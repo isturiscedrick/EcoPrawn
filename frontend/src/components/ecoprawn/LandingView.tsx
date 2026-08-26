@@ -47,13 +47,13 @@ export function LandingView({ onOpenDashboard }: LandingViewProps) {
                 className="inline-flex items-center gap-2 px-[26px] py-3.5 rounded-lg text-[14.5px] font-semibold bg-[var(--coral)] text-[var(--sand)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] hover:shadow-[0_12px_28px_-8px_rgba(232,98,58,0.55)]"
               >
                 Open the dashboard →
+              </button>
               <a
                 href="#objectives"
                 className="inline-flex items-center gap-2 px-[26px] py-3.5 rounded-lg text-[14.5px] font-semibold bg-transparent text-[var(--sand)] border border-[rgba(242,235,221,0.28)] transition-all duration-200 hover:bg-[rgba(242,235,221,0.08)] hover:border-[rgba(242,235,221,0.5)]"
               >
                 See how it works
               </a>
-              </button>
             </div>
           </div>
           <div className="relative h-[280px] md:h-[440px] flex items-center justify-center order-first md:order-last">
