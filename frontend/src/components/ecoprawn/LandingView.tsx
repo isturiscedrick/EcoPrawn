@@ -14,235 +14,580 @@ interface LandingViewProps {
 
 export function LandingView({ onOpenDashboard }: LandingViewProps) {
   return (
-    <div>
-      {/* HERO */}
-      <section
-        className="relative min-h-[92vh] text-[var(--sand)] overflow-hidden flex flex-col"
-        style={{
-          background:
-            "linear-gradient(180deg, var(--water-mid) 0%, var(--water-deep) 62%, #081E22 100%)",
-        }}
-      >
-        <div className="relative z-[3] max-w-[1200px] mx-auto w-full px-8 pt-[88px] grid grid-cols-1 md:grid-cols-[1.05fr_0.95fr] gap-10 items-center flex-1">
-          <div>
-            <div className="ep-font-mono text-xs tracking-[0.14em] uppercase text-[var(--mangrove-light)] flex items-center gap-2.5 mb-[22px]">
-              <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove-light)]" />
-              AIoT Grow-Out System &middot; Penaeus vannamei
-            </div>
-            <h1 className="ep-font-display font-semibold text-[clamp(38px,5vw,62px)] leading-[1.03] tracking-tight mb-[22px]">
-              Indoor shrimp farming,
-              <br />
-              <em className="italic font-medium text-[var(--coral)]">
-                read like a dashboard.
-              </em>
-            </h1>
-            <p className="text-[17px] leading-[1.65] text-[rgba(242,235,221,0.78)] max-w-[480px] mb-[34px]">
-              EcoPrawn pairs a submerged sensor array, AI vision growth tracking, and a
-              biofloc recirculation loop to keep white shrimp tanks in range 24/7 — and
-              routes what the tank doesn't need back into the mangroves.
-            </p>
-            <div className="flex gap-3.5 flex-wrap">
-              <button
-                onClick={onOpenDashboard}
-                className="inline-flex items-center gap-2 px-[26px] py-3.5 rounded-lg text-[14.5px] font-semibold bg-[var(--coral)] text-[var(--sand)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] hover:shadow-[0_12px_28px_-8px_rgba(232,98,58,0.55)]"
-              >
-                Open the dashboard →
-              </button>
-              <a
-                href="#objectives"
-                className="inline-flex items-center gap-2 px-[26px] py-3.5 rounded-lg text-[14.5px] font-semibold bg-transparent text-[var(--sand)] border border-[rgba(242,235,221,0.28)] transition-all duration-200 hover:bg-[rgba(242,235,221,0.08)] hover:border-[rgba(242,235,221,0.5)]"
-              >
-                See how it works
-              </a>
-            </div>
-          </div>
-          <div className="relative h-[280px] md:h-[440px] flex items-center justify-center order-first md:order-last">
-            <TankHeroSvg />
-          </div>
-        </div>
+    <div className="min-h-screen bg-[var(--sand)] text-[var(--water-deep)]">
+      {/* =========================================================
+          TOP NAVIGATION — matched to the reference design
+      ========================================================= */}
+      <header className="sticky top-0 z-50 h-[52px] border-b border-[rgba(11,35,32,0.08)] bg-[var(--sand)]/95 backdrop-blur-md">
+        <div className="mx-auto flex h-full max-w-[1240px] items-center justify-between px-5 sm:px-8 lg:px-10">
+          <a
+            href="#top"
+            className="group flex items-center gap-2.5 text-[var(--coral)]"
+            aria-label="EcoPrawn home"
+          >
+            <span
+              aria-hidden="true"
+              className="relative flex h-6 w-6 items-center justify-center overflow-hidden rounded-full bg-[var(--coral)]"
+            >
+              <span className="absolute -right-1 h-4 w-4 rounded-full border-[3px] border-[var(--sand)]" />
+              <span className="absolute left-1 top-1 h-2 w-2 rounded-full bg-[var(--sand)]" />
+            </span>
+            <span className="ep-font-display text-[14px] font-semibold tracking-[-0.02em]">
+              EcoPrawn
+            </span>
+          </a>
 
-        <div className="relative z-[3] max-w-[1200px] mx-auto w-full px-8 mt-14">
-          <div className="grid grid-cols-2 md:grid-cols-5 border-t border-[rgba(242,235,221,0.16)]">
-            {heroReadouts.map((r, i) => (
-              <div
-                key={r.label}
-                className={`px-1 pt-5 pb-[26px] ${
-                  i !== heroReadouts.length - 1 ? "md:border-r border-[rgba(242,235,221,0.12)]" : ""
+          <nav className="hidden h-full items-center gap-7 md:flex" aria-label="Primary navigation">
+            {[["Home", "#top"], ["Objectives", "#objectives"], ["Systems", "#systems"], ["Scope", "#scope"]].map(([label, href], index) => (
+              <a
+                key={label}
+                href={href}
+                className={`relative flex h-full items-center px-1 text-[12px] font-semibold text-[var(--water-deep)] transition-colors hover:text-[var(--coral)] ${
+                  index === 0 ? "after:absolute after:bottom-[8px] after:left-0 after:right-0 after:h-[2px] after:bg-[var(--coral)]" : ""
                 }`}
               >
-                <div className="ep-font-mono text-[10.5px] tracking-wide uppercase text-[rgba(242,235,221,0.5)] mb-2">
-                  {r.label}
+                {label}
+              </a>
+            ))}
+          </nav>
+
+          <button
+            type="button"
+            onClick={onOpenDashboard}
+            className="rounded-xl bg-[var(--water-deep)] px-4 py-2 text-[11px] font-semibold text-[var(--sand)] shadow-[0_8px_20px_-10px_rgba(11,35,32,0.7)] transition-all hover:-translate-y-0.5 hover:bg-[#123F43] focus:outline-none focus:ring-2 focus:ring-[var(--coral)] focus:ring-offset-2 focus:ring-offset-[var(--sand)] sm:px-5 sm:text-[12px]"
+          >
+            Log in
+          </button>
+        </div>
+      </header>
+      {/* =========================================================
+          HERO
+      ========================================================= */}
+      <section
+        id="top"
+        className="relative overflow-hidden text-[var(--sand)]"
+        style={{
+          background:
+            "linear-gradient(180deg, #07565A 0%, var(--water-deep) 58%, #081E22 100%)",
+        }}
+      >
+        {/* Atmospheric background */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-[12%] top-[4%] h-[520px] w-[520px] rounded-full opacity-30 blur-3xl"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(232,98,58,0.22), transparent 68%)",
+          }}
+        />
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-[15%] bottom-[4%] h-[460px] w-[460px] rounded-full opacity-25 blur-3xl"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(126,173,135,0.2), transparent 68%)",
+          }}
+        />
+
+        {/* Decorative grid */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(242,235,221,1) 1px, transparent 1px), linear-gradient(90deg, rgba(242,235,221,1) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+          }}
+        />
+
+        <div className="relative z-10 mx-auto max-w-[1240px] px-5 pt-3 sm:px-8 sm:pt-4 lg:px-10 lg:pt-5">
+          {/* Main hero row. The tank is kept inside its own bounded region so it
+              cannot intrude into the telemetry strip below. */}
+          <div className="grid min-h-[474px] grid-cols-1 items-center gap-4 md:grid-cols-[1.03fr_0.97fr] md:gap-4 lg:min-h-[474px] lg:grid-cols-[1.02fr_0.98fr] lg:gap-8">
+            {/* Hero copy */}
+            <div className="max-w-[650px] py-7 md:py-8 lg:py-9">
+              <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-[rgba(242,235,221,0.15)] bg-[rgba(242,235,221,0.045)] px-3.5 py-2 backdrop-blur-sm">
+                <span className="ep-pulse-dot h-[7px] w-[7px] rounded-full bg-[var(--mangrove-light)] shadow-[0_0_10px_rgba(126,173,135,0.7)]" />
+                <span className="ep-font-mono text-[10px] font-medium tracking-[0.13em] text-[rgba(242,235,221,0.72)] sm:text-[11px]">
+                  AIoT GROW-OUT SYSTEM
+                </span>
+                <span className="hidden h-3 w-px bg-[rgba(242,235,221,0.2)] sm:block" />
+                <span className="hidden text-[10px] text-[rgba(242,235,221,0.45)] sm:block">
+                  Penaeus vannamei
+                </span>
+              </div>
+
+              <h1 className="ep-font-display max-w-[720px] text-[clamp(43px,5vw,64px)] font-semibold leading-[0.96] tracking-[-0.04em]">
+                Indoor shrimp
+                <br />
+                farming,
+                <br />
+                <em className="font-medium italic text-[var(--coral)]">
+                  read like a dashboard.
+                </em>
+              </h1>
+
+              <p className="mt-5 max-w-[540px] text-[14px] leading-[1.62] text-[rgba(242,235,221,0.72)] sm:text-[15px]">
+                EcoPrawn pairs a submerged sensor array, AI vision growth
+                tracking, and a biofloc recirculation loop to keep white
+                shrimp tanks in range 24/7 — and routes what the tank doesn't
+                need back into the mangroves.
+              </p>
+
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <button
+                  onClick={onOpenDashboard}
+                  className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-[var(--coral)] px-6 py-3.5 text-[14px] font-semibold text-[var(--sand)] shadow-[0_14px_32px_-10px_rgba(232,98,58,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] hover:shadow-[0_18px_38px_-10px_rgba(232,98,58,0.7)] focus:outline-none focus:ring-2 focus:ring-[var(--coral)] focus:ring-offset-2 focus:ring-offset-[var(--water-deep)]"
+                >
+                  Open the dashboard
+                  <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
+                    →
+                  </span>
+                </button>
+
+                <a
+                  href="#objectives"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-[rgba(242,235,221,0.2)] bg-[rgba(242,235,221,0.035)] px-6 py-3.5 text-[14px] font-semibold text-[var(--sand)] backdrop-blur-sm transition-all duration-200 hover:border-[rgba(242,235,221,0.4)] hover:bg-[rgba(242,235,221,0.08)] focus:outline-none focus:ring-2 focus:ring-[var(--coral)]"
+                >
+                  See how it works
+                  <span aria-hidden="true">↓</span>
+                </a>
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2.5">
+                {[
+                  "SYSTEM ONLINE",
+                  "WATER MONITORING",
+                  "AI VISION",
+                ].map((label) => (
+                  <div key={label} className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--mangrove-light)] shadow-[0_0_8px_rgba(126,173,135,0.7)]" />
+                    <span className="ep-font-mono text-[9.5px] tracking-[0.1em] text-[rgba(242,235,221,0.5)]">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Tank visualization */}
+            <div className="relative flex h-[350px] items-center justify-center sm:h-[390px] md:h-[430px] lg:h-[440px]">
+              {/* The SVG gets a strict max-height so its bottom never reaches the
+                  telemetry row. */}
+              <div className="relative z-10 flex h-full w-full max-w-[560px] items-center justify-center [&>svg]:h-full [&>svg]:w-auto [&>svg]:max-w-full">
+                <TankHeroSvg />
+              </div>
+
+              {/* Live monitor card */}
+              <div className="absolute right-0 top-3 z-20 hidden w-[170px] rounded-xl border border-[rgba(242,235,221,0.13)] bg-[rgba(8,30,34,0.72)] p-3.5 shadow-[0_18px_40px_rgba(0,0,0,0.2)] backdrop-blur-md sm:block">
+                <div className="mb-2 flex items-center justify-between">
+                  <span className="ep-font-mono text-[8px] uppercase tracking-[0.12em] text-[rgba(242,235,221,0.45)]">
+                    Live monitor
+                  </span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--mangrove-light)] shadow-[0_0_7px_rgba(126,173,135,0.7)]" />
                 </div>
-                <div className="ep-font-mono text-[22px] font-semibold text-[var(--sand)] before:content-['●'] before:text-[var(--mangrove-light)] before:text-[9px] before:mr-[7px] before:align-middle">
-                  {r.value}
-                  <span className="text-[13px] text-[rgba(242,235,221,0.55)] ml-0.5">
-                    {heroReadoutUnits[r.label]}
+                <div className="ep-font-mono text-[20px] font-semibold text-[var(--sand)]">
+                  24/7
+                </div>
+                <div className="mt-1 text-[9px] leading-[1.4] text-[rgba(242,235,221,0.45)]">
+                  Continuous tank monitoring
+                </div>
+              </div>
+
+              {/* Intelligent control card */}
+              <div className="absolute bottom-2 left-0 z-20 hidden w-[180px] rounded-xl border border-[rgba(242,235,221,0.13)] bg-[rgba(8,30,34,0.72)] p-3.5 shadow-[0_18px_40px_rgba(0,0,0,0.2)] backdrop-blur-md sm:block">
+                <div className="mb-2 text-[9px] uppercase tracking-[0.1em] text-[rgba(242,235,221,0.45)]">
+                  Intelligent control
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="ep-font-mono text-[12px] text-[var(--mangrove-light)]">
+                    AI
+                  </span>
+                  <span className="h-px flex-1 bg-[rgba(242,235,221,0.1)]" />
+                  <span className="ep-font-mono text-[9px] text-[rgba(242,235,221,0.45)]">
+                    ACTIVE
                   </span>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Telemetry strip is a separate layout row — never positioned over the tank. */}
+          <div className="border-t border-[rgba(242,235,221,0.18)]">
+            <div className="grid grid-cols-2 md:grid-cols-5">
+              {heroReadouts.map((readout, index) => (
+                <div
+                  key={readout.label}
+                  className={`group px-2 py-4 sm:px-3 sm:py-5 ${
+                    index !== heroReadouts.length - 1
+                      ? "md:border-r md:border-[rgba(242,235,221,0.1)]"
+                      : ""
+                  }`}
+                >
+                  <div className="mb-2 flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--mangrove-light)] opacity-80 transition-opacity group-hover:opacity-100" />
+                    <div className="ep-font-mono text-[8.5px] uppercase tracking-[0.1em] text-[rgba(242,235,221,0.43)] sm:text-[9px]">
+                      {readout.label}
+                    </div>
+                  </div>
+                  <div className="ep-font-mono text-[19px] font-semibold tracking-tight text-[var(--sand)] sm:text-[22px]">
+                    {readout.value}
+                    <span className="ml-1 text-[10px] font-normal text-[rgba(242,235,221,0.42)] sm:text-[11px]">
+                      {heroReadoutUnits[readout.label]}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+          OBJECTIVES
+      ========================================================= */}
+      <section
+        id="objectives"
+        className="scroll-mt-24 px-5 py-24 sm:px-8 sm:py-28 lg:py-[120px]"
+      >
+        <div className="mx-auto max-w-[1200px]">
+          <div className="mb-12 max-w-[680px] sm:mb-14">
+            <div className="ep-font-mono mb-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)]">
+              Why it exists
+            </div>
+
+            <h2 className="ep-font-display text-[clamp(30px,4vw,44px)] font-semibold leading-[1.08] tracking-tight text-[var(--water-deep)]">
+              One general objective.
+              <br className="hidden sm:block" />
+              Five ways to hit it.
+            </h2>
+
+            <p className="mt-4 max-w-[590px] text-[15px] leading-[1.7] text-[rgba(11,35,32,0.62)]">
+              A focused system architecture designed around measurable
+              aquaculture outcomes.
+            </p>
+          </div>
+
+          {/* General objective */}
+          <div className="relative mb-5 overflow-hidden rounded-2xl bg-[var(--water-deep)] px-6 py-8 text-[var(--sand)] shadow-[0_20px_50px_-25px_rgba(11,35,32,0.4)] sm:px-10 sm:py-10">
+            <div
+              aria-hidden="true"
+              className="absolute -right-20 -top-24 h-[280px] w-[280px] rounded-full"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(232,98,58,0.22), transparent 70%)",
+              }}
+            />
+
+            <div className="relative z-10 flex flex-col gap-7 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-[850px]">
+                <div className="ep-font-mono mb-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--coral)]">
+                  General Objective
+                </div>
+
+                <p className="ep-font-display text-[20px] font-medium italic leading-[1.55] sm:text-[22px]">
+                  "To design and deploy an automated indoor aquaculture system
+                  leveraging Artificial Intelligence and Internet of Things
+                  technologies to optimize shrimp growth rates, maintain
+                  pristine water quality, and establish a resource-efficient
+                  operational model."
+                </p>
+              </div>
+
+              <div className="hidden shrink-0 lg:block">
+                <div className="ep-font-mono rounded-full border border-[rgba(242,235,221,0.12)] px-3 py-1.5 text-[9px] uppercase tracking-[0.12em] text-[rgba(242,235,221,0.45)]">
+                  Core objective
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Objective cards */}
+          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-5">
+            {objectives.map((objective) => (
+              <article
+                key={objective.num}
+                className="group rounded-xl border border-[var(--sand-dim)] bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--mangrove-light)] hover:shadow-[0_18px_36px_-16px_rgba(11,35,32,0.2)]"
+              >
+                <div className="mb-7 flex items-center justify-between">
+                  <span className="ep-font-mono text-[11px] font-semibold text-[var(--coral)]">
+                    {objective.num}
+                  </span>
+
+                  <span className="flex h-6 w-6 items-center justify-center rounded-md border border-[var(--sand-dim)] text-[11px] text-[rgba(11,35,32,0.35)] transition-all group-hover:border-[var(--mangrove-light)] group-hover:text-[var(--mangrove)]">
+                    ↗
+                  </span>
+                </div>
+
+                <h3 className="ep-font-display mb-2 text-[16px] font-semibold leading-tight text-[var(--water-deep)]">
+                  {objective.title}
+                </h3>
+
+                <p className="text-[12.5px] leading-[1.6] text-[rgba(11,35,32,0.6)]">
+                  {objective.body}
+                </p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* OBJECTIVES */}
-      <section className="px-8 py-[110px] max-w-[1200px] mx-auto" id="objectives">
-        <div className="max-w-[640px] mb-14">
-          <div className="ep-font-mono text-xs tracking-wide uppercase text-[var(--mangrove)] mb-3.5 font-semibold">
-            Why it exists
-          </div>
-          <h2 className="ep-font-display font-semibold text-[clamp(28px,3.4vw,40px)] tracking-tight leading-[1.12] text-[var(--water-deep)]">
-            One general objective. Five ways to hit it.
-          </h2>
-        </div>
-
-        <div className="relative overflow-hidden bg-[var(--water-deep)] text-[var(--sand)] rounded-2xl px-10 py-11 mb-5">
-          <div
-            className="absolute -right-[60px] -top-[60px] w-[220px] h-[220px] rounded-full pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(232,98,58,0.22), transparent 70%)",
-            }}
-          />
-          <span className="ep-font-mono text-[11px] tracking-wide uppercase text-[var(--coral)] mb-3.5 block">
-            General Objective
-          </span>
-          <p className="ep-font-display text-[22px] leading-[1.5] font-medium italic max-w-[820px] relative z-[1]">
-            "To design and deploy an automated indoor aquaculture system leveraging
-            Artificial Intelligence and Internet of Things technologies to optimize
-            shrimp growth rates, maintain pristine water quality, and establish a
-            resource-efficient operational model."
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
-          {objectives.map((o) => (
-            <div
-              key={o.num}
-              className="bg-white border border-[var(--sand-dim)] rounded-xl p-[22px_18px] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_16px_32px_-14px_rgba(11,35,32,0.18)] hover:border-[var(--mangrove-light)]"
-            >
-              <div className="ep-font-mono text-xs text-[var(--coral)] font-semibold mb-3.5">
-                {o.num}
-              </div>
-              <h3 className="ep-font-display text-base font-semibold text-[var(--water-deep)] mb-2 leading-tight">
-                {o.title}
-              </h3>
-              <p className="text-[13px] leading-[1.55] text-[rgba(11,35,32,0.62)]">
-                {o.body}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section className="px-8 py-[110px] bg-[var(--water-deep)] text-[var(--sand)]">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="max-w-[640px] mb-14">
-            <div className="ep-font-mono text-xs tracking-wide uppercase text-[var(--coral)] mb-3.5 font-semibold">
+      {/* =========================================================
+          FEATURES / SYSTEMS
+      ========================================================= */}
+      <section
+        id="systems"
+        className="scroll-mt-24 bg-[var(--water-deep)] px-5 py-24 text-[var(--sand)] sm:px-8 sm:py-28 lg:py-[120px]"
+      >
+        <div className="mx-auto max-w-[1200px]">
+          <div className="mb-12 max-w-[700px] sm:mb-14">
+            <div className="ep-font-mono mb-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--coral)]">
               What's inside
             </div>
-            <h2 className="ep-font-display font-semibold text-[clamp(28px,3.4vw,40px)] tracking-tight leading-[1.12] text-[var(--sand)]">
-              Five systems, one tank.
+
+            <h2 className="ep-font-display text-[clamp(30px,4vw,44px)] font-semibold leading-[1.08] tracking-tight">
+              Five systems,
+              <br className="hidden sm:block" />
+              one tank.
             </h2>
-            <p className="text-base leading-[1.7] text-[rgba(242,235,221,0.68)] mt-4">
-              Every feature maps to a spec in the proposal — nothing here is decorative.
+
+            <p className="mt-4 max-w-[590px] text-[15px] leading-[1.7] text-[rgba(242,235,221,0.6)]">
+              Every feature maps to a spec in the proposal — nothing here is
+              decorative.
             </p>
           </div>
 
-          <div className="flex flex-col">
-            {features.map((f) => (
-              <div
-                key={f.index}
-                className="grid grid-cols-[40px_1fr] md:grid-cols-[60px_1fr_1.3fr] gap-8 items-start py-8 border-t border-[rgba(242,235,221,0.14)] last:border-b"
+          <div className="border-t border-[rgba(242,235,221,0.12)]">
+            {features.map((feature) => (
+              <article
+                key={feature.index}
+                className="group grid grid-cols-[38px_1fr] gap-5 border-b border-[rgba(242,235,221,0.12)] py-7 transition-colors duration-200 hover:bg-[rgba(242,235,221,0.025)] sm:grid-cols-[55px_0.8fr_1.2fr] sm:gap-7 sm:py-8 lg:grid-cols-[65px_0.8fr_1.2fr] lg:gap-8"
               >
-                <div className="ep-font-mono text-[13px] text-[var(--mangrove-light)] pt-1">
-                  {f.index}
+                {/* Number */}
+                <div className="ep-font-mono pt-1 text-[11px] font-medium text-[var(--mangrove-light)]">
+                  {feature.index}
                 </div>
-                <h3 className="ep-font-display text-[21px] font-semibold leading-tight col-start-2 md:col-start-auto">
-                  {f.title}
-                </h3>
-                <div className="flex flex-col gap-3.5 col-span-2 md:col-span-1 mt-1.5 md:mt-0">
-                  {f.points.map((p) => (
-                    <div key={p.bold} className="flex gap-3">
-                      <span className="text-[var(--coral)] text-[15px] leading-[1.5] flex-shrink-0">
+
+                {/* Title */}
+                <div>
+                  <div className="mb-2 hidden text-[9px] uppercase tracking-[0.12em] text-[rgba(242,235,221,0.3)] sm:block">
+                    System module
+                  </div>
+
+                  <h3 className="ep-font-display text-[20px] font-semibold leading-tight transition-colors group-hover:text-[var(--coral)] sm:text-[21px]">
+                    {feature.title}
+                  </h3>
+                </div>
+
+                {/* Details */}
+                <div className="col-span-2 flex flex-col gap-3 pl-[58px] sm:col-span-1 sm:pl-0">
+                  {feature.points.map((point) => (
+                    <div key={point.bold} className="flex gap-3">
+                      <span
+                        aria-hidden="true"
+                        className="mt-[2px] text-[var(--coral)]"
+                      >
                         ›
                       </span>
-                      <span className="text-sm leading-[1.6] text-[rgba(242,235,221,0.72)]">
-                        <b className="font-semibold text-[var(--sand)]">{p.bold}</b>{" "}
-                        {p.body}
+
+                      <span className="text-[13px] leading-[1.65] text-[rgba(242,235,221,0.67)] sm:text-[13.5px]">
+                        <b className="font-semibold text-[var(--sand)]">
+                          {point.bold}
+                        </b>{" "}
+                        {point.body}
                       </span>
                     </div>
                   ))}
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SCOPE / LIMITATIONS */}
-      <section className="px-8 py-[110px] max-w-[1200px] mx-auto">
-        <div className="max-w-[640px] mb-14">
-          <div className="ep-font-mono text-xs tracking-wide uppercase text-[var(--mangrove)] mb-3.5 font-semibold">
-            Boundaries
-          </div>
-          <h2 className="ep-font-display font-semibold text-[clamp(28px,3.4vw,40px)] tracking-tight leading-[1.12] text-[var(--water-deep)]">
-            Scope and limitations.
-          </h2>
-          <p className="text-base leading-[1.7] text-[rgba(11,35,32,0.68)] mt-4">
-            Stated plainly, so expectations line up with what's actually being built.
-          </p>
-        </div>
+      {/* =========================================================
+          SCOPE / LIMITATIONS
+      ========================================================= */}
+      <section
+        id="scope"
+        className="scroll-mt-24 px-5 py-24 sm:px-8 sm:py-28 lg:py-[120px]"
+      >
+        <div className="mx-auto max-w-[1200px]">
+          <div className="mb-12 max-w-[700px] sm:mb-14">
+            <div className="ep-font-mono mb-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)]">
+              Boundaries
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl p-9 border border-[var(--sand-dim)]">
-            <h3 className="ep-font-display text-xl font-semibold mb-5 text-[var(--water-deep)] flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-[3px] bg-[var(--mangrove)]" />
-              In scope
-            </h3>
-            {inScope.map((item, i) => (
-              <div
-                key={item.title}
-                className={`py-3.5 ${i !== 0 ? "border-t border-[rgba(11,35,32,0.08)]" : "pt-0"}`}
-              >
-                <b className="block text-sm text-[var(--water-deep)] mb-1">{item.title}</b>
-                <span className="text-[13.5px] leading-[1.55] text-[rgba(11,35,32,0.62)]">
-                  {item.body}
-                </span>
-              </div>
-            ))}
+            <h2 className="ep-font-display text-[clamp(30px,4vw,44px)] font-semibold leading-[1.08] tracking-tight text-[var(--water-deep)]">
+              Scope and limitations.
+            </h2>
+
+            <p className="mt-4 max-w-[590px] text-[15px] leading-[1.7] text-[rgba(11,35,32,0.62)]">
+              Stated plainly, so expectations line up with what's actually
+              being built.
+            </p>
           </div>
 
-          <div className="rounded-2xl p-9 bg-[#FBF6EC] border border-[#EAD9B8]">
-            <h3 className="ep-font-display text-xl font-semibold mb-5 text-[var(--water-deep)] flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-[3px] bg-[var(--amber)]" />
-              Out of scope
-            </h3>
-            {outOfScope.map((item, i) => (
-              <div
-                key={item.title}
-                className={`py-3.5 ${i !== 0 ? "border-t border-[rgba(11,35,32,0.08)]" : "pt-0"}`}
-              >
-                <b className="block text-sm text-[var(--water-deep)] mb-1">{item.title}</b>
-                <span className="text-[13.5px] leading-[1.55] text-[rgba(11,35,32,0.62)]">
-                  {item.body}
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            {/* In scope */}
+            <article className="rounded-2xl border border-[var(--sand-dim)] bg-white p-6 shadow-[0_12px_32px_-24px_rgba(11,35,32,0.3)] sm:p-8">
+              <div className="mb-7 flex items-center justify-between">
+                <h3 className="ep-font-display flex items-center gap-2.5 text-[20px] font-semibold text-[var(--water-deep)]">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[rgba(126,173,135,0.12)]">
+                    <span className="h-2.5 w-2.5 rounded-[3px] bg-[var(--mangrove)]" />
+                  </span>
+                  In scope
+                </h3>
+
+                <span className="ep-font-mono rounded-full bg-[rgba(126,173,135,0.1)] px-2.5 py-1 text-[8px] uppercase tracking-[0.1em] text-[var(--mangrove)]">
+                  Included
                 </span>
               </div>
-            ))}
+
+              <div>
+                {inScope.map((item, index) => (
+                  <div
+                    key={item.title}
+                    className={`py-4 ${
+                      index !== 0
+                        ? "border-t border-[rgba(11,35,32,0.08)]"
+                        : "pt-0"
+                    }`}
+                  >
+                    <div className="flex gap-3">
+                      <span className="ep-font-mono mt-0.5 text-[9px] text-[var(--mangrove)]">
+                        0{index + 1}
+                      </span>
+
+                      <div>
+                        <b className="mb-1 block text-[13.5px] font-semibold text-[var(--water-deep)]">
+                          {item.title}
+                        </b>
+
+                        <span className="text-[13px] leading-[1.6] text-[rgba(11,35,32,0.6)]">
+                          {item.body}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            {/* Out of scope */}
+            <article className="rounded-2xl border border-[#EAD9B8] bg-[#FBF6EC] p-6 shadow-[0_12px_32px_-24px_rgba(11,35,32,0.25)] sm:p-8">
+              <div className="mb-7 flex items-center justify-between">
+                <h3 className="ep-font-display flex items-center gap-2.5 text-[20px] font-semibold text-[var(--water-deep)]">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[rgba(181,139,57,0.1)]">
+                    <span className="h-2.5 w-2.5 rounded-[3px] bg-[var(--amber)]" />
+                  </span>
+                  Out of scope
+                </h3>
+
+                <span className="ep-font-mono rounded-full bg-[rgba(181,139,57,0.1)] px-2.5 py-1 text-[8px] uppercase tracking-[0.1em] text-[var(--amber)]">
+                  Excluded
+                </span>
+              </div>
+
+              <div>
+                {outOfScope.map((item, index) => (
+                  <div
+                    key={item.title}
+                    className={`py-4 ${
+                      index !== 0
+                        ? "border-t border-[rgba(11,35,32,0.08)]"
+                        : "pt-0"
+                    }`}
+                  >
+                    <div className="flex gap-3">
+                      <span className="ep-font-mono mt-0.5 text-[9px] text-[var(--amber)]">
+                        0{index + 1}
+                      </span>
+
+                      <div>
+                        <b className="mb-1 block text-[13.5px] font-semibold text-[var(--water-deep)]">
+                          {item.title}
+                        </b>
+
+                        <span className="text-[13px] leading-[1.6] text-[rgba(11,35,32,0.6)]">
+                          {item.body}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <footer className="bg-[#081E22] text-[rgba(242,235,221,0.55)] px-8 py-12 text-[13px] flex justify-between items-center flex-wrap gap-4">
-        <div>
-          <span className="ep-font-display font-semibold text-[var(--sand)]">EcoPrawn</span>
-          {" "}— AIoT-Enabled Indoor White Shrimp Farming &amp; Water Management System
+      {/* =========================================================
+          FINAL CTA
+      ========================================================= */}
+      <section className="px-5 pb-24 sm:px-8 sm:pb-28">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="relative overflow-hidden rounded-2xl bg-[var(--water-deep)] px-6 py-10 text-center text-[var(--sand)] shadow-[0_24px_60px_-30px_rgba(11,35,32,0.5)] sm:px-10 sm:py-14">
+            <div
+              aria-hidden="true"
+              className="absolute left-1/2 top-1/2 h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(232,98,58,0.14), transparent 68%)",
+              }}
+            />
+
+            <div className="relative z-10">
+              <div className="ep-font-mono mb-3 text-[9px] uppercase tracking-[0.14em] text-[var(--mangrove-light)]">
+                EcoPrawn AIoT System
+              </div>
+
+              <h2 className="ep-font-display text-[clamp(26px,4vw,38px)] font-semibold leading-tight">
+                Ready to read the tank?
+              </h2>
+
+              <p className="mx-auto mt-3 max-w-[500px] text-[13.5px] leading-[1.65] text-[rgba(242,235,221,0.6)]">
+                Monitor the system, review its signals, and manage the
+                aquaculture environment from one dashboard.
+              </p>
+
+              <button
+                onClick={onOpenDashboard}
+                className="mt-7 inline-flex items-center gap-2.5 rounded-xl bg-[var(--coral)] px-6 py-3.5 text-[13.5px] font-semibold text-[var(--sand)] shadow-[0_12px_28px_-8px_rgba(232,98,58,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] focus:outline-none focus:ring-2 focus:ring-[var(--coral)] focus:ring-offset-2 focus:ring-offset-[var(--water-deep)]"
+              >
+                Open the dashboard
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="text-right leading-[1.6]">
-          University of Caloocan City, Congress Campus — Computer Studies Department
-          <br />
-          Project Proposal, CS 118 · Thesis Writing 1
+      </section>
+
+      {/* =========================================================
+          FOOTER
+      ========================================================= */}
+      <footer className="bg-[#081E22] px-5 py-10 text-[rgba(242,235,221,0.48)] sm:px-8 sm:py-12">
+        <div className="mx-auto flex max-w-[1200px] flex-col gap-7 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="mb-2">
+              <span className="ep-font-display text-[17px] font-semibold text-[var(--sand)]">
+                EcoPrawn
+              </span>
+            </div>
+
+            <div className="max-w-[420px] text-[12px] leading-[1.6]">
+              AIoT-Enabled Indoor White Shrimp Farming &amp; Water Management
+              System
+            </div>
+          </div>
+
+          <div className="text-left text-[11.5px] leading-[1.7] sm:text-right">
+            University of Caloocan City, Congress Campus — Computer Studies
+            Department
+            <br />
+            Project Proposal, CS 118 · Thesis Writing 1
+          </div>
         </div>
       </footer>
     </div>
