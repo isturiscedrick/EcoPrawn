@@ -62,11 +62,30 @@
 }
 
 @keyframes ep-drift {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  50% { transform: translate(14px, -6px) rotate(4deg); }
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(10px, -4px) rotate(3deg) scale(1.02); }
+  50% { transform: translate(16px, -8px) rotate(5deg) scale(1); }
+  75% { transform: translate(6px, -3px) rotate(2deg) scale(0.98); }
 }
 .ep-shrimp-drift {
   animation: ep-drift 7s ease-in-out infinite;
+}
+
+@keyframes ep-caustic-drift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(180px); }
+}
+.ep-caustic {
+  animation: ep-caustic-drift linear infinite;
+}
+
+@keyframes ep-ripple {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+}
+.ep-ripple {
+  animation: ep-ripple 4s ease-in-out infinite;
+  transform-origin: center;
 }
 
 @media (prefers-reduced-motion: reduce) {

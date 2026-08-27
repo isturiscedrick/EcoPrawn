@@ -21,9 +21,6 @@ export function DashboardView() {
         <aside className="bg-[var(--water-deep)] text-[var(--sand)] p-4 flex lg:flex-col flex-row items-center lg:items-stretch gap-1.5 overflow-x-auto">
           <div className="flex items-center gap-2.5 py-2 px-2.5 lg:pb-[26px]">
             <BrandMark size={24} />
-            <span className="ep-font-display font-semibold text-base text-[var(--sand)] whitespace-nowrap">
-              EcoPrawn
-            </span>
           </div>
           {navItems.map((item) => (
             <div
