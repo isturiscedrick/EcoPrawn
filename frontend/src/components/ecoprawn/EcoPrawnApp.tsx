@@ -10,7 +10,7 @@ export function EcoPrawnApp() {
 
   return (
     <div className="ecoprawn-root">
-      {view !== "dashboard" && <TopNav view={view} onChange={setView} />}
+{view === "login" && <TopNav view={view} onChange={setView} />}
       {view === "landing" && (
         <LandingView onOpenDashboard={() => setView("login")} />
       )}
