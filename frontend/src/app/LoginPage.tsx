@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrandMark } from "../components/BrandMark";
+import { SiteHeader } from "../components/SiteHeader";
 import { useView } from "../context/ViewContext";
 
 export function LoginPage() {
@@ -13,21 +13,16 @@ export function LoginPage() {
   }
 
   return (
-    <div
-      className="min-h-[92vh] flex items-center justify-center px-6 py-16 text-[var(--sand)]"
-      style={{
-        background:
-          "linear-gradient(180deg, var(--water-mid) 0%, var(--water-deep) 62%, #081E22 100%)",
-      }}
-    >
+    <div className="min-h-screen text-[var(--sand)]">
+      <SiteHeader showLinks={false} />
+      <div
+        className="min-h-[calc(100vh-52px)] flex items-center justify-center px-6 py-16"
+        style={{
+          background:
+            "linear-gradient(180deg, var(--water-mid) 0%, var(--water-deep) 62%, #081E22 100%)",
+        }}
+      >
       <div className="w-full max-w-[420px]">
-        <button
-          onClick={() => setView("landing")}
-          className="flex items-center gap-2.5 mb-10 mx-auto"
-        >
-          <BrandMark />
-        </button>
-
         <div className="bg-[rgba(242,235,221,0.05)] border border-[rgba(242,235,221,0.14)] rounded-2xl p-8 backdrop-blur-sm">
           <h1 className="ep-font-display font-semibold text-[26px] tracking-tight mb-1.5 text-center">
             Welcome back
@@ -76,6 +71,7 @@ export function LoginPage() {
         <p className="text-center text-[12.5px] text-[rgba(242,235,221,0.45)] mt-6">
           Demo access — enter any email and password to continue.
         </p>
+      </div>
       </div>
     </div>
   );
