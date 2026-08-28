@@ -1,7 +1,12 @@
-import { EcoPrawnApp } from "./components/ecoprawn/EcoPrawnApp";
+import { ViewProvider } from "./context/ViewContext";
+import { EcoPrawnApp } from "./app/EcoPrawnApp";
 
 export function App() {
-  return <EcoPrawnApp />;
+  return (
+    <ViewProvider>
+      <EcoPrawnApp />
+    </ViewProvider>
+  );
 }
 
 export default App;

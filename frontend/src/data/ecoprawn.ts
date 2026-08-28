@@ -1,25 +1,4 @@
-export type SensorStatus = "ok" | "warn";
-
-export interface SensorReading {
-  label: string;
-  value: string;
-  pct: number;
-  status: SensorStatus;
-}
-
-export interface TankStatus {
-  name: string;
-  pl: string;
-  biomass: string;
-  status: SensorStatus;
-}
-
-export interface AlertItem {
-  icon: "warn" | "info";
-  title: string;
-  detail: string;
-  time: string;
-}
+import type { SensorReading, TankStatus, AlertItem } from "../types";
 
 export const heroReadouts: SensorReading[] = [
   { label: "Dissolved O₂", value: "6.2", pct: 78, status: "ok" },

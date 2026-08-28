@@ -1,4 +1,4 @@
-import type { AlertItem, TankStatus } from "./data";
+import type { AlertItem, TankStatus } from "../types";
 
 export function TankRow({ name, pl, biomass, status }: TankStatus) {
   return (

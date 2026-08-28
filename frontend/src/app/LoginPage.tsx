@@ -1,18 +1,15 @@
 import { useState } from "react";
-import { BrandMark } from "./BrandMark";
+import { BrandMark } from "../components/BrandMark";
+import { useView } from "../context/ViewContext";
 
-interface LoginViewProps {
-  onLogin: () => void;
-  onBackToLanding: () => void;
-}
-
-export function LoginView({ onLogin, onBackToLanding }: LoginViewProps) {
+export function LoginPage() {
+  const { setView } = useView();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    onLogin();
+    setView("dashboard");
   }
 
   return (
@@ -25,7 +22,7 @@ export function LoginView({ onLogin, onBackToLanding }: LoginViewProps) {
     >
       <div className="w-full max-w-[420px]">
         <button
-          onClick={onBackToLanding}
+          onClick={() => setView("landing")}
           className="flex items-center gap-2.5 mb-10 mx-auto"
         >
           <BrandMark />

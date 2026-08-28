@@ -1,4 +1,4 @@
-import logo from "../../assets/ecoprawn-logo.png";
+import logo from "../assets/ecoprawn-logo.png";
 
 interface BrandMarkProps {
   size?: number;

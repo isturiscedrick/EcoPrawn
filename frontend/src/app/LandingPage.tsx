@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { TankHeroSvg } from "./TankHeroSvg";
+import { BrandMark } from "../components/BrandMark";
+import { useView } from "../context/ViewContext";
+import { LANDING_NAV_LINKS } from "../constants/nav";
 import {
   heroReadouts,
   heroReadoutUnits,
@@ -7,24 +10,18 @@ import {
   features,
   inScope,
   outOfScope,
-} from "./data";
+} from "../data/ecoprawn";
 
-interface LandingViewProps {
-  onOpenDashboard: () => void;
-}
-
-const NAV_LINKS: [string, string][] = [
-  ["Home", "#top"],
-  ["Objectives", "#objectives"],
-  ["Systems", "#systems"],
-  ["Scope", "#scope"],
-];
-
-export function LandingView({ onOpenDashboard }: LandingViewProps) {
+export function LandingPage() {
+  const { setView } = useView();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   function handleNavClick() {
     setMobileNavOpen(false);
+  }
+
+  function openDashboard() {
+    setView("login");
   }
 
   return (
@@ -39,20 +36,11 @@ export function LandingView({ onOpenDashboard }: LandingViewProps) {
             className="group flex items-center gap-2.5 text-[var(--coral)] rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)]"
             aria-label="EcoPrawn home"
           >
-            <span
-              aria-hidden="true"
-              className="relative flex h-6 w-6 items-center justify-center overflow-hidden rounded-full bg-[var(--coral)]"
-            >
-              <span className="absolute -right-1 h-4 w-4 rounded-full border-[3px] border-[var(--sand)]" />
-              <span className="absolute left-1 top-1 h-2 w-2 rounded-full bg-[var(--sand)]" />
-            </span>
-            <span className="ep-font-display text-[14px] font-semibold tracking-[-0.02em]">
-              EcoPrawn
-            </span>
+            <BrandMark size={26} />
           </a>
 
           <nav className="hidden h-full items-center gap-7 md:flex" aria-label="Primary navigation">
-            {NAV_LINKS.map(([label, href], index) => (
+            {LANDING_NAV_LINKS.map(([label, href], index) => (
               <a
                 key={label}
                 href={href}
@@ -70,7 +58,7 @@ export function LandingView({ onOpenDashboard }: LandingViewProps) {
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={onOpenDashboard}
+              onClick={openDashboard}
               className="rounded-xl bg-[var(--water-deep)] px-4 py-2 text-[11px] font-semibold text-[var(--sand)] shadow-[0_8px_20px_-10px_rgba(11,35,32,0.7)] transition-all hover:-translate-y-0.5 hover:bg-[#123F43] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)] sm:px-5 sm:text-[12px]"
             >
               Log in
@@ -107,7 +95,7 @@ export function LandingView({ onOpenDashboard }: LandingViewProps) {
             className="border-t border-[rgba(11,35,32,0.08)] bg-[var(--sand)] px-5 py-3 md:hidden"
           >
             <ul className="flex flex-col">
-              {NAV_LINKS.map(([label, href]) => (
+              {LANDING_NAV_LINKS.map(([label, href]) => (
                 <li key={label}>
                   <a
                     href={href}
@@ -198,7 +186,7 @@ export function LandingView({ onOpenDashboard }: LandingViewProps) {
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <button
-                  onClick={onOpenDashboard}
+                  onClick={openDashboard}
                   className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-[var(--coral)] px-6 py-3.5 text-[14px] font-semibold text-[var(--sand)] shadow-[0_14px_32px_-10px_rgba(232,98,58,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] hover:shadow-[0_18px_38px_-10px_rgba(232,98,58,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--water-deep)]"
                 >
                   Sign in to dashboard
@@ -592,7 +580,7 @@ export function LandingView({ onOpenDashboard }: LandingViewProps) {
               </p>
 
               <button
-                onClick={onOpenDashboard}
+                onClick={openDashboard}
                 className="mt-7 inline-flex items-center gap-2.5 rounded-xl bg-[var(--coral)] px-6 py-3.5 text-[13.5px] font-semibold text-[var(--sand)] shadow-[0_12px_28px_-8px_rgba(232,98,58,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--water-deep)]"
               >
                 Sign in to dashboard
