@@ -21,7 +21,7 @@ export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
           className="group flex items-center gap-2.5 text-[var(--coral)] rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)]"
           aria-label="EcoPrawn home"
         >
-          <BrandMark size={32} />
+          <BrandMark size={48} />
         </button>
 
         {showLinks && <NavLinks variant="desktop" />}

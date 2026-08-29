@@ -39,7 +39,7 @@ export function LoginPage() {
 
           <div className="bg-[rgba(242,235,221,0.05)] border border-[rgba(242,235,221,0.14)] rounded-2xl p-8 backdrop-blur-md shadow-[0_30px_70px_-30px_rgba(0,0,0,0.5)]">
             <div className="flex justify-center mb-5">
-              <BrandMark size={40} />
+              <BrandMark size={100} />
             </div>
 
             <h1 className="ep-font-display font-semibold text-[26px] tracking-tight mb-1.5 text-center">
