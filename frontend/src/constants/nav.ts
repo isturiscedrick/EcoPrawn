@@ -5,17 +5,19 @@ export const LANDING_NAV_LINKS: [string, string][] = [
   ["Scope", "#scope"],
 ];
 
+export type DashboardView = "overview" | "water" | "vision" | "feeding" | "biofloc" | "alerts";
+
 export interface DashboardNavItem {
   icon: string;
   label: string;
-  active: boolean;
+  view: DashboardView;
 }
 
 export const DASHBOARD_NAV_ITEMS: DashboardNavItem[] = [
-  { icon: "◧", label: "Overview", active: true },
-  { icon: "≈", label: "Water Quality", active: false },
-  { icon: "◎", label: "Vision & Growth", active: false },
-  { icon: "▤", label: "Feeding", active: false },
-  { icon: "⇌", label: "Biofloc Loop", active: false },
-  { icon: "⚠", label: "Alerts", active: false },
+  { icon: "◧", label: "Overview", view: "overview" },
+  { icon: "≈", label: "Water Quality", view: "water" },
+  { icon: "◎", label: "Vision & Growth", view: "vision" },
+  { icon: "▤", label: "Feeding", view: "feeding" },
+  { icon: "⇌", label: "Biofloc Loop", view: "biofloc" },
+  { icon: "⚠", label: "Alerts", view: "alerts" },
 ];

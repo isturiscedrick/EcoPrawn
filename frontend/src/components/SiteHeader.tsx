@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrandMark } from "./BrandMark";
+import { NavLinks } from "./NavLinks";
 import { useView } from "../context/ViewContext";
-import { LANDING_NAV_LINKS } from "../constants/nav";
 
 interface SiteHeaderProps {
   /** Show the anchor nav links (Home/Objectives/Systems/Scope). Off on pages without those sections. */
@@ -12,39 +12,19 @@ export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
   const { setView } = useView();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
-  function handleNavClick() {
-    setMobileNavOpen(false);
-  }
-
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(11,35,32,0.08)] bg-[var(--sand)]/95 backdrop-blur-md">
-      <div className="mx-auto flex h-[52px] max-w-[1240px] items-center justify-between px-5 sm:px-8 lg:px-10">
+      <div className="mx-auto flex h-[64px] max-w-[1240px] items-center justify-between px-5 sm:px-8 lg:px-10">
         <button
           type="button"
           onClick={() => setView("landing")}
           className="group flex items-center gap-2.5 text-[var(--coral)] rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)]"
           aria-label="EcoPrawn home"
         >
-          <BrandMark size={26} />
+          <BrandMark size={32} />
         </button>
 
-        {showLinks && (
-          <nav className="hidden h-full items-center gap-7 md:flex" aria-label="Primary navigation">
-            {LANDING_NAV_LINKS.map(([label, href], index) => (
-              <a
-                key={label}
-                href={href}
-                className={`relative flex h-full items-center px-1 text-[12px] font-semibold text-[var(--water-deep)] transition-colors hover:text-[var(--coral)] rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)] ${
-                  index === 0
-                    ? "after:absolute after:bottom-[8px] after:left-0 after:right-0 after:h-[2px] after:bg-[var(--coral)]"
-                    : ""
-                }`}
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-        )}
+        {showLinks && <NavLinks variant="desktop" />}
 
         <div className="flex items-center gap-2">
           <button
@@ -80,25 +60,7 @@ export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
       </div>
 
       {showLinks && mobileNavOpen && (
-        <nav
-          id="mobile-nav-panel"
-          aria-label="Mobile navigation"
-          className="border-t border-[rgba(11,35,32,0.08)] bg-[var(--sand)] px-5 py-3 md:hidden"
-        >
-          <ul className="flex flex-col">
-            {LANDING_NAV_LINKS.map(([label, href]) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  onClick={handleNavClick}
-                  className="block rounded-md px-1.5 py-2.5 text-[13px] font-semibold text-[var(--water-deep)] transition-colors hover:text-[var(--coral)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
-                >
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <NavLinks variant="mobile" onLinkClick={() => setMobileNavOpen(false)} />
       )}
     </header>
   );
