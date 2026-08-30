@@ -4,7 +4,6 @@ import { NavLinks } from "./NavLinks";
 import { useView } from "../context/ViewContext";
 
 interface SiteHeaderProps {
-  /** Show the anchor nav links (Home/Objectives/Systems/Scope). Off on pages without those sections. */
   showLinks?: boolean;
 }
 
