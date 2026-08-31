@@ -69,7 +69,7 @@ export function LandingPage() {
               <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-[rgba(242,235,221,0.15)] bg-[rgba(242,235,221,0.045)] px-3.5 py-2 backdrop-blur-sm">
                 <span className="ep-pulse-dot h-[7px] w-[7px] rounded-full bg-[var(--mangrove-light)] shadow-[0_0_10px_rgba(126,173,135,0.7)]" />
                 <span className="ep-font-mono text-[10px] font-medium tracking-[0.13em] text-[rgba(242,235,221,0.78)] sm:text-[11px]">
-                  AIoT GROW-OUT SYSTEM
+                  AIoT GROW-OUT SYSTEM · LIVE
                 </span>
                 <span className="hidden h-3 w-px bg-[rgba(242,235,221,0.2)] sm:block" />
                 <span className="hidden text-[10px] text-[rgba(242,235,221,0.55)] sm:block">
@@ -88,10 +88,10 @@ export function LandingPage() {
               </h1>
 
               <p className="mt-5 max-w-[540px] text-[14px] leading-[1.62] text-[rgba(242,235,221,0.78)] sm:text-[15px]">
-                EcoPrawn pairs a submerged sensor array, AI vision growth
+                EcoPrawn combines a submerged sensor array, AI-driven growth
                 tracking, and a biofloc recirculation loop to keep white
-                shrimp tanks in range 24/7 — and routes what the tank doesn't
-                need back into the mangroves.
+                shrimp tanks within range around the clock — and routes
+                whatever the tank doesn't need back into the mangroves.
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -207,18 +207,18 @@ export function LandingPage() {
         <div className="mx-auto max-w-[1200px]">
           <div className="mb-12 max-w-[680px] sm:mb-14">
             <div className="ep-font-mono mb-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)]">
-              Why it exists
+              How it works
             </div>
 
             <h2 className="ep-font-display text-[clamp(30px,4vw,44px)] font-semibold leading-[1.08] tracking-tight text-[var(--water-deep)]">
               One general objective.
               <br className="hidden sm:block" />
-              Five ways to hit it.
+              Six systems achieving it.
             </h2>
 
             <p className="mt-4 max-w-[590px] text-[15px] leading-[1.7] text-[rgba(11,35,32,0.62)]">
-              A focused system architecture designed around measurable
-              aquaculture outcomes.
+              A focused system architecture built around measurable
+              aquaculture outcomes — now fully operational.
             </p>
           </div>
 
@@ -240,24 +240,24 @@ export function LandingPage() {
                 </div>
 
                 <p className="ep-font-display text-[19px] font-medium italic leading-[1.6] sm:text-[21px]">
-                  "To design and deploy an automated indoor aquaculture system
-                  leveraging Artificial Intelligence and Internet of Things
-                  technologies to optimize shrimp growth rates, maintain
-                  pristine water quality, and establish a resource-efficient
-                  operational model."
+                  "EcoPrawn was designed and developed as an AIoT-enabled
+                  smart aquaculture system that automates water quality
+                  monitoring and precision feeding — maintaining suitable
+                  aquatic conditions and improving the efficiency of
+                  small-scale indoor shrimp farming."
                 </p>
               </div>
 
               <div className="hidden shrink-0 lg:block">
                 <div className="ep-font-mono rounded-full border border-[rgba(242,235,221,0.12)] px-3 py-1.5 text-[9px] uppercase tracking-[0.12em] text-[rgba(242,235,221,0.55)]">
-                  Core objective
+                  Core Objective
                 </div>
               </div>
             </div>
           </div>
 
           {/* Objective cards */}
-          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {objectives.map((objective) => (
               <article
                 key={objective.num}
@@ -296,7 +296,7 @@ export function LandingPage() {
         <div className="mx-auto max-w-[1200px]">
           <div className="mb-12 max-w-[700px] sm:mb-14">
             <div className="ep-font-mono mb-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--coral)]">
-              What's inside
+              What's running
             </div>
 
             <h2 className="ep-font-display text-[clamp(30px,4vw,44px)] font-semibold leading-[1.08] tracking-tight">
@@ -306,8 +306,8 @@ export function LandingPage() {
             </h2>
 
             <p className="mt-4 max-w-[590px] text-[15px] leading-[1.7] text-[rgba(242,235,221,0.68)]">
-              Every feature maps to a spec in the proposal — nothing here is
-              decorative.
+              Every system below is deployed and operating — nothing here is
+              a mockup.
             </p>
           </div>
 
@@ -323,7 +323,7 @@ export function LandingPage() {
 
                 <div>
                   <div className="mb-2 hidden text-[9px] uppercase tracking-[0.12em] text-[rgba(242,235,221,0.4)] sm:block">
-                    System module
+                    System Module
                   </div>
 
                   <h3 className="ep-font-display text-[20px] font-semibold leading-tight transition-colors group-hover:text-[var(--coral)] sm:text-[21px]">
@@ -369,8 +369,8 @@ export function LandingPage() {
             </h2>
 
             <p className="mt-4 max-w-[590px] text-[15px] leading-[1.7] text-[rgba(11,35,32,0.62)]">
-              Stated plainly, so expectations line up with what's actually
-              being built.
+              Stated plainly, so expectations line up with what the system
+              actually does.
             </p>
           </div>
 
@@ -481,12 +481,12 @@ export function LandingPage() {
               </div>
 
               <h2 className="ep-font-display text-[clamp(26px,4vw,38px)] font-semibold leading-tight">
-                Ready to read the tank?
+                The tank is already talking.
               </h2>
 
               <p className="mx-auto mt-3 max-w-[500px] text-[13.5px] leading-[1.65] text-[rgba(242,235,221,0.68)]">
-                Monitor the system, review its signals, and manage the
-                aquaculture environment from one dashboard.
+                Monitor the system, review its live signals, and manage the
+                aquaculture environment from a single dashboard.
               </p>
 
               <button
@@ -514,8 +514,8 @@ export function LandingPage() {
             </div>
 
             <div className="max-w-[420px] text-[12px] leading-[1.6]">
-              AIoT-Enabled Indoor White Shrimp Farming &amp; Water Management
-              System
+              An AIoT-Enabled Indoor White Shrimp Farming &amp; Water
+              Management System
             </div>
           </div>
 
@@ -523,7 +523,7 @@ export function LandingPage() {
             University of Caloocan City, Congress Campus — Computer Studies
             Department
             <br />
-            Project Proposal, CS 118 · Thesis Writing 1
+            Thesis Writing 1, CS 118 · Completed System
           </div>
         </div>
       </footer>
