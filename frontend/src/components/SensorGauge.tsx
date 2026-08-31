@@ -1,4 +1,4 @@
-import type { SensorReading } from "../types";
+import type { SensorReading } from "@/types";
 
 export function SensorGauge({ label, value, pct, status }: SensorReading) {
   const circumference = 2 * Math.PI * 26;

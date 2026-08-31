@@ -1,4 +1,4 @@
-import type { SensorReading, TankStatus, AlertItem } from "../types";
+import type { SensorReading, TankStatus, AlertItem } from "@/types";
 
 export const heroReadouts: SensorReading[] = [
   { label: "Dissolved O₂", value: "6.2", pct: 78, status: "ok" },

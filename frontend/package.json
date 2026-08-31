@@ -1,16 +1,16 @@
 {
-  "name": "bun-react-template",
+  "name": "ecoprawn-nextjs",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "bun --hot src/index.ts",
-    "start": "NODE_ENV=production bun src/index.ts",
-    "build": "bun run build.ts"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "bun-plugin-tailwind": "^0.1.2",
     "clsx": "^2.1.1",
+    "next": "^15.0.0",
     "react": "^19",
     "react-dom": "^19",
     "tailwind-merge": "^3.3.1",
@@ -19,10 +19,9 @@
   "devDependencies": {
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/bun": "latest",
-    "tailwindcss": "^4.1.11"
-  },
-  "peerDependencies": {
-    "typescript": "^7"
+    "@types/node": "latest",
+    "@tailwindcss/postcss": "^4.1.11",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5"
   }
 }

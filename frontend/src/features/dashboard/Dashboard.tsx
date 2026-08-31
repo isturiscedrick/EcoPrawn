@@ -1,7 +1,7 @@
-import { SensorGauge } from "../../components/SensorGauge";
-import { TankRow, AlertRow } from "../../components/DashboardRows";
-import { TrendChart } from "../../components/TrendChart";
-import { sensorGauges, tanks, alerts, visionMetrics } from "../../data/ecoprawn";
+import { SensorGauge } from "@/components/SensorGauge";
+import { TankRow, AlertRow } from "@/components/DashboardRows";
+import { TrendChart } from "@/components/TrendChart";
+import { sensorGauges, tanks, alerts, visionMetrics } from "@/data/ecoprawn";
 
 export function Dashboard() {
   return (

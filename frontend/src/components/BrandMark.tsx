@@ -1,4 +1,4 @@
-import logo from "../assets/ecoprawn-logo.png";
+import Image from "next/image";
 
 interface BrandMarkProps {
   size?: number;
@@ -7,13 +7,14 @@ interface BrandMarkProps {
 
 export function BrandMark({ size = 30, className = "" }: BrandMarkProps) {
   return (
-    <img
-      src={logo}
+    <Image
+      src="/assets/ecoprawn-logo.png"
       alt="EcoPrawn"
-      width={size}
-      height={size}
+      width={size * 3}
+      height={size * 3}
       className={`object-contain ${className}`}
       style={{ height: size, width: "auto" }}
+      priority
     />
   );
 }

@@ -1,38 +1,37 @@
+"use client";
+
 import { useState } from "react";
+import Link from "next/link";
 import { BrandMark } from "./BrandMark";
 import { NavLinks } from "./NavLinks";
-import { useView } from "../context/ViewContext";
 
 interface SiteHeaderProps {
   showLinks?: boolean;
 }
 
 export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
-  const { setView } = useView();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(11,35,32,0.08)] bg-[var(--sand)]/95 backdrop-blur-md">
       <div className="mx-auto flex h-[64px] max-w-[1240px] items-center justify-between px-5 sm:px-8 lg:px-10">
-        <button
-          type="button"
-          onClick={() => setView("landing")}
+        <Link
+          href="/"
           className="group flex items-center gap-2.5 text-[var(--coral)] rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)]"
           aria-label="EcoPrawn home"
         >
           <BrandMark size={64} />
-        </button>
+        </Link>
 
         {showLinks && <NavLinks variant="desktop" />}
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setView("login")}
+          <Link
+            href="/login"
             className="rounded-xl bg-[var(--water-deep)] px-4 py-2 text-[11px] font-semibold text-[var(--sand)] shadow-[0_8px_20px_-10px_rgba(11,35,32,0.7)] transition-all hover:-translate-y-0.5 hover:bg-[#123F43] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)] sm:px-5 sm:text-[12px]"
           >
             Log in
-          </button>
+          </Link>
 
           {showLinks && (
             <button

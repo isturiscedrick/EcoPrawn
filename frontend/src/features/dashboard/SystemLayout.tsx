@@ -1,14 +1,23 @@
+"use client";
+
 import type { ReactNode } from "react";
-import { BrandMark } from "../../components/BrandMark";
-import { DASHBOARD_NAV_ITEMS, type DashboardView } from "../../constants/nav";
+import { usePathname, useRouter } from "next/navigation";
+import { BrandMark } from "@/components/BrandMark";
+import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
 
 interface SystemLayoutProps {
   children: ReactNode;
-  activeView: DashboardView;
-  onNavigate: (view: DashboardView) => void;
 }
 
-export function SystemLayout({ children, activeView, onNavigate }: SystemLayoutProps) {
+export function SystemLayout({ children }: SystemLayoutProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const activeView = (pathname.split("/dashboard/")[1] ?? "overview") as DashboardView;
+
+  function onNavigate(view: DashboardView) {
+    router.push(view === "overview" ? "/dashboard" : `/dashboard/${view}`);
+  }
+
   return (
     <div className="bg-[#F5F1E7] min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-[224px_1fr] min-h-screen">

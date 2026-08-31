@@ -1,4 +1,4 @@
-import { LANDING_NAV_LINKS } from "../constants/nav";
+import { LANDING_NAV_LINKS } from "@/config/nav";
 
 interface NavLinksProps {
   variant: "desktop" | "mobile";
@@ -10,7 +10,13 @@ export function NavLinks({ variant, onLinkClick }: NavLinksProps) {
     return (
       <nav className="hidden h-full items-center gap-7 md:flex" aria-label="Primary navigation">
         {LANDING_NAV_LINKS.map(([label, href], index) => (
-          <a key={label} href={href} className={`relative flex h-full items-center px-1 text-[12px] font-semibold text-[var(--water-deep)] transition-colors hover:text-[var(--coral)] rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)] ${index === 0 ? "after:absolute after:bottom-[8px] after:left-0 after:right-0 after:h-[2px] after:bg-[var(--coral)]" : ""}`}>
+          <a
+            key={label}
+            href={href}
+            className={`relative flex h-full items-center px-1 text-[12px] font-semibold text-[var(--water-deep)] transition-colors hover:text-[var(--coral)] rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)] ${
+              index === 0 ? "after:absolute after:bottom-[8px] after:left-0 after:right-0 after:h-[2px] after:bg-[var(--coral)]" : ""
+            }`}
+          >
             {label}
           </a>
         ))}

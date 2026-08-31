@@ -1,6 +1,6 @@
-import { TankHeroSvg } from "./TankHeroSvg";
-import { SiteHeader } from "../components/SiteHeader";
-import { useView } from "../context/ViewContext";
+import Link from "next/link";
+import { TankHeroSvg } from "@/features/dashboard/TankHeroSvg";
+import { SiteHeader } from "@/components/SiteHeader";
 import {
   heroReadouts,
   heroReadoutUnits,
@@ -8,15 +8,9 @@ import {
   features,
   inScope,
   outOfScope,
-} from "../data/ecoprawn";
+} from "@/data/ecoprawn";
 
 export function LandingPage() {
-  const { setView } = useView();
-
-  function openDashboard() {
-    setView("login");
-  }
-
   return (
     <div className="min-h-screen bg-[var(--sand)] text-[var(--water-deep)] scroll-smooth">
       <SiteHeader />
@@ -91,19 +85,19 @@ export function LandingPage() {
                 EcoPrawn combines a submerged sensor array, AI-driven growth
                 tracking, and a biofloc recirculation loop to keep white
                 shrimp tanks within range around the clock — and routes
-                whatever the tank doesn't need back into the mangroves.
+                whatever the tank doesn&apos;t need back into the mangroves.
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <button
-                  onClick={openDashboard}
+                <Link
+                  href="/login"
                   className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-[var(--coral)] px-6 py-3.5 text-[14px] font-semibold text-[var(--sand)] shadow-[0_14px_32px_-10px_rgba(232,98,58,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] hover:shadow-[0_18px_38px_-10px_rgba(232,98,58,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--water-deep)]"
                 >
                   Sign in to dashboard
                   <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">
                     →
                   </span>
-                </button>
+                </Link>
 
                 <a
                   href="#objectives"
@@ -240,11 +234,11 @@ export function LandingPage() {
                 </div>
 
                 <p className="ep-font-display text-[19px] font-medium italic leading-[1.6] sm:text-[21px]">
-                  "EcoPrawn was designed and developed as an AIoT-enabled
+                  &quot;EcoPrawn was designed and developed as an AIoT-enabled
                   smart aquaculture system that automates water quality
                   monitoring and precision feeding — maintaining suitable
                   aquatic conditions and improving the efficiency of
-                  small-scale indoor shrimp farming."
+                  small-scale indoor shrimp farming.&quot;
                 </p>
               </div>
 
@@ -296,7 +290,7 @@ export function LandingPage() {
         <div className="mx-auto max-w-[1200px]">
           <div className="mb-12 max-w-[700px] sm:mb-14">
             <div className="ep-font-mono mb-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--coral)]">
-              What's running
+              What&apos;s running
             </div>
 
             <h2 className="ep-font-display text-[clamp(30px,4vw,44px)] font-semibold leading-[1.08] tracking-tight">
@@ -489,13 +483,13 @@ export function LandingPage() {
                 aquaculture environment from a single dashboard.
               </p>
 
-              <button
-                onClick={openDashboard}
+              <Link
+                href="/login"
                 className="mt-7 inline-flex items-center gap-2.5 rounded-xl bg-[var(--coral)] px-6 py-3.5 text-[13.5px] font-semibold text-[var(--sand)] shadow-[0_12px_28px_-8px_rgba(232,98,58,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--water-deep)]"
               >
                 Sign in to dashboard
                 <span aria-hidden="true">→</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

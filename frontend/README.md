@@ -1,21 +1,30 @@
-# bun-react-tailwind-shadcn-template
+# EcoPrawn — Next.js
 
-To install dependencies:
+AIoT-enabled indoor shrimp farming dashboard, migrated to Next.js (App Router).
 
-```bash
-bun install
-```
-
-To start a development server:
+## Getting Started
 
 ```bash
-bun dev
+npm install
+npm run dev
 ```
 
-To run for production:
+Open [http://localhost:3000](http://localhost:3000).
 
-```bash
-bun start
+## Folder Structure
+
 ```
-
-This project was created using `bun init` in bun v1.4.0. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+src/
+  app/            → routes (App Router): pages, layouts
+  components/      → shared/reusable UI components
+  features/        → feature-based modules (auth, dashboard)
+  hooks/           → custom React hooks
+  context/         → React context providers
+  utils/           → helper/utility functions
+  config/          → navigation & app-level constants
+  data/            → static mock data
+  types/           → shared TypeScript types
+public/
+  assets/          → images, logos
+  icons/           → icon assets
+```
