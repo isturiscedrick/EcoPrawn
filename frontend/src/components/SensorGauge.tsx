@@ -2,7 +2,8 @@ import type { SensorReading } from "@/types";
 
 export function SensorGauge({ label, value, pct, status }: SensorReading) {
   const circumference = 2 * Math.PI * 26;
-  const offset = circumference * (1 - pct / 100);
+  const clampedPct = Math.max(0, Math.min(100, pct));
+  const dashLength = circumference * (clampedPct / 100);
   const color = status === "ok" ? "#3C7A5C" : "#E8A23A";
 
   return (
@@ -19,8 +20,8 @@ export function SensorGauge({ label, value, pct, status }: SensorReading) {
           fill="none"
           stroke={color}
           strokeWidth="6"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
+          strokeDasharray={`${dashLength} ${circumference - dashLength}`}
+          strokeDashoffset={0}
           strokeLinecap="round"
           transform="rotate(-90 32 32)"
         />

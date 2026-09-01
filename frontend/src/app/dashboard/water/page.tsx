@@ -1,5 +1,5 @@
-import { ComingSoon } from "@/features/dashboard/ComingSoon";
+import { WaterQuality } from "@/features/dashboard/WaterQuality";
 
 export default function WaterPage() {
-  return <ComingSoon />;
+  return <WaterQuality />;
 }

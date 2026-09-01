@@ -1,5 +1,5 @@
-import { ComingSoon } from "@/features/dashboard/ComingSoon";
+import { AlertsView } from "@/features/dashboard/AlertsView";
 
 export default function AlertsPage() {
-  return <ComingSoon />;
+  return <AlertsView />;
 }

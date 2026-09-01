@@ -1,5 +1,5 @@
-import { ComingSoon } from "@/features/dashboard/ComingSoon";
+import { BioflocLoop } from "@/features/dashboard/BioflocLoop";
 
 export default function BioflocPage() {
-  return <ComingSoon />;
+  return <BioflocLoop />;
 }

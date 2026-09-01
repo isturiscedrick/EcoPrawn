@@ -1,5 +1,5 @@
-import { ComingSoon } from "@/features/dashboard/ComingSoon";
+import { Feeding } from "@/features/dashboard/Feeding";
 
 export default function FeedingPage() {
-  return <ComingSoon />;
+  return <Feeding />;
 }

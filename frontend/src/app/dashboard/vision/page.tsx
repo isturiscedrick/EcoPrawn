@@ -1,5 +1,5 @@
-import { ComingSoon } from "@/features/dashboard/ComingSoon";
+import { VisionGrowth } from "@/features/dashboard/VisionGrowth";
 
 export default function VisionPage() {
-  return <ComingSoon />;
+  return <VisionGrowth />;
 }

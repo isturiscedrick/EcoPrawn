@@ -22,9 +22,9 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     <div className="bg-[#F5F1E7] min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-[224px_1fr] min-h-screen">
         {/* SIDEBAR */}
-        <aside className="bg-[var(--water-deep)] text-[var(--sand)] p-4 flex lg:flex-col flex-row items-center lg:items-stretch gap-1.5 overflow-x-auto lg:sticky lg:top-0 lg:h-screen">
+        <aside className="bg-[var(--water-deep)] text-[var(--sand)] p-4 flex lg:flex-col flex-row items-center lg:items-stretch gap-1.5 overflow-x-auto lg:overflow-x-visible lg:sticky lg:top-0 lg:h-screen">
           <div className="flex items-center gap-2.5 py-2 px-2.5 lg:pb-6 lg:mb-2 lg:border-b lg:border-[rgba(242,235,221,0.1)]">
-            <BrandMark size={24} />
+            <BrandMark size={84} />
           </div>
 
           <div className="hidden lg:block ep-font-mono text-[9.5px] uppercase tracking-[0.12em] text-[rgba(242,235,221,0.35)] px-3 mb-1">

@@ -1,4 +1,4 @@
-import type { SensorReading, TankStatus, AlertItem } from "@/types";
+import type { SensorReading, TankStatus, AlertItem, SensorStatus } from "@/types";
 
 export const heroReadouts: SensorReading[] = [
   { label: "Dissolved O₂", value: "6.2", pct: 78, status: "ok" },
@@ -146,4 +146,177 @@ export const visionMetrics = [
   { label: "Avg. Weight", value: "18.2 g" },
   { label: "Population Est.", value: "10,120" },
   { label: "Abnormal Behavior", value: "0 flagged" },
+];
+
+/* =========================================================
+   WATER QUALITY PAGE
+========================================================= */
+
+export interface WaterQualityTankReading {
+  tank: string;
+  dissolvedOxygen: number;
+  ph: number;
+  temperature: number;
+  salinity: number;
+  waterLevel: number;
+  status: SensorStatus;
+}
+
+export const waterQualityByTank: WaterQualityTankReading[] = [
+  { tank: "Tank 1", dissolvedOxygen: 6.2, ph: 7.9, temperature: 28.4, salinity: 15, waterLevel: 98, status: "ok" },
+  { tank: "Tank 2", dissolvedOxygen: 5.8, ph: 7.8, temperature: 28.6, salinity: 15, waterLevel: 97, status: "ok" },
+  { tank: "Tank 3", dissolvedOxygen: 6.0, ph: 7.9, temperature: 28.2, salinity: 14, waterLevel: 96, status: "ok" },
+  { tank: "Tank 4", dissolvedOxygen: 4.6, ph: 7.7, temperature: 29.1, salinity: 15, waterLevel: 95, status: "warn" },
+  { tank: "Tank 5", dissolvedOxygen: 6.3, ph: 8.0, temperature: 28.0, salinity: 14, waterLevel: 98, status: "ok" },
+  { tank: "Tank 6", dissolvedOxygen: 6.1, ph: 7.9, temperature: 28.3, salinity: 15, waterLevel: 97, status: "ok" },
+];
+
+export interface WaterQualityThreshold {
+  label: string;
+  range: string;
+  current: string;
+  status: SensorStatus;
+}
+
+export const waterQualityThresholds: WaterQualityThreshold[] = [
+  { label: "Dissolved O₂", range: "≥ 4.5 mg/L", current: "6.0 mg/L avg", status: "ok" },
+  { label: "pH", range: "7.5 – 8.5", current: "7.87 avg", status: "ok" },
+  { label: "Temperature", range: "26 – 30 °C", current: "28.4 °C avg", status: "ok" },
+  { label: "Salinity", range: "10 – 20 ppt", current: "14.7 ppt avg", status: "ok" },
+  { label: "Water Level", range: "≥ 90%", current: "96.8% avg", status: "ok" },
+];
+
+/* =========================================================
+   VISION & GROWTH PAGE
+========================================================= */
+
+export interface TankGrowthReading {
+  tank: string;
+  bodyLength: string;
+  weight: string;
+  population: string;
+  abnormal: number;
+}
+
+export const growthByTank: TankGrowthReading[] = [
+  { tank: "Tank 1", bodyLength: "11.6 cm", weight: "18.6 g", population: "1,720", abnormal: 0 },
+  { tank: "Tank 2", bodyLength: "11.3 cm", weight: "17.9 g", population: "1,695", abnormal: 0 },
+  { tank: "Tank 3", bodyLength: "10.8 cm", weight: "16.4 g", population: "1,610", abnormal: 0 },
+  { tank: "Tank 4", bodyLength: "10.5 cm", weight: "15.8 g", population: "1,580", abnormal: 1 },
+  { tank: "Tank 5", bodyLength: "9.4 cm", weight: "12.1 g", population: "1,780", abnormal: 0 },
+  { tank: "Tank 6", bodyLength: "9.6 cm", weight: "12.6 g", population: "1,735", abnormal: 0 },
+];
+
+export const growthTrend: number[] = [10.2, 10.5, 10.7, 10.9, 11.0, 11.2, 11.4];
+
+export const visionScanLog = [
+  { time: "Today · 09:40", tank: "Tank 1", note: "Growth scan completed — no anomalies detected." },
+  { time: "Today · 08:15", tank: "Tank 4", note: "1 shrimp flagged for reduced motility, isolated for observation." },
+  { time: "Yesterday · 17:50", tank: "All tanks", note: "Full facility biomass recalculation completed." },
+];
+
+/* =========================================================
+   FEEDING PAGE
+========================================================= */
+
+export interface FeedScheduleEntry {
+  time: string;
+  amount: string;
+  status: "done" | "upcoming";
+}
+
+export const feedSchedule: FeedScheduleEntry[] = [
+  { time: "06:00", amount: "1.8 kg", status: "done" },
+  { time: "10:00", amount: "1.9 kg", status: "done" },
+  { time: "14:00", amount: "1.9 kg", status: "done" },
+  { time: "18:00", amount: "1.8 kg", status: "upcoming" },
+];
+
+export interface TankFeedAllocation {
+  tank: string;
+  dispensedToday: string;
+  targetToday: string;
+  fcr: string;
+}
+
+export const feedByTank: TankFeedAllocation[] = [
+  { tank: "Tank 1", dispensedToday: "1.3 kg", targetToday: "1.5 kg", fcr: "1.35" },
+  { tank: "Tank 2", dispensedToday: "1.2 kg", targetToday: "1.5 kg", fcr: "1.38" },
+  { tank: "Tank 3", dispensedToday: "1.1 kg", targetToday: "1.3 kg", fcr: "1.40" },
+  { tank: "Tank 4", dispensedToday: "1.1 kg", targetToday: "1.3 kg", fcr: "1.44" },
+  { tank: "Tank 5", dispensedToday: "0.9 kg", targetToday: "1.1 kg", fcr: "1.32" },
+  { tank: "Tank 6", dispensedToday: "0.9 kg", targetToday: "1.1 kg", fcr: "1.36" },
+];
+
+/* =========================================================
+   BIOFLOC LOOP PAGE
+========================================================= */
+
+export interface BioflocMetric {
+  label: string;
+  value: string;
+  unit: string;
+  status: SensorStatus;
+}
+
+export const bioflocMetrics: BioflocMetric[] = [
+  { label: "Floc Volume (FV)", value: "12.4", unit: "mL/L", status: "ok" },
+  { label: "C:N Ratio", value: "14.8", unit: ":1", status: "ok" },
+  { label: "Total Suspended Solids", value: "310", unit: "mg/L", status: "ok" },
+  { label: "Alkalinity", value: "148", unit: "mg/L CaCO₃", status: "ok" },
+];
+
+export const effluentLog = [
+  { time: "Today · 07:00", event: "Scheduled discharge cycle", detail: "Tank 4 blowdown routed to wetland outlet — 220 L." },
+  { time: "Yesterday · 19:00", event: "Scheduled discharge cycle", detail: "Facility-wide blowdown routed to mangrove outlet — 640 L." },
+  { time: "2 days ago", event: "Carbon dosing", detail: "Molasses dosed to Tanks 1–3 to correct C:N ratio." },
+];
+
+/* =========================================================
+   ALERTS PAGE
+========================================================= */
+
+export const alertsLog: AlertItem[] = [
+  {
+    icon: "warn",
+    title: "DO trending toward threshold",
+    detail: "Tank 4 — dissolved O₂ forecast to dip below 4.5 mg/L in ~2h",
+    time: "14m ago",
+  },
+  {
+    icon: "info",
+    title: "Aerator auto-activated",
+    detail: "Tank 2 — DO dropped to 4.8 mg/L, relay triggered automatically",
+    time: "1h ago",
+  },
+  {
+    icon: "info",
+    title: "Feed cycle completed",
+    detail: "All tanks — scheduled 14:00 dispense, biomass-adjusted",
+    time: "3h ago",
+  },
+  {
+    icon: "info",
+    title: "Vision scan completed",
+    detail: "Tank 1 — growth scan finished, no anomalies detected",
+    time: "5h ago",
+  },
+  {
+    icon: "warn",
+    title: "Abnormal behavior flagged",
+    detail: "Tank 4 — 1 shrimp showing reduced motility, isolated for observation",
+    time: "9h ago",
+  },
+  {
+    icon: "info",
+    title: "Scheduled effluent discharge",
+    detail: "Tank 4 blowdown routed to wetland outlet — 220 L",
+    time: "11h ago",
+  },
+  {
+    icon: "info",
+    title: "Carbon dosing applied",
+    detail: "Tanks 1–3 — molasses dosed to correct C:N ratio",
+    time: "1d ago",
+  },
 ];
