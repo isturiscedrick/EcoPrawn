@@ -10,6 +10,14 @@ import {
   outOfScope,
 } from "@/data/ecoprawn";
 
+/**
+ * Shared vertical rhythm for full-width sections. Every section below
+ * uses this same top/bottom padding so spacing feels consistent when
+ * scrolling through the page.
+ */
+const SECTION_PAD = "px-5 py-20 sm:px-8 sm:py-24 lg:py-28";
+const SECTION_HEADER_MARGIN = "mb-12 sm:mb-16";
+
 export function LandingPage() {
   return (
     <div className="min-h-screen bg-[var(--sand)] text-[var(--water-deep)] scroll-smooth">
@@ -55,11 +63,11 @@ export function LandingPage() {
           }}
         />
 
-        <div className="relative z-10 mx-auto max-w-[1240px] px-5 pt-8 sm:px-8 sm:pt-10 lg:px-10 lg:pt-12">
+        <div className="relative z-10 mx-auto max-w-[1240px] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
           {/* Main hero row */}
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[1.03fr_0.97fr] md:gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10">
             {/* Hero copy */}
-            <div className="max-w-[650px] py-2 md:py-6 lg:py-8">
+            <div className="max-w-[650px]">
               <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-[rgba(242,235,221,0.15)] bg-[rgba(242,235,221,0.045)] px-3.5 py-2 backdrop-blur-sm">
                 <span className="ep-pulse-dot h-[7px] w-[7px] rounded-full bg-[var(--mangrove-light)] shadow-[0_0_10px_rgba(126,173,135,0.7)]" />
                 <span className="ep-font-mono text-[10px] font-medium tracking-[0.13em] text-[rgba(242,235,221,0.78)] sm:text-[11px]">
@@ -161,7 +169,7 @@ export function LandingPage() {
           </div>
 
           {/* Telemetry strip */}
-          <div className="mt-8 border-t border-[rgba(242,235,221,0.18)] md:mt-4">
+          <div className="mt-14 border-t border-[rgba(242,235,221,0.18)] sm:mt-16">
             <div className="grid grid-cols-2 md:grid-cols-5">
               {heroReadouts.map((readout, index) => (
                 <div
@@ -194,12 +202,9 @@ export function LandingPage() {
       {/* =========================================================
           OBJECTIVES
       ========================================================= */}
-      <section
-        id="objectives"
-        className="scroll-mt-[68px] px-5 py-24 sm:px-8 sm:py-28 lg:py-[120px]"
-      >
+      <section id="objectives" className={`scroll-mt-[68px] ${SECTION_PAD}`}>
         <div className="mx-auto max-w-[1200px]">
-          <div className="mb-12 max-w-[680px] sm:mb-14">
+          <div className={`max-w-[680px] ${SECTION_HEADER_MARGIN}`}>
             <div className="ep-font-mono mb-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)]">
               How it works
             </div>
@@ -217,7 +222,7 @@ export function LandingPage() {
           </div>
 
           {/* General objective */}
-          <div className="relative mb-5 overflow-hidden rounded-2xl bg-[var(--water-deep)] px-6 py-8 text-[var(--sand)] shadow-[0_20px_50px_-25px_rgba(11,35,32,0.4)] sm:px-10 sm:py-10">
+          <div className="relative mb-6 overflow-hidden rounded-2xl bg-[var(--water-deep)] px-6 py-8 text-[var(--sand)] shadow-[0_20px_50px_-25px_rgba(11,35,32,0.4)] sm:px-10 sm:py-10">
             <div
               aria-hidden="true"
               className="absolute -right-20 -top-24 h-[280px] w-[280px] rounded-full"
@@ -251,7 +256,7 @@ export function LandingPage() {
           </div>
 
           {/* Objective cards */}
-          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {objectives.map((objective) => (
               <article
                 key={objective.num}
@@ -285,10 +290,10 @@ export function LandingPage() {
       ========================================================= */}
       <section
         id="systems"
-        className="scroll-mt-[68px] bg-[var(--water-deep)] px-5 py-24 text-[var(--sand)] sm:px-8 sm:py-28 lg:py-[120px]"
+        className={`scroll-mt-[68px] bg-[var(--water-deep)] text-[var(--sand)] ${SECTION_PAD}`}
       >
         <div className="mx-auto max-w-[1200px]">
-          <div className="mb-12 max-w-[700px] sm:mb-14">
+          <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
             <div className="ep-font-mono mb-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--coral)]">
               What&apos;s running
             </div>
@@ -348,12 +353,9 @@ export function LandingPage() {
       {/* =========================================================
           SCOPE / LIMITATIONS
       ========================================================= */}
-      <section
-        id="scope"
-        className="scroll-mt-[68px] px-5 py-24 sm:px-8 sm:py-28 lg:py-[120px]"
-      >
+      <section id="scope" className={`scroll-mt-[68px] ${SECTION_PAD}`}>
         <div className="mx-auto max-w-[1200px]">
-          <div className="mb-12 max-w-[700px] sm:mb-14">
+          <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
             <div className="ep-font-mono mb-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)]">
               Boundaries
             </div>
@@ -457,7 +459,7 @@ export function LandingPage() {
       {/* =========================================================
           FINAL CTA
       ========================================================= */}
-      <section className="px-5 pb-24 sm:px-8 sm:pb-28">
+      <section className={SECTION_PAD}>
         <div className="mx-auto max-w-[1200px]">
           <div className="relative overflow-hidden rounded-2xl bg-[var(--water-deep)] px-6 py-10 text-center text-[var(--sand)] shadow-[0_24px_60px_-30px_rgba(11,35,32,0.5)] sm:px-10 sm:py-14">
             <div

@@ -13,11 +13,16 @@ export function Sidebar() {
     router.push(view === "overview" ? "/dashboard" : `/dashboard/${view}`);
   }
 
+  function onLogout() {
+    // TODO: wire up real sign-out.
+    router.push("/login");
+  }
+
   return (
     <aside className="flex h-full flex-row items-center gap-1.5 overflow-x-auto bg-[var(--water-deep)] p-3 text-[var(--sand)] lg:flex-col lg:items-stretch lg:gap-0 lg:overflow-x-visible lg:p-4">
       {/* BRAND */}
       <div className="flex shrink-0 items-center gap-2.5 px-1 lg:mb-4 lg:w-full lg:border-b lg:border-[rgba(242,235,221,0.1)] lg:px-2.5 lg:pb-4 lg:pt-1">
-        <BrandMark size={84} />
+        <BrandMark size={36} />
       </div>
 
       {/* EDGE NODE STATUS */}
@@ -27,8 +32,6 @@ export function Sidebar() {
           EDGE NODE: mini-pc-01
         </span>
       </div>
-
-      <div className="mx-2 hidden h-6 w-px bg-[rgba(242,235,221,0.15)] lg:hidden" />
 
       {/* NAV LABEL (desktop only) */}
       <div className="hidden px-3 ep-font-mono text-[9.5px] uppercase tracking-[0.12em] text-[rgba(242,235,221,0.35)] lg:mb-2 lg:block">
@@ -62,23 +65,48 @@ export function Sidebar() {
       </div>
 
       {/* USER / OPERATOR (desktop only) */}
-      <div className="mt-auto hidden shrink-0 items-center gap-2.5 border-t border-[rgba(242,235,221,0.1)] px-2 pt-4 lg:flex lg:w-full">
-        <div
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold"
-          style={{ background: "var(--coral)" }}
-          aria-hidden="true"
+      <div className="mt-auto hidden shrink-0 flex-col gap-3 border-t border-[rgba(242,235,221,0.1)] px-2 pt-4 lg:flex lg:w-full">
+        <div className="flex items-center gap-2.5">
+          <div
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold"
+            style={{ background: "var(--coral)" }}
+            aria-hidden="true"
+          >
+            FO
+          </div>
+          <div className="min-w-0">
+            <div className="truncate text-[12.5px] font-semibold text-[var(--sand)]">
+              Facility Operator
+            </div>
+            <div className="ep-font-mono text-[10px] text-[rgba(242,235,221,0.5)]">
+              UPTIME 41d 06h
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={onLogout}
+          className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[13.5px] font-medium text-[rgba(242,235,221,0.62)] transition-colors duration-200 hover:bg-[rgba(232,98,58,0.12)] hover:text-[var(--coral)]"
         >
-          FO
-        </div>
-        <div className="min-w-0">
-          <div className="truncate text-[12.5px] font-semibold text-[var(--sand)]">
-            Facility Operator
-          </div>
-          <div className="ep-font-mono text-[10px] text-[rgba(242,235,221,0.5)]">
-            UPTIME 41d 06h
-          </div>
-        </div>
+          <span className="w-4 text-center text-sm" aria-hidden="true">
+            ⏻
+          </span>
+          Log out
+        </button>
       </div>
+
+      {/* LOGOUT (mobile only, icon button) */}
+      <button
+        type="button"
+        onClick={onLogout}
+        aria-label="Log out"
+        className="ml-auto flex shrink-0 items-center justify-center rounded-lg p-2.5 text-[rgba(242,235,221,0.62)] transition-colors duration-200 hover:bg-[rgba(232,98,58,0.12)] hover:text-[var(--coral)] lg:hidden"
+      >
+        <span className="text-sm" aria-hidden="true">
+          ⏻
+        </span>
+      </button>
     </aside>
   );
 }

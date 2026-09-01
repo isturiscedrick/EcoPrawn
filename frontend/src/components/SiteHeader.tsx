@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { BrandMark } from "./BrandMark";
 import { NavLinks } from "./NavLinks";
+import { LANDING_NAV_LINKS } from "@/config/nav";
 
 interface SiteHeaderProps {
   showLinks?: boolean;
@@ -11,6 +12,43 @@ interface SiteHeaderProps {
 
 export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState(LANDING_NAV_LINKS[0][1]);
+
+  // Scroll-spy: highlight whichever section is currently in view so the
+  // nav always reflects where the user actually is, on both desktop and
+  // mobile — instead of permanently pointing at "Home".
+  useEffect(() => {
+    if (!showLinks) return;
+
+    const sectionIds = LANDING_NAV_LINKS.map(([, href]) => href.replace("#", ""));
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible.length > 0) {
+          setActiveHref(`#${visible[0].target.id}`);
+        }
+      },
+      {
+        // Bias the trigger zone toward the upper portion of the viewport,
+        // just below the sticky header, so a section counts as "active"
+        // once it's actually the one the user is reading.
+        rootMargin: "-68px 0px -60% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [showLinks]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(11,35,32,0.08)] bg-[var(--sand)]/95 backdrop-blur-md">
@@ -23,7 +61,7 @@ export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
           <BrandMark size={64} />
         </Link>
 
-        {showLinks && <NavLinks variant="desktop" />}
+        {showLinks && <NavLinks variant="desktop" activeHref={activeHref} />}
 
         <div className="flex items-center gap-2">
           <Link
@@ -58,7 +96,11 @@ export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
       </div>
 
       {showLinks && mobileNavOpen && (
-        <NavLinks variant="mobile" onLinkClick={() => setMobileNavOpen(false)} />
+        <NavLinks
+          variant="mobile"
+          activeHref={activeHref}
+          onLinkClick={() => setMobileNavOpen(false)}
+        />
       )}
     </header>
   );
