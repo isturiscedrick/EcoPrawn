@@ -22,7 +22,7 @@ export function Sidebar() {
     <aside className="flex h-full flex-row items-center gap-1.5 overflow-x-auto bg-[var(--water-deep)] p-3 text-[var(--sand)] lg:flex-col lg:items-stretch lg:gap-0 lg:overflow-x-visible lg:p-4">
       {/* BRAND */}
       <div className="flex shrink-0 items-center gap-2.5 px-1 lg:mb-4 lg:w-full lg:border-b lg:border-[rgba(242,235,221,0.1)] lg:px-2.5 lg:pb-4 lg:pt-1">
-        <BrandMark size={36} />
+        <BrandMark size={84} />
       </div>
 
       {/* EDGE NODE STATUS */}

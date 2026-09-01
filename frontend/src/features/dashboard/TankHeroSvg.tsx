@@ -40,7 +40,9 @@ export function TankHeroSvg() {
         strokeWidth="1.5"
         strokeDasharray="2 6"
       />
-      <text x="336" y="104" fill="rgba(242,235,221,0.45)" fontFamily="IBM Plex Mono" fontSize="10">
+      {/* Label sits to the left of the tank (rather than the right) so it
+          never sits behind the "Live monitor" card overlaid on this SVG. */}
+      <text x="24" y="104" fill="rgba(242,235,221,0.45)" fontFamily="IBM Plex Mono" fontSize="10" textAnchor="end">
         waterline
       </text>
 
@@ -70,9 +72,11 @@ export function TankHeroSvg() {
 
       <rect x="31" y="368" width="298" height="21" fill="#081E22" />
 
+      {/* DO / pH probe — kept on the right, but label now sits below the
+          circle instead of at y=46, clearing the vision-cam label's row */}
       <line x1="270" y1="60" x2="270" y2="170" stroke="rgba(242,235,221,0.4)" strokeWidth="2" />
       <circle className="ep-probe-pulse" cx="270" cy="175" r="5" fill="var(--coral)" />
-      <text x="238" y="46" fill="rgba(242,235,221,0.6)" fontFamily="IBM Plex Mono" fontSize="9.5">
+      <text x="284" y="178" fill="rgba(242,235,221,0.65)" fontFamily="IBM Plex Mono" fontSize="9.5">
         DO / pH probe
       </text>
 
@@ -136,18 +140,20 @@ export function TankHeroSvg() {
         <path d="M185 190 q8 -8 16 -1 q3 3 0 6 q-2 2 -5 0 l-2 -2 q-3 3 -8 1 q-3 -2 0 -4z" fill="var(--coral)" opacity="0.4" />
       </g>
 
-      <rect x="160" y="34" width="30" height="16" rx="3" fill="rgba(242,235,221,0.5)" />
-      <circle cx="175" cy="42" r="4" fill="var(--water-deep)" />
+      {/* Vision camera — moved left and its label centered underneath so
+          it never overlaps the DO/pH probe label on the right */}
+      <rect x="110" y="34" width="30" height="16" rx="3" fill="rgba(242,235,221,0.5)" />
+      <circle cx="125" cy="42" r="4" fill="var(--water-deep)" />
       <line
-        x1="175"
+        x1="125"
         y1="50"
-        x2="175"
+        x2="125"
         y2="100"
         stroke="rgba(242,235,221,0.25)"
         strokeWidth="1"
         strokeDasharray="1 5"
       />
-      <text x="196" y="46" fill="rgba(242,235,221,0.6)" fontFamily="IBM Plex Mono" fontSize="9.5">
+      <text x="125" y="24" fill="rgba(242,235,221,0.65)" fontFamily="IBM Plex Mono" fontSize="9.5" textAnchor="middle">
         vision cam
       </text>
     </svg>
