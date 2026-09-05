@@ -151,10 +151,6 @@ export function Sidebar() {
 
           {/* Modal card */}
           <div className="relative z-10 w-full max-w-[360px] rounded-2xl border border-[rgba(242,235,221,0.14)] bg-[var(--water-deep)] p-6 text-[var(--sand)] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)]">
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(232,98,58,0.16)] text-[18px] text-[var(--coral)]">
-              ⏻
-            </div>
-
             <h2
               id="logout-modal-title"
               className="ep-font-display mb-1.5 text-[18px] font-semibold text-[var(--sand)]"
