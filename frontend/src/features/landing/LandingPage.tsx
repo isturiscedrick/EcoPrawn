@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { TankHeroSvg } from "@/features/dashboard/TankHeroSvg";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -19,6 +22,43 @@ const SECTION_PAD = "px-5 py-20 sm:px-8 sm:py-24 lg:py-28";
 const SECTION_HEADER_MARGIN = "mb-12 sm:mb-16";
 
 export function LandingPage() {
+  // Gentle scroll-tied depth cue for the hero tank visual. Capped so the
+  // effect settles once the hero scrolls out of view, rather than running
+  // as a persistent parallax gimmick down the whole page.
+  const [heroOffset, setHeroOffset] = useState(0);
+
+  useEffect(() => {
+    function onScroll() {
+      setHeroOffset(Math.min(window.scrollY * 0.08, 40));
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // One orchestrated reveal for the page: the final CTA fades/slides into
+  // place the first time it enters view. This is the single deliberate
+  // motion moment — everything else stays quiet and responds to hover
+  // only, per the "spend your boldness in one place" principle.
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const [ctaVisible, setCtaVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCtaVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-[var(--sand)] text-[var(--water-deep)] scroll-smooth">
       <SiteHeader />
@@ -130,7 +170,10 @@ export function LandingPage() {
 
             {/* Tank visualization */}
             <div className="relative mx-auto flex h-[320px] w-full max-w-[420px] items-center justify-center sm:h-[380px] sm:max-w-[480px] md:h-[420px] md:max-w-none lg:h-[440px]">
-              <div className="relative z-10 flex h-full w-full max-w-[560px] items-center justify-center [&>svg]:h-full [&>svg]:w-auto [&>svg]:max-w-full">
+              <div
+                className="relative z-10 flex h-full w-full max-w-[560px] items-center justify-center [&>svg]:h-full [&>svg]:w-auto [&>svg]:max-w-full"
+                style={{ transform: `translateY(${heroOffset}px)` }}
+              >
                 <TankHeroSvg />
               </div>
 
@@ -255,12 +298,19 @@ export function LandingPage() {
             </div>
           </div>
 
-          {/* Objective cards */}
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Objective cards — a thin connecting rule ties the six
+              sub-objectives back to the single general objective above,
+              since they genuinely are its component parts rather than
+              unrelated feature tiles. */}
+          <div className="relative grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-0 right-0 top-[26px] hidden h-px bg-[var(--sand-dim)] lg:block"
+            />
             {objectives.map((objective) => (
               <article
                 key={objective.num}
-                className="group rounded-xl border border-[var(--sand-dim)] bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--mangrove-light)] hover:shadow-[0_18px_36px_-16px_rgba(11,35,32,0.2)]"
+                className="group relative rounded-xl border border-[var(--sand-dim)] bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--mangrove-light)] hover:shadow-[0_18px_36px_-16px_rgba(11,35,32,0.2)]"
               >
                 <div className="mb-7 flex items-center justify-between">
                   <span className="ep-font-mono text-[11px] font-semibold text-[var(--coral)]">
@@ -314,8 +364,13 @@ export function LandingPage() {
             {features.map((feature) => (
               <article
                 key={feature.index}
-                className="group grid grid-cols-[38px_1fr] gap-5 border-b border-[rgba(242,235,221,0.12)] py-7 transition-colors duration-200 hover:bg-[rgba(242,235,221,0.025)] sm:grid-cols-[55px_0.8fr_1.2fr] sm:gap-7 sm:py-8 lg:grid-cols-[65px_0.8fr_1.2fr] lg:gap-8"
+                className="group relative grid grid-cols-[38px_1fr] gap-5 border-b border-[rgba(242,235,221,0.12)] py-7 pl-0 transition-all duration-200 hover:bg-[rgba(242,235,221,0.025)] hover:pl-3 sm:grid-cols-[55px_0.8fr_1.2fr] sm:gap-7 sm:py-8 lg:grid-cols-[65px_0.8fr_1.2fr] lg:gap-8"
               >
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 bg-[var(--coral)] transition-transform duration-200 group-hover:scale-y-100"
+                />
+
                 <div className="ep-font-mono pt-1 text-[11px] font-medium text-[var(--mangrove-light)]">
                   {feature.index}
                 </div>
@@ -412,8 +467,10 @@ export function LandingPage() {
               </div>
             </article>
 
-            {/* Out of scope */}
-            <article className="rounded-2xl border border-[#EAD9B8] bg-[#FBF6EC] p-6 shadow-[0_12px_32px_-24px_rgba(11,35,32,0.25)] sm:p-8">
+            {/* Out of scope — a dashed border reinforces "boundary /
+                excluded" as a distinct signal from the solid-bordered
+                "in scope" card, beyond just the warm color shift. */}
+            <article className="rounded-2xl border border-dashed border-[#D8C296] bg-[#FBF6EC] p-6 shadow-[0_12px_32px_-24px_rgba(11,35,32,0.25)] sm:p-8">
               <div className="mb-7 flex items-center justify-between">
                 <h3 className="ep-font-display flex items-center gap-2.5 text-[20px] font-semibold text-[var(--water-deep)]">
                   <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[rgba(181,139,57,0.1)]">
@@ -461,7 +518,12 @@ export function LandingPage() {
       ========================================================= */}
       <section className={SECTION_PAD}>
         <div className="mx-auto max-w-[1200px]">
-          <div className="relative overflow-hidden rounded-2xl bg-[var(--water-deep)] px-6 py-10 text-center text-[var(--sand)] shadow-[0_24px_60px_-30px_rgba(11,35,32,0.5)] sm:px-10 sm:py-14">
+          <div
+            ref={ctaRef}
+            className={`relative overflow-hidden rounded-2xl bg-[var(--water-deep)] px-6 py-10 text-center text-[var(--sand)] shadow-[0_24px_60px_-30px_rgba(11,35,32,0.5)] transition-all duration-700 ease-out sm:px-10 sm:py-14 ${
+              ctaVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+            }`}
+          >
             <div
               aria-hidden="true"
               className="absolute left-1/2 top-1/2 h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 rounded-full"
