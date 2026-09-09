@@ -17,7 +17,7 @@ export function Dashboard() {
             Tank Overview
           </h1>
           <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
-            Indoor grow-out facility · 6 tanks · <em className="not-italic text-[rgba(11,35,32,0.7)]">Penaeus vannamei</em>
+            Indoor grow-out facility · 1 tank · <em className="not-italic text-[rgba(11,35,32,0.7)]">Penaeus vannamei</em>
           </div>
         </div>
         <div className="flex items-center gap-2.5">
@@ -37,7 +37,7 @@ export function Dashboard() {
       {/* KPI ROW */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
         <KpiCard
-          label="Avg. Dissolved O₂"
+          label="Dissolved O₂"
           value="6.2"
           unit="mg/L"
           delta="▲ within target range"
@@ -45,24 +45,24 @@ export function Dashboard() {
         />
         <KpiCard
           label="Est. Biomass"
-          value="184"
+          value="31.2"
           unit="kg"
           delta="▲ 3.1% vs last week"
           deltaTone="ok"
         />
         <KpiCard
           label="Feed Conversion Ratio"
-          value="1.38"
+          value="1.35"
           unit="FCR"
-          delta="▲ improved from 1.46"
+          delta="▲ improved from 1.42"
           deltaTone="ok"
         />
         <KpiCard
           label="Active Alerts"
-          value="1"
+          value="0"
           unit="open"
-          delta="Tank 4 — DO trending down"
-          deltaTone="warn"
+          delta="No active warnings"
+          deltaTone="ok"
         />
       </div>
 
@@ -91,7 +91,7 @@ export function Dashboard() {
           </div>
         </Panel>
 
-        <Panel title="Recent Alerts" badge="3 events">
+        <Panel title="Recent Alerts" badge={`${alerts.length} events`}>
           <div>
             {alerts.map((a) => (
               <AlertRow key={a.title} {...a} />
@@ -102,7 +102,7 @@ export function Dashboard() {
 
       {/* TANK STATUS + FEED */}
       <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4 mb-4">
-        <Panel title="Tank Status" badge="6 tanks">
+        <Panel title="Tank Status" badge="1 tank">
           <div className="flex flex-col gap-2.5">
             {tanks.map((t) => (
               <TankRow key={t.name} {...t} />
@@ -112,15 +112,15 @@ export function Dashboard() {
 
         <Panel title="Feed Dispensed Today" badge="biomass-adjusted">
           <div className="ep-font-mono text-[26px] font-semibold text-[var(--water-deep)]">
-            7.4{" "}
+            1.3{" "}
             <span className="text-sm font-medium text-[rgba(11,35,32,0.5)]">
-              kg / 9.0 kg target
+              kg / 1.5 kg target
             </span>
           </div>
           <div className="bg-[var(--sand-dim)] rounded-full h-2 overflow-hidden mt-3">
             <div
               className="bg-gradient-to-r from-[var(--coral)] to-[var(--amber)] h-full rounded-full transition-all"
-              style={{ width: "82%" }}
+              style={{ width: "87%" }}
             />
           </div>
           <div className="grid grid-cols-2 gap-3 mt-5 pt-4 border-t border-[var(--sand-dim)]">
@@ -134,7 +134,7 @@ export function Dashboard() {
               <div className="ep-font-mono text-[9.5px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] mb-1">
                 FCR this cycle
               </div>
-              <div className="text-[14px] font-semibold text-[var(--mangrove)]">1.38 <span className="text-[11px] font-normal text-[rgba(11,35,32,0.5)]">(target ≤ 1.5)</span></div>
+              <div className="text-[14px] font-semibold text-[var(--mangrove)]">1.35 <span className="text-[11px] font-normal text-[rgba(11,35,32,0.5)]">(target ≤ 1.5)</span></div>
             </div>
           </div>
         </Panel>

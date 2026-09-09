@@ -2,7 +2,7 @@ import { Panel } from "@/components/DashboardPrimitives";
 import { bioflocMetrics, effluentLog } from "@/data/ecoprawn";
 
 const loopSteps = [
-  { step: "01", title: "Biofloc reactor", body: "Heterotrophic bacteria convert ammonia and organic waste into consumable floc within each tank's water column." },
+  { step: "01", title: "Biofloc reactor", body: "Heterotrophic bacteria convert ammonia and organic waste into consumable floc within the tank's water column." },
   { step: "02", title: "Solids management", body: "Excess suspended solids are periodically settled and drawn off to keep TSS within the target band." },
   { step: "03", title: "Discharge plumbing", body: "Scheduled blowdown routes bio-rich wastewater through dedicated plumbing toward the outlet." },
   { step: "04", title: "Mangrove / wetland outlet", body: "Nutrient-rich effluent is released to surrounding mangrove and wetland vegetation as part of normal operation." },

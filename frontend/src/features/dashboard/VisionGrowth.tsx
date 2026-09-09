@@ -38,10 +38,7 @@ function GrowthTrendChart() {
 }
 
 export function VisionGrowth() {
-  const totalPopulation = growthByTank.reduce(
-    (sum, t) => sum + Number(t.population.replace(/,/g, "")),
-    0
-  );
+  const tank = growthByTank[0];
   const abnormalTotal = growthByTank.reduce((sum, t) => sum + t.abnormal, 0);
 
   return (
@@ -55,7 +52,7 @@ export function VisionGrowth() {
             Vision &amp; Growth Analytics
           </h1>
           <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
-            Camera-based growth tracking &amp; biomass estimation · 6 tanks
+            Camera-based growth tracking &amp; biomass estimation · 1 tank
           </div>
         </div>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[0_2px_8px_-4px_rgba(11,35,32,0.12)]">
@@ -65,26 +62,26 @@ export function VisionGrowth() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-        <KpiCard label="Avg. Body Length" value="11.4" unit="cm" delta="▲ 0.2 cm vs last week" deltaTone="ok" />
-        <KpiCard label="Avg. Weight" value="18.2" unit="g" delta="▲ 1.4 g vs last week" deltaTone="ok" />
+        <KpiCard label="Body Length" value="11.6" unit="cm" delta="▲ 0.2 cm vs last week" deltaTone="ok" />
+        <KpiCard label="Weight" value="18.6" unit="g" delta="▲ 1.4 g vs last week" deltaTone="ok" />
         <KpiCard
           label="Population Est."
-          value={totalPopulation.toLocaleString()}
+          value={tank.population}
           unit="shrimp"
-          delta="across 6 tanks"
+          delta="single tank"
           deltaTone="ok"
         />
         <KpiCard
           label="Abnormal Behavior"
           value={String(abnormalTotal)}
           unit="flagged"
-          delta={abnormalTotal === 0 ? "No anomalies detected" : "Tank 4 — under observation"}
+          delta={abnormalTotal === 0 ? "No anomalies detected" : "Under observation"}
           deltaTone={abnormalTotal === 0 ? "ok" : "warn"}
         />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
-        <Panel title="Facility Growth Trend — Avg. Body Length" badge="7-week view">
+        <Panel title="Growth Trend — Avg. Body Length" badge="7-week view">
           <GrowthTrendChart />
           <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
             <span className="flex items-center gap-1.5">
@@ -107,7 +104,7 @@ export function VisionGrowth() {
         </Panel>
       </div>
 
-      <Panel title="Per-Tank Growth Snapshot" badge="6 tanks">
+      <Panel title="Growth Snapshot" badge="1 tank">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[640px]">
             <thead>

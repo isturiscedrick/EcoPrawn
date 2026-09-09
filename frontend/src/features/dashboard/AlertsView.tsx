@@ -34,7 +34,7 @@ export function AlertsView() {
           label="Open Alerts"
           value={String(openCount)}
           unit="active"
-          delta="Tank 4 — DO trending down"
+          delta={openCount === 0 ? "No active warnings" : "Under review"}
           deltaTone={openCount === 0 ? "ok" : "warn"}
         />
         <KpiCard label="Auto-Resolved Today" value="1" unit="event" delta="Aerator relay auto-triggered" deltaTone="ok" />
@@ -42,7 +42,7 @@ export function AlertsView() {
           label="Events Logged"
           value={String(alertsLog.length)}
           unit="last 24h"
-          delta="across all tanks"
+          delta="Tank 1"
           deltaTone="ok"
         />
       </div>

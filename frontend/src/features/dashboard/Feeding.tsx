@@ -18,7 +18,7 @@ export function Feeding() {
             Feeding
           </h1>
           <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
-            Scheduled, biomass-adjusted dispensing · 6 tanks
+            Scheduled, biomass-adjusted dispensing · 1 tank
           </div>
         </div>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[0_2px_8px_-4px_rgba(11,35,32,0.12)]">
@@ -35,7 +35,7 @@ export function Feeding() {
           delta={`of ${targetToday.toFixed(1)} kg target`}
           deltaTone="ok"
         />
-        <KpiCard label="Facility FCR" value="1.38" unit="FCR" delta="▲ improved from 1.46" deltaTone="ok" />
+        <KpiCard label="Tank FCR" value="1.35" unit="FCR" delta="▲ improved from 1.42" deltaTone="ok" />
         <KpiCard
           label="Next Dispense"
           value={nextEntry?.time ?? "—"}
@@ -93,13 +93,13 @@ export function Feeding() {
             />
           </div>
           <div className="mt-5 pt-4 border-t border-[var(--sand-dim)] text-[13px] text-[rgba(11,35,32,0.6)] leading-[1.6]">
-            Dispense volume per tank is recalculated automatically from the latest
+            Dispense volume is recalculated automatically from the latest
             AI-estimated biomass, keeping feed conversion efficient as shrimp grow.
           </div>
         </Panel>
       </div>
 
-      <Panel title="Per-Tank Feed Allocation" badge="6 tanks">
+      <Panel title="Feed Allocation" badge="1 tank">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[560px]">
             <thead>

@@ -3,6 +3,7 @@ import { TrendChart } from "@/components/TrendChart";
 import { waterQualityByTank, waterQualityThresholds } from "@/data/ecoprawn";
 
 export function WaterQuality() {
+  const tank = waterQualityByTank[0];
   const warnCount = waterQualityByTank.filter((t) => t.status === "warn").length;
 
   return (
@@ -16,7 +17,7 @@ export function WaterQuality() {
             Water Quality Monitoring
           </h1>
           <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
-            Dissolved oxygen, pH, temperature, salinity &amp; water level · 6 tanks
+            Dissolved oxygen, pH, temperature, salinity &amp; water level · 1 tank
           </div>
         </div>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[0_2px_8px_-4px_rgba(11,35,32,0.12)]">
@@ -25,19 +26,19 @@ export function WaterQuality() {
               warnCount === 0 ? "ep-pulse-dot bg-[var(--mangrove)]" : "bg-[var(--amber)]"
             }`}
           />
-          {warnCount === 0 ? "All parameters nominal" : `${warnCount} tank${warnCount > 1 ? "s" : ""} out of range`}
+          {warnCount === 0 ? "All parameters nominal" : "Tank out of range"}
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-        <KpiCard label="Avg. Dissolved O₂" value="6.0" unit="mg/L" delta="▲ within target range" deltaTone="ok" />
-        <KpiCard label="Avg. pH" value="7.87" unit="pH" delta="▲ within target range" deltaTone="ok" />
-        <KpiCard label="Avg. Temperature" value="28.4" unit="°C" delta="▲ within target range" deltaTone="ok" />
+        <KpiCard label="Dissolved O₂" value={tank.dissolvedOxygen.toFixed(1)} unit="mg/L" delta="▲ within target range" deltaTone="ok" />
+        <KpiCard label="pH" value={tank.ph.toFixed(1)} unit="pH" delta="▲ within target range" deltaTone="ok" />
+        <KpiCard label="Temperature" value={tank.temperature.toFixed(1)} unit="°C" delta="▲ within target range" deltaTone="ok" />
         <KpiCard
-          label="Tanks Watch-Listed"
-          value={String(warnCount)}
-          unit="of 6"
-          delta={warnCount === 0 ? "No active warnings" : "Tank 4 — DO trending down"}
+          label="Tank Status"
+          value={warnCount === 0 ? "OK" : "Watch"}
+          unit=""
+          delta={warnCount === 0 ? "No active warnings" : "DO trending down"}
           deltaTone={warnCount === 0 ? "ok" : "warn"}
         />
       </div>
@@ -56,7 +57,7 @@ export function WaterQuality() {
           </div>
         </Panel>
 
-        <Panel title="Parameter Thresholds" badge="facility-wide">
+        <Panel title="Parameter Thresholds" badge="Tank 1">
           <div className="flex flex-col gap-2.5">
             {waterQualityThresholds.map((t) => (
               <div
@@ -85,7 +86,7 @@ export function WaterQuality() {
         </Panel>
       </div>
 
-      <Panel title="Per-Tank Readings" badge="6 tanks">
+      <Panel title="Tank Readings" badge="1 tank">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[640px]">
             <thead>
