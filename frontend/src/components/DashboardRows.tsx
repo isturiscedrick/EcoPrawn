@@ -1,6 +1,11 @@
-import type { AlertItem, TankStatus } from "@/types";
+import type { AlertItem } from "@/types";
+import type { Tank } from "@/context/TankContext";
 
-export function TankRow({ name, pl, biomass, status }: TankStatus) {
+interface TankRowProps extends Tank {
+  onRemove?: (id: string) => void;
+}
+
+export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProps) {
   return (
     <div className="flex items-center justify-between p-3.5 border border-[var(--sand-dim)] rounded-[10px]">
       <div className="flex items-center gap-3">
@@ -16,10 +21,22 @@ export function TankRow({ name, pl, biomass, status }: TankStatus) {
           </div>
         </div>
       </div>
-      <div className="text-right">
-        <div className="ep-font-mono text-[13.5px] font-semibold text-[var(--water-deep)]">
-          {biomass}
+      <div className="flex items-center gap-3">
+        <div className="text-right">
+          <div className="ep-font-mono text-[13.5px] font-semibold text-[var(--water-deep)]">
+            {biomass.toFixed(1)} kg
+          </div>
         </div>
+        {onRemove && (
+          <button
+            type="button"
+            onClick={() => onRemove(id)}
+            aria-label={`Remove ${name}`}
+            className="flex h-7 w-7 items-center justify-center rounded-md text-[rgba(11,35,32,0.35)] transition-colors hover:bg-[rgba(214,69,69,0.1)] hover:text-[var(--danger)]"
+          >
+            ✕
+          </button>
+        )}
       </div>
     </div>
   );

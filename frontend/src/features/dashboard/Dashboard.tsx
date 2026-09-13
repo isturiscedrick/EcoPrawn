@@ -1,10 +1,59 @@
+"use client";
+
+import { useState } from "react";
 import { SensorGauge } from "@/components/SensorGauge";
 import { TankRow, AlertRow } from "@/components/DashboardRows";
 import { TrendChart } from "@/components/TrendChart";
 import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { sensorGauges, tanks, alerts, visionMetrics } from "@/data/ecoprawn";
+import { alerts } from "@/data/ecoprawn";
+import { useTanks } from "@/context/TankContext";
+import { AddTankModal } from "./AddTankModal";
 
 export function Dashboard() {
+  const { tanks, addTank, removeTank } = useTanks();
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const tankCount = tanks.length;
+  const totalBiomass = tanks.reduce((sum, t) => sum + t.biomass, 0);
+  const avgDO = tankCount ? tanks.reduce((sum, t) => sum + t.dissolvedOxygen, 0) / tankCount : 0;
+  const avgPh = tankCount ? tanks.reduce((sum, t) => sum + t.ph, 0) / tankCount : 0;
+  const avgTemp = tankCount ? tanks.reduce((sum, t) => sum + t.temperature, 0) / tankCount : 0;
+  const avgSalinity = tankCount ? tanks.reduce((sum, t) => sum + t.salinity, 0) / tankCount : 0;
+  const avgWaterLevel = tankCount ? tanks.reduce((sum, t) => sum + t.waterLevel, 0) / tankCount : 0;
+  const avgFcr = tankCount ? tanks.reduce((sum, t) => sum + t.fcr, 0) / tankCount : 0;
+  const openAlertTanks = tanks.filter((t) => t.status === "warn").length;
+
+  const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
+  const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0) || 1;
+  const feedPct = Math.round((dispensedToday / targetToday) * 100);
+
+  const totalPopulation = tanks.reduce((sum, t) => sum + t.population, 0);
+  const totalAbnormal = tanks.reduce((sum, t) => sum + t.abnormal, 0);
+  const avgBodyLength = tankCount ? tanks.reduce((sum, t) => sum + t.bodyLength, 0) / tankCount : 0;
+  const avgWeight = tankCount ? tanks.reduce((sum, t) => sum + t.weight, 0) / tankCount : 0;
+
+  const sensorGauges = tankCount
+    ? [
+        {
+          label: "Dissolved O₂",
+          value: `${avgDO.toFixed(1)} mg/L`,
+          pct: Math.min(100, (avgDO / 8) * 100),
+          status: openAlertTanks === 0 ? ("ok" as const) : ("warn" as const),
+        },
+        { label: "pH", value: avgPh.toFixed(1), pct: 66, status: "ok" as const },
+        { label: "Temperature", value: `${avgTemp.toFixed(1)} °C`, pct: 71, status: "ok" as const },
+        { label: "Salinity", value: `${Math.round(avgSalinity)} ppt`, pct: 60, status: "ok" as const },
+        { label: "Water Level", value: `${Math.round(avgWaterLevel)}%`, pct: avgWaterLevel, status: "ok" as const },
+      ]
+    : [];
+
+  const visionMetrics = [
+    { label: "Avg. Body Length", value: tankCount ? `${avgBodyLength.toFixed(1)} cm` : "—" },
+    { label: "Avg. Weight", value: tankCount ? `${avgWeight.toFixed(1)} g` : "—" },
+    { label: "Population Est.", value: totalPopulation.toLocaleString() },
+    { label: "Abnormal Behavior", value: `${totalAbnormal} flagged` },
+  ];
+
   return (
     <>
       {/* PAGE HEADER */}
@@ -17,19 +66,25 @@ export function Dashboard() {
             Tank Overview
           </h1>
           <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
-            Indoor grow-out facility · 1 tank · <em className="not-italic text-[rgba(11,35,32,0.7)]">Penaeus vannamei</em>
+            Indoor grow-out facility · {tankCount} tank{tankCount !== 1 ? "s" : ""} ·{" "}
+            <em className="not-italic text-[rgba(11,35,32,0.7)]">Penaeus vannamei</em>
           </div>
         </div>
         <div className="flex items-center gap-2.5">
           <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[0_2px_8px_-4px_rgba(11,35,32,0.12)]">
-            <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
-            All systems nominal
+            <span
+              className={`w-[7px] h-[7px] rounded-full ${
+                openAlertTanks === 0 ? "ep-pulse-dot bg-[var(--mangrove)]" : "bg-[var(--amber)]"
+              }`}
+            />
+            {openAlertTanks === 0 ? "All systems nominal" : `${openAlertTanks} tank(s) need attention`}
           </div>
           <button
             type="button"
-            className="ep-font-mono inline-flex items-center gap-1.5 rounded-full border border-[var(--sand-dim)] bg-white px-4 py-[9px] text-[11px] font-semibold text-[var(--water-deep)] transition-colors hover:border-[var(--mangrove-light)] hover:text-[var(--mangrove)]"
+            onClick={() => setModalOpen(true)}
+            className="ep-font-mono inline-flex items-center gap-1.5 rounded-full bg-[var(--coral)] px-4 py-[9px] text-[11px] font-semibold text-[var(--sand)] transition-colors hover:bg-[var(--coral-dim)]"
           >
-            ⟳ Refresh
+            + Add Tank
           </button>
         </div>
       </div>
@@ -37,58 +92,69 @@ export function Dashboard() {
       {/* KPI ROW */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
         <KpiCard
-          label="Dissolved O₂"
-          value="6.2"
+          label="Dissolved O₂ (avg)"
+          value={avgDO.toFixed(1)}
           unit="mg/L"
           delta="▲ within target range"
           deltaTone="ok"
         />
         <KpiCard
-          label="Est. Biomass"
-          value="31.2"
+          label="Total Biomass"
+          value={totalBiomass.toFixed(1)}
           unit="kg"
-          delta="▲ 3.1% vs last week"
+          delta={`across ${tankCount} tank${tankCount !== 1 ? "s" : ""}`}
           deltaTone="ok"
         />
         <KpiCard
-          label="Feed Conversion Ratio"
-          value="1.35"
+          label="Avg. Feed Conversion Ratio"
+          value={avgFcr.toFixed(2)}
           unit="FCR"
           delta="▲ improved from 1.42"
           deltaTone="ok"
         />
         <KpiCard
-          label="Active Alerts"
-          value="0"
+          label="Tanks Needing Attention"
+          value={String(openAlertTanks)}
           unit="open"
-          delta="No active warnings"
-          deltaTone="ok"
+          delta={openAlertTanks === 0 ? "No active warnings" : "Review thresholds"}
+          deltaTone={openAlertTanks === 0 ? "ok" : "warn"}
         />
       </div>
 
       {/* SENSOR + ALERTS */}
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 mb-4">
         <Panel
-          title="Live Sensor Array — Tank 1"
+          title={`Live Sensor Array — ${tankCount} Tank${tankCount !== 1 ? "s" : ""} (avg)`}
           badge="updated 8s ago"
         >
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {sensorGauges.map((s) => (
-              <SensorGauge key={s.label} {...s} />
-            ))}
-          </div>
-          <div className="mt-4 pt-4 border-t border-[var(--sand-dim)]">
-            <TrendChart />
-            <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
-              <span className="flex items-center gap-1.5">
-                <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> DO (mg/L)
-              </span>
-              <span className="flex items-center gap-1.5 text-[var(--coral)]">
-                <span className="inline-block w-3 h-[2px] bg-[var(--coral)]" style={{ borderTop: "2px dashed var(--coral)" }} />
-                Temp (°C, scaled)
-              </span>
+          {tankCount > 0 ? (
+            <>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                {sensorGauges.map((s) => (
+                  <SensorGauge key={s.label} {...s} />
+                ))}
+              </div>
+              <div className="mt-4 pt-4 border-t border-[var(--sand-dim)]">
+                <TrendChart />
+                <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
+                  <span className="flex items-center gap-1.5">
+                    <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> DO (mg/L)
+                  </span>
+                  <span className="flex items-center gap-1.5 text-[var(--coral)]">
+                    <span
+                      className="inline-block w-3 h-[2px] bg-[var(--coral)]"
+                      style={{ borderTop: "2px dashed var(--coral)" }}
+                    />
+                    Temp (°C, scaled)
+                  </span>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
+              No tanks yet — add one to see live sensor data.
             </div>
-          </div>
+          )}
         </Panel>
 
         <Panel title="Recent Alerts" badge={`${alerts.length} events`}>
@@ -102,25 +168,31 @@ export function Dashboard() {
 
       {/* TANK STATUS + FEED */}
       <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4 mb-4">
-        <Panel title="Tank Status" badge="1 tank">
-          <div className="flex flex-col gap-2.5">
-            {tanks.map((t) => (
-              <TankRow key={t.name} {...t} />
-            ))}
-          </div>
+        <Panel title="Tank Status" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
+          {tankCount > 0 ? (
+            <div className="flex flex-col gap-2.5">
+              {tanks.map((t) => (
+                <TankRow key={t.id} {...t} onRemove={removeTank} />
+              ))}
+            </div>
+          ) : (
+            <div className="py-6 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
+              No tanks added yet.
+            </div>
+          )}
         </Panel>
 
         <Panel title="Feed Dispensed Today" badge="biomass-adjusted">
           <div className="ep-font-mono text-[26px] font-semibold text-[var(--water-deep)]">
-            1.3{" "}
+            {dispensedToday.toFixed(1)}{" "}
             <span className="text-sm font-medium text-[rgba(11,35,32,0.5)]">
-              kg / 1.5 kg target
+              kg / {targetToday.toFixed(1)} kg target
             </span>
           </div>
           <div className="bg-[var(--sand-dim)] rounded-full h-2 overflow-hidden mt-3">
             <div
               className="bg-gradient-to-r from-[var(--coral)] to-[var(--amber)] h-full rounded-full transition-all"
-              style={{ width: "87%" }}
+              style={{ width: `${Math.min(100, feedPct)}%` }}
             />
           </div>
           <div className="grid grid-cols-2 gap-3 mt-5 pt-4 border-t border-[var(--sand-dim)]">
@@ -132,9 +204,12 @@ export function Dashboard() {
             </div>
             <div>
               <div className="ep-font-mono text-[9.5px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] mb-1">
-                FCR this cycle
+                Avg FCR this cycle
               </div>
-              <div className="text-[14px] font-semibold text-[var(--mangrove)]">1.35 <span className="text-[11px] font-normal text-[rgba(11,35,32,0.5)]">(target ≤ 1.5)</span></div>
+              <div className="text-[14px] font-semibold text-[var(--mangrove)]">
+                {avgFcr.toFixed(2)}{" "}
+                <span className="text-[11px] font-normal text-[rgba(11,35,32,0.5)]">(target ≤ 1.5)</span>
+              </div>
             </div>
           </div>
         </Panel>
@@ -159,6 +234,13 @@ export function Dashboard() {
           ))}
         </div>
       </Panel>
+
+      <AddTankModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSubmit={addTank}
+        existingCount={tankCount}
+      />
     </>
   );
 }
