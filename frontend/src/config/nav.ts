@@ -5,7 +5,7 @@ export const LANDING_NAV_LINKS: [string, string][] = [
   ["Scope", "#scope"],
 ];
 
-export type DashboardView = "overview" | "water" | "vision" | "feeding" | "biofloc" | "alerts";
+export type DashboardView = "overview" | "tanks" | "water" | "vision" | "feeding" | "biofloc" | "alerts";
 
 export interface DashboardNavItem {
   icon: string;
@@ -15,6 +15,7 @@ export interface DashboardNavItem {
 
 export const DASHBOARD_NAV_ITEMS: DashboardNavItem[] = [
   { icon: "◧", label: "Overview", view: "overview" },
+  { icon: "▦", label: "Tanks", view: "tanks" },
   { icon: "≈", label: "Water Quality", view: "water" },
   { icon: "◎", label: "Vision & Growth", view: "vision" },
   { icon: "▤", label: "Feeding", view: "feeding" },

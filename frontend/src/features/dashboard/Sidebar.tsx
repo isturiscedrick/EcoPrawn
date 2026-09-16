@@ -142,14 +142,11 @@ export function Sidebar() {
           aria-labelledby="logout-modal-title"
           className="fixed inset-0 z-[100] flex items-center justify-center p-5"
         >
-          {/* Overlay */}
           <div
             aria-hidden="true"
             onClick={onCancelLogout}
             className="absolute inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm"
           />
-
-          {/* Modal card */}
           <div className="relative z-10 w-full max-w-[360px] rounded-2xl border border-[rgba(242,235,221,0.14)] bg-[var(--water-deep)] p-6 text-[var(--sand)] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)]">
             <h2
               id="logout-modal-title"
@@ -160,7 +157,6 @@ export function Sidebar() {
             <p className="mb-6 text-[13px] leading-[1.55] text-[rgba(242,235,221,0.6)]">
               You&apos;ll need to sign in again to access the facility dashboard.
             </p>
-
             <div className="flex gap-3">
               <button
                 type="button"
