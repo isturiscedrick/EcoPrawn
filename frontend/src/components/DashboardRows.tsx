@@ -1,11 +1,17 @@
+"use client";
+
+import { useState } from "react";
 import type { AlertItem } from "@/types";
 import type { Tank } from "@/context/TankContext";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
 
 interface TankRowProps extends Tank {
   onRemove?: (id: string) => void;
 }
 
 export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProps) {
+  const [confirmingRemove, setConfirmingRemove] = useState(false);
+
   return (
     <div className="flex items-center justify-between p-3.5 border border-[var(--sand-dim)] rounded-[10px]">
       <div className="flex items-center gap-3">
@@ -30,7 +36,7 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
         {onRemove && (
           <button
             type="button"
-            onClick={() => onRemove(id)}
+            onClick={() => setConfirmingRemove(true)}
             aria-label={`Remove ${name}`}
             className="flex h-7 w-7 items-center justify-center rounded-md text-[rgba(11,35,32,0.35)] transition-colors hover:bg-[rgba(214,69,69,0.1)] hover:text-[var(--danger)]"
           >
@@ -38,6 +44,21 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
           </button>
         )}
       </div>
+
+      {onRemove && (
+        <ConfirmDialog
+          open={confirmingRemove}
+          tone="danger"
+          title={`Remove ${name}?`}
+          description={`This removes ${name} and its readings from the dashboard. This can't be undone.`}
+          confirmLabel="Remove tank"
+          onCancel={() => setConfirmingRemove(false)}
+          onConfirm={() => {
+            setConfirmingRemove(false);
+            onRemove(id);
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import type { NewTankInput } from "@/context/TankContext";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
 
 interface AddTankModalProps {
   open: boolean;
@@ -26,14 +27,21 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
   const [salinity, setSalinity] = useState("15");
   const [waterLevel, setWaterLevel] = useState("95");
   const [population, setPopulation] = useState("1000");
+  const [confirming, setConfirming] = useState(false);
 
   if (!open) return null;
 
+  const resolvedName = name.trim() || `Tank ${existingCount + 1}`;
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    setConfirming(true);
+  }
+
+  function handleConfirm() {
     const biomassNum = parseFloat(biomass) || 0;
     onSubmit({
-      name: name.trim() || `Tank ${existingCount + 1}`,
+      name: resolvedName,
       pl: pl.trim() || "PL-1",
       biomass: biomassNum,
       dissolvedOxygen: parseFloat(dissolvedOxygen) || 0,
@@ -49,6 +57,7 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
       dispensedToday: 0,
       targetToday: biomassNum * 0.05 || 1,
     });
+    setConfirming(false);
     onClose();
   }
 
@@ -200,6 +209,15 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
           </div>
         </form>
       </div>
+
+      <ConfirmDialog
+        open={confirming}
+        title={`Add ${resolvedName}?`}
+        description={`This adds ${resolvedName} to the facility with the readings you entered.`}
+        confirmLabel="Add tank"
+        onCancel={() => setConfirming(false)}
+        onConfirm={handleConfirm}
+      />
     </div>
   );
 }
