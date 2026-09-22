@@ -177,7 +177,7 @@ export function LandingPage() {
                 <TankHeroSvg />
               </div>
 
-              {/* Live monitor card */}
+              {/* Live monitor card — desktop overlay */}
               <div className="absolute right-0 top-1 z-20 hidden w-[160px] rounded-xl border border-[rgba(242,235,221,0.13)] bg-[rgba(8,30,34,0.78)] p-3.5 shadow-[0_18px_40px_rgba(0,0,0,0.25)] backdrop-blur-md md:block">
                 <div className="mb-2 flex items-center justify-between">
                   <span className="ep-font-mono text-[8px] uppercase tracking-[0.12em] text-[rgba(242,235,221,0.55)]">
@@ -193,8 +193,44 @@ export function LandingPage() {
                 </div>
               </div>
 
-              {/* Intelligent control card */}
+              {/* Intelligent control card — desktop overlay */}
               <div className="absolute bottom-1 left-0 z-20 hidden w-[170px] rounded-xl border border-[rgba(242,235,221,0.13)] bg-[rgba(8,30,34,0.78)] p-3.5 shadow-[0_18px_40px_rgba(0,0,0,0.25)] backdrop-blur-md md:block">
+                <div className="mb-2 text-[9px] uppercase tracking-[0.1em] text-[rgba(242,235,221,0.55)]">
+                  Intelligent control
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="ep-font-mono text-[12px] text-[var(--mangrove-light)]">
+                    AI
+                  </span>
+                  <span className="h-px flex-1 bg-[rgba(242,235,221,0.1)]" />
+                  <span className="ep-font-mono text-[9px] text-[rgba(242,235,221,0.55)]">
+                    ACTIVE
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Live monitor / Intelligent control — mobile row, shown
+                below the tank instead of overlaid on top of it, since
+                the absolute-positioned desktop cards have no room to
+                breathe on a narrow viewport. */}
+            <div className="grid grid-cols-2 gap-3 md:hidden">
+              <div className="rounded-xl border border-[rgba(242,235,221,0.13)] bg-[rgba(8,30,34,0.78)] p-3.5 shadow-[0_18px_40px_rgba(0,0,0,0.25)] backdrop-blur-md">
+                <div className="mb-2 flex items-center justify-between">
+                  <span className="ep-font-mono text-[8px] uppercase tracking-[0.12em] text-[rgba(242,235,221,0.55)]">
+                    Live monitor
+                  </span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--mangrove-light)] shadow-[0_0_7px_rgba(126,173,135,0.7)]" />
+                </div>
+                <div className="ep-font-mono text-[20px] font-semibold text-[var(--sand)]">
+                  24/7
+                </div>
+                <div className="mt-1 text-[9px] leading-[1.4] text-[rgba(242,235,221,0.55)]">
+                  Continuous tank monitoring
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-[rgba(242,235,221,0.13)] bg-[rgba(8,30,34,0.78)] p-3.5 shadow-[0_18px_40px_rgba(0,0,0,0.25)] backdrop-blur-md">
                 <div className="mb-2 text-[9px] uppercase tracking-[0.1em] text-[rgba(242,235,221,0.55)]">
                   Intelligent control
                 </div>
