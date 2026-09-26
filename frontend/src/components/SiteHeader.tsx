@@ -88,14 +88,14 @@ export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
     <header
       className={`sticky top-0 z-50 border-b transition-all duration-300 ${
         scrolled
-          ? "border-[rgba(11,35,32,0.1)] bg-[var(--sand)]/98 shadow-[0_8px_24px_-16px_rgba(11,35,32,0.35)] backdrop-blur-md"
-          : "border-[rgba(11,35,32,0.06)] bg-[var(--sand)]/90 backdrop-blur-sm"
+          ? "border-[rgba(11,35,32,0.1)] bg-(--sand)/98 shadow-[0_8px_24px_-16px_rgba(11,35,32,0.35)] backdrop-blur-md"
+          : "border-[rgba(11,35,32,0.06)] bg-(--sand)/90 backdrop-blur-sm"
       }`}
     >
-      <div className="mx-auto flex h-[64px] max-w-[1240px] items-center justify-between px-5 sm:px-8 lg:px-10">
+      <div className="mx-auto flex h-16 max-w-310 items-center justify-between px-5 sm:px-8 lg:px-10">
         <Link
           href="/"
-          className="group flex items-center gap-2.5 rounded-md text-[var(--coral)] transition-opacity duration-200 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)]"
+          className="group flex items-center gap-2.5 rounded-md text-(--coral) transition-opacity duration-200 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand)"
           aria-label="EcoPrawn home"
         >
           <BrandMark size={64} />
@@ -106,7 +106,7 @@ export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
         <div className="flex items-center gap-2">
           <Link
             href="/login"
-            className="group inline-flex items-center gap-1.5 rounded-xl bg-[var(--water-deep)] px-4 py-2 text-[11px] font-semibold text-[var(--sand)] shadow-[0_8px_20px_-10px_rgba(11,35,32,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#123F43] hover:shadow-[0_10px_24px_-10px_rgba(11,35,32,0.8)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)] sm:px-5 sm:text-[12px]"
+            className="group inline-flex items-center gap-1.5 rounded-xl bg-(--water-deep) px-4 py-2 text-[11px] font-semibold text-(--sand) shadow-[0_8px_20px_-10px_rgba(11,35,32,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#123F43] hover:shadow-[0_10px_24px_-10px_rgba(11,35,32,0.8)] focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand) sm:px-5 sm:text-[12px]"
           >
             Log in
             <span
@@ -124,7 +124,7 @@ export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
               aria-expanded={mobileNavOpen}
               aria-controls="mobile-nav-panel"
               aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-              className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-[rgba(11,35,32,0.12)] text-[var(--water-deep)] transition-colors duration-200 hover:border-[rgba(11,35,32,0.22)] hover:bg-[rgba(11,35,32,0.05)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)] md:hidden"
+              className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-[rgba(11,35,32,0.12)] text-(--water-deep) transition-colors duration-200 hover:border-[rgba(11,35,32,0.22)] hover:bg-[rgba(11,35,32,0.05)] focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand) md:hidden"
             >
               <span className="sr-only">Toggle navigation</span>
               <svg
@@ -159,7 +159,7 @@ export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
                   strokeWidth="1.6"
                   strokeLinecap="round"
                   className={`origin-center transition-all duration-200 ${
-                    mobileNavOpen ? "-translate-y-[3.5px] -rotate-45" : ""
+                    mobileNavOpen ? "translate-y-[-3.5px] -rotate-45" : ""
                   }`}
                 />
               </svg>
