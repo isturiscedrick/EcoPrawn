@@ -21,7 +21,6 @@ export function Sidebar() {
   }
 
   function onConfirmLogout() {
-    // TODO: wire up real sign-out.
     router.push("/login");
   }
 
@@ -29,7 +28,6 @@ export function Sidebar() {
     setConfirmingLogout(false);
   }
 
-  // Close on Escape, lock body scroll while open.
   useEffect(() => {
     if (!confirmingLogout) return;
     function onKeyDown(e: KeyboardEvent) {
