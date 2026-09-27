@@ -75,7 +75,7 @@ export function ConfirmDialog({
         className="absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm"
       />
 
-      <div className="relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--sand-dim)] bg-[var(--sand)] p-6 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.4)]">
+      <div className="relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--sand-dim)] bg-[var(--sand)] p-6 shadow-[var(--shadow-overlay)]">
         <h2
           id={titleId}
           className="ep-font-display mb-1.5 text-[18px] font-semibold text-[var(--water-deep)]"
