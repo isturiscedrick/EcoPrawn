@@ -1,4 +1,4 @@
-import { Panel } from "@/components/DashboardPrimitives";
+import { Panel, KpiCard } from "@/components/DashboardPrimitives";
 import { bioflocMetrics, effluentLog } from "@/data/ecoprawn";
 
 const loopSteps = [
@@ -31,25 +31,14 @@ export function BioflocLoop() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
         {bioflocMetrics.map((m) => (
-          <div
+          <KpiCard
             key={m.label}
-            className="bg-white border border-[var(--sand-dim)] rounded-[14px] p-5 px-[22px] shadow-[0_1px_2px_rgba(11,35,32,0.04)]"
-          >
-            <div className="ep-font-mono text-[11px] uppercase tracking-wide text-[rgba(11,35,32,0.48)] mb-2.5">
-              {m.label}
-            </div>
-            <div className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)]">
-              {m.value}
-              <span className="text-sm font-medium text-[rgba(11,35,32,0.5)] ml-[3px]">{m.unit}</span>
-            </div>
-            <div
-              className={`text-xs mt-2 font-semibold ${
-                m.status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber)]"
-              }`}
-            >
-              {m.status === "ok" ? "In range" : "Watch"}
-            </div>
-          </div>
+            label={m.label}
+            value={m.value}
+            unit={m.unit}
+            delta={m.status === "ok" ? "In range" : "Watch"}
+            deltaTone={m.status}
+          />
         ))}
       </div>
 
