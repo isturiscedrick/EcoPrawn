@@ -1,10 +1,17 @@
+"use client";
+
 import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { feedSchedule, feedByTank } from "@/data/ecoprawn";
+import { feedSchedule } from "@/data/ecoprawn";
+import { useTanks } from "@/context/TankContext";
 
 export function Feeding() {
-  const dispensedToday = feedByTank.reduce((sum, t) => sum + parseFloat(t.dispensedToday), 0);
-  const targetToday = feedByTank.reduce((sum, t) => sum + parseFloat(t.targetToday), 0);
-  const pct = Math.round((dispensedToday / targetToday) * 100);
+  const { tanks } = useTanks();
+  const tankCount = tanks.length;
+
+  const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
+  const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0);
+  const pct = targetToday > 0 ? Math.round((dispensedToday / targetToday) * 100) : 0;
+  const avgFcr = tankCount ? tanks.reduce((sum, t) => sum + t.fcr, 0) / tankCount : 0;
   const nextEntry = feedSchedule.find((f) => f.status === "upcoming");
 
   return (
@@ -18,7 +25,7 @@ export function Feeding() {
             Feeding
           </h1>
           <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
-            Scheduled, biomass-adjusted dispensing · 1 tank
+            Scheduled, biomass-adjusted dispensing · {tankCount} tank{tankCount !== 1 ? "s" : ""}
           </div>
         </div>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
@@ -27,104 +34,118 @@ export function Feeding() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-        <KpiCard
-          label="Dispensed Today"
-          value={dispensedToday.toFixed(1)}
-          unit="kg"
-          delta={`of ${targetToday.toFixed(1)} kg target`}
-          deltaTone="ok"
-        />
-        <KpiCard label="Tank FCR" value="1.35" unit="FCR" delta="▲ improved from 1.42" deltaTone="ok" />
-        <KpiCard
-          label="Next Dispense"
-          value={nextEntry?.time ?? "—"}
-          unit=""
-          delta={nextEntry ? `${nextEntry.amount} scheduled` : "Cycle complete"}
-          deltaTone="ok"
-        />
-        <KpiCard label="Completion" value={String(pct)} unit="%" delta="of today's target" deltaTone="ok" />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-4 mb-4">
-        <Panel title="Today's Feed Schedule" badge={`${feedSchedule.length} cycles`}>
-          <div className="flex flex-col gap-2.5">
-            {feedSchedule.map((f) => (
-              <div
-                key={f.time}
-                className="flex items-center justify-between p-3 border border-[var(--sand-dim)] rounded-[10px]"
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className={`w-[9px] h-[9px] rounded-full ${
-                      f.status === "done" ? "bg-[var(--mangrove)]" : "bg-[var(--amber)]"
-                    }`}
-                  />
-                  <span className="ep-font-mono text-[13.5px] font-semibold text-[var(--water-deep)]">
-                    {f.time}
-                  </span>
-                </div>
-                <div className="text-right">
-                  <div className="ep-font-mono text-[13px] text-[var(--water-deep)]">{f.amount}</div>
-                  <div
-                    className={`text-[10.5px] font-semibold ${
-                      f.status === "done" ? "text-[var(--mangrove)]" : "text-[var(--amber)]"
-                    }`}
-                  >
-                    {f.status === "done" ? "Dispensed" : "Upcoming"}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Panel>
-
-        <Panel title="Feed Progress" badge="biomass-adjusted">
-          <div className="ep-font-mono text-[26px] font-semibold text-[var(--water-deep)]">
-            {dispensedToday.toFixed(1)}{" "}
-            <span className="text-sm font-medium text-[rgba(11,35,32,0.5)]">
-              kg / {targetToday.toFixed(1)} kg target
-            </span>
-          </div>
-          <div className="bg-[var(--sand-dim)] rounded-full h-2 overflow-hidden mt-3">
-            <div
-              className="bg-gradient-to-r from-[var(--coral)] to-[var(--amber)] h-full rounded-full transition-all"
-              style={{ width: `${pct}%` }}
+      {tankCount > 0 ? (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+            <KpiCard
+              label="Dispensed Today"
+              value={dispensedToday.toFixed(1)}
+              unit="kg"
+              delta={`of ${targetToday.toFixed(1)} kg target`}
+              deltaTone="ok"
             />
+            <KpiCard label="Avg. Tank FCR" value={avgFcr.toFixed(2)} unit="FCR" delta="target ≤ 1.5" deltaTone="ok" />
+            <KpiCard
+              label="Next Dispense"
+              value={nextEntry?.time ?? "—"}
+              unit=""
+              delta={nextEntry ? `${nextEntry.amount} scheduled` : "Cycle complete"}
+              deltaTone="ok"
+            />
+            <KpiCard label="Completion" value={String(pct)} unit="%" delta="of today's target" deltaTone="ok" />
           </div>
-          <div className="mt-5 pt-4 border-t border-[var(--sand-dim)] text-[13px] text-[rgba(11,35,32,0.6)] leading-[1.6]">
-            Dispense volume is recalculated automatically from the latest
-            AI-estimated biomass, keeping feed conversion efficient as shrimp grow.
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-4 mb-4">
+            <Panel title="Today's Feed Schedule" badge={`${feedSchedule.length} cycles`}>
+              <div className="flex flex-col gap-2.5">
+                {feedSchedule.map((f) => (
+                  <div
+                    key={f.time}
+                    className="flex items-center justify-between p-3 border border-[var(--sand-dim)] rounded-[10px]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`w-[9px] h-[9px] rounded-full ${
+                          f.status === "done" ? "bg-[var(--mangrove)]" : "bg-[var(--amber)]"
+                        }`}
+                      />
+                      <span className="ep-font-mono text-[13.5px] font-semibold text-[var(--water-deep)]">
+                        {f.time}
+                      </span>
+                    </div>
+                    <div className="text-right">
+                      <div className="ep-font-mono text-[13px] text-[var(--water-deep)]">{f.amount}</div>
+                      <div
+                        className={`text-[10.5px] font-semibold ${
+                          f.status === "done" ? "text-[var(--mangrove)]" : "text-[var(--amber)]"
+                        }`}
+                      >
+                        {f.status === "done" ? "Dispensed" : "Upcoming"}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Panel>
+
+            <Panel title="Feed Progress" badge="biomass-adjusted">
+              <div className="ep-font-mono text-[26px] font-semibold text-[var(--water-deep)]">
+                {dispensedToday.toFixed(1)}{" "}
+                <span className="text-sm font-medium text-[rgba(11,35,32,0.5)]">
+                  kg / {targetToday.toFixed(1)} kg target
+                </span>
+              </div>
+              <div className="bg-[var(--sand-dim)] rounded-full h-2 overflow-hidden mt-3">
+                <div
+                  className="bg-gradient-to-r from-[var(--coral)] to-[var(--amber)] h-full rounded-full transition-all"
+                  style={{ width: `${Math.min(100, pct)}%` }}
+                />
+              </div>
+              <div className="mt-5 pt-4 border-t border-[var(--sand-dim)] text-[13px] text-[rgba(11,35,32,0.6)] leading-[1.6]">
+                Dispense volume is recalculated automatically from the latest
+                AI-estimated biomass, keeping feed conversion efficient as shrimp grow.
+              </div>
+            </Panel>
+          </div>
+
+          <Panel title="Feed Allocation" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[560px]">
+                <thead>
+                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] border-b border-[var(--sand-dim)]">
+                    <th className="py-2.5 pr-3 font-semibold">Tank</th>
+                    <th className="py-2.5 pr-3 font-semibold">Dispensed Today</th>
+                    <th className="py-2.5 pr-3 font-semibold">Target Today</th>
+                    <th className="py-2.5 font-semibold">FCR</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tanks.map((t) => (
+                    <tr key={t.id} className="border-b border-[var(--sand-dim)] last:border-b-0">
+                      <td className="py-3 pr-3 text-[13.5px] font-semibold text-[var(--water-deep)]">{t.name}</td>
+                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">
+                        {t.dispensedToday.toFixed(1)} kg
+                      </td>
+                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">
+                        {t.targetToday.toFixed(1)} kg
+                      </td>
+                      <td className="py-3 ep-font-mono text-[13px] text-[var(--mangrove)] font-semibold">
+                        {t.fcr.toFixed(2)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Panel>
+        </>
+      ) : (
+        <Panel title="Feed Allocation" badge="0 tanks">
+          <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
+            No tanks yet — add one on the Tanks page to see feeding data.
           </div>
         </Panel>
-      </div>
-
-      <Panel title="Feed Allocation" badge="1 tank">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[560px]">
-            <thead>
-              <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] border-b border-[var(--sand-dim)]">
-                <th className="py-2.5 pr-3 font-semibold">Tank</th>
-                <th className="py-2.5 pr-3 font-semibold">Dispensed Today</th>
-                <th className="py-2.5 pr-3 font-semibold">Target Today</th>
-                <th className="py-2.5 font-semibold">FCR</th>
-              </tr>
-            </thead>
-            <tbody>
-              {feedByTank.map((t) => (
-                <tr key={t.tank} className="border-b border-[var(--sand-dim)] last:border-b-0">
-                  <td className="py-3 pr-3 text-[13.5px] font-semibold text-[var(--water-deep)]">{t.tank}</td>
-                  <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">
-                    {t.dispensedToday}
-                  </td>
-                  <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.targetToday}</td>
-                  <td className="py-3 ep-font-mono text-[13px] text-[var(--mangrove)] font-semibold">{t.fcr}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Panel>
+      )}
     </>
   );
 }

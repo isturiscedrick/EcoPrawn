@@ -1,5 +1,8 @@
+"use client";
+
 import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { growthByTank, growthTrend, visionScanLog } from "@/data/ecoprawn";
+import { growthTrend, visionScanLog } from "@/data/ecoprawn";
+import { useTanks } from "@/context/TankContext";
 
 function GrowthTrendChart() {
   const min = Math.min(...growthTrend);
@@ -38,8 +41,13 @@ function GrowthTrendChart() {
 }
 
 export function VisionGrowth() {
-  const tank = growthByTank[0];
-  const abnormalTotal = growthByTank.reduce((sum, t) => sum + t.abnormal, 0);
+  const { tanks } = useTanks();
+  const tankCount = tanks.length;
+
+  const avgBodyLength = tankCount ? tanks.reduce((sum, t) => sum + t.bodyLength, 0) / tankCount : 0;
+  const avgWeight = tankCount ? tanks.reduce((sum, t) => sum + t.weight, 0) / tankCount : 0;
+  const totalPopulation = tanks.reduce((sum, t) => sum + t.population, 0);
+  const abnormalTotal = tanks.reduce((sum, t) => sum + t.abnormal, 0);
 
   return (
     <>
@@ -52,7 +60,7 @@ export function VisionGrowth() {
             Vision &amp; Growth Analytics
           </h1>
           <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
-            Camera-based growth tracking &amp; biomass estimation · 1 tank
+            Camera-based growth tracking &amp; biomass estimation · {tankCount} tank{tankCount !== 1 ? "s" : ""}
           </div>
         </div>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
@@ -61,83 +69,93 @@ export function VisionGrowth() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-        <KpiCard label="Body Length" value="11.6" unit="cm" delta="▲ 0.2 cm vs last week" deltaTone="ok" />
-        <KpiCard label="Weight" value="18.6" unit="g" delta="▲ 1.4 g vs last week" deltaTone="ok" />
-        <KpiCard
-          label="Population Est."
-          value={tank.population}
-          unit="shrimp"
-          delta="single tank"
-          deltaTone="ok"
-        />
-        <KpiCard
-          label="Abnormal Behavior"
-          value={String(abnormalTotal)}
-          unit="flagged"
-          delta={abnormalTotal === 0 ? "No anomalies detected" : "Under observation"}
-          deltaTone={abnormalTotal === 0 ? "ok" : "warn"}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
-        <Panel title="Growth Trend — Avg. Body Length" badge="7-week view">
-          <GrowthTrendChart />
-          <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
-            <span className="flex items-center gap-1.5">
-              <span className="inline-block w-3 h-[2px] bg-[var(--coral)]" /> Body length (cm)
-            </span>
+      {tankCount > 0 ? (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+            <KpiCard label="Avg. Body Length" value={avgBodyLength.toFixed(1)} unit="cm" delta="▲ 0.2 cm vs last week" deltaTone="ok" />
+            <KpiCard label="Avg. Weight" value={avgWeight.toFixed(1)} unit="g" delta="▲ 1.4 g vs last week" deltaTone="ok" />
+            <KpiCard
+              label="Population Est."
+              value={totalPopulation.toLocaleString()}
+              unit="shrimp"
+              delta={`across ${tankCount} tank${tankCount !== 1 ? "s" : ""}`}
+              deltaTone="ok"
+            />
+            <KpiCard
+              label="Abnormal Behavior"
+              value={String(abnormalTotal)}
+              unit="flagged"
+              delta={abnormalTotal === 0 ? "No anomalies detected" : "Under observation"}
+              deltaTone={abnormalTotal === 0 ? "ok" : "warn"}
+            />
           </div>
-        </Panel>
 
-        <Panel title="Recent Vision Scans" badge={`${visionScanLog.length} events`}>
-          <div className="flex flex-col">
-            {visionScanLog.map((s, i) => (
-              <div key={s.time} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
-                <div className="ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.45)] mb-1">
-                  {s.time} · {s.tank}
-                </div>
-                <div className="text-[13px] text-[var(--water-deep)]">{s.note}</div>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
+            <Panel title="Growth Trend — Avg. Body Length" badge="7-week view">
+              <GrowthTrendChart />
+              <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
+                <span className="flex items-center gap-1.5">
+                  <span className="inline-block w-3 h-[2px] bg-[var(--coral)]" /> Body length (cm)
+                </span>
               </div>
-            ))}
+            </Panel>
+
+            <Panel title="Recent Vision Scans" badge={`${visionScanLog.length} events`}>
+              <div className="flex flex-col">
+                {visionScanLog.map((s, i) => (
+                  <div key={s.time} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
+                    <div className="ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.45)] mb-1">
+                      {s.time} · {s.tank}
+                    </div>
+                    <div className="text-[13px] text-[var(--water-deep)]">{s.note}</div>
+                  </div>
+                ))}
+              </div>
+            </Panel>
+          </div>
+
+          <Panel title="Growth Snapshot" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[640px]">
+                <thead>
+                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] border-b border-[var(--sand-dim)]">
+                    <th className="py-2.5 pr-3 font-semibold">Tank</th>
+                    <th className="py-2.5 pr-3 font-semibold">Body Length</th>
+                    <th className="py-2.5 pr-3 font-semibold">Weight</th>
+                    <th className="py-2.5 pr-3 font-semibold">Population Est.</th>
+                    <th className="py-2.5 font-semibold">Abnormal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tanks.map((t) => (
+                    <tr key={t.id} className="border-b border-[var(--sand-dim)] last:border-b-0">
+                      <td className="py-3 pr-3 text-[13.5px] font-semibold text-[var(--water-deep)]">{t.name}</td>
+                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.bodyLength.toFixed(1)} cm</td>
+                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.weight.toFixed(1)} g</td>
+                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.population.toLocaleString()}</td>
+                      <td className="py-3">
+                        <span
+                          className={`text-[11.5px] font-semibold ${
+                            t.abnormal === 0 ? "text-[var(--mangrove)]" : "text-[var(--amber)]"
+                          }`}
+                        >
+                          {t.abnormal === 0 ? "None" : `${t.abnormal} flagged`}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Panel>
+        </>
+      ) : (
+        <Panel title="Growth Snapshot" badge="0 tanks">
+          <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
+            No tanks yet — add one on the Tanks page to see vision &amp; growth data.
           </div>
         </Panel>
-      </div>
-
-      <Panel title="Growth Snapshot" badge="1 tank">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[640px]">
-            <thead>
-              <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] border-b border-[var(--sand-dim)]">
-                <th className="py-2.5 pr-3 font-semibold">Tank</th>
-                <th className="py-2.5 pr-3 font-semibold">Body Length</th>
-                <th className="py-2.5 pr-3 font-semibold">Weight</th>
-                <th className="py-2.5 pr-3 font-semibold">Population Est.</th>
-                <th className="py-2.5 font-semibold">Abnormal</th>
-              </tr>
-            </thead>
-            <tbody>
-              {growthByTank.map((t) => (
-                <tr key={t.tank} className="border-b border-[var(--sand-dim)] last:border-b-0">
-                  <td className="py-3 pr-3 text-[13.5px] font-semibold text-[var(--water-deep)]">{t.tank}</td>
-                  <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.bodyLength}</td>
-                  <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.weight}</td>
-                  <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.population}</td>
-                  <td className="py-3">
-                    <span
-                      className={`text-[11.5px] font-semibold ${
-                        t.abnormal === 0 ? "text-[var(--mangrove)]" : "text-[var(--amber)]"
-                      }`}
-                    >
-                      {t.abnormal === 0 ? "None" : `${t.abnormal} flagged`}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Panel>
+      )}
     </>
   );
 }
