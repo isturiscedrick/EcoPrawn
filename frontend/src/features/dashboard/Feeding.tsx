@@ -2,6 +2,7 @@
 
 import { Panel, KpiCard } from "@/components/DashboardPrimitives";
 import { feedSchedule } from "@/data/ecoprawn";
+import { ScrollFadeContainer } from "@/components/ScrollFadeContainer";
 import { useTanks } from "@/context/TankContext";
 
 export function Feeding() {
@@ -109,7 +110,7 @@ export function Feeding() {
           </div>
 
           <Panel title="Feed Allocation" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
-            <div className="overflow-x-auto">
+            <ScrollFadeContainer>
               <table className="w-full text-left border-collapse min-w-[560px]">
                 <thead>
                   <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] border-b border-[var(--sand-dim)]">
@@ -136,7 +137,7 @@ export function Feeding() {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </ScrollFadeContainer>
           </Panel>
         </>
       ) : (

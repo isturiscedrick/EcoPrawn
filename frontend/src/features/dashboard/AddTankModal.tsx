@@ -86,6 +86,9 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="ep-font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-[var(--coral)]">
+            Identity
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className={labelClass}>Tank Name</label>
@@ -107,6 +110,9 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
             </div>
           </div>
 
+          <div className="ep-font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-[var(--coral)] mt-1">
+            Stock
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className={labelClass}>Biomass (kg)</label>
@@ -131,6 +137,9 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
             </div>
           </div>
 
+          <div className="ep-font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-[var(--coral)] mt-1">
+            Water Parameters
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className={labelClass}>Dissolved O₂ (mg/L)</label>

@@ -2,6 +2,7 @@
 
 import { Panel, KpiCard } from "@/components/DashboardPrimitives";
 import { growthTrend, visionScanLog } from "@/data/ecoprawn";
+import { ScrollFadeContainer } from "@/components/ScrollFadeContainer";
 import { useTanks } from "@/context/TankContext";
 
 function GrowthTrendChart() {
@@ -115,7 +116,7 @@ export function VisionGrowth() {
           </div>
 
           <Panel title="Growth Snapshot" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
-            <div className="overflow-x-auto">
+            <ScrollFadeContainer>
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
                   <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] border-b border-[var(--sand-dim)]">
@@ -146,7 +147,7 @@ export function VisionGrowth() {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </ScrollFadeContainer>
           </Panel>
         </>
       ) : (
