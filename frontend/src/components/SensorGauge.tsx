@@ -31,7 +31,7 @@ export function SensorGauge({ label, value, pct, status }: SensorReading) {
       </div>
       <div
         className={`text-[10px] mt-0.5 font-semibold ${
-          status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber)]"
+          status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
         }`}
       >
         {status === "ok" ? "Nominal" : "Watch"}

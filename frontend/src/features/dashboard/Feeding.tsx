@@ -78,7 +78,7 @@ export function Feeding() {
                       <div className="ep-font-mono text-[13px] text-[var(--water-deep)]">{f.amount}</div>
                       <div
                         className={`text-[10.5px] font-semibold ${
-                          f.status === "done" ? "text-[var(--mangrove)]" : "text-[var(--amber)]"
+                          f.status === "done" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
                         }`}
                       >
                         {f.status === "done" ? "Dispensed" : "Upcoming"}

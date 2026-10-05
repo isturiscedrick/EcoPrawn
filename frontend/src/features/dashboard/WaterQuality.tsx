@@ -120,7 +120,7 @@ export function WaterQuality() {
                       </div>
                       <div
                         className={`text-[10px] font-semibold ${
-                          t.status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber)]"
+                          t.status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
                         }`}
                       >
                         {t.status === "ok" ? "In range" : "Watch"}
@@ -162,7 +162,7 @@ export function WaterQuality() {
                       <td className="py-3">
                         <span
                           className={`inline-flex items-center gap-1.5 text-[11.5px] font-semibold ${
-                            t.status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber)]"
+                            t.status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
                           }`}
                         >
                           <span

@@ -65,7 +65,7 @@ export function KpiCard({ label, value, unit, delta, deltaTone }: KpiCardProps) 
       </div>
       <div
         className={`text-xs mt-2 font-semibold ${
-          deltaTone === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber)]"
+          deltaTone === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
         }`}
       >
         {delta}
