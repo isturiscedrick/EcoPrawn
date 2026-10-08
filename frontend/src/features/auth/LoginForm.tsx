@@ -70,7 +70,7 @@ export function LoginForm() {
       </div>
 
       <p className="text-center text-[12.5px] text-[rgba(242,235,221,0.45)] mt-6">
-        Facility access — enter your registered email and password to
+        Facility access — enter your registered email and password to continue.
       </p>
     </div>
   );
