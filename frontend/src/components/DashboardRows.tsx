@@ -9,11 +9,25 @@ interface TankRowProps extends Tank {
   onRemove?: (id: string) => void;
 }
 
+const REMOVE_ANIMATION_MS = 200;
+
 export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProps) {
   const [confirmingRemove, setConfirmingRemove] = useState(false);
+  const [leaving, setLeaving] = useState(false);
+
+  function handleConfirmRemove() {
+    setConfirmingRemove(false);
+    setLeaving(true);
+    // Let the slide-out finish before the row is actually removed.
+    setTimeout(() => onRemove?.(id), REMOVE_ANIMATION_MS);
+  }
 
   return (
-    <div className="flex items-center justify-between p-3.5 border border-[var(--sand-dim)] rounded-[10px]">
+    <div
+      className={`flex items-center justify-between p-3.5 border border-[var(--sand-dim)] rounded-[10px] ${
+        leaving ? "ep-row-out" : "ep-row-in"
+      }`}
+    >
       <div className="flex items-center gap-3">
         <span
           className={`w-[9px] h-[9px] rounded-full ${
@@ -37,8 +51,9 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
           <button
             type="button"
             onClick={() => setConfirmingRemove(true)}
+            disabled={leaving}
             aria-label={`Remove ${name}`}
-            className="flex h-7 w-7 items-center justify-center rounded-md text-[rgba(11,35,32,0.35)] transition-colors hover:bg-[rgba(214,69,69,0.1)] hover:text-[var(--danger)]"
+            className="ep-focus-ring flex h-7 w-7 items-center justify-center rounded-md text-[rgba(11,35,32,0.35)] transition-colors hover:bg-[rgba(214,69,69,0.1)] hover:text-[var(--danger)]"
           >
             ✕
           </button>
@@ -53,10 +68,7 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
           description={`This removes ${name} and its readings from the dashboard. This can't be undone.`}
           confirmLabel="Remove tank"
           onCancel={() => setConfirmingRemove(false)}
-          onConfirm={() => {
-            setConfirmingRemove(false);
-            onRemove(id);
-          }}
+          onConfirm={handleConfirmRemove}
         />
       )}
     </div>

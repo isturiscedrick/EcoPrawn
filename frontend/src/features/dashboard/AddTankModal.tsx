@@ -74,10 +74,10 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
       <div
         aria-hidden="true"
         onClick={onClose}
-        className="absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm"
+        className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm"
       />
 
-      <div className="relative z-10 w-full max-w-[480px] max-h-[90vh] overflow-y-auto rounded-2xl border border-[var(--sand-dim)] bg-[var(--sand)] p-6 shadow-[var(--shadow-overlay)] sm:p-7">
+      <div className="ep-pop-in relative z-10 w-full max-w-[480px] max-h-[90vh] overflow-y-auto rounded-2xl border border-[var(--sand-dim)] bg-[var(--sand)] p-6 shadow-[var(--shadow-overlay)] sm:p-7">
         <h2
           id="add-tank-title"
           className="ep-font-display mb-1.5 text-[20px] font-semibold text-[var(--water-deep)]"

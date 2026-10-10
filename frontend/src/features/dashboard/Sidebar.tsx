@@ -143,9 +143,9 @@ export function Sidebar() {
           <div
             aria-hidden="true"
             onClick={onCancelLogout}
-            className="absolute inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm"
+            className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm"
           />
-          <div className="relative z-10 w-full max-w-[360px] rounded-2xl border border-[rgba(242,235,221,0.14)] bg-[var(--water-deep)] p-6 text-[var(--sand)] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)]">
+          <div className="ep-pop-in relative z-10 w-full max-w-[360px] rounded-2xl border border-[rgba(242,235,221,0.14)] bg-[var(--water-deep)] p-6 text-[var(--sand)] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)]">
             <h2
               id="logout-modal-title"
               className="ep-font-display mb-1.5 text-[18px] font-semibold text-[var(--sand)]"

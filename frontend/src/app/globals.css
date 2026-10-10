@@ -238,6 +238,40 @@
   transform-origin: center;
 }
 
+/* Dashboard UI motion: modal backdrop/panel entrance and tank row
+   insert/remove. Short and one-shot; nothing loops. */
+@keyframes ep-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.ep-fade-in {
+  animation: ep-fade-in 180ms ease-out both;
+}
+
+@keyframes ep-pop-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.ep-pop-in {
+  animation: ep-pop-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ep-row-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ep-row-in {
+  animation: ep-row-in 260ms ease-out both;
+}
+
+@keyframes ep-row-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(12px); }
+}
+.ep-row-out {
+  animation: ep-row-out 200ms ease-in both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ecoprawn-root * {
     animation-duration: 0.01ms !important;
