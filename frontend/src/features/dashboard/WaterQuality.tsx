@@ -4,6 +4,7 @@ import { Panel, KpiCard } from "@/components/DashboardPrimitives";
 import { TrendChart } from "@/components/TrendChart";
 import { ScrollFadeContainer } from "@/components/ScrollFadeContainer";
 import { useTanks } from "@/context/TankContext";
+import { THRESHOLDS, rangeStatus } from "@/utils/thresholds";
 
 export function WaterQuality() {
   const { tanks } = useTanks();
@@ -14,6 +15,10 @@ export function WaterQuality() {
   const avgDO = tankCount ? tanks.reduce((sum, t) => sum + t.dissolvedOxygen, 0) / tankCount : 0;
   const avgPh = tankCount ? tanks.reduce((sum, t) => sum + t.ph, 0) / tankCount : 0;
   const avgTemp = tankCount ? tanks.reduce((sum, t) => sum + t.temperature, 0) / tankCount : 0;
+
+  const doStatus = rangeStatus(avgDO, THRESHOLDS.dissolvedOxygen.min);
+  const phStatus = rangeStatus(avgPh, THRESHOLDS.ph.min, THRESHOLDS.ph.max);
+  const tempStatus = rangeStatus(avgTemp, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max);
 
   const thresholds = first
     ? [
@@ -77,9 +82,27 @@ export function WaterQuality() {
       {tankCount > 0 ? (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-            <KpiCard label="Dissolved O₂ (avg)" value={avgDO.toFixed(1)} unit="mg/L" delta="▲ within target range" deltaTone="ok" />
-            <KpiCard label="pH (avg)" value={avgPh.toFixed(1)} unit="pH" delta="▲ within target range" deltaTone="ok" />
-            <KpiCard label="Temperature (avg)" value={avgTemp.toFixed(1)} unit="°C" delta="▲ within target range" deltaTone="ok" />
+            <KpiCard
+              label="Dissolved O₂ (avg)"
+              value={avgDO.toFixed(1)}
+              unit="mg/L"
+              delta={doStatus === "ok" ? "▲ within target range" : "Below target (≥ 4.5)"}
+              deltaTone={doStatus}
+            />
+            <KpiCard
+              label="pH (avg)"
+              value={avgPh.toFixed(1)}
+              unit="pH"
+              delta={phStatus === "ok" ? "▲ within target range" : "Outside target (7.5 – 8.5)"}
+              deltaTone={phStatus}
+            />
+            <KpiCard
+              label="Temperature (avg)"
+              value={avgTemp.toFixed(1)}
+              unit="°C"
+              delta={tempStatus === "ok" ? "▲ within target range" : "Outside target (26 – 30 °C)"}
+              deltaTone={tempStatus}
+            />
             <KpiCard
               label="Tanks Status"
               value={warnCount === 0 ? "OK" : "Watch"}

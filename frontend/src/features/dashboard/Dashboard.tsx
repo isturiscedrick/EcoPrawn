@@ -7,6 +7,7 @@ import { TrendChart } from "@/components/TrendChart";
 import { Panel, KpiCard } from "@/components/DashboardPrimitives";
 import { alerts } from "@/data/ecoprawn";
 import { useTanks } from "@/context/TankContext";
+import { THRESHOLDS, rangeStatus } from "@/utils/thresholds";
 import { AddTankModal } from "./AddTankModal";
 
 export function Dashboard() {
@@ -40,10 +41,10 @@ export function Dashboard() {
           pct: Math.min(100, (avgDO / 8) * 100),
           status: openAlertTanks === 0 ? ("ok" as const) : ("warn" as const),
         },
-        { label: "pH", value: avgPh.toFixed(1), pct: 66, status: "ok" as const },
-        { label: "Temperature", value: `${avgTemp.toFixed(1)} °C`, pct: 71, status: "ok" as const },
-        { label: "Salinity", value: `${Math.round(avgSalinity)} ppt`, pct: 60, status: "ok" as const },
-        { label: "Water Level", value: `${Math.round(avgWaterLevel)}%`, pct: avgWaterLevel, status: "ok" as const },
+        { label: "pH", value: avgPh.toFixed(1), pct: 66, status: rangeStatus(avgPh, THRESHOLDS.ph.min, THRESHOLDS.ph.max) },
+        { label: "Temperature", value: `${avgTemp.toFixed(1)} °C`, pct: 71, status: rangeStatus(avgTemp, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max) },
+        { label: "Salinity", value: `${Math.round(avgSalinity)} ppt`, pct: 60, status: rangeStatus(avgSalinity, THRESHOLDS.salinity.min, THRESHOLDS.salinity.max) },
+        { label: "Water Level", value: `${Math.round(avgWaterLevel)}%`, pct: avgWaterLevel, status: rangeStatus(avgWaterLevel, THRESHOLDS.waterLevel.min) },
       ]
     : [];
 
