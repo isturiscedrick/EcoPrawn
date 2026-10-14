@@ -20,7 +20,23 @@ const labelClass =
 const sectionLabelClass =
   "ep-font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-[var(--coral)]";
 
+/**
+ * Outer shell: renders nothing while closed. The form below only exists
+ * while open, so its state is created fresh on every open and never
+ * carries values over from the previous tank.
+ */
 export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTankModalProps) {
+  if (!open) return null;
+  return <AddTankForm onClose={onClose} onSubmit={onSubmit} existingCount={existingCount} />;
+}
+
+interface AddTankFormProps {
+  onClose: () => void;
+  onSubmit: (input: NewTankInput) => void;
+  existingCount: number;
+}
+
+function AddTankForm({ onClose, onSubmit, existingCount }: AddTankFormProps) {
   const [name, setName] = useState(`Tank ${existingCount + 1}`);
   const [pl, setPl] = useState("PL-1");
   const [biomass, setBiomass] = useState("10");
@@ -31,8 +47,6 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
   const [waterLevel, setWaterLevel] = useState("95");
   const [population, setPopulation] = useState("1000");
   const [confirming, setConfirming] = useState(false);
-
-  if (!open) return null;
 
   const resolvedName = name.trim() || `Tank ${existingCount + 1}`;
 

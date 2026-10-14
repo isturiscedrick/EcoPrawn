@@ -1,9 +1,17 @@
+"use client";
+
 import { AlertRow } from "@/components/DashboardRows";
 import { Panel, KpiCard } from "@/components/DashboardPrimitives";
 import { alertsLog } from "@/data/ecoprawn";
+import { useTanks } from "@/context/TankContext";
+import { deriveTankAlerts } from "@/utils/alerts";
 
 export function AlertsView() {
-  const openCount = alertsLog.filter((a) => a.icon === "warn").length;
+  const { tanks } = useTanks();
+
+  const liveAlerts = deriveTankAlerts(tanks);
+  const allAlerts = [...liveAlerts, ...alertsLog];
+  const openCount = liveAlerts.length;
 
   return (
     <>
@@ -34,23 +42,23 @@ export function AlertsView() {
           label="Open Alerts"
           value={String(openCount)}
           unit="active"
-          delta={openCount === 0 ? "No active warnings" : "Under review"}
+          delta={openCount === 0 ? "No active warnings" : "Parameters out of range"}
           deltaTone={openCount === 0 ? "ok" : "warn"}
         />
         <KpiCard label="Auto-Resolved Today" value="1" unit="event" delta="Aerator relay auto-triggered" deltaTone="ok" />
         <KpiCard
           label="Events Logged"
-          value={String(alertsLog.length)}
+          value={String(allAlerts.length)}
           unit="last 24h"
-          delta="Tank 1"
+          delta={`${liveAlerts.length} live · ${alertsLog.length} logged`}
           deltaTone="ok"
         />
       </div>
 
-      <Panel title="Alert & Event Log" badge={`${alertsLog.length} events`}>
+      <Panel title="Alert & Event Log" badge={`${allAlerts.length} events`}>
         <div>
-          {alertsLog.map((a) => (
-            <AlertRow key={a.title + a.time} {...a} />
+          {allAlerts.map((a) => (
+            <AlertRow key={`${a.title}-${a.detail}-${a.time}`} {...a} />
           ))}
         </div>
       </Panel>

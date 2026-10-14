@@ -8,6 +8,7 @@ import { Panel, KpiCard } from "@/components/DashboardPrimitives";
 import { alerts } from "@/data/ecoprawn";
 import { useTanks } from "@/context/TankContext";
 import { THRESHOLDS, rangeStatus } from "@/utils/thresholds";
+import { deriveTankAlerts } from "@/utils/alerts";
 import { AddTankModal } from "./AddTankModal";
 
 export function Dashboard() {
@@ -24,6 +25,11 @@ export function Dashboard() {
   const avgFcr = tankCount ? tanks.reduce((sum, t) => sum + t.fcr, 0) / tankCount : 0;
   const openAlertTanks = tanks.filter((t) => t.status === "warn").length;
 
+  // Live warnings (from current tank readings) first, then logged events.
+  const recentAlerts = [...deriveTankAlerts(tanks), ...alerts].slice(0, 5);
+
+  const doStatus = rangeStatus(avgDO, THRESHOLDS.dissolvedOxygen.min);
+
   const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
   const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0) || 1;
   const feedPct = Math.round((dispensedToday / targetToday) * 100);
@@ -39,7 +45,7 @@ export function Dashboard() {
           label: "Dissolved O₂",
           value: `${avgDO.toFixed(1)} mg/L`,
           pct: Math.min(100, (avgDO / 8) * 100),
-          status: openAlertTanks === 0 ? ("ok" as const) : ("warn" as const),
+          status: doStatus,
         },
         { label: "pH", value: avgPh.toFixed(1), pct: 66, status: rangeStatus(avgPh, THRESHOLDS.ph.min, THRESHOLDS.ph.max) },
         { label: "Temperature", value: `${avgTemp.toFixed(1)} °C`, pct: 71, status: rangeStatus(avgTemp, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max) },
@@ -96,8 +102,8 @@ export function Dashboard() {
           label="Dissolved O₂ (avg)"
           value={avgDO.toFixed(1)}
           unit="mg/L"
-          delta="▲ within target range"
-          deltaTone="ok"
+          delta={doStatus === "ok" ? "▲ within target range" : "Below target (≥ 4.5)"}
+          deltaTone={doStatus}
         />
         <KpiCard
           label="Total Biomass"
@@ -158,10 +164,10 @@ export function Dashboard() {
           )}
         </Panel>
 
-        <Panel title="Recent Alerts" badge={`${alerts.length} events`}>
+        <Panel title="Recent Alerts" badge={`${recentAlerts.length} events`}>
           <div>
-            {alerts.map((a) => (
-              <AlertRow key={a.title} {...a} />
+            {recentAlerts.map((a) => (
+              <AlertRow key={`${a.title}-${a.detail}-${a.time}`} {...a} />
             ))}
           </div>
         </Panel>
