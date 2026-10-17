@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent, type InputHTMLAttributes } from "react";
 import type { NewTankInput } from "@/context/TankContext";
 import { ConfirmDialog } from "@/components/ConfirmDialog";
 
@@ -20,24 +20,43 @@ const labelClass =
 const sectionLabelClass =
   "ep-font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-[var(--coral)]";
 
-/**
- * Outer shell: renders nothing while closed. The form below only exists
- * while open, so its state is created fresh on every open and never
- * carries values over from the previous tank.
- */
+function defaultValues(existingCount: number) {
+  return {
+    name: `Tank ${existingCount + 1}`,
+    pl: "PL-1",
+    biomass: "10",
+    dissolvedOxygen: "6.0",
+    ph: "7.8",
+    temperature: "28.0",
+    salinity: "15",
+    waterLevel: "95",
+    population: "1000",
+  };
+}
+
+interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
+  id: string;
+  label: string;
+}
+
+// Label + input pair. The htmlFor/id link means clicking the label focuses
+// the input and screen readers announce the label with the field.
+function Field({ id, label, ref, ...inputProps }: FieldProps & { ref?: React.Ref<HTMLInputElement> }) {
+  return (
+    <div>
+      <label htmlFor={id} className={labelClass}>
+        {label}
+      </label>
+      <input id={id} ref={ref} className={inputClass} {...inputProps} />
+    </div>
+  );
+}
+
 export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTankModalProps) {
-  if (!open) return null;
-  return <AddTankForm onClose={onClose} onSubmit={onSubmit} existingCount={existingCount} />;
-}
+  const uid = useId();
+  const firstFieldRef = useRef<HTMLInputElement>(null);
 
-interface AddTankFormProps {
-  onClose: () => void;
-  onSubmit: (input: NewTankInput) => void;
-  existingCount: number;
-}
-
-function AddTankForm({ onClose, onSubmit, existingCount }: AddTankFormProps) {
-  const [name, setName] = useState(`Tank ${existingCount + 1}`);
+  const [name, setName] = useState(() => defaultValues(existingCount).name);
   const [pl, setPl] = useState("PL-1");
   const [biomass, setBiomass] = useState("10");
   const [dissolvedOxygen, setDissolvedOxygen] = useState("6.0");
@@ -47,6 +66,50 @@ function AddTankForm({ onClose, onSubmit, existingCount }: AddTankFormProps) {
   const [waterLevel, setWaterLevel] = useState("95");
   const [population, setPopulation] = useState("1000");
   const [confirming, setConfirming] = useState(false);
+
+  // Fresh form every time the modal opens. Without this, the state from the
+  // previous add sticks around (same default name, old readings), because
+  // this component stays mounted in the parent while closed.
+  useEffect(() => {
+    if (!open) return;
+    const d = defaultValues(existingCount);
+    setName(d.name);
+    setPl(d.pl);
+    setBiomass(d.biomass);
+    setDissolvedOxygen(d.dissolvedOxygen);
+    setPh(d.ph);
+    setTemperature(d.temperature);
+    setSalinity(d.salinity);
+    setWaterLevel(d.waterLevel);
+    setPopulation(d.population);
+    setConfirming(false);
+    firstFieldRef.current?.focus();
+    // existingCount is read only at open time on purpose.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  // Escape closes the modal. While the confirm dialog is up, Escape belongs
+  // to that dialog (it cancels back to the form), so skip it here.
+  useEffect(() => {
+    if (!open || confirming) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, confirming, onClose]);
+
+  // Lock page scroll behind the modal.
+  useEffect(() => {
+    if (!open) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [open]);
+
+  if (!open) return null;
 
   const resolvedName = name.trim() || `Tank ${existingCount + 1}`;
 
@@ -82,7 +145,7 @@ function AddTankForm({ onClose, onSubmit, existingCount }: AddTankFormProps) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-labelledby="add-tank-title"
+      aria-labelledby={`${uid}-title`}
       className="fixed inset-0 z-[100] flex items-center justify-center p-5"
     >
       <div
@@ -93,7 +156,7 @@ function AddTankForm({ onClose, onSubmit, existingCount }: AddTankFormProps) {
 
       <div className="ep-pop-in relative z-10 w-full max-w-[480px] max-h-[90vh] overflow-y-auto rounded-2xl border border-[var(--sand-dim)] bg-[var(--sand)] p-6 shadow-[var(--shadow-overlay)] sm:p-7">
         <h2
-          id="add-tank-title"
+          id={`${uid}-title`}
           className="ep-font-display mb-1.5 text-[20px] font-semibold text-[var(--water-deep)]"
         >
           Add a new tank
@@ -105,111 +168,101 @@ function AddTankForm({ onClose, onSubmit, existingCount }: AddTankFormProps) {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className={sectionLabelClass}>Identity</div>
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className={labelClass}>Tank Name</label>
-              <input
-                className={inputClass}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label className={labelClass}>PL Batch</label>
-              <input
-                className={inputClass}
-                value={pl}
-                onChange={(e) => setPl(e.target.value)}
-                required
-              />
-            </div>
+            <Field
+              id={`${uid}-name`}
+              ref={firstFieldRef}
+              label="Tank Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <Field
+              id={`${uid}-pl`}
+              label="PL Batch"
+              value={pl}
+              onChange={(e) => setPl(e.target.value)}
+              required
+            />
           </div>
 
           <div className={`${sectionLabelClass} mt-1`}>Stock</div>
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className={labelClass}>Biomass (kg)</label>
-              <input
-                type="number"
-                step="0.1"
-                className={inputClass}
-                value={biomass}
-                onChange={(e) => setBiomass(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label className={labelClass}>Population (est.)</label>
-              <input
-                type="number"
-                className={inputClass}
-                value={population}
-                onChange={(e) => setPopulation(e.target.value)}
-                required
-              />
-            </div>
+            <Field
+              id={`${uid}-biomass`}
+              label="Biomass (kg)"
+              type="number"
+              step="0.1"
+              inputMode="decimal"
+              value={biomass}
+              onChange={(e) => setBiomass(e.target.value)}
+              required
+            />
+            <Field
+              id={`${uid}-population`}
+              label="Population (est.)"
+              type="number"
+              inputMode="numeric"
+              value={population}
+              onChange={(e) => setPopulation(e.target.value)}
+              required
+            />
           </div>
 
           <div className={`${sectionLabelClass} mt-1`}>Water Parameters</div>
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className={labelClass}>Dissolved O₂ (mg/L)</label>
-              <input
-                type="number"
-                step="0.1"
-                className={inputClass}
-                value={dissolvedOxygen}
-                onChange={(e) => setDissolvedOxygen(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label className={labelClass}>pH</label>
-              <input
-                type="number"
-                step="0.1"
-                className={inputClass}
-                value={ph}
-                onChange={(e) => setPh(e.target.value)}
-                required
-              />
-            </div>
+            <Field
+              id={`${uid}-do`}
+              label="Dissolved O₂ (mg/L)"
+              type="number"
+              step="0.1"
+              inputMode="decimal"
+              value={dissolvedOxygen}
+              onChange={(e) => setDissolvedOxygen(e.target.value)}
+              required
+            />
+            <Field
+              id={`${uid}-ph`}
+              label="pH"
+              type="number"
+              step="0.1"
+              inputMode="decimal"
+              value={ph}
+              onChange={(e) => setPh(e.target.value)}
+              required
+            />
           </div>
 
           <div className="grid grid-cols-3 gap-3">
-            <div>
-              <label className={labelClass}>Temp (°C)</label>
-              <input
-                type="number"
-                step="0.1"
-                className={inputClass}
-                value={temperature}
-                onChange={(e) => setTemperature(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label className={labelClass}>Salinity (ppt)</label>
-              <input
-                type="number"
-                step="0.1"
-                className={inputClass}
-                value={salinity}
-                onChange={(e) => setSalinity(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label className={labelClass}>Water Level (%)</label>
-              <input
-                type="number"
-                step="1"
-                className={inputClass}
-                value={waterLevel}
-                onChange={(e) => setWaterLevel(e.target.value)}
-                required
-              />
-            </div>
+            <Field
+              id={`${uid}-temp`}
+              label="Temp (°C)"
+              type="number"
+              step="0.1"
+              inputMode="decimal"
+              value={temperature}
+              onChange={(e) => setTemperature(e.target.value)}
+              required
+            />
+            <Field
+              id={`${uid}-salinity`}
+              label="Salinity (ppt)"
+              type="number"
+              step="0.1"
+              inputMode="decimal"
+              value={salinity}
+              onChange={(e) => setSalinity(e.target.value)}
+              required
+            />
+            <Field
+              id={`${uid}-level`}
+              label="Water Level (%)"
+              type="number"
+              step="1"
+              inputMode="numeric"
+              value={waterLevel}
+              onChange={(e) => setWaterLevel(e.target.value)}
+              required
+            />
           </div>
 
           <div className="mt-2 flex gap-3">
