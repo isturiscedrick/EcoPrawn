@@ -15,3 +15,18 @@ export function rangeStatus(value: number, min?: number, max?: number): SensorSt
   if (max !== undefined && value > max) return "warn";
   return "ok";
 }
+
+// Display scale for each gauge ring: the value range that maps to 0–100% fill.
+// Display only; these are not alert thresholds.
+export const GAUGE_SCALE = {
+  dissolvedOxygen: { min: 0, max: 8 },
+  ph: { min: 6, max: 10 },
+  temperature: { min: 20, max: 36 },
+  salinity: { min: 0, max: 30 },
+  waterLevel: { min: 0, max: 100 },
+} as const;
+
+export function scalePct(value: number, scale: { min: number; max: number }): number {
+  const pct = ((value - scale.min) / (scale.max - scale.min)) * 100;
+  return Math.max(0, Math.min(100, pct));
+}

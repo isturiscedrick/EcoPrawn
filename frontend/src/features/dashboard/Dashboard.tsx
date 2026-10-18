@@ -5,11 +5,12 @@ import { SensorGauge } from "@/components/SensorGauge";
 import { TankRow, AlertRow } from "@/components/DashboardRows";
 import { TrendChart } from "@/components/TrendChart";
 import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { alerts } from "@/data/ecoprawn";
+import { alerts, visionScanLog } from "@/data/ecoprawn";
 import { useTanks } from "@/context/TankContext";
-import { THRESHOLDS, rangeStatus } from "@/utils/thresholds";
-import { deriveTankAlerts } from "@/utils/alerts";
+import { THRESHOLDS, GAUGE_SCALE, rangeStatus, scalePct } from "@/utils/thresholds";
 import { AddTankModal } from "./AddTankModal";
+
+const FCR_TARGET = 1.5;
 
 export function Dashboard() {
   const { tanks, addTank, removeTank } = useTanks();
@@ -25,11 +26,6 @@ export function Dashboard() {
   const avgFcr = tankCount ? tanks.reduce((sum, t) => sum + t.fcr, 0) / tankCount : 0;
   const openAlertTanks = tanks.filter((t) => t.status === "warn").length;
 
-  // Live warnings (from current tank readings) first, then logged events.
-  const recentAlerts = [...deriveTankAlerts(tanks), ...alerts].slice(0, 5);
-
-  const doStatus = rangeStatus(avgDO, THRESHOLDS.dissolvedOxygen.min);
-
   const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
   const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0) || 1;
   const feedPct = Math.round((dispensedToday / targetToday) * 100);
@@ -39,18 +35,43 @@ export function Dashboard() {
   const avgBodyLength = tankCount ? tanks.reduce((sum, t) => sum + t.bodyLength, 0) / tankCount : 0;
   const avgWeight = tankCount ? tanks.reduce((sum, t) => sum + t.weight, 0) / tankCount : 0;
 
+  // Statuses derived from the averaged readings, so KPI text, gauge color
+  // and ring fill all come from the same numbers.
+  const doStatus = rangeStatus(avgDO, THRESHOLDS.dissolvedOxygen.min);
+  const fcrStatus = avgFcr <= FCR_TARGET ? "ok" : "warn";
+
   const sensorGauges = tankCount
     ? [
         {
           label: "Dissolved O₂",
           value: `${avgDO.toFixed(1)} mg/L`,
-          pct: Math.min(100, (avgDO / 8) * 100),
+          pct: scalePct(avgDO, GAUGE_SCALE.dissolvedOxygen),
           status: doStatus,
         },
-        { label: "pH", value: avgPh.toFixed(1), pct: 66, status: rangeStatus(avgPh, THRESHOLDS.ph.min, THRESHOLDS.ph.max) },
-        { label: "Temperature", value: `${avgTemp.toFixed(1)} °C`, pct: 71, status: rangeStatus(avgTemp, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max) },
-        { label: "Salinity", value: `${Math.round(avgSalinity)} ppt`, pct: 60, status: rangeStatus(avgSalinity, THRESHOLDS.salinity.min, THRESHOLDS.salinity.max) },
-        { label: "Water Level", value: `${Math.round(avgWaterLevel)}%`, pct: avgWaterLevel, status: rangeStatus(avgWaterLevel, THRESHOLDS.waterLevel.min) },
+        {
+          label: "pH",
+          value: avgPh.toFixed(1),
+          pct: scalePct(avgPh, GAUGE_SCALE.ph),
+          status: rangeStatus(avgPh, THRESHOLDS.ph.min, THRESHOLDS.ph.max),
+        },
+        {
+          label: "Temperature",
+          value: `${avgTemp.toFixed(1)} °C`,
+          pct: scalePct(avgTemp, GAUGE_SCALE.temperature),
+          status: rangeStatus(avgTemp, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max),
+        },
+        {
+          label: "Salinity",
+          value: `${Math.round(avgSalinity)} ppt`,
+          pct: scalePct(avgSalinity, GAUGE_SCALE.salinity),
+          status: rangeStatus(avgSalinity, THRESHOLDS.salinity.min, THRESHOLDS.salinity.max),
+        },
+        {
+          label: "Water Level",
+          value: `${Math.round(avgWaterLevel)}%`,
+          pct: scalePct(avgWaterLevel, GAUGE_SCALE.waterLevel),
+          status: rangeStatus(avgWaterLevel, THRESHOLDS.waterLevel.min),
+        },
       ]
     : [];
 
@@ -60,6 +81,10 @@ export function Dashboard() {
     { label: "Population Est.", value: totalPopulation.toLocaleString() },
     { label: "Abnormal Behavior", value: `${totalAbnormal} flagged` },
   ];
+
+  // Latest scan time comes from the scan log in data/ecoprawn.ts, not a
+  // hardcoded "22 min ago".
+  const lastScan = visionScanLog[0]?.time ?? "no scans yet";
 
   return (
     <>
@@ -102,8 +127,14 @@ export function Dashboard() {
           label="Dissolved O₂ (avg)"
           value={avgDO.toFixed(1)}
           unit="mg/L"
-          delta={doStatus === "ok" ? "▲ within target range" : "Below target (≥ 4.5)"}
-          deltaTone={doStatus}
+          delta={
+            tankCount === 0
+              ? "No tanks yet"
+              : doStatus === "ok"
+                ? "▲ within target range"
+                : `Below target (≥ ${THRESHOLDS.dissolvedOxygen.min})`
+          }
+          deltaTone={tankCount === 0 ? "ok" : doStatus}
         />
         <KpiCard
           label="Total Biomass"
@@ -116,8 +147,14 @@ export function Dashboard() {
           label="Avg. Feed Conversion Ratio"
           value={avgFcr.toFixed(2)}
           unit="FCR"
-          delta="▲ improved from 1.42"
-          deltaTone="ok"
+          delta={
+            tankCount === 0
+              ? "No tanks yet"
+              : fcrStatus === "ok"
+                ? `▲ within target (≤ ${FCR_TARGET})`
+                : `Above target (≤ ${FCR_TARGET})`
+          }
+          deltaTone={tankCount === 0 ? "ok" : fcrStatus}
         />
         <KpiCard
           label="Tanks Needing Attention"
@@ -132,7 +169,7 @@ export function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 mb-4">
         <Panel
           title={`Live Sensor Array — ${tankCount} Tank${tankCount !== 1 ? "s" : ""} (avg)`}
-          badge="updated 8s ago"
+          badge="live · 5 sensors"
         >
           {tankCount > 0 ? (
             <>
@@ -164,10 +201,10 @@ export function Dashboard() {
           )}
         </Panel>
 
-        <Panel title="Recent Alerts" badge={`${recentAlerts.length} events`}>
+        <Panel title="Recent Alerts" badge={`${alerts.length} events`}>
           <div>
-            {recentAlerts.map((a) => (
-              <AlertRow key={`${a.title}-${a.detail}-${a.time}`} {...a} />
+            {alerts.map((a) => (
+              <AlertRow key={a.title} {...a} />
             ))}
           </div>
         </Panel>
@@ -213,9 +250,15 @@ export function Dashboard() {
               <div className="ep-font-mono text-[9.5px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] mb-1">
                 Avg FCR this cycle
               </div>
-              <div className="text-[14px] font-semibold text-[var(--mangrove)]">
+              <div
+                className={`text-[14px] font-semibold ${
+                  fcrStatus === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
+                }`}
+              >
                 {avgFcr.toFixed(2)}{" "}
-                <span className="text-[11px] font-normal text-[rgba(11,35,32,0.5)]">(target ≤ 1.5)</span>
+                <span className="text-[11px] font-normal text-[rgba(11,35,32,0.5)]">
+                  (target ≤ {FCR_TARGET})
+                </span>
               </div>
             </div>
           </div>
@@ -223,7 +266,7 @@ export function Dashboard() {
       </div>
 
       {/* VISION */}
-      <Panel title="AI Vision — Growth Analytics" badge="last scan · 22 min ago">
+      <Panel title="AI Vision — Growth Analytics" badge={`last scan · ${lastScan}`}>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {visionMetrics.map((m) => (
             <div
