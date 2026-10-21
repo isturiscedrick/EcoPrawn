@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { LANDING_NAV_LINKS } from "@/config/nav";
 
 interface NavLinksProps {
@@ -13,10 +14,10 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
         {LANDING_NAV_LINKS.map(([label, href]) => {
           const isActive = href === activeHref;
           return (
-            <a
+            <Link
               key={label}
               href={href}
-              aria-current={isActive ? "true" : undefined}
+              aria-current={isActive ? "page" : undefined}
               className={`relative flex h-full items-center px-1 text-[12px] font-semibold transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)] ${
                 isActive
                   ? "text-[var(--coral)] after:absolute after:bottom-[8px] after:left-0 after:right-0 after:h-[2px] after:bg-[var(--coral)]"
@@ -24,7 +25,7 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
               }`}
             >
               {label}
-            </a>
+            </Link>
           );
         })}
       </nav>
@@ -38,10 +39,10 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
           const isActive = href === activeHref;
           return (
             <li key={label}>
-              <a
+              <Link
                 href={href}
                 onClick={onLinkClick}
-                aria-current={isActive ? "true" : undefined}
+                aria-current={isActive ? "page" : undefined}
                 className={`flex items-center gap-2 rounded-md px-1.5 py-2.5 text-[13px] font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] ${
                   isActive
                     ? "text-[var(--coral)]"
@@ -55,7 +56,7 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
                   }`}
                 />
                 {label}
-              </a>
+              </Link>
             </li>
           );
         })}

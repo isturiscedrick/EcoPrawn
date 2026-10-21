@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BrandMark } from "./BrandMark";
 import { NavLinks } from "./NavLinks";
-import { LANDING_NAV_LINKS } from "@/config/nav";
 
 interface SiteHeaderProps {
   showLinks?: boolean;
@@ -14,8 +14,8 @@ interface SiteHeaderProps {
 
 export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeaderProps) {
   const isAuth = variant === "auth";
+  const pathname = usePathname();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [activeHref, setActiveHref] = useState(LANDING_NAV_LINKS[0][1]);
   const [scrolled, setScrolled] = useState(false);
 
   // Elevate the header with a soft shadow + slightly denser background
@@ -29,41 +29,6 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Scroll-spy: highlight whichever section the user has scrolled past
-  // most recently, so the nav always reflects where they actually are.
-  // Walking sections by offsetTop against scroll position is more
-  // reliable here than IntersectionObserver ratios, which can misfire
-  // when sections have very different heights (e.g. a tall hero next
-  // to a short Objectives section).
-  useEffect(() => {
-    if (!showLinks) return;
-
-    const sectionIds = LANDING_NAV_LINKS.map(([, href]) => href.replace("#", ""));
-
-    function onScroll() {
-      const sections = sectionIds
-        .map((id) => document.getElementById(id))
-        .filter((el): el is HTMLElement => el !== null);
-
-      if (sections.length === 0) return;
-
-      const scrollPos = window.scrollY + 80; // offset past sticky header
-
-      let current = sections[0];
-      for (const section of sections) {
-        if (section.offsetTop <= scrollPos) {
-          current = section;
-        }
-      }
-
-      setActiveHref(`#${current.id}`);
-    }
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [showLinks]);
 
   // Lock body scroll while the mobile menu is open so the page behind
   // it doesn't scroll along with the panel.
@@ -110,7 +75,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
           <BrandMark size={isAuth ? 44 : 64} />
         </Link>
 
-        {showLinks && <NavLinks variant="desktop" activeHref={activeHref} />}
+        {showLinks && <NavLinks variant="desktop" activeHref={pathname} />}
 
         <div className="flex items-center gap-2">
           {isAuth ? (
@@ -203,7 +168,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
           <div className="min-h-0">
             <NavLinks
               variant="mobile"
-              activeHref={activeHref}
+              activeHref={pathname}
               onLinkClick={() => setMobileNavOpen(false)}
             />
           </div>

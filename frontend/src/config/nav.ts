@@ -1,8 +1,7 @@
 export const LANDING_NAV_LINKS: [string, string][] = [
-  ["Home", "#top"],
-  ["Objectives", "#objectives"],
-  ["Systems", "#systems"],
-  ["Scope", "#scope"],
+  ["Home", "/"],
+  ["About", "/about"],
+  ["Contact", "/contact"],
 ];
 
 export type DashboardView = "overview" | "tanks" | "water" | "vision" | "feeding" | "biofloc" | "alerts";
