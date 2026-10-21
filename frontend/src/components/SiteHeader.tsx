@@ -8,9 +8,12 @@ import { LANDING_NAV_LINKS } from "@/config/nav";
 
 interface SiteHeaderProps {
   showLinks?: boolean;
+  /** "auth" = compact header for login pages (smaller logo, back link instead of Log in). */
+  variant?: "default" | "auth";
 }
 
-export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
+export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeaderProps) {
+  const isAuth = variant === "auth";
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeHref, setActiveHref] = useState(LANDING_NAV_LINKS[0][1]);
   const [scrolled, setScrolled] = useState(false);
@@ -92,30 +95,51 @@ export function SiteHeader({ showLinks = true }: SiteHeaderProps) {
           : "border-[rgba(11,35,32,0.06)] bg-(--sand)/90 backdrop-blur-sm"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-310 items-center justify-between px-5 sm:px-8 lg:px-10">
+      <div
+        className={`flex h-16 items-center justify-between ${
+          isAuth
+            ? "w-full px-5 sm:px-8 lg:px-12 xl:px-16"
+            : "mx-auto max-w-310 px-5 sm:px-8 lg:px-10"
+        }`}
+      >
         <Link
           href="/"
           className="group flex items-center gap-2.5 rounded-md text-(--coral) transition-opacity duration-200 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand)"
           aria-label="EcoPrawn home"
         >
-          <BrandMark size={64} />
+          <BrandMark size={isAuth ? 44 : 64} />
         </Link>
 
         {showLinks && <NavLinks variant="desktop" activeHref={activeHref} />}
 
         <div className="flex items-center gap-2">
-          <Link
-            href="/login"
-            className="group inline-flex items-center gap-1.5 rounded-xl bg-(--water-deep) px-4 py-2 text-[11px] font-semibold text-(--sand) shadow-[0_8px_20px_-10px_rgba(11,35,32,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#123F43] hover:shadow-[0_10px_24px_-10px_rgba(11,35,32,0.8)] focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand) sm:px-5 sm:text-[12px]"
-          >
-            Log in
-            <span
-              aria-hidden="true"
-              className="text-[10px] transition-transform duration-200 group-hover:translate-x-0.5"
+          {isAuth ? (
+            <Link
+              href="/"
+              className="group inline-flex items-center gap-1.5 rounded-xl border border-[rgba(11,35,32,0.14)] px-4 py-2 text-[11px] font-semibold text-(--water-deep) transition-all duration-200 hover:border-[rgba(11,35,32,0.28)] hover:bg-[rgba(11,35,32,0.05)] focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand) sm:px-5 sm:text-[12px]"
             >
-              →
-            </span>
-          </Link>
+              <span
+                aria-hidden="true"
+                className="text-[10px] transition-transform duration-200 group-hover:-translate-x-0.5"
+              >
+                ←
+              </span>
+              Back to home
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              className="group inline-flex items-center gap-1.5 rounded-xl bg-(--water-deep) px-4 py-2 text-[11px] font-semibold text-(--sand) shadow-[0_8px_20px_-10px_rgba(11,35,32,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#123F43] hover:shadow-[0_10px_24px_-10px_rgba(11,35,32,0.8)] focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand) sm:px-5 sm:text-[12px]"
+            >
+              Log in
+              <span
+                aria-hidden="true"
+                className="text-[10px] transition-transform duration-200 group-hover:translate-x-0.5"
+              >
+                →
+              </span>
+            </Link>
+          )}
 
           {showLinks && (
             <button
