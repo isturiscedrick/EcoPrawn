@@ -10,7 +10,9 @@
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "db:seed": "node --env-file=.env prisma/seed.cjs",
+    "db:connect:supabase": "node --env-file=.env scripts/connect-supabase.cjs"
   },
   "dependencies": {
     "@prisma/client": "6.4.1",

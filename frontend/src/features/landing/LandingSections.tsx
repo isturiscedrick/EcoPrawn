@@ -1,7 +1,9 @@
+"use client";
 import Link from "next/link";
-import { heroReadouts, feedSchedule, features } from "@/data/ecoprawn";
-import { Icon, IconChip, type IconName } from "@/components/Icon";
-import { Reveal } from "@/components/Reveal";
+import { features } from "@/content/site";
+import { useDemoData } from "@/hooks/useDemoData";
+import { Icon, IconChip, type IconName } from "@/components/ui/Icon";
+import { Reveal } from "@/components/motion/Reveal";
 
 /**
  * Shared vertical rhythm for full-width sections. Used by LandingPage and
@@ -14,19 +16,51 @@ export const SECTION_HEADER_MARGIN = "mb-12 sm:mb-16";
    STATS BAND — numbers come from the data file, not hardcoded
 ========================================================= */
 
-const STATS: { value: string; label: string; note: string; icon: IconName }[] = [
-  { value: String(heroReadouts.length), label: "Water parameters", note: "DO, pH, temperature, salinity, level", icon: "droplet" },
-  { value: "24/7", label: "Continuous monitoring", note: "Sensor telemetry around the clock", icon: "clock" },
-  { value: String(feedSchedule.length), label: "Feed cycles per day", note: "Biomass-adjusted dispensing", icon: "utensils" },
-  { value: String(features.length), label: "Integrated systems", note: "One unified platform", icon: "layers" },
-];
-
 export function StatsBand() {
+  const { heroReadouts, feedSchedule } = useDemoData();
+  const STATS: {
+    value: string;
+    label: string;
+    note: string;
+    icon: IconName;
+  }[] = [
+    {
+      value: String(heroReadouts.length),
+      label: "Water parameters",
+      note: "DO, pH, temperature, salinity, level",
+      icon: "droplet",
+    },
+    {
+      value: "24/7",
+      label: "Continuous monitoring",
+      note: "Sensor telemetry around the clock",
+      icon: "clock",
+    },
+    {
+      value: String(feedSchedule.length),
+      label: "Feed cycles per day",
+      note: "Biomass-adjusted dispensing",
+      icon: "utensils",
+    },
+    {
+      value: String(features.length),
+      label: "Integrated systems",
+      note: "One unified platform",
+      icon: "layers",
+    },
+  ];
+
   return (
-    <section aria-label="System at a glance" className="border-b border-[var(--sand-dim)] bg-white">
+    <section
+      aria-label="System at a glance"
+      className="border-b border-[var(--sand-dim)] bg-white"
+    >
       <div className="mx-auto grid max-w-[1200px] grid-cols-2 gap-px bg-[var(--sand-dim)] md:grid-cols-4">
         {STATS.map((s) => (
-          <div key={s.label} className="group bg-white px-5 py-8 transition-colors duration-200 hover:bg-[#FDFBF6] sm:px-8 sm:py-10">
+          <div
+            key={s.label}
+            className="group bg-white px-5 py-8 transition-colors duration-200 hover:bg-[#FDFBF6] sm:px-8 sm:py-10"
+          >
             <IconChip
               name={s.icon}
               tone="mangrove"
@@ -39,7 +73,9 @@ export function StatsBand() {
             <div className="ep-font-mono mt-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--mangrove)]">
               {s.label}
             </div>
-            <div className="mt-1.5 text-[12.5px] leading-[1.5] text-[rgba(11,35,32,0.58)]">{s.note}</div>
+            <div className="mt-1.5 text-[12.5px] leading-[1.5] text-[rgba(11,35,32,0.58)]">
+              {s.note}
+            </div>
           </div>
         ))}
       </div>
@@ -80,7 +116,10 @@ const STEPS: { step: string; title: string; body: string; icon: IconName }[] = [
 
 export function ProcessFlow() {
   return (
-    <section id="process" className={`scroll-mt-[68px] bg-white ${SECTION_PAD}`}>
+    <section
+      id="process"
+      className={`scroll-mt-[68px] bg-white ${SECTION_PAD}`}
+    >
       <div className="mx-auto max-w-[1200px]">
         <Reveal>
           <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
@@ -93,8 +132,8 @@ export function ProcessFlow() {
               to mangrove.
             </h2>
             <p className="mt-4 max-w-[590px] text-[15px] leading-[1.7] text-[rgba(11,35,32,0.62)]">
-              Four stages run continuously, so the tank stays in range and nothing it
-              doesn&apos;t need goes to waste.
+              Four stages run continuously, so the tank stays in range and
+              nothing it doesn&apos;t need goes to waste.
             </p>
           </div>
         </Reveal>
@@ -118,7 +157,9 @@ export function ProcessFlow() {
                     <h3 className="ep-font-display mb-2 text-[20px] font-semibold text-[var(--water-deep)]">
                       {s.title}
                     </h3>
-                    <p className="text-[13.5px] leading-[1.65] text-[rgba(11,35,32,0.62)]">{s.body}</p>
+                    <p className="text-[13.5px] leading-[1.65] text-[rgba(11,35,32,0.62)]">
+                      {s.body}
+                    </p>
                   </div>
                 </Reveal>
               </li>
@@ -192,7 +233,9 @@ export function FaqSection() {
                     <Icon name="plus" size={15} strokeWidth={2} />
                   </span>
                 </summary>
-                <p className="pb-5 pr-12 text-[13.5px] leading-[1.7] text-[rgba(11,35,32,0.65)]">{f.a}</p>
+                <p className="pb-5 pr-12 text-[13.5px] leading-[1.7] text-[rgba(11,35,32,0.65)]">
+                  {f.a}
+                </p>
               </details>
             </Reveal>
           ))}
@@ -227,7 +270,10 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="bg-[#081E22] px-5 pb-8 pt-14 text-[rgba(242,235,221,0.55)] sm:px-8 sm:pt-16">
+    <footer
+      id="contact"
+      className="bg-[#081E22] px-5 pb-8 pt-14 text-[rgba(242,235,221,0.55)] sm:px-8 sm:pt-16"
+    >
       <div className="mx-auto max-w-[1200px]">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-[1.6fr_1fr_1.3fr]">
           <div>
@@ -235,7 +281,8 @@ export function SiteFooter() {
               EcoPrawn
             </span>
             <p className="mt-3 max-w-[380px] text-[12.5px] leading-[1.65]">
-              An AIoT-Enabled Indoor White Shrimp Farming &amp; Water Management System.
+              An AIoT-Enabled Indoor White Shrimp Farming &amp; Water Management
+              System.
             </p>
           </div>
 
@@ -269,8 +316,15 @@ export function SiteFooter() {
             </div>
             <ul className="flex flex-col gap-3">
               {PROJECT_LINES.map((l) => (
-                <li key={l.text} className="flex gap-2.5 text-[12.5px] leading-[1.6]">
-                  <Icon name={l.icon} size={15} className="mt-[3px] shrink-0 text-[var(--coral)]" />
+                <li
+                  key={l.text}
+                  className="flex gap-2.5 text-[12.5px] leading-[1.6]"
+                >
+                  <Icon
+                    name={l.icon}
+                    size={15}
+                    className="mt-[3px] shrink-0 text-[var(--coral)]"
+                  />
                   {l.text}
                 </li>
               ))}
@@ -280,7 +334,10 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-[rgba(242,235,221,0.1)] pt-6 text-[11.5px] sm:flex-row sm:items-center sm:justify-between">
           <span>© {year} EcoPrawn. All rights reserved.</span>
-          <a href="#top" className={`${footerLinkClass} inline-flex items-center gap-1.5 text-[11.5px]`}>
+          <a
+            href="#top"
+            className={`${footerLinkClass} inline-flex items-center gap-1.5 text-[11.5px]`}
+          >
             <Icon name="arrow-up" size={13} />
             Back to top
           </a>

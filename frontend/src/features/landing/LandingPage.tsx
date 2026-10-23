@@ -2,14 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { TankHeroSvg } from "@/features/dashboard/TankHeroSvg";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
-import { heroReadouts, heroReadoutUnits } from "@/data/ecoprawn";
+import { TankHeroSvg } from "@/components/illustrations/TankHeroSvg";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { heroReadoutUnits } from "@/config/sensors";
+import { useDemoData } from "@/hooks/useDemoData";
 
 const SECTION_PAD = "px-5 py-20 sm:px-8 sm:py-24 lg:py-28";
 
 export function LandingPage() {
+  const {heroReadouts}=useDemoData();
   // Gentle scroll-tied depth cue for the hero tank visual. Capped so the
   // effect settles once the hero scrolls out of view, rather than running
   // as a persistent parallax gimmick down the whole page.

@@ -1,11 +1,11 @@
 "use client";
 
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { growthTrend, visionScanLog } from "@/data/ecoprawn";
-import { ScrollFadeContainer } from "@/components/ScrollFadeContainer";
-import { useTanks } from "@/context/TankContext";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
+import { useTanks } from "@/features/dashboard/context/TankContext";
 
-function GrowthTrendChart() {
+function GrowthTrendChart({growthTrend}:{growthTrend:number[]}) {
+  if(growthTrend.length<2) return <p>Not enough scans to display a trend.</p>;
   const min = Math.min(...growthTrend);
   const max = Math.max(...growthTrend);
   const w = 560;
@@ -42,7 +42,7 @@ function GrowthTrendChart() {
 }
 
 export function VisionGrowth() {
-  const { tanks } = useTanks();
+  const { tanks, growthTrend, visionScanLog } = useTanks();
   const tankCount = tanks.length;
 
   const avgBodyLength = tankCount ? tanks.reduce((sum, t) => sum + t.bodyLength, 0) / tankCount : 0;
@@ -66,15 +66,15 @@ export function VisionGrowth() {
         </div>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
-          Last scan · 22 min ago
+          Last scan · {visionScanLog[0]?.time ?? "No scans yet"}
         </div>
       </div>
 
       {tankCount > 0 ? (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-            <KpiCard label="Avg. Body Length" value={avgBodyLength.toFixed(1)} unit="cm" delta="▲ 0.2 cm vs last week" deltaTone="ok" />
-            <KpiCard label="Avg. Weight" value={avgWeight.toFixed(1)} unit="g" delta="▲ 1.4 g vs last week" deltaTone="ok" />
+            <KpiCard label="Avg. Body Length" value={avgBodyLength.toFixed(1)} unit="cm" delta="Latest recorded scan" deltaTone="ok" />
+            <KpiCard label="Avg. Weight" value={avgWeight.toFixed(1)} unit="g" delta="Latest recorded scan" deltaTone="ok" />
             <KpiCard
               label="Population Est."
               value={totalPopulation.toLocaleString()}
@@ -92,8 +92,8 @@ export function VisionGrowth() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
-            <Panel title="Growth Trend — Avg. Body Length" badge="7-week view">
-              <GrowthTrendChart />
+            <Panel title="Growth Trend — Avg. Body Length" badge="Recorded scans">
+              <GrowthTrendChart growthTrend={growthTrend} />
               <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
                 <span className="flex items-center gap-1.5">
                   <span className="inline-block w-3 h-[2px] bg-[var(--coral)]" /> Body length (cm)

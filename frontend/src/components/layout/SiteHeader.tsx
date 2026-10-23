@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BrandMark } from "./BrandMark";
-import { NavLinks } from "./NavLinks";
+import { BrandMark } from "@/components/layout/BrandMark";
+import { NavLinks } from "@/components/layout/NavLinks";
 
 interface SiteHeaderProps {
   showLinks?: boolean;

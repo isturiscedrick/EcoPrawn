@@ -83,26 +83,26 @@ frontend/
   public/assets/        logo and images
   src/
     app/                App Router routes, layouts, global CSS
-    components/         shared UI (header, footer, icons, dashboard primitives)
+    components/         shared layout, UI, motion, and illustrations
     features/           feature modules: landing, about, contact, auth, dashboard
-    context/            TankContext (tank state) and navigation hook
-    hooks/              custom hooks (e.g. useLoginForm)
+    hooks/              API hooks for backend demo readouts
     config/             navigation config
-    data/               static mock data
+    content/            marketing and About-page copy
     types/              shared TypeScript types
-    utils/              thresholds, alert derivation, cn()
+    utils/              shared cn() helper
 backend/
-  prisma/               PostgreSQL schema
+  prisma/               PostgreSQL schema and repeatable seed script
   src/
-    app/api/            tank, water telemetry, and seed endpoints
+    app/api/            dashboard, demo, tank, water, and seed endpoints
+    data/demo.json       sample records and form defaults
     lib/prisma.ts       shared Prisma client
   .env.example          database connection template
 ```
 
 ## How the dashboard works
 
-- **Tank state** lives in `TankContext`, which calls `/api/tanks` through the frontend proxy. The backend reads and writes PostgreSQL through Prisma. The UI falls back to in-memory demo state when the API is unavailable.
-- **Target ranges** are defined in `src/utils/thresholds.ts`:
+- **Tank state** lives in `TankContext`, which calls `/api/dashboard` through the frontend proxy. The backend reads and writes PostgreSQL through Prisma. Loading and connection errors are shown explicitly.
+- **Target ranges** are defined in `src/features/dashboard/lib/thresholds.ts`:
 
   | Parameter | Target |
   | --- | --- |
@@ -112,14 +112,14 @@ backend/
   | Salinity | 10 – 20 ppt |
   | Water level | ≥ 90% |
 
-- **Alerts** for out-of-range readings are derived live in `src/utils/alerts.ts` and shown above the logged events.
+- **Alerts** for out-of-range readings are derived live in `src/features/dashboard/lib/alerts.ts` and shown above the logged events.
 
 ## Current limitations
 
 The dashboard combines database-backed tanks with demo data, without live hardware:
 
-- Tanks and their latest telemetry and vision scans can load from PostgreSQL. Other demo views use `src/data/ecoprawn.ts`, and `TankContext` provides fallback tank data.
-- Trend charts are static illustrations.
+- Tanks, telemetry, scans, growth history, feeding schedules, biofloc metrics, effluent logs, and alerts load from PostgreSQL through `/api/dashboard`. Run `npm run db:seed` in `backend/` to import sample records into an empty database. Existing tanks prevent reseeding.
+- Trend charts use recorded samples and show an empty state when there are too few readings.
 - **Login is not wired to authentication.** Submitting the form navigates to `/dashboard`.
 - **The contact form does not send anything.** It is not connected to a mail service yet.
 - The water API accepts telemetry, but connecting real sensors and the vision pipeline is still open work.

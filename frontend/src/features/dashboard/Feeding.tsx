@@ -1,12 +1,11 @@
 "use client";
 
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { feedSchedule } from "@/data/ecoprawn";
-import { ScrollFadeContainer } from "@/components/ScrollFadeContainer";
-import { useTanks } from "@/context/TankContext";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
+import { useTanks } from "@/features/dashboard/context/TankContext";
 
 export function Feeding() {
-  const { tanks } = useTanks();
+  const { tanks, feedSchedule } = useTanks();
   const tankCount = tanks.length;
 
   const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
@@ -61,7 +60,7 @@ export function Feeding() {
               <div className="flex flex-col gap-2.5">
                 {feedSchedule.map((f) => (
                   <div
-                    key={f.time}
+                    key={f.id}
                     className="flex items-center justify-between p-3 border border-[var(--sand-dim)] rounded-[10px]"
                   >
                     <div className="flex items-center gap-3">

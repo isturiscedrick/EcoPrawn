@@ -1,5 +1,6 @@
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { bioflocMetrics, effluentLog } from "@/data/ecoprawn";
+"use client";
+import {useTanks} from "@/features/dashboard/context/TankContext";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 
 const loopSteps = [
   { step: "01", title: "Biofloc reactor", body: "Heterotrophic bacteria convert ammonia and organic waste into consumable floc within the tank's water column." },
@@ -9,6 +10,7 @@ const loopSteps = [
 ];
 
 export function BioflocLoop() {
+  const {bioflocMetrics,effluentLog}=useTanks();
   return (
     <>
       <div className="flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--sand-dim)]">
@@ -25,7 +27,7 @@ export function BioflocLoop() {
         </div>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
-          Loop active
+          {bioflocMetrics.length ? "Latest recorded metrics" : "No metrics yet"}
         </div>
       </div>
 

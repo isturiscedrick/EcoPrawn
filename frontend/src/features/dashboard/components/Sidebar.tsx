@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { BrandMark } from "@/components/BrandMark";
+import { BrandMark } from "@/components/layout/BrandMark";
 import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
-import { useTanks } from "@/context/TankContext";
+import { useTanks } from "@/features/dashboard/context/TankContext";
 
 export function Sidebar() {
   const router = useRouter();
@@ -55,15 +55,15 @@ export function Sidebar() {
       <div className="hidden shrink-0 items-center gap-1.5 rounded-full border border-[rgba(242,235,221,0.15)] bg-[rgba(242,235,221,0.05)] px-3 py-1.5 lg:mb-2 lg:flex lg:w-fit">
         <span className="ep-pulse-dot h-1.5 w-1.5 rounded-full bg-[var(--mangrove-light)]" />
         <span className="ep-font-mono text-[10px] tracking-[0.1em] text-[rgba(242,235,221,0.65)]">
-          EDGE NODE: mini-pc-01
+          ECOPRAWN DASHBOARD
         </span>
       </div>
 
       {/* DATABASE STATUS */}
-      <div className="hidden shrink-0 items-center gap-1.5 rounded-full border border-[rgba(242,235,221,0.15)] bg-[rgba(242,235,221,0.05)] px-3 py-1.5 lg:mb-4 lg:flex lg:w-fit" title={isDbConnected ? "Connected to PostgreSQL database" : "Using in-memory cache. Run setup-db.ps1 to connect PostgreSQL."}>
+      <div className="hidden shrink-0 items-center gap-1.5 rounded-full border border-[rgba(242,235,221,0.15)] bg-[rgba(242,235,221,0.05)] px-3 py-1.5 lg:mb-4 lg:flex lg:w-fit" title={isDbConnected ? "Connected to PostgreSQL database" : "Unable to connect to the backend."}>
         <span className={`h-1.5 w-1.5 rounded-full ${isDbConnected ? "ep-pulse-dot bg-[var(--mangrove-light)]" : "bg-amber-400"}`} />
         <span className="ep-font-mono text-[10px] tracking-[0.1em] text-[rgba(242,235,221,0.65)]">
-          {isDbConnected ? "POSTGRES: CONNECTED" : "POSTGRES: LOCAL"}
+          {isDbConnected ? "POSTGRES: CONNECTED" : "POSTGRES: DISCONNECTED"}
         </span>
       </div>
 

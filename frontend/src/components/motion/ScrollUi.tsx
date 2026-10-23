@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Icon } from "./Icon";
+import { Icon } from "@/components/ui/Icon";
 
 /** Thin coral bar fixed to the top of the viewport showing page progress. */
 export function ScrollProgress() {

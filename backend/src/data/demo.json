@@ -1,0 +1,302 @@
+{
+  "heroReadouts": [
+    {
+      "label": "Dissolved O₂",
+      "value": "6.2",
+      "pct": 78,
+      "status": "ok"
+    },
+    {
+      "label": "pH",
+      "value": "7.9",
+      "pct": 66,
+      "status": "ok"
+    },
+    {
+      "label": "Temperature",
+      "value": "28.4",
+      "pct": 71,
+      "status": "ok"
+    },
+    {
+      "label": "Salinity",
+      "value": "15",
+      "pct": 60,
+      "status": "ok"
+    },
+    {
+      "label": "Water Level",
+      "value": "98",
+      "pct": 98,
+      "status": "ok"
+    }
+  ],
+  "sensorGauges": [
+    {
+      "label": "Dissolved O₂",
+      "value": "6.2 mg/L",
+      "pct": 78,
+      "status": "ok"
+    },
+    {
+      "label": "pH",
+      "value": "7.9",
+      "pct": 66,
+      "status": "ok"
+    },
+    {
+      "label": "Temperature",
+      "value": "28.4 °C",
+      "pct": 71,
+      "status": "ok"
+    },
+    {
+      "label": "Salinity",
+      "value": "15 ppt",
+      "pct": 60,
+      "status": "ok"
+    },
+    {
+      "label": "Water Level",
+      "value": "98%",
+      "pct": 98,
+      "status": "ok"
+    }
+  ],
+  "tanks": [
+    {
+      "name": "Tank 1",
+      "pl": "PL-42",
+      "biomass": "31.2 kg",
+      "status": "ok"
+    }
+  ],
+  "alerts": [
+    {
+      "icon": "info",
+      "title": "Aerator auto-activated",
+      "detail": "Tank 1 — DO dropped to 4.8 mg/L, relay triggered automatically",
+      "time": "1h ago"
+    },
+    {
+      "icon": "info",
+      "title": "Feed cycle completed",
+      "detail": "Tank 1 — scheduled 14:00 dispense, biomass-adjusted",
+      "time": "3h ago"
+    }
+  ],
+  "visionMetrics": [
+    {
+      "label": "Avg. Body Length",
+      "value": "11.4 cm"
+    },
+    {
+      "label": "Avg. Weight",
+      "value": "18.2 g"
+    },
+    {
+      "label": "Population Est.",
+      "value": "1,720"
+    },
+    {
+      "label": "Abnormal Behavior",
+      "value": "0 flagged"
+    }
+  ],
+  "waterQualityByTank": [
+    {
+      "tank": "Tank 1",
+      "dissolvedOxygen": 6.2,
+      "ph": 7.9,
+      "temperature": 28.4,
+      "salinity": 15,
+      "waterLevel": 98,
+      "status": "ok"
+    }
+  ],
+  "waterQualityThresholds": [
+    {
+      "label": "Dissolved O₂",
+      "range": "≥ 4.5 mg/L",
+      "current": "6.2 mg/L",
+      "status": "ok"
+    },
+    {
+      "label": "pH",
+      "range": "7.5 – 8.5",
+      "current": "7.9",
+      "status": "ok"
+    },
+    {
+      "label": "Temperature",
+      "range": "26 – 30 °C",
+      "current": "28.4 °C",
+      "status": "ok"
+    },
+    {
+      "label": "Salinity",
+      "range": "10 – 20 ppt",
+      "current": "15 ppt",
+      "status": "ok"
+    },
+    {
+      "label": "Water Level",
+      "range": "≥ 90%",
+      "current": "98%",
+      "status": "ok"
+    }
+  ],
+  "growthByTank": [
+    {
+      "tank": "Tank 1",
+      "bodyLength": "11.6 cm",
+      "weight": "18.6 g",
+      "population": "1,720",
+      "abnormal": 0
+    }
+  ],
+  "growthTrend": [
+    10.2,
+    10.5,
+    10.7,
+    10.9,
+    11,
+    11.2,
+    11.4
+  ],
+  "visionScanLog": [
+    {
+      "time": "Today · 09:40",
+      "tank": "Tank 1",
+      "note": "Growth scan completed — no anomalies detected."
+    },
+    {
+      "time": "Yesterday · 17:50",
+      "tank": "Tank 1",
+      "note": "Full biomass recalculation completed."
+    }
+  ],
+  "feedSchedule": [
+    {
+      "time": "06:00",
+      "amount": "1.8 kg",
+      "status": "done"
+    },
+    {
+      "time": "10:00",
+      "amount": "1.9 kg",
+      "status": "done"
+    },
+    {
+      "time": "14:00",
+      "amount": "1.9 kg",
+      "status": "done"
+    },
+    {
+      "time": "18:00",
+      "amount": "1.8 kg",
+      "status": "upcoming"
+    }
+  ],
+  "feedByTank": [
+    {
+      "tank": "Tank 1",
+      "dispensedToday": "1.3 kg",
+      "targetToday": "1.5 kg",
+      "fcr": "1.35"
+    }
+  ],
+  "bioflocMetrics": [
+    {
+      "label": "Floc Volume (FV)",
+      "value": "12.4",
+      "unit": "mL/L",
+      "status": "ok"
+    },
+    {
+      "label": "C:N Ratio",
+      "value": "14.8",
+      "unit": ":1",
+      "status": "ok"
+    },
+    {
+      "label": "Total Suspended Solids",
+      "value": "310",
+      "unit": "mg/L",
+      "status": "ok"
+    },
+    {
+      "label": "Alkalinity",
+      "value": "148",
+      "unit": "mg/L CaCO₃",
+      "status": "ok"
+    }
+  ],
+  "effluentLog": [
+    {
+      "time": "Today · 07:00",
+      "event": "Scheduled discharge cycle",
+      "detail": "Tank 1 blowdown routed to wetland outlet — 220 L."
+    },
+    {
+      "time": "Yesterday · 19:00",
+      "event": "Scheduled discharge cycle",
+      "detail": "Tank 1 blowdown routed to mangrove outlet — 640 L."
+    },
+    {
+      "time": "2 days ago",
+      "event": "Carbon dosing",
+      "detail": "Molasses dosed to Tank 1 to correct C:N ratio."
+    }
+  ],
+  "alertsLog": [
+    {
+      "icon": "info",
+      "title": "Aerator auto-activated",
+      "detail": "Tank 1 — DO dropped to 4.8 mg/L, relay triggered automatically",
+      "time": "1h ago"
+    },
+    {
+      "icon": "info",
+      "title": "Feed cycle completed",
+      "detail": "Tank 1 — scheduled 14:00 dispense, biomass-adjusted",
+      "time": "3h ago"
+    },
+    {
+      "icon": "info",
+      "title": "Vision scan completed",
+      "detail": "Tank 1 — growth scan finished, no anomalies detected",
+      "time": "5h ago"
+    },
+    {
+      "icon": "info",
+      "title": "Scheduled effluent discharge",
+      "detail": "Tank 1 blowdown routed to wetland outlet — 220 L",
+      "time": "11h ago"
+    },
+    {
+      "icon": "info",
+      "title": "Carbon dosing applied",
+      "detail": "Tank 1 — molasses dosed to correct C:N ratio",
+      "time": "1d ago"
+    }
+  ],
+  "tank": {
+    "name": "Tank 1",
+    "pl": "PL-42",
+    "biomass": 31.2,
+    "targetToday": 1.5,
+    "fcr": 1.35,
+    "dispensedToday": 1.3
+  },
+  "tankFormDefaults": {
+    "pl": "PL-1",
+    "biomass": "10",
+    "dissolvedOxygen": "6.0",
+    "ph": "7.8",
+    "temperature": "28.0",
+    "salinity": "15",
+    "waterLevel": "95",
+    "population": "1000"
+  }
+}

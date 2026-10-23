@@ -38,6 +38,8 @@ export async function POST(request: Request) {
       pl = "PL-42",
       biomass = 31.2,
       targetToday = 1.5,
+      fcr = 0,
+      dispensedToday = 0,
       dissolvedOxygen = 6.2,
       ph = 7.9,
       temperature = 28.4,
@@ -61,6 +63,8 @@ export async function POST(request: Request) {
         pl,
         biomass: Number(biomass),
         targetToday: Number(targetToday),
+        fcr: Number(fcr),
+        dispensedToday: Number(dispensedToday),
         telemetries: {
           create: {
             dissolvedOxygen: Number(dissolvedOxygen),

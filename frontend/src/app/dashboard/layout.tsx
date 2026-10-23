@@ -1,5 +1,5 @@
 import { SystemLayout } from "@/features/dashboard/SystemLayout";
-import { TankProvider } from "@/context/TankContext";
+import { TankProvider } from "@/features/dashboard/context/TankContext";
 
 export default function DashboardLayout({
   children,

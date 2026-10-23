@@ -1,6 +1,8 @@
-import { SiteHeader } from "@/components/SiteHeader";
+"use client";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import { LoginForm } from "@/features/auth/LoginForm";
-import { heroReadouts, heroReadoutUnits } from "@/data/ecoprawn";
+import { heroReadoutUnits } from "@/config/sensors";
+import { useDemoData } from "@/hooks/useDemoData";
 
 const HIGHLIGHTS = [
   { title: "Live water quality", body: "DO, pH, temperature, salinity and level, tracked around the clock." },
@@ -9,6 +11,7 @@ const HIGHLIGHTS = [
 ];
 
 export default function LoginPage() {
+  const {heroReadouts}=useDemoData();
   return (
     <div className="min-h-screen bg-[var(--sand)]">
      <SiteHeader showLinks={false} variant="auth" />

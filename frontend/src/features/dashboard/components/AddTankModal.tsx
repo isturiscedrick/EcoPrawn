@@ -1,8 +1,16 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type FormEvent, type InputHTMLAttributes } from "react";
-import type { NewTankInput } from "@/context/TankContext";
-import { ConfirmDialog } from "@/components/ConfirmDialog";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type FormEvent,
+  type InputHTMLAttributes,
+} from "react";
+import { useDemoData } from "@/hooks/useDemoData";
+import type { NewTankInput } from "@/features/dashboard/context/TankContext";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 
 interface AddTankModalProps {
   open: boolean;
@@ -20,20 +28,6 @@ const labelClass =
 const sectionLabelClass =
   "ep-font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-[var(--coral)]";
 
-function defaultValues(existingCount: number) {
-  return {
-    name: `Tank ${existingCount + 1}`,
-    pl: "PL-1",
-    biomass: "10",
-    dissolvedOxygen: "6.0",
-    ph: "7.8",
-    temperature: "28.0",
-    salinity: "15",
-    waterLevel: "95",
-    population: "1000",
-  };
-}
-
 interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: string;
@@ -41,7 +35,12 @@ interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 // Label + input pair. The htmlFor/id link means clicking the label focuses
 // the input and screen readers announce the label with the field.
-function Field({ id, label, ref, ...inputProps }: FieldProps & { ref?: React.Ref<HTMLInputElement> }) {
+function Field({
+  id,
+  label,
+  ref,
+  ...inputProps
+}: FieldProps & { ref?: React.Ref<HTMLInputElement> }) {
   return (
     <div>
       <label htmlFor={id} className={labelClass}>
@@ -52,27 +51,33 @@ function Field({ id, label, ref, ...inputProps }: FieldProps & { ref?: React.Ref
   );
 }
 
-export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTankModalProps) {
+export function AddTankModal({
+  open,
+  onClose,
+  onSubmit,
+  existingCount,
+}: AddTankModalProps) {
+  const { tankFormDefaults: defaults } = useDemoData();
   const uid = useId();
   const firstFieldRef = useRef<HTMLInputElement>(null);
 
-  const [name, setName] = useState(() => defaultValues(existingCount).name);
-  const [pl, setPl] = useState("PL-1");
-  const [biomass, setBiomass] = useState("10");
-  const [dissolvedOxygen, setDissolvedOxygen] = useState("6.0");
-  const [ph, setPh] = useState("7.8");
-  const [temperature, setTemperature] = useState("28.0");
-  const [salinity, setSalinity] = useState("15");
-  const [waterLevel, setWaterLevel] = useState("95");
-  const [population, setPopulation] = useState("1000");
+  const [name, setName] = useState(`Tank ${existingCount + 1}`);
+  const [pl, setPl] = useState("");
+  const [biomass, setBiomass] = useState("");
+  const [dissolvedOxygen, setDissolvedOxygen] = useState("");
+  const [ph, setPh] = useState("");
+  const [temperature, setTemperature] = useState("");
+  const [salinity, setSalinity] = useState("");
+  const [waterLevel, setWaterLevel] = useState("");
+  const [population, setPopulation] = useState("");
   const [confirming, setConfirming] = useState(false);
 
   // Fresh form every time the modal opens. Without this, the state from the
   // previous add sticks around (same default name, old readings), because
   // this component stays mounted in the parent while closed.
   useEffect(() => {
-    if (!open) return;
-    const d = defaultValues(existingCount);
+    if (!open || !defaults.pl) return;
+    const d: Record<string,string> = { ...defaults, name: `Tank ${existingCount + 1}` };
     setName(d.name);
     setPl(d.pl);
     setBiomass(d.biomass);
@@ -84,9 +89,7 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
     setPopulation(d.population);
     setConfirming(false);
     firstFieldRef.current?.focus();
-    // existingCount is read only at open time on purpose.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, [open, defaults, existingCount]);
 
   // Escape closes the modal. While the confirm dialog is up, Escape belongs
   // to that dialog (it cancels back to the form), so skip it here.
@@ -109,7 +112,7 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
     };
   }, [open]);
 
-  if (!open) return null;
+  if (!open || !defaults.pl) return null;
 
   const resolvedName = name.trim() || `Tank ${existingCount + 1}`;
 
@@ -122,18 +125,18 @@ export function AddTankModal({ open, onClose, onSubmit, existingCount }: AddTank
     const biomassNum = parseFloat(biomass) || 0;
     onSubmit({
       name: resolvedName,
-      pl: pl.trim() || "PL-1",
+      pl: pl.trim() || defaults.pl,
       biomass: biomassNum,
       dissolvedOxygen: parseFloat(dissolvedOxygen) || 0,
       ph: parseFloat(ph) || 0,
       temperature: parseFloat(temperature) || 0,
       salinity: parseFloat(salinity) || 0,
       waterLevel: parseFloat(waterLevel) || 0,
-      bodyLength: 10,
-      weight: 15,
+      bodyLength: 0,
+      weight: 0,
       population: parseInt(population, 10) || 0,
       abnormal: 0,
-      fcr: 1.4,
+      fcr: 0,
       dispensedToday: 0,
       targetToday: biomassNum * 0.05 || 1,
     });

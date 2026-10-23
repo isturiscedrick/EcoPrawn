@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ContactForm } from "./ContactForm";
 
 const SECTION_PAD = "px-5 py-20 sm:px-8 sm:py-24 lg:py-28";

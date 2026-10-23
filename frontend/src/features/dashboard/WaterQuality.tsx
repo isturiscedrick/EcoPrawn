@@ -1,13 +1,13 @@
 "use client";
 
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { TrendChart } from "@/components/TrendChart";
-import { ScrollFadeContainer } from "@/components/ScrollFadeContainer";
-import { useTanks } from "@/context/TankContext";
-import { THRESHOLDS, rangeStatus } from "@/utils/thresholds";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { TrendChart } from "@/features/dashboard/components/TrendChart";
+import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
+import { useTanks } from "@/features/dashboard/context/TankContext";
+import { THRESHOLDS, rangeStatus } from "@/features/dashboard/lib/thresholds";
 
 export function WaterQuality() {
-  const { tanks } = useTanks();
+  const { tanks, waterTrend } = useTanks();
   const tankCount = tanks.length;
   const warnCount = tanks.filter((t) => t.status === "warn").length;
   const first = tanks[0];
@@ -113,15 +113,11 @@ export function WaterQuality() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
-            <Panel title={`Live Sensor Array — ${first.name}`} badge="updated 8s ago">
-              <TrendChart />
+            <Panel title={`Live Sensor Array — ${first.name}`} badge="Recorded readings">
+              <TrendChart values={waterTrend.filter(r=>r.tankId===tanks[0]?.id).map(r=>r.value)} />
               <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
                 <span className="flex items-center gap-1.5">
                   <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> DO (mg/L)
-                </span>
-                <span className="flex items-center gap-1.5 text-[var(--coral)]">
-                  <span className="inline-block w-3 h-[2px]" style={{ borderTop: "2px dashed var(--coral)" }} />
-                  Temp (°C, scaled)
                 </span>
               </div>
             </Panel>

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import type { AlertItem } from "@/types";
-import type { Tank } from "@/context/TankContext";
-import { ConfirmDialog } from "@/components/ConfirmDialog";
+import type { Tank } from "@/features/dashboard/context/TankContext";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 
 interface TankRowProps extends Tank {
   onRemove?: (id: string) => void;

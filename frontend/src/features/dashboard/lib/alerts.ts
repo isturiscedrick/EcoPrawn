@@ -1,6 +1,6 @@
 import type { AlertItem } from "@/types";
-import type { Tank } from "@/context/TankContext";
-import { THRESHOLDS } from "@/utils/thresholds";
+import type { Tank } from "@/features/dashboard/context/TankContext";
+import { THRESHOLDS } from "@/features/dashboard/lib/thresholds";
 
 interface Check {
   label: string;

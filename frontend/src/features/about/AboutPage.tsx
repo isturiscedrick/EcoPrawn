@@ -1,6 +1,6 @@
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
-import { objectives, features, inScope, outOfScope } from "@/data/ecoprawn";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { objectives, features, inScope, outOfScope } from "@/content/site";
 
 const SECTION_PAD = "px-5 py-20 sm:px-8 sm:py-24 lg:py-28";
 const SECTION_HEADER_MARGIN = "mb-12 sm:mb-16";

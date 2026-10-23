@@ -1,13 +1,12 @@
 "use client";
 
-import { AlertRow } from "@/components/DashboardRows";
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { alertsLog } from "@/data/ecoprawn";
-import { useTanks } from "@/context/TankContext";
-import { deriveTankAlerts } from "@/utils/alerts";
+import { AlertRow } from "@/features/dashboard/components/DashboardRows";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { useTanks } from "@/features/dashboard/context/TankContext";
+import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 
 export function AlertsView() {
-  const { tanks } = useTanks();
+  const { tanks, alertsLog, resolvedAlerts } = useTanks();
 
   const liveAlerts = deriveTankAlerts(tanks);
   const allAlerts = [...liveAlerts, ...alertsLog];
@@ -45,11 +44,11 @@ export function AlertsView() {
           delta={openCount === 0 ? "No active warnings" : "Parameters out of range"}
           deltaTone={openCount === 0 ? "ok" : "warn"}
         />
-        <KpiCard label="Auto-Resolved Today" value="1" unit="event" delta="Aerator relay auto-triggered" deltaTone="ok" />
+        <KpiCard label="Resolved Alerts" value={String(resolvedAlerts)} unit="events" delta="Resolved events" deltaTone="ok" />
         <KpiCard
           label="Events Logged"
           value={String(allAlerts.length)}
-          unit="last 24h"
+          unit="events"
           delta={`${liveAlerts.length} live · ${alertsLog.length} logged`}
           deltaTone="ok"
         />

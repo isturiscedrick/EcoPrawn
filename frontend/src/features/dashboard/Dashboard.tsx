@@ -1,17 +1,16 @@
 "use client";
 
-import { SensorGauge } from "@/components/SensorGauge";
-import { TankRow, AlertRow } from "@/components/DashboardRows";
-import { TrendChart } from "@/components/TrendChart";
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { alerts, visionScanLog } from "@/data/ecoprawn";
-import { useTanks } from "@/context/TankContext";
-import { THRESHOLDS, GAUGE_SCALE, rangeStatus, scalePct } from "@/utils/thresholds";
+import { SensorGauge } from "@/features/dashboard/components/SensorGauge";
+import { TankRow, AlertRow } from "@/features/dashboard/components/DashboardRows";
+import { TrendChart } from "@/features/dashboard/components/TrendChart";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { useTanks } from "@/features/dashboard/context/TankContext";
+import { THRESHOLDS, GAUGE_SCALE, rangeStatus, scalePct } from "@/features/dashboard/lib/thresholds";
 
 const FCR_TARGET = 1.5;
 
 export function Dashboard() {
-  const { tanks, removeTank } = useTanks();
+  const { tanks, removeTank, waterTrend, feedSchedule, alertsLog: alerts, visionScanLog } = useTanks();
 
   const tankCount = tanks.length;
   const totalBiomass = tanks.reduce((sum, t) => sum + t.biomass, 0);
@@ -24,8 +23,8 @@ export function Dashboard() {
   const openAlertTanks = tanks.filter((t) => t.status === "warn").length;
 
   const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
-  const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0) || 1;
-  const feedPct = Math.round((dispensedToday / targetToday) * 100);
+  const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0);
+  const feedPct = targetToday > 0 ? Math.round((dispensedToday / targetToday) * 100) : 0;
 
   const totalPopulation = tanks.reduce((sum, t) => sum + t.population, 0);
   const totalAbnormal = tanks.reduce((sum, t) => sum + t.abnormal, 0);
@@ -79,8 +78,6 @@ export function Dashboard() {
     { label: "Abnormal Behavior", value: `${totalAbnormal} flagged` },
   ];
 
-  // Latest scan time comes from the scan log in data/ecoprawn.ts, not a
-  // hardcoded "22 min ago".
   const lastScan = visionScanLog[0]?.time ?? "no scans yet";
 
   return (
@@ -169,17 +166,10 @@ export function Dashboard() {
                 ))}
               </div>
               <div className="mt-4 pt-4 border-t border-[var(--sand-dim)]">
-                <TrendChart />
+                <TrendChart values={waterTrend.filter(r=>r.tankId===tanks[0]?.id).map(r=>r.value)} />
                 <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
                   <span className="flex items-center gap-1.5">
                     <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> DO (mg/L)
-                  </span>
-                  <span className="flex items-center gap-1.5 text-[var(--coral)]">
-                    <span
-                      className="inline-block w-3 h-[2px] bg-[var(--coral)]"
-                      style={{ borderTop: "2px dashed var(--coral)" }}
-                    />
-                    Temp (°C, scaled)
                   </span>
                 </div>
               </div>
@@ -234,7 +224,7 @@ export function Dashboard() {
               <div className="ep-font-mono text-[9.5px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] mb-1">
                 Next dispense
               </div>
-              <div className="text-[14px] font-semibold text-[var(--water-deep)]">18:00</div>
+              <div className="text-[14px] font-semibold text-[var(--water-deep)]">{feedSchedule.find(f=>f.status === "upcoming")?.time ?? "—"}</div>
             </div>
             <div>
               <div className="ep-font-mono text-[9.5px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] mb-1">

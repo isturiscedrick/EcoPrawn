@@ -14,6 +14,7 @@ model Tank {
   biomass         Float              @default(31.2) // in kg
   targetToday     Float              @default(1.5)  // kg
   fcr             Float              @default(1.35)
+  dispensedToday  Float              @default(0)
   createdAt       DateTime           @default(now())
   updatedAt       DateTime           @updatedAt
 
