@@ -64,7 +64,7 @@ export function BioflocLoop() {
         <Panel title="Effluent Routing Log" badge={`${effluentLog.length} events`}>
           <div className="flex flex-col">
             {effluentLog.map((e, i) => (
-              <div key={e.time} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
+              <div key={e.id} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[13px] font-semibold text-[var(--water-deep)]">{e.event}</span>
                   <span className="ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.45)] whitespace-nowrap">

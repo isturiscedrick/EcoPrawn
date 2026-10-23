@@ -104,7 +104,7 @@ export function VisionGrowth() {
             <Panel title="Recent Vision Scans" badge={`${visionScanLog.length} events`}>
               <div className="flex flex-col">
                 {visionScanLog.map((s, i) => (
-                  <div key={s.time} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
+                  <div key={s.id} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
                     <div className="ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.45)] mb-1">
                       {s.time} · {s.tank}
                     </div>

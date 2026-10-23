@@ -1,0 +1,8 @@
+{
+  "/api/tanks/[id]/route": "/api/tanks/[id]",
+  "/api/dashboard/route": "/api/dashboard",
+  "/api/tanks/route": "/api/tanks",
+  "/api/water/route": "/api/water",
+  "/api/seed/route": "/api/seed",
+  "/api/demo/route": "/api/demo"
+}

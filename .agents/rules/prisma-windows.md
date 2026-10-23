@@ -10,3 +10,7 @@
 
 3. **Version Pinning**:
    - Always pin `prisma` and `@prisma/client` to matching stable releases to prevent dependency bloat and excessive disk I/O on Windows Defender.
+
+4. **Multi-Package Dependency Verification**:
+   - Before running Prisma commands, seeds, or connection scripts in `backend/` or `frontend/`, always check if `node_modules/@prisma/client` exists in that specific directory.
+   - If not, execute `npm install` within that subfolder first.

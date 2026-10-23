@@ -39,6 +39,7 @@ export async function GET() {
         .map((r) => ({ tankId: r.tankId, value: r.dissolvedOxygen })),
       growthTrend: [...scans].reverse().map((s) => s.bodyLength),
       visionScanLog: scans.map((s) => ({
+        id: s.id,
         time: time(s.recordedAt),
         tank: s.tank.name,
         note: s.notes || "Scan recorded",
@@ -78,6 +79,7 @@ export async function GET() {
           ]
         : [],
       effluentLog: logs.map((l) => ({
+        id: l.id,
         time: time(l.recordedAt),
         event: l.event,
         detail: l.detail,
