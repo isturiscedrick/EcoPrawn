@@ -100,7 +100,7 @@ This frontend is currently driven by static data, not live hardware:
 
 - Sensor readings, feed schedule, scan log, effluent log, and event log come from `src/data/ecoprawn.ts` and the default tank in `TankContext`.
 - Trend charts are static illustrations.
-- **Login is not wired to authentication.** Submitting the form navigates to `/dashboard` (see `useLoginForm.ts`).
+- **Login is not wired to authentication.** Submitting the form navigates to `/dashboard`.
 - **The contact form does not send anything.** It is not connected to a mail service yet.
 - The dashboard does not yet read from the on-site server or cloud database, so connecting the sensor and vision pipeline to this UI is still open work.
 

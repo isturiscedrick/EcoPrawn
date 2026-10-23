@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { SensorGauge } from "@/components/SensorGauge";
 import { TankRow, AlertRow } from "@/components/DashboardRows";
 import { TrendChart } from "@/components/TrendChart";
@@ -8,13 +7,11 @@ import { Panel, KpiCard } from "@/components/DashboardPrimitives";
 import { alerts, visionScanLog } from "@/data/ecoprawn";
 import { useTanks } from "@/context/TankContext";
 import { THRESHOLDS, GAUGE_SCALE, rangeStatus, scalePct } from "@/utils/thresholds";
-import { AddTankModal } from "./AddTankModal";
 
 const FCR_TARGET = 1.5;
 
 export function Dashboard() {
-  const { tanks, addTank, removeTank } = useTanks();
-  const [modalOpen, setModalOpen] = useState(false);
+  const { tanks, removeTank } = useTanks();
 
   const tankCount = tanks.length;
   const totalBiomass = tanks.reduce((sum, t) => sum + t.biomass, 0);
@@ -111,13 +108,6 @@ export function Dashboard() {
             />
             {openAlertTanks === 0 ? "All systems nominal" : `${openAlertTanks} tank(s) need attention`}
           </div>
-          <button
-            type="button"
-            onClick={() => setModalOpen(true)}
-            className="ep-font-mono inline-flex items-center gap-1.5 rounded-full bg-[var(--coral)] px-4 py-[9px] text-[11px] font-semibold text-[var(--sand)] transition-colors hover:bg-[var(--coral-dim)]"
-          >
-            + Add Tank
-          </button>
         </div>
       </div>
 
@@ -285,12 +275,6 @@ export function Dashboard() {
         </div>
       </Panel>
 
-      <AddTankModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onSubmit={addTank}
-        existingCount={tankCount}
-      />
     </>
   );
 }

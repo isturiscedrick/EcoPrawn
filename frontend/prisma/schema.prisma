@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tank {
+  id              String             @id @default(cuid())
+  name            String
+  pl              String             @default("PL-42")
+  biomass         Float              @default(31.2) // in kg
+  targetToday     Float              @default(1.5)  // kg
+  fcr             Float              @default(1.35)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  telemetries     SensorTelemetry[]
+  visionScans     VisionScan[]
+  feedSchedules   FeedSchedule[]
+  effluentLogs    EffluentLog[]
+  alerts          Alert[]
+}
+
+model SensorTelemetry {
+  id              String   @id @default(cuid())
+  tankId          String
+  tank            Tank     @relation(fields: [tankId], references: [id], onDelete: Cascade)
+  dissolvedOxygen Float    // mg/L
+  ph              Float    // pH
+  temperature     Float    // °C
+  salinity        Float    // ppt
+  waterLevel      Float    // %
+  recordedAt      DateTime @default(now())
+
+  @@index([tankId, recordedAt])
+}
+
+model VisionScan {
+  id            String   @id @default(cuid())
+  tankId        String
+  tank          Tank     @relation(fields: [tankId], references: [id], onDelete: Cascade)
+  bodyLength    Float    // cm
+  weight        Float    // g
+  population    Int
+  abnormalCount Int      @default(0)
+  notes         String?
+  recordedAt    DateTime @default(now())
+
+  @@index([tankId, recordedAt])
+}
+
+model FeedSchedule {
+  id        String   @id @default(cuid())
+  tankId    String
+  tank      Tank     @relation(fields: [tankId], references: [id], onDelete: Cascade)
+  timeSlot  String   // e.g. "06:00", "10:00", "14:00", "18:00"
+  amountKg  Float    // kg
+  status    String   @default("upcoming") // "done" | "upcoming"
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@index([tankId])
+}
+
+model BioflocMetric {
+  id         String   @id @default(cuid())
+  flocVolume Float    // mL/L (FV)
+  cnRatio    Float    // C:N ratio
+  tss        Float    // Total Suspended Solids (mg/L)
+  alkalinity Float    // mg/L CaCO3
+  recordedAt DateTime @default(now())
+}
+
+model EffluentLog {
+  id          String   @id @default(cuid())
+  tankId      String?
+  tank        Tank?    @relation(fields: [tankId], references: [id], onDelete: SetNull)
+  event       String
+  detail      String
+  destination String?  // "mangrove" | "wetland"
+  volumeL     Float?
+  recordedAt  DateTime @default(now())
+}
+
+model Alert {
+  id        String   @id @default(cuid())
+  tankId    String?
+  tank      Tank?    @relation(fields: [tankId], references: [id], onDelete: SetNull)
+  icon      String   @default("info") // "warn" | "info"
+  title     String
+  detail    String
+  resolved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String?
+  role      String   @default("operator") // "operator" | "admin"
+  createdAt DateTime @default(now())
+}

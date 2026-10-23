@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import type { SensorStatus } from "@/types";
 
 export interface Tank {
@@ -62,9 +62,11 @@ export type NewTankInput = Omit<Tank, "id" | "status">;
 
 interface TankContextValue {
   tanks: Tank[];
-  addTank: (input: NewTankInput) => void;
-  removeTank: (id: string) => void;
-  updateTank: (id: string, patch: Partial<Tank>) => void;
+  addTank: (input: NewTankInput) => Promise<void>;
+  removeTank: (id: string) => Promise<void>;
+  updateTank: (id: string, patch: Partial<Tank>) => Promise<void>;
+  refreshTanks: () => Promise<void>;
+  isDbConnected: boolean;
 }
 
 const TankContext = createContext<TankContextValue | null>(null);
@@ -73,19 +75,90 @@ let tankCounter = 1;
 
 export function TankProvider({ children }: { children: ReactNode }) {
   const [tanks, setTanks] = useState<Tank[]>(defaultTanks);
+  const [isDbConnected, setIsDbConnected] = useState(false);
 
-  function addTank(input: NewTankInput) {
+  async function fetchDbTanks() {
+    try {
+      const res = await fetch("/api/tanks");
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.success && Array.isArray(data.tanks) && data.tanks.length > 0) {
+        setIsDbConnected(true);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const loaded: Tank[] = data.tanks.map((t: any) => {
+          const telemetry = t.telemetries?.[0] || {};
+          const scan = t.visionScans?.[0] || {};
+          const tankObj: Tank = {
+            id: t.id,
+            name: t.name,
+            pl: t.pl || "PL-42",
+            biomass: Number(t.biomass) || 31.2,
+            dissolvedOxygen: Number(telemetry.dissolvedOxygen ?? 6.2),
+            ph: Number(telemetry.ph ?? 7.9),
+            temperature: Number(telemetry.temperature ?? 28.4),
+            salinity: Number(telemetry.salinity ?? 15),
+            waterLevel: Number(telemetry.waterLevel ?? 98),
+            bodyLength: Number(scan.bodyLength ?? 11.6),
+            weight: Number(scan.weight ?? 18.6),
+            population: Number(scan.population ?? 1720),
+            abnormal: Number(scan.abnormalCount ?? 0),
+            fcr: Number(t.fcr ?? 1.35),
+            dispensedToday: 1.3,
+            targetToday: Number(t.targetToday ?? 1.5),
+            status: "ok",
+          };
+          tankObj.status = computeStatus(tankObj);
+          return tankObj;
+        });
+        setTanks(loaded);
+      }
+    } catch {
+      // Keep existing tanks on fallback
+      setIsDbConnected(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchDbTanks();
+  }, []);
+
+  async function addTank(input: NewTankInput) {
     tankCounter += 1;
-    const id = `tank-${Date.now()}-${tankCounter}`;
+    const tempId = `tank-${Date.now()}-${tankCounter}`;
     const status = computeStatus(input);
-    setTanks((prev) => [...prev, { ...input, id, status }]);
+    const newTank: Tank = { ...input, id: tempId, status };
+    setTanks((prev) => [...prev, newTank]);
+
+    try {
+      const res = await fetch("/api/tanks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(input),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.tank?.id) {
+          setTanks((prev) =>
+            prev.map((t) => (t.id === tempId ? { ...t, id: data.tank.id } : t))
+          );
+          setIsDbConnected(true);
+        }
+      }
+    } catch {
+      // Local state is preserved
+    }
   }
 
-  function removeTank(id: string) {
+  async function removeTank(id: string) {
     setTanks((prev) => prev.filter((t) => t.id !== id));
+    try {
+      await fetch(`/api/tanks/${id}`, { method: "DELETE" });
+    } catch {
+      // Local state already updated
+    }
   }
 
-  function updateTank(id: string, patch: Partial<Tank>) {
+  async function updateTank(id: string, patch: Partial<Tank>) {
     setTanks((prev) =>
       prev.map((t) => {
         if (t.id !== id) return t;
@@ -93,10 +166,28 @@ export function TankProvider({ children }: { children: ReactNode }) {
         return { ...merged, status: computeStatus(merged) };
       })
     );
+    try {
+      await fetch(`/api/tanks/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(patch),
+      });
+    } catch {
+      // Local state already updated
+    }
   }
 
   return (
-    <TankContext.Provider value={{ tanks, addTank, removeTank, updateTank }}>
+    <TankContext.Provider
+      value={{
+        tanks,
+        addTank,
+        removeTank,
+        updateTank,
+        refreshTanks: fetchDbTanks,
+        isDbConnected,
+      }}
+    >
       {children}
     </TankContext.Provider>
   );
