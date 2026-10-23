@@ -1,7 +1,10 @@
+import { requireAccess } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function GET(request: Request) {
+  const denied = await requireAccess({ write: false, admin: false });
+  if (denied) return denied;
   try {
     const { searchParams } = new URL(request.url);
     const tankId = searchParams.get("tankId");
@@ -37,6 +40,8 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  const denied = await requireAccess({ write: true, admin: false });
+  if (denied) return denied;
   try {
     const body = await request.json();
     const { tankId, dissolvedOxygen, ph, temperature, salinity, waterLevel } = body;

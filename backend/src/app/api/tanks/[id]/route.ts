@@ -1,3 +1,4 @@
+import { requireAccess } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
@@ -5,6 +6,8 @@ export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const denied = await requireAccess({ write: false, admin: false });
+  if (denied) return denied;
   try {
     const { id } = await params;
     const tank = await prisma.tank.findUnique({
@@ -38,6 +41,8 @@ export async function DELETE(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const denied = await requireAccess({ write: true, admin: false });
+  if (denied) return denied;
   try {
     const { id } = await params;
     await prisma.tank.delete({
@@ -58,6 +63,8 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const denied = await requireAccess({ write: true, admin: false });
+  if (denied) return denied;
   try {
     const { id } = await params;
     const body = await request.json();

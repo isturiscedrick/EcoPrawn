@@ -62,7 +62,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-The frontend forwards `/api/*` requests to `http://localhost:4000`. Set `BACKEND_URL` in `frontend/.env` to use a different backend address. Restart the frontend after changing it, and set it before production builds. Visit [the seed endpoint](http://localhost:3000/api/seed) once to populate demo data.
+The frontend forwards `/api/*` requests to `http://localhost:4000`. Set `BACKEND_URL` in `frontend/.env` to use a different backend address. Restart the frontend after changing it, and set it before production builds. Run `npm run db:seed` in `backend` to populate demo data.
 
 Other scripts:
 
@@ -120,7 +120,7 @@ The dashboard combines database-backed tanks with demo data, without live hardwa
 
 - Tanks, telemetry, scans, growth history, feeding schedules, biofloc metrics, effluent logs, and alerts load from PostgreSQL through `/api/dashboard`. Run `npm run db:seed` in `backend/` to import sample records into an empty database. Existing tanks prevent reseeding.
 - Trend charts use recorded samples and show an empty state when there are too few readings.
-- **Login is not wired to authentication.** Submitting the form navigates to `/dashboard`.
+- Google sign-in protects the dashboard and operational API routes. Follow the [backend Google sign-in setup](backend/README.md#google-sign-in) before logging in.
 - **The contact form does not send anything.** It is not connected to a mail service yet.
 - The water API accepts telemetry, but connecting real sensors and the vision pipeline is still open work.
 

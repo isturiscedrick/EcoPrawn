@@ -41,3 +41,7 @@ public/assets/             images and logos
 ```
 
 The frontend contains no sample records or Prisma imports. Backend fixtures live in `backend/src/data/demo.json`. From `backend/` run `npm run db:push` and `npm run db:seed` before starting the apps. The dashboard shows loading and connection errors instead of replacing missing data with dummy readings.
+
+## Google sign-in
+
+The login button starts Google OAuth through `/api/auth/google`. Supabase Auth handles Google identity, and the backend manages its session cookies through the existing API proxy. Dashboard middleware forwards refreshed cookies to the browser. Configure the backend using its [Google sign-in setup](../backend/README.md#google-sign-in). No Google secret belongs in frontend environment variables.

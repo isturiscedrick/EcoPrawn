@@ -98,6 +98,7 @@ CREATE TABLE "ecoprawn"."Alert" (
 -- CreateTable
 CREATE TABLE "ecoprawn"."User" (
     "id" TEXT NOT NULL,
+    "authId" UUID,
     "email" TEXT NOT NULL,
     "name" TEXT,
     "password" TEXT,
@@ -118,6 +119,7 @@ CREATE INDEX "FeedSchedule_tankId_idx" ON "ecoprawn"."FeedSchedule"("tankId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "ecoprawn"."User"("email");
+CREATE UNIQUE INDEX "User_authId_key" ON "ecoprawn"."User"("authId");
 
 -- AddForeignKey
 ALTER TABLE "ecoprawn"."SensorTelemetry" ADD CONSTRAINT "SensorTelemetry_tankId_fkey" FOREIGN KEY ("tankId") REFERENCES "ecoprawn"."Tank"("id") ON DELETE CASCADE ON UPDATE CASCADE;

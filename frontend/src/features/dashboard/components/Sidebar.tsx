@@ -22,8 +22,19 @@ export function Sidebar() {
     setConfirmingLogout(true);
   }
 
-  function onConfirmLogout() {
-    router.push("/login");
+  const [logoutError, setLogoutError] = useState("");
+  const [loggingOut, setLoggingOut] = useState(false);
+  async function onConfirmLogout() {
+    setLoggingOut(true);
+    setLogoutError("");
+    try {
+      const response = await fetch("/api/auth/logout", { method: "POST" });
+      if (!response.ok) throw new Error("Logout failed");
+      window.location.replace("/login");
+    } catch {
+      setLogoutError("Could not log out. Please try again.");
+      setLoggingOut(false);
+    }
   }
 
   function onCancelLogout() {
@@ -165,6 +176,7 @@ export function Sidebar() {
             <p className="mb-6 text-[13px] leading-[1.55] text-[rgba(242,235,221,0.6)]">
               You&apos;ll need to sign in again to access the facility dashboard.
             </p>
+            {logoutError && <p role="alert" className="mb-3 text-sm text-red-300">{logoutError}</p>}
             <div className="flex gap-3">
               <button
                 type="button"
@@ -176,6 +188,7 @@ export function Sidebar() {
               <button
                 type="button"
                 onClick={onConfirmLogout}
+                disabled={loggingOut}
                 className="flex-1 rounded-lg bg-[var(--coral)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--sand)] transition-colors duration-200 hover:bg-[var(--coral-dim)]"
               >
                 Log out

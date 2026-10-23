@@ -93,6 +93,10 @@ export function TankProvider({ children }: { children: ReactNode }) {
   async function refreshTanks() {
     try {
       const res = await fetch("/api/dashboard");
+      if (res.status === 401) {
+        window.location.replace("/login?error=expired");
+        return;
+      }
       if (!res.ok)
         throw new Error(
           "Unable to load dashboard. Check the backend connection.",
@@ -121,6 +125,10 @@ export function TankProvider({ children }: { children: ReactNode }) {
         headers: { "Content-Type": "application/json" },
         ...(body ? { body: JSON.stringify(body) } : {}),
       });
+      if (res.status === 401) {
+        window.location.replace("/login?error=expired");
+        return;
+      }
       if (!res.ok)
         throw new Error("Could not save the change. Please try again.");
       await refreshTanks();

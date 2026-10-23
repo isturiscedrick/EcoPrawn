@@ -1,6 +1,9 @@
+import { requireAccess } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
 export async function GET() {
+  const denied = await requireAccess({ write: false, admin: false });
+  if (denied) return denied;
   try {
     const [tanks, scans, schedules, metrics, logs, events, readings] =
       await prisma.$transaction([
