@@ -1,0 +1,28 @@
+{
+  "name": "ecoprawn-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 4000",
+    "build": "next build",
+    "start": "next start -p 4000",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "prisma generate",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/client": "6.4.1",
+    "next": "^15.0.0",
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "prisma": "6.4.1",
+    "typescript": "^5"
+  }
+}

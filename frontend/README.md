@@ -11,6 +11,10 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+Run the API service in `../backend` separately. Copy `.env.example` to `.env` if you need to change `BACKEND_URL`, which defaults to `http://localhost:4000`. Next.js forwards `/api/*` requests to that address. Restart the frontend after changing this setting, and set it before a production build.
+
+Prisma, PostgreSQL credentials, and API handlers live in `../backend`. See [backend setup](../backend/README.md). The frontend keeps React state, API calls, display thresholds, and mock data for its offline fallback.
+
 ## Folder Structure
 
 ```

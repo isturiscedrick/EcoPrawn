@@ -63,18 +63,18 @@ Add-Type -AssemblyName System.Web
 $encodedPassword = [System.Web.HttpUtility]::UrlEncode($Password)
 $connectionString = "postgresql://${User}:${encodedPassword}@${HostName}:${Port}/${DbName}?schema=public"
 
-$frontendEnv = Join-Path $PSScriptRoot "frontend\.env"
+$backendEnv = Join-Path $PSScriptRoot "backend\.env"
 $envLines = @(
     "# PostgreSQL connection string for EcoPrawn",
     "DATABASE_URL=`"$connectionString`""
 )
-Set-Content -Path $frontendEnv -Value $envLines -Encoding UTF8
-Write-Host "[OK] Updated $frontendEnv with your DATABASE_URL" -ForegroundColor Green
+Set-Content -Path $backendEnv -Value $envLines -Encoding UTF8
+Write-Host "[OK] Updated $backendEnv with your DATABASE_URL" -ForegroundColor Green
 
 # Push Prisma schema and generate client
 Write-Host ""
 Write-Host "Pushing schema to PostgreSQL (npx prisma db push)..." -ForegroundColor Yellow
-Push-Location (Join-Path $PSScriptRoot "frontend")
+Push-Location (Join-Path $PSScriptRoot "backend")
 try {
     npx prisma db push --skip-generate
     Write-Host "[OK] Database tables created successfully!" -ForegroundColor Green
@@ -91,6 +91,7 @@ Write-Host "==========================================" -ForegroundColor Green
 Write-Host " Setup Complete! PostgreSQL is ready.     " -ForegroundColor Green
 Write-Host "==========================================" -ForegroundColor Green
 Write-Host "Next steps:"
-Write-Host " 1. Visit http://localhost:3000/api/seed to populate initial data"
-Write-Host " 2. Open http://localhost:3000/dashboard (shows POSTGRES: CONNECTED)"
-Write-Host " 3. Optional: Run 'npx prisma studio' inside frontend/ to view your tables"
+Write-Host " 1. Run 'npm run dev' inside backend/ and frontend/ in separate terminals"
+Write-Host " 2. Visit http://localhost:3000/api/seed to populate initial data"
+Write-Host " 3. Open http://localhost:3000/dashboard (shows POSTGRES: CONNECTED)"
+Write-Host " 4. Optional: Run 'npm run db:studio' inside backend/ to view your tables"

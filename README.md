@@ -2,7 +2,7 @@
 
 **An AIoT-Enabled Indoor White Shrimp Farming & Water Management System**
 
-EcoPrawn is a thesis project (Thesis Writing 1, CS 118, Computer Studies Department, University of Caloocan City, Congress Campus). It combines a water-quality sensor network, computer-vision growth tracking, automated feeding, and a biofloc loop that routes effluent to mangrove/wetland vegetation. This repository contains the web frontend: a marketing site and an operator dashboard.
+EcoPrawn is a thesis project (Thesis Writing 1, CS 118, Computer Studies Department, University of Caloocan City, Congress Campus). It combines a water-quality sensor network, computer-vision growth tracking, automated feeding, and a biofloc loop that routes effluent to mangrove/wetland vegetation. This repository contains a marketing site, an operator dashboard, and a separate API backend.
 
 ## What the system covers
 
@@ -34,13 +34,25 @@ Out of scope: offshore farming, hatchery/breeding, off-grid energy independence,
 
 - [Next.js 15](https://nextjs.org/) (App Router) with React 19
 - TypeScript 5
+- PostgreSQL with Prisma ORM in the backend
 - Tailwind CSS 4 (`@tailwindcss/postcss`), `tw-animate-css`
 - `clsx` + `tailwind-merge` (via `cn()` in `src/utils/cn.ts`)
 - Fonts: Fraunces, Inter, IBM Plex Mono (Google Fonts)
 
 ## Getting started
 
-The app lives in `frontend/`.
+The UI lives in `frontend/`. The API and Prisma ORM live in `backend/`.
+
+Install and configure the backend first:
+
+```bash
+cd backend
+npm install
+```
+
+Copy `backend/.env.example` to `backend/.env` and set `DATABASE_URL`. Run `npm run db:push`, then `npm run dev` to start the API on port 4000. On Windows, `./setup-db.ps1` from the repository root can configure PostgreSQL and generate the client after dependencies are installed. See [backend setup](backend/README.md).
+
+In a separate terminal from the repository root:
 
 ```bash
 cd frontend
@@ -49,6 +61,8 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+The frontend forwards `/api/*` requests to `http://localhost:4000`. Set `BACKEND_URL` in `frontend/.env` to use a different backend address. Restart the frontend after changing it, and set it before production builds. Visit [the seed endpoint](http://localhost:3000/api/seed) once to populate demo data.
 
 Other scripts:
 
@@ -77,11 +91,17 @@ frontend/
     data/               static mock data
     types/              shared TypeScript types
     utils/              thresholds, alert derivation, cn()
+backend/
+  prisma/               PostgreSQL schema
+  src/
+    app/api/            tank, water telemetry, and seed endpoints
+    lib/prisma.ts       shared Prisma client
+  .env.example          database connection template
 ```
 
 ## How the dashboard works
 
-- **Tank state** lives in `TankContext` and is held in memory. Tanks added or removed on the Tanks page update every dashboard view, and tank status is derived from the thresholds below. State resets on page reload.
+- **Tank state** lives in `TankContext`, which calls `/api/tanks` through the frontend proxy. The backend reads and writes PostgreSQL through Prisma. The UI falls back to in-memory demo state when the API is unavailable.
 - **Target ranges** are defined in `src/utils/thresholds.ts`:
 
   | Parameter | Target |
@@ -96,13 +116,13 @@ frontend/
 
 ## Current limitations
 
-This frontend is currently driven by static data, not live hardware:
+The dashboard combines database-backed tanks with demo data, without live hardware:
 
-- Sensor readings, feed schedule, scan log, effluent log, and event log come from `src/data/ecoprawn.ts` and the default tank in `TankContext`.
+- Tanks and their latest telemetry and vision scans can load from PostgreSQL. Other demo views use `src/data/ecoprawn.ts`, and `TankContext` provides fallback tank data.
 - Trend charts are static illustrations.
 - **Login is not wired to authentication.** Submitting the form navigates to `/dashboard`.
 - **The contact form does not send anything.** It is not connected to a mail service yet.
-- The dashboard does not yet read from the on-site server or cloud database, so connecting the sensor and vision pipeline to this UI is still open work.
+- The water API accepts telemetry, but connecting real sensors and the vision pipeline is still open work.
 
 ## Design tokens
 
