@@ -8,9 +8,11 @@ import { Panel, KpiCard } from "@/components/DashboardPrimitives";
 import { alerts, visionScanLog } from "@/data/ecoprawn";
 import { useTanks } from "@/context/TankContext";
 import { THRESHOLDS, GAUGE_SCALE, rangeStatus, scalePct } from "@/utils/thresholds";
+import { deriveTankAlerts } from "@/utils/alerts";
 import { AddTankModal } from "./AddTankModal";
 
 const FCR_TARGET = 1.5;
+const MAX_RECENT_ALERTS = 5;
 
 export function Dashboard() {
   const { tanks, addTank, removeTank } = useTanks();
@@ -39,6 +41,12 @@ export function Dashboard() {
   // and ring fill all come from the same numbers.
   const doStatus = rangeStatus(avgDO, THRESHOLDS.dissolvedOxygen.min);
   const fcrStatus = avgFcr <= FCR_TARGET ? "ok" : "warn";
+
+  // Live warnings for any tank currently out of range (same helper the
+  // Alerts page uses), shown ahead of the static event log so the
+  // "tanks need attention" header and this panel always agree.
+  const liveAlerts = deriveTankAlerts(tanks);
+  const recentAlerts = [...liveAlerts, ...alerts].slice(0, MAX_RECENT_ALERTS);
 
   const sensorGauges = tankCount
     ? [
@@ -201,10 +209,13 @@ export function Dashboard() {
           )}
         </Panel>
 
-        <Panel title="Recent Alerts" badge={`${alerts.length} events`}>
+        <Panel
+          title="Recent Alerts"
+          badge={liveAlerts.length > 0 ? `${liveAlerts.length} open` : `${recentAlerts.length} events`}
+        >
           <div>
-            {alerts.map((a) => (
-              <AlertRow key={a.title} {...a} />
+            {recentAlerts.map((a) => (
+              <AlertRow key={`${a.title}-${a.detail}-${a.time}`} {...a} />
             ))}
           </div>
         </Panel>
