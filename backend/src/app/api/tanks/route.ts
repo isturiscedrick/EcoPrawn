@@ -1,12 +1,13 @@
-import { requireAccess } from "@/lib/auth";
+import { accountAccess } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function GET() {
-  const denied = await requireAccess({ write: false, admin: false });
-  if (denied) return denied;
+  const account = await accountAccess({ write: false, admin: false });
+  if (account instanceof Response) return account;
   try {
     const tanks = await prisma.tank.findMany({
+      where: { userId: account.id },
       include: {
         telemetries: {
           orderBy: { recordedAt: "desc" },
@@ -34,8 +35,8 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const denied = await requireAccess({ write: true, admin: false });
-  if (denied) return denied;
+  const account = await accountAccess({ write: true, admin: false });
+  if (account instanceof Response) return account;
   try {
     const body = await request.json();
     const {
@@ -64,6 +65,7 @@ export async function POST(request: Request) {
 
     const newTank = await prisma.tank.create({
       data: {
+        userId: account.id,
         name,
         pl,
         biomass: Number(biomass),

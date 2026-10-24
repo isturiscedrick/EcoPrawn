@@ -1,17 +1,17 @@
-import { requireAccess } from "@/lib/auth";
+import { accountAccess } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function GET(request: Request) {
-  const denied = await requireAccess({ write: false, admin: false });
-  if (denied) return denied;
+  const account = await accountAccess({ write: false, admin: false });
+  if (account instanceof Response) return account;
   try {
     const { searchParams } = new URL(request.url);
     const tankId = searchParams.get("tankId");
 
     if (tankId) {
       const readings = await prisma.sensorTelemetry.findMany({
-        where: { tankId },
+        where: { tankId, tank: { userId: account.id } },
         orderBy: { recordedAt: "desc" },
         take: 50,
       });
@@ -20,6 +20,7 @@ export async function GET(request: Request) {
 
     // Get latest telemetry for each tank
     const latestReadings = await prisma.sensorTelemetry.findMany({
+      where: { tank: { userId: account.id } },
       distinct: ["tankId"],
       orderBy: { recordedAt: "desc" },
       include: {
@@ -40,8 +41,8 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const denied = await requireAccess({ write: true, admin: false });
-  if (denied) return denied;
+  const account = await accountAccess({ write: true, admin: false });
+  if (account instanceof Response) return account;
   try {
     const body = await request.json();
     const { tankId, dissolvedOxygen, ph, temperature, salinity, waterLevel } = body;
@@ -52,6 +53,9 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    const tank = await prisma.tank.findUnique({ where: { id: tankId, userId: account.id }, select: { id: true } });
+    if (!tank) return NextResponse.json({ success: false, error: "Tank not found" }, { status: 404 });
 
     const reading = await prisma.sensorTelemetry.create({
       data: {
@@ -68,6 +72,7 @@ export async function POST(request: Request) {
     const alertsToCreate = [];
     if (reading.dissolvedOxygen < 4.5) {
       alertsToCreate.push({
+        userId: account.id,
         tankId,
         icon: "warn",
         title: "Low Dissolved Oxygen Alert",
@@ -76,6 +81,7 @@ export async function POST(request: Request) {
     }
     if (reading.ph < 7.5 || reading.ph > 8.5) {
       alertsToCreate.push({
+        userId: account.id,
         tankId,
         icon: "warn",
         title: "Abnormal pH Alert",

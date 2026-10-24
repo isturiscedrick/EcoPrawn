@@ -9,6 +9,9 @@ datasource db {
 
 model Tank {
   id              String             @id @default(cuid())
+  // Null is reserved for legacy records whose owner cannot be established.
+  userId          String?
+  user            User?              @relation(fields: [userId], references: [id], onDelete: SetNull)
   name            String
   pl              String             @default("PL-42")
   biomass         Float              @default(31.2) // in kg
@@ -23,6 +26,7 @@ model Tank {
   feedSchedules   FeedSchedule[]
   effluentLogs    EffluentLog[]
   alerts          Alert[]
+  @@index([userId])
 }
 
 model SensorTelemetry {
@@ -68,15 +72,20 @@ model FeedSchedule {
 
 model BioflocMetric {
   id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   flocVolume Float    // mL/L (FV)
   cnRatio    Float    // C:N ratio
   tss        Float    // Total Suspended Solids (mg/L)
   alkalinity Float    // mg/L CaCO3
   recordedAt DateTime @default(now())
+  @@index([userId, recordedAt])
 }
 
 model EffluentLog {
   id          String   @id @default(cuid())
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   tankId      String?
   tank        Tank?    @relation(fields: [tankId], references: [id], onDelete: SetNull)
   event       String
@@ -84,10 +93,14 @@ model EffluentLog {
   destination String?  // "mangrove" | "wetland"
   volumeL     Float?
   recordedAt  DateTime @default(now())
+  @@index([userId, recordedAt])
+  @@index([tankId])
 }
 
 model Alert {
   id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   tankId    String?
   tank      Tank?    @relation(fields: [tankId], references: [id], onDelete: SetNull)
   icon      String   @default("info") // "warn" | "info"
@@ -95,6 +108,8 @@ model Alert {
   detail    String
   resolved  Boolean  @default(false)
   createdAt DateTime @default(now())
+  @@index([userId, createdAt])
+  @@index([tankId])
 }
 
 model User {
@@ -105,4 +120,8 @@ model User {
   password  String?
   role      String   @default("operator") // "operator" | "admin"
   createdAt DateTime @default(now())
+  tanks     Tank[]
+  bioflocMetrics BioflocMetric[]
+  effluentLogs EffluentLog[]
+  alerts    Alert[]
 }

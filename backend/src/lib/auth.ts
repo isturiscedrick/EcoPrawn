@@ -48,7 +48,8 @@ export async function currentUser() {
   });
 }
 
-export async function requireAccess(options: { write?: boolean; admin?: boolean } = {}) {
+// Return the verified account so handlers never take ownership from request data.
+export async function accountAccess(options: { write?: boolean; admin?: boolean } = {}) {
   if (options.write && (await headers()).get("origin") !== appOrigin()) {
     return Response.json({ error: "Invalid request origin" }, { status: 403 });
   }
@@ -57,5 +58,10 @@ export async function requireAccess(options: { write?: boolean; admin?: boolean 
   if (options.admin && user.role !== "admin") {
     return Response.json({ error: "Administrator access required" }, { status: 403 });
   }
-  return null;
+  return user;
+}
+
+export async function requireAccess(options: { write?: boolean; admin?: boolean } = {}) {
+  const result = await accountAccess(options);
+  return result instanceof Response ? result : null;
 }

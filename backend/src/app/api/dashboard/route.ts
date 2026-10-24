@@ -1,13 +1,14 @@
-import { requireAccess } from "@/lib/auth";
+import { accountAccess } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
 export async function GET() {
-  const denied = await requireAccess({ write: false, admin: false });
-  if (denied) return denied;
+  const account = await accountAccess({ write: false, admin: false });
+  if (account instanceof Response) return account;
   try {
     const [tanks, scans, schedules, metrics, logs, events, readings] =
       await prisma.$transaction([
         prisma.tank.findMany({
+          where: { userId: account.id },
           orderBy: { createdAt: "asc" },
           include: {
             telemetries: { orderBy: { recordedAt: "desc" }, take: 1 },
@@ -15,20 +16,26 @@ export async function GET() {
           },
         }),
         prisma.visionScan.findMany({
+          where: { tank: { userId: account.id } },
           orderBy: { recordedAt: "desc" },
           take: 100,
           include: { tank: { select: { name: true } } },
         }),
         prisma.feedSchedule.findMany({
+          where: { tank: { userId: account.id } },
           orderBy: [{ timeSlot: "asc" }, { tankId: "asc" }],
         }),
-        prisma.bioflocMetric.findFirst({ orderBy: { recordedAt: "desc" } }),
+        prisma.bioflocMetric.findFirst({
+          where: { userId: account.id }, orderBy: { recordedAt: "desc" } }),
         prisma.effluentLog.findMany({
+          where: { userId: account.id },
           orderBy: { recordedAt: "desc" },
           take: 100,
         }),
-        prisma.alert.findMany({ orderBy: { createdAt: "desc" }, take: 100 }),
+        prisma.alert.findMany({
+          where: { userId: account.id }, orderBy: { createdAt: "desc" }, take: 100 }),
         prisma.sensorTelemetry.findMany({
+          where: { tank: { userId: account.id } },
           orderBy: { recordedAt: "desc" },
           take: 100,
         }),

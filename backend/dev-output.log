@@ -3,11 +3,8 @@
    - Network:      http://192.168.1.85:4000
    - Environments: .env
 
- ✓ Starting...
- ✓ Ready in 2.6s
- ✓ Compiled /api/dashboard in 456ms (283 modules)
-prisma:query BEGIN
-prisma:query SELECT "ecoprawn"."Tank"."id", "ecoprawn"."Tank"."name", "ecoprawn"."Tank"."pl", "ecoprawn"."Tank"."biomass", "ecoprawn"."Tank"."targetToday", "ecoprawn"."Tank"."fcr", "ecoprawn"."Tank"."dispensedToday", "ecoprawn"."Tank"."createdAt", "ecoprawn"."Tank"."updatedAt" FROM "ecoprawn"."Tank" WHERE 1=1 ORDER BY "ecoprawn"."Tank"."createdAt" ASC OFFSET $1
+ ✓ Starting.prisma:error Error in PostgreSQL connection: Error { kind: Io, cause: Some(Os { code: 10054, kind: ConnectionReset, message: "An existing connection was forcibly closed by the remote host." }) }
+n"."Tank"."biomass", "ecoprawn"."Tank"."targetToday", "ecoprawn"."Tank"."fcr", "ecoprawn"."Tank"."dispensedToday", "ecoprawn"."Tank"."createdAt", "ecoprawn"."Tank"."updatedAt" FROM "ecoprawn"."Tank" WHERE 1=1 ORDER BY "ecoprawn"."Tank"."createdAt" ASC OFFSET $1
 prisma:query SELECT "ecoprawn"."SensorTelemetry"."id", "ecoprawn"."SensorTelemetry"."tankId", "ecoprawn"."SensorTelemetry"."dissolvedOxygen", "ecoprawn"."SensorTelemetry"."ph", "ecoprawn"."SensorTelemetry"."temperature", "ecoprawn"."SensorTelemetry"."salinity", "ecoprawn"."SensorTelemetry"."waterLevel", "ecoprawn"."SensorTelemetry"."recordedAt" FROM "ecoprawn"."SensorTelemetry" WHERE "ecoprawn"."SensorTelemetry"."tankId" IN ($1) ORDER BY "ecoprawn"."SensorTelemetry"."recordedAt" DESC LIMIT $2 OFFSET $3
 prisma:query SELECT "ecoprawn"."VisionScan"."id", "ecoprawn"."VisionScan"."tankId", "ecoprawn"."VisionScan"."bodyLength", "ecoprawn"."VisionScan"."weight", "ecoprawn"."VisionScan"."population", "ecoprawn"."VisionScan"."abnormalCount", "ecoprawn"."VisionScan"."notes", "ecoprawn"."VisionScan"."recordedAt" FROM "ecoprawn"."VisionScan" WHERE "ecoprawn"."VisionScan"."tankId" IN ($1) ORDER BY "ecoprawn"."VisionScan"."recordedAt" DESC LIMIT $2 OFFSET $3
 prisma:query SELECT "ecoprawn"."VisionScan"."id", "ecoprawn"."VisionScan"."tankId", "ecoprawn"."VisionScan"."bodyLength", "ecoprawn"."VisionScan"."weight", "ecoprawn"."VisionScan"."population", "ecoprawn"."VisionScan"."abnormalCount", "ecoprawn"."VisionScan"."notes", "ecoprawn"."VisionScan"."recordedAt" FROM "ecoprawn"."VisionScan" WHERE 1=1 ORDER BY "ecoprawn"."VisionScan"."recordedAt" DESC LIMIT $1 OFFSET $2
