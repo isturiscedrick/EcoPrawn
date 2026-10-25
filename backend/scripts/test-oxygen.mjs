@@ -23,6 +23,7 @@ try {
   let tankId = "oxygen-test-tank";
   let sms;
   const savedReadings = [], savedAlerts = [], smsCalls = [];
+  let transactions = 0, failAlerts = false;
   if (live) {
     const { PrismaClient } = require("@prisma/client");
     database = new PrismaClient();
@@ -44,9 +45,20 @@ try {
     database = {
       tank: { findUnique: async ({ where }) => where.id === tankId && where.userId === userId ? { id: tankId, name: "TEST - Oxygen alert" } : null },
       sensorTelemetry: { create: async ({ data }) => { const row = { id: `reading-${savedReadings.length}`, ...data }; savedReadings.push(row); return row; } },
-      alert: { createMany: async ({ data }) => { savedAlerts.push(...data); return { count: data.length }; } },
+      alert: { createMany: async ({ data }) => {
+        if (failAlerts) throw new Error("Alert persistence failed");
+        savedAlerts.push(...data); return { count: data.length };
+      } },
     };
-    database.$transaction = async callback => callback(database);
+    database.$transaction = async callback => {
+      transactions++;
+      const readingCount = savedReadings.length, alertCount = savedAlerts.length;
+      try { return await callback(database); }
+      catch (error) {
+        savedReadings.length = readingCount; savedAlerts.length = alertCount;
+        throw error;
+      }
+    };
     sms = { dispatchSms: async (...args) => { smsCalls.push(args); return { status: "pending" }; } };
   }
   // Use the actual water route and its ownership checks. The CLI supplies the
@@ -70,6 +82,13 @@ try {
     }
     assert.equal(savedAlerts.length, 0);
     assert.equal(smsCalls.length, 0);
+    assert.equal(transactions, 0, "Healthy and boundary readings must use a single insert without a transaction");
+    failAlerts = true;
+    assert.equal((await route.POST(request(lowOxygen))).status, 500);
+    assert.equal(savedReadings.length, 2, "Alert failure must roll back the warning reading");
+    assert.equal(savedAlerts.length, 0);
+    assert.equal(smsCalls.length, 0, "A rolled-back reading must not trigger SMS");
+    failAlerts = false;
   }
 
   const response = await route.POST(request(lowOxygen));
@@ -91,6 +110,7 @@ try {
     console.log(JSON.stringify({ test: "Low dissolved oxygen", tank: "TEST - Oxygen alert", tankId, readingId: result.reading.id, oxygen: "3 mg/L", target: ">= 4.5 mg/L", alertId: alert.id, sms: result.sms }, null, 2));
     assert.ok(["pending", "retrying", "sent"].includes(result.sms.status), result.sms.error ?? `SMS was not accepted: ${result.sms.status}`);
   } else {
+    assert.equal(transactions, 2, "Warning readings must use an atomic transaction");
     assert.equal(savedAlerts.length, 1);
     assert.equal(savedAlerts[0].userId, userId);
     assert.equal(savedAlerts[0].tankId, tankId);

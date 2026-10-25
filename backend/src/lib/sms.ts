@@ -16,12 +16,12 @@ export async function dispatchSms(userId: string, content: string, tankId: strin
   if (!smsConfigured()) return { status: "not_configured", error: "Configure the UniSMS key and sender ID in the backend, then restart it." };
   const delivery = await prisma.$transaction(async (tx) => {
     const now = new Date();
-    const claimed = await tx.user.updateMany({
+    const [user] = await tx.user.updateManyAndReturn({
       where: { id: userId, smsEnabled: true, smsPhone: { not: null }, OR: [{ lastSmsAt: null }, { lastSmsAt: { lte: new Date(now.getTime() - SMS_COOLDOWN_MS) } }] },
       data: { lastSmsAt: now },
+      select: { smsPhone: true },
     });
-    if (!claimed.count) return null;
-    const user = await tx.user.findUniqueOrThrow({ where: { id: userId }, select: { smsPhone: true } });
+    if (!user) return null;
     return tx.smsDelivery.create({ data: { userId, tankId, recipient: user.smsPhone!, content } });
   });
   if (!delivery) {

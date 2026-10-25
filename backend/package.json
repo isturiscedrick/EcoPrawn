@@ -17,6 +17,7 @@
     "test:google-user": "node scripts/test-google-user.mjs",
     "test:accounts": "node scripts/test-account-isolation.mjs",
     "test:sms": "node scripts/test-sms.mjs",
+    "test:performance": "node scripts/test-performance.mjs",
     "test:oxygen": "node scripts/test-oxygen.mjs",
     "test:oxygen:live": "node --env-file=.env scripts/test-oxygen.mjs --live"
   },

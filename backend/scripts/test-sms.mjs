@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { AsyncLocalStorage } from "node:async_hooks";
 import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import ts from "typescript";
@@ -53,20 +54,29 @@ globalThis.fetch = async () => Response.json({ message: { status: "sent" } });
 await assert.rejects(provider.sendSms("+639171234567", "Warning", "delivery-1"), /unexpected response/);
 
 let account = { id: "account-a" }, lastSmsAt = null, stored = null, dispatchCount = 0, smsEnabled = true;
+let failDelivery = false;
+const transactionScope = new AsyncLocalStorage();
+const operations = [];
 const auth = { accountAccess: async () => account ?? Response.json({}, { status: 401 }) };
 const db = {
   user: {
-    async updateMany({ where, data }) {
+    async updateManyAndReturn({ where, data, select }) {
+      operations.push("claim");
       assert.equal(where.id, "account-a"); assert.equal(where.smsEnabled, true);
-      if (!smsEnabled) return { count: 0 };
-      if (lastSmsAt && lastSmsAt > where.OR[1].lastSmsAt.lte) return { count: 0 };
-      lastSmsAt = data.lastSmsAt; return { count: 1 };
+      assert.deepEqual(select, { smsPhone: true });
+      if (!smsEnabled) return [];
+      if (lastSmsAt && lastSmsAt > where.OR[1].lastSmsAt.lte) return [];
+      lastSmsAt = data.lastSmsAt; return [{ smsPhone: "+639171234567" }];
     },
-    async findUniqueOrThrow({ where }) { assert.equal(where.id, "account-a"); return { smsPhone: "+639171234567", smsEnabled, lastSmsAt }; },
+    async findUniqueOrThrow({ where }) { operations.push("user-read"); assert.equal(where.id, "account-a"); return { smsPhone: "+639171234567", smsEnabled, lastSmsAt }; },
     async update({ where, data }) { assert.equal(where.id, "account-a"); assert.equal(data.smsPhone, "+639171234567"); return data; },
   },
   smsDelivery: {
-    async create({ data }) { stored = { id: "delivery-1", referenceId: null, status: "sending", ...data }; return stored; },
+    async create({ data }) {
+      operations.push("delivery");
+      if (failDelivery) throw new Error("Delivery persistence failed");
+      stored = { id: "delivery-1", referenceId: null, status: "sending", ...data }; return stored;
+    },
     async findMany({ where }) { assert.equal(where.userId, "account-a"); return []; },
     async updateMany({ where, data }) {
       if (where.id) { if (stored.status !== where.status) return { count: 0 }; }
@@ -78,14 +88,60 @@ const db = {
     },
   },
 };
-db.$transaction = async callback => callback(db);
+// Serialize claims like PostgreSQL's row lock, restoring writes on rollback.
+let transactionQueue = Promise.resolve();
+db.$transaction = async callback => {
+  const previous = transactionQueue;
+  let release;
+  transactionQueue = new Promise(resolve => { release = resolve; });
+  await previous;
+  const before = { lastSmsAt, stored: stored && { ...stored } };
+  try {
+    return await transactionScope.run(true, () => callback(db));
+  } catch (error) {
+    lastSmsAt = before.lastSmsAt; stored = before.stored;
+    throw error;
+  } finally {
+    release();
+  }
+};
 const imports = { "@/lib/auth": auth, "@/lib/prisma": { __esModule: true, default: db }, "@/lib/unisms": provider };
-const sms = await load("lib/sms", { ...imports, "@/lib/unisms": { ...provider, sendSms: async () => { dispatchCount++; return { referenceId: "msg_test", status: "pending", error: null }; } } });
+const sms = await load("lib/sms", { ...imports, "@/lib/unisms": { ...provider, sendSms: async () => {
+  assert.notEqual(transactionScope.getStore(), true, "Provider calls must happen after commit");
+  dispatchCount++; return { referenceId: "msg_test", status: "pending", error: null };
+} } });
 assert.equal((await sms.dispatchSms("account-a", "warning")).status, "pending");
+assert.deepEqual(operations, ["claim", "delivery"], "Eligible sends need only two database operations before sending");
 const limited = await sms.dispatchSms("account-a", "warning");
 assert.equal(limited.status, "cooldown");
 assert.ok(limited.retryAfterSeconds > 0 && limited.retryAfterSeconds <= 300);
 assert.equal(dispatchCount, 1);
+
+lastSmsAt = new Date(Date.now() - sms.SMS_COOLDOWN_MS);
+assert.equal((await sms.dispatchSms("account-a", "expired cooldown")).status, "pending");
+lastSmsAt = null;
+const sendsBeforeRace = dispatchCount;
+const competing = await Promise.all(Array.from({ length: 10 }, () => sms.dispatchSms("account-a", "competing warning")));
+assert.equal(competing.filter(result => result.status === "pending").length, 1);
+assert.equal(competing.filter(result => result.status === "cooldown").length, 9);
+assert.equal(dispatchCount, sendsBeforeRace + 1, "Competing claims must send only once");
+
+lastSmsAt = null;
+failDelivery = true;
+const sendsBeforeRollback = dispatchCount;
+await assert.rejects(sms.dispatchSms("account-a", "rollback"), /Delivery persistence failed/);
+assert.equal(lastSmsAt, null, "Failed delivery creation must roll back the cooldown claim");
+assert.equal(dispatchCount, sendsBeforeRollback);
+failDelivery = false;
+assert.equal((await sms.dispatchSms("account-a", "after rollback")).status, "pending");
+
+lastSmsAt = null;
+const webhookRace = await load("lib/sms", { ...imports, "@/lib/unisms": { ...provider, sendSms: async () => {
+  stored.status = "sent"; stored.referenceId = "msg_test";
+  return { referenceId: "msg_test", status: "pending", error: null };
+} } });
+await webhookRace.dispatchSms("account-a", "webhook race");
+assert.equal(stored.status, "sent", "A send response must not undo a webhook received during the request");
 lastSmsAt = null;
 const broken = await load("lib/sms", { ...imports, "@/lib/unisms": { ...provider, sendSms: async () => { throw new Error("timeout"); } } });
 assert.equal((await broken.dispatchSms("account-a", "warning")).status, "unknown");

@@ -45,3 +45,11 @@ The frontend contains no sample records or Prisma imports. Backend fixtures live
 ## Google sign-in
 
 The login button starts Google OAuth through `/api/auth/google`. Supabase Auth handles Google identity, and the backend manages its session cookies through the existing API proxy. Dashboard middleware forwards refreshed cookies to the browser. Configure the backend using its [Google sign-in setup](../backend/README.md#google-sign-in). No Google secret belongs in frontend environment variables.
+
+## Dashboard navigation
+
+Sidebar links prefetch destination routes and show a loading indicator immediately when a route is still loading. Session validation stays in the dashboard middleware. Next.js enables link prefetching in production; use `npm run build` and `npm start` to measure navigation speed. Development mode also compiles routes on first use.
+
+Run `npm run test:navigation` with an available Playwright installation and browser. If Playwright is provided by a shared runtime, set `PLAYWRIGHT_MODULE_PATH` to its absolute package path. Set `BROWSER_CHANNEL=msedge` to use an installed Edge browser, or leave it unset for Playwright's Chromium. No project dependency installation is required when using a shared runtime.
+
+The test builds a temporary production copy outside OneDrive and uses a local mock backend with a 1,200 ms session delay. It checks prefetching, navigation within 300 ms after prefetching, cold-click feedback within 200 ms, and login redirection for expired sessions. It never uses real accounts, database records, or SMS. In the October 25, 2026 Edge run, page changes fell from 1,374 ms before the fix to 35 ms after prefetching; cold-click feedback appeared in 26 ms. Cold navigation still waits for the session response.

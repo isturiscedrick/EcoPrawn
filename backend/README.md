@@ -105,6 +105,21 @@ For a fresh database, generate the client and create tables from `prisma/schema.
 
 Run `npm run test:sms` for provider, phone, threshold, cooldown, account-isolation, webhook and telemetry-failure checks. These tests mock UniSMS and do not send paid messages. The existing account and Google-user tests remain available.
 
+Run `npm run test:performance` for concurrent dashboard/settings reads, response compatibility, account filters and query limits. Add `-- --compare-ref YOUR_BASE_COMMIT` to compare latency using 25 ms simulated reads and ten connection slots at one and ten concurrent requests. Simulated results are not production measurements.
+
+For a real database comparison, run `node --env-file=.env scripts/test-performance.mjs --compare-ref YOUR_BASE_COMMIT --database`. This executes only dashboard and SMS settings GET handlers against the configured database, selects an existing tank owner locally, and reports timing, SQL statement counts and errors without printing account data. It excludes browser authentication and sends no SMS. No schema or connection-pool configuration is changed.
+
+Read-only measurements against the configured Supabase database on October 25, 2026, compared with commit `bb9be8d45d912f904d375ad9111364cd9fd1cac0`:
+
+| GET handler | Concurrent requests | Median before | Median after | p95 before | p95 after |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Dashboard | 1 | 1,384 ms | 347 ms | 1,393 ms | 681 ms |
+| Dashboard | 10 | 2,076 ms | 1,143 ms | 3,350 ms | 1,422 ms |
+| SMS settings | 1 | 221 ms | 114 ms | 222 ms | 228 ms |
+| SMS settings | 10 | 451 ms | 333 ms | 462 ms | 333 ms |
+
+Each case used a warm-up followed by three sequential requests or one batch of ten requests, with zero request errors. This small sample measures handler/database time, not browser load or Google authentication. Dashboard SQL statements fell from 12 to 10 per sequential request, including transaction control; settings remained at two. Concurrent statement counts vary because Prisma batches identical reads and the pool may issue connection checks. Network latency and pool capacity affect subsequent runs.
+
 Reference: [UniSMS SMS API](https://unismsapi.com/docs/sms).
 
 ### Test a low-oxygen alert

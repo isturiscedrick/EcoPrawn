@@ -65,13 +65,14 @@ export async function POST(request: Request) {
     }
 
     const warnings = waterWarnings({ dissolvedOxygen, ph, temperature, salinity, waterLevel });
-    const reading = await prisma.$transaction(async (tx) => {
-      const result = await tx.sensorTelemetry.create({
-        data: { tankId, dissolvedOxygen, ph, temperature, salinity, waterLevel },
-      });
-      if (warnings.length) await tx.alert.createMany({ data: warnings.map((detail) => ({ userId: account.id, tankId, icon: "warn", title: "Water Quality Alert", detail })) });
-      return result;
-    });
+    const data = { tankId, dissolvedOxygen, ph, temperature, salinity, waterLevel };
+    const reading = warnings.length
+      ? await prisma.$transaction(async (tx) => {
+          const result = await tx.sensorTelemetry.create({ data });
+          await tx.alert.createMany({ data: warnings.map((detail) => ({ userId: account.id, tankId, icon: "warn", title: "Water Quality Alert", detail })) });
+          return result;
+        })
+      : await prisma.sensorTelemetry.create({ data });
     let sms: { status: string } = { status: "no_warning" };
     if (warnings.length) {
       try {

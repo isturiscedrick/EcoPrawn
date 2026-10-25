@@ -62,7 +62,11 @@ export function SmsSettings() {
       }
       if (!response.ok) throw new Error(data.error ?? "SMS could not be confirmed. Check delivery history before trying again.");
       setFeedback(test ? `Test message ${data.status}. Refresh delivery status to check for updates.` : "SMS preferences saved.");
-      if (!test) await load();
+      if (!test) {
+        setSettings((current) => current ? { ...current, smsPhone: data.smsPhone, smsEnabled: data.smsEnabled } : current);
+        setPhone(data.smsPhone ?? "");
+        setEnabled(data.smsEnabled);
+      }
     } catch (error) { setFailed(true); setFeedback(error instanceof Error ? error.message : "Could not save SMS settings."); }
     finally { setBusy(false); }
   }

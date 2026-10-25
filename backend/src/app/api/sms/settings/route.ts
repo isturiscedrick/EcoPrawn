@@ -6,9 +6,11 @@ import { nextSmsAttempt } from "@/lib/sms";
 export async function GET() {
   const account = await accountAccess();
   if (account instanceof Response) return account;
-  const settings = await prisma.user.findUniqueOrThrow({ where: { id: account.id }, select: { smsPhone: true, smsEnabled: true, lastSmsAt: true } });
-  const deliveries = await prisma.smsDelivery.findMany({ where: { userId: account.id }, orderBy: { createdAt: "desc" }, take: 10,
-    select: { id: true, content: true, status: true, error: true, createdAt: true } });
+  const [settings, deliveries] = await Promise.all([
+    prisma.user.findUniqueOrThrow({ where: { id: account.id }, select: { smsPhone: true, smsEnabled: true, lastSmsAt: true } }),
+    prisma.smsDelivery.findMany({ where: { userId: account.id }, orderBy: { createdAt: "desc" }, take: 10,
+      select: { id: true, content: true, status: true, error: true, createdAt: true } }),
+  ]);
   return Response.json({ smsPhone: settings.smsPhone, smsEnabled: settings.smsEnabled, nextAttemptAt: nextSmsAttempt(settings.lastSmsAt), configured: smsConfigured(), deliveries });
 }
 

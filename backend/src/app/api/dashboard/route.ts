@@ -6,7 +6,7 @@ export async function GET() {
   if (account instanceof Response) return account;
   try {
     const [tanks, scans, schedules, metrics, logs, events, readings] =
-      await prisma.$transaction([
+      await Promise.all([
         prisma.tank.findMany({
           where: { userId: account.id },
           orderBy: { createdAt: "asc" },
