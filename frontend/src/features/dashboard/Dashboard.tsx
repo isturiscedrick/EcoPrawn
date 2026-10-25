@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { SensorGauge } from "@/features/dashboard/components/SensorGauge";
 import { TankRow, AlertRow } from "@/features/dashboard/components/DashboardRows";
 import { TrendChart } from "@/features/dashboard/components/TrendChart";
@@ -11,6 +12,7 @@ const FCR_TARGET = 1.5;
 
 export function Dashboard() {
   const { tanks, removeTank, waterTrend, feedSchedule, alertsLog: alerts, visionScanLog } = useTanks();
+  const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
 
   const tankCount = tanks.length;
   const totalBiomass = tanks.reduce((sum, t) => sum + t.biomass, 0);
@@ -19,6 +21,14 @@ export function Dashboard() {
   const avgTemp = tankCount ? tanks.reduce((sum, t) => sum + t.temperature, 0) / tankCount : 0;
   const avgSalinity = tankCount ? tanks.reduce((sum, t) => sum + t.salinity, 0) / tankCount : 0;
   const avgWaterLevel = tankCount ? tanks.reduce((sum, t) => sum + t.waterLevel, 0) / tankCount : 0;
+  const selectedTank = tanks.find((tank) => tank.id === selectedTankId);
+  const sensorValues = {
+    dissolvedOxygen: selectedTank?.dissolvedOxygen ?? avgDO,
+    ph: selectedTank?.ph ?? avgPh,
+    temperature: selectedTank?.temperature ?? avgTemp,
+    salinity: selectedTank?.salinity ?? avgSalinity,
+    waterLevel: selectedTank?.waterLevel ?? avgWaterLevel,
+  };
   const avgFcr = tankCount ? tanks.reduce((sum, t) => sum + t.fcr, 0) / tankCount : 0;
   const openAlertTanks = tanks.filter((t) => t.status === "warn").length;
 
@@ -40,33 +50,33 @@ export function Dashboard() {
     ? [
         {
           label: "Dissolved O₂",
-          value: `${avgDO.toFixed(1)} mg/L`,
-          pct: scalePct(avgDO, GAUGE_SCALE.dissolvedOxygen),
-          status: doStatus,
+          value: `${sensorValues.dissolvedOxygen.toFixed(1)} mg/L`,
+          pct: scalePct(sensorValues.dissolvedOxygen, GAUGE_SCALE.dissolvedOxygen),
+          status: rangeStatus(sensorValues.dissolvedOxygen, THRESHOLDS.dissolvedOxygen.min),
         },
         {
           label: "pH",
-          value: avgPh.toFixed(1),
-          pct: scalePct(avgPh, GAUGE_SCALE.ph),
-          status: rangeStatus(avgPh, THRESHOLDS.ph.min, THRESHOLDS.ph.max),
+          value: sensorValues.ph.toFixed(1),
+          pct: scalePct(sensorValues.ph, GAUGE_SCALE.ph),
+          status: rangeStatus(sensorValues.ph, THRESHOLDS.ph.min, THRESHOLDS.ph.max),
         },
         {
           label: "Temperature",
-          value: `${avgTemp.toFixed(1)} °C`,
-          pct: scalePct(avgTemp, GAUGE_SCALE.temperature),
-          status: rangeStatus(avgTemp, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max),
+          value: `${sensorValues.temperature.toFixed(1)} °C`,
+          pct: scalePct(sensorValues.temperature, GAUGE_SCALE.temperature),
+          status: rangeStatus(sensorValues.temperature, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max),
         },
         {
           label: "Salinity",
-          value: `${Math.round(avgSalinity)} ppt`,
-          pct: scalePct(avgSalinity, GAUGE_SCALE.salinity),
-          status: rangeStatus(avgSalinity, THRESHOLDS.salinity.min, THRESHOLDS.salinity.max),
+          value: `${Math.round(sensorValues.salinity)} ppt`,
+          pct: scalePct(sensorValues.salinity, GAUGE_SCALE.salinity),
+          status: rangeStatus(sensorValues.salinity, THRESHOLDS.salinity.min, THRESHOLDS.salinity.max),
         },
         {
           label: "Water Level",
-          value: `${Math.round(avgWaterLevel)}%`,
-          pct: scalePct(avgWaterLevel, GAUGE_SCALE.waterLevel),
-          status: rangeStatus(avgWaterLevel, THRESHOLDS.waterLevel.min),
+          value: `${Math.round(sensorValues.waterLevel)}%`,
+          pct: scalePct(sensorValues.waterLevel, GAUGE_SCALE.waterLevel),
+          status: rangeStatus(sensorValues.waterLevel, THRESHOLDS.waterLevel.min),
         },
       ]
     : [];
@@ -155,23 +165,50 @@ export function Dashboard() {
       {/* SENSOR + ALERTS */}
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 mb-4">
         <Panel
-          title={`Live Sensor Array — ${tankCount} Tank${tankCount !== 1 ? "s" : ""} (avg)`}
+          title={`Live Sensor Array — ${selectedTank?.name ?? `${tankCount} Tank${tankCount !== 1 ? "s" : ""} (avg)`}`}
           badge="live · 5 sensors"
         >
           {tankCount > 0 ? (
             <>
+              <div className="flex flex-wrap gap-2 mb-4" aria-label="Sensor readings by tank">
+                <button
+                  type="button"
+                  aria-pressed={!selectedTank}
+                  onClick={() => setSelectedTankId(null)}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${!selectedTank ? "border-[var(--mangrove)] bg-[var(--mangrove)] text-white" : "border-[var(--sand-dim)] text-[var(--water-deep)] hover:border-[var(--mangrove)]"}`}
+                >
+                  All tanks (avg)
+                </button>
+                {tanks.map((tank) => (
+                  <button
+                    key={tank.id}
+                    type="button"
+                    aria-pressed={selectedTank?.id === tank.id}
+                    onClick={() => setSelectedTankId(tank.id)}
+                    className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${selectedTank?.id === tank.id ? "border-[var(--mangrove)] bg-[var(--mangrove)] text-white" : "border-[var(--sand-dim)] text-[var(--water-deep)] hover:border-[var(--mangrove)]"}`}
+                  >
+                    {tank.name}
+                  </button>
+                ))}
+              </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
                 {sensorGauges.map((s) => (
                   <SensorGauge key={s.label} {...s} />
                 ))}
               </div>
               <div className="mt-4 pt-4 border-t border-[var(--sand-dim)]">
-                <TrendChart values={waterTrend.filter(r=>r.tankId===tanks[0]?.id).map(r=>r.value)} />
-                <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
-                  <span className="flex items-center gap-1.5">
-                    <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> DO (mg/L)
-                  </span>
-                </div>
+                {selectedTank ? (
+                  <>
+                    <TrendChart values={waterTrend.filter((reading) => reading.tankId === selectedTank.id).map((reading) => reading.value)} />
+                    <div className="mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
+                      <span className="inline-flex items-center gap-1.5">
+                        <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> {selectedTank.name} DO (mg/L)
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <p className="py-6 text-sm text-[rgba(11,35,32,0.6)]">Select a tank to see its dissolved oxygen trend.</p>
+                )}
               </div>
             </>
           ) : (

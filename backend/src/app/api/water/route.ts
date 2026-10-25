@@ -1,6 +1,8 @@
 import { accountAccess } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { dispatchSms } from "@/lib/sms";
+import { waterWarnings } from "@/lib/unisms";
 
 export async function GET(request: Request) {
   const account = await accountAccess({ write: false, admin: false });
@@ -44,56 +46,42 @@ export async function POST(request: Request) {
   const account = await accountAccess({ write: true, admin: false });
   if (account instanceof Response) return account;
   try {
-    const body = await request.json();
+    let body;
+    try { body = await request.json(); } catch { return NextResponse.json({ success: false, error: "Invalid JSON" }, { status: 400 }); }
+    if (!body || typeof body !== "object") return NextResponse.json({ success: false, error: "Invalid reading" }, { status: 400 });
     const { tankId, dissolvedOxygen, ph, temperature, salinity, waterLevel } = body;
 
-    if (!tankId) {
+    if (typeof tankId !== "string" || !tankId) {
       return NextResponse.json(
         { success: false, error: "tankId is required" },
         { status: 400 }
       );
     }
 
-    const tank = await prisma.tank.findUnique({ where: { id: tankId, userId: account.id }, select: { id: true } });
+    const tank = await prisma.tank.findUnique({ where: { id: tankId, userId: account.id }, select: { id: true, name: true } });
     if (!tank) return NextResponse.json({ success: false, error: "Tank not found" }, { status: 404 });
+    if (![dissolvedOxygen, ph, temperature, salinity, waterLevel].every((value) => typeof value === "number" && Number.isFinite(value))) {
+      return NextResponse.json({ success: false, error: "All five water readings must be finite numbers" }, { status: 400 });
+    }
 
-    const reading = await prisma.sensorTelemetry.create({
-      data: {
-        tankId,
-        dissolvedOxygen: Number(dissolvedOxygen),
-        ph: Number(ph),
-        temperature: Number(temperature),
-        salinity: Number(salinity),
-        waterLevel: Number(waterLevel),
-      },
+    const warnings = waterWarnings({ dissolvedOxygen, ph, temperature, salinity, waterLevel });
+    const reading = await prisma.$transaction(async (tx) => {
+      const result = await tx.sensorTelemetry.create({
+        data: { tankId, dissolvedOxygen, ph, temperature, salinity, waterLevel },
+      });
+      if (warnings.length) await tx.alert.createMany({ data: warnings.map((detail) => ({ userId: account.id, tankId, icon: "warn", title: "Water Quality Alert", detail })) });
+      return result;
     });
-
-    // Check thresholds and create alert if out of range
-    const alertsToCreate = [];
-    if (reading.dissolvedOxygen < 4.5) {
-      alertsToCreate.push({
-        userId: account.id,
-        tankId,
-        icon: "warn",
-        title: "Low Dissolved Oxygen Alert",
-        detail: `DO level is critical at ${reading.dissolvedOxygen} mg/L (target ≥ 4.5 mg/L). Aerators activated.`,
-      });
+    let sms: { status: string } = { status: "no_warning" };
+    if (warnings.length) {
+      try {
+        sms = await dispatchSms(account.id, `EcoPrawn: ${tank.name.slice(0,80)}. ${warnings.join("; ")}. Check your tank now.`.slice(0,670), tankId);
+      } catch {
+        // Telemetry was saved successfully even if SMS persistence is unavailable.
+        sms = { status: "unavailable" };
+      }
     }
-    if (reading.ph < 7.5 || reading.ph > 8.5) {
-      alertsToCreate.push({
-        userId: account.id,
-        tankId,
-        icon: "warn",
-        title: "Abnormal pH Alert",
-        detail: `pH level is out of bounds at ${reading.ph} (target 7.5 – 8.5).`,
-      });
-    }
-
-    for (const alertData of alertsToCreate) {
-      await prisma.alert.create({ data: alertData });
-    }
-
-    return NextResponse.json({ success: true, reading }, { status: 201 });
+    return NextResponse.json({ success: true, reading, sms }, { status: 201 });
   } catch (error: unknown) {
     const err = error as Error;
     return NextResponse.json(

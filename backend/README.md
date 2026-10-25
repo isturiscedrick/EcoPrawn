@@ -64,3 +64,59 @@ Run `npm run test:google-user` for account-linking and role tests, and `npm run 
 Manual verification: sign in with an existing account and a new Google account, check Authentication > Users, confirm authId links each app User and that new roles are operator, reload the dashboard, and log out. Complete Google consent in your browser; tests cannot substitute for that step.
 
 References: [Supabase Google sign-in](https://supabase.com/docs/guides/auth/social-sign-in/auth-google), [server-side cookies](https://supabase.com/docs/guides/auth/server-side/creating-a-client).
+
+## Water-quality SMS with UniSMS
+
+Water readings submitted to `POST /api/water` now create warnings for all five target ranges and can send an SMS to the signed-in tank owner's saved number. The backend calls UniSMS and saves delivery history in the same Supabase PostgreSQL database as the tanks. No Supabase service-role key or browser SMS credentials are needed.
+
+### Provider setup
+
+1. In your [UniSMS dashboard](https://unismsapi.com/), get the API secret key and the sender ID assigned to your account. The sender ID is required; do not assume `EcoPrawn` or `UniSMS` is available on your account.
+2. Set these variables in `backend/.env` and your hosted backend's environment:
+
+   ```dotenv
+   UNISMS_API_KEY="your-secret-key"
+   UNISMS_SENDER_ID="your-assigned-sender-id"
+   UNISMS_WEBHOOK_SECRET="your-unisms-webhook-secret"
+   ```
+
+3. Restart the backend. Sign in, open **Dashboard > Alerts**, save a Philippine mobile number, and enable SMS alerts. Numbers such as `09171234567` normalize to `+639171234567`. Use a number you own or have permission to notify.
+4. Click **Send test SMS**. This sends a real message and uses provider credits. The UI shows `pending` when queued; that does not mean it has been sent yet.
+5. For delivery updates, register `https://YOUR_FRONTEND_DOMAIN/api/sms/webhook` in the UniSMS dashboard. The frontend proxies this route to the backend; a publicly reachable backend HTTPS URL works too. Set `UNISMS_WEBHOOK_SECRET` to the Webhook Secret Key shown by UniSMS. Localhost cannot receive provider webhooks without an HTTPS tunnel. Refresh delivery status on the Alerts page after delivery.
+
+The provider setup is still required even though the Supabase schema change has already been applied to project `uzedgsewqhehhnddlvsh`. The local `.env` template contains empty placeholders. Never commit your secret values or put them in frontend variables.
+
+### Sending behavior
+
+- Alerts are off by default and belong to each app account. The backend always derives the owner from the verified Supabase session and checks tank ownership.
+- Thresholds are DO below 4.5 mg/L, pH outside 7.5–8.5, temperature outside 26–30 C, salinity outside 10–20 ppt, or water level below 90%. All warnings for a reading share one SMS.
+- A database transaction permits one SMS attempt every five minutes per account across all tanks, including test messages and rejected requests. The test button shows the remaining time and the API returns `Retry-After` for cooldown responses. Disabled alerts return a separate error. Warnings during that interval remain in the event log; SMS messages are skipped rather than queued for later.
+- SMS is triggered by new readings submitted through the backend, not by viewing the dashboard, loading demo fixtures, or writing directly to Supabase. Hardware must submit readings through the authenticated API. This does not add a background sensor poller.
+- Provider and SMS database failures do not undo saved water readings. Explicit provider validation/authentication rejections are recorded as `rejected` with the returned field errors. A timeout or ambiguous send result is recorded as `unknown`. A process interruption may leave `sending`. Check UniSMS before attempting another send; paid requests are never automatically retried. Authenticated webhooks can reconcile uncertain states.
+- Webhooks verify the shared secret with a constant-time comparison. They match the saved provider reference or the delivery ID metadata plus recipient. Late retry events cannot overwrite terminal `sent` or `failed` results. Delivery history is backend-only; the new table enables RLS and revokes direct `anon`/`authenticated` access.
+
+| Endpoint | Methods | Purpose |
+| --- | --- | --- |
+| `/api/sms/settings` | GET, PATCH | Own phone, preference, and ten most recent deliveries |
+| `/api/sms/test` | POST | Send a fixed test message to the saved number |
+| `/api/sms/webhook` | POST | Receive UniSMS delivery events using its webhook secret |
+
+For a fresh database, generate the client and create tables from `prisma/schema.prisma`. For an existing pre-SMS hosted database, `prisma/add-sms.sql` is the additive migration for the `ecoprawn` schema. Change the schema qualifier for other installations. Do not rerun this migration on the already updated project.
+
+Run `npm run test:sms` for provider, phone, threshold, cooldown, account-isolation, webhook and telemetry-failure checks. These tests mock UniSMS and do not send paid messages. The existing account and Google-user tests remain available.
+
+Reference: [UniSMS SMS API](https://unismsapi.com/docs/sms).
+
+### Test a low-oxygen alert
+
+Run `npm run test:oxygen` from `backend` for an automated test without network requests or paid SMS. It exercises the water route and dashboard alert derivation: healthy oxygen and the 4.5 mg/L boundary stay quiet, while 3 mg/L creates one warning and invokes SMS for the tank owner. It also checks that another account's tank cannot receive the reading.
+
+To create an actual test alert in Supabase and send an SMS to your saved number:
+
+```bash
+npm run test:oxygen:live
+```
+
+This requires backend `.env` credentials and exactly one SMS-enabled account. If multiple accounts are enabled, select the app User ID explicitly with `npm run test:oxygen:live -- --user-id YOUR_APP_USER_ID`. The command respects the five-minute SMS cooldown and creates no data while that cooldown is active.
+
+The live test creates or reuses a separate tank named `TEST - Oxygen alert`, records oxygen at 3 mg/L with the other parameters in range, and invokes the real water route. It verifies the persisted alert and the dashboard API response. The CLI supplies the selected account identity; it does not test browser authentication. The test tank and alert stay in the database so you can inspect them in the dashboard. Each live run can use SMS credits. `pending` means UniSMS accepted the request; delivery confirmation comes separately from UniSMS.

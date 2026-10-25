@@ -4,6 +4,7 @@ import { AlertRow } from "@/features/dashboard/components/DashboardRows";
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
+import { SmsSettings } from "@/features/dashboard/components/SmsSettings";
 
 export function AlertsView() {
   const { tanks, alertsLog, resolvedAlerts } = useTanks();
@@ -54,6 +55,7 @@ export function AlertsView() {
         />
       </div>
 
+      <div className="mb-5"><SmsSettings /></div>
       <Panel title="Alert & Event Log" badge={`${allAlerts.length} events`}>
         <div>
           {allAlerts.map((a) => (

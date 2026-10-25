@@ -124,4 +124,24 @@ model User {
   bioflocMetrics BioflocMetric[]
   effluentLogs EffluentLog[]
   alerts    Alert[]
+  smsPhone  String?
+  smsEnabled Boolean @default(false)
+  lastSmsAt DateTime?
+  smsDeliveries SmsDelivery[]
+}
+
+model SmsDelivery {
+  id          String @id @default(cuid())
+  userId      String
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tankId      String?
+  recipient   String
+  content     String
+  status      String @default("sending")
+  referenceId String? @unique
+  error       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, createdAt])
 }

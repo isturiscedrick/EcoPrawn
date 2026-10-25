@@ -15,7 +15,10 @@
     "db:connect:supabase": "node --env-file=.env scripts/connect-supabase.cjs",
     "test:auth": "node scripts/test-auth.mjs",
     "test:google-user": "node scripts/test-google-user.mjs",
-    "test:accounts": "node scripts/test-account-isolation.mjs"
+    "test:accounts": "node scripts/test-account-isolation.mjs",
+    "test:sms": "node scripts/test-sms.mjs",
+    "test:oxygen": "node scripts/test-oxygen.mjs",
+    "test:oxygen:live": "node --env-file=.env scripts/test-oxygen.mjs --live"
   },
   "dependencies": {
     "@prisma/client": "6.4.1",

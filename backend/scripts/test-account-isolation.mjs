@@ -43,7 +43,7 @@ async function load(path) {
   const source = await readFile(new URL(`../src/app/api/${path}/route.ts`, import.meta.url), "utf8");
   const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } });
   const module = { exports: {} };
-  const imports = { "@/lib/auth": auth, "@/lib/prisma": { __esModule: true, default: db }, "next/server": { NextResponse: Response } };
+  const imports = { "@/lib/auth": auth, "@/lib/prisma": { __esModule: true, default: db }, "next/server": { NextResponse: Response }, "@/lib/unisms": { waterWarnings: () => [] }, "@/lib/sms": { dispatchSms: async () => ({ status: "not_configured" }) } };
   new Function("require", "module", "exports", outputText)(name => {
     if (!(name in imports)) throw new Error(`Unexpected import ${name}`);
     return imports[name];
