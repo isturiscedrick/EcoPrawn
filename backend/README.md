@@ -29,9 +29,12 @@ The API listens on [http://localhost:4000](http://localhost:4000). Run the front
 | `/api/tanks` | GET, POST | List or create tanks |
 | `/api/tanks/:id` | GET, PATCH, DELETE | Read, update or delete a tank |
 | `/api/water` | GET, POST | Read or record telemetry, with optional `tankId` query filter |
+| `/api/hardware` | GET, POST | Read or record partial ESP32 temperature/distance measurements for an owned tank |
 | `/api/seed` | POST | Populate demo data when there are no tanks |
 
 Use `npm run db:seed` during local setup. The HTTP seed endpoint now requires an authenticated administrator and a same-origin POST.
+
+For the ESP32 USB test, open **Water Quality**, select a tank, and click **Connect ESP32** in a browser with Web Serial. The browser reads the existing sketch at 115200 baud and posts temperature and ultrasonic distance through the authenticated `/api/hardware` route. Hardware readings use the separate `HardwareTelemetry` table, preserve missing measurements as null, and do not send SMS during this test. See [USB setup and wiring](../hardware/README.md). Run `npm run test:hardware` for parser, input validation, calibration and account-isolation checks.
 
 Use `npm run build` and `npm start` for production, `npm run typecheck` to check TypeScript, and `npm run db:studio` to browse the database. Deploy this service separately and set the frontend's `BACKEND_URL` before building the frontend. Keep database credentials in this backend only.
 

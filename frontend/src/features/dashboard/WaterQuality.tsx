@@ -6,6 +6,7 @@ import { TrendChart } from "@/features/dashboard/components/TrendChart";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { THRESHOLDS, rangeStatus } from "@/features/dashboard/lib/thresholds";
+import { Esp32Connection } from "@/features/dashboard/components/Esp32Connection";
 
 export function WaterQuality() {
   const { tanks, waterTrend } = useTanks();
@@ -166,13 +167,17 @@ export function WaterQuality() {
             </div>
           </div>
 
+          <div className="mb-4">
+            <Esp32Connection key={selectedTank.id} tankId={selectedTank.id} tankName={selectedTank.name} />
+          </div>
+
           <div
             id="water-tank-details"
             role="tabpanel"
             aria-labelledby={`water-tank-tab-${selectedTankIndex}`}
             className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4"
           >
-            <Panel title={`Live Sensor Array — ${selectedTank.name}`} badge="Recorded readings">
+            <Panel title={`Recorded oxygen history · ${selectedTank.name}`} badge="Recorded readings">
               <TrendChart values={waterTrend.filter((reading) => reading.tankId === selectedTank.id).map((reading) => reading.value)} />
               <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
                 <span className="flex items-center gap-1.5">

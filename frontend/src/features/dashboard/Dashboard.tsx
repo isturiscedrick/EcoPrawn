@@ -8,23 +8,26 @@ import { TrendChart } from "@/features/dashboard/components/TrendChart";
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { THRESHOLDS, GAUGE_SCALE, rangeStatus, scalePct } from "@/features/dashboard/lib/thresholds";
+import { waterLevelGauge } from "@/features/dashboard/lib/water-level";
+import { useEsp32 } from "@/features/dashboard/context/Esp32Context";
 
 const FCR_TARGET = 1.5;
 
 export function Dashboard() {
   const { tanks, removeTank, waterTrend, feedSchedule, alertsLog: alerts, visionScanLog } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
+  const usb = useEsp32();
 
   const tankCount = tanks.length;
   const {
-    tanksById, totalBiomass, avgDO, avgPh, avgTemp, avgSalinity, avgWaterLevel,
+    tanksById, totalBiomass, avgDO, avgPh, avgTemp, avgSalinity,
     avgFcr, openAlertTanks, dispensedToday, targetToday, totalPopulation,
     totalAbnormal, avgBodyLength, avgWeight,
   } = useMemo(() => {
     const tanksById = new Map<string, Tank>();
     const totals = {
       biomass: 0, dissolvedOxygen: 0, ph: 0, temperature: 0, salinity: 0,
-      waterLevel: 0, fcr: 0, warnings: 0, dispensedToday: 0, targetToday: 0,
+      fcr: 0, warnings: 0, dispensedToday: 0, targetToday: 0,
       population: 0, abnormal: 0, bodyLength: 0, weight: 0,
     };
     for (const tank of tanks) {
@@ -34,7 +37,6 @@ export function Dashboard() {
       totals.ph += tank.ph;
       totals.temperature += tank.temperature;
       totals.salinity += tank.salinity;
-      totals.waterLevel += tank.waterLevel;
       totals.fcr += tank.fcr;
       totals.warnings += tank.status === "warn" ? 1 : 0;
       totals.dispensedToday += tank.dispensedToday;
@@ -52,7 +54,6 @@ export function Dashboard() {
       avgPh: totals.ph / count,
       avgTemp: totals.temperature / count,
       avgSalinity: totals.salinity / count,
-      avgWaterLevel: totals.waterLevel / count,
       avgFcr: totals.fcr / count,
       openAlertTanks: totals.warnings,
       dispensedToday: totals.dispensedToday,
@@ -78,7 +79,6 @@ export function Dashboard() {
     ph: selectedTank?.ph ?? avgPh,
     temperature: selectedTank?.temperature ?? avgTemp,
     salinity: selectedTank?.salinity ?? avgSalinity,
-    waterLevel: selectedTank?.waterLevel ?? avgWaterLevel,
   };
   const feedPct = targetToday > 0 ? Math.round((dispensedToday / targetToday) * 100) : 0;
 
@@ -113,12 +113,7 @@ export function Dashboard() {
           pct: scalePct(sensorValues.salinity, GAUGE_SCALE.salinity),
           status: rangeStatus(sensorValues.salinity, THRESHOLDS.salinity.min, THRESHOLDS.salinity.max),
         },
-        {
-          label: "Water Level",
-          value: `${Math.round(sensorValues.waterLevel)}%`,
-          pct: scalePct(sensorValues.waterLevel, GAUGE_SCALE.waterLevel),
-          status: rangeStatus(sensorValues.waterLevel, THRESHOLDS.waterLevel.min),
-        },
+        waterLevelGauge(selectedTank ? [selectedTank] : tanks),
       ]
     : [];
 
@@ -207,7 +202,7 @@ export function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 mb-4">
         <Panel
           title={`Live Sensor Array — ${selectedTank?.name ?? `${tankCount} Tank${tankCount !== 1 ? "s" : ""} (avg)`}`}
-          badge="live · 5 sensors"
+          badge={usb.status === "connected" ? `USB · ${tanks.find(tank => tank.id === usb.tankId)?.name ?? "ESP32"}` : "Recorded readings"}
         >
           {tankCount > 0 ? (
             <>

@@ -101,6 +101,7 @@ for (const [name, count] of [["dashboard", 7], ["settings", 2]]) {
     }
     assert.deepEqual(queries.find(query => query.model === "tank").options.include, {
       telemetries: { orderBy: { recordedAt: "desc" }, take: 1 },
+      hardwareTelemetries: { orderBy: { recordedAt: "desc" }, take: 1 },
       visionScans: { orderBy: { recordedAt: "desc" }, take: 1 },
     });
   } else {

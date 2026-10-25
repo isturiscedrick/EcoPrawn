@@ -19,6 +19,7 @@
     "test:sms": "node scripts/test-sms.mjs",
     "test:performance": "node scripts/test-performance.mjs",
     "test:oxygen": "node scripts/test-oxygen.mjs",
+    "test:hardware": "node scripts/test-hardware.mjs",
     "test:oxygen:live": "node --env-file=.env scripts/test-oxygen.mjs --live"
   },
   "dependencies": {

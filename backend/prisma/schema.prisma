@@ -22,11 +22,25 @@ model Tank {
   updatedAt       DateTime           @updatedAt
 
   telemetries     SensorTelemetry[]
+  hardwareTelemetries HardwareTelemetry[]
   visionScans     VisionScan[]
   feedSchedules   FeedSchedule[]
   effluentLogs    EffluentLog[]
   alerts          Alert[]
   @@index([userId])
+}
+
+// Partial measurements from connected hardware. Absent sensors stay null.
+model HardwareTelemetry {
+  id          String   @id @default(cuid())
+  tankId      String
+  tank        Tank     @relation(fields: [tankId], references: [id], onDelete: Cascade)
+  temperature Float?
+  distanceCm  Float?
+  waterLevel  Float?
+  recordedAt  DateTime @default(now())
+
+  @@index([tankId, recordedAt])
 }
 
 model SensorTelemetry {

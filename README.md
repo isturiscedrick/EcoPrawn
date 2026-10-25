@@ -116,13 +116,13 @@ backend/
 
 ## Current limitations
 
-The dashboard combines database-backed tanks with demo data, without live hardware:
+The dashboard combines database-backed tanks with demo data and optional ESP32 USB testing:
 
 - Tanks, telemetry, scans, growth history, feeding schedules, biofloc metrics, effluent logs, and alerts load from PostgreSQL through `/api/dashboard`. Run `npm run db:seed` in `backend/` to import sample records into an empty database. Existing tanks prevent reseeding.
 - Trend charts use recorded samples and show an empty state when there are too few readings.
 - Google sign-in protects the dashboard and operational API routes. Follow the [backend Google sign-in setup](backend/README.md#google-sign-in) before logging in.
 - **The contact form does not send anything.** It is not connected to a mail service yet.
-- The water API accepts telemetry, but connecting real sensors and the vision pipeline is still open work.
+- The Water Quality page can connect an ESP32 over USB and save temperature and ultrasonic distance. Overview's Water Level gauge refreshes from those readings and uses distance until the tank is calibrated for percentage. USB stays connected when navigating between dashboard pages. See [ESP32 USB setup](hardware/README.md). Wi-Fi device authentication and the vision pipeline remain open work.
 
 ## Design tokens
 

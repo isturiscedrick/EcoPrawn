@@ -12,6 +12,7 @@ export async function GET() {
           orderBy: { createdAt: "asc" },
           include: {
             telemetries: { orderBy: { recordedAt: "desc" }, take: 1 },
+            hardwareTelemetries: { orderBy: { recordedAt: "desc" }, take: 1 },
             visionScans: { orderBy: { recordedAt: "desc" }, take: 1 },
           },
         }),
