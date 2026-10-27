@@ -2,6 +2,7 @@
   "name": "ecoprawn-backend",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "bun@1.4.0",
   "scripts": {
     "dev": "next dev -p 4000",
     "build": "next build",
@@ -14,6 +15,7 @@
     "db:seed": "node --env-file=.env prisma/seed.cjs",
     "db:connect:supabase": "node --env-file=.env scripts/connect-supabase.cjs",
     "test:auth": "node scripts/test-auth.mjs",
+    "test:phone-auth": "node scripts/test-phone-auth.mjs",
     "test:google-user": "node scripts/test-google-user.mjs",
     "test:accounts": "node scripts/test-account-isolation.mjs",
     "test:sms": "node scripts/test-sms.mjs",

@@ -12,7 +12,7 @@ The application tables live in the private `ecoprawn` schema. The existing local
 
 RLS policies provide additional protection for authenticated database access. Prisma uses a privileged connection, so the backend must continue filtering by account. The profile policy permits reading only the signed-in user's profile, with no client profile writes or role changes.
 
-Run `npm run test:accounts` to check cross-account API isolation. Demo seeding through `/api/seed` remains administrator-only and seeds only that administrator's account. For CLI seeding, set `SEED_USER_ID` to an existing application `User.id` before running `npm run db:seed`; seeding without an owner fails.
+Run `bun run test:accounts` to check cross-account API isolation. Demo seeding through `/api/seed` remains administrator-only and seeds only that administrator's account. For CLI seeding, set `SEED_USER_ID` to an existing application `User.id` before running `bun run db:seed`; seeding without an owner fails.
 
 ## Finish the backend connection
 
@@ -21,7 +21,7 @@ Run `npm run test:accounts` to check cross-account API isolation. Demo seeding t
 3. Stop the backend and Prisma Studio, then run this from `backend/`:
 
 ```bash
-npm run db:connect:supabase
+bun run db:connect:supabase
 ```
 
 The command checks that the URL belongs to the selected project, sets `schema=ecoprawn` and `sslmode=require`, and reads each table before updating `DATABASE_URL`. If verification fails, it leaves the existing connection unchanged. It saves the previous environment file in the ignored `.env.pre-supabase.local` file.
@@ -29,13 +29,13 @@ The command checks that the URL belongs to the selected project, sets `schema=ec
 4. Restart the backend and Studio:
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 In a separate terminal:
 
 ```bash
-npm run db:studio
+bun run db:studio
 ```
 
 The frontend continues calling the backend through `/api/*`.

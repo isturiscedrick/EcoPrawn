@@ -1,7 +1,14 @@
 "use client";
 
-import { useId, useState } from "react";
-import { useLoginForm } from "@/hooks/useLoginForm";
+import { useEffect, useId, useState, type FormEvent } from "react";
+
+const errors: Record<string, string> = {
+  configuration: "Google sign-in is not configured yet. Contact your administrator.",
+  expired: "Your sign-in request expired. Please try again.",
+  cancelled: "Google sign-in was cancelled. You can try again.",
+  unauthorized: "Please use a verified Google account to sign in.",
+  failed: "We could not complete sign-in. Please try again.",
+};
 
 const inputClass =
   "w-full rounded-lg border border-[var(--sand-dim)] bg-white py-3 pl-11 pr-4 text-[14px] text-[var(--water-deep)] outline-none transition-all duration-200 placeholder:text-[rgba(11,35,32,0.35)] hover:border-[rgba(11,35,32,0.25)] focus:border-[var(--coral)] focus:ring-4 focus:ring-[rgba(232,98,58,0.12)]";
@@ -10,9 +17,86 @@ const labelClass =
   "ep-font-mono mb-1.5 block text-[10.5px] font-medium uppercase tracking-[0.1em] text-[rgba(11,35,32,0.55)]";
 
 export function LoginForm() {
-  const { email, setEmail, password, setPassword, handleSubmit } = useLoginForm();
   const uid = useId();
+  const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
+  const [pending, setPending] = useState(false);
+  const [step, setStep] = useState<"signin" | "signup" | "verify" | "complete">("signin");
+  const [phone, setPhone] = useState("");
+  const [cooldown, setCooldown] = useState(0);
+  const [googlePending, setGooglePending] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (!cooldown) return;
+    const timer = window.setTimeout(() => setCooldown((value) => Math.max(0, value - 1)), 1000);
+    return () => window.clearTimeout(timer);
+  }, [cooldown]);
+
+  useEffect(() => {
+    const code = new URLSearchParams(window.location.search).get("error");
+    if (code) setError(errors[code] ?? errors.failed);
+    const reset = () => {
+      setPending(false);
+      setGooglePending(false);
+    };
+    window.addEventListener("pageshow", reset);
+    return () => window.removeEventListener("pageshow", reset);
+  }, []);
+
+  async function request(values: Record<string, unknown>) {
+    setError("");
+    setNotice("");
+    setPending(true);
+    try {
+      const response = await fetch("/api/auth/password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      if (data.complete) {
+        setStep("complete");
+        setError(data.error || "Please choose a username to continue.");
+        return;
+      }
+      if (data.verify) {
+        const number = data.phone || values.phone || values.identifier;
+        setPhone(typeof number === "string" ? number : "");
+        setStep("verify");
+        setCooldown(response.ok ? 60 : 0);
+        setNotice(
+          response.ok
+            ? "We sent a verification code to your phone."
+            : "Enter your phone number and request a code to verify your account."
+        );
+        return;
+      }
+      if (!response.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+      if (values.action === "resend") {
+        setCooldown(60);
+        setNotice("A new code has been sent.");
+        return;
+      }
+      window.location.assign("/dashboard");
+    } catch {
+      setError("Could not connect. Check your connection and try again.");
+    } finally {
+      setPending(false);
+    }
+  }
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await request({
+      ...Object.fromEntries(new FormData(event.currentTarget)),
+      action: step,
+      ...(step === "verify" ? { phone } : {}),
+    });
+  }
 
   return (
     <div className="w-full max-w-[420px]">
@@ -21,117 +105,496 @@ export function LoginForm() {
       </div>
 
       <h1 className="ep-font-display text-[32px] font-semibold leading-[1.1] tracking-tight text-[var(--water-deep)]">
-        Welcome back
+        {step === "signup"
+          ? "Create your account"
+          : step === "verify"
+          ? "Verify your phone"
+          : step === "complete"
+          ? "Choose your username"
+          : "Welcome back"}
       </h1>
       <p className="mt-2 text-[14px] leading-[1.6] text-[rgba(11,35,32,0.6)]">
-        Sign in to access the facility dashboard.
+        {step === "signup"
+          ? "Get started with a username and a verified mobile number."
+          : step === "verify"
+          ? "Enter the code from your text message to finish signing up."
+          : step === "complete"
+          ? "Your phone is verified. Pick an available username to continue."
+          : "Sign in with your username or mobile number and password."}
       </p>
 
-      <form
-        onSubmit={handleSubmit}
-        className="mt-8 flex flex-col gap-5 rounded-2xl border border-[var(--sand-dim)] bg-white p-6 shadow-[0_20px_50px_-30px_rgba(11,35,32,0.35)] sm:p-7"
-      >
-        {/* EMAIL */}
-        <div>
-          <label htmlFor={`${uid}-email`} className={labelClass}>
-            Email
-          </label>
-          <div className="relative">
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[rgba(11,35,32,0.4)]"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="5" width="18" height="14" rx="2" />
-                <path d="m3 7 9 6 9-6" />
-              </svg>
-            </span>
-            <input
-              id={`${uid}-email`}
-              type="email"
-              required
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@ecoprawn.io"
-              className={inputClass}
-            />
+      <div className="mt-8 flex flex-col gap-5 rounded-2xl border border-[var(--sand-dim)] bg-white p-6 shadow-[0_20px_50px_-30px_rgba(11,35,32,0.35)] sm:p-7">
+        {(step === "signin" || step === "signup") && (
+          <div className="flex rounded-lg bg-[var(--sand)] p-1" aria-label="Account access">
+            {(["signin", "signup"] as const).map((mode) => (
+              <button
+                key={mode}
+                type="button"
+                aria-pressed={step === mode}
+                disabled={pending}
+                onClick={() => {
+                  setStep(mode);
+                  setError("");
+                  setNotice("");
+                }}
+                className={`flex-1 rounded-md py-2 text-[13px] font-semibold transition-all focus-visible:outline-2 focus-visible:outline-[var(--coral)] ${
+                  step === mode
+                    ? "bg-white text-[var(--water-deep)] shadow-sm"
+                    : "text-[var(--mangrove)] hover:text-[var(--water-deep)]"
+                }`}
+              >
+                {mode === "signin" ? "Sign in" : "Sign up"}
+              </button>
+            ))}
           </div>
-        </div>
+        )}
 
-        {/* PASSWORD */}
-        <div>
-          <div className="mb-1.5 flex items-center justify-between">
-            <label htmlFor={`${uid}-password`} className="ep-font-mono block text-[10.5px] font-medium uppercase tracking-[0.1em] text-[rgba(11,35,32,0.55)]">
-              Password
-            </label>
-            <a
-              href="#"
-              className="rounded text-[12px] font-medium text-[var(--coral-dim)] transition-colors hover:text-[var(--coral)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
-            >
-              Forgot password?
-            </a>
-          </div>
-          <div className="relative">
-            <span
+        {error && (
+          <div
+            role="alert"
+            className="flex items-start gap-2.5 rounded-lg border border-red-200 bg-red-50/90 p-3 text-[13px] leading-[1.5] text-red-700"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mt-0.5 shrink-0 text-red-500"
               aria-hidden="true"
-              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[rgba(11,35,32,0.4)]"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="4" y="11" width="16" height="10" rx="2" />
-                <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-              </svg>
-            </span>
-            <input
-              id={`${uid}-password`}
-              type={showPassword ? "text" : "password"}
-              required
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className={`${inputClass} pr-12`}
-            />
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <span>{error}</span>
+          </div>
+        )}
+
+        {notice && (
+          <div
+            role="status"
+            className="flex items-start gap-2.5 rounded-lg border border-[var(--sand-dim)] bg-[var(--sand)]/60 p-3 text-[13px] leading-[1.5] text-[var(--mangrove)]"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="mt-0.5 shrink-0 text-[var(--mangrove)]"
+              aria-hidden="true"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <span>{notice}</span>
+          </div>
+        )}
+
+        <form key={step} onSubmit={submit} aria-busy={pending}>
+          <fieldset disabled={pending} className="flex flex-col gap-4 disabled:opacity-70">
+            {step === "signup" && (
+              <div>
+                <label htmlFor={`${uid}-name`} className={labelClass}>
+                  Full name
+                </label>
+                <div className="relative">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[rgba(11,35,32,0.4)]"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </span>
+                  <input
+                    id={`${uid}-name`}
+                    name="name"
+                    type="text"
+                    required
+                    autoComplete="name"
+                    maxLength={100}
+                    placeholder="Juan dela Cruz"
+                    className={inputClass}
+                  />
+                </div>
+              </div>
+            )}
+
+            {(step === "signup" || step === "complete") && (
+              <div>
+                <label htmlFor={`${uid}-username`} className={labelClass}>
+                  Username
+                </label>
+                <div className="relative">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[rgba(11,35,32,0.4)]"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="4" />
+                      <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+                    </svg>
+                  </span>
+                  <input
+                    id={`${uid}-username`}
+                    name="username"
+                    type="text"
+                    required
+                    autoComplete="username"
+                    minLength={3}
+                    maxLength={30}
+                    pattern="[A-Za-z][A-Za-z0-9_]{2,29}"
+                    aria-describedby={`${uid}-username-help`}
+                    placeholder="juan_operator"
+                    className={inputClass}
+                  />
+                </div>
+                <span id={`${uid}-username-help`} className="mt-1 block text-[11px] text-[var(--mangrove)]">
+                  3–30 letters, numbers, or underscores. Start with a letter.
+                </span>
+              </div>
+            )}
+
+            {step === "signin" && (
+              <div>
+                <label htmlFor={`${uid}-identifier`} className={labelClass}>
+                  Username or mobile number
+                </label>
+                <div className="relative">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[rgba(11,35,32,0.4)]"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </span>
+                  <input
+                    id={`${uid}-identifier`}
+                    name="identifier"
+                    type="text"
+                    required
+                    autoComplete="username"
+                    maxLength={40}
+                    placeholder="juan_operator or 09171234567"
+                    className={inputClass}
+                  />
+                </div>
+              </div>
+            )}
+
+            {(step === "signup" || step === "verify") && (
+              <div>
+                <label htmlFor={`${uid}-phone`} className={labelClass}>
+                  Mobile number
+                </label>
+                <div className="relative">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[rgba(11,35,32,0.4)]"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                      <line x1="12" y1="18" x2="12.01" y2="18" />
+                    </svg>
+                  </span>
+                  <input
+                    id={`${uid}-phone`}
+                    name="phone"
+                    type="tel"
+                    required
+                    autoComplete="tel"
+                    maxLength={24}
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="0917 123 4567"
+                    className={inputClass}
+                  />
+                </div>
+                <span className="mt-1 block text-[11px] text-[var(--mangrove)]">
+                  Philippine mobile numbers only (e.g. 0917 123 4567).
+                </span>
+              </div>
+            )}
+
+            {(step === "signin" || step === "signup") && (
+              <div>
+                <div className="mb-1.5 flex items-center justify-between">
+                  <label htmlFor={`${uid}-password`} className={labelClass}>
+                    Password
+                  </label>
+                  {step === "signin" && (
+                    <a
+                      href="#"
+                      className="rounded text-[12px] font-medium text-[var(--coral-dim)] transition-colors hover:text-[var(--coral)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
+                    >
+                      Forgot password?
+                    </a>
+                  )}
+                </div>
+                <div className="relative">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[rgba(11,35,32,0.4)]"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect x="4" y="11" width="16" height="10" rx="2" />
+                      <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                    </svg>
+                  </span>
+                  <input
+                    id={`${uid}-password`}
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    required
+                    autoComplete={step === "signup" ? "new-password" : "current-password"}
+                    minLength={step === "signup" ? 8 : 1}
+                    maxLength={128}
+                    placeholder="••••••••"
+                    className={`${inputClass} pr-12`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-pressed={showPassword}
+                    className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-[rgba(11,35,32,0.45)] transition-colors hover:bg-[rgba(11,35,32,0.06)] hover:text-[var(--water-deep)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
+                  >
+                    {showPassword ? (
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M3 3l18 18" />
+                        <path d="M10.6 6.1A9.8 9.8 0 0 1 12 6c5 0 8.5 4 9.5 6a13 13 0 0 1-2.6 3.4" />
+                        <path d="M6.2 6.9C4.1 8.3 2.7 10.4 2.5 12c1 2 4.5 6 9.5 6 1.5 0 2.8-.4 4-.9" />
+                        <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M2.5 12C3.5 10 7 6 12 6s8.5 4 9.5 6c-1 2-4.5 6-9.5 6s-8.5-4-9.5-6z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+                {step === "signup" && (
+                  <span className="mt-1 block text-[11px] text-[var(--mangrove)]">
+                    At least 8 characters.
+                  </span>
+                )}
+              </div>
+            )}
+
+            {step === "verify" && (
+              <div>
+                <label htmlFor={`${uid}-code`} className={labelClass}>
+                  Verification code
+                </label>
+                <div className="relative">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[rgba(11,35,32,0.4)]"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect x="3" y="5" width="18" height="14" rx="2" />
+                      <path d="m3 7 9 6 9-6" />
+                    </svg>
+                  </span>
+                  <input
+                    id={`${uid}-code`}
+                    name="code"
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="one-time-code"
+                    required
+                    pattern="[0-9]{6,10}"
+                    minLength={6}
+                    maxLength={10}
+                    placeholder="123456"
+                    className={`${inputClass} tracking-[0.25em]`}
+                  />
+                </div>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={pending}
+              className="group mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--coral)] px-6 py-3.5 text-[14.5px] font-semibold text-[var(--sand)] shadow-[0_12px_28px_-10px_rgba(232,98,58,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] hover:shadow-[0_16px_32px_-10px_rgba(232,98,58,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:pointer-events-none disabled:opacity-60"
+            >
+              {pending
+                ? "Please wait…"
+                : step === "signup"
+                ? "Create account & send code"
+                : step === "verify"
+                ? "Verify & continue"
+                : step === "complete"
+                ? "Continue to dashboard"
+                : "Sign in"}
+              <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">
+                →
+              </span>
+            </button>
+          </fieldset>
+        </form>
+
+        {step === "verify" && (
+          <div className="space-y-3 border-t border-[var(--sand-dim)] pt-4 text-center text-sm">
+            <p className="text-[13px] text-[var(--mangrove)]">
+              Didn't receive your code? Check your number and request a new one.
+            </p>
             <button
               type="button"
-              onClick={() => setShowPassword((v) => !v)}
-              aria-label={showPassword ? "Hide password" : "Show password"}
-              aria-pressed={showPassword}
-              className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-[rgba(11,35,32,0.45)] transition-colors hover:bg-[rgba(11,35,32,0.06)] hover:text-[var(--water-deep)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
+              disabled={pending || cooldown > 0 || !phone.trim()}
+              onClick={() => request({ action: "resend", phone })}
+              className="w-full rounded-lg border border-[var(--sand-dim)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--water-deep)] transition-colors hover:bg-[var(--sand)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coral)] disabled:opacity-50"
             >
-              {showPassword ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M3 3l18 18" />
-                  <path d="M10.6 6.1A9.8 9.8 0 0 1 12 6c5 0 8.5 4 9.5 6a13 13 0 0 1-2.6 3.4" />
-                  <path d="M6.2 6.9C4.1 8.3 2.7 10.4 2.5 12c1 2 4.5 6 9.5 6 1.5 0 2.8-.4 4-.9" />
-                  <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
-                </svg>
-              ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M2.5 12C3.5 10 7 6 12 6s8.5 4 9.5 6c-1 2-4.5 6-9.5 6s-8.5-4-9.5-6z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-              )}
+              {cooldown > 0 ? `Resend code (${cooldown}s)` : "Resend code"}
+            </button>
+            <button
+              type="button"
+              disabled={pending}
+              onClick={() => {
+                setStep("signin");
+                setError("");
+                setNotice("");
+              }}
+              className="text-[13px] text-[var(--water-deep)] underline underline-offset-4 transition-colors hover:text-[var(--coral)]"
+            >
+              Back to sign in
             </button>
           </div>
-        </div>
+        )}
 
-        <button
-          type="submit"
-          className="group mt-1 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--coral)] px-6 py-3.5 text-[14.5px] font-semibold text-[var(--sand)] shadow-[0_12px_28px_-10px_rgba(232,98,58,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] hover:shadow-[0_16px_32px_-10px_rgba(232,98,58,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-        >
-          Log in
-          <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">
-            →
-          </span>
-        </button>
-      </form>
+        {(step === "signin" || step === "signup") && (
+          <>
+            <div className="flex items-center gap-3 text-xs text-[rgba(11,35,32,0.4)]">
+              <span className="h-px flex-1 bg-[var(--sand-dim)]" />
+              <span className="ep-font-mono uppercase tracking-wider">or</span>
+              <span className="h-px flex-1 bg-[var(--sand-dim)]" />
+            </div>
+
+            <button
+              type="button"
+              disabled={pending || googlePending}
+              onClick={() => {
+                setPending(true);
+                setGooglePending(true);
+                window.location.assign("/api/auth/google");
+              }}
+              className="inline-flex w-full items-center justify-center gap-3 rounded-lg border border-[var(--sand-dim)] bg-white px-6 py-3 text-[14px] font-semibold text-[var(--water-deep)] transition-all hover:bg-[var(--sand)] hover:border-[rgba(11,35,32,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-wait disabled:opacity-60"
+            >
+              <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5Z" />
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.73 7.18l7.65 5.94c4.46-4.13 7.12-10.22 7.12-17.59Z" />
+                <path fill="#FBBC05" d="M10.53 28.59A14.4 14.4 0 0 1 9.75 24c0-1.59.27-3.13.75-4.59l-7.98-6.19A23.9 23.9 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19Z" />
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.9-5.86l-7.65-5.94c-2.13 1.43-4.86 2.28-8.25 2.28-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48Z" />
+              </svg>
+              {googlePending ? "Connecting to Google…" : "Continue with Google"}
+            </button>
+          </>
+        )}
+      </div>
 
       <div className="mt-6 flex items-center justify-center gap-2 text-[12px] text-[rgba(11,35,32,0.5)]">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
           <path d="M12 3 4 6v6c0 4.5 3.2 8 8 9 4.8-1 8-4.5 8-9V6l-8-3z" />
         </svg>
-        Access is limited to registered facility operators.
+        {step === "signin"
+          ? "Access is limited to registered facility operators."
+          : "New accounts receive operator access."}
       </div>
     </div>
   );

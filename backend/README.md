@@ -9,15 +9,15 @@ This Next.js API service owns database access. It has no UI pages.
 ## Run locally
 
 ```bash
-npm install
+bun install
 ```
 
 Copy `.env.example` to `.env` and set `DATABASE_URL`, then run:
 
 ```bash
-npm run db:push
-npm run db:seed
-npm run dev
+bun run db:push
+bun run db:seed
+bun run dev
 ```
 
 On Windows, you can instead run `./setup-db.ps1` from the repository root after installing dependencies. Stop backend development servers before generating the Prisma client or changing the database schema. Restart the backend after changing `.env`.
@@ -32,15 +32,15 @@ The API listens on [http://localhost:4000](http://localhost:4000). Run the front
 | `/api/hardware` | GET, POST | Read or record partial ESP32 temperature/distance measurements for an owned tank |
 | `/api/seed` | POST | Populate demo data when there are no tanks |
 
-Use `npm run db:seed` during local setup. The HTTP seed endpoint now requires an authenticated administrator and a same-origin POST.
+Use `bun run db:seed` during local setup. The HTTP seed endpoint now requires an authenticated administrator and a same-origin POST.
 
-For the ESP32 USB test, open **Water Quality**, select a tank, and click **Connect ESP32** in a browser with Web Serial. The browser reads the existing sketch at 115200 baud and posts temperature and ultrasonic distance through the authenticated `/api/hardware` route. Hardware readings use the separate `HardwareTelemetry` table, preserve missing measurements as null, and do not send SMS during this test. See [USB setup and wiring](../hardware/README.md). Run `npm run test:hardware` for parser, input validation, calibration and account-isolation checks.
+For the ESP32 USB test, open **Water Quality**, select a tank, and click **Connect ESP32** in a browser with Web Serial. The browser reads the existing sketch at 115200 baud and posts temperature and ultrasonic distance through the authenticated `/api/hardware` route. Hardware readings use the separate `HardwareTelemetry` table, preserve missing measurements as null, and do not send SMS during this test. See [USB setup and wiring](../hardware/README.md). Run `bun run test:hardware` for parser, input validation, calibration and account-isolation checks.
 
-Use `npm run build` and `npm start` for production, `npm run typecheck` to check TypeScript, and `npm run db:studio` to browse the database. Deploy this service separately and set the frontend's `BACKEND_URL` before building the frontend. Keep database credentials in this backend only.
+Use `bun run build` and `bun run start` for production, `bun run typecheck` to check TypeScript, and `bun run db:studio` to browse the database. Deploy this service separately and set the frontend's `BACKEND_URL` before building the frontend. Keep database credentials in this backend only.
 
 ## Sample data
 
-`src/data/demo.json` owns the transferred frontend fixtures and form defaults. `prisma/seed.cjs` imports operational records into PostgreSQL in one transaction. Run `npm run db:seed` from this folder. It skips the import when tanks already exist, preserving existing records. No demo user credentials are created.
+`src/data/demo.json` owns the transferred frontend fixtures and form defaults. `prisma/seed.cjs` imports operational records into PostgreSQL in one transaction. Run `bun run db:seed` from this folder. It skips the import when tanks already exist, preserving existing records. No demo user credentials are created.
 
 `GET /api/dashboard` reads persisted tanks, telemetry, scans, schedules, biofloc metrics, logs, and alerts. `GET /api/demo` serves sample readouts for the marketing/login pages and defaults for the add-tank form. Those readouts are examples, not live telemetry. The original seed endpoint delegates to the same seed function as the CLI.
 
@@ -62,7 +62,7 @@ Logout revokes the current Supabase session's refresh token and clears cookies. 
 
 The ecoprawn tables remain accessible through the backend Prisma connection only. Existing RLS protections remain enabled. Roles are stored in the app database, never in editable user metadata.
 
-Run `npm run test:google-user` for account-linking and role tests, and `npm run test:auth` for isolated authentication rejection, PKCE, callback, and logout checks. Auth integration tests use a local mock Supabase endpoint on port 4108 and a test backend on port 4107; they do not contact Google or write database records.
+Run `bun run test:google-user` for account-linking and role tests, and `bun run test:auth` for isolated authentication rejection, PKCE, callback, and logout checks. Auth integration tests use a local mock Supabase endpoint on port 4108 and a test backend on port 4107; they do not contact Google or write database records.
 
 Manual verification: sign in with an existing account and a new Google account, check Authentication > Users, confirm authId links each app User and that new roles are operator, reload the dashboard, and log out. Complete Google consent in your browser; tests cannot substitute for that step.
 
@@ -106,11 +106,11 @@ The provider setup is still required even though the Supabase schema change has 
 
 For a fresh database, generate the client and create tables from `prisma/schema.prisma`. For an existing pre-SMS hosted database, `prisma/add-sms.sql` is the additive migration for the `ecoprawn` schema. Change the schema qualifier for other installations. Do not rerun this migration on the already updated project.
 
-Run `npm run test:sms` for provider, phone, threshold, cooldown, account-isolation, webhook and telemetry-failure checks. These tests mock UniSMS and do not send paid messages. The existing account and Google-user tests remain available.
+Run `bun run test:sms` for provider, phone, threshold, cooldown, account-isolation, webhook and telemetry-failure checks. These tests mock UniSMS and do not send paid messages. The existing account and Google-user tests remain available.
 
-Run `npm run test:performance` for concurrent dashboard/settings reads, response compatibility, account filters and query limits. Add `-- --compare-ref YOUR_BASE_COMMIT` to compare latency using 25 ms simulated reads and ten connection slots at one and ten concurrent requests. Simulated results are not production measurements.
+Run `bun run test:performance` for concurrent dashboard/settings reads, response compatibility, account filters and query limits. Add `--compare-ref YOUR_BASE_COMMIT` to compare latency using 25 ms simulated reads and ten connection slots at one and ten concurrent requests. Simulated results are not production measurements.
 
-For a real database comparison, run `node --env-file=.env scripts/test-performance.mjs --compare-ref YOUR_BASE_COMMIT --database`. This executes only dashboard and SMS settings GET handlers against the configured database, selects an existing tank owner locally, and reports timing, SQL statement counts and errors without printing account data. It excludes browser authentication and sends no SMS. No schema or connection-pool configuration is changed.
+For a real database comparison, run `bun run test:performance --compare-ref YOUR_BASE_COMMIT --database`. This executes only dashboard and SMS settings GET handlers against the configured database, selects an existing tank owner locally, and reports timing, SQL statement counts and errors without printing account data. It excludes browser authentication and sends no SMS. No schema or connection-pool configuration is changed.
 
 Read-only measurements against the configured Supabase database on October 25, 2026, compared with commit `bb9be8d45d912f904d375ad9111364cd9fd1cac0`:
 
@@ -127,14 +127,14 @@ Reference: [UniSMS SMS API](https://unismsapi.com/docs/sms).
 
 ### Test a low-oxygen alert
 
-Run `npm run test:oxygen` from `backend` for an automated test without network requests or paid SMS. It exercises the water route and dashboard alert derivation: healthy oxygen and the 4.5 mg/L boundary stay quiet, while 3 mg/L creates one warning and invokes SMS for the tank owner. It also checks that another account's tank cannot receive the reading.
+Run `bun run test:oxygen` from `backend` for an automated test without network requests or paid SMS. It exercises the water route and dashboard alert derivation: healthy oxygen and the 4.5 mg/L boundary stay quiet, while 3 mg/L creates one warning and invokes SMS for the tank owner. It also checks that another account's tank cannot receive the reading.
 
 To create an actual test alert in Supabase and send an SMS to your saved number:
 
 ```bash
-npm run test:oxygen:live
+bun run test:oxygen:live
 ```
 
-This requires backend `.env` credentials and exactly one SMS-enabled account. If multiple accounts are enabled, select the app User ID explicitly with `npm run test:oxygen:live -- --user-id YOUR_APP_USER_ID`. The command respects the five-minute SMS cooldown and creates no data while that cooldown is active.
+This requires backend `.env` credentials and exactly one SMS-enabled account. If multiple accounts are enabled, select the app User ID explicitly with `bun run test:oxygen:live --user-id YOUR_APP_USER_ID`. The command respects the five-minute SMS cooldown and creates no data while that cooldown is active.
 
 The live test creates or reuses a separate tank named `TEST - Oxygen alert`, records oxygen at 3 mg/L with the other parameters in range, and invokes the real water route. It verifies the persisted alert and the dashboard API response. The CLI supplies the selected account identity; it does not test browser authentication. The test tank and alert stay in the database so you can inspect them in the dashboard. Each live run can use SMS credits. `pending` means UniSMS accepted the request; delivery confirmation comes separately from UniSMS.

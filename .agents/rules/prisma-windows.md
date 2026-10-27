@@ -2,7 +2,7 @@
 
 ## Process Management Guardrails
 1. **Stop Dev Server Before Prisma CLI Operations**:
-   - Always stop active Next.js dev server (`next dev`) processes before executing `npx prisma generate`, `npx prisma db push`, or `npx prisma migrate`.
+   - Always stop active Next.js dev server (`bun run dev`) processes before executing `bun run db:generate`, `bun run db:push`, or `bunx prisma migrate`.
    - On Windows, running Node processes lock `query_engine-windows.dll.node`, resulting in `EPERM` rename failures if the generator runs concurrently.
 
 2. **Restart Dev Server After .env Modifications**:
@@ -13,4 +13,4 @@
 
 4. **Multi-Package Dependency Verification**:
    - Before running Prisma commands, seeds, or connection scripts in `backend/` or `frontend/`, always check if `node_modules/@prisma/client` exists in that specific directory.
-   - If not, execute `npm install` within that subfolder first.
+   - If not, execute `bun install` within `backend/` first. The frontend does not install Prisma.

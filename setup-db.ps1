@@ -73,14 +73,16 @@ Write-Host "[OK] Updated $backendEnv with your DATABASE_URL" -ForegroundColor Gr
 
 # Push Prisma schema and generate client
 Write-Host ""
-Write-Host "Pushing schema to PostgreSQL (npx prisma db push)..." -ForegroundColor Yellow
+Write-Host "Pushing schema to PostgreSQL (bun run db:push)..." -ForegroundColor Yellow
 Push-Location (Join-Path $PSScriptRoot "backend")
 try {
-    npx prisma db push --skip-generate
+    bun run db:push --skip-generate
+    if ($LASTEXITCODE -ne 0) { throw "Prisma schema push failed." }
     Write-Host "[OK] Database tables created successfully!" -ForegroundColor Green
     
     Write-Host "Generating Prisma Client..." -ForegroundColor Yellow
-    npx prisma generate
+    bun run db:generate
+    if ($LASTEXITCODE -ne 0) { throw "Prisma Client generation failed." }
     Write-Host "[OK] Prisma Client ready!" -ForegroundColor Green
 } finally {
     Pop-Location
@@ -91,7 +93,7 @@ Write-Host "==========================================" -ForegroundColor Green
 Write-Host " Setup Complete! PostgreSQL is ready.     " -ForegroundColor Green
 Write-Host "==========================================" -ForegroundColor Green
 Write-Host "Next steps:"
-Write-Host " 1. Run 'npm run dev' inside backend/ and frontend/ in separate terminals"
+Write-Host " 1. Run 'bun run dev' inside backend/ and frontend/ in separate terminals"
 Write-Host " 2. Visit http://localhost:3000/api/seed to populate initial data"
 Write-Host " 3. Open http://localhost:3000/dashboard (shows POSTGRES: CONNECTED)"
-Write-Host " 4. Optional: Run 'npm run db:studio' inside backend/ to view your tables"
+Write-Host " 4. Optional: Run 'bun run db:studio' inside backend/ to view your tables"

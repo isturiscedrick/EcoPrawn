@@ -119,7 +119,7 @@ assert.equal(failed.status, 500);
 console.log("Performance regressions passed: concurrent dashboard/settings reads, response data, account filters, limits, and failure handling.");
 
 // Optional before/after comparison, with a bounded simulated connection pool.
-// Example: npm run test:performance -- --compare-ref <commit>
+// Example: bun run test:performance --compare-ref <commit>
 const refIndex = process.argv.indexOf("--compare-ref");
 if (refIndex >= 0) {
   const ref = process.argv[refIndex + 1];
