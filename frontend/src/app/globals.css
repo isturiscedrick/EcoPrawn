@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -284,4 +284,54 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ---------- Accessibility pass (users 30+, outdoor light) ----------
+   Appended last so it overrides the values above. Delete this whole
+   block to revert (and restore line 1 if you want the old fonts). */
+
+:root {
+  /* Two sans-serif fonts only: Lexend (headings) + Inter (everything
+     else). --font-mono points to Inter, so existing .ep-font-mono
+     usages keep working with no component edits. */
+  --font-display: 'Lexend', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Inter', system-ui, sans-serif;
+
+  /* Darker text-safe variants (about 6:1 or better on --sand).
+     Keep the original tokens for dots, fills, and borders. */
+  --danger-text: #a82020;
+  --mangrove-text: #2a5c43;
+  --coral-strong: #b23f1c; /* button fill, about 5.8:1 with white text */
+
+  /* shadcn tokens: only matter where components use them */
+  --primary: var(--water-deep);
+  --primary-foreground: #ffffff;
+  --muted-foreground: #4a5553;
+  --border: #b9b09a;
+  --ring: var(--coral-strong);
+}
+
+html {
+  font-size: 112.5%; /* 18px base; all rem sizes scale up */
+}
+
+.ecoprawn-root {
+  line-height: 1.55;
+}
+
+/* Headings stay upright: no slanted/synthesized italics */
+.ep-font-display {
+  font-style: normal;
+}
+
+.ep-font-mono {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 44px minimum touch target, but not for checkboxes/radios */
+.ecoprawn-root button,
+.ecoprawn-root select,
+.ecoprawn-root input:not([type="checkbox"]):not([type="radio"]) {
+  min-height: 44px;
 }
