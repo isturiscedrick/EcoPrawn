@@ -12,15 +12,16 @@ interface SiteHeaderProps {
   variant?: "default" | "auth";
 }
 
+const focusRing =
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
+
 export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeaderProps) {
   const isAuth = variant === "auth";
   const pathname = usePathname();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Elevate the header with a soft shadow + slightly denser background
-  // once the page has scrolled, so it reads as "lifted" above content
-  // instead of always looking flat against the hero.
+  // Solid background always; a darker border and shadow appear once the page scrolls.
   useEffect(() => {
     function onScroll() {
       setScrolled(window.scrollY > 8);
@@ -30,8 +31,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll while the mobile menu is open so the page behind
-  // it doesn't scroll along with the panel.
+  // Lock body scroll while the mobile menu is open.
   useEffect(() => {
     if (mobileNavOpen) {
       const original = document.body.style.overflow;
@@ -54,10 +54,10 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+      className={`sticky top-0 z-50 border-b bg-[var(--ep-bg)] transition-shadow duration-200 ${
         scrolled
-          ? "border-[rgba(11,35,32,0.1)] bg-(--sand)/98 shadow-[0_8px_24px_-16px_rgba(11,35,32,0.35)] backdrop-blur-md"
-          : "border-[rgba(11,35,32,0.06)] bg-(--sand)/90 backdrop-blur-sm"
+          ? "border-[var(--ep-primary)] shadow-[0_6px_16px_-10px_rgba(11,46,51,0.4)]"
+          : "border-[var(--ep-line)]"
       }`}
     >
       <div
@@ -69,7 +69,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
       >
         <Link
           href="/"
-          className="group flex items-center gap-2.5 rounded-md text-(--coral) transition-opacity duration-200 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand)"
+          className={`flex items-center rounded-md ${focusRing}`}
           aria-label="EcoPrawn home"
         >
           <BrandMark size={isAuth ? 44 : 64} />
@@ -81,28 +81,18 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
           {isAuth ? (
             <Link
               href="/"
-              className="group inline-flex items-center gap-1.5 rounded-xl border border-[rgba(11,35,32,0.14)] px-4 py-2 text-[11px] font-semibold text-(--water-deep) transition-all duration-200 hover:border-[rgba(11,35,32,0.28)] hover:bg-[rgba(11,35,32,0.05)] focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand) sm:px-5 sm:text-[12px]"
+              className={`inline-flex items-center gap-1.5 rounded-xl border-2 border-[var(--ep-primary)] px-4 py-2 text-sm font-semibold text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] sm:px-5 ${focusRing}`}
             >
-              <span
-                aria-hidden="true"
-                className="text-[10px] transition-transform duration-200 group-hover:-translate-x-0.5"
-              >
-                ←
-              </span>
+              <span aria-hidden="true">←</span>
               Back to home
             </Link>
           ) : (
             <Link
               href="/login"
-              className="group inline-flex items-center gap-1.5 rounded-xl bg-(--water-deep) px-4 py-2 text-[11px] font-semibold text-(--sand) shadow-[0_8px_20px_-10px_rgba(11,35,32,0.7)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#123F43] hover:shadow-[0_10px_24px_-10px_rgba(11,35,32,0.8)] focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand) sm:px-5 sm:text-[12px]"
+              className={`inline-flex items-center gap-1.5 rounded-xl border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)] px-4 py-2 text-sm font-semibold text-[var(--ep-bg)] transition-colors duration-200 hover:bg-[var(--ep-primary-soft)] sm:px-5 ${focusRing}`}
             >
               Log in
-              <span
-                aria-hidden="true"
-                className="text-[10px] transition-transform duration-200 group-hover:translate-x-0.5"
-              >
-                →
-              </span>
+              <span aria-hidden="true">→</span>
             </Link>
           )}
 
@@ -113,21 +103,20 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
               aria-expanded={mobileNavOpen}
               aria-controls="mobile-nav-panel"
               aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-              className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-[rgba(11,35,32,0.12)] text-(--water-deep) transition-colors duration-200 hover:border-[rgba(11,35,32,0.22)] hover:bg-[rgba(11,35,32,0.05)] focus:outline-none focus-visible:ring-2 focus-visible:ring-(--coral) focus-visible:ring-offset-2 focus-visible:ring-offset-(--sand) md:hidden"
+              className={`relative flex h-11 w-11 items-center justify-center rounded-lg border-2 border-[var(--ep-primary)] text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] md:hidden ${focusRing}`}
             >
               <span className="sr-only">Toggle navigation</span>
               <svg
-                width="16"
-                height="16"
+                width="18"
+                height="18"
                 viewBox="0 0 16 16"
                 fill="none"
                 aria-hidden="true"
-                className="transition-transform duration-200"
               >
                 <path
                   d="M1.5 4H14.5"
                   stroke="currentColor"
-                  strokeWidth="1.6"
+                  strokeWidth="1.8"
                   strokeLinecap="round"
                   className={`origin-center transition-all duration-200 ${
                     mobileNavOpen ? "translate-y-[3.5px] rotate-45" : ""
@@ -136,7 +125,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
                 <path
                   d="M1.5 8H14.5"
                   stroke="currentColor"
-                  strokeWidth="1.6"
+                  strokeWidth="1.8"
                   strokeLinecap="round"
                   className={`origin-center transition-opacity duration-150 ${
                     mobileNavOpen ? "opacity-0" : "opacity-100"
@@ -145,7 +134,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
                 <path
                   d="M1.5 12H14.5"
                   stroke="currentColor"
-                  strokeWidth="1.6"
+                  strokeWidth="1.8"
                   strokeLinecap="round"
                   className={`origin-center transition-all duration-200 ${
                     mobileNavOpen ? "translate-y-[-3.5px] -rotate-45" : ""

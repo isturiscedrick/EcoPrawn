@@ -7,10 +7,13 @@ interface NavLinksProps {
   onLinkClick?: () => void;
 }
 
+const focusRing =
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
+
 export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
   if (variant === "desktop") {
     return (
-      <nav className="hidden h-full items-center gap-7 md:flex" aria-label="Primary navigation">
+      <nav className="hidden h-full items-center gap-8 md:flex" aria-label="Primary navigation">
         {LANDING_NAV_LINKS.map(([label, href]) => {
           const isActive = href === activeHref;
           return (
@@ -18,10 +21,10 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
               key={label}
               href={href}
               aria-current={isActive ? "page" : undefined}
-              className={`relative flex h-full items-center px-1 text-[12px] font-semibold transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sand)] ${
+              className={`relative flex h-full items-center rounded-sm px-1 text-base font-semibold transition-colors ${focusRing} ${
                 isActive
-                  ? "text-[var(--coral)] after:absolute after:bottom-[8px] after:left-0 after:right-0 after:h-[2px] after:bg-[var(--coral)]"
-                  : "text-[var(--water-deep)] hover:text-[var(--coral)]"
+                  ? "text-[var(--ep-accent)] after:absolute after:bottom-[10px] after:left-0 after:right-0 after:h-[3px] after:bg-[var(--ep-accent)]"
+                  : "text-[var(--ep-primary)] hover:text-[var(--ep-accent)]"
               }`}
             >
               {label}
@@ -33,7 +36,11 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
   }
 
   return (
-    <nav id="mobile-nav-panel" aria-label="Mobile navigation" className="border-t border-[rgba(11,35,32,0.08)] bg-[var(--sand)] px-5 py-3 md:hidden">
+    <nav
+      id="mobile-nav-panel"
+      aria-label="Mobile navigation"
+      className="border-t border-[var(--ep-line)] bg-[var(--ep-bg)] px-5 py-2 md:hidden"
+    >
       <ul className="flex flex-col">
         {LANDING_NAV_LINKS.map(([label, href]) => {
           const isActive = href === activeHref;
@@ -43,16 +50,16 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
                 href={href}
                 onClick={onLinkClick}
                 aria-current={isActive ? "page" : undefined}
-                className={`flex items-center gap-2 rounded-md px-1.5 py-2.5 text-[13px] font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] ${
+                className={`flex items-center gap-3 rounded-md px-1.5 py-3 text-base font-semibold transition-colors ${focusRing} ${
                   isActive
-                    ? "text-[var(--coral)]"
-                    : "text-[var(--water-deep)] hover:text-[var(--coral)]"
+                    ? "text-[var(--ep-accent)]"
+                    : "text-[var(--ep-primary)] hover:text-[var(--ep-accent)]"
                 }`}
               >
                 <span
                   aria-hidden="true"
-                  className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                    isActive ? "bg-[var(--coral)]" : "bg-transparent"
+                  className={`h-2.5 w-2.5 rounded-full ${
+                    isActive ? "bg-[var(--ep-accent)]" : "bg-transparent"
                   }`}
                 />
                 {label}

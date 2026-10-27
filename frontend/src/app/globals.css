@@ -335,3 +335,20 @@ html {
 .ecoprawn-root input:not([type="checkbox"]):not([type="radio"]) {
   min-height: 44px;
 }
+
+/* ---------- EcoPrawn palette v3, warm high-contrast (60/30/10) ----------
+   Close to the original sand / deep teal / coral. Every text pairing is
+   at least 5.5:1. Accent is white-on-coral for fills, coral text on cream. */
+:root {
+  --ep-bg: #fbf8f1;          /* 60%  page background            */
+  --ep-surface: #ffffff;     /*      cards                      */
+  --ep-tint: #f2ebdd;        /*      sand bands                 */
+  --ep-line: #cfc4a8;        /*      decorative borders         */
+  --ep-primary: #0b2e33;     /* 30%  ink: text, outlines, dark panels */
+  --ep-primary-soft: #12474d;/*      hover on ink               */
+  --ep-text-muted: #3f5753;  /*      supporting copy            */
+  --ep-accent: #b23f1c;      /* 10%  main button, headline accent */
+  --ep-ok: #1e7a46;
+  --ep-warn-text: #8f5a12;
+  --ep-danger: #b3261e;
+}
