@@ -10,13 +10,16 @@ import { useTanks } from "@/features/dashboard/context/TankContext";
 import { THRESHOLDS, GAUGE_SCALE, rangeStatus, scalePct } from "@/features/dashboard/lib/thresholds";
 import { waterLevelGauge } from "@/features/dashboard/lib/water-level";
 import { useEsp32 } from "@/features/dashboard/context/Esp32Context";
+import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
+import { AddTankModal } from "@/features/dashboard/AddTankModal";
 
 const FCR_TARGET = 1.5;
 const MAX_RECENT_ALERTS = 5;
 
 export function Dashboard() {
-  const { tanks, removeTank, waterTrend, feedSchedule, alertsLog: alerts, visionScanLog } = useTanks();
+  const { tanks, addTank, removeTank, waterTrend, feedSchedule, alertsLog: alerts, visionScanLog } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const usb = useEsp32();
 
   const tankCount = tanks.length;

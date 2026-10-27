@@ -7,7 +7,7 @@ import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { SmsSettings } from "@/features/dashboard/components/SmsSettings";
 
 export function AlertsView() {
-  const { tanks } = useTanks();
+  const { tanks, alertsLog } = useTanks();
 
   const liveAlerts = deriveTankAlerts(tanks);
   const allAlerts = [...liveAlerts, ...alertsLog];
