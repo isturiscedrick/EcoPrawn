@@ -1,5 +1,6 @@
 import { SystemLayout } from "@/features/dashboard/SystemLayout";
-import { TankProvider } from "@/context/TankContext";
+import { TankProvider } from "@/features/dashboard/context/TankContext";
+import { Esp32Provider } from "@/features/dashboard/context/Esp32Context";
 
 export default function DashboardLayout({
   children,
@@ -8,7 +9,9 @@ export default function DashboardLayout({
 }) {
   return (
     <TankProvider>
-      <SystemLayout>{children}</SystemLayout>
+      <Esp32Provider>
+        <SystemLayout>{children}</SystemLayout>
+      </Esp32Provider>
     </TankProvider>
   );
 }

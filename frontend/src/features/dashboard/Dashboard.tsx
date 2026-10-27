@@ -1,41 +1,87 @@
 "use client";
 
-import { useState } from "react";
-import { SensorGauge } from "@/components/SensorGauge";
-import { TankRow, AlertRow } from "@/components/DashboardRows";
-import { TrendChart } from "@/components/TrendChart";
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { alerts, visionScanLog } from "@/data/ecoprawn";
-import { useTanks } from "@/context/TankContext";
-import { THRESHOLDS, GAUGE_SCALE, rangeStatus, scalePct } from "@/utils/thresholds";
-import { deriveTankAlerts } from "@/utils/alerts";
-import { AddTankModal } from "./AddTankModal";
+import { useMemo, useState } from "react";
+import type { Tank } from "@/features/dashboard/context/TankContext";
+import { SensorGauge } from "@/features/dashboard/components/SensorGauge";
+import { TankRow, AlertRow } from "@/features/dashboard/components/DashboardRows";
+import { TrendChart } from "@/features/dashboard/components/TrendChart";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { useTanks } from "@/features/dashboard/context/TankContext";
+import { THRESHOLDS, GAUGE_SCALE, rangeStatus, scalePct } from "@/features/dashboard/lib/thresholds";
+import { waterLevelGauge } from "@/features/dashboard/lib/water-level";
+import { useEsp32 } from "@/features/dashboard/context/Esp32Context";
 
 const FCR_TARGET = 1.5;
 const MAX_RECENT_ALERTS = 5;
 
 export function Dashboard() {
-  const { tanks, addTank, removeTank } = useTanks();
-  const [modalOpen, setModalOpen] = useState(false);
+  const { tanks, removeTank, waterTrend, feedSchedule, alertsLog: alerts, visionScanLog } = useTanks();
+  const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
+  const usb = useEsp32();
 
   const tankCount = tanks.length;
-  const totalBiomass = tanks.reduce((sum, t) => sum + t.biomass, 0);
-  const avgDO = tankCount ? tanks.reduce((sum, t) => sum + t.dissolvedOxygen, 0) / tankCount : 0;
-  const avgPh = tankCount ? tanks.reduce((sum, t) => sum + t.ph, 0) / tankCount : 0;
-  const avgTemp = tankCount ? tanks.reduce((sum, t) => sum + t.temperature, 0) / tankCount : 0;
-  const avgSalinity = tankCount ? tanks.reduce((sum, t) => sum + t.salinity, 0) / tankCount : 0;
-  const avgWaterLevel = tankCount ? tanks.reduce((sum, t) => sum + t.waterLevel, 0) / tankCount : 0;
-  const avgFcr = tankCount ? tanks.reduce((sum, t) => sum + t.fcr, 0) / tankCount : 0;
-  const openAlertTanks = tanks.filter((t) => t.status === "warn").length;
-
-  const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
-  const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0) || 1;
-  const feedPct = Math.round((dispensedToday / targetToday) * 100);
-
-  const totalPopulation = tanks.reduce((sum, t) => sum + t.population, 0);
-  const totalAbnormal = tanks.reduce((sum, t) => sum + t.abnormal, 0);
-  const avgBodyLength = tankCount ? tanks.reduce((sum, t) => sum + t.bodyLength, 0) / tankCount : 0;
-  const avgWeight = tankCount ? tanks.reduce((sum, t) => sum + t.weight, 0) / tankCount : 0;
+  const {
+    tanksById, totalBiomass, avgDO, avgPh, avgTemp, avgSalinity,
+    avgFcr, openAlertTanks, dispensedToday, targetToday, totalPopulation,
+    totalAbnormal, avgBodyLength, avgWeight,
+  } = useMemo(() => {
+    const tanksById = new Map<string, Tank>();
+    const totals = {
+      biomass: 0, dissolvedOxygen: 0, ph: 0, temperature: 0, salinity: 0,
+      fcr: 0, warnings: 0, dispensedToday: 0, targetToday: 0,
+      population: 0, abnormal: 0, bodyLength: 0, weight: 0,
+    };
+    for (const tank of tanks) {
+      tanksById.set(tank.id, tank);
+      totals.biomass += tank.biomass;
+      totals.dissolvedOxygen += tank.dissolvedOxygen;
+      totals.ph += tank.ph;
+      totals.temperature += tank.temperature;
+      totals.salinity += tank.salinity;
+      totals.fcr += tank.fcr;
+      totals.warnings += tank.status === "warn" ? 1 : 0;
+      totals.dispensedToday += tank.dispensedToday;
+      totals.targetToday += tank.targetToday;
+      totals.population += tank.population;
+      totals.abnormal += tank.abnormal;
+      totals.bodyLength += tank.bodyLength;
+      totals.weight += tank.weight;
+    }
+    const count = tanks.length || 1;
+    return {
+      tanksById,
+      totalBiomass: totals.biomass,
+      avgDO: totals.dissolvedOxygen / count,
+      avgPh: totals.ph / count,
+      avgTemp: totals.temperature / count,
+      avgSalinity: totals.salinity / count,
+      avgFcr: totals.fcr / count,
+      openAlertTanks: totals.warnings,
+      dispensedToday: totals.dispensedToday,
+      targetToday: totals.targetToday,
+      totalPopulation: totals.population,
+      totalAbnormal: totals.abnormal,
+      avgBodyLength: totals.bodyLength / count,
+      avgWeight: totals.weight / count,
+    };
+  }, [tanks]);
+  const trendsByTank = useMemo(() => {
+    const grouped = new Map<string, number[]>();
+    for (const reading of waterTrend) {
+      const values = grouped.get(reading.tankId);
+      if (values) values.push(reading.value);
+      else grouped.set(reading.tankId, [reading.value]);
+    }
+    return grouped;
+  }, [waterTrend]);
+  const selectedTank = selectedTankId ? tanksById.get(selectedTankId) : undefined;
+  const sensorValues = {
+    dissolvedOxygen: selectedTank?.dissolvedOxygen ?? avgDO,
+    ph: selectedTank?.ph ?? avgPh,
+    temperature: selectedTank?.temperature ?? avgTemp,
+    salinity: selectedTank?.salinity ?? avgSalinity,
+  };
+  const feedPct = targetToday > 0 ? Math.round((dispensedToday / targetToday) * 100) : 0;
 
   // Statuses derived from the averaged readings, so KPI text, gauge color
   // and ring fill all come from the same numbers.
@@ -52,34 +98,29 @@ export function Dashboard() {
     ? [
         {
           label: "Dissolved O₂",
-          value: `${avgDO.toFixed(1)} mg/L`,
-          pct: scalePct(avgDO, GAUGE_SCALE.dissolvedOxygen),
-          status: doStatus,
+          value: `${sensorValues.dissolvedOxygen.toFixed(1)} mg/L`,
+          pct: scalePct(sensorValues.dissolvedOxygen, GAUGE_SCALE.dissolvedOxygen),
+          status: rangeStatus(sensorValues.dissolvedOxygen, THRESHOLDS.dissolvedOxygen.min),
         },
         {
           label: "pH",
-          value: avgPh.toFixed(1),
-          pct: scalePct(avgPh, GAUGE_SCALE.ph),
-          status: rangeStatus(avgPh, THRESHOLDS.ph.min, THRESHOLDS.ph.max),
+          value: sensorValues.ph.toFixed(1),
+          pct: scalePct(sensorValues.ph, GAUGE_SCALE.ph),
+          status: rangeStatus(sensorValues.ph, THRESHOLDS.ph.min, THRESHOLDS.ph.max),
         },
         {
           label: "Temperature",
-          value: `${avgTemp.toFixed(1)} °C`,
-          pct: scalePct(avgTemp, GAUGE_SCALE.temperature),
-          status: rangeStatus(avgTemp, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max),
+          value: `${sensorValues.temperature.toFixed(1)} °C`,
+          pct: scalePct(sensorValues.temperature, GAUGE_SCALE.temperature),
+          status: rangeStatus(sensorValues.temperature, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max),
         },
         {
           label: "Salinity",
-          value: `${Math.round(avgSalinity)} ppt`,
-          pct: scalePct(avgSalinity, GAUGE_SCALE.salinity),
-          status: rangeStatus(avgSalinity, THRESHOLDS.salinity.min, THRESHOLDS.salinity.max),
+          value: `${Math.round(sensorValues.salinity)} ppt`,
+          pct: scalePct(sensorValues.salinity, GAUGE_SCALE.salinity),
+          status: rangeStatus(sensorValues.salinity, THRESHOLDS.salinity.min, THRESHOLDS.salinity.max),
         },
-        {
-          label: "Water Level",
-          value: `${Math.round(avgWaterLevel)}%`,
-          pct: scalePct(avgWaterLevel, GAUGE_SCALE.waterLevel),
-          status: rangeStatus(avgWaterLevel, THRESHOLDS.waterLevel.min),
-        },
+        waterLevelGauge(selectedTank ? [selectedTank] : tanks),
       ]
     : [];
 
@@ -176,30 +217,50 @@ export function Dashboard() {
       {/* SENSOR + ALERTS */}
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 mb-4">
         <Panel
-          title={`Live Sensor Array — ${tankCount} Tank${tankCount !== 1 ? "s" : ""} (avg)`}
-          badge="live · 5 sensors"
+          title={`Live Sensor Array — ${selectedTank?.name ?? `${tankCount} Tank${tankCount !== 1 ? "s" : ""} (avg)`}`}
+          badge={usb.status === "connected" ? `USB · ${tanks.find(tank => tank.id === usb.tankId)?.name ?? "ESP32"}` : "Recorded readings"}
         >
           {tankCount > 0 ? (
             <>
+              <div className="flex flex-wrap gap-2 mb-4" aria-label="Sensor readings by tank">
+                <button
+                  type="button"
+                  aria-pressed={!selectedTank}
+                  onClick={() => setSelectedTankId(null)}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${!selectedTank ? "border-[var(--mangrove)] bg-[var(--mangrove)] text-white" : "border-[var(--sand-dim)] text-[var(--water-deep)] hover:border-[var(--mangrove)]"}`}
+                >
+                  All tanks (avg)
+                </button>
+                {tanks.map((tank) => (
+                  <button
+                    key={tank.id}
+                    type="button"
+                    aria-pressed={selectedTank?.id === tank.id}
+                    onClick={() => setSelectedTankId(tank.id)}
+                    className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${selectedTank?.id === tank.id ? "border-[var(--mangrove)] bg-[var(--mangrove)] text-white" : "border-[var(--sand-dim)] text-[var(--water-deep)] hover:border-[var(--mangrove)]"}`}
+                  >
+                    {tank.name}
+                  </button>
+                ))}
+              </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
                 {sensorGauges.map((s) => (
                   <SensorGauge key={s.label} {...s} />
                 ))}
               </div>
               <div className="mt-4 pt-4 border-t border-[var(--sand-dim)]">
-                <TrendChart />
-                <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
-                  <span className="flex items-center gap-1.5">
-                    <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> DO (mg/L)
-                  </span>
-                  <span className="flex items-center gap-1.5 text-[var(--coral)]">
-                    <span
-                      className="inline-block w-3 h-[2px] bg-[var(--coral)]"
-                      style={{ borderTop: "2px dashed var(--coral)" }}
-                    />
-                    Temp (°C, scaled)
-                  </span>
-                </div>
+                {selectedTank ? (
+                  <>
+                    <TrendChart values={trendsByTank.get(selectedTank.id) ?? []} />
+                    <div className="mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
+                      <span className="inline-flex items-center gap-1.5">
+                        <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> {selectedTank.name} DO (mg/L)
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <p className="py-6 text-sm text-[rgba(11,35,32,0.6)]">Select a tank to see its dissolved oxygen trend.</p>
+                )}
               </div>
             </>
           ) : (

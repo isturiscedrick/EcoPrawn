@@ -30,6 +30,14 @@ export interface ApiTank {
   fcr: number;
   targetToday: number;
   dispensedToday: number;
+  hardwareTelemetries?: {
+    id: string;
+    tankId: string;
+    temperature: number | null;
+    distanceCm: number | null;
+    waterLevel: number | null;
+    recordedAt: string;
+  }[];
   telemetries: {
     dissolvedOxygen: number;
     ph: number;

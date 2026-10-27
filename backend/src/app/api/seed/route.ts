@@ -1,11 +1,11 @@
-import { requireAccess } from "@/lib/auth";
+import { accountAccess } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { seed } from "../../../../prisma/seed.cjs";
 export async function POST() {
-  const denied = await requireAccess({ write: true, admin: true });
-  if (denied) return denied;
+  const account = await accountAccess({ write: true, admin: true });
+  if (account instanceof Response) return account;
   try {
-    const result = await seed(prisma);
+    const result = await seed(prisma, account.id);
     return Response.json({ success: true, ...result });
   } catch {
     return Response.json(

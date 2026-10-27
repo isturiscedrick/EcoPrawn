@@ -18,6 +18,6 @@ export const DASHBOARD_NAV_ITEMS: DashboardNavItem[] = [
   { icon: "≈", label: "Water Quality", view: "water" },
   { icon: "◎", label: "Vision & Growth", view: "vision" },
   { icon: "▤", label: "Feeding", view: "feeding" },
-  { icon: "⇌", label: "Biofloc Loop", view: "biofloc" },
+  // { icon: "⇌", label: "Biofloc Loop", view: "biofloc" },
   { icon: "⚠", label: "Alerts", view: "alerts" },
 ];

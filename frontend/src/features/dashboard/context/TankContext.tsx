@@ -2,7 +2,9 @@
 import {
   createContext,
   useContext,
+  useCallback,
   useEffect,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -18,6 +20,7 @@ export interface Tank {
   temperature: number;
   salinity: number;
   waterLevel: number;
+  hardware?: NonNullable<ApiTank["hardwareTelemetries"]>[number];
   bodyLength: number; // cm
   weight: number; // g
   population: number;
@@ -28,7 +31,7 @@ export interface Tank {
   status: SensorStatus;
 }
 
-export type NewTankInput = Omit<Tank, "id" | "status">;
+export type NewTankInput = Omit<Tank, "id" | "status" | "hardware">;
 const empty: DashboardData = {
   waterTrend: [],
   growthTrend: [],
@@ -55,6 +58,7 @@ function mapTank(t: ApiTank): Tank {
     temperature: water?.temperature ?? 0,
     salinity: water?.salinity ?? 0,
     waterLevel: water?.waterLevel ?? 0,
+    hardware: t.hardwareTelemetries?.[0],
     bodyLength: scan?.bodyLength ?? 0,
     weight: scan?.weight ?? 0,
     population: scan?.population ?? 0,
@@ -90,9 +94,16 @@ export function TankProvider({ children }: { children: ReactNode }) {
   const [isDbConnected, setConnected] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  async function refreshTanks() {
+  const refreshing = useRef(false);
+  const mounted = useRef(true);
+  const controller = useRef<AbortController | null>(null);
+  const refreshTanks = useCallback(async () => {
+    if (refreshing.current) return;
+    refreshing.current = true;
+    const request = new AbortController();
+    controller.current = request;
     try {
-      const res = await fetch("/api/dashboard");
+      const res = await fetch("/api/dashboard", { cache: "no-store", signal: request.signal });
       if (res.status === 401) {
         window.location.replace("/login?error=expired");
         return;
@@ -104,20 +115,40 @@ export function TankProvider({ children }: { children: ReactNode }) {
       const result: DashboardData & { success: boolean; tanks: ApiTank[] } =
         await res.json();
       if (!result.success) throw new Error("Dashboard data unavailable");
+      if (!mounted.current) return;
       setTanks(result.tanks.map(mapTank));
       setData(result);
       setConnected(true);
       setError(null);
     } catch (e) {
+      if (request.signal.aborted || !mounted.current) return;
       setConnected(false);
       setError(e instanceof Error ? e.message : "Unable to load dashboard");
     } finally {
-      setLoading(false);
+      if (controller.current === request) {
+        refreshing.current = false;
+        controller.current = null;
+      }
+      if (mounted.current && !request.signal.aborted) setLoading(false);
     }
-  }
-  useEffect(() => {
-    void refreshTanks();
   }, []);
+  useEffect(() => {
+    mounted.current = true;
+    void refreshTanks();
+    const refreshVisible = () => { if (!document.hidden) void refreshTanks(); };
+    const timer = setInterval(refreshVisible, 5000);
+    document.addEventListener("visibilitychange", refreshVisible);
+    window.addEventListener("ecoprawn:hardware-saved", refreshVisible);
+    return () => {
+      mounted.current = false;
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", refreshVisible);
+      window.removeEventListener("ecoprawn:hardware-saved", refreshVisible);
+      controller.current?.abort();
+      controller.current = null;
+      refreshing.current = false;
+    };
+  }, [refreshTanks]);
   async function mutate(url: string, method: string, body?: unknown) {
     try {
       const res = await fetch(url, {

@@ -1,16 +1,43 @@
 "use client";
 
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { TrendChart } from "@/components/TrendChart";
-import { ScrollFadeContainer } from "@/components/ScrollFadeContainer";
-import { useTanks } from "@/context/TankContext";
-import { THRESHOLDS, rangeStatus } from "@/utils/thresholds";
+import { useState, type KeyboardEvent } from "react";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { TrendChart } from "@/features/dashboard/components/TrendChart";
+import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
+import { useTanks } from "@/features/dashboard/context/TankContext";
+import { THRESHOLDS, rangeStatus } from "@/features/dashboard/lib/thresholds";
+import { Esp32Connection } from "@/features/dashboard/components/Esp32Connection";
 
 export function WaterQuality() {
-  const { tanks } = useTanks();
+  const { tanks, waterTrend } = useTanks();
+  const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
   const tankCount = tanks.length;
   const warnCount = tanks.filter((t) => t.status === "warn").length;
-  const first = tanks[0];
+  const selectedTank = tanks.find((tank) => tank.id === selectedTankId) ?? tanks[0];
+  const selectedTankIndex = tanks.findIndex((tank) => tank.id === selectedTank?.id);
+
+  function handleTankTabKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    let nextIndex: number;
+    switch (event.key) {
+      case "ArrowRight":
+        nextIndex = (index + 1) % tankCount;
+        break;
+      case "ArrowLeft":
+        nextIndex = (index - 1 + tankCount) % tankCount;
+        break;
+      case "Home":
+        nextIndex = 0;
+        break;
+      case "End":
+        nextIndex = tankCount - 1;
+        break;
+      default:
+        return;
+    }
+    event.preventDefault();
+    setSelectedTankId(tanks[nextIndex].id);
+    event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>("[role='tab']")[nextIndex]?.focus();
+  }
 
   const avgDO = tankCount ? tanks.reduce((sum, t) => sum + t.dissolvedOxygen, 0) / tankCount : 0;
   const avgPh = tankCount ? tanks.reduce((sum, t) => sum + t.ph, 0) / tankCount : 0;
@@ -20,37 +47,37 @@ export function WaterQuality() {
   const phStatus = rangeStatus(avgPh, THRESHOLDS.ph.min, THRESHOLDS.ph.max);
   const tempStatus = rangeStatus(avgTemp, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max);
 
-  const thresholds = first
+  const thresholds = selectedTank
     ? [
         {
           label: "Dissolved O₂",
           range: "≥ 4.5 mg/L",
-          current: `${first.dissolvedOxygen.toFixed(1)} mg/L`,
-          status: first.dissolvedOxygen >= 4.5 ? "ok" : "warn",
+          current: `${selectedTank.dissolvedOxygen.toFixed(1)} mg/L`,
+          status: selectedTank.dissolvedOxygen >= 4.5 ? "ok" : "warn",
         },
         {
           label: "pH",
           range: "7.5 – 8.5",
-          current: first.ph.toFixed(1),
-          status: first.ph >= 7.5 && first.ph <= 8.5 ? "ok" : "warn",
+          current: selectedTank.ph.toFixed(1),
+          status: selectedTank.ph >= 7.5 && selectedTank.ph <= 8.5 ? "ok" : "warn",
         },
         {
           label: "Temperature",
           range: "26 – 30 °C",
-          current: `${first.temperature.toFixed(1)} °C`,
-          status: first.temperature >= 26 && first.temperature <= 30 ? "ok" : "warn",
+          current: `${selectedTank.temperature.toFixed(1)} °C`,
+          status: selectedTank.temperature >= 26 && selectedTank.temperature <= 30 ? "ok" : "warn",
         },
         {
           label: "Salinity",
           range: "10 – 20 ppt",
-          current: `${first.salinity} ppt`,
-          status: first.salinity >= 10 && first.salinity <= 20 ? "ok" : "warn",
+          current: `${selectedTank.salinity} ppt`,
+          status: selectedTank.salinity >= 10 && selectedTank.salinity <= 20 ? "ok" : "warn",
         },
         {
           label: "Water Level",
           range: "≥ 90%",
-          current: `${first.waterLevel}%`,
-          status: first.waterLevel >= 90 ? "ok" : "warn",
+          current: `${selectedTank.waterLevel}%`,
+          status: selectedTank.waterLevel >= 90 ? "ok" : "warn",
         },
       ]
     : [];
@@ -112,9 +139,46 @@ export function WaterQuality() {
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
-            <Panel title={`Live Sensor Array — ${first.name}`} badge="updated 8s ago">
-              <TrendChart />
+          <div className="mb-4">
+            <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
+              Tank details
+            </div>
+            <div role="tablist" aria-label="Water quality by tank" className="flex gap-2 overflow-x-auto pb-1">
+              {tanks.map((tank, index) => (
+                <button
+                  key={tank.id}
+                  id={`water-tank-tab-${index}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedTankIndex === index}
+                  aria-controls="water-tank-details"
+                  tabIndex={selectedTankIndex === index ? 0 : -1}
+                  onClick={() => setSelectedTankId(tank.id)}
+                  onKeyDown={(event) => handleTankTabKeyDown(event, index)}
+                  className={`shrink-0 rounded-full border px-4 py-2 text-[12.5px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove)] ${
+                    selectedTankIndex === index
+                      ? "border-[var(--mangrove)] bg-[var(--mangrove)] text-white"
+                      : "border-[var(--sand-dim)] bg-white text-[var(--water-deep)] hover:border-[var(--mangrove)]"
+                  }`}
+                >
+                  {tank.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <Esp32Connection key={selectedTank.id} tankId={selectedTank.id} tankName={selectedTank.name} />
+          </div>
+
+          <div
+            id="water-tank-details"
+            role="tabpanel"
+            aria-labelledby={`water-tank-tab-${selectedTankIndex}`}
+            className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4"
+          >
+            <Panel title={`Recorded oxygen history · ${selectedTank.name}`} badge="Recorded readings">
+              <TrendChart values={waterTrend.filter((reading) => reading.tankId === selectedTank.id).map((reading) => reading.value)} />
               <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
                 <span className="flex items-center gap-1.5">
                   <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> DO (mg/L)
@@ -126,7 +190,7 @@ export function WaterQuality() {
               </div>
             </Panel>
 
-            <Panel title="Parameter Thresholds" badge={first.name}>
+            <Panel title="Parameter Thresholds" badge={selectedTank.name}>
               <div className="flex flex-col gap-2.5">
                 {thresholds.map((t) => (
                   <div

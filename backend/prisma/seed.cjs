@@ -1,9 +1,11 @@
 const { PrismaClient } = require("@prisma/client");
 const demo = require("../src/data/demo.json");
 
-async function seed(prisma) {
+async function seed(prisma, userId) {
+  if (!userId) throw new Error("An account ID is required to seed demo records");
+  if (!await prisma.user.findUnique({ where: { id: userId } })) throw new Error("Account not found");
   return prisma.$transaction(async (db) => {
-    if (await db.tank.count()) return { seeded: false };
+    if (await db.tank.count({ where: { userId } })) return { seeded: false };
     const now = Date.now();
     const ago = (hours) => new Date(now - hours * 3600000);
     const water = demo.waterQualityByTank[0];
@@ -11,6 +13,7 @@ async function seed(prisma) {
     const tank = await db.tank.create({
       data: {
         ...demo.tank,
+        userId,
         telemetries: {
           create: {
             dissolvedOxygen: water.dissolvedOxygen,
@@ -47,6 +50,7 @@ async function seed(prisma) {
         },
         alerts: {
           create: demo.alertsLog.map((a, i) => ({
+            userId,
             icon: a.icon,
             title: a.title,
             detail: a.detail,
@@ -57,10 +61,11 @@ async function seed(prisma) {
       },
     });
     await db.bioflocMetric.create({
-      data: { flocVolume: 12.4, cnRatio: 14.8, tss: 310, alkalinity: 148 },
+      data: { userId, flocVolume: 12.4, cnRatio: 14.8, tss: 310, alkalinity: 148 },
     });
     await db.effluentLog.createMany({
       data: demo.effluentLog.map((e, i) => ({
+        userId,
         tankId: tank.id,
         event: e.event,
         detail: e.detail,
@@ -75,7 +80,7 @@ async function seed(prisma) {
 module.exports = { seed };
 if (require.main === module) {
   const prisma = new PrismaClient();
-  seed(prisma)
+  seed(prisma, process.env.SEED_USER_ID)
     .then((result) =>
       console.log(
         result.seeded

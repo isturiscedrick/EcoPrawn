@@ -29,9 +29,12 @@ The API listens on [http://localhost:4000](http://localhost:4000). Run the front
 | `/api/tanks` | GET, POST | List or create tanks |
 | `/api/tanks/:id` | GET, PATCH, DELETE | Read, update or delete a tank |
 | `/api/water` | GET, POST | Read or record telemetry, with optional `tankId` query filter |
+| `/api/hardware` | GET, POST | Read or record partial ESP32 temperature/distance measurements for an owned tank |
 | `/api/seed` | POST | Populate demo data when there are no tanks |
 
 Use `npm run db:seed` during local setup. The HTTP seed endpoint now requires an authenticated administrator and a same-origin POST.
+
+For the ESP32 USB test, open **Water Quality**, select a tank, and click **Connect ESP32** in a browser with Web Serial. The browser reads the existing sketch at 115200 baud and posts temperature and ultrasonic distance through the authenticated `/api/hardware` route. Hardware readings use the separate `HardwareTelemetry` table, preserve missing measurements as null, and do not send SMS during this test. See [USB setup and wiring](../hardware/README.md). Run `npm run test:hardware` for parser, input validation, calibration and account-isolation checks.
 
 Use `npm run build` and `npm start` for production, `npm run typecheck` to check TypeScript, and `npm run db:studio` to browse the database. Deploy this service separately and set the frontend's `BACKEND_URL` before building the frontend. Keep database credentials in this backend only.
 
@@ -64,3 +67,74 @@ Run `npm run test:google-user` for account-linking and role tests, and `npm run 
 Manual verification: sign in with an existing account and a new Google account, check Authentication > Users, confirm authId links each app User and that new roles are operator, reload the dashboard, and log out. Complete Google consent in your browser; tests cannot substitute for that step.
 
 References: [Supabase Google sign-in](https://supabase.com/docs/guides/auth/social-sign-in/auth-google), [server-side cookies](https://supabase.com/docs/guides/auth/server-side/creating-a-client).
+
+## Water-quality SMS with UniSMS
+
+Water readings submitted to `POST /api/water` now create warnings for all five target ranges and can send an SMS to the signed-in tank owner's saved number. The backend calls UniSMS and saves delivery history in the same Supabase PostgreSQL database as the tanks. No Supabase service-role key or browser SMS credentials are needed.
+
+### Provider setup
+
+1. In your [UniSMS dashboard](https://unismsapi.com/), get the API secret key and the sender ID assigned to your account. The sender ID is required; do not assume `EcoPrawn` or `UniSMS` is available on your account.
+2. Set these variables in `backend/.env` and your hosted backend's environment:
+
+   ```dotenv
+   UNISMS_API_KEY="your-secret-key"
+   UNISMS_SENDER_ID="your-assigned-sender-id"
+   UNISMS_WEBHOOK_SECRET="your-unisms-webhook-secret"
+   ```
+
+3. Restart the backend. Sign in, open **Dashboard > Alerts**, save a Philippine mobile number, and enable SMS alerts. Numbers such as `09171234567` normalize to `+639171234567`. Use a number you own or have permission to notify.
+4. Click **Send test SMS**. This sends a real message and uses provider credits. The UI shows `pending` when queued; that does not mean it has been sent yet.
+5. For delivery updates, register `https://YOUR_FRONTEND_DOMAIN/api/sms/webhook` in the UniSMS dashboard. The frontend proxies this route to the backend; a publicly reachable backend HTTPS URL works too. Set `UNISMS_WEBHOOK_SECRET` to the Webhook Secret Key shown by UniSMS. Localhost cannot receive provider webhooks without an HTTPS tunnel. Refresh delivery status on the Alerts page after delivery.
+
+The provider setup is still required even though the Supabase schema change has already been applied to project `uzedgsewqhehhnddlvsh`. The local `.env` template contains empty placeholders. Never commit your secret values or put them in frontend variables.
+
+### Sending behavior
+
+- Alerts are off by default and belong to each app account. The backend always derives the owner from the verified Supabase session and checks tank ownership.
+- Thresholds are DO below 4.5 mg/L, pH outside 7.5–8.5, temperature outside 26–30 C, salinity outside 10–20 ppt, or water level below 90%. All warnings for a reading share one SMS.
+- A database transaction permits one SMS attempt every five minutes per account across all tanks, including test messages and rejected requests. The test button shows the remaining time and the API returns `Retry-After` for cooldown responses. Disabled alerts return a separate error. Warnings during that interval remain in the event log; SMS messages are skipped rather than queued for later.
+- SMS is triggered by new readings submitted through the backend, not by viewing the dashboard, loading demo fixtures, or writing directly to Supabase. Hardware must submit readings through the authenticated API. This does not add a background sensor poller.
+- Provider and SMS database failures do not undo saved water readings. Explicit provider validation/authentication rejections are recorded as `rejected` with the returned field errors. A timeout or ambiguous send result is recorded as `unknown`. A process interruption may leave `sending`. Check UniSMS before attempting another send; paid requests are never automatically retried. Authenticated webhooks can reconcile uncertain states.
+- Webhooks verify the shared secret with a constant-time comparison. They match the saved provider reference or the delivery ID metadata plus recipient. Late retry events cannot overwrite terminal `sent` or `failed` results. Delivery history is backend-only; the new table enables RLS and revokes direct `anon`/`authenticated` access.
+
+| Endpoint | Methods | Purpose |
+| --- | --- | --- |
+| `/api/sms/settings` | GET, PATCH | Own phone, preference, and ten most recent deliveries |
+| `/api/sms/test` | POST | Send a fixed test message to the saved number |
+| `/api/sms/webhook` | POST | Receive UniSMS delivery events using its webhook secret |
+
+For a fresh database, generate the client and create tables from `prisma/schema.prisma`. For an existing pre-SMS hosted database, `prisma/add-sms.sql` is the additive migration for the `ecoprawn` schema. Change the schema qualifier for other installations. Do not rerun this migration on the already updated project.
+
+Run `npm run test:sms` for provider, phone, threshold, cooldown, account-isolation, webhook and telemetry-failure checks. These tests mock UniSMS and do not send paid messages. The existing account and Google-user tests remain available.
+
+Run `npm run test:performance` for concurrent dashboard/settings reads, response compatibility, account filters and query limits. Add `-- --compare-ref YOUR_BASE_COMMIT` to compare latency using 25 ms simulated reads and ten connection slots at one and ten concurrent requests. Simulated results are not production measurements.
+
+For a real database comparison, run `node --env-file=.env scripts/test-performance.mjs --compare-ref YOUR_BASE_COMMIT --database`. This executes only dashboard and SMS settings GET handlers against the configured database, selects an existing tank owner locally, and reports timing, SQL statement counts and errors without printing account data. It excludes browser authentication and sends no SMS. No schema or connection-pool configuration is changed.
+
+Read-only measurements against the configured Supabase database on October 25, 2026, compared with commit `bb9be8d45d912f904d375ad9111364cd9fd1cac0`:
+
+| GET handler | Concurrent requests | Median before | Median after | p95 before | p95 after |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Dashboard | 1 | 1,384 ms | 347 ms | 1,393 ms | 681 ms |
+| Dashboard | 10 | 2,076 ms | 1,143 ms | 3,350 ms | 1,422 ms |
+| SMS settings | 1 | 221 ms | 114 ms | 222 ms | 228 ms |
+| SMS settings | 10 | 451 ms | 333 ms | 462 ms | 333 ms |
+
+Each case used a warm-up followed by three sequential requests or one batch of ten requests, with zero request errors. This small sample measures handler/database time, not browser load or Google authentication. Dashboard SQL statements fell from 12 to 10 per sequential request, including transaction control; settings remained at two. Concurrent statement counts vary because Prisma batches identical reads and the pool may issue connection checks. Network latency and pool capacity affect subsequent runs.
+
+Reference: [UniSMS SMS API](https://unismsapi.com/docs/sms).
+
+### Test a low-oxygen alert
+
+Run `npm run test:oxygen` from `backend` for an automated test without network requests or paid SMS. It exercises the water route and dashboard alert derivation: healthy oxygen and the 4.5 mg/L boundary stay quiet, while 3 mg/L creates one warning and invokes SMS for the tank owner. It also checks that another account's tank cannot receive the reading.
+
+To create an actual test alert in Supabase and send an SMS to your saved number:
+
+```bash
+npm run test:oxygen:live
+```
+
+This requires backend `.env` credentials and exactly one SMS-enabled account. If multiple accounts are enabled, select the app User ID explicitly with `npm run test:oxygen:live -- --user-id YOUR_APP_USER_ID`. The command respects the five-minute SMS cooldown and creates no data while that cooldown is active.
+
+The live test creates or reuses a separate tank named `TEST - Oxygen alert`, records oxygen at 3 mg/L with the other parameters in range, and invokes the real water route. It verifies the persisted alert and the dashboard API response. The CLI supplies the selected account identity; it does not test browser authentication. The test tank and alert stay in the database so you can inspect them in the dashboard. Each live run can use SMS credits. `pending` means UniSMS accepted the request; delivery confirmation comes separately from UniSMS.

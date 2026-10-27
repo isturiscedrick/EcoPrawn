@@ -2,7 +2,17 @@
 
 Project: `uzedgsewqhehhnddlvsh`.
 
-The application tables live in the private `ecoprawn` schema. The existing local records were copied with their IDs, timestamps, and relationships intact. Row-level security is enabled on all eight tables with no client policies. Application access goes through the backend's PostgreSQL connection, not the browser Data API.
+The application tables live in the private `ecoprawn` schema. The existing local records were copied with their IDs, timestamps, and relationships intact. Row-level security and account policies are enabled on all eight tables. Application access goes through the backend's PostgreSQL connection, not the browser Data API. The schema remains inaccessible to browser roles.
+
+## Account ownership
+
+`Tank`, `BioflocMetric`, `EffluentLog`, and `Alert` have an indexed `userId` foreign key to `User.id`. Telemetry, scans, and feed schedules inherit ownership through their tank. Logs and alerts retain their owner when a tank is deleted. Every dashboard and tank/water query filters by the verified account, including mutations. Administrator accounts use the same ownership restrictions.
+
+`prisma/account-ownership.sql` records the hosted `account_ownership` migration. Apply it after the initial schema when provisioning another database. The `userId` columns are nullable only to preserve legacy records whose owner is unknown. These records are hidden from account queries; do not automatically assign them to the next account that signs in. A database administrator must establish the owner before assigning them. New API and seed records always receive the verified account's ID.
+
+RLS policies provide additional protection for authenticated database access. Prisma uses a privileged connection, so the backend must continue filtering by account. The profile policy permits reading only the signed-in user's profile, with no client profile writes or role changes.
+
+Run `npm run test:accounts` to check cross-account API isolation. Demo seeding through `/api/seed` remains administrator-only and seeds only that administrator's account. For CLI seeding, set `SEED_USER_ID` to an existing application `User.id` before running `npm run db:seed`; seeding without an owner fails.
 
 ## Finish the backend connection
 

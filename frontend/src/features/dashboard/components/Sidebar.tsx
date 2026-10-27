@@ -1,22 +1,42 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import Link, { useLinkStatus } from "next/link";
+import { usePathname } from "next/navigation";
 import { BrandMark } from "@/components/layout/BrandMark";
-import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
+import { DASHBOARD_NAV_ITEMS, type DashboardNavItem, type DashboardView } from "@/config/nav";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 
+function SidebarNavContent({ item, active }: { item: DashboardNavItem; active: boolean }) {
+  const { pending } = useLinkStatus();
+  return (
+    <span
+      aria-busy={pending}
+      className={`flex items-center gap-2.5 whitespace-nowrap rounded-lg px-3 py-2.5 text-left text-[13.5px] font-medium transition-colors duration-200 lg:w-full ${
+        active || pending
+          ? "bg-[rgba(232,98,58,0.16)] font-semibold text-[var(--coral)]"
+          : "text-[rgba(242,235,221,0.62)] hover:bg-[rgba(242,235,221,0.06)] hover:text-[var(--sand)]"
+      }`}
+    >
+      <span aria-hidden="true" className="w-4 text-center text-sm">{item.icon}</span>
+      <span className="hidden sm:inline">{item.label}</span>
+      {pending ? (
+        <span role="status" aria-label={`Opening ${item.label}`} className="ml-auto inline-flex">
+          <span aria-hidden="true" className="h-3 w-3 rounded-full border-2 border-current border-r-transparent animate-spin motion-reduce:animate-none" />
+        </span>
+      ) : active ? (
+        <span className="ml-auto hidden h-1.5 w-1.5 rounded-full bg-[var(--coral)] lg:block" />
+      ) : null}
+    </span>
+  );
+}
+
 export function Sidebar() {
-  const router = useRouter();
   const pathname = usePathname();
   const activeView = (pathname.split("/dashboard/")[1] ?? "overview") as DashboardView;
   const { isDbConnected } = useTanks();
 
   const [confirmingLogout, setConfirmingLogout] = useState(false);
-
-  function onNavigate(view: DashboardView) {
-    router.push(view === "overview" ? "/dashboard" : `/dashboard/${view}`);
-  }
 
   function onLogoutClick() {
     setConfirmingLogout(true);
@@ -88,23 +108,16 @@ export function Sidebar() {
         {DASHBOARD_NAV_ITEMS.map((item) => {
           const isActive = item.view === activeView;
           return (
-            <button
+            <Link
               key={item.label}
-              type="button"
-              onClick={() => onNavigate(item.view)}
+              href={item.view === "overview" ? "/dashboard" : `/dashboard/${item.view}`}
+              prefetch={!isActive}
+              aria-label={item.label}
               aria-current={isActive ? "page" : undefined}
-              className={`flex items-center gap-2.5 whitespace-nowrap rounded-lg px-3 py-2.5 text-left text-[13.5px] font-medium transition-all duration-200 lg:w-full ${
-                isActive
-                  ? "bg-[rgba(232,98,58,0.16)] font-semibold text-[var(--coral)]"
-                  : "text-[rgba(242,235,221,0.62)] hover:bg-[rgba(242,235,221,0.06)] hover:text-[var(--sand)]"
-              }`}
+              className="rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove-light)] lg:w-full"
             >
-              <span className="w-4 text-center text-sm">{item.icon}</span>
-              <span className="hidden sm:inline">{item.label}</span>
-              {isActive && (
-                <span className="ml-auto hidden h-1.5 w-1.5 rounded-full bg-[var(--coral)] lg:block" />
-              )}
-            </button>
+              <SidebarNavContent item={item} active={isActive} />
+            </Link>
           );
         })}
       </div>

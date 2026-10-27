@@ -1,10 +1,10 @@
 "use client";
 
-import { AlertRow } from "@/components/DashboardRows";
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { alertsLog } from "@/data/ecoprawn";
-import { useTanks } from "@/context/TankContext";
-import { deriveTankAlerts } from "@/utils/alerts";
+import { AlertRow } from "@/features/dashboard/components/DashboardRows";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { useTanks } from "@/features/dashboard/context/TankContext";
+import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
+import { SmsSettings } from "@/features/dashboard/components/SmsSettings";
 
 export function AlertsView() {
   const { tanks } = useTanks();
@@ -55,6 +55,7 @@ export function AlertsView() {
         />
       </div>
 
+      <div className="mb-5"><SmsSettings /></div>
       <Panel title="Alert & Event Log" badge={`${allAlerts.length} events`}>
         <div>
           {allAlerts.map((a) => (

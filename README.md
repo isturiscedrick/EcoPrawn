@@ -96,13 +96,13 @@ frontend/
 
 ## Current limitations
 
-This frontend is currently driven by static data, not live hardware:
+The dashboard combines database-backed tanks with demo data and optional ESP32 USB testing:
 
 - Sensor readings, feed schedule, scan log, effluent log, and event log come from `src/data/ecoprawn.ts` and the default tank in `TankContext`.
 - Trend charts are static illustrations.
 - **Login is not wired to authentication.** Submitting the form navigates to `/dashboard` (see `useLoginForm.ts`).
 - **The contact form does not send anything.** It is not connected to a mail service yet.
-- The dashboard does not yet read from the on-site server or cloud database, so connecting the sensor and vision pipeline to this UI is still open work.
+- The Water Quality page can connect an ESP32 over USB and save temperature and ultrasonic distance. Overview's Water Level gauge refreshes from those readings and uses distance until the tank is calibrated for percentage. USB stays connected when navigating between dashboard pages. See [ESP32 USB setup](hardware/README.md). Wi-Fi device authentication and the vision pipeline remain open work.
 
 ## Design tokens
 

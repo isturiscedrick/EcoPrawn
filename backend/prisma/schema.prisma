@@ -9,6 +9,9 @@ datasource db {
 
 model Tank {
   id              String             @id @default(cuid())
+  // Null is reserved for legacy records whose owner cannot be established.
+  userId          String?
+  user            User?              @relation(fields: [userId], references: [id], onDelete: SetNull)
   name            String
   pl              String             @default("PL-42")
   biomass         Float              @default(31.2) // in kg
@@ -19,10 +22,25 @@ model Tank {
   updatedAt       DateTime           @updatedAt
 
   telemetries     SensorTelemetry[]
+  hardwareTelemetries HardwareTelemetry[]
   visionScans     VisionScan[]
   feedSchedules   FeedSchedule[]
   effluentLogs    EffluentLog[]
   alerts          Alert[]
+  @@index([userId])
+}
+
+// Partial measurements from connected hardware. Absent sensors stay null.
+model HardwareTelemetry {
+  id          String   @id @default(cuid())
+  tankId      String
+  tank        Tank     @relation(fields: [tankId], references: [id], onDelete: Cascade)
+  temperature Float?
+  distanceCm  Float?
+  waterLevel  Float?
+  recordedAt  DateTime @default(now())
+
+  @@index([tankId, recordedAt])
 }
 
 model SensorTelemetry {
@@ -68,15 +86,20 @@ model FeedSchedule {
 
 model BioflocMetric {
   id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   flocVolume Float    // mL/L (FV)
   cnRatio    Float    // C:N ratio
   tss        Float    // Total Suspended Solids (mg/L)
   alkalinity Float    // mg/L CaCO3
   recordedAt DateTime @default(now())
+  @@index([userId, recordedAt])
 }
 
 model EffluentLog {
   id          String   @id @default(cuid())
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   tankId      String?
   tank        Tank?    @relation(fields: [tankId], references: [id], onDelete: SetNull)
   event       String
@@ -84,10 +107,14 @@ model EffluentLog {
   destination String?  // "mangrove" | "wetland"
   volumeL     Float?
   recordedAt  DateTime @default(now())
+  @@index([userId, recordedAt])
+  @@index([tankId])
 }
 
 model Alert {
   id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   tankId    String?
   tank      Tank?    @relation(fields: [tankId], references: [id], onDelete: SetNull)
   icon      String   @default("info") // "warn" | "info"
@@ -95,6 +122,8 @@ model Alert {
   detail    String
   resolved  Boolean  @default(false)
   createdAt DateTime @default(now())
+  @@index([userId, createdAt])
+  @@index([tankId])
 }
 
 model User {
@@ -105,4 +134,28 @@ model User {
   password  String?
   role      String   @default("operator") // "operator" | "admin"
   createdAt DateTime @default(now())
+  tanks     Tank[]
+  bioflocMetrics BioflocMetric[]
+  effluentLogs EffluentLog[]
+  alerts    Alert[]
+  smsPhone  String?
+  smsEnabled Boolean @default(false)
+  lastSmsAt DateTime?
+  smsDeliveries SmsDelivery[]
+}
+
+model SmsDelivery {
+  id          String @id @default(cuid())
+  userId      String
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tankId      String?
+  recipient   String
+  content     String
+  status      String @default("sending")
+  referenceId String? @unique
+  error       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, createdAt])
 }
