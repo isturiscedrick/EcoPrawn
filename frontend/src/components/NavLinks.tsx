@@ -13,7 +13,10 @@ const focusRing =
 export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
   if (variant === "desktop") {
     return (
-      <nav className="hidden h-full items-center gap-8 md:flex" aria-label="Primary navigation">
+      <nav
+        className="hidden items-center gap-1 rounded-full border-2 border-[var(--ep-primary)] bg-white p-1 md:flex"
+        aria-label="Primary navigation"
+      >
         {LANDING_NAV_LINKS.map(([label, href]) => {
           const isActive = href === activeHref;
           return (
@@ -21,10 +24,10 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
               key={label}
               href={href}
               aria-current={isActive ? "page" : undefined}
-              className={`relative flex h-full items-center rounded-sm px-1 text-base font-semibold transition-colors duration-200 ${focusRing} after:absolute after:bottom-[10px] after:left-0 after:right-0 after:h-[3px] after:origin-left after:bg-[var(--ep-accent)] after:transition-transform after:duration-200 ${
+              className={`rounded-full px-5 py-1.5 text-base font-semibold transition-colors duration-200 ${focusRing} ${
                 isActive
-                  ? "text-[var(--ep-accent)] after:scale-x-100"
-                  : "text-[var(--ep-primary)] after:scale-x-0 hover:text-[var(--ep-accent)] hover:after:scale-x-100"
+                  ? "bg-[var(--ep-primary)] text-[var(--ep-bg)]"
+                  : "text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]"
               }`}
             >
               {label}
