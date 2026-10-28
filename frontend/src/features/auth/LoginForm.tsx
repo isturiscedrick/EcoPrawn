@@ -101,7 +101,8 @@ export function LoginForm() {
   const [canSubmit, setCanSubmit] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
-  // Sign up is split in two pages. Page 1: name + username. Page 2: phone + password.
+  // Sign up is split in two pages. Page 1: full name + mobile number.
+  // Page 2: username + password.
   const onDetailsPage = step === "signup" && signupPage === 1;
   const onContactPage = step === "signup" && signupPage === 2;
 
@@ -169,10 +170,10 @@ export function LoginForm() {
     return () => window.removeEventListener("pageshow", reset);
   }, []);
 
-  // Move focus to the phone field when the second sign-up page opens.
+  // Move focus to the username field when the second sign-up page opens.
   useEffect(() => {
     if (step === "signup" && signupPage === 2) {
-      formRef.current?.querySelector<HTMLInputElement>('input[name="phone"]')?.focus();
+      formRef.current?.querySelector<HTMLInputElement>('input[name="username"]')?.focus();
     }
   }, [step, signupPage]);
 
@@ -221,11 +222,12 @@ export function LoginForm() {
     }
   }
 
-  // Validate only the page-1 fields, then reveal page 2. The form is
-  // noValidate on page 1, so this is the only validation that runs there.
+  // Validate only the page-1 fields (full name + mobile number), then reveal
+  // page 2. The form is noValidate on page 1, so this is the only validation
+  // that runs there.
   function goToContactPage(form: HTMLFormElement) {
     const fields = form.querySelectorAll<HTMLInputElement>(
-      'input[name="name"], input[name="username"]'
+      'input[name="name"], input[name="phone"]'
     );
     for (const field of Array.from(fields)) {
       if (!field.reportValidity()) return;
@@ -265,9 +267,9 @@ export function LoginForm() {
       </h1>
       <p className="mt-2 text-[14px] leading-[1.6] text-[rgba(11,35,32,0.6)]">
         {onDetailsPage
-          ? "Start with your name and a username."
+          ? "Start with your name and mobile number."
           : onContactPage
-          ? "Add your mobile number and a password. We'll text you a code."
+          ? "Choose a username and a password. We'll text a code to your mobile number."
           : step === "verify"
           ? "Enter the code from your text message to finish signing up."
           : step === "complete"
@@ -370,6 +372,7 @@ export function LoginForm() {
               </div>
             )}
 
+            {/* Signup page 1: full name */}
             {step === "signup" && (
               <div className={onContactPage ? "hidden" : undefined}>
                 <label htmlFor={`${uid}-name`} className={labelClass}>
@@ -411,8 +414,9 @@ export function LoginForm() {
               </div>
             )}
 
+            {/* Signup page 2 (and the "complete" step): username */}
             {(step === "signup" || step === "complete") && (
-              <div className={onContactPage ? "hidden" : undefined}>
+              <div className={onDetailsPage ? "hidden" : undefined}>
                 <label htmlFor={`${uid}-username`} className={labelClass}>
                   Username
                 </label>
@@ -497,8 +501,9 @@ export function LoginForm() {
               </div>
             )}
 
+            {/* Signup page 1 (and the verify step): mobile number */}
             {(step === "signup" || step === "verify") && (
-              <div className={onDetailsPage ? "hidden" : undefined}>
+              <div className={onContactPage ? "hidden" : undefined}>
                 <label htmlFor={`${uid}-phone`} className={labelClass}>
                   Mobile number
                 </label>
@@ -542,6 +547,7 @@ export function LoginForm() {
               </div>
             )}
 
+            {/* Signin and signup page 2: password */}
             {(step === "signin" || step === "signup") && (
               <div className={onDetailsPage ? "hidden" : undefined}>
                 <div className="mb-1.5 flex items-center justify-between">
@@ -709,8 +715,8 @@ export function LoginForm() {
                   setError("");
                   setNotice("");
                   // Leaving page 2 blurs its fields first; forget that so an
-                  // empty phone isn't already red when the user comes back.
-                  touched.current.delete("phone");
+                  // empty username isn't already red when the user comes back.
+                  touched.current.delete("username");
                   touched.current.delete("password");
                   setSignupPage(1);
                 }}
