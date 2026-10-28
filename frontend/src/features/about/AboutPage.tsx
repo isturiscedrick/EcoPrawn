@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { Icon } from "@/components/Icon";
+import { PageHero } from "@/components/layout/PageHero";
+import { Icon, IconChip, type IconName } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
 import { SectionNav } from "./SectionNav";
 import { objectives, features, inScope, outOfScope } from "@/data/ecoprawn";
@@ -15,12 +16,28 @@ const heading =
 const lead =
   "mt-4 max-w-[36rem] text-lg leading-relaxed text-[var(--ep-text-muted)]";
 
+// One icon per objective / system, in the same order as the arrays in data/ecoprawn.ts.
+const OBJECTIVE_ICONS: IconName[] = ["cpu", "droplet", "wifi", "utensils", "camera", "layers"];
+const FEATURE_ICONS: IconName[] = ["wrench", "gauge", "eye", "repeat", "leaf"];
+
 export function AboutPage() {
   return (
     <div className="flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)]">
       <SiteHeader />
 
       <main className="flex-1">
+        <PageHero
+          kicker="How it works"
+          title={
+            <>
+              One general objective.
+              <br className="hidden sm:block" />
+              Six systems achieving it.
+            </>
+          }
+          lead="A focused system architecture built around measurable aquaculture outcomes, now fully operational."
+        />
+
         <SectionNav />
 
         {/* =========================================================
@@ -28,28 +45,11 @@ export function AboutPage() {
         ========================================================= */}
         <section id="objectives" className={`scroll-mt-32 ${SECTION_PAD}`}>
           <div className="mx-auto max-w-[1200px]">
+            {/* General objective: sand panel with an accent bar, since it is a quotation */}
             <Reveal>
-              <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
-                <div className={eyebrow}>How it works</div>
-
-                <h1 className={heading}>
-                  One general objective.
-                  <br className="hidden sm:block" />
-                  Six systems achieving it.
-                </h1>
-
-                <p className={lead}>
-                  A focused system architecture built around measurable
-                  aquaculture outcomes, now fully operational.
-                </p>
-              </div>
-            </Reveal>
-
-            {/* General objective: ink panel, same treatment as the Home tank panel */}
-            <Reveal>
-              <div className="mb-6 rounded-3xl border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)] px-6 py-8 text-[var(--ep-bg)] sm:px-10 sm:py-10">
-                <div className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ep-tint)]">
-                  General Objective
+              <div className="mb-6 rounded-3xl border-2 border-l-[10px] border-[var(--ep-primary)] border-l-[var(--ep-accent)] bg-[var(--ep-tint)] px-6 py-8 sm:px-10 sm:py-10">
+                <div className="mb-3 text-sm font-semibold text-[var(--ep-text-muted)]">
+                  General objective
                 </div>
 
                 <p className="ep-font-display max-w-[52rem] text-xl font-medium leading-relaxed sm:text-2xl">
@@ -66,9 +66,12 @@ export function AboutPage() {
               {objectives.map((objective, i) => (
                 <Reveal key={objective.num} delay={(i % 3) * 90} className="h-full">
                   <article className="group h-full rounded-2xl border-2 border-[var(--ep-primary)] bg-[var(--ep-surface)] p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-[6px_6px_0_0_var(--ep-primary)]">
-                    <div className="mb-5 text-sm font-semibold tabular-nums text-[var(--ep-accent)]">
-                      {objective.num}
-                    </div>
+                    <IconChip
+                      name={OBJECTIVE_ICONS[i] ?? "layers"}
+                      tone="coral"
+                      size={20}
+                      className="mb-5"
+                    />
 
                     <h3 className="ep-font-display mb-2 text-xl font-semibold leading-tight transition-colors duration-200 group-hover:text-[var(--ep-accent)]">
                       {objective.title}
@@ -110,7 +113,7 @@ export function AboutPage() {
             </Reveal>
 
             <div className="border-t border-[var(--ep-line)]">
-              {features.map((feature) => (
+              {features.map((feature, i) => (
                 <Reveal key={feature.index}>
                   <article className="group relative grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 border-b border-[var(--ep-line)] px-4 py-8 transition-colors duration-200 hover:bg-[var(--ep-bg)] sm:grid-cols-[3.5rem_0.8fr_1.2fr] sm:gap-x-8">
                     <span
@@ -118,9 +121,12 @@ export function AboutPage() {
                       className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 bg-[var(--ep-accent)] transition-transform duration-200 group-hover:scale-y-100"
                     />
 
-                    <div className="pt-1 text-sm font-semibold tabular-nums text-[var(--ep-accent)]">
-                      {feature.index}
-                    </div>
+                    <span
+                      aria-hidden="true"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[var(--ep-primary)] bg-[var(--ep-surface)] text-[var(--ep-accent)]"
+                    >
+                      <Icon name={FEATURE_ICONS[i] ?? "layers"} size={18} />
+                    </span>
 
                     <div>
                       <div className="mb-1 hidden text-sm font-semibold uppercase tracking-wide text-[var(--ep-text-muted)] sm:block">
