@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
 import { Icon, type IconName } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
+import { AuthLink } from "@/features/auth/AuthModalProvider";
 import { heroReadouts, heroReadoutUnits } from "@/data/ecoprawn";
 
 const focusRing =
@@ -63,8 +64,7 @@ export function LandingPage() {
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/login"
+              <AuthLink
                 className={`group inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 text-base font-semibold text-white hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
               >
                 Sign in to dashboard
@@ -74,7 +74,7 @@ export function LandingPage() {
                 >
                   →
                 </span>
-              </Link>
+              </AuthLink>
 
               <Link
                 href="/about"

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandMark } from "./BrandMark";
 import { NavLinks } from "./NavLinks";
+import { AuthLink } from "@/features/auth/AuthModalProvider";
 
 interface SiteHeaderProps {
   showLinks?: boolean;
@@ -92,8 +93,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
               Back to home
             </Link>
           ) : (
-            <Link
-              href="/login"
+            <AuthLink
               className={`group inline-flex items-center gap-1.5 rounded-xl border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)] px-4 py-2 text-sm font-semibold text-[var(--ep-bg)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary-soft)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.7)] active:translate-y-0 sm:px-5 ${focusRing}`}
             >
               Log in
@@ -103,7 +103,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
               >
                 →
               </span>
-            </Link>
+            </AuthLink>
           )}
 
           {showLinks && (

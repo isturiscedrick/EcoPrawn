@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AuthModalProvider } from "@/features/auth/AuthModalProvider";
 
 export const metadata: Metadata = {
   title: "EcoPrawn",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className="ecoprawn-root">{children}</body>
+      <body className="ecoprawn-root">
+        <AuthModalProvider>{children}</AuthModalProvider>
+      </body>
     </html>
   );
 }

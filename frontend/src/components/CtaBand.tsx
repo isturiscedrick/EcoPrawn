@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AuthLink } from "@/features/auth/AuthModalProvider";
 
 interface CtaBandProps {
   secondaryHref: string;
@@ -26,8 +27,7 @@ export function CtaBand({ secondaryHref, secondaryLabel }: CtaBandProps) {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
-          <Link
-            href="/login"
+          <AuthLink
             className={`group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl border-2 border-[var(--ep-bg)] bg-[var(--ep-bg)] px-7 py-3.5 text-base font-semibold text-[var(--ep-primary)] hover:bg-white hover:shadow-[0_10px_24px_-12px_rgba(0,0,0,0.6)] ${motion} ${focusRing}`}
           >
             Sign in to dashboard
@@ -37,7 +37,7 @@ export function CtaBand({ secondaryHref, secondaryLabel }: CtaBandProps) {
             >
               →
             </span>
-          </Link>
+          </AuthLink>
 
           <Link
             href={secondaryHref}
