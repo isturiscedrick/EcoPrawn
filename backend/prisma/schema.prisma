@@ -126,10 +126,20 @@ model Alert {
   @@index([tankId])
 }
 
+model AuthThrottle {
+  key       String @id
+  count     Int
+  expiresAt DateTime @db.Timestamptz
+
+  @@index([expiresAt])
+}
+
 model User {
   id        String   @id @default(cuid())
   authId    String?  @unique @db.Uuid
-  email     String   @unique
+  email     String?  @unique
+  username  String?  @unique
+  phone     String?  @unique
   name      String?
   password  String?
   role      String   @default("operator") // "operator" | "admin"

@@ -2,11 +2,12 @@
   "name": "ecoprawn-nextjs",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "bun@1.4.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
     "test:navigation": "node scripts/test-navigation.mjs"
   },
   "dependencies": {

@@ -33,4 +33,4 @@ Overview reads the latest saved hardware measurement for each owned tank. Its Wa
 
 `HardwareTelemetry` stores partial hardware readings with an index on tank and timestamp. Access goes through the backend, which checks the verified account's tank ownership for both reads and writes. RLS is enabled and direct public/anon/authenticated table access is revoked on the hosted database.
 
-For an existing hosted `ecoprawn` database, `backend/prisma/add-hardware-telemetry.sql` is the additive schema change. For a fresh local database, use the Prisma schema. Generate the Prisma client and restart the backend after adding the model. Run `npm run test:hardware` in `backend` to check parsing, calibration, validation and account isolation without hardware or SMS.
+For an existing hosted `ecoprawn` database, `backend/prisma/add-hardware-telemetry.sql` is the additive schema change. For a fresh local database, use the Prisma schema. Generate the Prisma client and restart the backend after adding the model. Run `bun run test:hardware` in `backend` to check parsing, calibration, validation and account isolation without hardware or SMS.

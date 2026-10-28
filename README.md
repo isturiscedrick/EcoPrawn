@@ -40,27 +40,40 @@ Out of scope: offshore farming, hatchery/breeding, off-grid energy independence,
 
 ## Getting started
 
-The app lives in `frontend/`.
+The UI lives in `frontend/`. The API and Prisma ORM live in `backend/`.
+
+Install and configure the backend first:
+
+```bash
+cd backend
+bun install
+```
+
+Copy `backend/.env.example` to `backend/.env` and set `DATABASE_URL`. Run `bun run db:push`, then `bun run dev` to start the API on port 4000. On Windows, `./setup-db.ps1` from the repository root can configure PostgreSQL and generate the client after dependencies are installed. See [backend setup](backend/README.md).
+
+In a separate terminal from the repository root:
 
 ```bash
 cd frontend
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
 
+The frontend forwards `/api/*` requests to `http://localhost:4000`. Set `BACKEND_URL` in `frontend/.env` to use a different backend address. Restart the frontend after changing it, and set it before production builds. Run `bun run db:seed` in `backend` to populate demo data.
+
 Other scripts:
 
 ```bash
-npm run build   # production build
-npm run start   # serve the production build
-npm run lint    # next lint
+bun run build   # production build
+bun run start   # serve the production build
+bun run typecheck # check TypeScript
 ```
 
-Node 20.9 or newer is recommended (required by some of Next's and Tailwind's native dependencies).
+Use Bun 1.4.0 for installs and scripts in both folders. Each app has its own `bun.lock`; use `bun install --frozen-lockfile` for reproducible installs. Next.js and Prisma CLI commands still use Node.js, so keep Node 20.9 or newer installed.
 
-> Both `package-lock.json` and `bun.lock` are committed. Use one package manager consistently.
+On Windows OneDrive checkouts, if `node_modules` contains empty package folders after installation, rerun the install with `bun install --frozen-lockfile --force --backend=copyfile` in the affected app folder.
 
 ## Project structure
 
@@ -98,9 +111,9 @@ frontend/
 
 The dashboard combines database-backed tanks with demo data and optional ESP32 USB testing:
 
-- Sensor readings, feed schedule, scan log, effluent log, and event log come from `src/data/ecoprawn.ts` and the default tank in `TankContext`.
-- Trend charts are static illustrations.
-- **Login is not wired to authentication.** Submitting the form navigates to `/dashboard` (see `useLoginForm.ts`).
+- Tanks, telemetry, scans, growth history, feeding schedules, biofloc metrics, effluent logs, and alerts load from PostgreSQL through `/api/dashboard`. Run `bun run db:seed` in `backend/` to import sample records into an empty database. Existing tanks prevent reseeding.
+- Trend charts use recorded samples and show an empty state when there are too few readings.
+- Operator authentication supports username, mobile number with SMS verification, and Google sign-in to protect the dashboard and operational API routes. Follow the [backend setup](backend/README.md) and [phone auth setup](backend/PHONE-AUTH.md).
 - **The contact form does not send anything.** It is not connected to a mail service yet.
 - The Water Quality page can connect an ESP32 over USB and save temperature and ultrasonic distance. Overview's Water Level gauge refreshes from those readings and uses distance until the tank is calibrated for percentage. USB stays connected when navigating between dashboard pages. See [ESP32 USB setup](hardware/README.md). Wi-Fi device authentication and the vision pipeline remain open work.
 
