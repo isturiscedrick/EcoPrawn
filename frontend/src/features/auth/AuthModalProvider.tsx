@@ -53,8 +53,15 @@ function AuthDialog({ onClose }: { onClose: () => void }) {
     const items = () =>
       panel ? Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE)) : [];
 
-    // Start on the first field; fall back to the close button.
-    (panel?.querySelector<HTMLElement>("input") ?? items()[0])?.focus();
+    // Desktop: start on the first field. Touch devices: focusing an input
+    // opens the on-screen keyboard immediately and covers the form, so focus
+    // the dialog panel itself and let the user tap a field when ready.
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (isTouch) {
+      panel?.focus();
+    } else {
+      (panel?.querySelector<HTMLElement>("input") ?? items()[0])?.focus();
+    }
 
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -84,7 +91,7 @@ function AuthDialog({ onClose }: { onClose: () => void }) {
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-[100] flex overflow-y-auto p-4 sm:p-6">
+    <div className="fixed inset-0 z-[100] flex overflow-y-auto overscroll-contain p-2 sm:p-6">
       <div
         aria-hidden="true"
         onClick={onClose}
@@ -96,17 +103,22 @@ function AuthDialog({ onClose }: { onClose: () => void }) {
         role="dialog"
         aria-modal="true"
         aria-label="Sign in or create an account"
+        tabIndex={-1}
         style={SCOPE}
-        className="ep-pop-in relative z-10 m-auto w-full max-w-[470px] rounded-3xl border-2 border-[var(--ep-primary)] bg-[var(--ep-bg)] p-5 shadow-[var(--shadow-overlay)] sm:p-7"
+        className="ep-pop-in relative z-10 m-auto w-full max-w-[470px] rounded-2xl border-2 border-[var(--ep-primary)] bg-[var(--ep-bg)] p-4 shadow-[var(--shadow-overlay)] outline-none sm:rounded-3xl sm:p-7 [&_input]:text-[16px] sm:[&_input]:text-[14px] max-sm:[&_h1]:text-[26px] max-sm:[&_h1+p]:hidden max-sm:[&_div:has(>form)]:mt-4 max-sm:[&_div:has(>form)]:gap-3 max-sm:[&_div:has(>form)]:border-0 max-sm:[&_div:has(>form)]:bg-transparent max-sm:[&_div:has(>form)]:p-0 max-sm:[&_div:has(>form)]:shadow-none max-sm:[&_fieldset]:gap-3"
       >
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close"
-          className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[var(--ep-tint)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
-        >
-          <Icon name="x" size={20} strokeWidth={2.2} />
-        </button>
+        {/* Mobile: sits in its own row above the form so it never overlaps the
+            heading. sm and up: floats in the top-right corner as before. */}
+        <div className="flex justify-end sm:block">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="z-10 flex h-11 w-11 items-center justify-center rounded-full text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[var(--ep-tint)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] sm:absolute sm:right-3 sm:top-3"
+          >
+            <Icon name="x" size={20} strokeWidth={2.2} />
+          </button>
+        </div>
 
         <LoginForm />
       </div>

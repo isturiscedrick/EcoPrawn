@@ -1,6 +1,15 @@
 "use client";
 
-import { useEffect, useId, useState, type FormEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type FocusEvent as ReactFocusEvent,
+  type FormEvent,
+  type ReactNode,
+} from "react";
 
 const errors: Record<string, string> = {
   configuration: "Google sign-in is not configured yet. Contact your administrator.",
@@ -10,22 +19,138 @@ const errors: Record<string, string> = {
   failed: "We could not complete sign-in. Please try again.",
 };
 
-const inputClass =
-  "w-full rounded-lg border border-[var(--sand-dim)] bg-white py-3 pl-11 pr-4 text-[14px] text-[var(--water-deep)] outline-none transition-all duration-200 placeholder:text-[rgba(11,35,32,0.35)] hover:border-[rgba(11,35,32,0.25)] focus:border-[var(--coral)] focus:ring-4 focus:ring-[rgba(232,98,58,0.12)]";
+// Border/ring colors are kept out of the base so the ok and error states
+// never fight over the same CSS property.
+const inputBase =
+  "w-full rounded-lg border bg-white py-3 pl-11 pr-4 text-[14px] text-[var(--water-deep)] outline-none transition-all duration-200 placeholder:text-[rgba(11,35,32,0.35)]";
+
+const inputOk =
+  "border-[var(--sand-dim)] hover:border-[rgba(11,35,32,0.25)] focus:border-[var(--coral)] focus:ring-4 focus:ring-[rgba(232,98,58,0.12)]";
+
+const inputBad =
+  "border-[var(--danger)] focus:border-[var(--danger)] focus:ring-4 focus:ring-[rgba(214,69,69,0.15)]";
 
 const labelClass =
   "ep-font-mono mb-1.5 block text-[10.5px] font-medium uppercase tracking-[0.1em] text-[rgba(11,35,32,0.55)]";
 
+// Turns the browser's validity state into a short message for one field.
+function messageFor(input: HTMLInputElement): string {
+  const v = input.validity;
+  if (v.valid) return "";
+  switch (input.name) {
+    case "name":
+      return "Enter your full name.";
+    case "username":
+      return v.valueMissing
+        ? "Choose a username."
+        : "Use 3–30 letters, numbers, or underscores, starting with a letter.";
+    case "identifier":
+      return "Enter your username or mobile number.";
+    case "phone":
+      return "Enter your mobile number.";
+    case "password":
+      if (v.valueMissing) {
+        return input.autocomplete === "new-password" ? "Enter a password." : "Enter your password.";
+      }
+      return "Use at least 8 characters.";
+    case "code":
+      return v.valueMissing ? "Enter the code from your text message." : "The code is 6–10 digits.";
+    default:
+      return input.validationMessage;
+  }
+}
+
+// Shows the error in red when there is one; otherwise the normal grey hint.
+// The same id is used for both so aria-describedby always points at it.
+function FieldMessage({
+  id,
+  error,
+  children,
+}: {
+  id: string;
+  error?: string;
+  children?: ReactNode;
+}) {
+  if (error) {
+    return (
+      <span id={id} className="mt-1 block text-[11px] font-medium text-[var(--danger-text)]">
+        {error}
+      </span>
+    );
+  }
+  return children ? (
+    <span id={id} className="mt-1 block text-[11px] text-[var(--mangrove)]">
+      {children}
+    </span>
+  ) : null;
+}
+
 export function LoginForm() {
   const uid = useId();
+  const formRef = useRef<HTMLFormElement>(null);
+  const touched = useRef<Set<string>>(new Set());
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [pending, setPending] = useState(false);
   const [step, setStep] = useState<"signin" | "signup" | "verify" | "complete">("signin");
+  const [signupPage, setSignupPage] = useState<1 | 2>(1);
   const [phone, setPhone] = useState("");
   const [cooldown, setCooldown] = useState(0);
   const [googlePending, setGooglePending] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  // Sign up is split in two pages. Page 1: name + username. Page 2: phone + password.
+  const onDetailsPage = step === "signup" && signupPage === 1;
+  const onContactPage = step === "signup" && signupPage === 2;
+
+  const inputClass = (name: string) => `${inputBase} ${fieldErrors[name] ? inputBad : inputOk}`;
+
+  // Recomputes two things from the live DOM: whether the submit button can be
+  // enabled, and which touched fields currently have an error. Fields on the
+  // hidden sign-up page are skipped so they don't block or show errors.
+  const updateValidity = useCallback(() => {
+    const form = formRef.current;
+    if (!form) return;
+    const visible = Array.from(form.querySelectorAll<HTMLInputElement>("input")).filter(
+      (input) => !input.closest(".hidden")
+    );
+    setCanSubmit(visible.every((input) => input.checkValidity()));
+
+    const next: Record<string, string> = {};
+    for (const input of visible) {
+      if (!touched.current.has(input.name)) continue;
+      const message = messageFor(input);
+      if (message) next[input.name] = message;
+    }
+    setFieldErrors((prev) => {
+      const keys = new Set([...Object.keys(prev), ...Object.keys(next)]);
+      for (const key of keys) if (prev[key] !== next[key]) return next;
+      return prev;
+    });
+  }, []);
+
+  // A fresh form (new step) starts with no field marked as touched.
+  useEffect(() => {
+    touched.current.clear();
+  }, [step]);
+
+  // Re-check after the form remounts (step change), the page flips, or the
+  // controlled phone value changes (e.g. prefilled on the verify step).
+  useEffect(() => {
+    updateValidity();
+  }, [step, signupPage, phone, updateValidity]);
+
+  // A field counts as touched once the user leaves it. React's onBlur bubbles,
+  // so one handler on the form covers every input.
+  function handleBlur(event: ReactFocusEvent<HTMLFormElement>) {
+    const target = event.target;
+    if (target instanceof HTMLInputElement && target.name) {
+      touched.current.add(target.name);
+      updateValidity();
+    }
+  }
 
   useEffect(() => {
     if (!cooldown) return;
@@ -43,6 +168,13 @@ export function LoginForm() {
     window.addEventListener("pageshow", reset);
     return () => window.removeEventListener("pageshow", reset);
   }, []);
+
+  // Move focus to the phone field when the second sign-up page opens.
+  useEffect(() => {
+    if (step === "signup" && signupPage === 2) {
+      formRef.current?.querySelector<HTMLInputElement>('input[name="phone"]')?.focus();
+    }
+  }, [step, signupPage]);
 
   async function request(values: Record<string, unknown>) {
     setError("");
@@ -89,8 +221,26 @@ export function LoginForm() {
     }
   }
 
+  // Validate only the page-1 fields, then reveal page 2. The form is
+  // noValidate on page 1, so this is the only validation that runs there.
+  function goToContactPage(form: HTMLFormElement) {
+    const fields = form.querySelectorAll<HTMLInputElement>(
+      'input[name="name"], input[name="username"]'
+    );
+    for (const field of Array.from(fields)) {
+      if (!field.reportValidity()) return;
+    }
+    setError("");
+    setNotice("");
+    setSignupPage(2);
+  }
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (onDetailsPage) {
+      goToContactPage(event.currentTarget);
+      return;
+    }
     await request({
       ...Object.fromEntries(new FormData(event.currentTarget)),
       action: step,
@@ -114,8 +264,10 @@ export function LoginForm() {
           : "Welcome back"}
       </h1>
       <p className="mt-2 text-[14px] leading-[1.6] text-[rgba(11,35,32,0.6)]">
-        {step === "signup"
-          ? "Get started with a username and a verified mobile number."
+        {onDetailsPage
+          ? "Start with your name and a username."
+          : onContactPage
+          ? "Add your mobile number and a password. We'll text you a code."
           : step === "verify"
           ? "Enter the code from your text message to finish signing up."
           : step === "complete"
@@ -134,6 +286,7 @@ export function LoginForm() {
                 disabled={pending}
                 onClick={() => {
                   setStep(mode);
+                  setSignupPage(1);
                   setError("");
                   setNotice("");
                 }}
@@ -198,10 +351,27 @@ export function LoginForm() {
           </div>
         )}
 
-        <form key={step} onSubmit={submit} aria-busy={pending}>
+        <form
+          key={step}
+          ref={formRef}
+          onSubmit={submit}
+          onInput={updateValidity}
+          onBlur={handleBlur}
+          noValidate={onDetailsPage}
+          aria-busy={pending}
+        >
           <fieldset disabled={pending} className="flex flex-col gap-4 disabled:opacity-70">
             {step === "signup" && (
-              <div>
+              <div
+                aria-live="polite"
+                className="ep-font-mono text-[10.5px] font-medium uppercase tracking-[0.1em] text-[var(--mangrove)]"
+              >
+                Step {signupPage} of 2
+              </div>
+            )}
+
+            {step === "signup" && (
+              <div className={onContactPage ? "hidden" : undefined}>
                 <label htmlFor={`${uid}-name`} className={labelClass}>
                   Full name
                 </label>
@@ -232,14 +402,17 @@ export function LoginForm() {
                     autoComplete="name"
                     maxLength={100}
                     placeholder="Juan dela Cruz"
-                    className={inputClass}
+                    aria-invalid={fieldErrors.name ? true : undefined}
+                    aria-describedby={fieldErrors.name ? `${uid}-name-error` : undefined}
+                    className={inputClass("name")}
                   />
                 </div>
+                <FieldMessage id={`${uid}-name-error`} error={fieldErrors.name} />
               </div>
             )}
 
             {(step === "signup" || step === "complete") && (
-              <div>
+              <div className={onContactPage ? "hidden" : undefined}>
                 <label htmlFor={`${uid}-username`} className={labelClass}>
                   Username
                 </label>
@@ -271,14 +444,15 @@ export function LoginForm() {
                     minLength={3}
                     maxLength={30}
                     pattern="[A-Za-z][A-Za-z0-9_]{2,29}"
+                    aria-invalid={fieldErrors.username ? true : undefined}
                     aria-describedby={`${uid}-username-help`}
                     placeholder="juan_operator"
-                    className={inputClass}
+                    className={inputClass("username")}
                   />
                 </div>
-                <span id={`${uid}-username-help`} className="mt-1 block text-[11px] text-[var(--mangrove)]">
+                <FieldMessage id={`${uid}-username-help`} error={fieldErrors.username}>
                   3–30 letters, numbers, or underscores. Start with a letter.
-                </span>
+                </FieldMessage>
               </div>
             )}
 
@@ -314,14 +488,17 @@ export function LoginForm() {
                     autoComplete="username"
                     maxLength={40}
                     placeholder="juan_operator or 09171234567"
-                    className={inputClass}
+                    aria-invalid={fieldErrors.identifier ? true : undefined}
+                    aria-describedby={fieldErrors.identifier ? `${uid}-identifier-error` : undefined}
+                    className={inputClass("identifier")}
                   />
                 </div>
+                <FieldMessage id={`${uid}-identifier-error`} error={fieldErrors.identifier} />
               </div>
             )}
 
             {(step === "signup" || step === "verify") && (
-              <div>
+              <div className={onDetailsPage ? "hidden" : undefined}>
                 <label htmlFor={`${uid}-phone`} className={labelClass}>
                   Mobile number
                 </label>
@@ -354,17 +531,19 @@ export function LoginForm() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="0917 123 4567"
-                    className={inputClass}
+                    aria-invalid={fieldErrors.phone ? true : undefined}
+                    aria-describedby={`${uid}-phone-help`}
+                    className={inputClass("phone")}
                   />
                 </div>
-                <span className="mt-1 block text-[11px] text-[var(--mangrove)]">
+                <FieldMessage id={`${uid}-phone-help`} error={fieldErrors.phone}>
                   Philippine mobile numbers only (e.g. 0917 123 4567).
-                </span>
+                </FieldMessage>
               </div>
             )}
 
             {(step === "signin" || step === "signup") && (
-              <div>
+              <div className={onDetailsPage ? "hidden" : undefined}>
                 <div className="mb-1.5 flex items-center justify-between">
                   <label htmlFor={`${uid}-password`} className={labelClass}>
                     Password
@@ -406,7 +585,9 @@ export function LoginForm() {
                     minLength={step === "signup" ? 8 : 1}
                     maxLength={128}
                     placeholder="••••••••"
-                    className={`${inputClass} pr-12`}
+                    aria-invalid={fieldErrors.password ? true : undefined}
+                    aria-describedby={step === "signup" ? `${uid}-password-help` : fieldErrors.password ? `${uid}-password-help` : undefined}
+                    className={`${inputClass("password")} pr-12`}
                   />
                   <button
                     type="button"
@@ -450,11 +631,9 @@ export function LoginForm() {
                     )}
                   </button>
                 </div>
-                {step === "signup" && (
-                  <span className="mt-1 block text-[11px] text-[var(--mangrove)]">
-                    At least 8 characters.
-                  </span>
-                )}
+                <FieldMessage id={`${uid}-password-help`} error={fieldErrors.password}>
+                  {step === "signup" ? "At least 8 characters." : null}
+                </FieldMessage>
               </div>
             )}
 
@@ -493,20 +672,25 @@ export function LoginForm() {
                     minLength={6}
                     maxLength={10}
                     placeholder="123456"
-                    className={`${inputClass} tracking-[0.25em]`}
+                    aria-invalid={fieldErrors.code ? true : undefined}
+                    aria-describedby={fieldErrors.code ? `${uid}-code-error` : undefined}
+                    className={`${inputClass("code")} tracking-[0.25em]`}
                   />
                 </div>
+                <FieldMessage id={`${uid}-code-error`} error={fieldErrors.code} />
               </div>
             )}
 
             <button
               type="submit"
-              disabled={pending}
+              disabled={pending || !canSubmit}
               className="group mt-2 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--coral)] px-6 py-3.5 text-[14.5px] font-semibold text-[var(--sand)] shadow-[0_12px_28px_-10px_rgba(232,98,58,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--coral-dim)] hover:shadow-[0_16px_32px_-10px_rgba(232,98,58,0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:pointer-events-none disabled:opacity-60"
             >
               {pending
                 ? "Please wait…"
-                : step === "signup"
+                : onDetailsPage
+                ? "Continue"
+                : onContactPage
                 ? "Create account & send code"
                 : step === "verify"
                 ? "Verify & continue"
@@ -517,6 +701,24 @@ export function LoginForm() {
                 →
               </span>
             </button>
+
+            {onContactPage && (
+              <button
+                type="button"
+                onClick={() => {
+                  setError("");
+                  setNotice("");
+                  // Leaving page 2 blurs its fields first; forget that so an
+                  // empty phone isn't already red when the user comes back.
+                  touched.current.delete("phone");
+                  touched.current.delete("password");
+                  setSignupPage(1);
+                }}
+                className="self-center text-[13px] text-[var(--water-deep)] underline underline-offset-4 transition-colors hover:text-[var(--coral)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
+              >
+                Back
+              </button>
+            )}
           </fieldset>
         </form>
 
@@ -538,6 +740,7 @@ export function LoginForm() {
               disabled={pending}
               onClick={() => {
                 setStep("signin");
+                setSignupPage(1);
                 setError("");
                 setNotice("");
               }}
@@ -548,7 +751,7 @@ export function LoginForm() {
           </div>
         )}
 
-        {(step === "signin" || step === "signup") && (
+        {(step === "signin" || onDetailsPage) && (
           <>
             <div className="flex items-center gap-3 text-xs text-[rgba(11,35,32,0.4)]">
               <span className="h-px flex-1 bg-[var(--sand-dim)]" />
