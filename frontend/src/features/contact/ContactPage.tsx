@@ -1,8 +1,9 @@
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { Reveal } from "@/components/Reveal";
 import { ContactForm } from "./ContactForm";
 
-const SECTION_PAD = "px-5 py-20 sm:px-8 sm:py-24 lg:py-28";
+const SECTION_PAD = "px-5 py-16 sm:px-8 sm:py-20 lg:py-24";
 
 // Details taken from the site footer. Add an email / phone here when you
 // have one you want to publish.
@@ -14,47 +15,53 @@ const CONTACT_DETAILS = [
 
 export function ContactPage() {
   return (
-    <div className="min-h-screen bg-[var(--sand)] text-[var(--water-deep)]">
+    <div className="flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)]">
       <SiteHeader />
 
-      <section className={SECTION_PAD}>
-        <div className="mx-auto max-w-[1200px]">
-          <div className="mb-12 max-w-[680px] sm:mb-16">
-            <div className="ep-font-mono mb-3.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)]">
-              Get in touch
-            </div>
-
-            <h1 className="ep-font-display text-[clamp(30px,4vw,44px)] font-semibold leading-[1.08] tracking-tight text-[var(--water-deep)]">
-              Contact us.
-            </h1>
-
-            <p className="mt-4 max-w-[590px] text-[15px] leading-[1.7] text-[rgba(11,35,32,0.62)]">
-              Questions about the EcoPrawn system or the thesis behind it?
-              Send a note and we&apos;ll get back to you.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-            <div className="flex flex-col gap-3">
-              {CONTACT_DETAILS.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-xl border border-[var(--sand-dim)] bg-white p-5"
-                >
-                  <div className="ep-font-mono mb-1.5 text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.5)]">
-                    {item.label}
-                  </div>
-                  <div className="text-[14px] font-semibold text-[var(--water-deep)]">
-                    {item.value}
-                  </div>
+      <main className="flex-1">
+        <section className={SECTION_PAD}>
+          <div className="mx-auto max-w-[1200px]">
+            <Reveal>
+              <div className="mb-10 max-w-[700px] sm:mb-14">
+                <div className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">
+                  Get in touch
                 </div>
-              ))}
-            </div>
 
-            <ContactForm />
+                <h1 className="ep-font-display text-[clamp(30px,4vw,44px)] font-semibold leading-[1.1] tracking-tight">
+                  Contact us.
+                </h1>
+
+                <p className="mt-4 max-w-[36rem] text-lg leading-relaxed text-[var(--ep-text-muted)]">
+                  Questions about the EcoPrawn system or the thesis behind it?
+                  Send a note and we&apos;ll get back to you.
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+              <Reveal>
+                <dl className="flex flex-col gap-4">
+                  {CONTACT_DETAILS.map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-2xl border-2 border-[var(--ep-primary)] bg-[var(--ep-tint)] p-5"
+                    >
+                      <dt className="mb-1 text-sm font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">
+                        {item.label}
+                      </dt>
+                      <dd className="text-lg font-semibold">{item.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </Reveal>
+
+              <Reveal delay={120}>
+                <ContactForm />
+              </Reveal>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       <SiteFooter />
     </div>

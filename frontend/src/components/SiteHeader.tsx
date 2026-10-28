@@ -69,7 +69,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
       >
         <Link
           href="/"
-          className={`flex items-center rounded-md ${focusRing}`}
+          className={`flex items-center rounded-md transition-opacity duration-200 hover:opacity-80 ${focusRing}`}
           aria-label="EcoPrawn home"
         >
           <BrandMark size={isAuth ? 44 : 64} />
@@ -81,18 +81,28 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
           {isAuth ? (
             <Link
               href="/"
-              className={`inline-flex items-center gap-1.5 rounded-xl border-2 border-[var(--ep-primary)] px-4 py-2 text-sm font-semibold text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] sm:px-5 ${focusRing}`}
+              className={`group inline-flex items-center gap-1.5 rounded-xl border-2 border-[var(--ep-primary)] px-4 py-2 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] active:translate-y-0 sm:px-5 ${focusRing}`}
             >
-              <span aria-hidden="true">←</span>
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform duration-200 group-hover:-translate-x-1"
+              >
+                ←
+              </span>
               Back to home
             </Link>
           ) : (
             <Link
               href="/login"
-              className={`inline-flex items-center gap-1.5 rounded-xl border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)] px-4 py-2 text-sm font-semibold text-[var(--ep-bg)] transition-colors duration-200 hover:bg-[var(--ep-primary-soft)] sm:px-5 ${focusRing}`}
+              className={`group inline-flex items-center gap-1.5 rounded-xl border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)] px-4 py-2 text-sm font-semibold text-[var(--ep-bg)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary-soft)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.7)] active:translate-y-0 sm:px-5 ${focusRing}`}
             >
               Log in
-              <span aria-hidden="true">→</span>
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+              >
+                →
+              </span>
             </Link>
           )}
 

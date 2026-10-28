@@ -21,10 +21,10 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
               key={label}
               href={href}
               aria-current={isActive ? "page" : undefined}
-              className={`relative flex h-full items-center rounded-sm px-1 text-base font-semibold transition-colors ${focusRing} ${
+              className={`relative flex h-full items-center rounded-sm px-1 text-base font-semibold transition-colors duration-200 ${focusRing} after:absolute after:bottom-[10px] after:left-0 after:right-0 after:h-[3px] after:origin-left after:bg-[var(--ep-accent)] after:transition-transform after:duration-200 ${
                 isActive
-                  ? "text-[var(--ep-accent)] after:absolute after:bottom-[10px] after:left-0 after:right-0 after:h-[3px] after:bg-[var(--ep-accent)]"
-                  : "text-[var(--ep-primary)] hover:text-[var(--ep-accent)]"
+                  ? "text-[var(--ep-accent)] after:scale-x-100"
+                  : "text-[var(--ep-primary)] after:scale-x-0 hover:text-[var(--ep-accent)] hover:after:scale-x-100"
               }`}
             >
               {label}
@@ -50,7 +50,7 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
                 href={href}
                 onClick={onLinkClick}
                 aria-current={isActive ? "page" : undefined}
-                className={`flex items-center gap-3 rounded-md px-1.5 py-3 text-base font-semibold transition-colors ${focusRing} ${
+                className={`group flex items-center gap-3 rounded-md px-1.5 py-3 text-base font-semibold transition-colors duration-200 hover:bg-[var(--ep-tint)] ${focusRing} ${
                   isActive
                     ? "text-[var(--ep-accent)]"
                     : "text-[var(--ep-primary)] hover:text-[var(--ep-accent)]"
@@ -58,8 +58,10 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
               >
                 <span
                   aria-hidden="true"
-                  className={`h-2.5 w-2.5 rounded-full ${
-                    isActive ? "bg-[var(--ep-accent)]" : "bg-transparent"
+                  className={`h-2.5 w-2.5 rounded-full transition-colors duration-200 ${
+                    isActive
+                      ? "bg-[var(--ep-accent)]"
+                      : "bg-transparent group-hover:bg-[var(--ep-line)]"
                   }`}
                 />
                 {label}

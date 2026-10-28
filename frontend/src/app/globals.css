@@ -351,4 +351,5 @@ html {
   --ep-ok: #1e7a46;
   --ep-warn-text: #8f5a12;
   --ep-danger: #b3261e;
+  --ep-accent-hover: #8f3115; /* hover for coral buttons: same hue, deeper, white text about 8:1 */
 }
