@@ -314,6 +314,9 @@
 
 html {
   font-size: 112.5%; /* 18px base; all rem sizes scale up */
+  /* Keep the scrollbar's space reserved so locking body scroll (modals)
+     doesn't widen the viewport and make the page jump sideways. */
+  scrollbar-gutter: stable;
 }
 
 .ecoprawn-root {
