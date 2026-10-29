@@ -1,8 +1,8 @@
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components//layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { PageHero } from "@/components/layout/PageHero";
-import { IconChip, type IconName } from "@/components/Icon";
-import { Reveal } from "@/components/Reveal";
+import { IconChip, type IconName } from "@/components/ui/Icon";
+import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "./ContactForm";
 
 const SECTION_PAD = "px-5 pb-16 pt-6 sm:px-8 sm:pb-20 lg:pb-24";

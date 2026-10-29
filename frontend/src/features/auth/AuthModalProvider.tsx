@@ -13,7 +13,7 @@ import {
   type ReactNode,
 } from "react";
 import Link from "next/link";
-import { Icon } from "@/components/Icon";
+import { Icon } from "@/components/ui/Icon";
 import { LoginForm } from "./LoginForm";
 
 interface AuthModalValue {

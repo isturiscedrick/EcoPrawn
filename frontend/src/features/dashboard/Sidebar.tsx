@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { BrandMark } from "@/components/BrandMark";
+import { BrandMark } from "@/components//layout/BrandMark";
 import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
 
 export function Sidebar() {

@@ -1,8 +1,8 @@
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { PageHero } from "@/components/layout/PageHero";
-import { Icon, IconChip, type IconName } from "@/components/Icon";
-import { Reveal } from "@/components/Reveal";
+import { Icon, IconChip, type IconName } from "@/components/ui/Icon";
+import { Reveal } from "@/components/motion/Reveal";
 import { SectionNav } from "./SectionNav";
 import { objectives, features, inScope, outOfScope } from "@/data/ecoprawn";
 

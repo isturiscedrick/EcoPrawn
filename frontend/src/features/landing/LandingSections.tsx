@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { heroReadouts, feedSchedule, features } from "@/data/ecoprawn";
-import { Icon, IconChip, type IconName } from "@/components/Icon";
-import { Reveal } from "@/components/Reveal";
+import { Icon, IconChip, type IconName } from "@/components//ui/Icon";
+import { Reveal } from "@/components/motion/Reveal";
 
 /**
  * Shared vertical rhythm for full-width sections. Used by LandingPage and

@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { TankHeroSvg } from "@/features/dashboard/TankHeroSvg";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
+import { TankHeroSvg } from "@/components/illustrations/TankHeroSvg";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
-import { Icon, IconChip, type IconName } from "@/components/Icon";
-import { Reveal } from "@/components/Reveal";
+import { Icon, IconChip, type IconName } from "@/components//ui/Icon";
+import { Reveal } from "@/components/motion/Reveal";
 import { Bubbles } from "@/components/illustrations/Bubbles";
 import { WaveEdge } from "@/components/illustrations/WaveEdge";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
