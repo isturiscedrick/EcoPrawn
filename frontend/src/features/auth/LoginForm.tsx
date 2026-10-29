@@ -425,7 +425,7 @@ export function LoginForm() {
           ? "Verify your phone"
           : step === "complete"
           ? "Choose your username"
-          : "Welcome back"}
+          : "Welcome back!"}
       </h1>
       <p className="mt-2 text-[15px] leading-[1.6] text-[var(--ep-text-muted)]">
         {onDetailsPage

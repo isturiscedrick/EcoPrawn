@@ -1,0 +1,296 @@
+
+/*
+ * EcoPrawn Authentication Modal
+ * Clean, centered, responsive design.
+ * UI-only changes — authentication logic stays intact.
+ */
+
+/* ========================================
+   1. MODAL CONTAINER
+======================================== */
+
+.ep-auth-modal {
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  /* Hide scrollbar but preserve scrolling */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.ep-auth-modal::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========================================
+   2. BRANDING HEADER
+======================================== */
+
+.ep-auth-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  min-height: 60px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+}
+
+.ep-auth-brand img {
+  display: block;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* ========================================
+   3. FORM CONTENT
+======================================== */
+
+.ep-auth-modal > div:not(.ep-auth-brand) {
+  width: 100%;
+  max-width: none;
+}
+
+/* Center all authentication titles */
+.ep-auth-modal h1 {
+  width: 100%;
+  margin: 0;
+
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+
+  color: var(--ep-primary);
+}
+
+/* Center descriptions below titles */
+.ep-auth-modal h1 + p {
+  max-width: 340px;
+  margin: 8px auto 0;
+
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: var(--ep-text-muted);
+}
+
+/* ========================================
+   4. FORM CARD
+======================================== */
+
+.ep-auth-modal div:has(> form) {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 14px;
+  padding: 16px;
+  gap: 12px;
+
+  border: 1px solid var(--ep-line);
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow: 0 4px 20px rgba(11, 46, 51, 0.05);
+}
+
+/* ========================================
+   5. SIGN IN / SIGN UP TABS
+======================================== */
+
+.ep-auth-modal [role="group"][aria-label="Account access"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 4px;
+  padding: 4px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--ep-tint);
+}
+
+.ep-auth-modal [role="group"][aria-label="Account access"] button {
+  min-height: 42px;
+  border-radius: 9px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+/* ========================================
+   6. FORM INPUTS
+======================================== */
+
+.ep-auth-modal fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Keep the existing input colors and validation states */
+.ep-auth-modal input {
+  min-height: 48px;
+
+  border-radius: 11px;
+  font-size: 16px;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.ep-auth-modal input::placeholder {
+  opacity: 0.65;
+}
+
+/* Form labels */
+.ep-auth-modal label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ========================================
+   7. PRIMARY BUTTON
+======================================== */
+
+.ep-auth-modal button[type="submit"] {
+  min-height: 48px;
+  border-radius: 11px;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ========================================
+   8. GOOGLE SIGN IN
+======================================== */
+
+.ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
+  min-height: 48px;
+
+  border-radius: 11px;
+  background: #ffffff;
+  box-shadow: none;
+
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
+  background: var(--ep-tint);
+}
+
+/* ========================================
+   9. FOOTER MESSAGE
+======================================== */
+
+.ep-auth-modal > div:not(.ep-auth-brand) > div:last-child {
+  margin-top: 14px;
+
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ========================================
+   10. DESKTOP
+======================================== */
+
+@media (min-width: 640px) {
+  .ep-auth-modal {
+    max-height: calc(100dvh - 48px);
+  }
+
+  .ep-auth-modal h1 {
+    font-size: 30px;
+  }
+
+  .ep-auth-modal h1 + p {
+    font-size: 14px;
+  }
+}
+
+/* ========================================
+   11. MOBILE
+======================================== */
+
+@media (max-width: 639px) {
+  .ep-auth-overlay {
+    padding: 10px;
+  }
+
+  .ep-auth-modal {
+    max-height: calc(100dvh - 20px);
+
+    border-radius: 20px;
+    padding: 16px;
+  }
+
+  .ep-auth-brand {
+    min-height: 54px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+
+  .ep-auth-modal h1 {
+    font-size: 25px;
+  }
+
+  .ep-auth-modal h1 + p {
+    max-width: 300px;
+
+    margin: 6px auto 0;
+
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .ep-auth-modal div:has(> form) {
+    margin-top: 14px;
+    padding: 14px;
+    gap: 12px;
+    border-radius: 14px;
+  }
+
+  .ep-auth-modal fieldset {
+    gap: 12px;
+  }
+
+  .ep-auth-modal input {
+    font-size: 16px;
+  }
+
+  .ep-auth-modal button[type="submit"] {
+    min-height: 46px;
+  }
+
+  .ep-auth-modal > div:not(.ep-auth-brand) > div:last-child {
+    margin-top: 12px;
+  }
+}
+
+/* ========================================
+   12. ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-auth-modal *,
+  .ep-auth-modal *::before,
+  .ep-auth-modal *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
