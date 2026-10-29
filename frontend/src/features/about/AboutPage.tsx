@@ -43,7 +43,7 @@ export function AboutPage() {
         {/* =========================================================
             OBJECTIVES
         ========================================================= */}
-        <section id="objectives" className={`scroll-mt-32 ${SECTION_PAD}`}>
+        <section id="objectives" className={`scroll-mt-[140px] md:scroll-mt-[150px] ${SECTION_PAD}`}>
           <div className="mx-auto max-w-[1200px]">
             {/* General objective: sand panel with an accent bar, since it is a quotation */}
             <Reveal>
@@ -92,7 +92,7 @@ export function AboutPage() {
         ========================================================= */}
         <section
           id="systems"
-          className={`scroll-mt-32 border-y-2 border-[var(--ep-primary)] bg-[var(--ep-tint)] ${SECTION_PAD}`}
+          className={`scroll-mt-[140px] md:scroll-mt-[150px] border-y-2 border-[var(--ep-primary)] bg-[var(--ep-tint)] ${SECTION_PAD}`}
         >
           <div className="mx-auto max-w-[1200px]">
             <Reveal>
@@ -162,7 +162,7 @@ export function AboutPage() {
         {/* =========================================================
             SCOPE / LIMITATIONS
         ========================================================= */}
-        <section id="scope" className={`scroll-mt-32 ${SECTION_PAD}`}>
+        <section id="scope" className={`scroll-mt-[140px] md:scroll-mt-[150px] ${SECTION_PAD}`}>
           <div className="mx-auto max-w-[1200px]">
             <Reveal>
               <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
