@@ -1,5 +1,3 @@
-export type View = "landing" | "login" | "dashboard";
-
 export type SensorStatus = "ok" | "warn";
 
 export interface SensorReading {

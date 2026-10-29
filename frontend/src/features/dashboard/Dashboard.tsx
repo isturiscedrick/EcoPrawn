@@ -11,7 +11,7 @@ import { THRESHOLDS, GAUGE_SCALE, rangeStatus, scalePct } from "@/features/dashb
 import { waterLevelGauge } from "@/features/dashboard/lib/water-level";
 import { useEsp32 } from "@/features/dashboard/context/Esp32Context";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
-import { AddTankModal } from "@/features/dashboard/AddTankModal";
+import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
 
 const FCR_TARGET = 1.5;
 const MAX_RECENT_ALERTS = 5;

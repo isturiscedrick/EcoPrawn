@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { TankRow } from "@/components/DashboardRows";
-import { useTanks } from "@/context/TankContext";
-import { AddTankModal } from "./AddTankModal";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { TankRow } from "@/features/dashboard/components/DashboardRows";
+import { useTanks } from "@/features/dashboard/context/TankContext";
+import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
 
 export function TanksView() {
   const { tanks, addTank, removeTank } = useTanks();
