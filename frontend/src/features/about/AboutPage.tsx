@@ -4,7 +4,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { Icon, IconChip, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionNav } from "./SectionNav";
-import { objectives, features, inScope, outOfScope } from "@/data/ecoprawn";
+import { objectives, features, inScope, outOfScope } from "@/content/site";
 
 const SECTION_PAD = "px-5 py-16 sm:px-8 sm:py-20 lg:py-24";
 const SECTION_HEADER_MARGIN = "mb-10 sm:mb-14";

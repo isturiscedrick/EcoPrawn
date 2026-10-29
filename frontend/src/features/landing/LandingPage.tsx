@@ -8,14 +8,14 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Bubbles } from "@/components/illustrations/Bubbles";
 import { WaveEdge } from "@/components/illustrations/WaveEdge";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
+import { heroReadoutUnits } from "@/config/sensors";
 import {
   heroReadouts,
-  heroReadoutUnits,
   waterQualityThresholds,
   tanks,
   feedByTank,
   alerts,
-} from "@/data/ecoprawn";
+} from "@/content/landing-preview";
 
 const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";

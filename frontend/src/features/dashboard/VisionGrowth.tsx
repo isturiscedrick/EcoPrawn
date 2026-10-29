@@ -1,18 +1,25 @@
 "use client";
 
-import { Panel, KpiCard } from "@/components/DashboardPrimitives";
-import { growthTrend, visionScanLog } from "@/data/ecoprawn";
-import { ScrollFadeContainer } from "@/components/ScrollFadeContainer";
-import { useTanks } from "@/context/TankContext";
+import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
+import { useTanks } from "@/features/dashboard/context/TankContext";
 
-function GrowthTrendChart() {
-  const min = Math.min(...growthTrend);
-  const max = Math.max(...growthTrend);
+function GrowthTrendChart({ values }: { values: number[] }) {
+  if (values.length < 2) {
+    return (
+      <p className="py-6 text-sm text-[rgba(11,35,32,0.6)]">
+        Not enough scans to display a trend.
+      </p>
+    );
+  }
+
+  const min = Math.min(...values);
+  const max = Math.max(...values);
   const w = 560;
   const h = 160;
-  const points = growthTrend
+  const points = values
     .map((v, i) => {
-      const x = (i / (growthTrend.length - 1)) * w;
+      const x = (i / (values.length - 1)) * w;
       const y = h - ((v - min) / (max - min || 1)) * (h - 20) - 10;
       return `${x},${y}`;
     })
@@ -42,13 +49,14 @@ function GrowthTrendChart() {
 }
 
 export function VisionGrowth() {
-  const { tanks } = useTanks();
+  const { tanks, growthTrend, visionScanLog } = useTanks();
   const tankCount = tanks.length;
 
   const avgBodyLength = tankCount ? tanks.reduce((sum, t) => sum + t.bodyLength, 0) / tankCount : 0;
   const avgWeight = tankCount ? tanks.reduce((sum, t) => sum + t.weight, 0) / tankCount : 0;
   const totalPopulation = tanks.reduce((sum, t) => sum + t.population, 0);
   const abnormalTotal = tanks.reduce((sum, t) => sum + t.abnormal, 0);
+  const lastScan = visionScanLog[0]?.time ?? "no scans yet";
 
   return (
     <>
@@ -66,7 +74,7 @@ export function VisionGrowth() {
         </div>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
-          Last scan · 22 min ago
+          Last scan · {lastScan}
         </div>
       </div>
 
@@ -93,7 +101,7 @@ export function VisionGrowth() {
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
             <Panel title="Growth Trend — Avg. Body Length" badge="7-week view">
-              <GrowthTrendChart />
+              <GrowthTrendChart values={growthTrend} />
               <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
                 <span className="flex items-center gap-1.5">
                   <span className="inline-block w-3 h-[2px] bg-[var(--coral)]" /> Body length (cm)
@@ -104,7 +112,7 @@ export function VisionGrowth() {
             <Panel title="Recent Vision Scans" badge={`${visionScanLog.length} events`}>
               <div className="flex flex-col">
                 {visionScanLog.map((s, i) => (
-                  <div key={s.time} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
+                  <div key={s.id} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
                     <div className="ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.45)] mb-1">
                       {s.time} · {s.tank}
                     </div>
