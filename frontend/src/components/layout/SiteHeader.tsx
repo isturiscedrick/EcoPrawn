@@ -62,7 +62,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
       }`}
     >
       <div
-        className={`flex h-16 items-center justify-between ${
+        className={`flex h-[72px] items-center justify-between gap-3 md:h-20 ${
           isAuth
             ? "w-full px-5 sm:px-8 lg:px-12 xl:px-16"
             : "mx-auto max-w-310 px-5 sm:px-8 lg:px-10"
@@ -70,15 +70,21 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
       >
         <Link
           href="/"
-          className={`flex items-center rounded-md transition-opacity duration-200 hover:opacity-80 ${focusRing}`}
+          className={`flex shrink-0 items-center rounded-md transition-opacity duration-200 hover:opacity-80 ${focusRing}`}
           aria-label="EcoPrawn home"
         >
-          <BrandMark size={isAuth ? 44 : 64} />
+          <span className="md:hidden">
+  <BrandMark size={isAuth ? 42 : 48} />
+</span>
+
+<span className="hidden md:block">
+  <BrandMark size={isAuth ? 54 : 76} />
+</span>
         </Link>
 
         {showLinks && <NavLinks variant="desktop" activeHref={pathname} />}
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           {isAuth ? (
             <Link
               href="/"
