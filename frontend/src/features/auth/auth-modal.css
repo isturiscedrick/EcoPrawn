@@ -294,3 +294,10 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* The landing page keeps its hidden water-intro element in the DOM, which
+   makes the logo wait 1.4s (see brand-mark.css). Inside the modal the logo
+   should draw right away, a beat after the panel pops in. */
+.ep-auth-modal .ep-logo.ep-logo {
+  --ep-logo-wait: 0.25s;
+}

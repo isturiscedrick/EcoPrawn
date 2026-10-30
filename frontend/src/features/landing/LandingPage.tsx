@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { TankHeroSvg } from "@/components/illustrations/TankHeroSvg";
+import { BrandIcon } from "@/components/layout/BrandIcon";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
@@ -175,13 +175,13 @@ export function LandingPage() {
               </ul>
             </div>
 
-            {/* Tank visual: ink panel (30%) with coral offset shadow and a floating reading */}
+            {/* Logo visual: ink panel (30%) with coral offset shadow and a floating reading */}
             <div className="relative mx-auto w-full max-w-[460px]">
               <div
                 aria-hidden="true"
                 className="flex h-[340px] w-full items-center justify-center rounded-3xl border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)] p-4 shadow-[10px_10px_0_0_var(--ep-accent)] sm:h-[420px] md:h-[460px] [&>svg]:h-full [&>svg]:w-auto [&>svg]:max-w-full"
               >
-                <TankHeroSvg />
+                <BrandIcon className="p-6 sm:p-10" timeScale={1.4} />
               </div>
 
               <div className="absolute bottom-6 left-3 rounded-2xl border-2 border-[var(--ep-primary)] bg-white px-4 py-3 shadow-[0_12px_28px_-12px_rgba(11,46,51,0.5)] sm:-left-6">

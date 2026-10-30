@@ -1,0 +1,78 @@
+/*
+ * EcoPrawn logo: draw-on animation.
+ *
+ * Every shape is one <path pathLength="1">. Phase 1 draws its outline by
+ * animating stroke-dashoffset 1 -> 0. Phase 2 fades the solid fill in while
+ * the outline fades out, so the resting logo is a plain filled shape.
+ *
+ * Per-shape timing comes from BrandMark.tsx through two custom properties:
+ *   --d  delay before this shape starts drawing
+ *   --t  how long the outline takes to draw
+ */
+
+.ep-logo {
+  /* Extra delay for the whole logo. See the landing-page rule below. */
+  --ep-logo-wait: 0s;
+  /* Wordmark color. Override with a utility class on dark backgrounds,
+     e.g. className="[--ep-logo-text:#f2ebdd]". */
+  --ep-logo-text: #02262b;
+  overflow: visible;
+}
+
+/* The landing page covers the screen with a water intro for the first
+   ~2 seconds. Hold the drawing until the water has drained past the header
+   (same 1.4s the old logo entrance waited). */
+body:has(.ep-water-curtain) .ep-logo {
+  --ep-logo-wait: 1.4s;
+}
+
+.ep-logo-shape {
+  stroke-width: 6;
+  stroke-linejoin: round;
+  /* Butt caps: a round cap would leave a dot at the start of every
+     hidden outline. */
+  stroke-linecap: butt;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  /* Resting state (also what reduced-motion users see): filled, no outline. */
+  fill-opacity: 1;
+  stroke-opacity: 0;
+}
+
+.ep-logo-shrimp {
+  fill: #d94416;
+  stroke: #d94416;
+}
+
+.ep-logo-text {
+  fill: var(--ep-logo-text);
+  stroke: var(--ep-logo-text);
+}
+
+.ep-logo-shape {
+  animation:
+    ep-logo-draw var(--t, 1s) cubic-bezier(0.65, 0, 0.35, 1)
+      calc(var(--ep-logo-wait) + var(--d, 0s)) both,
+    ep-logo-settle 0.45s ease-out
+      calc(var(--ep-logo-wait) + var(--d, 0s) + var(--t, 1s) * 0.75) both;
+}
+
+@keyframes ep-logo-draw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* "both" holds the first keyframe during the delay, so the outline is
+   visible (and the fill hidden) while the stroke is being drawn. */
+@keyframes ep-logo-settle {
+  from { fill-opacity: 0; stroke-opacity: 1; }
+  to   { fill-opacity: 1; stroke-opacity: 0; }
+}
+
+/* The global reduced-motion rule only shortens durations, which would still
+   honor the delays above and leave the logo invisible. Skip it entirely. */
+@media (prefers-reduced-motion: reduce) {
+  .ep-logo-shape {
+    animation: none;
+  }
+}

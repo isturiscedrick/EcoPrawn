@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -18,6 +17,7 @@ import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { LoginForm } from "./LoginForm";
+import { AuthModalMotion, playAuthExit } from "./AuthModalMotion";
 import "./auth-modal.css";
 
 interface AuthModalValue {
@@ -49,7 +49,17 @@ const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 function AuthDialog({ onClose }: { onClose: () => void }) {
+  const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const closing = useRef(false);
+
+  // Every way of closing (Escape, backdrop, X button) goes through here so the
+  // exit animation plays before the dialog unmounts.
+  const requestClose = useCallback(() => {
+    if (closing.current) return;
+    closing.current = true;
+    playAuthExit(overlayRef.current, panelRef.current, onClose);
+  }, [onClose]);
 
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null;
@@ -81,7 +91,7 @@ function AuthDialog({ onClose }: { onClose: () => void }) {
 
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        onClose();
+        requestClose();
         return;
       }
 
@@ -116,16 +126,23 @@ function AuthDialog({ onClose }: { onClose: () => void }) {
       document.body.style.overflow = originalOverflow;
       opener?.focus();
     };
-  }, [onClose]);
+  }, [requestClose]);
 
   return (
-    <div className="ep-auth-overlay fixed inset-0 z-[100] flex overflow-y-auto overscroll-contain p-3 sm:p-6">
-      {/* Backdrop */}
+    <div
+      ref={overlayRef}
+      className="ep-auth-overlay fixed inset-0 z-[100] flex overflow-y-auto overscroll-contain p-3 sm:p-6"
+    >
+      {/* Backdrop (faded in and out by AuthModalMotion) */}
       <div
+        data-auth-backdrop=""
         aria-hidden="true"
-        onClick={onClose}
-        className="ep-fade-in fixed inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm"
+        onClick={requestClose}
+        className="fixed inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm"
       />
+
+      {/* Decorative bubbles + all modal motion */}
+      <AuthModalMotion overlayRef={overlayRef} panelRef={panelRef} />
 
       {/* Modal panel */}
       <div
@@ -135,7 +152,7 @@ function AuthDialog({ onClose }: { onClose: () => void }) {
         aria-label="Sign in or create an account"
         tabIndex={-1}
         style={SCOPE}
-        className="ep-auth-modal ep-pop-in relative z-10 m-auto w-full max-w-[440px] overflow-y-auto rounded-[24px] border border-[var(--ep-line)] bg-[var(--ep-bg)] px-5 py-5 shadow-[0_24px_80px_rgba(8,30,34,0.28)] outline-none sm:px-8 sm:py-7"
+        className="ep-auth-modal relative z-10 m-auto w-full max-w-[440px] overflow-y-auto rounded-[24px] border border-[var(--ep-line)] bg-[var(--ep-bg)] px-5 py-5 shadow-[0_24px_80px_rgba(8,30,34,0.28)] outline-none sm:px-8 sm:py-7"
       >
         {/* Logo and close button */}
         <div className="ep-auth-brand relative mb-5 flex min-h-[72px] items-center justify-center border-b border-[var(--ep-line)] pb-4">
@@ -148,7 +165,7 @@ function AuthDialog({ onClose }: { onClose: () => void }) {
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={requestClose}
             aria-label="Close"
             className="absolute right-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-xl text-[var(--ep-text-muted)] transition-colors duration-200 hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
           >
