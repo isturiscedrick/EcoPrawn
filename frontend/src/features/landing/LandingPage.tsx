@@ -175,30 +175,12 @@ export function LandingPage() {
               </ul>
             </div>
 
-            {/* Logo visual: ink panel (30%) with coral offset shadow and a floating reading */}
-            <div className="relative mx-auto w-full max-w-[460px]">
-              <div
-                aria-hidden="true"
-                className="flex h-[340px] w-full items-center justify-center rounded-3xl border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)] p-4 shadow-[10px_10px_0_0_var(--ep-accent)] sm:h-[420px] md:h-[460px] [&>svg]:h-full [&>svg]:w-auto [&>svg]:max-w-full"
-              >
-                <BrandIcon className="p-6 sm:p-10" timeScale={1.4} />
-              </div>
-
-              <div className="absolute bottom-6 left-3 rounded-2xl border-2 border-[var(--ep-primary)] bg-white px-4 py-3 shadow-[0_12px_28px_-12px_rgba(11,46,51,0.5)] sm:-left-6">
-                <div className="text-xs font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">
-                  {heroReadouts[0].label}
-                </div>
-                <div className="mt-0.5 flex items-center gap-2 text-2xl font-semibold tabular-nums">
-                  {heroReadouts[0].value}
-                  <span className="text-sm font-medium">
-                    {heroReadoutUnits[heroReadouts[0].label]}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className="ep-pulse-dot ml-1 h-2 w-2 rounded-full bg-[var(--ep-ok)]"
-                  />
-                </div>
-              </div>
+            {/* Shrimp-only hero visual: no surrounding card or floating sensor readout */}
+            <div className="relative mx-auto flex w-full max-w-[460px] items-center justify-center">
+              <BrandIcon
+                className="h-[320px] w-auto max-w-full sm:h-[400px] md:h-[440px]"
+                timeScale={1.4}
+              />
             </div>
           </div>
         </section>
