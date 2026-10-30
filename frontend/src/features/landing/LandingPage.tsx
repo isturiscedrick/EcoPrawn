@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
 import { Icon, IconChip, type IconName } from "@/components//ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
+import { LandingMotion } from "@/components/motion/LandingMotion";
 import { Bubbles } from "@/components/illustrations/Bubbles";
 import { WaveEdge } from "@/components/illustrations/WaveEdge";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
@@ -89,6 +90,7 @@ export function LandingPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)]">
+      <LandingMotion />
       <SiteHeader />
 
       <main className="flex-1">
