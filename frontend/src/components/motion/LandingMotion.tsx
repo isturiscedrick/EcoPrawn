@@ -4,6 +4,8 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import { HeroEnhance } from "./HeroEnhance";
+import { LogoMotion } from "./LogoMotion";
 
 gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
 
@@ -433,6 +435,8 @@ export function LandingMotion() {
           />
         ))}
       </div>
+      <HeroEnhance />
+      <LogoMotion />
     </>
   );
 }
