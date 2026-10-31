@@ -1,145 +1,158 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import { HeroLens } from "@/features/landing/HeroLens";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
-import { Icon, IconChip, type IconName } from "@/components//ui/Icon";
+import { Icon, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
-import { Bubbles } from "@/components/illustrations/Bubbles";
-import { WaveEdge } from "@/components/illustrations/WaveEdge";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
 import { heroReadoutUnits } from "@/config/sensors";
-import {
-  heroReadouts,
-  waterQualityThresholds,
-  tanks,
-  feedByTank,
-  alerts,
-} from "@/content/landing-preview";
+import { heroReadouts, waterQualityThresholds } from "@/content/landing-preview";
 
 const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
 
 const buttonMotion =
-  "transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-12px_rgba(11,46,51,0.6)] active:translate-y-0 active:shadow-none";
+  "transition-all duration-200 hover:-translate-y-px active:translate-y-0";
+
+const eyebrow =
+  "mb-4 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]";
 
 const STEPS: { step: string; title: string; body: string; icon: IconName }[] = [
-  {
-    step: "01",
-    title: "Sense",
-    icon: "activity",
-    body: "Dissolved oxygen, pH, temperature, salinity, and water level sensors stream telemetry to an on-site server and cloud database.",
-  },
-  {
-    step: "02",
-    title: "Analyze",
-    icon: "eye",
-    body: "Machine learning models estimate shrimp growth and biomass directly from camera feeds, with no physical handling.",
-  },
-  {
-    step: "03",
-    title: "Act",
-    icon: "zap",
-    body: "Aerators activate automatically when a parameter crosses its threshold, and feed is dispensed on a biomass-adjusted schedule.",
-  },
-  {
-    step: "04",
-    title: "Return",
-    icon: "leaf",
-    body: "Bio-rich wastewater from the biofloc loop is routed to surrounding mangrove and wetland vegetation.",
-  },
+  { step: "01", title: "Sense", icon: "activity", body: "Five sensors stream water readings around the clock." },
+  { step: "02", title: "Analyze", icon: "eye", body: "Cameras estimate shrimp growth and biomass without handling." },
+  { step: "03", title: "Act", icon: "zap", body: "Aerators start automatically. Feed follows biomass." },
+  { step: "04", title: "Return", icon: "leaf", body: "Treated wastewater is routed to mangrove and wetland." },
 ];
 
-const PREVIEW_POINTS: { icon: IconName; title: string; body: string }[] = [
-  {
-    icon: "activity",
-    title: "Live water quality",
-    body: "Oxygen, pH, temperature, salinity, and water level, each checked against its target range.",
-  },
-  {
-    icon: "utensils",
-    title: "Feeding on schedule",
-    body: "See what was dispensed today and what is coming up next.",
-  },
-  {
-    icon: "eye",
-    title: "Growth from camera feeds",
-    body: "Body length, weight, and population estimated without handling the shrimp.",
-  },
+const STATS = [
+  { label: "Parameters tracked", value: String(heroReadouts.length) },
+  { label: "Aeration", value: "Automatic" },
+  { label: "Growth vision", value: "No handling" },
 ];
 
-// Same sample series the dashboard trend chart used before it read real data.
-const PREVIEW_TREND =
-  "0,90 40,84 80,88 120,70 160,76 200,60 240,66 280,50 320,58 360,44 400,52 440,40 480,46 520,36 560,42";
+// Gauge scale and target zone per reading, used only to draw the range bars.
+// Same numbers as the dashboard thresholds.
+const ZONES: Record<string, { min: number; max: number; lo: number; hi: number }> = {
+  "Dissolved O₂": { min: 0, max: 8, lo: 4.5, hi: 8 },
+  pH: { min: 6, max: 10, lo: 7.5, hi: 8.5 },
+  Temperature: { min: 20, max: 36, lo: 26, hi: 30 },
+  Salinity: { min: 0, max: 30, lo: 10, hi: 20 },
+  "Water Level": { min: 0, max: 100, lo: 90, hi: 100 },
+};
+
+const CROSSES = [
+  { left: "6%", top: "18%" },
+  { left: "44%", top: "9%" },
+  { left: "93%", top: "26%" },
+  { left: "12%", top: "82%" },
+  { left: "52%", top: "90%" },
+  { left: "88%", top: "78%" },
+];
+
+const pct = (v: number, min: number, max: number) =>
+  Math.max(0, Math.min(100, ((v - min) / (max - min)) * 100));
 
 function targetRangeFor(label: string): string | undefined {
   return waterQualityThresholds.find((t) => t.label === label)?.range;
 }
 
-export function LandingPage() {
-  const previewKpis = [
-    {
-      label: heroReadouts[0].label,
-      value: `${heroReadouts[0].value} ${heroReadoutUnits[heroReadouts[0].label]}`,
-    },
-    { label: "Biomass", value: tanks[0].biomass },
-    { label: "Feed conversion", value: feedByTank[0].fcr },
-  ];
-  const previewAlert = alerts[0];
+// Splits a line into words, each in a clipping wrapper so GSAP can slide it up.
+function Words({ text }: { text: string }) {
+  return text.split(" ").map((word, i) => (
+    <Fragment key={`${word}-${i}`}>
+      <span className="inline-block overflow-hidden pb-[0.14em] align-bottom -mb-[0.14em]">
+        <span data-hero="word" className="inline-block">
+          {word}
+        </span>
+      </span>{" "}
+    </Fragment>
+  ));
+}
 
+export function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)]">
       <LandingMotion />
       <SiteHeader />
 
       <main className="flex-1">
-        {/* HERO: cream background (60%), coral accent on one phrase and one button (10%) */}
+        {/* HERO: cream (60%) with a faint blueprint grid and one coral accent */}
         <section id="top" className="relative isolate overflow-hidden">
-          {/* Depth: soft coral/green glows plus a faint grid that fades toward the edges */}
+          <div
+            aria-hidden="true"
+            data-hero="grid"
+            className="pointer-events-none absolute inset-x-0 -top-[10%] -z-10 h-[120%] opacity-[0.07]"
+            style={{
+              backgroundImage:
+                "linear-gradient(var(--ep-primary) 1px, transparent 1px), linear-gradient(90deg, var(--ep-primary) 1px, transparent 1px)",
+              backgroundSize: "64px 64px",
+              WebkitMaskImage: "radial-gradient(ellipse at 60% 40%, black 25%, transparent 72%)",
+              maskImage: "radial-gradient(ellipse at 60% 40%, black 25%, transparent 72%)",
+            }}
+          />
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10"
             style={{
               background:
-                "radial-gradient(600px circle at 85% 20%, rgba(178,63,28,0.10), transparent 60%), radial-gradient(700px circle at 10% 90%, rgba(30,122,70,0.08), transparent 60%)",
+                "radial-gradient(640px circle at 82% 30%, rgba(95,184,196,0.16), transparent 62%), radial-gradient(520px circle at 8% 95%, rgba(178,63,28,0.07), transparent 60%)",
             }}
           />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06]"
-            style={{
-              backgroundImage:
-                "linear-gradient(var(--ep-primary) 1px, transparent 1px), linear-gradient(90deg, var(--ep-primary) 1px, transparent 1px)",
-              backgroundSize: "56px 56px",
-              WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-              maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-            }}
-          />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+            {CROSSES.map((c) => (
+              <span
+                key={`${c.left}-${c.top}`}
+                data-cross=""
+                className="absolute h-4 w-4 opacity-[0.15]"
+                style={{ left: c.left, top: c.top }}
+              >
+                <span className="absolute left-1/2 top-0 h-full w-px bg-[var(--ep-accent)]" />
+                <span className="absolute left-0 top-1/2 h-px w-full bg-[var(--ep-accent)]" />
+              </span>
+            ))}
+          </div>
 
-          <div className="mx-auto grid max-w-[1200px] items-center gap-10 px-5 py-14 sm:px-8 md:grid-cols-2 md:gap-12 lg:py-20">
-            <div>
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-[var(--ep-primary)] bg-white px-3.5 py-1.5 text-sm font-semibold">
-                <span
-                  aria-hidden="true"
-                  className="ep-pulse-dot h-2 w-2 rounded-full bg-[var(--ep-ok)]"
-                />
+          <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 py-14 sm:px-8 md:grid-cols-[1.05fr_0.95fr] md:gap-14 lg:py-24">
+            <div data-hero="text">
+              <div
+                data-hero="eyebrow"
+                className="mb-7 inline-flex items-center gap-3 border-l-2 border-[var(--ep-accent)] pl-3 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]"
+              >
+                <span className="relative flex h-2 w-2" aria-hidden="true">
+                  <span
+                    data-live-ping=""
+                    className="absolute inline-flex h-full w-full rounded-full bg-[var(--ep-ok)] opacity-60"
+                  />
+                  <span className="relative h-2 w-2 rounded-full bg-[var(--ep-ok)]" />
+                </span>
                 Live monitoring · 24/7
               </div>
 
-              <h1 className="ep-font-display text-[clamp(40px,5.5vw,64px)] font-semibold leading-[1.1] tracking-tight">
-                Indoor shrimp farming,{" "}
-                <span className="text-[var(--ep-accent)]">always in range.</span>
+              <h1
+                aria-label="Indoor shrimp farming, always in range."
+                className="ep-font-display text-[clamp(40px,5.4vw,68px)] font-semibold leading-[1.06] tracking-tight"
+              >
+                <span aria-hidden="true">
+                  <Words text="Indoor shrimp farming," />
+                  <span className="block text-[var(--ep-accent)]">
+                    <Words text="always in range." />
+                  </span>
+                </span>
               </h1>
 
-              <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-[var(--ep-text-muted)]">
-                Live water quality, automated feeding, and AI growth tracking for
-                your tanks, all in one dashboard.
+              <p
+                data-hero="lead"
+                className="mt-6 max-w-[32rem] text-lg leading-relaxed text-[var(--ep-text-muted)]"
+              >
+                Live water quality, automatic feeding, and AI growth tracking in one dashboard.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div data-hero="cta" className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <AuthLink
-                  className={`group inline-flex items-center justify-center gap-2 rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 text-base font-semibold text-white hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
+                  className={`group inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 text-base font-semibold text-white hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
                 >
                   Sign in to dashboard
                   <span
@@ -152,93 +165,119 @@ export function LandingPage() {
 
                 <Link
                   href="/about"
-                  className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-primary)] px-7 py-3.5 text-base font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${buttonMotion} ${focusRing}`}
+                  className={`inline-flex items-center justify-center rounded-lg border-2 border-[var(--ep-primary)] px-7 py-3.5 text-base font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${buttonMotion} ${focusRing}`}
                 >
                   See how it works
                 </Link>
               </div>
 
-              {/* Proof row */}
-              <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-[var(--ep-line)] pt-6 text-sm font-semibold">
-                <li className="flex items-center gap-2">
-                  <span aria-hidden="true" className="text-[var(--ep-accent)]">●</span>
-                  {heroReadouts.length} parameters tracked
-                </li>
-                <li className="flex items-center gap-2">
-                  <span aria-hidden="true" className="text-[var(--ep-accent)]">●</span>
-                  Auto-aeration
-                </li>
-                <li className="flex items-center gap-2">
-                  <span aria-hidden="true" className="text-[var(--ep-accent)]">●</span>
-                  Handling-free AI vision
-                </li>
-              </ul>
+              <dl className="relative mt-12 grid grid-cols-1 gap-5 pt-6 sm:grid-cols-3">
+                <span
+                  aria-hidden="true"
+                  data-hero="statline"
+                  className="absolute inset-x-0 top-0 h-px bg-[var(--ep-primary)]"
+                />
+                {STATS.map((s) => (
+                  <div key={s.label} data-hero="stat">
+                    <dt className="text-sm font-semibold text-[var(--ep-text-muted)]">{s.label}</dt>
+                    <dd className="ep-font-display mt-1 text-2xl font-semibold tabular-nums">
+                      {s.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
 
-            {/* Camera-lens hero visual: the prawn "captured" inside a lens with example readings */}
-            <div className="relative mx-auto flex w-full max-w-[460px] items-center justify-center">
-              <HeroLens />
+            <div data-hero="parallax-console" className="relative mx-auto w-full max-w-[480px]">
+              <div data-hero="console">
+                <HeroLens />
+              </div>
             </div>
           </div>
         </section>
 
-        {/* READINGS: deep-water band with wavy edges, rising bubbles, and a gauge bar per reading */}
+        {/* READINGS: deep teal (30%). Each reading shown against its target zone. */}
         <section
+          id="readings"
           aria-labelledby="readings-title"
-          className="relative isolate bg-[var(--ep-primary)] text-[var(--ep-bg)]"
+          className="relative isolate overflow-hidden border-y border-[var(--ep-primary)] bg-[var(--ep-primary)] text-[var(--ep-bg)]"
         >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10"
+            data-readings-bg=""
+            className="pointer-events-none absolute inset-x-0 -top-[10%] -z-10 h-[120%] opacity-[0.08]"
             style={{
-              background:
-                "radial-gradient(700px circle at 15% 100%, rgba(95,184,196,0.2), transparent 60%), linear-gradient(180deg, var(--ep-primary) 0%, var(--ep-primary-soft) 100%)",
+              backgroundImage:
+                "linear-gradient(var(--ep-bg) 1px, transparent 1px), linear-gradient(90deg, var(--ep-bg) 1px, transparent 1px)",
+              backgroundSize: "64px 64px",
+              WebkitMaskImage: "radial-gradient(ellipse at 30% 0%, black 20%, transparent 70%)",
+              maskImage: "radial-gradient(ellipse at 30% 0%, black 20%, transparent 70%)",
             }}
           />
-          <Bubbles />
-          {/* Top: a dark wave that rises over the hero's bottom edge, so it never has to match the hero's glows */}
-          <WaveEdge className="bottom-[calc(100%-1px)] z-20 text-[var(--ep-primary)]" />
-          {/* Bottom: a sand wave that matches the dashboard-preview section below */}
-          <WaveEdge className="bottom-[-1px] z-20 text-[var(--ep-tint)]" />
 
-          <div className="relative z-10 mx-auto max-w-[1200px] px-5 py-20 sm:px-8 sm:py-24">
-            <h2
-              id="readings-title"
-              className="ep-font-display text-[clamp(24px,3vw,32px)] font-semibold tracking-tight"
-            >
-              Tank 1, latest readings
-            </h2>
-            <p className="mt-2 max-w-[34rem] text-base leading-relaxed text-[rgba(242,235,221,0.78)]">
-              Each reading is shown against the range the shrimp need to stay healthy.
-            </p>
+          <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 sm:py-24">
+            <div data-reveal="" className="max-w-[40rem]">
+              <div className={`${eyebrow} !text-[rgba(242,235,221,0.85)]`}>
+                <span aria-hidden="true" className="h-2 w-2 bg-[var(--coral)]" />
+                Target ranges
+              </div>
+              <h2
+                id="readings-title"
+                className="ep-font-display text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
+              >
+                Five readings, each held in range.
+              </h2>
+              <p className="mt-3 text-lg leading-relaxed text-[rgba(242,235,221,0.88)]">
+                Sample values from Tank 1, shown against the range shrimp need.
+              </p>
+            </div>
 
-            <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-5">
-              {heroReadouts.map((readout) => {
-                const range = targetRangeFor(readout.label);
+            <dl className="mt-14 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-5">
+              {heroReadouts.map((r) => {
+                const zone = ZONES[r.label];
+                const value = parseFloat(r.value);
+                const zoneLeft = zone ? pct(zone.lo, zone.min, zone.max) : 0;
+                const zoneWidth = zone ? pct(zone.hi, zone.min, zone.max) - zoneLeft : 0;
+                const markerLeft = zone ? pct(value, zone.min, zone.max) : 0;
+                const range = targetRangeFor(r.label);
                 return (
-                  <div key={readout.label} className="last:col-span-2 md:last:col-span-1">
-                    <dt className="text-sm font-semibold text-[rgba(242,235,221,0.82)]">
-                      {readout.label}
-                    </dt>
-                    <dd className="mt-1 text-4xl font-semibold tabular-nums">
-                      {readout.value}
-                      <span className="ml-1 text-base font-medium text-[rgba(242,235,221,0.72)]">
-                        {heroReadoutUnits[readout.label]}
+                  <div
+                    key={r.label}
+                    data-reading=""
+                    className="border-t border-[rgba(242,235,221,0.3)] pt-5 last:col-span-2 md:last:col-span-1"
+                  >
+                    <dt className="text-base font-semibold text-[rgba(242,235,221,0.92)]">{r.label}</dt>
+                    <dd className="mt-2 text-4xl font-semibold tabular-nums">
+                      <span data-countto={r.value}>{r.value}</span>
+                      <span className="ml-1 text-base font-medium text-[rgba(242,235,221,0.8)]">
+                        {heroReadoutUnits[r.label]}
                       </span>
                     </dd>
+
                     <div
                       aria-hidden="true"
-                      className="mt-3 h-1.5 overflow-hidden rounded-full bg-[rgba(242,235,221,0.16)]"
+                      className="relative mt-6 h-2 rounded-full bg-[rgba(242,235,221,0.16)]"
                     >
                       <div
-                        className={`h-full rounded-full ${
-                          readout.status === "ok" ? "bg-[var(--mangrove-light)]" : "bg-[var(--amber)]"
-                        }`}
-                        style={{ width: `${readout.pct}%` }}
+                        data-zone=""
+                        className="absolute inset-y-0 rounded-full bg-[var(--mangrove-light)]"
+                        style={{ left: `${zoneLeft}%`, width: `${zoneWidth}%` }}
                       />
+                      <div
+                        data-marker=""
+                        className="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2"
+                        style={{ left: `${markerLeft}%` }}
+                      >
+                        <span
+                          data-ping=""
+                          className="absolute inset-0 rounded-full border-2 border-[var(--coral)] opacity-0"
+                        />
+                        <span className="absolute inset-0 rounded-full border-2 border-[var(--ep-primary)] bg-[var(--coral)]" />
+                      </div>
                     </div>
+
                     {range && (
-                      <p className="mt-2 text-sm text-[rgba(242,235,221,0.72)]">Target {range}</p>
+                      <p className="mt-3 text-sm text-[rgba(242,235,221,0.85)]">Target {range}</p>
                     )}
                   </div>
                 );
@@ -247,166 +286,54 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* DASHBOARD PREVIEW: sample data from the same file as the hero readings */}
-        <section
-          aria-labelledby="preview-title"
-          className="bg-[var(--ep-tint)] px-5 py-16 sm:px-8 sm:py-20 lg:py-24"
-        >
-          <div className="mx-auto grid max-w-[1200px] items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-            <div>
-              <h2
-                id="preview-title"
-                className="ep-font-display text-[clamp(30px,4vw,44px)] font-semibold leading-[1.1] tracking-tight"
-              >
-                Everything about the tank, on one screen.
-              </h2>
-              <p className="mt-4 max-w-[34rem] text-lg leading-relaxed text-[var(--ep-text-muted)]">
-                Readings, feeding, growth, and alerts sit side by side, so you can
-                see what needs attention without opening anything else.
-              </p>
-
-              <ul className="mt-8 flex flex-col gap-5">
-                {PREVIEW_POINTS.map((p) => (
-                  <li key={p.title} className="flex gap-4">
-                    <IconChip name={p.icon} tone="mangrove" size={20} />
-                    <div>
-                      <div className="text-base font-semibold">{p.title}</div>
-                      <p className="mt-0.5 text-base leading-relaxed text-[var(--ep-text-muted)]">
-                        {p.body}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div
-              aria-hidden="true"
-              className="overflow-hidden rounded-2xl border-2 border-[var(--ep-primary)] bg-[var(--ep-surface)] shadow-[10px_10px_0_0_var(--ep-primary)]"
-            >
-              <div className="flex items-center gap-1.5 border-b-2 border-[var(--ep-primary)] bg-[var(--ep-bg)] px-4 py-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-[var(--ep-line)]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[var(--ep-line)]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[var(--ep-line)]" />
-                <span className="ml-3 text-xs font-semibold text-[var(--ep-text-muted)]">
-                  Tank overview
-                </span>
-              </div>
-
-              <div className="p-4 sm:p-6">
-                <div className="grid grid-cols-3 gap-3">
-                  {previewKpis.map((k) => (
-                    <div
-                      key={k.label}
-                      className="rounded-xl border-2 border-[var(--ep-line)] p-3"
-                    >
-                      <div className="text-xs font-semibold text-[var(--ep-text-muted)]">
-                        {k.label}
-                      </div>
-                      <div className="mt-1 text-lg font-semibold tabular-nums sm:text-xl">
-                        {k.value}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-4 rounded-xl border-2 border-[var(--ep-line)] p-4">
-                  <div className="mb-2 text-sm font-semibold">Dissolved oxygen, last readings</div>
-                  <svg viewBox="0 0 560 120" preserveAspectRatio="none" className="h-28 w-full">
-                    <defs>
-                      <linearGradient id="ep-preview-fill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#1e7a46" stopOpacity="0.3" />
-                        <stop offset="100%" stopColor="#1e7a46" stopOpacity="0" />
-                      </linearGradient>
-                    </defs>
-                    <polygon
-                      points={`${PREVIEW_TREND} 560,120 0,120`}
-                      fill="url(#ep-preview-fill)"
-                    />
-                    <polyline
-                      points={PREVIEW_TREND}
-                      fill="none"
-                      stroke="#1e7a46"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      vectorEffect="non-scaling-stroke"
-                    />
-                  </svg>
-                </div>
-
-                <div className="mt-4 flex items-start gap-3 rounded-xl bg-[var(--ep-tint)] p-3">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--ep-ok)] text-white">
-                    <Icon name="check" size={14} strokeWidth={2.5} />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold">{previewAlert.title}</div>
-                    <div className="text-sm text-[var(--ep-text-muted)]">{previewAlert.detail}</div>
-                  </div>
-                  <span className="shrink-0 text-xs font-semibold text-[var(--ep-text-muted)]">
-                    {previewAlert.time}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* PROCESS: four stages, left to right */}
+        {/* PROCESS: four stages on a single rule that fills as you scroll */}
         <section
           id="process"
           aria-labelledby="process-title"
-          className="px-5 py-16 sm:px-8 sm:py-20 lg:py-24"
+          className="px-5 py-20 sm:px-8 sm:py-24"
         >
           <div className="mx-auto max-w-[1200px]">
-            <Reveal>
-              <div className="mb-10 max-w-[700px] sm:mb-14">
-                <div className="mb-3 text-sm font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">
-                  The loop
-                </div>
-                <h2
-                  id="process-title"
-                  className="ep-font-display text-[clamp(30px,4vw,44px)] font-semibold leading-[1.1] tracking-tight"
-                >
-                  From sensor
-                  <br className="hidden sm:block" />
-                  to mangrove.
-                </h2>
-                <p className="mt-4 max-w-[36rem] text-lg leading-relaxed text-[var(--ep-text-muted)]">
-                  Four stages run continuously, so the tank stays in range and
-                  nothing it doesn&apos;t need goes to waste.
-                </p>
+            <div data-reveal="" className="mb-14 max-w-[40rem]">
+              <div className={eyebrow}>
+                <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
+                The loop
               </div>
-            </Reveal>
+              <h2
+                id="process-title"
+                className="ep-font-display text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
+              >
+                From sensor to mangrove.
+              </h2>
+            </div>
 
-            <div className="relative">
-              <div
+            <div className="relative lg:border-t lg:border-[var(--ep-line)]">
+              <span
                 aria-hidden="true"
-                className="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-[var(--ep-line)] lg:block"
+                data-process-line=""
+                className="pointer-events-none absolute -top-px left-0 hidden h-0.5 w-full origin-left bg-[var(--ep-accent)] lg:block"
               />
-              <ol className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-                {STEPS.map((s, i) => (
-                  <li key={s.step}>
-                    <Reveal delay={i * 110}>
-                      <div className="group">
-                        <div className="relative z-10 mb-5 flex h-14 w-14 items-center justify-center rounded-full border-2 border-[var(--ep-primary)] bg-[var(--ep-surface)] text-[var(--ep-accent)] transition-all duration-200 group-hover:-translate-y-1 group-hover:border-[var(--ep-accent)] group-hover:bg-[var(--ep-accent)] group-hover:text-white group-hover:shadow-[0_10px_24px_-12px_rgba(11,46,51,0.6)]">
-                          <Icon
-                            name={s.icon}
-                            size={22}
-                            className="transition-transform duration-200 group-hover:scale-110"
-                          />
-                        </div>
-                        <div className="mb-1 text-sm font-semibold uppercase tracking-wide text-[var(--ep-text-muted)] transition-colors duration-200 group-hover:text-[var(--ep-primary)]">
-                          Step {s.step}
-                        </div>
-                        <h3 className="ep-font-display mb-2 text-xl font-semibold transition-colors duration-200 group-hover:text-[var(--ep-accent)]">
-                          {s.title}
-                        </h3>
-                        <p className="text-base leading-relaxed text-[var(--ep-text-muted)]">
-                          {s.body}
-                        </p>
-                      </div>
-                    </Reveal>
+              <ol className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+                {STEPS.map((s) => (
+                  <li
+                    key={s.step}
+                    data-step=""
+                    className="relative border-t border-[var(--ep-line)] pt-8 lg:border-t-0"
+                  >
+                    <span
+                      aria-hidden="true"
+                      data-step-node=""
+                      className="absolute -top-[5px] left-0 hidden h-2.5 w-2.5 bg-[var(--ep-primary)] lg:block"
+                    />
+                    <div className="mb-6 flex items-center justify-between">
+                      <span className="text-sm font-semibold tabular-nums tracking-wide text-[var(--ep-text-muted)]">
+                        {s.step}
+                      </span>
+                      <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--ep-primary)] text-[var(--ep-primary)]">
+                        <Icon name={s.icon} size={22} />
+                      </span>
+                    </div>
+                    <h3 className="ep-font-display mb-2 text-2xl font-semibold">{s.title}</h3>
+                    <p className="text-base leading-relaxed text-[var(--ep-text-muted)]">{s.body}</p>
                   </li>
                 ))}
               </ol>
