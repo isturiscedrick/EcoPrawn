@@ -31,25 +31,38 @@ export const SHAPES: { kind: "shrimp" | "text"; d: string; delay: number; dur: n
 
 export function BrandMark({ size = 30, className = "" }: BrandMarkProps) {
   return (
-    <svg
+    <span
       role="img"
       aria-label="EcoPrawn"
-      viewBox="0 0 1086 362"
-      width={size * 3}
-      height={size}
-      className={`ep-logo ${className}`}
-      style={{ height: size, width: "auto" }}
+      className={`ep-logo inline-flex items-center whitespace-nowrap ${className}`}
+      style={{ gap: size * 0.18 }}
     >
-      {SHAPES.map((shape, i) => (
-        <path
-          key={i}
-          className={`ep-logo-shape ep-logo-${shape.kind}`}
-          pathLength={1}
-          fillRule="evenodd"
-          d={shape.d}
-          style={{ "--d": `${shape.delay}s`, "--t": `${shape.dur}s` } as CSSProperties}
-        />
-      ))}
-    </svg>
+      {/* Shrimp only. Cropped to the shrimp's bounds, same as BrandIcon. */}
+      <svg
+        aria-hidden="true"
+        viewBox="70 4 411 357"
+        style={{ height: size, width: "auto" }}
+      >
+        {SHAPES.filter((shape) => shape.kind === "shrimp").map((shape, i) => (
+          <path
+            key={i}
+            className="ep-logo-shape ep-logo-shrimp"
+            pathLength={1}
+            fillRule="evenodd"
+            d={shape.d}
+            style={{ "--d": `${shape.delay}s`, "--t": `${shape.dur}s` } as CSSProperties}
+          />
+        ))}
+      </svg>
+
+      {/* Real text, not paths. Color comes from --ep-logo-text. */}
+      <span
+        aria-hidden="true"
+        className="ep-logo-wordmark ep-font-display font-semibold leading-none tracking-tight"
+        style={{ fontSize: size * 0.44 }}
+      >
+        EcoPrawn
+      </span>
+    </span>
   );
 }

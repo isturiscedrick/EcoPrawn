@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BrandIcon } from "@/components/layout/BrandIcon";
+import { HeroLens } from "@/features/landing/HeroLens";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
@@ -175,12 +175,9 @@ export function LandingPage() {
               </ul>
             </div>
 
-            {/* Shrimp-only hero visual: no surrounding card or floating sensor readout */}
+            {/* Camera-lens hero visual: the prawn "captured" inside a lens with example readings */}
             <div className="relative mx-auto flex w-full max-w-[460px] items-center justify-center">
-              <BrandIcon
-                className="h-[320px] w-auto max-w-full sm:h-[400px] md:h-[440px]"
-                timeScale={1.4}
-              />
+              <HeroLens />
             </div>
           </div>
         </section>

@@ -16,12 +16,13 @@ import {
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 import { BrandMark } from "@/components/layout/BrandMark";
-import { LoginForm } from "./LoginForm";
+import { LoginForm, type AuthMode } from "./LoginForm";
 import { AuthModalMotion, playAuthExit } from "./AuthModalMotion";
 import "./auth-modal.css";
 
 interface AuthModalValue {
-  open: () => void;
+  /** Opens the modal on the Sign in tab (default) or the Sign up tab. */
+  open: (mode?: AuthMode) => void;
   close: () => void;
 }
 
@@ -48,7 +49,7 @@ const SCOPE = {
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-function AuthDialog({ onClose }: { onClose: () => void }) {
+function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const closing = useRef(false);
@@ -178,7 +179,7 @@ function AuthDialog({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* Existing form and all its logic */}
-        <LoginForm />
+        <LoginForm initialMode={mode} />
       </div>
     </div>
   );
@@ -190,22 +191,30 @@ export function AuthModalProvider({
   children: ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [mode, setMode] = useState<AuthMode>("signin");
 
-  const open = useCallback(() => setIsOpen(true), []);
+  const open = useCallback((next: AuthMode = "signin") => {
+    setMode(next);
+    setIsOpen(true);
+  }, []);
   const close = useCallback(() => setIsOpen(false), []);
 
   return (
     <AuthModalContext.Provider value={{ open, close }}>
       {children}
-      {isOpen && <AuthDialog onClose={close} />}
+      {isOpen && <AuthDialog onClose={close} mode={mode} />}
     </AuthModalContext.Provider>
   );
 }
 
-type AuthLinkProps = Omit<ComponentProps<typeof Link>, "href">;
+type AuthLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
+  /** Which tab the modal opens on. Defaults to Sign in. */
+  mode?: AuthMode;
+};
 
 export function AuthLink({
   onClick,
+  mode,
   ...props
 }: AuthLinkProps) {
   const { open } = useAuthModal();
@@ -225,7 +234,7 @@ export function AuthLink({
     }
 
     e.preventDefault();
-    open();
+    open(mode);
   }
 
   return <Link {...props} href="/login" onClick={handleClick} />;

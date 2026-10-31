@@ -83,3 +83,27 @@ body:has(.ep-water-curtain) .ep-logo {
 html.ep-nav-seen header .ep-logo-shape {
   animation: none;
 }
+
+/* Wordmark: real text beside the shrimp. It fades in once the shrimp has
+   started drawing. --ep-logo-wait and --ep-logo-text come from .ep-logo. */
+.ep-logo-wordmark {
+  color: var(--ep-logo-text);
+  animation: ep-wordmark-in 0.7s ease-out calc(var(--ep-logo-wait) + 0.9s) both;
+}
+
+@keyframes ep-wordmark-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-logo-wordmark {
+    animation: none;
+  }
+}
+
+/* Same static rules the shrimp follows. */
+html.ep-nav-seen header .ep-logo-wordmark,
+.ep-auth-modal .ep-logo-wordmark {
+  animation: none;
+}

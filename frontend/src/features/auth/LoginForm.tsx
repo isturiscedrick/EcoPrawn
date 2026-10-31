@@ -231,14 +231,16 @@ const SIGNUP_STEPS = ["Your details", "Account"] as const;
 
 /* ---------- The form ---------- */
 
-export function LoginForm() {
+export type AuthMode = "signin" | "signup";
+
+export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }) {
   const uid = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const touched = useRef<Set<string>>(new Set());
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [pending, setPending] = useState(false);
-  const [step, setStep] = useState<"signin" | "signup" | "verify" | "complete">("signin");
+  const [step, setStep] = useState<"signin" | "signup" | "verify" | "complete">(initialMode);
   const [signupPage, setSignupPage] = useState<1 | 2>(1);
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");

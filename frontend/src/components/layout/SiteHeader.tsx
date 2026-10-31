@@ -61,8 +61,12 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
           : "border-[var(--ep-line)]"
       }`}
     >
+      {/* With links: logo | centered nav | actions (true center, whatever the side widths).
+          Without links: plain two-sided row. */}
       <div
         className={`flex h-[72px] items-center justify-between gap-3 md:h-20 ${
+          showLinks ? "md:grid md:grid-cols-[1fr_auto_1fr]" : ""
+        } ${
           isAuth
             ? "w-full px-5 sm:px-8 lg:px-12 xl:px-16"
             : "mx-auto max-w-310 px-5 sm:px-8 lg:px-10"
@@ -70,21 +74,21 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
       >
         <Link
           href="/"
-          className={`flex shrink-0 items-center rounded-md transition-opacity duration-200 hover:opacity-80 ${focusRing}`}
+          className={`flex shrink-0 items-center rounded-md transition-opacity duration-200 hover:opacity-80 md:justify-self-start ${focusRing}`}
           aria-label="EcoPrawn home"
         >
           <span className="md:hidden">
-  <BrandMark size={isAuth ? 42 : 48} />
-</span>
+            <BrandMark size={isAuth ? 36 : 40} />
+          </span>
 
-<span className="hidden md:block">
-  <BrandMark size={isAuth ? 54 : 76} />
-</span>
+          <span className="hidden md:block">
+            <BrandMark size={isAuth ? 44 : 48} />
+          </span>
         </Link>
 
         {showLinks && <NavLinks variant="desktop" activeHref={pathname} />}
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2 md:justify-self-end">
           {isAuth ? (
             <Link
               href="/"
@@ -99,17 +103,20 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
               Back to home
             </Link>
           ) : (
-            <AuthLink
-              className={`group inline-flex items-center gap-1.5 rounded-xl border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)] px-4 py-2 text-sm font-semibold text-[var(--ep-bg)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary-soft)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.7)] active:translate-y-0 sm:px-5 ${focusRing}`}
-            >
-              Log in
-              <span
-                aria-hidden="true"
-                className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+            <>
+              <AuthLink
+                className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-primary)] px-4 py-2.5 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] active:translate-y-0 sm:px-5 ${focusRing}`}
               >
-                →
-              </span>
-            </AuthLink>
+                Log in
+              </AuthLink>
+
+              <AuthLink
+                mode="signup"
+                className={`hidden items-center justify-center rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.7)] active:translate-y-0 sm:inline-flex sm:px-5 ${focusRing}`}
+              >
+                Sign up
+              </AuthLink>
+            </>
           )}
 
           {showLinks && (
