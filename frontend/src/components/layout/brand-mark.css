@@ -76,3 +76,10 @@ body:has(.ep-water-curtain) .ep-logo {
     animation: none;
   }
 }
+
+/* Header logo: after the first in-app navigation, show it static.
+   Reload resets <html>, so the draw-on plays again. Scoped to <header>,
+   so the hero shrimp icon is unaffected. */
+html.ep-nav-seen header .ep-logo-shape {
+  animation: none;
+}

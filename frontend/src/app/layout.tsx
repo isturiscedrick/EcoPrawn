@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AuthModalProvider } from "@/features/auth/AuthModalProvider";
+import { LogoIntroGate } from "@/components/motion/LogoIntroGate";
 
 export const metadata: Metadata = {
   title: "EcoPrawn",
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className="ecoprawn-root">
+        <LogoIntroGate />
         <AuthModalProvider>{children}</AuthModalProvider>
       </body>
     </html>
