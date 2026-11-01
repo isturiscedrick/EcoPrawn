@@ -14,7 +14,7 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
   if (variant === "desktop") {
     return (
       <nav
-        className="hidden items-center gap-1 rounded-full border-2 border-[var(--ep-primary)] bg-white p-1 md:flex"
+        className="hidden items-center gap-1 rounded-xl border-2 border-[var(--ep-primary)] bg-white/60 p-1 md:flex"
         aria-label="Primary navigation"
       >
         {LANDING_NAV_LINKS.map(([label, href]) => {
@@ -24,7 +24,7 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
               key={label}
               href={href}
               aria-current={isActive ? "page" : undefined}
-              className={`rounded-full px-5 py-1.5 text-base font-semibold transition-colors duration-200 ${focusRing} ${
+              className={`rounded-lg px-4 py-1.5 text-sm font-semibold transition-colors duration-200 ${focusRing} ${
                 isActive
                   ? "bg-[var(--ep-primary)] text-[var(--ep-bg)]"
                   : "text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]"

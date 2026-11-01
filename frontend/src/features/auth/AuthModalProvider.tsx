@@ -159,8 +159,8 @@ function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) 
         <div className="ep-auth-brand relative mb-5 flex min-h-[72px] items-center justify-center border-b border-[var(--ep-line)] pb-4">
           <div className="flex items-center justify-center px-11">
             <BrandMark
-              size={56}
-              className="max-w-[190px] sm:max-w-[220px]"
+              size={44}
+              className="max-w-[230px] sm:max-w-[260px]"
             />
           </div>
 

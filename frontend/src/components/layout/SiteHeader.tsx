@@ -11,18 +11,25 @@ interface SiteHeaderProps {
   showLinks?: boolean;
   /** "auth" = compact header for login pages (smaller logo, back link instead of Log in). */
   variant?: "default" | "auth";
+  /** Header background: "cream" (default, matches the page) or "white". */
+  tone?: "cream" | "white";
 }
 
 const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
 
-export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeaderProps) {
+export function SiteHeader({
+  showLinks = true,
+  variant = "default",
+  tone = "cream",
+}: SiteHeaderProps) {
   const isAuth = variant === "auth";
+  const isWhite = tone === "white";
   const pathname = usePathname();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Solid background always; a darker border and shadow appear once the page scrolls.
+  // Frosted background always; a darker border, shadow and gradient hairline appear once the page scrolls.
   useEffect(() => {
     function onScroll() {
       setScrolled(window.scrollY > 8);
@@ -53,14 +60,32 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileNavOpen]);
 
+  const topBg = isWhite ? "bg-white" : "bg-[rgba(251,248,241,0.95)]";
+  const scrolledBg = isWhite ? "bg-[rgba(255,255,255,0.9)]" : "bg-[rgba(251,248,241,0.9)]";
+
   return (
     <header
-      className={`sticky top-0 z-50 border-b bg-[var(--ep-bg)] transition-shadow duration-200 ${
+      id="site-header"
+      className={`sticky top-0 z-50 border-b backdrop-blur-md transition-[background-color,box-shadow,border-color] duration-200 ${
         scrolled
-          ? "border-[var(--ep-primary)] shadow-[0_6px_16px_-10px_rgba(11,46,51,0.4)]"
-          : "border-[var(--ep-line)]"
+          ? `border-[var(--ep-primary)] ${scrolledBg} shadow-[0_8px_20px_-12px_rgba(11,46,51,0.45)]`
+          : `border-[var(--ep-line)] ${topBg}`
       }`}
     >
+      {/* Brand accent strip along the very top: deep teal to mangrove to coral */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[var(--ep-primary)] via-[var(--mangrove-light)] to-[var(--ep-accent)]"
+      />
+
+      {/* Gradient hairline under the header, fades in on scroll */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-[var(--ep-accent)] to-transparent transition-opacity duration-300 ${
+          scrolled ? "opacity-60" : "opacity-0"
+        }`}
+      />
+
       {/* With links: logo | centered nav | actions (true center, whatever the side widths).
           Without links: plain two-sided row. */}
       <div
@@ -74,7 +99,7 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
       >
         <Link
           href="/"
-          className={`flex shrink-0 items-center rounded-md transition-opacity duration-200 hover:opacity-80 md:justify-self-start ${focusRing}`}
+          className={`flex shrink-0 items-center rounded-md transition-transform duration-200 hover:scale-[1.03] active:scale-100 md:justify-self-start ${focusRing}`}
           aria-label="EcoPrawn home"
         >
           <span className="md:hidden">
@@ -105,16 +130,22 @@ export function SiteHeader({ showLinks = true, variant = "default" }: SiteHeader
           ) : (
             <>
               <AuthLink
-                className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-primary)] px-4 py-2.5 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] active:translate-y-0 sm:px-5 ${focusRing}`}
+                className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-primary)] bg-white/60 px-4 py-2.5 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.7)] active:translate-y-0 sm:px-5 ${focusRing}`}
               >
                 Log in
               </AuthLink>
 
               <AuthLink
                 mode="signup"
-                className={`hidden items-center justify-center rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.7)] active:translate-y-0 sm:inline-flex sm:px-5 ${focusRing}`}
+                className={`group hidden items-center justify-center gap-1.5 rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_6px_14px_-8px_rgba(178,63,28,0.8)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_10px_20px_-10px_rgba(178,63,28,0.9)] active:translate-y-0 sm:inline-flex sm:px-5 ${focusRing}`}
               >
                 Sign up
+                <span
+                  aria-hidden="true"
+                  className="inline-block transition-transform duration-200 group-hover:translate-x-0.5"
+                >
+                  →
+                </span>
               </AuthLink>
             </>
           )}

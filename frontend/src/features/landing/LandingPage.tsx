@@ -74,9 +74,9 @@ function Words({ text }: { text: string }) {
 
 export function LandingPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)]">
+    <div className="flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
       <LandingMotion />
-      <SiteHeader />
+      <SiteHeader tone="white" />
 
       <main className="flex-1">
         {/* HERO: cream (60%) with a faint blueprint grid and one coral accent */}
