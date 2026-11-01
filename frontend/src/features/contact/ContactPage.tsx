@@ -5,7 +5,7 @@ import { IconChip, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "./ContactForm";
 
-const SECTION_PAD = "px-5 pb-16 pt-6 sm:px-8 sm:pb-20 lg:pb-24";
+const SECTION_PAD = "px-5 py-16 sm:px-8 sm:py-20 lg:py-24";
 
 // Details taken from the site footer. Add an email / phone here when you
 // have one you want to publish.
@@ -17,8 +17,8 @@ const CONTACT_DETAILS: { label: string; value: string; icon: IconName }[] = [
 
 export function ContactPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)]">
-      <SiteHeader />
+    <div className="flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
+      <SiteHeader tone="white" />
 
       <main className="flex-1">
         <PageHero
@@ -35,7 +35,7 @@ export function ContactPage() {
                   {CONTACT_DETAILS.map((item) => (
                     <div
                       key={item.label}
-                      className="flex items-start gap-4 rounded-2xl border-2 border-[var(--ep-primary)] bg-[var(--ep-tint)] p-5"
+                      className="flex items-start gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-tint)] p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-transform duration-200 hover:-translate-y-0.5"
                     >
                       <IconChip name={item.icon} tone="coral" size={20} />
                       <div>

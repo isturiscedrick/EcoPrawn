@@ -79,10 +79,10 @@ const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
 const inputBase =
-  "w-full rounded-xl border-2 bg-white py-3 pl-11 pr-4 text-[15px] text-[var(--ep-primary)] outline-none transition-all duration-200 placeholder:text-[var(--ep-text-muted)] placeholder:opacity-60";
+  "w-full rounded-xl border bg-white py-3 pl-11 pr-4 text-[15px] text-[var(--ep-primary)] outline-none transition-all duration-200 placeholder:text-[var(--ep-text-muted)] placeholder:opacity-60";
 
 const inputOk =
-  "border-[var(--ep-primary)] hover:border-[var(--ep-accent)] focus:border-[var(--ep-accent)] focus:ring-4 focus:ring-[rgba(178,63,28,0.15)]";
+  "border-[var(--ep-line)] hover:border-[var(--ep-accent)] focus:border-[var(--ep-accent)] focus:ring-4 focus:ring-[rgba(178,63,28,0.15)]";
 
 const inputBad =
   "border-[var(--ep-danger)] focus:border-[var(--ep-danger)] focus:ring-4 focus:ring-[rgba(179,38,30,0.15)]";
@@ -90,7 +90,7 @@ const inputBad =
 const labelClass = "mb-1.5 block text-sm font-semibold text-[var(--ep-primary)]";
 
 const outlineButton =
-  "w-full rounded-xl border-2 border-[var(--ep-primary)] bg-white px-4 py-2.5 text-[14px] font-semibold text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[var(--ep-tint)] disabled:opacity-50 " +
+  "w-full rounded-xl border border-[var(--ep-primary)] bg-white px-4 py-2.5 text-[14px] font-semibold text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[var(--ep-tint)] disabled:opacity-50 " +
   focusRing;
 
 /* ---------- Small pieces ---------- */

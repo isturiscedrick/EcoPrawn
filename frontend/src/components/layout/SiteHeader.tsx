@@ -60,32 +60,18 @@ export function SiteHeader({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileNavOpen]);
 
-  const topBg = isWhite ? "bg-white" : "bg-[rgba(251,248,241,0.95)]";
-  const scrolledBg = isWhite ? "bg-[rgba(255,255,255,0.9)]" : "bg-[rgba(251,248,241,0.9)]";
+  const topBg = isWhite ? "bg-white" : "bg-[rgba(251,248,241,0.96)]";
+  const scrolledBg = isWhite ? "bg-[rgba(255,255,255,0.92)]" : "bg-[rgba(251,248,241,0.92)]";
 
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-50 border-b backdrop-blur-md transition-[background-color,box-shadow,border-color] duration-200 ${
+      className={`sticky top-0 z-50 border-b border-[rgba(11,46,51,0.12)] backdrop-blur-md transition-[background-color,box-shadow] duration-200 ${
         scrolled
-          ? `border-[var(--ep-primary)] ${scrolledBg} shadow-[0_8px_20px_-12px_rgba(11,46,51,0.45)]`
-          : `border-[var(--ep-line)] ${topBg}`
+          ? `${scrolledBg} shadow-[0_8px_24px_-14px_rgba(11,46,51,0.35)]`
+          : topBg
       }`}
     >
-      {/* Brand accent strip along the very top: deep teal to mangrove to coral */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[var(--ep-primary)] via-[var(--mangrove-light)] to-[var(--ep-accent)]"
-      />
-
-      {/* Gradient hairline under the header, fades in on scroll */}
-      <div
-        aria-hidden="true"
-        className={`pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-[var(--ep-accent)] to-transparent transition-opacity duration-300 ${
-          scrolled ? "opacity-60" : "opacity-0"
-        }`}
-      />
-
       {/* With links: logo | centered nav | actions (true center, whatever the side widths).
           Without links: plain two-sided row. */}
       <div
@@ -103,11 +89,11 @@ export function SiteHeader({
           aria-label="EcoPrawn home"
         >
           <span className="md:hidden">
-            <BrandMark size={isAuth ? 36 : 40} />
+            <BrandMark size={isAuth ? 32 : 34} />
           </span>
 
           <span className="hidden md:block">
-            <BrandMark size={isAuth ? 44 : 48} />
+            <BrandMark size={isAuth ? 36 : 40} />
           </span>
         </Link>
 
@@ -117,7 +103,7 @@ export function SiteHeader({
           {isAuth ? (
             <Link
               href="/"
-              className={`group inline-flex items-center gap-1.5 rounded-xl border-2 border-[var(--ep-primary)] px-4 py-2 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] active:translate-y-0 sm:px-5 ${focusRing}`}
+              className={`group inline-flex items-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] px-4 py-2 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] active:translate-y-0 sm:px-5 ${focusRing}`}
             >
               <span
                 aria-hidden="true"
@@ -130,15 +116,21 @@ export function SiteHeader({
           ) : (
             <>
               <AuthLink
-                className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-primary)] bg-white/60 px-4 py-2.5 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.7)] active:translate-y-0 sm:px-5 ${focusRing}`}
+                className={`inline-flex items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/60 px-4 py-2.5 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.35)] active:translate-y-0 sm:px-5 ${focusRing}`}
               >
+                <svg className="shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                  <circle cx="12" cy="8" r="3.5" /><path d="M5 20c.7-3.1 3.2-5 7-5s6.3 1.9 7 5" />
+                </svg>
                 Log in
               </AuthLink>
 
               <AuthLink
                 mode="signup"
-                className={`group hidden items-center justify-center gap-1.5 rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_6px_14px_-8px_rgba(178,63,28,0.8)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_10px_20px_-10px_rgba(178,63,28,0.9)] active:translate-y-0 sm:inline-flex sm:px-5 ${focusRing}`}
+                className={`group hidden items-center justify-center gap-2 rounded-lg bg-[var(--ep-accent)] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_6px_14px_-8px_rgba(178,63,28,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_10px_20px_-10px_rgba(178,63,28,0.55)] active:translate-y-0 sm:inline-flex sm:px-5 ${focusRing}`}
               >
+                <svg className="shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
                 Sign up
                 <span
                   aria-hidden="true"

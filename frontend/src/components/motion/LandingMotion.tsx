@@ -58,18 +58,18 @@ export function LandingMotion() {
     }
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // HERO: left column items stagger in, tank card follows. The delay
+      // HERO: lens and text columns stagger in. The delay
       // lets the water drain past the hero before the text appears.
       gsap
         .timeline({ defaults: { ease: "power3.out" }, delay: 1.2 })
-        .from("#top .grid > div:first-child > *", {
+        .from("#top .grid > div:last-child > *", {
           y: 24,
           opacity: 0,
           duration: 0.7,
           stagger: 0.1,
         })
         .from(
-          "#top .grid > div:last-child",
+          "#top .grid > div:first-child",
           { y: 32, opacity: 0, scale: 0.97, duration: 0.9 },
           0.15
         );
@@ -205,7 +205,7 @@ export function LandingMotion() {
     // HERO DEPTH: float for every size, parallax from tablet up.
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const readout = document.querySelector<HTMLElement>(
-        "#top .grid > div:last-child > div:last-child"
+        "#top .grid > div:first-child [data-hero='console']"
       );
       if (readout) {
         // yPercent, not y: the parallax below owns y on the same element.
@@ -223,10 +223,10 @@ export function LandingMotion() {
       "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
       () => {
         const panel = document.querySelector<HTMLElement>(
-          "#top .grid > div:last-child > div:first-child"
+          "#top .grid > div:first-child"
         );
         const readout = document.querySelector<HTMLElement>(
-          "#top .grid > div:last-child > div:last-child"
+          "#top .grid > div:first-child [data-hero='console']"
         );
         const scrollTrigger = {
           trigger: "#top",
@@ -245,7 +245,7 @@ export function LandingMotion() {
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       // 1. Hero text drifts up and fades as you scroll past (scrubbed).
       //    Targets the column wrapper; the intro animates its children.
-      gsap.to("#top .grid > div:first-child", {
+      gsap.to("#top .grid > div:last-child", {
         y: -48,
         opacity: 0.25,
         ease: "none",
