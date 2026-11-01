@@ -3,9 +3,12 @@
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
+import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 
 export function Feeding() {
-  const { tanks, feedSchedule } = useTanks();
+  const { tanks, feedSchedule, loading } = useTanks();
+
+  if (loading) return <DashboardViewSkeleton variant="feeding" />;
   const tankCount = tanks.length;
 
   const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
@@ -61,7 +64,7 @@ export function Feeding() {
                 {feedSchedule.map((f) => (
                   <div
                     key={f.id}
-                    className="flex items-center justify-between p-3 border border-[var(--sand-dim)] rounded-[10px]"
+                    className="dashboard-hover flex items-center justify-between rounded-[10px] border border-[var(--sand-dim)] p-3"
                   >
                     <div className="flex items-center gap-3">
                       <span

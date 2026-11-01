@@ -289,13 +289,13 @@ export function HeroLens() {
             fill="none"
             className="ep-lens-rings pointer-events-none absolute inset-0 h-full w-full"
           >
-            <circle cx="200" cy="200" r="176" stroke="rgba(242,235,221,0.14)" strokeWidth="1" />
-            <circle cx="200" cy="200" r="146" stroke="rgba(242,235,221,0.10)" strokeWidth="1" />
+            <circle cx="200" cy="200" r="176" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
+            <circle cx="200" cy="200" r="146" stroke="rgba(255,255,255,0.10)" strokeWidth="1" />
             <circle
               cx="200"
               cy="200"
               r="112"
-              stroke="rgba(242,235,221,0.16)"
+              stroke="rgba(255,255,255,0.16)"
               strokeWidth="1"
               strokeDasharray="2 7"
             />
@@ -314,7 +314,7 @@ export function HeroLens() {
                 y1={t.y1}
                 x2={t.x2}
                 y2={t.y2}
-                stroke={t.long ? "rgba(242,235,221,0.55)" : "rgba(242,235,221,0.28)"}
+                stroke={t.long ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.28)"}
                 strokeWidth={t.long ? 2 : 1.2}
                 strokeLinecap="round"
               />
@@ -335,7 +335,7 @@ export function HeroLens() {
           {/* Soft halo behind the prawn so it separates from the dark glass */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-[22%] rounded-full bg-[radial-gradient(circle,rgba(242,235,221,0.24)_0%,rgba(242,235,221,0.09)_45%,transparent_72%)]"
+            className="pointer-events-none absolute inset-[22%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.09)_45%,transparent_72%)]"
           />
 
           {/* The prawn. Lighter coral than the logo orange for contrast on teal.
@@ -378,7 +378,7 @@ export function HeroLens() {
             const compact = i === 4; // top-center slot (Water Level)
             return (
               <div key={r.label} className={`ep-lens-readout absolute flex flex-col ${SLOTS[i]}`}>
-                <span className="flex items-center gap-1.5 text-[10px] font-medium text-[rgba(242,235,221,0.78)] sm:text-xs">
+                <span className="flex items-center gap-1.5 text-[10px] font-medium text-[rgba(255,255,255,0.78)] sm:text-xs">
                   <span
                     aria-hidden="true"
                     className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-[var(--mangrove-light)]"
@@ -391,7 +391,7 @@ export function HeroLens() {
                   }`}
                 >
                   <span data-count={r.value}>{r.value}</span>
-                  <span className="ml-1 text-[10px] font-medium text-[rgba(242,235,221,0.72)] sm:text-xs">
+                  <span className="ml-1 text-[10px] font-medium text-[rgba(255,255,255,0.72)] sm:text-xs">
                     {heroReadoutUnits[r.label]}
                   </span>
                 </span>
@@ -399,7 +399,7 @@ export function HeroLens() {
             );
           })}
 
-          <p className="ep-lens-caption absolute bottom-[12%] left-1/2 w-[56%] -translate-x-1/2 text-center text-[10px] leading-tight text-[rgba(242,235,221,0.72)] sm:text-[11px]">
+          <p className="ep-lens-caption absolute bottom-[12%] left-1/2 w-[56%] -translate-x-1/2 text-center text-[10px] leading-tight text-[rgba(255,255,255,0.72)] sm:text-[11px]">
             Example readings, not from a real tank.
           </p>
 

@@ -16,6 +16,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                try {
+                  var saved = localStorage.getItem("ep-dashboard-theme");
+                  var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                  if (saved === "dark" || (saved !== "light" && prefersDark)) {
+                    document.documentElement.classList.add("dark");
+                  }
+                } catch (_) {}
+              }());
+            `,
+          }}
+        />
+      </head>
       <body className="ecoprawn-root">
         <LogoIntroGate />
         <AuthModalProvider>{children}</AuthModalProvider>

@@ -34,6 +34,8 @@ const BUBBLES = [
   { left: "48%", size: 9 },
 ];
 
+const WATER_INTRO_KEY = "ep-water-intro-seen";
+
 /**
  * GSAP motion for the landing page. Renders the underwater intro overlay,
  * then finds its other targets in the DOM by the structure LandingPage
@@ -47,6 +49,16 @@ export function LandingMotion() {
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
     let cancelled = false;
+    let playWaterIntro = true;
+
+    try {
+      playWaterIntro = sessionStorage.getItem(WATER_INTRO_KEY) !== "1";
+      if (playWaterIntro) {
+        sessionStorage.setItem(WATER_INTRO_KEY, "1");
+      }
+    } catch {
+      // Session storage may be unavailable; the intro can still fail safely.
+    }
 
     // Google Fonts (Lexend/Inter) swap in after first paint and reflow the
     // text, which shifts every scroll trigger's start position. Re-measure
@@ -58,18 +70,18 @@ export function LandingMotion() {
     }
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // HERO: left column items stagger in, tank card follows. The delay
+      // HERO: lens and text columns stagger in. The delay
       // lets the water drain past the hero before the text appears.
       gsap
         .timeline({ defaults: { ease: "power3.out" }, delay: 1.2 })
-        .from("#top .grid > div:first-child > *", {
+        .from("#top .grid > div:last-child > *", {
           y: 24,
           opacity: 0,
           duration: 0.7,
           stagger: 0.1,
         })
         .from(
-          "#top .grid > div:last-child",
+          "#top .grid > div:first-child",
           { y: 32, opacity: 0, scale: 0.97, duration: 0.9 },
           0.15
         );
@@ -171,7 +183,41 @@ export function LandingMotion() {
           });
         });
 
-      return () => restores.forEach((restore) => restore());
+      // Shared hover lift for the data cards and process steps.
+      const hoverCleanups: Array<() => void> = [];
+      gsap.utils.toArray<HTMLElement>("[data-hover-lift]").forEach((el) => {
+          const enter = () =>
+            gsap.to(el, {
+              y: -5,
+              scale: 1.01,
+              duration: 0.25,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+          const leave = () =>
+            gsap.to(el, {
+              y: 0,
+              scale: 1,
+              duration: 0.32,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+          el.addEventListener("mouseenter", enter);
+          el.addEventListener("mouseleave", leave);
+          el.addEventListener("focusin", enter);
+          el.addEventListener("focusout", leave);
+          hoverCleanups.push(() => {
+            el.removeEventListener("mouseenter", enter);
+            el.removeEventListener("mouseleave", leave);
+            el.removeEventListener("focusin", enter);
+            el.removeEventListener("focusout", leave);
+          });
+        });
+
+      return () => {
+        restores.forEach((restore) => restore());
+        hoverCleanups.forEach((cleanup) => cleanup());
+      };
     });
 
     // PROCESS LINE: desktop only (the line is hidden below lg). It draws
@@ -205,7 +251,7 @@ export function LandingMotion() {
     // HERO DEPTH: float for every size, parallax from tablet up.
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const readout = document.querySelector<HTMLElement>(
-        "#top .grid > div:last-child > div:last-child"
+        "#top .grid > div:first-child [data-hero='console']"
       );
       if (readout) {
         // yPercent, not y: the parallax below owns y on the same element.
@@ -223,10 +269,10 @@ export function LandingMotion() {
       "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
       () => {
         const panel = document.querySelector<HTMLElement>(
-          "#top .grid > div:last-child > div:first-child"
+          "#top .grid > div:first-child"
         );
         const readout = document.querySelector<HTMLElement>(
-          "#top .grid > div:last-child > div:last-child"
+          "#top .grid > div:first-child [data-hero='console']"
         );
         const scrollTrigger = {
           trigger: "#top",
@@ -245,7 +291,7 @@ export function LandingMotion() {
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       // 1. Hero text drifts up and fades as you scroll past (scrubbed).
       //    Targets the column wrapper; the intro animates its children.
-      gsap.to("#top .grid > div:first-child", {
+      gsap.to("#top .grid > div:last-child", {
         y: -48,
         opacity: 0.25,
         ease: "none",
@@ -331,6 +377,10 @@ export function LandingMotion() {
       const back = backRef.current;
       const front = frontRef.current;
       if (!overlay || !back || !front) return;
+      if (!playWaterIntro) {
+        gsap.set(overlay, { display: "none" });
+        return;
+      }
 
       const bubbles = gsap.utils.toArray<HTMLElement>(
         ".ep-water-bubble",
@@ -429,7 +479,7 @@ export function LandingMotion() {
         {BUBBLES.map((b) => (
           <span
             key={b.left}
-            className="ep-water-bubble absolute rounded-full border border-[rgba(242,235,221,0.5)] bg-[rgba(242,235,221,0.18)]"
+            className="ep-water-bubble absolute rounded-full border border-[rgba(255,255,255,0.5)] bg-[rgba(255,255,255,0.18)]"
             style={{ left: b.left, bottom: -24, width: b.size, height: b.size }}
           />
         ))}

@@ -63,7 +63,7 @@ function targetRangeFor(label: string): string | undefined {
 function Words({ text }: { text: string }) {
   return text.split(" ").map((word, i) => (
     <Fragment key={`${word}-${i}`}>
-      <span className="inline-block overflow-hidden pb-[0.14em] align-bottom -mb-[0.14em]">
+      <span className="inline-block overflow-hidden align-bottom">
         <span data-hero="word" className="inline-block">
           {word}
         </span>
@@ -115,11 +115,17 @@ export function LandingPage() {
             ))}
           </div>
 
-          <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 py-14 sm:px-8 md:grid-cols-[1.05fr_0.95fr] md:gap-14 lg:py-24">
-            <div data-hero="text">
+          <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 py-14 sm:px-8 md:grid-cols-[0.95fr_1.05fr] md:gap-16 lg:py-24">
+            <div data-hero="parallax-console" className="relative mx-auto w-full max-w-[480px]">
+              <div data-hero="console">
+                <HeroLens />
+              </div>
+            </div>
+
+            <div data-hero="text" className="text-center md:text-left">
               <div
                 data-hero="eyebrow"
-                className="mb-7 inline-flex items-center gap-3 border-l-2 border-[var(--ep-accent)] pl-3 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]"
+                className="mb-5 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--ep-text-muted)] md:justify-start"
               >
                 <span className="relative flex h-2 w-2" aria-hidden="true">
                   <span
@@ -136,10 +142,10 @@ export function LandingPage() {
                 className="ep-font-display text-[clamp(40px,5.4vw,68px)] font-semibold leading-[1.06] tracking-tight"
               >
                 <span aria-hidden="true">
-                  <Words text="Indoor shrimp farming," />
-                  <span className="block text-[var(--ep-accent)]">
-                    <Words text="always in range." />
+                  <span className="text-[var(--ep-accent)]">
+                    <Words text="Indoor shrimp farming," />
                   </span>
+                  <span className="block text-[var(--ep-primary)]"><Words text="always in range." /></span>
                 </span>
               </h1>
 
@@ -147,10 +153,10 @@ export function LandingPage() {
                 data-hero="lead"
                 className="mt-6 max-w-[32rem] text-lg leading-relaxed text-[var(--ep-text-muted)]"
               >
-                Live water quality, automatic feeding, and AI growth tracking in one dashboard.
+                Live water quality, automated feeding, and AI growth tracking for your tanks, all in one dashboard.
               </p>
 
-              <div data-hero="cta" className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <div data-hero="cta" className="mt-9 flex flex-col gap-3 sm:flex-row md:justify-start">
                 <AuthLink
                   className={`group inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 text-base font-semibold text-white hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
                 >
@@ -171,27 +177,6 @@ export function LandingPage() {
                 </Link>
               </div>
 
-              <dl className="relative mt-12 grid grid-cols-1 gap-5 pt-6 sm:grid-cols-3">
-                <span
-                  aria-hidden="true"
-                  data-hero="statline"
-                  className="absolute inset-x-0 top-0 h-px bg-[var(--ep-primary)]"
-                />
-                {STATS.map((s) => (
-                  <div key={s.label} data-hero="stat">
-                    <dt className="text-sm font-semibold text-[var(--ep-text-muted)]">{s.label}</dt>
-                    <dd className="ep-font-display mt-1 text-2xl font-semibold tabular-nums">
-                      {s.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div data-hero="parallax-console" className="relative mx-auto w-full max-w-[480px]">
-              <div data-hero="console">
-                <HeroLens />
-              </div>
             </div>
           </div>
         </section>
@@ -205,19 +190,16 @@ export function LandingPage() {
           <div
             aria-hidden="true"
             data-readings-bg=""
-            className="pointer-events-none absolute inset-x-0 -top-[10%] -z-10 h-[120%] opacity-[0.08]"
+            className="pointer-events-none absolute inset-0 -z-10 opacity-90"
             style={{
               backgroundImage:
-                "linear-gradient(var(--ep-bg) 1px, transparent 1px), linear-gradient(90deg, var(--ep-bg) 1px, transparent 1px)",
-              backgroundSize: "64px 64px",
-              WebkitMaskImage: "radial-gradient(ellipse at 30% 0%, black 20%, transparent 70%)",
-              maskImage: "radial-gradient(ellipse at 30% 0%, black 20%, transparent 70%)",
+                "radial-gradient(ellipse at 12% 8%, rgba(35, 111, 117, 0.42), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(4, 25, 34, 0.7), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(18, 71, 77, 0.6), transparent 52%), linear-gradient(155deg, #0b2e33 0%, #08272f 48%, #061e27 100%)",
             }}
           />
 
           <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 sm:py-24">
             <div data-reveal="" className="max-w-[40rem]">
-              <div className={`${eyebrow} !text-[rgba(242,235,221,0.85)]`}>
+              <div className={`${eyebrow} !text-[rgba(255,255,255,0.85)]`}>
                 <span aria-hidden="true" className="h-2 w-2 bg-[var(--coral)]" />
                 Target ranges
               </div>
@@ -227,7 +209,7 @@ export function LandingPage() {
               >
                 Five readings, each held in range.
               </h2>
-              <p className="mt-3 text-lg leading-relaxed text-[rgba(242,235,221,0.88)]">
+              <p className="mt-3 text-lg leading-relaxed text-[rgba(255,255,255,0.88)]">
                 Sample values from Tank 1, shown against the range shrimp need.
               </p>
             </div>
@@ -245,10 +227,11 @@ export function LandingPage() {
                   <div
                     key={r.label}
                     data-reading=""
-                    className="rounded-xl border border-[rgba(242,235,221,0.22)] bg-[rgba(242,235,221,0.05)] p-5 transition-[background-color,border-color,translate] duration-200 hover:-translate-y-0.5 hover:border-[rgba(242,235,221,0.5)] hover:bg-[rgba(242,235,221,0.09)] last:col-span-2 md:last:col-span-1"
+                    data-hover-lift=""
+                    className="rounded-xl border border-[rgba(255,255,255,0.22)] bg-[rgba(255,255,255,0.05)] p-5 transition-[background-color,border-color] duration-200 hover:border-[rgba(255,255,255,0.5)] hover:bg-[rgba(255,255,255,0.09)] last:col-span-2 md:last:col-span-1"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <dt className="text-base font-semibold text-[rgba(242,235,221,0.92)]">{r.label}</dt>
+                      <dt className="text-base font-semibold text-[rgba(255,255,255,0.92)]">{r.label}</dt>
                       <span
                         className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-[var(--ep-bg)] ${
                           inRange ? "bg-[rgba(91,155,120,0.28)]" : "bg-[rgba(232,162,58,0.32)]"
@@ -265,14 +248,14 @@ export function LandingPage() {
 
                     <dd className="mt-3 text-4xl font-semibold tabular-nums">
                       <span data-countto={r.value}>{r.value}</span>
-                      <span className="ml-1 text-base font-medium text-[rgba(242,235,221,0.8)]">
+                      <span className="ml-1 text-base font-medium text-[rgba(255,255,255,0.8)]">
                         {heroReadoutUnits[r.label]}
                       </span>
                     </dd>
 
                     <div
                       aria-hidden="true"
-                      className="relative mx-2 mt-6 h-2 rounded-full bg-[rgba(242,235,221,0.16)]"
+                      className="relative mx-2 mt-6 h-2 rounded-full bg-[rgba(255,255,255,0.16)]"
                     >
                       <div
                         data-zone=""
@@ -295,7 +278,7 @@ export function LandingPage() {
                     {zone && (
                       <div
                         aria-hidden="true"
-                        className="mt-2.5 flex justify-between text-xs tabular-nums text-[rgba(242,235,221,0.7)]"
+                        className="mt-2.5 flex justify-between text-xs tabular-nums text-[rgba(255,255,255,0.7)]"
                       >
                         <span>{zone.min}</span>
                         <span>{zone.max}</span>
@@ -303,7 +286,7 @@ export function LandingPage() {
                     )}
 
                     {range && (
-                      <p className="mt-2 text-sm text-[rgba(242,235,221,0.85)]">Target {range}</p>
+                      <p className="mt-2 text-sm text-[rgba(255,255,255,0.85)]">Target {range}</p>
                     )}
                   </div>
                 );
@@ -311,7 +294,7 @@ export function LandingPage() {
             </dl>
 
             {/* Legend: explains what the bar and dot mean */}
-            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-[rgba(242,235,221,0.85)]">
+            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-[rgba(255,255,255,0.85)]">
               <span className="inline-flex items-center gap-2">
                 <span aria-hidden="true" className="h-2 w-8 rounded-full bg-[var(--mangrove-light)]" />
                 Target zone
@@ -358,7 +341,8 @@ export function LandingPage() {
                   <li
                     key={s.step}
                     data-step=""
-                    className="group relative border-t border-[var(--ep-line)] pt-8 transition-[translate] duration-200 hover:-translate-y-1 lg:border-t-0"
+                    data-hover-lift=""
+                    className="group relative border-t border-[var(--ep-line)] pt-8 transition-colors duration-200 hover:border-[var(--ep-accent)] lg:border-t-0"
                   >
                     <span
                       aria-hidden="true"

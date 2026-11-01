@@ -22,8 +22,8 @@ const FEATURE_ICONS: IconName[] = ["wrench", "gauge", "eye", "repeat", "leaf"];
 
 export function AboutPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)]">
-      <SiteHeader />
+    <div className="flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
+      <SiteHeader tone="white" />
 
       <main className="flex-1">
         <PageHero
@@ -47,7 +47,7 @@ export function AboutPage() {
           <div className="mx-auto max-w-[1200px]">
             {/* General objective: sand panel with an accent bar, since it is a quotation */}
             <Reveal>
-              <div className="mb-6 rounded-3xl border-2 border-l-[10px] border-[var(--ep-primary)] border-l-[var(--ep-accent)] bg-[var(--ep-tint)] px-6 py-8 sm:px-10 sm:py-10">
+              <div className="mb-6 rounded-3xl border border-l-4 border-[var(--ep-line)] border-l-[var(--ep-accent)] bg-white px-6 py-8 shadow-[0_16px_30px_-28px_rgba(11,46,51,0.5)] sm:px-10 sm:py-10">
                 <div className="mb-3 text-sm font-semibold text-[var(--ep-text-muted)]">
                   General objective
                 </div>
@@ -65,7 +65,7 @@ export function AboutPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {objectives.map((objective, i) => (
                 <Reveal key={objective.num} delay={(i % 3) * 90} className="h-full">
-                  <article className="group h-full rounded-2xl border-2 border-[var(--ep-primary)] bg-[var(--ep-surface)] p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-[6px_6px_0_0_var(--ep-primary)]">
+                  <article className="group h-full rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)]">
                     <IconChip
                       name={OBJECTIVE_ICONS[i] ?? "layers"}
                       tone="coral"
@@ -92,8 +92,16 @@ export function AboutPage() {
         ========================================================= */}
         <section
           id="systems"
-          className={`scroll-mt-[140px] md:scroll-mt-[150px] border-y-2 border-[var(--ep-primary)] bg-[var(--ep-tint)] ${SECTION_PAD}`}
+          className={`relative isolate scroll-mt-[140px] overflow-hidden border-y border-[var(--ep-primary)] bg-[var(--ep-primary)] text-[var(--ep-bg)] ${SECTION_PAD}`}
         >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10 opacity-90"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse at 12% 8%, rgba(35, 111, 117, 0.42), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(4, 25, 34, 0.7), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(18, 71, 77, 0.6), transparent 52%), linear-gradient(155deg, #0b2e33 0%, #08272f 48%, #061e27 100%)",
+            }}
+          />
           <div className="mx-auto max-w-[1200px]">
             <Reveal>
               <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
@@ -105,17 +113,17 @@ export function AboutPage() {
                   one tank.
                 </h2>
 
-                <p className={lead}>
+                <p className={`${lead} !text-[rgba(255,255,255,0.88)]`}>
                   Every system below is deployed and operating. Nothing here is
                   a mockup.
                 </p>
               </div>
             </Reveal>
 
-            <div className="border-t border-[var(--ep-line)]">
+            <div className="border-t border-[rgba(255,255,255,0.22)]">
               {features.map((feature, i) => (
                 <Reveal key={feature.index}>
-                  <article className="group relative grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 border-b border-[var(--ep-line)] px-4 py-8 transition-colors duration-200 hover:bg-[var(--ep-bg)] sm:grid-cols-[3.5rem_0.8fr_1.2fr] sm:gap-x-8">
+                  <article className="group relative grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 border-b border-[rgba(255,255,255,0.22)] px-4 py-8 transition-colors duration-200 hover:bg-[rgba(255,255,255,0.06)] sm:grid-cols-[3.5rem_0.8fr_1.2fr] sm:gap-x-8">
                     <span
                       aria-hidden="true"
                       className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 bg-[var(--ep-accent)] transition-transform duration-200 group-hover:scale-y-100"
@@ -123,13 +131,13 @@ export function AboutPage() {
 
                     <span
                       aria-hidden="true"
-                      className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[var(--ep-primary)] bg-[var(--ep-surface)] text-[var(--ep-accent)]"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(255,255,255,0.35)] bg-[rgba(255,255,255,0.08)] text-[var(--ep-accent)]"
                     >
                       <Icon name={FEATURE_ICONS[i] ?? "layers"} size={18} />
                     </span>
 
                     <div>
-                      <div className="mb-1 hidden text-sm font-semibold uppercase tracking-wide text-[var(--ep-text-muted)] sm:block">
+                      <div                       className="mb-1 hidden text-sm font-semibold uppercase tracking-wide text-[rgba(255,255,255,0.62)] sm:block">
                         System Module
                       </div>
 
@@ -145,8 +153,8 @@ export function AboutPage() {
                             ›
                           </span>
 
-                          <span className="text-base leading-relaxed text-[var(--ep-text-muted)]">
-                            <b className="font-semibold text-[var(--ep-primary)]">{point.bold}</b>{" "}
+                          <span className="text-base leading-relaxed text-[rgba(255,255,255,0.82)]">
+                            <b className="font-semibold text-[var(--ep-bg)]">{point.bold}</b>{" "}
                             {point.body}
                           </span>
                         </div>
@@ -220,7 +228,7 @@ export function AboutPage() {
 
               {/* Out of scope: dashed outline on sand, a second signal beyond colour */}
               <Reveal delay={120} className="h-full">
-                <article className="h-full rounded-2xl border-2 border-dashed border-[var(--ep-primary)] bg-[var(--ep-tint)] p-6 sm:p-8">
+                <article className="h-full rounded-2xl border border-dashed border-[var(--ep-line)] bg-white p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
                     <h3 className="ep-font-display flex items-center gap-3 text-2xl font-semibold">
                       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-warn-text)] text-white">

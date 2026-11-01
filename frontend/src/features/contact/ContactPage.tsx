@@ -4,8 +4,9 @@ import { PageHero } from "@/components/layout/PageHero";
 import { IconChip, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "./ContactForm";
+import { ContactMotion } from "@/components/motion/ContactMotion";
 
-const SECTION_PAD = "px-5 pb-16 pt-6 sm:px-8 sm:pb-20 lg:pb-24";
+const SECTION_PAD = "px-5 py-16 sm:px-8 sm:py-20 lg:py-24";
 
 // Details taken from the site footer. Add an email / phone here when you
 // have one you want to publish.
@@ -17,8 +18,9 @@ const CONTACT_DETAILS: { label: string; value: string; icon: IconName }[] = [
 
 export function ContactPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)]">
-      <SiteHeader />
+    <div className="flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
+      <ContactMotion />
+      <SiteHeader tone="white" />
 
       <main className="flex-1">
         <PageHero
@@ -31,11 +33,13 @@ export function ContactPage() {
           <div className="mx-auto max-w-[1200px]">
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.8fr_1.2fr]">
               <Reveal>
-                <dl className="flex flex-col gap-4">
+                <dl data-contact-details="" className="flex flex-col gap-4">
                   {CONTACT_DETAILS.map((item) => (
                     <div
                       key={item.label}
-                      className="flex items-start gap-4 rounded-2xl border-2 border-[var(--ep-primary)] bg-[var(--ep-tint)] p-5"
+                      data-contact-card=""
+                      tabIndex={0}
+                      className="flex items-start gap-4 rounded-2xl border border-[var(--ep-line)] bg-white p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
                     >
                       <IconChip name={item.icon} tone="coral" size={20} />
                       <div>
@@ -49,8 +53,10 @@ export function ContactPage() {
                 </dl>
               </Reveal>
 
-              <Reveal delay={120}>
+              <Reveal delay={120} className="h-full" >
+                <div data-contact-form="" className="h-full">
                 <ContactForm />
+                </div>
               </Reveal>
             </div>
           </div>

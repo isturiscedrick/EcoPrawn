@@ -50,7 +50,7 @@ export function SectionNav() {
         top-[72px] md:top-[80px]
         z-40
         border-b border-[var(--ep-line)]
-        bg-[var(--ep-bg)]
+        bg-white
         shadow-[0_4px_12px_-8px_rgba(11,46,51,0.2)]
       "
     >
@@ -78,7 +78,7 @@ export function SectionNav() {
               className={`
                 inline-flex min-h-[38px]
                 shrink-0 items-center justify-center
-                rounded-full border-2
+                rounded-lg border
                 border-[var(--ep-primary)]
                 px-5 py-2
                 text-sm font-semibold
@@ -87,11 +87,11 @@ export function SectionNav() {
                 focus-visible:ring-2
                 focus-visible:ring-[var(--ep-accent)]
                 focus-visible:ring-offset-2
-                focus-visible:ring-offset-[var(--ep-bg)]
+                focus-visible:ring-offset-white
                 ${
                   isActive
                     ? "bg-[var(--ep-primary)] text-[var(--ep-bg)]"
-                    : "bg-transparent text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]"
+                    : "bg-transparent text-[var(--ep-primary)] hover:border-[var(--ep-accent)] hover:text-[var(--ep-accent)]"
                 }
               `}
             >

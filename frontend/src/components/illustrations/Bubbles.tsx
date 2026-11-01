@@ -19,7 +19,7 @@ export function Bubbles({ className = "" }: { className?: string }) {
       {BUBBLES.map((b) => (
         <span
           key={b.left}
-          className="ep-bubble absolute bottom-0 rounded-full bg-[rgba(242,235,221,0.45)]"
+          className="ep-bubble absolute bottom-0 rounded-full bg-[rgba(255,255,255,0.45)]"
           style={{
             left: b.left,
             width: b.size,

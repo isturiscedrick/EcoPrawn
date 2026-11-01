@@ -10,7 +10,7 @@
 ======================================== */
 
 .ep-auth-modal {
-  max-height: calc(100dvh - 24px);
+  max-height: calc(100dvh - 48px);
   overflow-y: auto;
   overscroll-behavior: contain;
 
@@ -88,15 +88,15 @@
   flex-direction: column;
 
   margin-top: 14px;
-  padding: 16px;
+  padding: 20px;
   gap: 12px;
 
   border: 1px solid var(--ep-line);
-  border-radius: 16px;
+  border-radius: 18px;
 
-  background: #ffffff;
+  background: var(--ep-bg);
 
-  box-shadow: 0 4px 20px rgba(11, 46, 51, 0.05);
+  box-shadow: 0 12px 28px -22px rgba(11, 46, 51, 0.45);
 }
 
 /* ========================================
@@ -140,9 +140,10 @@
 
 /* Keep the existing input colors and validation states */
 .ep-auth-modal input {
-  min-height: 48px;
+  min-height: 50px;
 
-  border-radius: 11px;
+  border-width: 1px;
+  border-radius: 12px;
   font-size: 16px;
 
   transition:
@@ -211,7 +212,7 @@
 
 @media (min-width: 640px) {
   .ep-auth-modal {
-    max-height: calc(100dvh - 48px);
+    max-height: calc(100dvh - 64px);
   }
 
   .ep-auth-modal h1 {
@@ -233,7 +234,7 @@
   }
 
   .ep-auth-modal {
-    max-height: calc(100dvh - 20px);
+    max-height: calc(100dvh - 32px);
 
     border-radius: 20px;
     padding: 16px;

@@ -83,14 +83,14 @@
   --mangrove-light: #5b9b78;
   --coral: #e8623a;
   --coral-dim: #c9512e;
-  --sand: #f2ebdd;
-  --sand-dim: #e4dbc7;
+  --sand: #ffffff;
+  --sand-dim: #d8e0de;
   --amber: #e8a23a;
   --danger: #d64545;
   --ink: #0b2320;
-  --font-display: 'Fraunces', serif;
+  --font-display: 'Lexend', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-mono: 'Inter', sans-serif;
 
   /* Shared elevation/radius — replaces one-off shadow/radius values
      that were scattered across Panel, KpiCard, and modal overlays. */
@@ -162,6 +162,74 @@
   -webkit-font-smoothing: antialiased;
 }
 
+.ecoprawn-root :is(h1, h2, h3, h4, h5, h6, .ep-font-display) {
+  font-family: var(--font-display);
+}
+
+.ecoprawn-root :is(a, button, [role="button"]) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ecoprawn-root button:not(:disabled),
+.ecoprawn-root [role="button"]:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
+.ecoprawn-root :is(a, button, [role="button"]):focus-visible {
+  outline: 2px solid var(--ep-accent);
+  outline-offset: 3px;
+}
+
+.ecoprawn-root :where(a, button, [role="button"]) {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease;
+}
+
+.ecoprawn-root :where(a, button, [role="button"]):not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ecoprawn-root :where(a, button, [role="button"]) {
+    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+  }
+
+  .ecoprawn-root :where(a, button, [role="button"]):hover {
+    transform: none;
+  }
+}
+
+.dashboard-shell {
+  font-family: var(--font-body);
+}
+
+.dashboard-shell :is(h1, h2, h3, h4, h5, h6, .ep-font-display) {
+  font-family: var(--font-display);
+}
+
+.dashboard-skeleton-block {
+  background: #d7e1df;
+}
+
+.dark .dashboard-skeleton-block {
+  background: #3a3b3c;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+[role="dialog"],
+.ep-auth-modal {
+  font-family: var(--font-body);
+}
+
+[role="dialog"] :is(h1, h2, h3, h4, h5, h6),
+.ep-auth-modal :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-display);
+}
+
 .ecoprawn-root ::selection {
   background: var(--coral);
   color: var(--sand);
@@ -185,6 +253,36 @@
   outline: 2px solid var(--coral);
   outline-offset: 2px;
   border-radius: 6px;
+}
+
+.dashboard-hover {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.dashboard-hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--coral);
+  background-color: color-mix(in srgb, var(--ep-surface) 92%, var(--coral));
+  box-shadow: 0 10px 24px -18px rgba(8, 30, 34, 0.55);
+}
+
+.dashboard-hover:focus-within {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(178, 63, 28, 0.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-hover {
+    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .dashboard-hover:hover {
+    transform: none;
+  }
 }
 
 @keyframes ep-pulse-dot {
@@ -343,10 +441,10 @@ html {
    Close to the original sand / deep teal / coral. Every text pairing is
    at least 5.5:1. Accent is white-on-coral for fills, coral text on cream. */
 :root {
-  --ep-bg: #fbf8f1;          /* 60%  page background            */
+  --ep-bg: #ffffff;          /* 60%  page background            */
   --ep-surface: #ffffff;     /*      cards                      */
-  --ep-tint: #f2ebdd;        /*      sand bands                 */
-  --ep-line: #cfc4a8;        /*      decorative borders         */
+  --ep-tint: #ffffff;        /*      neutral surfaces            */
+  --ep-line: #d8e0de;        /*      decorative borders         */
   --ep-primary: #0b2e33;     /* 30%  ink: text, outlines, dark panels */
   --ep-primary-soft: #12474d;/*      hover on ink               */
   --ep-text-muted: #3f5753;  /*      supporting copy            */
@@ -355,4 +453,129 @@ html {
   --ep-warn-text: #8f5a12;
   --ep-danger: #b3261e;
   --ep-accent-hover: #8f3115; /* hover for coral buttons: same hue, deeper, white text about 8:1 */
+}
+
+html:not(.dark) .dashboard-shell {
+  --ep-bg: #f3f7f6;
+  --ep-surface: #ffffff;
+  --ep-line: #9fb3b0;
+  background: var(--ep-bg);
+}
+
+html:not(.dark) .dashboard-shell aside {
+  border-right: 1px solid #b5c5c2;
+  box-shadow: 2px 0 8px rgba(11, 46, 51, 0.06);
+}
+
+html:not(.dark) .dashboard-shell aside .ep-logo {
+  --ep-logo-color: #d94416;
+  --ep-logo-text: #0b4f3a;
+}
+
+html:not(.dark) .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.12\)\],
+html:not(.dark) .dashboard-shell .border-\[var\(--sand-dim\)\] {
+  border-color: #9fb3b0;
+}
+
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.55\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.6\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.68\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\] {
+  color: #35534f;
+}
+
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.45\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\] {
+  color: #4a6561;
+}
+
+html:not(.dark) .dashboard-shell .dashboard-nav-active {
+  border-width: 2px;
+}
+
+html.dark .dashboard-shell {
+  --ep-bg: #18191a;
+  --ep-surface: #242526;
+  --ep-tint: #3a3b3c;
+  --ep-line: rgba(255, 255, 255, 0.12);
+  --ep-primary: #e4e6eb;
+  --ep-primary-soft: #f0f2f5;
+  --ep-text-muted: #b0b3b8;
+  background: var(--ep-bg);
+  color: #e4e6eb;
+}
+
+html.dark .dashboard-shell .bg-white {
+  background-color: #242526;
+}
+
+html.dark .dashboard-shell aside {
+  background-color: #242526;
+  color: #e4e6eb;
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.12);
+}
+
+html.dark .dashboard-shell aside .ep-logo {
+  --ep-logo-color: #f28a68;
+  --ep-logo-text: #8bd5a6;
+}
+
+html.dark .dashboard-shell .text-\[var\(--water-deep\)\] {
+  color: #e4e6eb;
+}
+
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.55\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.68\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.72\)\] {
+  color: #b0b3b8;
+}
+
+html.dark .dashboard-shell .border-\[var\(--sand-dim\)\],
+html.dark .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.12\)\],
+html.dark .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.1\)\] {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+html.dark .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\] {
+  background-color: #3a3b3c;
+}
+
+html.dark .dashboard-shell .text-\[var\(--mangrove\)\],
+html.dark .dashboard-shell .text-\[var\(--mangrove-text\)\] {
+  color: #8fc6a6;
+}
+
+html.dark .dashboard-shell .bg-\[var\(--water-deep\)\] {
+  background-color: #0b2e33;
+}
+
+html.dark .dashboard-shell .dashboard-nav-active {
+  background-color: #3a3b3c;
+  border-color: rgba(232, 98, 58, 0.7);
+  color: #e4e6eb;
+  box-shadow: 0 6px 16px -10px rgba(0, 0, 0, 0.8);
+}
+
+html:not(.dark) .dashboard-shell .dashboard-nav-active {
+  background-color: #ffffff;
+  border-color: #e8623a;
+  color: #0b2e33;
+  box-shadow: 0 6px 16px -10px rgba(11, 46, 51, 0.45);
+}
+
+html:not(.dark) .dashboard-shell .dashboard-nav-active-dot {
+  background-color: #e8623a;
+}
+
+html.dark .dashboard-shell .dashboard-nav-active-dot {
+  background-color: #e8623a;
+}
+
+html.dark .dashboard-shell aside .hover\:text-\[var\(--water-deep\)\]:hover {
+  color: #e4e6eb;
 }

@@ -4,11 +4,16 @@ import { useState } from "react";
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { TankRow } from "@/features/dashboard/components/DashboardRows";
 import { useTanks } from "@/features/dashboard/context/TankContext";
+import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
+import { useToast } from "@/features/dashboard/components/Toast";
 
 export function TanksView() {
-  const { tanks, addTank, removeTank } = useTanks();
+  const { tanks, addTank, removeTank, loading } = useTanks();
   const [modalOpen, setModalOpen] = useState(false);
+  const { showToast } = useToast();
+
+  if (loading) return <DashboardViewSkeleton variant="tanks" />;
 
   const tankCount = tanks.length;
   const totalBiomass = tanks.reduce((sum, t) => sum + t.biomass, 0);
@@ -76,7 +81,13 @@ export function TanksView() {
         {tankCount > 0 ? (
           <div className="flex flex-col gap-2.5">
             {tanks.map((t) => (
-              <TankRow key={t.id} {...t} onRemove={removeTank} />
+              <TankRow
+                key={t.id}
+                {...t}
+                onRemove={async (id) => {
+                  if (await removeTank(id)) showToast("Tank removed successfully.");
+                }}
+              />
             ))}
           </div>
         ) : (
@@ -89,7 +100,9 @@ export function TanksView() {
       <AddTankModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        onSubmit={addTank}
+        onSubmit={async (input) => {
+          if (await addTank(input)) showToast(`${input.name} added successfully.`);
+        }}
         existingCount={tankCount}
       />
     </>

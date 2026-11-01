@@ -79,10 +79,10 @@ const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
 const inputBase =
-  "w-full rounded-xl border-2 bg-white py-3 pl-11 pr-4 text-[15px] text-[var(--ep-primary)] outline-none transition-all duration-200 placeholder:text-[var(--ep-text-muted)] placeholder:opacity-60";
+  "w-full rounded-xl border bg-white py-3 pl-11 pr-4 text-[15px] text-[var(--ep-primary)] outline-none transition-all duration-200 placeholder:text-[var(--ep-text-muted)] placeholder:opacity-60";
 
 const inputOk =
-  "border-[var(--ep-primary)] hover:border-[var(--ep-accent)] focus:border-[var(--ep-accent)] focus:ring-4 focus:ring-[rgba(178,63,28,0.15)]";
+  "border-[var(--ep-line)] hover:border-[var(--ep-accent)] focus:border-[var(--ep-accent)] focus:ring-4 focus:ring-[rgba(178,63,28,0.15)]";
 
 const inputBad =
   "border-[var(--ep-danger)] focus:border-[var(--ep-danger)] focus:ring-4 focus:ring-[rgba(179,38,30,0.15)]";
@@ -90,7 +90,7 @@ const inputBad =
 const labelClass = "mb-1.5 block text-sm font-semibold text-[var(--ep-primary)]";
 
 const outlineButton =
-  "w-full rounded-xl border-2 border-[var(--ep-primary)] bg-white px-4 py-2.5 text-[14px] font-semibold text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[var(--ep-tint)] disabled:opacity-50 " +
+  "w-full rounded-xl border border-[var(--ep-primary)] bg-white px-4 py-2.5 text-[14px] font-semibold text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[rgba(11,46,51,0.04)] disabled:opacity-50 " +
   focusRing;
 
 /* ---------- Small pieces ---------- */
@@ -446,7 +446,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
           <div
             role="group"
             aria-label="Account access"
-            className="grid grid-cols-2 gap-1 rounded-xl border-2 border-[var(--ep-primary)] bg-[var(--ep-tint)] p-1"
+            className="grid grid-cols-2 gap-1 rounded-xl border border-[var(--ep-line)] bg-white p-1"
           >
             {(["signin", "signup"] as const).map((mode) => (
               <button
@@ -664,7 +664,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
                     onClick={() => setShowPassword((v) => !v)}
                     aria-label={showPassword ? "Hide password" : "Show password"}
                     aria-pressed={showPassword}
-                    className="absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
+                    className="absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[rgba(11,46,51,0.04)] hover:text-[var(--ep-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
                     style={{ minHeight: 0 }}
                   >
                     {showPassword ? (
@@ -794,7 +794,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
                 setGooglePending(true);
                 window.location.assign("/api/auth/google");
               }}
-              className={`inline-flex w-full items-center justify-center gap-3 rounded-xl border-2 border-[var(--ep-primary)] bg-white px-6 py-3 text-[15px] font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-tint)] active:translate-y-0 disabled:cursor-wait disabled:opacity-60 ${focusRing}`}
+              className={`inline-flex w-full items-center justify-center gap-3 rounded-xl border border-[var(--ep-primary)] bg-white px-6 py-3 text-[15px] font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[rgba(11,46,51,0.04)] active:translate-y-0 disabled:cursor-wait disabled:opacity-60 ${focusRing}`}
             >
               <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5Z" />

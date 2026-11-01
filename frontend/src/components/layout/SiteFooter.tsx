@@ -1,22 +1,49 @@
+import Link from "next/link";
 import { ScrollEnhancements } from "@/components/motion/ScrollUi";
+import { BrandMark } from "./BrandMark";
 
 export function SiteFooter() {
   return (
     <>
-      <footer className="bg-[var(--ep-primary)] px-5 py-10 text-[var(--ep-bg)] sm:px-8 sm:py-12">
-        <div className="mx-auto flex max-w-[1200px] flex-col gap-6 border-t border-[var(--ep-bg)] pt-8 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <div className="ep-font-display text-xl font-semibold">EcoPrawn</div>
-            <p className="mt-2 max-w-[26rem] text-sm leading-relaxed">
-              An AIoT-Enabled Indoor White Shrimp Farming &amp; Water Management System
-            </p>
+      <footer
+        className="relative isolate overflow-hidden px-5 py-14 text-[var(--ep-bg)] sm:px-8 sm:py-16"
+        style={{
+          background:
+            "radial-gradient(ellipse at 12% 8%, rgba(35, 111, 117, 0.42), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(4, 25, 34, 0.7), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(18, 71, 77, 0.6), transparent 52%), linear-gradient(155deg, #0b2e33 0%, #08272f 48%, #061e27 100%)",
+        }}
+      >
+        <div className="mx-auto max-w-[1200px]">
+          <div className="grid gap-10 border-b border-[rgba(255,255,255,0.2)] pb-10 md:grid-cols-[1.6fr_0.8fr_1fr] md:gap-16">
+            <div>
+              <Link href="/" className="inline-flex rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-bg)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-primary)]" aria-label="EcoPrawn home">
+                <BrandMark size={42} logoColor="var(--ep-bg)" logoTextColor="var(--ep-bg)" />
+              </Link>
+              <p className="mt-5 max-w-[27rem] text-base leading-relaxed text-[rgba(255,255,255,0.78)]">
+                An AIoT-enabled indoor white shrimp farming and water management system for healthier tanks and smarter operations.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-[rgba(255,255,255,0.62)]">Explore</h2>
+              <nav className="mt-4 flex flex-col items-start gap-3 text-base" aria-label="Footer navigation">
+                <Link className="transition-colors hover:text-[var(--ep-accent)]" href="/">Home</Link>
+                <Link className="transition-colors hover:text-[var(--ep-accent)]" href="/about">About</Link>
+                <Link className="transition-colors hover:text-[var(--ep-accent)]" href="/contact">Contact</Link>
+              </nav>
+            </div>
+
+            <div>
+              <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-[rgba(255,255,255,0.62)]">Built for better water</h2>
+              <p className="mt-4 text-base leading-relaxed text-[rgba(255,255,255,0.78)]">
+                Monitor quality, feeding, growth, and environmental return from one place.
+              </p>
+            </div>
           </div>
 
-          <p className="text-sm leading-relaxed sm:text-right">
-            University of Caloocan City, Congress Campus
-            <br />
-            Computer Studies Department · CS 118
-          </p>
+          <div className="flex flex-col gap-3 pt-6 text-sm text-[rgba(255,255,255,0.62)] sm:flex-row sm:items-center sm:justify-between">
+            <p>University of Caloocan City · Computer Studies Department · CS 118</p>
+            <p>© {new Date().getFullYear()} EcoPrawn</p>
+          </div>
         </div>
       </footer>
 

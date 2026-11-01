@@ -4,6 +4,9 @@ import "./brand-mark.css";
 interface BrandMarkProps {
   size?: number;
   className?: string;
+  logoColor?: string;
+  logoTextColor?: string;
+  showWordmark?: boolean;
 }
 
 /**
@@ -29,13 +32,17 @@ export const SHAPES: { kind: "shrimp" | "text"; d: string; delay: number; dur: n
   { kind: "text", d: "M933 283C933 283 933 276 933 267C933 254 933 252 932 252C932 252 932 251 932 247C932 243 932 242 932 242C933 242 933 241 933 240C933 238 933 237 932 237C932 237 932 236 932 234C932 233 932 232 932 232C933 232 933 230 933 224C933 219 933 217 932 217C932 217 932 216 932 216C932 215 932 214 932 214C933 214 933 213 933 212C933 210 933 209 934 209C934 209 934 208 934 208C934 208 934 207 934 207C935 207 935 206 935 206C935 205 937 203 938 203C938 203 939 203 940 202C941 201 951 200 952 202C952 202 953 202 953 202C954 202 956 204 956 205C956 205 956 206 956 206C957 206 957 207 957 207C957 207 957 208 958 208C958 208 958 209 958 209C958 210 959 210 962 207C963 205 965 204 965 204C965 204 966 204 966 203C967 202 968 202 969 202C969 202 970 202 970 202C970 201 971 201 971 201C971 201 972 201 972 200C972 200 974 200 980 200C986 200 988 200 988 200C988 201 989 201 990 201C990 201 991 201 991 202C991 202 992 202 993 202C994 202 995 202 996 203C996 204 997 204 997 204C997 204 998 204 998 205C999 206 1000 206 1000 206C1001 206 1006 211 1006 212C1006 212 1006 213 1006 213C1007 213 1007 214 1007 214C1007 214 1007 215 1008 216C1009 216 1009 217 1009 217C1009 217 1009 218 1010 218C1010 218 1010 219 1010 220C1010 220 1010 221 1010 221C1011 221 1011 222 1011 222C1011 223 1011 224 1012 224C1012 224 1012 225 1012 226C1012 228 1012 229 1012 229C1013 230 1013 279 1013 280C1012 280 1012 281 1012 281C1012 282 1012 282 1011 282C1011 282 1010 282 1010 283C1010 283 1007 283 998 283L986 283L986 258C986 236 986 232 985 232C985 232 985 231 985 231C985 229 981 225 980 225C980 225 979 225 979 224C979 224 978 224 973 224C968 224 967 224 967 224C967 225 966 225 966 225C965 225 962 228 962 229C962 229 962 230 961 230C960 231 960 232 960 233C960 233 960 234 960 234C959 234 959 238 959 259L959 283L946 283C939 283 933 283 933 283Z", delay: 1.06, dur: 0.7 },
 ];
 
-export function BrandMark({ size = 30, className = "" }: BrandMarkProps) {
+export function BrandMark({ size = 30, className = "", logoColor, logoTextColor, showWordmark = true }: BrandMarkProps) {
   return (
     <span
       role="img"
       aria-label="EcoPrawn"
       className={`ep-logo inline-flex items-center whitespace-nowrap ${className}`}
-      style={{ gap: size * 0.18 }}
+      style={{
+        gap: size * 0.18,
+        ...(logoColor ? { "--ep-logo-color": logoColor } : {}),
+        ...(logoTextColor ? { "--ep-logo-text": logoTextColor } : {}),
+      } as CSSProperties}
     >
       {/* Shrimp only. Cropped to the shrimp's bounds, same as BrandIcon. */}
       <svg
@@ -56,13 +63,15 @@ export function BrandMark({ size = 30, className = "" }: BrandMarkProps) {
       </svg>
 
       {/* Real text, not paths. Color comes from --ep-logo-text. */}
-      <span
-        aria-hidden="true"
-        className="ep-logo-wordmark ep-font-display font-semibold leading-none tracking-tight"
-        style={{ fontSize: size * 0.8 }}
-      >
-        EcoPrawn
-      </span>
+      {showWordmark && (
+        <span
+          aria-hidden="true"
+          className="ep-logo-wordmark ep-font-display font-semibold leading-none tracking-tight"
+          style={{ fontSize: size * 0.8 }}
+        >
+          EcoPrawn
+        </span>
+      )}
     </span>
   );
 }

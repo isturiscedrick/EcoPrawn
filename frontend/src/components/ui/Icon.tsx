@@ -155,6 +155,13 @@ const PATHS = {
       <path d="m12 5 7 7-7 7" />
     </>
   ),
+  "sidebar-toggle": (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M9 4v16" />
+      <path d="m13 10 2 2-2 2" />
+    </>
+  ),
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof PATHS;
@@ -188,7 +195,7 @@ const TONES = {
   coral: "bg-[rgba(232,98,58,0.1)] text-[var(--coral)]",
   mangrove: "bg-[rgba(60,122,92,0.1)] text-[var(--mangrove)]",
   amber: "bg-[rgba(181,139,57,0.12)] text-[var(--amber-text)]",
-  dark: "bg-[rgba(242,235,221,0.08)] text-[var(--coral)]",
+  dark: "bg-[rgba(255,255,255,0.08)] text-[var(--coral)]",
 } as const;
 
 interface IconChipProps {

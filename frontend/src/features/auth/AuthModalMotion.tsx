@@ -296,7 +296,7 @@ export function AuthModalMotion({ overlayRef, panelRef }: AuthModalMotionProps) 
       {SPECKS.map((s) => (
         <span
           key={`${s.left}-${s.top}`}
-          className="ep-auth-speck absolute rounded-full bg-[rgba(242,235,221,0.6)] opacity-[0.08]"
+          className="ep-auth-speck absolute rounded-full bg-[rgba(255,255,255,0.6)] opacity-[0.08]"
           style={{ left: s.left, top: s.top, width: s.size, height: s.size }}
         />
       ))}

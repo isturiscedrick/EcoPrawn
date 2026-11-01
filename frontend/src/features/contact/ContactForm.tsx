@@ -5,7 +5,7 @@ import { useId, useState, type FormEvent } from "react";
 const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
 
-const inputClass = `w-full rounded-xl border-2 border-[var(--ep-primary)] bg-white px-4 py-2.5 text-base text-[var(--ep-primary)] transition-colors duration-200 placeholder:text-[var(--ep-text-muted)] hover:border-[var(--ep-accent)] ${focusRing}`;
+const inputClass = `w-full rounded-xl border border-[var(--ep-line)] bg-white px-4 py-3 text-base text-[var(--ep-primary)] shadow-[0_4px_12px_-10px_rgba(11,46,51,0.35)] transition-[border-color,box-shadow] duration-200 placeholder:text-[var(--ep-text-muted)] hover:border-[var(--ep-accent)] focus:shadow-[0_0_0_3px_rgba(178,63,28,0.12)] ${focusRing}`;
 
 const labelClass = "mb-1.5 block text-sm font-semibold text-[var(--ep-primary)]";
 
@@ -36,7 +36,7 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="rounded-2xl border-2 border-[var(--ep-primary)] bg-white p-6 text-center sm:p-8"
+        className="rounded-2xl border border-[var(--ep-line)] bg-white p-6 text-center shadow-[0_16px_32px_-24px_rgba(11,46,51,0.55)] sm:p-8"
       >
         <h2 className="ep-font-display mb-2 text-2xl font-semibold">Message ready</h2>
         <p className="mb-6 text-base leading-relaxed text-[var(--ep-text-muted)]">
@@ -57,7 +57,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-5 rounded-2xl border-2 border-[var(--ep-primary)] bg-white p-6 sm:p-8"
+      className="flex flex-col gap-5 rounded-2xl border border-[var(--ep-line)] bg-white p-6 shadow-[0_16px_32px_-24px_rgba(11,46,51,0.45)] sm:p-8"
     >
       <div>
         <label htmlFor={`${uid}-name`} className={labelClass}>

@@ -24,7 +24,7 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
 
   return (
     <div
-      className={`flex items-center justify-between p-3.5 border border-[var(--sand-dim)] rounded-[10px] ${
+      className={`dashboard-hover flex items-center justify-between p-3.5 border border-[var(--sand-dim)] rounded-[10px] ${
         leaving ? "ep-row-out" : "ep-row-in"
       }`}
     >
@@ -77,7 +77,7 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
 
 export function AlertRow({ icon, title, detail, time }: AlertItem) {
   return (
-    <div className="flex gap-3 py-3 border-t border-[var(--sand-dim)] first:border-t-0 first:pt-0">
+    <div className="dashboard-hover flex gap-3 rounded-lg border-t border-[var(--sand-dim)] px-2 py-3 first:border-t-0 first:pt-3">
       <div
         className={`w-[26px] h-[26px] rounded-[7px] flex items-center justify-center text-xs flex-shrink-0 ${
           icon === "warn"
