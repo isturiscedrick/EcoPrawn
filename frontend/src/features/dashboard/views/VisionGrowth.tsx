@@ -3,6 +3,7 @@
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
+import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 
 function GrowthTrendChart({ values }: { values: number[] }) {
   if (values.length < 2) {
@@ -49,7 +50,9 @@ function GrowthTrendChart({ values }: { values: number[] }) {
 }
 
 export function VisionGrowth() {
-  const { tanks, growthTrend, visionScanLog } = useTanks();
+  const { tanks, growthTrend, visionScanLog, loading } = useTanks();
+
+  if (loading) return <DashboardViewSkeleton variant="vision" />;
   const tankCount = tanks.length;
 
   const avgBodyLength = tankCount ? tanks.reduce((sum, t) => sum + t.bodyLength, 0) / tankCount : 0;

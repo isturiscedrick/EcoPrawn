@@ -1,4 +1,4 @@
-import { BioflocLoop } from "@/features/dashboard/BioflocLoop";
+import { BioflocLoop } from "@/features/dashboard/views/BioflocLoop";
 
 export default function BioflocPage() {
   return <BioflocLoop />;

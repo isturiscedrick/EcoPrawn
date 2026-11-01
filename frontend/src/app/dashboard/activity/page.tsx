@@ -1,4 +1,8 @@
+"use client";
+
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
+import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
+import { useTanks } from "@/features/dashboard/context/TankContext";
 
 const activityItems = [
   { action: "Dashboard session opened", detail: "Facility overview loaded", time: "Just now", tone: "coral" },
@@ -8,6 +12,10 @@ const activityItems = [
 ];
 
 export default function ActivityPage() {
+  const { loading } = useTanks();
+
+  if (loading) return <DashboardViewSkeleton variant="activity" />;
+
   return (
     <>
       <div className="mb-7 border-b border-[rgba(11,46,51,0.12)] pb-7">

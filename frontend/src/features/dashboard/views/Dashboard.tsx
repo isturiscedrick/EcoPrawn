@@ -14,12 +14,27 @@ import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
 import { DashboardDetailModal } from "@/features/dashboard/components/DashboardDetailModal";
 import { SensorThresholdModal } from "@/features/dashboard/components/SensorThresholdModal";
+import {
+  DashboardErrorState,
+  DashboardLoadingState,
+} from "@/features/dashboard/components/DashboardStates";
 
 const FCR_TARGET = 1.5;
 const MAX_RECENT_ALERTS = 5;
 
 export function Dashboard() {
-  const { tanks, addTank, removeTank, waterTrend, feedSchedule, alertsLog: alerts, visionScanLog } = useTanks();
+  const {
+    tanks,
+    addTank,
+    removeTank,
+    waterTrend,
+    feedSchedule,
+    alertsLog: alerts,
+    visionScanLog,
+    loading,
+    error,
+    refreshTanks,
+  } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [thresholdModalOpen, setThresholdModalOpen] = useState(false);
@@ -145,6 +160,20 @@ export function Dashboard() {
   // Latest scan time comes from the scan log in data/ecoprawn.ts, not a
   // hardcoded "22 min ago".
   const lastScan = visionScanLog[0]?.time ?? "no scans yet";
+
+  if (loading) {
+    return <DashboardLoadingState />;
+  }
+
+  if (error && tanks.length === 0) {
+    return (
+      <DashboardErrorState
+        title="Dashboard data unavailable"
+        description={error}
+        action={{ label: "Try again", onClick: () => void refreshTanks() }}
+      />
+    );
+  }
 
   function showDetail(title: string, description: string, details: string[]) {
     setDetail({ title, description, details });

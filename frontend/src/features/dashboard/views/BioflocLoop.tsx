@@ -2,6 +2,7 @@
 
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { useTanks } from "@/features/dashboard/context/TankContext";
+import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 
 const loopSteps = [
   { step: "01", title: "Biofloc reactor", body: "Heterotrophic bacteria convert ammonia and organic waste into consumable floc within the tank's water column." },
@@ -11,7 +12,9 @@ const loopSteps = [
 ];
 
 export function BioflocLoop() {
-  const { bioflocMetrics, effluentLog } = useTanks();
+  const { bioflocMetrics, effluentLog, loading } = useTanks();
+
+  if (loading) return <DashboardViewSkeleton variant="biofloc" />;
 
   return (
     <>

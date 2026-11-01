@@ -1,4 +1,4 @@
-import { SystemLayout } from "@/features/dashboard/SystemLayout";
+import { SystemLayout } from "@/features/dashboard/layout/SystemLayout";
 import { TankProvider } from "@/features/dashboard/context/TankContext";
 import { Esp32Provider } from "@/features/dashboard/context/Esp32Context";
 

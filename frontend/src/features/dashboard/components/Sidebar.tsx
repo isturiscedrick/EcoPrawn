@@ -1,44 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link, { useLinkStatus } from "next/link";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandMark } from "@/components/layout/BrandMark";
-import { DASHBOARD_NAV_ITEMS, type DashboardNavItem, type DashboardView } from "@/config/nav";
+import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
 import { Icon } from "@/components/ui/Icon";
-
-function SidebarNavContent({ item, active, collapsed }: { item: DashboardNavItem; active: boolean; collapsed: boolean }) {
-  const { pending } = useLinkStatus();
-  return (
-    <span
-      aria-busy={pending}
-      className={`flex min-h-11 items-center gap-2.5 whitespace-nowrap rounded-lg px-3 py-2.5 text-left text-[15px] font-medium transition-colors duration-200 lg:w-full ${
-        collapsed ? "lg:mx-auto lg:h-11 lg:!w-11 lg:justify-center lg:px-0 lg:py-0" : ""
-      } ${
-        active || pending
-          ? "dashboard-nav-active border border-[rgba(232,98,58,0.7)] bg-white font-semibold text-[var(--water-deep)] shadow-[0_6px_14px_-10px_rgba(11,46,51,0.55)]"
-          : "text-[rgba(11,46,51,0.68)] hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--water-deep)]"
-      }`}
-    >
-      <span aria-hidden="true" className="relative flex w-4 shrink-0 justify-center">
-        <Icon name={item.icon} size={16} strokeWidth={1.8} className={pending && collapsed ? "opacity-0" : ""} />
-        {pending && collapsed && (
-          <span className="absolute inset-0 flex items-center justify-center">
-            <span className="h-3 w-3 rounded-full border-2 border-current border-r-transparent animate-spin motion-reduce:animate-none" />
-          </span>
-        )}
-      </span>
-      <span className={collapsed ? "lg:hidden" : undefined}>{item.label}</span>
-      {pending && !collapsed ? (
-        <span role="status" aria-label={`Opening ${item.label}`} className="ml-auto inline-flex">
-          <span aria-hidden="true" className="h-3 w-3 rounded-full border-2 border-current border-r-transparent animate-spin motion-reduce:animate-none" />
-        </span>
-      ) : active ? (
-        <span className={`dashboard-nav-active-dot ml-auto hidden h-1.5 w-1.5 rounded-full bg-[var(--coral)] lg:block ${collapsed ? "lg:hidden" : ""}`} />
-      ) : null}
-    </span>
-  );
-}
+import { SidebarNavItem } from "./SidebarNavItem";
 
 interface SidebarProps {
   collapsed?: boolean;
@@ -170,23 +138,19 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
       </div>
 
       {/* NAV ITEMS */}
-      <div className={`flex shrink-0 flex-row items-center gap-1.5 lg:w-full lg:flex-col lg:gap-1 ${collapsed ? "lg:items-center lg:pt-3" : "lg:items-stretch"}`}>
-        {DASHBOARD_NAV_ITEMS.map((item) => {
-          const isActive = item.view === activeView;
-          return (
-            <Link
-              key={item.label}
-              href={item.view === "overview" ? "/dashboard" : `/dashboard/${item.view}`}
-              prefetch={!isActive}
-              aria-label={item.label}
-              aria-current={isActive ? "page" : undefined}
-              className={`rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove-light)] ${collapsed ? "lg:mx-auto lg:w-11" : "lg:w-full"}`}
-            >
-              <SidebarNavContent item={item} active={isActive} collapsed={collapsed} />
-            </Link>
-          );
-        })}
-      </div>
+      <nav
+        aria-label="Dashboard modules"
+        className={`flex shrink-0 flex-row items-center gap-1.5 lg:w-full lg:flex-col lg:gap-2 ${collapsed ? "lg:items-center lg:pt-3" : "lg:items-stretch lg:px-2"}`}
+      >
+        {DASHBOARD_NAV_ITEMS.map((item) => (
+          <SidebarNavItem
+            key={item.label}
+            item={item}
+            active={item.view === activeView}
+            collapsed={collapsed}
+          />
+        ))}
+      </nav>
 
       {/* SIDEBAR ACTIONS (desktop only) */}
       <div className={`mt-auto hidden shrink-0 flex-col gap-1 border-t border-[rgba(11,46,51,0.1)] lg:flex lg:w-full lg:pt-4 ${collapsed ? "lg:px-0" : "lg:px-2"}`}>

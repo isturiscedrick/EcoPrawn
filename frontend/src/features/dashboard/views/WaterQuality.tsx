@@ -5,12 +5,16 @@ import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimiti
 import { TrendChart } from "@/features/dashboard/components/TrendChart";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
+import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { THRESHOLDS, rangeStatus } from "@/features/dashboard/lib/thresholds";
 import { Esp32Connection } from "@/features/dashboard/components/Esp32Connection";
 
 export function WaterQuality() {
-  const { tanks, waterTrend } = useTanks();
+  const { tanks, waterTrend, loading } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
+
+  if (loading) return <DashboardViewSkeleton variant="water" />;
+
   const tankCount = tanks.length;
   const warnCount = tanks.filter((t) => t.status === "warn").length;
   const selectedTank = tanks.find((tank) => tank.id === selectedTankId) ?? tanks[0];

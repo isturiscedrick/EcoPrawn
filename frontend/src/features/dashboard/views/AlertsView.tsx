@@ -5,9 +5,12 @@ import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimiti
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { SmsSettings } from "@/features/dashboard/components/SmsSettings";
+import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 
 export function AlertsView() {
-  const { tanks, alertsLog } = useTanks();
+  const { tanks, alertsLog, loading } = useTanks();
+
+  if (loading) return <DashboardViewSkeleton variant="alerts" />;
 
   const liveAlerts = deriveTankAlerts(tanks);
   const allAlerts = [...liveAlerts, ...alertsLog];
