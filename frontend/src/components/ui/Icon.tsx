@@ -155,6 +155,13 @@ const PATHS = {
       <path d="m12 5 7 7-7 7" />
     </>
   ),
+  "sidebar-toggle": (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M9 4v16" />
+      <path d="m13 10 2 2-2 2" />
+    </>
+  ),
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof PATHS;

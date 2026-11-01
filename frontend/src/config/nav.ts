@@ -4,7 +4,7 @@ export const LANDING_NAV_LINKS: [string, string][] = [
   ["Contact", "/contact"],
 ];
 
-export type DashboardView = "overview" | "tanks" | "water" | "vision" | "feeding" | "biofloc" | "alerts";
+export type DashboardView = "overview" | "tanks" | "water" | "vision" | "feeding" | "biofloc" | "alerts" | "activity";
 
 export interface DashboardNavItem {
   icon: IconName;
@@ -20,5 +20,6 @@ export const DASHBOARD_NAV_ITEMS: DashboardNavItem[] = [
   { icon: "utensils", label: "Feeding", view: "feeding" },
   // { icon: "⇌", label: "Biofloc Loop", view: "biofloc" },
   { icon: "zap", label: "Alerts", view: "alerts" },
+  { icon: "clock", label: "Activity Log", view: "activity" },
 ];
 import type { IconName } from "@/components/ui/Icon";

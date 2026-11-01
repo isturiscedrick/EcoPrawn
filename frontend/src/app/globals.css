@@ -357,11 +357,47 @@ html {
   --ep-accent-hover: #8f3115; /* hover for coral buttons: same hue, deeper, white text about 8:1 */
 }
 
+html:not(.dark) .dashboard-shell {
+  --ep-bg: #f3f7f6;
+  --ep-surface: #ffffff;
+  --ep-line: #9fb3b0;
+  background: var(--ep-bg);
+}
+
+html:not(.dark) .dashboard-shell aside {
+  border-right: 1px solid #b5c5c2;
+  box-shadow: 2px 0 8px rgba(11, 46, 51, 0.06);
+}
+
+html:not(.dark) .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.12\)\],
+html:not(.dark) .dashboard-shell .border-\[var\(--sand-dim\)\] {
+  border-color: #9fb3b0;
+}
+
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.55\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.6\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.68\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\] {
+  color: #35534f;
+}
+
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.45\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\] {
+  color: #4a6561;
+}
+
+html:not(.dark) .dashboard-shell .dashboard-nav-active {
+  border-width: 2px;
+}
+
 html.dark .dashboard-shell {
   --ep-bg: #18191a;
   --ep-surface: #242526;
   --ep-tint: #3a3b3c;
   --ep-line: rgba(255, 255, 255, 0.12);
+  --ep-primary: #e4e6eb;
+  --ep-primary-soft: #f0f2f5;
   --ep-text-muted: #b0b3b8;
   background: var(--ep-bg);
   color: #e4e6eb;

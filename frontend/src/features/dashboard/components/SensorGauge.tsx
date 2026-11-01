@@ -14,7 +14,7 @@ export function SensorGauge({ label, value, pct, status, statusLabel, note }: Se
         {label}
       </div>
       <svg viewBox="0 0 64 64" aria-hidden="true" className="w-16 h-16 mx-auto mb-1.5">
-        <circle cx="32" cy="32" r="26" fill="none" stroke="#E4DBC7" strokeWidth="6" />
+        <circle cx="32" cy="32" r="26" fill="none" stroke="var(--ep-line)" strokeWidth="6" />
         <circle
           cx="32"
           cy="32"

@@ -1,19 +1,25 @@
  "use client";
 
 import type { ReactNode } from "react";
-import { Sidebar } from "./components/Sidebar";
+ import { useState } from "react";
+ import { Sidebar } from "./components/Sidebar";
 
 interface SystemLayoutProps {
   children: ReactNode;
 }
 
 export function SystemLayout({ children }: SystemLayoutProps) {
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
   return (
     <div className="dashboard-shell min-h-screen bg-[var(--ep-bg)]">
-      <div className="grid grid-cols-1 lg:grid-cols-[224px_1fr]">
+      <div className={`grid grid-cols-1 transition-[grid-template-columns] duration-200 ease-out ${sidebarCollapsed ? "lg:grid-cols-[76px_1fr]" : "lg:grid-cols-[260px_1fr]"}`}>
         {/* SIDEBAR */}
         <div className="sticky top-0 z-50 lg:h-screen">
-          <Sidebar />
+          <Sidebar
+            collapsed={sidebarCollapsed}
+            onToggle={() => setSidebarCollapsed((current) => !current)}
+          />
         </div>
 
         {/* MAIN */}

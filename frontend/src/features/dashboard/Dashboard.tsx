@@ -13,6 +13,7 @@ import { useEsp32 } from "@/features/dashboard/context/Esp32Context";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
 import { DashboardDetailModal } from "@/features/dashboard/components/DashboardDetailModal";
+import { SensorThresholdModal } from "@/features/dashboard/components/SensorThresholdModal";
 
 const FCR_TARGET = 1.5;
 const MAX_RECENT_ALERTS = 5;
@@ -21,6 +22,7 @@ export function Dashboard() {
   const { tanks, addTank, removeTank, waterTrend, feedSchedule, alertsLog: alerts, visionScanLog } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [thresholdModalOpen, setThresholdModalOpen] = useState(false);
   const [detail, setDetail] = useState<{
     title: string;
     description: string;
@@ -271,7 +273,14 @@ export function Dashboard() {
         >
           {tankCount > 0 ? (
             <>
-              <div className="flex flex-wrap gap-2 mb-4" aria-label="Sensor readings by tank">
+              <div className="mb-4 flex flex-wrap items-center gap-2" aria-label="Sensor readings by tank">
+                <button
+                  type="button"
+                  onClick={() => setThresholdModalOpen(true)}
+                  className="order-last min-h-11 rounded-full border border-[var(--ep-line)] px-3 py-1.5 text-sm font-semibold text-[var(--ep-primary)] transition-colors hover:border-[var(--coral)] hover:text-[var(--coral)] sm:order-none"
+                >
+                  Configure ranges
+                </button>
                 <button
                   type="button"
                   aria-pressed={!selectedTank}
@@ -300,7 +309,20 @@ export function Dashboard() {
               <div className="mt-4 pt-4 border-t border-[var(--sand-dim)]">
                 {selectedTank ? (
                   <>
-                    <TrendChart values={trendsByTank.get(selectedTank.id) ?? []} />
+                    <TrendChart
+                      values={trendsByTank.get(selectedTank.id) ?? []}
+                      onPointClick={(value, index) =>
+                        showDetail(
+                          `${selectedTank.name} dissolved oxygen reading`,
+                          "Historical sensor point selected from the live trend.",
+                          [
+                            `Reading ${index + 1}: ${value.toFixed(2)} mg/L`,
+                            `Tank: ${selectedTank.name}`,
+                            "Open Water Quality for the full reading history and report view.",
+                          ],
+                        )
+                      }
+                    />
                     <div className="mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
                       <span className="inline-flex items-center gap-1.5">
                         <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> {selectedTank.name} DO (mg/L)
@@ -447,6 +469,16 @@ export function Dashboard() {
             </div>
           ))}
         </div>
+        <div className="mt-4 rounded-xl border border-[rgba(232,98,58,0.22)] bg-[rgba(232,98,58,0.06)] p-4">
+          <div className="mb-1 text-sm font-semibold text-[var(--ep-primary)]">AI recommendation</div>
+          <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">
+            {tankCount
+              ? totalAbnormal > 0
+                ? "Review flagged behavior before the next feeding cycle and compare it with water-quality readings."
+                : "Growth indicators are stable. Continue scheduled scans and review the next prediction after the next sampling cycle."
+              : "Add a tank to receive daily growth predictions and actionable recommendations."}
+          </p>
+        </div>
       </Panel>
 
       <AddTankModal
@@ -461,6 +493,10 @@ export function Dashboard() {
         description={detail?.description ?? ""}
         details={detail?.details ?? []}
         onClose={() => setDetail(null)}
+      />
+      <SensorThresholdModal
+        open={thresholdModalOpen}
+        onClose={() => setThresholdModalOpen(false)}
       />
     </>
   );
