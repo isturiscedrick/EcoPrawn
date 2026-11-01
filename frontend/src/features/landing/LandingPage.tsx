@@ -196,7 +196,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* READINGS: deep teal (30%). Each reading shown against its target zone. */}
+        {/* READINGS: deep teal (30%). Each reading is a card shown against its target zone. */}
         <section
           id="readings"
           aria-labelledby="readings-title"
@@ -232,22 +232,38 @@ export function LandingPage() {
               </p>
             </div>
 
-            <dl className="mt-14 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-5">
+            <dl className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-5">
               {heroReadouts.map((r) => {
                 const zone = ZONES[r.label];
                 const value = parseFloat(r.value);
                 const zoneLeft = zone ? pct(zone.lo, zone.min, zone.max) : 0;
                 const zoneWidth = zone ? pct(zone.hi, zone.min, zone.max) - zoneLeft : 0;
                 const markerLeft = zone ? pct(value, zone.min, zone.max) : 0;
+                const inRange = zone ? value >= zone.lo && value <= zone.hi : true;
                 const range = targetRangeFor(r.label);
                 return (
                   <div
                     key={r.label}
                     data-reading=""
-                    className="border-t border-[rgba(242,235,221,0.3)] pt-5 last:col-span-2 md:last:col-span-1"
+                    className="rounded-xl border border-[rgba(242,235,221,0.22)] bg-[rgba(242,235,221,0.05)] p-5 transition-[background-color,border-color,translate] duration-200 hover:-translate-y-0.5 hover:border-[rgba(242,235,221,0.5)] hover:bg-[rgba(242,235,221,0.09)] last:col-span-2 md:last:col-span-1"
                   >
-                    <dt className="text-base font-semibold text-[rgba(242,235,221,0.92)]">{r.label}</dt>
-                    <dd className="mt-2 text-4xl font-semibold tabular-nums">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <dt className="text-base font-semibold text-[rgba(242,235,221,0.92)]">{r.label}</dt>
+                      <span
+                        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-[var(--ep-bg)] ${
+                          inRange ? "bg-[rgba(91,155,120,0.28)]" : "bg-[rgba(232,162,58,0.32)]"
+                        }`}
+                      >
+                        {inRange ? (
+                          <Icon name="check" size={12} strokeWidth={2.5} className="text-[var(--mangrove-light)]" />
+                        ) : (
+                          <span>!</span>
+                        )}
+                        {inRange ? "In range" : "Out of range"}
+                      </span>
+                    </div>
+
+                    <dd className="mt-3 text-4xl font-semibold tabular-nums">
                       <span data-countto={r.value}>{r.value}</span>
                       <span className="ml-1 text-base font-medium text-[rgba(242,235,221,0.8)]">
                         {heroReadoutUnits[r.label]}
@@ -256,7 +272,7 @@ export function LandingPage() {
 
                     <div
                       aria-hidden="true"
-                      className="relative mt-6 h-2 rounded-full bg-[rgba(242,235,221,0.16)]"
+                      className="relative mx-2 mt-6 h-2 rounded-full bg-[rgba(242,235,221,0.16)]"
                     >
                       <div
                         data-zone=""
@@ -276,13 +292,38 @@ export function LandingPage() {
                       </div>
                     </div>
 
+                    {zone && (
+                      <div
+                        aria-hidden="true"
+                        className="mt-2.5 flex justify-between text-xs tabular-nums text-[rgba(242,235,221,0.7)]"
+                      >
+                        <span>{zone.min}</span>
+                        <span>{zone.max}</span>
+                      </div>
+                    )}
+
                     {range && (
-                      <p className="mt-3 text-sm text-[rgba(242,235,221,0.85)]">Target {range}</p>
+                      <p className="mt-2 text-sm text-[rgba(242,235,221,0.85)]">Target {range}</p>
                     )}
                   </div>
                 );
               })}
             </dl>
+
+            {/* Legend: explains what the bar and dot mean */}
+            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-[rgba(242,235,221,0.85)]">
+              <span className="inline-flex items-center gap-2">
+                <span aria-hidden="true" className="h-2 w-8 rounded-full bg-[var(--mangrove-light)]" />
+                Target zone
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <span
+                  aria-hidden="true"
+                  className="h-3.5 w-3.5 rounded-full border-2 border-[var(--ep-primary)] bg-[var(--coral)]"
+                />
+                Current reading
+              </span>
+            </div>
           </div>
         </section>
 
@@ -317,7 +358,7 @@ export function LandingPage() {
                   <li
                     key={s.step}
                     data-step=""
-                    className="relative border-t border-[var(--ep-line)] pt-8 lg:border-t-0"
+                    className="group relative border-t border-[var(--ep-line)] pt-8 transition-[translate] duration-200 hover:-translate-y-1 lg:border-t-0"
                   >
                     <span
                       aria-hidden="true"
@@ -325,14 +366,16 @@ export function LandingPage() {
                       className="absolute -top-[5px] left-0 hidden h-2.5 w-2.5 bg-[var(--ep-primary)] lg:block"
                     />
                     <div className="mb-6 flex items-center justify-between">
-                      <span className="text-sm font-semibold tabular-nums tracking-wide text-[var(--ep-text-muted)]">
+                      <span className="text-sm font-semibold tabular-nums tracking-wide text-[var(--ep-text-muted)] transition-colors duration-200 group-hover:text-[var(--ep-accent)]">
                         {s.step}
                       </span>
-                      <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--ep-primary)] text-[var(--ep-primary)]">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--ep-primary)] text-[var(--ep-primary)] transition-colors duration-200 group-hover:bg-[var(--ep-primary)] group-hover:text-[var(--ep-bg)]">
                         <Icon name={s.icon} size={22} />
                       </span>
                     </div>
-                    <h3 className="ep-font-display mb-2 text-2xl font-semibold">{s.title}</h3>
+                    <h3 className="ep-font-display mb-2 text-2xl font-semibold transition-colors duration-200 group-hover:text-[var(--ep-accent)]">
+                      {s.title}
+                    </h3>
                     <p className="text-base leading-relaxed text-[var(--ep-text-muted)]">{s.body}</p>
                   </li>
                 ))}
