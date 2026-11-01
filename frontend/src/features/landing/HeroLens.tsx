@@ -50,12 +50,17 @@ const SPECKS = [
   { left: "47%", top: "56%", size: 3 },
 ];
 
-// One slot per corner, inside the circle.
+// One slot per reading, inside the circle: four corners, then top-center
+// (Water Level). The top-center slot is rendered a little smaller so it
+// clears the north focus bracket. Vertical rhythm: Water Level sits high
+// (8%), the top corners drop to 25% so there is a clear gap beneath it,
+// and the bottom corners sit at 23% to leave room for the caption.
 const SLOTS = [
-  "left-[17%] top-[20%] items-start text-left",
-  "right-[17%] top-[20%] items-end text-right",
-  "left-[17%] bottom-[20%] items-start text-left",
-  "right-[17%] bottom-[20%] items-end text-right",
+  "left-[16%] top-[25%] items-start text-left",
+  "right-[16%] top-[25%] items-end text-right",
+  "left-[16%] bottom-[23%] items-start text-left",
+  "right-[16%] bottom-[23%] items-end text-right",
+  "left-1/2 top-[8%] -translate-x-1/2 items-center text-center",
 ];
 
 export function HeroLens() {
@@ -264,7 +269,8 @@ export function HeroLens() {
     return () => mm.revert();
   }, []);
 
-  const readouts = heroReadouts.slice(0, 4);
+  // All five readings (DO, pH, temperature, salinity, water level).
+  const readouts = heroReadouts.slice(0, SLOTS.length);
 
   return (
     <figure
@@ -326,13 +332,21 @@ export function HeroLens() {
             ))}
           </div>
 
-          {/* The prawn */}
+          {/* Soft halo behind the prawn so it separates from the dark glass */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-[22%] rounded-full bg-[radial-gradient(circle,rgba(242,235,221,0.24)_0%,rgba(242,235,221,0.09)_45%,transparent_72%)]"
+          />
+
+          {/* The prawn. Lighter coral than the logo orange for contrast on teal.
+              The "!" is needed because brand-mark.css is unlayered and would
+              otherwise beat Tailwind utilities. */}
           <div
             aria-hidden="true"
             className="ep-lens-shrimp pointer-events-none absolute inset-0 flex items-center justify-center"
           >
             <BrandIcon
-              className="h-auto w-[40%] drop-shadow-[0_0_16px_rgba(232,98,58,0.35)]"
+              className="h-auto w-[44%] drop-shadow-[0_0_18px_rgba(255,138,99,0.55)] [&_.ep-logo-shrimp]:fill-[#ff8a63]! [&_.ep-logo-shrimp]:stroke-[#ff8a63]!"
               timeScale={1.2}
             />
           </div>
@@ -360,23 +374,30 @@ export function HeroLens() {
           />
 
           {/* Readouts */}
-          {readouts.map((r, i) => (
-            <div key={r.label} className={`ep-lens-readout absolute flex flex-col ${SLOTS[i]}`}>
-              <span className="flex items-center gap-1.5 text-[10px] font-medium text-[rgba(242,235,221,0.78)] sm:text-xs">
-                <span
-                  aria-hidden="true"
-                  className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-[var(--mangrove-light)]"
-                />
-                {r.label}
-              </span>
-              <span className="mt-0.5 text-lg font-semibold tabular-nums text-[var(--ep-bg)] sm:text-2xl">
-                <span data-count={r.value}>{r.value}</span>
-                <span className="ml-1 text-[10px] font-medium text-[rgba(242,235,221,0.72)] sm:text-xs">
-                  {heroReadoutUnits[r.label]}
+          {readouts.map((r, i) => {
+            const compact = i === 4; // top-center slot (Water Level)
+            return (
+              <div key={r.label} className={`ep-lens-readout absolute flex flex-col ${SLOTS[i]}`}>
+                <span className="flex items-center gap-1.5 text-[10px] font-medium text-[rgba(242,235,221,0.78)] sm:text-xs">
+                  <span
+                    aria-hidden="true"
+                    className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-[var(--mangrove-light)]"
+                  />
+                  {r.label}
                 </span>
-              </span>
-            </div>
-          ))}
+                <span
+                  className={`mt-0.5 font-semibold tabular-nums text-[var(--ep-bg)] ${
+                    compact ? "text-base sm:text-xl" : "text-lg sm:text-2xl"
+                  }`}
+                >
+                  <span data-count={r.value}>{r.value}</span>
+                  <span className="ml-1 text-[10px] font-medium text-[rgba(242,235,221,0.72)] sm:text-xs">
+                    {heroReadoutUnits[r.label]}
+                  </span>
+                </span>
+              </div>
+            );
+          })}
 
           <p className="ep-lens-caption absolute bottom-[12%] left-1/2 w-[56%] -translate-x-1/2 text-center text-[10px] leading-tight text-[rgba(242,235,221,0.72)] sm:text-[11px]">
             Example readings, not from a real tank.
