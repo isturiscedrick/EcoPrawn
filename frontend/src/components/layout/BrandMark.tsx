@@ -59,7 +59,7 @@ export function BrandMark({ size = 30, className = "" }: BrandMarkProps) {
       <span
         aria-hidden="true"
         className="ep-logo-wordmark ep-font-display font-semibold leading-none tracking-tight"
-        style={{ fontSize: size * 0.44 }}
+        style={{ fontSize: size * 0.8 }}
       >
         EcoPrawn
       </span>
