@@ -14,7 +14,7 @@ function SidebarNavContent({ item, active }: { item: DashboardNavItem; active: b
       aria-busy={pending}
       className={`flex min-h-11 items-center gap-2.5 whitespace-nowrap rounded-lg px-3 py-2.5 text-left text-[15px] font-medium transition-colors duration-200 lg:w-full ${
         active || pending
-          ? "dashboard-nav-active border border-[rgba(232,98,58,0.7)] bg-[var(--water-deep)] font-semibold text-white shadow-[0_6px_14px_-10px_rgba(11,46,51,0.55)]"
+          ? "dashboard-nav-active border border-[rgba(232,98,58,0.7)] bg-white font-semibold text-[var(--water-deep)] shadow-[0_6px_14px_-10px_rgba(11,46,51,0.55)]"
           : "text-[rgba(11,46,51,0.68)] hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--water-deep)]"
       }`}
     >
@@ -27,7 +27,7 @@ function SidebarNavContent({ item, active }: { item: DashboardNavItem; active: b
           <span aria-hidden="true" className="h-3 w-3 rounded-full border-2 border-current border-r-transparent animate-spin motion-reduce:animate-none" />
         </span>
       ) : active ? (
-        <span className="dashboard-nav-active-dot ml-auto hidden h-1.5 w-1.5 rounded-full bg-white lg:block" />
+        <span className="dashboard-nav-active-dot ml-auto hidden h-1.5 w-1.5 rounded-full bg-[var(--coral)] lg:block" />
       ) : null}
     </span>
   );
@@ -99,8 +99,8 @@ export function Sidebar() {
       <div className="flex min-w-0 shrink-0 items-center gap-2 overflow-visible px-1 lg:mb-4 lg:w-full lg:border-b lg:border-[rgba(11,46,51,0.12)] lg:px-2.5 lg:pb-4 lg:pt-1">
         <BrandMark
           size={30}
-          logoColor="#d94416"
-          logoTextColor="#d94416"
+          logoColor={darkMode ? "#f28a68" : "#d94416"}
+          logoTextColor={darkMode ? "#f28a68" : "#d94416"}
         />
       </div>
 
