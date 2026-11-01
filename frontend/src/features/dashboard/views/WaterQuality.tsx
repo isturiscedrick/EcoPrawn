@@ -182,7 +182,11 @@ export function WaterQuality() {
             className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4"
           >
             <Panel title={`Recorded oxygen history · ${selectedTank.name}`} badge="Recorded readings">
-              <TrendChart values={waterTrend.filter((reading) => reading.tankId === selectedTank.id).map((reading) => reading.value)} />
+              <TrendChart
+                values={waterTrend.filter((reading) => reading.tankId === selectedTank.id).map((reading) => reading.value)}
+                label="Dissolved oxygen"
+                unit="mg/L"
+              />
               <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
                 <span className="flex items-center gap-1.5">
                   <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> DO (mg/L)
@@ -199,7 +203,7 @@ export function WaterQuality() {
                 {thresholds.map((t) => (
                   <div
                     key={t.label}
-                    className="flex items-center justify-between p-3 border border-[var(--sand-dim)] rounded-[10px]"
+                    className="dashboard-hover flex items-center justify-between rounded-[10px] border border-[var(--sand-dim)] p-3"
                   >
                     <div>
                       <div className="text-[13px] font-semibold text-[var(--water-deep)]">{t.label}</div>

@@ -53,7 +53,7 @@ export function BioflocLoop() {
         <Panel title="Treatment Loop" badge="continuous">
           <div className="flex flex-col gap-3">
             {loopSteps.map((s) => (
-              <div key={s.step} className="flex gap-3 p-3 border border-[var(--sand-dim)] rounded-[10px]">
+              <div key={s.step} className="dashboard-hover flex gap-3 rounded-[10px] border border-[var(--sand-dim)] p-3">
                 <span className="ep-font-mono text-[11px] font-semibold text-[var(--coral)] pt-0.5">
                   {s.step}
                 </span>

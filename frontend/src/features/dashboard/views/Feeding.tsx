@@ -64,7 +64,7 @@ export function Feeding() {
                 {feedSchedule.map((f) => (
                   <div
                     key={f.id}
-                    className="flex items-center justify-between p-3 border border-[var(--sand-dim)] rounded-[10px]"
+                    className="dashboard-hover flex items-center justify-between rounded-[10px] border border-[var(--sand-dim)] p-3"
                   >
                     <div className="flex items-center gap-3">
                       <span

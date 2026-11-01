@@ -88,8 +88,6 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
       <div className={`group relative flex min-w-0 shrink-0 items-center gap-2 overflow-visible px-1 lg:mb-4 lg:w-full lg:border-b lg:border-[rgba(11,46,51,0.12)] ${collapsed ? "lg:justify-center lg:px-0 lg:pb-6 lg:pt-3" : "lg:px-2.5 lg:pb-4 lg:pt-1"}`}>
         <BrandMark
           size={30}
-          logoColor={darkMode ? "#f28a68" : "#d94416"}
-          logoTextColor={darkMode ? "#f28a68" : "#d94416"}
           showWordmark={!collapsed}
           className={collapsed ? "transition-opacity duration-200 group-hover:opacity-0 group-focus-within:opacity-0" : ""}
         />
@@ -212,7 +210,7 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
           <div
             aria-hidden="true"
             onClick={onCancelLogout}
-            className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm"
+            className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.76)]"
           />
           <div className="ep-pop-in relative z-10 w-full max-w-[360px] rounded-2xl border border-[rgba(255,255,255,0.16)] bg-[var(--water-deep)] p-6 text-[var(--sand)] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)]">
             <h2

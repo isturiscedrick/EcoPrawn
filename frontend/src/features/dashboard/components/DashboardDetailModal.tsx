@@ -39,7 +39,7 @@ export function DashboardDetailModal({
         type="button"
         aria-label="Close details"
         onClick={onClose}
-        className="absolute inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm"
+        className="absolute inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.76)]"
       />
       <section
         role="dialog"

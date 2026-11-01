@@ -16,7 +16,7 @@
   --ep-logo-color: #d94416;
   /* Wordmark color. Override with a utility class on dark backgrounds,
      e.g. className="[--ep-logo-text:#ffffff]". */
-  --ep-logo-text: #02262b;
+  --ep-logo-text: #0b4f3a;
   overflow: visible;
 }
 
@@ -38,6 +38,10 @@ body:has(.ep-water-curtain) .ep-logo {
   /* Resting state (also what reduced-motion users see): filled, no outline. */
   fill-opacity: 1;
   stroke-opacity: 0;
+}
+
+html.dark .ep-logo {
+  --ep-logo-text: #8bd5a6;
 }
 
 .ep-logo-shrimp {

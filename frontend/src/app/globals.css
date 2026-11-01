@@ -88,9 +88,9 @@
   --amber: #e8a23a;
   --danger: #d64545;
   --ink: #0b2320;
-  --font-display: 'Fraunces', serif;
+  --font-display: 'Lexend', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-mono: 'Inter', sans-serif;
 
   /* Shared elevation/radius — replaces one-off shadow/radius values
      that were scattered across Panel, KpiCard, and modal overlays. */
@@ -162,6 +162,74 @@
   -webkit-font-smoothing: antialiased;
 }
 
+.ecoprawn-root :is(h1, h2, h3, h4, h5, h6, .ep-font-display) {
+  font-family: var(--font-display);
+}
+
+.ecoprawn-root :is(a, button, [role="button"]) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ecoprawn-root button:not(:disabled),
+.ecoprawn-root [role="button"]:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
+.ecoprawn-root :is(a, button, [role="button"]):focus-visible {
+  outline: 2px solid var(--ep-accent);
+  outline-offset: 3px;
+}
+
+.ecoprawn-root :where(a, button, [role="button"]) {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease;
+}
+
+.ecoprawn-root :where(a, button, [role="button"]):not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ecoprawn-root :where(a, button, [role="button"]) {
+    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+  }
+
+  .ecoprawn-root :where(a, button, [role="button"]):hover {
+    transform: none;
+  }
+}
+
+.dashboard-shell {
+  font-family: var(--font-body);
+}
+
+.dashboard-shell :is(h1, h2, h3, h4, h5, h6, .ep-font-display) {
+  font-family: var(--font-display);
+}
+
+.dashboard-skeleton-block {
+  background: #d7e1df;
+}
+
+.dark .dashboard-skeleton-block {
+  background: #3a3b3c;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+[role="dialog"],
+.ep-auth-modal {
+  font-family: var(--font-body);
+}
+
+[role="dialog"] :is(h1, h2, h3, h4, h5, h6),
+.ep-auth-modal :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-display);
+}
+
 .ecoprawn-root ::selection {
   background: var(--coral);
   color: var(--sand);
@@ -185,6 +253,36 @@
   outline: 2px solid var(--coral);
   outline-offset: 2px;
   border-radius: 6px;
+}
+
+.dashboard-hover {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.dashboard-hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--coral);
+  background-color: color-mix(in srgb, var(--ep-surface) 92%, var(--coral));
+  box-shadow: 0 10px 24px -18px rgba(8, 30, 34, 0.55);
+}
+
+.dashboard-hover:focus-within {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(178, 63, 28, 0.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-hover {
+    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .dashboard-hover:hover {
+    transform: none;
+  }
 }
 
 @keyframes ep-pulse-dot {
@@ -369,6 +467,11 @@ html:not(.dark) .dashboard-shell aside {
   box-shadow: 2px 0 8px rgba(11, 46, 51, 0.06);
 }
 
+html:not(.dark) .dashboard-shell aside .ep-logo {
+  --ep-logo-color: #d94416;
+  --ep-logo-text: #0b4f3a;
+}
+
 html:not(.dark) .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.12\)\],
 html:not(.dark) .dashboard-shell .border-\[var\(--sand-dim\)\] {
   border-color: #9fb3b0;
@@ -413,6 +516,11 @@ html.dark .dashboard-shell aside {
   box-shadow: 1px 0 0 rgba(255, 255, 255, 0.12);
 }
 
+html.dark .dashboard-shell aside .ep-logo {
+  --ep-logo-color: #f28a68;
+  --ep-logo-text: #8bd5a6;
+}
+
 html.dark .dashboard-shell .text-\[var\(--water-deep\)\] {
   color: #e4e6eb;
 }
@@ -420,6 +528,7 @@ html.dark .dashboard-shell .text-\[var\(--water-deep\)\] {
 html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.55\)\],
 html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.68\)\],
 html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
 html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\],
 html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
 html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.72\)\] {

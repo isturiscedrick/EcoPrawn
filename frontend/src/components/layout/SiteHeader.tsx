@@ -89,11 +89,11 @@ export function SiteHeader({
           aria-label="EcoPrawn home"
         >
           <span className="md:hidden">
-            <BrandMark size={isAuth ? 32 : 34} logoTextColor="#d94416" />
+            <BrandMark size={isAuth ? 32 : 34} />
           </span>
 
           <span className="hidden md:block">
-            <BrandMark size={isAuth ? 36 : 40} logoTextColor="#d94416" />
+            <BrandMark size={isAuth ? 36 : 40} />
           </span>
         </Link>
 

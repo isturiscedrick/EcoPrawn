@@ -1,11 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 
 function GrowthTrendChart({ values }: { values: number[] }) {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
   if (values.length < 2) {
     return (
       <p className="py-6 text-sm text-[rgba(11,35,32,0.6)]">
@@ -17,24 +20,63 @@ function GrowthTrendChart({ values }: { values: number[] }) {
   const min = Math.min(...values);
   const max = Math.max(...values);
   const w = 560;
-  const h = 160;
+  const h = 220;
+  const chartTop = 22;
+  const chartBottom = 178;
+  const chartLeft = 42;
+  const chartRight = 548;
+  const chartHeight = chartBottom - chartTop;
+  const chartWidth = chartRight - chartLeft;
   const points = values
     .map((v, i) => {
-      const x = (i / (values.length - 1)) * w;
-      const y = h - ((v - min) / (max - min || 1)) * (h - 20) - 10;
+      const x = chartLeft + (i / (values.length - 1)) * chartWidth;
+      const y = chartBottom - ((v - min) / (max - min || 1)) * chartHeight;
       return `${x},${y}`;
     })
     .join(" ");
+  const coordinates = values.map((value, index) => ({
+    x: chartLeft + (index / (values.length - 1)) * chartWidth,
+    y: chartBottom - ((value - min) / (max - min || 1)) * chartHeight,
+  }));
 
   return (
-    <div className="h-[180px] mt-1.5">
-      <svg viewBox={`0 0 ${w} ${h}`} width="100%" height="100%" preserveAspectRatio="none">
+    <div className="mt-1.5 space-y-3">
+      <div className="flex items-center justify-between gap-3 text-sm font-medium text-[var(--ep-text-muted)]">
+        <span>Average body length (cm)</span>
+        {selectedIndex !== null && (
+          <span className="rounded-full bg-[rgba(232,98,58,0.12)] px-3 py-1 font-semibold text-[var(--ep-accent)]">
+            {values[selectedIndex].toFixed(1)} cm
+          </span>
+        )}
+      </div>
+      <svg viewBox={`0 0 ${w} ${h}`} width="100%" height="250" role="group" aria-label="Interactive growth trend chart">
         <defs>
           <linearGradient id="ep-growth-fill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#E8623A" stopOpacity="0.3" />
             <stop offset="100%" stopColor="#E8623A" stopOpacity="0" />
           </linearGradient>
         </defs>
+        {[0, 0.33, 0.66, 1].map((position) => {
+          const y = chartTop + chartHeight * position;
+          const value = max - (max - min) * position;
+          return (
+            <g key={position}>
+              <line x1={chartLeft} x2={chartRight} y1={y} y2={y} stroke="var(--ep-line)" strokeWidth="1" strokeDasharray="4 6" />
+              <text x="0" y={y + 5} fill="var(--ep-text-muted)" fontSize="13">{value.toFixed(1)}</text>
+            </g>
+          );
+        })}
+        <line x1={chartLeft} x2={chartRight} y1={chartBottom} y2={chartBottom} stroke="var(--ep-line)" strokeWidth="1.5" />
+        {values.map((_, index) => {
+          const x = chartLeft + (index / (values.length - 1)) * chartWidth;
+          return (
+            <text key={index} x={x} y="207" textAnchor="middle" fill="var(--ep-text-muted)" fontSize="13">
+              W{index + 1}
+            </text>
+          );
+        })}
+        <text x={chartLeft} y="219" fill="var(--ep-text-muted)" fontSize="11">Earlier</text>
+        <text x={chartRight} y="219" textAnchor="end" fill="var(--ep-text-muted)" fontSize="11">Latest</text>
         <polyline
           points={points}
           fill="none"
@@ -43,8 +85,39 @@ function GrowthTrendChart({ values }: { values: number[] }) {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <polygon points={`${points} ${w},${h} 0,${h}`} fill="url(#ep-growth-fill)" />
+        <polygon points={`${points} ${chartRight},${chartBottom} ${chartLeft},${chartBottom}`} fill="url(#ep-growth-fill)" />
+        {coordinates.map((point, index) => (
+          <g key={`${point.x}-${point.y}`}>
+            <circle
+              cx={point.x}
+              cy={point.y}
+              r="13"
+              fill="transparent"
+              tabIndex={0}
+              role="button"
+              aria-label={`Growth reading ${index + 1}: ${values[index].toFixed(1)} centimeters`}
+              onClick={() => setSelectedIndex(index)}
+              onFocus={() => setSelectedIndex(index)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setSelectedIndex(index);
+                }
+              }}
+            />
+            <circle
+              cx={point.x}
+              cy={point.y}
+              r={selectedIndex === index ? 8 : 6}
+              fill="var(--ep-surface)"
+              stroke="var(--coral)"
+              strokeWidth={selectedIndex === index ? 4 : 3}
+              pointerEvents="none"
+            />
+          </g>
+        ))}
       </svg>
+      <p className="text-sm text-[var(--ep-text-muted)]">Select any point to inspect that week.</p>
     </div>
   );
 }
@@ -115,7 +188,7 @@ export function VisionGrowth() {
             <Panel title="Recent Vision Scans" badge={`${visionScanLog.length} events`}>
               <div className="flex flex-col">
                 {visionScanLog.map((s, i) => (
-                  <div key={s.id} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
+                  <div key={s.id} className={`dashboard-hover rounded-lg px-2 py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
                     <div className="ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.45)] mb-1">
                       {s.time} · {s.tank}
                     </div>

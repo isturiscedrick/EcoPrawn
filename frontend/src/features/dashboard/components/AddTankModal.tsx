@@ -12,6 +12,7 @@ import { useDemoData } from "@/hooks/useDemoData";
 import type { NewTankInput } from "@/features/dashboard/context/TankContext";
 import { validateNewTank } from "@/features/dashboard/validateNewTank";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
+import { Icon, type IconName } from "@/components/ui/Icon";
 
 interface AddTankModalProps {
   open: boolean;
@@ -21,17 +22,18 @@ interface AddTankModalProps {
 }
 
 const inputClass =
-  "w-full px-3 py-2 rounded-lg border border-[var(--sand-dim)] bg-white text-[13.5px] text-[var(--water-deep)] outline-none focus:border-[var(--mangrove-light)] transition-colors";
+  "min-h-11 w-full rounded-lg border border-[var(--sand-dim)] bg-[var(--ep-bg)] px-3 text-[14px] font-medium text-[var(--water-deep)] outline-none transition-[border-color,box-shadow] placeholder:text-[rgba(11,35,32,0.42)] focus:border-[var(--ep-accent)] focus:shadow-[0_0_0_3px_rgba(178,63,28,0.12)]";
 
 const labelClass =
-  "ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.5)] block mb-1.5";
+  "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--ep-text-muted)]";
 
 const sectionLabelClass =
-  "ep-font-mono text-[9px] font-semibold uppercase tracking-[0.1em] text-[var(--coral)]";
+  "text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ep-accent)]";
 
 interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: string;
+  icon?: IconName;
 }
 
 // Label + input pair. The htmlFor/id link means clicking the label focuses
@@ -39,12 +41,14 @@ interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
 function Field({
   id,
   label,
+  icon,
   ref,
   ...inputProps
 }: FieldProps & { ref?: React.Ref<HTMLInputElement> }) {
   return (
     <div>
-      <label htmlFor={id} className={labelClass}>
+      <label htmlFor={id} className={`${labelClass} flex items-center gap-1.5`}>
+        {icon && <Icon name={icon} size={11} strokeWidth={2} className="text-[var(--ep-accent)]" />}
         {label}
       </label>
       <input id={id} ref={ref} className={inputClass} {...inputProps} />
@@ -159,28 +163,48 @@ export function AddTankModal({
       <div
         aria-hidden="true"
         onClick={onClose}
-        className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm"
+        className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.72)]"
       />
 
-      <div className="ep-pop-in relative z-10 w-full max-w-[480px] max-h-[90vh] overflow-y-auto rounded-2xl border border-[var(--sand-dim)] bg-[var(--ep-surface)] p-6 shadow-[var(--shadow-overlay)] sm:p-7">
-        <h2
-          id={`${uid}-title`}
-          className="ep-font-display mb-1.5 text-[20px] font-semibold text-[var(--water-deep)]"
-        >
-          Add a new tank
-        </h2>
-        <p className="mb-6 text-[13px] leading-[1.5] text-[rgba(11,35,32,0.6)]">
-          Set initial readings for the tank. You can adjust these later.
-        </p>
+      <div className="ep-pop-in relative z-10 max-h-[90vh] w-full max-w-[520px] overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_28px_90px_rgba(8,30,34,0.28)] sm:p-7">
+        <div className="mb-7 flex items-start justify-between gap-5">
+          <div>
+            <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ep-accent)]">
+              <Icon name="layers" size={12} strokeWidth={2} />
+              Facility configuration
+            </p>
+            <h2
+              id={`${uid}-title`}
+              className="ep-font-display text-[25px] font-semibold leading-tight text-[var(--water-deep)]"
+            >
+              Add a new tank
+            </h2>
+            <p className="mt-2 max-w-[30rem] text-[14px] leading-relaxed text-[var(--ep-text-muted)]">
+              Set initial readings for the tank. You can adjust these later.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close add tank dialog"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xl leading-none text-[var(--ep-text-muted)] transition-colors hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--ep-primary)]"
+          >
+            ×
+          </button>
+        </div>
 
         <form onSubmit={handleSubmit} onInput={() => setFormError(null)} className="flex flex-col gap-4">
           {formError && <p role="alert" className="text-[13px] text-[var(--coral)]">{formError}</p>}
-          <div className={sectionLabelClass}>Identity</div>
+          <div className={`${sectionLabelClass} flex items-center gap-1.5`}>
+            <Icon name="package" size={12} strokeWidth={2} />
+            Identity
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <Field
               id={`${uid}-name`}
               ref={firstFieldRef}
               label="Tank Name"
+              icon="layers"
               value={name}
               onChange={(e) => setName(e.target.value)}
               maxLength={100}
@@ -189,6 +213,7 @@ export function AddTankModal({
             <Field
               id={`${uid}-pl`}
               label="PL Batch"
+              icon="package"
               value={pl}
               onChange={(e) => setPl(e.target.value)}
               maxLength={100}
@@ -196,11 +221,15 @@ export function AddTankModal({
             />
           </div>
 
-          <div className={`${sectionLabelClass} mt-1`}>Stock</div>
+          <div className={`${sectionLabelClass} mt-1 flex items-center gap-1.5`}>
+            <Icon name="egg" size={12} strokeWidth={2} />
+            Stock
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <Field
               id={`${uid}-biomass`}
               label="Biomass (kg)"
+              icon="egg"
               type="number"
               step="any"
               inputMode="decimal"
@@ -212,6 +241,7 @@ export function AddTankModal({
             <Field
               id={`${uid}-population`}
               label="Population (est.)"
+              icon="activity"
               type="number"
               inputMode="numeric"
               min="0" max="2147483647" step="1"
@@ -221,11 +251,15 @@ export function AddTankModal({
             />
           </div>
 
-          <div className={`${sectionLabelClass} mt-1`}>Water Parameters</div>
+          <div className={`${sectionLabelClass} mt-1 flex items-center gap-1.5`}>
+            <Icon name="waves" size={12} strokeWidth={2} />
+            Water Parameters
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <Field
               id={`${uid}-do`}
               label="Dissolved O₂ (mg/L)"
+              icon="droplet"
               type="number"
               step="any"
               inputMode="decimal"
@@ -237,6 +271,7 @@ export function AddTankModal({
             <Field
               id={`${uid}-ph`}
               label="pH"
+              icon="flask"
               type="number"
               step="any"
               inputMode="decimal"
@@ -251,6 +286,7 @@ export function AddTankModal({
             <Field
               id={`${uid}-temp`}
               label="Temp (°C)"
+              icon="thermometer"
               type="number"
               step="any"
               inputMode="decimal"
@@ -262,6 +298,7 @@ export function AddTankModal({
             <Field
               id={`${uid}-salinity`}
               label="Salinity (ppt)"
+              icon="waves"
               type="number"
               step="any"
               inputMode="decimal"
@@ -273,6 +310,7 @@ export function AddTankModal({
             <Field
               id={`${uid}-level`}
               label="Water Level (%)"
+              icon="gauge"
               type="number"
               step="1"
               inputMode="numeric"
@@ -287,14 +325,16 @@ export function AddTankModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded-lg border border-[var(--sand-dim)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--water-deep)] transition-colors hover:bg-[rgba(11,35,32,0.05)]"
+              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border-2 border-[var(--ep-primary)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-primary)] hover:text-white"
             >
+              <Icon name="x" size={14} strokeWidth={2} />
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 rounded-lg bg-[var(--coral)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--sand)] transition-colors hover:bg-[var(--coral-dim)]"
+              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-4 py-2.5 text-[13.5px] font-semibold text-white transition-colors hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)]"
             >
+              <Icon name="check" size={14} strokeWidth={2.2} />
               Add Tank
             </button>
           </div>

@@ -12,8 +12,27 @@ interface PanelProps {
 }
 
 export function Panel({ title, badge, onDetails, icon = "layers", children }: PanelProps) {
+  const interactiveProps = onDetails
+    ? {
+        role: "button" as const,
+        tabIndex: 0,
+        onClick: onDetails,
+        onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            onDetails();
+          }
+        },
+      }
+    : {};
+
   return (
-    <div className="rounded-2xl border border-[rgba(11,46,51,0.12)] bg-white p-[22px_24px] shadow-[0_8px_24px_-18px_rgba(11,46,51,0.38)]">
+    <div
+      {...interactiveProps}
+      className={`group rounded-2xl border border-[rgba(11,46,51,0.12)] bg-white p-[22px_24px] shadow-[0_8px_24px_-18px_rgba(11,46,51,0.38)] ${
+        onDetails ? "cursor-pointer transition-all hover:-translate-y-0.5 hover:border-[var(--coral)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]" : ""
+      }`}
+    >
       <div className="mb-[18px] flex items-center justify-between gap-3">
         <h3 className="flex items-center gap-2 ep-font-display text-[18px] font-semibold text-[var(--water-deep)]">
           <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[rgba(232,98,58,0.12)] text-[var(--coral)]">
@@ -23,7 +42,7 @@ export function Panel({ title, badge, onDetails, icon = "layers", children }: Pa
         </h3>
         <div className="flex items-center gap-2">
           {onDetails && (
-            <button type="button" onClick={onDetails} className="min-h-11 rounded-md px-2 text-sm font-semibold text-[var(--ep-accent)] hover:bg-[rgba(232,98,58,0.08)] hover:text-[var(--ep-accent-hover)]">
+            <button type="button" onClick={(event) => { event.stopPropagation(); onDetails(); }} className="min-h-11 rounded-md px-2 text-sm font-semibold text-[var(--ep-accent)] opacity-80 transition-opacity hover:bg-[rgba(232,98,58,0.08)] hover:text-[var(--ep-accent-hover)] group-hover:opacity-100 focus:opacity-100">
               Details
             </button>
           )}
@@ -64,14 +83,33 @@ export function KpiCard({ label, value, unit, delta, deltaTone, onDetails }: Kpi
     return () => clearTimeout(t);
   }, [value]);
 
+  const interactiveProps = onDetails
+    ? {
+        role: "button" as const,
+        tabIndex: 0,
+        onClick: onDetails,
+        onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            onDetails();
+          }
+        },
+      }
+    : {};
+
   return (
-    <div className="group rounded-2xl border border-[rgba(11,46,51,0.12)] bg-white p-5 px-[22px] shadow-[0_8px_24px_-18px_rgba(11,46,51,0.38)] transition-all hover:-translate-y-0.5 hover:border-[var(--coral)] hover:shadow-[0_14px_28px_-18px_rgba(11,46,51,0.42)]">
+    <div
+      {...interactiveProps}
+      className={`group rounded-2xl border border-[rgba(11,46,51,0.12)] bg-white p-5 px-[22px] shadow-[0_8px_24px_-18px_rgba(11,46,51,0.38)] transition-all hover:-translate-y-0.5 hover:border-[var(--coral)] hover:shadow-[0_14px_28px_-18px_rgba(11,46,51,0.42)] ${
+        onDetails ? "cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]" : ""
+      }`}
+    >
       <div className="mb-2.5 flex items-center justify-between gap-2">
         <div className="ep-font-mono text-xs font-medium uppercase tracking-wide text-[rgba(11,35,32,0.68)]">
           {label}
         </div>
         {onDetails && (
-          <button type="button" onClick={onDetails} className="min-h-11 rounded-md px-2 text-sm font-semibold text-[var(--ep-accent)] opacity-0 transition-opacity hover:bg-[rgba(232,98,58,0.08)] group-hover:opacity-100 focus:opacity-100">
+          <button type="button" onClick={(event) => { event.stopPropagation(); onDetails(); }} className="min-h-11 rounded-md px-2 text-sm font-semibold text-[var(--ep-accent)] opacity-0 transition-opacity hover:bg-[rgba(232,98,58,0.08)] group-hover:opacity-100 focus:opacity-100">
             Details
           </button>
         )}

@@ -103,9 +103,9 @@ interface TankContextValue extends DashboardData {
   isDbConnected: boolean;
   loading: boolean;
   error: string | null;
-  addTank: (input: NewTankInput) => Promise<void>;
-  removeTank: (id: string) => Promise<void>;
-  updateTank: (id: string, patch: Partial<Tank>) => Promise<void>;
+  addTank: (input: NewTankInput) => Promise<boolean>;
+  removeTank: (id: string) => Promise<boolean>;
+  updateTank: (id: string, patch: Partial<Tank>) => Promise<boolean>;
   refreshTanks: () => Promise<void>;
 }
 const TankContext = createContext<TankContextValue | null>(null);
@@ -168,7 +168,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
       refreshing.current = false;
     };
   }, [refreshTanks]);
-  async function mutate(url: string, method: string, body?: unknown) {
+  async function mutate(url: string, method: string, body?: unknown): Promise<boolean> {
     try {
       const res = await fetch(url, {
         method,
@@ -177,16 +177,18 @@ export function TankProvider({ children }: { children: ReactNode }) {
       });
       if (res.status === 401) {
         window.location.replace("/login?error=expired");
-        return;
+        return false;
       }
       if (!res.ok)
         throw new Error("Could not save the change. Please try again.");
       await refreshTanks();
+      return true;
     } catch (e) {
       setError(e instanceof Error ? e.message : "Unable to save change");
+      return false;
     }
   }
-  const reject = (message: string) => { setError(message); return Promise.resolve(); };
+  const reject = (message: string) => { setError(message); return Promise.resolve(false); };
   return (
     <TankContext.Provider
       value={{

@@ -14,6 +14,7 @@ import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
 import { DashboardDetailModal } from "@/features/dashboard/components/DashboardDetailModal";
 import { SensorThresholdModal } from "@/features/dashboard/components/SensorThresholdModal";
+import { useToast } from "@/features/dashboard/components/Toast";
 import {
   DashboardErrorState,
   DashboardLoadingState,
@@ -44,6 +45,7 @@ export function Dashboard() {
     details: string[];
   } | null>(null);
   const usb = useEsp32();
+  const { showToast } = useToast();
 
   const tankCount = tanks.length;
   const {
@@ -407,7 +409,13 @@ export function Dashboard() {
           {tankCount > 0 ? (
             <div className="flex flex-col gap-2.5">
               {tanks.map((t) => (
-                <TankRow key={t.id} {...t} onRemove={removeTank} />
+                <TankRow
+                  key={t.id}
+                  {...t}
+                  onRemove={async (id) => {
+                    if (await removeTank(id)) showToast("Tank removed successfully.");
+                  }}
+                />
               ))}
             </div>
           ) : (
@@ -513,7 +521,9 @@ export function Dashboard() {
       <AddTankModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        onSubmit={addTank}
+        onSubmit={async (input) => {
+          if (await addTank(input)) showToast(`${input.name} added successfully.`);
+        }}
         existingCount={tankCount}
       />
       <DashboardDetailModal

@@ -162,7 +162,6 @@ function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) 
               size={44}
               className="max-w-[230px] sm:max-w-[260px]"
               logoColor="#d94416"
-              logoTextColor="#d94416"
             />
           </div>
 

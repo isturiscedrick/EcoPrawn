@@ -8,7 +8,7 @@ interface StateMessageProps {
 }
 
 function SkeletonBlock({ className }: { className: string }) {
-  return <div aria-hidden="true" className={`animate-pulse rounded-xl bg-[var(--ep-line)]/60 ${className}`} />;
+  return <div aria-hidden="true" className={`dashboard-skeleton-block animate-pulse rounded-xl ${className}`} />;
 }
 
 export function DashboardSkeleton() {
