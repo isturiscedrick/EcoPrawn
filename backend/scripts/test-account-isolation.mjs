@@ -43,13 +43,18 @@ async function load(path) {
   const source = await readFile(new URL(`../src/app/api/${path}/route.ts`, import.meta.url), "utf8");
   const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } });
   const module = { exports: {} };
-  const imports = { "@/lib/auth": auth, "@/lib/prisma": { __esModule: true, default: db }, "next/server": { NextResponse: Response }, "@/lib/unisms": { waterWarnings: () => [] }, "@/lib/sms": { dispatchSms: async () => ({ status: "not_configured" }) } };
+  const imports = { "@/lib/auth": auth, "@/lib/prisma": { __esModule: true, default: db }, "@/lib/api-validation": validation, "next/server": { NextResponse: Response }, "@/lib/unisms": { waterWarnings: () => [] }, "@/lib/sms": { dispatchSms: async () => ({ status: "not_configured" }) } };
   new Function("require", "module", "exports", outputText)(name => {
     if (!(name in imports)) throw new Error(`Unexpected import ${name}`);
     return imports[name];
   }, module, module.exports);
   return module.exports;
 }
+const validationSource = await readFile(new URL("../src/lib/api-validation.ts", import.meta.url), "utf8");
+const validationOutput = ts.transpileModule(validationSource, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+const validationModule = { exports: {} };
+new Function("require", "module", "exports", validationOutput)(() => { throw new Error("Unexpected validation import"); }, validationModule, validationModule.exports);
+const validation = validationModule.exports;
 const list = await load("tanks");
 const detail = await load("tanks/[id]");
 const water = await load("water");
@@ -67,10 +72,12 @@ assert.equal((await detail.PATCH(request({ name: "stolen" }), params("tank-a")))
 assert.equal((await detail.PATCH(request({ userId: "account-a", telemetries: { deleteMany: {} } }), params("tank-b"))).status, 400);
 assert.equal(tanks.find(t => t.id === "tank-b").userId, "account-b");
 assert.equal((await detail.PATCH(request({ name: "Updated" }), params("tank-b"))).status, 200);
-const created = await (await list.POST(request({ name: "Created", userId: "account-a" }))).json();
+assert.equal((await list.POST(request({ name: "Created", userId: "account-a" }))).status, 400);
+const created = await (await list.POST(request({ name: "Created" }))).json();
 assert.equal(created.tank.userId, "account-b");
-assert.equal((await water.POST(request({ tankId: "tank-a" }))).status, 404);
-assert.equal((await water.POST(request({ tankId: "legacy" }))).status, 404);
+const validReading = { dissolvedOxygen: 6, ph: 8, temperature: 28, salinity: 15, waterLevel: 90 };
+assert.equal((await water.POST(request({ tankId: "tank-a", ...validReading }))).status, 404);
+assert.equal((await water.POST(request({ tankId: "legacy", ...validReading }))).status, 404);
 assert.deepEqual((await (await water.GET(new Request("http://localhost/api/water?tankId=tank-a"))).json()).readings, []);
 assert.deepEqual((await (await water.GET(new Request("http://localhost/api/water"))).json()).readings.map(r => r.tankId), ["tank-b"]);
 const data = await (await dashboard.GET()).json();

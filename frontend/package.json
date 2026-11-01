@@ -9,7 +9,9 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test:navigation": "node scripts/test-navigation.mjs",
-    "test:auth-proxy": "node scripts/test-auth-proxy.mjs"
+    "test:auth-proxy": "node scripts/test-auth-proxy.mjs",
+    "test:tank-validation": "node --test scripts/test-tank-validation.mjs",
+    "test:responses": "node scripts/test-response-validation.mjs"
   },
   "dependencies": {
     "animejs": "^4.5.0",

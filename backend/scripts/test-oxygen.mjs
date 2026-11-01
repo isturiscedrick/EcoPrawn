@@ -13,6 +13,7 @@ async function load(relativePath, imports = {}) {
 }
 
 const provider = await load("../src/lib/unisms.ts");
+const validation = await load("../src/lib/api-validation.ts");
 const healthy = { dissolvedOxygen: 6, ph: 8, temperature: 28, salinity: 15, waterLevel: 95 };
 const lowOxygen = { ...healthy, dissolvedOxygen: 3 };
 const live = process.argv.includes("--live");
@@ -67,6 +68,7 @@ try {
     "@/lib/auth": { accountAccess: async () => ({ id: userId, role: "operator" }) },
     "@/lib/prisma": { __esModule: true, default: database },
     "@/lib/unisms": provider,
+    "@/lib/api-validation": validation,
     "@/lib/sms": sms,
     "next/server": { NextResponse: Response },
   });

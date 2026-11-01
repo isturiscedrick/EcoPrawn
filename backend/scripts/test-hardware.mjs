@@ -67,6 +67,14 @@ for (const body of [null, [], {}, { temperature: -127 }, { temperature: "28" }, 
 }
 assert.equal((await post({ temperature: 28, tankId: "tank-b", userId: "owner-a" })).status, 404);
 assert.equal(writes, 2, "Rejected readings must not reach storage");
+for (const tankId of ["", " ", " tank-a", "tank-a ", "tank\na", "x".repeat(129), 123]) {
+  assert.equal((await post({ tankId, temperature: 28 })).status, 400, `Invalid tank ID: ${JSON.stringify(tankId)}`);
+  if (typeof tankId === "string") {
+    assert.equal((await route.GET(new Request(`http://localhost/api/hardware?tankId=${encodeURIComponent(tankId)}`))).status, 400);
+  }
+}
+assert.equal((await route.POST(new Request("http://localhost/api/hardware", { method: "POST", body: "{bad" }))).status, 400);
+assert.equal(writes, 2, "Malformed requests must not reach storage");
 for (const [distanceCm, expected] of [[30, 50], [60, 0], [2, 100]]) {
   const result = await (await post({ distanceCm, emptyDistanceCm: 50, fullDistanceCm: 10, waterLevel: 999 })).json();
   assert.equal(result.reading.waterLevel, expected);

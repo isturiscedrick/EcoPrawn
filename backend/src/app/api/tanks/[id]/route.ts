@@ -1,6 +1,7 @@
 import { accountAccess } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { isRecord, validLabel, validNumber, validTankId } from "@/lib/api-validation";
 
 export async function GET(
   _request: Request,
@@ -10,6 +11,7 @@ export async function GET(
   if (account instanceof Response) return account;
   try {
     const { id } = await params;
+    if (!validTankId(id)) return NextResponse.json({ success: false, error: "Invalid tank ID" }, { status: 400 });
     const tank = await prisma.tank.findUnique({
       where: { id, userId: account.id },
       include: {
@@ -48,6 +50,7 @@ export async function DELETE(
   if (account instanceof Response) return account;
   try {
     const { id } = await params;
+    if (!validTankId(id)) return NextResponse.json({ success: false, error: "Invalid tank ID" }, { status: 400 });
     await prisma.tank.delete({
       where: { id, userId: account.id },
     });
@@ -73,16 +76,17 @@ export async function PATCH(
   if (account instanceof Response) return account;
   try {
     const { id } = await params;
-    const body = await request.json();
+    if (!validTankId(id)) return NextResponse.json({ success: false, error: "Invalid tank ID" }, { status: 400 });
+    const body: unknown = await request.json().catch(() => null);
     const allowed = ["name", "pl", "biomass", "targetToday", "fcr", "dispensedToday"];
-    if (!body || typeof body !== "object" || Array.isArray(body) ||
+    if (!isRecord(body) || Object.keys(body).length === 0 ||
         Object.keys(body).some(key => !allowed.includes(key))) {
       return NextResponse.json({ success: false, error: "Unsupported tank fields" }, { status: 400 });
     }
     for (const [key, value] of Object.entries(body)) {
       const valid = ["name", "pl"].includes(key)
-        ? typeof value === "string" && value.trim().length > 0
-        : typeof value === "number" && Number.isFinite(value) && value >= 0;
+        ? validLabel(value)
+        : validNumber(value, 0);
       if (!valid) return NextResponse.json({ success: false, error: "Invalid tank field" }, { status: 400 });
     }
 

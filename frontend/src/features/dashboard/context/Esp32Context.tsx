@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { createEsp32Parser } from "../lib/esp32-serial";
+import { parseHardwareReadingResponse } from "../lib/validate-response";
 
 export interface HardwareReading {
   id: string;
@@ -62,10 +63,17 @@ export function Esp32Provider({ children }: { children: ReactNode }) {
 
   async function connect(tankId: string, emptyDistance: string, fullDistance: string) {
     if (!navigator.serial || session.current) return;
-    const calibrated = emptyDistance !== "" || fullDistance !== "";
-    if (calibrated && (emptyDistance === "" || fullDistance === "" ||
-      !Number.isFinite(Number(emptyDistance)) || !Number.isFinite(Number(fullDistance)) ||
-      Number(fullDistance) < 2 || Number(emptyDistance) > 400 || Number(emptyDistance) <= Number(fullDistance))) {
+    if (!tankId || tankId.length > 128 || tankId.trim() !== tankId || /\s/.test(tankId)) {
+      setError("Choose a valid tank before connecting.");
+      return;
+    }
+    const empty = emptyDistance.trim();
+    const full = fullDistance.trim();
+    const calibrated = empty !== "" || full !== "";
+    if (calibrated && (empty === "" || full === "" ||
+      !Number.isFinite(Number(empty)) || !Number.isFinite(Number(full)) ||
+      Number(empty) < 2 || Number(full) > 400 ||
+      Number(full) < 2 || Number(empty) > 400 || Number(empty) <= Number(full))) {
       setError("Enter both distances from 2 to 400 cm. Empty distance must be greater than full distance.");
       return;
     }
@@ -107,14 +115,15 @@ export function Esp32Provider({ children }: { children: ReactNode }) {
             const response = await fetch("/api/hardware", {
               method: "POST", headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ tankId, ...sample, ...(calibrated ? {
-                emptyDistanceCm: Number(emptyDistance), fullDistanceCm: Number(fullDistance),
+                emptyDistanceCm: Number(empty), fullDistanceCm: Number(full),
               } : {}) }),
               signal: current.abort.signal,
             });
-            const result = await response.json();
-            if (!response.ok) throw new Error(result.error || "Unable to save this reading. Check that you are signed in.");
+            const result: unknown = await response.json();
+            if (!response.ok) throw new Error(typeof result === "object" && result !== null && "error" in result && typeof result.error === "string" ? result.error : "Unable to save this reading. Check that you are signed in.");
+            const savedReading = parseHardwareReadingResponse(result, tankId);
             if (mounted.current) {
-              setReading(result.reading);
+              setReading(savedReading);
               window.dispatchEvent(new Event("ecoprawn:hardware-saved"));
               setSaved(count => count + 1);
               setError(sample.temperature === null ? "Temperature sensor disconnected; distance saved." :
