@@ -47,7 +47,7 @@ export function AboutPage() {
           <div className="mx-auto max-w-[1200px]">
             {/* General objective: sand panel with an accent bar, since it is a quotation */}
             <Reveal>
-              <div className="mb-6 rounded-3xl border border-l-4 border-[var(--ep-line)] border-l-[var(--ep-accent)] bg-[var(--ep-tint)] px-6 py-8 shadow-[0_16px_30px_-28px_rgba(11,46,51,0.5)] sm:px-10 sm:py-10">
+              <div className="mb-6 rounded-3xl border border-l-4 border-[var(--ep-line)] border-l-[var(--ep-accent)] bg-white px-6 py-8 shadow-[0_16px_30px_-28px_rgba(11,46,51,0.5)] sm:px-10 sm:py-10">
                 <div className="mb-3 text-sm font-semibold text-[var(--ep-text-muted)]">
                   General objective
                 </div>
@@ -113,17 +113,17 @@ export function AboutPage() {
                   one tank.
                 </h2>
 
-                <p className={`${lead} !text-[rgba(242,235,221,0.88)]`}>
+                <p className={`${lead} !text-[rgba(255,255,255,0.88)]`}>
                   Every system below is deployed and operating. Nothing here is
                   a mockup.
                 </p>
               </div>
             </Reveal>
 
-            <div className="border-t border-[rgba(242,235,221,0.22)]">
+            <div className="border-t border-[rgba(255,255,255,0.22)]">
               {features.map((feature, i) => (
                 <Reveal key={feature.index}>
-                  <article className="group relative grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 border-b border-[rgba(242,235,221,0.22)] px-4 py-8 transition-colors duration-200 hover:bg-[rgba(242,235,221,0.06)] sm:grid-cols-[3.5rem_0.8fr_1.2fr] sm:gap-x-8">
+                  <article className="group relative grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 border-b border-[rgba(255,255,255,0.22)] px-4 py-8 transition-colors duration-200 hover:bg-[rgba(255,255,255,0.06)] sm:grid-cols-[3.5rem_0.8fr_1.2fr] sm:gap-x-8">
                     <span
                       aria-hidden="true"
                       className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 bg-[var(--ep-accent)] transition-transform duration-200 group-hover:scale-y-100"
@@ -131,13 +131,13 @@ export function AboutPage() {
 
                     <span
                       aria-hidden="true"
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(242,235,221,0.35)] bg-[rgba(242,235,221,0.08)] text-[var(--ep-accent)]"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(255,255,255,0.35)] bg-[rgba(255,255,255,0.08)] text-[var(--ep-accent)]"
                     >
                       <Icon name={FEATURE_ICONS[i] ?? "layers"} size={18} />
                     </span>
 
                     <div>
-                      <div                       className="mb-1 hidden text-sm font-semibold uppercase tracking-wide text-[rgba(242,235,221,0.62)] sm:block">
+                      <div                       className="mb-1 hidden text-sm font-semibold uppercase tracking-wide text-[rgba(255,255,255,0.62)] sm:block">
                         System Module
                       </div>
 
@@ -153,7 +153,7 @@ export function AboutPage() {
                             ›
                           </span>
 
-                          <span className="text-base leading-relaxed text-[rgba(242,235,221,0.82)]">
+                          <span className="text-base leading-relaxed text-[rgba(255,255,255,0.82)]">
                             <b className="font-semibold text-[var(--ep-bg)]">{point.bold}</b>{" "}
                             {point.body}
                           </span>
@@ -228,7 +228,7 @@ export function AboutPage() {
 
               {/* Out of scope: dashed outline on sand, a second signal beyond colour */}
               <Reveal delay={120} className="h-full">
-                <article className="h-full rounded-2xl border-2 border-dashed border-[var(--ep-primary)] bg-[var(--ep-tint)] p-6 sm:p-8">
+                <article className="h-full rounded-2xl border border-dashed border-[var(--ep-line)] bg-white p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
                     <h3 className="ep-font-display flex items-center gap-3 text-2xl font-semibold">
                       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-warn-text)] text-white">

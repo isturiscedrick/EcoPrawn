@@ -12,6 +12,7 @@ import { waterLevelGauge } from "@/features/dashboard/lib/water-level";
 import { useEsp32 } from "@/features/dashboard/context/Esp32Context";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
+import { DashboardDetailModal } from "@/features/dashboard/components/DashboardDetailModal";
 
 const FCR_TARGET = 1.5;
 const MAX_RECENT_ALERTS = 5;
@@ -20,6 +21,11 @@ export function Dashboard() {
   const { tanks, addTank, removeTank, waterTrend, feedSchedule, alertsLog: alerts, visionScanLog } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [detail, setDetail] = useState<{
+    title: string;
+    description: string;
+    details: string[];
+  } | null>(null);
   const usb = useEsp32();
 
   const tankCount = tanks.length;
@@ -138,24 +144,28 @@ export function Dashboard() {
   // hardcoded "22 min ago".
   const lastScan = visionScanLog[0]?.time ?? "no scans yet";
 
+  function showDetail(title: string, description: string, details: string[]) {
+    setDetail({ title, description, details });
+  }
+
   return (
     <>
       {/* PAGE HEADER */}
-      <div className="flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--sand-dim)]">
+      <div className="mb-7 flex flex-wrap items-end justify-between gap-5 border-b border-[rgba(11,46,51,0.12)] pb-7">
         <div>
-          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
+          <div className="mb-2 ep-font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mangrove-text)]">
             Facility Overview
           </div>
-          <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
+          <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--water-deep)]">
             Tank Overview
           </h1>
-          <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
+          <div className="mt-2 text-[15px] text-[rgba(11,35,32,0.68)]">
             Indoor grow-out facility · {tankCount} tank{tankCount !== 1 ? "s" : ""} ·{" "}
             <em className="not-italic text-[rgba(11,35,32,0.7)]">Penaeus vannamei</em>
           </div>
         </div>
         <div className="flex items-center gap-2.5">
-          <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
+          <div className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--sand-dim)] bg-white px-4 py-2 text-sm font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
             <span
               className={`w-[7px] h-[7px] rounded-full ${
                 openAlertTanks === 0 ? "ep-pulse-dot bg-[var(--mangrove)]" : "bg-[var(--amber)]"
@@ -166,7 +176,7 @@ export function Dashboard() {
           <button
             type="button"
             onClick={() => setModalOpen(true)}
-            className="ep-font-mono inline-flex items-center gap-1.5 rounded-full bg-[var(--coral)] px-4 py-[9px] text-[11px] font-semibold text-[var(--sand)] transition-colors hover:bg-[var(--coral-dim)]"
+            className="ep-font-mono inline-flex min-h-11 items-center gap-1.5 rounded-full bg-[var(--coral)] px-4 py-2 text-xs font-semibold text-[var(--sand)] transition-colors hover:bg-[var(--coral-dim)]"
           >
             + Add Tank
           </button>
@@ -187,6 +197,13 @@ export function Dashboard() {
                 : `Below target (≥ ${THRESHOLDS.dissolvedOxygen.min})`
           }
           deltaTone={tankCount === 0 ? "ok" : doStatus}
+          onDetails={() =>
+            showDetail("Dissolved oxygen", "Average oxygen level across the selected facility readings.", [
+              `Current average: ${avgDO.toFixed(1)} mg/L`,
+              `Target minimum: ${THRESHOLDS.dissolvedOxygen.min} mg/L`,
+              tankCount ? `Calculated from ${tankCount} tank${tankCount === 1 ? "" : "s"}.` : "Add a tank to begin monitoring.",
+            ])
+          }
         />
         <KpiCard
           label="Total Biomass"
@@ -194,6 +211,13 @@ export function Dashboard() {
           unit="kg"
           delta={`across ${tankCount} tank${tankCount !== 1 ? "s" : ""}`}
           deltaTone="ok"
+          onDetails={() =>
+            showDetail("Total biomass", "The estimated combined biomass currently recorded across all tanks.", [
+              `Current total: ${totalBiomass.toFixed(1)} kg`,
+              `Included tanks: ${tankCount}`,
+              tankCount ? "Values update as tank records change." : "No tank biomass has been recorded yet.",
+            ])
+          }
         />
         <KpiCard
           label="Avg. Feed Conversion Ratio"
@@ -207,6 +231,13 @@ export function Dashboard() {
                 : `Above target (≤ ${FCR_TARGET})`
           }
           deltaTone={tankCount === 0 ? "ok" : fcrStatus}
+          onDetails={() =>
+            showDetail("Feed conversion ratio", "A lower FCR indicates more efficient feed usage.", [
+              `Current average: ${avgFcr.toFixed(2)}`,
+              `Target: ≤ ${FCR_TARGET}`,
+              tankCount ? "Average is calculated across the current tank set." : "Add a tank to begin calculating FCR.",
+            ])
+          }
         />
         <KpiCard
           label="Tanks Needing Attention"
@@ -214,6 +245,13 @@ export function Dashboard() {
           unit="open"
           delta={openAlertTanks === 0 ? "No active warnings" : "Review thresholds"}
           deltaTone={openAlertTanks === 0 ? "ok" : "warn"}
+          onDetails={() =>
+            showDetail("Tank attention", "Tanks with readings that currently need operator review.", [
+              `Open attention items: ${openAlertTanks}`,
+              openAlertTanks ? "Review the Alerts view for each threshold event." : "No active warnings are present.",
+              `Recent events shown: ${recentAlerts.length}`,
+            ])
+          }
         />
       </div>
 
@@ -221,7 +259,15 @@ export function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 mb-4">
         <Panel
           title={`Live Sensor Array — ${selectedTank?.name ?? `${tankCount} Tank${tankCount !== 1 ? "s" : ""} (avg)`}`}
+          icon="activity"
           badge={usb.status === "connected" ? `USB · ${tanks.find(tank => tank.id === usb.tankId)?.name ?? "ESP32"}` : "Recorded readings"}
+          onDetails={() =>
+            showDetail("Live sensor array", "Current water readings and dissolved oxygen trend for the selected tank or facility average.", [
+              selectedTank ? `Selected tank: ${selectedTank.name}` : `Facility average across ${tankCount} tank${tankCount === 1 ? "" : "s"}`,
+              `Parameters tracked: ${sensorGauges.map((gauge) => gauge.label).join(", ")}`,
+              usb.status === "connected" ? "Readings are connected to the USB edge node." : "Readings are currently from recorded dashboard data.",
+            ])
+          }
         >
           {tankCount > 0 ? (
             <>
@@ -275,7 +321,15 @@ export function Dashboard() {
 
         <Panel
           title="Recent Alerts"
+          icon="zap"
           badge={liveAlerts.length > 0 ? `${liveAlerts.length} open` : `${recentAlerts.length} events`}
+          onDetails={() =>
+            showDetail("Recent alerts", "A concise view of live threshold warnings and recent recorded events.", [
+              `Open alerts: ${liveAlerts.length}`,
+              `Recent events: ${recentAlerts.length}`,
+              liveAlerts.length ? "Open the Alerts view to review each affected parameter." : "All monitored tanks are currently within their configured ranges.",
+            ])
+          }
         >
           <div>
             {recentAlerts.map((a) => (
@@ -287,7 +341,18 @@ export function Dashboard() {
 
       {/* TANK STATUS + FEED */}
       <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4 mb-4">
-        <Panel title="Tank Status" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
+        <Panel
+          title="Tank Status"
+          icon="layers"
+          badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}
+          onDetails={() =>
+            showDetail("Tank status", "A compact overview of each tank’s condition and biomass.", [
+              `Registered tanks: ${tankCount}`,
+              tankCount ? `${openAlertTanks} tank${openAlertTanks === 1 ? "" : "s"} need attention.` : "No tanks have been added yet.",
+              "Use the Tanks view for full records and controls.",
+            ])
+          }
+        >
           {tankCount > 0 ? (
             <div className="flex flex-col gap-2.5">
               {tanks.map((t) => (
@@ -301,7 +366,19 @@ export function Dashboard() {
           )}
         </Panel>
 
-        <Panel title="Feed Dispensed Today" badge="biomass-adjusted">
+        <Panel
+          title="Feed Dispensed Today"
+          icon="utensils"
+          badge="biomass-adjusted"
+          onDetails={() =>
+            showDetail("Feed dispensed today", "Daily feed progress compared with the current biomass-adjusted target.", [
+              `Dispensed: ${dispensedToday.toFixed(1)} kg`,
+              `Target: ${targetToday.toFixed(1)} kg`,
+              `Progress: ${feedPct}%`,
+              `Next dispense: 18:00`,
+            ])
+          }
+        >
           <div className="ep-font-mono text-[26px] font-semibold text-[var(--water-deep)]">
             {dispensedToday.toFixed(1)}{" "}
             <span className="text-sm font-medium text-[rgba(11,35,32,0.5)]">
@@ -341,7 +418,19 @@ export function Dashboard() {
       </div>
 
       {/* VISION */}
-      <Panel title="AI Vision — Growth Analytics" badge={`last scan · ${lastScan}`}>
+      <Panel
+        title="AI Vision — Growth Analytics"
+        icon="eye"
+        badge={`last scan · ${lastScan}`}
+        onDetails={() =>
+          showDetail("AI vision", "Growth and behavior estimates from the latest available scan.", [
+            `Latest scan: ${lastScan}`,
+            `Population estimate: ${totalPopulation.toLocaleString()}`,
+            `Abnormal behavior flags: ${totalAbnormal}`,
+            tankCount ? "Open Vision & Growth for scan history and tank-level details." : "Add a tank to begin collecting vision data.",
+          ])
+        }
+      >
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {visionMetrics.map((m) => (
             <div
@@ -351,7 +440,7 @@ export function Dashboard() {
                 background: "linear-gradient(160deg, var(--water-deep), var(--water-mid))",
               }}
             >
-              <div className="ep-font-mono text-[10px] uppercase text-[rgba(242,235,221,0.55)] mb-1.5">
+              <div className="ep-font-mono text-[10px] uppercase text-[rgba(255,255,255,0.62)] mb-1.5">
                 {m.label}
               </div>
               <div className="ep-font-display text-xl font-semibold">{m.value}</div>
@@ -365,6 +454,13 @@ export function Dashboard() {
         onClose={() => setModalOpen(false)}
         onSubmit={addTank}
         existingCount={tankCount}
+      />
+      <DashboardDetailModal
+        open={detail !== null}
+        title={detail?.title ?? ""}
+        description={detail?.description ?? ""}
+        details={detail?.details ?? []}
+        onClose={() => setDetail(null)}
       />
     </>
   );

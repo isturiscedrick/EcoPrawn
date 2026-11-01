@@ -34,6 +34,8 @@ const BUBBLES = [
   { left: "48%", size: 9 },
 ];
 
+const WATER_INTRO_KEY = "ep-water-intro-seen";
+
 /**
  * GSAP motion for the landing page. Renders the underwater intro overlay,
  * then finds its other targets in the DOM by the structure LandingPage
@@ -47,6 +49,16 @@ export function LandingMotion() {
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
     let cancelled = false;
+    let playWaterIntro = true;
+
+    try {
+      playWaterIntro = sessionStorage.getItem(WATER_INTRO_KEY) !== "1";
+      if (playWaterIntro) {
+        sessionStorage.setItem(WATER_INTRO_KEY, "1");
+      }
+    } catch {
+      // Session storage may be unavailable; the intro can still fail safely.
+    }
 
     // Google Fonts (Lexend/Inter) swap in after first paint and reflow the
     // text, which shifts every scroll trigger's start position. Re-measure
@@ -171,7 +183,41 @@ export function LandingMotion() {
           });
         });
 
-      return () => restores.forEach((restore) => restore());
+      // Shared hover lift for the data cards and process steps.
+      const hoverCleanups: Array<() => void> = [];
+      gsap.utils.toArray<HTMLElement>("[data-hover-lift]").forEach((el) => {
+          const enter = () =>
+            gsap.to(el, {
+              y: -5,
+              scale: 1.01,
+              duration: 0.25,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+          const leave = () =>
+            gsap.to(el, {
+              y: 0,
+              scale: 1,
+              duration: 0.32,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+          el.addEventListener("mouseenter", enter);
+          el.addEventListener("mouseleave", leave);
+          el.addEventListener("focusin", enter);
+          el.addEventListener("focusout", leave);
+          hoverCleanups.push(() => {
+            el.removeEventListener("mouseenter", enter);
+            el.removeEventListener("mouseleave", leave);
+            el.removeEventListener("focusin", enter);
+            el.removeEventListener("focusout", leave);
+          });
+        });
+
+      return () => {
+        restores.forEach((restore) => restore());
+        hoverCleanups.forEach((cleanup) => cleanup());
+      };
     });
 
     // PROCESS LINE: desktop only (the line is hidden below lg). It draws
@@ -331,6 +377,10 @@ export function LandingMotion() {
       const back = backRef.current;
       const front = frontRef.current;
       if (!overlay || !back || !front) return;
+      if (!playWaterIntro) {
+        gsap.set(overlay, { display: "none" });
+        return;
+      }
 
       const bubbles = gsap.utils.toArray<HTMLElement>(
         ".ep-water-bubble",
@@ -429,7 +479,7 @@ export function LandingMotion() {
         {BUBBLES.map((b) => (
           <span
             key={b.left}
-            className="ep-water-bubble absolute rounded-full border border-[rgba(242,235,221,0.5)] bg-[rgba(242,235,221,0.18)]"
+            className="ep-water-bubble absolute rounded-full border border-[rgba(255,255,255,0.5)] bg-[rgba(255,255,255,0.18)]"
             style={{ left: b.left, bottom: -24, width: b.size, height: b.size }}
           />
         ))}

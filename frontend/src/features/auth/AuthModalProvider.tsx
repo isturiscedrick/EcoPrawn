@@ -132,7 +132,7 @@ function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) 
   return (
     <div
       ref={overlayRef}
-      className="ep-auth-overlay fixed inset-0 z-[100] flex overflow-y-auto overscroll-contain p-3 sm:p-6"
+      className="ep-auth-overlay fixed inset-0 z-[100] flex items-start overflow-y-auto overscroll-contain p-3 sm:p-6"
     >
       {/* Backdrop (faded in and out by AuthModalMotion) */}
       <div
@@ -153,7 +153,7 @@ function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) 
         aria-label="Sign in or create an account"
         tabIndex={-1}
         style={SCOPE}
-        className="ep-auth-modal relative z-10 m-auto w-full max-w-[460px] overflow-y-auto rounded-[24px] border border-[var(--ep-line)] bg-white px-5 py-6 shadow-[0_28px_90px_rgba(8,30,34,0.32)] outline-none sm:px-9 sm:py-8"
+        className="ep-auth-modal relative z-10 mx-auto my-6 w-full max-w-[460px] overflow-y-auto rounded-[24px] border border-[var(--ep-line)] bg-white px-5 py-6 shadow-[0_28px_90px_rgba(8,30,34,0.32)] outline-none sm:my-8 sm:px-9 sm:py-8"
       >
         {/* Logo and close button */}
         <div className="ep-auth-brand relative mb-6 flex min-h-[72px] items-center justify-center border-b border-[var(--ep-line)] pb-5">
@@ -161,6 +161,8 @@ function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) 
             <BrandMark
               size={44}
               className="max-w-[230px] sm:max-w-[260px]"
+              logoColor="#d94416"
+              logoTextColor="#d94416"
             />
           </div>
 
@@ -168,7 +170,7 @@ function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) 
             type="button"
             onClick={requestClose}
             aria-label="Close"
-            className="absolute right-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-xl text-[var(--ep-text-muted)] transition-colors duration-200 hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
+            className="absolute right-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-xl text-[var(--ep-text-muted)] transition-colors duration-200 hover:bg-[rgba(11,46,51,0.04)] hover:text-[var(--ep-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
           >
             <Icon
               name="x"

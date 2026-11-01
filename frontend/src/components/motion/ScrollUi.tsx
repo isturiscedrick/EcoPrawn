@@ -6,16 +6,12 @@ import { Icon } from "@/components/ui/Icon";
 
 /**
  * Scroll progress bar that automatically stays
- * directly below the sticky site header.
+ * above the sticky site header.
  */
 export function ScrollProgress() {
   const barRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     let frameId = 0;
-
-    const header = document.getElementById("site-header");
 
     function updateProgress() {
       const root = document.documentElement;
@@ -37,14 +33,6 @@ export function ScrollProgress() {
         barRef.current.style.transform = `scaleX(${progress})`;
       }
 
-      if (containerRef.current) {
-        const headerBottom = header
-          ? header.getBoundingClientRect().bottom
-          : 0;
-
-        containerRef.current.style.top =
-          `${Math.max(0, headerBottom)}px`;
-      }
     }
 
     function scheduleUpdate() {
@@ -56,16 +44,6 @@ export function ScrollProgress() {
       });
     }
 
-    // Track header changes, including responsive sizing.
-    const observer =
-      header && typeof ResizeObserver !== "undefined"
-        ? new ResizeObserver(scheduleUpdate)
-        : null;
-
-    if (header && observer) {
-      observer.observe(header);
-    }
-
     updateProgress();
 
     window.addEventListener("scroll", scheduleUpdate, {
@@ -75,8 +53,6 @@ export function ScrollProgress() {
     window.addEventListener("resize", scheduleUpdate);
 
     return () => {
-      observer?.disconnect();
-
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
 
@@ -86,9 +62,8 @@ export function ScrollProgress() {
 
   return (
     <div
-      ref={containerRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px]"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[100] h-[3px]"
     >
       <div
         ref={barRef}

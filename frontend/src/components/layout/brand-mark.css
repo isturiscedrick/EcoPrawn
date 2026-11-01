@@ -13,8 +13,9 @@
 .ep-logo {
   /* Extra delay for the whole logo. See the landing-page rule below. */
   --ep-logo-wait: 0s;
+  --ep-logo-color: #d94416;
   /* Wordmark color. Override with a utility class on dark backgrounds,
-     e.g. className="[--ep-logo-text:#f2ebdd]". */
+     e.g. className="[--ep-logo-text:#ffffff]". */
   --ep-logo-text: #02262b;
   overflow: visible;
 }
@@ -40,8 +41,8 @@ body:has(.ep-water-curtain) .ep-logo {
 }
 
 .ep-logo-shrimp {
-  fill: #d94416;
-  stroke: #d94416;
+  fill: var(--ep-logo-color);
+  stroke: var(--ep-logo-color);
 }
 
 .ep-logo-text {

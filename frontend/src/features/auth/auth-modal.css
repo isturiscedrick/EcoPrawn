@@ -10,7 +10,7 @@
 ======================================== */
 
 .ep-auth-modal {
-  max-height: calc(100dvh - 24px);
+  max-height: calc(100dvh - 48px);
   overflow-y: auto;
   overscroll-behavior: contain;
 
@@ -212,7 +212,7 @@
 
 @media (min-width: 640px) {
   .ep-auth-modal {
-    max-height: calc(100dvh - 48px);
+    max-height: calc(100dvh - 64px);
   }
 
   .ep-auth-modal h1 {
@@ -234,7 +234,7 @@
   }
 
   .ep-auth-modal {
-    max-height: calc(100dvh - 20px);
+    max-height: calc(100dvh - 32px);
 
     border-radius: 20px;
     padding: 16px;
