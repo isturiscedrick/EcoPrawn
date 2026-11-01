@@ -10,6 +10,7 @@ import {
 } from "react";
 import type { SensorStatus } from "@/types";
 import type { ApiTank, DashboardData } from "@/types/api";
+import { parseDashboardResponse } from "../lib/validate-response";
 export interface Tank {
   id: string;
   name: string;
@@ -77,6 +78,26 @@ function mapTank(t: ApiTank): Tank {
         : "warn",
   };
 }
+const validId = (value: string) => value.length > 0 && value.length <= 128 && value.trim() === value && !/\s/.test(value);
+const validNumber = (value: unknown, min = 0, max = Number.MAX_VALUE) =>
+  typeof value === "number" && Number.isFinite(value) && value >= min && value <= max;
+const validName = (value: unknown) => typeof value === "string" && value.trim() === value && value.length > 0 && value.length <= 100;
+function validNewTank(input: NewTankInput) {
+  return validName(input.name) && validName(input.pl) &&
+    [input.biomass, input.fcr, input.targetToday, input.dispensedToday, input.bodyLength, input.weight]
+      .every(value => validNumber(value)) &&
+    Number.isInteger(input.population) && validNumber(input.population, 0, 2147483647) &&
+    Number.isInteger(input.abnormal) && validNumber(input.abnormal, 0, 2147483647) && input.abnormal <= input.population &&
+    validNumber(input.dissolvedOxygen, 0, 100) && validNumber(input.ph, 0, 14) &&
+    validNumber(input.temperature, -55, 125) && validNumber(input.salinity, 0, 1000) &&
+    validNumber(input.waterLevel, 0, 100);
+}
+function validPatch(patch: Partial<Tank>) {
+  const entries = Object.entries(patch);
+  return entries.length > 0 && entries.every(([key, value]) =>
+    key === "name" || key === "pl" ? validName(value) :
+      ["biomass", "targetToday", "fcr", "dispensedToday"].includes(key) && validNumber(value));
+}
 interface TankContextValue extends DashboardData {
   tanks: Tank[];
   isDbConnected: boolean;
@@ -112,9 +133,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
         throw new Error(
           "Unable to load dashboard. Check the backend connection.",
         );
-      const result: DashboardData & { success: boolean; tanks: ApiTank[] } =
-        await res.json();
-      if (!result.success) throw new Error("Dashboard data unavailable");
+      const result = parseDashboardResponse(await res.json());
       if (!mounted.current) return;
       setTanks(result.tanks.map(mapTank));
       setData(result);
@@ -167,6 +186,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
       setError(e instanceof Error ? e.message : "Unable to save change");
     }
   }
+  const reject = (message: string) => { setError(message); return Promise.resolve(); };
   return (
     <TankContext.Provider
       value={{
@@ -176,11 +196,12 @@ export function TankProvider({ children }: { children: ReactNode }) {
         loading,
         error,
         refreshTanks,
-        addTank: (input) => mutate("/api/tanks", "POST", input),
+        addTank: (input) => validNewTank(input)
+          ? mutate("/api/tanks", "POST", input) : reject("Enter valid tank measurements before saving."),
         removeTank: (id) =>
-          mutate("/api/tanks/" + encodeURIComponent(id), "DELETE"),
+          validId(id) ? mutate("/api/tanks/" + encodeURIComponent(id), "DELETE") : reject("Invalid tank ID."),
         updateTank: (id, patch) =>
-          mutate("/api/tanks/" + encodeURIComponent(id), "PATCH", patch),
+          validId(id) && validPatch(patch) ? mutate("/api/tanks/" + encodeURIComponent(id), "PATCH", patch) : reject("Invalid tank change."),
       }}
     >
       {children}

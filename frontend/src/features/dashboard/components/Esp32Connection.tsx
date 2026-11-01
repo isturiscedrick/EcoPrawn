@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Panel } from "./DashboardPrimitives";
 import { useEsp32, type HardwareReading } from "../context/Esp32Context";
+import { parseHardwareListResponse } from "../lib/validate-response";
 
 export function Esp32Connection({ tankId, tankName }: { tankId: string; tankName: string }) {
   const usb = useEsp32();
@@ -25,11 +26,12 @@ export function Esp32Connection({ tankId, tankName }: { tankId: string; tankName
     async function load() {
       try {
         const response = await fetch(`/api/hardware?tankId=${encodeURIComponent(tankId)}`, { cache: "no-store", signal: abort.signal });
-        const result = await response.json();
-        if (!response.ok) throw new Error(result.error || "Unable to load hardware readings");
+        const result: unknown = await response.json();
+        if (!response.ok) throw new Error(typeof result === "object" && result !== null && "error" in result && typeof result.error === "string" ? result.error : "Unable to load hardware readings");
+        const readings = parseHardwareListResponse(result, tankId);
         setLoadError(null);
-        if (result.readings[0]) {
-          const latest: HardwareReading = result.readings[0];
+        if (readings[0]) {
+          const latest = readings[0];
           setReading(current => !current || latest.recordedAt > current.recordedAt ? latest : current);
         }
       } catch (cause) {

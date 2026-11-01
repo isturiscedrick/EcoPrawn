@@ -10,6 +10,7 @@ import {
 } from "react";
 import { useDemoData } from "@/hooks/useDemoData";
 import type { NewTankInput } from "@/features/dashboard/context/TankContext";
+import { validateNewTank } from "@/features/dashboard/validateNewTank";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 
 interface AddTankModalProps {
@@ -71,6 +72,7 @@ export function AddTankModal({
   const [waterLevel, setWaterLevel] = useState("");
   const [population, setPopulation] = useState("");
   const [confirming, setConfirming] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   // Fresh form every time the modal opens. Without this, the state from the
   // previous add sticks around (same default name, old readings), because
@@ -88,6 +90,7 @@ export function AddTankModal({
     setWaterLevel(d.waterLevel);
     setPopulation(d.population);
     setConfirming(false);
+    setFormError(null);
     firstFieldRef.current?.focus();
   }, [open, defaults, existingCount]);
 
@@ -114,32 +117,34 @@ export function AddTankModal({
 
   if (!open || !defaults.pl) return null;
 
-  const resolvedName = name.trim() || `Tank ${existingCount + 1}`;
+  const resolvedName = name.trim();
+
+  function validatedInput() {
+    return validateNewTank(
+      { name, pl, biomass, dissolvedOxygen, ph, temperature, salinity, waterLevel, population },
+      { bodyLength: 0, weight: 0, fcr: 0 },
+    );
+  }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    const result = validatedInput();
+    if (!result.value) {
+      setFormError(result.error);
+      return;
+    }
+    setFormError(null);
     setConfirming(true);
   }
 
   function handleConfirm() {
-    const biomassNum = parseFloat(biomass) || 0;
-    onSubmit({
-      name: resolvedName,
-      pl: pl.trim() || defaults.pl,
-      biomass: biomassNum,
-      dissolvedOxygen: parseFloat(dissolvedOxygen) || 0,
-      ph: parseFloat(ph) || 0,
-      temperature: parseFloat(temperature) || 0,
-      salinity: parseFloat(salinity) || 0,
-      waterLevel: parseFloat(waterLevel) || 0,
-      bodyLength: 0,
-      weight: 0,
-      population: parseInt(population, 10) || 0,
-      abnormal: 0,
-      fcr: 0,
-      dispensedToday: 0,
-      targetToday: biomassNum * 0.05 || 1,
-    });
+    const result = validatedInput();
+    if (!result.value) {
+      setConfirming(false);
+      setFormError(result.error);
+      return;
+    }
+    onSubmit(result.value);
     setConfirming(false);
     onClose();
   }
@@ -168,7 +173,8 @@ export function AddTankModal({
           Set initial readings for the tank. You can adjust these later.
         </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} onInput={() => setFormError(null)} className="flex flex-col gap-4">
+          {formError && <p role="alert" className="text-[13px] text-[var(--coral)]">{formError}</p>}
           <div className={sectionLabelClass}>Identity</div>
           <div className="grid grid-cols-2 gap-3">
             <Field
@@ -177,6 +183,7 @@ export function AddTankModal({
               label="Tank Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              maxLength={100}
               required
             />
             <Field
@@ -184,6 +191,7 @@ export function AddTankModal({
               label="PL Batch"
               value={pl}
               onChange={(e) => setPl(e.target.value)}
+              maxLength={100}
               required
             />
           </div>
@@ -194,8 +202,9 @@ export function AddTankModal({
               id={`${uid}-biomass`}
               label="Biomass (kg)"
               type="number"
-              step="0.1"
+              step="any"
               inputMode="decimal"
+              min="0"
               value={biomass}
               onChange={(e) => setBiomass(e.target.value)}
               required
@@ -205,6 +214,7 @@ export function AddTankModal({
               label="Population (est.)"
               type="number"
               inputMode="numeric"
+              min="0" max="2147483647" step="1"
               value={population}
               onChange={(e) => setPopulation(e.target.value)}
               required
@@ -217,8 +227,9 @@ export function AddTankModal({
               id={`${uid}-do`}
               label="Dissolved O₂ (mg/L)"
               type="number"
-              step="0.1"
+              step="any"
               inputMode="decimal"
+              min="0" max="100"
               value={dissolvedOxygen}
               onChange={(e) => setDissolvedOxygen(e.target.value)}
               required
@@ -227,8 +238,9 @@ export function AddTankModal({
               id={`${uid}-ph`}
               label="pH"
               type="number"
-              step="0.1"
+              step="any"
               inputMode="decimal"
+              min="0" max="14"
               value={ph}
               onChange={(e) => setPh(e.target.value)}
               required
@@ -240,8 +252,9 @@ export function AddTankModal({
               id={`${uid}-temp`}
               label="Temp (°C)"
               type="number"
-              step="0.1"
+              step="any"
               inputMode="decimal"
+              min="-55" max="125"
               value={temperature}
               onChange={(e) => setTemperature(e.target.value)}
               required
@@ -250,8 +263,9 @@ export function AddTankModal({
               id={`${uid}-salinity`}
               label="Salinity (ppt)"
               type="number"
-              step="0.1"
+              step="any"
               inputMode="decimal"
+              min="0" max="1000"
               value={salinity}
               onChange={(e) => setSalinity(e.target.value)}
               required
@@ -262,6 +276,7 @@ export function AddTankModal({
               type="number"
               step="1"
               inputMode="numeric"
+              min="0" max="100"
               value={waterLevel}
               onChange={(e) => setWaterLevel(e.target.value)}
               required

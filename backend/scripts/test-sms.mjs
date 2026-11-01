@@ -13,6 +13,7 @@ async function load(path, imports = {}) {
   return module.exports;
 }
 const provider = await load("lib/unisms");
+const validation = await load("lib/api-validation");
 const normal = { dissolvedOxygen: 4.5, ph: 7.5, temperature: 26, salinity: 10, waterLevel: 90 };
 assert.deepEqual(provider.waterWarnings(normal), []);
 assert.deepEqual(provider.waterWarnings({ ...normal, ph: 8.5, temperature: 30, salinity: 20 }), []);
@@ -195,7 +196,7 @@ let recorded = 0;
 db.tank = { findUnique: async ({ where }) => where.userId === "account-a" && where.id === "tank-a" ? { id: "tank-a", name: "A" } : null };
 db.sensorTelemetry = { create: async ({ data }) => { recorded++; return data; } };
 db.alert = { createMany: async ({ data }) => assert.equal(data.length, 1) };
-const water = await load("app/api/water/route", { ...imports, "next/server": { NextResponse: Response }, "@/lib/sms": { dispatchSms: async () => { throw new Error("SMS database down"); } } });
+const water = await load("app/api/water/route", { ...imports, "@/lib/api-validation": validation, "next/server": { NextResponse: Response }, "@/lib/sms": { dispatchSms: async () => { throw new Error("SMS database down"); } } });
 assert.equal((await water.POST(req({ tankId: "tank-b", ...normal }))).status, 404);
 assert.equal((await water.POST(req({ tankId: "tank-a", ...normal, ph: null }))).status, 400);
 const result = await water.POST(req({ tankId: "tank-a", ...normal, ph: 9 }));

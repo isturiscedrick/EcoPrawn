@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { dispatchSms } from "@/lib/sms";
 import { waterWarnings } from "@/lib/unisms";
+import { isRecord, validTankId, validWaterReading } from "@/lib/api-validation";
 
 export async function GET(request: Request) {
   const account = await accountAccess({ write: false, admin: false });
@@ -10,6 +11,9 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const tankId = searchParams.get("tankId");
+    if (tankId !== null && !validTankId(tankId)) {
+      return NextResponse.json({ success: false, error: "Invalid tank ID" }, { status: 400 });
+    }
 
     if (tankId) {
       const readings = await prisma.sensorTelemetry.findMany({
@@ -46,26 +50,26 @@ export async function POST(request: Request) {
   const account = await accountAccess({ write: true, admin: false });
   if (account instanceof Response) return account;
   try {
-    let body;
-    try { body = await request.json(); } catch { return NextResponse.json({ success: false, error: "Invalid JSON" }, { status: 400 }); }
-    if (!body || typeof body !== "object") return NextResponse.json({ success: false, error: "Invalid reading" }, { status: 400 });
+    const body: unknown = await request.json().catch(() => null);
+    if (!isRecord(body)) return NextResponse.json({ success: false, error: "Invalid reading" }, { status: 400 });
     const { tankId, dissolvedOxygen, ph, temperature, salinity, waterLevel } = body;
 
-    if (typeof tankId !== "string" || !tankId) {
+    if (!validTankId(tankId)) {
       return NextResponse.json(
         { success: false, error: "tankId is required" },
         { status: 400 }
       );
     }
+    if (Object.keys(body).some((key) => !["tankId", "dissolvedOxygen", "ph", "temperature", "salinity", "waterLevel"].includes(key)) ||
+        !validWaterReading(body)) {
+      return NextResponse.json({ success: false, error: "Invalid water reading" }, { status: 400 });
+    }
 
     const tank = await prisma.tank.findUnique({ where: { id: tankId, userId: account.id }, select: { id: true, name: true } });
     if (!tank) return NextResponse.json({ success: false, error: "Tank not found" }, { status: 404 });
-    if (![dissolvedOxygen, ph, temperature, salinity, waterLevel].every((value) => typeof value === "number" && Number.isFinite(value))) {
-      return NextResponse.json({ success: false, error: "All five water readings must be finite numbers" }, { status: 400 });
-    }
 
-    const warnings = waterWarnings({ dissolvedOxygen, ph, temperature, salinity, waterLevel });
-    const data = { tankId, dissolvedOxygen, ph, temperature, salinity, waterLevel };
+    const data = { tankId, dissolvedOxygen: dissolvedOxygen as number, ph: ph as number, temperature: temperature as number, salinity: salinity as number, waterLevel: waterLevel as number };
+    const warnings = waterWarnings(data);
     const reading = warnings.length
       ? await prisma.$transaction(async (tx) => {
           const result = await tx.sensorTelemetry.create({ data });

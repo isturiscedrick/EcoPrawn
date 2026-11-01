@@ -1,11 +1,16 @@
 import { accountAccess } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
+function validTankId(value: unknown): value is string {
+  return typeof value === "string" && value.length > 0 && value.length <= 128 &&
+    value.trim() === value && !/\s/.test(value);
+}
+
 export async function GET(request: Request) {
   const account = await accountAccess({ write: false });
   if (account instanceof Response) return account;
   const tankId = new URL(request.url).searchParams.get("tankId");
-  if (!tankId) return Response.json({ error: "Choose a tank" }, { status: 400 });
+  if (!validTankId(tankId)) return Response.json({ error: "Choose a valid tank" }, { status: 400 });
   try {
     const readings = await prisma.hardwareTelemetry.findMany({
       where: { tankId, tank: { userId: account.id } },
@@ -27,7 +32,7 @@ export async function POST(request: Request) {
   const { tankId, temperature = null, distanceCm = null, emptyDistanceCm = null, fullDistanceCm = null } = body as Record<string, unknown>;
   const valid = (value: unknown, min: number, max: number): value is number =>
     typeof value === "number" && Number.isFinite(value) && value >= min && value <= max;
-  if (typeof tankId !== "string" || !tankId ||
+  if (!validTankId(tankId) ||
       (temperature !== null && !valid(temperature, -55, 125)) ||
       (distanceCm !== null && !valid(distanceCm, 2, 400)) ||
       (temperature === null && distanceCm === null)) {

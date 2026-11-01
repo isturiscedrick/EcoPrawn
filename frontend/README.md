@@ -11,6 +11,10 @@ bun run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+Start the API separately with `bun run dev` in `../backend`. The frontend forwards `/api/*`, including signup, signin, and Google callbacks, to `http://localhost:4000`. Set `BACKEND_URL` in `.env.local` to use another backend, then restart the frontend. Set it before building for production.
+
+Run `bun run test:auth-proxy` to check auth request forwarding, redirects, and session cookies against a local mock backend. The test creates no accounts and sends no SMS.
+
 ## Folder Structure
 
 ```

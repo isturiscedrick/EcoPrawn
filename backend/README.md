@@ -38,6 +38,25 @@ For the ESP32 USB test, open **Water Quality**, select a tank, and click **Conne
 
 Use `bun run build` and `bun run start` for production, `bun run typecheck` to check TypeScript, and `bun run db:studio` to browse the database. Deploy this service separately and set the frontend's `BACKEND_URL` before building the frontend. Keep database credentials in this backend only.
 
+## Parameter validation
+
+Tank creation, tank updates, and water telemetry reject malformed JSON, non-object payloads, invalid field types, and invalid tank identifiers with HTTP 400 before writing data. Numeric API fields require JSON numbers; strings, booleans, null, and non-finite values are not converted to readings. Tank names and PL batches must be trimmed and contain 1 to 100 characters. Population must be a nonnegative 32-bit integer. Stock, growth, and feeding quantities must be finite and nonnegative.
+
+| Parameter | Accepted range |
+| --- | --- |
+| Dissolved oxygen | 0 to 100 mg/L |
+| pH | 0 to 14 |
+| Temperature | -55 to 125 °C, matching the hardware sensor |
+| Salinity | 0 to 1000 ppt |
+| Water level | 0 to 100% |
+| Ultrasonic distance and calibration | 2 to 400 cm; empty distance must exceed full distance |
+
+These are input limits, separate from healthy operating targets. A valid reading outside the healthy targets still saves and triggers the existing water-quality alert flow. Hardware accepts a missing temperature or distance as null when the other measurement is valid, and derives the water-level percentage from calibration rather than trusting a submitted percentage.
+
+The add-tank form validates values before confirmation. The dashboard and hardware clients also validate response fields before displaying values or calculating charts. Authentication already checks action, password length, phone/username formats, and verification codes. SMS settings validate mobile numbers and preference types; SMS delivery and callbacks check provider status and correlation fields. The contact form is a local preview without a submission endpoint.
+
+Run `bun run test:validation` and `bun run test:hardware` in `backend`, and `bun run test:tank-validation` and `bun run test:responses` in `frontend`, for offline validation regression checks.
+
 ## Sample data
 
 `src/data/demo.json` owns the transferred frontend fixtures and form defaults. `prisma/seed.cjs` imports operational records into PostgreSQL in one transaction. Run `bun run db:seed` from this folder. It skips the import when tanks already exist, preserving existing records. No demo user credentials are created.
