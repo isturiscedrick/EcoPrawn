@@ -1,0 +1,120 @@
+- generic [ref=f3e1]:
+  - generic [ref=f3e3]:
+    - complementary [ref=f3e5]:
+      - img "EcoPrawn" [ref=f3e7]:
+        - generic [aria-hidden] [ref=f3e13]: EcoPrawn
+      - generic [ref=f3e14]: ECOPRAWN DASHBOARD
+      - generic "Connected to PostgreSQL database" [ref=f3e84]: "POSTGRES: CONNECTED"
+      - generic [ref=f3e20]: Navigation
+      - generic [ref=f3e21]:
+        - link "Overview" [ref=f3e22] [cursor=pointer]:
+          - /url: /dashboard
+          - generic [ref=f3e23]:
+            - generic [aria-hidden] [ref=f3e24]: ◧
+            - generic [ref=f3e25]: Overview
+        - link "Tanks" [ref=f3e26] [cursor=pointer]:
+          - /url: /dashboard/tanks
+          - generic [ref=f3e27]:
+            - generic [aria-hidden] [ref=f3e28]: ▦
+            - generic [ref=f3e29]: Tanks
+        - link "Water Quality" [ref=f3e31] [cursor=pointer]:
+          - /url: /dashboard/water
+          - generic [ref=f3e32]:
+            - generic [aria-hidden] [ref=f3e33]: ≈
+            - generic [ref=f3e34]: Water Quality
+        - link "Vision & Growth" [ref=f3e35] [cursor=pointer]:
+          - /url: /dashboard/vision
+          - generic [ref=f3e36]:
+            - generic [aria-hidden] [ref=f3e37]: ◎
+            - generic [ref=f3e38]: Vision & Growth
+        - link "Feeding" [ref=f3e39] [cursor=pointer]:
+          - /url: /dashboard/feeding
+          - generic [ref=f3e40]:
+            - generic [aria-hidden] [ref=f3e41]: ▤
+            - generic [ref=f3e42]: Feeding
+        - link "Alerts" [ref=f3e43] [cursor=pointer]:
+          - /url: /dashboard/alerts
+          - generic [ref=f3e44]:
+            - generic [aria-hidden] [ref=f3e45]: ⚠
+            - generic [ref=f3e46]: Alerts
+      - generic [ref=f3e47]:
+        - generic [ref=f3e48]:
+          - generic [aria-hidden] [ref=f3e49]: FO
+          - generic [ref=f3e50]:
+            - generic [ref=f3e51]: Facility Operator
+            - generic [ref=f3e52]: UPTIME 41d 06h
+        - button "Log out" [ref=f3e53]:
+          - generic [aria-hidden] [ref=f3e54]: ⏻
+          - text: Log out
+    - main [ref=f3e55]:
+      - generic [ref=f3e56]:
+        - generic [ref=f3e57]:
+          - generic [ref=f3e58]:
+            - generic [ref=f3e59]: Facility Configuration
+            - heading "Tanks" [level=1] [ref=f3e60]
+            - generic [ref=f3e61]: Add, remove, and review tanks in the facility · 0 tanks
+          - generic [ref=f3e62]:
+            - generic [ref=f3e63]: All tanks nominal
+            - button "+ Add Tank" [ref=f3e65]
+        - generic [ref=f3e66]:
+          - generic [ref=f3e67]:
+            - generic [ref=f3e68]: Total Tanks
+            - generic [ref=f3e69]: 0active
+            - generic [ref=f3e70]: No tanks yet
+          - generic [ref=f3e71]:
+            - generic [ref=f3e72]: Total Biomass
+            - generic [ref=f3e73]: 0.0kg
+            - generic [ref=f3e74]: across 0 tanks
+          - generic [ref=f3e75]:
+            - generic [ref=f3e76]: Avg. Feed Conversion Ratio
+            - generic [ref=f3e77]: 0.00FCR
+            - generic [ref=f3e78]: target ≤ 1.5
+        - generic [ref=f3e79]:
+          - generic [ref=f3e80]:
+            - heading "All Tanks" [level=3] [ref=f3e81]
+            - generic [ref=f3e82]: 0 tanks
+          - generic [ref=f3e83]: No tanks yet — add one to get started.
+        - dialog [ref=f3e85]:
+          - generic [ref=f3e87]:
+            - heading "Add a new tank" [level=2] [ref=f3e88]
+            - paragraph [ref=f3e89]: Set initial readings for the tank. You can adjust these later.
+            - generic [ref=f3e90]:
+              - generic [ref=f3e91]: Identity
+              - generic [ref=f3e92]:
+                - generic [ref=f3e93]:
+                  - generic [ref=f3e94]: Tank Name
+                  - textbox "Tank Name" [active] [ref=f3e95]: Tank 1
+                - generic [ref=f3e96]:
+                  - generic [ref=f3e97]: PL Batch
+                  - textbox "PL Batch" [ref=f3e98]: PL-1
+              - generic [ref=f3e99]: Stock
+              - generic [ref=f3e100]:
+                - generic [ref=f3e101]:
+                  - generic [ref=f3e102]: Biomass (kg)
+                  - spinbutton "Biomass (kg)" [ref=f3e103]: "10"
+                - generic [ref=f3e104]:
+                  - generic [ref=f3e105]: Population (est.)
+                  - spinbutton "Population (est.)" [ref=f3e106]: "1000"
+              - generic [ref=f3e107]: Water Parameters
+              - generic [ref=f3e108]:
+                - generic [ref=f3e109]:
+                  - generic [ref=f3e110]: Dissolved O₂ (mg/L)
+                  - spinbutton "Dissolved O₂ (mg/L)" [ref=f3e111]: "6.0"
+                - generic [ref=f3e112]:
+                  - generic [ref=f3e113]: pH
+                  - spinbutton "pH" [ref=f3e114]: "7.8"
+              - generic [ref=f3e115]:
+                - generic [ref=f3e116]:
+                  - generic [ref=f3e117]: Temp (°C)
+                  - spinbutton "Temp (°C)" [ref=f3e118]: "28.0"
+                - generic [ref=f3e119]:
+                  - generic [ref=f3e120]: Salinity (ppt)
+                  - spinbutton "Salinity (ppt)" [ref=f3e121]: "15"
+                - generic [ref=f3e122]:
+                  - generic [ref=f3e123]: Water Level (%)
+                  - spinbutton "Water Level (%)" [ref=f3e124]: "95"
+              - generic [ref=f3e125]:
+                - button "Cancel" [ref=f3e126]
+                - button "Add Tank" [ref=f3e127]
+  - button "Open Next.js Dev Tools" [ref=f3e133] [cursor=pointer]
+  - alert [ref=f3e137]
