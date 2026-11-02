@@ -10,3 +10,9 @@ dist
 .DS_Store
 *.tsbuildinfo
 *.log
+
+# TanStack Start / Vite / Nitro
+.output
+.nitro
+.tanstack
+.vite

@@ -4,9 +4,9 @@
   "private": true,
   "packageManager": "bun@1.4.0",
   "scripts": {
-    "dev": "next dev -p 4000",
-    "build": "next build",
-    "start": "next start -p 4000",
+    "dev": "vite --port 4000",
+    "build": "vite build",
+    "start": "node scripts/start.mjs",
     "typecheck": "tsc --noEmit",
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
@@ -29,16 +29,24 @@
     "@prisma/client": "6.4.1",
     "@supabase/ssr": "0.12.7",
     "@supabase/supabase-js": "2.118.0",
-    "next": "^15.0.0",
     "react": "^19",
     "react-dom": "^19",
-    "tslib": "^2.9.1"
+    "tslib": "^2.9.1",
+    "@tanstack/react-start": "1.169.4",
+    "@tanstack/react-router": "1.170.46"
   },
   "devDependencies": {
     "@types/node": "latest",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "prisma": "6.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "8.3.5",
+    "@vitejs/plugin-react": "6.1.2",
+    "nitro": "3.0.261029-rc"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=24"
   }
 }

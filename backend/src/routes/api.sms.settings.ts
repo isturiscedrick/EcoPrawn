@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { GET, PATCH } from '@/handlers/sms-settings';
+export const Route = createFileRoute('/api/sms/settings')({ server: { handlers: { GET: ({ request, params }) => GET(), PATCH: ({ request, params }) => PATCH(request), POST: () => new Response(null, { status: 405, headers: { Allow: 'GET, PATCH, HEAD, OPTIONS' } }), DELETE: () => new Response(null, { status: 405, headers: { Allow: 'GET, PATCH, HEAD, OPTIONS' } }), PUT: () => new Response(null, { status: 405, headers: { Allow: 'GET, PATCH, HEAD, OPTIONS' } }), OPTIONS: () => new Response(null, { status: 204, headers: { Allow: 'GET, PATCH, HEAD, OPTIONS' } }) } } });

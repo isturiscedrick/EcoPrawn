@@ -1,5 +1,3 @@
-"use client";
-
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { createEsp32Parser } from "../lib/esp32-serial";
 import { parseHardwareReadingResponse } from "../lib/validate-response";

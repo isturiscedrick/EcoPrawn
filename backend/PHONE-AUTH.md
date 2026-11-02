@@ -11,7 +11,7 @@ Users sign up with a name, username, Philippine mobile number, and password. Sup
    The SMS includes the brand, OTP, phone-verification purpose, and expiration required by UniSMS. It defaults to 300 seconds, matching the five-minute Supabase expiry above. If you change Supabase's expiry, also set the Edge Function secret `SMS_OTP_EXPIRY_SECONDS` to the same number of seconds. This variable only controls the message text; Supabase enforces expiry.
 5. Open `/login`, choose Sign up, and test with a phone you own. No real SMS is sent by the automated tests.
 
-Function source: `supabase/functions/send-auth-sms/index.ts`. It is deployed separately from Next.js. Provider errors never return the OTP or secret to the browser. OTPs are not written to application SMS history.
+Function source: `supabase/functions/send-auth-sms/index.ts`. It is deployed separately from the API service. Provider errors never return the OTP or secret to the browser. OTPs are not written to application SMS history.
 
 ## Accounts and limits
 

@@ -9,8 +9,8 @@ const mock = createServer((req, res) => {
 });
 mock.listen(4108, "127.0.0.1");
 await once(mock, "listening");
-const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "dev", "-p", "4107"], {
-  env: { ...process.env, APP_URL: origin, NEXT_BUILD_DIR: ".next-auth-test",
+const server = spawn(process.execPath, process.argv.includes("--production") ? [".output/server/index.mjs"] : ["node_modules/vite/bin/vite.js", "--port", "4107"], {
+  env: { ...process.env, APP_URL: origin, PORT: "4107",
     SUPABASE_URL: "http://127.0.0.1:4108", SUPABASE_PUBLISHABLE_KEY: "test-publishable-key" },
   stdio: ["ignore", "pipe", "pipe"],
 });

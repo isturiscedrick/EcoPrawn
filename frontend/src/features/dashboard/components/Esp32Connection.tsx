@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { Panel } from "./DashboardPrimitives";
 import { useEsp32, type HardwareReading } from "../context/Esp32Context";
