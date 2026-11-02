@@ -71,7 +71,7 @@ bun run start   # serve the production build
 bun run typecheck # check TypeScript
 ```
 
-Use Bun 1.4.0 for installs and scripts in both folders. Each app has its own `bun.lock`; use `bun install --frozen-lockfile` for reproducible installs. Builds and production servers use Node.js; use Node 24 LTS or newer.
+Use Bun 1.4.0 for installs, development, builds, production servers, tests, and database tooling in both folders. Each app has its own `bun.lock`; use `bun install --frozen-lockfile` for reproducible installs.
 
 On Windows OneDrive checkouts, if `node_modules` contains empty package folders after installation, rerun the install with `bun install --frozen-lockfile --force --backend=copyfile` in the affected app folder.
 

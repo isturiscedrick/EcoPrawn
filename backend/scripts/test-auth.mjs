@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { once } from "node:events";
 import { createServer } from "node:http";
+assert.ok(process.versions.bun, "Bun is required to run auth tests");
 const origin = "http://localhost:4107";
 const mock = createServer((req, res) => {
   res.writeHead(400, { "Content-Type": "application/json" });
@@ -9,7 +10,7 @@ const mock = createServer((req, res) => {
 });
 mock.listen(4108, "127.0.0.1");
 await once(mock, "listening");
-const server = spawn(process.execPath, process.argv.includes("--production") ? [".output/server/index.mjs"] : ["node_modules/vite/bin/vite.js", "--port", "4107"], {
+const server = spawn(process.execPath, ["--no-env-file", ...(process.argv.includes("--production") ? [".output/server/index.mjs"] : ["--bun", "node_modules/vite/bin/vite.js", "--port", "4107"])], {
   env: { ...process.env, APP_URL: origin, PORT: "4107",
     SUPABASE_URL: "http://127.0.0.1:4108", SUPABASE_PUBLISHABLE_KEY: "test-publishable-key" },
   stdio: ["ignore", "pipe", "pipe"],

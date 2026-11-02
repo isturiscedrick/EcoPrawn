@@ -9,6 +9,7 @@ import { setTimeout } from 'node:timers/promises';
 import assert from 'node:assert/strict';
 
 export async function productionApp(backendUrl) {
+  assert.ok(process.versions.bun, 'Bun is required to run the test server.');
   const source = fileURLToPath(new URL('..', import.meta.url));
   const fixture = await mkdtemp(join(tmpdir(), 'ecoprawn-start-test-'));
   let app;
@@ -20,14 +21,14 @@ export async function productionApp(backendUrl) {
     await rm(fixture, { recursive: true, force: true });
   }
   try {
-    for (const entry of ['src', 'public', 'package.json', 'tsconfig.json', 'vite.config.ts']) {
+    for (const entry of ['src', 'public', 'package.json', 'bunfig.toml', 'tsconfig.json', 'vite.config.ts']) {
       await cp(join(source, entry), join(fixture, entry), { recursive: true }).catch(e => {
-        if (e.code !== 'ENOENT' || !['public'].includes(entry)) throw e;
+        if (e.code !== 'ENOENT' || !['public', 'bunfig.toml'].includes(entry)) throw e;
       });
     }
     await symlink(join(source, 'node_modules'), join(fixture, 'node_modules'), 'junction');
     const env = { ...process.env, BACKEND_URL: backendUrl, NODE_ENV: 'production' };
-    const build = spawn(process.execPath, [join(source, 'node_modules/vite/bin/vite.js'), 'build'], { cwd: fixture, env, timeout: 180000, stdio: ['ignore', 'pipe', 'pipe'] });
+    const build = spawn(process.execPath, ['--no-env-file', '--bun', join(source, 'node_modules/vite/bin/vite.js'), 'build'], { cwd: fixture, env, timeout: 180000, stdio: ['ignore', 'pipe', 'pipe'] });
     let output = '';
     build.stdout.on('data', c => output += c); build.stderr.on('data', c => output += c);
     const [code] = await once(build, 'exit');
@@ -35,7 +36,7 @@ export async function productionApp(backendUrl) {
     const reservation = createServer(); reservation.listen(0, '127.0.0.1'); await once(reservation, 'listening');
     const port = reservation.address().port; await new Promise(resolve => reservation.close(resolve));
     const origin = `http://127.0.0.1:${port}`;
-    app = spawn(process.execPath, ['.output/server/index.mjs'], { cwd: fixture, env: { ...env, PORT: String(port), HOST: '127.0.0.1' }, stdio: ['ignore', 'pipe', 'pipe'] });
+    app = spawn(process.execPath, ['--no-env-file', '.output/server/index.mjs'], { cwd: fixture, env: { ...env, PORT: String(port), HOST: '127.0.0.1' }, stdio: ['ignore', 'pipe', 'pipe'] });
     output = ''; app.stdout.on('data', c => output += c); app.stderr.on('data', c => output += c);
     for (let i = 0; i < 150; i++) {
       if (app.exitCode !== null) throw new Error(output);

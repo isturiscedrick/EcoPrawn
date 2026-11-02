@@ -1,6 +1,6 @@
 # Next.js to TanStack migration inventory
 
-Original inventory: 2026-11-02. The inventory below describes the pre-migration application. Both services now use TanStack Start; see the app READMEs for current commands and configuration. The selected architecture keeps separate frontend and API services on Node 24+, using TanStack Start, Vite and Nitro. Existing HTTP contracts and database schema are retained.
+Original inventory: 2026-11-02. The inventory below describes the pre-migration application. Both services now use TanStack Start; see the app READMEs for current commands and configuration. The selected architecture keeps separate frontend and API services on Bun 1.4.0, using TanStack Start, Vite and Nitro. Existing HTTP contracts and database schema are retained.
 
 ## Current applications
 

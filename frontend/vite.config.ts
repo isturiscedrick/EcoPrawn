@@ -4,16 +4,17 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
 import { fileURLToPath } from "node:url";
-Object.assign(
-  process.env,
+for (const [key, value] of Object.entries(
   loadEnv(process.env.NODE_ENV || "development", process.cwd(), ""),
-);
+)) {
+  if (process.env[key] === undefined) process.env[key] = value;
+}
 export default defineConfig({
   resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
   plugins: [
     tailwindcss(),
     tanstackStart(),
-    nitro({ preset: "node-server" }),
+    nitro({ preset: "bun" }),
     react(),
   ],
 });

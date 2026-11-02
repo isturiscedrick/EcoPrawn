@@ -160,6 +160,6 @@ The live test creates or reuses a separate tank named `TEST - Oxygen alert`, rec
 
 ## Runtime and migration
 
-Use Node.js 24 LTS or newer and Bun 1.4.0. `bun run dev` serves port 4000 with Vite; `bun run build` emits the standalone Nitro Node server and `bun run start` starts it on `PORT` or 4000. Build on the deployment OS so Prisma native binaries match. Production startup loads `.env` when present; deployment environment variables take precedence.
+Use Bun 1.4.0. `bun run dev` serves port 4000 with Vite on Bun; `bun run build` emits the standalone Nitro Bun server and `bun run start` starts it on `PORT` or 4000. Build on the deployment OS so Prisma 6.4.1 native binaries match. Production startup loads `.env` when present; deployment environment variables take precedence.
 
 TanStack server routes live in `src/routes`; framework-independent HTTP handlers remain in `src/handlers`. `src/lib/request-context.ts` adapts active request cookies and headers for Supabase SSR. `src/start.ts` disables caching for all API responses. No database schema changes are required.

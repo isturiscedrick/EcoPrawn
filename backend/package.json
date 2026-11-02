@@ -4,26 +4,26 @@
   "private": true,
   "packageManager": "bun@1.4.0",
   "scripts": {
-    "dev": "vite --port 4000",
-    "build": "vite build",
-    "start": "node scripts/start.mjs",
-    "typecheck": "tsc --noEmit",
-    "postinstall": "prisma generate",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:studio": "prisma studio",
-    "db:seed": "node --env-file=.env prisma/seed.cjs",
-    "db:connect:supabase": "node --env-file=.env scripts/connect-supabase.cjs",
-    "test:auth": "node scripts/test-auth.mjs",
-    "test:phone-auth": "node scripts/test-phone-auth.mjs",
-    "test:google-user": "node scripts/test-google-user.mjs",
-    "test:accounts": "node scripts/test-account-isolation.mjs",
-    "test:sms": "node scripts/test-sms.mjs",
-    "test:performance": "node scripts/test-performance.mjs",
-    "test:oxygen": "node scripts/test-oxygen.mjs",
-    "test:hardware": "node scripts/test-hardware.mjs",
-    "test:validation": "node scripts/test-api-validation.mjs",
-    "test:oxygen:live": "node --env-file=.env scripts/test-oxygen.mjs --live"
+    "dev": "bun --bun vite --port 4000",
+    "build": "bun --bun vite build",
+    "start": "bun --no-env-file scripts/start.mjs",
+    "typecheck": "bun --bun tsc --noEmit",
+    "postinstall": "bun --bun prisma generate",
+    "db:generate": "bun --bun prisma generate",
+    "db:push": "bun --bun prisma db push",
+    "db:studio": "bun --bun prisma studio",
+    "db:seed": "bun --env-file=.env prisma/seed.cjs",
+    "db:connect:supabase": "bun --env-file=.env scripts/connect-supabase.cjs",
+    "test:auth": "bun --no-env-file scripts/test-auth.mjs",
+    "test:phone-auth": "bun --no-env-file scripts/test-phone-auth.mjs",
+    "test:google-user": "bun --no-env-file scripts/test-google-user.mjs",
+    "test:accounts": "bun --no-env-file scripts/test-account-isolation.mjs",
+    "test:sms": "bun --no-env-file scripts/test-sms.mjs",
+    "test:performance": "bun --no-env-file scripts/test-performance.mjs",
+    "test:oxygen": "bun --no-env-file scripts/test-oxygen.mjs",
+    "test:hardware": "bun --no-env-file scripts/test-hardware.mjs",
+    "test:validation": "bun --no-env-file scripts/test-api-validation.mjs",
+    "test:oxygen:live": "bun --env-file=.env scripts/test-oxygen.mjs --live"
   },
   "dependencies": {
     "@prisma/client": "6.4.1",
@@ -47,6 +47,6 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=24"
+    "bun": ">=1.4.0"
   }
 }

@@ -9,5 +9,5 @@ export default defineConfig(({ mode }) => {
   const port = Number(process.env.PORT);
   const env = loadEnv(mode, process.cwd(), '');
   for (const [key, value] of Object.entries(env)) if (key !== 'PORT' && process.env[key] === undefined) process.env[key] = value;
-  return { resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } }, plugins: [tanstackStart(), nitro({ preset: 'node-server' }), react(), { name: 'api-port', enforce: 'post', config: () => ({ server: { port } }) }], server: { port: 4000 } };
+  return { resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } }, plugins: [tanstackStart(), nitro({ preset: 'bun' }), react(), { name: 'api-port', enforce: 'post', config: () => ({ server: { port } }) }], server: { port: 4000 } };
 });

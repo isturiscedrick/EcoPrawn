@@ -4,14 +4,14 @@
   "private": true,
   "packageManager": "bun@1.4.0",
   "scripts": {
-    "dev": "vite dev --port 3000",
-    "build": "vite build",
-    "start": "node --env-file-if-exists=.env --env-file-if-exists=.env.local .output/server/index.mjs",
-    "typecheck": "tsc --noEmit",
-    "test:navigation": "node scripts/test-navigation.mjs",
-    "test:auth-proxy": "node scripts/test-auth-proxy.mjs",
-    "test:tank-validation": "node --test scripts/test-tank-validation.mjs",
-    "test:responses": "node scripts/test-response-validation.mjs"
+    "dev": "bun --bun vite dev --port 3000",
+    "build": "bun --bun vite build",
+    "start": "bun --env-file=.env --env-file=.env.local .output/server/index.mjs",
+    "typecheck": "bun --bun tsc --noEmit",
+    "test:navigation": "bun --no-env-file scripts/test-navigation.mjs",
+    "test:auth-proxy": "bun --no-env-file scripts/test-auth-proxy.mjs",
+    "test:tank-validation": "bun --no-env-file test ./scripts/test-tank-validation.mjs",
+    "test:responses": "bun --no-env-file scripts/test-response-validation.mjs"
   },
   "dependencies": {
     "animejs": "^4.5.0",
@@ -38,6 +38,6 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=24"
+    "bun": ">=1.4.0"
   }
 }
