@@ -22,7 +22,7 @@ const FEATURE_ICONS: IconName[] = ["wrench", "gauge", "eye", "repeat", "leaf"];
 
 export function AboutPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
+    <div className="marketing-shell flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
       <SiteHeader tone="white" />
 
       <main className="flex-1">

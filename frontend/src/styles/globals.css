@@ -579,3 +579,221 @@ html.dark .dashboard-shell .dashboard-nav-active-dot {
 html.dark .dashboard-shell aside .hover\:text-\[var\(--water-deep\)\]:hover {
   color: #e4e6eb;
 }
+
+/* ---------- Marketing palette: landing, About, Contact, auth modal ----------
+   Scoped to .marketing-shell and .ep-auth-modal so the dashboard keeps its own
+   tokens. Delete this whole block to revert. */
+
+/* Light mode */
+:is(.marketing-shell, .ep-auth-modal) {
+  --ep-accent: #d94416;
+  --ep-accent-hover: #b83a0f;
+  --ep-primary: #0f4c5c;
+  --ep-secondary: #0f4c5c;
+  --ep-text-muted: #3d5a61;
+  --coral: var(--ep-accent);
+  --coral-dim: var(--ep-accent-hover);
+}
+
+/* Dark mode */
+html.dark :is(.marketing-shell, .ep-auth-modal) {
+  color-scheme: dark;
+  --ep-bg: #18191a;
+  --ep-surface: #202122;
+  --ep-tint: #2c2d2e;
+  --ep-line: rgba(255, 255, 255, 0.14);
+  --ep-primary: #e4e6eb;
+  --ep-text-muted: #b0b3b8;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #f6a185;
+  --ep-secondary: #38bdf8;
+  --ep-ok: #5fbf8a;
+  --ep-warn-text: #e8a23a;
+  --ep-danger: #ff8a80;
+}
+
+html.dark body.ecoprawn-root:has(.marketing-shell) {
+  background: #18191a;
+}
+
+html.dark .ep-auth-modal {
+  color: var(--ep-primary);
+}
+
+/* Dark bands (both modes): re-declare tokens so everything inside renders
+   as a light-on-teal block, whatever the page theme is. */
+:is(
+    .marketing-shell #readings,
+    .marketing-shell #systems,
+    .marketing-shell footer,
+    .marketing-shell [data-band]
+  ) {
+  --ep-bg: #ffffff;
+  --ep-surface: #ffffff;
+  --ep-tint: #ffffff;
+  --ep-primary: #0f4c5c;
+  --ep-text-muted: #cfe2e6;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #f6a185;
+  --coral: #f28a68;
+}
+
+/* Band backgrounds: the gradients are inline styles, so !important is needed. */
+.marketing-shell :is(#readings, #systems) > div[aria-hidden="true"]:first-child {
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(56, 189, 248, 0.22), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(5, 32, 42, 0.6), transparent 48%),
+    linear-gradient(155deg, #13596b 0%, #0f4c5c 48%, #0b3a47 100%) !important;
+}
+
+.marketing-shell footer {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(56, 189, 248, 0.22), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(5, 32, 42, 0.6), transparent 48%),
+    linear-gradient(155deg, #13596b 0%, #0f4c5c 48%, #0b3a47 100%) !important;
+}
+
+/* Hero lens keeps a brighter coral so the arcs read on the dark glass. */
+.marketing-shell figure[aria-label^="A shrimp"] {
+  --coral: #f28a68;
+}
+
+/* Logo: shrimp = accent, wordmark = secondary. Footer logo stays all white. */
+html body :is(.marketing-shell, .ep-auth-modal) .ep-logo {
+  --ep-logo-color: var(--ep-accent) !important;
+  --ep-logo-text: var(--ep-secondary) !important;
+}
+html body .marketing-shell footer .ep-logo {
+  --ep-logo-color: var(--ep-bg) !important;
+  --ep-logo-text: var(--ep-bg) !important;
+}
+
+/* Dark-mode fixes for classes that hard-code white or dark-teal values */
+html.dark :is(.marketing-shell, .ep-auth-modal) .bg-white {
+  background-color: var(--ep-surface);
+}
+html.dark .marketing-shell #site-header {
+  background-color: rgba(24, 25, 26, 0.92);
+  border-color: var(--ep-line);
+}
+html.dark .marketing-shell #site-header .bg-white\/60 {
+  background-color: transparent;
+}
+html.dark :is(.marketing-shell, .ep-auth-modal) [class*="border-[rgba(11,46,51"] {
+  border-color: var(--ep-line);
+}
+/* Coral fills need dark text; white on #f28a68 is only about 2.4:1. */
+html.dark :is(.marketing-shell, .ep-auth-modal) .bg-\[var\(--ep-accent\)\] {
+  color: #1b0a04;
+}
+html.dark .marketing-shell :is(.bg-\[var\(--ep-ok\)\], .bg-\[var\(--ep-warn-text\)\]) {
+  color: #0b1417;
+}
+html.dark :is(.marketing-shell, .ep-auth-modal) [class*="ring-offset-white"] {
+  --tw-ring-offset-color: var(--ep-bg);
+}
+html.dark .ep-auth-modal .hover\:bg-white:hover {
+  background-color: var(--ep-tint);
+}
+html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
+  background: var(--ep-surface);
+}
+
+/* Active nav pill uses the sky-blue secondary in dark mode */
+html.dark .marketing-shell :is(nav[aria-label="Primary navigation"], nav[aria-label="On this page"]) a[aria-current] {
+  background-color: var(--ep-secondary);
+  border-color: var(--ep-secondary);
+  color: #04202b;
+}
+
+/* ---------- Dashboard palette ----------
+   Scoped to .dashboard-shell. Orange = brand and calls to action,
+   teal / sky blue = headings and controls, green stays reserved for OK status.
+   Delete this block to revert. */
+
+/* Light mode */
+.dashboard-shell {
+  --ep-accent: #d94416;
+  --ep-accent-hover: #b83a0f;
+  --ep-primary: #0f4c5c;
+  --ep-secondary: #0f4c5c;
+  --ep-text-muted: #3d5a61;
+  --coral: #d94416;
+  --coral-dim: #b83a0f;
+  --water-deep: #0f4c5c;
+  --water-mid: #13596b;
+}
+
+/* Dark mode: the existing html.dark .dashboard-shell block keeps the neutral
+   surfaces and text; this only swaps the accents. --amber-text had no dark
+   value, so warning text was dark amber on a dark page. */
+html.dark .dashboard-shell {
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #f6a185;
+  --ep-secondary: #38bdf8;
+  --coral: #f28a68;
+  --coral-dim: #f6a185;
+  --amber-text: #e8a23a;
+}
+
+/* Coral fills need dark text in dark mode; white on #f28a68 is only ~2.4:1. */
+html.dark .dashboard-shell :is(.bg-\[var\(--coral\)\], .bg-\[var\(--ep-accent\)\]) {
+  color: #1b0a04;
+}
+
+/* Selected pills and green-filled buttons (tank tabs, SMS save, Connect ESP32)
+   become the secondary color. Status dots have no text-white, so they stay green. */
+.dashboard-shell .bg-\[var\(--mangrove\)\].text-white {
+  background-color: var(--ep-secondary);
+  border-color: var(--ep-secondary);
+}
+html.dark .dashboard-shell .bg-\[var\(--mangrove\)\].text-white {
+  color: #04202b;
+}
+.dashboard-shell .hover\:border-\[var\(--mangrove\)\]:hover {
+  border-color: var(--ep-secondary);
+}
+
+/* Page eyebrows ("Facility Overview", "Sensor Network", ...) */
+.dashboard-shell .ep-font-mono.uppercase[class*="tracking-[0.14em]"] {
+  color: var(--ep-secondary);
+}
+
+/* Sidebar: active item and its dot used a hard-coded #e8623a */
+html:not(.dark) .dashboard-shell .dashboard-nav-active {
+  border-color: var(--coral);
+  color: var(--ep-primary);
+}
+html.dark .dashboard-shell .dashboard-nav-active {
+  border-color: rgba(242, 138, 104, 0.7);
+}
+html:not(.dark) .dashboard-shell .dashboard-nav-active-dot,
+html.dark .dashboard-shell .dashboard-nav-active-dot {
+  background-color: var(--coral);
+}
+
+/* Sidebar logo: shrimp = accent, wordmark = secondary */
+html:not(.dark) .dashboard-shell aside .ep-logo {
+  --ep-logo-color: var(--ep-accent);
+  --ep-logo-text: var(--ep-secondary);
+}
+html.dark .dashboard-shell aside .ep-logo {
+  --ep-logo-color: var(--ep-accent);
+  --ep-logo-text: var(--ep-secondary);
+}
+
+/* Operator avatar ("FO") sits on a coral fill */
+.dashboard-shell [style*="var(--coral)"] {
+  color: #ffffff;
+}
+html.dark .dashboard-shell [style*="var(--coral)"] {
+  color: #1b0a04;
+}
+
+/* Vision & Growth chart hard-codes #E8623A in SVG attributes */
+.dashboard-shell polyline[stroke="#E8623A"] {
+  stroke: var(--coral);
+}
+.dashboard-shell stop[stop-color="#E8623A"] {
+  stop-color: var(--coral);
+}
