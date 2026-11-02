@@ -451,6 +451,7 @@ html {
   --ep-text-muted: #3f5753;  /*      supporting copy            */
   --ep-accent: #cf3f12;      /* 10%  main button, headline accent */
   --ep-ok: #1e7a46;
+  --ep-green: #0b4f3a; /* secondary: dark green */
   --ep-warn-text: #8f5a12;
   --ep-danger: #b3261e;
   --ep-accent-hover: #8f3115; /* hover for coral buttons: same hue, deeper, white text about 8:1 */
@@ -579,4 +580,69 @@ html.dark .dashboard-shell .dashboard-nav-active-dot {
 
 html.dark .dashboard-shell aside .hover\:text-\[var\(--water-deep\)\]:hover {
   color: #e4e6eb;
+}
+
+/* ---------- Dashboard light mode: 60/30/10 ----------
+   60% white, 30% dark green (--ep-green), 10% orange (--ep-accent).
+   Text is black. Appended last so it overrides the light-mode rules above.
+   Dark mode is untouched. */
+html:not(.dark) .dashboard-shell {
+  --ep-bg: #ffffff;
+  --ep-surface: #ffffff;
+  --ep-primary: #000000;
+  --ep-text-muted: #333333;
+  --ink: #000000;
+
+  /* Secondary: dark green. Used for fills, badges, charts, vision cards. */
+  --water-deep: #0b4f3a;
+  --water-mid: #126b4f;
+  --mangrove: #0b4f3a;
+  --mangrove-text: #0b4f3a;
+
+  /* Primary: orange. Buttons, active states, hover borders. */
+  --coral: #cf3f12;
+  --coral-dim: #8f3115;
+
+  background: #ffffff;
+  color: #000000;
+}
+
+html:not(.dark) .dashboard-shell aside {
+  border-right-color: rgba(11, 79, 58, 0.35);
+}
+
+/* Headings and values: black text (the variable itself is green for fills). */
+html:not(.dark) .dashboard-shell .text-\[var\(--water-deep\)\] {
+  color: #000000;
+}
+
+/* Supporting text: near-black instead of grey-green. */
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.55\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.6\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.65\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.68\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.7\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\] {
+  color: #333333;
+}
+
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.4\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.45\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\] {
+  color: #444444;
+}
+
+/* Active sidebar item: orange border and dot (were hardcoded #e8623a). */
+html:not(.dark) .dashboard-shell .dashboard-nav-active {
+  border-color: var(--ep-accent);
+}
+
+html:not(.dark) .dashboard-shell .dashboard-nav-active-dot {
+  background-color: var(--ep-accent);
+}
+
+/* Avatar initials sit on orange, so they need white text. */
+html:not(.dark) .dashboard-shell aside a[aria-label="Edit user profile"] > div:first-child {
+  color: #ffffff;
 }

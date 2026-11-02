@@ -494,15 +494,12 @@ export function Dashboard() {
           {visionMetrics.map((m) => (
             <div
               key={m.label}
-              className="rounded-[10px] p-3.5 text-[var(--sand)] transition-transform hover:-translate-y-0.5"
-              style={{
-                background: "linear-gradient(160deg, var(--water-deep), var(--water-mid))",
-              }}
+              className="rounded-[10px] border border-[var(--sand-dim)] bg-white p-3.5 transition-all hover:-translate-y-0.5 hover:border-[var(--coral)]"
             >
-              <div className="ep-font-mono text-[10px] uppercase text-[rgba(255,255,255,0.62)] mb-1.5">
+              <div className="ep-font-mono text-[10px] uppercase text-[rgba(11,35,32,0.5)] mb-1.5">
                 {m.label}
               </div>
-              <div className="ep-font-display text-xl font-semibold">{m.value}</div>
+              <div className="ep-font-display text-xl font-semibold text-[var(--water-deep)]">{m.value}</div>
             </div>
           ))}
         </div>
