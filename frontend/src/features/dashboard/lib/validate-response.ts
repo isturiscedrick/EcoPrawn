@@ -38,7 +38,7 @@ export function parseHardwareListResponse(value: unknown, expectedTankId: string
   return value.readings as HardwareReading[];
 }
 
-function isTank(value: unknown): value is ApiTank {
+export function isTank(value: unknown): value is ApiTank {
   return record(value) && tankId(value.id) && text(value.name) && text(value.pl) &&
     number(value.biomass, 0) && number(value.fcr, 0) &&
     number(value.targetToday, 0) && number(value.dispensedToday, 0) &&
@@ -51,6 +51,13 @@ function isTank(value: unknown): value is ApiTank {
       count(item.population) && count(item.abnormalCount)) &&
     (value.hardwareTelemetries === undefined ||
       list(value.hardwareTelemetries, item => isHardwareReading(item, value.id as string)));
+}
+
+export function parseTankMutationResponse(value: unknown): ApiTank {
+  if (!record(value) || value.success !== true || !isTank(value.tank)) {
+    throw new Error("Invalid tank response");
+  }
+  return value.tank;
 }
 
 export function parseDashboardResponse(value: unknown): DashboardData & { tanks: ApiTank[] } {

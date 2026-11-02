@@ -9,7 +9,7 @@ import {
 } from "react";
 import type { SensorStatus } from "@/types";
 import type { ApiTank, DashboardData } from "@/types/api";
-import { parseDashboardResponse } from "../lib/validate-response";
+import { parseDashboardResponse, parseTankMutationResponse } from "../lib/validate-response";
 export interface Tank {
   id: string;
   name: string;
@@ -42,6 +42,25 @@ const empty: DashboardData = {
   alertsLog: [],
   resolvedAlerts: 0,
 };
+function computeTankStatus(water?: {
+  dissolvedOxygen: number;
+  ph: number;
+  temperature: number;
+  salinity: number;
+  waterLevel: number;
+}): SensorStatus {
+  return water &&
+    water.dissolvedOxygen >= 4.5 &&
+    water.ph >= 7.5 &&
+    water.ph <= 8.5 &&
+    water.temperature >= 26 &&
+    water.temperature <= 30 &&
+    water.salinity >= 10 &&
+    water.salinity <= 20 &&
+    water.waterLevel >= 90
+    ? "ok"
+    : "warn";
+}
 function mapTank(t: ApiTank): Tank {
   const water = t.telemetries[0];
   const scan = t.visionScans[0];
@@ -63,18 +82,7 @@ function mapTank(t: ApiTank): Tank {
     weight: scan?.weight ?? 0,
     population: scan?.population ?? 0,
     abnormal: scan?.abnormalCount ?? 0,
-    status:
-      water &&
-      water.dissolvedOxygen >= 4.5 &&
-      water.ph >= 7.5 &&
-      water.ph <= 8.5 &&
-      water.temperature >= 26 &&
-      water.temperature <= 30 &&
-      water.salinity >= 10 &&
-      water.salinity <= 20 &&
-      water.waterLevel >= 90
-        ? "ok"
-        : "warn",
+    status: computeTankStatus(water),
   };
 }
 const validId = (value: string) => value.length > 0 && value.length <= 128 && value.trim() === value && !/\s/.test(value);
@@ -115,10 +123,15 @@ export function TankProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const refreshing = useRef(false);
+  const pendingMutations = useRef(0);
   const mounted = useRef(true);
   const controller = useRef<AbortController | null>(null);
-  const refreshTanks = useCallback(async () => {
-    if (refreshing.current) return;
+  const refreshTanks = useCallback(async (force = false) => {
+    if (pendingMutations.current > 0 && !force) return;
+    if (refreshing.current) {
+      if (!force) return;
+      controller.current?.abort();
+    }
     refreshing.current = true;
     const request = new AbortController();
     controller.current = request;
@@ -133,7 +146,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
           "Unable to load dashboard. Check the backend connection.",
         );
       const result = parseDashboardResponse(await res.json());
-      if (!mounted.current) return;
+      if (!mounted.current || request.signal.aborted || pendingMutations.current > 0) return;
       setTanks(result.tanks.map(mapTank));
       setData(result);
       setConnected(true);
@@ -154,20 +167,33 @@ export function TankProvider({ children }: { children: ReactNode }) {
     mounted.current = true;
     void refreshTanks();
     const refreshVisible = () => { if (!document.hidden) void refreshTanks(); };
+    const refreshHardware = () => { if (!document.hidden) void refreshTanks(true); };
     const timer = setInterval(refreshVisible, 5000);
     document.addEventListener("visibilitychange", refreshVisible);
-    window.addEventListener("ecoprawn:hardware-saved", refreshVisible);
+    window.addEventListener("ecoprawn:hardware-saved", refreshHardware);
     return () => {
       mounted.current = false;
       clearInterval(timer);
       document.removeEventListener("visibilitychange", refreshVisible);
-      window.removeEventListener("ecoprawn:hardware-saved", refreshVisible);
+      window.removeEventListener("ecoprawn:hardware-saved", refreshHardware);
       controller.current?.abort();
       controller.current = null;
       refreshing.current = false;
     };
   }, [refreshTanks]);
-  async function mutate(url: string, method: string, body?: unknown): Promise<boolean> {
+  async function mutate(
+    url: string,
+    method: string,
+    body?: unknown,
+    options?: {
+      onOptimistic?: () => () => void;
+      onSuccess?: (payload: unknown) => void;
+    },
+  ): Promise<boolean> {
+    controller.current?.abort();
+    refreshing.current = false;
+    pendingMutations.current += 1;
+    const rollback = mounted.current ? options?.onOptimistic?.() : undefined;
     try {
       const res = await fetch(url, {
         method,
@@ -175,16 +201,29 @@ export function TankProvider({ children }: { children: ReactNode }) {
         ...(body ? { body: JSON.stringify(body) } : {}),
       });
       if (res.status === 401) {
+        rollback?.();
         window.location.replace("/login?error=expired");
         return false;
       }
       if (!res.ok)
         throw new Error("Could not save the change. Please try again.");
-      await refreshTanks();
+      const payload: unknown = await res.json().catch(() => null);
+      if (mounted.current) {
+        options?.onSuccess?.(payload);
+        setError(null);
+      }
       return true;
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Unable to save change");
+      if (mounted.current) {
+        rollback?.();
+        setError(e instanceof Error ? e.message : "Unable to save change");
+      }
       return false;
+    } finally {
+      pendingMutations.current = Math.max(0, pendingMutations.current - 1);
+      if (mounted.current && pendingMutations.current === 0) {
+        void refreshTanks(true);
+      }
     }
   }
   const reject = (message: string) => { setError(message); return Promise.resolve(false); };
@@ -196,13 +235,117 @@ export function TankProvider({ children }: { children: ReactNode }) {
         isDbConnected,
         loading,
         error,
-        refreshTanks,
-        addTank: (input) => validNewTank(input)
-          ? mutate("/api/tanks", "POST", input) : reject("Enter valid tank measurements before saving."),
-        removeTank: (id) =>
-          validId(id) ? mutate("/api/tanks/" + encodeURIComponent(id), "DELETE") : reject("Invalid tank ID."),
-        updateTank: (id, patch) =>
-          validId(id) && validPatch(patch) ? mutate("/api/tanks/" + encodeURIComponent(id), "PATCH", patch) : reject("Invalid tank change."),
+        refreshTanks: () => refreshTanks(true),
+        addTank: (input) => {
+          if (!validNewTank(input)) return reject("Enter valid tank measurements before saving.");
+          const tempId = `temp-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+          const tempScanId = `scan-${tempId}`;
+          const nowIso = new Date().toISOString();
+          const optimisticTank: Tank = {
+            id: tempId,
+            ...input,
+            status: computeTankStatus(input),
+          };
+          return mutate("/api/tanks", "POST", input, {
+            onOptimistic: () => {
+              setTanks((prev) => [...prev, optimisticTank]);
+              setData((prev) => ({
+                ...prev,
+                waterTrend: [...prev.waterTrend, { tankId: tempId, value: input.dissolvedOxygen }],
+                growthTrend: [...prev.growthTrend, input.bodyLength],
+                visionScanLog: [
+                  { id: tempScanId, time: nowIso, tank: input.name, note: "Scan recorded" },
+                  ...prev.visionScanLog,
+                ],
+              }));
+              return () => {
+                setTanks((prev) => prev.filter((t) => t.id !== tempId));
+                setData((prev) => ({
+                  ...prev,
+                  waterTrend: prev.waterTrend.filter((r) => r.tankId !== tempId),
+                  growthTrend: prev.growthTrend.slice(0, -1),
+                  visionScanLog: prev.visionScanLog.filter((s) => s.id !== tempScanId),
+                }));
+              };
+            },
+            onSuccess: (payload) => {
+              const created = parseTankMutationResponse(payload);
+              const mapped = mapTank(created);
+              const scan = created.visionScans[0] as { id?: string; recordedAt?: string; notes?: string | null } | undefined;
+              setTanks((prev) =>
+                prev.some((t) => t.id === tempId)
+                  ? prev.map((t) => (t.id === tempId ? mapped : t))
+                  : prev.some((t) => t.id === mapped.id)
+                    ? prev
+                    : [...prev, mapped],
+              );
+              setData((prev) => ({
+                ...prev,
+                waterTrend: prev.waterTrend.map((r) => (r.tankId === tempId ? { ...r, tankId: mapped.id } : r)),
+                visionScanLog: prev.visionScanLog.map((s) =>
+                  s.id === tempScanId
+                    ? {
+                        id: scan?.id ?? tempScanId,
+                        time: scan?.recordedAt ?? s.time,
+                        tank: mapped.name,
+                        note: scan?.notes || "Scan recorded",
+                      }
+                    : s,
+                ),
+              }));
+            },
+          });
+        },
+        removeTank: (id) => {
+          if (!validId(id)) return reject("Invalid tank ID.");
+          return mutate("/api/tanks/" + encodeURIComponent(id), "DELETE", undefined, {
+            onOptimistic: () => {
+              let removedTank: Tank | undefined;
+              let removedIndex = -1;
+              setTanks((prev) => {
+                removedIndex = prev.findIndex((t) => t.id === id);
+                removedTank = removedIndex >= 0 ? prev[removedIndex] : undefined;
+                return prev.filter((t) => t.id !== id);
+              });
+              return () => {
+                if (!removedTank) return;
+                const restored = removedTank;
+                setTanks((prev) => {
+                  if (prev.some((t) => t.id === restored.id)) return prev;
+                  const next = [...prev];
+                  next.splice(Math.min(Math.max(0, removedIndex), next.length), 0, restored);
+                  return next;
+                });
+              };
+            },
+            onSuccess: () => {
+              setData((prev) => ({
+                ...prev,
+                waterTrend: prev.waterTrend.filter((r) => r.tankId !== id),
+              }));
+            },
+          });
+        },
+        updateTank: (id, patch) => {
+          if (!validId(id) || !validPatch(patch)) return reject("Invalid tank change.");
+          return mutate("/api/tanks/" + encodeURIComponent(id), "PATCH", patch, {
+            onOptimistic: () => {
+              let previousTank: Tank | undefined;
+              setTanks((prev) =>
+                prev.map((t) => {
+                  if (t.id !== id) return t;
+                  previousTank = t;
+                  return { ...t, ...patch };
+                }),
+              );
+              return () => {
+                if (!previousTank) return;
+                const restored = previousTank;
+                setTanks((prev) => prev.map((t) => (t.id === id ? restored : t)));
+              };
+            },
+          });
+        },
       }}
     >
       {children}

@@ -411,7 +411,8 @@ export function Dashboard() {
                   key={t.id}
                   {...t}
                   onRemove={async (id) => {
-                    if (await removeTank(id)) showToast("Tank removed successfully.");
+                    showToast("Tank removed.");
+                    if (!(await removeTank(id))) showToast("Could not remove tank. Please try again.");
                   }}
                 />
               ))}
@@ -520,7 +521,8 @@ export function Dashboard() {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         onSubmit={async (input) => {
-          if (await addTank(input)) showToast(`${input.name} added successfully.`);
+          showToast(`${input.name} added.`);
+          if (!(await addTank(input))) showToast(`Could not save ${input.name}. Please try again.`);
         }}
         existingCount={tankCount}
       />
