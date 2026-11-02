@@ -16,21 +16,21 @@
   --ep-logo-color: #d94416;
   /* Wordmark color. Override with a utility class on dark backgrounds,
      e.g. className="[--ep-logo-text:#ffffff]". */
-  --ep-logo-text: #1e7a46;
+  --ep-logo-text: #000000;
   overflow: visible;
 }
 
-/* Dark mode: light coral shrimp, light green wordmark. */
+/* Dark mode: light coral shrimp, white wordmark. */
 html.dark .ep-logo {
   --ep-logo-color: #f28a68;
-  --ep-logo-text: #8bd5a6;
+  --ep-logo-text: #ffffff;
 }
 
 /* The public header and auth modal are always white, so keep the light colors. */
 html.dark header .ep-logo,
 html.dark .ep-auth-modal .ep-logo {
   --ep-logo-color: #d94416;
-  --ep-logo-text: #1e7a46;
+  --ep-logo-text: #000000;
 }
 
 /* The landing page covers the screen with a water intro for the first

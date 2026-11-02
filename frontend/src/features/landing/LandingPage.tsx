@@ -74,7 +74,7 @@ function Words({ text }: { text: string }) {
 
 export function LandingPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
+    <div className="flex min-h-screen flex-col bg-white text-[var(--ep-text)]">
       <LandingMotion />
       <SiteHeader tone="white" />
 
@@ -145,7 +145,7 @@ export function LandingPage() {
                   <span className="text-[var(--ep-accent)]">
                     <Words text="Indoor shrimp farming," />
                   </span>
-                  <span className="block text-[var(--ep-primary)]"><Words text="always in range." /></span>
+                  <span className="block text-[var(--ep-text)]"><Words text="always in range." /></span>
                 </span>
               </h1>
 

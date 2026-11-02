@@ -18,7 +18,7 @@ const CONTACT_DETAILS: { label: string; value: string; icon: IconName }[] = [
 
 export function ContactPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
+    <div className="flex min-h-screen flex-col bg-white text-[var(--ep-text)]">
       <ContactMotion />
       <SiteHeader tone="white" />
 

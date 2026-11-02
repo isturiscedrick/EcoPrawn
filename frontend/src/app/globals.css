@@ -445,10 +445,11 @@ html {
   --ep-surface: #ffffff;     /*      cards                      */
   --ep-tint: #ffffff;        /*      neutral surfaces            */
   --ep-line: #d8e0de;        /*      decorative borders         */
-  --ep-primary: #0b2e33;     /* 30%  ink: text, outlines, dark panels */
+  --ep-primary: #0b2e33;     /* 30%  ink: outlines, dark panels */
+  --ep-text: #000000;        /*      page body text on landing, About, Contact */
   --ep-primary-soft: #12474d;/*      hover on ink               */
   --ep-text-muted: #3f5753;  /*      supporting copy            */
-  --ep-accent: #b23f1c;      /* 10%  main button, headline accent */
+  --ep-accent: #cf3f12;      /* 10%  main button, headline accent */
   --ep-ok: #1e7a46;
   --ep-warn-text: #8f5a12;
   --ep-danger: #b3261e;
@@ -469,7 +470,7 @@ html:not(.dark) .dashboard-shell aside {
 
 html:not(.dark) .dashboard-shell aside .ep-logo {
   --ep-logo-color: #d94416;
-  --ep-logo-text: #1e7a46;
+  --ep-logo-text: #000000;
 }
 
 html:not(.dark) .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.12\)\],
@@ -518,7 +519,7 @@ html.dark .dashboard-shell aside {
 
 html.dark .dashboard-shell aside .ep-logo {
   --ep-logo-color: #f28a68;
-  --ep-logo-text: #8bd5a6;
+  --ep-logo-text: #ffffff;
 }
 
 html.dark .dashboard-shell .text-\[var\(--water-deep\)\] {
