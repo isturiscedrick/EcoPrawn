@@ -278,10 +278,10 @@ export function HeroLens() {
       aria-label="A shrimp inside a camera lens, with example water-quality readings"
       className="relative mx-auto aspect-square w-full max-w-[460px]"
     >
-      {/* Lens barrel */}
-      <div className="absolute inset-0 rounded-full bg-[linear-gradient(145deg,#1d5b62_0%,#0b2e33_55%,#06191c_100%)] p-[3.2%] shadow-[0_40px_70px_-34px_rgba(11,46,51,0.75),inset_0_2px_0_rgba(255,255,255,0.18)]">
+      {/* Lens barrel: deep slate teal #0f4c5c, lit from the top left */}
+      <div className="absolute inset-0 rounded-full bg-[linear-gradient(145deg,#1a6a7e_0%,#0f4c5c_55%,#082b35_100%)] p-[3.2%] shadow-[0_40px_70px_-34px_rgba(15,76,92,0.75),inset_0_2px_0_rgba(255,255,255,0.18)]">
         {/* Glass */}
-        <div className="relative isolate h-full w-full overflow-hidden rounded-full bg-[radial-gradient(circle_at_50%_46%,#1d5b62_0%,#12474d_38%,#0b2e33_72%,#071f23_100%)] ring-1 ring-[rgba(251,248,241,0.25)]">
+        <div className="relative isolate h-full w-full overflow-hidden rounded-full bg-[radial-gradient(circle_at_50%_46%,#1a6a7e_0%,#13596b_38%,#0f4c5c_72%,#082b35_100%)] ring-1 ring-[rgba(251,248,241,0.25)]">
           {/* Concentric rings */}
           <svg
             aria-hidden="true"
@@ -338,7 +338,7 @@ export function HeroLens() {
             className="pointer-events-none absolute inset-[22%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.09)_45%,transparent_72%)]"
           />
 
-          {/* The prawn. Lighter coral than the logo orange for contrast on teal.
+          {/* The prawn, in the dark-mode coral #f28a68 so it pops on teal.
               The "!" is needed because brand-mark.css is unlayered and would
               otherwise beat Tailwind utilities. */}
           <div
@@ -346,7 +346,7 @@ export function HeroLens() {
             className="ep-lens-shrimp pointer-events-none absolute inset-0 flex items-center justify-center"
           >
             <BrandIcon
-              className="h-auto w-[44%] drop-shadow-[0_0_18px_rgba(255,138,99,0.55)] [&_.ep-logo-shrimp]:fill-[#ff8a63]! [&_.ep-logo-shrimp]:stroke-[#ff8a63]!"
+              className="h-auto w-[44%] drop-shadow-[0_0_18px_rgba(242,138,104,0.55)] [&_.ep-logo-shrimp]:fill-[#f28a68]! [&_.ep-logo-shrimp]:stroke-[#f28a68]!"
               timeScale={1.2}
             />
           </div>
@@ -359,18 +359,18 @@ export function HeroLens() {
             className="ep-lens-arcs pointer-events-none absolute inset-0 h-full w-full"
           >
             {ARCS.map((d) => (
-              <path key={d} d={d} stroke="var(--coral)" strokeWidth="3" strokeLinecap="round" />
+              <path key={d} d={d} stroke="#f28a68" strokeWidth="3" strokeLinecap="round" />
             ))}
           </svg>
 
-          {/* Lock ping + scan line */}
+          {/* Lock ping + scan line (sky blue secondary) */}
           <span
             aria-hidden="true"
-            className="ep-lens-ping pointer-events-none absolute inset-[22%] rounded-full border-2 border-[var(--coral)] opacity-0"
+            className="ep-lens-ping pointer-events-none absolute inset-[22%] rounded-full border-2 border-[#f28a68] opacity-0"
           />
           <span
             aria-hidden="true"
-            className="ep-lens-scan pointer-events-none absolute inset-x-[22%] top-[16%] h-px bg-[linear-gradient(90deg,transparent,rgba(255,138,99,0.9),transparent)] opacity-0 shadow-[0_0_14px_rgba(232,98,58,0.7)]"
+            className="ep-lens-scan pointer-events-none absolute inset-x-[22%] top-[16%] h-px bg-[linear-gradient(90deg,transparent,rgba(56,189,248,0.9),transparent)] opacity-0 shadow-[0_0_14px_rgba(56,189,248,0.7)]"
           />
 
           {/* Readouts */}
@@ -381,7 +381,7 @@ export function HeroLens() {
                 <span className="flex items-center gap-1.5 text-[10px] font-medium text-[rgba(255,255,255,0.78)] sm:text-xs">
                   <span
                     aria-hidden="true"
-                    className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-[var(--mangrove-light)]"
+                    className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-[#38bdf8]"
                   />
                   {r.label}
                 </span>
@@ -424,7 +424,7 @@ export function HeroLens() {
           {/* Iris: covers the glass, then opens */}
           <span
             aria-hidden="true"
-            className="ep-lens-iris pointer-events-none absolute inset-0 bg-[#061a1d]"
+            className="ep-lens-iris pointer-events-none absolute inset-0 bg-[#082b35]"
             style={
               {
                 "--iris": "100%",

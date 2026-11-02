@@ -235,7 +235,6 @@ export function LandingMotion() {
           {
             scaleX: 1,
             height: 2,
-            backgroundColor: "#b23f1c",
             ease: "none",
             scrollTrigger: {
               trigger: "#process ol",
