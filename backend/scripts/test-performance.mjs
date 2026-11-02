@@ -7,8 +7,8 @@ import ts from "typescript";
 
 // Exercise real handlers with lazy Prisma-like queries. No database or SMS calls.
 const paths = {
-  dashboard: "src/app/api/dashboard/route.ts",
-  settings: "src/app/api/sms/settings/route.ts",
+  dashboard: "src/handlers/dashboard.ts",
+  settings: "src/handlers/sms-settings.ts",
 };
 const sources = Object.fromEntries(await Promise.all(Object.entries(paths).map(async ([name, path]) =>
   [name, await readFile(new URL(`../${path}`, import.meta.url), "utf8")])));
@@ -120,12 +120,27 @@ console.log("Performance regressions passed: concurrent dashboard/settings reads
 
 // Optional before/after comparison, with a bounded simulated connection pool.
 // Example: bun run test:performance --compare-ref <commit>
+
+// Older revisions predate the handlers directory. Keep comparison runs usable.
+function readHistoricalSource(ref, path) {
+  const historical = {
+    "src/handlers/dashboard.ts": "src/app/api/dashboard/route.ts",
+    "src/handlers/sms-settings.ts": "src/app/api/sms/settings/route.ts",
+  };
+  try {
+    return execFileSync("git", ["show", `${ref}:backend/${path}`], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+  } catch (error) {
+    if (!historical[path]) throw error;
+    return execFileSync("git", ["show", `${ref}:backend/${historical[path]}`], { encoding: "utf8" });
+  }
+}
+
 const refIndex = process.argv.indexOf("--compare-ref");
 if (refIndex >= 0) {
   const ref = process.argv[refIndex + 1];
   assert.ok(ref && !ref.startsWith("-"), "--compare-ref requires a Git revision");
   const baseline = Object.fromEntries(Object.entries(paths).map(([name, path]) => [name,
-    execFileSync("git", ["show", `${ref}:backend/${path}`], { encoding: "utf8" })]));
+    readHistoricalSource(ref, path)]));
   if (process.argv.includes("--database")) {
     // GET handlers only. Identity is supplied locally to measure database work
     // separately from browser authentication. Never print account data.

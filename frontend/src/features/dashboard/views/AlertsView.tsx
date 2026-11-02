@@ -1,5 +1,3 @@
-"use client";
-
 import { AlertRow } from "@/features/dashboard/components/DashboardRows";
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { useTanks } from "@/features/dashboard/context/TankContext";

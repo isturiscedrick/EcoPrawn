@@ -1,7 +1,5 @@
-"use client";
-
 import { useLayoutEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { useRouterState } from "@tanstack/react-router";
 
 /**
  * Marks <html> after the first in-app navigation so the header logo stops
@@ -9,7 +7,9 @@ import { usePathname } from "next/navigation";
  * so the animation plays again.
  */
 export function LogoIntroGate() {
-  const pathname = usePathname();
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
   const firstPath = useRef(pathname);
 
   // Layout effect: runs before paint, so the new header never flashes the animation.

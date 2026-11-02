@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { POST } from '@/handlers/seed';
+export const Route = createFileRoute('/api/seed')({ server: { handlers: { POST: ({ request, params }) => POST(), GET: () => new Response(null, { status: 405, headers: { Allow: 'POST, OPTIONS' } }), PATCH: () => new Response(null, { status: 405, headers: { Allow: 'POST, OPTIONS' } }), DELETE: () => new Response(null, { status: 405, headers: { Allow: 'POST, OPTIONS' } }), PUT: () => new Response(null, { status: 405, headers: { Allow: 'POST, OPTIONS' } }), HEAD: () => new Response(null, { status: 405, headers: { Allow: 'POST, OPTIONS' } }), OPTIONS: () => new Response(null, { status: 204, headers: { Allow: 'POST, OPTIONS' } }) } } });

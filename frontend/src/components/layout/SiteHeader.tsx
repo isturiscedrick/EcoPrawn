@@ -1,8 +1,6 @@
-"use client";
-
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { BrandMark } from "./BrandMark";
 import { NavLinks } from "./NavLinks";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
@@ -25,7 +23,9 @@ export function SiteHeader({
 }: SiteHeaderProps) {
   const isAuth = variant === "auth";
   const isWhite = tone === "white";
-  const pathname = usePathname();
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -61,7 +61,9 @@ export function SiteHeader({
   }, [mobileNavOpen]);
 
   const topBg = isWhite ? "bg-white" : "bg-[rgba(251,248,241,0.96)]";
-  const scrolledBg = isWhite ? "bg-[rgba(255,255,255,0.92)]" : "bg-[rgba(251,248,241,0.92)]";
+  const scrolledBg = isWhite
+    ? "bg-[rgba(255,255,255,0.92)]"
+    : "bg-[rgba(251,248,241,0.92)]";
 
   return (
     <header
@@ -84,9 +86,10 @@ export function SiteHeader({
         }`}
       >
         <Link
-          href="/"
+          to="/"
           className={`flex shrink-0 items-center rounded-md transition-transform duration-200 hover:scale-[1.03] active:scale-100 md:justify-self-start ${focusRing}`}
           aria-label="EcoPrawn home"
+          activeOptions={{ exact: true }}
         >
           <span className="md:hidden">
             <BrandMark size={isAuth ? 32 : 34} />
@@ -102,8 +105,9 @@ export function SiteHeader({
         <div className="flex shrink-0 items-center gap-2 md:justify-self-end">
           {isAuth ? (
             <Link
-              href="/"
+              to="/"
               className={`group inline-flex items-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] px-4 py-2 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] active:translate-y-0 sm:px-5 ${focusRing}`}
+              activeOptions={{ exact: true }}
             >
               <span
                 aria-hidden="true"
@@ -118,8 +122,18 @@ export function SiteHeader({
               <AuthLink
                 className={`inline-flex items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/60 px-4 py-2.5 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.35)] active:translate-y-0 sm:px-5 ${focusRing}`}
               >
-                <svg className="shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-                  <circle cx="12" cy="8" r="3.5" /><path d="M5 20c.7-3.1 3.2-5 7-5s6.3 1.9 7 5" />
+                <svg
+                  className="shrink-0"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="8" r="3.5" />
+                  <path d="M5 20c.7-3.1 3.2-5 7-5s6.3 1.9 7 5" />
                 </svg>
                 Log in
               </AuthLink>
@@ -128,7 +142,16 @@ export function SiteHeader({
                 mode="signup"
                 className={`group hidden items-center justify-center gap-2 rounded-lg bg-[var(--ep-accent)] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_6px_14px_-8px_rgba(178,63,28,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_10px_20px_-10px_rgba(178,63,28,0.55)] active:translate-y-0 sm:inline-flex sm:px-5 ${focusRing}`}
               >
-                <svg className="shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+                <svg
+                  className="shrink-0"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  aria-hidden="true"
+                >
                   <path d="M12 5v14M5 12h14" />
                 </svg>
                 Sign up

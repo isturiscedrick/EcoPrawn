@@ -1,5 +1,3 @@
-"use client";
-
 import { useMemo, useState } from "react";
 import type { Tank } from "@/features/dashboard/context/TankContext";
 import { SensorGauge } from "@/features/dashboard/components/SensorGauge";

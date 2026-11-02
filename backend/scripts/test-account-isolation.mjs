@@ -40,10 +40,10 @@ const auth = {
   accountAccess: async () => user ?? Response.json({}, { status: 401 }),
 };
 async function load(path) {
-  const source = await readFile(new URL(`../src/app/api/${path}/route.ts`, import.meta.url), "utf8");
+  const source = await readFile(new URL(`../src/handlers/${path}.ts`, import.meta.url), "utf8");
   const { outputText } = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } });
   const module = { exports: {} };
-  const imports = { "@/lib/auth": auth, "@/lib/prisma": { __esModule: true, default: db }, "@/lib/api-validation": validation, "next/server": { NextResponse: Response }, "@/lib/unisms": { waterWarnings: () => [] }, "@/lib/sms": { dispatchSms: async () => ({ status: "not_configured" }) } };
+  const imports = { "@/lib/auth": auth, "@/lib/prisma": { __esModule: true, default: db }, "@/lib/api-validation": validation, "@/lib/unisms": { waterWarnings: () => [] }, "@/lib/sms": { dispatchSms: async () => ({ status: "not_configured" }) } };
   new Function("require", "module", "exports", outputText)(name => {
     if (!(name in imports)) throw new Error(`Unexpected import ${name}`);
     return imports[name];
@@ -56,10 +56,10 @@ const validationModule = { exports: {} };
 new Function("require", "module", "exports", validationOutput)(() => { throw new Error("Unexpected validation import"); }, validationModule, validationModule.exports);
 const validation = validationModule.exports;
 const list = await load("tanks");
-const detail = await load("tanks/[id]");
+const detail = await load("tanks-detail");
 const water = await load("water");
 const dashboard = await load("dashboard");
-const params = id => ({ params: Promise.resolve({ id }) });
+const params = id => ({ params: { id } });
 const request = (body, url = "http://localhost/api/tanks") => new Request(url, {
   method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body),
 });

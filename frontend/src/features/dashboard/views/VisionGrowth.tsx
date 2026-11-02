@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";

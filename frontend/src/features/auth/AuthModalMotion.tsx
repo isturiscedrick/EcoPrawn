@@ -1,5 +1,3 @@
-"use client";
-
 import { useLayoutEffect, type RefObject } from "react";
 import gsap from "gsap";
 import { animate, utils } from "animejs";

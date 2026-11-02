@@ -1,10 +1,10 @@
 # EcoPrawn backend
 
-This Next.js API service owns database access. It has no UI pages.
+This TanStack Start API service owns database access. It has no UI pages.
 
 - `prisma/schema.prisma` defines the PostgreSQL models.
 - `src/lib/prisma.ts` creates the shared Prisma client.
-- `src/app/api/` contains tank CRUD, water telemetry and alert creation, and the seed endpoint.
+- `src/handlers/` contains tank CRUD, water telemetry and alert creation, and the seed endpoint.
 
 ## Run locally
 
@@ -22,7 +22,7 @@ bun run dev
 
 On Windows, you can instead run `./setup-db.ps1` from the repository root after installing dependencies. Stop backend development servers before generating the Prisma client or changing the database schema. Restart the backend after changing `.env`.
 
-The API listens on [http://localhost:4000](http://localhost:4000). Run the frontend separately on port 3000. Its `/api/*` requests are forwarded here by `frontend/next.config.ts`.
+The API listens on [http://localhost:4000](http://localhost:4000). Run the frontend separately on port 3000. Its `/api/*` requests are forwarded here by the TanStack request middleware in `frontend/src/start.ts`.
 
 | Endpoint | Methods | Purpose |
 | --- | --- | --- |
@@ -157,3 +157,9 @@ bun run test:oxygen:live
 This requires backend `.env` credentials and exactly one SMS-enabled account. If multiple accounts are enabled, select the app User ID explicitly with `bun run test:oxygen:live --user-id YOUR_APP_USER_ID`. The command respects the five-minute SMS cooldown and creates no data while that cooldown is active.
 
 The live test creates or reuses a separate tank named `TEST - Oxygen alert`, records oxygen at 3 mg/L with the other parameters in range, and invokes the real water route. It verifies the persisted alert and the dashboard API response. The CLI supplies the selected account identity; it does not test browser authentication. The test tank and alert stay in the database so you can inspect them in the dashboard. Each live run can use SMS credits. `pending` means UniSMS accepted the request; delivery confirmation comes separately from UniSMS.
+
+## Runtime and migration
+
+Use Bun 1.4.0. `bun run dev` serves port 4000 with Vite on Bun; `bun run build` emits the standalone Nitro Bun server and `bun run start` starts it on `PORT` or 4000. Build on the deployment OS so Prisma 6.4.1 native binaries match. Production startup loads `.env` when present; deployment environment variables take precedence.
+
+TanStack server routes live in `src/routes`; framework-independent HTTP handlers remain in `src/handlers`. `src/lib/request-context.ts` adapts active request cookies and headers for Supabase SSR. `src/start.ts` disables caching for all API responses. No database schema changes are required.

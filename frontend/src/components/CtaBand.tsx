@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
 
 interface CtaBandProps {
@@ -40,8 +40,9 @@ export function CtaBand({ secondaryHref, secondaryLabel }: CtaBandProps) {
           </AuthLink>
 
           <Link
-            href={secondaryHref}
+            to={secondaryHref}
             className={`inline-flex items-center justify-center whitespace-nowrap rounded-xl border-2 border-[var(--ep-bg)] px-7 py-3.5 text-base font-semibold text-[var(--ep-bg)] hover:bg-[var(--ep-bg)] hover:text-[var(--ep-primary)] ${motion} ${focusRing}`}
+            activeOptions={{ exact: true }}
           >
             {secondaryLabel}
           </Link>

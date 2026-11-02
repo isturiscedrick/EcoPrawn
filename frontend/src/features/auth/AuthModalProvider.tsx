@@ -1,5 +1,3 @@
-"use client";
-
 import {
   createContext,
   useCallback,
@@ -13,7 +11,7 @@ import {
   type ReactNode,
 } from "react";
 
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { LoginForm, type AuthMode } from "./LoginForm";
@@ -49,7 +47,13 @@ const SCOPE = {
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) {
+function AuthDialog({
+  onClose,
+  mode,
+}: {
+  onClose: () => void;
+  mode: AuthMode;
+}) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const closing = useRef(false);
@@ -71,23 +75,14 @@ function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) 
     const panel = panelRef.current;
 
     const items = () =>
-      panel
-        ? Array.from(
-            panel.querySelectorAll<HTMLElement>(FOCUSABLE)
-          )
-        : [];
+      panel ? Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE)) : [];
 
-    const isTouch = window.matchMedia(
-      "(pointer: coarse)"
-    ).matches;
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
     if (isTouch) {
       panel?.focus();
     } else {
-      (
-        panel?.querySelector<HTMLElement>("input") ??
-        items()[0]
-      )?.focus();
+      (panel?.querySelector<HTMLElement>("input") ?? items()[0])?.focus();
     }
 
     function onKeyDown(e: KeyboardEvent) {
@@ -105,16 +100,10 @@ function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) 
       const first = list[0];
       const last = list[list.length - 1];
 
-      if (
-        e.shiftKey &&
-        document.activeElement === first
-      ) {
+      if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
         last.focus();
-      } else if (
-        !e.shiftKey &&
-        document.activeElement === last
-      ) {
+      } else if (!e.shiftKey && document.activeElement === last) {
         e.preventDefault();
         first.focus();
       }
@@ -171,11 +160,7 @@ function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) 
             aria-label="Close"
             className="absolute right-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-xl text-[var(--ep-text-muted)] transition-colors duration-200 hover:bg-[rgba(11,46,51,0.04)] hover:text-[var(--ep-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
           >
-            <Icon
-              name="x"
-              size={20}
-              strokeWidth={2}
-            />
+            <Icon name="x" size={20} strokeWidth={2} />
           </button>
         </div>
 
@@ -186,11 +171,7 @@ function AuthDialog({ onClose, mode }: { onClose: () => void; mode: AuthMode }) 
   );
 }
 
-export function AuthModalProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function AuthModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [mode, setMode] = useState<AuthMode>("signin");
 
@@ -208,16 +189,12 @@ export function AuthModalProvider({
   );
 }
 
-type AuthLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
+type AuthLinkProps = Omit<ComponentProps<typeof Link>, "to"> & {
   /** Which tab the modal opens on. Defaults to Sign in. */
   mode?: AuthMode;
 };
 
-export function AuthLink({
-  onClick,
-  mode,
-  ...props
-}: AuthLinkProps) {
+export function AuthLink({ onClick, mode, ...props }: AuthLinkProps) {
   const { open } = useAuthModal();
 
   function handleClick(e: MouseEvent<HTMLAnchorElement>) {
@@ -238,5 +215,12 @@ export function AuthLink({
     open(mode);
   }
 
-  return <Link {...props} href="/login" onClick={handleClick} />;
+  return (
+    <Link
+      {...props}
+      to="/login"
+      onClick={handleClick}
+      activeOptions={{ exact: true }}
+    />
+  );
 }

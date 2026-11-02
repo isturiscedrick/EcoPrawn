@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { HeroLens } from "@/features/landing/HeroLens";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -9,7 +9,10 @@ import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
 import { heroReadoutUnits } from "@/config/sensors";
-import { heroReadouts, waterQualityThresholds } from "@/content/landing-preview";
+import {
+  heroReadouts,
+  waterQualityThresholds,
+} from "@/content/landing-preview";
 
 const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
@@ -21,10 +24,30 @@ const eyebrow =
   "mb-4 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]";
 
 const STEPS: { step: string; title: string; body: string; icon: IconName }[] = [
-  { step: "01", title: "Sense", icon: "activity", body: "Five sensors stream water readings around the clock." },
-  { step: "02", title: "Analyze", icon: "eye", body: "Cameras estimate shrimp growth and biomass without handling." },
-  { step: "03", title: "Act", icon: "zap", body: "Aerators start automatically. Feed follows biomass." },
-  { step: "04", title: "Return", icon: "leaf", body: "Treated wastewater is routed to mangrove and wetland." },
+  {
+    step: "01",
+    title: "Sense",
+    icon: "activity",
+    body: "Five sensors stream water readings around the clock.",
+  },
+  {
+    step: "02",
+    title: "Analyze",
+    icon: "eye",
+    body: "Cameras estimate shrimp growth and biomass without handling.",
+  },
+  {
+    step: "03",
+    title: "Act",
+    icon: "zap",
+    body: "Aerators start automatically. Feed follows biomass.",
+  },
+  {
+    step: "04",
+    title: "Return",
+    icon: "leaf",
+    body: "Treated wastewater is routed to mangrove and wetland.",
+  },
 ];
 
 const STATS = [
@@ -35,7 +58,10 @@ const STATS = [
 
 // Gauge scale and target zone per reading, used only to draw the range bars.
 // Same numbers as the dashboard thresholds.
-const ZONES: Record<string, { min: number; max: number; lo: number; hi: number }> = {
+const ZONES: Record<
+  string,
+  { min: number; max: number; lo: number; hi: number }
+> = {
   "Dissolved O₂": { min: 0, max: 8, lo: 4.5, hi: 8 },
   pH: { min: 6, max: 10, lo: 7.5, hi: 8.5 },
   Temperature: { min: 20, max: 36, lo: 26, hi: 30 },
@@ -89,8 +115,10 @@ export function LandingPage() {
               backgroundImage:
                 "linear-gradient(var(--ep-primary) 1px, transparent 1px), linear-gradient(90deg, var(--ep-primary) 1px, transparent 1px)",
               backgroundSize: "64px 64px",
-              WebkitMaskImage: "radial-gradient(ellipse at 60% 40%, black 25%, transparent 72%)",
-              maskImage: "radial-gradient(ellipse at 60% 40%, black 25%, transparent 72%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse at 60% 40%, black 25%, transparent 72%)",
+              maskImage:
+                "radial-gradient(ellipse at 60% 40%, black 25%, transparent 72%)",
             }}
           />
           <div
@@ -101,7 +129,10 @@ export function LandingPage() {
                 "radial-gradient(640px circle at 82% 30%, rgba(95,184,196,0.16), transparent 62%), radial-gradient(520px circle at 8% 95%, rgba(178,63,28,0.07), transparent 60%)",
             }}
           />
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10"
+          >
             {CROSSES.map((c) => (
               <span
                 key={`${c.left}-${c.top}`}
@@ -116,7 +147,10 @@ export function LandingPage() {
           </div>
 
           <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 py-14 sm:px-8 md:grid-cols-[0.95fr_1.05fr] md:gap-16 lg:py-24">
-            <div data-hero="parallax-console" className="relative mx-auto w-full max-w-[480px]">
+            <div
+              data-hero="parallax-console"
+              className="relative mx-auto w-full max-w-[480px]"
+            >
               <div data-hero="console">
                 <HeroLens />
               </div>
@@ -145,7 +179,9 @@ export function LandingPage() {
                   <span className="text-[var(--ep-accent)]">
                     <Words text="Indoor shrimp farming," />
                   </span>
-                  <span className="block text-[var(--ep-primary)]"><Words text="always in range." /></span>
+                  <span className="block text-[var(--ep-primary)]">
+                    <Words text="always in range." />
+                  </span>
                 </span>
               </h1>
 
@@ -153,10 +189,14 @@ export function LandingPage() {
                 data-hero="lead"
                 className="mt-6 max-w-[32rem] text-lg leading-relaxed text-[var(--ep-text-muted)]"
               >
-                Live water quality, automated feeding, and AI growth tracking for your tanks, all in one dashboard.
+                Live water quality, automated feeding, and AI growth tracking
+                for your tanks, all in one dashboard.
               </p>
 
-              <div data-hero="cta" className="mt-9 flex flex-col gap-3 sm:flex-row md:justify-start">
+              <div
+                data-hero="cta"
+                className="mt-9 flex flex-col gap-3 sm:flex-row md:justify-start"
+              >
                 <AuthLink
                   className={`group inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 text-base font-semibold text-white hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
                 >
@@ -170,13 +210,13 @@ export function LandingPage() {
                 </AuthLink>
 
                 <Link
-                  href="/about"
+                  to="/about"
                   className={`inline-flex items-center justify-center rounded-lg border-2 border-[var(--ep-primary)] px-7 py-3.5 text-base font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${buttonMotion} ${focusRing}`}
+                  activeOptions={{ exact: true }}
                 >
                   See how it works
                 </Link>
               </div>
-
             </div>
           </div>
         </section>
@@ -200,7 +240,10 @@ export function LandingPage() {
           <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 sm:py-24">
             <div data-reveal="" className="max-w-[40rem]">
               <div className={`${eyebrow} !text-[rgba(255,255,255,0.85)]`}>
-                <span aria-hidden="true" className="h-2 w-2 bg-[var(--coral)]" />
+                <span
+                  aria-hidden="true"
+                  className="h-2 w-2 bg-[var(--coral)]"
+                />
                 Target ranges
               </div>
               <h2
@@ -219,9 +262,13 @@ export function LandingPage() {
                 const zone = ZONES[r.label];
                 const value = parseFloat(r.value);
                 const zoneLeft = zone ? pct(zone.lo, zone.min, zone.max) : 0;
-                const zoneWidth = zone ? pct(zone.hi, zone.min, zone.max) - zoneLeft : 0;
+                const zoneWidth = zone
+                  ? pct(zone.hi, zone.min, zone.max) - zoneLeft
+                  : 0;
                 const markerLeft = zone ? pct(value, zone.min, zone.max) : 0;
-                const inRange = zone ? value >= zone.lo && value <= zone.hi : true;
+                const inRange = zone
+                  ? value >= zone.lo && value <= zone.hi
+                  : true;
                 const range = targetRangeFor(r.label);
                 return (
                   <div
@@ -231,14 +278,23 @@ export function LandingPage() {
                     className="rounded-xl border border-[rgba(255,255,255,0.22)] bg-[rgba(255,255,255,0.05)] p-5 transition-[background-color,border-color] duration-200 hover:border-[rgba(255,255,255,0.5)] hover:bg-[rgba(255,255,255,0.09)] last:col-span-2 md:last:col-span-1"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <dt className="text-base font-semibold text-[rgba(255,255,255,0.92)]">{r.label}</dt>
+                      <dt className="text-base font-semibold text-[rgba(255,255,255,0.92)]">
+                        {r.label}
+                      </dt>
                       <span
                         className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-[var(--ep-bg)] ${
-                          inRange ? "bg-[rgba(91,155,120,0.28)]" : "bg-[rgba(232,162,58,0.32)]"
+                          inRange
+                            ? "bg-[rgba(91,155,120,0.28)]"
+                            : "bg-[rgba(232,162,58,0.32)]"
                         }`}
                       >
                         {inRange ? (
-                          <Icon name="check" size={12} strokeWidth={2.5} className="text-[var(--mangrove-light)]" />
+                          <Icon
+                            name="check"
+                            size={12}
+                            strokeWidth={2.5}
+                            className="text-[var(--mangrove-light)]"
+                          />
                         ) : (
                           <span>!</span>
                         )}
@@ -286,7 +342,9 @@ export function LandingPage() {
                     )}
 
                     {range && (
-                      <p className="mt-2 text-sm text-[rgba(255,255,255,0.85)]">Target {range}</p>
+                      <p className="mt-2 text-sm text-[rgba(255,255,255,0.85)]">
+                        Target {range}
+                      </p>
                     )}
                   </div>
                 );
@@ -296,7 +354,10 @@ export function LandingPage() {
             {/* Legend: explains what the bar and dot mean */}
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-[rgba(255,255,255,0.85)]">
               <span className="inline-flex items-center gap-2">
-                <span aria-hidden="true" className="h-2 w-8 rounded-full bg-[var(--mangrove-light)]" />
+                <span
+                  aria-hidden="true"
+                  className="h-2 w-8 rounded-full bg-[var(--mangrove-light)]"
+                />
                 Target zone
               </span>
               <span className="inline-flex items-center gap-2">
@@ -319,7 +380,10 @@ export function LandingPage() {
           <div className="mx-auto max-w-[1200px]">
             <div data-reveal="" className="mb-14 max-w-[40rem]">
               <div className={eyebrow}>
-                <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
+                <span
+                  aria-hidden="true"
+                  className="h-2 w-2 bg-[var(--ep-accent)]"
+                />
                 The loop
               </div>
               <h2
@@ -360,7 +424,9 @@ export function LandingPage() {
                     <h3 className="ep-font-display mb-2 text-2xl font-semibold transition-colors duration-200 group-hover:text-[var(--ep-accent)]">
                       {s.title}
                     </h3>
-                    <p className="text-base leading-relaxed text-[var(--ep-text-muted)]">{s.body}</p>
+                    <p className="text-base leading-relaxed text-[var(--ep-text-muted)]">
+                      {s.body}
+                    </p>
                   </li>
                 ))}
               </ol>

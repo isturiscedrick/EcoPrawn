@@ -13,7 +13,6 @@ function compile(source, imports = {}) {
 }
 
 const validation = compile(await readFile(new URL("../src/lib/api-validation.ts", import.meta.url), "utf8"));
-const next = { NextResponse: { json: Response.json } };
 let writes = 0;
 let alerts = 0;
 let sms = 0;
@@ -32,18 +31,17 @@ const imports = {
   "@/lib/auth": { accountAccess: async () => ({ id: "owner-a" }) },
   "@/lib/prisma": { __esModule: true, default: prisma },
   "@/lib/api-validation": validation,
-  "next/server": next,
   "@/lib/sms": { dispatchSms: async () => { sms++; return { status: "sent" }; } },
   "@/lib/unisms": { waterWarnings: ({ dissolvedOxygen }) => dissolvedOxygen < 4 ? ["Low oxygen"] : [] },
 };
-const tankRoute = compile(await readFile(new URL("../src/app/api/tanks/route.ts", import.meta.url), "utf8"), imports);
-const tankIdRoute = compile(await readFile(new URL("../src/app/api/tanks/[id]/route.ts", import.meta.url), "utf8"), imports);
-const waterRoute = compile(await readFile(new URL("../src/app/api/water/route.ts", import.meta.url), "utf8"), imports);
+const tankRoute = compile(await readFile(new URL("../src/handlers/tanks.ts", import.meta.url), "utf8"), imports);
+const tankIdRoute = compile(await readFile(new URL("../src/handlers/tanks-detail.ts", import.meta.url), "utf8"), imports);
+const waterRoute = compile(await readFile(new URL("../src/handlers/water.ts", import.meta.url), "utf8"), imports);
 const request = (path, body, method = "POST") => new Request(`http://localhost/api/${path}`, {
   method,
   ...(method === "GET" || method === "DELETE" ? {} : { body: typeof body === "string" ? body : JSON.stringify(body) }),
 });
-const patch = (body, id = "tank-a") => tankIdRoute.PATCH(request(`tanks/${id}`, body, "PATCH"), { params: Promise.resolve({ id }) });
+const patch = (body, id = "tank-a") => tankIdRoute.PATCH(request(`tanks/${id}`, body, "PATCH"), { params: { id } });
 
 assert.equal((await tankRoute.POST(request("tanks", { name: "Tank A" }))).status, 201);
 assert.equal((await tankRoute.POST(request("tanks", { name: "Zero", pl: "PL-0", biomass: 0, targetToday: 0, fcr: 0, dispensedToday: 0, dissolvedOxygen: 0, ph: 0, temperature: -55, salinity: 0, waterLevel: 0, bodyLength: 0, weight: 0, population: 0, abnormal: 0 }))).status, 201);
@@ -60,8 +58,8 @@ for (const body of [{}, [], null, { name: " A" }, { pl: "" }, { fcr: -1 }, { bio
 assert.equal((await patch("{bad")).status, 400);
 assert.equal((await patch({ name: "Tank B", fcr: 1.2 })).status, 200);
 assert.equal((await patch({ name: "A" }, " bad")).status, 400);
-assert.equal((await tankIdRoute.GET(request("tanks/bad id", {}, "GET"), { params: Promise.resolve({ id: "bad id" }) })).status, 400);
-assert.equal((await tankIdRoute.DELETE(request("tanks/bad id", {}, "DELETE"), { params: Promise.resolve({ id: "bad id" }) })).status, 400);
+assert.equal((await tankIdRoute.GET(request("tanks/bad id", {}, "GET"), { params: { id: "bad id" } })).status, 400);
+assert.equal((await tankIdRoute.DELETE(request("tanks/bad id", {}, "DELETE"), { params: { id: "bad id" } })).status, 400);
 assert.equal(writes, 4, "Invalid patches and IDs must not write");
 
 const good = { tankId: "tank-a", dissolvedOxygen: 6, ph: 8, temperature: 28, salinity: 15, waterLevel: 95 };

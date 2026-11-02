@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import type { AlertItem } from "@/types";
 import type { Tank } from "@/features/dashboard/context/TankContext";
