@@ -489,19 +489,18 @@ export function Dashboard() {
           ])
         }
       >
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {visionMetrics.map((m) => (
             <div
               key={m.label}
-              className="rounded-[10px] p-3.5 text-[var(--sand)] transition-transform hover:-translate-y-0.5"
-              style={{
-                background: "linear-gradient(160deg, var(--water-deep), var(--water-mid))",
-              }}
+              className="rounded-2xl border border-[rgba(11,46,51,0.12)] bg-white px-[22px] py-5 shadow-[0_8px_24px_-18px_rgba(11,46,51,0.38)] transition-all hover:-translate-y-0.5 hover:border-[var(--coral)] hover:shadow-[0_14px_28px_-18px_rgba(11,46,51,0.42)]"
             >
-              <div className="ep-font-mono text-[10px] uppercase text-[rgba(255,255,255,0.62)] mb-1.5">
+              <div className="mb-2.5 ep-font-mono text-xs font-medium uppercase tracking-wide text-[rgba(11,35,32,0.68)]">
                 {m.label}
               </div>
-              <div className="ep-font-display text-xl font-semibold">{m.value}</div>
+              <div className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)]">
+                {m.value}
+              </div>
             </div>
           ))}
         </div>
