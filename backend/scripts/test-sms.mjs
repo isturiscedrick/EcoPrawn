@@ -159,17 +159,17 @@ const rejectedResult = await realProviderDispatch.dispatchSms("account-a", "warn
 assert.equal(rejectedResult.status, "rejected");
 assert.equal(stored.status, "rejected");
 assert.match(stored.error, /content: This content is not allowed/);
-const testRoute = await load("app/api/sms/test/route", { ...imports, "@/lib/sms": { dispatchSms: async () => rejectedResult } });
+const testRoute = await load("handlers/sms-test", { ...imports, "@/lib/sms": { dispatchSms: async () => rejectedResult } });
 const rejectedResponse = await testRoute.POST();
 assert.equal(rejectedResponse.status, 422);
 assert.match((await rejectedResponse.json()).error, /This content is not allowed/);
-const limitedRoute = await load("app/api/sms/test/route", { ...imports, "@/lib/sms": sms });
+const limitedRoute = await load("handlers/sms-test", { ...imports, "@/lib/sms": sms });
 const limitedResponse = await limitedRoute.POST();
 assert.equal(limitedResponse.status, 429);
 assert.ok(Number(limitedResponse.headers.get("Retry-After")) > 0);
 imports["@/lib/sms"] = sms;
 
-const settings = await load("app/api/sms/settings/route", imports);
+const settings = await load("handlers/sms-settings", imports);
 const req = body => new Request("http://localhost/api", { method: "POST", headers: { "Content-Type": "application/json", "webhook-secret-key": "webhook-test" }, body: JSON.stringify(body) });
 assert.equal((await settings.GET()).status, 200);
 assert.ok((await (await settings.GET()).json()).nextAttemptAt);
@@ -180,7 +180,7 @@ account = null;
 assert.equal((await settings.GET()).status, 401); assert.equal((await settings.PATCH(req({}))).status, 401);
 account = { id: "account-a" };
 
-const webhook = await load("app/api/sms/webhook/route", imports);
+const webhook = await load("handlers/sms-webhook", imports);
 stored.status = "unknown";
 const payload = status => ({ id: "msg_test", event: `message.${status}`, message: { status, reference_id: "msg_test", recipient: "+639171234567", metadata: { delivery_id: "delivery-1" } } });
 assert.equal((await webhook.POST(new Request("http://localhost", { method: "POST" }))).status, 401);
@@ -196,7 +196,7 @@ let recorded = 0;
 db.tank = { findUnique: async ({ where }) => where.userId === "account-a" && where.id === "tank-a" ? { id: "tank-a", name: "A" } : null };
 db.sensorTelemetry = { create: async ({ data }) => { recorded++; return data; } };
 db.alert = { createMany: async ({ data }) => assert.equal(data.length, 1) };
-const water = await load("app/api/water/route", { ...imports, "@/lib/api-validation": validation, "next/server": { NextResponse: Response }, "@/lib/sms": { dispatchSms: async () => { throw new Error("SMS database down"); } } });
+const water = await load("handlers/water", { ...imports, "@/lib/api-validation": validation, "@/lib/sms": { dispatchSms: async () => { throw new Error("SMS database down"); } } });
 assert.equal((await water.POST(req({ tankId: "tank-b", ...normal }))).status, 404);
 assert.equal((await water.POST(req({ tankId: "tank-a", ...normal, ph: null }))).status, 400);
 const result = await water.POST(req({ tankId: "tank-a", ...normal, ph: 9 }));

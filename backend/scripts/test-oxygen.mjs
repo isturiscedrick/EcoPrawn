@@ -64,13 +64,12 @@ try {
   }
   // Use the actual water route and its ownership checks. The CLI supplies the
   // selected identity; browser sign-in itself is covered by the auth tests.
-  const route = await load("../src/app/api/water/route.ts", {
+  const route = await load("../src/handlers/water.ts", {
     "@/lib/auth": { accountAccess: async () => ({ id: userId, role: "operator" }) },
     "@/lib/prisma": { __esModule: true, default: database },
     "@/lib/unisms": provider,
     "@/lib/api-validation": validation,
     "@/lib/sms": sms,
-    "next/server": { NextResponse: Response },
   });
   const request = (reading, id = tankId) => new Request("http://localhost:4000/api/water", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ tankId: id, ...reading }) });
 
@@ -100,7 +99,7 @@ try {
   if (live) {
     const alert = await database.alert.findFirst({ where: { userId, tankId, detail: { contains: "DO 3 mg/L" } }, orderBy: { createdAt: "desc" } });
     assert.ok(alert, "Low oxygen alert must be persisted in Supabase");
-    const dashboardRoute = await load("../src/app/api/dashboard/route.ts", {
+    const dashboardRoute = await load("../src/handlers/dashboard.ts", {
       "@/lib/auth": { accountAccess: async () => ({ id: userId, role: "operator" }) },
       "@/lib/prisma": { __esModule: true, default: database },
     });

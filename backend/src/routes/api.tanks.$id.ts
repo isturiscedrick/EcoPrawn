@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { GET, DELETE, PATCH } from '@/handlers/tanks-detail';
+export const Route = createFileRoute('/api/tanks/$id')({ server: { handlers: { GET: ({ request, params }) => GET(request, { params }), DELETE: ({ request, params }) => DELETE(request, { params }), PATCH: ({ request, params }) => PATCH(request, { params }), POST: () => new Response(null, { status: 405, headers: { Allow: 'GET, DELETE, PATCH, HEAD, OPTIONS' } }), PUT: () => new Response(null, { status: 405, headers: { Allow: 'GET, DELETE, PATCH, HEAD, OPTIONS' } }), OPTIONS: () => new Response(null, { status: 204, headers: { Allow: 'GET, DELETE, PATCH, HEAD, OPTIONS' } }) } } });

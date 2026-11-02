@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, type KeyboardEvent } from "react";
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { TrendChart } from "@/features/dashboard/components/TrendChart";

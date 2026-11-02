@@ -54,7 +54,7 @@ const client = { auth: {
 } };
 let allowed = true;
 globalThis.phoneTest = { ...globalThis.phoneTest, client, phoneAccount, normalizeUsername, throttle: async () => allowed };
-const { POST } = await load("../src/app/api/auth/password/route.ts", {
+const { POST } = await load("../src/handlers/auth-password.ts", {
   'import { appOrigin, authClient } from "@/lib/auth";': 'const appOrigin = () => "http://localhost:3000"; const authClient = async () => globalThis.phoneTest.client;',
   'import prisma from "@/lib/prisma";': 'const prisma = globalThis.phoneTest.database;',
   'import { normalizePhone } from "@/lib/unisms";': 'const { normalizePhone } = globalThis.phoneTest;',

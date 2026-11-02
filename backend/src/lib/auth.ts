@@ -1,4 +1,4 @@
-import { cookies, headers } from "next/headers";
+import { cookies, headers } from "@/lib/request-context";
 import { createServerClient } from "@supabase/ssr";
 import prisma from "@/lib/prisma";
 

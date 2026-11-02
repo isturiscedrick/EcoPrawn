@@ -1,8 +1,6 @@
-"use client";
-
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
 import { Icon } from "@/components/ui/Icon";
@@ -13,9 +11,15 @@ interface SidebarProps {
   onToggle?: () => void;
 }
 
-export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps) {
-  const pathname = usePathname();
-  const activeView = (pathname.split("/dashboard/")[1] ?? "overview") as DashboardView;
+export function Sidebar({
+  collapsed = false,
+  onToggle = () => {},
+}: SidebarProps) {
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+  const activeView = (pathname.split("/dashboard/")[1] ??
+    "overview") as DashboardView;
   const [darkMode, setDarkMode] = useState(false);
   const [confirmingLogout, setConfirmingLogout] = useState(false);
   const [profileName, setProfileName] = useState("Facility Operator");
@@ -23,7 +27,9 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem("ep-dashboard-theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
     const enabled = savedTheme ? savedTheme === "dark" : prefersDark;
     setDarkMode(enabled);
     document.documentElement.classList.toggle("dark", enabled);
@@ -39,7 +45,10 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
   function toggleTheme() {
     setDarkMode((current) => {
       const next = !current;
-      window.localStorage.setItem("ep-dashboard-theme", next ? "dark" : "light");
+      window.localStorage.setItem(
+        "ep-dashboard-theme",
+        next ? "dark" : "light",
+      );
       document.documentElement.classList.toggle("dark", next);
       return next;
     });
@@ -83,13 +92,21 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
   }, [confirmingLogout]);
 
   return (
-    <aside className={`relative flex h-full min-w-0 flex-row items-center gap-1.5 overflow-x-auto bg-white p-3 text-[var(--water-deep)] shadow-[1px_0_0_rgba(11,46,51,0.08)] lg:flex-col lg:items-stretch lg:gap-0 lg:overflow-x-visible ${collapsed ? "lg:p-0" : "lg:p-4"}`}>
+    <aside
+      className={`relative flex h-full min-w-0 flex-row items-center gap-1.5 overflow-x-auto bg-white p-3 text-[var(--water-deep)] shadow-[1px_0_0_rgba(11,46,51,0.08)] lg:flex-col lg:items-stretch lg:gap-0 lg:overflow-x-visible ${collapsed ? "lg:p-0" : "lg:p-4"}`}
+    >
       {/* BRAND */}
-      <div className={`group relative flex min-w-0 shrink-0 items-center gap-2 overflow-visible px-1 lg:mb-4 lg:w-full lg:border-b lg:border-[rgba(11,46,51,0.12)] ${collapsed ? "lg:justify-center lg:px-0 lg:pb-6 lg:pt-3" : "lg:px-2.5 lg:pb-4 lg:pt-1"}`}>
+      <div
+        className={`group relative flex min-w-0 shrink-0 items-center gap-2 overflow-visible px-1 lg:mb-4 lg:w-full lg:border-b lg:border-[rgba(11,46,51,0.12)] ${collapsed ? "lg:justify-center lg:px-0 lg:pb-6 lg:pt-3" : "lg:px-2.5 lg:pb-4 lg:pt-1"}`}
+      >
         <BrandMark
           size={30}
           showWordmark={!collapsed}
-          className={collapsed ? "transition-opacity duration-200 group-hover:opacity-0 group-focus-within:opacity-0" : ""}
+          className={
+            collapsed
+              ? "transition-opacity duration-200 group-hover:opacity-0 group-focus-within:opacity-0"
+              : ""
+          }
         />
         <button
           type="button"
@@ -106,11 +123,14 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
       </div>
 
       {/* USER / OPERATOR (desktop only) */}
-      <div className={`hidden shrink-0 border-b border-[rgba(11,46,51,0.1)] lg:flex lg:w-full lg:pb-4 ${collapsed ? "lg:justify-center lg:px-0" : "lg:px-2"}`}>
+      <div
+        className={`hidden shrink-0 border-b border-[rgba(11,46,51,0.1)] lg:flex lg:w-full lg:pb-4 ${collapsed ? "lg:justify-center lg:px-0" : "lg:px-2"}`}
+      >
         <Link
-          href="/dashboard/profile"
+          to="/dashboard/profile"
           className={`flex w-full items-center gap-2.5 rounded-lg text-left transition-colors hover:bg-[rgba(232,98,58,0.08)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)] ${collapsed ? "lg:mx-auto lg:h-11 lg:w-11 lg:justify-center" : ""}`}
           aria-label="Edit user profile"
+          activeOptions={{ exact: true }}
         >
           <div
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold"
@@ -131,7 +151,9 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
       </div>
 
       {/* NAV LABEL (desktop only) */}
-      <div className={`hidden px-3 pt-4 ep-font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-[rgba(11,46,51,0.58)] lg:mb-2 lg:block ${collapsed ? "lg:hidden" : ""}`}>
+      <div
+        className={`hidden px-3 pt-4 ep-font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-[rgba(11,46,51,0.58)] lg:mb-2 lg:block ${collapsed ? "lg:hidden" : ""}`}
+      >
         Navigation
       </div>
 
@@ -151,15 +173,18 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
       </nav>
 
       {/* SIDEBAR ACTIONS (desktop only) */}
-      <div className={`mt-auto hidden shrink-0 flex-col gap-1 border-t border-[rgba(11,46,51,0.1)] lg:flex lg:w-full lg:pt-4 ${collapsed ? "lg:px-0" : "lg:px-2"}`}>
+      <div
+        className={`mt-auto hidden shrink-0 flex-col gap-1 border-t border-[rgba(11,46,51,0.1)] lg:flex lg:w-full lg:pt-4 ${collapsed ? "lg:px-0" : "lg:px-2"}`}
+      >
         <Link
-          href="/dashboard/profile"
+          to="/dashboard/profile"
           aria-current={pathname === "/dashboard/profile" ? "page" : undefined}
           className={`flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[13.5px] font-medium transition-colors duration-200 ${collapsed ? "lg:mx-auto lg:h-11 lg:w-11 lg:justify-center lg:px-0 lg:py-0" : ""} ${
             pathname === "/dashboard/profile"
               ? "dashboard-nav-active font-semibold"
               : "text-[rgba(11,46,51,0.62)] hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--water-deep)]"
           }`}
+          activeOptions={{ exact: true }}
         >
           <span className="flex w-4 justify-center" aria-hidden="true">
             <Icon name="wrench" size={16} strokeWidth={1.8} />
@@ -172,8 +197,15 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
           aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
           className={`flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[13.5px] font-medium text-[rgba(11,46,51,0.62)] transition-colors hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--water-deep)] ${collapsed ? "lg:mx-auto lg:h-11 lg:w-11 lg:justify-center lg:px-0 lg:py-0" : ""}`}
         >
-          <span aria-hidden="true" className="flex w-4 justify-center text-base">{darkMode ? "☀" : "◐"}</span>
-          <span className={collapsed ? "lg:hidden" : undefined}>{darkMode ? "Light mode" : "Dark mode"}</span>
+          <span
+            aria-hidden="true"
+            className="flex w-4 justify-center text-base"
+          >
+            {darkMode ? "☀" : "◐"}
+          </span>
+          <span className={collapsed ? "lg:hidden" : undefined}>
+            {darkMode ? "Light mode" : "Dark mode"}
+          </span>
         </button>
         <button
           type="button"
@@ -220,9 +252,14 @@ export function Sidebar({ collapsed = false, onToggle = () => {} }: SidebarProps
               Log out of EcoPrawn?
             </h2>
             <p className="mb-6 text-[13px] leading-[1.55] text-[rgba(255,255,255,0.68)]">
-              You&apos;ll need to sign in again to access the facility dashboard.
+              You&apos;ll need to sign in again to access the facility
+              dashboard.
             </p>
-            {logoutError && <p role="alert" className="mb-3 text-sm text-red-300">{logoutError}</p>}
+            {logoutError && (
+              <p role="alert" className="mb-3 text-sm text-red-300">
+                {logoutError}
+              </p>
+            )}
             <div className="flex gap-3">
               <button
                 type="button"

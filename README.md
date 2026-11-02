@@ -32,9 +32,9 @@ Out of scope: offshore farming, hatchery/breeding, off-grid energy independence,
 
 ## Tech stack
 
-- [Next.js 15](https://nextjs.org/) (App Router) with React 19
+- [TanStack Start](https://tanstack.com/start/latest) and TanStack Router with React 19
 - TypeScript 5
-- Tailwind CSS 4 (`@tailwindcss/postcss`), `tw-animate-css`
+- Tailwind CSS 4 (`@tailwindcss/vite`), `tw-animate-css`
 - `clsx` + `tailwind-merge` (via `cn()` in `src/utils/cn.ts`)
 - Fonts: Fraunces, Inter, IBM Plex Mono (Google Fonts)
 
@@ -61,7 +61,7 @@ bun run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-The frontend forwards `/api/*` requests to `http://localhost:4000`. Set `BACKEND_URL` in `frontend/.env` to use a different backend address. Restart the frontend after changing it, and set it before production builds. Run `bun run db:seed` in `backend` to populate demo data.
+The frontend forwards `/api/*` requests to `http://localhost:4000`. Set `BACKEND_URL` in `frontend/.env` to use a different backend address. Restart the frontend after changing it. Production reads this setting at runtime. Run `bun run db:seed` in `backend` to populate demo data.
 
 Other scripts:
 
@@ -71,7 +71,7 @@ bun run start   # serve the production build
 bun run typecheck # check TypeScript
 ```
 
-Use Bun 1.4.0 for installs and scripts in both folders. Each app has its own `bun.lock`; use `bun install --frozen-lockfile` for reproducible installs. Next.js and Prisma CLI commands still use Node.js, so keep Node 20.9 or newer installed.
+Use Bun 1.4.0 for installs, development, builds, production servers, tests, and database tooling in both folders. Each app has its own `bun.lock`; use `bun install --frozen-lockfile` for reproducible installs.
 
 On Windows OneDrive checkouts, if `node_modules` contains empty package folders after installation, rerun the install with `bun install --frozen-lockfile --force --backend=copyfile` in the affected app folder.
 
@@ -81,7 +81,8 @@ On Windows OneDrive checkouts, if `node_modules` contains empty package folders 
 frontend/
   public/assets/        logo and images
   src/
-    app/                App Router routes, layouts, global CSS
+    routes/             TanStack routes and nested layouts
+    styles/             global CSS
     components/         shared UI (header, footer, icons, dashboard primitives)
     features/           feature modules: landing, about, contact, auth, dashboard
     context/            TankContext (tank state) and navigation hook
@@ -119,4 +120,4 @@ The dashboard combines database-backed tanks with demo data and optional ESP32 U
 
 ## Design tokens
 
-Theme colors and shared tokens (`--water-deep`, `--mangrove`, `--coral`, `--sand`, shadows, radii) are defined in `frontend/src/app/globals.css`. Use these variables rather than hardcoding colors.
+Theme colors and shared tokens (`--water-deep`, `--mangrove`, `--coral`, `--sand`, shadows, radii) are defined in `frontend/src/styles/globals.css`. Use these variables rather than hardcoding colors.

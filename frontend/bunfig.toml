@@ -1,0 +1,5 @@
+env = false
+
+[run]
+bun = true
+

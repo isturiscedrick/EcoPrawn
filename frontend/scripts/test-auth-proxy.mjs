@@ -1,22 +1,9 @@
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import { once } from "node:events";
-import { spawn } from "node:child_process";
-import { cp, mkdir, mkdtemp, writeFile, symlink, rm, rmdir } from "node:fs/promises";
-import { tmpdir } from "node:os";
-import { join, resolve, sep } from "node:path";
-import { fileURLToPath } from "node:url";
-import { createRequire } from "node:module";
-import { setTimeout } from "node:timers/promises";
+import { productionApp } from "./test-server.mjs";
 
-const require = createRequire(import.meta.url);
-const source = fileURLToPath(new URL("..", import.meta.url));
-const loadConfig = require("next/dist/server/config").default;
-const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
-const config = await loadConfig(PHASE_DEVELOPMENT_SERVER, source);
-assert.equal(typeof config.rewrites, "function", "Frontend must forward /api/* to the backend for signup, signin and Google SSO");
-
-// Exercise the actual Next.js rewrite with a local backend, without accounts or SMS.
+// Exercise the production API proxy with a local backend, without accounts or SMS.
 const received = [];
 const backend = createServer(async (req, res) => {
   let body = "";
@@ -24,41 +11,31 @@ const backend = createServer(async (req, res) => {
   received.push({ url: req.url, method: req.method, origin: req.headers.origin, cookie: req.headers.cookie, body });
   res.setHeader("Cache-Control", "no-store");
   res.setHeader("Set-Cookie", ["test-session=one; Path=/; HttpOnly; SameSite=Lax", "test-refresh=two; Path=/; HttpOnly; SameSite=Lax"]);
-  if (req.url === "/api/auth/google") {
+  if (req.url === "/api/auth/session") {
+    if (sessionStatus === -1) { req.socket.destroy(); return; }
+    res.writeHead(sessionStatus, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ user: sessionStatus === 200 ? { id: "test" } : null }));
+    return;
+  } else if (req.url === "/api/auth/google") {
     res.writeHead(307, { Location: "https://accounts.example.test/authorize?provider=google" });
   } else if (req.url.startsWith("/api/auth/google/callback")) {
     res.writeHead(307, { Location: "/dashboard" });
+  } else if (req.url === "/api/test-failure") {
+    res.writeHead(422, { "Content-Type": "application/json" });
+    res.write(JSON.stringify({ error: "Invalid input" }));
   } else {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ ok: true }));
   }
   res.end();
 });
-let fixture, server, output = "";
+let app;
+let sessionStatus = 200;
 try {
   backend.listen(0, "127.0.0.1");
   await once(backend, "listening");
-  fixture = await mkdtemp(join(tmpdir(), "ecoprawn-auth-proxy-"));
-  await cp(join(source, "next.config.ts"), join(fixture, "next.config.ts"));
-  await writeFile(join(fixture, "package.json"), JSON.stringify({ private: true }));
-  await symlink(join(source, "node_modules"), join(fixture, "node_modules"), "junction");
-  await mkdir(join(fixture, "pages"));
-  await writeFile(join(fixture, "pages", "index.js"), "export default function Page() { return null; }");
-  server = spawn(process.execPath, [require.resolve("next/dist/bin/next"), "dev", "-p", "0", "-H", "127.0.0.1"], {
-    cwd: fixture,
-    env: { ...process.env, BACKEND_URL: `http://127.0.0.1:${backend.address().port}/`, NEXT_TELEMETRY_DISABLED: "1" },
-    stdio: ["ignore", "pipe", "pipe"],
-  });
-  server.stdout.on("data", chunk => { output += chunk; });
-  server.stderr.on("data", chunk => { output += chunk; });
-  let origin;
-  for (let attempt = 0; attempt < 150; attempt++) {
-    if (server.exitCode !== null) throw new Error(output);
-    origin = output.match(/http:\/\/127\.0\.0\.1:\d+/)?.[0];
-    if (origin && output.includes("Ready")) break;
-    await setTimeout(200);
-  }
-  assert.ok(origin && output.includes("Ready"), output);
+  app = await productionApp(`http://127.0.0.1:${backend.address().port}/`);
+  const { origin } = app;
   for (const action of ["signup", "signin", "verify", "resend", "complete"]) {
     const body = JSON.stringify({ action, test: true });
     const response = await fetch(`${origin}/api/auth/password`, {
@@ -77,15 +54,33 @@ try {
     assert.equal(response.headers.getSetCookie().length, 2);
     assert.equal(received.at(-1).url, path, "Keep callback query parameters");
   }
+  for (const method of ["GET", "PATCH", "DELETE"]) {
+    const body = method === "PATCH" ? JSON.stringify({ name: "test" }) : undefined;
+    const response = await fetch(origin + "/api/tanks/test?check=one", { method, body, headers: { Origin: origin, Cookie: "test-session=existing", "Content-Type": "application/json" } });
+    assert.equal(response.status, 200);
+    assert.equal(received.at(-1).method, method);
+    assert.equal(received.at(-1).url, "/api/tanks/test?check=one");
+    assert.equal(received.at(-1).body, body || "");
+  }
+  const invalid = await fetch(origin + "/api/test-failure");
+  assert.equal(invalid.status, 422);
+  assert.deepEqual(await invalid.json(), { error: "Invalid input" });
+  for (const status of [401, 500]) {
+    sessionStatus = status;
+    const response = await fetch(origin + "/dashboard/water", { redirect: "manual", headers: { Cookie: "test-session=existing" } });
+    assert.equal(response.status, status === 401 ? 307 : 503);
+    if (status === 401) assert.equal(new URL(response.headers.get("location"), origin).pathname, "/login");
+    assert.match(response.headers.get("cache-control"), /no-store/);
+    assert.equal(response.headers.getSetCookie().length, 2);
+    assert.equal(received.at(-1).cookie, "test-session=existing");
+  }
+  sessionStatus = -1;
+  const unreachable = await fetch(origin + "/dashboard", { redirect: "manual" });
+  assert.equal(unreachable.status, 503);
+  assert.match(unreachable.headers.get("cache-control"), /no-store/);
   console.log("Auth proxy passed: signup, signin, verification, Google redirect/callback, request bodies, origins and session cookies.");
 } finally {
-  if (server && server.exitCode === null) { server.kill(); await once(server, "exit"); }
+  await app?.close();
   backend.closeAllConnections();
   await new Promise(resolve => backend.close(resolve));
-  if (fixture) {
-    // Remove the junction before recursively removing only this temporary fixture.
-    assert.ok(resolve(fixture).startsWith(resolve(tmpdir()) + sep), "Cleanup must stay in the temporary directory");
-    await rmdir(join(fixture, "node_modules")).catch(error => { if (error.code !== "ENOENT") throw error; });
-    await rm(fixture, { recursive: true, force: true });
-  }
 }

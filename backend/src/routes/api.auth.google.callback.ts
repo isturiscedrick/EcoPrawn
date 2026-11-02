@@ -1,0 +1,3 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { GET } from '@/handlers/auth-google-callback';
+export const Route = createFileRoute('/api/auth/google/callback')({ server: { handlers: { GET: ({ request, params }) => GET(request), POST: () => new Response(null, { status: 405, headers: { Allow: 'GET, HEAD, OPTIONS' } }), PATCH: () => new Response(null, { status: 405, headers: { Allow: 'GET, HEAD, OPTIONS' } }), DELETE: () => new Response(null, { status: 405, headers: { Allow: 'GET, HEAD, OPTIONS' } }), PUT: () => new Response(null, { status: 405, headers: { Allow: 'GET, HEAD, OPTIONS' } }), OPTIONS: () => new Response(null, { status: 204, headers: { Allow: 'GET, HEAD, OPTIONS' } }) } } });

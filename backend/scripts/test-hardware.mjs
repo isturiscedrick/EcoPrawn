@@ -40,7 +40,7 @@ assert.deepEqual(parse("-----------------------------------"), { temperature: nu
 let identity = { id: "owner-a" };
 let writes = 0;
 const readings = [];
-const route = compile(await readFile(new URL("../src/app/api/hardware/route.ts", import.meta.url), "utf8"), {
+const route = compile(await readFile(new URL("../src/handlers/hardware.ts", import.meta.url), "utf8"), {
   "@/lib/auth": { accountAccess: async () => identity ?? Response.json({}, { status: 401 }) },
   "@/lib/prisma": { __esModule: true, default: {
     tank: { findUnique: async ({ where }) => where.id === "tank-a" && where.userId === "owner-a" ? { id: "tank-a" } : null },
