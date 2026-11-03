@@ -18,11 +18,7 @@ export function SiteFooter() {
                 aria-label="EcoPrawn home"
                 activeOptions={{ exact: true }}
               >
-                <BrandMark
-                  size={42}
-                  logoColor="#FFFFFF"
-                  logoTextColor="#FFFFFF"
-                />
+                <BrandMark size={42} />
               </Link>
               <p className="mt-5 max-w-[27rem] text-base leading-relaxed text-[rgba(255,255,255,0.78)]">
                 An AIoT-enabled indoor white shrimp farming and water management
