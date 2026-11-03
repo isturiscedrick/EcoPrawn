@@ -84,7 +84,7 @@ export function SiteHeader({
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-50 border-b border-[rgba(11,46,51,0.12)] backdrop-blur-md transition-[background-color,box-shadow] duration-200 ${
+      className={`sticky top-0 z-50 relative border-b border-[rgba(11,46,51,0.12)] backdrop-blur-md transition-[background-color,box-shadow] duration-200 ${
         scrolled
           ? `${scrolledBg} shadow-[0_8px_24px_-14px_rgba(11,46,51,0.35)]`
           : topBg
@@ -231,20 +231,21 @@ export function SiteHeader({
         </div>
       </div>
 
+
       {!isAuth && (
-        <div className="mx-auto flex max-w-310 justify-end px-5 pb-2 sm:px-8 lg:px-10">
-                        <button
-                          type="button"
-                          onClick={toggleTheme}
-                          aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
-                          aria-pressed={darkMode}
-                          className={`inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/60 px-3 text-sm font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${focusRing}`}
-                        >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                            {darkMode ? <circle cx="12" cy="12" r="4" /> : <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />}
-                          </svg>
-                          <span className="hidden sm:inline">{darkMode ? "Light mode" : "Dark mode"}</span>
-                        </button>
+        <div className="absolute right-0 top-full z-40 flex justify-end px-5 pt-2 sm:px-8 lg:px-10">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
+            aria-pressed={darkMode}
+            className={`inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/90 px-3 text-sm font-semibold text-[var(--ep-primary)] shadow-md backdrop-blur-sm transition-colors hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${focusRing}`}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              {darkMode ? <circle cx="12" cy="12" r="4" /> : <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />}
+            </svg>
+            <span className="hidden sm:inline">{darkMode ? "Light mode" : "Dark mode"}</span>
+          </button>
         </div>
       )}
 
