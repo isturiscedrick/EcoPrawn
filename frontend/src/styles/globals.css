@@ -1272,3 +1272,67 @@ html.dark .marketing-shell [data-band] a:not([class*="bg-"]):hover {
   background: #8bd5a6 !important;
   color: #14231a !important;
 }
+
+/* About and Contact pages: complete dark-mode surfaces and form controls. */
+html.dark .marketing-shell :is(#objectives, #scope, [data-contact-details]) {
+  background-color: #18191a !important;
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell :is(#objectives, #scope) :is(article, [class*="bg-white"]) {
+  background-color: #242729 !important;
+  border-color: rgba(139, 213, 166, 0.24);
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell :is(#objectives, #scope) :is(h2, h3, b, p, span) {
+  color: #e4e6eb;
+}
+html.dark .marketing-shell :is(#objectives, #scope) :is(.text-\[var\(--ep-text-muted\)\]) {
+  color: #b8c0c2 !important;
+}
+html.dark .marketing-shell :is(#objectives, #scope) .border-t,
+html.dark .marketing-shell :is(#objectives, #scope) .border-b {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Shared About/Contact page hero (PageHero component). */
+html.dark .marketing-shell main > section:first-child {
+  background-color: #202122 !important;
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell main > section:first-child > [aria-hidden="true"]:first-child {
+  background: radial-gradient(640px circle at 82% 30%, rgba(139, 213, 166, 0.08), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(242, 138, 104, 0.07), transparent 60%) !important;
+}
+html.dark .marketing-shell main > section:first-child :is(h1, p) {
+  color: #e4e6eb;
+}
+
+/* Contact cards and form: dark inputs with readable labels and placeholders. */
+html.dark .marketing-shell [data-contact-card],
+html.dark .marketing-shell [data-contact-form] :is(form, [role="status"]) {
+  background-color: #242729 !important;
+  border-color: rgba(139, 213, 166, 0.24) !important;
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell [data-contact-card] :is(dt, dd) {
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell [data-contact-form] :is(label, h2, p) {
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell [data-contact-form] :is(input, textarea) {
+  background-color: #181b1c !important;
+  border-color: rgba(139, 213, 166, 0.32) !important;
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell [data-contact-form] :is(input, textarea)::placeholder {
+  color: #9ba5a7 !important;
+}
+html.dark .marketing-shell [data-contact-form] button[type="button"] {
+  border-color: #8bd5a6 !important;
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell [data-contact-form] button[type="button"]:hover {
+  background-color: #8bd5a6 !important;
+  color: #14231a !important;
+}
