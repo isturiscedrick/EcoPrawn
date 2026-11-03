@@ -241,10 +241,10 @@ export function SiteHeader({
             aria-checked={darkMode}
             aria-label={darkMode ? "Dark mode enabled. Switch to light mode." : "Light mode enabled. Switch to dark mode."}
             title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-            className={`relative inline-flex h-[38px] w-[78px] shrink-0 items-center rounded-full border p-[3px] shadow-[0_3px_10px_rgba(0,0,0,0.12)] transition-colors duration-300 ${darkMode ? "border-[#F28A68]/35 bg-[#263238]" : "border-[#E5E7EB] bg-[#F8F8F6]"} ${focusRing}`}
+            className={`relative inline-flex h-[38px] w-[78px] shrink-0 items-center rounded-full border p-[3px] shadow-[0_3px_10px_rgba(0,0,0,0.12)] transition-colors duration-300 ${darkMode ? "border-[#3B4143] bg-[#202122]" : "border-[#E5E7EB] bg-[#F8F8F6]"} ${focusRing}`}
           >
             <span
-              className={`flex h-[30px] w-[30px] items-center justify-center rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.16)] transition-transform duration-300 ease-in-out ${darkMode ? "translate-x-[40px] bg-[#18191A] text-[#F28A68]" : "translate-x-0 bg-white text-[#0F4C5C]"}`}
+              className={`flex h-[30px] w-[30px] items-center justify-center rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.16)] transition-transform duration-300 ease-in-out ${darkMode ? "translate-x-[40px] bg-[#292D2F] text-[#F28A68]" : "translate-x-0 bg-white text-[#0F4C5C]"}`}
             >
               <svg
                 width="19"
