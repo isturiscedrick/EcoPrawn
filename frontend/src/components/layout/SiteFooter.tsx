@@ -6,11 +6,8 @@ export function SiteFooter() {
   return (
     <>
       <footer
-        className="relative isolate overflow-hidden px-5 py-14 text-[var(--ep-bg)] sm:px-8 sm:py-16"
-        style={{
-          background:
-            "radial-gradient(ellipse at 12% 8%, rgba(35, 111, 117, 0.42), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(4, 25, 34, 0.7), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(18, 71, 77, 0.6), transparent 52%), linear-gradient(155deg, #0b2e33 0%, #08272f 48%, #061e27 100%)",
-        }}
+        data-site-footer
+        className="relative isolate overflow-hidden px-5 py-14 sm:px-8 sm:py-16"
       >
         <div className="mx-auto max-w-[1200px]">
           <div className="grid gap-10 border-b border-[rgba(255,255,255,0.2)] pb-10 md:grid-cols-[1.6fr_0.8fr_1fr] md:gap-16">
