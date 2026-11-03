@@ -1421,3 +1421,63 @@ html.dark .marketing-shell #systems article .bg-\[var\(--ep-accent\)] {
 html.dark .marketing-shell #systems article :is(b, span) {
   --ep-bg: #e4e6eb;
 }
+
+/* Accessibility contrast pass for public pages (landing, about, contact). */
+.marketing-shell {
+  --ep-readable-text: #18343b;
+  --ep-readable-muted: #52656b;
+  --ep-readable-surface: #ffffff;
+  --ep-readable-border: #9aadb1;
+  color: var(--ep-readable-text);
+}
+.marketing-shell :is(p, li, dd, dt, label, small, figcaption) {
+  color: var(--ep-readable-text);
+}
+.marketing-shell :is(.text-muted, [data-muted], .text-\[var\(--ep-text-muted\)\]) {
+  color: var(--ep-readable-muted) !important;
+}
+.marketing-shell :is(input, textarea, select) {
+  color: #18343b;
+}
+.marketing-shell :is(input, textarea, select)::placeholder {
+  color: #52656b;
+  opacity: 1;
+}
+.marketing-shell a:focus-visible,
+.marketing-shell button:focus-visible,
+.marketing-shell input:focus-visible,
+.marketing-shell textarea:focus-visible,
+.marketing-shell select:focus-visible {
+  outline: 3px solid var(--ep-brand-primary) !important;
+  outline-offset: 3px;
+}
+html.dark .marketing-shell {
+  --ep-readable-text: #f1f3f4;
+  --ep-readable-muted: #c3ccce;
+  --ep-readable-surface: #242729;
+  --ep-readable-border: #647477;
+  color: var(--ep-readable-text);
+}
+html.dark .marketing-shell :is(p, li, dd, dt, label, small, figcaption) {
+  color: var(--ep-readable-text);
+}
+html.dark .marketing-shell :is(.text-muted, [data-muted], .text-\[var\(--ep-text-muted\)]) {
+  color: var(--ep-readable-muted) !important;
+}
+html.dark .marketing-shell :is(input, textarea, select) {
+  background-color: #181b1c !important;
+  border-color: #647477 !important;
+  color: #f1f3f4 !important;
+}
+html.dark .marketing-shell :is(input, textarea, select)::placeholder {
+  color: #c3ccce !important;
+  opacity: 1;
+}
+html.dark .marketing-shell :is(a, button):focus-visible,
+html.dark .marketing-shell :is(input, textarea, select):focus-visible {
+  outline-color: #8bd5a6 !important;
+}
+html.dark .marketing-shell :is(button:disabled, [aria-disabled="true"]) {
+  color: #c3ccce !important;
+  opacity: 0.75;
+}
