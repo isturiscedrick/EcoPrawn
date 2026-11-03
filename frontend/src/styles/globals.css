@@ -1203,3 +1203,29 @@ html.dark .marketing-shell footer .ep-logo .ep-logo-text {
   fill: #ffffff !important;
   stroke: #ffffff !important;
 }
+
+/* Hero lens: dark mode uses charcoal glass with coral + mint brand accents. */
+html.dark .marketing-shell figure[aria-label^="A shrimp"] > div:first-child {
+  background: linear-gradient(145deg, #343638 0%, #202122 55%, #111314 100%) !important;
+  box-shadow: 0 40px 70px -34px rgba(0, 0, 0, 0.85), inset 0 2px 0 rgba(255, 255, 255, 0.12) !important;
+}
+html.dark .marketing-shell figure[aria-label^="A shrimp"] > div:first-child > div:first-child {
+  background: radial-gradient(circle at 50% 46%, #343638 0%, #252729 38%, #1b1d1f 72%, #111314 100%) !important;
+  --ep-bg: #e4e6eb;
+}
+html.dark .marketing-shell figure[aria-label^="A shrimp"] .ep-lens-arcs path {
+  stroke: #f28a68 !important;
+}
+html.dark .marketing-shell figure[aria-label^="A shrimp"] .ep-lens-ping {
+  border-color: #f28a68 !important;
+}
+html.dark .marketing-shell figure[aria-label^="A shrimp"] .ep-lens-dot {
+  background-color: #8bd5a6 !important;
+}
+html.dark .marketing-shell figure[aria-label^="A shrimp"] .ep-lens-scan {
+  background: linear-gradient(90deg, transparent, rgba(139, 213, 166, 0.98), transparent) !important;
+  box-shadow: 0 0 16px rgba(139, 213, 166, 0.75) !important;
+}
+html.dark .marketing-shell figure[aria-label^="A shrimp"] .ep-lens-iris {
+  background-color: #111314 !important;
+}
