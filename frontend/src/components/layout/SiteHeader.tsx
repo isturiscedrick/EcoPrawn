@@ -240,7 +240,7 @@ export function SiteHeader({
             aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
             aria-pressed={darkMode}
             title={darkMode ? "Light mode" : "Dark mode"}
-            className={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(11,46,51,0.22)] bg-white/90 text-[var(--ep-primary)] shadow-md backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${focusRing}`}
+            className={`inline-flex h-10 w-10 items-center justify-center rounded-full border shadow-md backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 ${darkMode ? "border-[#F28A68]/40 bg-[#0B2E33] text-[#F28A68] hover:bg-[#16434A] hover:text-[#F8B09A]" : "border-[rgba(11,46,51,0.22)] bg-white/90 text-[#D94416] hover:bg-[#D94416] hover:text-white"} ${focusRing}`}
           >
             <svg
               width="20"
