@@ -1336,3 +1336,55 @@ html.dark .marketing-shell [data-contact-form] button[type="button"]:hover {
   background-color: #8bd5a6 !important;
   color: #14231a !important;
 }
+
+/* About page navigation and shared page hero: dark-mode surface fixes. */
+html.dark .marketing-shell nav[aria-label="On this page"] {
+  background-color: #202122 !important;
+  border-color: rgba(139, 213, 166, 0.24) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+}
+html.dark .marketing-shell nav[aria-label="On this page"] a {
+  border-color: rgba(139, 213, 166, 0.45) !important;
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell nav[aria-label="On this page"] a[aria-current="location"] {
+  background-color: #8bd5a6 !important;
+  border-color: #8bd5a6 !important;
+  color: #14231a !important;
+}
+html.dark .marketing-shell nav[aria-label="On this page"] a:not([aria-current="location"]):hover {
+  color: #8bd5a6 !important;
+  border-color: #8bd5a6 !important;
+}
+html.dark .marketing-shell nav[aria-label="On this page"] a {
+  --tw-ring-offset-color: #202122;
+}
+html.dark .marketing-shell > main > section.relative.isolate {
+  background-color: #202122 !important;
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell > main > section.relative.isolate > div[aria-hidden="true"]:first-child {
+  background: radial-gradient(640px circle at 82% 30%, rgba(139, 213, 166, 0.10), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(242, 138, 104, 0.08), transparent 60%) !important;
+}
+html.dark .marketing-shell > main > section.relative.isolate :is(h1, p) {
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell #objectives > div > div:first-child > div {
+  background-color: #242729 !important;
+  border-color: rgba(139, 213, 166, 0.28) !important;
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell #objectives > div > div:first-child > div :is(div, p) {
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell #scope article {
+  background-color: #242729 !important;
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell #scope article :is(h3, b, span) {
+  color: inherit;
+}
+html.dark .marketing-shell #scope article :is(.text-\[var\(--ep-text-muted\)]) {
+  color: #b8c0c2 !important;
+}
