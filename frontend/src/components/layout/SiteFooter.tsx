@@ -23,8 +23,8 @@ export function SiteFooter() {
               >
                 <BrandMark
                   size={42}
-                  logoColor="var(--ep-bg)"
-                  logoTextColor="var(--ep-bg)"
+                  logoColor="var(--ep-accent)"
+                  logoTextColor="#000000"
                 />
               </Link>
               <p className="mt-5 max-w-[27rem] text-base leading-relaxed text-[rgba(255,255,255,0.78)]">
