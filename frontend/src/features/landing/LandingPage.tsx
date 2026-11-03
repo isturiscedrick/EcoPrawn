@@ -176,7 +176,7 @@ export function LandingPage() {
                 className="ep-font-display text-[clamp(40px,5.4vw,68px)] font-semibold leading-[1.06] tracking-tight"
               >
                 <span aria-hidden="true">
-                  <span className="text-[var(--ep-accent)] dark:text-[#F28A68]">
+                  <span data-hero-headline-accent className="text-[var(--ep-accent)] dark:text-[#F28A68]">
                     <Words text="Indoor shrimp farming," />
                   </span>
                   <span className="block text-[var(--ep-primary)]">
