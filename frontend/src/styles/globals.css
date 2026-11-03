@@ -1168,3 +1168,23 @@ html.dark .marketing-shell :is(
 ) {
   color: #8bd5a6;
 }
+
+
+/* Dark mode: footer and hero lens use mint secondary consistently. */
+html.dark .marketing-shell footer,
+html.dark .marketing-shell footer :is(p, span, a, li, small, strong, h1, h2, h3, h4) {
+  color: #8bd5a6 !important;
+}
+
+html.dark .marketing-shell #top [data-hero="text"] :is(h1, h2, p, span) {
+  color: #8bd5a6;
+}
+
+/* HeroLens secondary indicators: replace the old sky-blue accents with mint. */
+html.dark .marketing-shell .ep-lens-dot {
+  background-color: #8bd5a6 !important;
+}
+html.dark .marketing-shell .ep-lens-scan {
+  background: linear-gradient(90deg, transparent, rgba(139,213,166,0.95), transparent) !important;
+  box-shadow: 0 0 14px rgba(139,213,166,0.7) !important;
+}
