@@ -43,7 +43,7 @@ export function SiteHeader({
       window.removeEventListener("ecoprawn-theme-change", syncTheme);
       window.removeEventListener("storage", syncTheme);
     };
-  }, []);
+  }, [pathname]);
 
   function toggleTheme() {
     setDarkMode((current) => {
