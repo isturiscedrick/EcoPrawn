@@ -135,18 +135,6 @@ export function SiteHeader({
             </Link>
           ) : (
             <>
-              <button
-                type="button"
-                onClick={toggleTheme}
-                aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
-                aria-pressed={darkMode}
-                className={`inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/60 px-3 text-sm font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${focusRing}`}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  {darkMode ? <circle cx="12" cy="12" r="4" /> : <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />}
-                </svg>
-                <span className="hidden sm:inline">{darkMode ? "Light mode" : "Dark mode"}</span>
-              </button>
               <AuthLink
                 className={`inline-flex items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/60 px-4 py-2.5 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.35)] active:translate-y-0 sm:px-5 ${focusRing}`}
               >
@@ -242,6 +230,23 @@ export function SiteHeader({
           )}
         </div>
       </div>
+
+      {!isAuth && (
+        <div className="mx-auto flex max-w-310 justify-end px-5 pb-2 sm:px-8 lg:px-10">
+                        <button
+                          type="button"
+                          onClick={toggleTheme}
+                          aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
+                          aria-pressed={darkMode}
+                          className={`inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/60 px-3 text-sm font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${focusRing}`}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            {darkMode ? <circle cx="12" cy="12" r="4" /> : <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />}
+                          </svg>
+                          <span className="hidden sm:inline">{darkMode ? "Light mode" : "Dark mode"}</span>
+                        </button>
+        </div>
+      )}
 
       {showLinks && (
         <div
