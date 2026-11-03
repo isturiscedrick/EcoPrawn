@@ -28,6 +28,22 @@ export function SiteHeader({
   });
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const enabled = window.localStorage.getItem("ep-dashboard-theme") === "dark";
+    setDarkMode(enabled);
+    document.documentElement.classList.toggle("dark", enabled);
+  }, []);
+
+  function toggleTheme() {
+    setDarkMode((current) => {
+      const next = !current;
+      window.localStorage.setItem("ep-dashboard-theme", next ? "dark" : "light");
+      document.documentElement.classList.toggle("dark", next);
+      return next;
+    });
+  }
 
   // Frosted background always; a darker border, shadow and gradient hairline appear once the page scrolls.
   useEffect(() => {
@@ -119,6 +135,18 @@ export function SiteHeader({
             </Link>
           ) : (
             <>
+              <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
+                aria-pressed={darkMode}
+                className={`inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/60 px-3 text-sm font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${focusRing}`}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  {darkMode ? <circle cx="12" cy="12" r="4" /> : <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />}
+                </svg>
+                <span className="hidden sm:inline">{darkMode ? "Light mode" : "Dark mode"}</span>
+              </button>
               <AuthLink
                 className={`inline-flex items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/60 px-4 py-2.5 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.35)] active:translate-y-0 sm:px-5 ${focusRing}`}
               >
