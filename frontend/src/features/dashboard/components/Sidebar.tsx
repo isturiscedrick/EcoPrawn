@@ -57,7 +57,10 @@ export function Sidebar({
         "ep-dashboard-theme",
         next ? "dark" : "light",
       );
-      document.documentElement.classList.toggle("dark", next);
+      const root = document.documentElement;
+      root.classList.add("theme-transitioning");
+      window.setTimeout(() => root.classList.remove("theme-transitioning"), 480);
+      root.classList.toggle("dark", next);
       window.dispatchEvent(new Event("ecoprawn-theme-change"));
       return next;
     });
