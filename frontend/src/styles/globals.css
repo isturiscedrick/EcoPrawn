@@ -1617,6 +1617,7 @@ html.dark footer[data-site-footer] nav a:hover {
 
 /* Keep the landing hero's first headline line coral in dark mode.
    This targeted rule overrides the broad dark-mode span-to-mint rule above. */
-html.dark .marketing-shell #top [data-hero-headline-accent] {
+html.dark .marketing-shell #top [data-hero-headline-accent],
+html.dark .marketing-shell #top [data-hero-headline-accent] * {
   color: #f28a68 !important;
 }
