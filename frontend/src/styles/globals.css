@@ -1001,3 +1001,58 @@ html.dark .marketing-shell .bg-\[var\(--ep-accent\)\] {
 html.dark .marketing-shell nav[aria-label="Primary navigation"] a[aria-current] {
   color: #10251a;
 }
+
+
+/* ---------- Landing page brand palette: canonical light/dark mapping ---------- */
+/* Match the dashboard brand colors across the landing page and public sections.
+   Keep light/dark surfaces and readable text colors separate from brand accents. */
+.marketing-shell {
+  --ep-brand-primary: #d94416;
+  --ep-brand-secondary: #0f4c5c;
+  --ep-accent: var(--ep-brand-primary);
+  --ep-accent-hover: #b83a0f;
+  --ep-secondary: var(--ep-brand-secondary);
+  --coral: var(--ep-brand-primary);
+  --coral-dim: var(--ep-accent-hover);
+}
+
+html.dark .marketing-shell {
+  --ep-brand-primary: #f28a68;
+  --ep-brand-secondary: #8bd5a6;
+  --ep-accent: var(--ep-brand-primary);
+  --ep-accent-hover: #f6a185;
+  --ep-secondary: var(--ep-brand-secondary);
+  --coral: var(--ep-brand-primary);
+  --coral-dim: var(--ep-accent-hover);
+}
+
+/* Apply the secondary brand color to headings, labels and supporting accents. */
+.marketing-shell .ep-font-mono.uppercase,
+.marketing-shell [data-brand-secondary] {
+  color: var(--ep-brand-secondary);
+}
+
+/* The hero's shrimp illustration sits on dark glass; retain coral visibility. */
+.marketing-shell figure[aria-label^="A shrimp"] {
+  --coral: var(--ep-brand-primary);
+}
+
+/* Keep the logo's shrimp and wordmark aligned with the two brand colors. */
+.marketing-shell .ep-logo {
+  --ep-logo-color: var(--ep-brand-primary);
+  --ep-logo-text: var(--ep-brand-secondary);
+}
+
+html.dark .marketing-shell .ep-logo {
+  --ep-logo-color: var(--ep-brand-primary);
+  --ep-logo-text: var(--ep-brand-secondary);
+}
+
+/* Use theme-aware tints for feature chips and coral accent surfaces. */
+.marketing-shell {
+  --ep-accent-tint: color-mix(in srgb, var(--ep-brand-primary) 10%, transparent);
+  --ep-secondary-tint: color-mix(in srgb, var(--ep-brand-secondary) 12%, transparent);
+}
+.marketing-shell .bg-\\[rgba\\(232\\,98\\,58\\,0\\.1\\)\\] {
+  background-color: var(--ep-accent-tint);
+}
