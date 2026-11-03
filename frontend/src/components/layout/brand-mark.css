@@ -112,3 +112,16 @@ html.ep-nav-seen header .ep-logo-wordmark,
 .ep-auth-modal .ep-logo-wordmark {
   animation: none;
 }
+
+/* Footer brand mark: force both the shrimp symbol and the actual text wordmark to white. */
+html.dark footer .ep-logo {
+  --ep-logo-color: #ffffff !important;
+  --ep-logo-text: #ffffff !important;
+}
+html.dark footer .ep-logo .ep-logo-shrimp {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+html.dark footer .ep-logo .ep-logo-wordmark {
+  color: #ffffff !important;
+}
