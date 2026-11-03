@@ -1188,3 +1188,21 @@ html.dark .marketing-shell .ep-lens-scan {
   background: linear-gradient(90deg, transparent, rgba(139,213,166,0.95), transparent) !important;
   box-shadow: 0 0 14px rgba(139,213,166,0.7) !important;
 }
+
+
+/* SiteFooter has inline styles, so its dark theme must override them explicitly. */
+html.dark .marketing-shell footer {
+  background: #101f1c !important;
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell footer :is(p, h2, nav a, small, span, li) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell footer .ep-logo .ep-logo-shrimp {
+  fill: #f28a68 !important;
+  stroke: #f28a68 !important;
+}
+html.dark .marketing-shell footer .ep-logo .ep-logo-text {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
