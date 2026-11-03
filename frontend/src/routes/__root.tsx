@@ -34,7 +34,7 @@ function Root() {
         <script
           dangerouslySetInnerHTML={{
             __html:
-              '\n              (function () {\n                try {\n                  var saved = localStorage.getItem("ep-dashboard-theme");\n                  var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;\n                  if (saved === "dark" || (saved !== "light" && prefersDark)) {\n                    document.documentElement.classList.add("dark");\n                  }\n                } catch (_) {}\n              }());\n            ',
+              '\n              (function () {\n                try {\n                  var migrationKey = "ep-light-mode-default-v1";\n                  if (localStorage.getItem(migrationKey) !== "done") {\n                    localStorage.setItem("ep-dashboard-theme", "light");\n                    localStorage.setItem(migrationKey, "done");\n                  }\n                  var saved = localStorage.getItem("ep-dashboard-theme");\n                  document.documentElement.classList.toggle("dark", saved === "dark");\n                } catch (_) {\n                  document.documentElement.classList.remove("dark");\n                }\n              }());\n            ',
           }}
         />
       </head>
