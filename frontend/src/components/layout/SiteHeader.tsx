@@ -28,7 +28,10 @@ export function SiteHeader({
   });
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.localStorage.getItem("ep-dashboard-theme") === "dark";
+  });
 
   useEffect(() => {
     const syncTheme = () => {
