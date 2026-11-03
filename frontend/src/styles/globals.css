@@ -1595,3 +1595,21 @@ html.dark [data-site-footer] .ep-logo .ep-logo-shrimp {
 html.dark [data-site-footer] .ep-logo .ep-logo-wordmark {
   color: #8bd5a6 !important;
 }
+
+/* Dark footer text: white throughout, except the EcoPrawn wordmark stays mint. */
+html.dark footer[data-site-footer] {
+  color: #ffffff !important;
+}
+html.dark footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong, nav a, span) {
+  color: #ffffff !important;
+}
+html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
+  color: #8bd5a6 !important;
+}
+html.dark footer[data-site-footer] .ep-logo .ep-logo-shrimp {
+  fill: #d94416 !important;
+  stroke: #d94416 !important;
+}
+html.dark footer[data-site-footer] nav a:hover {
+  color: #8bd5a6 !important;
+}
