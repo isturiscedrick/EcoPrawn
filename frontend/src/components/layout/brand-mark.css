@@ -125,3 +125,16 @@ html.dark footer .ep-logo .ep-logo-shrimp {
 html.dark footer .ep-logo .ep-logo-wordmark {
   color: #ffffff !important;
 }
+
+/* Footer must use the exact same dark-mode brand mark colors as the header. */
+html.dark footer[data-site-footer] .ep-logo {
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #8bd5a6 !important;
+}
+html.dark footer[data-site-footer] .ep-logo .ep-logo-shrimp {
+  fill: #d94416 !important;
+  stroke: #d94416 !important;
+}
+html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
+  color: #8bd5a6 !important;
+}
