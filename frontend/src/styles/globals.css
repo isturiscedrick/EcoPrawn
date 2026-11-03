@@ -1198,11 +1198,8 @@ html.dark .marketing-shell footer {
 html.dark .marketing-shell footer :is(p, h2, nav a, small, span, li) {
   color: #8bd5a6 !important;
 }
-html.dark .marketing-shell footer .ep-logo .ep-logo-shrimp {
-  fill: #f28a68 !important;
-  stroke: #f28a68 !important;
-}
+html.dark .marketing-shell footer .ep-logo .ep-logo-shrimp,
 html.dark .marketing-shell footer .ep-logo .ep-logo-text {
-  fill: #000000 !important;
-  stroke: #000000 !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
