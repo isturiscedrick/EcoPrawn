@@ -237,31 +237,36 @@ export function SiteHeader({
           <button
             type="button"
             onClick={toggleTheme}
-            aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
-            aria-pressed={darkMode}
-            title={darkMode ? "Light mode" : "Dark mode"}
-            className={`inline-flex h-10 w-10 items-center justify-center rounded-full border shadow-md backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 ${darkMode ? "border-[#F28A68]/45 bg-[#18191A] text-[#F28A68] hover:bg-[#292D2F] hover:text-[#F28A68] hover:border-[#F28A68]/70" : "border-[rgba(11,46,51,0.22)] bg-white/90 text-[#D94416] hover:bg-[#D94416] hover:text-white"} ${focusRing}`}
+            role="switch"
+            aria-checked={darkMode}
+            aria-label={darkMode ? "Dark mode enabled. Switch to light mode." : "Light mode enabled. Switch to dark mode."}
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            className={`relative inline-flex h-[38px] w-[78px] shrink-0 items-center rounded-full border p-[3px] shadow-[0_3px_10px_rgba(0,0,0,0.12)] transition-colors duration-300 ${darkMode ? "border-[#F28A68]/35 bg-[#263238]" : "border-[#E5E7EB] bg-[#F8F8F6]"} ${focusRing}`}
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
+            <span
+              className={`flex h-[30px] w-[30px] items-center justify-center rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.16)] transition-transform duration-300 ease-in-out ${darkMode ? "translate-x-[40px] bg-[#18191A] text-[#F28A68]" : "translate-x-0 bg-white text-[#0F4C5C]"}`}
             >
-              {darkMode ? (
-                <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
-              ) : (
-                <>
-                  <circle cx="12" cy="12" r="4" />
-                  <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
-                </>
-              )}
-            </svg>
+              <svg
+                width="19"
+                height="19"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                {darkMode ? (
+                  <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
+                ) : (
+                  <>
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+                  </>
+                )}
+              </svg>
+            </span>
           </button>
         </div>
       )}
