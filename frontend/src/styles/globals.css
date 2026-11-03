@@ -1513,3 +1513,37 @@ html.dark .marketing-shell footer :is(a, button):focus-visible {
   outline: 3px solid #8bd5a6 !important;
   outline-offset: 3px;
 }
+
+/* Footer readability in light mode: dark text on a clean light surface. */
+html:not(.dark) .marketing-shell footer {
+  background-color: #f4f7f6 !important;
+  color: #18343b !important;
+  border-color: rgba(15, 76, 92, 0.22) !important;
+}
+html:not(.dark) .marketing-shell footer :is(p, li, small, address, strong, h1, h2, h3, h4) {
+  color: #18343b !important;
+}
+html:not(.dark) .marketing-shell footer :is(a, button) {
+  color: #0f4c5c !important;
+}
+html:not(.dark) .marketing-shell footer :is(a, button):hover {
+  color: #d94416 !important;
+}
+html:not(.dark) .marketing-shell footer :is(.ep-font-mono, [data-brand-secondary]) {
+  color: #0f4c5c !important;
+}
+html:not(.dark) .marketing-shell footer .ep-logo {
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #0f4c5c !important;
+}
+html:not(.dark) .marketing-shell footer .ep-logo .ep-logo-wordmark {
+  color: #0f4c5c !important;
+}
+html:not(.dark) .marketing-shell footer .ep-logo .ep-logo-shrimp {
+  fill: #d94416 !important;
+  stroke: #d94416 !important;
+}
+html:not(.dark) .marketing-shell footer :is(a, button):focus-visible {
+  outline: 3px solid #0f4c5c !important;
+  outline-offset: 3px;
+}
