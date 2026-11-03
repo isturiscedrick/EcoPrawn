@@ -936,3 +936,68 @@ html.dark .dashboard-shell .hover\:bg-\[var\(--ep-primary\)\]:hover {
 .marketing-shell .hover\:shadow-\[0_10px_20px_-10px_rgba\(178\,63\,28\,0\.55\)\]:hover {
   --tw-shadow: 0 10px 20px -10px color-mix(in srgb, var(--ep-accent) 55%, transparent);
 }
+
+/* ---------- Landing page brand palette: terracotta + teal/mint ---------- */
+/* Light theme: brand orange + deep teal. Keep body surfaces neutral. */
+.marketing-shell {
+  --ep-brand-primary: #d94416;
+  --ep-brand-secondary: #0f4c5c;
+  --ep-accent: var(--ep-brand-primary);
+  --ep-accent-hover: #b83a0f;
+  --ep-primary: var(--ep-brand-secondary);
+  --ep-secondary: var(--ep-brand-secondary);
+  --coral: var(--ep-brand-primary);
+  --coral-dim: var(--ep-accent-hover);
+}
+
+/* Dark theme: coral + mint. Text and surfaces remain independently readable. */
+html.dark .marketing-shell {
+  --ep-brand-primary: #f28a68;
+  --ep-brand-secondary: #8bd5a6;
+  --ep-accent: var(--ep-brand-primary);
+  --ep-accent-hover: #f6a185;
+  --ep-secondary: var(--ep-brand-secondary);
+  --coral: var(--ep-brand-primary);
+  --coral-dim: var(--ep-accent-hover);
+}
+
+/* Public-page wordmark follows the brand pair. */
+.marketing-shell .ep-logo {
+  --ep-logo-color: var(--ep-brand-primary);
+  --ep-logo-text: var(--ep-brand-secondary);
+}
+
+/* Keep the shrimp illustration visible on its dark circular display in both themes. */
+.marketing-shell figure[aria-label^="A shrimp"] {
+  --coral: #f28a68;
+}
+
+/* Dark teal content bands retain a light readable foreground; coral/mint are accents. */
+.marketing-shell :is(#readings, #systems, footer, [data-band]) {
+  --ep-brand-primary: #f28a68;
+  --ep-brand-secondary: #8bd5a6;
+  --ep-accent: #f28a68;
+  --ep-secondary: #8bd5a6;
+  --coral: #f28a68;
+}
+
+/* Ensure the landing page's primary action follows the palette in dark mode.
+   Dark text on soft coral gives stronger contrast than white text. */
+html.dark .marketing-shell .bg-\[var\(--ep-accent\)\] {
+  color: #1b0a04;
+}
+
+/* Small feature/icon backgrounds use a subtle tint of the current brand orange. */
+.marketing-shell .bg-\[rgba\(232\,98\,58\,0\.1\)\] {
+  background-color: color-mix(in srgb, var(--ep-brand-primary) 10%, transparent);
+}
+
+/* Active navigation uses the secondary color: teal in light mode, mint in dark. */
+.marketing-shell nav[aria-label="Primary navigation"] a[aria-current] {
+  background-color: var(--ep-brand-secondary);
+  border-color: var(--ep-brand-secondary);
+  color: #ffffff;
+}
+html.dark .marketing-shell nav[aria-label="Primary navigation"] a[aria-current] {
+  color: #10251a;
+}
