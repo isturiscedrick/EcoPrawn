@@ -303,3 +303,59 @@
 .ep-auth-modal .ep-logo-shape {
   animation: none;
 }
+
+
+/* Keep the authentication dialog in its intended light palette.
+   The panel is deliberately white; inheriting html.dark text/surface tokens
+   made light text render on the white dialog and darkened the form card. */
+.ep-auth-modal {
+  color-scheme: light;
+  --ep-bg: #ffffff;
+  --ep-surface: #ffffff;
+  --ep-tint: #f3f7f6;
+  --ep-line: #d8e0de;
+  --ep-primary: #0f4c5c;
+  --ep-secondary: #0f4c5c;
+  --ep-text-muted: #3d5a61;
+  --ep-accent: #d94416;
+  --ep-accent-hover: #b83a0f;
+  color: #0f4c5c;
+  background-color: #ffffff;
+}
+
+/* Match the root panel even when the application itself is in dark mode. */
+html.dark .ep-auth-modal.bg-white {
+  background-color: #ffffff;
+  color: #0f4c5c;
+}
+
+html.dark .ep-auth-modal .bg-white {
+  background-color: #ffffff;
+}
+
+/* Keep supporting text readable and placeholders visible on light inputs. */
+.ep-auth-modal h1,
+.ep-auth-modal label {
+  color: #0f4c5c;
+}
+
+.ep-auth-modal h1 + p,
+.ep-auth-modal > div:not(.ep-auth-brand) > div:last-child {
+  color: #3d5a61;
+}
+
+.ep-auth-modal input {
+  color: #0f4c5c;
+  background-color: #ffffff;
+}
+
+.ep-auth-modal input::placeholder {
+  color: #526b70;
+  opacity: 1;
+}
+
+/* Disabled is still visibly disabled, without making the button unreadable. */
+.ep-auth-modal button:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
