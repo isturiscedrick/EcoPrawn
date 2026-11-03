@@ -20,7 +20,10 @@ export function Sidebar({
   });
   const activeView = (pathname.split("/dashboard/")[1] ??
     "overview") as DashboardView;
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.localStorage.getItem("ep-dashboard-theme") === "dark";
+  });
   const [confirmingLogout, setConfirmingLogout] = useState(false);
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
