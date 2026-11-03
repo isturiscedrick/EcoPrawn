@@ -359,3 +359,83 @@ html.dark .ep-auth-modal .bg-white {
   opacity: 0.72;
   cursor: not-allowed;
 }
+
+/* Dark-mode authentication modal: charcoal surfaces with coral and mint accents. */
+html.dark .ep-auth-modal {
+  color-scheme: dark;
+  --ep-bg: #18191a;
+  --ep-surface: #242729;
+  --ep-tint: #29332f;
+  --ep-line: rgba(139, 213, 166, 0.28);
+  --ep-primary: #f28a68;
+  --ep-secondary: #8bd5a6;
+  --ep-text-muted: #b8c0c2;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #e87552;
+  background-color: #202122 !important;
+  border-color: rgba(139, 213, 166, 0.32) !important;
+  color: #e4e6eb !important;
+}
+
+html.dark .ep-auth-modal :is(h1, label, .text-\[var\(--ep-primary\)\]) {
+  color: #e4e6eb !important;
+}
+html.dark .ep-auth-modal :is(h1 + p, .text-\[var\(--ep-text-muted\)]) {
+  color: #b8c0c2 !important;
+}
+html.dark .ep-auth-modal div:has(> form),
+html.dark .ep-auth-modal [role="status"],
+html.dark .ep-auth-modal [role="alert"] {
+  background-color: #242729 !important;
+  border-color: rgba(139, 213, 166, 0.24) !important;
+  color: #e4e6eb !important;
+}
+html.dark .ep-auth-modal input {
+  background-color: #181b1c !important;
+  border-color: rgba(139, 213, 166, 0.32) !important;
+  color: #e4e6eb !important;
+  caret-color: #8bd5a6;
+}
+html.dark .ep-auth-modal input::placeholder {
+  color: #9ba5a7 !important;
+  opacity: 1;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] {
+  background-color: #29332f !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button {
+  color: #c5ceca !important;
+}
+html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
+  background-color: #292d2f !important;
+  border: 1px solid rgba(139, 213, 166, 0.32) !important;
+  color: #e4e6eb !important;
+}
+html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
+  background-color: #343a3b !important;
+}
+html.dark .ep-auth-modal button:not([type="submit"]):not(:has(> svg[viewBox="0 0 48 48"])) {
+  --tw-ring-offset-color: #202122;
+}
+html.dark .ep-auth-modal .ep-auth-brand {
+  border-color: rgba(139, 213, 166, 0.24) !important;
+}
+html.dark .ep-auth-modal button[aria-label="Close"] {
+  color: #b8c0c2 !important;
+}
+html.dark .ep-auth-modal button[aria-label="Close"]:hover {
+  background-color: rgba(139, 213, 166, 0.12) !important;
+  color: #8bd5a6 !important;
+}
+html.dark .ep-auth-modal button[type="submit"] {
+  background-color: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
+html.dark .ep-auth-modal button[type="submit"]:hover {
+  background-color: #e87552 !important;
+  border-color: #e87552 !important;
+}
+html.dark .ep-auth-modal :is(a, button) {
+  --tw-ring-offset-color: #202122;
+}
