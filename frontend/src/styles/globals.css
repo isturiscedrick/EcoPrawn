@@ -1481,3 +1481,35 @@ html.dark .marketing-shell :is(button:disabled, [aria-disabled="true"]) {
   color: #c3ccce !important;
   opacity: 0.75;
 }
+
+/* Footer readability: use high-contrast text on the dark footer surface. */
+html.dark .marketing-shell footer {
+  background-color: #101718 !important;
+  color: #f1f3f4 !important;
+  border-color: rgba(139, 213, 166, 0.32) !important;
+}
+html.dark .marketing-shell footer :is(p, li, small, address, strong, h1, h2, h3, h4) {
+  color: #f1f3f4 !important;
+}
+html.dark .marketing-shell footer :is(a, button) {
+  color: #c3ccce !important;
+}
+html.dark .marketing-shell footer :is(a, button):hover {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell footer :is(.ep-font-mono, [data-brand-secondary]) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell footer .ep-logo {
+  --ep-logo-color: #ffffff !important;
+  --ep-logo-text: #ffffff !important;
+}
+html.dark .marketing-shell footer .ep-logo :is(.ep-logo-shrimp, .ep-logo-wordmark) {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+html.dark .marketing-shell footer :is(a, button):focus-visible {
+  outline: 3px solid #8bd5a6 !important;
+  outline-offset: 3px;
+}
