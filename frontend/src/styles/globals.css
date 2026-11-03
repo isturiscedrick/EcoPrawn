@@ -1581,3 +1581,17 @@ html.dark [data-site-footer] :is(p, h2, nav a, small, span, li, address, strong)
 html.dark [data-site-footer] nav a:hover {
   color: #8bd5a6 !important;
 }
+
+/* Match the footer brand mark to the header brand mark in dark mode:
+   terracotta shrimp icon + mint EcoPrawn wordmark. */
+html.dark [data-site-footer] .ep-logo {
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #8bd5a6 !important;
+}
+html.dark [data-site-footer] .ep-logo .ep-logo-shrimp {
+  fill: #d94416 !important;
+  stroke: #d94416 !important;
+}
+html.dark [data-site-footer] .ep-logo .ep-logo-wordmark {
+  color: #8bd5a6 !important;
+}
