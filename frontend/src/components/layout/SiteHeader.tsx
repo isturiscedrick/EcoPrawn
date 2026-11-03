@@ -89,15 +89,21 @@ export function SiteHeader({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileNavOpen]);
 
-  const topBg = isWhite ? "bg-white" : "bg-[rgba(251,248,241,0.96)]";
-  const scrolledBg = isWhite
-    ? "bg-[rgba(255,255,255,0.92)]"
-    : "bg-[rgba(251,248,241,0.92)]";
+  const topBg = darkMode
+    ? "bg-[rgba(24,25,26,0.82)]"
+    : isWhite
+      ? "bg-[rgba(255,255,255,0.88)]"
+      : "bg-[rgba(251,248,241,0.88)]";
+  const scrolledBg = darkMode
+    ? "bg-[rgba(24,25,26,0.94)]"
+    : isWhite
+      ? "bg-[rgba(255,255,255,0.94)]"
+      : "bg-[rgba(251,248,241,0.94)]";
 
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-50 relative border-b border-[rgba(11,46,51,0.12)] backdrop-blur-md transition-[background-color,box-shadow] duration-200 ${
+      className={`sticky top-0 z-50 relative border-b backdrop-blur-xl supports-[backdrop-filter]:bg-clip-padding transition-[background-color,border-color,box-shadow] duration-300 ${darkMode ? "border-[rgba(242,138,104,0.16)] shadow-[0_8px_24px_-14px_rgba(0,0,0,0.55)]" : "border-[rgba(11,46,51,0.12)]"} ${
         scrolled
           ? `${scrolledBg} shadow-[0_8px_24px_-14px_rgba(11,46,51,0.35)]`
           : topBg
