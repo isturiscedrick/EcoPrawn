@@ -38,7 +38,7 @@ export function Sidebar({
       window.removeEventListener("ecoprawn-theme-change", syncTheme);
       window.removeEventListener("storage", syncTheme);
     };
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     const savedName = window.localStorage.getItem("ep-profile-name");
