@@ -1094,3 +1094,47 @@ html.dark .dashboard-shell {
 .dashboard-shell input[type="radio"] {
   accent-color: var(--ep-brand-secondary);
 }
+
+
+/* ---------- Landing page dark-theme surface correction ---------- */
+/* The root route can enable .dark from the saved/system preference. The landing
+   page previously kept its Tailwind bg-white hero, so dark-mode accents appeared
+   over a light hero. Give the public page matching dark surfaces and text. */
+html.dark .marketing-shell {
+  background-color: #18191a;
+  color: #e4e6eb;
+}
+html.dark .marketing-shell.bg-white {
+  background-color: #18191a;
+  color: #e4e6eb;
+}
+html.dark .marketing-shell #top {
+  background-color: #202122;
+}
+html.dark .marketing-shell #top [data-hero="grid"] {
+  opacity: 0.035;
+}
+html.dark .marketing-shell #top [data-hero="text"] {
+  color: #e4e6eb;
+}
+html.dark .marketing-shell #top a:not([class*="bg-"]) {
+  border-color: var(--ep-brand-secondary);
+  color: var(--ep-brand-secondary);
+}
+html.dark .marketing-shell #top a:not([class*="bg-"]):hover {
+  background-color: var(--ep-brand-secondary);
+  color: #102018;
+}
+html.dark .marketing-shell :is(#process, #systems, #about-content) {
+  background-color: #18191a;
+  color: #e4e6eb;
+}
+html.dark .marketing-shell :is(#process, #systems, #about-content) .text-\[var\(--ep-primary\)\] {
+  color: #e4e6eb;
+}
+html.dark .marketing-shell :is(#process, #systems, #about-content) .border-\[var\(--ep-line\)\] {
+  border-color: rgba(255,255,255,0.14);
+}
+html.dark .marketing-shell footer {
+  color: #e4e6eb;
+}
