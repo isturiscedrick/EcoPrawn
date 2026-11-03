@@ -439,3 +439,22 @@ html.dark .ep-auth-modal button[type="submit"]:hover {
 html.dark .ep-auth-modal :is(a, button) {
   --tw-ring-offset-color: #202122;
 }
+
+/* Final contrast safeguards: override legacy white-panel rules above in dark mode. */
+html.dark .ep-auth-modal.bg-white,
+html.dark .ep-auth-modal .bg-white {
+  background-color: #202122 !important;
+  color: #e4e6eb !important;
+}
+html.dark .ep-auth-modal :is(p, small, span, div) {
+  color: inherit;
+}
+html.dark .ep-auth-modal :is(.text-\[var\(--ep-text-muted\)], [data-muted]) {
+  color: #b8c0c2 !important;
+}
+html.dark .ep-auth-modal a:not([class*="bg-"]) {
+  color: #8bd5a6 !important;
+}
+html.dark .ep-auth-modal button[type="submit"] :is(span, svg) {
+  color: #18191a !important;
+}
