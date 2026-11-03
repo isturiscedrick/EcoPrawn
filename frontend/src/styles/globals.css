@@ -1056,3 +1056,41 @@ html.dark .marketing-shell .ep-logo {
 .marketing-shell .bg-\\[rgba\\(232\\,98\\,58\\,0\\.1\\)\\] {
   background-color: var(--ep-accent-tint);
 }
+
+
+/* ---------- Dashboard brand palette: canonical light/dark mapping ---------- */
+/* Match the requested brand palette while retaining existing neutral surfaces. */
+.dashboard-shell {
+  --ep-brand-primary: #d94416;
+  --ep-brand-secondary: #0f4c5c;
+  --ep-accent: var(--ep-brand-primary);
+  --ep-accent-hover: #b83a0f;
+  --coral: var(--ep-brand-primary);
+  --coral-dim: var(--ep-accent-hover);
+  --ep-secondary: var(--ep-brand-secondary);
+  --ep-accent-tint: color-mix(in srgb, var(--ep-brand-primary) 12%, transparent);
+  --ep-accent-tint-soft: color-mix(in srgb, var(--ep-brand-primary) 8%, transparent);
+  --ep-secondary-tint: color-mix(in srgb, var(--ep-brand-secondary) 12%, transparent);
+}
+html.dark .dashboard-shell {
+  --ep-brand-primary: #f28a68;
+  --ep-brand-secondary: #8bd5a6;
+  --ep-accent: var(--ep-brand-primary);
+  --ep-accent-hover: #f6a185;
+  --coral: var(--ep-brand-primary);
+  --coral-dim: var(--ep-accent-hover);
+  --ep-secondary: var(--ep-brand-secondary);
+}
+.dashboard-shell .dashboard-nav-active-dot {
+  background-color: var(--ep-brand-primary);
+}
+.dashboard-shell .ep-font-mono.uppercase[class*="tracking-[0.14em]"] {
+  color: var(--ep-brand-secondary);
+}
+.dashboard-shell :is(.text-\[var\(--mangrove\)\], .text-\[var\(--mangrove-text\)\]) {
+  color: var(--ep-brand-secondary);
+}
+.dashboard-shell input[type="checkbox"],
+.dashboard-shell input[type="radio"] {
+  accent-color: var(--ep-brand-secondary);
+}
