@@ -26,13 +26,18 @@ export function Sidebar({
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
 
   useEffect(() => {
-    const savedTheme = window.localStorage.getItem("ep-dashboard-theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-    const enabled = savedTheme ? savedTheme === "dark" : prefersDark;
-    setDarkMode(enabled);
-    document.documentElement.classList.toggle("dark", enabled);
+    const syncTheme = () => {
+      const enabled = window.localStorage.getItem("ep-dashboard-theme") === "dark";
+      setDarkMode(enabled);
+      document.documentElement.classList.toggle("dark", enabled);
+    };
+    syncTheme();
+    window.addEventListener("ecoprawn-theme-change", syncTheme);
+    window.addEventListener("storage", syncTheme);
+    return () => {
+      window.removeEventListener("ecoprawn-theme-change", syncTheme);
+      window.removeEventListener("storage", syncTheme);
+    };
   }, []);
 
   useEffect(() => {
@@ -50,6 +55,7 @@ export function Sidebar({
         next ? "dark" : "light",
       );
       document.documentElement.classList.toggle("dark", next);
+      window.dispatchEvent(new Event("ecoprawn-theme-change"));
       return next;
     });
   }
