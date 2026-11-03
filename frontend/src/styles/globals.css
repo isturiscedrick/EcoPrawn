@@ -1547,3 +1547,37 @@ html:not(.dark) .marketing-shell footer :is(a, button):focus-visible {
   outline: 3px solid #0f4c5c !important;
   outline-offset: 3px;
 }
+
+/* Site footer theme surfaces: target the actual footer component directly.
+   Its previous inline teal gradient prevented the light theme from appearing. */
+html:not(.dark) [data-site-footer] {
+  background: linear-gradient(155deg, #ffffff 0%, #f4f7f6 58%, #eaf1ef 100%) !important;
+  color: #18343b !important;
+}
+html:not(.dark) [data-site-footer] :is(p, h2, nav a, small, span, li, address, strong) {
+  color: #18343b !important;
+}
+html:not(.dark) [data-site-footer] nav a:hover {
+  color: #d94416 !important;
+}
+html:not(.dark) [data-site-footer] .ep-logo {
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #0f4c5c !important;
+}
+html:not(.dark) [data-site-footer] .ep-logo .ep-logo-wordmark {
+  color: #0f4c5c !important;
+}
+html:not(.dark) [data-site-footer] .ep-logo .ep-logo-shrimp {
+  fill: #d94416 !important;
+  stroke: #d94416 !important;
+}
+html.dark [data-site-footer] {
+  background: linear-gradient(155deg, #172326 0%, #101718 58%, #0b1214 100%) !important;
+  color: #f1f3f4 !important;
+}
+html.dark [data-site-footer] :is(p, h2, nav a, small, span, li, address, strong) {
+  color: #f1f3f4 !important;
+}
+html.dark [data-site-footer] nav a:hover {
+  color: #8bd5a6 !important;
+}
