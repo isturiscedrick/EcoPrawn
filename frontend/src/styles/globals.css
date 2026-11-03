@@ -1138,3 +1138,33 @@ html.dark .marketing-shell :is(#process, #systems, #about-content) .border-\[var
 html.dark .marketing-shell footer {
   color: #e4e6eb;
 }
+
+
+/* Dark-mode landing content: use the requested mint secondary throughout. */
+html.dark .marketing-shell {
+  --ep-primary: #8bd5a6;
+  --ep-secondary: #8bd5a6;
+  --ep-brand-secondary: #8bd5a6;
+  --water-deep: #8bd5a6;
+  --mangrove: #8bd5a6;
+  --mangrove-text: #8bd5a6;
+}
+
+/* Some landing sections declare their own light-mode teal text tokens.
+   Override those locally in dark mode so they use mint as well. */
+html.dark .marketing-shell :is(#readings, #systems, footer, [data-band]) {
+  --ep-primary: #8bd5a6;
+  --ep-secondary: #8bd5a6;
+  --water-deep: #8bd5a6;
+  --mangrove: #8bd5a6;
+  --mangrove-text: #8bd5a6;
+}
+
+html.dark .marketing-shell :is(
+  .text-\[var\(--ep-primary\)\],
+  .text-\[var\(--ep-secondary\)\],
+  .text-\[var\(--mangrove\)\],
+  .text-\[var\(--mangrove-text\)\]
+) {
+  color: #8bd5a6;
+}
