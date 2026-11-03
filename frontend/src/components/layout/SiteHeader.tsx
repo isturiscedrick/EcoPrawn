@@ -239,12 +239,29 @@ export function SiteHeader({
             onClick={toggleTheme}
             aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
             aria-pressed={darkMode}
-            className={`inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/90 px-3 text-sm font-semibold text-[var(--ep-primary)] shadow-md backdrop-blur-sm transition-colors hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${focusRing}`}
+            title={darkMode ? "Light mode" : "Dark mode"}
+            className={`inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(11,46,51,0.22)] bg-white/90 text-[var(--ep-primary)] shadow-md backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${focusRing}`}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              {darkMode ? <circle cx="12" cy="12" r="4" /> : <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />}
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              {darkMode ? (
+                <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
+              ) : (
+                <>
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+                </>
+              )}
             </svg>
-            <span className="hidden sm:inline">{darkMode ? "Light mode" : "Dark mode"}</span>
           </button>
         </div>
       )}
