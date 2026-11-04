@@ -2737,3 +2737,77 @@ html.dark .ep-auth-modal button[aria-label="Close"] {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Text and icon contrast priority:
+   use neutral black on light surfaces and white on dark surfaces;
+   reserve brand colors for accents, not routine typography/icons. */
+html:not(.dark) .marketing-shell :is(
+  h1, h2, h3, h4, h5, h6, p, li, dt, dd, label, small, strong, em,
+  blockquote, figcaption, summary
+) {
+  color: #000000;
+  -webkit-text-fill-color: #000000;
+}
+html:not(.dark) .marketing-shell :is(
+  a:not([data-band] a), button:not([data-band] button),
+  [role="button"], [role="tab"]
+) {
+  color: #000000;
+}
+html:not(.dark) .marketing-shell :is(
+  main svg, header svg, footer svg
+) {
+  color: #000000;
+  stroke: currentColor;
+}
+html:not(.dark) .marketing-shell :is([data-band], #systems) :is(
+  h1, h2, h3, h4, p, li, span, a, button, svg
+) {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+html:not(.dark) .marketing-shell :is([data-band], #systems) svg {
+  stroke: currentColor;
+}
+html:not(.dark) .marketing-shell :is(button, a)[style*="background-color: var(--ep-accent)"],
+html:not(.dark) .marketing-shell :is(button, a).bg-\[\#b23f1c\] {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+html.dark .marketing-shell :is(
+  h1, h2, h3, h4, h5, h6, p, li, dt, dd, label, small, strong, em,
+  blockquote, figcaption, summary, a, button, [role="button"], [role="tab"]
+) {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+html.dark .marketing-shell :is(main svg, header svg, footer svg) {
+  color: #ffffff;
+  stroke: currentColor;
+}
+html.dark .marketing-shell :is([data-band], #systems) :is(
+  h1, h2, h3, h4, p, li, span, a, button, svg
+) {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+html.dark .marketing-shell :is([data-band], #systems) svg {
+  stroke: currentColor;
+}
+
+/* Authentication dialog follows the same neutral-first text/icon rule. */
+.ep-auth-modal :is(h1, h2, h3, p, label, small, span, strong, a, button, svg) {
+  color: #000000;
+}
+.ep-auth-modal button[type="submit"] {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .ep-auth-modal :is(h1, h2, h3, p, label, small, span, strong, a, button, svg) {
+  color: #ffffff;
+}
+html.dark .ep-auth-modal button[type="submit"] {
+  color: #18191a !important;
+  -webkit-text-fill-color: #18191a !important;
+}
