@@ -2258,3 +2258,55 @@ html.dark .marketing-shell .ep-landing-hero .ep-hero-visual > div:not([data-hero
 html.dark .marketing-shell .ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]) :is(span, p, small, svg, i) {
   color: #173b3d !important;
 }
+
+
+/* Final public header/footer contrast correction.
+   The footer uses a pale surface in light mode, so its text must be dark;
+   dark mode keeps the footer dark with white text. Header controls sit on
+   a pale surface in light mode and use dark ink, except the filled CTA. */
+html:not(.dark) .marketing-shell #site-header,
+html:not(.dark) .marketing-shell #site-header :is(a, button, span, nav, li) {
+  color: #0b2320 !important;
+}
+html:not(.dark) .marketing-shell #site-header :is(button, a) svg,
+html:not(.dark) .marketing-shell #site-header :is(button, a) svg * {
+  stroke: currentColor;
+}
+html:not(.dark) .marketing-shell #site-header a[style*="background-color: var(--ep-accent)"],
+html:not(.dark) .marketing-shell #site-header a[style*="backgroundColor: var(--ep-accent)"],
+html:not(.dark) .marketing-shell #site-header a[style*="background-color: var(--ep-accent)"] *,
+html:not(.dark) .marketing-shell #site-header a[style*="backgroundColor: var(--ep-accent)"] * {
+  color: #ffffff !important;
+}
+
+/* Light footer = pale background + dark readable copy and icons. */
+html:not(.dark) .marketing-shell footer[data-site-footer] {
+  background: #f4f7f6 !important;
+  color: #18343b !important;
+}
+html:not(.dark) .marketing-shell footer[data-site-footer] :is(p, h2, h3, h4, a, span, small, strong, li, nav) {
+  color: #18343b !important;
+}
+html:not(.dark) .marketing-shell footer[data-site-footer] nav a:hover {
+  color: #b23f1c !important;
+}
+html:not(.dark) .marketing-shell footer[data-site-footer] .ep-logo {
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #0f4c5c !important;
+}
+html:not(.dark) .marketing-shell footer[data-site-footer] :is(svg:not(.ep-logo svg), [data-icon]) {
+  color: #18343b !important;
+  stroke: currentColor;
+}
+
+/* Dark footer = deep teal + white copy/icons, with brand logo accents. */
+html.dark .marketing-shell footer[data-site-footer] {
+  background: #101f1c !important;
+  color: #ffffff !important;
+}
+html.dark .marketing-shell footer[data-site-footer] :is(p, h2, h3, h4, a, span, small, strong, li, nav) {
+  color: #ffffff !important;
+}
+html.dark .marketing-shell footer[data-site-footer] nav a:hover {
+  color: #8bd5a6 !important;
+}
