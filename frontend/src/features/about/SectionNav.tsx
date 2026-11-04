@@ -47,7 +47,7 @@ export function SectionNav() {
         top-[72px] md:top-[80px]
         z-40
         border-b border-[var(--ep-line)]
-        bg-white
+        bg-white dark:bg-[#202729]
         shadow-[0_4px_12px_-8px_rgba(11,46,51,0.2)]
       "
     >
