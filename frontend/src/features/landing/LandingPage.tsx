@@ -147,7 +147,7 @@ export function LandingPage() {
             ))}
           </div>
 
-          <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-8 px-5 pb-12 pt-10 sm:px-8 sm:pb-16 sm:pt-14 lg:grid-cols-[minmax(0,1.08fr)_minmax(380px,.92fr)] lg:gap-10 lg:px-12 lg:py-14 xl:gap-16">
+          <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-8 px-5 pb-12 pt-24 sm:px-8 sm:pb-16 sm:pt-28 lg:grid-cols-[minmax(0,1.08fr)_minmax(380px,.92fr)] lg:gap-10 lg:px-12 lg:pt-28 lg:pb-14 xl:gap-16">
             <div data-hero="text" className="ep-hero-copy order-1 mx-auto w-full max-w-[760px] text-center lg:mx-0 lg:text-left">
               <div
                 data-hero="eyebrow"
