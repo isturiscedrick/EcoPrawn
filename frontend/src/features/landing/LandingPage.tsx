@@ -101,13 +101,13 @@ function Words({ text }: { text: string }) {
 
 export function LandingPage() {
   return (
-    <div className="marketing-shell flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
+    <div className="marketing-shell flex min-h-screen flex-col bg-[#f4f7f6] text-[#0b2e33] dark:bg-[#18191a] dark:text-[#e4e6eb]">
       <LandingMotion />
       <SiteHeader tone="white" integrated />
 
       <main className="flex-1">
         {/* HERO: cream (60%) with a faint blueprint grid and one coral accent */}
-        <section id="top" className="ep-landing-hero relative isolate overflow-hidden bg-[#f5f9fc] text-[#171f2b] dark:bg-[#101b2a] dark:text-[#f4f7fb]">
+        <section id="top" className="ep-landing-hero relative isolate overflow-hidden bg-[#f4f7f6] text-[#0b2e33] dark:bg-[#18191a] dark:text-[#e4e6eb]">
           <div
             aria-hidden="true"
             data-hero="grid"
@@ -127,7 +127,7 @@ export function LandingPage() {
             className="pointer-events-none absolute inset-0 -z-10"
             style={{
               background:
-                "radial-gradient(680px circle at 78% 38%, rgba(105,157,207,0.22), transparent 62%), radial-gradient(520px circle at 8% 95%, rgba(87,115,158,0.10), transparent 60%), linear-gradient(135deg, #f8fbff 0%, #edf4fb 100%)",
+                "radial-gradient(680px circle at 78% 38%, rgba(60,122,92,0.12), transparent 62%), radial-gradient(520px circle at 8% 95%, rgba(11,46,51,0.06), transparent 60%), linear-gradient(135deg, #f8faf9 0%, #edf4f1 100%)",
             }}
           />
           <div
@@ -151,7 +151,7 @@ export function LandingPage() {
             <div data-hero="text" className="ep-hero-copy order-1 mx-auto w-full max-w-[760px] text-center lg:mx-0 lg:text-left">
               <div
                 data-hero="eyebrow"
-                className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#cbd7ea] bg-white/75 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#d6532d] shadow-sm dark:border-white/15 dark:bg-white/[0.06] dark:text-[#ff9b79]"
+                className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d8e0de] bg-white/85 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#b23f1c] shadow-sm dark:border-white/15 dark:bg-white/[0.06] dark:text-[#f6a185]"
               >
                 <span className="relative flex h-2 w-2" aria-hidden="true">
                   <span data-live-ping="" className="absolute inline-flex h-full w-full rounded-full bg-[#e46b45] opacity-60" />
@@ -164,17 +164,17 @@ export function LandingPage() {
                 aria-label="Smarter shrimp farming, always in range."
                 className="ep-font-display mx-auto max-w-[900px] text-[clamp(42px,5.2vw,76px)] font-bold leading-[1.08] tracking-[-0.055em] lg:mx-0"
               >
-                <span data-hero-headline-accent className="block text-[#57739e] dark:text-[#a9c9ee]">
+                <span data-hero-headline-accent className="block text-[#0f4c5c] dark:text-[#e4e6eb]">
                   <Words text="Smarter shrimp farming," />
                 </span>
-                <span className="block text-[#17243a] dark:text-[#f4f7fb]">
+                <span className="block text-[#0b2e33] dark:text-[#e4e6eb]">
                   <Words text="always in range." />
                 </span>
               </h1>
 
               <p
                 data-hero="lead"
-                className="mx-auto mt-5 max-w-[590px] text-[15px] leading-[1.8] text-[#617087] dark:text-[#bdc9d7] sm:text-base lg:mx-0"
+                className="mx-auto mt-5 max-w-[590px] text-[15px] leading-[1.8] text-[#3f5753] dark:text-[#b0b3b8] sm:text-base lg:mx-0"
               >
                 Bring water quality, automated feeding, and AI growth insights together
                 in one calm, connected view of your shrimp farm.
@@ -182,14 +182,14 @@ export function LandingPage() {
 
               <div data-hero="cta" className="mt-7 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
                 <AuthLink
-                  className={`group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#4d66b1] bg-[#4d66b1] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_-12px_rgba(54,78,153,.65)] hover:border-[#3d559b] hover:bg-[#3d559b] ${buttonMotion} ${focusRing}`}
+                  className={`group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#b23f1c] bg-[#b23f1c] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_-12px_rgba(11,46,51,.35)] hover:border-[#8f3115] hover:bg-[#8f3115] ${buttonMotion} ${focusRing}`}
                 >
                   Open farm dashboard
                   <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </AuthLink>
                 <Link
                   to="/about"
-                  className={`inline-flex min-h-11 items-center justify-center rounded-xl border border-[#c6d1e3] bg-white/80 px-6 py-3 text-sm font-semibold text-[#263958] shadow-sm hover:border-[#8095c5] hover:bg-white dark:border-white/20 dark:bg-white/[0.05] dark:text-white dark:hover:bg-white/10 ${buttonMotion} ${focusRing}`}
+                  className={`inline-flex min-h-11 items-center justify-center rounded-xl border border-[#cbd8d3] bg-white/85 px-6 py-3 text-sm font-semibold text-[#0b2e33] shadow-sm hover:border-[#b23f1c] hover:bg-white dark:border-white/20 dark:bg-white/[0.05] dark:text-[#e4e6eb] dark:hover:bg-white/10 ${buttonMotion} ${focusRing}`}
                   activeOptions={{ exact: true }}
                 >
                   Explore the system
@@ -206,12 +206,12 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section aria-label="EcoPrawn at a glance" className="relative border-b border-[#dce4f1] bg-white/90 px-5 py-7 dark:border-white/10 dark:bg-[#131e2c] sm:px-8">
-          <div className="mx-auto grid max-w-[920px] grid-cols-2 gap-2 rounded-2xl border border-[#d8e1f0] bg-white/85 p-2 shadow-[0_12px_35px_-24px_rgba(31,53,94,.45)] dark:border-white/10 dark:bg-white/[0.04] sm:grid-cols-4 sm:gap-3 sm:p-3">
+        <section aria-label="EcoPrawn at a glance" className="relative border-b border-[#d8e0de] bg-[#f4f7f6] dark:border-white/10 dark:bg-[#202122] px-5 py-7 dark:border-white/10 dark:bg-[#131e2c] sm:px-8">
+          <div className="mx-auto grid max-w-[920px] grid-cols-2 gap-2 rounded-2xl border border-[#d8e0de] bg-white/90 p-2 shadow-[0_12px_35px_-24px_rgba(31,53,94,.45)] dark:border-white/10 dark:bg-white/[0.04] sm:grid-cols-4 sm:gap-3 sm:p-3">
             {STATS.map((stat, index) => (
-              <div key={stat.label} className={`rounded-xl border px-3 py-3 text-left ${index % 2 ? "border-[#e56b48]" : "border-[#5872bd]"} dark:bg-white/[0.03]`}>
-                <span className="block text-[clamp(19px,2.5vw,27px)] font-bold leading-none tracking-tight text-[#4964b0] dark:text-[#a9c9ee]">{stat.value}</span>
-                <span className="mt-2 block text-[10px] font-medium leading-snug text-[#53627b] dark:text-[#c1ccda]">{stat.label}</span>
+              <div key={stat.label} className={`rounded-xl border px-3 py-3 text-left ${index % 2 ? "border-[#d9a18f]" : "border-[#9fb3b0]"} dark:bg-white/[0.03]`}>
+                <span className="block text-[clamp(19px,2.5vw,27px)] font-bold leading-none tracking-tight text-[#0f4c5c] dark:text-[#8bd5a6]">{stat.value}</span>
+                <span className="mt-2 block text-[10px] font-medium leading-snug text-[#3f5753] dark:text-[#b0b3b8]">{stat.label}</span>
               </div>
             ))}
           </div>
@@ -221,7 +221,7 @@ export function LandingPage() {
         <section
           id="readings"
           aria-labelledby="readings-title"
-          className="ep-readings-section relative isolate overflow-hidden border-y border-[#1a2a40] bg-[#101b2a] text-white"
+          className="ep-readings-section relative isolate overflow-hidden border-y border-[#1a2a40] bg-[#0b2e33] text-white"
         >
           <div
             aria-hidden="true"
@@ -244,7 +244,7 @@ export function LandingPage() {
               </div>
               <h2
                 id="readings-title"
-                className="ep-font-display !text-[#101b19] dark:!text-white text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
+                className="ep-font-display !text-white text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
               >
                 Five readings, each held in range.
               </h2>
@@ -371,7 +371,7 @@ export function LandingPage() {
         <section
           id="process"
           aria-labelledby="process-title"
-          className="ep-process-section !bg-[#f1f5f2] !text-[#101b19] px-5 py-20 dark:!bg-[#111d2c] dark:!text-white sm:px-8 sm:py-24"
+          className="ep-process-section !bg-[#f4f7f6] !text-[#0b2e33] px-5 py-20 dark:!bg-[#202122] dark:!text-[#e4e6eb] sm:px-8 sm:py-24"
         >
           <div className="mx-auto max-w-[1200px]">
             <div data-reveal="" className="mb-14 max-w-[40rem]">
@@ -410,17 +410,17 @@ export function LandingPage() {
                       className="absolute -top-[5px] left-0 hidden h-2.5 w-2.5 bg-[var(--ep-primary)] lg:block"
                     />
                     <div className="mb-6 flex items-center justify-between">
-                      <span className="!text-[#31514b] dark:!text-white text-sm font-semibold tabular-nums tracking-wide transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
+                      <span className="!text-[#3f5753] dark:!text-[#b0b3b8] text-sm font-semibold tabular-nums tracking-wide transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
                         {s.step}
                       </span>
-                      <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--ep-primary)] !text-[#14545a] dark:!text-white transition-colors duration-200 group-hover:bg-[var(--ep-primary)] group-hover:!text-white">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--ep-primary)] !text-[#0f4c5c] dark:!text-[#8bd5a6] transition-colors duration-200 group-hover:bg-[var(--ep-primary)] group-hover:!text-white">
                         <Icon name={s.icon} size={22} />
                       </span>
                     </div>
-                    <h3 className="ep-font-display mb-2 !text-[#101b19] dark:!text-white text-2xl font-semibold transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
+                    <h3 className="ep-font-display mb-2 !text-[#0b2e33] dark:!text-[#e4e6eb] text-2xl font-semibold transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
                       {s.title}
                     </h3>
-                    <p className="!text-[#31514b] dark:!text-white text-base leading-relaxed">
+                    <p className="!text-[#3f5753] dark:!text-[#b0b3b8] text-base leading-relaxed">
                       {s.body}
                     </p>
                   </li>
