@@ -72,56 +72,8 @@ export function LandingMotion() {
     // ScrollSmoother is a paid plugin, so this uses the free ScrollTrigger
     // normalizer and ScrollToPlugin already included with GSAP.
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // Smooth desktop mouse-wheel scrolling with GSAP momentum.
-      // Touch, keyboard, and native scrolling inside nested panels remain native.
-      let targetY = window.scrollY;
-      let wheelTween: gsap.core.Tween | undefined;
-
-      const canScrollInside = (element: Element | null, deltaY: number) => {
-        let node = element;
-        while (node && node !== document.body && node !== document.documentElement) {
-          const style = window.getComputedStyle(node);
-          const overflowY = style.overflowY;
-          if (/(auto|scroll|overlay)/.test(overflowY) && node.scrollHeight > node.clientHeight) {
-            const atTop = (node as HTMLElement).scrollTop <= 0;
-            const atBottom =
-              (node as HTMLElement).scrollTop + (node as HTMLElement).clientHeight >=
-              (node as HTMLElement).scrollHeight - 1;
-            if ((deltaY < 0 && !atTop) || (deltaY > 0 && !atBottom)) return true;
-          }
-          node = node.parentElement;
-        }
-        return false;
-      };
-
-      const handleWheel = (event: WheelEvent) => {
-        if (
-          event.defaultPrevented ||
-          event.ctrlKey ||
-          event.metaKey ||
-          event.shiftKey ||
-          event.deltaY === 0 ||
-          canScrollInside(event.target as Element | null, event.deltaY)
-        ) return;
-
-        event.preventDefault();
-        const scale = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
-        const delta = gsap.utils.clamp(-140, 140, event.deltaY * scale);
-        const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-        targetY = gsap.utils.clamp(0, maxY, targetY + delta * 1.35);
-
-        wheelTween?.kill();
-        wheelTween = gsap.to(window, {
-          duration: 0.85,
-          ease: "power3.out",
-          overwrite: true,
-          scrollTo: { y: targetY, autoKill: false },
-          onComplete: () => { wheelTween = undefined; },
-        });
-      };
-
-      window.addEventListener("wheel", handleWheel, { passive: false });
-
+      // Keep native wheel/touch scrolling responsive. GSAP is used only
+      // for deliberate in-page anchor navigation, not to intercept every wheel event.
       const anchorLinks = gsap.utils.toArray<HTMLAnchorElement>(
         'a[href^="#"]:not([href="#"])'
       );
@@ -156,8 +108,6 @@ export function LandingMotion() {
 
       return () => {
         handlers.forEach((cleanup) => cleanup());
-        window.removeEventListener("wheel", handleWheel);
-        wheelTween?.kill();
         gsap.killTweensOf(window);
       };
     });
