@@ -244,7 +244,7 @@ export function LandingPage() {
               </div>
               <h2
                 id="readings-title"
-                className="ep-font-display text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
+                className="ep-font-display !text-[#101b19] dark:!text-white text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
               >
                 Five readings, each held in range.
               </h2>
@@ -371,7 +371,7 @@ export function LandingPage() {
         <section
           id="process"
           aria-labelledby="process-title"
-          className="ep-process-section bg-[#f5f9fc] px-5 py-20 dark:bg-[#111d2c] sm:px-8 sm:py-24"
+          className="ep-process-section !bg-[#f1f5f2] !text-[#101b19] px-5 py-20 dark:!bg-[#111d2c] dark:!text-white sm:px-8 sm:py-24"
         >
           <div className="mx-auto max-w-[1200px]">
             <div data-reveal="" className="mb-14 max-w-[40rem]">
@@ -410,17 +410,17 @@ export function LandingPage() {
                       className="absolute -top-[5px] left-0 hidden h-2.5 w-2.5 bg-[var(--ep-primary)] lg:block"
                     />
                     <div className="mb-6 flex items-center justify-between">
-                      <span className="text-sm font-semibold tabular-nums tracking-wide text-[var(--ep-text-muted)] transition-colors duration-200 group-hover:text-[var(--ep-accent)]">
+                      <span className="!text-[#31514b] dark:!text-white text-sm font-semibold tabular-nums tracking-wide transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
                         {s.step}
                       </span>
-                      <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--ep-primary)] text-[var(--ep-primary)] transition-colors duration-200 group-hover:bg-[var(--ep-primary)] group-hover:text-[var(--ep-bg)]">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--ep-primary)] !text-[#14545a] dark:!text-white transition-colors duration-200 group-hover:bg-[var(--ep-primary)] group-hover:!text-white">
                         <Icon name={s.icon} size={22} />
                       </span>
                     </div>
-                    <h3 className="ep-font-display mb-2 text-2xl font-semibold transition-colors duration-200 group-hover:text-[var(--ep-accent)]">
+                    <h3 className="ep-font-display mb-2 !text-[#101b19] dark:!text-white text-2xl font-semibold transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
                       {s.title}
                     </h3>
-                    <p className="text-base leading-relaxed text-[var(--ep-text-muted)]">
+                    <p className="!text-[#31514b] dark:!text-white text-base leading-relaxed">
                       {s.body}
                     </p>
                   </li>
