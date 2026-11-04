@@ -2969,3 +2969,75 @@ html.dark .marketing-shell footer {
   background-image: linear-gradient(90deg, transparent, rgba(139,213,166,.9), transparent) !important;
   box-shadow: 0 0 14px rgba(139,213,166,.55) !important;
 }
+
+
+/* About and Contact: shared EcoPrawn palette for both themes. */
+.marketing-shell {
+  --ep-bg: #f4f7f6;
+  --ep-surface: #ffffff;
+  --ep-tint: #edf3f1;
+  --ep-line: #d8e0de;
+  --ep-primary: #142b2e;
+  --ep-secondary: #0f4c5c;
+  --ep-text-muted: #405653;
+  --ep-accent: #d94416;
+  --ep-accent-hover: #b83a0f;
+  background-color: #f4f7f6;
+  color: #142b2e;
+}
+.marketing-shell [data-page-hero] {
+  background-color: #f4f7f6 !important;
+  background-image:
+    radial-gradient(640px circle at 82% 30%, rgba(139,213,166,.18), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(217,68,22,.07), transparent 60%) !important;
+}
+.marketing-shell :is(h1,h2,h3,h4,h5,h6) { color: #142b2e; }
+.marketing-shell :is(input,textarea,select) {
+  color: #142b2e;
+  background-color: #ffffff;
+  border-color: #cbd8d5;
+}
+.marketing-shell :is(input,textarea,select)::placeholder { color: #657875; }
+html.dark .marketing-shell {
+  --ep-bg: #18191a;
+  --ep-surface: #202729;
+  --ep-tint: #29332f;
+  --ep-line: rgba(139,213,166,.22);
+  --ep-primary: #f4f7f6;
+  --ep-secondary: #8bd5a6;
+  --ep-text-muted: #c0cbca;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #e87552;
+  background-color: #18191a !important;
+  color: #f4f7f6 !important;
+}
+html.dark .marketing-shell [data-page-hero] {
+  background-color: #18191a !important;
+  background-image:
+    radial-gradient(640px circle at 82% 30%, rgba(139,213,166,.12), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(242,138,104,.09), transparent 60%) !important;
+}
+html.dark .marketing-shell :is(h1,h2,h3,h4,h5,h6) { color: #f4f7f6; }
+html.dark .marketing-shell :is(p,li,dd,dt,label) { color: inherit; }
+html.dark .marketing-shell :is(article,[data-contact-card],[data-contact-form] form,[role="status"]) {
+  background-color: #202729 !important;
+  border-color: rgba(139,213,166,.2) !important;
+  color: #f4f7f6 !important;
+}
+html.dark .marketing-shell :is(input,textarea,select) {
+  color: #f4f7f6 !important;
+  background-color: #181f20 !important;
+  border-color: rgba(139,213,166,.3) !important;
+  caret-color: #8bd5a6;
+}
+html.dark .marketing-shell :is(input,textarea,select)::placeholder { color: #aab8b6 !important; }
+html.dark .marketing-shell #systems {
+  background-color: #0f4c5c;
+  border-color: rgba(139,213,166,.24);
+}
+html.dark .marketing-shell #systems > div[aria-hidden="true"]:first-child {
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.14), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.10), transparent 48%),
+    linear-gradient(155deg, #123d42 0%, #0c3035 52%, #09262b 100%) !important;
+}
