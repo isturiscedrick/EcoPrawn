@@ -1615,9 +1615,40 @@ html.dark footer[data-site-footer] nav a:hover {
 }
 
 
-/* Keep the landing hero's first headline line coral in dark mode.
-   This targeted rule overrides the broad dark-mode span-to-mint rule above. */
+/* Verity-inspired landing hero: keep the cool blue accent consistent in dark mode. */
 html.dark .marketing-shell #top [data-hero-headline-accent],
 html.dark .marketing-shell #top [data-hero-headline-accent] * {
-  color: #f28a68 !important;
+  color: #a9c9ee !important;
+}
+
+/* Subtle depth and responsive polish for the landing-page preview. */
+.ep-hero-console {
+  transition: transform 700ms cubic-bezier(.2,.75,.25,1), box-shadow 700ms ease;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ep-hero-visual:hover .ep-hero-console {
+    transform: translateY(-5px) rotateX(1deg);
+    box-shadow: 0 36px 100px -38px rgba(38,75,112,.48);
+  }
+}
+.ep-landing-hero [data-hero="grid"] {
+  opacity: .055;
+}
+html.dark .ep-landing-hero [data-hero="grid"] {
+  opacity: .12;
+}
+@media (max-width: 767px) {
+  .ep-landing-hero .ep-hero-console {
+    border-radius: 1.35rem;
+    padding: .55rem;
+  }
+  .ep-landing-hero .ep-hero-copy {
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-hero-console {
+    transition: none;
+  }
 }
