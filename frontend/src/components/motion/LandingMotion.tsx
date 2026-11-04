@@ -213,6 +213,81 @@ export function LandingMotion() {
           0
         );
 
+      // SECTION FLOW: reveal supporting sections with a restrained,
+      // consistent lift-and-fade as they enter the viewport.
+      const sectionReveals = [
+        {
+          trigger: '[aria-label="EcoPrawn at a glance"]',
+          targets: '[aria-label="EcoPrawn at a glance"] > div > div',
+          y: 18,
+          stagger: 0.08,
+        },
+        {
+          trigger: "#process",
+          targets: "#process ol > li",
+          y: 22,
+          stagger: 0.12,
+        },
+        {
+          trigger: "[data-band]",
+          targets: "[data-band] > div",
+          y: 24,
+          stagger: 0.12,
+        },
+        {
+          trigger: "[data-site-footer]",
+          targets: "[data-site-footer] .mx-auto > div",
+          y: 16,
+          stagger: 0.1,
+        },
+      ];
+
+      sectionReveals.forEach(({ trigger, targets, y, stagger }) => {
+        const section = document.querySelector<HTMLElement>(trigger);
+        const items = gsap.utils.toArray<HTMLElement>(targets);
+        if (!section || !items.length) return;
+        gsap.from(items, {
+          y,
+          autoAlpha: 0,
+          duration: 0.75,
+          stagger,
+          ease: "power3.out",
+          clearProps: "all",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 82%",
+            once: true,
+          },
+        });
+      });
+
+      // Give the CTA a soft hover response without changing its layout.
+      const ctaBand = document.querySelector<HTMLElement>("[data-band]");
+      if (ctaBand) {
+        const enter = () =>
+          gsap.to(ctaBand, {
+            y: -3,
+            boxShadow: "0 24px 55px -32px rgba(11,46,51,.55)",
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        const leave = () =>
+          gsap.to(ctaBand, {
+            y: 0,
+            boxShadow: "0 12px 32px -24px rgba(11,46,51,.35)",
+            duration: 0.45,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        ctaBand.addEventListener("mouseenter", enter);
+        ctaBand.addEventListener("mouseleave", leave);
+        hoverCleanups.push(() => {
+          ctaBand.removeEventListener("mouseenter", enter);
+          ctaBand.removeEventListener("mouseleave", leave);
+        });
+      }
+
       // PROCESS: each step's circle pops in as it enters view.
       gsap.utils
         .toArray<HTMLElement>("#process ol li .rounded-full")
