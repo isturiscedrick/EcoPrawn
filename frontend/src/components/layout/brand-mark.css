@@ -16,7 +16,7 @@
   --ep-logo-color: #d94416;
   /* Wordmark color. Override with a utility class on dark backgrounds,
      e.g. className="[--ep-logo-text:#ffffff]". */
-  --ep-logo-text: #0b4f3a;
+  --ep-logo-text: #000000;
   overflow: visible;
 }
 
