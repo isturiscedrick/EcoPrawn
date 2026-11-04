@@ -3317,3 +3317,168 @@ html.dark .marketing-shell :is(a,button):focus-visible,
   outline-color: #d94416;
 }
 html.dark .marketing-shell :is(a,button):focus-visible { outline-color: #f28a68; }
+
+
+/* Landing-page visual system is the source of truth for all marketing pages.
+   Keep the same warm-neutral canvas, restrained teal cards, coral actions,
+   soft hero atmosphere, and matching dark-mode surfaces. */
+.marketing-shell.ep-about-page,
+.marketing-shell.ep-contact-page {
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+}
+.marketing-shell.ep-about-page [data-page-hero],
+.marketing-shell.ep-contact-page [data-page-hero] {
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+}
+.marketing-shell.ep-about-page [data-page-kicker] > span,
+.marketing-shell.ep-contact-page [data-page-kicker] > span {
+  background: #d94416 !important;
+}
+.marketing-shell.ep-about-page [data-page-hero] h1,
+.marketing-shell.ep-contact-page [data-page-hero] h1 {
+  color: #142b2e !important;
+}
+.marketing-shell.ep-about-page [data-page-lead],
+.marketing-shell.ep-contact-page [data-page-lead] {
+  color: #142b2e !important;
+  opacity: .88;
+}
+.marketing-shell.ep-about-page #objectives,
+.marketing-shell.ep-about-page #scope,
+.marketing-shell.ep-contact-page main > section {
+  background: #f4f7f6 !important;
+}
+.marketing-shell.ep-about-page .ep-about-objective,
+.marketing-shell.ep-about-page #objectives article,
+.marketing-shell.ep-about-page #scope article,
+.marketing-shell.ep-contact-page [data-contact-card],
+.marketing-shell.ep-contact-page [data-contact-form] form,
+.marketing-shell.ep-contact-page [data-contact-form] [role="status"] {
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: #0f4c5c !important;
+  box-shadow: 0 12px 35px -24px rgba(20,43,46,.28);
+}
+.marketing-shell.ep-about-page :is(#objectives,#scope) :is(h2,h3,p,span,b,strong,small),
+.marketing-shell.ep-contact-page :is([data-contact-card],[data-contact-form]) :is(h2,h3,p,dt,dd,label,small) {
+  color: #142b2e !important;
+}
+.marketing-shell.ep-about-page #systems {
+  background: #0f4c5c !important;
+  color: #f4f7f6 !important;
+  border-color: #0f4c5c !important;
+}
+.marketing-shell.ep-about-page #systems > div[aria-hidden="true"]:first-child {
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.18), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.14), transparent 48%),
+    linear-gradient(155deg, #0f4c5c 0%, #0f4c5c 52%, #142b2e 100%) !important;
+}
+.marketing-shell.ep-about-page #systems :is(h2,h3,p,span,b,strong,div) {
+  color: #f4f7f6;
+}
+.marketing-shell.ep-about-page #systems :is(svg,[data-icon]) {
+  color: #f28a68;
+}
+.marketing-shell.ep-about-page #systems :is(article,article > span) {
+  border-color: rgba(244,247,246,.28);
+}
+.marketing-shell.ep-about-page #systems article:hover {
+  background: rgba(244,247,246,.06);
+}
+.marketing-shell.ep-about-page #scope :is(.bg-\\[var\\(--ep-ok\\)\\],.bg-\\[var\\(--ep-warn-text\\)\\]) {
+  background: #0f4c5c !important;
+  color: #f4f7f6 !important;
+}
+.marketing-shell.ep-about-page #scope :is(.text-\\[var\\(--ep-ok\\)\\],.text-\\[var\\(--ep-warn-text\\)\\]) {
+  color: #0f4c5c !important;
+}
+.marketing-shell.ep-contact-page [data-contact-form] form :is(input,textarea,select) {
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: #0f4c5c !important;
+}
+.marketing-shell.ep-contact-page [data-contact-form] form :is(input,textarea,select)::placeholder {
+  color: #142b2e !important;
+  opacity: .62;
+}
+.marketing-shell.ep-contact-page [data-contact-form] form button[type="submit"] {
+  background: #d94416 !important;
+  color: #f4f7f6 !important;
+  border-color: #d94416 !important;
+}
+html.dark .marketing-shell.ep-about-page,
+html.dark .marketing-shell.ep-contact-page {
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-about-page [data-page-hero],
+html.dark .marketing-shell.ep-contact-page [data-page-hero],
+html.dark .marketing-shell.ep-about-page #objectives,
+html.dark .marketing-shell.ep-about-page #scope,
+html.dark .marketing-shell.ep-contact-page main > section {
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-about-page [data-page-hero] :is(h1,p),
+html.dark .marketing-shell.ep-contact-page [data-page-hero] :is(h1,p) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-about-page .ep-about-objective,
+html.dark .marketing-shell.ep-about-page #objectives article,
+html.dark .marketing-shell.ep-about-page #scope article,
+html.dark .marketing-shell.ep-contact-page [data-contact-card],
+html.dark .marketing-shell.ep-contact-page [data-contact-form] form,
+html.dark .marketing-shell.ep-contact-page [data-contact-form] [role="status"] {
+  background: #202729 !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.35) !important;
+  box-shadow: 0 12px 35px -24px rgba(0,0,0,.45);
+}
+html.dark .marketing-shell.ep-about-page :is(#objectives,#scope) :is(h2,h3,p,span,b,strong,small),
+html.dark .marketing-shell.ep-contact-page :is([data-contact-card],[data-contact-form]) :is(h2,h3,p,dt,dd,label,small) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-about-page #systems {
+  background: #202729 !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.35) !important;
+}
+html.dark .marketing-shell.ep-about-page #systems > div[aria-hidden="true"]:first-child {
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.12), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.10), transparent 48%),
+    linear-gradient(155deg, #202729 0%, #202729 52%, #18191a 100%) !important;
+}
+html.dark .marketing-shell.ep-about-page #systems :is(h2,h3,p,span,b,strong,div) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-about-page #systems :is(svg,[data-icon]) {
+  color: #f28a68 !important;
+}
+html.dark .marketing-shell.ep-about-page #systems :is(article,article > span) {
+  border-color: rgba(139,213,166,.28) !important;
+}
+html.dark .marketing-shell.ep-about-page #scope :is(.bg-\\[var\\(--ep-ok\\)\\],.bg-\\[var\\(--ep-warn-text\\)\\]) {
+  background: #8bd5a6 !important;
+  color: #18191a !important;
+}
+html.dark .marketing-shell.ep-about-page #scope :is(.text-\\[var\\(--ep-ok\\)\\],.text-\\[var\\(--ep-warn-text\\)\\]) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-contact-page [data-contact-form] form :is(input,textarea,select) {
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.45) !important;
+}
+html.dark .marketing-shell.ep-contact-page [data-contact-form] form :is(input,textarea,select)::placeholder {
+  color: #8bd5a6 !important;
+  opacity: .72;
+}
+html.dark .marketing-shell.ep-contact-page [data-contact-form] form button[type="submit"] {
+  background: #f28a68 !important;
+  color: #18191a !important;
+  border-color: #f28a68 !important;
+}
