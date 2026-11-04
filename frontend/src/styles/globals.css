@@ -2229,3 +2229,32 @@ html:not(.dark) .marketing-shell footer .ep-logo {
 html:not(.dark) .marketing-shell :is(a, button, [role="button"]) :is(svg, i, [data-icon]) {
   color: inherit;
 }
+
+
+/* Dark-mode public-site contrast: keep all landing, header, and footer
+   typography and iconography white against their dark surfaces. */
+html.dark .marketing-shell .ep-landing-hero,
+html.dark .marketing-shell .ep-landing-hero :is(h1, h2, h3, h4, p, small, label, span, a, button, li, strong, svg, i),
+html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"],
+html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] :is(h1, h2, h3, h4, p, small, label, span, a, button, li, strong, svg, i),
+html.dark .marketing-shell #process,
+html.dark .marketing-shell #process :is(h1, h2, h3, h4, p, small, label, span, a, button, li, strong, svg, i),
+html.dark .marketing-shell #site-header,
+html.dark .marketing-shell #site-header :is(a, button, span, svg, i, small, strong, nav, li),
+html.dark .marketing-shell footer,
+html.dark .marketing-shell footer :is(a, button, p, span, small, strong, h1, h2, h3, h4, li, svg, i) {
+  color: #ffffff !important;
+}
+
+/* Ensure outline icons inherit the white foreground in dark mode. */
+html.dark .marketing-shell :is(#site-header, .ep-landing-hero, #process, footer, section[aria-label="EcoPrawn at a glance"]) svg,
+html.dark .marketing-shell :is(#site-header, .ep-landing-hero, #process, footer, section[aria-label="EcoPrawn at a glance"]) svg * {
+  stroke: currentColor;
+}
+
+/* Floating hero chips sit on pale glass surfaces, so retain dark ink there
+   instead of making their white-on-white labels disappear. */
+html.dark .marketing-shell .ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]),
+html.dark .marketing-shell .ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]) :is(span, p, small, svg, i) {
+  color: #173b3d !important;
+}
