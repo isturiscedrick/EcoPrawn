@@ -161,14 +161,14 @@ export function LandingPage() {
               </div>
 
               <h1
-                aria-label="Smarter shrimp farming, naturally in balance."
+                aria-label="Smarter farming, always in range."
                 className="ep-font-display mx-auto max-w-[900px] text-[clamp(42px,5.2vw,76px)] font-bold leading-[0.98] tracking-[-0.055em] lg:mx-0"
               >
                 <span data-hero-headline-accent className="block text-[#57739e] dark:text-[#a9c9ee]">
-                  <Words text="Smarter shrimp farming," />
+                  <Words text="Smarter farming," />
                 </span>
                 <span className="block text-[#17243a] dark:text-[#f4f7fb]">
-                  <Words text="naturally in balance." />
+                  <Words text="always in range." />
                 </span>
               </h1>
 
