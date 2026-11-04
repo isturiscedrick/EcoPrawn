@@ -2898,3 +2898,74 @@ html.dark .marketing-shell .ep-landing-hero [data-hero="text"] h1 span {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
+
+
+/* EcoPrawn landing palette alignment — consistent sand, deep teal, coral and mint. */
+.marketing-shell .ep-stats-section {
+  background: #f4f7f6 !important;
+  border-color: #d8e0de !important;
+}
+html.dark .marketing-shell .ep-stats-section {
+  background: #18191a !important;
+  border-color: rgba(255,255,255,.1) !important;
+}
+.marketing-shell .ep-stats-panel {
+  border-color: #d8e0de !important;
+  background: #ffffff !important;
+  box-shadow: 0 12px 35px -24px rgba(11,46,51,.22) !important;
+}
+html.dark .marketing-shell .ep-stats-panel {
+  border-color: rgba(255,255,255,.12) !important;
+  background: #242729 !important;
+}
+.marketing-shell .ep-stat-card {
+  border-color: #d8e0de !important;
+  background: #ffffff !important;
+}
+html.dark .marketing-shell .ep-stat-card {
+  border-color: rgba(255,255,255,.12) !important;
+  background: #202729 !important;
+}
+.marketing-shell .ep-stat-value {
+  color: #142b2e !important;
+  -webkit-text-fill-color: #142b2e !important;
+}
+html.dark .marketing-shell .ep-stat-value {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Readings and footer use EcoPrawn deep teal rather than unrelated navy/blue. */
+.marketing-shell #readings > [data-readings-bg] {
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.18), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.14), transparent 48%),
+    linear-gradient(155deg, #13596b 0%, #0f4c5c 52%, #0b3a47 100%) !important;
+}
+html.dark .marketing-shell #readings > [data-readings-bg] {
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.12), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.10), transparent 48%),
+    linear-gradient(155deg, #123d42 0%, #0c3035 52%, #09262b 100%) !important;
+}
+.marketing-shell footer {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.16), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.12), transparent 48%),
+    linear-gradient(155deg, #13596b 0%, #0f4c5c 48%, #0b3a47 100%) !important;
+}
+html.dark .marketing-shell footer {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.12), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.10), transparent 48%),
+    linear-gradient(155deg, #123d42 0%, #0c3035 48%, #09262b 100%) !important;
+}
+
+/* Keep all sensor accents within the approved mint/coral palette. */
+.marketing-shell .ep-lens-dot {
+  background-color: #8bd5a6 !important;
+}
+.marketing-shell .ep-lens-scan {
+  background-image: linear-gradient(90deg, transparent, rgba(139,213,166,.9), transparent) !important;
+  box-shadow: 0 0 14px rgba(139,213,166,.55) !important;
+}
