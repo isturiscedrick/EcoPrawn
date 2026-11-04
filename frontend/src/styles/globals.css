@@ -2369,3 +2369,29 @@ html.dark .marketing-shell #site-header :is(button, a)[style*="background-color:
     gap: 10px;
   }
 }
+
+
+/* Navigation icon colors must explicitly track each link's foreground.
+   This overrides broad site-wide icon rules without changing other header icons. */
+html:not(.dark) .marketing-shell #site-header nav[aria-label="Primary navigation"] a svg,
+html:not(.dark) .marketing-shell #site-header nav[aria-label="Primary navigation"] a svg * {
+  color: inherit !important;
+  stroke: currentColor !important;
+}
+html:not(.dark) .marketing-shell #site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]) svg {
+  color: #173b35 !important;
+}
+html:not(.dark) .marketing-shell #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg {
+  color: #ffffff !important;
+}
+html.dark .marketing-shell #site-header nav[aria-label="Primary navigation"] a svg,
+html.dark .marketing-shell #site-header nav[aria-label="Primary navigation"] a svg * {
+  color: inherit !important;
+  stroke: currentColor !important;
+}
+html.dark .marketing-shell #site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]) svg {
+  color: #f1f5f3 !important;
+}
+html.dark .marketing-shell #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg {
+  color: #ffffff !important;
+}
