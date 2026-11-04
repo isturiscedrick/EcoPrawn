@@ -201,12 +201,7 @@ export function LandingPage() {
               data-hero="parallax-console"
               className="ep-hero-visual order-2 relative mx-auto mt-10 w-full max-w-[430px] sm:mt-12"
             >
-              <div
-                data-hero="console"
-                className="ep-hero-console relative z-[1] mx-auto w-full rounded-full"
-              >
-                <HeroLens />
-              </div>
+              <HeroLens />
             </div>
           </div>
         </section>
