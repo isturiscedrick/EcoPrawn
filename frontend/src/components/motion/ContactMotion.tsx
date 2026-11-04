@@ -13,6 +13,17 @@ export function ContactMotion() {
       const context = gsap.context(() => {
         const cleanups: Array<() => void> = [];
 
+        const hero = document.querySelector("[data-page-hero]");
+        if (hero) {
+          const kicker = hero.querySelector("[data-page-kicker]");
+          const title = hero.querySelector("h1");
+          const lead = hero.querySelector("[data-page-lead]");
+          gsap.timeline({ defaults: { ease: "power3.out" } })
+            .from(kicker, { y: 12, opacity: 0, duration: 0.45 })
+            .from(title, { y: 30, opacity: 0, duration: 0.75 }, "-=0.2")
+            .from(lead, { y: 18, opacity: 0, duration: 0.6 }, "-=0.35");
+        }
+
         gsap.from("[data-contact-card]", {
           y: 28,
           opacity: 0,
