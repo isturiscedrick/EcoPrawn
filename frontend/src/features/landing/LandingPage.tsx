@@ -231,7 +231,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        {/* READINGS:        {/* READINGS: deep teal (30%). Each reading is a card shown against its target zone. */}
+        {/* WATER QUALITY: live readings presented as clean monitoring cards. */}
         <section
           id="readings"
           aria-labelledby="readings-title"
