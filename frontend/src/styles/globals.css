@@ -3135,3 +3135,88 @@ html.dark .ep-auth-modal button[type="submit"] {
 @media (prefers-reduced-motion: reduce) {
   .marketing-shell [data-contact-card] { transform: none !important; }
 }
+
+
+/* STRICT BRAND PALETTE — do not introduce additional UI colors.
+   Light: warm neutral, charcoal teal, deep teal, terracotta.
+   Dark: dark base, card surface, mint accent, soft coral. */
+.marketing-shell {
+  --ep-bg: #f4f7f6;
+  --ep-surface: #f4f7f6;
+  --ep-primary: #142b2e;
+  --ep-secondary: #0f4c5c;
+  --ep-accent: #d94416;
+  --ep-text-muted: #142b2e;
+  --ep-line: #0f4c5c;
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+}
+.marketing-shell :is(header,main,section,article,aside,nav,footer,[data-page-hero],[data-contact-card],[data-contact-form] form,.ep-about-objective,.ep-about-outscope) {
+  border-color: #0f4c5c;
+}
+.marketing-shell :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small) {
+  color: #142b2e;
+}
+.marketing-shell :is(input,textarea,select) {
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: #0f4c5c !important;
+}
+.marketing-shell :is(input,textarea,select)::placeholder { color: #142b2e !important; opacity: .72; }
+.marketing-shell :is(button,a)[data-primary],
+.marketing-shell button[type="submit"] {
+  background: #d94416;
+  border-color: #d94416;
+  color: #f4f7f6;
+}
+.marketing-shell [data-page-hero],
+.marketing-shell .ep-page-hero-atmosphere {
+  background-color: #f4f7f6 !important;
+  background-image: radial-gradient(ellipse at 85% 20%, rgba(15,76,92,.14), transparent 62%) !important;
+}
+html.dark .marketing-shell {
+  --ep-bg: #18191a;
+  --ep-surface: #202729;
+  --ep-primary: #8bd5a6;
+  --ep-secondary: #8bd5a6;
+  --ep-accent: #f28a68;
+  --ep-text-muted: #8bd5a6;
+  --ep-line: #8bd5a6;
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell :is(header,main,section,article,aside,nav,footer,[data-page-hero],[data-contact-card],[data-contact-form] form,.ep-about-objective,.ep-about-outscope) {
+  border-color: rgba(139,213,166,.28);
+}
+html.dark .marketing-shell :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small) {
+  color: #8bd5a6;
+}
+html.dark .marketing-shell :is(article,[data-contact-card],[data-contact-form] form,.ep-about-objective,.ep-about-outscope,nav[aria-label="On this page"]) {
+  background: #202729 !important;
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell :is(input,textarea,select) {
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.45) !important;
+  caret-color: #8bd5a6;
+}
+html.dark .marketing-shell :is(input,textarea,select)::placeholder { color: #8bd5a6 !important; opacity: .75; }
+html.dark .marketing-shell :is(button,a)[data-primary],
+html.dark .marketing-shell button[type="submit"] {
+  background: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
+html.dark .marketing-shell [data-page-hero],
+html.dark .marketing-shell .ep-page-hero-atmosphere {
+  background-color: #18191a !important;
+  background-image: radial-gradient(ellipse at 85% 20%, rgba(139,213,166,.12), transparent 62%) !important;
+}
+html.dark .marketing-shell #systems,
+html.dark .marketing-shell #readings > [data-readings-bg],
+html.dark .marketing-shell footer {
+  background-color: #202729 !important;
+  background-image: none !important;
+}
+html.dark .marketing-shell :is(svg,[data-icon]) { color: #8bd5a6; }
