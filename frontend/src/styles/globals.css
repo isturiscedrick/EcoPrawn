@@ -1654,22 +1654,58 @@ html.dark .ep-landing-hero [data-hero="grid"] {
 }
 
 
-/* Centered orbital landing composition inspired by the supplied EQISI reference. */
+
+/* Reference-inspired landing composition, using EcoPrawn's established palette. */
 .ep-landing-hero {
   min-height: 0;
-  background-color: #f7f9fd;
+  background: var(--ep-bg, #ffffff);
+  color: var(--ep-primary);
 }
 .ep-landing-hero [data-hero="grid"] {
-  background-image: radial-gradient(rgba(78, 104, 169, .23) 1px, transparent 1px) !important;
+  background-image: radial-gradient(color-mix(in srgb, var(--ep-primary) 22%, transparent) 1px, transparent 1px) !important;
   background-size: 16px 16px !important;
-  opacity: .52 !important;
+  opacity: .48 !important;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.65) 58%, transparent 100%) !important;
   mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.65) 58%, transparent 100%) !important;
+}
+.ep-landing-hero [data-hero="text"] h1 span:first-child {
+  color: var(--ep-accent) !important;
+}
+.ep-landing-hero [data-hero="text"] h1 span:last-child {
+  color: var(--ep-primary) !important;
+}
+.ep-landing-hero [data-hero="eyebrow"] {
+  color: var(--ep-accent) !important;
+  border-color: var(--ep-line) !important;
+  background: var(--ep-surface) !important;
+}
+.ep-landing-hero [data-hero="lead"] {
+  color: var(--ep-text-muted) !important;
+}
+.ep-landing-hero [data-hero="cta"] a:first-child {
+  border-color: var(--ep-accent) !important;
+  background: var(--ep-accent) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 24px -12px color-mix(in srgb, var(--ep-accent) 55%, transparent) !important;
+}
+.ep-landing-hero [data-hero="cta"] a:first-child:hover {
+  border-color: var(--ep-accent-hover) !important;
+  background: var(--ep-accent-hover) !important;
+}
+.ep-landing-hero [data-hero="cta"] a:last-child {
+  border-color: var(--ep-line) !important;
+  background: var(--ep-surface) !important;
+  color: var(--ep-primary) !important;
+}
+.ep-landing-hero [data-hero="cta"] a {
+  min-width: 168px;
 }
 .ep-landing-hero [data-hero="console"] {
   border-radius: 9999px;
   padding: .45rem;
-  box-shadow: 0 26px 70px -36px rgba(50, 73, 130, .48);
+  border-color: var(--ep-line) !important;
+  background: color-mix(in srgb, var(--ep-surface) 76%, transparent) !important;
+  box-shadow: 0 26px 70px -36px color-mix(in srgb, var(--ep-primary) 35%, transparent) !important;
 }
 .ep-landing-hero .ep-hero-visual {
   isolation: isolate;
@@ -1682,7 +1718,7 @@ html.dark .ep-landing-hero [data-hero="grid"] {
   left: 50%;
   width: 112%;
   aspect-ratio: 1;
-  border: 1px dashed rgba(83, 111, 183, .25);
+  border: 1px dashed color-mix(in srgb, var(--ep-primary) 25%, transparent);
   border-radius: 50%;
   content: "";
   transform: translate(-50%, -50%) rotate(-18deg) scaleY(.42);
@@ -1691,91 +1727,103 @@ html.dark .ep-landing-hero [data-hero="grid"] {
 .ep-landing-hero .ep-hero-visual::after {
   width: 124%;
   transform: translate(-50%, -50%) rotate(22deg) scaleY(.34);
-  border-color: rgba(224, 103, 68, .32);
+  border-color: color-mix(in srgb, var(--ep-accent) 35%, transparent);
 }
 .ep-landing-hero .ep-hero-console {
   transition: transform 650ms cubic-bezier(.2,.75,.25,1), box-shadow 650ms ease;
 }
-.ep-landing-hero [data-hero="text"] h1 {
+.ep-landing-hero [data-hero="text"] h1,
+.ep-landing-hero [data-hero="lead"] {
   text-wrap: balance;
 }
-.ep-landing-hero [data-hero="lead"] {
-  text-wrap: pretty;
+.ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]) {
+  border-color: var(--ep-line) !important;
+  background: var(--ep-surface) !important;
+  color: var(--ep-primary) !important;
 }
-.ep-landing-hero [data-hero="cta"] a {
-  min-width: 168px;
+.ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]) span {
+  color: var(--ep-primary) !important;
 }
 .marketing-shell section[aria-label="EcoPrawn at a glance"] {
-  background:
-    radial-gradient(ellipse at 10% 50%, rgba(83, 111, 183, .06), transparent 35%),
-    radial-gradient(ellipse at 92% 50%, rgba(224, 103, 68, .05), transparent 32%),
-    #fff;
+  background: var(--ep-bg) !important;
+  border-color: var(--ep-line) !important;
 }
+.marketing-shell section[aria-label="EcoPrawn at a glance"] > div {
+  border-color: var(--ep-line) !important;
+  background: var(--ep-surface) !important;
+  box-shadow: var(--shadow-md);
+}
+.marketing-shell section[aria-label="EcoPrawn at a glance"] > div > div {
+  border-color: var(--ep-line) !important;
+  background: var(--ep-tint, var(--ep-surface)) !important;
+}
+.marketing-shell section[aria-label="EcoPrawn at a glance"] > div > div span:first-child {
+  color: var(--ep-accent) !important;
+}
+.marketing-shell section[aria-label="EcoPrawn at a glance"] > div > div span:last-child {
+  color: var(--ep-text-muted) !important;
+}
+/* Keep the established deep-water section treatment and its original palette. */
 .marketing-shell #readings {
-  border-color: #dce4f1 !important;
-  background: #f6f8fc !important;
-  color: #1b2942 !important;
+  border-color: color-mix(in srgb, var(--water-mid) 65%, transparent) !important;
 }
 .marketing-shell #readings [data-readings-bg] {
-  background:
-    radial-gradient(ellipse at 10% 0%, rgba(83, 111, 183, .08), transparent 42%),
-    radial-gradient(ellipse at 90% 100%, rgba(224, 103, 68, .05), transparent 42%) !important;
-  opacity: 1 !important;
-}
-.marketing-shell #readings :is(h2, dt, dd) {
-  color: #1b2942 !important;
-}
-.marketing-shell #readings :is(p, .text-\[rgba\(255\,255\,255\,0\.85\)\]) {
-  color: #5c6a82 !important;
-}
-.marketing-shell #readings dl > div {
-  border: 1px solid #d7e0ef !important;
-  border-radius: 16px !important;
-  background: rgba(255,255,255,.92) !important;
-  box-shadow: 0 10px 24px -20px rgba(36, 55, 96, .45);
-  color: #1b2942 !important;
-}
-.marketing-shell #readings dl > div dt,
-.marketing-shell #readings dl > div dd {
-  color: #243858 !important;
-}
-.marketing-shell #readings dl > div dd span {
-  color: #687790 !important;
-}
-.marketing-shell #readings dl > div [aria-hidden="true"] {
-  background-color: #e8edf5;
-}
-.marketing-shell #readings dl > div [data-zone] {
-  background: #83bda0 !important;
-}
-.marketing-shell #readings dl > div [data-marker] > span:last-child {
-  border-color: #fff !important;
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(56, 189, 248, 0.22), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(5, 32, 42, 0.6), transparent 48%),
+    linear-gradient(155deg, #13596b 0%, #0f4c5c 48%, #0b3a47 100%) !important;
 }
 .marketing-shell #process {
   position: relative;
   overflow: hidden;
-  background-color: #f2f5fb !important;
-  background-image: radial-gradient(rgba(78, 104, 169, .13) .8px, transparent .8px);
+  background-color: var(--ep-bg) !important;
+  background-image: radial-gradient(color-mix(in srgb, var(--ep-primary) 12%, transparent) .8px, transparent .8px);
   background-size: 14px 14px;
 }
 .marketing-shell #process [data-step] {
   min-height: 220px;
   padding: 22px;
-  border: 1px solid #d9e1ef;
+  border: 1px solid var(--ep-line);
   border-radius: 16px;
-  background: rgba(255,255,255,.94);
-  box-shadow: 0 12px 28px -24px rgba(30, 49, 92, .55);
+  background: var(--ep-surface);
+  box-shadow: var(--shadow-md);
 }
 .marketing-shell #process [data-step] h3 {
-  color: #1d2d4d;
+  color: var(--ep-primary);
 }
 .marketing-shell #process [data-step] p {
-  color: #5c6a82;
+  color: var(--ep-text-muted);
 }
 .marketing-shell #process [data-step] > div > span:last-child {
   border-radius: 10px;
-  background: #eef1fa;
-  border-color: #dbe2f1;
+  background: var(--ep-tint, var(--ep-surface));
+  border-color: var(--ep-line);
+  color: var(--ep-primary);
+}
+html.dark .ep-landing-hero {
+  background: var(--ep-bg, #18191a) !important;
+}
+html.dark .ep-landing-hero [data-hero="grid"] {
+  opacity: .2 !important;
+}
+html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] {
+  background: var(--ep-bg, #18191a) !important;
+}
+html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] > div,
+html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] > div > div {
+  background: var(--ep-surface, #202122) !important;
+  border-color: var(--ep-line) !important;
+}
+html.dark .marketing-shell #process {
+  background-color: var(--ep-bg, #18191a) !important;
+  background-image: radial-gradient(rgba(228,230,235,.10) .8px, transparent .8px) !important;
+}
+html.dark .marketing-shell #process [data-step] {
+  background: var(--ep-surface, #202122) !important;
+  border-color: var(--ep-line) !important;
+}
+html.dark .marketing-shell #process [data-step] :is(h3, p) {
+  color: var(--ep-primary) !important;
 }
 @media (max-width: 767px) {
   .ep-landing-hero .ep-hero-visual {
@@ -1799,39 +1847,4 @@ html.dark .ep-landing-hero [data-hero="grid"] {
   .ep-landing-hero .ep-hero-console {
     transition: none !important;
   }
-}
-html.dark .ep-landing-hero {
-  background-color: #111b2a !important;
-}
-html.dark .ep-landing-hero [data-hero="grid"] {
-  opacity: .2 !important;
-}
-html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] {
-  background: #131e2c !important;
-}
-html.dark .marketing-shell #readings {
-  background: #141f2e !important;
-  border-color: rgba(255,255,255,.12) !important;
-  color: #f1f4f8 !important;
-}
-html.dark .marketing-shell #readings :is(h2, dt, dd, p) {
-  color: #f1f4f8 !important;
-}
-html.dark .marketing-shell #readings dl > div {
-  background: #1d2a3b !important;
-  border-color: rgba(255,255,255,.14) !important;
-}
-html.dark .marketing-shell #readings dl > div :is(dt, dd, dd span) {
-  color: #f1f4f8 !important;
-}
-html.dark .marketing-shell #process {
-  background-color: #111b2a !important;
-  background-image: radial-gradient(rgba(169, 201, 238, .12) .8px, transparent .8px) !important;
-}
-html.dark .marketing-shell #process [data-step] {
-  background: #1b293b !important;
-  border-color: rgba(255,255,255,.13) !important;
-}
-html.dark .marketing-shell #process [data-step] :is(h3, p) {
-  color: #f1f4f8 !important;
 }
