@@ -49,7 +49,7 @@ export function AboutPage() {
           <div className="mx-auto max-w-[1200px]">
             {/* General objective: sand panel with an accent bar, since it is a quotation */}
             <Reveal>
-              <div className="mb-6 rounded-3xl border border-l-4 border-[var(--ep-line)] border-l-[var(--ep-accent)] bg-white px-6 py-8 shadow-[0_16px_30px_-28px_rgba(11,46,51,0.5)] sm:px-10 sm:py-10">
+              <div className="ep-about-objective mb-6 rounded-3xl border border-l-4 border-[var(--ep-line)] border-l-[var(--ep-accent)] bg-white px-6 py-8 shadow-[0_16px_30px_-28px_rgba(11,46,51,0.5)] sm:px-10 sm:py-10">
                 <div className="mb-3 text-sm font-semibold text-[var(--ep-text-muted)]">
                   General objective
                 </div>
@@ -101,7 +101,7 @@ export function AboutPage() {
             className="pointer-events-none absolute inset-0 -z-10 opacity-90"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse at 12% 8%, rgba(35, 111, 117, 0.42), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(4, 25, 34, 0.7), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(18, 71, 77, 0.6), transparent 52%), linear-gradient(155deg, #0b2e33 0%, #08272f 48%, #061e27 100%)",
+                "radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.18), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.14), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(11,46,51,.42), transparent 52%), linear-gradient(155deg, #13596b 0%, #0f4c5c 52%, #0b3a47 100%)",
             }}
           />
           <div className="mx-auto max-w-[1200px]">
@@ -230,7 +230,7 @@ export function AboutPage() {
 
               {/* Out of scope: dashed outline on sand, a second signal beyond colour */}
               <Reveal delay={120} className="h-full">
-                <article className="h-full rounded-2xl border border-dashed border-[var(--ep-line)] bg-white p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] sm:p-8">
+                <article className="ep-about-outscope h-full rounded-2xl border border-dashed border-[var(--ep-line)] bg-white p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
                     <h3 className="ep-font-display flex items-center gap-3 text-2xl font-semibold">
                       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-warn-text)] text-white">
