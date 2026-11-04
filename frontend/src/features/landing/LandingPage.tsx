@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { Link } from "@tanstack/react-router";
-import { HeroLens } from "@/features/landing/HeroLens";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
@@ -103,7 +102,7 @@ export function LandingPage() {
   return (
     <div className="marketing-shell flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
       <LandingMotion />
-      <SiteHeader tone="white" />
+      <SiteHeader tone="white" integrated />
 
       <main className="flex-1">
         {/* HERO: cream (60%) with a faint blueprint grid and one coral accent */}
@@ -197,25 +196,7 @@ export function LandingPage() {
               </div>
             </div>
 
-            <div
-              data-hero="parallax-console"
-              className="ep-hero-visual order-2 relative mx-auto mt-1 w-full max-w-[430px] sm:mt-2"
-            >
-              <div data-hero="console" className="ep-hero-console relative z-[1] mx-auto w-full rounded-full border border-white/90 bg-white/55 p-2 shadow-[0_28px_90px_-34px_rgba(38,75,112,0.38)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.04] sm:p-3">
-                <HeroLens />
-              </div>
-              <div className="pointer-events-none absolute -left-2 top-[27%] z-10 rounded-xl border border-[#d6dfef] bg-white/95 px-3 py-2 shadow-lg dark:border-white/15 dark:bg-[#1b293b] sm:-left-14">
-                <span className="block text-[8px] font-bold uppercase tracking-[0.14em] text-[#77859c] dark:text-[#aab8cb]">Live monitoring</span>
-                <span className="mt-1 flex items-center gap-1.5 text-[11px] font-semibold text-[#243858] dark:text-white"><span className="h-1.5 w-1.5 rounded-full bg-[#55a77c]" /> 5 water parameters</span>
-              </div>
-              <div className="pointer-events-none absolute -right-2 bottom-[23%] z-10 rounded-xl border border-[#d6dfef] bg-white/95 px-3 py-2 shadow-lg dark:border-white/15 dark:bg-[#1b293b] sm:-right-14">
-                <span className="block text-[8px] font-bold uppercase tracking-[0.14em] text-[#77859c] dark:text-[#aab8cb]">Smart response</span>
-                <span className="mt-1 block text-[11px] font-semibold text-[#243858] dark:text-white">Automated aeration</span>
-              </div>
-            </div>
-            <p className="order-3 mt-2 text-center text-[9px] font-bold uppercase tracking-[0.28em] text-[#526b9f] dark:text-[#a9c9ee]">
-              Observe · Understand · Act · Restore
-            </p>
+
           </div>
         </section>
 
