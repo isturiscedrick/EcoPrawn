@@ -82,8 +82,20 @@ export function LandingMotion() {
       anchorLinks.forEach((link) => {
         const handleClick = (event: MouseEvent) => {
           const href = link.getAttribute("href");
-          if (!href) return;
-          const target = document.querySelector<HTMLElement>(href);
+          if (
+            !href ||
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey ||
+            link.target === "_blank" ||
+            link.hasAttribute("download")
+          ) return;
+          const targetId = href.startsWith("#") ? decodeURIComponent(href.slice(1)) : "";
+          if (!targetId) return;
+          const target = document.getElementById(targetId);
           if (!target) return;
 
           event.preventDefault();
@@ -194,24 +206,8 @@ export function LandingMotion() {
           );
         });
 
-      // DASHBOARD PREVIEW: points slide in from the left, card from the right.
-      const preview = '[aria-labelledby="preview-title"]';
-      gsap
-        .timeline({
-          defaults: { ease: "power3.out" },
-          scrollTrigger: { trigger: preview, start: "top 70%", once: true },
-        })
-        .from(`${preview} ul li`, {
-          x: -24,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.12,
-        })
-        .from(
-          `${preview} .grid > div:last-child`,
-          { x: 40, opacity: 0, duration: 0.9 },
-          0
-        );
+      // No dashboard-preview animation here: the current landing page
+      // intentionally has no preview section, so avoid registering dead triggers.
 
       const hoverCleanups: Array<() => void> = [];
 
