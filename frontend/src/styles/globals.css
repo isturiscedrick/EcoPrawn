@@ -2194,3 +2194,38 @@ html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:first-chil
 html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:first-child :is(span, svg, i) {
   color: #ffffff !important;
 }
+
+/* Global light-mode contrast pass for the complete public site.
+   Include text, links, button labels, and icon glyphs in the header/footer.
+   Light surfaces use black ink; the dark teal footer and dark bands use white. */
+html:not(.dark) .marketing-shell #site-header,
+html:not(.dark) .marketing-shell #site-header :is(a, button, span, svg, path, i, small, strong, nav, li) {
+  color: #000000 !important;
+}
+
+html:not(.dark) .marketing-shell #site-header a[style*="background-color: var(--ep-accent)"],
+html:not(.dark) .marketing-shell #site-header a[style*="backgroundColor: var(--ep-accent)"],
+html:not(.dark) .marketing-shell #site-header a[style*="background-color: var(--ep-accent)"] :is(span, svg),
+html:not(.dark) .marketing-shell #site-header a[style*="backgroundColor: var(--ep-accent)"] :is(span, svg) {
+  color: #ffffff !important;
+}
+
+/* Footer has a deep teal background in light mode, so all footer copy,
+   links, social icons, and logo marks stay white for accessible contrast. */
+html:not(.dark) .marketing-shell footer,
+html:not(.dark) .marketing-shell footer :is(a, button, p, span, small, strong, h1, h2, h3, h4, li, svg, path, i) {
+  color: #ffffff !important;
+}
+html:not(.dark) .marketing-shell footer :is(a, button):hover {
+  color: #e8f3ed !important;
+}
+html:not(.dark) .marketing-shell footer .ep-logo {
+  --ep-logo-color: #ffffff !important;
+  --ep-logo-text: #ffffff !important;
+}
+
+/* Ensure button icons follow the same foreground as their button labels
+   across every public-page section, including header and footer controls. */
+html:not(.dark) .marketing-shell :is(a, button, [role="button"]) :is(svg, i, [data-icon]) {
+  color: inherit;
+}
