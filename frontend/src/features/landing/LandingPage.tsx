@@ -413,7 +413,7 @@ export function LandingPage() {
                       <span className="!text-[#3f5753] dark:!text-[#b0b3b8] text-sm font-semibold tabular-nums tracking-wide transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
                         {s.step}
                       </span>
-                      <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-[var(--ep-primary)] !text-[#0f4c5c] dark:!text-[#8bd5a6] transition-colors duration-200 group-hover:bg-[var(--ep-primary)] group-hover:!text-white">
+                      <span className="flex h-11 w-11 items-center justify-center !text-black dark:!text-white transition-colors duration-200">
                         <Icon name={s.icon} size={22} />
                       </span>
                     </div>
