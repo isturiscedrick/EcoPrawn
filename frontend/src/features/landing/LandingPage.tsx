@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { Link } from "@tanstack/react-router";
-import { HeroLens } from "@/features/landing/HeroLens";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
@@ -147,7 +146,7 @@ export function LandingPage() {
             ))}
           </div>
 
-          <div className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-5 px-5 pb-12 pt-12 sm:px-8 sm:pt-16 lg:pt-20">
+          <div className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-3 px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
             <div data-hero="text" className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center">
               <div
                 data-hero="eyebrow"
@@ -197,24 +196,7 @@ export function LandingPage() {
               </div>
             </div>
 
-            <div
-              data-hero="parallax-console"
-              className="ep-hero-visual order-2 relative mx-auto mt-1 w-full max-w-[430px] sm:mt-2"
-            >
-              <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 h-[82%] w-[82%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#9bb0d7]/60 dark:border-white/15" />
-              <div data-hero="console" className="ep-hero-console relative z-[1] mx-auto w-full rounded-full border border-white/90 bg-white/55 p-2 shadow-[0_28px_90px_-34px_rgba(38,75,112,0.38)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.04] sm:p-3">
-                <HeroLens />
-              </div>
-              <div className="pointer-events-none absolute -left-2 top-[27%] z-10 rounded-xl border border-[#d6dfef] bg-white/95 px-3 py-2 shadow-lg dark:border-white/15 dark:bg-[#1b293b] sm:-left-14">
-                <span className="block text-[8px] font-bold uppercase tracking-[0.14em] text-[#77859c] dark:text-[#aab8cb]">Live monitoring</span>
-                <span className="mt-1 flex items-center gap-1.5 text-[11px] font-semibold text-[#243858] dark:text-white"><span className="h-1.5 w-1.5 rounded-full bg-[#55a77c]" /> 5 water parameters</span>
-              </div>
-              <div className="pointer-events-none absolute -right-2 bottom-[23%] z-10 rounded-xl border border-[#d6dfef] bg-white/95 px-3 py-2 shadow-lg dark:border-white/15 dark:bg-[#1b293b] sm:-right-14">
-                <span className="block text-[8px] font-bold uppercase tracking-[0.14em] text-[#77859c] dark:text-[#aab8cb]">Smart response</span>
-                <span className="mt-1 block text-[11px] font-semibold text-[#243858] dark:text-white">Automated aeration</span>
-              </div>
-            </div>
-            <p className="order-3 mt-1 text-center text-[9px] font-bold uppercase tracking-[0.28em] text-[#526b9f] dark:text-[#a9c9ee]">
+            <p className="order-2 mt-2 text-center text-[9px] font-bold uppercase tracking-[0.28em] text-[#526b9f] dark:text-[#a9c9ee]">
               Observe · Understand · Act · Restore
             </p>
           </div>
