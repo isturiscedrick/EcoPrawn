@@ -84,10 +84,10 @@ export function SectionNav() {
                 focus-visible:ring-2
                 focus-visible:ring-[var(--ep-accent)]
                 focus-visible:ring-offset-2
-                focus-visible:ring-offset-white
+                focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#18191a]
                 ${
                   isActive
-                    ? "bg-[var(--ep-primary)] text-[var(--ep-bg)]"
+                    ? "bg-[var(--ep-secondary)] text-white border-[var(--ep-secondary)] dark:bg-[#8bd5a6] dark:text-[#18191a] dark:border-[#8bd5a6]"
                     : "bg-transparent text-[var(--ep-primary)] hover:border-[var(--ep-accent)] hover:text-[var(--ep-accent)]"
                 }
               `}
