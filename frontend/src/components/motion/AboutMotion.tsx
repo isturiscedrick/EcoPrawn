@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { animate, stagger } from "animejs";
@@ -7,9 +7,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Scroll reveals and small interactive details for the About page. */
 export function AboutMotion() {
-  const rootRef = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
-    const root = rootRef.current;
+    const root = document.querySelector<HTMLElement>(".marketing-shell");
     if (!root) return;
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
@@ -62,5 +61,5 @@ export function AboutMotion() {
     });
     return () => mm.revert();
   }, []);
-  return <div ref={rootRef} className="pointer-events-none fixed inset-0 -z-10" aria-hidden="true" />;
+  return null;
 }
