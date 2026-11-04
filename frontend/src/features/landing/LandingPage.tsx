@@ -54,6 +54,7 @@ const STATS = [
   { label: "Parameters tracked", value: String(heroReadouts.length) },
   { label: "Aeration", value: "Automatic" },
   { label: "Growth vision", value: "No handling" },
+  { label: "Monitoring", value: "24/7" },
 ];
 
 // Gauge scale and target zone per reading, used only to draw the range bars.
@@ -146,82 +147,91 @@ export function LandingPage() {
             ))}
           </div>
 
-          <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-5 py-16 sm:px-8 md:grid-cols-[1fr_1.05fr] md:gap-14 lg:py-28">
-            <div
-              data-hero="parallax-console"
-              className="ep-hero-visual order-2 relative mx-auto w-full max-w-[560px] md:order-2"
-            >
-              <div data-hero="console" className="ep-hero-console relative z-[1] rounded-[2rem] border border-white/80 bg-white/60 p-3 shadow-[0_28px_90px_-34px_rgba(38,75,112,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.04] sm:p-4">
-                <HeroLens />
-              </div>
-            </div>
-
-            <div data-hero="text" className="ep-hero-copy order-1 text-center md:order-1 md:text-left">
+          <div className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-5 px-5 pb-12 pt-12 sm:px-8 sm:pt-16 lg:pt-20">
+            <div data-hero="text" className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center">
               <div
                 data-hero="eyebrow"
-                className="mb-5 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--ep-text-muted)] md:justify-start"
+                className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#cbd7ea] bg-white/75 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#d6532d] shadow-sm dark:border-white/15 dark:bg-white/[0.06] dark:text-[#ff9b79]"
               >
                 <span className="relative flex h-2 w-2" aria-hidden="true">
-                  <span
-                    data-live-ping=""
-                    className="absolute inline-flex h-full w-full rounded-full bg-[var(--ep-ok)] opacity-60"
-                  />
-                  <span className="relative h-2 w-2 rounded-full bg-[var(--ep-ok)]" />
+                  <span data-live-ping="" className="absolute inline-flex h-full w-full rounded-full bg-[#e46b45] opacity-60" />
+                  <span className="relative h-2 w-2 rounded-full bg-[#e46b45]" />
                 </span>
-                Intelligent aquaculture · 24/7
+                AIoT-powered indoor shrimp farming
               </div>
 
               <h1
-                aria-label="Indoor shrimp farming, always in range."
-                className="ep-font-display text-[clamp(46px,6.2vw,78px)] font-semibold leading-[0.99] tracking-[-0.045em]"
+                aria-label="Smarter shrimp farming, naturally in balance."
+                className="ep-font-display mx-auto max-w-[900px] text-[clamp(42px,7.2vw,82px)] font-bold leading-[0.98] tracking-[-0.055em]"
               >
-                <span aria-hidden="true">
-                  <span data-hero-headline-accent className="text-[#57739e] dark:text-[#a9c9ee]">
-                    <Words text="Smarter shrimp farming," />
-                  </span>
-                  <span className="block text-[var(--ep-primary)]">
-                    <Words text="naturally in balance." />
-                  </span>
+                <span data-hero-headline-accent className="block text-[#57739e] dark:text-[#a9c9ee]">
+                  <Words text="Smarter shrimp farming," />
+                </span>
+                <span className="block text-[#17243a] dark:text-[#f4f7fb]">
+                  <Words text="naturally in balance." />
                 </span>
               </h1>
 
               <p
                 data-hero="lead"
-                className="mt-7 max-w-[34rem] text-[17px] leading-[1.8] text-[#5e6d7e] dark:text-[#bdc9d7] sm:text-lg"
+                className="mx-auto mt-5 max-w-[590px] text-[15px] leading-[1.8] text-[#617087] dark:text-[#bdc9d7] sm:text-base"
               >
-                Bring water quality, automated feeding, and AI growth insights
-                together in one calm, connected view of your farm.
+                Bring water quality, automated feeding, and AI growth insights together
+                in one calm, connected view of your shrimp farm.
               </p>
 
-              <div
-                data-hero="cta"
-                className="mt-9 flex flex-col gap-3 sm:flex-row md:justify-start"
-              >
+              <div data-hero="cta" className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
                 <AuthLink
-                  className={`group inline-flex items-center justify-center gap-2 rounded-full border border-[#57739e] bg-[#57739e] px-7 py-3.5 text-base font-semibold text-white shadow-[0_12px_26px_-12px_rgba(54,91,137,0.65)] hover:border-[#405d83] hover:bg-[#405d83] ${buttonMotion} ${focusRing}`}
+                  className={`group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#4d66b1] bg-[#4d66b1] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_-12px_rgba(54,78,153,.65)] hover:border-[#3d559b] hover:bg-[#3d559b] ${buttonMotion} ${focusRing}`}
                 >
-                  Sign in to dashboard
-                  <span
-                    aria-hidden="true"
-                    className="inline-block transition-transform duration-200 group-hover:translate-x-1"
-                  >
-                    →
-                  </span>
+                  Open farm dashboard
+                  <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </AuthLink>
-
                 <Link
                   to="/about"
-                  className={`inline-flex items-center justify-center rounded-full border border-[#b9c9d9] bg-white/55 px-7 py-3.5 text-base font-semibold text-[#24364a] hover:border-[#57739e] hover:bg-white dark:border-white/20 dark:bg-white/[0.04] dark:text-white dark:hover:bg-white/10 ${buttonMotion} ${focusRing}`}
+                  className={`inline-flex min-h-11 items-center justify-center rounded-xl border border-[#c6d1e3] bg-white/80 px-6 py-3 text-sm font-semibold text-[#263958] shadow-sm hover:border-[#8095c5] hover:bg-white dark:border-white/20 dark:bg-white/[0.05] dark:text-white dark:hover:bg-white/10 ${buttonMotion} ${focusRing}`}
                   activeOptions={{ exact: true }}
                 >
-                  See how it works
+                  Explore the system
                 </Link>
               </div>
             </div>
+
+            <div
+              data-hero="parallax-console"
+              className="ep-hero-visual order-2 relative mx-auto mt-1 w-full max-w-[430px] sm:mt-2"
+            >
+              <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 h-[82%] w-[82%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#9bb0d7]/60 dark:border-white/15" />
+              <div data-hero="console" className="ep-hero-console relative z-[1] mx-auto w-full rounded-full border border-white/90 bg-white/55 p-2 shadow-[0_28px_90px_-34px_rgba(38,75,112,0.38)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.04] sm:p-3">
+                <HeroLens />
+              </div>
+              <div className="pointer-events-none absolute -left-2 top-[27%] z-10 rounded-xl border border-[#d6dfef] bg-white/95 px-3 py-2 shadow-lg dark:border-white/15 dark:bg-[#1b293b] sm:-left-14">
+                <span className="block text-[8px] font-bold uppercase tracking-[0.14em] text-[#77859c] dark:text-[#aab8cb]">Live monitoring</span>
+                <span className="mt-1 flex items-center gap-1.5 text-[11px] font-semibold text-[#243858] dark:text-white"><span className="h-1.5 w-1.5 rounded-full bg-[#55a77c]" /> 5 water parameters</span>
+              </div>
+              <div className="pointer-events-none absolute -right-2 bottom-[23%] z-10 rounded-xl border border-[#d6dfef] bg-white/95 px-3 py-2 shadow-lg dark:border-white/15 dark:bg-[#1b293b] sm:-right-14">
+                <span className="block text-[8px] font-bold uppercase tracking-[0.14em] text-[#77859c] dark:text-[#aab8cb]">Smart response</span>
+                <span className="mt-1 block text-[11px] font-semibold text-[#243858] dark:text-white">Automated aeration</span>
+              </div>
+            </div>
+            <p className="order-3 mt-1 text-center text-[9px] font-bold uppercase tracking-[0.28em] text-[#526b9f] dark:text-[#a9c9ee]">
+              Observe · Understand · Act · Restore
+            </p>
           </div>
         </section>
 
-        {/* READINGS: deep teal (30%). Each reading is a card shown against its target zone. */}
+        <section aria-label="EcoPrawn at a glance" className="relative border-b border-[#dce4f1] bg-white/90 px-5 py-7 dark:border-white/10 dark:bg-[#131e2c] sm:px-8">
+          <div className="mx-auto grid max-w-[920px] grid-cols-2 gap-2 rounded-2xl border border-[#d8e1f0] bg-white/85 p-2 shadow-[0_12px_35px_-24px_rgba(31,53,94,.45)] dark:border-white/10 dark:bg-white/[0.04] sm:grid-cols-4 sm:gap-3 sm:p-3">
+            {STATS.map((stat, index) => (
+              <div key={stat.label} className={`rounded-xl border px-3 py-3 text-left ${index % 2 ? "border-[#e56b48]" : "border-[#5872bd]"} dark:bg-white/[0.03]`}>
+                <span className="block text-[clamp(19px,2.5vw,27px)] font-bold leading-none tracking-tight text-[#4964b0] dark:text-[#a9c9ee]">{stat.value}</span>
+                <span className="mt-2 block text-[10px] font-medium leading-snug text-[#53627b] dark:text-[#c1ccda]">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* READINGS:        {/* READINGS: deep teal (30%). Each reading is a card shown against its target zone. */}
         <section
           id="readings"
           aria-labelledby="readings-title"
