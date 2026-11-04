@@ -1860,3 +1860,34 @@ html.dark .marketing-shell #process [data-step] :is(h3, p) {
     transition: none !important;
   }
 }
+
+/* Explicit marketing typography contrast requested:
+   black text in light mode, white text in dark mode.
+   Brand colors remain on decorative surfaces, icons, and fills. */
+html:not(.dark) .marketing-shell :is(
+  h1,h2,h3,h4,h5,h6,p,span,a,button,li,dt,dd,label,small,
+  strong,b,em,i,figcaption,blockquote,th,td
+) {
+  color: #000000 !important;
+}
+html.dark .marketing-shell :is(
+  h1,h2,h3,h4,h5,h6,p,span,a,button,li,dt,dd,label,small,
+  strong,b,em,i,figcaption,blockquote,th,td
+) {
+  color: #ffffff !important;
+}
+
+/* Keep filled primary actions readable in both themes. */
+.marketing-shell [data-hero="cta"] a:first-child,
+.marketing-shell button[data-variant="primary"],
+.marketing-shell a[data-variant="primary"] {
+  color: #ffffff !important;
+}
+
+/* Form controls follow the same black/white text rule. */
+html:not(.dark) .marketing-shell :is(input,textarea,select) {
+  color: #000000 !important;
+}
+html.dark .marketing-shell :is(input,textarea,select) {
+  color: #ffffff !important;
+}
