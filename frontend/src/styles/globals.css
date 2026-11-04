@@ -2847,3 +2847,41 @@ html.dark .ep-auth-modal button[type="submit"] {
     padding-top: 6.5rem;
   }
 }
+
+
+/* Landing quality pass: theme-aware hero atmosphere and responsive sensor cards. */
+.marketing-shell .ep-hero-atmosphere {
+  background:
+    radial-gradient(680px circle at 78% 38%, rgba(60,122,92,.12), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(11,46,51,.06), transparent 60%),
+    linear-gradient(135deg, #f8faf9 0%, #edf4f1 100%);
+}
+html.dark .marketing-shell .ep-hero-atmosphere {
+  background:
+    radial-gradient(680px circle at 78% 38%, rgba(139,213,166,.12), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(242,138,104,.08), transparent 60%),
+    linear-gradient(135deg, #202b2b 0%, #18191a 100%);
+}
+@media (max-width: 639px) {
+  .marketing-shell #readings dl > div {
+    min-width: 0;
+    padding: 1rem;
+  }
+  .marketing-shell #readings dl dt {
+    font-size: .875rem;
+    line-height: 1.35;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .marketing-shell #readings dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .marketing-shell #readings dl > div:last-child {
+    grid-column: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marketing-shell .ep-hero-atmosphere {
+    transition: none !important;
+  }
+}
