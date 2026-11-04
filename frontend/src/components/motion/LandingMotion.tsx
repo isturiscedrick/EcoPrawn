@@ -365,7 +365,7 @@ export function LandingMotion() {
     // HERO DEPTH: float for every size, parallax from tablet up.
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const readout = document.querySelector<HTMLElement>(
-        "#top .grid > div:nth-child(2) [data-hero='console']"
+        "#top .ep-hero-visual > figure"
       );
       if (readout) {
         // yPercent, not y: the parallax below owns y on the same element.
@@ -386,7 +386,7 @@ export function LandingMotion() {
           "#top .grid > div:nth-child(2)"
         );
         const readout = document.querySelector<HTMLElement>(
-          "#top .grid > div:nth-child(2) [data-hero='console']"
+          "#top .ep-hero-visual > figure"
         );
         const scrollTrigger = {
           trigger: "#top",
