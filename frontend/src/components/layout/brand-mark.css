@@ -164,13 +164,19 @@ html.theme-transitioning *::after {
   }
 }
 
-/* Header wordmark contrast: override inherited theme/text utility colors.
-   Keep the dark-mode wordmark mint and the shrimp icon coral. */
+/* Header wordmark uses the EcoPrawn secondary brand color.
+   Keep the shrimp mark coral and adapt the wordmark to each theme. */
+html:not(.dark) header .ep-logo {
+  --ep-logo-text: var(--ep-secondary, #0f4c5c) !important;
+}
 html:not(.dark) header .ep-logo .ep-logo-wordmark {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+  color: var(--ep-secondary, #0f4c5c) !important;
+  -webkit-text-fill-color: var(--ep-secondary, #0f4c5c) !important;
+}
+html.dark header .ep-logo {
+  --ep-logo-text: var(--ep-secondary, #8bd5a6) !important;
 }
 html.dark header .ep-logo .ep-logo-wordmark {
-  color: #8bd5a6 !important;
-  -webkit-text-fill-color: #8bd5a6 !important;
+  color: var(--ep-secondary, #8bd5a6) !important;
+  -webkit-text-fill-color: var(--ep-secondary, #8bd5a6) !important;
 }
