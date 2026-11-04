@@ -2811,3 +2811,39 @@ html.dark .ep-auth-modal button[type="submit"] {
   color: #18191a !important;
   -webkit-text-fill-color: #18191a !important;
 }
+
+
+/* Landing-page contrast correction: the readings panel is always a dark
+   surface, so force readable white foregrounds in BOTH themes. This is
+   intentionally scoped to the panel so light-surface buttons remain dark. */
+.marketing-shell #readings,
+.marketing-shell #readings :is(h1,h2,h3,h4,h5,h6,p,span,dt,dd,small,strong,em,li,label,a,button,svg) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.marketing-shell #readings svg,
+.marketing-shell #readings svg * {
+  stroke: currentColor !important;
+}
+.marketing-shell #readings [data-zone] {
+  background-color: #8bd5a6 !important;
+}
+.marketing-shell #readings [data-marker] > span:last-child {
+  background-color: #f28a68 !important;
+  border-color: #ffffff !important;
+}
+
+/* Keep the hero headline comfortably below the sticky header at every size. */
+.marketing-shell .ep-landing-hero > div.mx-auto.grid {
+  padding-top: 5.5rem;
+}
+@media (min-width: 640px) {
+  .marketing-shell .ep-landing-hero > div.mx-auto.grid {
+    padding-top: 6rem;
+  }
+}
+@media (min-width: 1024px) {
+  .marketing-shell .ep-landing-hero > div.mx-auto.grid {
+    padding-top: 6.5rem;
+  }
+}
