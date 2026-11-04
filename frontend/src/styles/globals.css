@@ -2395,3 +2395,25 @@ html.dark .marketing-shell #site-header nav[aria-label="Primary navigation"] a:n
 html.dark .marketing-shell #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg {
   color: #ffffff !important;
 }
+
+
+/* HeroLens is a dark-glass instrument in BOTH themes. Keep every live
+   reading and its caption white regardless of the page's light-mode ink rules. */
+html:not(.dark) .marketing-shell .ep-lens-readout,
+html:not(.dark) .marketing-shell .ep-lens-readout > span,
+html:not(.dark) .marketing-shell .ep-lens-readout [data-count],
+html:not(.dark) .marketing-shell .ep-lens-caption,
+html.dark .marketing-shell .ep-lens-readout,
+html.dark .marketing-shell .ep-lens-readout > span,
+html.dark .marketing-shell .ep-lens-readout [data-count],
+html.dark .marketing-shell .ep-lens-caption {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, .7);
+}
+html:not(.dark) .marketing-shell .ep-lens-readout .ep-lens-dot,
+html.dark .marketing-shell .ep-lens-readout .ep-lens-dot {
+  color: #38bdf8 !important;
+  background-color: #38bdf8 !important;
+  text-shadow: none;
+}
