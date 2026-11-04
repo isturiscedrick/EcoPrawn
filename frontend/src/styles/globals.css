@@ -1724,22 +1724,8 @@ html.dark .ep-landing-hero [data-hero="grid"] {
 }
 .ep-landing-hero .ep-hero-visual::before,
 .ep-landing-hero .ep-hero-visual::after {
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  width: 112%;
-  aspect-ratio: 1;
-  border: 1px dashed color-mix(in srgb, var(--ep-primary) 25%, transparent);
-  border-radius: 50%;
-  content: "";
-  transform: translate(-50%, -50%) rotate(-18deg) scaleY(.42);
-  pointer-events: none;
-}
-.ep-landing-hero .ep-hero-visual::after {
-  width: 124%;
-  transform: translate(-50%, -50%) rotate(22deg) scaleY(.34);
-  border-color: color-mix(in srgb, var(--ep-accent) 35%, transparent);
+  content: none !important;
+  display: none !important;
 }
 .ep-landing-hero .ep-hero-console {
   transition: transform 650ms cubic-bezier(.2,.75,.25,1), box-shadow 650ms ease;
