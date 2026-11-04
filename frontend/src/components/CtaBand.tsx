@@ -15,12 +15,12 @@ const motion =
 export function CtaBand({ secondaryHref, secondaryLabel }: CtaBandProps) {
   return (
     <section className="px-5 pb-16 sm:px-8 sm:pb-20 lg:pb-24">
-      <div data-band="" className="mx-auto flex max-w-[1200px] flex-col gap-8 rounded-3xl border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)] px-6 py-10 text-[var(--ep-bg)] sm:px-10 sm:py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+      <div data-band="" className="mx-auto flex max-w-[1200px] flex-col gap-8 rounded-3xl border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)] px-6 py-10 !text-white sm:px-10 sm:py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
         <div className="min-w-0 lg:flex-1">
           <h2 className="ep-font-display max-w-[28rem] text-balance text-[clamp(28px,3.5vw,40px)] font-semibold leading-[1.1] tracking-tight">
             See your tanks, always in range.
           </h2>
-          <p className="mt-3 max-w-[34rem] text-lg leading-relaxed text-[var(--ep-tint)]">
+          <p className="mt-3 max-w-[34rem] !text-white text-lg leading-relaxed">
             Sign in to monitor water quality, feeding, and shrimp growth from a
             single dashboard.
           </p>
@@ -28,7 +28,7 @@ export function CtaBand({ secondaryHref, secondaryLabel }: CtaBandProps) {
 
         <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
           <AuthLink
-            className={`group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl border-2 border-[var(--ep-bg)] bg-[var(--ep-bg)] px-7 py-3.5 text-base font-semibold text-[var(--ep-primary)] hover:bg-white hover:shadow-[0_10px_24px_-12px_rgba(0,0,0,0.6)] ${motion} ${focusRing}`}
+            className={`group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl border-2 border-[var(--ep-bg)] bg-[var(--ep-bg)] px-7 py-3.5 text-base font-semibold !text-[#104b58] hover:bg-white hover:shadow-[0_10px_24px_-12px_rgba(0,0,0,0.6)] ${motion} ${focusRing}`}
           >
             Sign in to dashboard
             <span
@@ -41,7 +41,7 @@ export function CtaBand({ secondaryHref, secondaryLabel }: CtaBandProps) {
 
           <Link
             to={secondaryHref}
-            className={`inline-flex items-center justify-center whitespace-nowrap rounded-xl border-2 border-[var(--ep-bg)] px-7 py-3.5 text-base font-semibold text-[var(--ep-bg)] hover:bg-[var(--ep-bg)] hover:text-[var(--ep-primary)] ${motion} ${focusRing}`}
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-xl border-2 border-[var(--ep-bg)] px-7 py-3.5 text-base font-semibold !text-white hover:bg-[var(--ep-bg)] hover:text-[var(--ep-primary)] ${motion} ${focusRing}`}
             activeOptions={{ exact: true }}
           >
             {secondaryLabel}
