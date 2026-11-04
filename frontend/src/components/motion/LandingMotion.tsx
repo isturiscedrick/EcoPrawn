@@ -213,6 +213,8 @@ export function LandingMotion() {
           0
         );
 
+      const hoverCleanups: Array<() => void> = [];
+
       // SECTION FLOW: reveal supporting sections with a restrained,
       // consistent lift-and-fade as they enter the viewport.
       const sectionReveals = [
@@ -302,7 +304,6 @@ export function LandingMotion() {
         });
 
       // Shared hover lift for the data cards and process steps.
-      const hoverCleanups: Array<() => void> = [];
       gsap.utils.toArray<HTMLElement>("[data-hover-lift]").forEach((el) => {
           const enter = () =>
             gsap.to(el, {
