@@ -2158,3 +2158,25 @@ html.dark .marketing-shell #process [data-step] {
     padding: 20px;
   }
 }
+
+/* Light theme typography: use true black ink on pale landing-page surfaces.
+   Keep white text on intentionally dark teal/navy sections and filled buttons. */
+html:not(.dark) .marketing-shell .ep-landing-hero,
+html:not(.dark) .marketing-shell .ep-landing-hero :is(h1, h2, h3, h4, p, small, label, [data-hero="lead"], [data-hero="eyebrow"]),
+html:not(.dark) .marketing-shell section[aria-label="EcoPrawn at a glance"],
+html:not(.dark) .marketing-shell section[aria-label="EcoPrawn at a glance"] :is(h2, h3, p, span),
+html:not(.dark) .marketing-shell #process,
+html:not(.dark) .marketing-shell #process :is(h2, h3, p, span, small, label),
+html:not(.dark) .marketing-shell footer,
+html:not(.dark) .marketing-shell footer :is(h2, h3, p, span, small, label, a) {
+  color: #000000 !important;
+}
+
+/* Preserve contrast for light text on dark sections and filled actions. */
+html:not(.dark) .marketing-shell #readings,
+html:not(.dark) .marketing-shell #readings *,
+html:not(.dark) .marketing-shell [data-band],
+html:not(.dark) .marketing-shell [data-band] *,
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:first-child {
+  color: #ffffff !important;
+}
