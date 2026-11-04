@@ -90,7 +90,7 @@ function targetRangeFor(label: string): string | undefined {
 function Words({ text }: { text: string }) {
   return text.split(" ").map((word, i) => (
     <Fragment key={`${word}-${i}`}>
-      <span className="inline-block overflow-hidden align-bottom pb-[0.16em] -mb-[0.16em]">
+      <span className="inline-block align-baseline overflow-visible">
         <span data-hero="word" className="inline-block">
           {word}
         </span>
