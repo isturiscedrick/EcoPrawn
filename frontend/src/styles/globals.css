@@ -2885,3 +2885,16 @@ html.dark .marketing-shell .ep-hero-atmosphere {
     transition: none !important;
   }
 }
+
+
+/* Hero headline ink: softer deep charcoal-teal in light mode, clean white in dark mode. */
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="text"] h1,
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="text"] h1 span {
+  color: #142b2e !important;
+  -webkit-text-fill-color: #142b2e !important;
+}
+html.dark .marketing-shell .ep-landing-hero [data-hero="text"] h1,
+html.dark .marketing-shell .ep-landing-hero [data-hero="text"] h1 span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
