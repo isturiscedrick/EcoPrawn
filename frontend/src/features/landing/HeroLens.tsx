@@ -368,7 +368,7 @@ export function HeroLens() {
           />
           <span
             aria-hidden="true"
-            className="ep-lens-scan pointer-events-none absolute inset-x-[22%] top-[16%] h-px bg-[linear-gradient(90deg,transparent,rgba(56,189,248,0.9),transparent)] opacity-0 shadow-[0_0_14px_rgba(56,189,248,0.7)]"
+            className="ep-lens-scan pointer-events-none absolute inset-x-[22%] top-[16%] h-px bg-[linear-gradient(90deg,transparent,rgba(139,213,166,0.9),transparent)] opacity-0 shadow-[0_0_14px_rgba(139,213,166,0.55)]"
           />
 
           {/* Readouts */}
@@ -379,7 +379,7 @@ export function HeroLens() {
                 <span className="flex items-center gap-1.5 text-xs font-medium text-white/90 sm:text-sm">
                   <span
                     aria-hidden="true"
-                    className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-[#38bdf8]"
+                    className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-[#8bd5a6]"
                   />
                   {r.label}
                 </span>
