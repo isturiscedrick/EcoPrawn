@@ -8,6 +8,7 @@ interface SiteHeaderProps {
   showLinks?: boolean;
   variant?: "default" | "auth";
   tone?: "cream" | "white";
+  integrated?: boolean;
 }
 
 const focusRing =
@@ -17,6 +18,7 @@ export function SiteHeader({
   showLinks = true,
   variant = "default",
   tone = "cream",
+  integrated = false,
 }: SiteHeaderProps) {
   const isAuth = variant === "auth";
   const pathname = useRouterState({ select: (state) => state.location.pathname });
@@ -78,23 +80,25 @@ export function SiteHeader({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileNavOpen]);
 
-  const headerSurface = darkMode
-    ? scrolled ? "rgba(24,25,26,.94)" : "rgba(24,25,26,.78)"
-    : tone === "white"
-      ? scrolled ? "rgba(255,255,255,.96)" : "rgba(255,255,255,.82)"
-      : scrolled ? "rgba(251,248,241,.96)" : "rgba(251,248,241,.82)";
+  const headerSurface = integrated
+    ? darkMode ? "#101d1b" : "#f3f5f2"
+    : darkMode
+      ? scrolled ? "rgba(24,25,26,.94)" : "rgba(24,25,26,.78)"
+      : tone === "white"
+        ? scrolled ? "rgba(255,255,255,.96)" : "rgba(255,255,255,.82)"
+        : scrolled ? "rgba(251,248,241,.96)" : "rgba(251,248,241,.82)";
 
   return (
     <header
       id="site-header"
-      className="sticky top-0 z-50 border-b backdrop-blur-2xl transition-all duration-300"
+      className={`relative z-50 transition-all duration-300 ${integrated ? "border-0" : "sticky top-0 border-b backdrop-blur-2xl"}`}
       style={{
         backgroundColor: headerSurface,
         borderColor: darkMode ? "rgba(255,255,255,.09)" : "rgba(11,46,51,.08)",
-        boxShadow: scrolled ? "0 12px 34px -25px rgba(0,0,0,.35)" : "none",
+        boxShadow: !integrated && scrolled ? "0 12px 34px -25px rgba(0,0,0,.35)" : "none",
       }}
     >
-      <div className={`mx-auto flex min-h-[82px] max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12 ${isAuth ? "w-full" : ""}`}>
+      <div className={`mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12 ${isAuth ? "w-full" : ""}`}>
         <Link
           to="/"
           aria-label="EcoPrawn home"
@@ -104,7 +108,7 @@ export function SiteHeader({
           <BrandMark size={36} />
         </Link>
 
-        {showLinks && <NavLinks variant="desktop" activeHref={pathname} />}
+        {showLinks && <div className={integrated ? "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" : ""}><NavLinks variant="desktop" activeHref={pathname} /></div>}
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           {!isAuth && (
@@ -140,11 +144,11 @@ export function SiteHeader({
             </Link>
           ) : (
             <>
-              <AuthLink className={`hidden rounded-full border px-5 py-2.5 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}>
+              <AuthLink className={`hidden rounded-full border px-5 py-2 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}>
                 Log in
               </AuthLink>
-              <AuthLink mode="signup" className={`hidden rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ backgroundColor: "var(--ep-accent)" }}>
-                Get started <span aria-hidden="true">↗</span>
+              <AuthLink mode="signup" className={`hidden h-9 w-9 items-center justify-center rounded-full text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ backgroundColor: "var(--ep-accent)" }}>
+                <span aria-label="Get started">↗</span>
               </AuthLink>
             </>
           )}
