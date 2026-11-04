@@ -376,7 +376,7 @@ export function HeroLens() {
             const compact = i === 4; // top-center slot (Water Level)
             return (
               <div key={r.label} className={`ep-lens-readout absolute flex flex-col ${SLOTS[i]}`}>
-                <span className="flex items-center gap-1.5 text-[10px] font-medium text-[rgba(255,255,255,0.78)] sm:text-xs">
+                <span className="flex items-center gap-1.5 text-xs font-medium text-white/90 sm:text-sm">
                   <span
                     aria-hidden="true"
                     className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-[#38bdf8]"
@@ -385,11 +385,11 @@ export function HeroLens() {
                 </span>
                 <span
                   className={`mt-0.5 font-semibold tabular-nums text-[var(--ep-bg)] ${
-                    compact ? "text-base sm:text-xl" : "text-lg sm:text-2xl"
+                    compact ? "text-lg sm:text-xl" : "text-xl sm:text-2xl"
                   }`}
                 >
                   <span data-count={r.value}>{r.value}</span>
-                  <span className="ml-1 text-[10px] font-medium text-[rgba(255,255,255,0.72)] sm:text-xs">
+                  <span className="ml-1 text-xs font-medium text-white/85 sm:text-sm">
                     {heroReadoutUnits[r.label]}
                   </span>
                 </span>
@@ -397,7 +397,7 @@ export function HeroLens() {
             );
           })}
 
-          <p className="ep-lens-caption absolute bottom-[12%] left-1/2 w-[56%] -translate-x-1/2 text-center text-[10px] leading-tight text-[rgba(255,255,255,0.72)] sm:text-[11px]">
+          <p className="ep-lens-caption absolute bottom-[12%] left-1/2 w-[56%] -translate-x-1/2 text-center text-[11px] leading-snug text-white/85 sm:text-xs">
             Example readings, not from a real tank.
           </p>
 
