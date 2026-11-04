@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components//layout/SiteHeader";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { PageHero } from "@/components/layout/PageHero";
 import { IconChip, type IconName } from "@/components/ui/Icon";
@@ -53,7 +53,7 @@ export function ContactPage() {
                 </dl>
               </Reveal>
 
-              <Reveal delay={120} className="h-full" >
+              <Reveal delay={120} className="h-full">
                 <div data-contact-form="" className="h-full">
                 <ContactForm />
                 </div>
