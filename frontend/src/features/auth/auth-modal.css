@@ -514,3 +514,24 @@ html.dark .ep-auth-modal button[type="submit"]:hover {
 html.dark .ep-auth-modal :is(a:not([class*="bg-"]),button[aria-label="Close"]) {
   color: #8bd5a6 !important;
 }
+
+
+/* Modal finish: consistent focus, spacing and EcoPrawn action treatment. */
+.ep-auth-modal {
+  border-radius: 26px;
+  box-shadow: 0 32px 100px rgba(5,25,28,.38);
+}
+.ep-auth-modal :is(input,button,a):focus-visible {
+  outline: 2px solid #d94416;
+  outline-offset: 3px;
+}
+.ep-auth-modal button[type="submit"] {
+  min-height: 48px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 10px 22px -14px rgba(217,68,22,.8);
+}
+html.dark .ep-auth-modal :is(input,button,a):focus-visible { outline-color: #f28a68; }
+html.dark .ep-auth-modal button[type="submit"] {
+  box-shadow: 0 10px 22px -14px rgba(242,138,104,.8);
+}
