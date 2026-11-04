@@ -3739,3 +3739,104 @@ html.dark .ep-landing-page #process [data-step] :is(h3,p) { color: #8bd5a6 !impo
 html.dark .ep-landing-page #process [data-step] svg { color: #8bd5a6 !important; }
 html.dark .ep-landing-page #process [data-step]:hover { border-color: #f28a68 !important; }
 html.dark .ep-landing-page :is(a,button):focus-visible { outline-color: #f28a68 !important; }
+
+
+/* =========================================================================
+   16. LANDING-ALIGNED PUBLIC PAGES — About and Contact
+   ========================================================================= */
+.marketing-shell.ep-about-page,
+.marketing-shell.ep-contact-page {
+  --ep-bg: #f4f7f6;
+  --ep-surface: #f4f7f6;
+  --ep-tint: #f4f7f6;
+  --ep-primary: #142b2e;
+  --ep-text-muted: #142b2e;
+  --ep-secondary: #0f4c5c;
+  --ep-accent: #d94416;
+  --ep-line: rgba(15,76,92,.28);
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+}
+.marketing-shell.ep-about-page :is(main > section,#objectives,#scope),
+.marketing-shell.ep-contact-page main > section {
+  background-color: #f4f7f6 !important;
+}
+.marketing-shell.ep-about-page :is(#objectives,#scope) :is(article,.ep-about-objective,.ep-about-outscope),
+.marketing-shell.ep-contact-page :is([data-contact-card],[data-contact-form] form) {
+  background-color: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: rgba(15,76,92,.28) !important;
+  box-shadow: 0 12px 35px -28px rgba(20,43,46,.35);
+}
+.marketing-shell.ep-about-page :is(#objectives,#scope) :is(h2,h3,p,span,b,strong,small),
+.marketing-shell.ep-contact-page :is([data-contact-card],[data-contact-form]) :is(h2,h3,p,dt,dd,label,small) {
+  color: #142b2e !important;
+}
+.marketing-shell.ep-about-page #systems {
+  background: #0f4c5c !important;
+  color: #f4f7f6 !important;
+}
+.marketing-shell.ep-about-page #systems :is(h2,h3,p,span,b,strong,div) { color: #f4f7f6; }
+.marketing-shell.ep-about-page #systems :is(svg,[data-icon]) { color: #d94416; }
+.marketing-shell.ep-about-page :is(a,button):focus-visible,
+.marketing-shell.ep-contact-page :is(a,button,input,textarea):focus-visible {
+  outline-color: #d94416 !important;
+}
+.marketing-shell.ep-contact-page [data-contact-form] form :is(input,textarea,select) {
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: #0f4c5c !important;
+}
+.marketing-shell.ep-contact-page [data-contact-form] form button[type="submit"] {
+  background: #d94416 !important;
+  border-color: #d94416 !important;
+  color: #f4f7f6 !important;
+}
+html.dark .marketing-shell.ep-about-page,
+html.dark .marketing-shell.ep-contact-page {
+  --ep-bg: #18191a;
+  --ep-surface: #202729;
+  --ep-tint: #202729;
+  --ep-primary: #8bd5a6;
+  --ep-text-muted: #8bd5a6;
+  --ep-secondary: #8bd5a6;
+  --ep-accent: #f28a68;
+  --ep-line: rgba(139,213,166,.28);
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-about-page :is(main > section,#objectives,#scope),
+html.dark .marketing-shell.ep-contact-page main > section {
+  background-color: #18191a !important;
+}
+html.dark .marketing-shell.ep-about-page :is(#objectives,#scope) :is(article,.ep-about-objective,.ep-about-outscope),
+html.dark .marketing-shell.ep-contact-page :is([data-contact-card],[data-contact-form] form) {
+  background-color: #202729 !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.28) !important;
+  box-shadow: 0 12px 35px -28px rgba(0,0,0,.45);
+}
+html.dark .marketing-shell.ep-about-page :is(#objectives,#scope) :is(h2,h3,p,span,b,strong,small),
+html.dark .marketing-shell.ep-contact-page :is([data-contact-card],[data-contact-form]) :is(h2,h3,p,dt,dd,label,small) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-about-page #systems {
+  background: #202729 !important;
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-about-page #systems :is(h2,h3,p,span,b,strong,div) { color: #8bd5a6 !important; }
+html.dark .marketing-shell.ep-about-page #systems :is(svg,[data-icon]) { color: #f28a68 !important; }
+html.dark .marketing-shell.ep-about-page :is(a,button):focus-visible,
+html.dark .marketing-shell.ep-contact-page :is(a,button,input,textarea):focus-visible {
+  outline-color: #f28a68 !important;
+}
+html.dark .marketing-shell.ep-contact-page [data-contact-form] form :is(input,textarea,select) {
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.35) !important;
+}
+html.dark .marketing-shell.ep-contact-page [data-contact-form] form button[type="submit"] {
+  background: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
