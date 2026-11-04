@@ -91,11 +91,11 @@ export function SiteHeader({
   return (
     <header
       id="site-header"
-      className={`relative z-50 transition-all duration-300 ${integrated ? "border-0" : "sticky top-0 border-b backdrop-blur-2xl"}`}
+      className={`sticky top-0 z-50 transition-all duration-300 backdrop-blur-2xl ${integrated ? "border-0" : "border-b"}`}
       style={{
         backgroundColor: headerSurface,
         borderColor: darkMode ? "rgba(255,255,255,.09)" : "rgba(11,46,51,.08)",
-        boxShadow: !integrated && scrolled ? "0 12px 34px -25px rgba(0,0,0,.35)" : "none",
+        boxShadow: scrolled ? (integrated ? "0 10px 28px -24px rgba(0,0,0,.28)" : "0 12px 34px -25px rgba(0,0,0,.35)") : "none",
       }}
     >
       <div className={`mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12 ${isAuth ? "w-full" : ""}`}>
