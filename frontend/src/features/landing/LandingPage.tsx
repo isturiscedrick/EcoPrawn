@@ -202,12 +202,12 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section aria-label="EcoPrawn at a glance" className="relative border-b border-[#d8e0de] bg-[#f4f7f6] dark:border-white/10 dark:bg-[#202122] px-5 py-7 dark:border-white/10 dark:bg-[#131e2c] sm:px-8">
-          <div className="mx-auto grid max-w-[920px] grid-cols-2 gap-2 rounded-2xl border border-[#d8e0de] bg-white/90 p-2 shadow-[0_12px_35px_-24px_rgba(31,53,94,.45)] dark:border-white/10 dark:bg-white/[0.04] sm:grid-cols-4 sm:gap-3 sm:p-3">
+        <section aria-label="EcoPrawn at a glance" className="ep-stats-section relative border-b border-[#d8e0de] bg-[#f4f7f6] px-5 py-7 dark:border-white/10 dark:bg-[#202122] sm:px-8">
+          <div className="ep-stats-panel mx-auto grid max-w-[920px] grid-cols-2 gap-2 rounded-2xl border border-[#d8e0de] bg-white/90 p-2 shadow-[0_12px_35px_-24px_rgba(11,46,51,.18)] dark:border-white/10 dark:bg-[#242729] sm:grid-cols-4 sm:gap-3 sm:p-3">
             {STATS.map((stat, index) => (
-              <div key={stat.label} className={`rounded-xl border px-3 py-3 text-left ${index % 2 ? "border-[#d9a18f]" : "border-[#9fb3b0]"} dark:bg-white/[0.03]`}>
-                <span className="block text-[clamp(19px,2.5vw,27px)] font-bold leading-none tracking-tight text-[#0f4c5c] dark:text-[#8bd5a6]">{stat.value}</span>
-                <span className="mt-2 block text-[10px] font-medium leading-snug text-[#3f5753] dark:text-[#b0b3b8]">{stat.label}</span>
+              <div key={stat.label} className="ep-stat-card rounded-xl border border-[#d8e0de] bg-white px-3 py-3 text-left dark:border-white/10 dark:bg-[#202122]">
+                <span className="ep-stat-value block text-[clamp(19px,2.5vw,27px)] font-bold leading-none tracking-tight text-[#142b2e] dark:text-white">{stat.value}</span>
+                <span className="mt-2 block text-[10px] font-medium leading-snug text-[#3f5753] dark:text-[#c3ccce]">{stat.label}</span>
               </div>
             ))}
           </div>
@@ -217,7 +217,7 @@ export function LandingPage() {
         <section
           id="readings"
           aria-labelledby="readings-title"
-          className="ep-readings-section relative isolate overflow-hidden border-y border-[#1a2a40] bg-[#0b2e33] text-white"
+          className="ep-readings-section relative isolate overflow-hidden border-y border-[#0f4c5c] bg-[#0f4c5c] text-white"
         >
           <div
             aria-hidden="true"
@@ -225,7 +225,7 @@ export function LandingPage() {
             className="pointer-events-none absolute inset-0 -z-10 opacity-90"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse at 12% 8%, rgba(87,115,158,0.34), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(55,104,157,0.25), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(34,75,117,0.32), transparent 52%), linear-gradient(155deg, #172b43 0%, #101f33 52%, #0a1525 100%)",
+                "radial-gradient(ellipse at 12% 8%, rgba(139,213,166,0.18), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(242,138,104,0.14), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(11,46,51,0.42), transparent 52%), linear-gradient(155deg, #13596b 0%, #0f4c5c 52%, #0b3a47 100%)",
             }}
           />
 
