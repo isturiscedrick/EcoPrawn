@@ -3220,3 +3220,100 @@ html.dark .marketing-shell footer {
   background-image: none !important;
 }
 html.dark .marketing-shell :is(svg,[data-icon]) { color: #8bd5a6; }
+
+
+/* About + Contact palette completion: keep every surface inside the approved
+   EcoPrawn tokens; replace legacy white/gray/green/amber treatments. */
+.marketing-shell :is(#objectives,#scope,[data-contact-details]) {
+  background-color: #f4f7f6;
+  color: #142b2e;
+}
+.marketing-shell :is(#objectives,#scope) :is(article,.ep-about-objective,.ep-about-outscope),
+.marketing-shell [data-contact-card],
+.marketing-shell [data-contact-form] form {
+  background-color: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: #0f4c5c !important;
+}
+.marketing-shell :is(#objectives,#scope) :is(h1,h2,h3,h4,p,span,b,strong,small),
+.marketing-shell [data-contact-card] :is(dt,dd,span,svg) {
+  color: #142b2e;
+}
+.marketing-shell :is(#objectives,#scope) :is(.text-\\[var\\(--ep-ok\\)\\],.text-\\[var\\(--ep-warn-text\\)\\]) {
+  color: #0f4c5c !important;
+}
+.marketing-shell :is(#objectives,#scope) :is(.bg-\\[var\\(--ep-ok\\)\\],.bg-\\[var\\(--ep-warn-text\\)\\]) {
+  background-color: #0f4c5c !important;
+  color: #f4f7f6 !important;
+}
+.marketing-shell #systems {
+  background-color: #0f4c5c !important;
+  color: #f4f7f6 !important;
+  border-color: #0f4c5c !important;
+}
+.marketing-shell #systems :is(h1,h2,h3,h4,p,span,b,strong,div) {
+  color: #f4f7f6;
+}
+.marketing-shell #systems :is(svg,[data-icon]) { color: #d94416; }
+.marketing-shell #systems > div[aria-hidden="true"]:first-child {
+  background-image: linear-gradient(145deg, #0f4c5c, #142b2e) !important;
+}
+.marketing-shell [data-contact-form] form :is(input,textarea,select) {
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: #0f4c5c !important;
+}
+.marketing-shell [data-contact-form] form :is(button[type="submit"],[type="submit"]) {
+  background: #d94416 !important;
+  color: #f4f7f6 !important;
+  border-color: #d94416 !important;
+}
+html.dark .marketing-shell :is(#objectives,#scope,[data-contact-details]) {
+  background-color: #18191a;
+  color: #8bd5a6;
+}
+html.dark .marketing-shell :is(#objectives,#scope) :is(article,.ep-about-objective,.ep-about-outscope),
+html.dark .marketing-shell [data-contact-card],
+html.dark .marketing-shell [data-contact-form] form {
+  background-color: #202729 !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.42) !important;
+}
+html.dark .marketing-shell :is(#objectives,#scope) :is(h1,h2,h3,h4,p,span,b,strong,small),
+html.dark .marketing-shell [data-contact-card] :is(dt,dd,span,svg) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell :is(#objectives,#scope) :is(.text-\\[var\\(--ep-ok\\)\\],.text-\\[var\\(--ep-warn-text\\)\\]) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell :is(#objectives,#scope) :is(.bg-\\[var\\(--ep-ok\\)\\],.bg-\\[var\\(--ep-warn-text\\)\\]) {
+  background-color: #8bd5a6 !important;
+  color: #18191a !important;
+}
+html.dark .marketing-shell #systems {
+  background-color: #202729 !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.42) !important;
+}
+html.dark .marketing-shell #systems :is(h1,h2,h3,h4,p,span,b,strong,div) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell #systems :is(svg,[data-icon]) { color: #f28a68 !important; }
+html.dark .marketing-shell #systems > div[aria-hidden="true"]:first-child {
+  background-image: linear-gradient(145deg, #202729, #18191a) !important;
+}
+html.dark .marketing-shell [data-contact-form] form :is(input,textarea,select) {
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.45) !important;
+}
+html.dark .marketing-shell [data-contact-form] form :is(button[type="submit"],[type="submit"]) {
+  background: #f28a68 !important;
+  color: #18191a !important;
+  border-color: #f28a68 !important;
+}
+html.dark .marketing-shell :is(a,button):focus-visible,
+.marketing-shell :is(a,button):focus-visible {
+  outline-color: #d94416;
+}
+html.dark .marketing-shell :is(a,button):focus-visible { outline-color: #f28a68; }
