@@ -24,7 +24,7 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
               key={label}
               to={href}
               aria-current={isActive ? "page" : undefined}
-              className={`inline-flex items-center rounded-full px-3.5 py-2 text-[10px] font-medium leading-none transition-colors duration-200 ${focusRing} ${
+              className={`inline-flex items-center rounded-full px-4 py-2.5 text-xs font-semibold leading-none transition-colors duration-200 ${focusRing} ${
                 isActive
                   ? "bg-[#5f8f69] text-white"
                   : "text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]"
