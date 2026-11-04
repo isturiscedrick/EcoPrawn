@@ -3579,3 +3579,163 @@ html.dark .marketing-shell.ep-contact-page [data-contact-form] form button[type=
   color: #18191a !important;
   border-color: #f28a68 !important;
 }
+
+
+/* =========================================================================
+   LANDING PAGE — canonical EcoPrawn color system
+   The landing page is the reference for all public-facing surfaces.
+   Light: #F4F7F6 / #142B2E / #0F4C5C / #D94416
+   Dark:  #18191A / #202729 / #8BD5A6 / #F28A68
+   ========================================================================= */
+.ep-landing-page {
+  --ep-bg: #f4f7f6;
+  --ep-surface: #f4f7f6;
+  --ep-tint: #f4f7f6;
+  --ep-primary: #142b2e;
+  --ep-text-muted: #142b2e;
+  --ep-secondary: #0f4c5c;
+  --ep-accent: #d94416;
+  --ep-line: rgba(15,76,92,.28);
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+}
+.ep-landing-page :is(#top,#process,section[aria-label="EcoPrawn at a glance"]) {
+  background-color: #f4f7f6 !important;
+  color: #142b2e !important;
+}
+.ep-landing-page #top {
+  background-image:
+    radial-gradient(ellipse at 82% 22%, rgba(15,76,92,.14), transparent 58%),
+    linear-gradient(180deg, rgba(15,76,92,.035), transparent 72%) !important;
+}
+.ep-landing-page :is(#top h1,#top h2,#process h2,#process h3),
+.ep-landing-page :is(#top p,#process p,#process li) {
+  color: #142b2e !important;
+}
+.ep-landing-page #top [data-hero="eyebrow"],
+.ep-landing-page #process [class*="uppercase"] {
+  color: #0f4c5c !important;
+}
+.ep-landing-page #top [data-hero="eyebrow"] > span,
+.ep-landing-page #process [data-step-node] {
+  background: #d94416 !important;
+}
+.ep-landing-page #top [data-hero="cta"] a:first-child {
+  background: #d94416 !important;
+  border-color: #d94416 !important;
+  color: #f4f7f6 !important;
+}
+.ep-landing-page #top [data-hero="cta"] a:last-child {
+  background: #f4f7f6 !important;
+  border-color: #0f4c5c !important;
+  color: #142b2e !important;
+}
+.ep-landing-page section[aria-label="EcoPrawn at a glance"] {
+  border-color: rgba(15,76,92,.28) !important;
+}
+.ep-landing-page .ep-stats-panel,
+.ep-landing-page .ep-stat-card {
+  background: #f4f7f6 !important;
+  border-color: rgba(15,76,92,.28) !important;
+}
+.ep-landing-page .ep-stat-value { color: #d94416 !important; }
+.ep-landing-page .ep-stat-card span:last-child { color: #142b2e !important; }
+.ep-landing-page #readings {
+  background: #0f4c5c !important;
+  color: #f4f7f6 !important;
+  border-color: #0f4c5c !important;
+}
+.ep-landing-page #readings [data-readings-bg] {
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.18), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.14), transparent 48%),
+    linear-gradient(155deg, #0f4c5c 0%, #0f4c5c 52%, #142b2e 100%) !important;
+}
+.ep-landing-page #readings :is(h2,h3,dt,dd,p,span,div) { color: #f4f7f6; }
+.ep-landing-page #readings :is(svg,[data-icon]) { color: #8bd5a6; }
+.ep-landing-page #readings [class*="bg-[rgba(91"],
+.ep-landing-page #readings [class*="bg-[rgba(232"] { background: rgba(139,213,166,.22) !important; }
+.ep-landing-page #process {
+  background-image: radial-gradient(rgba(15,76,92,.10) .8px, transparent .8px) !important;
+  background-size: 14px 14px;
+}
+.ep-landing-page #process [data-step] {
+  background: #f4f7f6 !important;
+  border-color: rgba(15,76,92,.28) !important;
+  box-shadow: 0 12px 35px -28px rgba(20,43,46,.35);
+}
+.ep-landing-page #process [data-step] :is(h3,p) { color: #142b2e !important; }
+.ep-landing-page #process [data-step] svg { color: #0f4c5c !important; }
+.ep-landing-page #process [data-step]:hover { border-color: #d94416 !important; }
+.ep-landing-page :is(a,button):focus-visible { outline-color: #d94416 !important; }
+html.dark .ep-landing-page {
+  --ep-bg: #18191a;
+  --ep-surface: #202729;
+  --ep-tint: #202729;
+  --ep-primary: #8bd5a6;
+  --ep-text-muted: #8bd5a6;
+  --ep-secondary: #8bd5a6;
+  --ep-accent: #f28a68;
+  --ep-line: rgba(139,213,166,.28);
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+}
+html.dark .ep-landing-page :is(#top,#process,section[aria-label="EcoPrawn at a glance"]) {
+  background-color: #18191a !important;
+  color: #8bd5a6 !important;
+}
+html.dark .ep-landing-page #top {
+  background-image:
+    radial-gradient(ellipse at 82% 22%, rgba(139,213,166,.10), transparent 58%),
+    linear-gradient(180deg, rgba(139,213,166,.025), transparent 72%) !important;
+}
+html.dark .ep-landing-page :is(#top h1,#top h2,#top p,#process h2,#process h3,#process p,#process li) {
+  color: #8bd5a6 !important;
+}
+html.dark .ep-landing-page #top [data-hero="eyebrow"],
+html.dark .ep-landing-page #process [class*="uppercase"] { color: #8bd5a6 !important; }
+html.dark .ep-landing-page #top [data-hero="cta"] a:first-child {
+  background: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
+html.dark .ep-landing-page #top [data-hero="cta"] a:last-child {
+  background: #202729 !important;
+  border-color: rgba(139,213,166,.45) !important;
+  color: #8bd5a6 !important;
+}
+html.dark .ep-landing-page section[aria-label="EcoPrawn at a glance"] {
+  border-color: rgba(139,213,166,.28) !important;
+}
+html.dark .ep-landing-page .ep-stats-panel,
+html.dark .ep-landing-page .ep-stat-card {
+  background: #202729 !important;
+  border-color: rgba(139,213,166,.28) !important;
+}
+html.dark .ep-landing-page .ep-stat-value { color: #f28a68 !important; }
+html.dark .ep-landing-page .ep-stat-card span:last-child { color: #8bd5a6 !important; }
+html.dark .ep-landing-page #readings {
+  background: #202729 !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.28) !important;
+}
+html.dark .ep-landing-page #readings [data-readings-bg] {
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.12), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.10), transparent 48%),
+    linear-gradient(155deg, #202729 0%, #202729 52%, #18191a 100%) !important;
+}
+html.dark .ep-landing-page #readings :is(h2,h3,dt,dd,p,span,div) { color: #8bd5a6; }
+html.dark .ep-landing-page #readings :is(svg,[data-icon]) { color: #f28a68; }
+html.dark .ep-landing-page #process {
+  background-image: radial-gradient(rgba(139,213,166,.08) .8px, transparent .8px) !important;
+}
+html.dark .ep-landing-page #process [data-step] {
+  background: #202729 !important;
+  border-color: rgba(139,213,166,.28) !important;
+  box-shadow: 0 12px 35px -28px rgba(0,0,0,.45);
+}
+html.dark .ep-landing-page #process [data-step] :is(h3,p) { color: #8bd5a6 !important; }
+html.dark .ep-landing-page #process [data-step] svg { color: #8bd5a6 !important; }
+html.dark .ep-landing-page #process [data-step]:hover { border-color: #f28a68 !important; }
+html.dark .ep-landing-page :is(a,button):focus-visible { outline-color: #f28a68 !important; }
