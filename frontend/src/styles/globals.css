@@ -2417,3 +2417,59 @@ html.dark .marketing-shell .ep-lens-readout .ep-lens-dot {
   background-color: #38bdf8 !important;
   text-shadow: none;
 }
+
+
+/* Process section: use dark ink on its pale surface and white ink on dark mode.
+   The stage tiles stay distinct from the section background in both themes. */
+html:not(.dark) .marketing-shell #process {
+  background: #f1f5f2 !important;
+  color: #101b19 !important;
+}
+html:not(.dark) .marketing-shell #process :is(h2, h3, p, li, li > div > span:first-child) {
+  color: #101b19 !important;
+  -webkit-text-fill-color: #101b19 !important;
+}
+html:not(.dark) .marketing-shell #process li > div > span:last-child {
+  color: #14545a !important;
+  border-color: rgba(20,84,90,.22) !important;
+  background: rgba(255,255,255,.82) !important;
+}
+html.dark .marketing-shell #process {
+  background: #111d2c !important;
+  color: #ffffff !important;
+}
+html.dark .marketing-shell #process :is(h2, h3, p, li, li > div > span:first-child) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .marketing-shell #process li > div > span:last-child {
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,.24) !important;
+  background: rgba(255,255,255,.07) !important;
+}
+
+/* The CTA band is always dark teal: keep its copy white, while the
+   filled light button uses dark teal ink for clear contrast. */
+html:not(.dark) .marketing-shell [data-band],
+html.dark .marketing-shell [data-band] {
+  color: #ffffff !important;
+}
+html:not(.dark) .marketing-shell [data-band] :is(h2, p),
+html.dark .marketing-shell [data-band] :is(h2, p) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html:not(.dark) .marketing-shell [data-band] a:first-child,
+html:not(.dark) .marketing-shell [data-band] a:first-child *,
+html.dark .marketing-shell [data-band] a:first-child,
+html.dark .marketing-shell [data-band] a:first-child * {
+  color: #104b58 !important;
+  -webkit-text-fill-color: #104b58 !important;
+}
+html:not(.dark) .marketing-shell [data-band] a:last-child,
+html:not(.dark) .marketing-shell [data-band] a:last-child *,
+html.dark .marketing-shell [data-band] a:last-child,
+html.dark .marketing-shell [data-band] a:last-child * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
