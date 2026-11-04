@@ -2,6 +2,29 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* =========================================================================
+   ECOPRAWN GLOBAL STYLESHEET
+   -------------------------------------------------------------------------
+   Reading guide:
+   01  Theme tokens
+   02  Shared foundations and motion
+   03  Accessibility and global sizing
+   04  Semantic application tokens
+   05  Marketing theme foundations
+   06  Dashboard theme
+   07  Shared public-app overrides
+   08  Landing page styles
+   09  Dashboard refinements
+   10  Landing-page refinements
+   11  Shared public-page system (About, Contact, Auth)
+   12–15  Final page and palette alignment
+
+   Cascade note: the refinement sections intentionally remain after their
+   base sections. Their order preserves existing specificity and overrides.
+   This pass is organizational only; declarations and runtime behavior are
+   intentionally preserved.
+   ========================================================================= */
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -75,6 +98,11 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+/* =====================================================================
+   01. THEME TOKENS — typography, base palette, elevation, radii
+   ===================================================================== */
+
 
   /* EcoPrawn theme tokens */
   --water-deep: #0b2e33;
@@ -152,6 +180,11 @@
     @apply m-0 bg-background text-foreground font-sans;
   }
 }
+
+/* =====================================================================
+   02. SHARED FOUNDATIONS — root layout, focus, motion, utilities
+   ===================================================================== */
+
 
 /* ---------- EcoPrawn root + effects ---------- */
 
@@ -384,6 +417,11 @@
   }
 }
 
+/* =====================================================================
+   03. ACCESSIBILITY & GLOBAL SIZING — readable type and touch targets
+   ===================================================================== */
+
+
 /* ---------- Accessibility pass (users 30+, outdoor light) ----------
    Appended last so it overrides the values above. Delete this whole
    block to revert (and restore line 1 if you want the old fonts). */
@@ -436,6 +474,11 @@ html {
 .ecoprawn-root input:not([type="checkbox"]):not([type="radio"]) {
   min-height: 44px;
 }
+
+/* =====================================================================
+   04. SEMANTIC COLOR TOKENS — legacy app/dashboard token layer
+   ===================================================================== */
+
 
 /* ---------- EcoPrawn palette v3, warm high-contrast (60/30/10) ----------
    Close to the original sand / deep teal / coral. Every text pairing is
@@ -580,6 +623,11 @@ html.dark .dashboard-shell aside .hover\:text-\[var\(--water-deep\)\]:hover {
   color: #e4e6eb;
 }
 
+/* =====================================================================
+   05. MARKETING THEME — shared public-page tokens and dark bands
+   ===================================================================== */
+
+
 /* ---------- Marketing palette: landing, About, Contact, auth modal ----------
    Scoped to .marketing-shell and .ep-auth-modal so the dashboard keeps its own
    tokens. Delete this whole block to revert. */
@@ -706,6 +754,11 @@ html.dark .marketing-shell :is(nav[aria-label="Primary navigation"], nav[aria-la
   color: #04202b;
 }
 
+/* =====================================================================
+   06. DASHBOARD THEME — dashboard-only surfaces and component states
+   ===================================================================== */
+
+
 /* ---------- Dashboard palette ----------
    Scoped to .dashboard-shell. Orange = brand and calls to action,
    teal / sky blue = headings and controls, green stays reserved for OK status.
@@ -794,6 +847,11 @@ html:not(.dark) .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(-
 .dashboard-shell .bg-\[\#4b8db8\] {
   background-color: var(--ep-secondary);
 }
+
+/* =====================================================================
+   07. PUBLIC APP OVERRIDES — shared header, forms, icons and interactions
+   ===================================================================== */
+
 
 /* ---------- Public pages: landing, About, Contact, sign-in modal ----------
    Light mode already matches (#d94416 and #0f4c5c). Dark mode still had the
@@ -937,6 +995,11 @@ html.dark .dashboard-shell .hover\:bg-\[var\(--ep-primary\)\]:hover {
   --tw-shadow: 0 10px 20px -10px color-mix(in srgb, var(--ep-accent) 55%, transparent);
 }
 
+/* =====================================================================
+   08. LANDING PAGE — brand styling, hero, sections, imagery and motion
+   ===================================================================== */
+
+
 /* ---------- Landing page brand palette: terracotta + teal/mint ---------- */
 /* Light theme: brand orange + deep teal. Keep body surfaces neutral. */
 .marketing-shell {
@@ -1058,6 +1121,11 @@ html.dark .marketing-shell .ep-logo {
 }
 
 
+/* =====================================================================
+   09. DASHBOARD BRAND OVERRIDES — final dashboard-specific refinements
+   ===================================================================== */
+
+
 /* ---------- Dashboard brand palette: canonical light/dark mapping ---------- */
 /* Match the requested brand palette while retaining existing neutral surfaces. */
 .dashboard-shell {
@@ -1094,6 +1162,11 @@ html.dark .dashboard-shell {
 .dashboard-shell input[type="radio"] {
   accent-color: var(--ep-brand-secondary);
 }
+
+
+/* =====================================================================
+   10. LANDING PAGE REFINEMENTS — theme corrections and responsive polish
+   ===================================================================== */
 
 
 /* ---------- Landing page dark-theme surface correction ---------- */
@@ -1664,7 +1737,6 @@ html.dark .ep-landing-hero [data-hero="grid"] {
     transition: none;
   }
 }
-
 
 
 /* Reference-inspired landing composition, using EcoPrawn's established palette. */
@@ -2507,6 +2579,11 @@ html:has(.marketing-shell) {
 }
 
 
+/* =====================================================================
+   11. SHARED PUBLIC-PAGE SYSTEM — page foundations, About, Contact, Auth
+   ===================================================================== */
+
+
 /* =========================================================
    Shared public-page design system
    Bring About, Contact and the authentication dialog into
@@ -2971,6 +3048,11 @@ html.dark .marketing-shell footer {
 }
 
 
+/* =====================================================================
+   12. ABOUT & CONTACT REFINEMENTS — page-specific surfaces and forms
+   ===================================================================== */
+
+
 /* About and Contact: shared EcoPrawn palette for both themes. */
 .marketing-shell {
   --ep-bg: #f4f7f6;
@@ -3137,6 +3219,11 @@ html.dark .ep-auth-modal button[type="submit"] {
 }
 
 
+/* =====================================================================
+   13. CANONICAL BRAND PALETTE — final public-page palette enforcement
+   ===================================================================== */
+
+
 /* STRICT BRAND PALETTE — do not introduce additional UI colors.
    Light: warm neutral, charcoal teal, deep teal, terracotta.
    Dark: dark base, card surface, mint accent, soft coral. */
@@ -3220,6 +3307,11 @@ html.dark .marketing-shell footer {
   background-image: none !important;
 }
 html.dark .marketing-shell :is(svg,[data-icon]) { color: #8bd5a6; }
+
+
+/* =====================================================================
+   14. PAGE-SPECIFIC PALETTE FIXES — About systems and Contact details
+   ===================================================================== */
 
 
 /* About + Contact palette completion: keep every surface inside the approved
@@ -3317,6 +3409,11 @@ html.dark .marketing-shell :is(a,button):focus-visible,
   outline-color: #d94416;
 }
 html.dark .marketing-shell :is(a,button):focus-visible { outline-color: #f28a68; }
+
+
+/* =====================================================================
+   15. FINAL PAGE ALIGNMENT — Landing page is the marketing design source
+   ===================================================================== */
 
 
 /* Landing-page visual system is the source of truth for all marketing pages.
