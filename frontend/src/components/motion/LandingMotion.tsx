@@ -1,10 +1,11 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { HeroEnhance } from "./HeroEnhance";
 
-gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, MorphSVGPlugin);
 
 // Water surfaces on a 100x100 viewBox stretched over the screen. Every path
 // has the same command structure (M, C, C, V, H, z) so MorphSVG can
@@ -66,6 +67,54 @@ export function LandingMotion() {
         if (!cancelled) ScrollTrigger.refresh();
       });
     }
+
+    // SMOOTH SCROLL: normalize touch/inertial scrolling with GSAP.
+    // ScrollSmoother is a paid plugin, so this uses the free ScrollTrigger
+    // normalizer and ScrollToPlugin already included with GSAP.
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      ScrollTrigger.normalizeScroll({
+        allowNestedScroll: true,
+        momentum: (self) => Math.min(2.5, self.velocityY / 1000),
+      });
+
+      const anchorLinks = gsap.utils.toArray<HTMLAnchorElement>(
+        'a[href^="#"]:not([href="#"])'
+      );
+      const handlers: Array<() => void> = [];
+
+      anchorLinks.forEach((link) => {
+        const handleClick = (event: MouseEvent) => {
+          const href = link.getAttribute("href");
+          if (!href) return;
+          const target = document.querySelector<HTMLElement>(href);
+          if (!target) return;
+
+          event.preventDefault();
+          gsap.to(window, {
+            duration: 1.05,
+            ease: "power3.inOut",
+            overwrite: "auto",
+            scrollTo: {
+              y: target,
+              offsetY: 84,
+              autoKill: true,
+            },
+            onComplete: () => {
+              history.replaceState(null, "", href);
+            },
+          });
+        };
+
+        link.addEventListener("click", handleClick);
+        handlers.push(() => link.removeEventListener("click", handleClick));
+      });
+
+      return () => {
+        handlers.forEach((cleanup) => cleanup());
+        ScrollTrigger.normalizeScroll(false);
+        gsap.killTweensOf(window);
+      };
+    });
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       // HERO: lens and text columns stagger in. The delay
