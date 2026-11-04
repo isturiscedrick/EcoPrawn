@@ -1140,44 +1140,56 @@ html.dark .marketing-shell footer {
 }
 
 
-/* Dark-mode landing content: use the requested mint secondary throughout. */
+/* Dark-mode landing palette: charcoal surfaces, soft white text, coral + mint accents.
+   Keep mint as the secondary accent only; it must not replace primary text. */
 html.dark .marketing-shell {
-  --ep-primary: #8bd5a6;
-  --ep-secondary: #8bd5a6;
+  --ep-bg: #18191a;
+  --ep-surface: #202122;
+  --ep-tint: #2c2d2e;
+  --ep-line: rgba(255,255,255,.14);
+  --ep-primary: #e4e6eb;
+  --ep-text-muted: #b0b3b8;
+  --ep-brand-primary: #f28a68;
   --ep-brand-secondary: #8bd5a6;
-  --water-deep: #8bd5a6;
-  --mangrove: #8bd5a6;
-  --mangrove-text: #8bd5a6;
-}
-
-/* Some landing sections declare their own light-mode teal text tokens.
-   Override those locally in dark mode so they use mint as well. */
-html.dark .marketing-shell :is(#readings, #systems, footer, [data-band]) {
-  --ep-primary: #8bd5a6;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #f6a185;
   --ep-secondary: #8bd5a6;
-  --water-deep: #8bd5a6;
-  --mangrove: #8bd5a6;
-  --mangrove-text: #8bd5a6;
+  --coral: #f28a68;
+  --coral-dim: #f6a185;
 }
-
+html.dark .marketing-shell :is(#readings, #systems, footer, [data-band]) {
+  --ep-bg: #18191a;
+  --ep-surface: #202122;
+  --ep-tint: #2c2d2e;
+  --ep-line: rgba(255,255,255,.14);
+  --ep-primary: #e4e6eb;
+  --ep-text-muted: #b0b3b8;
+  --ep-accent: #f28a68;
+  --ep-secondary: #8bd5a6;
+  --coral: #f28a68;
+}
 html.dark .marketing-shell :is(
-  .text-\[var\(--ep-primary\)\],
-  .text-\[var\(--ep-secondary\)\],
-  .text-\[var\(--mangrove\)\],
-  .text-\[var\(--mangrove-text\)\]
+  .text-\\[var\\(--ep-primary\\)\\],
+  .text-\\[var\\(--water-deep\\)\\],
+  .text-\\[var\\(--mangrove-text\\)\\]
 ) {
-  color: #8bd5a6;
+  color: #e4e6eb;
 }
-
-
-/* Dark mode: footer and hero lens use mint secondary consistently. */
+html.dark .marketing-shell #top [data-hero="text"] :is(h1, h2, p, span) {
+  color: inherit;
+}
+html.dark .marketing-shell #top [data-hero="text"] h1 span:first-child {
+  color: #f28a68 !important;
+}
+html.dark .marketing-shell #top [data-hero="text"] h1 span:last-child {
+  color: #e4e6eb !important;
+}
 html.dark .marketing-shell footer,
 html.dark .marketing-shell footer :is(p, span, a, li, small, strong, h1, h2, h3, h4) {
-  color: #8bd5a6 !important;
+  color: #e4e6eb !important;
 }
-
-html.dark .marketing-shell #top [data-hero="text"] :is(h1, h2, p, span) {
-  color: #8bd5a6;
+html.dark .marketing-shell footer a:hover {
+  color: #8bd5a6 !important;
 }
 
 /* HeroLens secondary indicators: replace the old sky-blue accents with mint. */
