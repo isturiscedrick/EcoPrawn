@@ -458,3 +458,59 @@ html.dark .ep-auth-modal a:not([class*="bg-"]) {
 html.dark .ep-auth-modal button[type="submit"] :is(span, svg) {
   color: #18191a !important;
 }
+
+
+/* Final EcoPrawn brand alignment: charcoal ink, coral actions, mint details. */
+.ep-auth-modal {
+  --ep-primary: #142b2e;
+  --ep-secondary: #0f4c5c;
+  --ep-text-muted: #405653;
+  --ep-accent: #d94416;
+  --ep-accent-hover: #b83a0f;
+  --ep-line: #d8e0de;
+  --ep-tint: #edf3f1;
+  color: #142b2e;
+}
+.ep-auth-modal :is(h1,label) { color: #142b2e; }
+.ep-auth-modal :is(h1 + p,small,[data-muted]) { color: #405653; }
+.ep-auth-modal button[type="submit"] {
+  background-color: #d94416;
+  border-color: #d94416;
+  color: #ffffff;
+}
+.ep-auth-modal button[type="submit"]:hover {
+  background-color: #b83a0f;
+  border-color: #b83a0f;
+}
+html.dark .ep-auth-modal {
+  --ep-primary: #f4f7f6;
+  --ep-secondary: #8bd5a6;
+  --ep-text-muted: #c0cbca;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #e87552;
+  --ep-line: rgba(139,213,166,.22);
+  --ep-tint: #29332f;
+  background-color: #202729 !important;
+  border-color: rgba(139,213,166,.22) !important;
+  color: #f4f7f6 !important;
+}
+html.dark .ep-auth-modal :is(h1,label) { color: #f4f7f6 !important; }
+html.dark .ep-auth-modal :is(h1 + p,small,[data-muted]) { color: #c0cbca !important; }
+html.dark .ep-auth-modal :is(input,textarea,select) {
+  background-color: #181f20 !important;
+  border-color: rgba(139,213,166,.3) !important;
+  color: #f4f7f6 !important;
+}
+html.dark .ep-auth-modal input::placeholder { color: #aab8b6 !important; }
+html.dark .ep-auth-modal button[type="submit"] {
+  background-color: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
+html.dark .ep-auth-modal button[type="submit"]:hover {
+  background-color: #e87552 !important;
+  border-color: #e87552 !important;
+}
+html.dark .ep-auth-modal :is(a:not([class*="bg-"]),button[aria-label="Close"]) {
+  color: #8bd5a6 !important;
+}
