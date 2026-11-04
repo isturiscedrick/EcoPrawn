@@ -57,6 +57,10 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-5 rounded-2xl border border-[var(--ep-line)] bg-white p-6 shadow-[0_16px_32px_-24px_rgba(11,46,51,0.45)] sm:p-8"
     >
+      <div className="mb-1">
+        <h2 className="ep-font-display text-2xl font-semibold tracking-tight text-[var(--ep-primary)]">Send us a message</h2>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">Share your question or feedback about EcoPrawn. All fields are required.</p>
+      </div>
       <div>
         <label htmlFor={`${uid}-name`} className={labelClass}>
           Name
@@ -67,6 +71,7 @@ export function ContactForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           autoComplete="name"
+          placeholder="Your full name"
           required
         />
       </div>
@@ -82,6 +87,7 @@ export function ContactForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"
+          placeholder="you@example.com"
           required
         />
       </div>
@@ -93,6 +99,8 @@ export function ContactForm() {
         <textarea
           id={`${uid}-message`}
           rows={5}
+          minLength={10}
+          placeholder="Tell us how we can help…"
           className={`${inputClass} resize-y`}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
