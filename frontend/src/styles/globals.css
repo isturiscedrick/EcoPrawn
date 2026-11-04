@@ -2505,3 +2505,235 @@ html:has(.marketing-shell) {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* =========================================================
+   Shared public-page design system
+   Bring About, Contact and the authentication dialog into
+   the same EcoPrawn palette and motion language as Home.
+========================================================= */
+
+/* Public page foundations */
+.marketing-shell {
+  --public-bg: #f4f7f6;
+  --public-surface: #ffffff;
+  --public-ink: #0b2e33;
+  --public-muted: #3f5753;
+  --public-line: #d8e0de;
+  --public-accent: #b23f1c;
+  background: var(--public-bg);
+  color: var(--public-ink);
+}
+html.dark .marketing-shell {
+  --public-bg: #18191a;
+  --public-surface: #242729;
+  --public-ink: #e4e6eb;
+  --public-muted: #b0b3b8;
+  --public-line: rgba(255,255,255,.13);
+  --public-accent: #f28a68;
+  background: var(--public-bg);
+  color: var(--public-ink);
+}
+
+/* About + Contact hero: same quiet neutral canvas as the landing hero. */
+.marketing-shell main > section:first-child {
+  background: #f4f7f6 !important;
+  color: #0b2e33 !important;
+}
+.marketing-shell main > section:first-child :is(h1, p) {
+  color: inherit;
+}
+html.dark .marketing-shell main > section:first-child {
+  background: #18191a !important;
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell main > section:first-child :is(h1, p) {
+  color: inherit !important;
+}
+html.dark .marketing-shell main > section:first-child p {
+  color: #b0b3b8 !important;
+}
+
+/* Neutral content sections and cards share the Home page surfaces. */
+html:not(.dark) .marketing-shell main :is(#objectives, #scope, [data-contact-details], [data-contact-form]) {
+  color: #0b2e33;
+}
+html:not(.dark) .marketing-shell main :is(#objectives, #scope) {
+  background: #f4f7f6;
+}
+html:not(.dark) .marketing-shell main :is(#objectives, #scope) article,
+html:not(.dark) .marketing-shell [data-contact-card],
+html:not(.dark) .marketing-shell [data-contact-form] form,
+html:not(.dark) .marketing-shell [data-contact-form] [role="status"] {
+  background: #ffffff !important;
+  border-color: #d8e0de !important;
+  color: #0b2e33 !important;
+}
+html:not(.dark) .marketing-shell main :is(#objectives, #scope) :is(h2, h3, p, b, span, div) {
+  color: inherit;
+}
+html:not(.dark) .marketing-shell main :is(#objectives, #scope) :is(p, span) {
+  color: #3f5753;
+}
+html.dark .marketing-shell main :is(#objectives, #scope) {
+  background: #18191a;
+  color: #e4e6eb;
+}
+html.dark .marketing-shell main :is(#objectives, #scope) article,
+html.dark .marketing-shell [data-contact-card],
+html.dark .marketing-shell [data-contact-form] form,
+html.dark .marketing-shell [data-contact-form] [role="status"] {
+  background: #242729 !important;
+  border-color: rgba(255,255,255,.13) !important;
+  color: #e4e6eb !important;
+}
+html.dark .marketing-shell main :is(#objectives, #scope) :is(h2, h3, p, b, span, div),
+html.dark .marketing-shell [data-contact-card] :is(dt, dd) {
+  color: inherit;
+}
+html.dark .marketing-shell main :is(#objectives, #scope) :is(p, span) {
+  color: #b0b3b8;
+}
+html.dark .marketing-shell main #systems {
+  background-color: #0b2e33 !important;
+  color: #ffffff !important;
+}
+html.dark .marketing-shell main #systems :is(h2, h3, p, span, b) {
+  color: inherit;
+}
+
+/* Contact form fields and buttons use the same accessible states as Home. */
+.marketing-shell [data-contact-form] :is(input, textarea) {
+  background: var(--public-surface) !important;
+  border-color: var(--public-line) !important;
+  color: var(--public-ink) !important;
+}
+.marketing-shell [data-contact-form] :is(input, textarea)::placeholder {
+  color: var(--public-muted) !important;
+}
+.marketing-shell [data-contact-form] label {
+  color: var(--public-ink) !important;
+}
+.marketing-shell [data-contact-form] button[type="submit"] {
+  background: var(--public-accent) !important;
+  border-color: var(--public-accent) !important;
+  color: #ffffff !important;
+}
+html.dark .marketing-shell [data-contact-form] button[type="submit"] {
+  color: #18191a !important;
+}
+
+/* Shared hover, focus and scroll rhythm across About and Contact. */
+.marketing-shell main :is(article, [data-contact-card], form) {
+  transition:
+    transform 320ms cubic-bezier(.22,1,.36,1),
+    border-color 240ms ease,
+    box-shadow 320ms cubic-bezier(.22,1,.36,1),
+    background-color 240ms ease;
+}
+.marketing-shell main :is(article, [data-contact-card]):hover {
+  transform: translateY(-4px);
+}
+.marketing-shell :is(a, button, input, textarea):focus-visible {
+  outline-color: var(--public-accent);
+  outline-offset: 3px;
+}
+
+/* Auth modal shares the same neutral/teal/coral palette in both themes. */
+.ep-auth-modal {
+  --ep-bg: #f4f7f6;
+  --ep-surface: #ffffff;
+  --ep-tint: #eaf0ee;
+  --ep-line: #d8e0de;
+  --ep-primary: #0b2e33;
+  --ep-secondary: #0f4c5c;
+  --ep-text-muted: #3f5753;
+  --ep-accent: #b23f1c;
+  --ep-accent-hover: #8f3115;
+  background: #f4f7f6 !important;
+  border-color: #d8e0de !important;
+  color: #0b2e33 !important;
+}
+.ep-auth-modal :is(h1, label, p, small) {
+  color: #0b2e33;
+}
+.ep-auth-modal h1 + p,
+.ep-auth-modal > div:not(.ep-auth-brand) > div:last-child {
+  color: #3f5753;
+}
+.ep-auth-modal div:has(> form) {
+  background: #ffffff;
+  border-color: #d8e0de;
+}
+.ep-auth-modal input {
+  background: #ffffff;
+  border-color: #d8e0de;
+  color: #0b2e33;
+}
+.ep-auth-modal input::placeholder {
+  color: #526b70;
+}
+.ep-auth-modal button[type="submit"] {
+  background: #b23f1c;
+  border-color: #b23f1c;
+  color: #ffffff;
+}
+.ep-auth-modal button[aria-label="Close"] {
+  color: #3f5753;
+}
+html.dark .ep-auth-modal {
+  --ep-bg: #18191a;
+  --ep-surface: #242729;
+  --ep-tint: #29332f;
+  --ep-line: rgba(255,255,255,.14);
+  --ep-primary: #e4e6eb;
+  --ep-secondary: #8bd5a6;
+  --ep-text-muted: #b0b3b8;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #e87552;
+  background: #202122 !important;
+  border-color: rgba(255,255,255,.14) !important;
+  color: #e4e6eb !important;
+}
+html.dark .ep-auth-modal :is(h1, label, p, small, span, div) {
+  color: inherit;
+}
+html.dark .ep-auth-modal h1 + p,
+html.dark .ep-auth-modal > div:not(.ep-auth-brand) > div:last-child {
+  color: #b0b3b8 !important;
+}
+html.dark .ep-auth-modal div:has(> form) {
+  background: #242729 !important;
+  border-color: rgba(255,255,255,.14) !important;
+}
+html.dark .ep-auth-modal input {
+  background: #18191a !important;
+  border-color: rgba(255,255,255,.18) !important;
+  color: #e4e6eb !important;
+}
+html.dark .ep-auth-modal input::placeholder {
+  color: #aeb5b7 !important;
+}
+html.dark .ep-auth-modal button[type="submit"] {
+  background: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
+html.dark .ep-auth-modal button[aria-label="Close"] {
+  color: #b0b3b8 !important;
+}
+
+/* All public pages use the same restrained, reduced-motion-aware easing. */
+@media (prefers-reduced-motion: reduce) {
+  .marketing-shell *,
+  .marketing-shell *::before,
+  .marketing-shell *::after,
+  .ep-auth-overlay *,
+  .ep-auth-overlay *::before,
+  .ep-auth-overlay *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
