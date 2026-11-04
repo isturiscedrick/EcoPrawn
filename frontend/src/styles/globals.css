@@ -1926,3 +1926,88 @@ html.dark .ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]) span
 html.dark .ep-landing-hero [data-hero="grid"] {
   opacity: .16 !important;
 }
+
+/* Final light-theme readability pass for the landing page.
+   Use near-black ink on pale surfaces and soft white on deep-water surfaces. */
+html:not(.dark) .marketing-shell .ep-landing-hero {
+  color: #0b2320;
+}
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="text"] h1 span:first-child,
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="text"] h1 span:last-child {
+  color: #0b2320 !important;
+}
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="lead"] {
+  color: #344744 !important;
+}
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="eyebrow"] {
+  color: #a93618 !important;
+}
+html:not(.dark) .marketing-shell .ep-landing-hero > div > p:last-child {
+  color: #31534b !important;
+}
+
+/* Statistics: darker coral for values, near-black for descriptions. */
+html:not(.dark) .marketing-shell section[aria-label="EcoPrawn at a glance"] {
+  color: #0b2320 !important;
+}
+html:not(.dark) .marketing-shell section[aria-label="EcoPrawn at a glance"] span:first-child {
+  color: #b23f1c !important;
+}
+html:not(.dark) .marketing-shell section[aria-label="EcoPrawn at a glance"] span:last-child {
+  color: #263b36 !important;
+}
+
+/* Process cards sit on a pale surface, so keep every text tier dark enough. */
+html:not(.dark) .marketing-shell #process,
+html:not(.dark) .marketing-shell #process h2,
+html:not(.dark) .marketing-shell #process [data-step] h3 {
+  color: #0b2320 !important;
+}
+html:not(.dark) .marketing-shell #process [data-step] p,
+html:not(.dark) .marketing-shell #process [data-step] > div > span:first-child {
+  color: #354943 !important;
+}
+html:not(.dark) .marketing-shell #process [data-step] > div > span:last-child {
+  color: #0b3b35 !important;
+}
+
+/* The CTA band is dark teal even in light mode: its copy must stay light. */
+html:not(.dark) .marketing-shell [data-band] {
+  color: #ffffff !important;
+}
+html:not(.dark) .marketing-shell [data-band] h2,
+html:not(.dark) .marketing-shell [data-band] p {
+  color: #ffffff !important;
+}
+html:not(.dark) .marketing-shell [data-band] p {
+  color: #e5f0ec !important;
+}
+html:not(.dark) .marketing-shell [data-band] a:first-child {
+  color: #0b3b35 !important;
+}
+html:not(.dark) .marketing-shell [data-band] a:last-child {
+  color: #ffffff !important;
+}
+html:not(.dark) .marketing-shell [data-band] a:last-child:hover {
+  color: #0b3b35 !important;
+}
+
+/* Deep-water sensor section retains high-contrast white labels and values. */
+html:not(.dark) .marketing-shell #readings,
+html:not(.dark) .marketing-shell #readings :is(h2, p, dt, dd, span) {
+  color: #f4f8f6;
+}
+html:not(.dark) .marketing-shell #readings [data-reading] dt,
+html:not(.dark) .marketing-shell #readings [data-reading] dd {
+  color: #ffffff !important;
+}
+html:not(.dark) .marketing-shell #readings [data-reading] p,
+html:not(.dark) .marketing-shell #readings [data-reading] > div:last-child {
+  color: #e1ece8 !important;
+}
+
+/* White floating labels over the hero illustration use dark ink. */
+html:not(.dark) .marketing-shell .ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]),
+html:not(.dark) .marketing-shell .ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]) span {
+  color: #173b3d !important;
+}
