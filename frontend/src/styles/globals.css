@@ -2180,3 +2180,17 @@ html:not(.dark) .marketing-shell [data-band] *,
 html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:first-child {
   color: #ffffff !important;
 }
+
+/* Keep labels and icons readable on light buttons in light mode.
+   Filled primary actions retain white foreground for contrast. */
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:not(:first-child),
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:not(:first-child) :is(span, svg, i),
+html:not(.dark) #site-header :is(button, a)[style*="background-color: var(--ep-surface)"],
+html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
+  color: #000000 !important;
+}
+
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:first-child,
+html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:first-child :is(span, svg, i) {
+  color: #ffffff !important;
+}
