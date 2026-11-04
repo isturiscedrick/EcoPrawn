@@ -14,7 +14,7 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
   if (variant === "desktop") {
     return (
       <nav
-        className="hidden items-center gap-1 rounded-xl border border-[rgba(11,46,51,0.16)] bg-[var(--ep-surface)]/70 p-1 md:flex"
+        className="hidden items-center gap-0.5 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)]/90 p-1 shadow-sm backdrop-blur-xl md:flex"
         aria-label="Primary navigation"
       >
         {LANDING_NAV_LINKS.map(([label, href]) => {
@@ -24,9 +24,9 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
               key={label}
               to={href}
               aria-current={isActive ? "page" : undefined}
-              className={`inline-flex items-center gap-1.5 rounded-lg px-4 py-1.5 text-sm font-semibold leading-none transition-colors duration-200 ${focusRing} ${
+              className={`inline-flex items-center rounded-full px-3.5 py-2 text-[10px] font-medium leading-none transition-colors duration-200 ${focusRing} ${
                 isActive
-                  ? "bg-[var(--ep-primary)] text-[var(--ep-bg)]"
+                  ? "bg-[#5f8f69] text-white"
                   : "text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]"
               }`}
               activeOptions={{ exact: true }}
