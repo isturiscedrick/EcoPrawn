@@ -2473,3 +2473,35 @@ html.dark .marketing-shell [data-band] a:last-child * {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
+
+
+/* Landing-page motion polish: native scrolling stays responsive, while
+   in-page anchors glide beneath the sticky header. */
+html:has(.marketing-shell) {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+.marketing-shell :is(a, button, [role="button"]) {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: 240ms;
+  transition-timing-function: cubic-bezier(.22, 1, .36, 1);
+}
+.marketing-shell :is([data-hover-lift], [data-reading], #process ol > li) {
+  will-change: transform;
+}
+.marketing-shell :is(a, button):focus-visible {
+  scroll-margin-block: 6rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.marketing-shell) {
+    scroll-behavior: auto;
+  }
+  .marketing-shell *,
+  .marketing-shell *::before,
+  .marketing-shell *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
