@@ -3840,3 +3840,185 @@ html.dark .marketing-shell.ep-contact-page [data-contact-form] form button[type=
   border-color: #f28a68 !important;
   color: #18191a !important;
 }
+
+
+/* =========================================================================
+   17. PUBLIC UI CONSISTENCY — shared text, links, controls and icon contrast
+   Keep Landing, About and Contact on the same palette in both themes.
+   ========================================================================= */
+.marketing-shell {
+  --ep-bg: #f4f7f6;
+  --ep-surface: #f4f7f6;
+  --ep-primary: #142b2e;
+  --ep-text-muted: #142b2e;
+  --ep-secondary: #0f4c5c;
+  --ep-accent: #d94416;
+  --ep-line: rgba(15,76,92,.28);
+  color: var(--ep-primary);
+}
+.marketing-shell :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,b,em,blockquote) {
+  color: inherit;
+}
+.marketing-shell :is(a,button,[role="button"]) {
+  -webkit-tap-highlight-color: transparent;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+.marketing-shell :is(a,button,[role="button"]):focus-visible {
+  outline: 2px solid var(--ep-accent) !important;
+  outline-offset: 3px;
+}
+.marketing-shell :is(a,button,[role="button"]):not(:disabled):hover {
+  border-color: var(--ep-accent);
+}
+.marketing-shell :is(a,button,[role="button"]):not(:disabled):hover :is(svg,[data-icon]) {
+  color: var(--ep-accent);
+}
+.marketing-shell svg,
+.marketing-shell [data-icon] {
+  color: currentColor;
+  flex-shrink: 0;
+}
+.marketing-shell :is(input,textarea,select) {
+  color: var(--ep-primary);
+  caret-color: var(--ep-accent);
+}
+.marketing-shell :is(input,textarea,select):focus {
+  border-color: var(--ep-accent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent) 18%, transparent);
+  outline: none;
+}
+.marketing-shell :is(input,textarea,select)::placeholder {
+  color: var(--ep-text-muted);
+  opacity: .68;
+}
+.marketing-shell :is([data-contact-card],[data-contact-form] form) :is(button,a) {
+  color: inherit;
+}
+.marketing-shell :is([data-contact-form] form) button[type="submit"] {
+  background: #d94416 !important;
+  border-color: #d94416 !important;
+  color: #f4f7f6 !important;
+}
+.marketing-shell :is([data-contact-form] form) button[type="submit"]:hover {
+  background: #0f4c5c !important;
+  border-color: #0f4c5c !important;
+  color: #f4f7f6 !important;
+}
+.marketing-shell :is([data-contact-form] form) button[type="submit"] svg {
+  color: currentColor !important;
+}
+
+/* Shared header/footer links and controls */
+.marketing-shell :is(header,footer) :is(a,button) {
+  color: inherit;
+}
+.marketing-shell :is(header,footer) :is(a,button):hover {
+  color: var(--ep-accent) !important;
+}
+.marketing-shell :is(header,footer) :is(a,button):hover svg {
+  color: currentColor !important;
+}
+.marketing-shell :is(header,footer) :is(svg,[data-icon]) {
+  color: currentColor;
+}
+
+/* Keep deliberately dark feature bands readable while other sections use
+   the warm-neutral surface and charcoal-teal text. */
+.marketing-shell :is(#readings,#systems) {
+  color: #f4f7f6;
+}
+.marketing-shell :is(#readings,#systems) :is(h1,h2,h3,h4,p,li,dt,dd,span,b,strong,small,div) {
+  color: #f4f7f6;
+}
+.marketing-shell :is(#readings,#systems) :is(svg,[data-icon]) {
+  color: var(--ep-accent);
+}
+.marketing-shell :is(#readings,#systems) :is(a,button):hover {
+  color: #f4f7f6;
+}
+
+/* LIGHT MODE — one surface, one ink colour, one action accent */
+html:not(.dark) .marketing-shell {
+  --ep-bg: #f4f7f6;
+  --ep-surface: #f4f7f6;
+  --ep-primary: #142b2e;
+  --ep-text-muted: #142b2e;
+  --ep-secondary: #0f4c5c;
+  --ep-accent: #d94416;
+  --ep-line: rgba(15,76,92,.28);
+  background-color: #f4f7f6;
+  color: #142b2e;
+}
+html:not(.dark) .marketing-shell :is(main > section:not(#readings):not(#systems),#top,#process) {
+  color: #142b2e;
+}
+html:not(.dark) .marketing-shell :is(.ep-about-objective,#objectives article,#scope article,[data-contact-card],[data-contact-form] form,.ep-stat-card,.ep-stats-panel,#process [data-step]) {
+  background-color: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: rgba(15,76,92,.28);
+}
+html:not(.dark) .marketing-shell :is(.ep-about-objective,#objectives article,#scope article,[data-contact-card],[data-contact-form] form,.ep-stat-card,.ep-stats-panel,#process [data-step]) :is(h2,h3,h4,p,span,b,strong,small,dt,dd,label,svg) {
+  color: #142b2e;
+}
+html:not(.dark) .marketing-shell :is(a,button):hover {
+  color: #d94416;
+}
+
+/* DARK MODE — card surface, mint text, coral actions */
+html.dark .marketing-shell {
+  --ep-bg: #18191a;
+  --ep-surface: #202729;
+  --ep-primary: #8bd5a6;
+  --ep-text-muted: #8bd5a6;
+  --ep-secondary: #8bd5a6;
+  --ep-accent: #f28a68;
+  --ep-line: rgba(139,213,166,.28);
+  background-color: #18191a;
+  color: #8bd5a6;
+}
+html.dark .marketing-shell :is(main > section:not(#readings):not(#systems),#top,#process) {
+  color: #8bd5a6;
+}
+html.dark .marketing-shell :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,b,em,blockquote) {
+  color: #8bd5a6;
+}
+html.dark .marketing-shell :is(.ep-about-objective,#objectives article,#scope article,[data-contact-card],[data-contact-form] form,.ep-stat-card,.ep-stats-panel,#process [data-step]) {
+  background-color: #202729 !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.28) !important;
+}
+html.dark .marketing-shell :is(.ep-about-objective,#objectives article,#scope article,[data-contact-card],[data-contact-form] form,.ep-stat-card,.ep-stats-panel,#process [data-step]) :is(h2,h3,h4,p,span,b,strong,small,dt,dd,label,svg) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell :is(input,textarea,select) {
+  background-color: #18191a !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.4) !important;
+}
+html.dark .marketing-shell :is(input,textarea,select)::placeholder {
+  color: #8bd5a6;
+  opacity: .72;
+}
+html.dark .marketing-shell :is([data-contact-form] form) button[type="submit"] {
+  background: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
+html.dark .marketing-shell :is([data-contact-form] form) button[type="submit"]:hover {
+  background: #8bd5a6 !important;
+  border-color: #8bd5a6 !important;
+  color: #18191a !important;
+}
+html.dark .marketing-shell :is(a,button):hover {
+  color: #f28a68;
+}
+html.dark .marketing-shell :is(#readings,#systems) {
+  background-color: #202729;
+  color: #8bd5a6;
+}
+html.dark .marketing-shell :is(#readings,#systems) :is(h1,h2,h3,h4,p,li,dt,dd,span,b,strong,small,div) {
+  color: #8bd5a6;
+}
+html.dark .marketing-shell :is(#readings,#systems) :is(svg,[data-icon]) {
+  color: #f28a68 !important;
+}
