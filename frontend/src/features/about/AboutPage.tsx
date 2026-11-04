@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { PageHero } from "@/components/layout/PageHero";
 import { Icon, IconChip, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
+import { AboutMotion } from "@/components/motion/AboutMotion";
 import { SectionNav } from "./SectionNav";
 import { objectives, features, inScope, outOfScope } from "@/content/site";
 
@@ -23,6 +24,7 @@ const FEATURE_ICONS: IconName[] = ["wrench", "gauge", "eye", "repeat", "leaf"];
 export function AboutPage() {
   return (
     <div className="marketing-shell flex min-h-screen flex-col bg-white text-[var(--ep-primary)]">
+      <AboutMotion />
       <SiteHeader tone="white" />
 
       <main className="flex-1">
