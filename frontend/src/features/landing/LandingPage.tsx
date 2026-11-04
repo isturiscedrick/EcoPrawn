@@ -106,7 +106,7 @@ export function LandingPage() {
 
       <main className="flex-1">
         {/* HERO: cream (60%) with a faint blueprint grid and one coral accent */}
-        <section id="top" className="relative isolate overflow-hidden">
+        <section id="top" className="ep-landing-hero relative isolate overflow-hidden bg-[#f5f9fc] text-[#171f2b] dark:bg-[#101b2a] dark:text-[#f4f7fb]">
           <div
             aria-hidden="true"
             data-hero="grid"
@@ -126,7 +126,7 @@ export function LandingPage() {
             className="pointer-events-none absolute inset-0 -z-10"
             style={{
               background:
-                "radial-gradient(640px circle at 82% 30%, rgba(95,184,196,0.16), transparent 62%), radial-gradient(520px circle at 8% 95%, rgba(178,63,28,0.07), transparent 60%)",
+                "radial-gradient(680px circle at 78% 38%, rgba(105,157,207,0.22), transparent 62%), radial-gradient(520px circle at 8% 95%, rgba(87,115,158,0.10), transparent 60%), linear-gradient(135deg, #f8fbff 0%, #edf4fb 100%)",
             }}
           />
           <div
@@ -146,17 +146,17 @@ export function LandingPage() {
             ))}
           </div>
 
-          <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-5 py-14 sm:px-8 md:grid-cols-[0.95fr_1.05fr] md:gap-16 lg:py-24">
+          <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-5 py-16 sm:px-8 md:grid-cols-[1fr_1.05fr] md:gap-14 lg:py-28">
             <div
               data-hero="parallax-console"
-              className="relative mx-auto w-full max-w-[480px]"
+              className="ep-hero-visual order-2 relative mx-auto w-full max-w-[560px] md:order-2"
             >
-              <div data-hero="console">
+              <div data-hero="console" className="ep-hero-console relative z-[1] rounded-[2rem] border border-white/80 bg-white/60 p-3 shadow-[0_28px_90px_-34px_rgba(38,75,112,0.35)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.04] sm:p-4">
                 <HeroLens />
               </div>
             </div>
 
-            <div data-hero="text" className="text-center md:text-left">
+            <div data-hero="text" className="ep-hero-copy order-1 text-center md:order-1 md:text-left">
               <div
                 data-hero="eyebrow"
                 className="mb-5 inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--ep-text-muted)] md:justify-start"
@@ -168,29 +168,29 @@ export function LandingPage() {
                   />
                   <span className="relative h-2 w-2 rounded-full bg-[var(--ep-ok)]" />
                 </span>
-                Live monitoring · 24/7
+                Intelligent aquaculture · 24/7
               </div>
 
               <h1
                 aria-label="Indoor shrimp farming, always in range."
-                className="ep-font-display text-[clamp(40px,5.4vw,68px)] font-semibold leading-[1.06] tracking-tight"
+                className="ep-font-display text-[clamp(46px,6.2vw,78px)] font-semibold leading-[0.99] tracking-[-0.045em]"
               >
                 <span aria-hidden="true">
-                  <span data-hero-headline-accent className="text-[var(--ep-accent)] dark:text-[#F28A68]">
-                    <Words text="Indoor shrimp farming," />
+                  <span data-hero-headline-accent className="text-[#57739e] dark:text-[#a9c9ee]">
+                    <Words text="Smarter shrimp farming," />
                   </span>
                   <span className="block text-[var(--ep-primary)]">
-                    <Words text="always in range." />
+                    <Words text="naturally in balance." />
                   </span>
                 </span>
               </h1>
 
               <p
                 data-hero="lead"
-                className="mt-6 max-w-[32rem] text-lg leading-relaxed text-[var(--ep-text-muted)]"
+                className="mt-7 max-w-[34rem] text-[17px] leading-[1.8] text-[#5e6d7e] dark:text-[#bdc9d7] sm:text-lg"
               >
-                Live water quality, automated feeding, and AI growth tracking
-                for your tanks, all in one dashboard.
+                Bring water quality, automated feeding, and AI growth insights
+                together in one calm, connected view of your farm.
               </p>
 
               <div
@@ -198,7 +198,7 @@ export function LandingPage() {
                 className="mt-9 flex flex-col gap-3 sm:flex-row md:justify-start"
               >
                 <AuthLink
-                  className={`group inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 text-base font-semibold text-white hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
+                  className={`group inline-flex items-center justify-center gap-2 rounded-full border border-[#57739e] bg-[#57739e] px-7 py-3.5 text-base font-semibold text-white shadow-[0_12px_26px_-12px_rgba(54,91,137,0.65)] hover:border-[#405d83] hover:bg-[#405d83] ${buttonMotion} ${focusRing}`}
                 >
                   Sign in to dashboard
                   <span
@@ -211,7 +211,7 @@ export function LandingPage() {
 
                 <Link
                   to="/about"
-                  className={`inline-flex items-center justify-center rounded-lg border-2 border-[var(--ep-primary)] px-7 py-3.5 text-base font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${buttonMotion} ${focusRing}`}
+                  className={`inline-flex items-center justify-center rounded-full border border-[#b9c9d9] bg-white/55 px-7 py-3.5 text-base font-semibold text-[#24364a] hover:border-[#57739e] hover:bg-white dark:border-white/20 dark:bg-white/[0.04] dark:text-white dark:hover:bg-white/10 ${buttonMotion} ${focusRing}`}
                   activeOptions={{ exact: true }}
                 >
                   See how it works
@@ -225,7 +225,7 @@ export function LandingPage() {
         <section
           id="readings"
           aria-labelledby="readings-title"
-          className="relative isolate overflow-hidden border-y border-[var(--ep-primary)] bg-[var(--ep-primary)] text-[var(--ep-bg)]"
+          className="ep-readings-section relative isolate overflow-hidden border-y border-[#1a2a40] bg-[#101b2a] text-white"
         >
           <div
             aria-hidden="true"
@@ -233,7 +233,7 @@ export function LandingPage() {
             className="pointer-events-none absolute inset-0 -z-10 opacity-90"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse at 12% 8%, rgba(35, 111, 117, 0.42), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(4, 25, 34, 0.7), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(18, 71, 77, 0.6), transparent 52%), linear-gradient(155deg, #0b2e33 0%, #08272f 48%, #061e27 100%)",
+                "radial-gradient(ellipse at 12% 8%, rgba(87,115,158,0.34), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(55,104,157,0.25), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(34,75,117,0.32), transparent 52%), linear-gradient(155deg, #172b43 0%, #101f33 52%, #0a1525 100%)",
             }}
           />
 
@@ -375,7 +375,7 @@ export function LandingPage() {
         <section
           id="process"
           aria-labelledby="process-title"
-          className="px-5 py-20 sm:px-8 sm:py-24"
+          className="ep-process-section bg-[#f5f9fc] px-5 py-20 dark:bg-[#111d2c] sm:px-8 sm:py-24"
         >
           <div className="mx-auto max-w-[1200px]">
             <div data-reveal="" className="mb-14 max-w-[40rem]">
