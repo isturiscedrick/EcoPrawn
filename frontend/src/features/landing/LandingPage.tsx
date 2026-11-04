@@ -147,8 +147,8 @@ export function LandingPage() {
             ))}
           </div>
 
-          <div className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-3 px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
-            <div data-hero="text" className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center">
+          <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-8 px-5 pb-12 pt-10 sm:px-8 sm:pb-16 sm:pt-14 lg:grid-cols-[minmax(0,1.08fr)_minmax(380px,.92fr)] lg:gap-10 lg:px-12 lg:py-14 xl:gap-16">
+            <div data-hero="text" className="ep-hero-copy order-1 mx-auto w-full max-w-[760px] text-center lg:mx-0 lg:text-left">
               <div
                 data-hero="eyebrow"
                 className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#cbd7ea] bg-white/75 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#d6532d] shadow-sm dark:border-white/15 dark:bg-white/[0.06] dark:text-[#ff9b79]"
@@ -162,7 +162,7 @@ export function LandingPage() {
 
               <h1
                 aria-label="Smarter shrimp farming, naturally in balance."
-                className="ep-font-display mx-auto max-w-[900px] text-[clamp(42px,7.2vw,82px)] font-bold leading-[0.98] tracking-[-0.055em]"
+                className="ep-font-display mx-auto max-w-[900px] text-[clamp(42px,5.2vw,76px)] font-bold leading-[0.98] tracking-[-0.055em] lg:mx-0"
               >
                 <span data-hero-headline-accent className="block text-[#57739e] dark:text-[#a9c9ee]">
                   <Words text="Smarter shrimp farming," />
@@ -174,13 +174,13 @@ export function LandingPage() {
 
               <p
                 data-hero="lead"
-                className="mx-auto mt-5 max-w-[590px] text-[15px] leading-[1.8] text-[#617087] dark:text-[#bdc9d7] sm:text-base"
+                className="mx-auto mt-5 max-w-[590px] text-[15px] leading-[1.8] text-[#617087] dark:text-[#bdc9d7] sm:text-base lg:mx-0"
               >
                 Bring water quality, automated feeding, and AI growth insights together
                 in one calm, connected view of your shrimp farm.
               </p>
 
-              <div data-hero="cta" className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+              <div data-hero="cta" className="mt-7 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
                 <AuthLink
                   className={`group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#4d66b1] bg-[#4d66b1] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_-12px_rgba(54,78,153,.65)] hover:border-[#3d559b] hover:bg-[#3d559b] ${buttonMotion} ${focusRing}`}
                 >
@@ -199,7 +199,7 @@ export function LandingPage() {
 
             <div
               data-hero="parallax-console"
-              className="ep-hero-visual order-2 relative mx-auto mt-10 w-full max-w-[430px] sm:mt-12"
+              className="ep-hero-visual order-2 relative mx-auto mt-2 flex w-full max-w-[500px] items-center justify-center lg:mt-0 lg:max-w-none"
             >
               <HeroLens />
             </div>
