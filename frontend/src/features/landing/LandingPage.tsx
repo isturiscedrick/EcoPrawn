@@ -125,10 +125,7 @@ export function LandingPage() {
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10"
-            style={{
-              background:
-                "radial-gradient(680px circle at 78% 38%, rgba(60,122,92,0.12), transparent 62%), radial-gradient(520px circle at 8% 95%, rgba(11,46,51,0.06), transparent 60%), linear-gradient(135deg, #f8faf9 0%, #edf4f1 100%)",
-            }}
+            className="ep-hero-atmosphere"
           />
           <div
             aria-hidden="true"
@@ -253,7 +250,7 @@ export function LandingPage() {
               </p>
             </div>
 
-            <dl className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-5">
+            <dl className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
               {heroReadouts.map((r) => {
                 const zone = ZONES[r.label];
                 const value = parseFloat(r.value);
