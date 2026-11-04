@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { BrandMark } from "./BrandMark";
 import { NavLinks } from "./NavLinks";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
 
 interface SiteHeaderProps {
   showLinks?: boolean;
-  /** "auth" = compact header for login pages (smaller logo, back link instead of Log in). */
   variant?: "default" | "auth";
-  /** Header background: "cream" (default, matches the page) or "white". */
   tone?: "cream" | "white";
 }
 
@@ -22,10 +19,7 @@ export function SiteHeader({
   tone = "cream",
 }: SiteHeaderProps) {
   const isAuth = variant === "auth";
-  const isWhite = tone === "white";
-  const pathname = useRouterState({
-    select: (state) => state.location.pathname,
-  });
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
@@ -61,144 +55,96 @@ export function SiteHeader({
     });
   }
 
-  // Frosted background always; a darker border, shadow and gradient hairline appear once the page scrolls.
   useEffect(() => {
-    function onScroll() {
-      setScrolled(window.scrollY > 8);
-    }
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll while the mobile menu is open.
-  useEffect(() => {
-    if (mobileNavOpen) {
-      const original = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = original;
-      };
-    }
-  }, [mobileNavOpen]);
-
-  // Close mobile menu on Escape for keyboard users.
   useEffect(() => {
     if (!mobileNavOpen) return;
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setMobileNavOpen(false);
-    }
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = original; };
+  }, [mobileNavOpen]);
+
+  useEffect(() => {
+    if (!mobileNavOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileNavOpen(false);
+    };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileNavOpen]);
 
-  const topBg = darkMode
-    ? "bg-[rgba(24,25,26,0.82)]"
-    : isWhite
-      ? "bg-[rgba(255,255,255,0.88)]"
-      : "bg-[rgba(251,248,241,0.88)]";
-  const scrolledBg = darkMode
-    ? "bg-[rgba(24,25,26,0.94)]"
-    : isWhite
-      ? "bg-[rgba(255,255,255,0.94)]"
-      : "bg-[rgba(251,248,241,0.94)]";
+  const headerSurface = darkMode
+    ? scrolled ? "rgba(24,25,26,.94)" : "rgba(24,25,26,.78)"
+    : tone === "white"
+      ? scrolled ? "rgba(255,255,255,.96)" : "rgba(255,255,255,.82)"
+      : scrolled ? "rgba(251,248,241,.96)" : "rgba(251,248,241,.82)";
 
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-50 relative border-b backdrop-blur-xl supports-[backdrop-filter]:bg-clip-padding transition-[background-color,border-color,box-shadow] duration-300 ${darkMode ? "border-[rgba(242,138,104,0.16)] shadow-[0_8px_24px_-14px_rgba(0,0,0,0.55)]" : "border-[rgba(11,46,51,0.12)]"} ${
-        scrolled
-          ? `${scrolledBg} shadow-[0_8px_24px_-14px_rgba(11,46,51,0.35)]`
-          : topBg
-      }`}
+      className="sticky top-0 z-50 border-b backdrop-blur-2xl transition-all duration-300"
+      style={{
+        backgroundColor: headerSurface,
+        borderColor: darkMode ? "rgba(255,255,255,.09)" : "rgba(11,46,51,.08)",
+        boxShadow: scrolled ? "0 12px 34px -25px rgba(0,0,0,.35)" : "none",
+      }}
     >
-      {/* With links: logo | centered nav | actions (true center, whatever the side widths).
-          Without links: plain two-sided row. */}
-      <div
-        className={`flex h-[72px] items-center justify-between gap-3 md:h-20 ${
-          showLinks ? "md:grid md:grid-cols-[1fr_auto_1fr]" : ""
-        } ${
-          isAuth
-            ? "w-full px-5 sm:px-8 lg:px-12 xl:px-16"
-            : "mx-auto max-w-310 px-5 sm:px-8 lg:px-10"
-        }`}
-      >
+      <div className={`mx-auto flex min-h-[82px] max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12 ${isAuth ? "w-full" : ""}`}>
         <Link
           to="/"
-          className={`flex shrink-0 items-center rounded-md transition-transform duration-200 hover:scale-[1.03] active:scale-100 md:justify-self-start ${focusRing}`}
           aria-label="EcoPrawn home"
           activeOptions={{ exact: true }}
+          className={`flex shrink-0 items-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
         >
-          <span className="md:hidden">
-            <BrandMark size={isAuth ? 32 : 34} />
-          </span>
-
-          <span className="hidden md:block">
-            <BrandMark size={isAuth ? 36 : 40} />
-          </span>
+          <BrandMark size={36} />
         </Link>
 
         {showLinks && <NavLinks variant="desktop" activeHref={pathname} />}
 
-        <div className="flex shrink-0 items-center gap-2 md:justify-self-end">
-          {isAuth ? (
-            <Link
-              to="/"
-              className={`group inline-flex items-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] px-4 py-2 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] active:translate-y-0 sm:px-5 ${focusRing}`}
-              activeOptions={{ exact: true }}
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          {!isAuth && (
+            <button
+              type="button"
+              onClick={toggleTheme}
+              role="switch"
+              aria-checked={darkMode}
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
+              style={{
+                color: "var(--ep-primary)",
+                borderColor: "var(--ep-line)",
+                backgroundColor: "var(--ep-surface)",
+              }}
             >
-              <span
-                aria-hidden="true"
-                className="inline-block transition-transform duration-200 group-hover:-translate-x-1"
-              >
-                ←
-              </span>
-              Back to home
+              {darkMode ? (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+                </svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
+                </svg>
+              )}
+            </button>
+          )}
+
+          {isAuth ? (
+            <Link to="/" className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition-all hover:-translate-y-0.5 ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>
+              <span aria-hidden="true">←</span> Back to home
             </Link>
           ) : (
             <>
-              <AuthLink
-                className={`inline-flex items-center justify-center gap-2 rounded-lg border border-[rgba(11,46,51,0.22)] bg-white/60 px-4 py-2.5 text-sm font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] hover:shadow-[0_8px_18px_-10px_rgba(11,46,51,0.35)] active:translate-y-0 sm:px-5 ${focusRing}`}
-              >
-                <svg
-                  className="shrink-0"
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="8" r="3.5" />
-                  <path d="M5 20c.7-3.1 3.2-5 7-5s6.3 1.9 7 5" />
-                </svg>
+              <AuthLink className={`hidden rounded-full border px-5 py-2.5 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}>
                 Log in
               </AuthLink>
-
-              <AuthLink
-                mode="signup"
-                className={`group hidden items-center justify-center gap-2 rounded-lg bg-[var(--ep-accent)] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_6px_14px_-8px_rgba(178,63,28,0.45)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_10px_20px_-10px_rgba(178,63,28,0.55)] active:translate-y-0 sm:inline-flex sm:px-5 ${focusRing}`}
-              >
-                <svg
-                  className="shrink-0"
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  aria-hidden="true"
-                >
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-                Sign up
-                <span
-                  aria-hidden="true"
-                  className="inline-block transition-transform duration-200 group-hover:translate-x-0.5"
-                >
-                  →
-                </span>
+              <AuthLink mode="signup" className={`hidden rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ backgroundColor: "var(--ep-accent)" }}>
+                Get started <span aria-hidden="true">↗</span>
               </AuthLink>
             </>
           )}
@@ -206,107 +152,29 @@ export function SiteHeader({
           {showLinks && (
             <button
               type="button"
-              onClick={() => setMobileNavOpen((v) => !v)}
+              onClick={() => setMobileNavOpen((open) => !open)}
               aria-expanded={mobileNavOpen}
               aria-controls="mobile-nav-panel"
               aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-              className={`relative flex h-11 w-11 items-center justify-center rounded-lg border-2 border-[var(--ep-primary)] text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] md:hidden ${focusRing}`}
+              className={`flex h-10 w-10 items-center justify-center rounded-full border md:hidden ${focusRing}`}
+              style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
             >
-              <span className="sr-only">Toggle navigation</span>
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M1.5 4H14.5"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  className={`origin-center transition-all duration-200 ${
-                    mobileNavOpen ? "translate-y-[3.5px] rotate-45" : ""
-                  }`}
-                />
-                <path
-                  d="M1.5 8H14.5"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  className={`origin-center transition-opacity duration-150 ${
-                    mobileNavOpen ? "opacity-0" : "opacity-100"
-                  }`}
-                />
-                <path
-                  d="M1.5 12H14.5"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  className={`origin-center transition-all duration-200 ${
-                    mobileNavOpen ? "translate-y-[-3.5px] -rotate-45" : ""
-                  }`}
-                />
+              <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                {mobileNavOpen ? <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /> : <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
               </svg>
             </button>
           )}
         </div>
       </div>
 
-
-      {!isAuth && (
-        <div className="absolute right-0 top-full z-40 flex justify-end px-5 pt-2 sm:px-8 lg:px-10">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            role="switch"
-            aria-checked={darkMode}
-            aria-label={darkMode ? "Dark mode enabled. Switch to light mode." : "Light mode enabled. Switch to dark mode."}
-            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-            className={`relative inline-flex h-[38px] w-[78px] shrink-0 items-center rounded-full border p-[3px] shadow-[0_3px_10px_rgba(0,0,0,0.12)] transition-colors duration-300 ${darkMode ? "border-[#3B4143] bg-[#202122]" : "border-[#E5E7EB] bg-[#F8F8F6]"} ${focusRing}`}
-          >
-            <span
-              className={`flex h-[30px] w-[30px] items-center justify-center rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.16)] transition-transform duration-300 ease-in-out ${darkMode ? "translate-x-[40px] bg-[#292D2F] text-[#F28A68]" : "translate-x-0 bg-white text-[#0F4C5C]"}`}
-            >
-              <svg
-                width="19"
-                height="19"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                {darkMode ? (
-                  <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
-                ) : (
-                  <>
-                    <circle cx="12" cy="12" r="4" />
-                    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
-                  </>
-                )}
-              </svg>
-            </span>
-          </button>
-        </div>
-      )}
-
       {showLinks && (
-        <div
-          className={`grid overflow-hidden transition-all duration-300 ease-out md:hidden ${
-            mobileNavOpen
-              ? "visible grid-rows-[1fr] opacity-100"
-              : "invisible grid-rows-[0fr] opacity-0"
-          }`}
-        >
+        <div className={`grid overflow-hidden transition-all duration-300 ease-out md:hidden ${mobileNavOpen ? "visible grid-rows-[1fr] opacity-100" : "invisible grid-rows-[0fr] opacity-0"}`}>
           <div className="min-h-0">
-            <NavLinks
-              variant="mobile"
-              activeHref={pathname}
-              onLinkClick={() => setMobileNavOpen(false)}
-            />
+            <NavLinks variant="mobile" activeHref={pathname} onLinkClick={() => setMobileNavOpen(false)} />
+            <div className="flex gap-3 px-5 pb-5 sm:hidden">
+              <AuthLink className="flex-1 rounded-full border px-4 py-3 text-center text-sm font-semibold" style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>Log in</AuthLink>
+              <AuthLink mode="signup" className="flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold text-white" style={{ backgroundColor: "var(--ep-accent)" }}>Get started</AuthLink>
+            </div>
           </div>
         </div>
       )}
