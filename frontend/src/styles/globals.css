@@ -4022,3 +4022,141 @@ html.dark .marketing-shell :is(#readings,#systems) :is(h1,h2,h3,h4,p,li,dt,dd,sp
 html.dark .marketing-shell :is(#readings,#systems) :is(svg,[data-icon]) {
   color: #f28a68 !important;
 }
+
+
+/* =========================================================================
+   18. CONTRAST REFINEMENT — prevent hover colours from reducing legibility
+   ========================================================================= */
+
+/* Text links may use the accent on hover; filled controls keep their
+   foreground/background pairing so coral never lands on coral. */
+.marketing-shell a:not([data-hero="cta"] a),
+.marketing-shell [data-contact-card] a {
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+}
+.marketing-shell a:not([data-hero="cta"] a):hover,
+.marketing-shell [data-contact-card] a:hover {
+  color: var(--ep-accent);
+  text-decoration-color: currentColor;
+}
+.marketing-shell button:hover,
+.marketing-shell [role="button"]:hover {
+  color: inherit;
+}
+.marketing-shell button svg,
+.marketing-shell [role="button"] svg {
+  color: currentColor;
+}
+
+/* Landing hero actions: explicit high-contrast text in every interaction state. */
+.ep-landing-page #top [data-hero="cta"] a:first-child,
+.ep-landing-page #top [data-hero="cta"] a:first-child:hover,
+.ep-landing-page #top [data-hero="cta"] a:first-child:focus-visible {
+  background: #d94416 !important;
+  border-color: #d94416 !important;
+  color: #f4f7f6 !important;
+}
+.ep-landing-page #top [data-hero="cta"] a:last-child,
+.ep-landing-page #top [data-hero="cta"] a:last-child:hover,
+.ep-landing-page #top [data-hero="cta"] a:last-child:focus-visible {
+  background: #f4f7f6 !important;
+  border-color: #0f4c5c !important;
+  color: #142b2e !important;
+}
+html.dark .ep-landing-page #top [data-hero="cta"] a:first-child,
+html.dark .ep-landing-page #top [data-hero="cta"] a:first-child:hover,
+html.dark .ep-landing-page #top [data-hero="cta"] a:first-child:focus-visible {
+  background: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
+html.dark .ep-landing-page #top [data-hero="cta"] a:last-child,
+html.dark .ep-landing-page #top [data-hero="cta"] a:last-child:hover,
+html.dark .ep-landing-page #top [data-hero="cta"] a:last-child:focus-visible {
+  background: #202729 !important;
+  border-color: rgba(139,213,166,.55) !important;
+  color: #8bd5a6 !important;
+}
+
+/* Keep card copy readable when only the card border is being highlighted. */
+.marketing-shell :is(#objectives,#scope,[data-contact-details]) article:hover,
+.marketing-shell [data-contact-card]:hover {
+  color: var(--ep-primary);
+}
+.marketing-shell :is(#objectives,#scope,[data-contact-details]) article:hover :is(h2,h3,h4,p,span,b,strong,small,dt,dd),
+.marketing-shell [data-contact-card]:hover :is(dt,dd) {
+  color: inherit;
+}
+.marketing-shell :is(#objectives,#scope,[data-contact-details]) article:hover :is(svg,[data-icon]),
+.marketing-shell [data-contact-card]:hover :is(svg,[data-icon]) {
+  color: var(--ep-accent);
+}
+
+/* Dark feature bands use the card surface and mint ink, with coral reserved
+   for their icons and active/hover markers. */
+html.dark .marketing-shell :is(#readings,#systems) {
+  background-color: #202729;
+  color: #8bd5a6;
+}
+html.dark .marketing-shell :is(#readings,#systems) :is(h1,h2,h3,h4,p,li,dt,dd,span,b,strong,small) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell :is(#readings,#systems) :is(svg,[data-icon]) {
+  color: #f28a68 !important;
+}
+html.dark .marketing-shell :is(#readings,#systems) a:hover,
+html.dark .marketing-shell :is(#readings,#systems) button:hover {
+  color: #8bd5a6 !important;
+}
+
+/* Header and footer use the same readable text/icon pairing on both themes. */
+html:not(.dark) .marketing-shell :is(header,footer) :is(a,button):hover {
+  color: #d94416 !important;
+}
+html.dark .marketing-shell :is(header,footer) :is(a,button):hover {
+  color: #f28a68 !important;
+}
+html:not(.dark) .marketing-shell :is(header,footer) :is(svg,[data-icon]) {
+  color: currentColor;
+}
+html.dark .marketing-shell :is(header,footer) :is(svg,[data-icon]) {
+  color: currentColor;
+}
+
+/* Form controls and submit action remain legible while focused or hovered. */
+.marketing-shell [data-contact-form] :is(input,textarea,select) {
+  background-color: #f4f7f6;
+  color: #142b2e;
+  border-color: rgba(15,76,92,.45);
+}
+.marketing-shell [data-contact-form] :is(input,textarea,select)::placeholder {
+  color: #142b2e;
+  opacity: .62;
+}
+.marketing-shell [data-contact-form] button[type="submit"],
+.marketing-shell [data-contact-form] button[type="submit"]:hover {
+  background: #d94416 !important;
+  border-color: #d94416 !important;
+  color: #f4f7f6 !important;
+}
+.marketing-shell [data-contact-form] button[type="submit"] svg {
+  color: #f4f7f6 !important;
+}
+html.dark .marketing-shell [data-contact-form] :is(input,textarea,select) {
+  background-color: #18191a !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.45) !important;
+}
+html.dark .marketing-shell [data-contact-form] :is(input,textarea,select)::placeholder {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell [data-contact-form] button[type="submit"],
+html.dark .marketing-shell [data-contact-form] button[type="submit"]:hover {
+  background: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
+html.dark .marketing-shell [data-contact-form] button[type="submit"] svg {
+  color: #18191a !important;
+}
