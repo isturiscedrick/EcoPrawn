@@ -359,7 +359,7 @@ export function HeroLens() {
             ))}
           </svg>
 
-          {/* Lock ping + scan line (sky blue secondary) */}
+          {/* Monochrome focus ping and scan line. */}
           <span
             aria-hidden="true"
             className="ep-lens-ping pointer-events-none absolute inset-[22%] rounded-full border-2 border-white opacity-0 dark:border-black"
