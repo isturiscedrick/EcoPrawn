@@ -77,6 +77,8 @@ export function HeroLens() {
       const readouts = many(".ep-lens-readout");
       const dots = many(".ep-lens-dot");
       const specks = many(".ep-lens-speck");
+      const connectorPaths = many(".ep-lens-connectors path");
+      const connectorNodes = many(".ep-lens-connectors circle");
       if (!iris || !rings || !ticks || !shrimp || !arcs || !glare || !pingEl || !scan || !flash || !caption) return;
 
       // Scroll-linked depth: the instrument drifts and subtly tilts as it
@@ -193,6 +195,34 @@ export function HeroLens() {
       /* GSAP: the lens re-locks focus every few seconds */
       const loop = gsap.timeline({ repeat: -1, repeatDelay: 5.5, delay: INTRO_DELAY + 6 });
       addLock(loop, 0, true);
+
+      /* GSAP: premium sensor-link choreography. Lines draw outward from
+         the lens, then their endpoint markers breathe gently. */
+      if (connectorPaths.length) {
+        connectorPaths.forEach((path) => {
+          const length = (path as SVGPathElement).getTotalLength?.() ?? 180;
+          gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+        });
+        gsap.to(connectorPaths, {
+          strokeDashoffset: 0,
+          duration: 1.15,
+          stagger: 0.12,
+          delay: INTRO_DELAY + 1.35,
+          ease: "power2.out",
+        });
+      }
+      if (connectorNodes.length) {
+        gsap.fromTo(connectorNodes,
+          { scale: 0.4, opacity: 0, transformOrigin: "center" },
+          { scale: 1, opacity: 1, duration: 0.55, stagger: 0.12,
+            delay: INTRO_DELAY + 2.05, ease: "back.out(2)" }
+        );
+        gsap.to(connectorNodes, {
+          opacity: 0.55, duration: 1.4, stagger: 0.16,
+          repeat: -1, yoyo: true, ease: "sine.inOut",
+          delay: INTRO_DELAY + 2.8,
+        });
+      }
 
       /* anime.js: ambient loops */
       anims.push(
