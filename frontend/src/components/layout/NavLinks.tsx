@@ -85,10 +85,10 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
     <nav
       id="mobile-nav-panel"
       aria-label="Mobile navigation"
-      className={`border-t px-5 py-2 lg:hidden ${monochrome ? "ep-nav-monochrome" : "border-[var(--ep-line)] bg-[var(--ep-bg)]"}`}
+      className={`border-t px-4 py-2 sm:px-5 lg:hidden ${monochrome ? "ep-nav-monochrome" : "border-[var(--ep-line)] bg-[var(--ep-bg)]"}`}
       style={monochrome ? { backgroundColor: darkMode ? "#000000" : "#ffffff", borderColor: darkMode ? "#ffffff" : "#000000", color: darkMode ? "#ffffff" : "#000000" } : undefined}
     >
-      <ul className="flex flex-col">
+      <ul className="flex flex-col pb-1">
         {LANDING_NAV_LINKS.map(([label, href]) => {
           const isActive = href === activeHref;
           return (
@@ -97,7 +97,7 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
                 to={href}
                 onClick={onLinkClick}
                 aria-current={isActive ? "page" : undefined}
-                className={`group flex items-center gap-3 rounded-md px-1.5 py-3 text-base font-semibold transition-colors duration-200 ${focusRing} ${monochrome ? "ep-nav-monochrome-link" : `hover:bg-[var(--ep-tint)] ${isActive ? "text-[var(--ep-accent)]" : "text-[var(--ep-primary)] hover:text-[var(--ep-accent)]"}`}`}
+                className={`group flex items-center gap-3 rounded-lg px-2 py-3.5 text-base font-semibold transition-colors duration-200 ${focusRing} ${monochrome ? "ep-nav-monochrome-link" : `hover:bg-[var(--ep-tint)] ${isActive ? "text-[var(--ep-accent)]" : "text-[var(--ep-primary)] hover:text-[var(--ep-accent)]"}`}`}
                 style={monochrome ? { backgroundColor: isActive ? (darkMode ? "#ffffff" : "#000000") : "transparent", color: isActive ? (darkMode ? "#000000" : "#ffffff") : (darkMode ? "#ffffff" : "#000000") } : undefined}
                 activeOptions={{ exact: true }}
               >
