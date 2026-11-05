@@ -1,15 +1,33 @@
-/* Minimal full-screen brand intro, inspired by the supplied reference. */
+/* EcoPrawn branded loading intro — light and dark themes. */
 .ep-loading-screen {
+  --loading-bg: #f4f7f6;
+  --loading-text: #0f4c5c;
+  --loading-muted: #315e65;
+  --loading-track: rgba(15, 76, 92, 0.16);
+  --loading-start: #d94416;
+  --loading-end: #0f4c5c;
+
   position: fixed;
   inset: 0;
   z-index: 99999;
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: #fff;
-  color: #263b66;
+  background: var(--loading-bg);
+  color: var(--loading-text);
   opacity: 1;
   animation: ep-loading-screen-out 420ms ease 1.55s forwards;
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+html.dark .ep-loading-screen {
+  --loading-bg: #18191a;
+  --loading-text: #eaf4ef;
+  --loading-muted: #b7cbc1;
+  --loading-track: rgba(139, 213, 166, 0.2);
+  --loading-start: #f28a68;
+  --loading-end: #8bd5a6;
+  color-scheme: dark;
 }
 
 .ep-loading-content {
@@ -22,8 +40,8 @@
 }
 
 .ep-loading-content .ep-logo {
-  --ep-logo-color: #d94416;
-  --ep-logo-text: #344f82;
+  --ep-logo-color: var(--loading-start);
+  --ep-logo-text: var(--loading-text);
   gap: 5px;
 }
 
@@ -36,7 +54,7 @@
 }
 
 .ep-loading-caption {
-  color: #40547f;
+  color: var(--loading-muted);
   font-size: 8px;
   font-weight: 800;
   letter-spacing: 0.34em;
@@ -53,14 +71,16 @@
   height: 3px;
   margin-top: 5px;
   overflow: hidden;
-  background: #e5e9f3;
+  border-radius: 999px;
+  background: var(--loading-track);
 }
 
 .ep-loading-progress {
   display: block;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, #d94416, #667fc2);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--loading-start), var(--loading-end));
   transform: scaleX(0);
   transform-origin: left center;
   animation: ep-loading-progress 1.45s cubic-bezier(0.62, 0, 0.35, 1) 120ms forwards;
@@ -84,9 +104,7 @@
     animation-duration: 1ms;
     animation-delay: 200ms;
   }
-  .ep-loading-progress {
-    animation-duration: 1ms;
-  }
+  .ep-loading-progress,
   .ep-loading-caption {
     animation-duration: 1ms;
   }
