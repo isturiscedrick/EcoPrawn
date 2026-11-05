@@ -21,7 +21,7 @@ const buttonMotion =
   "transition-all duration-200 hover:-translate-y-px active:translate-y-0";
 
 const eyebrow =
-  "mb-4 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]";
+  "mb-4 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]";
 
 const STEPS: { step: string; title: string; body: string; icon: IconName }[] = [
   {
@@ -367,7 +367,7 @@ export function LandingPage() {
               <div className={eyebrow}>
                 <span
                   aria-hidden="true"
-                  className="h-2 w-2 bg-[var(--ep-accent)]"
+                  className="h-2 w-2 bg-[var(--ep-primary)]"
                 />
                 The loop
               </div>
@@ -383,7 +383,7 @@ export function LandingPage() {
               <span
                 aria-hidden="true"
                 data-process-line=""
-                className="pointer-events-none absolute -top-px left-0 hidden h-0.5 w-full origin-left bg-[var(--ep-accent)] lg:block"
+                className="pointer-events-none absolute -top-px left-0 hidden h-0.5 w-full origin-left bg-[var(--ep-primary)] lg:block"
               />
               <ol className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
                 {STEPS.map((s) => (
@@ -399,7 +399,7 @@ export function LandingPage() {
                       className="absolute -top-[5px] left-0 hidden h-2.5 w-2.5 bg-[var(--ep-primary)] lg:block"
                     />
                     <div className="mb-6 flex items-center justify-between">
-                      <span className="!text-[var(--ep-text-muted)] dark:!text-[var(--ep-text-muted)] text-sm font-semibold tabular-nums tracking-wide transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
+                      <span className="!text-[var(--ep-text-muted)] dark:!text-[var(--ep-text-muted)] text-sm font-semibold tabular-nums tracking-wide transition-colors duration-200 group-hover:!text-[var(--ep-primary)]">
                         {s.step}
                       </span>
                       <span className="flex h-11 w-11 items-center justify-center !text-black dark:!text-[var(--ep-bg)] transition-colors duration-200">
