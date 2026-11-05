@@ -1,23 +1,43 @@
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
+import { BrandMark } from "@/components/layout/BrandMark";
+import "./logo-intro.css";
 
 /**
- * Marks <html> after the first in-app navigation so the header logo stops
- * replaying its draw-on animation. A full reload starts with a fresh <html>,
- * so the animation plays again.
+ * Displays a short branded loading screen on a fresh page load.
+ * In-app navigation only marks the header logo as already seen.
  */
 export function LogoIntroGate() {
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   });
   const firstPath = useRef(pathname);
+  const [visible, setVisible] = useState(true);
 
-  // Layout effect: runs before paint, so the new header never flashes the animation.
   useLayoutEffect(() => {
     if (pathname !== firstPath.current) {
       document.documentElement.classList.add("ep-nav-seen");
     }
   }, [pathname]);
 
-  return null;
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const delay = reducedMotion ? 250 : 1900;
+    const timeout = window.setTimeout(() => setVisible(false), delay);
+    return () => window.clearTimeout(timeout);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div className="ep-loading-screen" role="status" aria-label="Loading EcoPrawn">
+      <div className="ep-loading-content">
+        <BrandMark size={30} showWordmark />
+        <span className="ep-loading-caption">SMART AQUACULTURE SYSTEM</span>
+        <div className="ep-loading-track" aria-hidden="true">
+          <span className="ep-loading-progress" />
+        </div>
+      </div>
+    </div>
+  );
 }
