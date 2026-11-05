@@ -64,7 +64,14 @@ html.dark body.ecoprawn-root:has(.ep-landing) {
 
 /* In-page anchors land below the sticky header. */
 html:has(.ep-landing) {
+  scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.ep-landing) {
+    scroll-behavior: auto;
+  }
 }
 
 /* ---------- Hero atmosphere (landing hero and the About/Contact hero) ---------- */
