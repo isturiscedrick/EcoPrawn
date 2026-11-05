@@ -153,3 +153,27 @@ html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary 
   color: #8BD5A6 !important;
   -webkit-text-fill-color: #8BD5A6 !important;
 }
+
+
+/* About and Contact page hero headlines share the same two-tone
+   EcoPrawn brand treatment as the landing hero. */
+.ep-about-page [data-page-hero-headline] > span:first-child,
+.ep-contact-page [data-page-hero-headline] > span:first-child {
+  color: #D94416 !important;
+  -webkit-text-fill-color: #D94416 !important;
+}
+.ep-about-page [data-page-hero-headline] > span:last-child,
+.ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #0F4C5C !important;
+  -webkit-text-fill-color: #0F4C5C !important;
+}
+html.dark .ep-about-page [data-page-hero-headline] > span:first-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:first-child {
+  color: #F28A68 !important;
+  -webkit-text-fill-color: #F28A68 !important;
+}
+html.dark .ep-about-page [data-page-hero-headline] > span:last-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #8BD5A6 !important;
+  -webkit-text-fill-color: #8BD5A6 !important;
+}
