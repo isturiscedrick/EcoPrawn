@@ -158,21 +158,9 @@ export function PublicChromeMotion() {
           }
         }
 
-        // Buttons get a small GSAP lift, with pointer movement kept separate
-        // from the page-specific card hover effects.
-        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-          root.querySelectorAll<HTMLElement>("main a, main button").forEach((control) => {
-            if (control.closest("[data-hover-lift]")) return;
-            const enter = () => gsap.to(control, { y: -2, duration: .2, ease: "power2.out", overwrite: "auto" });
-            const leave = () => gsap.to(control, { y: 0, duration: .25, ease: "power2.out", overwrite: "auto" });
-            control.addEventListener("pointerenter", enter);
-            control.addEventListener("pointerleave", leave);
-            cleanups.push(() => {
-              control.removeEventListener("pointerenter", enter);
-              control.removeEventListener("pointerleave", leave);
-            });
-          });
-        }
+        // Page-specific motion components own main controls and card transforms.
+        // This shared layer intentionally avoids competing transform tweens.
+
       }, root);
 
       return () => {
