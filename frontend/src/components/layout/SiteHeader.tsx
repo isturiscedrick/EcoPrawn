@@ -22,6 +22,7 @@ export function SiteHeader({
 }: SiteHeaderProps) {
   const isAuth = variant === "auth";
   const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const isMonochromeLanding = integrated && pathname === "/";
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
@@ -80,13 +81,15 @@ export function SiteHeader({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileNavOpen]);
 
-  const headerSurface = integrated
-    ? darkMode ? "#202729" : "#F4F7F6"
-    : darkMode
-      ? scrolled ? "rgba(24,25,26,.94)" : "rgba(24,25,26,.78)"
-      : tone === "white"
-        ? scrolled ? "rgba(244,247,246,.96)" : "rgba(244,247,246,.84)"
-        : scrolled ? "rgba(244,247,246,.96)" : "rgba(244,247,246,.84)";
+  const headerSurface = isMonochromeLanding
+    ? darkMode ? "#000000" : "#ffffff"
+    : integrated
+      ? darkMode ? "#202729" : "#F4F7F6"
+      : darkMode
+        ? scrolled ? "rgba(24,25,26,.94)" : "rgba(24,25,26,.78)"
+        : tone === "white"
+          ? scrolled ? "rgba(244,247,246,.96)" : "rgba(244,247,246,.84)"
+          : scrolled ? "rgba(244,247,246,.96)" : "rgba(244,247,246,.84)";
 
   return (
     <header
@@ -94,7 +97,7 @@ export function SiteHeader({
       className={`sticky top-0 z-50 transition-all duration-300 backdrop-blur-2xl ${integrated ? "border-0" : "border-b"}`}
       style={{
         backgroundColor: headerSurface,
-        borderColor: darkMode ? "rgba(139,213,166,.22)" : "rgba(15,76,92,.16)",
+        borderColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : darkMode ? "rgba(139,213,166,.22)" : "rgba(15,76,92,.16)",
         boxShadow: scrolled ? (integrated ? "0 10px 28px -24px rgba(0,0,0,.28)" : "0 12px 34px -25px rgba(0,0,0,.35)") : "none",
       }}
     >
