@@ -369,3 +369,17 @@ html.dark .marketing-shell.ep-landing-page [data-band] :is(h2,p) {
 html.dark .marketing-shell.ep-landing-page [data-band] a {
   border-color: #8bd5a6;
 }
+
+
+/* Dark readings band uses only the approved dark base/card surfaces. */
+html.dark .marketing-shell.ep-landing-page #readings {
+  background-color: #202729 !important;
+  border-color: rgba(139,213,166,.28) !important;
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-landing-page #readings > [data-readings-bg] {
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.12), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.10), transparent 48%),
+    linear-gradient(155deg, #202729 0%, #202729 58%, #18191a 100%) !important;
+}
