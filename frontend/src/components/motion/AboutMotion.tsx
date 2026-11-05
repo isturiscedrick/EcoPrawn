@@ -1,190 +1,146 @@
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { animate } from "animejs";
+import { animate, stagger } from "animejs";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Motion for the About page.
- * All scroll entrances use transforms only—content is never hidden with
- * opacity/autoAlpha, so a missed ScrollTrigger can never leave a card invisible.
- */
+/** Rich About-page choreography. Entrances use transforms only so cards
+ * remain visible if a ScrollTrigger is delayed, disabled, or unavailable. */
 export function AboutMotion() {
   useLayoutEffect(() => {
     const root = document.querySelector<HTMLElement>(".ep-about-page");
     if (!root) return;
 
-    const media = gsap.matchMedia();
-    media.add("(prefers-reduced-motion: no-preference)", () => {
-      const context = gsap.context(() => {
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
         const hero = root.querySelector<HTMLElement>("[data-page-hero]");
         if (hero) {
           const kicker = hero.querySelector<HTMLElement>("[data-page-kicker]");
           const title = hero.querySelector<HTMLElement>("h1");
           const lead = hero.querySelector<HTMLElement>("[data-page-lead]");
-          const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-          if (kicker) intro.from(kicker, { y: 18, duration: 0.5 });
-          if (title) intro.from(title, { y: 34, duration: 0.72 }, "-=0.2");
-          if (lead) intro.from(lead, { y: 16, duration: 0.5 }, "-=0.32");
+          const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
+          if (kicker) intro.from(kicker, { y: 22, duration: .55 });
+          if (title) intro.from(title, { y: 42, rotateX: -8, transformPerspective: 1000, duration: .85 }, "-=.24");
+          if (lead) intro.from(lead, { y: 18, duration: .6 }, "-=.42");
 
           const atmosphere = hero.querySelector<HTMLElement>(".ep-hero-atmosphere");
-          if (atmosphere) {
-            gsap.to(atmosphere, {
-              yPercent: 14,
-              ease: "none",
-              scrollTrigger: {
-                trigger: hero,
-                start: "top top",
-                end: "bottom top",
-                scrub: 0.7,
-              },
-            });
-          }
+          if (atmosphere) gsap.to(atmosphere, {
+            yPercent: 18, scale: 1.08, ease: "none",
+            scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: .8 },
+          });
         }
 
-        // Section headings animate only when a real heading exists.
-        root.querySelectorAll<HTMLElement>("main section h2").forEach((heading) => {
-          const section = heading.closest("section");
-          if (!section) return;
-          const eyebrow = heading.parentElement?.querySelector<HTMLElement>("div");
-          const lead = heading.parentElement?.querySelectorAll<HTMLElement>("p");
-          const timeline = gsap.timeline({
-            scrollTrigger: { trigger: heading, start: "top 86%", once: true },
-            defaults: { ease: "power3.out" },
+        // Every section gets a heading sequence and a subtle scroll-linked depth shift.
+        root.querySelectorAll<HTMLElement>("main section").forEach((section) => {
+          const heading = section.querySelector<HTMLElement>("h2");
+          if (heading) {
+            const eyebrow = heading.parentElement?.querySelector<HTMLElement>("div");
+            const copy = heading.parentElement?.querySelectorAll<HTMLElement>("p");
+            const tl = gsap.timeline({
+              scrollTrigger: { trigger: heading, start: "top 88%", once: true },
+              defaults: { ease: "power3.out" },
+            });
+            if (eyebrow && eyebrow !== heading) tl.from(eyebrow, { x: -18, duration: .42 });
+            tl.from(heading, { y: 28, rotateX: -4, transformPerspective: 900, duration: .7 }, "-=.12");
+            if (copy?.length) tl.from(copy, { y: 14, duration: .5, stagger: .09 }, "-=.3");
+          }
+          const inner = section.querySelector<HTMLElement>(":scope > div");
+          if (inner) gsap.fromTo(inner, { y: 12 }, {
+            y: 0, ease: "none",
+            scrollTrigger: { trigger: section, start: "top bottom", end: "top 30%", scrub: .7 },
           });
-          if (eyebrow && eyebrow !== heading) timeline.from(eyebrow, { x: -14, duration: 0.4 });
-          timeline.from(heading, { y: 24, duration: 0.62 }, "-=0.12");
-          if (lead?.length) timeline.from(lead, { y: 12, duration: 0.45, stagger: 0.08 }, "-=0.28");
         });
 
-        // Animate article cards once. Do not animate nested text visibility;
-        // this avoids competing transforms and cards stuck in a hidden state.
+        // Objective, system, scope and limitation cards enter with a 3D lift.
         const cards = gsap.utils.toArray<HTMLElement>("main article", root);
         cards.forEach((card, index) => {
           gsap.from(card, {
-            y: 34,
-            rotateX: index % 2 === 0 ? 3 : -3,
-            transformPerspective: 900,
+            y: 42,
+            rotateX: index % 2 ? 3 : -3,
+            rotateY: index % 3 === 0 ? -2 : 2,
+            transformPerspective: 1100,
             transformOrigin: "center bottom",
-            duration: 0.72,
-            ease: "power3.out",
-            scrollTrigger: { trigger: card, start: "top 88%", once: true },
+            duration: .82,
+            ease: "expo.out",
+            scrollTrigger: { trigger: card, start: "top 91%", once: true },
           });
         });
 
-        // Stagger system-row detail points as one sequence per row.
+        // System rows reveal their icon, title and capability points in sequence.
         root.querySelectorAll<HTMLElement>("#systems article").forEach((row) => {
+          const icon = row.querySelector<HTMLElement>("svg");
+          const title = row.querySelector<HTMLElement>("h3");
           const points = row.querySelectorAll<HTMLElement>(".col-span-2 > div");
-          if (points.length) {
-            gsap.from(points, {
-              x: 12,
-              duration: 0.42,
-              stagger: 0.07,
-              ease: "power2.out",
-              scrollTrigger: { trigger: row, start: "top 82%", once: true },
-            });
-          }
+          const tl = gsap.timeline({
+            scrollTrigger: { trigger: row, start: "top 88%", once: true },
+            defaults: { ease: "power3.out" },
+          });
+          if (icon) tl.from(icon, { scale: .72, rotation: -12, duration: .55, ease: "back.out(1.8)" });
+          if (title) tl.from(title, { x: 18, duration: .48 }, "-=.3");
+          if (points.length) tl.from(points, { x: 16, duration: .42, stagger: .075 }, "-=.22");
         });
 
-        const footer = root.querySelector<HTMLElement>("footer");
-        const footerColumns = footer?.querySelectorAll<HTMLElement>(".grid > div");
-        if (footer && footerColumns?.length) {
-          gsap.from(footerColumns, {
-            y: 18,
-            duration: 0.58,
-            stagger: 0.1,
-            ease: "power3.out",
-            scrollTrigger: { trigger: footer, start: "top 92%", once: true },
-          });
-        }
-
-        // Card hover uses GSAP for depth; Anime.js adds a short icon response.
+        // Scope cards get a light depth hover with pointer tracking.
         root.querySelectorAll<HTMLElement>("main article").forEach((card) => {
           const icon = card.querySelector<SVGElement>("svg");
-          const rotateX = gsap.quickTo(card, "rotationX", { duration: 0.28, ease: "power2.out" });
-          const rotateY = gsap.quickTo(card, "rotationY", { duration: 0.28, ease: "power2.out" });
-
-          const onEnter = () => {
-            gsap.to(card, {
-              y: -5,
-              scale: 1.012,
-              boxShadow: "0 22px 48px -34px rgba(7,42,48,.42)",
-              duration: 0.25,
-              ease: "power2.out",
-            });
-            if (icon) {
-              animate(icon, {
-                scale: [1, 1.14, 1],
-                rotate: [0, -8, 5, 0],
-                duration: 520,
-                ease: "outElastic(1, .6)",
-              });
-            }
+          const rx = gsap.quickTo(card, "rotationX", { duration: .3, ease: "power2.out" });
+          const ry = gsap.quickTo(card, "rotationY", { duration: .3, ease: "power2.out" });
+          const enter = () => {
+            gsap.to(card, { y: -7, scale: 1.012, boxShadow: "0 26px 54px -34px rgba(7,42,48,.5)", duration: .28, ease: "power3.out", overwrite: "auto" });
+            if (icon) animate(icon, { scale: [1, 1.16, 1], rotate: [0, -10, 6, 0], duration: 560, ease: "outElastic(1,.6)" });
           };
-
-          const onMove = (event: PointerEvent) => {
-            const bounds = card.getBoundingClientRect();
-            if (!bounds.width || !bounds.height) return;
-            rotateY(((event.clientX - bounds.left) / bounds.width - 0.5) * 5);
-            rotateX(-((event.clientY - bounds.top) / bounds.height - 0.5) * 4);
+          const move = (event: PointerEvent) => {
+            const rect = card.getBoundingClientRect();
+            if (!rect.width || !rect.height) return;
+            ry(((event.clientX - rect.left) / rect.width - .5) * 6);
+            rx(-((event.clientY - rect.top) / rect.height - .5) * 5);
           };
-
-          const onLeave = () => {
-            rotateX(0);
-            rotateY(0);
-            gsap.to(card, {
-              y: 0,
-              scale: 1,
-              rotationX: 0,
-              rotationY: 0,
-              duration: 0.38,
-              ease: "power2.out",
-            });
+          const leave = () => {
+            rx(0); ry(0);
+            gsap.to(card, { y: 0, scale: 1, rotationX: 0, rotationY: 0, duration: .48, ease: "elastic.out(1,.65)", overwrite: "auto" });
           };
-
-          card.addEventListener("pointerenter", onEnter);
-          card.addEventListener("pointermove", onMove);
-          card.addEventListener("pointerleave", onLeave);
-          card.addEventListener("focusin", onEnter);
-          card.addEventListener("focusout", onLeave);
-
-          context.add(() => {
-            card.removeEventListener("pointerenter", onEnter);
-            card.removeEventListener("pointermove", onMove);
-            card.removeEventListener("pointerleave", onLeave);
-            card.removeEventListener("focusin", onEnter);
-            card.removeEventListener("focusout", onLeave);
+          card.addEventListener("pointerenter", enter);
+          card.addEventListener("pointermove", move);
+          card.addEventListener("pointerleave", leave);
+          card.addEventListener("focusin", enter);
+          card.addEventListener("focusout", leave);
+          ctx.add(() => {
+            card.removeEventListener("pointerenter", enter);
+            card.removeEventListener("pointermove", move);
+            card.removeEventListener("pointerleave", leave);
+            card.removeEventListener("focusin", enter);
+            card.removeEventListener("focusout", leave);
           });
         });
 
         root.querySelectorAll<HTMLElement>("main a, main button").forEach((control) => {
           const icon = control.querySelector<SVGElement>("svg");
-          const onEnter = () => {
-            gsap.to(control, { y: -2, duration: 0.2, ease: "power2.out" });
-            if (icon) {
-              animate(icon, {
-                translateX: [0, 3],
-                duration: 260,
-                ease: "outBack(1.5)",
-              });
-            }
+          const enter = () => {
+            gsap.to(control, { y: -3, duration: .2, ease: "power2.out" });
+            if (icon) animate(icon, { translateX: [0, 4], rotate: [0, -6, 0], duration: 340, ease: "outBack(1.5)" });
           };
-          const onLeave = () => gsap.to(control, { y: 0, duration: 0.24, ease: "power2.out" });
-          control.addEventListener("pointerenter", onEnter);
-          control.addEventListener("pointerleave", onLeave);
-          context.add(() => {
-            control.removeEventListener("pointerenter", onEnter);
-            control.removeEventListener("pointerleave", onLeave);
+          const leave = () => gsap.to(control, { y: 0, duration: .25, ease: "power2.out" });
+          control.addEventListener("pointerenter", enter);
+          control.addEventListener("pointerleave", leave);
+          ctx.add(() => {
+            control.removeEventListener("pointerenter", enter);
+            control.removeEventListener("pointerleave", leave);
           });
+        });
+
+        // Decorative dots and markers have a gentle stagger, never affecting layout.
+        const markers = root.querySelectorAll<HTMLElement>("section [aria-hidden='true'].h-2, section [aria-hidden='true'].rounded-full");
+        if (markers.length) animate(markers, {
+          scale: [0.7, 1], delay: stagger(65), duration: 480, ease: "outBack(1.7)",
         });
       }, root);
 
-      return () => context.revert();
+      return () => ctx.revert();
     });
 
-    return () => media.revert();
+    return () => mm.revert();
   }, []);
 
   return null;
