@@ -414,6 +414,64 @@ export function LandingMotion() {
           });
         });
 
+      // Animate every meaningful Home section's content in a deliberate
+      // reading order. Text remains crisp: use transforms/opacity, never blur.
+      const processSteps = gsap.utils.toArray<HTMLElement>("#process ol > li");
+      processSteps.forEach((step) => {
+        const number = step.querySelector<HTMLElement>(":scope > div span");
+        const title = step.querySelector<HTMLElement>("h3");
+        const copy = step.querySelector<HTMLElement>("p");
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: step, start: "top 86%", once: true },
+          defaults: { ease: "power3.out" },
+        });
+        if (number) tl.from(number, { x: -12, autoAlpha: 0, duration: .35 });
+        if (title) tl.from(title, { y: 22, autoAlpha: 0, duration: .55 }, "-=.12");
+        if (copy) tl.from(copy, { y: 14, autoAlpha: 0, duration: .48 }, "-=.28");
+      });
+
+      // Section-level atmosphere movement gives the page a continuous
+      // scroll narrative while leaving the HeroLens itself untouched.
+      ["[aria-label='EcoPrawn at a glance']", "#readings", "#process", "[data-band]"].forEach((selector) => {
+        const section = document.querySelector<HTMLElement>(selector);
+        const surface = section?.querySelector<HTMLElement>(":scope > div");
+        if (!section || !surface) return;
+        gsap.fromTo(surface,
+          { y: 18 },
+          { y: 0, ease: "none",
+            scrollTrigger: { trigger: section, start: "top bottom", end: "top 35%", scrub: .65 } }
+        );
+      });
+
+      // Anime.js handles icon personality across all Home sections.
+      // Each icon animates once as it enters view; hover listeners below can
+      // then provide a separate, short response.
+      const homeIcons = homeRoot?.querySelectorAll<HTMLElement>("main svg");
+      let homeIconObserver: IntersectionObserver | undefined;
+      if (homeIcons?.length) {
+        homeIconObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const icon = entry.target as HTMLElement;
+            microAnimations.push(animate(icon, {
+              scale: [.72, 1], rotate: [-12, 0], opacity: [0, 1],
+              duration: 620, ease: "outElastic(1,.6)",
+            }));
+            homeIconObserver?.unobserve(icon);
+          });
+        }, { threshold: .3 });
+        homeIcons.forEach((icon) => homeIconObserver?.observe(icon));
+      }
+
+      // Animate small decorative marks with a soft stagger as the hero arrives.
+      const crosses = homeRoot?.querySelectorAll<HTMLElement>("[data-cross]");
+      if (crosses?.length) {
+        microAnimations.push(animate(crosses, {
+          opacity: [.12, .55, .18], scale: [.65, 1.15, 1],
+          delay: stagger(90), duration: 1100, ease: "inOutSine",
+        }));
+      }
+
       // Shared 3D hover interaction for data cards and process steps.
       gsap.utils.toArray<HTMLElement>("[data-hover-lift]").forEach((el) => {
         const icon = el.querySelector<HTMLElement>("svg");
@@ -461,6 +519,7 @@ export function LandingMotion() {
         restores.forEach((restore) => restore());
         hoverCleanups.forEach((cleanup) => cleanup());
         microAnimations.forEach((animation) => animation.revert());
+        homeIconObserver?.disconnect();
       };
     });
 
