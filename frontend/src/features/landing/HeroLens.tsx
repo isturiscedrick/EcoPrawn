@@ -395,7 +395,7 @@ export function HeroLens() {
             );
           })}
 
-          <p className="ep-lens-caption absolute bottom-[12%] left-1/2 w-[56%] -translate-x-1/2 text-center text-[11px] leading-snug text-[#f4f7f6]/85 sm:text-xs">
+          <p className="ep-lens-caption absolute bottom-[12%] left-1/2 w-[56%] -translate-x-1/2 text-center text-[11px] leading-snug text-white dark:text-black sm:text-xs">
             Example readings, not from a real tank.
           </p>
 
