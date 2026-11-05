@@ -99,7 +99,7 @@ export function SiteHeader({
       {/* Three columns (logo | nav | actions) so the nav is truly centered and can never overlap. */}
       <div
         className={`mx-auto min-h-[66px] max-w-[1440px] items-center gap-4 px-5 sm:px-8 lg:px-12 ${
-          showLinks ? "grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr]" : "flex justify-between"
+          showLinks ? "grid grid-cols-[auto_1fr] lg:grid-cols-[1fr_auto_1fr]" : "flex justify-between"
         } ${isAuth ? "w-full" : ""}`}
       >
         <Link
@@ -112,7 +112,7 @@ export function SiteHeader({
         </Link>
 
         {showLinks && (
-          <div className="hidden justify-self-center md:block">
+          <div className="hidden justify-self-center lg:block">
             <NavLinks variant="desktop" activeHref={navHref} />
           </div>
         )}
@@ -152,7 +152,7 @@ export function SiteHeader({
           ) : (
             <>
               <AuthLink
-                className={`hidden h-10 items-center rounded-full border px-5 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`}
+                className={`hidden h-10 items-center rounded-full border px-5 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex ${focusRing}`}
                 style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}
               >
                 Log in
@@ -160,7 +160,7 @@ export function SiteHeader({
               <AuthLink
                 mode="signup"
                 aria-label="Get started"
-                className={`hidden h-10 min-w-10 items-center justify-center gap-2 rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex lg:px-5 ${focusRing}`}
+                className={`hidden h-10 min-w-10 items-center justify-center gap-2 rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex lg:px-5 ${focusRing}`}
                 style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}
               >
                 <span className="hidden lg:inline">Get started</span>
@@ -176,7 +176,7 @@ export function SiteHeader({
               aria-expanded={mobileNavOpen}
               aria-controls="mobile-nav-panel"
               aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-              className={`flex h-10 w-10 items-center justify-center rounded-full border md:hidden ${focusRing}`}
+              className={`flex h-10 w-10 items-center justify-center rounded-full border lg:hidden ${focusRing}`}
               style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
             >
               <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -188,10 +188,10 @@ export function SiteHeader({
       </div>
 
       {showLinks && (
-        <div className={`grid overflow-hidden transition-all duration-300 ease-out md:hidden ${mobileNavOpen ? "visible grid-rows-[1fr] opacity-100" : "invisible grid-rows-[0fr] opacity-0"}`}>
+        <div className={`grid overflow-hidden transition-all duration-300 ease-out lg:hidden ${mobileNavOpen ? "visible grid-rows-[1fr] opacity-100" : "invisible grid-rows-[0fr] opacity-0"}`}>
           <div className="min-h-0">
             <NavLinks variant="mobile" activeHref={navHref} onLinkClick={() => setMobileNavOpen(false)} />
-            <div className="flex gap-3 px-5 pb-5 sm:hidden">
+            <div className="flex gap-3 px-5 pb-5 lg:hidden">
               <AuthLink className="flex-1 rounded-full border px-4 py-3 text-center text-sm font-semibold" style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>Log in</AuthLink>
               <AuthLink mode="signup" className="flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold" style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}>Get started</AuthLink>
             </div>
