@@ -81,12 +81,12 @@ export function SiteHeader({
   }, [mobileNavOpen]);
 
   const headerSurface = integrated
-    ? darkMode ? "#101d1b" : "#f3f5f2"
+    ? darkMode ? "#202729" : "#F4F7F6"
     : darkMode
       ? scrolled ? "rgba(24,25,26,.94)" : "rgba(24,25,26,.78)"
       : tone === "white"
-        ? scrolled ? "rgba(255,255,255,.96)" : "rgba(255,255,255,.82)"
-        : scrolled ? "rgba(251,248,241,.96)" : "rgba(251,248,241,.82)";
+        ? scrolled ? "rgba(244,247,246,.96)" : "rgba(244,247,246,.84)"
+        : scrolled ? "rgba(244,247,246,.96)" : "rgba(244,247,246,.84)";
 
   return (
     <header
@@ -94,7 +94,7 @@ export function SiteHeader({
       className={`sticky top-0 z-50 transition-all duration-300 backdrop-blur-2xl ${integrated ? "border-0" : "border-b"}`}
       style={{
         backgroundColor: headerSurface,
-        borderColor: darkMode ? "rgba(255,255,255,.09)" : "rgba(11,46,51,.08)",
+        borderColor: darkMode ? "rgba(139,213,166,.22)" : "rgba(15,76,92,.16)",
         boxShadow: scrolled ? (integrated ? "0 10px 28px -24px rgba(0,0,0,.28)" : "0 12px 34px -25px rgba(0,0,0,.35)") : "none",
       }}
     >
