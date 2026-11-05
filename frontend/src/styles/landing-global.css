@@ -134,3 +134,22 @@ html .ep-landing .ep-lens-readout .ep-lens-dot {
 .ep-landing .ep-lens-shrimp .ep-logo {
   --ep-logo-color: #f28a68;
 }
+
+/* Landing hero headline: use the two official brand colors, not generic
+   body ink/accent tokens. Keep this scoped to the landing hero only. */
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+  color: #D94416 !important;
+  -webkit-text-fill-color: #D94416 !important;
+}
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
+  color: #0F4C5C !important;
+  -webkit-text-fill-color: #0F4C5C !important;
+}
+html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+  color: #F28A68 !important;
+  -webkit-text-fill-color: #F28A68 !important;
+}
+html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
+  color: #8BD5A6 !important;
+  -webkit-text-fill-color: #8BD5A6 !important;
+}
