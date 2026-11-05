@@ -2,8 +2,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 @import "./foundations.css";
 @import "./theme-components.css";
 @import "./landing-dashboard.css";
