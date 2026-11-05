@@ -225,7 +225,7 @@ export function LandingPage() {
             className="pointer-events-none absolute inset-0 -z-10 opacity-90"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse at 12% 8%, rgba(139,213,166,0.18), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(242,138,104,0.14), transparent 48%), radial-gradient(ellipse at 52% 118%, rgba(11,46,51,0.42), transparent 52%), linear-gradient(155deg, #13596b 0%, #0f4c5c 52%, #0b3a47 100%)",
+                "radial-gradient(ellipse at 12% 8%, rgba(139,213,166,0.16), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(242,138,104,0.12), transparent 48%), linear-gradient(155deg, #0f4c5c 0%, #0f4c5c 58%, #142b2e 100%)",
             }}
           />
 
