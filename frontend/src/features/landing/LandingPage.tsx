@@ -228,7 +228,7 @@ export function LandingPage() {
 
           <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 sm:py-24">
             <div data-reveal="" className="max-w-[40rem]">
-              <div className={`${eyebrow} !text-[var(--ep-bg)]`}>
+              <div className={`${eyebrow} !text-white dark:!text-black`}>
                 <span
                   aria-hidden="true"
                   className="h-2 w-2 bg-white dark:bg-black"
@@ -237,11 +237,11 @@ export function LandingPage() {
               </div>
               <h2
                 id="readings-title"
-                className="ep-font-display !text-[var(--ep-bg)] text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
+                className="ep-font-display !text-white dark:!text-black text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
               >
                 Five readings, each held in range.
               </h2>
-              <p className="mt-3 text-lg leading-relaxed text-[var(--ep-bg)]">
+              <p className="mt-3 text-lg leading-relaxed text-white dark:text-black">
                 Sample values from Tank 1, shown against the range shrimp need.
               </p>
             </div>
@@ -264,25 +264,21 @@ export function LandingPage() {
                     key={r.label}
                     data-reading=""
                     data-hover-lift=""
-                    className="rounded-xl border border-white/30 bg-white/10 p-5 transition-[background-color,border-color] duration-200 hover:border-[var(--ep-bg)] hover:bg-white/20 last:col-span-2 md:last:col-span-1"
+                    className="rounded-xl border border-white bg-transparent p-5 transition-colors duration-200 hover:bg-white/10 dark:border-black dark:hover:bg-black/10 last:col-span-2 md:last:col-span-1"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <dt className="text-base font-semibold text-[var(--ep-bg)]">
+                      <dt className="text-base font-semibold text-white dark:text-black">
                         {r.label}
                       </dt>
                       <span
-                        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-[var(--ep-bg)] ${
-                          inRange
-                            ? "bg-white/15"
-                            : "bg-white/15"
-                        }`}
+                        className="inline-flex items-center gap-1 rounded-full border border-white px-2 py-0.5 text-xs font-semibold text-white dark:border-black dark:text-black"
                       >
                         {inRange ? (
                           <Icon
                             name="check"
                             size={12}
                             strokeWidth={2.5}
-                            className="text-[var(--ep-primary)]"
+                            className="text-white dark:text-black"
                           />
                         ) : (
                           <span>!</span>
@@ -293,7 +289,7 @@ export function LandingPage() {
 
                     <dd className="mt-3 text-4xl font-semibold tabular-nums">
                       <span data-countto={r.value}>{r.value}</span>
-                      <span className="ml-1 text-base font-medium text-[var(--ep-bg)]">
+                      <span className="ml-1 text-base font-medium text-white dark:text-black">
                         {heroReadoutUnits[r.label]}
                       </span>
                     </dd>
@@ -323,7 +319,7 @@ export function LandingPage() {
                     {zone && (
                       <div
                         aria-hidden="true"
-                        className="mt-2.5 flex justify-between text-xs tabular-nums text-[var(--ep-bg)]"
+                        className="mt-2.5 flex justify-between text-xs tabular-nums text-white dark:text-black"
                       >
                         <span>{zone.min}</span>
                         <span>{zone.max}</span>
@@ -331,7 +327,7 @@ export function LandingPage() {
                     )}
 
                     {range && (
-                      <p className="mt-2 text-sm text-[var(--ep-bg)]">
+                      <p className="mt-2 text-sm text-white dark:text-black">
                         Target {range}
                       </p>
                     )}
@@ -341,7 +337,7 @@ export function LandingPage() {
             </dl>
 
             {/* Legend: explains what the bar and dot mean */}
-            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-[var(--ep-bg)]">
+            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-white dark:text-black">
               <span className="inline-flex items-center gap-2">
                 <span
                   aria-hidden="true"
@@ -352,7 +348,7 @@ export function LandingPage() {
               <span className="inline-flex items-center gap-2">
                 <span
                   aria-hidden="true"
-                  className="h-3.5 w-3.5 rounded-full border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)]"
+                  className="h-3.5 w-3.5 rounded-full border-2 border-white bg-white dark:border-black dark:bg-black"
                 />
                 Current reading
               </span>
