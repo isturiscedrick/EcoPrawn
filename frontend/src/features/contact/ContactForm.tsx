@@ -36,10 +36,10 @@ export function ContactForm() {
         role="status"
         className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center shadow-[0_16px_32px_-24px_rgba(11,46,51,0.55)] sm:p-8"
       >
-        <h2 className="ep-font-display mb-2 text-2xl font-semibold text-[var(--ep-text)]">Message ready</h2>
+        <h2 className="ep-font-display mb-2 text-2xl font-semibold text-[var(--ep-text)]">Message preview ready</h2>
         <p className="mb-6 text-base leading-relaxed text-[var(--ep-text-muted)]">
-          Thanks, {name.trim() || "friend"}. This form isn&apos;t connected to a
-          mail service yet, so nothing has been sent.
+          Thanks, {name.trim() || "friend"}. Your message has been prepared, but this
+          form is not connected to a mail service yet, so it has not been sent.
         </p>
         <button
           type="button"
@@ -62,7 +62,7 @@ export function ContactForm() {
           Send us a message
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">
-          Share your question or feedback about EcoPrawn. All fields are required.
+          Share your question or feedback about EcoPrawn. This demo form currently provides a local preview only.
         </p>
       </div>
 
@@ -117,7 +117,7 @@ export function ContactForm() {
         type="submit"
         className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 text-base font-semibold text-[var(--ep-on-accent)] hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
       >
-        Send message
+        Preview message
       </button>
     </form>
   );
