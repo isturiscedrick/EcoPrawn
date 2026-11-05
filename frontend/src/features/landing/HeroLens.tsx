@@ -277,9 +277,9 @@ export function HeroLens() {
       className="relative mx-auto aspect-square w-full max-w-[460px]"
     >
       {/* Lens barrel: deep slate teal #0f4c5c, lit from the top left */}
-      <div className="absolute inset-0 rounded-full bg-[linear-gradient(145deg,#0f4c5c_0%,#0f4c5c_55%,#142b2e_100%)] dark:bg-[linear-gradient(145deg,#202729_0%,#202729_55%,#18191a_100%)] p-[3.2%] shadow-[0_40px_70px_-34px_rgba(15,76,92,0.75),inset_0_2px_0_rgba(255,255,255,0.18)]">
+      <div className="absolute inset-0 rounded-full bg-[linear-gradient(145deg,#0f4c5c_0%,#0f4c5c_55%,#142b2e_100%)] dark:bg-[linear-gradient(145deg,#202729_0%,#202729_55%,#18191a_100%)] p-[3.2%] shadow-[0_40px_70px_-34px_rgba(15,76,92,0.75),inset_0_2px_0_rgba(244,247,246,0.18)]">
         {/* Glass */}
-        <div className="relative isolate h-full w-full overflow-hidden rounded-full bg-[radial-gradient(circle_at_50%_46%,#0f4c5c_0%,#0f4c5c_58%,#142b2e_100%)] dark:bg-[radial-gradient(circle_at_50%_46%,#202729_0%,#202729_58%,#18191a_100%)] ring-1 ring-[rgba(251,248,241,0.25)]">
+        <div className="relative isolate h-full w-full overflow-hidden rounded-full bg-[radial-gradient(circle_at_50%_46%,#0f4c5c_0%,#0f4c5c_58%,#142b2e_100%)] dark:bg-[radial-gradient(circle_at_50%_46%,#202729_0%,#202729_58%,#18191a_100%)] ring-1 ring-[rgba(244,247,246,0.25)]">
           {/* Concentric rings */}
           <svg
             aria-hidden="true"
@@ -397,7 +397,7 @@ export function HeroLens() {
             );
           })}
 
-          <p className="ep-lens-caption absolute bottom-[12%] left-1/2 w-[56%] -translate-x-1/2 text-center text-[11px] leading-snug text-white/85 sm:text-xs">
+          <p className="ep-lens-caption absolute bottom-[12%] left-1/2 w-[56%] -translate-x-1/2 text-center text-[11px] leading-snug text-[#f4f7f6]/85 sm:text-xs">
             Example readings, not from a real tank.
           </p>
 
@@ -412,7 +412,7 @@ export function HeroLens() {
           />
           <span
             aria-hidden="true"
-            className="ep-lens-glare pointer-events-none absolute -left-[10%] -top-[10%] h-[70%] w-[70%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.2)_0%,rgba(244,247,246,0.05)_45%,transparent_70%)]"
+            className="ep-lens-glare pointer-events-none absolute -left-[10%] -top-[10%] h-[70%] w-[70%] rounded-full bg-[radial-gradient(circle,rgba(244,247,246,0.2)_0%,rgba(244,247,246,0.05)_45%,transparent_70%)]"
           />
           <span
             aria-hidden="true"
