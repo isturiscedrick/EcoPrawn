@@ -1,0 +1,93 @@
+/* Minimal full-screen brand intro, inspired by the supplied reference. */
+.ep-loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #fff;
+  color: #263b66;
+  opacity: 1;
+  animation: ep-loading-screen-out 420ms ease 1.55s forwards;
+}
+
+.ep-loading-content {
+  display: flex;
+  width: min(220px, calc(100vw - 48px));
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  transform: translateY(2px);
+}
+
+.ep-loading-content .ep-logo {
+  --ep-logo-color: #d94416;
+  --ep-logo-text: #344f82;
+  gap: 5px;
+}
+
+.ep-loading-content .ep-logo-wordmark {
+  font-size: 25px !important;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  animation: none;
+  opacity: 1;
+}
+
+.ep-loading-caption {
+  color: #40547f;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.34em;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  animation: ep-loading-caption-in 450ms ease 220ms forwards;
+}
+
+.ep-loading-track {
+  position: relative;
+  width: 145px;
+  height: 3px;
+  margin-top: 5px;
+  overflow: hidden;
+  background: #e5e9f3;
+}
+
+.ep-loading-progress {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #d94416, #667fc2);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: ep-loading-progress 1.45s cubic-bezier(0.62, 0, 0.35, 1) 120ms forwards;
+}
+
+@keyframes ep-loading-progress {
+  to { transform: scaleX(1); }
+}
+
+@keyframes ep-loading-caption-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ep-loading-screen-out {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-loading-screen {
+    animation-duration: 1ms;
+    animation-delay: 200ms;
+  }
+  .ep-loading-progress {
+    animation-duration: 1ms;
+  }
+  .ep-loading-caption {
+    animation-duration: 1ms;
+  }
+}
