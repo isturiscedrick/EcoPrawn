@@ -14,6 +14,7 @@ export function AboutMotion() {
 
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const cleanups: Array<() => void> = [];
       const ctx = gsap.context(() => {
         const hero = root.querySelector<HTMLElement>("[data-page-hero]");
         if (hero) {
@@ -106,7 +107,7 @@ export function AboutMotion() {
           card.addEventListener("pointerleave", leave);
           card.addEventListener("focusin", enter);
           card.addEventListener("focusout", leave);
-          ctx.add(() => {
+          cleanups.push(() => {
             card.removeEventListener("pointerenter", enter);
             card.removeEventListener("pointermove", move);
             card.removeEventListener("pointerleave", leave);
@@ -124,7 +125,7 @@ export function AboutMotion() {
           const leave = () => gsap.to(control, { y: 0, duration: .25, ease: "power2.out" });
           control.addEventListener("pointerenter", enter);
           control.addEventListener("pointerleave", leave);
-          ctx.add(() => {
+          cleanups.push(() => {
             control.removeEventListener("pointerenter", enter);
             control.removeEventListener("pointerleave", leave);
           });
@@ -137,7 +138,10 @@ export function AboutMotion() {
         });
       }, root);
 
-      return () => ctx.revert();
+      return () => {
+        cleanups.forEach((cleanup) => cleanup());
+        ctx.revert();
+      };
     });
 
     return () => mm.revert();
