@@ -51,8 +51,6 @@ export function ContactMotion() {
           gsap.from(card, {
             x: index % 2 ? 24 : -24,
             y: 30,
-            rotateY: index % 2 ? 5 : -5,
-            transformPerspective: 1000,
             duration: .8,
             ease: "expo.out",
             scrollTrigger: { trigger: card, start: "top 91%", once: true },
@@ -62,8 +60,8 @@ export function ContactMotion() {
         const form = root.querySelector<HTMLElement>("[data-contact-form]");
         if (form) {
           gsap.from(form, {
-            x: 34, y: 26, rotateY: 4, scale: .985,
-            transformPerspective: 1100, duration: .9, ease: "expo.out",
+            x: 34, y: 26, scale: .985,
+            duration: .9, ease: "expo.out",
             scrollTrigger: { trigger: form, start: "top 90%", once: true },
           });
           const fields = form.querySelectorAll<HTMLElement>("input, textarea, select");
@@ -107,33 +105,28 @@ export function ContactMotion() {
           });
         }
 
-        // Depth hover for information cards.
+        // Information cards use a simple lift and icon reaction,
+        // keeping the card plane flat (no pointer-driven 3D tilt).
         cards.forEach((card) => {
           const icon = card.querySelector<SVGElement>("svg");
-          const rx = gsap.quickTo(card, "rotationX", { duration: .28, ease: "power2.out" });
-          const ry = gsap.quickTo(card, "rotationY", { duration: .28, ease: "power2.out" });
           const enter = () => {
-            gsap.to(card, { y: -7, scale: 1.02, boxShadow: "0 28px 64px -34px rgba(7,42,48,.5)", duration: .3, ease: "power3.out", overwrite: "auto" });
-            if (icon) animate(icon, { scale: [1, 1.2, 1], rotate: [0, -12, 8, 0], duration: 600, ease: "outElastic(1,.55)" });
+            gsap.to(card, {
+              y: -6, scale: 1.01,
+              boxShadow: "0 24px 54px -32px rgba(7,42,48,.42)",
+              duration: .3, ease: "power3.out", overwrite: "auto",
+            });
+            if (icon) animate(icon, { scale: [1, 1.16, 1], rotate: [0, -10, 6, 0], duration: 560, ease: "outElastic(1,.55)" });
           };
-          const move = (event: PointerEvent) => {
-            const rect = card.getBoundingClientRect();
-            if (!rect.width || !rect.height) return;
-            ry(((event.clientX - rect.left) / rect.width - .5) * 7);
-            rx(-((event.clientY - rect.top) / rect.height - .5) * 5);
-          };
-          const leave = () => {
-            rx(0); ry(0);
-            gsap.to(card, { y: 0, scale: 1, rotationX: 0, rotationY: 0, duration: .45, ease: "elastic.out(1,.6)", overwrite: "auto" });
-          };
+          const leave = () => gsap.to(card, {
+            y: 0, scale: 1,
+            duration: .42, ease: "power3.out", overwrite: "auto",
+          });
           card.addEventListener("pointerenter", enter);
-          card.addEventListener("pointermove", move);
           card.addEventListener("pointerleave", leave);
           card.addEventListener("focusin", enter);
           card.addEventListener("focusout", leave);
           cleanups.push(() => {
             card.removeEventListener("pointerenter", enter);
-            card.removeEventListener("pointermove", move);
             card.removeEventListener("pointerleave", leave);
             card.removeEventListener("focusin", enter);
             card.removeEventListener("focusout", leave);
