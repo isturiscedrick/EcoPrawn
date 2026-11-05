@@ -278,7 +278,55 @@ export function LandingMotion() {
         });
       }
 
-      // SECTION FLOW: reveal supporting sections with a restrained,
+      // CINEMATIC HOME SCROLL CHOREOGRAPHY
+      // A slow atmosphere parallax and layered section reveals create depth
+      // without scaling the HeroLens SVG (which must remain crisp).
+      const heroAtmosphere = document.querySelector<HTMLElement>("#top .ep-hero-atmosphere");
+      if (heroAtmosphere) {
+        gsap.to(heroAtmosphere, {
+          yPercent: 28, scale: 1.12, ease: "none",
+          scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: 1 },
+        });
+      }
+
+      const heroEyebrow = document.querySelector<HTMLElement>("#top [data-hero=eyebrow]");
+      if (heroEyebrow) {
+        gsap.to(heroEyebrow, {
+          y: -18, autoAlpha: .35, ease: "none",
+          scrollTrigger: { trigger: "#top", start: "top top", end: "65% top", scrub: .7 },
+        });
+      }
+
+      // Scroll-linked section headings: masked upward reveal with a subtle
+      // accent underline that draws as each section reaches the viewport.
+      ["#readings-title", "#preview-title", "#process h2"].forEach((selector) => {
+        const heading = document.querySelector<HTMLElement>(selector);
+        if (!heading) return;
+        const underline = heading.parentElement?.querySelector<HTMLElement>("[data-heading-accent]");
+        gsap.from(heading, {
+          y: 46, autoAlpha: 0, clipPath: "inset(0 0 100% 0)",
+          duration: .95, ease: "power4.out",
+          scrollTrigger: { trigger: heading, start: "top 84%", once: true },
+        });
+        if (underline) gsap.fromTo(underline,
+          { scaleX: 0, transformOrigin: "left center" },
+          { scaleX: 1, duration: .8, ease: "power3.out",
+            scrollTrigger: { trigger: heading, start: "top 80%", once: true } }
+        );
+      });
+
+      // Reading tiles get a soft 3D entrance, while their contents stay legible.
+      const readingTiles = gsap.utils.toArray<HTMLElement>('[aria-labelledby="readings-title"] dl > div');
+      readingTiles.forEach((tile, index) => {
+        gsap.from(tile, {
+          y: 58, rotateX: 13, rotateY: index % 2 ? 5 : -5,
+          transformPerspective: 1100, autoAlpha: 0, duration: .95,
+          ease: "expo.out",
+          scrollTrigger: { trigger: tile, start: "top 90%", once: true },
+        });
+      });
+
+      //      // SECTION FLOW: reveal supporting sections with a restrained,
       // consistent lift-and-fade as they enter the viewport.
       const sectionReveals = [
         {
@@ -366,35 +414,48 @@ export function LandingMotion() {
           });
         });
 
-      // Shared hover lift for the data cards and process steps.
+      // Shared 3D hover interaction for data cards and process steps.
       gsap.utils.toArray<HTMLElement>("[data-hover-lift]").forEach((el) => {
-          const enter = () =>
-            gsap.to(el, {
-              y: -5,
-              scale: 1.01,
-              duration: 0.25,
-              ease: "power2.out",
-              overwrite: "auto",
-            });
-          const leave = () =>
-            gsap.to(el, {
-              y: 0,
-              scale: 1,
-              duration: 0.32,
-              ease: "power2.out",
-              overwrite: "auto",
-            });
-          el.addEventListener("mouseenter", enter);
-          el.addEventListener("mouseleave", leave);
-          el.addEventListener("focusin", enter);
-          el.addEventListener("focusout", leave);
-          hoverCleanups.push(() => {
-            el.removeEventListener("mouseenter", enter);
-            el.removeEventListener("mouseleave", leave);
-            el.removeEventListener("focusin", enter);
-            el.removeEventListener("focusout", leave);
+        const icon = el.querySelector<HTMLElement>("svg");
+        const rx = gsap.quickTo(el, "rotationX", { duration: .32, ease: "power3.out" });
+        const ry = gsap.quickTo(el, "rotationY", { duration: .32, ease: "power3.out" });
+        const enter = () => {
+          gsap.to(el, {
+            y: -8, scale: 1.018,
+            boxShadow: "0 28px 60px -34px rgba(7,42,48,.42)",
+            duration: .35, ease: "power3.out", overwrite: "auto",
           });
+          if (icon) microAnimations.push(animate(icon, {
+            scale: [1, 1.18, 1], rotate: [0, -9, 6, 0],
+            duration: 560, ease: "outElastic(1,.55)",
+          }));
+        };
+        const pointer = (event: PointerEvent) => {
+          const rect = el.getBoundingClientRect();
+          ry(((event.clientX - rect.left) / rect.width - .5) * 8);
+          rx(-((event.clientY - rect.top) / rect.height - .5) * 6);
+        };
+        const leave = () => {
+          rx(0); ry(0);
+          gsap.to(el, {
+            y: 0, scale: 1, rotationX: 0, rotationY: 0,
+            boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
+            duration: .55, ease: "elastic.out(1,.65)", overwrite: "auto",
+          });
+        };
+        el.addEventListener("mouseenter", enter);
+        el.addEventListener("pointermove", pointer);
+        el.addEventListener("mouseleave", leave);
+        el.addEventListener("focusin", enter);
+        el.addEventListener("focusout", leave);
+        hoverCleanups.push(() => {
+          el.removeEventListener("mouseenter", enter);
+          el.removeEventListener("pointermove", pointer);
+          el.removeEventListener("mouseleave", leave);
+          el.removeEventListener("focusin", enter);
+          el.removeEventListener("focusout", leave);
         });
+      });
 
       return () => {
         restores.forEach((restore) => restore());
