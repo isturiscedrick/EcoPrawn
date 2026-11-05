@@ -262,7 +262,7 @@ html:not(.dark) .marketing-shell :is([data-band], #systems) svg {
   stroke: currentColor;
 }
 html:not(.dark) .marketing-shell :is(button, a)[style*="background-color: var(--ep-accent)"],
-html:not(.dark) .marketing-shell :is(button, a).bg-\[\#b23f1c\] {
+html:not([class~="dark) .marketing-shell :is(button, a).bg-[#b23f1c"] {
   color: #ffffff;
   -webkit-text-fill-color: #ffffff;
 }
