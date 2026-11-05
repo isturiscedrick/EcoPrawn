@@ -428,3 +428,18 @@ html.dark .marketing-shell.ep-landing-page #readings > [data-readings-bg] {
 html.dark .marketing-shell.ep-landing-page #process :is(span, h3, p, svg) {
   color: var(--ep-primary) !important;
 }
+
+/* Public page hero headlines must use the exact landing hero color treatment.
+   Accent phrase = deep teal in light mode; remaining headline = charcoal teal.
+   Dark mode uses mint for both, matching the landing hero's dark treatment.
+   These rules intentionally come last to beat legacy PageHero overrides. */
+.marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1 {
+  color: #142b2e !important;
+}
+.marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1 [data-page-hero-accent] {
+  color: #0f4c5c !important;
+}
+html.dark .marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1,
+html.dark .marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1 [data-page-hero-accent] {
+  color: #8bd5a6 !important;
+}
