@@ -552,3 +552,59 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
     padding: .55rem .4rem;
   }
 }
+
+
+/* ---------- Hero parameter strip: clean typography, no individual cards ---------- */
+.ep-landing #top .ep-lens-showcase .ep-lens-readings {
+  width: min(100%, 620px);
+  margin-top: .15rem;
+  padding: .9rem .25rem;
+  border-top: 1px solid var(--ep-line);
+  border-bottom: 1px solid var(--ep-line);
+  column-gap: clamp(.7rem, 2vw, 1.4rem);
+  row-gap: .9rem;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout {
+  min-height: 0;
+  padding: .15rem .1rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout > span:first-child {
+  color: var(--ep-text-muted);
+  font-size: clamp(.7rem, 1vw, .82rem);
+  font-weight: 600;
+  letter-spacing: .015em;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout > span:last-child {
+  margin-top: .35rem;
+  color: var(--ep-text);
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  font-weight: 750;
+  line-height: 1.2;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout > span:last-child > span:last-child {
+  color: var(--ep-text-muted);
+  font-size: .75em;
+  font-weight: 600;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout .ep-lens-dot {
+  width: .42rem;
+  height: .42rem;
+  background: var(--ep-secondary);
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-showcase .ep-lens-readings {
+    padding: .75rem .1rem;
+    column-gap: .5rem;
+    row-gap: .75rem;
+  }
+  .ep-landing #top .ep-lens-showcase .ep-lens-readout > span:first-child {
+    font-size: .72rem;
+  }
+  .ep-landing #top .ep-lens-showcase .ep-lens-readout > span:last-child {
+    font-size: 1.05rem;
+  }
+}
