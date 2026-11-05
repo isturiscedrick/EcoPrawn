@@ -26,6 +26,11 @@ export function PublicChromeMotion() {
         // A shared underline follows the active desktop navigation link.
         if (nav) {
           const links = Array.from(nav.querySelectorAll<HTMLElement>("a"));
+          // Nav enters as a compact, staggered control group.
+          gsap.fromTo(links,
+            { y: -9, opacity: 0, scale: .96 },
+            { y: 0, opacity: 1, scale: 1, duration: .48, stagger: .075, ease: "power3.out", delay: .08, clearProps: "transform,opacity" }
+          );
           const indicator = document.createElement("span");
           indicator.setAttribute("aria-hidden", "true");
           Object.assign(indicator.style, {
@@ -60,6 +65,14 @@ export function PublicChromeMotion() {
           links.forEach((link) => {
             const enter = () => {
               moveIndicator(link);
+              gsap.to(link, {
+                y: -2,
+                scale: 1.035,
+                backgroundColor: "var(--ep-tint)",
+                duration: .22,
+                ease: "power2.out",
+                overwrite: "auto",
+              });
               const icon = link.querySelector<SVGElement>("svg");
               if (icon) animeRuns.push(animate(icon, {
                 translateY: [-2, 0],
@@ -69,6 +82,14 @@ export function PublicChromeMotion() {
               }));
             };
             const leave = () => {
+              gsap.to(link, {
+                y: 0,
+                scale: 1,
+                backgroundColor: link.getAttribute("aria-current") === "page" ? "var(--ep-accent)" : "transparent",
+                duration: .26,
+                ease: "power2.out",
+                overwrite: "auto",
+              });
               const current = links.find((item) => item.getAttribute("aria-current") === "page");
               if (current) moveIndicator(current);
               else gsap.to(indicator, { opacity: 0, duration: .2 });
@@ -80,7 +101,46 @@ export function PublicChromeMotion() {
               link.removeEventListener("pointerleave", leave);
             });
           });
-          cleanups.push(() => indicator.remove());
+          cleanups.push(() => {
+            gsap.killTweensOf(links);
+            indicator.remove();
+            nav.style.position = "";
+          });
+        }
+
+        // Header actions receive small, tactile feedback without changing layout.
+        const themeButton = header?.querySelector<HTMLElement>('button[role="switch"]');
+        if (themeButton) {
+          const icon = themeButton.querySelector<SVGElement>("svg");
+          const onThemeClick = () => {
+            if (icon) animeRuns.push(animate(icon, {
+              rotate: [0, 180],
+              scale: [1, .72, 1],
+              duration: 520,
+              ease: "outBack(1.7)",
+            }));
+            gsap.fromTo(themeButton,
+              { scale: .92 },
+              { scale: 1, duration: .42, ease: "elastic.out(1,.55)", overwrite: "auto" }
+            );
+          };
+          themeButton.addEventListener("click", onThemeClick);
+          cleanups.push(() => themeButton.removeEventListener("click", onThemeClick));
+        }
+
+        const menuToggle = header?.querySelector<HTMLElement>('button[aria-controls="mobile-nav-panel"]');
+        if (menuToggle) {
+          const icon = menuToggle.querySelector<SVGElement>("svg");
+          const onMenuClick = () => {
+            if (icon) animeRuns.push(animate(icon, {
+              rotate: [0, 90],
+              scale: [1, .82, 1],
+              duration: 380,
+              ease: "outBack(1.6)",
+            }));
+          };
+          menuToggle.addEventListener("click", onMenuClick);
+          cleanups.push(() => menuToggle.removeEventListener("click", onMenuClick));
         }
 
         // Mobile navigation items enter in sequence whenever the menu opens.
