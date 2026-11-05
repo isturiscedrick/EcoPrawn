@@ -325,20 +325,20 @@ export function HeroLens() {
   return (
     <div ref={ref} className="ep-lens-showcase mx-auto flex w-full max-w-[620px] flex-col items-center gap-3">
       <div className="ep-lens-diagram relative grid w-full">
-        <svg aria-hidden="true" viewBox="0 0 620 390" preserveAspectRatio="none" className="ep-lens-connectors pointer-events-none absolute inset-0 h-full w-full overflow-visible">
+        <svg aria-hidden="true" viewBox="0 0 620 440" preserveAspectRatio="none" className="ep-lens-connectors pointer-events-none absolute inset-0 h-full w-full overflow-visible">
           <g fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" opacity=".8">
-            <path d="M326 72 H378 L398 72" />
-            <path d="M326 132 H378 L398 132" />
-            <path d="M326 195 H378 L398 195" />
-            <path d="M326 258 H378 L398 258" />
-            <path d="M326 320 H378 L398 320" />
+            <path d="M126 118 H148 L174 145" />
+            <path d="M126 292 H148 L174 265" />
+            <path d="M446 145 L472 118 H494" />
+            <path d="M446 265 L472 292 H494" />
+            <path d="M310 358 V385" />
           </g>
           <g fill="var(--ep-accent)">
-            <circle cx="326" cy="72" r="3.2" />
-            <circle cx="326" cy="132" r="3.2" />
-            <circle cx="326" cy="195" r="3.2" />
-            <circle cx="326" cy="258" r="3.2" />
-            <circle cx="326" cy="320" r="3.2" />
+            <circle cx="174" cy="145" r="3.2" />
+            <circle cx="174" cy="265" r="3.2" />
+            <circle cx="446" cy="145" r="3.2" />
+            <circle cx="446" cy="265" r="3.2" />
+            <circle cx="310" cy="358" r="3.2" />
           </g>
         </svg>
         <div className="ep-lens-stage relative z-[1] flex items-center justify-center">
