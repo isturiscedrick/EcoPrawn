@@ -36,17 +36,30 @@ export function ContactForm() {
         role="status"
         className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center shadow-[0_16px_32px_-24px_rgba(11,46,51,0.55)] sm:p-8"
       >
-        <h2 className="ep-font-display mb-2 text-2xl font-semibold text-[var(--ep-text)]">Message preview ready</h2>
+        <h2 className="ep-font-display mb-2 text-2xl font-semibold text-[var(--ep-text)]">Review your message</h2>
         <p className="mb-6 text-base leading-relaxed text-[var(--ep-text-muted)]">
-          Thanks, {name.trim() || "friend"}. Your message has been prepared, but this
-          form is not connected to a mail service yet, so it has not been sent.
+          This is a local preview only. Nothing has been sent.
         </p>
+        <dl className="mb-6 space-y-4 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4 text-left">
+          <div>
+            <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">From</dt>
+            <dd className="mt-1 break-words text-sm font-medium text-[var(--ep-text)]">{name.trim()}</dd>
+          </div>
+          <div>
+            <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">Email</dt>
+            <dd className="mt-1 break-all text-sm font-medium text-[var(--ep-text)]">{email.trim()}</dd>
+          </div>
+          <div>
+            <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">Message</dt>
+            <dd className="mt-1 whitespace-pre-wrap break-words text-sm leading-relaxed text-[var(--ep-text)]">{message.trim()}</dd>
+          </div>
+        </dl>
         <button
           type="button"
           onClick={handleReset}
           className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-primary)] px-6 py-3 text-base font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${buttonMotion} ${focusRing}`}
         >
-          Write another
+          Edit message
         </button>
       </div>
     );
@@ -62,7 +75,7 @@ export function ContactForm() {
           Send us a message
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">
-          Share your question or feedback about EcoPrawn. This demo form currently provides a local preview only.
+          Fill in the details below. You can review your message before sending it once a mail service is connected.
         </p>
       </div>
 
