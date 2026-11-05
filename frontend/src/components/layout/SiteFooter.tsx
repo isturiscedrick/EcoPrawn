@@ -14,10 +14,10 @@ export function SiteFooter() {
     <>
       <footer
         data-site-footer
-        className="relative isolate overflow-hidden border-t border-[var(--ep-line)] px-5 py-14 sm:px-8 sm:py-16"
+        className="relative isolate overflow-hidden border-t border-[var(--ep-line)] px-4 py-12 sm:px-8 sm:py-16"
       >
         <div className="mx-auto max-w-[1200px]">
-          <div className="grid gap-10 border-b border-[var(--ep-line)] pb-10 md:grid-cols-[1.6fr_0.8fr_1fr] md:gap-16">
+          <div className="grid grid-cols-1 gap-8 border-b border-[var(--ep-line)] pb-8 sm:gap-10 sm:pb-10 md:grid-cols-[1.6fr_0.8fr_1fr] md:gap-16">
             <div>
               <Link
                 to="/"
@@ -69,7 +69,7 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 pt-6 text-sm text-[var(--ep-text-muted)] sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-2 pt-5 text-xs leading-relaxed sm:pt-6 sm:text-sm text-[var(--ep-text-muted)] sm:flex-row sm:items-center sm:justify-between">
             <p>
               University of Caloocan City · Computer Studies Department · CS 118
             </p>
