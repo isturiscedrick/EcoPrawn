@@ -195,6 +195,32 @@ export function ContactMotion() {
           });
         });
 
+        // The contact form swaps to a local review state after submission.
+        // Observe that real state change and animate the confirmation content in.
+        const reviewObserver = new MutationObserver(() => {
+          const review = root.querySelector<HTMLElement>('[role="status"]');
+          if (!review || review.dataset.motionPlayed === "true") return;
+          review.dataset.motionPlayed = "true";
+          gsap.fromTo(review,
+            { y: 22, opacity: 0, scale: .985 },
+            { y: 0, opacity: 1, scale: 1, duration: .62, ease: "power3.out", clearProps: "transform,opacity" }
+          );
+          const rows = review.querySelectorAll<HTMLElement>("dl > div");
+          if (rows.length) gsap.from(rows, {
+            x: -12, opacity: 0, stagger: .08, duration: .42,
+            ease: "power2.out", delay: .12, clearProps: "transform,opacity",
+          });
+          const action = review.querySelector<HTMLElement>("button");
+          if (action) animate(action, {
+            scale: [0.96, 1.035, 1],
+            duration: 520,
+            delay: 220,
+            ease: "outElastic(1,.65)",
+          });
+        });
+        reviewObserver.observe(root, { childList: true, subtree: true });
+        cleanups.push(() => reviewObserver.disconnect());
+
         // Tiny ornamental marks pulse in a short, non-looping sequence.
         const marks = root.querySelectorAll<HTMLElement>("main [aria-hidden='true'].h-2");
         if (marks.length) animate(marks, { scale: [0.7, 1], delay: stagger(70), duration: 460, ease: "outBack(1.7)" });
