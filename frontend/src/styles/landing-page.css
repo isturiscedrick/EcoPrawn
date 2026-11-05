@@ -1,516 +1,227 @@
-/* Landing page monochrome design system.
-   This is the single source of truth for the landing page's black/white UI.
-   Shared public pages and the dashboard keep their own design tokens. */
+/* EcoPrawn landing-page palette
+ * This file is imported only by LandingPage.tsx through landing-global.css.
+ * Light: Terracotta Orange #D94416 + Deep Slate Teal #0F4C5C.
+ * Dark: Soft Coral #F28A68 + Soft Green #8BD5A6.
+ * About, Contact, Dashboard and Auth keep their own styles.
+ */
+
 .marketing-shell.ep-landing-page {
-  --ep-bg: #ffffff !important;
-  --ep-surface: #ffffff !important;
-  --ep-tint: #ffffff !important;
-  --ep-primary: #000000 !important;
-  --ep-primary-soft: #000000 !important;
-  --ep-secondary: #000000 !important;
-  --ep-accent: #000000 !important;
-  --ep-accent-hover: #000000 !important;
-  --ep-text-muted: #000000 !important;
-  --ep-line: #000000 !important;
-  --ep-brand-primary: #000000 !important;
-  --ep-brand-secondary: #000000 !important;
-  --coral: #000000 !important;
-  --coral-dim: #000000 !important;
-  --mangrove-light: #000000 !important;
-  --water-deep: #000000 !important;
-  --sand: #ffffff !important;
-  --mangrove: #000000 !important;
-  --mangrove-text: #000000 !important;
-  --ep-ok: #000000 !important;
-  --ep-warn-text: #000000 !important;
-  --ep-danger: #000000 !important;
-  --ep-logo-color: #000000 !important;
-  --ep-logo-text: #000000 !important;
-  --ep-accent-tint: transparent !important;
-  --ep-secondary-tint: transparent !important;
-  background: #ffffff !important;
-  color: #000000 !important;
+  --ep-bg: #f4f7f6;
+  --ep-surface: #ffffff;
+  --ep-tint: #e8f0ef;
+  --ep-primary: #d94416;
+  --ep-primary-soft: #fbe9e3;
+  --ep-secondary: #0f4c5c;
+  --ep-accent: #d94416;
+  --ep-accent-hover: #b93612;
+  --ep-text: #142b2e;
+  --ep-text-muted: #496064;
+  --ep-line: rgba(15, 76, 92, .28);
+  --ep-brand-primary: #d94416;
+  --ep-brand-secondary: #0f4c5c;
+  --ep-ok: #0f4c5c;
+  --ep-warn-text: #d94416;
+  --ep-danger: #b42318;
+  background: var(--ep-bg) !important;
+  color: var(--ep-text) !important;
 }
 html.dark .marketing-shell.ep-landing-page {
-  --ep-bg: #000000 !important;
-  --ep-surface: #000000 !important;
-  --ep-tint: #000000 !important;
-  --ep-primary: #ffffff !important;
-  --ep-primary-soft: #ffffff !important;
-  --ep-secondary: #ffffff !important;
-  --ep-accent: #ffffff !important;
-  --ep-accent-hover: #ffffff !important;
-  --ep-text-muted: #ffffff !important;
-  --ep-line: #ffffff !important;
-  --ep-brand-primary: #ffffff !important;
-  --ep-brand-secondary: #ffffff !important;
-  --coral: #ffffff !important;
-  --coral-dim: #ffffff !important;
-  --mangrove-light: #ffffff !important;
-  --water-deep: #ffffff !important;
-  --sand: #000000 !important;
-  --mangrove: #ffffff !important;
-  --mangrove-text: #ffffff !important;
-  --ep-ok: #ffffff !important;
-  --ep-warn-text: #ffffff !important;
-  --ep-danger: #ffffff !important;
-  --ep-logo-color: #ffffff !important;
-  --ep-logo-text: #ffffff !important;
-  --ep-accent-tint: transparent !important;
-  --ep-secondary-tint: transparent !important;
-  background: #000000 !important;
-  color: #ffffff !important;
+  --ep-bg: #18191a;
+  --ep-surface: #202729;
+  --ep-tint: #263331;
+  --ep-primary: #f28a68;
+  --ep-primary-soft: rgba(242, 138, 104, .14);
+  --ep-secondary: #8bd5a6;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #ffab91;
+  --ep-text: #eaf4ef;
+  --ep-text-muted: #b7cbc1;
+  --ep-line: rgba(139, 213, 166, .32);
+  --ep-brand-primary: #f28a68;
+  --ep-brand-secondary: #8bd5a6;
+  --ep-ok: #8bd5a6;
+  --ep-warn-text: #f28a68;
+  --ep-danger: #ff8a80;
+  background: var(--ep-bg) !important;
+  color: var(--ep-text) !important;
 }
 
-/* Remove legacy colored fills, gradients, and shadows within this page only. */
-.marketing-shell.ep-landing-page :is(*, *::before, *::after) {
-  background-image: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  border-color: #000000 !important;
+/* Global landing-page text and icon defaults. */
+.marketing-shell.ep-landing-page :is(h1,h2,h3,h4,h5,h6) {
+  color: var(--ep-text) !important;
+  -webkit-text-fill-color: var(--ep-text) !important;
 }
-html.dark .marketing-shell.ep-landing-page :is(*, *::before, *::after) {
-  border-color: #ffffff !important;
+.marketing-shell.ep-landing-page :is(p,li,dt,dd,label,small) {
+  color: var(--ep-text-muted) !important;
+  -webkit-text-fill-color: var(--ep-text-muted) !important;
 }
-.marketing-shell.ep-landing-page :is(header, main, section, footer, nav, article, aside) {
-  background-color: transparent;
-  color: #000000;
+.marketing-shell.ep-landing-page :is(svg,[data-icon],.ep-icon) {
+  color: var(--ep-secondary);
 }
-html.dark .marketing-shell.ep-landing-page :is(header, main, section, footer, nav, article, aside) {
-  color: #ffffff;
+.marketing-shell.ep-landing-page :is(section,article,aside,nav,header,footer) {
+  border-color: var(--ep-line);
 }
-
-/* Base text, icons, and controls. */
-.marketing-shell.ep-landing-page :is(
-  h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,span,a,button,
-  input,textarea,select,summary,[role="button"],svg
-) {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page :is(
-  h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,span,a,button,
-  input,textarea,select,summary,[role="button"],svg
-) {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-.marketing-shell.ep-landing-page :is(svg, svg *) {
-  stroke: currentColor !important;
+.marketing-shell.ep-landing-page :is(a,button,input,textarea,select):focus-visible {
+  outline: 3px solid var(--ep-primary) !important;
+  outline-offset: 3px;
 }
 
-/* Main canvas and reusable neutral surfaces. */
-.marketing-shell.ep-landing-page :is(#top, #process, .ep-stats-section, main, footer, header) {
-  background-color: #ffffff !important;
-  color: #000000 !important;
+/* Page canvas and alternating surfaces. */
+.marketing-shell.ep-landing-page,
+.marketing-shell.ep-landing-page main,
+.marketing-shell.ep-landing-page #top,
+.marketing-shell.ep-landing-page #process,
+.marketing-shell.ep-landing-page .ep-stats-section {
+  background-color: var(--ep-bg) !important;
 }
-html.dark .marketing-shell.ep-landing-page :is(#top, #process, .ep-stats-section, main, footer, header) {
-  background-color: #000000 !important;
-  color: #ffffff !important;
+.marketing-shell.ep-landing-page :is(.ep-stats-panel,.ep-stat-card,[data-reading],[data-card]) {
+  background: var(--ep-surface) !important;
+  color: var(--ep-text) !important;
+  border: 1px solid var(--ep-line) !important;
+  border-radius: 1rem;
 }
-.marketing-shell.ep-landing-page :is(.ep-stats-panel, .ep-stat-card, [data-hero="eyebrow"], [data-hero="cta"] a:last-child) {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border: 1px solid #000000 !important;
+.marketing-shell.ep-landing-page :is(.ep-stats-panel,.ep-stat-card,[data-reading],[data-card]) :is(h3,h4,strong,b) {
+  color: var(--ep-secondary) !important;
 }
-html.dark .marketing-shell.ep-landing-page :is(.ep-stats-panel, .ep-stat-card, [data-hero="eyebrow"], [data-hero="cta"] a:last-child) {
-  background: #000000 !important;
-  color: #ffffff !important;
-  border: 1px solid #ffffff !important;
-}
-
-/* High-contrast feature bands: black in light mode, white in dark mode. */
-.marketing-shell.ep-landing-page :is(#readings, [data-band]) {
-  background: #000000 !important;
-  color: #ffffff !important;
-  border-color: #000000 !important;
-}
-.marketing-shell.ep-landing-page :is(#readings, [data-band]) * {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #ffffff !important;
-}
-.marketing-shell.ep-landing-page :is(#readings, [data-band]) :is([data-reading], [data-card], article) {
-  background: transparent !important;
-  border: 1px solid #ffffff !important;
-}
-html.dark .marketing-shell.ep-landing-page :is(#readings, [data-band]) {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border-color: #ffffff !important;
-}
-html.dark .marketing-shell.ep-landing-page :is(#readings, [data-band]) * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  border-color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page :is(#readings, [data-band]) :is([data-reading], [data-card], article) {
-  background: transparent !important;
-  border: 1px solid #000000 !important;
+.marketing-shell.ep-landing-page :is(.ep-stats-panel,.ep-stat-card,[data-reading],[data-card]) :is(svg,[data-icon]) {
+  color: var(--ep-primary) !important;
 }
 
-/* CTA and primary actions invert with the page theme. */
-.marketing-shell.ep-landing-page :is(button, a)[data-primary],
-.marketing-shell.ep-landing-page :is(a, button)[data-variant="primary"],
-.marketing-shell.ep-landing-page :is(a, button)[data-primary-action],
+/* Brand accents: coral for primary actions, teal for secondary actions. */
+.marketing-shell.ep-landing-page :is(button,a)[data-primary],
+.marketing-shell.ep-landing-page :is(a,button)[data-variant="primary"],
+.marketing-shell.ep-landing-page :is(a,button)[data-primary-action],
 .marketing-shell.ep-landing-page button[type="submit"],
 .marketing-shell.ep-landing-page [data-hero="cta"] a:first-child {
-  background: #000000 !important;
+  background: var(--ep-primary) !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-  border: 1px solid #000000 !important;
+  border: 1px solid var(--ep-primary) !important;
 }
-html.dark .marketing-shell.ep-landing-page :is(button, a)[data-primary],
-html.dark .marketing-shell.ep-landing-page :is(a, button)[data-variant="primary"],
-html.dark .marketing-shell.ep-landing-page :is(a, button)[data-primary-action],
-html.dark .marketing-shell.ep-landing-page button[type="submit"],
-html.dark .marketing-shell.ep-landing-page [data-hero="cta"] a:first-child {
-  background: #ffffff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  border: 1px solid #ffffff !important;
+.marketing-shell.ep-landing-page :is(button,a)[data-secondary],
+.marketing-shell.ep-landing-page :is(a,button)[data-variant="secondary"],
+.marketing-shell.ep-landing-page [data-hero="cta"] a:last-child {
+  background: var(--ep-secondary) !important;
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
+  border: 1px solid var(--ep-secondary) !important;
 }
-
-/* Keep every illustration and canvas graphic monochrome. */
-.marketing-shell.ep-landing-page :is(img, video, canvas, figure, .ep-hero-visual) {
-  filter: grayscale(1) !important;
+.marketing-shell.ep-landing-page :is(button,a)[data-primary]:hover,
+.marketing-shell.ep-landing-page :is(a,button)[data-variant="primary"]:hover,
+.marketing-shell.ep-landing-page button[type="submit"]:hover {
+  background: var(--ep-accent-hover) !important;
+  border-color: var(--ep-accent-hover) !important;
 }
-
-
-/* Landing header/footer and shared CTA components use the same two-color system. */
-.marketing-shell.ep-landing-page #site-header {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border-color: #000000 !important;
-  box-shadow: none !important;
-}
-html.dark .marketing-shell.ep-landing-page #site-header {
-  background: #000000 !important;
-  color: #ffffff !important;
-  border-color: #ffffff !important;
-}
-.marketing-shell.ep-landing-page [data-site-footer] {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border-top: 1px solid #000000 !important;
-}
-.marketing-shell.ep-landing-page [data-site-footer] * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  border-color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page [data-site-footer] {
-  background: #000000 !important;
-  color: #ffffff !important;
-  border-top-color: #ffffff !important;
-}
-html.dark .marketing-shell.ep-landing-page [data-site-footer] * {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #ffffff !important;
+.marketing-shell.ep-landing-page :is(button,a)[data-secondary]:hover,
+.marketing-shell.ep-landing-page :is(a,button)[data-variant="secondary"]:hover {
+  filter: brightness(1.08);
 }
 
-/* CTA band buttons need their own foreground/background pairing. */
+/* Header, desktop/mobile navigation, and brand mark. */
+.marketing-shell.ep-landing-page #site-header,
+.marketing-shell.ep-landing-page #site-header > div {
+  background: var(--ep-bg) !important;
+  color: var(--ep-text) !important;
+  border-color: var(--ep-line) !important;
+}
+.marketing-shell.ep-landing-page #site-header :is(a,button,svg,.ep-logo,.ep-logo-wordmark) {
+  color: var(--ep-text) !important;
+  -webkit-text-fill-color: var(--ep-text) !important;
+}
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"],
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] {
+  background: var(--ep-surface) !important;
+  border: 1px solid var(--ep-line) !important;
+  border-radius: 999px;
+}
+.marketing-shell.ep-landing-page #site-header nav a {
+  color: var(--ep-text) !important;
+  -webkit-text-fill-color: var(--ep-text) !important;
+  border-color: transparent !important;
+}
+.marketing-shell.ep-landing-page #site-header nav a:hover,
+.marketing-shell.ep-landing-page #site-header nav a[aria-current="page"] {
+  background: var(--ep-secondary) !important;
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
+}
+.marketing-shell.ep-landing-page .ep-logo {
+  --ep-logo-color: var(--ep-primary) !important;
+  --ep-logo-text: var(--ep-text) !important;
+}
+.marketing-shell.ep-landing-page .ep-logo-wordmark {
+  color: var(--ep-text) !important;
+  -webkit-text-fill-color: var(--ep-text) !important;
+}
+
+/* Secondary-color feature band; coral is reserved for emphasis and markers. */
+.marketing-shell.ep-landing-page :is(#readings,[data-band]) {
+  background: var(--ep-secondary) !important;
+  color: var(--ep-bg) !important;
+  border-color: var(--ep-secondary) !important;
+}
+.marketing-shell.ep-landing-page :is(#readings,[data-band]) :is(h1,h2,h3,h4,h5,h6,p,span,li,dt,dd,strong,b,label) {
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
+}
+.marketing-shell.ep-landing-page :is(#readings,[data-band]) :is(svg,[data-icon],.ep-icon) {
+  color: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page #readings :is([data-reading],article,[data-card]) {
+  background: color-mix(in srgb, var(--ep-secondary) 86%, white 14%) !important;
+  border: 1px solid color-mix(in srgb, var(--ep-bg) 34%, transparent) !important;
+  color: var(--ep-bg) !important;
+}
+.marketing-shell.ep-landing-page #readings [data-marker] > span:last-child,
+.marketing-shell.ep-landing-page #readings [data-zone] {
+  background: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page #readings [data-marker] > span:first-child {
+  border-color: var(--ep-bg) !important;
+}
+
+/* CTA band and footer. */
 .marketing-shell.ep-landing-page [data-band] a:first-child {
-  background: #ffffff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  border-color: #ffffff !important;
+  background: var(--ep-primary) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: var(--ep-primary) !important;
 }
 .marketing-shell.ep-landing-page [data-band] a:last-child {
   background: transparent !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #ffffff !important;
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
+  border-color: var(--ep-bg) !important;
 }
-html.dark .marketing-shell.ep-landing-page [data-band] a:first-child {
-  background: #000000 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #000000 !important;
+.marketing-shell.ep-landing-page footer[data-site-footer] {
+  background: var(--ep-surface) !important;
+  color: var(--ep-text) !important;
+  border-top: 1px solid var(--ep-line) !important;
 }
-html.dark .marketing-shell.ep-landing-page [data-band] a:last-child {
-  background: transparent !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  border-color: #000000 !important;
+.marketing-shell.ep-landing-page footer[data-site-footer] :is(a,p,span,small,h2,h3) {
+  color: var(--ep-text-muted) !important;
+  -webkit-text-fill-color: var(--ep-text-muted) !important;
 }
-
-/* HeroLens embedded shrimp SVG inherits the monochrome foreground. */
-.marketing-shell.ep-landing-page .ep-lens-shrimp .ep-logo-shrimp {
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
+.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo-wordmark {
+  color: var(--ep-text) !important;
+  -webkit-text-fill-color: var(--ep-text) !important;
 }
-html.dark .marketing-shell.ep-landing-page .ep-lens-shrimp .ep-logo-shrimp {
-  fill: #000000 !important;
-  stroke: #000000 !important;
+.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo svg .ep-logo-shrimp {
+  fill: var(--ep-primary) !important;
+  stroke: var(--ep-primary) !important;
 }
 
-/* Theme-specific lens labels and selected navigation state. */
+/* Hero lens and illustration retain their original full color treatment. */
 .marketing-shell.ep-landing-page .ep-lens-caption,
 .marketing-shell.ep-landing-page .ep-lens-readout,
 .marketing-shell.ep-landing-page .ep-lens-readout * {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
 }
-html.dark .marketing-shell.ep-landing-page .ep-lens-caption,
-html.dark .marketing-shell.ep-landing-page .ep-lens-readout,
-html.dark .marketing-shell.ep-landing-page .ep-lens-readout * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+.marketing-shell.ep-landing-page .ep-lens-shrimp .ep-logo-shrimp {
+  fill: var(--ep-primary) !important;
+  stroke: var(--ep-primary) !important;
 }
-.marketing-shell.ep-landing-page nav[aria-label="Primary navigation"] a[aria-current],
-.marketing-shell.ep-landing-page nav[aria-label="Mobile navigation"] a[aria-current] {
-  background: #000000 !important;
-  border-color: #000000 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+.marketing-shell.ep-landing-page :is(img,video,canvas,figure,.ep-hero-visual) {
+  filter: none !important;
 }
-html.dark .marketing-shell.ep-landing-page nav[aria-label="Primary navigation"] a[aria-current],
-html.dark .marketing-shell.ep-landing-page nav[aria-label="Mobile navigation"] a[aria-current] {
-  background: #ffffff !important;
-  border-color: #ffffff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* BrandMark declares its own logo variables, so override them at the logo node. */
-.marketing-shell.ep-landing-page .ep-logo {
-  --ep-logo-color: #000000 !important;
-  --ep-logo-text: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page .ep-logo {
-  --ep-logo-color: #ffffff !important;
-  --ep-logo-text: #ffffff !important;
-}
-.marketing-shell.ep-landing-page .ep-logo-wordmark {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page .ep-logo-wordmark {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-
-/* Target ranges: suppress legacy water gradients and keep every reading
-   element strictly black/white in both themes. */
-.marketing-shell.ep-landing-page #readings {
-  background: #000000 !important;
-  color: #ffffff !important;
-  border-color: #000000 !important;
-}
-.marketing-shell.ep-landing-page #readings > [data-readings-bg] {
-  background: transparent !important;
-  background-image: none !important;
-  opacity: 0 !important;
-}
-.marketing-shell.ep-landing-page #readings :is(h2, p, dt, dd, span, svg, path, .ep-icon) {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-.marketing-shell.ep-landing-page #readings [data-reading] {
-  background: #000000 !important;
-  border: 1px solid #ffffff !important;
-  color: #ffffff !important;
-}
-.marketing-shell.ep-landing-page #readings [data-reading] :is(*, *::before, *::after) {
-  border-color: #ffffff !important;
-}
-.marketing-shell.ep-landing-page #readings [data-reading] [data-zone],
-.marketing-shell.ep-landing-page #readings [data-reading] [data-marker] > span:last-child {
-  background: #ffffff !important;
-}
-.marketing-shell.ep-landing-page #readings [data-reading] [data-marker] > span:first-child {
-  border-color: #ffffff !important;
-}
-html.dark .marketing-shell.ep-landing-page #readings {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border-color: #ffffff !important;
-}
-html.dark .marketing-shell.ep-landing-page #readings :is(h2, p, dt, dd, span, svg, path, .ep-icon) {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page #readings [data-reading] {
-  background: #ffffff !important;
-  border: 1px solid #000000 !important;
-  color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page #readings [data-reading] :is(*, *::before, *::after) {
-  border-color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page #readings [data-reading] [data-zone],
-html.dark .marketing-shell.ep-landing-page #readings [data-reading] [data-marker] > span:last-child {
-  background: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page #readings [data-reading] [data-marker] > span:first-child {
-  border-color: #000000 !important;
-}
-
-/* Footer logo shrimp paths have explicit legacy fills; override the paths,
-   not just the inherited logo variables. */
-.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo svg .ep-logo-shrimp {
-  fill: #000000 !important;
-  stroke: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo svg .ep-logo-shrimp {
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
-}
-.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo .ep-logo-wordmark {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo .ep-logo-wordmark {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-
-
-/* Final source-level lock for the landing navigation and header branding.
-   Keep this scoped to the landing page; shared pages retain their palette. */
-.marketing-shell.ep-landing-page #site-header,
-.marketing-shell.ep-landing-page #site-header > div,
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"],
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  background-image: none !important;
-  color: #000000 !important;
-  border-color: #000000 !important;
-  box-shadow: none !important;
-}
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a,
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a,
-.marketing-shell.ep-landing-page #site-header > div > a,
-.marketing-shell.ep-landing-page #site-header button,
-.marketing-shell.ep-landing-page #site-header button svg {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  border-color: #000000 !important;
-}
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a[aria-current],
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a[aria-current] {
-  background: #000000 !important;
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-.marketing-shell.ep-landing-page #site-header .ep-logo,
-.marketing-shell.ep-landing-page #site-header .ep-logo-wordmark,
-.marketing-shell.ep-landing-page #site-header .ep-logo svg,
-.marketing-shell.ep-landing-page #site-header .ep-logo svg * {
-  color: #000000 !important;
-  fill: #000000 !important;
-  stroke: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page #site-header,
-html.dark .marketing-shell.ep-landing-page #site-header > div,
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"],
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] {
-  background: #000000 !important;
-  background-color: #000000 !important;
-  background-image: none !important;
-  color: #ffffff !important;
-  border-color: #ffffff !important;
-  box-shadow: none !important;
-}
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a,
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a,
-html.dark .marketing-shell.ep-landing-page #site-header > div > a,
-html.dark .marketing-shell.ep-landing-page #site-header button,
-html.dark .marketing-shell.ep-landing-page #site-header button svg,
-html.dark .marketing-shell.ep-landing-page #site-header .ep-logo,
-html.dark .marketing-shell.ep-landing-page #site-header .ep-logo-wordmark,
-html.dark .marketing-shell.ep-landing-page #site-header .ep-logo svg,
-html.dark .marketing-shell.ep-landing-page #site-header .ep-logo svg * {
-  color: #ffffff !important;
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #ffffff !important;
-}
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a[aria-current],
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a[aria-current] {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-
-/* Landing section headings must not inherit the legacy teal/coral accents. */
-.marketing-shell.ep-landing-page main :is(h1,h2,h3,h4,h5,h6),
-.marketing-shell.ep-landing-page main :is(h1,h2,h3,h4,h5,h6) *,
-.marketing-shell.ep-landing-page main [data-section-heading] {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  background-image: none !important;
-}
-html.dark .marketing-shell.ep-landing-page main :is(h1,h2,h3,h4,h5,h6),
-html.dark .marketing-shell.ep-landing-page main :is(h1,h2,h3,h4,h5,h6) *,
-html.dark .marketing-shell.ep-landing-page main [data-section-heading] {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  background-image: none !important;
-}
-
-/* Final landing-only header and hero headline treatment. */
-.marketing-shell.ep-landing-page .ep-monochrome-header,
-.marketing-shell.ep-landing-page .ep-monochrome-header > div,
-.marketing-shell.ep-landing-page .ep-monochrome-header nav {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  background-image: none !important;
-  color: #000000 !important;
-  border-color: #000000 !important;
-  box-shadow: none !important;
-}
-.marketing-shell.ep-landing-page .ep-monochrome-header :is(a, button, svg, .ep-logo, .ep-logo-wordmark) {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  border-color: #000000 !important;
-}
-.marketing-shell.ep-landing-page .ep-monochrome-header :is(a[aria-current="page"], [data-variant="primary"], a[data-primary], button[data-primary]) {
-  background: #000000 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page .ep-monochrome-header,
-html.dark .marketing-shell.ep-landing-page .ep-monochrome-header > div,
-html.dark .marketing-shell.ep-landing-page .ep-monochrome-header nav {
-  background: #000000 !important;
-  background-color: #000000 !important;
-  background-image: none !important;
-  color: #ffffff !important;
-  border-color: #ffffff !important;
-  box-shadow: none !important;
-}
-html.dark .marketing-shell.ep-landing-page .ep-monochrome-header :is(a, button, svg, .ep-logo, .ep-logo-wordmark) {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #ffffff !important;
-}
-html.dark .marketing-shell.ep-landing-page .ep-monochrome-header :is(a[aria-current="page"], [data-variant="primary"], a[data-primary], button[data-primary]) {
-  background: #ffffff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  border-color: #ffffff !important;
-}
-
-/* Hero headline: black on the light canvas, white on the dark canvas. */
-.marketing-shell.ep-landing-page #top [data-hero="headline"],
-.marketing-shell.ep-landing-page #top [data-hero="headline"] * {
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  background-image: none !important;
-}
-html.dark .marketing-shell.ep-landing-page #top [data-hero="headline"],
-html.dark .marketing-shell.ep-landing-page #top [data-hero="headline"] * {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  background-image: none !important;
-}
-
