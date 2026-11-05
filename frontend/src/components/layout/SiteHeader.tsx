@@ -102,7 +102,7 @@ export function SiteHeader({
     >
       {/* Three columns (logo | nav | actions) so the nav is truly centered and can never overlap. */}
       <div
-        className={`mx-auto min-h-[66px] max-w-[1440px] items-center gap-4 px-5 sm:px-8 lg:px-12 ${
+        className={`mx-auto min-h-[66px] max-w-[1440px] items-center gap-3 px-4 sm:gap-4 sm:px-8 lg:px-12 ${
           showLinks ? "grid grid-cols-[auto_1fr] lg:grid-cols-[1fr_auto_1fr]" : "flex justify-between"
         } ${isAuth ? "w-full" : ""}`}
       >
@@ -121,7 +121,7 @@ export function SiteHeader({
           </div>
         )}
 
-        <div className="flex shrink-0 items-center justify-self-end gap-2 sm:gap-3">
+        <div className="flex shrink-0 items-center justify-self-end gap-1.5 sm:gap-3">
           {!isAuth && (
             <button
               type="button"
