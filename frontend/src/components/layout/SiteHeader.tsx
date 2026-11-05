@@ -124,9 +124,9 @@ export function SiteHeader({
               title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
               className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
               style={{
-                color: "var(--ep-primary)",
-                borderColor: "var(--ep-line)",
-                backgroundColor: "var(--ep-surface)",
+                color: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-primary)",
+                borderColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-line)",
+                backgroundColor: isMonochromeLanding ? (darkMode ? "#000000" : "#ffffff") : "var(--ep-surface)",
               }}
             >
               {darkMode ? (
@@ -147,10 +147,10 @@ export function SiteHeader({
             </Link>
           ) : (
             <>
-              <AuthLink className={`hidden rounded-full border px-5 py-2 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}>
+              <AuthLink className={`hidden rounded-full border px-5 py-2 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ borderColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-line)", color: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-primary)", backgroundColor: isMonochromeLanding ? (darkMode ? "#000000" : "#ffffff") : "var(--ep-surface)" }}>
                 Log in
               </AuthLink>
-              <AuthLink mode="signup" className={`hidden h-9 w-9 items-center justify-center rounded-full text-[var(--ep-bg)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}>
+              <AuthLink mode="signup" className={`hidden h-9 w-9 items-center justify-center rounded-full text-[var(--ep-bg)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ backgroundColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-accent)", color: isMonochromeLanding ? (darkMode ? "#000000" : "#ffffff") : "var(--ep-bg)" }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-label="Get started"><path d="M7 17 17 7M7 7h10v10" /></svg>
               </AuthLink>
             </>
@@ -179,8 +179,8 @@ export function SiteHeader({
           <div className="min-h-0">
             <NavLinks variant="mobile" activeHref={pathname} onLinkClick={() => setMobileNavOpen(false)} monochrome={isMonochromeLanding} darkMode={darkMode} />
             <div className="flex gap-3 px-5 pb-5 sm:hidden">
-              <AuthLink className="flex-1 rounded-full border px-4 py-3 text-center text-sm font-semibold" style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>Log in</AuthLink>
-              <AuthLink mode="signup" className="flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold text-[var(--ep-bg)]" style={{ backgroundColor: "var(--ep-accent)" }}>Get started</AuthLink>
+              <AuthLink className="flex-1 rounded-full border px-4 py-3 text-center text-sm font-semibold" style={{ borderColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-line)", color: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-primary)" }}>Log in</AuthLink>
+              <AuthLink mode="signup" className="flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold text-[var(--ep-bg)]" style={{ backgroundColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-accent)", color: isMonochromeLanding ? (darkMode ? "#000000" : "#ffffff") : undefined }}>Get started</AuthLink>
             </div>
           </div>
         </div>
