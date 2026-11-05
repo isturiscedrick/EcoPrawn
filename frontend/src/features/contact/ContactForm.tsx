@@ -34,7 +34,7 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="h-full rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center shadow-[0_16px_32px_-24px_rgba(11,46,51,0.55)] sm:p-8"
+        className="h-full rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center shadow-[0_16px_32px_-24px_rgba(11,46,51,0.55)] sm:gap-5 sm:p-8"
       >
         <h2 className="ep-font-display mb-2 text-2xl font-semibold text-[var(--ep-text)]">Review your message</h2>
         <p className="mb-6 text-base leading-relaxed text-[var(--ep-text-muted)]">
@@ -68,7 +68,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex h-full flex-col gap-5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_16px_32px_-24px_rgba(11,46,51,0.45)] sm:p-8"
+      className="flex h-full flex-col gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-[0_16px_32px_-24px_rgba(11,46,51,0.45)] sm:p-8"
     >
       <div className="mb-1">
         <h2 className="ep-font-display text-2xl font-semibold tracking-tight text-[var(--ep-text)]">
@@ -101,6 +101,7 @@ export function ContactForm() {
         <input
           id={`${uid}-email`}
           type="email"
+          inputMode="email"
           className={inputClass}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -117,6 +118,7 @@ export function ContactForm() {
         <textarea
           id={`${uid}-message`}
           rows={5}
+          maxLength={2000}
           minLength={10}
           placeholder="Tell us how we can help…"
           className={`${inputClass} resize-y`}
