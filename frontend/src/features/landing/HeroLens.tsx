@@ -102,12 +102,10 @@ export function HeroLens() {
           invalidateOnRefresh: true,
         },
       });
+      // Keep the SVG lens itself at a constant scale and rotation.
+      // Scroll only its internal instrumentation and reflection to avoid
+      // transform resampling that can leave the lens looking soft.
       scrollDepth
-        .fromTo(
-          root,
-          { y: 54, rotateZ: -3, scale: 0.9, autoAlpha: 0.72 },
-          { y: -34, rotateZ: 3, scale: 1.035, autoAlpha: 1, ease: "none" }
-        )
         .fromTo(rings, { rotateZ: -12 }, { rotateZ: 12, ease: "none" }, 0)
         .fromTo(
           one(".ep-lens-glare"),
