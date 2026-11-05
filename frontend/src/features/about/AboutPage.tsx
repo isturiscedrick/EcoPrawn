@@ -7,7 +7,7 @@ import { AboutMotion } from "@/components/motion/AboutMotion";
 import { SectionNav } from "./SectionNav";
 import { objectives, features, inScope, outOfScope } from "@/content/site";
 
-const SECTION_PAD = "px-5 py-20 sm:px-8 sm:py-24";
+const SECTION_PAD = "px-4 py-16 sm:px-8 sm:py-24";
 const SECTION_HEADER_MARGIN = "mb-10 sm:mb-14";
 
 // Same eyebrow / heading scale as the landing sections.
@@ -126,7 +126,7 @@ export function AboutPage() {
             <div className="border-t border-white/20">
               {features.map((feature, i) => (
                 <Reveal key={feature.index}>
-                  <article className="group relative grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 border-b border-white/20 px-4 py-8 transition-colors duration-200 hover:bg-white/[0.07] sm:grid-cols-[3.5rem_0.8fr_1.2fr] sm:gap-x-8">
+                  <article className="group relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-3 gap-y-3 border-b border-white/20 px-2 py-6 transition-colors duration-200 hover:bg-white/[0.07] sm:grid-cols-[3.5rem_0.8fr_1.2fr] sm:gap-x-8 sm:px-4 sm:py-8">
                     <span
                       aria-hidden="true"
                       className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 bg-[var(--ep-marker)] transition-transform duration-200 group-hover:scale-y-100"
@@ -149,14 +149,14 @@ export function AboutPage() {
                       </h3>
                     </div>
 
-                    <div className="col-span-2 flex flex-col gap-3 pl-[3.5rem] sm:col-span-1 sm:pl-0">
+                    <div className="col-start-2 col-span-1 flex min-w-0 flex-col gap-3 pl-0 sm:col-start-auto sm:col-span-1">
                       {feature.points.map((point) => (
-                        <div key={point.bold} className="flex gap-3">
+                        <div key={point.bold} className="flex min-w-0 gap-3">
                           <span aria-hidden="true" className="text-[var(--ep-marker)]">
                             ›
                           </span>
 
-                          <span className="text-base leading-relaxed text-[var(--ep-on-deep-muted)]">
+                          <span className="min-w-0 break-words text-sm leading-relaxed text-[var(--ep-on-deep-muted)] sm:text-base">
                             <b className="font-semibold text-[var(--ep-on-deep)]">{point.bold}</b>{" "}
                             {point.body}
                           </span>
