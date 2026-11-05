@@ -101,13 +101,13 @@ function Words({ text }: { text: string }) {
 
 export function LandingPage() {
   return (
-    <div className="marketing-shell flex min-h-screen flex-col bg-[#f4f7f6] text-[#0b2e33] dark:bg-[#18191a] dark:text-[#e4e6eb]">
+    <div className="marketing-shell flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)] dark:bg-[var(--ep-bg)] dark:text-[var(--ep-primary)]">
       <LandingMotion />
       <SiteHeader tone="white" integrated />
 
       <main className="flex-1">
-        {/* HERO: cream (60%) with a faint blueprint grid and one coral accent */}
-        <section id="top" className="ep-landing-hero relative isolate overflow-hidden bg-[#f4f7f6] text-[#0b2e33] dark:bg-[#18191a] dark:text-[#e4e6eb]">
+        {/* HERO: warm-neutral canvas, charcoal typography, restrained terracotta accents. */}
+        <section id="top" className="ep-landing-hero relative isolate overflow-hidden bg-[var(--ep-bg)] text-[var(--ep-primary)] dark:bg-[var(--ep-bg)] dark:text-[var(--ep-primary)]">
           <div
             aria-hidden="true"
             data-hero="grid"
@@ -147,11 +147,11 @@ export function LandingPage() {
             <div data-hero="text" className="ep-hero-copy order-1 mx-auto w-full max-w-[760px] text-center lg:mx-0 lg:text-left">
               <div
                 data-hero="eyebrow"
-                className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d8e0de] bg-white/85 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#b23f1c] shadow-sm dark:border-white/15 dark:bg-white/[0.06] dark:text-[#f6a185]"
+                className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--ep-accent)] shadow-sm"
               >
                 <span className="relative flex h-2 w-2" aria-hidden="true">
-                  <span data-live-ping="" className="absolute inline-flex h-full w-full rounded-full bg-[#e46b45] opacity-60" />
-                  <span className="relative h-2 w-2 rounded-full bg-[#e46b45]" />
+                  <span data-live-ping="" className="absolute inline-flex h-full w-full rounded-full bg-[var(--ep-accent)] opacity-60" />
+                  <span className="relative h-2 w-2 rounded-full bg-[var(--ep-accent)]" />
                 </span>
                 AIoT-powered indoor shrimp farming
               </div>
@@ -160,17 +160,17 @@ export function LandingPage() {
                 aria-label="Smarter shrimp farming, always in range."
                 className="ep-font-display mx-auto max-w-[900px] text-[clamp(42px,5.2vw,76px)] font-bold leading-[1.08] tracking-[-0.055em] lg:mx-0"
               >
-                <span data-hero-headline-accent className="block text-[#0f4c5c] dark:text-[#e4e6eb]">
+                <span data-hero-headline-accent className="block text-[var(--ep-secondary)] dark:text-[var(--ep-primary)]">
                   <Words text="Smarter shrimp farming," />
                 </span>
-                <span className="block text-[#0b2e33] dark:text-[#e4e6eb]">
+                <span className="block text-[var(--ep-primary)] dark:text-[var(--ep-primary)]">
                   <Words text="always in range." />
                 </span>
               </h1>
 
               <p
                 data-hero="lead"
-                className="mx-auto mt-5 max-w-[590px] text-[15px] leading-[1.8] text-[#3f5753] dark:text-[#b0b3b8] sm:text-base lg:mx-0"
+                className="mx-auto mt-5 max-w-[590px] text-[15px] leading-[1.8] text-[var(--ep-text-muted)] dark:text-[var(--ep-text-muted)] sm:text-base lg:mx-0"
               >
                 Bring water quality, automated feeding, and AI growth insights together
                 in one calm, connected view of your shrimp farm.
@@ -178,14 +178,14 @@ export function LandingPage() {
 
               <div data-hero="cta" className="mt-7 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
                 <AuthLink
-                  className={`group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#b23f1c] bg-[#b23f1c] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_-12px_rgba(11,46,51,.35)] hover:border-[#8f3115] hover:bg-[#8f3115] ${buttonMotion} ${focusRing}`}
+                  className={`group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-3 text-sm font-semibold text-[var(--ep-bg)] shadow-sm hover:opacity-90 ${buttonMotion} ${focusRing}`}
                 >
                   Open farm dashboard
                   <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </AuthLink>
                 <Link
                   to="/about"
-                  className={`inline-flex min-h-11 items-center justify-center rounded-xl border border-[#cbd8d3] bg-white/85 px-6 py-3 text-sm font-semibold text-[#0b2e33] shadow-sm hover:border-[#b23f1c] hover:bg-white dark:border-white/20 dark:bg-white/[0.05] dark:text-[#e4e6eb] dark:hover:bg-white/10 ${buttonMotion} ${focusRing}`}
+                  className={`inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-6 py-3 text-sm font-semibold text-[var(--ep-primary)] shadow-sm hover:bg-[var(--ep-bg)] ${buttonMotion} ${focusRing}`}
                   activeOptions={{ exact: true }}
                 >
                   Explore the system
@@ -202,12 +202,12 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section aria-label="EcoPrawn at a glance" className="ep-stats-section relative border-b border-[#d8e0de] bg-[#f4f7f6] px-5 py-7 dark:border-white/10 dark:bg-[#202122] sm:px-8">
-          <div className="ep-stats-panel mx-auto grid max-w-[920px] grid-cols-2 gap-2 rounded-2xl border border-[#d8e0de] bg-white/90 p-2 shadow-[0_12px_35px_-24px_rgba(11,46,51,.18)] dark:border-white/10 dark:bg-[#242729] sm:grid-cols-4 sm:gap-3 sm:p-3">
+        <section aria-label="EcoPrawn at a glance" className="ep-stats-section relative border-b border-[var(--ep-line)] bg-[var(--ep-bg)] px-5 py-7 dark:border-[var(--ep-line)] dark:bg-[var(--ep-surface)] sm:px-8">
+          <div className="ep-stats-panel mx-auto grid max-w-[920px] grid-cols-2 gap-2 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-2 shadow-sm dark:border-[var(--ep-line)] dark:bg-[var(--ep-surface)] sm:grid-cols-4 sm:gap-3 sm:p-3">
             {STATS.map((stat, index) => (
-              <div key={stat.label} className="ep-stat-card rounded-xl border border-[#d8e0de] bg-white px-3 py-3 text-left dark:border-white/10 dark:bg-[#202122]">
-                <span className="ep-stat-value block text-[clamp(19px,2.5vw,27px)] font-bold leading-none tracking-tight text-[#142b2e] dark:text-white">{stat.value}</span>
-                <span className="mt-2 block text-[10px] font-medium leading-snug text-[#3f5753] dark:text-[#c3ccce]">{stat.label}</span>
+              <div key={stat.label} className="ep-stat-card rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-3 text-left dark:border-[var(--ep-line)] dark:bg-[var(--ep-surface)]">
+                <span className="ep-stat-value block text-[clamp(19px,2.5vw,27px)] font-bold leading-none tracking-tight text-[var(--ep-primary)] dark:text-[var(--ep-primary)]">{stat.value}</span>
+                <span className="mt-2 block text-[10px] font-medium leading-snug text-[var(--ep-text-muted)] dark:text-[var(--ep-text-muted)]">{stat.label}</span>
               </div>
             ))}
           </div>
@@ -217,7 +217,7 @@ export function LandingPage() {
         <section
           id="readings"
           aria-labelledby="readings-title"
-          className="ep-readings-section relative isolate overflow-hidden border-y border-[#0f4c5c] bg-[#0f4c5c] text-white"
+          className="ep-readings-section relative isolate overflow-hidden border-y border-[var(--ep-secondary)] bg-[var(--ep-secondary)] text-[var(--ep-bg)]"
         >
           <div
             aria-hidden="true"
@@ -231,7 +231,7 @@ export function LandingPage() {
 
           <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 sm:py-24">
             <div data-reveal="" className="max-w-[40rem]">
-              <div className={`${eyebrow} !text-[rgba(255,255,255,0.85)]`}>
+              <div className={`${eyebrow} !text-[var(--ep-bg)]`}>
                 <span
                   aria-hidden="true"
                   className="h-2 w-2 bg-[var(--coral)]"
@@ -240,11 +240,11 @@ export function LandingPage() {
               </div>
               <h2
                 id="readings-title"
-                className="ep-font-display !text-white text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
+                className="ep-font-display !text-[var(--ep-bg)] text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
               >
                 Five readings, each held in range.
               </h2>
-              <p className="mt-3 text-lg leading-relaxed text-[rgba(255,255,255,0.88)]">
+              <p className="mt-3 text-lg leading-relaxed text-[var(--ep-bg)]">
                 Sample values from Tank 1, shown against the range shrimp need.
               </p>
             </div>
@@ -267,17 +267,17 @@ export function LandingPage() {
                     key={r.label}
                     data-reading=""
                     data-hover-lift=""
-                    className="rounded-xl border border-[rgba(255,255,255,0.22)] bg-[rgba(255,255,255,0.05)] p-5 transition-[background-color,border-color] duration-200 hover:border-[rgba(255,255,255,0.5)] hover:bg-[rgba(255,255,255,0.09)] last:col-span-2 md:last:col-span-1"
+                    className="rounded-xl border border-[rgba(244,247,246,0.28)] bg-[rgba(244,247,246,0.06)] p-5 transition-[background-color,border-color] duration-200 hover:border-[var(--ep-bg)] hover:bg-[rgba(244,247,246,0.12)] last:col-span-2 md:last:col-span-1"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <dt className="text-base font-semibold text-[rgba(255,255,255,0.92)]">
+                      <dt className="text-base font-semibold text-[var(--ep-bg)]">
                         {r.label}
                       </dt>
                       <span
                         className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-[var(--ep-bg)] ${
                           inRange
-                            ? "bg-[rgba(91,155,120,0.28)]"
-                            : "bg-[rgba(232,162,58,0.32)]"
+                            ? "bg-[rgba(139,213,166,0.24)]"
+                            : "bg-[rgba(242,138,104,0.24)]"
                         }`}
                       >
                         {inRange ? (
@@ -285,7 +285,7 @@ export function LandingPage() {
                             name="check"
                             size={12}
                             strokeWidth={2.5}
-                            className="text-[var(--mangrove-light)]"
+                            className="text-[var(--ep-primary)]"
                           />
                         ) : (
                           <span>!</span>
@@ -296,14 +296,14 @@ export function LandingPage() {
 
                     <dd className="mt-3 text-4xl font-semibold tabular-nums">
                       <span data-countto={r.value}>{r.value}</span>
-                      <span className="ml-1 text-base font-medium text-[rgba(255,255,255,0.8)]">
+                      <span className="ml-1 text-base font-medium text-[var(--ep-bg)]">
                         {heroReadoutUnits[r.label]}
                       </span>
                     </dd>
 
                     <div
                       aria-hidden="true"
-                      className="relative mx-2 mt-6 h-2 rounded-full bg-[rgba(255,255,255,0.16)]"
+                      className="relative mx-2 mt-6 h-2 rounded-full bg-[rgba(244,247,246,0.22)]"
                     >
                       <div
                         data-zone=""
@@ -326,7 +326,7 @@ export function LandingPage() {
                     {zone && (
                       <div
                         aria-hidden="true"
-                        className="mt-2.5 flex justify-between text-xs tabular-nums text-[rgba(255,255,255,0.7)]"
+                        className="mt-2.5 flex justify-between text-xs tabular-nums text-[var(--ep-bg)]"
                       >
                         <span>{zone.min}</span>
                         <span>{zone.max}</span>
@@ -334,7 +334,7 @@ export function LandingPage() {
                     )}
 
                     {range && (
-                      <p className="mt-2 text-sm text-[rgba(255,255,255,0.85)]">
+                      <p className="mt-2 text-sm text-[var(--ep-bg)]">
                         Target {range}
                       </p>
                     )}
@@ -344,7 +344,7 @@ export function LandingPage() {
             </dl>
 
             {/* Legend: explains what the bar and dot mean */}
-            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-[rgba(255,255,255,0.85)]">
+            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-[var(--ep-bg)]">
               <span className="inline-flex items-center gap-2">
                 <span
                   aria-hidden="true"
@@ -367,7 +367,7 @@ export function LandingPage() {
         <section
           id="process"
           aria-labelledby="process-title"
-          className="ep-process-section !bg-[#f4f7f6] !text-[#0b2e33] px-5 py-20 dark:!bg-[#202122] dark:!text-[#e4e6eb] sm:px-8 sm:py-24"
+          className="ep-process-section !bg-[var(--ep-bg)] !text-[var(--ep-primary)] px-5 py-20 dark:!bg-[var(--ep-surface)] dark:!text-[var(--ep-primary)] sm:px-8 sm:py-24"
         >
           <div className="mx-auto max-w-[1200px]">
             <div data-reveal="" className="mb-14 max-w-[40rem]">
@@ -406,17 +406,17 @@ export function LandingPage() {
                       className="absolute -top-[5px] left-0 hidden h-2.5 w-2.5 bg-[var(--ep-primary)] lg:block"
                     />
                     <div className="mb-6 flex items-center justify-between">
-                      <span className="!text-[#3f5753] dark:!text-[#b0b3b8] text-sm font-semibold tabular-nums tracking-wide transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
+                      <span className="!text-[var(--ep-text-muted)] dark:!text-[var(--ep-text-muted)] text-sm font-semibold tabular-nums tracking-wide transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
                         {s.step}
                       </span>
-                      <span className="flex h-11 w-11 items-center justify-center !text-black dark:!text-white transition-colors duration-200">
+                      <span className="flex h-11 w-11 items-center justify-center !text-black dark:!text-[var(--ep-bg)] transition-colors duration-200">
                         <Icon name={s.icon} size={22} />
                       </span>
                     </div>
-                    <h3 className="ep-font-display mb-2 !text-[#0b2e33] dark:!text-[#e4e6eb] text-2xl font-semibold transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
+                    <h3 className="ep-font-display mb-2 !text-[var(--ep-primary)] dark:!text-[var(--ep-primary)] text-2xl font-semibold transition-colors duration-200 group-hover:!text-[var(--ep-accent)]">
                       {s.title}
                     </h3>
-                    <p className="!text-[#3f5753] dark:!text-[#b0b3b8] text-base leading-relaxed">
+                    <p className="!text-[var(--ep-text-muted)] dark:!text-[var(--ep-text-muted)] text-base leading-relaxed">
                       {s.body}
                     </p>
                   </li>
