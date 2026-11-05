@@ -5,6 +5,7 @@ import { animate, stagger } from "animejs";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/** High-impact but restrained motion system for the About page. */
 export function AboutMotion() {
   useLayoutEffect(() => {
     const root = document.querySelector<HTMLElement>(".ep-about-page");
@@ -18,78 +19,121 @@ export function AboutMotion() {
           const kicker = hero.querySelector("[data-page-kicker]");
           const title = hero.querySelector("h1");
           const lead = hero.querySelector("[data-page-lead]");
-          gsap.timeline({ defaults: { ease: "power3.out" } })
-            .from(kicker, { y: 14, autoAlpha: 0, duration: .45 })
-            .from(title, { y: 34, autoAlpha: 0, duration: .8 }, "-=.2")
-            .from(lead, { y: 18, autoAlpha: 0, duration: .6 }, "-=.4");
+          const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+          tl.from(kicker, { y: 22, autoAlpha: 0, filter: "blur(8px)", duration: .65 })
+            .from(title, { y: 64, autoAlpha: 0, filter: "blur(12px)", duration: 1 }, "-=.35")
+            .from(lead, { y: 28, autoAlpha: 0, duration: .75 }, "-=.55");
+          const grid = hero.querySelector<HTMLElement>(".ep-hero-atmosphere");
+          if (grid) gsap.to(grid, {
+            yPercent: 22, scale: 1.12, ease: "none",
+            scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: .8 },
+          });
         }
 
-        ["#objectives", "#systems", "#scope"].forEach((selector) => {
-          const section = root.querySelector<HTMLElement>(selector);
-          const heading = section?.querySelector<HTMLElement>("h2");
-          const intro = section?.querySelector<HTMLElement>("p");
-          if (!section || !heading) return;
-          gsap.from([heading, ...(intro ? [intro] : [])], {
-            y: 24, autoAlpha: 0, duration: .7, stagger: .1, ease: "power3.out",
-            scrollTrigger: { trigger: section, start: "top 76%", once: true },
+        const objectiveSection = root.querySelector<HTMLElement>("#objectives");
+        const objectiveCards = gsap.utils.toArray<HTMLElement>("#objectives article", root);
+        if (objectiveSection && objectiveCards.length) {
+          gsap.from(objectiveCards, {
+            y: 72, rotateX: 12, rotateY: (i) => i % 2 ? 5 : -5,
+            transformPerspective: 1100, transformOrigin: "center bottom",
+            autoAlpha: 0, duration: 1, stagger: .13, ease: "expo.out",
+            scrollTrigger: { trigger: objectiveSection, start: "top 72%", once: true },
+          });
+        }
+
+        const systems = gsap.utils.toArray<HTMLElement>("#systems article", root);
+        systems.forEach((row, i) => {
+          const icon = row.querySelector<HTMLElement>("span.flex");
+          const content = row.querySelectorAll<HTMLElement>("h3, .col-span-2");
+          gsap.from(row, {
+            x: i % 2 ? 80 : -80, autoAlpha: 0, duration: .9, ease: "power4.out",
+            scrollTrigger: { trigger: row, start: "top 86%", once: true },
+          });
+          if (icon) gsap.from(icon, {
+            scale: .4, rotate: i % 2 ? 35 : -35, duration: .8, ease: "back.out(2.2)",
+            scrollTrigger: { trigger: row, start: "top 82%", once: true },
+          });
+          if (content.length) gsap.from(content, {
+            y: 26, autoAlpha: 0, duration: .7, stagger: .12, ease: "power3.out",
+            scrollTrigger: { trigger: row, start: "top 78%", once: true },
           });
         });
 
-        const objectives = gsap.utils.toArray<HTMLElement>("#objectives article", root);
-        if (objectives.length) gsap.from(objectives, {
-          y: 28, rotateX: 4, transformPerspective: 900, transformOrigin: "center bottom",
-          duration: .72, stagger: .09, ease: "power3.out",
-          scrollTrigger: { trigger: "#objectives .grid", start: "top 82%", once: true },
+        const scopeCards = gsap.utils.toArray<HTMLElement>("#scope article", root);
+        if (scopeCards.length) gsap.from(scopeCards, {
+          y: 64, scale: .94, rotateZ: (i) => i === 0 ? -2 : 2,
+          autoAlpha: 0, duration: 1, stagger: .2, ease: "expo.out",
+          scrollTrigger: { trigger: "#scope .grid", start: "top 78%", once: true },
         });
 
-        const systems = gsap.utils.toArray<HTMLElement>("#systems article", root);
-        if (systems.length) gsap.from(systems, {
-          x: (i) => i % 2 ? 24 : -24, duration: .65, stagger: .1, ease: "power3.out",
-          scrollTrigger: { trigger: "#systems", start: "top 72%", once: true },
-        });
-
-        const scope = gsap.utils.toArray<HTMLElement>("#scope article", root);
-        if (scope.length) gsap.from(scope, {
-          y: 30, scale: .985, duration: .7, stagger: .14, ease: "power3.out",
-          scrollTrigger: { trigger: "#scope .grid", start: "top 80%", once: true },
-        });
+        // Scroll-scrubbed progress accent across the systems list.
+        const systemRule = root.querySelector<HTMLElement>("#systems .border-t");
+        if (systemRule) gsap.fromTo(systemRule,
+          { borderColor: "rgba(139,213,166,0)", scaleX: .35, transformOrigin: "left center" },
+          { borderColor: "rgba(139,213,166,.55)", scaleX: 1, ease: "none",
+            scrollTrigger: { trigger: "#systems", start: "top 65%", end: "bottom 75%", scrub: 1 } }
+        );
       }, root);
 
       const cleanups: Array<() => void> = [];
-      const animations: Array<{ revert: () => unknown }> = [];
-      root.querySelectorAll<HTMLElement>("main article").forEach((card) => {
+      const animeRuns: Array<{ revert: () => unknown }> = [];
+      const cardTargets = root.querySelectorAll<HTMLElement>("#objectives article, #scope article, #systems article");
+      cardTargets.forEach((card) => {
         const icon = card.querySelector<HTMLElement>("svg");
-        if (!icon) return;
-        const enter = () => animations.push(animate(icon, {
-          scale: [1, 1.16, 1], rotate: [0, -7, 0], duration: 440, ease: "out(3)",
-        }));
+        const move = gsap.quickTo(card, "y", { duration: .35, ease: "power3.out" });
+        const tiltX = gsap.quickTo(card, "rotationX", { duration: .35, ease: "power3.out" });
+        const tiltY = gsap.quickTo(card, "rotationY", { duration: .35, ease: "power3.out" });
+        const enter = () => {
+          gsap.to(card, { scale: 1.018, boxShadow: "0 28px 65px -34px rgba(7,42,48,.48)", duration: .35, ease: "power3.out" });
+          if (icon) animeRuns.push(animate(icon, {
+            scale: [1, 1.22, 1], rotate: [0, -12, 8, 0], duration: 620, ease: "outElastic(1, .55)",
+          }));
+        };
+        const leave = () => {
+          move(0); tiltX(0); tiltY(0);
+          gsap.to(card, { scale: 1, boxShadow: "0 12px 28px -24px rgba(11,46,51,.35)", duration: .5, ease: "elastic.out(1,.65)" });
+        };
+        const pointer = (event: PointerEvent) => {
+          const rect = card.getBoundingClientRect();
+          const px = (event.clientX - rect.left) / rect.width - .5;
+          const py = (event.clientY - rect.top) / rect.height - .5;
+          move(-3 + -py * 3);
+          tiltX(-py * 5);
+          tiltY(px * 6);
+        };
         card.addEventListener("mouseenter", enter);
+        card.addEventListener("mouseleave", leave);
+        card.addEventListener("pointermove", pointer);
         card.addEventListener("focusin", enter);
+        card.addEventListener("focusout", leave);
         cleanups.push(() => {
           card.removeEventListener("mouseenter", enter);
+          card.removeEventListener("mouseleave", leave);
+          card.removeEventListener("pointermove", pointer);
           card.removeEventListener("focusin", enter);
+          card.removeEventListener("focusout", leave);
         });
       });
 
-      const icons = root.querySelectorAll<HTMLElement>("#objectives article svg");
-      const grid = root.querySelector("#objectives .grid");
+      const objectiveIcons = root.querySelectorAll<HTMLElement>("#objectives article svg");
+      const objectiveGrid = root.querySelector("#objectives .grid");
       let observer: IntersectionObserver | undefined;
-      if (icons.length && grid) {
+      if (objectiveIcons.length && objectiveGrid) {
         observer = new IntersectionObserver((entries) => {
           if (!entries.some((entry) => entry.isIntersecting)) return;
-          animations.push(animate(icons, {
-            scale: [.72, 1], rotate: [-10, 0], delay: stagger(65), duration: 520, ease: "outBack",
+          animeRuns.push(animate(objectiveIcons, {
+            scale: [.55, 1], rotate: [-18, 0], opacity: [0, 1],
+            delay: stagger(85), duration: 780, ease: "outElastic(1,.6)",
           }));
           observer?.disconnect();
-        }, { threshold: .2 });
-        observer.observe(grid);
+        }, { threshold: .18 });
+        observer.observe(objectiveGrid);
       }
 
       return () => {
-        ctx.revert();
-        observer?.disconnect();
+        ctx.revert(); observer?.disconnect();
         cleanups.forEach((fn) => fn());
-        animations.forEach((animation) => animation.revert());
+        animeRuns.forEach((animation) => animation.revert());
       };
     });
     return () => mm.revert();
