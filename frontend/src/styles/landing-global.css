@@ -1125,3 +1125,122 @@ html.dark .ep-landing #top .ep-lens-connectors {
   .ep-landing #top .ep-lens-core { width: 235px; max-width: 235px; }
   .ep-landing #top .ep-lens-readout { width: 108px; }
 }
+
+
+/* ---------- Final HeroLens balance: two callouts per side + one below ---------- */
+@media (min-width: 640px) {
+  .ep-landing #top .ep-lens-diagram {
+    position: relative;
+    display: block;
+    width: min(100%, 620px);
+    height: 440px;
+    min-height: 440px;
+  }
+  .ep-landing #top .ep-lens-stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ep-landing #top .ep-lens-core {
+    position: relative;
+    inset: auto;
+    width: min(42vw, 270px);
+    max-width: 270px;
+    transform: none;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: absolute;
+    inset: 0;
+    display: block;
+    pointer-events: none;
+  }
+  .ep-landing #top .ep-lens-readout,
+  .ep-landing #top .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readout-2,
+  .ep-landing #top .ep-lens-readout-3,
+  .ep-landing #top .ep-lens-readout-4 {
+    position: absolute;
+    width: 116px;
+    min-height: 0;
+    padding: 0;
+    transform: none;
+    pointer-events: auto;
+  }
+  /* First two sensors on the left. */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 {
+    left: 0;
+    right: auto;
+    top: 104px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1 {
+    left: 0;
+    right: auto;
+    top: 264px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  /* Next two sensors mirror them on the right. */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 {
+    left: auto;
+    right: 0;
+    top: 104px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3 {
+    left: auto;
+    right: 0;
+    top: 264px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  /* Fifth sensor centered beneath the lens. */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    left: 50%;
+    right: auto;
+    top: 386px;
+    width: 160px;
+    transform: translateX(-50%);
+    align-items: center;
+    text-align: center;
+  }
+  .ep-landing #top .ep-lens-connectors {
+    display: block;
+    z-index: 1;
+  }
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .ep-landing #top .ep-lens-diagram {
+    width: 100%;
+    height: 420px;
+    min-height: 420px;
+  }
+  .ep-landing #top .ep-lens-readout,
+  .ep-landing #top .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readout-2,
+  .ep-landing #top .ep-lens-readout-3 { width: 102px; }
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-diagram {
+    height: auto;
+    min-height: 0;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    grid-column: 1 / -1;
+    align-items: center;
+    text-align: center;
+  }
+}
