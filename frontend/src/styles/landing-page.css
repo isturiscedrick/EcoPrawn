@@ -274,4 +274,22 @@ html.dark .marketing-shell.ep-landing-page nav[aria-label="Mobile navigation"] a
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
 }
+
+/* BrandMark declares its own logo variables, so override them at the logo node. */
+.marketing-shell.ep-landing-page .ep-logo {
+  --ep-logo-color: #000000 !important;
+  --ep-logo-text: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page .ep-logo {
+  --ep-logo-color: #ffffff !important;
+  --ep-logo-text: #ffffff !important;
+}
+.marketing-shell.ep-landing-page .ep-logo-wordmark {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page .ep-logo-wordmark {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
 }
