@@ -234,3 +234,88 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
   --ep-logo-color: #F28A68;
   --ep-logo-text: #8BD5A6;
 }
+
+
+/* ---------- Centered hero showcase layout (reference-inspired) ---------- */
+.ep-landing #top.ep-hero {
+  background-color: var(--ep-bg);
+}
+.ep-landing #top .ep-hero-layout {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1rem, 2.4vw, 1.8rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  padding-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+.ep-landing #top .ep-hero-copy {
+  max-width: 920px;
+}
+.ep-landing #top [data-hero="eyebrow"] {
+  margin-bottom: 1.1rem;
+  padding: .48rem .95rem;
+  font-size: .66rem;
+  letter-spacing: .13em;
+}
+.ep-landing #top [data-hero="headline"] {
+  max-width: 1050px;
+  margin-inline: auto;
+  font-size: clamp(2.7rem, 6.8vw, 5.6rem);
+  line-height: .99;
+  letter-spacing: -.058em;
+  text-align: center;
+}
+.ep-landing #top [data-hero="lead"] {
+  max-width: 660px;
+  margin: 1.15rem auto 0;
+  text-align: center;
+}
+.ep-landing #top [data-hero="cta"] {
+  justify-content: center;
+  margin-top: 1.6rem;
+}
+.ep-landing #top [data-hero="parallax-console"] {
+  width: min(100%, 410px);
+  max-width: 410px;
+  margin: .2rem auto 0;
+}
+.ep-landing #top .ep-hero-visual figure {
+  max-width: 410px;
+}
+.ep-landing #top [data-hero="signature"] {
+  margin-top: -.25rem;
+  letter-spacing: .2em;
+}
+.ep-landing .ep-stats-panel {
+  width: min(100%, 1040px);
+  margin-inline: auto;
+}
+.ep-landing .ep-stats-panel > div {
+  min-height: 92px;
+  border-color: var(--ep-accent);
+  background: var(--ep-surface);
+  box-shadow: 0 3px 14px -12px rgba(15, 76, 92, .45);
+}
+.ep-landing .ep-stats-panel > div:nth-child(even) {
+  border-color: var(--ep-secondary);
+}
+.ep-landing .ep-stats-panel > div > span:first-child {
+  font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+}
+.ep-landing .ep-stats-panel > div > span:last-child {
+  border-top: 1px solid var(--ep-line);
+  padding-top: .55rem;
+}
+@media (min-width: 640px) {
+  .ep-landing #top .ep-hero-layout { gap: 1.25rem; }
+  .ep-landing #top [data-hero="parallax-console"] { width: min(100%, 430px); max-width: 430px; }
+}
+@media (max-width: 639px) {
+  .ep-landing #top [data-hero="headline"] {
+    font-size: clamp(2.35rem, 10.2vw, 3.65rem);
+    line-height: 1.02;
+  }
+  .ep-landing #top [data-hero="cta"] > a { width: 100%; }
+  .ep-landing .ep-stats-panel > div { min-height: 82px; padding: .8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-landing #top [data-hero="parallax-console"] { transform: none !important; }
+}
