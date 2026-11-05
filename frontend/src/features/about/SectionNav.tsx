@@ -23,7 +23,7 @@ export function SectionNav() {
           }
         }
       },
-      { rootMargin: "-30% 0px -60% 0px" }
+      { rootMargin: "-22% 0px -58% 0px", threshold: 0 }
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -34,9 +34,9 @@ export function SectionNav() {
   return (
     <nav
       aria-label="On this page"
-      className="sticky top-[72px] z-40 border-b border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-bg)_92%,transparent)] backdrop-blur-xl md:top-[80px]"
+      className="sticky top-[66px] z-40 border-b border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-bg)_92%,transparent)] backdrop-blur-xl md:top-[66px]"
     >
-      <div className="mx-auto flex max-w-[1200px] items-center gap-3 overflow-x-auto px-5 py-4 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mx-auto flex max-w-[1200px] items-center gap-3 overflow-x-auto overscroll-x-contain px-5 py-3 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {ITEMS.map(([id, label]) => {
           const isActive = active === id;
 
