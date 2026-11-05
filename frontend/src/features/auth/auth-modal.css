@@ -973,7 +973,7 @@ html.dark .ep-auth-modal input:focus-visible {
   background: #eaf1ee !important;
 }
 
-.ep-auth-modal [role="group][aria-label="Account access"] button {
+.ep-auth-modal [role="group"][aria-label="Account access"] button {
   min-height: 42px;
   padding: 9px 12px;
   border: 1px solid transparent !important;
