@@ -147,8 +147,8 @@ export function SiteHeader({
               <AuthLink className={`hidden rounded-full border px-5 py-2 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}>
                 Log in
               </AuthLink>
-              <AuthLink mode="signup" className={`hidden h-9 w-9 items-center justify-center rounded-full text-sm font-semibold text-[var(--ep-bg)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ backgroundColor: "var(--ep-accent)" }}>
-                <span aria-label="Get started">↗</span>
+              <AuthLink mode="signup" className={`hidden h-9 w-9 items-center justify-center rounded-full text-[var(--ep-bg)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-label="Get started"><path d="M7 17 17 7M7 7h10v10" /></svg>
               </AuthLink>
             </>
           )}
