@@ -173,8 +173,8 @@ export function HeroLens() {
           .call(() => ping.restart(), undefined, at);
         if (refocus) {
           target
-            .to(shrimp, { filter: "blur(3px)", duration: 0.12, ease: "power2.in" }, at)
-            .to(shrimp, { filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, at + 0.12);
+            .to(shrimp, { scale: 0.985, duration: 0.12, ease: "power2.in" }, at)
+            .to(shrimp, { scale: 1, duration: 0.5, ease: "power2.out" }, at + 0.12);
         }
       };
 
@@ -185,9 +185,7 @@ export function HeroLens() {
       tl.fromTo(iris, { "--iris": "0%" }, { "--iris": "100%", duration: 1.4, ease: "power2.inOut" }, 0)
         .from(rings, { scale: 0.6, opacity: 0, duration: 1.2 }, 0.1)
         .from(ticks, { opacity: 0, duration: 0.9, ease: "none" }, 0.3)
-        .to(shrimp, { filter: "blur(6px)", duration: 0.55, ease: "power1.inOut" }, 0.25)
-        .to(shrimp, { filter: "blur(11px)", duration: 0.35, ease: "power1.inOut" }, ">")
-        .to(shrimp, { filter: "blur(0px)", scale: 1, duration: 0.7, ease: "power2.out" }, ">")
+        .to(shrimp, { opacity: 1, scale: 1, duration: 0.75, ease: "power2.out" }, 0.25)
         .from(arcs, { scale: 1.4, opacity: 0, duration: 0.6, ease: "back.out(1.6)" }, 1.3)
         .from(readouts, { y: 14, opacity: 0, duration: 0.6, stagger: 0.1 }, 1.7)
         .call(startCount, undefined, 1.7)
