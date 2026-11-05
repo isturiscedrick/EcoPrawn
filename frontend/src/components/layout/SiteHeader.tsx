@@ -147,7 +147,7 @@ export function SiteHeader({
               <AuthLink className={`hidden rounded-full border px-5 py-2 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}>
                 Log in
               </AuthLink>
-              <AuthLink mode="signup" className={`hidden h-9 w-9 items-center justify-center rounded-full text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ backgroundColor: "var(--ep-accent)" }}>
+              <AuthLink mode="signup" className={`hidden h-9 w-9 items-center justify-center rounded-full text-sm font-semibold text-[var(--ep-bg)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ backgroundColor: "var(--ep-accent)" }}>
                 <span aria-label="Get started">↗</span>
               </AuthLink>
             </>
@@ -177,7 +177,7 @@ export function SiteHeader({
             <NavLinks variant="mobile" activeHref={pathname} onLinkClick={() => setMobileNavOpen(false)} />
             <div className="flex gap-3 px-5 pb-5 sm:hidden">
               <AuthLink className="flex-1 rounded-full border px-4 py-3 text-center text-sm font-semibold" style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>Log in</AuthLink>
-              <AuthLink mode="signup" className="flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold text-white" style={{ backgroundColor: "var(--ep-accent)" }}>Get started</AuthLink>
+              <AuthLink mode="signup" className="flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold text-[var(--ep-bg)]" style={{ backgroundColor: "var(--ep-accent)" }}>Get started</AuthLink>
             </div>
           </div>
         </div>
