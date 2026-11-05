@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import { animate } from "animejs";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
@@ -210,6 +211,72 @@ export function LandingMotion() {
       // intentionally has no preview section, so avoid registering dead triggers.
 
       const hoverCleanups: Array<() => void> = [];
+      const microAnimations: Array<{ revert: () => unknown }> = [];
+
+      // HOME micro-interactions: Anime.js handles icon/button details while
+      // GSAP owns scroll reveals and card elevation. Keep those transforms separate.
+      const homeRoot = document.querySelector<HTMLElement>(".ep-landing:not(.ep-about-page):not(.ep-contact-page)");
+      if (homeRoot) {
+        homeRoot.querySelectorAll<HTMLElement>("#top [data-hero=cta] a, #top [data-hero=cta] button").forEach((control) => {
+          const icon = control.querySelector<HTMLElement>("svg");
+          const enter = () => {
+            microAnimations.push(animate(control, {
+              translateY: -3, scale: 1.025, duration: 230, ease: "out(3)",
+            }));
+            if (icon) microAnimations.push(animate(icon, {
+              translateX: 3, duration: 260, ease: "out(3)",
+            }));
+          };
+          const leave = () => {
+            microAnimations.push(animate(control, {
+              translateY: 0, scale: 1, duration: 300, ease: "out(3)",
+            }));
+            if (icon) microAnimations.push(animate(icon, {
+              translateX: 0, duration: 280, ease: "out(3)",
+            }));
+          };
+          control.addEventListener("mouseenter", enter);
+          control.addEventListener("mouseleave", leave);
+          control.addEventListener("focusin", enter);
+          control.addEventListener("focusout", leave);
+          hoverCleanups.push(() => {
+            control.removeEventListener("mouseenter", enter);
+            control.removeEventListener("mouseleave", leave);
+            control.removeEventListener("focusin", enter);
+            control.removeEventListener("focusout", leave);
+          });
+        });
+
+        homeRoot.querySelectorAll<HTMLElement>("[data-reading], #process ol > li, .ep-stats-panel > div").forEach((card) => {
+          const icon = card.querySelector<HTMLElement>("svg");
+          const enter = () => {
+            if (icon) microAnimations.push(animate(icon, {
+              scale: [1, 1.13, 1], rotate: [0, -5, 0], duration: 420, ease: "out(3)",
+            }));
+          };
+          card.addEventListener("mouseenter", enter);
+          card.addEventListener("focusin", enter);
+          hoverCleanups.push(() => {
+            card.removeEventListener("mouseenter", enter);
+            card.removeEventListener("focusin", enter);
+          });
+        });
+
+        homeRoot.querySelectorAll<HTMLElement>("#site-header nav a, [data-site-footer] nav a").forEach((link) => {
+          const enter = () => microAnimations.push(animate(link, {
+            translateX: 3, duration: 200, ease: "out(3)",
+          }));
+          const leave = () => microAnimations.push(animate(link, {
+            translateX: 0, duration: 240, ease: "out(3)",
+          }));
+          link.addEventListener("mouseenter", enter);
+          link.addEventListener("mouseleave", leave);
+          hoverCleanups.push(() => {
+            link.removeEventListener("mouseenter", enter);
+            link.removeEventListener("mouseleave", leave);
+          });
+        });
+      }
 
       // SECTION FLOW: reveal supporting sections with a restrained,
       // consistent lift-and-fade as they enter the viewport.
@@ -332,6 +399,7 @@ export function LandingMotion() {
       return () => {
         restores.forEach((restore) => restore());
         hoverCleanups.forEach((cleanup) => cleanup());
+        microAnimations.forEach((animation) => animation.revert());
       };
     });
 
