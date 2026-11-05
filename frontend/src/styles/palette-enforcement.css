@@ -429,17 +429,35 @@ html.dark .marketing-shell.ep-landing-page #process :is(span, h3, p, svg) {
   color: var(--ep-primary) !important;
 }
 
-/* Public page hero headlines must use the exact landing hero color treatment.
-   Accent phrase = deep teal in light mode; remaining headline = charcoal teal.
-   Dark mode uses mint for both, matching the landing hero's dark treatment.
-   These rules intentionally come last to beat legacy PageHero overrides. */
-.marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1 {
+/* Canonical hero headline colors.
+   Explicitly set -webkit-text-fill-color as legacy public-page rules set it
+   separately from color, which can otherwise make later overrides invisible. */
+html:not(.dark) .marketing-shell.ep-landing-page .ep-landing-hero [data-hero="text"] h1,
+html:not(.dark) .marketing-shell.ep-landing-page .ep-landing-hero [data-hero="text"] h1 span {
   color: #142b2e !important;
+  -webkit-text-fill-color: #142b2e !important;
 }
-.marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1 [data-page-hero-accent] {
+html:not(.dark) .marketing-shell.ep-landing-page .ep-landing-hero [data-hero="text"] h1 [data-hero-headline-accent] {
   color: #0f4c5c !important;
+  -webkit-text-fill-color: #0f4c5c !important;
+}
+html.dark .marketing-shell.ep-landing-page .ep-landing-hero [data-hero="text"] h1,
+html.dark .marketing-shell.ep-landing-page .ep-landing-hero [data-hero="text"] h1 span {
+  color: #8bd5a6 !important;
+  -webkit-text-fill-color: #8bd5a6 !important;
+}
+
+html:not(.dark) .marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1,
+html:not(.dark) .marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1 span {
+  color: #142b2e !important;
+  -webkit-text-fill-color: #142b2e !important;
+}
+html:not(.dark) .marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1 [data-page-hero-accent] {
+  color: #0f4c5c !important;
+  -webkit-text-fill-color: #0f4c5c !important;
 }
 html.dark .marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1,
-html.dark .marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1 [data-page-hero-accent] {
+html.dark .marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero] h1 span {
   color: #8bd5a6 !important;
+  -webkit-text-fill-color: #8bd5a6 !important;
 }
