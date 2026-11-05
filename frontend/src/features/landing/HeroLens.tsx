@@ -179,7 +179,7 @@ export function HeroLens() {
       };
 
       /* GSAP: intro. Iris opens, shrimp hunts focus, brackets lock, readouts arrive. */
-      gsap.set(shrimp, { filter: "blur(16px)", scale: 1.12 });
+      gsap.set(shrimp, { scale: 1.04, opacity: 0 });
 
       const tl = gsap.timeline({ delay: INTRO_DELAY, defaults: { ease: "power3.out" } });
       tl.fromTo(iris, { "--iris": "0%" }, { "--iris": "100%", duration: 1.4, ease: "power2.inOut" }, 0)
