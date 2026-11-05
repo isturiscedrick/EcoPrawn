@@ -1244,3 +1244,113 @@ html.dark .ep-landing #top .ep-lens-connectors {
     text-align: center;
   }
 }
+
+
+/* Definitive desktop layout: readings are placed in a real 3-column grid,
+   not absolutely positioned against the diagram (which caused them to stack left). */
+@media (min-width: 640px) {
+  .ep-landing #top .ep-lens-diagram {
+    position: relative !important;
+    display: block !important;
+    width: min(100%, 620px) !important;
+    height: 440px !important;
+    min-height: 440px !important;
+  }
+  .ep-landing #top .ep-lens-stage {
+    position: absolute !important;
+    inset: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1 !important;
+  }
+  .ep-landing #top .ep-lens-core {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    top: auto !important;
+    width: min(42vw, 270px) !important;
+    max-width: 270px !important;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: absolute !important;
+    inset: 0 !important;
+    display: grid !important;
+    grid-template-columns: 116px minmax(0, 1fr) 116px !important;
+    grid-template-rows: 1fr 1fr 54px !important;
+    align-items: center !important;
+    gap: 0 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 2 !important;
+    pointer-events: none;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: 116px !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    justify-self: start !important;
+    pointer-events: auto;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 {
+    grid-column: 1 !important; grid-row: 1 !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1 {
+    grid-column: 3 !important; grid-row: 1 !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 {
+    grid-column: 1 !important; grid-row: 2 !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3 {
+    grid-column: 3 !important; grid-row: 2 !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+    width: 160px !important;
+    justify-self: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-diagram {
+    display: flex !important;
+    height: auto !important;
+    min-height: 0 !important;
+    flex-direction: column !important;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    padding: .9rem .25rem .25rem !important;
+    gap: .65rem 1rem !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout {
+    position: relative !important;
+    inset: auto !important;
+    width: auto !important;
+    transform: none !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    grid-column: 1 / -1 !important;
+    justify-self: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+}
