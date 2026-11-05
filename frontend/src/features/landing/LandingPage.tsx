@@ -400,13 +400,13 @@ export function LandingPage() {
               </h2>
             </div>
 
-            <div className="relative lg:border-t lg:border-[var(--ep-line)]">
+            <div data-process-viewport="" className="ep-process-viewport relative lg:border-t lg:border-[var(--ep-line)]">
               <span
                 aria-hidden="true"
                 data-process-line=""
                 className="pointer-events-none absolute -top-px left-0 hidden h-0.5 w-full origin-left bg-[var(--ep-accent)] lg:block"
               />
-              <ol className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+              <ol data-process-track="" className="ep-process-track grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
                 {STEPS.map((s) => (
                   <li
                     key={s.step}
