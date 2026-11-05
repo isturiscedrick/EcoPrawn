@@ -50,19 +50,6 @@ const SPECKS = [
   { left: "47%", top: "56%", size: 3 },
 ];
 
-// One slot per reading, inside the circle: four corners, then top-center
-// (Water Level). The top-center slot is rendered a little smaller so it
-// clears the north focus bracket. Vertical rhythm: Water Level sits high
-// (8%), the top corners drop to 25% so there is a clear gap beneath it,
-// and the bottom corners sit at 23% to leave room for the caption.
-const SLOTS = [
-  "left-[16%] top-[25%] items-start text-left",
-  "right-[16%] top-[25%] items-end text-right",
-  "left-[16%] bottom-[23%] items-start text-left",
-  "right-[16%] bottom-[23%] items-end text-right",
-  "left-1/2 top-[8%] -translate-x-1/2 items-center text-center",
-];
-
 export function HeroLens() {
   const ref = useRef<HTMLElement>(null);
 
@@ -303,14 +290,14 @@ export function HeroLens() {
   }, []);
 
   // All five readings (DO, pH, temperature, salinity, water level).
-  const readouts = heroReadouts.slice(0, SLOTS.length);
+  const readouts = heroReadouts.slice(0, 5);
 
   return (
-    <figure
-      ref={ref}
-      aria-label="A shrimp inside a camera lens, with example water-quality readings"
-      className="relative mx-auto aspect-square w-full max-w-[460px]"
-    >
+    <div ref={ref} className="ep-lens-showcase mx-auto flex w-full max-w-[560px] flex-col items-center gap-4 sm:gap-5">
+      <figure
+        aria-label="A shrimp inside a camera lens"
+        className="relative mx-auto aspect-square w-full max-w-[300px] shrink-0"
+      >
       {/* Monochrome lens barrel and glass */}
       <div className="absolute inset-0 rounded-full bg-black p-[3.2%] dark:bg-white">
         {/* Glass */}
@@ -404,36 +391,6 @@ export function HeroLens() {
             className="ep-lens-scan pointer-events-none absolute inset-x-[22%] top-[16%] h-px bg-white opacity-0 dark:bg-black"
           />
 
-          {/* Readouts */}
-          {readouts.map((r, i) => {
-            const compact = i === 4; // top-center slot (Water Level)
-            return (
-              <div key={r.label} className={`ep-lens-readout absolute flex flex-col ${SLOTS[i]}`}>
-                <span className="flex items-center gap-1.5 text-xs font-medium text-white dark:text-black sm:text-sm">
-                  <span
-                    aria-hidden="true"
-                    className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-white dark:bg-black"
-                  />
-                  {r.label}
-                </span>
-                <span
-                  className={`mt-0.5 font-semibold tabular-nums text-[var(--ep-bg)] ${
-                    compact ? "text-lg sm:text-xl" : "text-xl sm:text-2xl"
-                  }`}
-                >
-                  <span data-count={r.value}>{r.value}</span>
-                  <span className="ml-1 text-xs font-medium text-white dark:text-black sm:text-sm">
-                    {heroReadoutUnits[r.label]}
-                  </span>
-                </span>
-              </div>
-            );
-          })}
-
-          <p className="ep-lens-caption absolute bottom-[12%] left-1/2 w-[56%] -translate-x-1/2 text-center text-[11px] leading-snug text-white dark:text-black sm:text-xs">
-            Example readings, not from a real tank.
-          </p>
-
           {/* Glass finish: vignette, specular crescent, cursor glare, shutter flash */}
           <span
             aria-hidden="true"
@@ -466,6 +423,34 @@ export function HeroLens() {
           />
         </div>
       </div>
-    </figure>
+      </figure>
+
+      {/* Readings now sit outside the lens, in a dedicated responsive strip. */}
+      <div
+        aria-label="Example water quality readings"
+        className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5"
+      >
+        {readouts.map((r) => (
+          <div
+            key={r.label}
+            className="ep-lens-readout flex min-w-0 flex-col items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-2.5 py-2.5 text-center shadow-sm sm:px-3"
+          >
+            <span className="flex items-center justify-center gap-1.5 text-[10px] font-semibold leading-tight text-[var(--ep-text-muted)] sm:text-xs">
+              <span aria-hidden="true" className="ep-lens-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ep-secondary)]" />
+              {r.label}
+            </span>
+            <span className="mt-1 font-bold tabular-nums text-sm text-[var(--ep-text)] sm:text-base">
+              <span data-count={r.value}>{r.value}</span>
+              <span className="ml-0.5 text-[10px] font-medium text-[var(--ep-text-muted)] sm:text-xs">
+                {heroReadoutUnits[r.label]}
+              </span>
+            </span>
+          </div>
+        ))}
+      </div>
+      <p className="ep-lens-caption text-center text-[10px] leading-snug text-[var(--ep-text-muted)] sm:text-xs">
+        Example readings, not from a real tank.
+      </p>
+    </div>
   );
 }
