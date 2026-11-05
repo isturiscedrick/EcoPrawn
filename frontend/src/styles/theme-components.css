@@ -1,5 +1,5 @@
 /* ---------- EcoPrawn palette v3, warm high-contrast (60/30/10) ----------
-   Close to the original sand / deep teal / coral[class~=" Every text pairing is
+   Close to the original sand / deep teal / coral. Every text pairing is
    at least 5.5:1. Accent is white-on-coral for fills, coral text on cream. */
 :root {
   --ep-bg: #ffffff;          /* 60%  page background            */
@@ -33,21 +33,21 @@ html:not(.dark) .dashboard-shell aside .ep-logo {
   --ep-logo-text: #0b4f3a;
 }
 
-html:not(.dark) .dashboard-shell .border-[rgba(11,46,51,0.12)],
-html:not(.dark) .dashboard-shell .border-[var(--sand-dim)] {
+html:not(.dark) .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.12\)\],
+html:not(.dark) .dashboard-shell .border-\[var\(--sand-dim\)\] {
   border-color: #9fb3b0;
 }
 
-html:not(.dark) .dashboard-shell .text-[rgba(11,35,32,0.55)],
-html:not(.dark) .dashboard-shell .text-[rgba(11,35,32,0.6)],
-html:not(.dark) .dashboard-shell .text-[rgba(11,35,32,0.68)],
-html:not(.dark) .dashboard-shell .text-[rgba(11,46,51,0.62)],
-html:not(.dark) .dashboard-shell .text-[rgba(11,46,51,0.68)] {
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.55\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.6\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.68\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\] {
   color: #35534f;
 }
 
-html:not(.dark) .dashboard-shell .text-[rgba(11,35,32,0.45)],
-html:not(.dark) .dashboard-shell .text-[rgba(11,35,32,0.5)"] {
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.45\)\],
+html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\] {
   color: #4a6561;
 }
 
@@ -82,36 +82,36 @@ html.dark .dashboard-shell aside .ep-logo {
   --ep-logo-text: #8bd5a6;
 }
 
-html.dark .dashboard-shell [class~="text-[var(--water-deep)]"] {
+html.dark .dashboard-shell .text-\[var\(--water-deep\)\] {
   color: #e4e6eb;
 }
 
-html[class~="dark .dashboard-shell .text-[rgba(11,35,32,0.55)],
-html.dark .dashboard-shell .text-[rgba(11,35,32,0.68)],
-html.dark .dashboard-shell .text-[rgba(11,46,51,0.68)],
-html.dark .dashboard-shell .text-[rgba(11,46,51,0.62)],
-html.dark .dashboard-shell .text-[rgba(11,35,32,0.5)],
-html.dark .dashboard-shell .text-[rgba(11,46,51,0.62)],
-html.dark .dashboard-shell .text-[rgba(11,46,51,0.72)] {
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.55\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.68\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.72\)\] {
   color: #b0b3b8;
 }
 
-html.dark .dashboard-shell .border-[var(--sand-dim)],
-html.dark .dashboard-shell .border-[rgba(11,46,51,0.12)],
-html.dark .dashboard-shell .border-[rgba(11,46,51,0.1)] {
+html.dark .dashboard-shell .border-\[var\(--sand-dim\)\],
+html.dark .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.12\)\],
+html.dark .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.1\)\] {
   border-color: rgba(255, 255, 255, 0.12);
 }
 
-html.dark .dashboard-shell .bg-[rgba(60,122,92,0.1)] {
+html.dark .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\] {
   background-color: #3a3b3c;
 }
 
-html.dark .dashboard-shell .text-[var(--mangrove)"],
-html.dark .dashboard-shell [class~="text-[var(--mangrove-text)]"] {
+html.dark .dashboard-shell .text-\[var\(--mangrove\)\],
+html.dark .dashboard-shell .text-\[var\(--mangrove-text\)\] {
   color: #8fc6a6;
 }
 
-html[class~="dark .dashboard-shell .bg-[var(--water-deep)] {
+html.dark .dashboard-shell .bg-\[var\(--water-deep\)\] {
   background-color: #0b2e33;
 }
 
@@ -137,7 +137,7 @@ html.dark .dashboard-shell .dashboard-nav-active-dot {
   background-color: #e8623a;
 }
 
-html.dark .dashboard-shell aside .hover:text-[var(--water-deep)"]:hover {
+html.dark .dashboard-shell aside .hover\:text-\[var\(--water-deep\)\]:hover {
   color: #e4e6eb;
 }
 
@@ -244,10 +244,10 @@ html.dark :is(.marketing-shell, .ep-auth-modal) [class*="border-[rgba(11,46,51"]
   border-color: var(--ep-line);
 }
 /* Coral fills need dark text; white on #f28a68 is only about 2.4:1. */
-html.dark :is(.marketing-shell, .ep-auth-modal) [class~="bg-[var(--ep-accent)]"] {
+html.dark :is(.marketing-shell, .ep-auth-modal) .bg-\[var\(--ep-accent\)\] {
   color: #1b0a04;
 }
-html.dark .marketing-shell :is([class~="bg-[var(--ep-ok)]"], [class~="bg-[var(--ep-warn-text)]"]) {
+html.dark .marketing-shell :is(.bg-\[var\(--ep-ok\)\], .bg-\[var\(--ep-warn-text\)\]) {
   color: #0b1417;
 }
 html.dark :is(.marketing-shell, .ep-auth-modal) [class*="ring-offset-white"] {
@@ -268,7 +268,7 @@ html.dark .marketing-shell :is(nav[aria-label="Primary navigation"], nav[aria-la
 }
 
 /* ---------- Dashboard palette ----------
-   Scoped to [class~="dashboard-shell. Orange = brand and calls to action,
+   Scoped to .dashboard-shell. Orange = brand and calls to action,
    teal / sky blue = headings and controls, green stays reserved for OK status.
    Delete this block to revert. */
 
@@ -307,27 +307,27 @@ html.dark .dashboard-shell {
 
 /* Dark mode: Panel badges and page accents follow the secondary color.
    Same specificity as the earlier #8fc6a6 rule, so this one wins by order. */
-html.dark .dashboard-shell :is(.text-[var(--mangrove)"], [class~="text-[var(--mangrove-text)]"]) {
+html.dark .dashboard-shell :is(.text-\[var\(--mangrove\)\], .text-\[var\(--mangrove-text\)\]) {
   color: var(--ep-secondary);
 }
 
 /* Dashboard components hard-code the old orange as rgba(232,98,58,…):
    Panel icon chips, value badges, Details hovers, sidebar profile and
-   logout hovers, empty-state button hover[class~=" */
-.dashboard-shell .bg-[rgba(232,98,58,0.12)] {
+   logout hovers, empty-state button hover. */
+.dashboard-shell .bg-\[rgba\(232\,98\,58\,0\.12\)\] {
   background-color: var(--ep-accent-tint);
 }
-.dashboard-shell .hover:bg-[rgba(232,98,58,0.08)]:hover {
+.dashboard-shell .hover\:bg-\[rgba\(232\,98\,58\,0\.08\)\]:hover {
   background-color: var(--ep-accent-tint-soft);
 }
-.dashboard-shell .hover:bg-[rgba(232,98,58,0.12)]:hover {
+.dashboard-shell .hover\:bg-\[rgba\(232\,98\,58\,0\.12\)\]:hover {
   background-color: var(--ep-accent-tint);
 }
 /* "AI recommendation" box on the Overview */
-.dashboard-shell .bg-[rgba(232,98,58,0.06)] {
+.dashboard-shell .bg-\[rgba\(232\,98\,58\,0\.06\)\] {
   background-color: color-mix(in srgb, var(--ep-accent) 6%, transparent);
 }
-.dashboard-shell .border-[rgba(232,98,58,0.22)] {
+.dashboard-shell .border-\[rgba\(232\,98\,58\,0\.22\)\] {
   border-color: color-mix(in srgb, var(--ep-accent) 22%, transparent);
 }
 /* Keyboard focus on hoverable rows used the old #b23f1c */
@@ -336,10 +336,10 @@ html.dark .dashboard-shell :is(.text-[var(--mangrove)"], [class~="text-[var(--ma
 }
 
 /* Panel badges ("7-week view", "3 tanks"...): secondary text, light-mode tint */
-.dashboard-shell .bg-[rgba(60,122,92,0.1)"][class~="text-[var(--mangrove-text)]"] {
+.dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(--mangrove-text\)\] {
   color: var(--ep-secondary);
 }
-html:not([class~="dark) .dashboard-shell .bg-[rgba(60,122,92,0.1)"][class~="text-[var(--mangrove-text)]"] {
+html:not(.dark) .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(--mangrove-text\)\] {
   background-color: var(--ep-secondary-tint);
 }
 
@@ -347,12 +347,12 @@ html:not([class~="dark) .dashboard-shell .bg-[rgba(60,122,92,0.1)"][class~="text
 .dashboard-shell polyline[stroke="var(--mangrove)"] {
   stroke: var(--ep-secondary);
 }
-[class~="dashboard-shell .inline-block.h-[2px].bg-[var(--mangrove)] {
+.dashboard-shell .inline-block.h-\[2px\].bg-\[var\(--mangrove\)\] {
   background-color: var(--ep-secondary);
 }
 
 /* Activity Log: "info" entries were a hard-coded blue (#4b8db8) */
-.dashboard-shell .bg-[#4b8db8"] {
+.dashboard-shell .bg-\[\#4b8db8\] {
   background-color: var(--ep-secondary);
 }
 
@@ -364,31 +364,31 @@ html.dark :is(.marketing-shell, .ep-auth-modal) {
 }
 
 /* Feature icon chips (About, Contact) hard-code the old orange tint */
-.marketing-shell [class~="bg-[rgba(232,98,58,0.1)]"] {
+.marketing-shell .bg-\[rgba\(232\,98\,58\,0\.1\)\] {
   background-color: color-mix(in srgb, var(--ep-accent) 10%, transparent);
 }
 
-/* Hero lens status dots hard-code sky blue[class~=" The lens is always dark,
+/* Hero lens status dots hard-code sky blue. The lens is always dark,
    so it uses the mint value in both themes. */
-.marketing-shell .bg-[#38bdf8] {
+.marketing-shell .bg-\[\#38bdf8\] {
   background-color: #8bd5a6;
 }
 
 /* Coral fills need dark text in dark mode; white on #f28a68 is only ~2.4:1. */
-html.dark .dashboard-shell :is(.bg-[var(--coral)"], [class~="bg-[var(--ep-accent)]"]) {
+html.dark .dashboard-shell :is(.bg-\[var\(--coral\)\], .bg-\[var\(--ep-accent\)\]) {
   color: #1b0a04;
 }
 
 /* Selected pills and green-filled buttons (tank tabs, SMS save, Connect ESP32)
-   become the secondary color[class~=" Status dots have no text-white, so they stay green. */
-.dashboard-shell .bg-[var(--mangrove)].text-white {
+   become the secondary color. Status dots have no text-white, so they stay green. */
+.dashboard-shell .bg-\[var\(--mangrove\)\].text-white {
   background-color: var(--ep-secondary);
   border-color: var(--ep-secondary);
 }
-html.dark .dashboard-shell .bg-[var(--mangrove)].text-white {
+html.dark .dashboard-shell .bg-\[var\(--mangrove\)\].text-white {
   color: #04202b;
 }
-.dashboard-shell .hover:border-[var(--mangrove)"]:hover {
+.dashboard-shell .hover\:border-\[var\(--mangrove\)\]:hover {
   border-color: var(--ep-secondary);
 }
 
@@ -438,21 +438,21 @@ html.dark .dashboard-shell [style*="var(--coral)"] {
 
 /* ---------- Hover, focus and modal states that still used literal colors ---------- */
 
-/* Input focus glow used rgba(178,63,28), the old #b23f1c[class~="
+/* Input focus glow used rgba(178,63,28), the old #b23f1c.
    Add Tank modal and the Contact form. */
-:is(.dashboard-shell, .marketing-shell) .focus:shadow-[0_0_0_3px_rgba(178,63,28,0.12)]:focus {
+:is(.dashboard-shell, .marketing-shell) .focus\:shadow-\[0_0_0_3px_rgba\(178\,63\,28\,0\.12\)\]:focus {
   --tw-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent) 12%, transparent);
 }
 
 /* Sign-in modal inputs use a ring instead of a shadow */
-.ep-auth-modal .focus:ring-[rgba(178,63,28,0.15)]:focus {
+.ep-auth-modal .focus\:ring-\[rgba\(178\,63\,28\,0\.15\)\]:focus {
   --tw-ring-color: color-mix(in srgb, var(--ep-accent) 15%, transparent);
 }
 
 /* Green focus outlines (tank tabs, sidebar links) follow the secondary color */
 .dashboard-shell :is(
-    .focus-visible:outline-[var(--mangrove)],
-    .focus-visible:outline-[var(--mangrove-light)"]
+    .focus-visible\:outline-\[var\(--mangrove\)\],
+    .focus-visible\:outline-\[var\(--mangrove-light\)\]
   ):focus-visible {
   outline-color: var(--ep-secondary);
 }
@@ -464,18 +464,18 @@ html.dark .dashboard-shell [style*="var(--coral)"] {
 }
 
 /* Alert rows: the "info" check icon was green */
-[class~="dashboard-shell .bg-[rgba(60,122,92,0.14)] {
+.dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.14\)\] {
   background-color: var(--ep-secondary-tint);
   color: var(--ep-secondary);
 }
 
 /* "Water level calibration, optional" disclosure link */
-.dashboard-shell summary.text-[var(--mangrove)] {
+.dashboard-shell summary.text-\[var\(--mangrove\)\] {
   color: var(--ep-secondary);
 }
 
 /* Feed progress bar ended in amber; now coral to secondary */
-.dashboard-shell .to-[var(--amber)] {
+.dashboard-shell .to-\[var\(--amber\)\] {
   --tw-gradient-to: var(--ep-secondary);
 }
 
@@ -486,15 +486,15 @@ html.dark .dashboard-shell .from-white {
 
 /* Add Tank modal, Cancel button: on hover it fills with --ep-primary
    (light gray in dark mode) but kept white text. Use the page color instead. */
-html.dark .dashboard-shell .hover:bg-[var(--ep-primary)]:hover {
+html.dark .dashboard-shell .hover\:bg-\[var\(--ep-primary\)\]:hover {
   color: var(--ep-bg);
 }
 
 /* Public header "Sign up" button shadows used the old orange */
-.marketing-shell .shadow-[0_6px_14px_-8px_rgba(178,63,28,0.45)] {
+.marketing-shell .shadow-\[0_6px_14px_-8px_rgba\(178\,63\,28\,0\.45\)\] {
   --tw-shadow: 0 6px 14px -8px color-mix(in srgb, var(--ep-accent) 45%, transparent);
 }
-.marketing-shell .hover:shadow-[0_10px_20px_-10px_rgba(178,63,28,0.55)"]:hover {
+.marketing-shell .hover\:shadow-\[0_10px_20px_-10px_rgba\(178\,63\,28\,0\.55\)\]:hover {
   --tw-shadow: 0 10px 20px -10px color-mix(in srgb, var(--ep-accent) 55%, transparent);
 }
 
