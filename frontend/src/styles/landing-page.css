@@ -225,3 +225,229 @@ html.dark .marketing-shell.ep-landing-page {
 .marketing-shell.ep-landing-page :is(img,video,canvas,figure,.ep-hero-visual) {
   filter: none !important;
 }
+
+
+/* Complete brand-color coverage for every landing-page region.
+   These selectors intentionally win over the old monochrome utility classes
+   in the landing markup and over normal inline component styles. */
+
+/* Hero: secondary-color atmosphere with primary coral emphasis. */
+.marketing-shell.ep-landing-page .ep-landing-hero {
+  background: var(--ep-bg) !important;
+  color: var(--ep-text) !important;
+}
+.marketing-shell.ep-landing-page .ep-landing-hero [data-hero="grid"] {
+  opacity: .1 !important;
+}
+.marketing-shell.ep-landing-page .ep-landing-hero [data-hero="grid"],
+.marketing-shell.ep-landing-page .ep-landing-hero [data-cross] {
+  color: var(--ep-secondary) !important;
+}
+.marketing-shell.ep-landing-page .ep-landing-hero [data-cross] span {
+  background-color: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-landing-hero [data-hero="eyebrow"] {
+  background: var(--ep-primary-soft) !important;
+  border-color: var(--ep-primary) !important;
+  color: var(--ep-primary) !important;
+  -webkit-text-fill-color: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-landing-hero [data-hero="eyebrow"] span {
+  background: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-landing-hero [data-hero="headline"] [data-hero-headline-accent] {
+  color: var(--ep-secondary) !important;
+  -webkit-text-fill-color: var(--ep-secondary) !important;
+}
+.marketing-shell.ep-landing-page .ep-landing-hero [data-hero="headline"] > span:last-child {
+  color: var(--ep-primary) !important;
+  -webkit-text-fill-color: var(--ep-primary) !important;
+}
+
+/* Stats and process sections: alternate neutral surfaces with brand-colored
+   headings, iconography, timeline, separators, and hover states. */
+.marketing-shell.ep-landing-page .ep-stats-section {
+  background: var(--ep-tint) !important;
+  border-color: var(--ep-line) !important;
+}
+.marketing-shell.ep-landing-page .ep-stats-panel {
+  background: var(--ep-surface) !important;
+  border-color: var(--ep-line) !important;
+}
+.marketing-shell.ep-landing-page .ep-stat-card {
+  background: var(--ep-bg) !important;
+  border-color: var(--ep-line) !important;
+}
+.marketing-shell.ep-landing-page .ep-stat-value {
+  color: var(--ep-primary) !important;
+  -webkit-text-fill-color: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-process-section {
+  background: var(--ep-bg) !important;
+  color: var(--ep-text) !important;
+}
+.marketing-shell.ep-landing-page .ep-process-section [data-step-node],
+.marketing-shell.ep-landing-page .ep-process-section [data-process-line],
+.marketing-shell.ep-landing-page .ep-process-section .ep-font-display + span {
+  background: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-process-section [data-step] {
+  border-color: var(--ep-line) !important;
+}
+.marketing-shell.ep-landing-page .ep-process-section [data-step] :is(svg,[data-icon]) {
+  color: var(--ep-secondary) !important;
+}
+.marketing-shell.ep-landing-page .ep-process-section [data-step] h3 {
+  color: var(--ep-secondary) !important;
+  -webkit-text-fill-color: var(--ep-secondary) !important;
+}
+.marketing-shell.ep-landing-page .ep-process-section [data-step]:hover {
+  border-color: var(--ep-primary) !important;
+}
+
+/* Reading-range band uses secondary as its surface and primary for data
+   markers. Every label/value keeps a high-contrast foreground in both themes. */
+.marketing-shell.ep-landing-page #readings {
+  background: var(--ep-secondary) !important;
+  color: var(--ep-bg) !important;
+  border-color: var(--ep-secondary) !important;
+}
+.marketing-shell.ep-landing-page #readings :is(h2,p,dt,dd,span,label,li,strong,b) {
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
+}
+.marketing-shell.ep-landing-page #readings [data-reading] {
+  background: color-mix(in srgb, var(--ep-secondary) 88%, var(--ep-text) 12%) !important;
+  border-color: var(--ep-line) !important;
+}
+.marketing-shell.ep-landing-page #readings [data-zone],
+.marketing-shell.ep-landing-page #readings [data-marker] > span:last-child {
+  background: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page #readings [data-marker] > span:first-child {
+  border-color: var(--ep-primary) !important;
+}
+
+/* Header: theme canvas, teal navigation surface, coral signup action, and
+   brand-colored logo. Overrides the header's inline monochrome declarations. */
+.marketing-shell.ep-landing-page #site-header,
+.marketing-shell.ep-landing-page #site-header > div {
+  background: var(--ep-bg) !important;
+  background-color: var(--ep-bg) !important;
+  color: var(--ep-text) !important;
+  border-color: var(--ep-line) !important;
+}
+.marketing-shell.ep-landing-page #site-header .ep-logo,
+.marketing-shell.ep-landing-page #site-header .ep-logo svg,
+.marketing-shell.ep-landing-page #site-header .ep-logo svg *,
+.marketing-shell.ep-landing-page #site-header .ep-logo-wordmark {
+  color: var(--ep-primary) !important;
+  fill: var(--ep-primary) !important;
+  stroke: var(--ep-primary) !important;
+  -webkit-text-fill-color: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"],
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] {
+  background: var(--ep-surface) !important;
+  background-color: var(--ep-surface) !important;
+  border-color: var(--ep-line) !important;
+}
+.marketing-shell.ep-landing-page #site-header nav a {
+  color: var(--ep-text) !important;
+  -webkit-text-fill-color: var(--ep-text) !important;
+}
+.marketing-shell.ep-landing-page #site-header nav a:hover,
+.marketing-shell.ep-landing-page #site-header nav a[aria-current="page"] {
+  background: var(--ep-secondary) !important;
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
+}
+.marketing-shell.ep-landing-page #site-header button[role="switch"],
+.marketing-shell.ep-landing-page #site-header a[href="/auth"],
+.marketing-shell.ep-landing-page #site-header a[href="/login"] {
+  border-color: var(--ep-primary) !important;
+  color: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page #site-header a[href="/signup"],
+.marketing-shell.ep-landing-page #site-header a[aria-label*="Get started"] {
+  background: var(--ep-primary) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Footer becomes a deliberate secondary-color anchor, with primary coral
+   used for the shrimp mark and interactive hover accents. */
+.marketing-shell.ep-landing-page footer[data-site-footer] {
+  background: var(--ep-secondary) !important;
+  color: var(--ep-bg) !important;
+  border-top: 1px solid var(--ep-secondary) !important;
+}
+.marketing-shell.ep-landing-page footer[data-site-footer] :is(h2,h3,p,a,span,small,li) {
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
+}
+.marketing-shell.ep-landing-page footer[data-site-footer] a:hover {
+  color: var(--ep-primary) !important;
+  -webkit-text-fill-color: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo,
+.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo svg,
+.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo svg *,
+.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo-shrimp {
+  color: var(--ep-primary) !important;
+  fill: var(--ep-primary) !important;
+  stroke: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo-wordmark {
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
+}
+
+/* HeroLens: teal lens barrel and glass, coral shrimp/scan/focus details,
+   green secondary instrumentation in dark mode. */
+.marketing-shell.ep-landing-page .ep-hero-visual figure > div:first-child {
+  background: var(--ep-secondary) !important;
+}
+.marketing-shell.ep-landing-page .ep-hero-visual figure > div:first-child > div {
+  background: var(--ep-secondary) !important;
+  border-color: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-lens-rings,
+.marketing-shell.ep-landing-page .ep-lens-ticks,
+.marketing-shell.ep-landing-page .ep-lens-arcs {
+  color: var(--ep-bg) !important;
+}
+.marketing-shell.ep-landing-page .ep-lens-rings circle {
+  stroke: var(--ep-secondary) !important;
+}
+.marketing-shell.ep-landing-page .ep-lens-ticks line,
+.marketing-shell.ep-landing-page .ep-lens-arcs path {
+  stroke: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-lens-shrimp :is(svg,path,.ep-logo-shrimp) {
+  color: var(--ep-primary) !important;
+  fill: var(--ep-primary) !important;
+  stroke: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-lens-readout,
+.marketing-shell.ep-landing-page .ep-lens-readout :is(span,small) {
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
+}
+.marketing-shell.ep-landing-page .ep-lens-dot,
+.marketing-shell.ep-landing-page .ep-lens-scan {
+  background: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-lens-ping {
+  border-color: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-lens-caption {
+  color: var(--ep-bg) !important;
+  -webkit-text-fill-color: var(--ep-bg) !important;
+}
+.marketing-shell.ep-landing-page .ep-lens-speck {
+  background: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page .ep-lens-iris {
+  background: var(--ep-secondary) !important;
+}
