@@ -292,4 +292,79 @@ html.dark .marketing-shell.ep-landing-page .ep-logo-wordmark {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
+
+/* Target ranges: suppress legacy water gradients and keep every reading
+   element strictly black/white in both themes. */
+.marketing-shell.ep-landing-page #readings {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page #readings > [data-readings-bg] {
+  background: transparent !important;
+  background-image: none !important;
+  opacity: 0 !important;
+}
+.marketing-shell.ep-landing-page #readings :is(h2, p, dt, dd, span, svg, path, .ep-icon) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page #readings [data-reading] {
+  background: #000000 !important;
+  border: 1px solid #ffffff !important;
+  color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page #readings [data-reading] :is(*, *::before, *::after) {
+  border-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page #readings [data-reading] [data-zone],
+.marketing-shell.ep-landing-page #readings [data-reading] [data-marker] > span:last-child {
+  background: #ffffff !important;
+}
+.marketing-shell.ep-landing-page #readings [data-reading] [data-marker] > span:first-child {
+  border-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page #readings {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page #readings :is(h2, p, dt, dd, span, svg, path, .ep-icon) {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page #readings [data-reading] {
+  background: #ffffff !important;
+  border: 1px solid #000000 !important;
+  color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page #readings [data-reading] :is(*, *::before, *::after) {
+  border-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page #readings [data-reading] [data-zone],
+html.dark .marketing-shell.ep-landing-page #readings [data-reading] [data-marker] > span:last-child {
+  background: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page #readings [data-reading] [data-marker] > span:first-child {
+  border-color: #000000 !important;
+}
+
+/* Footer logo shrimp paths have explicit legacy fills; override the paths,
+   not just the inherited logo variables. */
+.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo svg .ep-logo-shrimp {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo svg .ep-logo-shrimp {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+.marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo .ep-logo-wordmark {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo .ep-logo-wordmark {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
 }
