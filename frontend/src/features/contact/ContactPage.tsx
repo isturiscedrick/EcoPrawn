@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "./ContactForm";
 import { ContactMotion } from "@/components/motion/ContactMotion";
 
-const SECTION_PAD = "px-5 py-20 sm:px-8 sm:py-24";
+const SECTION_PAD = "px-4 py-16 sm:px-8 sm:py-24";
 
 // Details taken from the site footer. Add an email / phone here when you
 // have one you want to publish.
@@ -36,21 +36,21 @@ export function ContactPage() {
 
         <section className={SECTION_PAD}>
           <div className="mx-auto max-w-[1200px]">
-            <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
+            <div className="grid grid-cols-1 items-stretch gap-5 sm:gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
               <Reveal>
                 <dl data-contact-details="" className="flex flex-col gap-4">
                   {CONTACT_DETAILS.map((item) => (
                     <div
                       key={item.label}
                       data-contact-card=""
-                      className="flex min-w-0 items-start gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)]"
+                      className="flex min-w-0 items-start gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)]"
                     >
                       <IconChip name={item.icon} tone="coral" size={20} />
                       <div className="min-w-0">
                         <dt className="mb-1 text-sm font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">
                           {item.label}
                         </dt>
-                        <dd className="break-words text-base font-semibold leading-relaxed text-[var(--ep-text)] sm:text-lg">{item.value}</dd>
+                        <dd className="break-words text-sm font-semibold leading-relaxed text-[var(--ep-text)] sm:text-lg">{item.value}</dd>
                       </div>
                     </div>
                   ))}
