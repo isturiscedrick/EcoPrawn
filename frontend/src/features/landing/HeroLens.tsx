@@ -293,11 +293,28 @@ export function HeroLens() {
   const readouts = heroReadouts.slice(0, 5);
 
   return (
-    <div ref={ref} className="ep-lens-showcase mx-auto flex w-full max-w-[560px] flex-col items-center gap-4 sm:gap-5">
-      <figure
-        aria-label="A shrimp inside a camera lens"
-        className="relative mx-auto aspect-square w-full max-w-[300px] shrink-0"
-      >
+    <div ref={ref} className="ep-lens-showcase mx-auto flex w-full max-w-[620px] flex-col items-center gap-3">
+      <div className="ep-lens-diagram relative w-full">
+        <svg aria-hidden="true" viewBox="0 0 620 390" preserveAspectRatio="none" className="ep-lens-connectors pointer-events-none absolute inset-0 h-full w-full overflow-visible">
+          <g fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" opacity=".72">
+            <path d="M166 112 H126 L105 91" />
+            <path d="M454 112 H494 L515 91" />
+            <path d="M166 264 H126 L105 285" />
+            <path d="M454 264 H494 L515 285" />
+            <path d="M310 326 V354" />
+          </g>
+          <g fill="var(--ep-secondary)">
+            <circle cx="166" cy="112" r="3" />
+            <circle cx="454" cy="112" r="3" />
+            <circle cx="166" cy="264" r="3" />
+            <circle cx="454" cy="264" r="3" />
+            <circle cx="310" cy="326" r="3" />
+          </g>
+        </svg>
+        <figure
+          aria-label="A shrimp inside a camera lens"
+          className="ep-lens-core relative z-[1] mx-auto aspect-square w-full max-w-[300px] shrink-0"
+        >
       {/* Monochrome lens barrel and glass */}
       <div className="absolute inset-0 rounded-full bg-black p-[3.2%] dark:bg-white">
         {/* Glass */}
@@ -423,30 +440,21 @@ export function HeroLens() {
           />
         </div>
       </div>
-      </figure>
-
-      {/* Readings now sit outside the lens, in a dedicated responsive strip. */}
-      <div
-        aria-label="Example water quality readings"
-        className="ep-lens-readings grid w-full grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3 lg:grid-cols-5"
-      >
-        {readouts.map((r) => (
-          <div
-            key={r.label}
-            className="ep-lens-readout flex min-w-0 flex-col items-center justify-center py-1 text-center"
-          >
-            <span className="flex items-center justify-center gap-1.5 text-xs font-semibold leading-tight text-[var(--ep-text-muted)] sm:text-sm">
-              <span aria-hidden="true" className="ep-lens-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ep-secondary)]" />
-              {r.label}
-            </span>
-            <span className="mt-1 font-bold tabular-nums text-lg leading-tight text-[var(--ep-text)] sm:text-xl">
-              <span data-count={r.value}>{r.value}</span>
-              <span className="ml-1 text-xs font-medium text-[var(--ep-text-muted)] sm:text-sm">
-                {heroReadoutUnits[r.label]}
+        </figure>
+        <div aria-label="Example water quality readings connected to the lens" className="ep-lens-readings absolute inset-0 z-[2]">
+          {readouts.map((r, i) => (
+            <div key={r.label} className={`ep-lens-readout ep-lens-readout-${i} absolute flex min-w-0 flex-col ${i === 0 || i === 2 ? "items-start text-left" : i === 1 || i === 3 ? "items-end text-right" : "items-center text-center"}`}>
+              <span className="flex items-center gap-1.5 text-xs font-semibold leading-tight">
+                <span aria-hidden="true" className="ep-lens-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full" />
+                {r.label}
               </span>
-            </span>
-          </div>
-        ))}
+              <span className="mt-1 font-bold tabular-nums text-lg leading-tight sm:text-xl">
+                <span data-count={r.value}>{r.value}</span>
+                <span className="ml-1 text-xs font-medium sm:text-sm">{heroReadoutUnits[r.label]}</span>
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
       <p className="ep-lens-caption text-center text-[10px] leading-snug text-[var(--ep-text-muted)] sm:text-xs">
         Example readings, not from a real tank.
