@@ -343,3 +343,29 @@ html.dark .marketing-shell.ep-contact-page [data-contact-form] form button[type=
   color: #18191a !important;
   border-color: #f28a68 !important;
 }
+
+
+/* Landing page color rhythm: neutral canvas -> deep-teal feature band -> neutral
+   process section -> restrained CTA band. Accent colors stay on small controls. */
+.marketing-shell.ep-landing-page [data-band] {
+  background: #0f4c5c !important;
+  border-color: #0f4c5c !important;
+  color: #f4f7f6 !important;
+}
+.marketing-shell.ep-landing-page [data-band] :is(h2,p) {
+  color: #f4f7f6 !important;
+}
+.marketing-shell.ep-landing-page [data-band] a {
+  border-color: #f4f7f6;
+}
+html.dark .marketing-shell.ep-landing-page [data-band] {
+  background: #202729 !important;
+  border-color: rgba(139,213,166,.32) !important;
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-landing-page [data-band] :is(h2,p) {
+  color: #8bd5a6 !important;
+}
+html.dark .marketing-shell.ep-landing-page [data-band] a {
+  border-color: #8bd5a6;
+}
