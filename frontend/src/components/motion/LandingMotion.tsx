@@ -602,30 +602,36 @@ export function LandingMotion() {
       };
     });
 
-    // PROCESS LINE: desktop only (the line is hidden below lg). It draws
-    // left to right, tied to scroll position, in the accent color.
+    // HORIZONTAL PROCESS STORY: desktop users scroll vertically while
+    // the four process stages travel horizontally. Mobile keeps its natural
+    // stacked layout and reduced-motion users are not pinned.
     mm.add(
       "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
       () => {
-        const line = document.querySelector<HTMLElement>(
-          '#process .relative > [aria-hidden="true"]'
-        );
-        if (!line) return;
-        gsap.fromTo(
-          line,
-          { scaleX: 0, transformOrigin: "left center" },
-          {
-            scaleX: 1,
-            height: 2,
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#process ol",
-              start: "top 75%",
-              end: "top 35%",
-              scrub: true,
+        const viewport = document.querySelector<HTMLElement>("#process [data-process-viewport]");
+        const track = viewport?.querySelector<HTMLElement>("[data-process-track]");
+        const line = viewport?.querySelector<HTMLElement>("[data-process-line]");
+        if (!viewport || !track) return;
+
+        const getDistance = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
+        if (getDistance() < 40) return;
+
+        gsap.to(track, {
+          x: () => -getDistance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: viewport,
+            start: "top 16%",
+            end: () => `+=${getDistance()}`,
+            scrub: 1,
+            pin: viewport,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              if (line) gsap.set(line, { scaleX: self.progress, transformOrigin: "left center" });
             },
-          }
-        );
+          },
+        });
       }
     );
 
