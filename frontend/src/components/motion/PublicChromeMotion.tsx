@@ -189,7 +189,7 @@ export function PublicChromeMotion() {
         const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
         if (finePointer.matches && main) {
           const magneticTargets = main.querySelectorAll<HTMLElement>(
-            '#top [data-hero="cta"] a, #top [data-hero="cta"] button, [data-band] a, [data-contact-form] button[type="submit"]'
+            '[data-band] a, [data-contact-form] button[type="submit"]'
           );
           magneticTargets.forEach((target) => {
             const moveX = gsap.quickTo(target, "x", { duration: .38, ease: "power3.out", overwrite: "auto" });
