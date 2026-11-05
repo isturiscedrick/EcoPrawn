@@ -111,7 +111,7 @@ export function SiteHeader({
           <BrandMark size={36} />
         </Link>
 
-        {showLinks && <div className={integrated ? "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" : ""}><NavLinks variant="desktop" activeHref={pathname} /></div>}
+        {showLinks && <div className={integrated ? "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" : ""}><NavLinks variant="desktop" activeHref={pathname} monochrome={isMonochromeLanding} darkMode={darkMode} /></div>}
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           {!isAuth && (
@@ -177,7 +177,7 @@ export function SiteHeader({
       {showLinks && (
         <div className={`grid overflow-hidden transition-all duration-300 ease-out md:hidden ${mobileNavOpen ? "visible grid-rows-[1fr] opacity-100" : "invisible grid-rows-[0fr] opacity-0"}`}>
           <div className="min-h-0">
-            <NavLinks variant="mobile" activeHref={pathname} onLinkClick={() => setMobileNavOpen(false)} />
+            <NavLinks variant="mobile" activeHref={pathname} onLinkClick={() => setMobileNavOpen(false)} monochrome={isMonochromeLanding} darkMode={darkMode} />
             <div className="flex gap-3 px-5 pb-5 sm:hidden">
               <AuthLink className="flex-1 rounded-full border px-4 py-3 text-center text-sm font-semibold" style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>Log in</AuthLink>
               <AuthLink mode="signup" className="flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold text-[var(--ep-bg)]" style={{ backgroundColor: "var(--ep-accent)" }}>Get started</AuthLink>
