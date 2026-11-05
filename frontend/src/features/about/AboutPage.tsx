@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { PageHero } from "@/components/layout/PageHero";
 import { Icon, IconChip, type IconName } from "@/components/ui/Icon";
@@ -24,6 +25,7 @@ export function AboutPage() {
   return (
     <div className="ep-landing ep-about-page flex min-h-screen flex-col">
       <AboutMotion />
+      <PublicChromeMotion />
       <SiteHeader tone="white" integrated />
 
       <main className="flex-1">
