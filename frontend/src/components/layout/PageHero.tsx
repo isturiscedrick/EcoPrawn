@@ -33,7 +33,7 @@ export function PageHero({ kicker, title, lead }: PageHeroProps) {
           {kicker}
         </p>
 
-        <h1 className="ep-font-display max-w-[900px] text-[clamp(40px,5.2vw,76px)] font-bold leading-[1.08] tracking-[-0.05em] text-[var(--ep-text)] [&_[data-page-hero-accent]]:text-[var(--ep-accent)]">
+        <h1 data-page-hero-headline="" className="ep-font-display max-w-[900px] text-[clamp(40px,5.2vw,76px)] font-bold leading-[1.08] tracking-[-0.05em] text-[var(--ep-text)] [&_[data-page-hero-accent]]:text-[var(--ep-accent)]">
           {title}
         </h1>
 
