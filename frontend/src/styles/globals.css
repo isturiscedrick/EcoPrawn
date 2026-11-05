@@ -683,7 +683,7 @@ html.dark :is(.marketing-shell, .ep-auth-modal) [class*="border-[rgba(11,46,51"]
   border-color: var(--ep-line);
 }
 /* Coral fills need dark text; white on #f28a68 is only about 2.4:1. */
-html.dark :is(.marketing-shell, .ep-auth-modal) .bg-\[var\(--ep-accent\)\] {
+html.dark :is(.marketing-shell, .ep-auth-modal) [class~="bg-[var(--ep-accent)]"] {
   color: #1b0a04;
 }
 html.dark .marketing-shell :is([class~="bg-[var(--ep-ok)]"], [class~="bg-[var(--ep-warn-text)]"]) {
@@ -814,7 +814,7 @@ html.dark :is(.marketing-shell, .ep-auth-modal) {
 }
 
 /* Coral fills need dark text in dark mode; white on #f28a68 is only ~2.4:1. */
-html.dark .dashboard-shell :is(.bg-\[var\(--coral\)\], .bg-\[var\(--ep-accent\)\]) {
+html.dark .dashboard-shell :is(.bg-\[var\(--coral\)\], [class~="bg-[var(--ep-accent)]"]) {
   color: #1b0a04;
 }
 
@@ -983,7 +983,7 @@ html.dark .marketing-shell {
 
 /* Ensure the landing page's primary action follows the palette in dark mode.
    Dark text on soft coral gives stronger contrast than white text. */
-html.dark .marketing-shell .bg-\[var\(--ep-accent\)\] {
+html.dark .marketing-shell [class~="bg-[var(--ep-accent)]"] {
   color: #1b0a04;
 }
 
