@@ -34,7 +34,7 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center shadow-[0_16px_32px_-24px_rgba(11,46,51,0.55)] sm:p-8"
+        className="h-full rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center shadow-[0_16px_32px_-24px_rgba(11,46,51,0.55)] sm:p-8"
       >
         <h2 className="ep-font-display mb-2 text-2xl font-semibold text-[var(--ep-text)]">Review your message</h2>
         <p className="mb-6 text-base leading-relaxed text-[var(--ep-text-muted)]">
@@ -68,7 +68,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_16px_32px_-24px_rgba(11,46,51,0.45)] sm:p-8"
+      className="flex h-full flex-col gap-5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_16px_32px_-24px_rgba(11,46,51,0.45)] sm:p-8"
     >
       <div className="mb-1">
         <h2 className="ep-font-display text-2xl font-semibold tracking-tight text-[var(--ep-text)]">
@@ -128,7 +128,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 text-base font-semibold text-[var(--ep-on-accent)] hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
+        className={`inline-flex min-h-12 w-full items-center justify-center rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 sm:w-auto text-base font-semibold text-[var(--ep-on-accent)] hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
       >
         Preview message
       </button>
