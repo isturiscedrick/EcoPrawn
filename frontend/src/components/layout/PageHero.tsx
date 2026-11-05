@@ -24,20 +24,20 @@ export function PageHero({ kicker, title, lead }: PageHeroProps) {
       />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 ep-hero-atmosphere" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center px-5 pb-12 pt-10 text-center sm:px-8 sm:pb-16 sm:pt-14 lg:pb-20 lg:pt-16">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center px-4 pb-10 pt-8 text-center sm:px-8 sm:pb-16 sm:pt-14 lg:pb-20 lg:pt-16">
         <p
           data-page-kicker=""
-          className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--ep-accent)] shadow-sm"
+          className="mb-4 inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] sm:px-4 sm:text-[11px] sm:tracking-[0.16em] text-[var(--ep-accent)] shadow-sm"
         >
           <span aria-hidden="true" className="ep-pulse-dot h-2 w-2 rounded-full bg-[var(--ep-accent)]" />
           {kicker}
         </p>
 
-        <h1 data-page-hero-headline="" className="ep-font-display mx-auto w-full max-w-[1000px] text-balance text-[clamp(40px,5.2vw,76px)] font-bold leading-[1.04] tracking-[-0.05em] text-[var(--ep-text)] [&_[data-page-hero-accent]]:text-[var(--ep-accent)]">
+        <h1 data-page-hero-headline="" className="ep-font-display mx-auto w-full max-w-[1000px] text-balance text-[clamp(2.35rem,10vw,4.75rem)] sm:text-[clamp(40px,5.2vw,76px)] font-bold leading-[1.04] tracking-[-0.05em] text-[var(--ep-text)] [&_[data-page-hero-accent]]:text-[var(--ep-accent)]">
           {title}
         </h1>
 
-        <p data-page-lead="" className="mx-auto mt-5 max-w-[42rem] text-pretty text-base leading-[1.75] text-[var(--ep-text-muted)] sm:mt-6 sm:text-lg">
+        <p data-page-lead="" className="mx-auto mt-4 max-w-[42rem] text-pretty text-base leading-[1.75] text-[var(--ep-text-muted)] sm:mt-6 sm:text-lg">
           {lead}
         </p>
       </div>
