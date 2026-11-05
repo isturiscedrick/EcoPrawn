@@ -276,24 +276,24 @@ export function HeroLens() {
       aria-label="A shrimp inside a camera lens, with example water-quality readings"
       className="relative mx-auto aspect-square w-full max-w-[460px]"
     >
-      {/* Lens barrel: deep slate teal #0f4c5c, lit from the top left */}
-      <div className="absolute inset-0 rounded-full bg-[linear-gradient(145deg,#0f4c5c_0%,#0f4c5c_55%,#142b2e_100%)] dark:bg-[linear-gradient(145deg,#202729_0%,#202729_55%,#18191a_100%)] p-[3.2%] shadow-[0_40px_70px_-34px_rgba(15,76,92,0.75),inset_0_2px_0_rgba(244,247,246,0.18)]">
+      {/* Monochrome lens barrel and glass */}
+      <div className="absolute inset-0 rounded-full bg-black p-[3.2%] dark:bg-white">
         {/* Glass */}
-        <div className="relative isolate h-full w-full overflow-hidden rounded-full bg-[radial-gradient(circle_at_50%_46%,#0f4c5c_0%,#0f4c5c_58%,#142b2e_100%)] dark:bg-[radial-gradient(circle_at_50%_46%,#202729_0%,#202729_58%,#18191a_100%)] ring-1 ring-[rgba(244,247,246,0.25)]">
+        <div className="relative isolate h-full w-full overflow-hidden rounded-full bg-black ring-1 ring-white/25 dark:bg-white dark:ring-black/25">
           {/* Concentric rings */}
           <svg
             aria-hidden="true"
             viewBox="0 0 400 400"
             fill="none"
-            className="ep-lens-rings pointer-events-none absolute inset-0 h-full w-full"
+            className="ep-lens-rings pointer-events-none absolute inset-0 h-full w-full text-white dark:text-black"
           >
-            <circle cx="200" cy="200" r="176" stroke="rgba(244,247,246,0.14)" strokeWidth="1" />
-            <circle cx="200" cy="200" r="146" stroke="rgba(244,247,246,0.10)" strokeWidth="1" />
+            <circle cx="200" cy="200" r="176" stroke="currentColor" opacity="0.14" strokeWidth="1" />
+            <circle cx="200" cy="200" r="146" stroke="currentColor" opacity="0.10" strokeWidth="1" />
             <circle
               cx="200"
               cy="200"
               r="112"
-              stroke="rgba(244,247,246,0.16)"
+              stroke="currentColor" opacity="0.16"
               strokeWidth="1"
               strokeDasharray="2 7"
             />
@@ -303,7 +303,7 @@ export function HeroLens() {
           <svg
             aria-hidden="true"
             viewBox="0 0 400 400"
-            className="ep-lens-ticks pointer-events-none absolute inset-0 h-full w-full"
+            className="ep-lens-ticks pointer-events-none absolute inset-0 h-full w-full text-white dark:text-black"
           >
             {TICKS.map((t, i) => (
               <line
@@ -312,7 +312,7 @@ export function HeroLens() {
                 y1={t.y1}
                 x2={t.x2}
                 y2={t.y2}
-                stroke={t.long ? "rgba(244,247,246,0.55)" : "rgba(244,247,246,0.28)"}
+                stroke="currentColor" opacity={t.long ? 0.55 : 0.28}
                 strokeWidth={t.long ? 2 : 1.2}
                 strokeLinecap="round"
               />
@@ -324,7 +324,7 @@ export function HeroLens() {
             {SPECKS.map((s) => (
               <span
                 key={`${s.left}-${s.top}`}
-                className="ep-lens-speck absolute rounded-full bg-[var(--sand)] opacity-[0.1]"
+                className="ep-lens-speck absolute rounded-full bg-white opacity-[0.1] dark:bg-black"
                 style={{ left: s.left, top: s.top, width: s.size, height: s.size }}
               />
             ))}
@@ -333,18 +333,16 @@ export function HeroLens() {
           {/* Soft halo behind the prawn so it separates from the dark glass */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-[22%] rounded-full bg-[radial-gradient(circle,rgba(244,247,246,0.24)_0%,rgba(244,247,246,0.09)_45%,transparent_72%)]"
+            className="pointer-events-none absolute inset-[22%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.09)_45%,transparent_72%)] dark:bg-[radial-gradient(circle,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0.07)_45%,transparent_72%)]"
           />
 
-          {/* The prawn, in the dark-mode coral #f28a68 so it pops on teal.
-              The "!" is needed because brand-mark.css is unlayered and would
-              otherwise beat Tailwind utilities. */}
+          {/* The shrimp mark inherits the monochrome foreground in each theme. */}
           <div
             aria-hidden="true"
             className="ep-lens-shrimp pointer-events-none absolute inset-0 flex items-center justify-center"
           >
             <BrandIcon
-              className="h-auto w-[44%] drop-shadow-[0_0_18px_rgba(242,138,104,0.55)] [&_.ep-logo-shrimp]:fill-[#f28a68]! [&_.ep-logo-shrimp]:stroke-[#f28a68]!"
+              className="h-auto w-[44%] text-white dark:text-black"
               timeScale={1.2}
             />
           </div>
@@ -354,21 +352,21 @@ export function HeroLens() {
             aria-hidden="true"
             viewBox="0 0 400 400"
             fill="none"
-            className="ep-lens-arcs pointer-events-none absolute inset-0 h-full w-full"
+            className="ep-lens-arcs pointer-events-none absolute inset-0 h-full w-full text-white dark:text-black"
           >
             {ARCS.map((d) => (
-              <path key={d} d={d} stroke="#f28a68" strokeWidth="3" strokeLinecap="round" />
+              <path key={d} d={d} stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
             ))}
           </svg>
 
           {/* Lock ping + scan line (sky blue secondary) */}
           <span
             aria-hidden="true"
-            className="ep-lens-ping pointer-events-none absolute inset-[22%] rounded-full border-2 border-[#f28a68] opacity-0"
+            className="ep-lens-ping pointer-events-none absolute inset-[22%] rounded-full border-2 border-white opacity-0 dark:border-black"
           />
           <span
             aria-hidden="true"
-            className="ep-lens-scan pointer-events-none absolute inset-x-[22%] top-[16%] h-px bg-[linear-gradient(90deg,transparent,rgba(139,213,166,0.9),transparent)] opacity-0 shadow-[0_0_14px_rgba(139,213,166,0.55)]"
+            className="ep-lens-scan pointer-events-none absolute inset-x-[22%] top-[16%] h-px bg-white opacity-0 dark:bg-black"
           />
 
           {/* Readouts */}
@@ -376,10 +374,10 @@ export function HeroLens() {
             const compact = i === 4; // top-center slot (Water Level)
             return (
               <div key={r.label} className={`ep-lens-readout absolute flex flex-col ${SLOTS[i]}`}>
-                <span className="flex items-center gap-1.5 text-xs font-medium text-[#f4f7f6]/90 sm:text-sm">
+                <span className="flex items-center gap-1.5 text-xs font-medium text-white dark:text-black sm:text-sm">
                   <span
                     aria-hidden="true"
-                    className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-[#8bd5a6]"
+                    className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-white dark:bg-black"
                   />
                   {r.label}
                 </span>
@@ -389,7 +387,7 @@ export function HeroLens() {
                   }`}
                 >
                   <span data-count={r.value}>{r.value}</span>
-                  <span className="ml-1 text-xs font-medium text-[#f4f7f6]/85 sm:text-sm">
+                  <span className="ml-1 text-xs font-medium text-white dark:text-black sm:text-sm">
                     {heroReadoutUnits[r.label]}
                   </span>
                 </span>
@@ -408,21 +406,21 @@ export function HeroLens() {
           />
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-[4%] rounded-full border-t-2 border-[rgba(244,247,246,0.2)] [mask-image:linear-gradient(180deg,#000,transparent_40%)]"
+            className="pointer-events-none absolute inset-[4%] rounded-full border-t-2 border-white/20 dark:border-black/20 [mask-image:linear-gradient(180deg,#000,transparent_40%)]"
           />
           <span
             aria-hidden="true"
-            className="ep-lens-glare pointer-events-none absolute -left-[10%] -top-[10%] h-[70%] w-[70%] rounded-full bg-[radial-gradient(circle,rgba(244,247,246,0.2)_0%,rgba(244,247,246,0.05)_45%,transparent_70%)]"
+            className="ep-lens-glare pointer-events-none absolute -left-[10%] -top-[10%] h-[70%] w-[70%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0.05)_45%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(0,0,0,0.16)_0%,rgba(0,0,0,0.04)_45%,transparent_70%)]"
           />
           <span
             aria-hidden="true"
-            className="ep-lens-flash pointer-events-none absolute inset-0 bg-[#f4f7f6] opacity-0"
+            className="ep-lens-flash pointer-events-none absolute inset-0 bg-white opacity-0 dark:bg-black"
           />
 
           {/* Iris: covers the glass, then opens */}
           <span
             aria-hidden="true"
-            className="ep-lens-iris pointer-events-none absolute inset-0 bg-[#142b2e] dark:bg-[#18191a]"
+            className="ep-lens-iris pointer-events-none absolute inset-0 bg-black dark:bg-white"
             style={
               {
                 "--iris": "100%",
