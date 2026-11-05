@@ -986,3 +986,142 @@ html.dark .ep-landing #top .ep-lens-core::before {
   .ep-landing #top .ep-lens-readout > span:first-child { font-size: .72rem; }
   .ep-landing #top .ep-lens-readout > span:last-child { font-size: 1.12rem; }
 }
+
+
+/* ---------- Balanced bilateral HeroLens telemetry ---------- */
+/* Two readings on each side of the lens; the fifth anchors the lower center. */
+.ep-landing #top .ep-lens-diagram {
+  position: relative;
+  display: block;
+  width: min(100%, 620px);
+  height: 440px;
+  min-height: 440px;
+}
+.ep-landing #top .ep-lens-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ep-landing #top .ep-lens-core {
+  position: relative;
+  inset: auto;
+  width: min(44vw, 270px);
+  max-width: 270px;
+  transform: none;
+}
+.ep-landing #top .ep-lens-readings {
+  position: absolute;
+  inset: 0;
+  display: contents;
+}
+.ep-landing #top .ep-lens-readout,
+.ep-landing #top .ep-lens-readout-0,
+.ep-landing #top .ep-lens-readout-1,
+.ep-landing #top .ep-lens-readout-2,
+.ep-landing #top .ep-lens-readout-3,
+.ep-landing #top .ep-lens-readout-4 {
+  position: absolute;
+  width: 118px;
+  min-height: 0;
+  padding: 0;
+  transform: none;
+}
+.ep-landing #top .ep-lens-readout-0 { left: 0; right: auto; top: 92px; }
+.ep-landing #top .ep-lens-readout-2 { left: 0; right: auto; top: 266px; }
+.ep-landing #top .ep-lens-readout-1 { left: auto; right: 0; top: 92px; }
+.ep-landing #top .ep-lens-readout-3 { left: auto; right: 0; top: 266px; }
+.ep-landing #top .ep-lens-readout-4 {
+  left: 50%;
+  right: auto;
+  top: 386px;
+  width: 160px;
+  transform: translateX(-50%);
+  align-items: center;
+  text-align: center;
+}
+.ep-landing #top .ep-lens-readout > span:first-child {
+  font-size: clamp(.68rem, .95vw, .8rem);
+  white-space: normal;
+}
+.ep-landing #top .ep-lens-readout > span:last-child {
+  font-size: clamp(1.08rem, 1.55vw, 1.3rem);
+}
+.ep-landing #top .ep-lens-connectors {
+  display: block;
+  z-index: 1;
+  color: var(--ep-secondary);
+}
+.ep-landing #top .ep-lens-connectors path {
+  stroke: currentColor;
+}
+.ep-landing #top .ep-lens-connectors circle {
+  fill: var(--ep-accent);
+}
+html.dark .ep-landing #top .ep-lens-connectors {
+  color: #8bd5a6;
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-diagram {
+    display: flex;
+    height: auto;
+    min-height: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: .85rem;
+  }
+  .ep-landing #top .ep-lens-stage {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+  .ep-landing #top .ep-lens-core {
+    position: relative;
+    inset: auto;
+    width: min(72vw, 250px);
+    max-width: 250px;
+  }
+  .ep-landing #top .ep-lens-connectors {
+    display: none;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: .7rem 1rem;
+    padding: .9rem .25rem .2rem;
+    border-top: 1px solid var(--ep-line);
+  }
+  .ep-landing #top .ep-lens-readout,
+  .ep-landing #top .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readout-2,
+  .ep-landing #top .ep-lens-readout-3,
+  .ep-landing #top .ep-lens-readout-4 {
+    position: relative;
+    inset: auto;
+    left: auto;
+    right: auto;
+    top: auto;
+    width: auto;
+    transform: none;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .ep-landing #top .ep-lens-readout-4 {
+    grid-column: 1 / -1;
+    align-items: center;
+    text-align: center;
+  }
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .ep-landing #top .ep-lens-diagram {
+    height: 420px;
+    min-height: 420px;
+  }
+  .ep-landing #top .ep-lens-core { width: 235px; max-width: 235px; }
+  .ep-landing #top .ep-lens-readout { width: 108px; }
+}
