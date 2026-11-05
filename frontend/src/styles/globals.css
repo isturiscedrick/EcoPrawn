@@ -4,25 +4,29 @@
 
 /* =========================================================================
    ECOPRAWN GLOBAL STYLESHEET
-   -------------------------------------------------------------------------
-   Reading guide:
-   01  Theme tokens
-   02  Shared foundations and motion
-   03  Accessibility and global sizing
-   04  Semantic application tokens
-   05  Marketing theme foundations
-   06  Dashboard theme
-   07  Shared public-app overrides
-   08  Landing page styles
-   09  Dashboard refinements
-   10  Landing-page refinements
-   11  Shared public-page system (About, Contact, Auth)
-   12–15  Final page and palette alignment
+   =========================================================================
+   FILE MAP
+   01. Tailwind theme bridge and design tokens
+   02. Global foundations, effects, and motion
+   03. Accessibility, typography, and responsive defaults
+   04. Canonical EcoPrawn light/dark palette
+   05. Dashboard theme and component refinements
+   06. Public-site theme foundations
+   07. Landing page base styles and visual system
+   08. About and Contact shared page system
+   09. Authentication modal styling
+   10. Shared header, footer, forms, and interaction states
+   11. Final cross-page palette and contrast corrections
 
-   Cascade note: the refinement sections intentionally remain after their
-   base sections. Their order preserves existing specificity and overrides.
-   This pass is organizational only; declarations and runtime behavior are
-   intentionally preserved.
+   MAINTENANCE NOTES
+   - Keep @import statements at the very top of this file.
+   - Keep base styles before the page-specific refinement sections.
+   - The later refinement blocks intentionally override earlier component
+     styles. Do not move them above their base rules without checking cascade.
+   - Approved palette only:
+       Light: #F4F7F6, #142B2E, #0F4C5C, #D94416
+       Dark:  #18191A, #202729, #8BD5A6, #F28A68
+   - This organization pass changes comments and section labels only.
    ========================================================================= */
 
 @custom-variant dark (&:is(.dark *));
@@ -104,7 +108,7 @@
    ===================================================================== */
 
 
-  /* EcoPrawn theme tokens */
+  /* 01. DESIGN TOKENS — semantic aliases and shared brand values */
   --water-deep: #0b2e33;
   --water-mid: #12474d;
   --mangrove: #3c7a5c;
@@ -120,7 +124,8 @@
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Inter', sans-serif;
 
-  /* Shared elevation/radius — replaces one-off shadow/radius values
+  /* 02. SHARED FOUNDATIONS — elevation, radius, surfaces, and effects
+   Shared elevation/radius — replaces one-off shadow/radius values
      that were scattered across Panel, KpiCard, and modal overlays. */
   --shadow-sm: 0 1px 2px rgba(11, 35, 32, 0.04);
   --shadow-md: 0 8px 20px -12px rgba(11, 35, 32, 0.18);
@@ -186,7 +191,7 @@
    ===================================================================== */
 
 
-/* ---------- EcoPrawn root + effects ---------- */
+/* 03. GLOBAL FOUNDATIONS — root sizing, effects, and motion */
 
 .ecoprawn-root {
   font-family: var(--font-body);
@@ -422,7 +427,8 @@
    ===================================================================== */
 
 
-/* ---------- Accessibility pass (users 30+, outdoor light) ----------
+/* 04. ACCESSIBILITY + TYPOGRAPHY — readable sizing and interaction defaults
+   Accessibility pass (users 30+, outdoor light) ----------
    Appended last so it overrides the values above. Delete this whole
    block to revert (and restore line 1 if you want the old fonts). */
 
@@ -480,7 +486,8 @@ html {
    ===================================================================== */
 
 
-/* ---------- EcoPrawn palette v3, warm high-contrast (60/30/10) ----------
+/* 05. CANONICAL BRAND PALETTE — global semantic color assignments
+   EcoPrawn palette v3, warm high-contrast (60/30/10) ----------
    Close to the original sand / deep teal / coral. Every text pairing is
    at least 5.5:1. Accent is white-on-coral for fills, coral text on cream. */
 :root {
@@ -628,7 +635,7 @@ html.dark .dashboard-shell aside .hover\:text-\[var\(--water-deep\)\]:hover {
    ===================================================================== */
 
 
-/* ---------- Marketing palette: landing, About, Contact, auth modal ----------
+/* 06. PUBLIC-SITE THEME — Landing, About, Contact, and Auth foundations */
    Scoped to .marketing-shell and .ep-auth-modal so the dashboard keeps its own
    tokens. Delete this whole block to revert. */
 
@@ -759,7 +766,7 @@ html.dark .marketing-shell :is(nav[aria-label="Primary navigation"], nav[aria-la
    ===================================================================== */
 
 
-/* ---------- Dashboard palette ----------
+/* 07. DASHBOARD THEME — dashboard-specific tokens and components */
    Scoped to .dashboard-shell. Orange = brand and calls to action,
    teal / sky blue = headings and controls, green stays reserved for OK status.
    Delete this block to revert. */
@@ -853,7 +860,7 @@ html:not(.dark) .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(-
    ===================================================================== */
 
 
-/* ---------- Public pages: landing, About, Contact, sign-in modal ----------
+/* 08. PUBLIC-PAGE COMPONENT OVERRIDES — shared marketing and auth controls */
    Light mode already matches (#d94416 and #0f4c5c). Dark mode still had the
    sky-blue secondary. Same specificity as the earlier dark rule, so it wins by order. */
 html.dark :is(.marketing-shell, .ep-auth-modal) {
@@ -1000,7 +1007,7 @@ html.dark .dashboard-shell .hover\:bg-\[var\(--ep-primary\)\]:hover {
    ===================================================================== */
 
 
-/* ---------- Landing page brand palette: terracotta + teal/mint ---------- */
+/* 09. LANDING PAGE — brand palette and component-level styling */
 /* Light theme: brand orange + deep teal. Keep body surfaces neutral. */
 .marketing-shell {
   --ep-brand-primary: #d94416;
@@ -1126,7 +1133,7 @@ html.dark .marketing-shell .ep-logo {
    ===================================================================== */
 
 
-/* ---------- Dashboard brand palette: canonical light/dark mapping ---------- */
+/* 10. DASHBOARD REFINEMENTS — canonical light/dark mapping */
 /* Match the requested brand palette while retaining existing neutral surfaces. */
 .dashboard-shell {
   --ep-brand-primary: #d94416;
@@ -1169,7 +1176,7 @@ html.dark .dashboard-shell {
    ===================================================================== */
 
 
-/* ---------- Landing page dark-theme surface correction ---------- */
+/* 11. LANDING PAGE REFINEMENTS — dark surfaces, lens, and visual details */
 /* The root route can enable .dark from the saved/system preference. The landing
    page previously kept its Tailwind bg-white hero, so dark-mode accents appeared
    over a light hero. Give the public page matching dark surfaces and text. */
@@ -2590,7 +2597,7 @@ html:has(.marketing-shell) {
    the same EcoPrawn palette and motion language as Home.
 ========================================================= */
 
-/* Public page foundations */
+/* 12. ABOUT + CONTACT — shared page foundations and layout */
 .marketing-shell {
   --public-bg: #f4f7f6;
   --public-surface: #ffffff;
@@ -3053,7 +3060,7 @@ html.dark .marketing-shell footer {
    ===================================================================== */
 
 
-/* About and Contact: shared EcoPrawn palette for both themes. */
+/* 13. ABOUT + CONTACT — page-specific palette and contrast refinements */
 .marketing-shell {
   --ep-bg: #f4f7f6;
   --ep-surface: #ffffff;
@@ -3224,7 +3231,8 @@ html.dark .ep-auth-modal button[type="submit"] {
    ===================================================================== */
 
 
-/* STRICT BRAND PALETTE — do not introduce additional UI colors.
+/* 14. STRICT PALETTE ENFORCEMENT — only the eight approved brand colors.
+   STRICT BRAND PALETTE — do not introduce additional UI colors.
    Light: warm neutral, charcoal teal, deep teal, terracotta.
    Dark: dark base, card surface, mint accent, soft coral. */
 .marketing-shell {
@@ -3416,7 +3424,8 @@ html.dark .marketing-shell :is(a,button):focus-visible { outline-color: #f28a68;
    ===================================================================== */
 
 
-/* Landing-page visual system is the source of truth for all marketing pages.
+/* 15. SHARED MARKETING SYSTEM — Landing page is the visual source of truth.
+   Landing-page visual system is the source of truth for all marketing pages.
    Keep the same warm-neutral canvas, restrained teal cards, coral actions,
    soft hero atmosphere, and matching dark-mode surfaces. */
 .marketing-shell.ep-about-page,
@@ -3908,7 +3917,7 @@ html.dark .marketing-shell.ep-contact-page [data-contact-form] form button[type=
   color: currentColor !important;
 }
 
-/* Shared header/footer links and controls */
+/* 16. SHARED CHROME — header, footer, navigation, and shared controls */
 .marketing-shell :is(header,footer) :is(a,button) {
   color: inherit;
 }
@@ -3937,7 +3946,7 @@ html.dark .marketing-shell.ep-contact-page [data-contact-form] form button[type=
   color: #f4f7f6;
 }
 
-/* LIGHT MODE — one surface, one ink colour, one action accent */
+/* 17. FINAL LIGHT-MODE PASS — surface, text, and action contrast */
 html:not(.dark) .marketing-shell {
   --ep-bg: #f4f7f6;
   --ep-surface: #f4f7f6;
@@ -3964,7 +3973,7 @@ html:not(.dark) .marketing-shell :is(a,button):hover {
   color: #d94416;
 }
 
-/* DARK MODE — card surface, mint text, coral actions */
+/* 18. FINAL DARK-MODE PASS — card surface, mint text, and coral actions */
 html.dark .marketing-shell {
   --ep-bg: #18191a;
   --ep-surface: #202729;
