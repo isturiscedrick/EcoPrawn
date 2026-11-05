@@ -1,4 +1,3 @@
-@layer utilities {
 /* Landing page monochrome design system.
    This is the single source of truth for the landing page's black/white UI.
    Shared public pages and the dashboard keep their own design tokens. */
@@ -366,5 +365,4 @@ html.dark .marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo svg
 html.dark .marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo .ep-logo-wordmark {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-}
 }
