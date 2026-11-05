@@ -175,10 +175,10 @@ export function LandingPage() {
                 aria-label="Smarter shrimp farming, always in range."
                 className="ep-font-display mx-auto max-w-[900px] text-[clamp(40px,5.2vw,76px)] font-bold leading-[1.08] tracking-[-0.05em] lg:mx-0"
               >
-                <span className="block text-[var(--ep-text)]">
+                <span className="block ep-hero-headline-primary">
                   <Words text="Smarter shrimp farming," />
                 </span>
-                <span className="block text-[var(--ep-accent)]">
+                <span className="block ep-hero-headline-secondary">
                   <Words text="always in range." />
                 </span>
               </h1>
