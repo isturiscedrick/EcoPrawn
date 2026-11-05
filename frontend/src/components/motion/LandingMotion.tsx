@@ -126,20 +126,57 @@ export function LandingMotion() {
     });
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // HERO: lens and text columns stagger in. The delay
-      // lets the water drain past the hero before the text appears.
-      gsap
-        .timeline({ defaults: { ease: "power3.out" }, delay: 1.2 })
-        .from("#top .grid > div:nth-child(2) > *", {
-          y: 24,
-          duration: 0.7,
-          stagger: 0.1,
-        })
-        .from(
-          "#top .grid > div:nth-child(2)",
-          { y: 32, scale: 0.97, duration: 0.9 },
-          0.15
-        );
+      // HERO INTRO: target the real data attributes in LandingPage.
+      // The old grid-column selector no longer matched after the hero layout
+      // changed to a centered single-column composition.
+      const hero = document.querySelector<HTMLElement>("#top");
+      const heroText = hero?.querySelector<HTMLElement>("[data-hero=text]");
+      const eyebrow = hero?.querySelector<HTMLElement>("[data-hero=eyebrow]");
+      const headlineWords = hero?.querySelectorAll<HTMLElement>("[data-hero=word]");
+      const lead = hero?.querySelector<HTMLElement>("[data-hero=lead]");
+      const actions = hero?.querySelector<HTMLElement>("[data-hero=cta]");
+      const visual = hero?.querySelector<HTMLElement>("[data-hero=parallax-console]");
+      const signature = hero?.querySelector<HTMLElement>("[data-hero=signature]");
+
+      if (heroText) {
+        const intro = gsap.timeline({
+          defaults: { ease: "power4.out" },
+          delay: playWaterIntro ? 1.7 : 0.12,
+        });
+        if (eyebrow) intro.from(eyebrow, {
+          y: 22, autoAlpha: 0, scale: .94, duration: .65,
+        });
+        if (headlineWords?.length) intro.from(headlineWords, {
+          yPercent: 115, rotateX: -55, transformPerspective: 900,
+          autoAlpha: 0, duration: .9, stagger: .055, ease: "power4.out",
+        }, "-=.28");
+        if (lead) intro.from(lead, {
+          y: 20, autoAlpha: 0, duration: .7,
+        }, "-=.42");
+        if (actions) intro.from(actions.children, {
+          y: 18, autoAlpha: 0, scale: .96, duration: .58, stagger: .12,
+        }, "-=.38");
+        if (signature) intro.from(signature, {
+          y: 12, autoAlpha: 0, duration: .55,
+        }, "-=.28");
+      }
+
+      if (visual) {
+        gsap.from(visual, {
+          y: 48, scale: .9, autoAlpha: 0, rotateX: -8,
+          transformPerspective: 1100, duration: 1.15,
+          ease: "expo.out", delay: playWaterIntro ? 1.9 : .28,
+        });
+        gsap.to(visual, {
+          y: -12, ease: "none",
+          scrollTrigger: {
+            trigger: hero,
+            start: "top top",
+            end: "bottom top",
+            scrub: .8,
+          },
+        });
+      }
 
       // READINGS: each reading rises in, then its bar fills while its
       // number counts up from 0.
@@ -603,14 +640,11 @@ export function LandingMotion() {
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       // 1. Hero text drifts up and fades as you scroll past (scrubbed).
       //    Targets the column wrapper; the intro animates its children.
-      gsap.to("#top .grid > div:first-child", {
-        y: -48.25,
-        ease: "none",
+      const heroCopy = document.querySelector<HTMLElement>("#top [data-hero=text]");
+      if (heroCopy) gsap.to(heroCopy, {
+        y: -48, ease: "none",
         scrollTrigger: {
-          trigger: "#top",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
+          trigger: "#top", start: "top top", end: "bottom top", scrub: true,
         },
       });
 
