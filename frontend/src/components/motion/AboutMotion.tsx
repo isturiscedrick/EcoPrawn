@@ -155,6 +155,44 @@ export function AboutMotion() {
         if (markers.length) animate(markers, {
           scale: [0.7, 1], delay: stagger(65), duration: 480, ease: "outBack(1.7)",
         });
+
+        // Anime.js gives every About section a small, readable accent sequence.
+        // Only icons, index markers and chevrons animate; cards stay visible.
+        const sectionAccents = root.querySelectorAll<HTMLElement>(
+          "main section svg, #scope article > div:last-child > div > div > span:first-child, #systems article > div:last-child > div > span:first-child"
+        );
+        let sectionAccentObserver: IntersectionObserver | undefined;
+        if (sectionAccents.length) {
+          sectionAccentObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const target = entry.target as HTMLElement;
+              animate(target, {
+                scale: [0.78, 1],
+                rotate: target.tagName.toLowerCase() === "svg" ? [-10, 0] : [0, 0],
+                translateY: [5, 0],
+                duration: 540,
+                ease: "outElastic(1,.65)",
+              });
+              sectionAccentObserver?.unobserve(target);
+            });
+          }, { threshold: 0.35 });
+          sectionAccents.forEach((target) => sectionAccentObserver?.observe(target));
+        }
+
+        // Section eyebrow dots pulse once when their own section enters view.
+        root.querySelectorAll<HTMLElement>("main section").forEach((section) => {
+          const dot = section.querySelector<HTMLElement>(":scope [aria-hidden='true'].h-2");
+          if (!dot) return;
+          const observer = new IntersectionObserver((entries) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            animate(dot, { scale: [0.65, 1.35, 1], duration: 620, ease: "outElastic(1,.6)" });
+            observer.disconnect();
+          }, { threshold: 0.5 });
+          observer.observe(section);
+          cleanups.push(() => observer.disconnect());
+        });
+        cleanups.push(() => sectionAccentObserver?.disconnect());
       }, root);
 
       return () => {
