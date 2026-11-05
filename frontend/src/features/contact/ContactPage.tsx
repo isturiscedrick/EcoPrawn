@@ -43,7 +43,6 @@ export function ContactPage() {
                     <div
                       key={item.label}
                       data-contact-card=""
-                      tabIndex={0}
                       className="flex items-start gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
                     >
                       <IconChip name={item.icon} tone="coral" size={20} />
