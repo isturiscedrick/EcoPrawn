@@ -1354,3 +1354,57 @@ html.dark .ep-landing #top .ep-lens-connectors {
     text-align: center !important;
   }
 }
+
+
+/* ---------- HeroLens light-theme contrast correction ---------- */
+/* Older lens defaults forced white telemetry text in both themes.
+   Keep dark mode styling intact and use high-contrast ink in light mode. */
+html:not(.dark) .ep-landing #top .ep-lens-readout,
+html:not(.dark) .ep-landing #top .ep-lens-readout span,
+html:not(.dark) .ep-landing #top .ep-lens-caption {
+  color: #172321 !important;
+  -webkit-text-fill-color: #172321;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:first-child {
+  color: #344943 !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child {
+  color: #101B19 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
+  color: #40534D !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout .ep-lens-dot {
+  background-color: #0F4C5C !important;
+  box-shadow: 0 0 0 3px rgba(15, 76, 92, .12) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-caption {
+  color: #40534D !important;
+  font-weight: 650;
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors {
+  color: #0F4C5C !important;
+  filter: drop-shadow(0 0 2px rgba(15, 76, 92, .18));
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors path {
+  stroke: #0F4C5C !important;
+  opacity: .9 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors circle {
+  fill: #D94416 !important;
+  filter: none !important;
+}
+/* Keep the instrument itself distinct against the warm light canvas. */
+html:not(.dark) .ep-landing figure[aria-label^="A shrimp"] > div {
+  background: linear-gradient(145deg, #24484B 0%, #102F34 55%, #0B2024 100%);
+  box-shadow: 0 32px 64px -30px rgba(16, 47, 52, .42),
+    inset 0 1px 0 rgba(255,255,255,.28),
+    0 0 0 1px rgba(15,76,92,.16);
+}
+html:not(.dark) .ep-landing figure[aria-label^="A shrimp"] > div > div {
+  background: radial-gradient(circle at 50% 42%, #31585A 0%, #193B3F 54%, #10282C 100%);
+}
