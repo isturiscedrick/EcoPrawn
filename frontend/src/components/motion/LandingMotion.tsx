@@ -368,10 +368,10 @@ export function LandingMotion() {
         "#top .ep-hero-visual > figure"
       );
       if (readout) {
-        // yPercent, not y: the parallax below owns y on the same element.
+        // Gentle vertical float only: avoid scale/filter resampling on the SVG lens.
         gsap.to(readout, {
-          yPercent: -8,
-          duration: 2.6,
+          y: -7,
+          duration: 3.4,
           ease: "sine.inOut",
           yoyo: true,
           repeat: -1,
