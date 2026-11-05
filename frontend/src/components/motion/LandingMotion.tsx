@@ -378,12 +378,6 @@ export function LandingMotion() {
           stagger: 0.08,
         },
         {
-          trigger: "#process",
-          targets: "#process ol > li",
-          y: 22,
-          stagger: 0.12,
-        },
-        {
           trigger: "[data-band]",
           targets: "[data-band] > div",
           y: 24,
@@ -442,37 +436,14 @@ export function LandingMotion() {
         });
       }
 
-      // PROCESS: each step's circle pops in as it enters view.
-      gsap.utils
-        .toArray<HTMLElement>("#process ol li .rounded-full")
-        .forEach((circle) => {
-          gsap.from(circle, {
-            scale: 0.6,
-            duration: 0.5,
-            ease: "back.out(1.7)",
-            scrollTrigger: { trigger: circle, start: "top 85%", once: true },
-          });
-        });
-
-      // Animate every meaningful Home section's content in a deliberate
-      // reading order. Text remains crisp: use transforms/opacity, never blur.
-      const processSteps = gsap.utils.toArray<HTMLElement>("#process ol > li");
-      processSteps.forEach((step) => {
-        const number = step.querySelector<HTMLElement>(":scope > div span");
-        const title = step.querySelector<HTMLElement>("h3");
-        const copy = step.querySelector<HTMLElement>("p");
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: step, start: "top 86%", once: true },
-          defaults: { ease: "power3.out" },
-        });
-        if (number) tl.from(number, { x: -12, duration: .35 });
-        if (title) tl.from(title, { y: 22, duration: .55 }, "-=.12");
-        if (copy) tl.from(copy, { y: 14, duration: .48 }, "-=.28");
-      });
+      // Process cards are driven by the horizontal pinned timeline on
+      // desktop. Do not attach vertical ScrollTriggers to the same cards:
+      // those triggers fire at the wrong time while the track is translated.
+      // On smaller screens the list stays stacked and uses CSS-only presentation.
 
       // Section-level atmosphere movement gives the page a continuous
       // scroll narrative while leaving the HeroLens itself untouched.
-      ["[aria-label='EcoPrawn at a glance']", "#readings", "#process", "[data-band]"].forEach((selector) => {
+      ["[aria-label='EcoPrawn at a glance']", "#readings", "[data-band]"].forEach((selector) => {
         const section = document.querySelector<HTMLElement>(selector);
         const surface = section?.querySelector<HTMLElement>(":scope > div");
         if (!section || !surface) return;
