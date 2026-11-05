@@ -362,44 +362,8 @@ export function LandingMotion() {
       }
     );
 
-    // HERO DEPTH: float for every size, parallax from tablet up.
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const readout = document.querySelector<HTMLElement>(
-        "#top .ep-hero-visual > figure"
-      );
-      if (readout) {
-        // Gentle vertical float only: avoid scale/filter resampling on the SVG lens.
-        gsap.to(readout, {
-          y: -7,
-          duration: 3.4,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-        });
-      }
-    });
-
-    mm.add(
-      "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-      () => {
-        const panel = document.querySelector<HTMLElement>(
-          "#top .grid > div:nth-child(2)"
-        );
-        const readout = document.querySelector<HTMLElement>(
-          "#top .ep-hero-visual > figure"
-        );
-        const scrollTrigger = {
-          trigger: "#top",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        };
-        // Both drift down slower than the page; the readout moves less
-        // than the tank, which reads as it floating in front.
-        if (panel) gsap.to(panel, { y: 40, ease: "none", scrollTrigger });
-        if (readout) gsap.to(readout, { y: 16, ease: "none", scrollTrigger });
-      }
-    );
+    // HERO DEPTH: keep the lens figure free of competing transforms.
+    // Its internal rings and glare are scroll-linked inside HeroLens.
 
     // MORE SCROLL EFFECTS
     mm.add("(prefers-reduced-motion: no-preference)", () => {
