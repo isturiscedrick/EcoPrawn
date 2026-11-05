@@ -148,7 +148,7 @@ html.dark .dashboard-shell {
 .dashboard-shell .ep-font-mono.uppercase[class*="tracking-[0.14em]"] {
   color: var(--ep-brand-secondary);
 }
-.dashboard-shell :is(.text-\[var\(--mangrove\)\], [class~="text-[var(--mangrove-text)]"]) {
+[class~="dashboard-shell :is(.text-[var(--mangrove)"], [class~="text-[var(--mangrove-text)]"]) {
   color: var(--ep-brand-secondary);
 }
 .dashboard-shell input[type="checkbox"],
