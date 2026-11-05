@@ -23,7 +23,7 @@ export function PublicChromeMotion() {
         const header = root.querySelector<HTMLElement>("#site-header");
         const nav = header?.querySelector<HTMLElement>('nav[aria-label="Primary navigation"]');
 
-        // A shared underline follows the active desktop navigation link.
+        // The active pill is the sole active-state indicator; no extra underline.
         if (nav) {
           const links = Array.from(nav.querySelectorAll<HTMLElement>("a"));
           // Nav enters as a compact, staggered control group.
@@ -31,36 +31,6 @@ export function PublicChromeMotion() {
             { y: -9, opacity: 0, scale: .96 },
             { y: 0, opacity: 1, scale: 1, duration: .48, stagger: .075, ease: "power3.out", delay: .08, clearProps: "transform,opacity" }
           );
-          const indicator = document.createElement("span");
-          indicator.setAttribute("aria-hidden", "true");
-          Object.assign(indicator.style, {
-            position: "absolute",
-            left: "0",
-            bottom: "4px",
-            height: "2px",
-            width: "0",
-            borderRadius: "999px",
-            background: "var(--ep-accent)",
-            pointerEvents: "none",
-            opacity: "0",
-          });
-          nav.style.position = "relative";
-          nav.appendChild(indicator);
-
-          const moveIndicator = (link: HTMLElement) => {
-            const navRect = nav.getBoundingClientRect();
-            const linkRect = link.getBoundingClientRect();
-            gsap.to(indicator, {
-              x: linkRect.left - navRect.left,
-              width: linkRect.width,
-              opacity: 1,
-              duration: .32,
-              ease: "power3.out",
-              overwrite: "auto",
-            });
-          };
-          const active = links.find((link) => link.getAttribute("aria-current") === "page");
-          if (active) moveIndicator(active);
 
           links.forEach((link) => {
             const enter = () => {
@@ -90,9 +60,6 @@ export function PublicChromeMotion() {
                 ease: "power2.out",
                 overwrite: "auto",
               });
-              const current = links.find((item) => item.getAttribute("aria-current") === "page");
-              if (current) moveIndicator(current);
-              else gsap.to(indicator, { opacity: 0, duration: .2 });
             };
             link.addEventListener("pointerenter", enter);
             link.addEventListener("pointerleave", leave);
@@ -103,8 +70,6 @@ export function PublicChromeMotion() {
           });
           cleanups.push(() => {
             gsap.killTweensOf(links);
-            indicator.remove();
-            nav.style.position = "";
           });
         }
 
