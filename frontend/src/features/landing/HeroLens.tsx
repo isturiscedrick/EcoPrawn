@@ -277,9 +277,23 @@ export function HeroLens() {
         const shrimp = one(".ep-lens-shrimp");
         const rings = one(".ep-lens-rings");
         const glare = one(".ep-lens-glare");
-        if (!shrimp || !rings || !glare) return;
+        const lens = one(".ep-lens-core");
+        const stage = one(".ep-lens-stage");
+        if (!shrimp || !rings || !glare || !lens || !stage) return;
 
-        const opts = { duration: 0.8, ease: "power3.out" };
+        // The outer lens owns the 3D tilt. Inner layers keep their own
+        // smaller parallax offsets, creating a true multi-plane instrument.
+        gsap.set(stage, { perspective: 1100, transformStyle: "preserve-3d" });
+        gsap.set(lens, {
+          transformStyle: "preserve-3d",
+          transformPerspective: 1100,
+          transformOrigin: "50% 50%",
+          force3D: true,
+        });
+        const opts = { duration: 0.72, ease: "power3.out", overwrite: "auto" };
+        const tiltX = gsap.quickTo(lens, "rotationX", opts);
+        const tiltY = gsap.quickTo(lens, "rotationY", opts);
+        const lift = gsap.quickTo(lens, "z", opts);
         const sx = gsap.quickTo(shrimp, "x", opts);
         const sy = gsap.quickTo(shrimp, "y", opts);
         const rx = gsap.quickTo(rings, "x", opts);
@@ -288,9 +302,12 @@ export function HeroLens() {
         const gy = gsap.quickTo(glare, "y", opts);
 
         const onMove = (e: PointerEvent) => {
-          const r = root.getBoundingClientRect();
-          const nx = (e.clientX - r.left) / r.width - 0.5;
-          const ny = (e.clientY - r.top) / r.height - 0.5;
+          const r = lens.getBoundingClientRect();
+          const nx = gsap.utils.clamp(-0.5, 0.5, (e.clientX - r.left) / r.width - 0.5);
+          const ny = gsap.utils.clamp(-0.5, 0.5, (e.clientY - r.top) / r.height - 0.5);
+          tiltX(ny * -11);
+          tiltY(nx * 13);
+          lift(18);
           sx(nx * -18);
           sy(ny * -18);
           rx(nx * 10);
@@ -299,6 +316,9 @@ export function HeroLens() {
           gy(ny * 80);
         };
         const onLeave = () => {
+          tiltX(0);
+          tiltY(0);
+          lift(0);
           sx(0);
           sy(0);
           rx(0);
