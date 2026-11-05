@@ -132,7 +132,6 @@ export function LandingMotion() {
         .timeline({ defaults: { ease: "power3.out" }, delay: 1.2 })
         .from("#top .grid > div:nth-child(2) > *", {
           y: 24,
-          opacity: 0,
           duration: 0.7,
           stagger: 0.1,
         })
@@ -153,7 +152,6 @@ export function LandingMotion() {
       readingsTl
         .from(`${readings} dl > div`, {
           y: 24,
-          opacity: 0,
           duration: 0.6,
           stagger: 0.08,
         })
@@ -361,7 +359,6 @@ export function LandingMotion() {
         if (!section || !items.length) return;
         gsap.from(items, {
           y,
-          autoAlpha: 0,
           duration: 0.75,
           stagger,
           ease: "power3.out",
@@ -407,7 +404,6 @@ export function LandingMotion() {
         .forEach((circle) => {
           gsap.from(circle, {
             scale: 0.6,
-            opacity: 0,
             duration: 0.5,
             ease: "back.out(1.7)",
             scrollTrigger: { trigger: circle, start: "top 85%", once: true },
@@ -572,7 +568,6 @@ export function LandingMotion() {
       // 2. Readings band heading + intro line rise in before the readings.
       gsap.from("#readings-title, #readings-title + p", {
         y: 20,
-        opacity: 0,
         duration: 0.6,
         stagger: 0.1,
         ease: "power3.out",
@@ -586,7 +581,6 @@ export function LandingMotion() {
       // 3. Preview heading + paragraph rise in.
       gsap.from("#preview-title, #preview-title + p", {
         y: 20,
-        opacity: 0,
         duration: 0.6,
         stagger: 0.1,
         ease: "power3.out",
@@ -600,7 +594,6 @@ export function LandingMotion() {
       // 4. Preview KPI tiles pop up one by one after the card arrives.
       gsap.from('[aria-labelledby="preview-title"] .grid-cols-3 > div', {
         y: 16,
-        opacity: 0,
         duration: 0.5,
         stagger: 0.1,
         delay: 0.4,
@@ -664,7 +657,6 @@ export function LandingMotion() {
         { y: 0, opacity: 0.7 },
         {
           y: -(window.innerHeight + 80),
-          opacity: 0,
           duration: 2.2,
           ease: "none",
           stagger: 0.12,
