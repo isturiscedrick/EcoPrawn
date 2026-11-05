@@ -958,3 +958,78 @@ html.dark .ep-auth-modal input:focus-visible {
     animation-duration: .01ms !important;
   }
 }
+
+
+/* Account mode switch: consistent segmented navigation in both themes.
+   Use aria-pressed as the source of truth so active/inactive states stay
+   correct when the user switches between Sign in and Sign up. */
+.ep-auth-modal [role="group"][aria-label="Account access"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px !important;
+  padding: 4px !important;
+  border: 1px solid rgba(15, 76, 92, .16) !important;
+  border-radius: 12px !important;
+  background: #eaf1ee !important;
+}
+
+.ep-auth-modal [role="group][aria-label="Account access"] button {
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  background: transparent !important;
+  color: #0f4c5c !important;
+  box-shadow: none !important;
+  outline-offset: 2px;
+  transition: background-color .2s ease, color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
+  background: #d94416 !important;
+  border-color: #d94416 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(217, 68, 22, .2) !important;
+}
+
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled) {
+  background: rgba(15, 76, 92, .08) !important;
+  color: #142b2e !important;
+}
+
+.ep-auth-modal [role="group"][aria-label="Account access"] button:focus-visible {
+  outline: 2px solid #d94416 !important;
+  outline-offset: 2px;
+}
+
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] {
+  border-color: rgba(139, 213, 166, .2) !important;
+  background: #29332f !important;
+}
+
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button {
+  background: transparent !important;
+  color: #8bd5a6 !important;
+}
+
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
+  background: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+  box-shadow: 0 4px 14px rgba(242, 138, 104, .2) !important;
+}
+
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled) {
+  background: rgba(139, 213, 166, .1) !important;
+  color: #f4f7f6 !important;
+}
+
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focus-visible {
+  outline-color: #f28a68 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-auth-modal [role="group"][aria-label="Account access"] button {
+    transition: none !important;
+  }
+}
