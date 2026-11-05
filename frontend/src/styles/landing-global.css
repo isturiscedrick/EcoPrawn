@@ -319,3 +319,62 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
 @media (prefers-reduced-motion: reduce) {
   .ep-landing #top [data-hero="parallax-console"] { transform: none !important; }
 }
+
+
+/* ---------- Hero sizing and crisp lens rendering ---------- */
+.ep-landing #top .ep-hero-layout {
+  gap: clamp(.75rem, 1.5vw, 1.2rem);
+  padding-top: clamp(1.65rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1.5rem, 2.8vw, 2.4rem);
+}
+.ep-landing #top [data-hero="headline"] {
+  max-width: 900px;
+  font-size: clamp(2.45rem, 6vw, 5rem);
+  line-height: 1;
+}
+.ep-landing #top [data-hero="lead"] {
+  margin-top: .9rem;
+  max-width: 620px;
+}
+.ep-landing #top [data-hero="cta"] {
+  margin-top: 1.25rem;
+}
+.ep-landing #top [data-hero="parallax-console"] {
+  width: min(100%, 360px);
+  max-width: 360px;
+  margin-top: 0;
+}
+.ep-landing #top .ep-hero-visual figure {
+  width: 100%;
+  max-width: 360px;
+  filter: none !important;
+  image-rendering: auto;
+  backface-visibility: visible;
+}
+.ep-landing #top .ep-lens-shrimp,
+.ep-landing #top .ep-lens-shrimp .ep-logo,
+.ep-landing #top .ep-lens-shrimp .ep-logo-shape {
+  filter: none !important;
+}
+.ep-landing #top [data-hero="signature"] {
+  margin-top: -.45rem;
+  font-size: .68rem;
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-hero-layout {
+    gap: .9rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .ep-landing #top [data-hero="headline"] {
+    font-size: clamp(2.2rem, 9.5vw, 3.25rem);
+    line-height: 1.04;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(88vw, 320px);
+    max-width: 320px;
+  }
+  .ep-landing #top .ep-hero-visual figure {
+    max-width: 320px;
+  }
+}
