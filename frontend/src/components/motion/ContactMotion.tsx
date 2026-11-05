@@ -85,6 +85,28 @@ export function ContactMotion() {
           scrollTrigger: { trigger: footer, start: "top 92%", once: true },
         });
 
+        // Scroll-linked movement and staggered reveals for contact details.
+        const details = root.querySelector<HTMLElement>("[data-contact-details]");
+        if (details) {
+          gsap.to(details, {
+            y: -18, ease: "none",
+            scrollTrigger: { trigger: details, start: "top bottom", end: "bottom top", scrub: .8 },
+          });
+          gsap.from(details.querySelectorAll<HTMLElement>("[data-contact-card]"), {
+            y: 34, stagger: .12, duration: .72, ease: "power3.out",
+            scrollTrigger: { trigger: details, start: "top 84%", once: true },
+          });
+        }
+
+        // Bring the form action into view after its fields.
+        if (form) {
+          const action = form.querySelector<HTMLElement>("button[type='submit']");
+          if (action) gsap.from(action, {
+            y: 16, scale: .98, duration: .55, ease: "back.out(1.4)",
+            scrollTrigger: { trigger: action, start: "top 94%", once: true },
+          });
+        }
+
         // Depth hover for information cards.
         cards.forEach((card) => {
           const icon = card.querySelector<SVGElement>("svg");
