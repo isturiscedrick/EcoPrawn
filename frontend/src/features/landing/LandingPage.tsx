@@ -158,6 +158,7 @@ export function LandingPage() {
               </div>
 
               <h1
+                data-hero="headline"
                 aria-label="Smarter shrimp farming, always in range."
                 className="ep-font-display mx-auto max-w-[900px] text-[clamp(42px,5.2vw,76px)] font-bold leading-[1.08] tracking-[-0.055em] lg:mx-0"
               >
