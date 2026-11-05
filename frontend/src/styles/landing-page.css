@@ -455,3 +455,62 @@ html.dark .marketing-shell.ep-landing-page main [data-section-heading] {
   -webkit-text-fill-color: #ffffff !important;
   background-image: none !important;
 }
+
+/* Final landing-only header and hero headline treatment. */
+.marketing-shell.ep-landing-page .ep-monochrome-header,
+.marketing-shell.ep-landing-page .ep-monochrome-header > div,
+.marketing-shell.ep-landing-page .ep-monochrome-header nav {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: none !important;
+}
+.marketing-shell.ep-landing-page .ep-monochrome-header :is(a, button, svg, .ep-logo, .ep-logo-wordmark) {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page .ep-monochrome-header :is(a[aria-current="page"], [data-variant="primary"], a[data-primary], button[data-primary]) {
+  background: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page .ep-monochrome-header,
+html.dark .marketing-shell.ep-landing-page .ep-monochrome-header > div,
+html.dark .marketing-shell.ep-landing-page .ep-monochrome-header nav {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+}
+html.dark .marketing-shell.ep-landing-page .ep-monochrome-header :is(a, button, svg, .ep-logo, .ep-logo-wordmark) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page .ep-monochrome-header :is(a[aria-current="page"], [data-variant="primary"], a[data-primary], button[data-primary]) {
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+/* Hero headline: black on the light canvas, white on the dark canvas. */
+.marketing-shell.ep-landing-page #top [data-hero="headline"],
+.marketing-shell.ep-landing-page #top [data-hero="headline"] * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-image: none !important;
+}
+html.dark .marketing-shell.ep-landing-page #top [data-hero="headline"],
+html.dark .marketing-shell.ep-landing-page #top [data-hero="headline"] * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-image: none !important;
+}
+
