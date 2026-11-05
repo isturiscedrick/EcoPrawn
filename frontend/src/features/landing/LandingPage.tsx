@@ -160,7 +160,7 @@ export function LandingPage() {
                 aria-label="Smarter shrimp farming, always in range."
                 className="ep-font-display mx-auto max-w-[900px] text-[clamp(42px,5.2vw,76px)] font-bold leading-[1.08] tracking-[-0.055em] lg:mx-0"
               >
-                <span data-hero-headline-accent className="block text-[var(--ep-secondary)] dark:text-[var(--ep-primary)]">
+                <span data-hero-headline-accent className="block text-black dark:text-white">
                   <Words text="Smarter shrimp farming," />
                 </span>
                 <span className="block text-[var(--ep-primary)] dark:text-[var(--ep-primary)]">
@@ -217,16 +217,13 @@ export function LandingPage() {
         <section
           id="readings"
           aria-labelledby="readings-title"
-          className="ep-readings-section relative isolate overflow-hidden border-y border-[var(--ep-secondary)] bg-[var(--ep-secondary)] text-[var(--ep-bg)]"
+          className="ep-readings-section relative isolate overflow-hidden border-y border-black bg-black text-white dark:border-white dark:bg-white dark:text-black"
         >
           <div
             aria-hidden="true"
             data-readings-bg=""
             className="pointer-events-none absolute inset-0 -z-10 opacity-90"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse at 12% 8%, rgba(139,213,166,0.16), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(242,138,104,0.12), transparent 48%), linear-gradient(155deg, #0f4c5c 0%, #0f4c5c 58%, #142b2e 100%)",
-            }}
+            
           />
 
           <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 sm:py-24">
@@ -234,7 +231,7 @@ export function LandingPage() {
               <div className={`${eyebrow} !text-[var(--ep-bg)]`}>
                 <span
                   aria-hidden="true"
-                  className="h-2 w-2 bg-[var(--coral)]"
+                  className="h-2 w-2 bg-white dark:bg-black"
                 />
                 Target ranges
               </div>
@@ -267,7 +264,7 @@ export function LandingPage() {
                     key={r.label}
                     data-reading=""
                     data-hover-lift=""
-                    className="rounded-xl border border-[rgba(244,247,246,0.28)] bg-[rgba(244,247,246,0.06)] p-5 transition-[background-color,border-color] duration-200 hover:border-[var(--ep-bg)] hover:bg-[rgba(244,247,246,0.12)] last:col-span-2 md:last:col-span-1"
+                    className="rounded-xl border border-white/30 bg-white/10 p-5 transition-[background-color,border-color] duration-200 hover:border-[var(--ep-bg)] hover:bg-white/20 last:col-span-2 md:last:col-span-1"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <dt className="text-base font-semibold text-[var(--ep-bg)]">
@@ -276,8 +273,8 @@ export function LandingPage() {
                       <span
                         className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-[var(--ep-bg)] ${
                           inRange
-                            ? "bg-[rgba(15,76,92,0.18)] dark:bg-[rgba(139,213,166,0.24)]"
-                            : "bg-[rgba(217,68,22,0.16)] dark:bg-[rgba(242,138,104,0.24)]"
+                            ? "bg-white/15"
+                            : "bg-white/15"
                         }`}
                       >
                         {inRange ? (
@@ -303,11 +300,11 @@ export function LandingPage() {
 
                     <div
                       aria-hidden="true"
-                      className="relative mx-2 mt-6 h-2 rounded-full bg-[rgba(244,247,246,0.22)]"
+                      className="relative mx-2 mt-6 h-2 rounded-full bg-white/25"
                     >
                       <div
                         data-zone=""
-                        className="absolute inset-y-0 rounded-full bg-[var(--ep-secondary)]"
+                        className="absolute inset-y-0 rounded-full bg-white dark:bg-black"
                         style={{ left: `${zoneLeft}%`, width: `${zoneWidth}%` }}
                       />
                       <div
@@ -317,9 +314,9 @@ export function LandingPage() {
                       >
                         <span
                           data-ping=""
-                          className="absolute inset-0 rounded-full border-2 border-[var(--coral)] opacity-0"
+                          className="absolute inset-0 rounded-full border-2 border-white dark:border-black opacity-0"
                         />
-                        <span className="absolute inset-0 rounded-full border-2 border-[var(--ep-primary)] bg-[var(--coral)]" />
+                        <span className="absolute inset-0 rounded-full border-2 border-white bg-white dark:border-black dark:bg-black" />
                       </div>
                     </div>
 
@@ -348,7 +345,7 @@ export function LandingPage() {
               <span className="inline-flex items-center gap-2">
                 <span
                   aria-hidden="true"
-                  className="h-2 w-8 rounded-full bg-[var(--mangrove-light)]"
+                  className="h-2 w-8 rounded-full bg-white dark:bg-black"
                 />
                 Target zone
               </span>
