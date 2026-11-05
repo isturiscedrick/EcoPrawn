@@ -101,7 +101,7 @@ function Words({ text }: { text: string }) {
 
 export function LandingPage() {
   return (
-    <div className="marketing-shell flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)] dark:bg-[var(--ep-bg)] dark:text-[var(--ep-primary)]">
+    <div className="marketing-shell ep-landing-page flex min-h-screen flex-col bg-[var(--ep-bg)] text-[var(--ep-primary)] dark:bg-[var(--ep-bg)] dark:text-[var(--ep-primary)]">
       <LandingMotion />
       <SiteHeader tone="white" integrated />
 
