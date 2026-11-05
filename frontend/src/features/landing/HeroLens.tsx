@@ -1,11 +1,13 @@
 import { useLayoutEffect, useRef, type CSSProperties } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { animate, stagger, utils } from "animejs";
 import { BrandIcon } from "@/components/layout/BrandIcon";
 import { heroReadouts } from "@/content/landing-preview";
 import { heroReadoutUnits } from "@/config/sensors";
 
 // LandingMotion fades the right column in at 1.2s. Start just after it.
+gsap.registerPlugin(ScrollTrigger);
 const INTRO_DELAY = 1.35;
 
 // Iris overlay: transparent inside the radius, solid outside. GSAP tweens --iris.
@@ -88,6 +90,31 @@ export function HeroLens() {
       const dots = many(".ep-lens-dot");
       const specks = many(".ep-lens-speck");
       if (!iris || !rings || !ticks || !shrimp || !arcs || !pingEl || !scan || !flash || !caption) return;
+
+      // Scroll-linked depth: the instrument drifts and subtly tilts as it
+      // travels through the viewport. Scrubbing keeps motion tied to scrolling.
+      const scrollDepth = gsap.timeline({
+        scrollTrigger: {
+          trigger: root,
+          start: "top 92%",
+          end: "bottom 8%",
+          scrub: 1.15,
+          invalidateOnRefresh: true,
+        },
+      });
+      scrollDepth
+        .fromTo(
+          root,
+          { y: 54, rotateZ: -3, scale: 0.9, autoAlpha: 0.72 },
+          { y: -34, rotateZ: 3, scale: 1.035, autoAlpha: 1, ease: "none" }
+        )
+        .fromTo(rings, { rotateZ: -12 }, { rotateZ: 12, ease: "none" }, 0)
+        .fromTo(
+          one(".ep-lens-glare"),
+          { xPercent: -18, yPercent: -12, opacity: 0.18 },
+          { xPercent: 18, yPercent: 12, opacity: 0.48, ease: "none" },
+          0
+        );
 
       const anims: Array<{ revert: () => unknown }> = [];
 
