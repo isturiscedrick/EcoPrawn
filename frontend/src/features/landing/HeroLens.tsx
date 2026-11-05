@@ -66,6 +66,7 @@ export function HeroLens() {
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const iris = one(".ep-lens-iris");
       const rings = one(".ep-lens-rings");
+      const outerRing = one(".ep-lens-outer-ring");
       const ticks = one(".ep-lens-ticks");
       const shrimp = one(".ep-lens-shrimp");
       const arcs = one(".ep-lens-arcs");
@@ -95,6 +96,14 @@ export function HeroLens() {
       // Scroll only the lens internals: the outer SVG stays crisp and its
       // dimensions never change. Each layer has a distinct transform owner.
       scrollDepth
+        // Rotate the external mechanical bezel through one full revolution
+        // as the hero scrolls. The glass and sensor labels remain stable.
+        .fromTo(
+          outerRing,
+          { rotation: -180, transformOrigin: "50% 50%" },
+          { rotation: 180, ease: "none", transformOrigin: "50% 50%" },
+          0
+        )
         .fromTo(rings, { rotateZ: -28 }, { rotateZ: 28, ease: "none" }, 0)
         .fromTo(
           glare,
@@ -366,6 +375,22 @@ export function HeroLens() {
           aria-label="A shrimp inside a camera lens"
           className="ep-lens-core relative z-[1] mx-auto aspect-square w-full max-w-[300px] shrink-0"
         >
+      {/* Rotating outer mechanical bezel, controlled by ScrollTrigger. */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 440 440"
+        fill="none"
+        className="ep-lens-outer-ring pointer-events-none absolute -inset-[5.5%] z-[2] h-[111%] w-[111%] overflow-visible text-[#0F4C5C] dark:text-[#8BD5A6]"
+      >
+        <circle cx="220" cy="220" r="211" stroke="currentColor" strokeWidth="1.4" opacity=".72" />
+        <circle cx="220" cy="220" r="204" stroke="currentColor" strokeWidth="1" strokeDasharray="2 7" opacity=".5" />
+        <circle cx="220" cy="220" r="198" stroke="currentColor" strokeWidth="2" strokeDasharray="34 18 7 18" strokeLinecap="round" opacity=".82" />
+        <path d="M220 4v13 M436 220h-13 M220 436v-13 M4 220h13" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity=".9" />
+        <circle cx="220" cy="9" r="3.2" fill="#D94416" className="dark:fill-[#F28A68]" />
+        <circle cx="431" cy="220" r="2.4" fill="currentColor" />
+        <circle cx="220" cy="431" r="2.4" fill="currentColor" />
+        <circle cx="9" cy="220" r="2.4" fill="currentColor" />
+      </svg>
       {/* Monochrome lens barrel and glass */}
       <div className="absolute inset-0 rounded-full bg-black p-[3.2%] dark:bg-white">
         {/* Glass */}
