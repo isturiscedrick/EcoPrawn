@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { Link } from "@tanstack/react-router";
 import { HeroLens } from "@/features/landing/HeroLens";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -103,6 +104,7 @@ export function LandingPage() {
   return (
     <div className="ep-landing flex min-h-screen flex-col">
       <LandingMotion />
+      <PublicChromeMotion />
       <a
         href="#main"
         className={`sr-only z-[120] rounded-lg bg-[var(--ep-accent)] px-4 py-2 text-sm font-semibold text-[var(--ep-on-accent)] focus:not-sr-only focus:fixed focus:left-4 focus:top-4 ${focusRing}`}
