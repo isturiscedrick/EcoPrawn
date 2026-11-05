@@ -181,7 +181,7 @@ export function LandingPage() {
                   className={`group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-3 text-sm font-semibold text-[var(--ep-bg)] shadow-sm hover:opacity-90 ${buttonMotion} ${focusRing}`}
                 >
                   Open farm dashboard
-                  <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  <span aria-hidden="true" className="inline-flex items-center text-current transition-transform duration-200 group-hover:translate-x-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg></span>
                 </AuthLink>
                 <Link
                   to="/about"
