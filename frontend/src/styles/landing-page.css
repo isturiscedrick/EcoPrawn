@@ -366,3 +366,92 @@ html.dark .marketing-shell.ep-landing-page footer[data-site-footer] .ep-logo .ep
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
+
+
+/* Final source-level lock for the landing navigation and header branding.
+   Keep this scoped to the landing page; shared pages retain their palette. */
+.marketing-shell.ep-landing-page #site-header,
+.marketing-shell.ep-landing-page #site-header > div,
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"],
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: none !important;
+}
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a,
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a,
+.marketing-shell.ep-landing-page #site-header > div > a,
+.marketing-shell.ep-landing-page #site-header button,
+.marketing-shell.ep-landing-page #site-header button svg {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a[aria-current],
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a[aria-current] {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page #site-header .ep-logo,
+.marketing-shell.ep-landing-page #site-header .ep-logo-wordmark,
+.marketing-shell.ep-landing-page #site-header .ep-logo svg,
+.marketing-shell.ep-landing-page #site-header .ep-logo svg * {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page #site-header,
+html.dark .marketing-shell.ep-landing-page #site-header > div,
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"],
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+}
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a,
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a,
+html.dark .marketing-shell.ep-landing-page #site-header > div > a,
+html.dark .marketing-shell.ep-landing-page #site-header button,
+html.dark .marketing-shell.ep-landing-page #site-header button svg,
+html.dark .marketing-shell.ep-landing-page #site-header .ep-logo,
+html.dark .marketing-shell.ep-landing-page #site-header .ep-logo-wordmark,
+html.dark .marketing-shell.ep-landing-page #site-header .ep-logo svg,
+html.dark .marketing-shell.ep-landing-page #site-header .ep-logo svg * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a[aria-current],
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a[aria-current] {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+/* Landing section headings must not inherit the legacy teal/coral accents. */
+.marketing-shell.ep-landing-page main :is(h1,h2,h3,h4,h5,h6),
+.marketing-shell.ep-landing-page main :is(h1,h2,h3,h4,h5,h6) *,
+.marketing-shell.ep-landing-page main [data-section-heading] {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-image: none !important;
+}
+html.dark .marketing-shell.ep-landing-page main :is(h1,h2,h3,h4,h5,h6),
+html.dark .marketing-shell.ep-landing-page main :is(h1,h2,h3,h4,h5,h6) *,
+html.dark .marketing-shell.ep-landing-page main [data-section-heading] {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-image: none !important;
+}
