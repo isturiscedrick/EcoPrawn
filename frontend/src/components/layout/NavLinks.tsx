@@ -26,7 +26,7 @@ export function NavLinks({ variant, activeHref, onLinkClick }: NavLinksProps) {
               aria-current={isActive ? "page" : undefined}
               className={`inline-flex items-center rounded-full px-4 py-2.5 text-xs font-semibold leading-none transition-colors duration-200 ${focusRing} ${
                 isActive
-                  ? "bg-[#5f8f69] text-white"
+                  ? "bg-[var(--ep-accent)] text-[var(--ep-bg)]"
                   : "text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]"
               }`}
               activeOptions={{ exact: true }}
