@@ -150,22 +150,22 @@ html.dark .ep-loading-screen {
   pointer-events: none;
   will-change: transform, opacity;
 }
-.ep-loading-particle:nth-of-type(3) { --particle-x: -145px; --particle-y: -72px; }
-.ep-loading-particle:nth-of-type(4) { --particle-x: 136px; --particle-y: -88px; }
-.ep-loading-particle:nth-of-type(5) { --particle-x: -166px; --particle-y: 34px; }
-.ep-loading-particle:nth-of-type(6) { --particle-x: 170px; --particle-y: 48px; }
-.ep-loading-particle:nth-of-type(7) { --particle-x: -94px; --particle-y: 116px; }
-.ep-loading-particle:nth-of-type(8) { --particle-x: 92px; --particle-y: 120px; }
-.ep-loading-particle:nth-of-type(9) { --particle-x: -42px; --particle-y: -148px; }
-.ep-loading-particle:nth-of-type(10) { --particle-x: 44px; --particle-y: 152px; }
-.ep-loading-particle:nth-of-type(11) { --particle-x: -188px; --particle-y: -112px; }
-.ep-loading-particle:nth-of-type(12) { --particle-x: 188px; --particle-y: -118px; }
+.ep-loading-particle:nth-child(3) { --particle-x: -145px; --particle-y: -72px; }
+.ep-loading-particle:nth-child(4) { --particle-x: 136px; --particle-y: -88px; }
+.ep-loading-particle:nth-child(5) { --particle-x: -166px; --particle-y: 34px; }
+.ep-loading-particle:nth-child(6) { --particle-x: 170px; --particle-y: 48px; }
+.ep-loading-particle:nth-child(7) { --particle-x: -94px; --particle-y: 116px; }
+.ep-loading-particle:nth-child(8) { --particle-x: 92px; --particle-y: 120px; }
+.ep-loading-particle:nth-child(9) { --particle-x: -42px; --particle-y: -148px; }
+.ep-loading-particle:nth-child(10) { --particle-x: 44px; --particle-y: 152px; }
+.ep-loading-particle:nth-child(11) { --particle-x: -188px; --particle-y: -112px; }
+.ep-loading-particle:nth-child(12) { --particle-x: 188px; --particle-y: -118px; }
 
 @media (max-width: 480px) {
   .ep-loading-orbit-one { width: 260px; }
   .ep-loading-orbit-two { width: 330px; }
-  .ep-loading-particle:nth-of-type(11),
-  .ep-loading-particle:nth-of-type(12) { display: none; }
+  .ep-loading-particle:nth-child(11),
+  .ep-loading-particle:nth-child(12) { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
