@@ -383,3 +383,48 @@ html.dark .marketing-shell.ep-landing-page #readings > [data-readings-bg] {
     radial-gradient(ellipse at 88% 76%, rgba(242,138,104,.10), transparent 48%),
     linear-gradient(155deg, #202729 0%, #202729 58%, #18191a 100%) !important;
 }
+
+
+/* Landing icon + label contract.
+   Icon strokes always inherit the foreground of their own control/card;
+   never force a global white/black stroke over the component's text color. */
+.marketing-shell.ep-landing-page :is(a, button, [role="button"]) {
+  color: inherit;
+}
+.marketing-shell.ep-landing-page :is(a, button, [role="button"]) :is(svg, svg *) {
+  color: inherit;
+  stroke: currentColor;
+}
+.marketing-shell.ep-landing-page :is(article, [class*="card"], .ep-stat-card, .ep-stat-value) :is(svg, svg *) {
+  color: inherit;
+  stroke: currentColor;
+}
+.marketing-shell.ep-landing-page #process :is(span, h3, p, svg) {
+  color: var(--ep-primary) !important;
+}
+.marketing-shell.ep-landing-page #process svg,
+.marketing-shell.ep-landing-page #process svg * {
+  stroke: currentColor !important;
+}
+.marketing-shell.ep-landing-page .ep-readings-section :is(a, button, [role="button"]) {
+  color: inherit;
+}
+.marketing-shell.ep-landing-page .ep-readings-section :is(a, button, [role="button"]) svg,
+.marketing-shell.ep-landing-page .ep-readings-section :is(a, button, [role="button"]) svg * {
+  stroke: currentColor !important;
+}
+
+/* Explicit foreground for filled accent buttons: text and icons stay paired. */
+.marketing-shell.ep-landing-page :is(a, button, [role="button"])[data-variant="primary"],
+.marketing-shell.ep-landing-page :is(a, button, [role="button"])[data-primary-action] {
+  color: var(--ep-bg) !important;
+}
+.marketing-shell.ep-landing-page :is(a, button, [role="button"])[data-variant="primary"] svg,
+.marketing-shell.ep-landing-page :is(a, button, [role="button"])[data-variant="primary"] svg *,
+.marketing-shell.ep-landing-page :is(a, button, [role="button"])[data-primary-action] svg,
+.marketing-shell.ep-landing-page :is(a, button, [role="button"])[data-primary-action] svg * {
+  stroke: currentColor !important;
+}
+html.dark .marketing-shell.ep-landing-page #process :is(span, h3, p, svg) {
+  color: var(--ep-primary) !important;
+}
