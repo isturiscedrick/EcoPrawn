@@ -1516,3 +1516,62 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
 @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
   .ep-landing #top .ep-lens-core { will-change: auto; }
 }
+
+
+/* ---------- Horizontal process story (desktop only) ----------
+   Vertical page scrolling drives the four process stages horizontally.
+   Tablet/mobile retain the accessible stacked list. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .ep-landing #process [data-process-viewport] {
+    width: 100%;
+    overflow: hidden;
+    padding-top: 1.75rem;
+    padding-bottom: 1.25rem;
+    overscroll-behavior: contain;
+  }
+
+  .ep-landing #process [data-process-track] {
+    display: flex;
+    width: max-content;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: clamp(1.25rem, 2.2vw, 2rem);
+    will-change: transform;
+  }
+
+  .ep-landing #process [data-process-track] > li {
+    flex: 0 0 min(72vw, 760px);
+    width: min(72vw, 760px);
+    min-width: 560px;
+    min-height: 270px;
+    padding: 2rem 2.25rem 2.25rem;
+    border: 1px solid var(--ep-line);
+    border-top: 2px solid var(--ep-accent);
+    border-radius: 1.25rem;
+    background: var(--ep-surface);
+    box-shadow: 0 18px 48px -38px rgba(7, 42, 48, .38);
+  }
+
+  .ep-landing #process [data-process-track] > li [data-step-node] {
+    display: none;
+  }
+
+  .ep-landing #process [data-process-line] {
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+}
+
+@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  .ep-landing #process [data-process-viewport] {
+    overflow: visible;
+  }
+  .ep-landing #process [data-process-track] {
+    width: auto;
+    transform: none !important;
+  }
+}
