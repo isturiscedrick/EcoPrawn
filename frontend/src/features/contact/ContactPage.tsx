@@ -25,7 +25,12 @@ export function ContactPage() {
       <main className="flex-1">
         <PageHero
           kicker="Get in touch"
-          title="Contact us."
+          title={
+            <>
+              <span data-page-hero-accent="">Contact</span>
+              <span> us.</span>
+            </>
+          }
           lead="Questions about the EcoPrawn system or the thesis behind it? Send a note and we'll get back to you."
         />
 
