@@ -16,7 +16,7 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
   if (variant === "desktop") {
     return (
       <nav
-        className={`hidden items-center gap-0.5 rounded-full border p-1 shadow-sm backdrop-blur-xl md:flex ${monochrome ? "ep-nav-monochrome" : "border-[var(--ep-line)] bg-[var(--ep-surface)]/90"}`}
+        className={`hidden items-center gap-0.5 rounded-full border p-1 shadow-sm backdrop-blur-xl lg:flex ${monochrome ? "ep-nav-monochrome" : "border-[var(--ep-line)] bg-[var(--ep-surface)]/90"}`}
         style={monochrome ? { backgroundColor: darkMode ? "#000000" : "#ffffff", borderColor: darkMode ? "#ffffff" : "#000000", color: darkMode ? "#ffffff" : "#000000" } : undefined}
         aria-label="Primary navigation"
       >
@@ -85,7 +85,7 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
     <nav
       id="mobile-nav-panel"
       aria-label="Mobile navigation"
-      className={`border-t px-5 py-2 md:hidden ${monochrome ? "ep-nav-monochrome" : "border-[var(--ep-line)] bg-[var(--ep-bg)]"}`}
+      className={`border-t px-5 py-2 lg:hidden ${monochrome ? "ep-nav-monochrome" : "border-[var(--ep-line)] bg-[var(--ep-bg)]"}`}
       style={monochrome ? { backgroundColor: darkMode ? "#000000" : "#ffffff", borderColor: darkMode ? "#ffffff" : "#000000", color: darkMode ? "#ffffff" : "#000000" } : undefined}
     >
       <ul className="flex flex-col">
