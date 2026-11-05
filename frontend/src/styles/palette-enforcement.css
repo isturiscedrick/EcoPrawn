@@ -641,3 +641,35 @@ html.dark .marketing-shell.ep-landing-page :is([data-live-ping],[data-step-node]
   background-color: #ffffff !important;
   border-color: currentColor !important;
 }
+
+
+/* Final high-specificity monochrome text override (including legacy !important rules). */
+.marketing-shell.ep-landing-page :is(
+  h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,span,a,button,
+  [role="button"],[data-icon],svg
+) {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page :is(#readings,#systems) :is(
+  h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,span,a,button,
+  [role="button"],[data-icon],svg
+) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(
+  h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,span,a,button,
+  [role="button"],[data-icon],svg
+) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(a,button)[data-primary],
+html.dark .marketing-shell.ep-landing-page :is(a,button)[data-variant="primary"],
+html.dark .marketing-shell.ep-landing-page :is(a,button)[data-primary-action],
+html.dark .marketing-shell.ep-landing-page button[type="submit"],
+html.dark .marketing-shell.ep-landing-page [data-hero="cta"] a:first-child {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
