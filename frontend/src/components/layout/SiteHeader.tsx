@@ -17,12 +17,13 @@ const focusRing =
 export function SiteHeader({
   showLinks = true,
   variant = "default",
-  tone = "cream",
   integrated = false,
 }: SiteHeaderProps) {
   const isAuth = variant === "auth";
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const isMonochromeLanding = integrated && pathname === "/";
+  // The landing page is also rendered at /login (with the sign-in modal open).
+  const onLanding = pathname === "/" || pathname === "/login";
+  const navHref = pathname === "/login" ? "/" : pathname;
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
@@ -81,39 +82,51 @@ export function SiteHeader({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileNavOpen]);
 
-  const headerSurface = isMonochromeLanding
-    ? darkMode ? "#000000" : "#ffffff"
+  // Landing follows its tokens; the other public pages keep their original surfaces.
+  const headerSurface = onLanding
+    ? `color-mix(in srgb, var(--ep-bg) ${scrolled ? 94 : 82}%, transparent)`
     : integrated
       ? darkMode ? "#202729" : "#F4F7F6"
       : darkMode
         ? scrolled ? "rgba(24,25,26,.94)" : "rgba(24,25,26,.78)"
-        : tone === "white"
-          ? scrolled ? "rgba(244,247,246,.96)" : "rgba(244,247,246,.84)"
-          : scrolled ? "rgba(244,247,246,.96)" : "rgba(244,247,246,.84)";
+        : scrolled ? "rgba(244,247,246,.96)" : "rgba(244,247,246,.84)";
+
+  const headerBorder = onLanding
+    ? scrolled ? "var(--ep-line)" : "transparent"
+    : darkMode ? "rgba(139,213,166,.22)" : "rgba(15,76,92,.16)";
 
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-50 transition-all duration-300 backdrop-blur-2xl ${integrated ? "border-0" : "border-b"} ${isMonochromeLanding ? "ep-monochrome-header" : ""}`}
+      className={`sticky top-0 z-50 transition-all duration-300 backdrop-blur-2xl ${integrated && !onLanding ? "border-0" : "border-b"}`}
       style={{
         backgroundColor: headerSurface,
-        borderColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : darkMode ? "rgba(139,213,166,.22)" : "rgba(15,76,92,.16)",
+        borderColor: headerBorder,
         boxShadow: scrolled ? (integrated ? "0 10px 28px -24px rgba(0,0,0,.28)" : "0 12px 34px -25px rgba(0,0,0,.35)") : "none",
       }}
     >
-      <div className={`mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12 ${isAuth ? "w-full" : ""}`}>
+      {/* Three columns (logo | nav | actions) so the nav is truly centered and can never overlap. */}
+      <div
+        className={`mx-auto min-h-[66px] max-w-[1440px] items-center gap-4 px-5 sm:px-8 lg:px-12 ${
+          showLinks ? "grid grid-cols-[auto_1fr] md:grid-cols-[1fr_auto_1fr]" : "flex justify-between"
+        } ${isAuth ? "w-full" : ""}`}
+      >
         <Link
           to="/"
           aria-label="EcoPrawn home"
           activeOptions={{ exact: true }}
-          className={`flex shrink-0 items-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
+          className={`flex shrink-0 items-center justify-self-start rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
         >
           <BrandMark size={36} />
         </Link>
 
-        {showLinks && <div className={integrated ? "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" : ""}><NavLinks variant="desktop" activeHref={pathname} monochrome={isMonochromeLanding} darkMode={darkMode} /></div>}
+        {showLinks && (
+          <div className="hidden justify-self-center md:block">
+            <NavLinks variant="desktop" activeHref={navHref} />
+          </div>
+        )}
 
-        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+        <div className="flex shrink-0 items-center justify-self-end gap-2 sm:gap-3">
           {!isAuth && (
             <button
               type="button"
@@ -124,9 +137,9 @@ export function SiteHeader({
               title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
               className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
               style={{
-                color: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-primary)",
-                borderColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-line)",
-                backgroundColor: isMonochromeLanding ? (darkMode ? "#000000" : "#ffffff") : "var(--ep-surface)",
+                color: "var(--ep-primary)",
+                borderColor: "var(--ep-line)",
+                backgroundColor: "var(--ep-surface)",
               }}
             >
               {darkMode ? (
@@ -147,11 +160,20 @@ export function SiteHeader({
             </Link>
           ) : (
             <>
-              <AuthLink className={`hidden rounded-full border px-5 py-2 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ borderColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-line)", color: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-primary)", backgroundColor: isMonochromeLanding ? (darkMode ? "#000000" : "#ffffff") : "var(--ep-surface)" }}>
+              <AuthLink
+                className={`hidden h-10 items-center rounded-full border px-5 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`}
+                style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}
+              >
                 Log in
               </AuthLink>
-              <AuthLink mode="signup" className={`hidden h-9 w-9 items-center justify-center rounded-full text-[var(--ep-bg)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex ${focusRing}`} style={{ backgroundColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-accent)", color: isMonochromeLanding ? (darkMode ? "#000000" : "#ffffff") : "var(--ep-bg)" }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-label="Get started"><path d="M7 17 17 7M7 7h10v10" /></svg>
+              <AuthLink
+                mode="signup"
+                aria-label="Get started"
+                className={`hidden h-10 min-w-10 items-center justify-center gap-2 rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 sm:inline-flex lg:px-5 ${focusRing}`}
+                style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}
+              >
+                <span className="hidden lg:inline">Get started</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
               </AuthLink>
             </>
           )}
@@ -177,10 +199,10 @@ export function SiteHeader({
       {showLinks && (
         <div className={`grid overflow-hidden transition-all duration-300 ease-out md:hidden ${mobileNavOpen ? "visible grid-rows-[1fr] opacity-100" : "invisible grid-rows-[0fr] opacity-0"}`}>
           <div className="min-h-0">
-            <NavLinks variant="mobile" activeHref={pathname} onLinkClick={() => setMobileNavOpen(false)} monochrome={isMonochromeLanding} darkMode={darkMode} />
+            <NavLinks variant="mobile" activeHref={navHref} onLinkClick={() => setMobileNavOpen(false)} />
             <div className="flex gap-3 px-5 pb-5 sm:hidden">
-              <AuthLink className="flex-1 rounded-full border px-4 py-3 text-center text-sm font-semibold" style={{ borderColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-line)", color: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-primary)" }}>Log in</AuthLink>
-              <AuthLink mode="signup" className="flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold text-[var(--ep-bg)]" style={{ backgroundColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : "var(--ep-accent)", color: isMonochromeLanding ? (darkMode ? "#000000" : "#ffffff") : undefined }}>Get started</AuthLink>
+              <AuthLink className="flex-1 rounded-full border px-4 py-3 text-center text-sm font-semibold" style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>Log in</AuthLink>
+              <AuthLink mode="signup" className="flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold" style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}>Get started</AuthLink>
             </div>
           </div>
         </div>

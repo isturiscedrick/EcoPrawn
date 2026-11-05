@@ -1,63 +1,134 @@
-/* Landing-page-only global stylesheet entrypoint.
- * Imported by LandingPage.tsx so these rules never affect dashboard,
- * authentication, About, or Contact routes.
+/* EcoPrawn landing page: the single source of truth for its colors.
+ *
+ * The landing root is `.ep-landing` (NOT `.marketing-shell`), so the shared
+ * About/Contact override files no longer reach it. Everything here is plain
+ * tokens; no !important is needed.
  */
-@import "./landing-page.css";
 
-/* Navigation is deliberately hard-locked to monochrome on the landing route.
-   This file is imported only by LandingPage, so shared routes are unaffected. */
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"],
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border: 1px solid #000000 !important;
-  box-shadow: none !important;
-}
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a,
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a {
-  background: transparent !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-  border-color: #000000 !important;
-}
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a[aria-current="page"],
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a[aria-current="page"] {
-  background: #000000 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a:hover,
-.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a:hover {
-  background: #000000 !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-}
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"],
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] {
-  background: #000000 !important;
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border: 1px solid #ffffff !important;
-  box-shadow: none !important;
-}
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a,
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a {
-  background: transparent !important;
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  border-color: #ffffff !important;
-}
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a[aria-current="page"],
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a[aria-current="page"] {
-  background: #ffffff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
-}
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a:hover,
-html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a:hover {
-  background: #ffffff !important;
-  color: #000000 !important;
-  -webkit-text-fill-color: #000000 !important;
+/* ---------- Tokens ---------- */
+.ep-landing {
+  color-scheme: light;
+  --ep-bg: #f4f7f6;
+  --ep-surface: #ffffff;
+  --ep-tint: #e8f0ef;
+  --ep-line: rgba(15, 76, 92, 0.22);
+  --ep-primary: #0f4c5c; /* ink: text, icons, outlines */
+  --ep-secondary: #0f4c5c;
+  --ep-text: #0b2320;
+  --ep-text-muted: #3f5753;
+  --ep-accent: #c43d14; /* white text on it is about 5.2:1 */
+  --ep-accent-hover: #a8330f;
+  --ep-on-accent: #ffffff;
+  --ep-deep: #0f4c5c; /* deep-water band + CTA band */
+  --ep-on-deep: #f4f7f6;
+  --ep-on-deep-muted: #cfe2e6;
+  --ep-zone: #8bd5a6;
+  --ep-marker: #f28a68;
+  --coral: var(--ep-accent);
+  background-color: var(--ep-bg);
+  color: var(--ep-text);
 }
 
+html.dark .ep-landing {
+  color-scheme: dark;
+  --ep-bg: #18191a;
+  --ep-surface: #202729;
+  --ep-tint: #1f2a2b;
+  --ep-line: rgba(139, 213, 166, 0.26);
+  --ep-primary: #eaf4ef;
+  --ep-secondary: #8bd5a6;
+  --ep-text: #eaf4ef;
+  --ep-text-muted: #b7cbc1;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #ffab91;
+  --ep-on-accent: #1b0a04;
+  --ep-deep: #10353a;
+  --ep-on-deep: #f1f5f3;
+  --ep-on-deep-muted: #c3d4d0;
+}
+
+/* Page background behind/overscroll (the old rule keyed on .marketing-shell). */
+html:not(.dark) body.ecoprawn-root:has(.ep-landing) {
+  background: #f4f7f6;
+}
+html.dark body.ecoprawn-root:has(.ep-landing) {
+  background: #18191a;
+}
+
+/* In-page anchors land below the sticky header. */
+html:has(.ep-landing) {
+  scroll-padding-top: 5.5rem;
+}
+
+/* ---------- Hero atmosphere ---------- */
+.ep-landing .ep-hero-atmosphere {
+  background:
+    radial-gradient(680px circle at 78% 38%, rgba(15, 76, 92, 0.1), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(196, 61, 20, 0.06), transparent 60%);
+}
+html.dark .ep-landing .ep-hero-atmosphere {
+  background:
+    radial-gradient(680px circle at 78% 38%, rgba(139, 213, 166, 0.12), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(242, 138, 104, 0.08), transparent 60%);
+}
+
+/* ---------- Header logo: don't wait for an intro that was skipped ----------
+   brand-mark.css delays the logo while `.ep-water-curtain` exists in the DOM,
+   but the curtain stays in the DOM (display:none) after the intro or when it
+   is skipped. Once LandingMotion hides it, drop the delay. */
+body:has(.ep-water-curtain[style*="display: none"]) .ep-logo {
+  --ep-logo-wait: 0s;
+}
+
+/* ---------- Hero lens: always deep-water glass, in both themes ----------
+   HeroLens.tsx ships black/white `dark:` classes. These selectors outrank
+   them so the lens is the same teal instrument in light and dark. */
+.ep-landing figure[aria-label^="A shrimp"] > div {
+  background: linear-gradient(145deg, #1a6173 0%, #0f4c5c 55%, #0b3a47 100%);
+  box-shadow: 0 40px 70px -34px rgba(8, 47, 57, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.14);
+}
+html .ep-landing figure[aria-label^="A shrimp"] > div > div {
+  background: radial-gradient(circle at 50% 46%, #14596a 0%, #0f4c5c 45%, #082f39 100%);
+  --tw-ring-color: rgb(255 255 255 / 0.25);
+}
+html .ep-landing figure[aria-label^="A shrimp"] div[class*="inset-[22%]"] {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.07) 45%, transparent 72%);
+}
+html .ep-landing figure[aria-label^="A shrimp"] span[class*="border-t-2"] {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+html .ep-landing .ep-lens-rings,
+html .ep-landing .ep-lens-ticks {
+  color: #ffffff;
+}
+html .ep-landing .ep-lens-arcs {
+  color: #f28a68;
+}
+html .ep-landing .ep-lens-speck,
+html .ep-landing .ep-lens-flash {
+  background: #ffffff;
+}
+html .ep-landing .ep-lens-ping {
+  border-color: #f28a68;
+}
+html .ep-landing .ep-lens-scan {
+  background: linear-gradient(90deg, transparent, #8bd5a6, transparent);
+  box-shadow: 0 0 14px rgba(139, 213, 166, 0.55);
+}
+html .ep-landing .ep-lens-iris {
+  background: #0b3a47;
+}
+html .ep-landing .ep-lens-glare {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 45%, transparent 70%);
+}
+html .ep-landing .ep-lens-readout,
+html .ep-landing .ep-lens-readout span,
+html .ep-landing .ep-lens-caption {
+  color: #ffffff;
+}
+html .ep-landing .ep-lens-readout .ep-lens-dot {
+  background-color: #8bd5a6;
+}
+.ep-landing .ep-lens-shrimp .ep-logo {
+  --ep-logo-color: #f28a68;
+}
