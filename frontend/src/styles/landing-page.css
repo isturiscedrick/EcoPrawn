@@ -1,0 +1,155 @@
+/* Landing page monochrome design system.
+   This is the single source of truth for the landing page's black/white UI.
+   Shared public pages and the dashboard keep their own design tokens. */
+.marketing-shell.ep-landing-page {
+  --ep-bg: #ffffff;
+  --ep-surface: #ffffff;
+  --ep-tint: #ffffff;
+  --ep-primary: #000000;
+  --ep-primary-soft: #000000;
+  --ep-secondary: #000000;
+  --ep-accent: #000000;
+  --ep-accent-hover: #000000;
+  --ep-text-muted: #000000;
+  --ep-line: #000000;
+  --ep-brand-primary: #000000;
+  --ep-brand-secondary: #000000;
+  --coral: #000000;
+  --coral-dim: #000000;
+  --mangrove-light: #000000;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page {
+  --ep-bg: #000000;
+  --ep-surface: #000000;
+  --ep-tint: #000000;
+  --ep-primary: #ffffff;
+  --ep-primary-soft: #ffffff;
+  --ep-secondary: #ffffff;
+  --ep-accent: #ffffff;
+  --ep-accent-hover: #ffffff;
+  --ep-text-muted: #ffffff;
+  --ep-line: #ffffff;
+  --ep-brand-primary: #ffffff;
+  --ep-brand-secondary: #ffffff;
+  --coral: #ffffff;
+  --coral-dim: #ffffff;
+  --mangrove-light: #ffffff;
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Remove legacy colored fills, gradients, and shadows within this page only. */
+.marketing-shell.ep-landing-page :is(*, *::before, *::after) {
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  border-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(*, *::before, *::after) {
+  border-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page :is(header, main, section, footer, nav, article, aside) {
+  background-color: transparent;
+  color: #000000;
+}
+html.dark .marketing-shell.ep-landing-page :is(header, main, section, footer, nav, article, aside) {
+  color: #ffffff;
+}
+
+/* Base text, icons, and controls. */
+.marketing-shell.ep-landing-page :is(
+  h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,span,a,button,
+  input,textarea,select,summary,[role="button"],svg
+) {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(
+  h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,span,a,button,
+  input,textarea,select,summary,[role="button"],svg
+) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page :is(svg, svg *) {
+  stroke: currentColor !important;
+}
+
+/* Main canvas and reusable neutral surfaces. */
+.marketing-shell.ep-landing-page :is(#top, #process, .ep-stats-section, main, footer, header) {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(#top, #process, .ep-stats-section, main, footer, header) {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page :is(.ep-stats-panel, .ep-stat-card, [data-hero="eyebrow"], [data-hero="cta"] a:last-child) {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(.ep-stats-panel, .ep-stat-card, [data-hero="eyebrow"], [data-hero="cta"] a:last-child) {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+/* High-contrast feature bands: black in light mode, white in dark mode. */
+.marketing-shell.ep-landing-page :is(#readings, [data-band]) {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page :is(#readings, [data-band]) * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page :is(#readings, [data-band]) :is([data-reading], [data-card], article) {
+  background: transparent !important;
+  border: 1px solid #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(#readings, [data-band]) {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(#readings, [data-band]) * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(#readings, [data-band]) :is([data-reading], [data-card], article) {
+  background: transparent !important;
+  border: 1px solid #000000 !important;
+}
+
+/* CTA and primary actions invert with the page theme. */
+.marketing-shell.ep-landing-page :is(button, a)[data-primary],
+.marketing-shell.ep-landing-page :is(a, button)[data-variant="primary"],
+.marketing-shell.ep-landing-page :is(a, button)[data-primary-action],
+.marketing-shell.ep-landing-page button[type="submit"],
+.marketing-shell.ep-landing-page [data-hero="cta"] a:first-child {
+  background: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1px solid #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(button, a)[data-primary],
+html.dark .marketing-shell.ep-landing-page :is(a, button)[data-variant="primary"],
+html.dark .marketing-shell.ep-landing-page :is(a, button)[data-primary-action],
+html.dark .marketing-shell.ep-landing-page button[type="submit"],
+html.dark .marketing-shell.ep-landing-page [data-hero="cta"] a:first-child {
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border: 1px solid #ffffff !important;
+}
+
+/* Keep every illustration and canvas graphic monochrome. */
+.marketing-shell.ep-landing-page :is(img, video, canvas, figure, .ep-hero-visual) {
+  filter: grayscale(1) !important;
+}
