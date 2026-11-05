@@ -87,9 +87,9 @@ export function HeroEnhance() {
         // Tank panel tilts toward the cursor. Rotation only, so it stacks
         // with the scroll parallax (y) and the intro (scale on the wrapper).
         const zone = document.querySelector<HTMLElement>(
-          "#top .grid > div:last-child"
+          "#top [data-hero=parallax-console]"
         );
-        const panel = zone?.firstElementChild as HTMLElement | null;
+        const panel = zone?.querySelector<HTMLElement>(":scope > *") ?? null;
         if (zone && panel) {
           gsap.set(panel, { transformPerspective: 900 });
           const rotX = gsap.quickTo(panel, "rotationX", {
