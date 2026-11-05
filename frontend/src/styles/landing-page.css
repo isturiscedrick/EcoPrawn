@@ -1,3 +1,4 @@
+@layer utilities {
 /* Landing page monochrome design system.
    This is the single source of truth for the landing page's black/white UI.
    Shared public pages and the dashboard keep their own design tokens. */
@@ -222,4 +223,33 @@ html.dark .marketing-shell.ep-landing-page [data-band] a:last-child {
 html.dark .marketing-shell.ep-landing-page .ep-lens-shrimp .ep-logo-shrimp {
   fill: #000000 !important;
   stroke: #000000 !important;
+}
+
+/* Theme-specific lens labels and selected navigation state. */
+.marketing-shell.ep-landing-page .ep-lens-caption,
+.marketing-shell.ep-landing-page .ep-lens-readout,
+.marketing-shell.ep-landing-page .ep-lens-readout * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page .ep-lens-caption,
+html.dark .marketing-shell.ep-landing-page .ep-lens-readout,
+html.dark .marketing-shell.ep-landing-page .ep-lens-readout * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page nav[aria-label="Primary navigation"] a[aria-current],
+.marketing-shell.ep-landing-page nav[aria-label="Mobile navigation"] a[aria-current] {
+  background: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page nav[aria-label="Primary navigation"] a[aria-current],
+html.dark .marketing-shell.ep-landing-page nav[aria-label="Mobile navigation"] a[aria-current] {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
 }
