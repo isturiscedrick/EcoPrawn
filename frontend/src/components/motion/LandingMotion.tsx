@@ -491,6 +491,32 @@ export function LandingMotion() {
         homeAccents.forEach((accent) => homeAccentObserver?.observe(accent));
       }
 
+      // Consistent GSAP hover treatment for remaining Home section surfaces.
+      // Skip elements already handled by the richer data-hover-lift interaction.
+      const homeSurfaces = gsap.utils.toArray<HTMLElement>(
+        ".ep-stats-panel > div, [data-band], [data-site-footer] .grid > div"
+      ).filter((el) => !el.matches("[data-hover-lift]"));
+      homeSurfaces.forEach((surface) => {
+        const enter = () => gsap.to(surface, {
+          y: -6, scale: 1.012,
+          borderColor: "var(--ep-accent)",
+          boxShadow: "0 24px 52px -34px rgba(7,42,48,.48)",
+          duration: .3, ease: "power3.out", overwrite: "auto",
+        });
+        const leave = () => gsap.to(surface, {
+          y: 0, scale: 1,
+          borderColor: "var(--ep-line)",
+          boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
+          duration: .42, ease: "power3.out", overwrite: "auto",
+        });
+        surface.addEventListener("pointerenter", enter);
+        surface.addEventListener("pointerleave", leave);
+        hoverCleanups.push(() => {
+          surface.removeEventListener("pointerenter", enter);
+          surface.removeEventListener("pointerleave", leave);
+        });
+      });
+
       // Shared 3D hover interaction for data cards and process steps.
       gsap.utils.toArray<HTMLElement>("[data-hover-lift]").forEach((el) => {
         const icon = el.querySelector<HTMLElement>("svg");
