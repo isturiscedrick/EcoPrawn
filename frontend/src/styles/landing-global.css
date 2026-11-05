@@ -1,0 +1,5 @@
+/* Landing-page-only global stylesheet entrypoint.
+ * Imported by LandingPage.tsx so these rules never affect dashboard,
+ * authentication, About, or Contact routes.
+ */
+@import "./landing-page.css";
