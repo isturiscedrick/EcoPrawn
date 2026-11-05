@@ -3,3 +3,61 @@
  * authentication, About, or Contact routes.
  */
 @import "./landing-page.css";
+
+/* Navigation is deliberately hard-locked to monochrome on the landing route.
+   This file is imported only by LandingPage, so shared routes are unaffected. */
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"],
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+  box-shadow: none !important;
+}
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a,
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a {
+  background: transparent !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a[aria-current="page"],
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a[aria-current="page"] {
+  background: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a:hover,
+.marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"],
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: none !important;
+}
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a,
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a {
+  background: transparent !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a[aria-current="page"],
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a[aria-current="page"] {
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Primary navigation"] a:hover,
+html.dark .marketing-shell.ep-landing-page #site-header nav[aria-label="Mobile navigation"] a:hover {
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
