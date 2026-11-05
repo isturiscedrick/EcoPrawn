@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { animate, stagger } from "animejs";
+import { animate } from "animejs";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,9 +19,9 @@ export function AboutMotion() {
           const title = hero.querySelector("h1");
           const lead = hero.querySelector("[data-page-lead]");
           gsap.timeline({ defaults: { ease: "power4.out" } })
-            .from(kicker, { y: 20, autoAlpha: 0, duration: .6 })
-            .from(title, { y: 48, autoAlpha: 0, duration: .85 }, "-=.32")
-            .from(lead, { y: 22, autoAlpha: 0, duration: .65 }, "-=.48");
+            .from(kicker, { y: 20, duration: .6 })
+            .from(title, { y: 48, duration: .85 }, "-=.32")
+            .from(lead, { y: 22, duration: .65 }, "-=.48");
           const atmosphere = hero.querySelector<HTMLElement>(".ep-hero-atmosphere");
           if (atmosphere) gsap.to(atmosphere, {
             yPercent: 18, ease: "none",
@@ -43,15 +43,14 @@ export function AboutMotion() {
               scrollTrigger: { trigger: header, start: "top 84%", once: true },
               defaults: { ease: "power3.out" },
             });
-            if (eyebrow) tl.from(eyebrow, { x: -20, autoAlpha: 0, duration: .45 });
-            if (heading) tl.from(heading, { y: 32, autoAlpha: 0, duration: .7 }, "-=.2");
-            if (copy.length) tl.from(copy, { y: 18, autoAlpha: 0, duration: .55, stagger: .1 }, "-=.35");
+            if (eyebrow) tl.from(eyebrow, { x: -20, duration: .45 });
+            if (heading) tl.from(heading, { y: 32, duration: .7 }, "-=.2");
+            if (copy.length) tl.from(copy, { y: 18, duration: .55, stagger: .1 }, "-=.35");
           }
 
           const cards = gsap.utils.toArray<HTMLElement>("article", section);
           if (cards.length) gsap.from(cards, {
-            y: 48, rotateX: 7, transformPerspective: 1000, transformOrigin: "center bottom",
-            autoAlpha: 0, duration: .85, stagger: .12, ease: "expo.out",
+            y: 48, rotateX: 7, transformPerspective: 1000, transformOrigin: "center bottom", duration: .85, stagger: .12, ease: "expo.out",
             scrollTrigger: { trigger: cards[0], start: "top 86%", once: true },
           });
 
@@ -60,7 +59,7 @@ export function AboutMotion() {
           cards.forEach((card) => {
             const text = card.querySelectorAll<HTMLElement>("h3, dt, dd, b, p, article > div > span");
             if (text.length) gsap.from(text, {
-              y: 14, autoAlpha: 0, duration: .48, stagger: .045, ease: "power2.out",
+              y: 14, duration: .48, stagger: .045, ease: "power2.out",
               scrollTrigger: { trigger: card, start: "top 82%", once: true },
             });
           });
@@ -75,7 +74,7 @@ export function AboutMotion() {
           });
           const points = row.querySelectorAll<HTMLElement>(".col-span-2 > div");
           if (points.length) gsap.from(points, {
-            x: 18, autoAlpha: 0, duration: .5, stagger: .09, ease: "power3.out",
+            x: 18, duration: .5, stagger: .09, ease: "power3.out",
             scrollTrigger: { trigger: row, start: "top 78%", once: true },
           });
         });
@@ -83,7 +82,7 @@ export function AboutMotion() {
         const footer = root.querySelector<HTMLElement>("[data-site-footer]");
         const footerGroups = footer?.querySelectorAll<HTMLElement>(":scope .grid > div");
         if (footer && footerGroups?.length) gsap.from(footerGroups, {
-          y: 24, autoAlpha: 0, duration: .7, stagger: .12, ease: "power3.out",
+          y: 24, duration: .7, stagger: .12, ease: "power3.out",
           scrollTrigger: { trigger: footer, start: "top 90%", once: true },
         });
       }, root);
