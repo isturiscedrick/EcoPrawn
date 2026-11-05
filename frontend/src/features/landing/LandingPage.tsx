@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import "@/styles/landing-global.css";
 import { Link } from "@tanstack/react-router";
 import { HeroLens } from "@/features/landing/HeroLens";
 import { SiteHeader } from "@/components/layout/SiteHeader";
