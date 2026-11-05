@@ -1408,3 +1408,84 @@ html:not(.dark) .ep-landing figure[aria-label^="A shrimp"] > div {
 html:not(.dark) .ep-landing figure[aria-label^="A shrimp"] > div > div {
   background: radial-gradient(circle at 50% 42%, #31585A 0%, #193B3F 54%, #10282C 100%);
 }
+
+
+/* ---------- Refined light-mode HeroLens palette ---------- */
+/* A lighter, clearer teal instrument replaces the near-black glass;
+   telemetry uses the brand's deep teal ink and terracotta signal accents. */
+html:not(.dark) .ep-landing #top figure[aria-label^="A shrimp"] > div {
+  background: linear-gradient(145deg, #477F86 0%, #28636D 48%, #174B55 100%) !important;
+  border: 1px solid rgba(15, 76, 92, .32);
+  box-shadow:
+    0 30px 58px -30px rgba(15, 76, 92, .42),
+    inset 0 2px 0 rgba(255, 255, 255, .62),
+    inset 0 -8px 18px rgba(5, 37, 43, .24),
+    0 0 0 5px rgba(15, 76, 92, .08) !important;
+}
+html:not(.dark) .ep-landing #top figure[aria-label^="A shrimp"] > div > div {
+  background: radial-gradient(circle at 48% 38%,
+    #397780 0%, #245D67 48%, #123F49 100%) !important;
+  --tw-ring-color: rgba(15, 76, 92, .48) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-rings,
+html:not(.dark) .ep-landing #top .ep-lens-ticks {
+  color: #D9EFEB !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-rings circle {
+  stroke: currentColor;
+}
+html:not(.dark) .ep-landing #top .ep-lens-arcs {
+  color: #F28A68 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-shrimp .ep-logo {
+  --ep-logo-color: #F28A68 !important;
+  --ep-logo-text: #F28A68 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-speck {
+  background: #EAF7F2 !important;
+  opacity: .34 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-glare {
+  background-image: radial-gradient(circle,
+    rgba(255,255,255,.28) 0%,
+    rgba(255,255,255,.08) 48%,
+    transparent 72%) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-iris {
+  background: #123F49 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-ping {
+  border-color: #F28A68 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-scan {
+  background: linear-gradient(90deg, transparent, #D9EFEB, transparent) !important;
+  box-shadow: 0 0 12px rgba(217,239,235,.6) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:first-child {
+  color: #31504C !important;
+  font-weight: 750 !important;
+  letter-spacing: .01em;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child {
+  color: #0F3439 !important;
+  font-weight: 800 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
+  color: #315A5C !important;
+  font-weight: 700 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout .ep-lens-dot {
+  background: #D94416 !important;
+  box-shadow: 0 0 0 3px rgba(217,68,22,.13) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors path {
+  stroke: #477780 !important;
+  stroke-width: 1.6 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors circle {
+  fill: #D94416 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-caption {
+  color: #31504C !important;
+  text-shadow: none !important;
+}
