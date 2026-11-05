@@ -164,6 +164,23 @@ html.theme-transitioning *::after {
   }
 }
 
+/* Auth modal wordmark must match the site header in both themes.
+   !important is intentional: BrandMark receives an inline fallback prop. */
+html:not(.dark) .ep-auth-modal .ep-logo {
+  --ep-logo-text: var(--ep-secondary, #0f4c5c) !important;
+}
+html:not(.dark) .ep-auth-modal .ep-logo .ep-logo-wordmark {
+  color: var(--ep-secondary, #0f4c5c) !important;
+  -webkit-text-fill-color: var(--ep-secondary, #0f4c5c) !important;
+}
+html.dark .ep-auth-modal .ep-logo {
+  --ep-logo-text: var(--ep-secondary, #8bd5a6) !important;
+}
+html.dark .ep-auth-modal .ep-logo .ep-logo-wordmark {
+  color: var(--ep-secondary, #8bd5a6) !important;
+  -webkit-text-fill-color: var(--ep-secondary, #8bd5a6) !important;
+}
+
 /* Header wordmark uses the EcoPrawn secondary brand color.
    Keep the shrimp mark coral and adapt the wordmark to each theme. */
 html:not(.dark) header .ep-logo {
