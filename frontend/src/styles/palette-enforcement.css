@@ -461,3 +461,183 @@ html.dark .marketing-shell:is(.ep-about-page, .ep-contact-page) [data-page-hero]
   color: #8bd5a6 !important;
   -webkit-text-fill-color: #8bd5a6 !important;
 }
+
+
+/* LANDING PAGE MONOCHROME PASS
+   Landing only: remove primary/secondary brand colors and use black, white,
+   and neutral grayscale. About, Contact, Dashboard, and Auth remain untouched. */
+.marketing-shell.ep-landing-page {
+  --ep-bg: #ffffff;
+  --ep-surface: #f2f2f2;
+  --ep-primary: #000000;
+  --ep-secondary: #000000;
+  --ep-accent: #000000;
+  --ep-accent-hover: #333333;
+  --ep-text-muted: #333333;
+  --ep-line: #b8b8b8;
+  --ep-brand-primary: #000000;
+  --ep-brand-secondary: #000000;
+  --coral: #000000;
+  --coral-dim: #333333;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page {
+  --ep-bg: #000000;
+  --ep-surface: #171717;
+  --ep-primary: #ffffff;
+  --ep-secondary: #ffffff;
+  --ep-accent: #ffffff;
+  --ep-accent-hover: #d9d9d9;
+  --ep-text-muted: #d0d0d0;
+  --ep-line: #555555;
+  --ep-brand-primary: #ffffff;
+  --ep-brand-secondary: #ffffff;
+  --coral: #ffffff;
+  --coral-dim: #d9d9d9;
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Neutralize all landing-page text and icon colors, including legacy utilities. */
+.marketing-shell.ep-landing-page :is(
+  h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,span,a,button,
+  [role="button"],[data-icon],svg
+) {
+  color: inherit;
+  -webkit-text-fill-color: currentColor;
+}
+.marketing-shell.ep-landing-page :is(svg,svg *) {
+  stroke: currentColor !important;
+}
+.marketing-shell.ep-landing-page :is(header,main,section,article,aside,nav,footer) {
+  border-color: var(--ep-line) !important;
+}
+
+/* Light-mode surfaces: white canvas, subtle gray panels, black typography. */
+.marketing-shell.ep-landing-page,
+.marketing-shell.ep-landing-page :is(#top,#process,#systems,#about-content,.ep-stats-section) {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+.marketing-shell.ep-landing-page :is(
+  .ep-stats-panel,.ep-stat-card,article,[data-band],
+  [data-hero="eyebrow"],[data-hero="cta"] a,
+  header nav,footer
+) {
+  background-color: #f2f2f2 !important;
+  border-color: #b8b8b8 !important;
+  color: #000000 !important;
+}
+.marketing-shell.ep-landing-page :is(
+  #readings,.ep-readings-section,#systems
+) {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page :is(#readings,#systems) :is(
+  h1,h2,h3,h4,p,li,dt,dd,label,small,strong,span,a,button,svg
+) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page :is(
+  .ep-hero-atmosphere,[data-readings-bg],[data-band] > [aria-hidden="true"]
+) {
+  background: #ffffff !important;
+  background-image: none !important;
+}
+.marketing-shell.ep-landing-page #readings > [data-readings-bg] {
+  background: #000000 !important;
+  background-image: none !important;
+}
+.marketing-shell.ep-landing-page [data-cross] :is(span) {
+  background-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page :is(button,a)[data-primary],
+.marketing-shell.ep-landing-page :is(a,button)[data-variant="primary"],
+.marketing-shell.ep-landing-page :is(a,button)[data-primary-action],
+.marketing-shell.ep-landing-page button[type="submit"],
+.marketing-shell.ep-landing-page [data-hero="cta"] a:first-child {
+  background: #000000 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page :is(button,a):hover {
+  border-color: #000000;
+}
+.marketing-shell.ep-landing-page :is(button,a):focus-visible {
+  outline-color: #000000 !important;
+}
+
+/* Dark-mode surfaces invert cleanly while retaining gray separation. */
+html.dark .marketing-shell.ep-landing-page,
+html.dark .marketing-shell.ep-landing-page :is(#top,#process,#about-content,.ep-stats-section) {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(
+  .ep-stats-panel,.ep-stat-card,article,[data-band],
+  [data-hero="eyebrow"],[data-hero="cta"] a,
+  header nav,footer
+) {
+  background-color: #171717 !important;
+  border-color: #555555 !important;
+  color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(
+  #readings,.ep-readings-section,#systems
+) {
+  background-color: #171717 !important;
+  border-color: #555555 !important;
+  color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(#readings,#systems) :is(
+  h1,h2,h3,h4,p,li,dt,dd,label,small,strong,span,a,button,svg
+) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(
+  .ep-hero-atmosphere,[data-readings-bg],[data-band] > [aria-hidden="true"]
+) {
+  background: #000000 !important;
+  background-image: none !important;
+}
+html.dark .marketing-shell.ep-landing-page #readings > [data-readings-bg] {
+  background: #171717 !important;
+  background-image: none !important;
+}
+html.dark .marketing-shell.ep-landing-page [data-cross] :is(span) {
+  background-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(button,a)[data-primary],
+html.dark .marketing-shell.ep-landing-page :is(a,button)[data-variant="primary"],
+html.dark .marketing-shell.ep-landing-page :is(a,button)[data-primary-action],
+html.dark .marketing-shell.ep-landing-page button[type="submit"],
+html.dark .marketing-shell.ep-landing-page [data-hero="cta"] a:first-child {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(button,a):focus-visible {
+  outline-color: #ffffff !important;
+}
+
+/* Remove the remaining brand hues from illustrations, gradients, and motion accents. */
+.marketing-shell.ep-landing-page .ep-hero-atmosphere,
+.marketing-shell.ep-landing-page figure[aria-label^="A shrimp"],
+.marketing-shell.ep-landing-page .ep-hero-visual {
+  filter: grayscale(1);
+}
+.marketing-shell.ep-landing-page :is([data-live-ping],[data-step-node],[data-zone],[data-marker],.ep-lens-dot,.ep-lens-ping) {
+  background-color: #000000 !important;
+  border-color: currentColor !important;
+}
+html.dark .marketing-shell.ep-landing-page :is([data-live-ping],[data-step-node],[data-zone],[data-marker],.ep-lens-dot,.ep-lens-ping) {
+  background-color: #ffffff !important;
+  border-color: currentColor !important;
+}
