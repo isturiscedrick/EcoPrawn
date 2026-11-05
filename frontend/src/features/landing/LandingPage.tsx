@@ -150,10 +150,10 @@ export function LandingPage() {
           </div>
 
           {/* The header is sticky (in flow), so the hero needs only a small top pad. */}
-          <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-center gap-10 px-5 pb-14 pt-10 sm:px-8 sm:pb-16 sm:pt-14 lg:min-h-[min(calc(100svh_-_4.5rem),860px)] lg:grid-cols-[minmax(0,1.08fr)_minmax(380px,.92fr)] lg:gap-12 lg:px-12 lg:pb-20 lg:pt-16">
+          <div className="ep-hero-layout mx-auto grid w-full max-w-[1440px] grid-cols-1 justify-items-center gap-5 px-5 pb-10 pt-9 sm:gap-6 sm:px-8 sm:pb-12 sm:pt-12 lg:px-12 lg:pt-14">
             <div
               data-hero="text"
-              className="ep-hero-copy order-1 mx-auto w-full max-w-[760px] text-center lg:mx-0 lg:text-left"
+              className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center"
             >
               <div
                 data-hero="eyebrow"
@@ -172,7 +172,7 @@ export function LandingPage() {
               <h1
                 data-hero="headline"
                 aria-label="Smarter shrimp farming, always in range."
-                className="ep-font-display mx-auto max-w-[900px] text-[clamp(40px,5.2vw,76px)] font-bold leading-[1.08] tracking-[-0.05em] lg:mx-0"
+                className="ep-font-display mx-auto max-w-[1000px] text-[clamp(40px,6.4vw,88px)] font-bold leading-[1.02] tracking-[-0.055em]"
               >
                 <span className="block ep-hero-headline-primary">
                   <Words text="Smarter shrimp farming," />
@@ -184,7 +184,7 @@ export function LandingPage() {
 
               <p
                 data-hero="lead"
-                className="mx-auto mt-5 max-w-[590px] text-base leading-[1.75] text-[var(--ep-text-muted)] sm:text-lg lg:mx-0"
+                className="mx-auto mt-5 max-w-[650px] text-base leading-[1.75] text-[var(--ep-text-muted)] sm:text-lg"
               >
                 Bring water quality, automated feeding, and AI growth insights
                 together in one calm, connected view of your shrimp farm.
@@ -192,7 +192,7 @@ export function LandingPage() {
 
               <div
                 data-hero="cta"
-                className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start"
+                className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center"
               >
                 <AuthLink
                   className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-3 text-sm font-semibold text-[var(--ep-on-accent)] shadow-sm hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
@@ -219,7 +219,7 @@ export function LandingPage() {
 
             <div
               data-hero="parallax-console"
-              className="ep-hero-visual order-2 relative mx-auto flex w-full max-w-[460px] items-center justify-center lg:max-w-none"
+              className="ep-hero-visual order-2 relative mx-auto flex w-full max-w-[390px] items-center justify-center sm:max-w-[420px]"
             >
               <HeroLens />
             </div>
@@ -231,7 +231,7 @@ export function LandingPage() {
           aria-label="EcoPrawn at a glance"
           className="border-y border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-8 sm:px-8"
         >
-          <div className="mx-auto grid max-w-[920px] grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="ep-stats-panel mx-auto grid max-w-[1040px] grid-cols-2 gap-2.5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 shadow-[0_18px_45px_-30px_rgba(15,76,92,.42)] sm:grid-cols-4 sm:gap-3 sm:rounded-3xl sm:p-4">
             {STATS.map((stat) => (
               <div
                 key={stat.label}
