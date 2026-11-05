@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { PageHero } from "@/components/layout/PageHero";
 import { IconChip, type IconName } from "@/components/ui/Icon";
@@ -20,6 +21,7 @@ export function ContactPage() {
   return (
     <div className="ep-landing ep-contact-page flex min-h-screen flex-col">
       <ContactMotion />
+      <PublicChromeMotion />
       <SiteHeader tone="white" integrated />
 
       <main className="flex-1">
