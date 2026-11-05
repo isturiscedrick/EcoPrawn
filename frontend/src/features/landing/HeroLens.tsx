@@ -277,9 +277,9 @@ export function HeroLens() {
       className="relative mx-auto aspect-square w-full max-w-[460px]"
     >
       {/* Lens barrel: deep slate teal #0f4c5c, lit from the top left */}
-      <div className="absolute inset-0 rounded-full bg-[linear-gradient(145deg,#1a6a7e_0%,#0f4c5c_55%,#082b35_100%)] p-[3.2%] shadow-[0_40px_70px_-34px_rgba(15,76,92,0.75),inset_0_2px_0_rgba(255,255,255,0.18)]">
+      <div className="absolute inset-0 rounded-full bg-[linear-gradient(145deg,#0f4c5c_0%,#0f4c5c_55%,#142b2e_100%)] dark:bg-[linear-gradient(145deg,#202729_0%,#202729_55%,#18191a_100%)] p-[3.2%] shadow-[0_40px_70px_-34px_rgba(15,76,92,0.75),inset_0_2px_0_rgba(255,255,255,0.18)]">
         {/* Glass */}
-        <div className="relative isolate h-full w-full overflow-hidden rounded-full bg-[radial-gradient(circle_at_50%_46%,#1a6a7e_0%,#13596b_38%,#0f4c5c_72%,#082b35_100%)] ring-1 ring-[rgba(251,248,241,0.25)]">
+        <div className="relative isolate h-full w-full overflow-hidden rounded-full bg-[radial-gradient(circle_at_50%_46%,#0f4c5c_0%,#0f4c5c_58%,#142b2e_100%)] dark:bg-[radial-gradient(circle_at_50%_46%,#202729_0%,#202729_58%,#18191a_100%)] ring-1 ring-[rgba(251,248,241,0.25)]">
           {/* Concentric rings */}
           <svg
             aria-hidden="true"
@@ -422,7 +422,7 @@ export function HeroLens() {
           {/* Iris: covers the glass, then opens */}
           <span
             aria-hidden="true"
-            className="ep-lens-iris pointer-events-none absolute inset-0 bg-[#082b35]"
+            className="ep-lens-iris pointer-events-none absolute inset-0 bg-[#142b2e] dark:bg-[#18191a]"
             style={
               {
                 "--iris": "100%",
