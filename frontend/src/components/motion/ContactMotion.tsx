@@ -174,6 +174,32 @@ export function ContactMotion() {
         // Tiny ornamental marks pulse in a short, non-looping sequence.
         const marks = root.querySelectorAll<HTMLElement>("main [aria-hidden='true'].h-2");
         if (marks.length) animate(marks, { scale: [0.7, 1], delay: stagger(70), duration: 460, ease: "outBack(1.7)" });
+
+        // Anime.js adds a section-by-section entrance for the contact details,
+        // form labels and supporting icons without making any content invisible.
+        const sectionAccents = root.querySelectorAll<HTMLElement>(
+          "[data-contact-card] svg, [data-contact-card] dt, [data-contact-form] label, [data-site-footer] svg"
+        );
+        let accentObserver: IntersectionObserver | undefined;
+        if (sectionAccents.length) {
+          accentObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const target = entry.target as HTMLElement;
+              const isIcon = target.tagName.toLowerCase() === "svg";
+              animate(target, {
+                translateY: [isIcon ? 7 : 5, 0],
+                scale: isIcon ? [0.76, 1] : [0.985, 1],
+                rotate: isIcon ? [-9, 0] : [0, 0],
+                duration: isIcon ? 560 : 430,
+                ease: isIcon ? "outElastic(1,.6)" : "out(3)",
+              });
+              accentObserver?.unobserve(target);
+            });
+          }, { threshold: 0.3 });
+          sectionAccents.forEach((target) => accentObserver?.observe(target));
+        }
+        cleanups.push(() => accentObserver?.disconnect());
       }, root);
 
       return () => {
