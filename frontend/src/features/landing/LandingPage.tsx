@@ -223,6 +223,9 @@ export function LandingPage() {
             >
               <HeroLens />
             </div>
+            <p data-hero="signature" className="order-3 -mt-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ep-text-muted)] sm:text-xs">
+              Live insight · Automated care · Healthier harvests
+            </p>
           </div>
         </section>
 
