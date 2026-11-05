@@ -25,7 +25,7 @@ export function AboutPage() {
   return (
     <div className="marketing-shell ep-about-page flex min-h-screen flex-col bg-[#f4f7f6] text-[#142b2e] dark:bg-[#18191a] dark:text-[#8bd5a6]">
       <AboutMotion />
-      <SiteHeader tone="white" />
+      <SiteHeader tone="white" integrated />
 
       <main className="flex-1">
         <PageHero
