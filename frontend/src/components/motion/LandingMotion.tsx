@@ -137,7 +137,7 @@ export function LandingMotion() {
         })
         .from(
           "#top .grid > div:nth-child(2)",
-          { y: 32, opacity: 0, scale: 0.97, duration: 0.9 },
+          { y: 32, scale: 0.97, duration: 0.9 },
           0.15
         );
 
@@ -302,7 +302,7 @@ export function LandingMotion() {
         if (!heading) return;
         const underline = heading.parentElement?.querySelector<HTMLElement>("[data-heading-accent]");
         gsap.from(heading, {
-          y: 46, autoAlpha: 0, clipPath: "inset(0 0 100% 0)",
+          y: 46, clipPath: "inset(0 0 100% 0)",
           duration: .95, ease: "power4.out",
           scrollTrigger: { trigger: heading, start: "top 84%", once: true },
         });
@@ -318,7 +318,7 @@ export function LandingMotion() {
       readingTiles.forEach((tile, index) => {
         gsap.from(tile, {
           y: 58, rotateX: 13, rotateY: index % 2 ? 5 : -5,
-          transformPerspective: 1100, autoAlpha: 0, duration: .95,
+          transformPerspective: 1100, duration: .95,
           ease: "expo.out",
           scrollTrigger: { trigger: tile, start: "top 90%", once: true },
         });
@@ -421,9 +421,9 @@ export function LandingMotion() {
           scrollTrigger: { trigger: step, start: "top 86%", once: true },
           defaults: { ease: "power3.out" },
         });
-        if (number) tl.from(number, { x: -12, autoAlpha: 0, duration: .35 });
-        if (title) tl.from(title, { y: 22, autoAlpha: 0, duration: .55 }, "-=.12");
-        if (copy) tl.from(copy, { y: 14, autoAlpha: 0, duration: .48 }, "-=.28");
+        if (number) tl.from(number, { x: -12, duration: .35 });
+        if (title) tl.from(title, { y: 22, duration: .55 }, "-=.12");
+        if (copy) tl.from(copy, { y: 14, duration: .48 }, "-=.28");
       });
 
       // Section-level atmosphere movement gives the page a continuous
@@ -554,8 +554,7 @@ export function LandingMotion() {
       // 1. Hero text drifts up and fades as you scroll past (scrubbed).
       //    Targets the column wrapper; the intro animates its children.
       gsap.to("#top .grid > div:first-child", {
-        y: -48,
-        opacity: 0.25,
+        y: -48.25,
         ease: "none",
         scrollTrigger: {
           trigger: "#top",
@@ -654,7 +653,7 @@ export function LandingMotion() {
 
       tl.fromTo(
         bubbles,
-        { y: 0, opacity: 0.7 },
+        { y: 0.7 },
         {
           y: -(window.innerHeight + 80),
           duration: 2.2,
