@@ -32,9 +32,9 @@ export function AboutPage() {
           kicker="How it works"
           title={
             <>
-              One general objective.
+              <span className="text-[#0F4C5C] dark:text-[#8BD5A6]">One general objective.</span>
               <br className="hidden sm:block" />
-              Six systems achieving it.
+              <span className="text-[#142B2E] dark:text-[#8BD5A6]">Six systems achieving it.</span>
             </>
           }
           lead="A focused system architecture built around measurable aquaculture outcomes, now fully operational."
