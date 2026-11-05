@@ -73,7 +73,7 @@ export function AboutMotion() {
         root.querySelectorAll<HTMLElement>("#systems article").forEach((row) => {
           const icon = row.querySelector<HTMLElement>("svg");
           const title = row.querySelector<HTMLElement>("h3");
-          const points = row.querySelectorAll<HTMLElement>(".col-span-2 > div");
+          const points = row.querySelectorAll<HTMLElement>(":scope > div:last-child > div");
           const tl = gsap.timeline({
             scrollTrigger: { trigger: row, start: "top 88%", once: true },
             defaults: { ease: "power3.out" },
@@ -81,6 +81,25 @@ export function AboutMotion() {
           if (icon) tl.from(icon, { scale: .72, rotation: -12, duration: .55, ease: "back.out(1.8)" });
           if (title) tl.from(title, { x: 18, duration: .48 }, "-=.3");
           if (points.length) tl.from(points, { x: 16, duration: .42, stagger: .075 }, "-=.22");
+        });
+
+        // Scroll-linked system markers draw as each row crosses the viewport.
+        root.querySelectorAll<HTMLElement>("#systems article").forEach((row) => {
+          const marker = row.querySelector<HTMLElement>(":scope > span");
+          if (marker) gsap.fromTo(marker,
+            { scaleY: 0, transformOrigin: "top center" },
+            { scaleY: 1, ease: "none",
+              scrollTrigger: { trigger: row, start: "top 82%", end: "bottom 42%", scrub: .55 } }
+          );
+        });
+
+        // Scope list items reveal in reading order.
+        root.querySelectorAll<HTMLElement>("#scope article").forEach((card) => {
+          const items = card.querySelectorAll<HTMLElement>(":scope > div:last-child > div");
+          if (items.length) gsap.from(items, {
+            x: 14, duration: .48, stagger: .075, ease: "power2.out",
+            scrollTrigger: { trigger: card, start: "top 82%", once: true },
+          });
         });
 
         // Scope cards get a light depth hover with pointer tracking.
