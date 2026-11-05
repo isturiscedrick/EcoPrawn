@@ -153,3 +153,73 @@ html.dark .marketing-shell.ep-landing-page [data-hero="cta"] a:first-child {
 .marketing-shell.ep-landing-page :is(img, video, canvas, figure, .ep-hero-visual) {
   filter: grayscale(1) !important;
 }
+
+
+/* Landing header/footer and shared CTA components use the same two-color system. */
+.marketing-shell.ep-landing-page #site-header {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: none !important;
+}
+html.dark .marketing-shell.ep-landing-page #site-header {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page [data-site-footer] {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+.marketing-shell.ep-landing-page [data-site-footer] * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page [data-site-footer] {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-top-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page [data-site-footer] * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* CTA band buttons need their own foreground/background pairing. */
+.marketing-shell.ep-landing-page [data-band] a:first-child {
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border-color: #ffffff !important;
+}
+.marketing-shell.ep-landing-page [data-band] a:last-child {
+  background: transparent !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page [data-band] a:first-child {
+  background: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page [data-band] a:last-child {
+  background: transparent !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+/* HeroLens embedded shrimp SVG inherits the monochrome foreground. */
+.marketing-shell.ep-landing-page .ep-lens-shrimp .ep-logo-shrimp {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page .ep-lens-shrimp .ep-logo-shrimp {
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
