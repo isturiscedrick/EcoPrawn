@@ -177,3 +177,53 @@ html.dark .ep-contact-page [data-page-hero-headline] > span:last-child {
   color: #8BD5A6 !important;
   -webkit-text-fill-color: #8BD5A6 !important;
 }
+
+
+/* ---------- Hero lens: dedicated dark-mode instrument finish ----------
+   Keep the light lens teal, but give dark mode a darker graphite-water
+   glass, mint instrumentation and a coral shrimp mark for clear contrast. */
+html.dark .ep-landing figure[aria-label^="A shrimp"] > div {
+  background: linear-gradient(145deg, #26383A 0%, #142629 52%, #0A171A 100%);
+  box-shadow: 0 42px 78px -32px rgba(0, 0, 0, 0.82),
+    inset 0 2px 0 rgba(139, 213, 166, 0.18),
+    0 0 36px rgba(139, 213, 166, 0.08);
+}
+html.dark .ep-landing figure[aria-label^="A shrimp"] > div > div {
+  background: radial-gradient(circle at 50% 44%, #244044 0%, #142B2F 48%, #091619 100%);
+  --tw-ring-color: rgba(139, 213, 166, 0.34);
+}
+html.dark .ep-landing .ep-lens-rings,
+html.dark .ep-landing .ep-lens-ticks {
+  color: #8BD5A6;
+}
+html.dark .ep-landing .ep-lens-arcs {
+  color: #F28A68;
+}
+html.dark .ep-landing .ep-lens-ping {
+  border-color: #F28A68;
+}
+html.dark .ep-landing .ep-lens-scan {
+  background: linear-gradient(90deg, transparent, #8BD5A6, transparent);
+  box-shadow: 0 0 16px rgba(139, 213, 166, 0.72);
+}
+html.dark .ep-landing .ep-lens-iris {
+  background: #071417;
+}
+html.dark .ep-landing .ep-lens-readout,
+html.dark .ep-landing .ep-lens-readout span,
+html.dark .ep-landing .ep-lens-caption {
+  color: #EAF4EF;
+}
+html.dark .ep-landing .ep-lens-readout .ep-lens-dot {
+  background-color: #8BD5A6;
+}
+html.dark .ep-landing .ep-lens-speck {
+  background: #DDF8E7;
+}
+html.dark .ep-landing .ep-lens-flash {
+  background: #F28A68;
+}
+html.dark .ep-landing .ep-lens-shrimp .ep-logo {
+  --ep-logo-color: #F28A68;
+  --ep-logo-text: #8BD5A6;
+}
