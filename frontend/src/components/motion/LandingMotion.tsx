@@ -360,10 +360,9 @@ export function LandingMotion() {
 
       // Reading tiles get a soft 3D entrance, while their contents stay legible.
       const readingTiles = gsap.utils.toArray<HTMLElement>('[aria-labelledby="readings-title"] dl > div');
-      readingTiles.forEach((tile, index) => {
+      readingTiles.forEach((tile) => {
         gsap.from(tile, {
-          y: 58, rotateX: 13, rotateY: index % 2 ? 5 : -5,
-          transformPerspective: 1100, duration: .95,
+          y: 42, duration: .78,
           ease: "expo.out",
           scrollTrigger: { trigger: tile, start: "top 90%", once: true },
         });
@@ -562,43 +561,32 @@ export function LandingMotion() {
         });
       });
 
-      // Shared 3D hover interaction for data cards and process steps.
+      // Data cards and process steps use a restrained lift on hover.
+      // Their surfaces remain flat; the hero lens keeps its own 3D motion.
       gsap.utils.toArray<HTMLElement>("[data-hover-lift]").forEach((el) => {
         const icon = el.querySelector<HTMLElement>("svg");
-        const rx = gsap.quickTo(el, "rotationX", { duration: .32, ease: "power3.out" });
-        const ry = gsap.quickTo(el, "rotationY", { duration: .32, ease: "power3.out" });
         const enter = () => {
           gsap.to(el, {
-            y: -8, scale: 1.018,
-            boxShadow: "0 28px 60px -34px rgba(7,42,48,.42)",
-            duration: .35, ease: "power3.out", overwrite: "auto",
+            y: -6, scale: 1.012,
+            boxShadow: "0 24px 52px -32px rgba(7,42,48,.38)",
+            duration: .3, ease: "power3.out", overwrite: "auto",
           });
-          if (icon) microAnimations.push(animate(icon, {
-            scale: [1, 1.18, 1], rotate: [0, -9, 6, 0],
-            duration: 560, ease: "outElastic(1,.55)",
-          }));
-        };
-        const pointer = (event: PointerEvent) => {
-          const rect = el.getBoundingClientRect();
-          ry(((event.clientX - rect.left) / rect.width - .5) * 8);
-          rx(-((event.clientY - rect.top) / rect.height - .5) * 6);
-        };
-        const leave = () => {
-          rx(0); ry(0);
-          gsap.to(el, {
-            y: 0, scale: 1, rotationX: 0, rotationY: 0,
-            boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
-            duration: .55, ease: "elastic.out(1,.65)", overwrite: "auto",
+          if (icon) animate(icon, {
+            scale: [1, 1.14, 1], rotate: [0, -8, 5, 0],
+            duration: 540, ease: "outElastic(1,.6)",
           });
         };
+        const leave = () => gsap.to(el, {
+          y: 0, scale: 1,
+          boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
+          duration: .45, ease: "power3.out", overwrite: "auto",
+        });
         el.addEventListener("mouseenter", enter);
-        el.addEventListener("pointermove", pointer);
         el.addEventListener("mouseleave", leave);
         el.addEventListener("focusin", enter);
         el.addEventListener("focusout", leave);
         hoverCleanups.push(() => {
           el.removeEventListener("mouseenter", enter);
-          el.removeEventListener("pointermove", pointer);
           el.removeEventListener("mouseleave", leave);
           el.removeEventListener("focusin", enter);
           el.removeEventListener("focusout", leave);
