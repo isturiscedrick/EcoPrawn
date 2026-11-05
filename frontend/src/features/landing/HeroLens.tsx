@@ -82,6 +82,7 @@ export function HeroLens() {
       const ticks = one(".ep-lens-ticks");
       const shrimp = one(".ep-lens-shrimp");
       const arcs = one(".ep-lens-arcs");
+      const glare = one(".ep-lens-glare");
       const pingEl = one(".ep-lens-ping");
       const scan = one(".ep-lens-scan");
       const flash = one(".ep-lens-flash");
@@ -89,28 +90,39 @@ export function HeroLens() {
       const readouts = many(".ep-lens-readout");
       const dots = many(".ep-lens-dot");
       const specks = many(".ep-lens-speck");
-      if (!iris || !rings || !ticks || !shrimp || !arcs || !pingEl || !scan || !flash || !caption) return;
+      if (!iris || !rings || !ticks || !shrimp || !arcs || !glare || !pingEl || !scan || !flash || !caption) return;
 
       // Scroll-linked depth: the instrument drifts and subtly tilts as it
       // travels through the viewport. Scrubbing keeps motion tied to scrolling.
       const scrollDepth = gsap.timeline({
         scrollTrigger: {
           trigger: root,
-          start: "top 92%",
-          end: "bottom 8%",
-          scrub: 1.15,
+          start: "top 88%",
+          end: "bottom 12%",
+          scrub: 0.85,
           invalidateOnRefresh: true,
         },
       });
-      // Keep the SVG lens itself at a constant scale and rotation.
-      // Scroll only its internal instrumentation and reflection to avoid
-      // transform resampling that can leave the lens looking soft.
+      // Scroll only the lens internals: the outer SVG stays crisp and its
+      // dimensions never change. Each layer has a distinct transform owner.
       scrollDepth
-        .fromTo(rings, { rotateZ: -12 }, { rotateZ: 12, ease: "none" }, 0)
+        .fromTo(rings, { rotateZ: -28 }, { rotateZ: 28, ease: "none" }, 0)
         .fromTo(
-          one(".ep-lens-glare"),
-          { xPercent: -18, yPercent: -12, opacity: 0.18 },
-          { xPercent: 18, yPercent: 12, opacity: 0.48, ease: "none" },
+          glare,
+          { xPercent: -34, yPercent: -20, opacity: 0.12 },
+          { xPercent: 34, yPercent: 20, opacity: 0.52, ease: "none" },
+          0
+        )
+        .fromTo(
+          shrimp,
+          { yPercent: 9 },
+          { yPercent: -9, ease: "none" },
+          0
+        )
+        .fromTo(
+          readouts,
+          { yPercent: 7 },
+          { yPercent: -7, ease: "none" },
           0
         );
 
