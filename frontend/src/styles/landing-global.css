@@ -378,3 +378,113 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
     max-width: 320px;
   }
 }
+
+
+/* ---------- Laptop viewport fit: keep the complete hero composition visible ---------- */
+@media (min-width: 768px) {
+  .ep-landing #top .ep-hero-layout {
+    gap: clamp(.55rem, 1vw, .9rem);
+    padding-top: clamp(1.1rem, 2.2vh, 1.8rem);
+    padding-bottom: clamp(1rem, 2vh, 1.5rem);
+  }
+  .ep-landing #top .ep-hero-copy {
+    max-width: 1240px;
+  }
+  .ep-landing #top [data-hero="headline"] {
+    width: 100%;
+    max-width: 1200px;
+    font-size: clamp(2.65rem, 5.2vw, 4.8rem);
+    line-height: .99;
+    letter-spacing: -.06em;
+  }
+  .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+    white-space: nowrap;
+  }
+  .ep-landing #top [data-hero="lead"] {
+    margin-top: .65rem;
+    line-height: 1.55;
+  }
+  .ep-landing #top [data-hero="cta"] {
+    margin-top: 1rem;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(30vw, 320px);
+    max-width: 320px;
+  }
+  .ep-landing #top .ep-hero-visual figure {
+    max-width: 320px;
+  }
+  .ep-landing #top [data-hero="signature"] {
+    margin-top: -.35rem;
+    font-size: .62rem;
+  }
+}
+
+/* Short laptop screens: reduce vertical footprint rather than cropping the lens. */
+@media (min-width: 768px) and (max-height: 900px) {
+  .ep-landing #top .ep-hero-layout {
+    gap: .5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .ep-landing #top [data-hero="eyebrow"] {
+    margin-bottom: .65rem;
+    padding: .38rem .8rem;
+  }
+  .ep-landing #top [data-hero="headline"] {
+    font-size: clamp(2.5rem, 4.7vw, 4.25rem);
+  }
+  .ep-landing #top [data-hero="lead"] {
+    margin-top: .55rem;
+    font-size: 1rem;
+  }
+  .ep-landing #top [data-hero="cta"] {
+    margin-top: .8rem;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(27vw, 285px);
+    max-width: 285px;
+  }
+  .ep-landing #top .ep-hero-visual figure {
+    max-width: 285px;
+  }
+}
+
+/* At medium laptop widths allow the headline to wrap naturally without overflow. */
+@media (min-width: 768px) and (max-width: 1100px) {
+  .ep-landing #top [data-hero="headline"] {
+    font-size: clamp(2.45rem, 5.4vw, 3.75rem);
+  }
+  .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+    white-space: normal;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(34vw, 285px);
+    max-width: 285px;
+  }
+  .ep-landing #top .ep-hero-visual figure {
+    max-width: 285px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ep-landing #top .ep-hero-layout {
+    gap: .85rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+  .ep-landing #top [data-hero="headline"] {
+    max-width: 100%;
+    overflow-wrap: normal;
+  }
+  .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+    white-space: normal;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(82vw, 300px);
+    max-width: 300px;
+  }
+  .ep-landing #top .ep-hero-visual figure {
+    max-width: 300px;
+  }
+}
