@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
-import { animate } from "animejs";
+import { animate, stagger } from "animejs";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
