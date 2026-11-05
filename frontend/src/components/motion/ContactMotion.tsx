@@ -13,6 +13,7 @@ export function ContactMotion() {
 
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const cleanups: Array<() => void> = [];
       const ctx = gsap.context(() => {
         const hero = root.querySelector<HTMLElement>("[data-page-hero]");
         if (hero) {
@@ -108,7 +109,7 @@ export function ContactMotion() {
           card.addEventListener("pointerleave", leave);
           card.addEventListener("focusin", enter);
           card.addEventListener("focusout", leave);
-          ctx.add(() => {
+          cleanups.push(() => {
             card.removeEventListener("pointerenter", enter);
             card.removeEventListener("pointermove", move);
             card.removeEventListener("pointerleave", leave);
@@ -127,7 +128,7 @@ export function ContactMotion() {
           const blur = () => gsap.to(field, { scale: 1, boxShadow: "0 0 0 0 transparent", duration: .28, ease: "power2.out" });
           field.addEventListener("focus", focus);
           field.addEventListener("blur", blur);
-          ctx.add(() => {
+          cleanups.push(() => {
             field.removeEventListener("focus", focus);
             field.removeEventListener("blur", blur);
           });
@@ -142,7 +143,7 @@ export function ContactMotion() {
           const leave = () => gsap.to(control, { y: 0, duration: .25, ease: "power2.out" });
           control.addEventListener("pointerenter", enter);
           control.addEventListener("pointerleave", leave);
-          ctx.add(() => {
+          cleanups.push(() => {
             control.removeEventListener("pointerenter", enter);
             control.removeEventListener("pointerleave", leave);
           });
@@ -153,7 +154,10 @@ export function ContactMotion() {
         if (marks.length) animate(marks, { scale: [0.7, 1], delay: stagger(70), duration: 460, ease: "outBack(1.7)" });
       }, root);
 
-      return () => ctx.revert();
+      return () => {
+        cleanups.forEach((cleanup) => cleanup());
+        ctx.revert();
+      };
     });
 
     return () => mm.revert();
