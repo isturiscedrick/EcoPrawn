@@ -106,7 +106,7 @@ export function LandingPage() {
       <SiteHeader tone="white" integrated />
 
       <main className="flex-1">
-        {/* HERO: warm-neutral canvas, charcoal typography, restrained terracotta accents. */}
+        {/* HERO: pure monochrome canvas and typography. */}
         <section id="top" className="ep-landing-hero relative isolate overflow-hidden bg-[var(--ep-bg)] text-[var(--ep-primary)] dark:bg-[var(--ep-bg)] dark:text-[var(--ep-primary)]">
           <div
             aria-hidden="true"
@@ -352,7 +352,7 @@ export function LandingPage() {
               <span className="inline-flex items-center gap-2">
                 <span
                   aria-hidden="true"
-                  className="h-3.5 w-3.5 rounded-full border-2 border-[var(--ep-primary)] bg-[var(--coral)]"
+                  className="h-3.5 w-3.5 rounded-full border-2 border-[var(--ep-primary)] bg-[var(--ep-primary)]"
                 />
                 Current reading
               </span>
