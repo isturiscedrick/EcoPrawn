@@ -1489,3 +1489,30 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
   color: #31504C !important;
   text-shadow: none !important;
 }
+
+
+/* ---------- GSAP 3D HeroLens instrument depth ---------- */
+.ep-landing #top .ep-lens-stage {
+  perspective: 1100px;
+  perspective-origin: 50% 48%;
+  transform-style: preserve-3d;
+}
+.ep-landing #top .ep-lens-core {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+  filter: drop-shadow(0 28px 24px rgba(5, 35, 39, .22));
+}
+.ep-landing #top .ep-lens-core > div:first-child {
+  transform: translateZ(0);
+  transform-style: preserve-3d;
+}
+.ep-landing #top .ep-lens-core .ep-lens-rings { transform: translateZ(9px); }
+.ep-landing #top .ep-lens-core .ep-lens-ticks { transform: translateZ(13px); }
+.ep-landing #top .ep-lens-core .ep-lens-shrimp { transform: translateZ(25px); }
+.ep-landing #top .ep-lens-core .ep-lens-arcs { transform: translateZ(19px); }
+.ep-landing #top .ep-lens-core .ep-lens-glare { transform: translateZ(31px); }
+.ep-landing #top .ep-lens-core .ep-lens-scan { transform: translateZ(28px); }
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .ep-landing #top .ep-lens-core { will-change: auto; }
+}
