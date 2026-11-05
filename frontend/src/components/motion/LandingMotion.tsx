@@ -468,6 +468,29 @@ export function LandingMotion() {
         }));
       }
 
+      // Animate section-specific labels and markers with Anime.js as they enter.
+      // The existing GSAP timelines continue to own the larger card/section motion.
+      const homeAccents = homeRoot?.querySelectorAll<HTMLElement>(
+        "main section [aria-hidden='true'].h-2, main section [data-step-node], main section [data-live-ping]"
+      );
+      let homeAccentObserver: IntersectionObserver | undefined;
+      if (homeAccents?.length) {
+        homeAccentObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const accent = entry.target as HTMLElement;
+            microAnimations.push(animate(accent, {
+              scale: [0.65, 1.18, 1],
+              opacity: [0.55, 1],
+              duration: 580,
+              ease: "outElastic(1,.6)",
+            }));
+            homeAccentObserver?.unobserve(accent);
+          });
+        }, { threshold: 0.35 });
+        homeAccents.forEach((accent) => homeAccentObserver?.observe(accent));
+      }
+
       // Shared 3D hover interaction for data cards and process steps.
       gsap.utils.toArray<HTMLElement>("[data-hover-lift]").forEach((el) => {
         const icon = el.querySelector<HTMLElement>("svg");
@@ -516,6 +539,7 @@ export function LandingMotion() {
         hoverCleanups.forEach((cleanup) => cleanup());
         microAnimations.forEach((animation) => animation.revert());
         homeIconObserver?.disconnect();
+        homeAccentObserver?.disconnect();
       };
     });
 
