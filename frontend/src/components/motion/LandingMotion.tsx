@@ -259,7 +259,7 @@ export function LandingMotion() {
           const resetMagnet = () => { magnetX(0); magnetY(0); };
           const enter = () => {
             microAnimations.push(animate(control, {
-              translateY: -3, scale: 1.025, duration: 230, ease: "out(3)",
+              scale: 1.025, duration: 230, ease: "out(3)",
             }));
             if (icon) microAnimations.push(animate(icon, {
               translateX: 3, duration: 260, ease: "out(3)",
@@ -267,7 +267,7 @@ export function LandingMotion() {
           };
           const leave = () => {
             microAnimations.push(animate(control, {
-              translateY: 0, scale: 1, duration: 300, ease: "out(3)",
+              scale: 1, duration: 300, ease: "out(3)",
             }));
             if (icon) microAnimations.push(animate(icon, {
               translateX: 0, duration: 280, ease: "out(3)",
