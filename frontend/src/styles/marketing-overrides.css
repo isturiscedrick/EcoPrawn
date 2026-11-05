@@ -31,10 +31,10 @@ html.dark .marketing-shell :is(#process, #systems, #about-content) {
   background-color: #18191a;
   color: #e4e6eb;
 }
-html.dark .marketing-shell :is(#process, #systems, #about-content) [class~="text-[var(--ep-primary)]"] {
+html.dark .marketing-shell :is(#process, #systems, #about-content) .text-\[var\(--ep-primary\)\] {
   color: #e4e6eb;
 }
-html.dark .marketing-shell :is(#process, #systems, #about-content) [class~="border-[var(--ep-line)]"] {
+html.dark .marketing-shell :is(#process, #systems, #about-content) .border-\[var\(--ep-line\)\] {
   border-color: rgba(255,255,255,0.14);
 }
 html.dark .marketing-shell footer {
@@ -71,9 +71,9 @@ html.dark .marketing-shell :is(#readings, #systems, footer, [data-band]) {
   --coral: #f28a68;
 }
 html.dark .marketing-shell :is(
-  [class~="text-[var(--ep-primary)]"],
-  [class~="text-[var(--water-deep)]"],
-  [class~="text-[var(--mangrove-text)]"]
+  .text-\[var\(--ep-primary\)\],
+  .text-\[var\(--water-deep\)\],
+  .text-\[var\(--mangrove-text\)\]
 ) {
   color: #e4e6eb;
 }
@@ -200,7 +200,7 @@ html.dark .marketing-shell :is(#objectives, #scope) :is(article, [class*="bg-whi
 html.dark .marketing-shell :is(#objectives, #scope) :is(h2, h3, b, p, span) {
   color: #e4e6eb;
 }
-html.dark .marketing-shell :is(#objectives, #scope) :is([class~="text-[var(--ep-text-muted)]"]) {
+html.dark .marketing-shell :is(#objectives, #scope) :is(.text-\[var\(--ep-text-muted\)\]) {
   color: #b8c0c2 !important;
 }
 html.dark .marketing-shell :is(#objectives, #scope) .border-t,
@@ -299,7 +299,7 @@ html.dark .marketing-shell #scope article {
 html.dark .marketing-shell #scope article :is(h3, b, span) {
   color: inherit;
 }
-html.dark .marketing-shell #scope article :is(.text-\[var\(--ep-text-muted\)]) {
+html.dark .marketing-shell #scope article :is(.text-\[var\(--ep-text-muted\)\]) {
   color: #b8c0c2 !important;
 }
 
@@ -319,7 +319,7 @@ html.dark .marketing-shell #systems > [aria-hidden="true"] {
 html.dark .marketing-shell #systems :is(h2, h3) {
   color: #e4e6eb !important;
 }
-html.dark .marketing-shell #systems :is(.text-\[var\(--ep-text-muted\)]) {
+html.dark .marketing-shell #systems :is(.text-\[var\(--ep-text-muted\)\]) {
   color: #b8c0c2 !important;
 }
 html.dark .marketing-shell #systems article {
@@ -329,7 +329,7 @@ html.dark .marketing-shell #systems article > span[aria-hidden="true"]:not(.abso
   border-color: rgba(139, 213, 166, 0.45) !important;
   color: #8bd5a6 !important;
 }
-html.dark .marketing-shell #systems article .bg-\[var\(--ep-accent\)] {
+html.dark .marketing-shell #systems article .bg-\[var\(--ep-accent\)\] {
   background-color: #f28a68 !important;
 }
 html.dark .marketing-shell #systems article :is(b, span) {
@@ -347,7 +347,7 @@ html.dark .marketing-shell #systems article :is(b, span) {
 .marketing-shell :is(p, li, dd, dt, label, small, figcaption) {
   color: var(--ep-readable-text);
 }
-.marketing-shell :is(.text-muted, [data-muted], [class~="text-[var(--ep-text-muted)]"]) {
+.marketing-shell :is(.text-muted, [data-muted], .text-\[var\(--ep-text-muted\)\]) {
   color: var(--ep-readable-muted) !important;
 }
 .marketing-shell :is(input, textarea, select) {
@@ -375,7 +375,7 @@ html.dark .marketing-shell {
 html.dark .marketing-shell :is(p, li, dd, dt, label, small, figcaption) {
   color: var(--ep-readable-text);
 }
-html.dark .marketing-shell :is(.text-muted, [data-muted], .text-\[var\(--ep-text-muted\)]) {
+html.dark .marketing-shell :is(.text-muted, [data-muted], .text-\[var\(--ep-text-muted\)\]) {
   color: var(--ep-readable-muted) !important;
 }
 html.dark .marketing-shell :is(input, textarea, select) {
