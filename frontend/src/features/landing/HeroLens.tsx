@@ -287,13 +287,13 @@ export function HeroLens() {
             fill="none"
             className="ep-lens-rings pointer-events-none absolute inset-0 h-full w-full"
           >
-            <circle cx="200" cy="200" r="176" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
-            <circle cx="200" cy="200" r="146" stroke="rgba(255,255,255,0.10)" strokeWidth="1" />
+            <circle cx="200" cy="200" r="176" stroke="rgba(244,247,246,0.14)" strokeWidth="1" />
+            <circle cx="200" cy="200" r="146" stroke="rgba(244,247,246,0.10)" strokeWidth="1" />
             <circle
               cx="200"
               cy="200"
               r="112"
-              stroke="rgba(255,255,255,0.16)"
+              stroke="rgba(244,247,246,0.16)"
               strokeWidth="1"
               strokeDasharray="2 7"
             />
@@ -312,7 +312,7 @@ export function HeroLens() {
                 y1={t.y1}
                 x2={t.x2}
                 y2={t.y2}
-                stroke={t.long ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.28)"}
+                stroke={t.long ? "rgba(244,247,246,0.55)" : "rgba(244,247,246,0.28)"}
                 strokeWidth={t.long ? 2 : 1.2}
                 strokeLinecap="round"
               />
@@ -333,7 +333,7 @@ export function HeroLens() {
           {/* Soft halo behind the prawn so it separates from the dark glass */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-[22%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0.09)_45%,transparent_72%)]"
+            className="pointer-events-none absolute inset-[22%] rounded-full bg-[radial-gradient(circle,rgba(244,247,246,0.24)_0%,rgba(244,247,246,0.09)_45%,transparent_72%)]"
           />
 
           {/* The prawn, in the dark-mode coral #f28a68 so it pops on teal.
@@ -376,7 +376,7 @@ export function HeroLens() {
             const compact = i === 4; // top-center slot (Water Level)
             return (
               <div key={r.label} className={`ep-lens-readout absolute flex flex-col ${SLOTS[i]}`}>
-                <span className="flex items-center gap-1.5 text-xs font-medium text-white/90 sm:text-sm">
+                <span className="flex items-center gap-1.5 text-xs font-medium text-[#f4f7f6]/90 sm:text-sm">
                   <span
                     aria-hidden="true"
                     className="ep-lens-dot inline-block h-1.5 w-1.5 rounded-full bg-[#8bd5a6]"
@@ -389,7 +389,7 @@ export function HeroLens() {
                   }`}
                 >
                   <span data-count={r.value}>{r.value}</span>
-                  <span className="ml-1 text-xs font-medium text-white/85 sm:text-sm">
+                  <span className="ml-1 text-xs font-medium text-[#f4f7f6]/85 sm:text-sm">
                     {heroReadoutUnits[r.label]}
                   </span>
                 </span>
@@ -408,15 +408,15 @@ export function HeroLens() {
           />
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-[4%] rounded-full border-t-2 border-[rgba(255,255,255,0.2)] [mask-image:linear-gradient(180deg,#000,transparent_40%)]"
+            className="pointer-events-none absolute inset-[4%] rounded-full border-t-2 border-[rgba(244,247,246,0.2)] [mask-image:linear-gradient(180deg,#000,transparent_40%)]"
           />
           <span
             aria-hidden="true"
-            className="ep-lens-glare pointer-events-none absolute -left-[10%] -top-[10%] h-[70%] w-[70%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0.05)_45%,transparent_70%)]"
+            className="ep-lens-glare pointer-events-none absolute -left-[10%] -top-[10%] h-[70%] w-[70%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.2)_0%,rgba(244,247,246,0.05)_45%,transparent_70%)]"
           />
           <span
             aria-hidden="true"
-            className="ep-lens-flash pointer-events-none absolute inset-0 bg-white opacity-0"
+            className="ep-lens-flash pointer-events-none absolute inset-0 bg-[#f4f7f6] opacity-0"
           />
 
           {/* Iris: covers the glass, then opens */}
