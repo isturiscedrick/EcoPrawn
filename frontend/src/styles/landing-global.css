@@ -722,3 +722,94 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
 @media (min-width: 640px) and (max-width: 767px) {
   .ep-landing #top .ep-lens-diagram { transform: scale(.92); transform-origin: top center; margin-bottom: -30px; }
 }
+
+
+/* ---------- Premium HeroLens instrument finish ---------- */
+.ep-landing #top .ep-lens-diagram {
+  isolation: isolate;
+}
+.ep-landing #top .ep-lens-core {
+  filter: drop-shadow(0 22px 34px rgba(0,0,0,.24));
+}
+.ep-landing #top .ep-lens-core::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  inset: -8px;
+  border: 1px solid color-mix(in srgb, var(--ep-secondary) 58%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--ep-secondary) 8%, transparent),
+    0 0 28px color-mix(in srgb, var(--ep-secondary) 12%, transparent),
+    inset 0 0 18px color-mix(in srgb, var(--ep-secondary) 8%, transparent);
+}
+.ep-landing #top .ep-lens-core::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  inset: 5px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.ep-landing #top .ep-lens-connectors {
+  color: var(--ep-secondary);
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--ep-secondary) 32%, transparent));
+}
+.ep-landing #top .ep-lens-connectors path {
+  stroke-width: 1.35;
+  opacity: .82;
+}
+.ep-landing #top .ep-lens-connectors circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  fill: var(--ep-accent);
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--ep-accent) 55%, transparent));
+}
+.ep-landing #top .ep-lens-readout {
+  width: 116px;
+  gap: 2px;
+  padding: 2px 0;
+}
+.ep-landing #top .ep-lens-readout > span:first-child {
+  color: var(--ep-text-muted);
+  font-size: clamp(.72rem, .9vw, .84rem);
+  font-weight: 650;
+  letter-spacing: .025em;
+}
+.ep-landing #top .ep-lens-readout > span:last-child {
+  margin-top: .24rem;
+  color: var(--ep-text);
+  font-size: clamp(1.2rem, 1.8vw, 1.42rem);
+  font-weight: 780;
+  letter-spacing: -.035em;
+  font-variant-numeric: tabular-nums;
+}
+.ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
+  color: var(--ep-text-muted);
+  font-size: .72em;
+  letter-spacing: 0;
+}
+.ep-landing #top .ep-lens-readout .ep-lens-dot {
+  width: .48rem;
+  height: .48rem;
+  background: var(--ep-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent) 13%, transparent);
+}
+.ep-landing #top .ep-lens-caption {
+  margin-top: .35rem;
+  padding-top: .7rem;
+  border-top: 1px solid var(--ep-line);
+  width: min(100%, 560px);
+  font-size: .72rem;
+  letter-spacing: .015em;
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-core::before { inset: -5px; }
+  .ep-landing #top .ep-lens-readout { width: auto; }
+  .ep-landing #top .ep-lens-readout > span:last-child { font-size: 1.12rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-landing #top .ep-lens-connectors path { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
+}
