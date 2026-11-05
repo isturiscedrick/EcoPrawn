@@ -167,15 +167,8 @@ export function LandingMotion() {
           transformPerspective: 1100, duration: 1.15,
           ease: "expo.out", delay: playWaterIntro ? 1.9 : .28,
         });
-        gsap.to(visual, {
-          y: -12, ease: "none",
-          scrollTrigger: {
-            trigger: hero,
-            start: "top top",
-            end: "bottom top",
-            scrub: .8,
-          },
-        });
+        // HeroLens owns its own scroll-linked depth. Do not animate this
+        // wrapper's y here: it is already used by the entrance tween above.
       }
 
       // READINGS: each reading rises in, then its bar fills while its
