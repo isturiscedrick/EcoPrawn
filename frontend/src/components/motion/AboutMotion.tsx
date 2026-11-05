@@ -108,7 +108,11 @@ export function AboutMotion() {
           const rx = gsap.quickTo(card, "rotationX", { duration: .3, ease: "power2.out" });
           const ry = gsap.quickTo(card, "rotationY", { duration: .3, ease: "power2.out" });
           const enter = () => {
-            gsap.to(card, { y: -7, scale: 1.012, boxShadow: "0 26px 54px -34px rgba(7,42,48,.5)", duration: .28, ease: "power3.out", overwrite: "auto" });
+            gsap.to(card, {
+              y: -8, scale: 1.018, borderColor: "var(--ep-accent)",
+              boxShadow: "0 28px 58px -32px rgba(7,42,48,.58)",
+              duration: .32, ease: "power3.out", overwrite: "auto",
+            });
             if (icon) animate(icon, { scale: [1, 1.16, 1], rotate: [0, -10, 6, 0], duration: 560, ease: "outElastic(1,.6)" });
           };
           const move = (event: PointerEvent) => {
@@ -119,7 +123,12 @@ export function AboutMotion() {
           };
           const leave = () => {
             rx(0); ry(0);
-            gsap.to(card, { y: 0, scale: 1, rotationX: 0, rotationY: 0, duration: .48, ease: "elastic.out(1,.65)", overwrite: "auto" });
+            gsap.to(card, {
+              y: 0, scale: 1, rotationX: 0, rotationY: 0,
+              borderColor: "var(--ep-line)",
+              boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
+              duration: .5, ease: "elastic.out(1,.65)", overwrite: "auto",
+            });
           };
           card.addEventListener("pointerenter", enter);
           card.addEventListener("pointermove", move);
@@ -147,6 +156,30 @@ export function AboutMotion() {
           cleanups.push(() => {
             control.removeEventListener("pointerenter", enter);
             control.removeEventListener("pointerleave", leave);
+          });
+        });
+
+        // The objective statement and section navigation get the same tactile
+        // response as the article cards, using only existing theme tokens.
+        const featureSurfaces = root.querySelectorAll<HTMLElement>(
+          ".ep-about-objective, [data-section-nav] a"
+        );
+        featureSurfaces.forEach((surface) => {
+          const enter = () => gsap.to(surface, {
+            y: -5, borderColor: "var(--ep-accent)",
+            boxShadow: "0 24px 48px -32px rgba(7,42,48,.48)",
+            duration: .28, ease: "power3.out", overwrite: "auto",
+          });
+          const leave = () => gsap.to(surface, {
+            y: 0, borderColor: "var(--ep-line)",
+            boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
+            duration: .4, ease: "power3.out", overwrite: "auto",
+          });
+          surface.addEventListener("pointerenter", enter);
+          surface.addEventListener("pointerleave", leave);
+          cleanups.push(() => {
+            surface.removeEventListener("pointerenter", enter);
+            surface.removeEventListener("pointerleave", leave);
           });
         });
 
