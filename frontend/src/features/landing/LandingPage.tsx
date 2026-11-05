@@ -276,8 +276,8 @@ export function LandingPage() {
                       <span
                         className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-[var(--ep-bg)] ${
                           inRange
-                            ? "bg-[rgba(139,213,166,0.24)]"
-                            : "bg-[rgba(242,138,104,0.24)]"
+                            ? "bg-[rgba(15,76,92,0.18)] dark:bg-[rgba(139,213,166,0.24)]"
+                            : "bg-[rgba(217,68,22,0.16)] dark:bg-[rgba(242,138,104,0.24)]"
                         }`}
                       >
                         {inRange ? (
@@ -307,7 +307,7 @@ export function LandingPage() {
                     >
                       <div
                         data-zone=""
-                        className="absolute inset-y-0 rounded-full bg-[var(--mangrove-light)]"
+                        className="absolute inset-y-0 rounded-full bg-[var(--ep-secondary)]"
                         style={{ left: `${zoneLeft}%`, width: `${zoneWidth}%` }}
                       />
                       <div
