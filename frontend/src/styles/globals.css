@@ -6,5 +6,4 @@
 @import "./theme-components.css";
 @import "./dashboard.css";
 @import "./marketing-overrides.css";
-@import "./public-pages.css";
-@import "./palette-enforcement.css";
+@import "./landing-global.css";

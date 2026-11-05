@@ -1,14 +1,14 @@
 import { useId, useState, type FormEvent } from "react";
 
 const focusRing =
-  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
 
-const inputClass = `w-full rounded-xl border border-[var(--ep-line)] bg-white px-4 py-3 text-base text-[var(--ep-primary)] shadow-[0_4px_12px_-10px_rgba(11,46,51,0.35)] transition-[border-color,box-shadow] duration-200 placeholder:text-[var(--ep-text-muted)] hover:border-[var(--ep-accent)] focus:shadow-[0_0_0_3px_rgba(178,63,28,0.12)] ${focusRing}`;
+const inputClass = `w-full rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-3 text-base text-[var(--ep-text)] transition-[border-color,box-shadow] duration-200 placeholder:text-[var(--ep-text-muted)] placeholder:opacity-70 hover:border-[var(--ep-accent)] focus:border-[var(--ep-accent)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--ep-accent)_18%,transparent)] ${focusRing}`;
 
-const labelClass = "mb-1.5 block text-sm font-semibold text-[var(--ep-primary)]";
+const labelClass = "mb-1.5 block text-sm font-semibold text-[var(--ep-text)]";
 
 const buttonMotion =
-  "transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-12px_rgba(11,46,51,0.6)] active:translate-y-0 active:shadow-none";
+  "transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0";
 
 export function ContactForm() {
   const uid = useId();
@@ -34,9 +34,9 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="rounded-2xl border border-[var(--ep-line)] bg-white p-6 text-center shadow-[0_16px_32px_-24px_rgba(11,46,51,0.55)] sm:p-8"
+        className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center shadow-[0_16px_32px_-24px_rgba(11,46,51,0.55)] sm:p-8"
       >
-        <h2 className="ep-font-display mb-2 text-2xl font-semibold">Message ready</h2>
+        <h2 className="ep-font-display mb-2 text-2xl font-semibold text-[var(--ep-text)]">Message ready</h2>
         <p className="mb-6 text-base leading-relaxed text-[var(--ep-text-muted)]">
           Thanks, {name.trim() || "friend"}. This form isn&apos;t connected to a
           mail service yet, so nothing has been sent.
@@ -55,12 +55,17 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-5 rounded-2xl border border-[var(--ep-line)] bg-white p-6 shadow-[0_16px_32px_-24px_rgba(11,46,51,0.45)] sm:p-8"
+      className="flex flex-col gap-5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_16px_32px_-24px_rgba(11,46,51,0.45)] sm:p-8"
     >
       <div className="mb-1">
-        <h2 className="ep-font-display text-2xl font-semibold tracking-tight text-[var(--ep-primary)]">Send us a message</h2>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">Share your question or feedback about EcoPrawn. All fields are required.</p>
+        <h2 className="ep-font-display text-2xl font-semibold tracking-tight text-[var(--ep-text)]">
+          Send us a message
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">
+          Share your question or feedback about EcoPrawn. All fields are required.
+        </p>
       </div>
+
       <div>
         <label htmlFor={`${uid}-name`} className={labelClass}>
           Name
@@ -110,7 +115,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 text-base font-semibold text-white hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
+        className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 text-base font-semibold text-[var(--ep-on-accent)] hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
       >
         Send message
       </button>

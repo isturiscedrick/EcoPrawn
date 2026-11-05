@@ -18,7 +18,7 @@ const CONTACT_DETAILS: { label: string; value: string; icon: IconName }[] = [
 
 export function ContactPage() {
   return (
-    <div className="marketing-shell ep-contact-page flex min-h-screen flex-col bg-[#f4f7f6] text-[#142b2e] dark:bg-[#18191a] dark:text-[#8bd5a6]">
+    <div className="ep-landing ep-contact-page flex min-h-screen flex-col">
       <ContactMotion />
       <SiteHeader tone="white" integrated />
 
@@ -44,14 +44,14 @@ export function ContactPage() {
                       key={item.label}
                       data-contact-card=""
                       tabIndex={0}
-                      className="flex items-start gap-4 rounded-2xl border border-[var(--ep-line)] bg-white p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
+                      className="flex items-start gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
                     >
                       <IconChip name={item.icon} tone="coral" size={20} />
                       <div>
                         <dt className="mb-1 text-sm font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">
                           {item.label}
                         </dt>
-                        <dd className="text-lg font-semibold">{item.value}</dd>
+                        <dd className="text-lg font-semibold text-[var(--ep-text)]">{item.value}</dd>
                       </div>
                     </div>
                   ))}
@@ -60,7 +60,7 @@ export function ContactPage() {
 
               <Reveal delay={120} className="h-full">
                 <div data-contact-form="" className="h-full">
-                <ContactForm />
+                  <ContactForm />
                 </div>
               </Reveal>
             </div>

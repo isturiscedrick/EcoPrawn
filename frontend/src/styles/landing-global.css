@@ -1,8 +1,7 @@
-/* EcoPrawn landing page: the single source of truth for its colors.
+/* EcoPrawn public UI: the single source of truth for its colors.
  *
- * The landing root is `.ep-landing` (NOT `.marketing-shell`), so the shared
- * About/Contact override files no longer reach it. Everything here is plain
- * tokens; no !important is needed.
+ * `.ep-landing` is the root of the landing page, About, Contact, and the
+ * sign-in dialog panel. Everything here is plain tokens; no !important.
  */
 
 /* ---------- Tokens ---------- */
@@ -24,6 +23,10 @@
   --ep-on-deep-muted: #cfe2e6;
   --ep-zone: #8bd5a6;
   --ep-marker: #f28a68;
+  --ep-ok: #1e7a46;
+  --ep-warn-text: #8f5a12;
+  --ep-danger: #b3261e;
+  --ep-on-status: #ffffff;
   --coral: var(--ep-accent);
   background-color: var(--ep-bg);
   color: var(--ep-text);
@@ -45,9 +48,13 @@ html.dark .ep-landing {
   --ep-deep: #10353a;
   --ep-on-deep: #f1f5f3;
   --ep-on-deep-muted: #c3d4d0;
+  --ep-ok: #5fbf8a;
+  --ep-warn-text: #e8a23a;
+  --ep-danger: #ff8a80;
+  --ep-on-status: #0b1417;
 }
 
-/* Page background behind/overscroll (the old rule keyed on .marketing-shell). */
+/* Page background behind/overscroll. */
 html:not(.dark) body.ecoprawn-root:has(.ep-landing) {
   background: #f4f7f6;
 }
@@ -60,7 +67,7 @@ html:has(.ep-landing) {
   scroll-padding-top: 5.5rem;
 }
 
-/* ---------- Hero atmosphere ---------- */
+/* ---------- Hero atmosphere (landing hero and the About/Contact hero) ---------- */
 .ep-landing .ep-hero-atmosphere {
   background:
     radial-gradient(680px circle at 78% 38%, rgba(15, 76, 92, 0.1), transparent 62%),
@@ -72,17 +79,12 @@ html.dark .ep-landing .ep-hero-atmosphere {
     radial-gradient(520px circle at 8% 95%, rgba(242, 138, 104, 0.08), transparent 60%);
 }
 
-/* ---------- Header logo: don't wait for an intro that was skipped ----------
-   brand-mark.css delays the logo while `.ep-water-curtain` exists in the DOM,
-   but the curtain stays in the DOM (display:none) after the intro or when it
-   is skipped. Once LandingMotion hides it, drop the delay. */
+/* ---------- Header logo: don't wait for an intro that was skipped ---------- */
 body:has(.ep-water-curtain[style*="display: none"]) .ep-logo {
   --ep-logo-wait: 0s;
 }
 
-/* ---------- Hero lens: always deep-water glass, in both themes ----------
-   HeroLens.tsx ships black/white `dark:` classes. These selectors outrank
-   them so the lens is the same teal instrument in light and dark. */
+/* ---------- Hero lens: always deep-water glass, in both themes ---------- */
 .ep-landing figure[aria-label^="A shrimp"] > div {
   background: linear-gradient(145deg, #1a6173 0%, #0f4c5c 55%, #0b3a47 100%);
   box-shadow: 0 40px 70px -34px rgba(8, 47, 57, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.14);

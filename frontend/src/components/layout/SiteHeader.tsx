@@ -82,27 +82,18 @@ export function SiteHeader({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [mobileNavOpen]);
 
-  // Landing follows its tokens; the other public pages keep their original surfaces.
-  const headerSurface = onLanding
-    ? `color-mix(in srgb, var(--ep-bg) ${scrolled ? 94 : 82}%, transparent)`
-    : integrated
-      ? darkMode ? "#202729" : "#F4F7F6"
-      : darkMode
-        ? scrolled ? "rgba(24,25,26,.94)" : "rgba(24,25,26,.78)"
-        : scrolled ? "rgba(244,247,246,.96)" : "rgba(244,247,246,.84)";
-
-  const headerBorder = onLanding
-    ? scrolled ? "var(--ep-line)" : "transparent"
-    : darkMode ? "rgba(139,213,166,.22)" : "rgba(15,76,92,.16)";
+  // Every public page sits inside `.ep-landing`, so the header follows the landing tokens.
+  const headerSurface = `color-mix(in srgb, var(--ep-bg) ${scrolled ? 94 : 82}%, transparent)`;
+  const headerBorder = scrolled ? "var(--ep-line)" : "transparent";
 
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-50 transition-all duration-300 backdrop-blur-2xl ${integrated && !onLanding ? "border-0" : "border-b"}`}
+      className="sticky top-0 z-50 border-b transition-all duration-300 backdrop-blur-2xl"
       style={{
         backgroundColor: headerSurface,
         borderColor: headerBorder,
-        boxShadow: scrolled ? (integrated ? "0 10px 28px -24px rgba(0,0,0,.28)" : "0 12px 34px -25px rgba(0,0,0,.35)") : "none",
+        boxShadow: scrolled ? "0 10px 28px -24px rgba(0,0,0,.28)" : "none",
       }}
     >
       {/* Three columns (logo | nav | actions) so the nav is truly centered and can never overlap. */}

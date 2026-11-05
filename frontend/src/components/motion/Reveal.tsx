@@ -9,8 +9,9 @@ interface RevealProps {
 
 /**
  * Fades and lifts its children into place the first time they scroll into
- * view. Subtle on purpose (20px, 700ms). Reduced-motion users get the
- * near-instant transitions from the global prefers-reduced-motion rule.
+ * view. Anything already on screen (or above it) when the page mounts is
+ * shown straight away, so a laptop-sized viewport never starts with a row of
+ * hidden cards. Without IntersectionObserver the content is simply visible.
  */
 export function Reveal({ children, delay = 0, className = "" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -19,6 +20,19 @@ export function Reveal({ children, delay = 0, className = "" }: RevealProps) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+
+    // Already in the viewport (or scrolled past) on mount: reveal now.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+      const frame = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(frame);
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -26,7 +40,7 @@ export function Reveal({ children, delay = 0, className = "" }: RevealProps) {
           observer.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -36,7 +50,7 @@ export function Reveal({ children, delay = 0, className = "" }: RevealProps) {
     <div
       ref={ref}
       style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
-      className={`transition-all duration-700 ease-out ${
+      className={`transition-[opacity,transform] duration-700 ease-out ${
         visible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
       } ${className}`}
     >
