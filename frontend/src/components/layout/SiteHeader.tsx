@@ -94,7 +94,7 @@ export function SiteHeader({
   return (
     <header
       id="site-header"
-      className={`sticky top-0 z-50 transition-all duration-300 backdrop-blur-2xl ${integrated ? "border-0" : "border-b"}`}
+      className={`sticky top-0 z-50 transition-all duration-300 backdrop-blur-2xl ${integrated ? "border-0" : "border-b"} ${isMonochromeLanding ? "ep-monochrome-header" : ""}`}
       style={{
         backgroundColor: headerSurface,
         borderColor: isMonochromeLanding ? (darkMode ? "#ffffff" : "#000000") : darkMode ? "rgba(139,213,166,.22)" : "rgba(15,76,92,.16)",
