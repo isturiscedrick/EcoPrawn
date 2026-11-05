@@ -1,4 +1,4 @@
-/* EcoPrawn branded loading intro — light and dark themes. */
+/* EcoPrawn loading intro. Motion sequencing lives in LogoIntroGate.tsx. */
 .ep-loading-screen {
   --loading-bg: #f4f7f6;
   --loading-text: #0f4c5c;
@@ -6,6 +6,7 @@
   --loading-track: rgba(15, 76, 92, 0.16);
   --loading-start: #d94416;
   --loading-end: #0f4c5c;
+  --loading-particle: #d94416;
 
   position: fixed;
   inset: 0;
@@ -13,10 +14,10 @@
   display: grid;
   place-items: center;
   overflow: hidden;
+  isolation: isolate;
   background: var(--loading-bg);
   color: var(--loading-text);
   opacity: 1;
-  animation: ep-loading-screen-out 420ms ease 1.55s forwards;
   transition: background-color 220ms ease, color 220ms ease;
 }
 
@@ -27,16 +28,28 @@ html.dark .ep-loading-screen {
   --loading-track: rgba(139, 213, 166, 0.2);
   --loading-start: #f28a68;
   --loading-end: #8bd5a6;
+  --loading-particle: #8bd5a6;
   color-scheme: dark;
 }
 
 .ep-loading-content {
+  position: relative;
+  z-index: 2;
   display: flex;
-  width: min(220px, calc(100vw - 48px));
+  width: min(240px, calc(100vw - 48px));
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  transform: translateY(2px);
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.ep-loading-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 5px 16px color-mix(in srgb, var(--loading-start) 12%, transparent));
 }
 
 .ep-loading-content .ep-logo {
@@ -62,7 +75,8 @@ html.dark .ep-loading-screen {
   text-align: center;
   white-space: nowrap;
   opacity: 0;
-  animation: ep-loading-caption-in 450ms ease 220ms forwards;
+  visibility: hidden;
+  will-change: transform, opacity;
 }
 
 .ep-loading-track {
@@ -73,39 +87,94 @@ html.dark .ep-loading-screen {
   overflow: hidden;
   border-radius: 999px;
   background: var(--loading-track);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--loading-end) 12%, transparent);
 }
 
 .ep-loading-progress {
+  position: relative;
   display: block;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--loading-start), var(--loading-end));
   transform: scaleX(0);
   transform-origin: left center;
-  animation: ep-loading-progress 1.45s cubic-bezier(0.62, 0, 0.35, 1) 120ms forwards;
+  will-change: transform;
 }
 
-@keyframes ep-loading-progress {
-  to { transform: scaleX(1); }
+.ep-loading-shimmer {
+  position: absolute;
+  inset: 0 auto 0 -35%;
+  width: 35%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent);
+  transform: translateX(0);
+  will-change: transform;
 }
 
-@keyframes ep-loading-caption-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+.ep-loading-orbit {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: min(390px, 90vw);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--loading-end) 10%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
 }
 
-@keyframes ep-loading-screen-out {
-  to { opacity: 0; visibility: hidden; pointer-events: none; }
+.ep-loading-orbit-one {
+  width: min(310px, 76vw);
+  border-style: dashed;
+  opacity: .42;
+}
+
+.ep-loading-orbit-two {
+  width: min(390px, 90vw);
+  opacity: .24;
+}
+
+.ep-loading-particle {
+  position: absolute;
+  z-index: 1;
+  top: calc(50% + var(--particle-y, 0px));
+  left: calc(50% + var(--particle-x, 0px));
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--loading-particle);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--loading-particle) 55%, transparent);
+  opacity: .16;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.ep-loading-particle:nth-of-type(3) { --particle-x: -145px; --particle-y: -72px; }
+.ep-loading-particle:nth-of-type(4) { --particle-x: 136px; --particle-y: -88px; }
+.ep-loading-particle:nth-of-type(5) { --particle-x: -166px; --particle-y: 34px; }
+.ep-loading-particle:nth-of-type(6) { --particle-x: 170px; --particle-y: 48px; }
+.ep-loading-particle:nth-of-type(7) { --particle-x: -94px; --particle-y: 116px; }
+.ep-loading-particle:nth-of-type(8) { --particle-x: 92px; --particle-y: 120px; }
+.ep-loading-particle:nth-of-type(9) { --particle-x: -42px; --particle-y: -148px; }
+.ep-loading-particle:nth-of-type(10) { --particle-x: 44px; --particle-y: 152px; }
+.ep-loading-particle:nth-of-type(11) { --particle-x: -188px; --particle-y: -112px; }
+.ep-loading-particle:nth-of-type(12) { --particle-x: 188px; --particle-y: -118px; }
+
+@media (max-width: 480px) {
+  .ep-loading-orbit-one { width: 260px; }
+  .ep-loading-orbit-two { width: 330px; }
+  .ep-loading-particle:nth-of-type(11),
+  .ep-loading-particle:nth-of-type(12) { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ep-loading-screen {
-    animation-duration: 1ms;
-    animation-delay: 200ms;
-  }
+  .ep-loading-screen,
+  .ep-loading-content,
+  .ep-loading-caption,
   .ep-loading-progress,
-  .ep-loading-caption {
-    animation-duration: 1ms;
+  .ep-loading-shimmer,
+  .ep-loading-particle {
+    transition-duration: 1ms !important;
   }
 }
