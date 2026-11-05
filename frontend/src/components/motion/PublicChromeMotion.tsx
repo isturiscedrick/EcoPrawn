@@ -183,6 +183,54 @@ export function PublicChromeMotion() {
           }
         }
 
+        // Premium pointer interactions: small magnetic pull on primary actions,
+        // plus restrained image zoom. Keep these effects desktop-only and local
+        // to the hovered element so page/card transforms retain ownership.
+        const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+        if (finePointer.matches && main) {
+          const magneticTargets = main.querySelectorAll<HTMLElement>(
+            '#top [data-hero="cta"] a, #top [data-hero="cta"] button, [data-band] a, [data-contact-form] button[type="submit"]'
+          );
+          magneticTargets.forEach((target) => {
+            const moveX = gsap.quickTo(target, "x", { duration: .38, ease: "power3.out", overwrite: "auto" });
+            const moveY = gsap.quickTo(target, "y", { duration: .38, ease: "power3.out", overwrite: "auto" });
+            const onMove = (event: PointerEvent) => {
+              const rect = target.getBoundingClientRect();
+              const dx = (event.clientX - rect.left - rect.width / 2) / Math.max(rect.width / 2, 1);
+              const dy = (event.clientY - rect.top - rect.height / 2) / Math.max(rect.height / 2, 1);
+              moveX(dx * 5);
+              moveY(dy * 4 - 2);
+            };
+            const reset = () => { moveX(0); moveY(0); };
+            target.addEventListener("pointermove", onMove);
+            target.addEventListener("pointerleave", reset);
+            target.addEventListener("pointercancel", reset);
+            cleanups.push(() => {
+              target.removeEventListener("pointermove", onMove);
+              target.removeEventListener("pointerleave", reset);
+              target.removeEventListener("pointercancel", reset);
+              gsap.killTweensOf(target, "x,y");
+            });
+          });
+
+          main.querySelectorAll<HTMLImageElement>("img").forEach((img) => {
+            const enter = () => gsap.to(img, {
+              scale: 1.045, duration: .65, ease: "power3.out", overwrite: "auto",
+            });
+            const leave = () => gsap.to(img, {
+              scale: 1, duration: .75, ease: "power3.out", overwrite: "auto",
+            });
+            img.addEventListener("pointerenter", enter);
+            img.addEventListener("pointerleave", leave);
+            cleanups.push(() => {
+              img.removeEventListener("pointerenter", enter);
+              img.removeEventListener("pointerleave", leave);
+              gsap.killTweensOf(img);
+              gsap.set(img, { clearProps: "transform" });
+            });
+          });
+        }
+
         // Page-specific motion components own main controls and card transforms.
         // This shared layer intentionally avoids competing transform tweens.
 
