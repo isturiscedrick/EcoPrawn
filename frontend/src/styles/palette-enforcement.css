@@ -814,3 +814,182 @@ html.dark .marketing-shell.ep-landing-page .ep-hero-visual,
 html.dark .marketing-shell.ep-landing-page figure {
   filter: grayscale(1) !important;
 }
+
+
+/* STRICT MONOCHROME CLEANUP
+   This is intentionally scoped to the landing page and overrides legacy
+   brand declarations, inline background images, utility classes and pseudo-elements. */
+.marketing-shell.ep-landing-page,
+.marketing-shell.ep-landing-page * ,
+.marketing-shell.ep-landing-page *::before,
+.marketing-shell.ep-landing-page *::after {
+  --ep-brand-primary: #000000 !important;
+  --ep-brand-secondary: #000000 !important;
+  --ep-primary: #000000 !important;
+  --ep-secondary: #000000 !important;
+  --ep-accent: #000000 !important;
+  --ep-accent-hover: #000000 !important;
+  --coral: #000000 !important;
+  --coral-dim: #000000 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+.marketing-shell.ep-landing-page {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+.marketing-shell.ep-landing-page * ,
+.marketing-shell.ep-landing-page *::before,
+.marketing-shell.ep-landing-page *::after {
+  border-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page :is(
+  main,section,header,footer,nav,article,aside,div,ul,ol,dl,figure,
+  [data-hero],[data-band],[data-reading],[data-card]
+) {
+  background-color: transparent !important;
+}
+.marketing-shell.ep-landing-page :is(
+  h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,span,a,button,
+  input,textarea,select,summary,[role="button"],[data-icon],svg
+) {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page :is(svg,svg *) {
+  stroke: currentColor !important;
+}
+.marketing-shell.ep-landing-page svg [fill]:not([fill="none"]) {
+  fill: currentColor !important;
+}
+.marketing-shell.ep-landing-page :is(
+  #readings,#systems,[data-band],.ep-readings-section
+) {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+.marketing-shell.ep-landing-page :is(
+  #readings,#systems,[data-band],.ep-readings-section
+) * ,
+.marketing-shell.ep-landing-page :is(
+  #readings,#systems,[data-band],.ep-readings-section
+) *::before,
+.marketing-shell.ep-landing-page :is(
+  #readings,#systems,[data-band],.ep-readings-section
+) *::after {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+.marketing-shell.ep-landing-page :is(
+  #readings,#systems,[data-band],.ep-readings-section
+) :is([data-reading],[data-card],article) {
+  background: transparent !important;
+  border: 1px solid #ffffff !important;
+}
+.marketing-shell.ep-landing-page :is(button,a)[data-primary],
+.marketing-shell.ep-landing-page :is(a,button)[data-variant="primary"],
+.marketing-shell.ep-landing-page :is(a,button)[data-primary-action],
+.marketing-shell.ep-landing-page button[type="submit"],
+.marketing-shell.ep-landing-page [data-hero="cta"] a:first-child {
+  background: #000000 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 1px solid #000000 !important;
+}
+.marketing-shell.ep-landing-page :is(a,button):focus-visible {
+  outline: 2px solid #000000 !important;
+  outline-offset: 3px;
+}
+.marketing-shell.ep-landing-page :is(img,video,canvas,figure) {
+  filter: grayscale(1) !important;
+}
+html.dark .marketing-shell.ep-landing-page,
+html.dark .marketing-shell.ep-landing-page * ,
+html.dark .marketing-shell.ep-landing-page *::before,
+html.dark .marketing-shell.ep-landing-page *::after {
+  --ep-brand-primary: #ffffff !important;
+  --ep-brand-secondary: #ffffff !important;
+  --ep-primary: #ffffff !important;
+  --ep-secondary: #ffffff !important;
+  --ep-accent: #ffffff !important;
+  --ep-accent-hover: #ffffff !important;
+  --coral: #ffffff !important;
+  --coral-dim: #ffffff !important;
+  border-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+html.dark .marketing-shell.ep-landing-page {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(
+  main,section,header,footer,nav,article,aside,div,ul,ol,dl,figure,
+  [data-hero],[data-band],[data-reading],[data-card]
+) {
+  background-color: transparent !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(
+  h1,h2,h3,h4,h5,h6,p,li,dt,dd,label,small,strong,em,span,a,button,
+  input,textarea,select,summary,[role="button"],[data-icon],svg
+) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(svg,svg *) {
+  stroke: currentColor !important;
+}
+html.dark .marketing-shell.ep-landing-page svg [fill]:not([fill="none"]) {
+  fill: currentColor !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(
+  #readings,#systems,[data-band],.ep-readings-section
+) {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(
+  #readings,#systems,[data-band],.ep-readings-section
+) * ,
+html.dark .marketing-shell.ep-landing-page :is(
+  #readings,#systems,[data-band],.ep-readings-section
+) *::before,
+html.dark .marketing-shell.ep-landing-page :is(
+  #readings,#systems,[data-band],.ep-readings-section
+) *::after {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border-color: #000000 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(
+  #readings,#systems,[data-band],.ep-readings-section
+) :is([data-reading],[data-card],article) {
+  background: transparent !important;
+  border: 1px solid #000000 !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(button,a)[data-primary],
+html.dark .marketing-shell.ep-landing-page :is(a,button)[data-variant="primary"],
+html.dark .marketing-shell.ep-landing-page :is(a,button)[data-primary-action],
+html.dark .marketing-shell.ep-landing-page button[type="submit"],
+html.dark .marketing-shell.ep-landing-page [data-hero="cta"] a:first-child {
+  background: #ffffff !important;
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  border: 1px solid #ffffff !important;
+}
+html.dark .marketing-shell.ep-landing-page :is(a,button):focus-visible {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 3px;
+}
+html.dark .marketing-shell.ep-landing-page :is(img,video,canvas,figure) {
+  filter: grayscale(1) !important;
+}
