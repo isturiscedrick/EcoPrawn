@@ -428,20 +428,20 @@ export function HeroLens() {
       {/* Readings now sit outside the lens, in a dedicated responsive strip. */}
       <div
         aria-label="Example water quality readings"
-        className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5"
+        className="ep-lens-readings grid w-full grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3 lg:grid-cols-5"
       >
         {readouts.map((r) => (
           <div
             key={r.label}
-            className="ep-lens-readout flex min-w-0 flex-col items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-2.5 py-2.5 text-center shadow-sm sm:px-3"
+            className="ep-lens-readout flex min-w-0 flex-col items-center justify-center py-1 text-center"
           >
-            <span className="flex items-center justify-center gap-1.5 text-[10px] font-semibold leading-tight text-[var(--ep-text-muted)] sm:text-xs">
+            <span className="flex items-center justify-center gap-1.5 text-xs font-semibold leading-tight text-[var(--ep-text-muted)] sm:text-sm">
               <span aria-hidden="true" className="ep-lens-dot inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ep-secondary)]" />
               {r.label}
             </span>
-            <span className="mt-1 font-bold tabular-nums text-sm text-[var(--ep-text)] sm:text-base">
+            <span className="mt-1 font-bold tabular-nums text-lg leading-tight text-[var(--ep-text)] sm:text-xl">
               <span data-count={r.value}>{r.value}</span>
-              <span className="ml-0.5 text-[10px] font-medium text-[var(--ep-text-muted)] sm:text-xs">
+              <span className="ml-1 text-xs font-medium text-[var(--ep-text-muted)] sm:text-sm">
                 {heroReadoutUnits[r.label]}
               </span>
             </span>
