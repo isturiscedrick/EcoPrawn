@@ -23,7 +23,7 @@ export function PageHero({ kicker, title, lead }: PageHeroProps) {
           {kicker}
         </p>
 
-        <h1 className="ep-font-display max-w-[52rem] text-[clamp(40px,5.4vw,68px)] font-semibold leading-[1.06] tracking-tight">
+        <h1 className="ep-font-display max-w-[900px] text-[clamp(42px,5.2vw,76px)] font-bold leading-[1.08] tracking-[-0.055em]">
           {title}
         </h1>
 
