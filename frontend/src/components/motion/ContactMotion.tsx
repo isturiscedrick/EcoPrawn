@@ -25,11 +25,7 @@ export function ContactMotion() {
           if (title) intro.from(title, { y: 44, rotateX: -7, transformPerspective: 1000, duration: .85 }, "-=.24");
           if (lead) intro.from(lead, { y: 18, duration: .6 }, "-=.42");
 
-          const atmosphere = hero.querySelector<HTMLElement>(".ep-hero-atmosphere");
-          if (atmosphere) gsap.to(atmosphere, {
-            yPercent: 18, scale: 1.08, ease: "none",
-            scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: .8 },
-          });
+          // Keep the hero atmosphere fixed to its section; no scroll parallax.
         }
 
         const section = root.querySelector<HTMLElement>("main section");
@@ -83,13 +79,10 @@ export function ContactMotion() {
           scrollTrigger: { trigger: footer, start: "top 92%", once: true },
         });
 
-        // Scroll-linked movement and staggered reveals for contact details.
+        // Contact details stay in their natural document position. Cards still
+        // reveal once as they enter view, without continuous scroll-linked drift.
         const details = root.querySelector<HTMLElement>("[data-contact-details]");
         if (details) {
-          gsap.to(details, {
-            y: -18, ease: "none",
-            scrollTrigger: { trigger: details, start: "top bottom", end: "bottom top", scrub: .8 },
-          });
           gsap.from(details.querySelectorAll<HTMLElement>("[data-contact-card]"), {
             y: 34, stagger: .12, duration: .72, ease: "power3.out",
             scrollTrigger: { trigger: details, start: "top 84%", once: true },
