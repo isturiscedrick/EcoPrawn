@@ -105,7 +105,7 @@ export function Sidebar({
 
     const desktop = window.matchMedia("(min-width: 1024px)");
     const onChange = (e: MediaQueryListEvent) => {
-      if (e.matches) setMobileOpen(false);
+      if (e.matches) onMobileClose();
     };
 
     window.addEventListener("keydown", onKeyDown);
@@ -115,7 +115,7 @@ export function Sidebar({
       desktop.removeEventListener("change", onChange);
       document.body.style.overflow = original;
     };
-  }, [mobileOpen, closeDrawer]);
+  }, [mobileOpen, closeDrawer, onMobileClose]);
 
 
   const [logoutError, setLogoutError] = useState("");
@@ -264,7 +264,7 @@ export function Sidebar({
             <button
               type="button"
               onClick={() => {
-                setMobileOpen(false);
+                onMobileClose();
                 onLogoutClick();
               }}
               className="flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-medium text-[rgba(11,46,51,0.68)] transition-colors duration-200 hover:bg-[rgba(232,98,58,0.12)] hover:text-[var(--coral)]"
