@@ -33,7 +33,7 @@ export function ContactPage() {
               <span> us.</span>
             </>
           }
-          lead="Questions about the EcoPrawn system or the thesis behind it? Send a note and we'll get back to you."
+          lead="Questions about EcoPrawn? Send us a message."
         />
 
         <section className={SECTION_PAD}>
