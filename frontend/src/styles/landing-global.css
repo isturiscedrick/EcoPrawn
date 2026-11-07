@@ -1575,3 +1575,243 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
     transform: none !important;
   }
 }
+
+
+/* ================================================================
+   Fluid content system — Landing, About and Contact
+   Keep content readable at narrow phones, tablets, laptops and
+   ultra-wide screens without changing the existing brand palette.
+================================================================ */
+
+/* Prevent long labels, card copy and embedded controls from widening pages. */
+.ep-landing,
+.ep-landing main,
+.ep-landing section,
+.ep-landing article,
+.ep-landing [class*="grid"] > *,
+.ep-landing [class*="flex"] > * {
+  min-width: 0;
+}
+
+.ep-landing img,
+.ep-landing video,
+.ep-landing svg {
+  max-width: 100%;
+}
+
+.ep-landing p,
+.ep-landing li,
+.ep-landing dd,
+.ep-landing h1,
+.ep-landing h2,
+.ep-landing h3,
+.ep-landing h4 {
+  overflow-wrap: anywhere;
+}
+
+.ep-landing p {
+  text-wrap: pretty;
+}
+
+.ep-landing h1,
+.ep-landing h2,
+.ep-landing h3 {
+  text-wrap: balance;
+}
+
+/* Make section containers and card surfaces use fluid spacing. */
+.ep-landing main > section > div,
+.ep-landing main > section > .mx-auto {
+  max-width: min(100% - 2rem, 1200px);
+}
+
+.ep-landing article,
+.ep-landing [data-contact-card],
+.ep-landing .ep-about-objective {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ep-landing article :where(p, li, dd, span),
+.ep-landing [data-contact-card] :where(dd, span) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Keep icons crisp and proportionate instead of letting flexbox squash them. */
+.ep-landing :where([class*="rounded-full"], [class*="rounded-xl"], [class*="rounded-2xl"]) > svg,
+.ep-landing :where([class*="IconChip"], [data-icon-chip]) svg {
+  flex: 0 0 auto;
+}
+
+.ep-landing svg {
+  flex-shrink: 0;
+}
+
+/* Forms and buttons should occupy the available card width when necessary. */
+.ep-landing input,
+.ep-landing textarea,
+.ep-landing select {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.ep-landing button,
+.ep-landing a {
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  .ep-landing main > section {
+    scroll-margin-top: 5rem;
+  }
+
+  .ep-landing main > section:not(#top) {
+    padding-top: clamp(2.75rem, 8vw, 4rem);
+    padding-bottom: clamp(2.75rem, 8vw, 4rem);
+  }
+
+  .ep-landing :where(h2) {
+    font-size: clamp(1.65rem, 5.8vw, 2.35rem);
+    line-height: 1.12;
+  }
+
+  .ep-landing :where(h3) {
+    font-size: clamp(1.05rem, 4vw, 1.35rem);
+    line-height: 1.2;
+  }
+
+  .ep-landing :where(p, li, dd) {
+    font-size: clamp(.9rem, 2.6vw, 1rem);
+    line-height: 1.65;
+  }
+
+  .ep-landing article {
+    padding: clamp(.9rem, 3.5vw, 1.25rem);
+    border-radius: 1.1rem;
+  }
+
+  .ep-landing :where([class*="IconChip"], [data-icon-chip]) {
+    width: clamp(2.5rem, 9vw, 3rem);
+    height: clamp(2.5rem, 9vw, 3rem);
+  }
+
+  .ep-about-page .ep-about-objective {
+    padding: clamp(1rem, 4vw, 1.5rem);
+  }
+
+  .ep-about-page .ep-about-objective p {
+    font-size: clamp(1rem, 3.6vw, 1.35rem);
+    line-height: 1.6;
+  }
+
+  .ep-contact-page [data-contact-card] {
+    gap: .75rem;
+    padding: .9rem;
+  }
+
+  .ep-contact-page [data-contact-card] dd {
+    font-size: clamp(.9rem, 2.8vw, 1rem);
+  }
+
+  .ep-contact-page form,
+  .ep-contact-page [role="status"] {
+    padding: clamp(1rem, 4vw, 1.5rem);
+  }
+
+  .ep-contact-page form :where(input, textarea) {
+    font-size: 16px;
+  }
+
+  /* Prevent horizontal overflow from long process/readout labels. */
+  .ep-landing .ep-lens-readout,
+  .ep-landing .ep-lens-readout > span,
+  .ep-landing .ep-lens-readout-0,
+  .ep-landing .ep-lens-readout-1,
+  .ep-landing .ep-lens-readout-2,
+  .ep-landing .ep-lens-readout-3,
+  .ep-landing .ep-lens-readout-4 {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 479px) {
+  .ep-landing main > section > div,
+  .ep-landing main > section > .mx-auto {
+    max-width: calc(100% - 1.5rem);
+  }
+
+  .ep-landing :where(h2) {
+    font-size: clamp(1.55rem, 7vw, 2rem);
+    letter-spacing: -.035em;
+  }
+
+  .ep-landing :where(h3) {
+    font-size: 1.05rem;
+  }
+
+  .ep-landing :where(p, li, dd) {
+    font-size: .9rem;
+    line-height: 1.6;
+  }
+
+  .ep-landing .ep-stats-panel > div {
+    min-height: 0;
+    padding: .7rem .55rem;
+  }
+
+  .ep-landing .ep-stats-panel > div > span:first-child {
+    font-size: clamp(1rem, 5vw, 1.35rem);
+    overflow-wrap: anywhere;
+  }
+
+  .ep-landing .ep-stats-panel > div > span:last-child {
+    font-size: .68rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .ep-landing :where(button, a)[class*="px-"] {
+    max-width: 100%;
+  }
+
+  .ep-about-page article h3,
+  .ep-contact-page article h3 {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .ep-landing main > section:not(#top) {
+    padding-top: clamp(3.5rem, 6vw, 5rem);
+    padding-bottom: clamp(3.5rem, 6vw, 5rem);
+  }
+
+  .ep-landing article {
+    padding: clamp(1.1rem, 2vw, 1.6rem);
+  }
+
+  .ep-landing :where(h2) {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  }
+}
+
+@media (min-width: 1600px) {
+  .ep-landing main > section > div,
+  .ep-landing main > section > .mx-auto {
+    max-width: 1280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-landing article,
+  .ep-landing button,
+  .ep-landing a,
+  .ep-landing svg {
+    scroll-behavior: auto;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
