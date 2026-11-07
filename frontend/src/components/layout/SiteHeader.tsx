@@ -208,6 +208,7 @@ export function SiteHeader({
           id="mobile-nav-panel"
           aria-label="Mobile sidebar navigation"
           aria-hidden={!mobileNavOpen}
+          inert={!mobileNavOpen}
           className={`fixed bottom-0 left-0 top-0 z-[70] flex w-[min(86vw,340px)] flex-col border-r shadow-2xl transition-transform duration-300 ease-out lg:hidden ${mobileNavOpen ? "translate-x-0" : "-translate-x-full"}`}
           style={{ backgroundColor: "var(--ep-bg)", borderColor: "var(--ep-line)", paddingTop: "env(safe-area-inset-top)" }}
         >
