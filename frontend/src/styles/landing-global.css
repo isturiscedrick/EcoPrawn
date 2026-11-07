@@ -2074,3 +2074,44 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
     background-position: center;
   }
 }
+
+/* Fix hero background being painted inside a constrained content-width box.
+   The hero section and every decorative layer must span the full viewport;
+   only the inner .ep-hero-layout should use the centered content max-width. */
+.ep-business-landing #top.ep-hero {
+  display: block;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-inline: calc(50% - 50vw) !important;
+  box-sizing: border-box;
+  background-color: var(--ep-bg);
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat;
+}
+
+.ep-business-landing #top.ep-hero > [data-hero="grid"],
+.ep-business-landing #top.ep-hero > .ep-hero-atmosphere,
+.ep-business-landing #top.ep-hero > [aria-hidden="true"] {
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.ep-business-landing #top.ep-hero > .ep-hero-layout {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+@media (max-width: 767px) {
+  .ep-business-landing #top.ep-hero {
+    background-position: center top;
+  }
+
+  .ep-business-landing #top.ep-hero > [data-hero="grid"] {
+    background-position: center top;
+    background-size: 22px 22px;
+  }
+}
