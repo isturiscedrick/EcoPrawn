@@ -18,7 +18,7 @@ const focusRing =
 function ThemeIcon({ dark }: { dark: boolean }) {
   // Show the current theme: sun in light mode, moon in dark mode.
   return dark ? (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ display: "block", transform: "none", rotate: "0deg", transformOrigin: "center" }}>
       <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
     </svg>
   ) : (
