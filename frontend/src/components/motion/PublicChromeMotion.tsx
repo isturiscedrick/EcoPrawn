@@ -92,20 +92,9 @@ export function PublicChromeMotion() {
           cleanups.push(() => themeButton.removeEventListener("click", onThemeClick));
         }
 
-        const menuToggle = header?.querySelector<HTMLElement>('button[aria-controls="mobile-nav-panel"]');
-        if (menuToggle) {
-          const icon = menuToggle.querySelector<SVGElement>("svg");
-          const onMenuClick = () => {
-            if (icon) animeRuns.push(animate(icon, {
-              rotate: [0, 90],
-              scale: [1, .82, 1],
-              duration: 380,
-              ease: "outBack(1.6)",
-            }));
-          };
-          menuToggle.addEventListener("click", onMenuClick);
-          cleanups.push(() => menuToggle.removeEventListener("click", onMenuClick));
-        }
+        // Keep the menu glyph upright when opening the drawer.
+        // The drawer itself animates; rotating the three-line menu icon made
+        // it appear tilted after the button was clicked.
 
         // Mobile navigation items enter in sequence whenever the menu opens.
         const menuButton = header?.querySelector<HTMLElement>('button[aria-controls="mobile-nav-panel"]');
