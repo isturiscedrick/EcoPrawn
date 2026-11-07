@@ -321,24 +321,8 @@ export function LandingMotion() {
         });
       }
 
-      // CINEMATIC HOME SCROLL CHOREOGRAPHY
-      // A slow atmosphere parallax and layered section reveals create depth
-      // without scaling the HeroLens SVG (which must remain crisp).
-      const heroAtmosphere = document.querySelector<HTMLElement>("#top .ep-hero-atmosphere");
-      if (heroAtmosphere) {
-        gsap.to(heroAtmosphere, {
-          yPercent: 28, scale: 1.12, ease: "none",
-          scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: 1 },
-        });
-      }
-
-      const heroEyebrow = document.querySelector<HTMLElement>("#top [data-hero=eyebrow]");
-      if (heroEyebrow) {
-        gsap.to(heroEyebrow, {
-          y: -18, autoAlpha: .35, ease: "none",
-          scrollTrigger: { trigger: "#top", start: "top top", end: "65% top", scrub: .7 },
-        });
-      }
+      // Keep the hero background and hero copy anchored during page scroll.
+      // No scroll-scrubbed transforms are applied to the hero atmosphere.
 
       // Scroll-linked section headings: masked upward reveal with a subtle
       // accent underline that draws as each section reaches the viewport.
@@ -441,18 +425,8 @@ export function LandingMotion() {
       // those triggers fire at the wrong time while the track is translated.
       // On smaller screens the list stays stacked and uses CSS-only presentation.
 
-      // Section-level atmosphere movement gives the page a continuous
-      // scroll narrative while leaving the HeroLens itself untouched.
-      ["[aria-label='EcoPrawn at a glance']", "#readings", "[data-band]"].forEach((selector) => {
-        const section = document.querySelector<HTMLElement>(selector);
-        const surface = section?.querySelector<HTMLElement>(":scope > div");
-        if (!section || !surface) return;
-        gsap.fromTo(surface,
-          { y: 18 },
-          { y: 0, ease: "none",
-            scrollTrigger: { trigger: section, start: "top bottom", end: "top 35%", scrub: .65 } }
-        );
-      });
+      // Keep every landing-page section surface in its natural position.
+      // One-time reveal effects remain, but section backgrounds/content do not drift.
 
       // Anime.js handles icon personality across all Home sections.
       // Each icon animates once as it enters view; hover listeners below can
