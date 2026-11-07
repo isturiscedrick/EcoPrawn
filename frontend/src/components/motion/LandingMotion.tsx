@@ -585,15 +585,8 @@ export function LandingMotion() {
 
     // MORE SCROLL EFFECTS
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // 1. Hero text drifts up and fades as you scroll past (scrubbed).
-      //    Targets the column wrapper; the intro animates its children.
-      const heroCopy = document.querySelector<HTMLElement>("#top [data-hero=text]");
-      if (heroCopy) gsap.to(heroCopy, {
-        y: -48, ease: "none",
-        scrollTrigger: {
-          trigger: "#top", start: "top top", end: "bottom top", scrub: true,
-        },
-      });
+      // Keep hero copy and all section surfaces stationary relative to their
+      // own layout while scrolling. Only one-time entrance reveals remain.
 
       // 2. Readings band heading + intro line rise in before the readings.
       gsap.from("#readings-title, #readings-title + p", {
