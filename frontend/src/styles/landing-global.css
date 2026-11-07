@@ -1797,21 +1797,29 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
   }
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1200px) {
   /*
-   * Browser zoom-out expands the CSS viewport. Keep content fluid at those
-   * very wide viewport widths instead of leaving it trapped at 1280px
-   * (which becomes a tiny centered strip on screen).
+   * Use the same broad, fluid content frame for every landing section.
+   * This keeps light sections, stats, process and the deep-blue readings
+   * band visually aligned when users zoom out to a wide CSS viewport.
    */
-  .ep-landing main > section > div,
-  .ep-landing main > section > .mx-auto {
-    width: min(92vw, 3200px);
-    max-width: min(92vw, 3200px);
+  .ep-business-landing main > section > div,
+  .ep-business-landing main > section > .mx-auto {
+    width: min(92vw, 3200px) !important;
+    max-width: min(92vw, 3200px) !important;
+    margin-inline: auto;
   }
 
   .ep-business-landing .ep-hero-layout {
-    width: min(92vw, 3200px);
-    max-width: min(92vw, 3200px);
+    width: min(92vw, 3200px) !important;
+    max-width: min(92vw, 3200px) !important;
+  }
+
+  .ep-business-landing #capabilities [data-business-card],
+  .ep-business-landing #process [data-step],
+  .ep-business-landing #readings [data-reading] {
+    min-width: 0;
+    height: 100%;
   }
 }
 
