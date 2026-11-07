@@ -155,6 +155,13 @@ const PATHS = {
       <path d="m12 5 7 7-7 7" />
     </>
   ),
+  menu: (
+    <>
+      <path d="M4 6h16" />
+      <path d="M4 12h16" />
+      <path d="M4 18h16" />
+    </>
+  ),
   "sidebar-toggle": (
     <>
       <rect x="3" y="4" width="18" height="16" rx="2" />
