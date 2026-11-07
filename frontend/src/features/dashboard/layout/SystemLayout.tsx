@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { Icon } from "@/components/ui/Icon";
 import { Sidebar } from "../components/Sidebar";
@@ -10,6 +10,7 @@ interface SystemLayoutProps {
 export function SystemLayout({ children }: SystemLayoutProps) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const closeMobileSidebar = useCallback(() => setMobileSidebarOpen(false), []);
   const [darkMode, setDarkMode] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ep-dashboard-theme") === "dark");
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
             collapsed={sidebarCollapsed}
             onToggle={() => setSidebarCollapsed((current) => !current)}
             mobileOpen={mobileSidebarOpen}
-            onMobileClose={() => setMobileSidebarOpen(false)}
+            onMobileClose={closeMobileSidebar}
           />
         </div>
 
