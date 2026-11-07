@@ -38,6 +38,13 @@ function NavIcon({ label, size = 15 }: { label: string; size?: number }) {
       </svg>
     );
   }
+  if (label === "Contact") {
+    return (
+      <svg {...common}>
+        <path d="M21.5 16.5v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 1.62 3.76 2 2 0 0 1 3.6 1.5h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L7.58 9.4a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7a2 2 0 0 1 1.74 2.12Z" />
+      </svg>
+    );
+  }
   return (
     <svg {...common}>
       <path d="M4 5h16v12H4z" />
@@ -83,10 +90,10 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
     <nav
       id="mobile-nav-panel"
       aria-label="Mobile navigation"
-      className={`px-3 pb-2 pt-3 sm:px-4 lg:hidden ${monochrome ? "ep-nav-monochrome" : ""}`}
+      className={`px-3 pb-3 pt-4 sm:px-4 lg:hidden ${monochrome ? "ep-nav-monochrome" : ""}`}
       style={monochrome ? { backgroundColor: darkMode ? "#000000" : "#ffffff", borderColor: darkMode ? "#ffffff" : "#000000", color: darkMode ? "#ffffff" : "#000000" } : undefined}
     >
-      <ul className="flex flex-col gap-1">
+      <ul className="flex flex-col gap-2">
         {LANDING_NAV_LINKS.map(([label, href]) => {
           const isActive = href === activeHref;
           return (
@@ -95,11 +102,11 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
                 to={href}
                 onClick={onLinkClick}
                 aria-current={isActive ? "page" : undefined}
-                className={`group flex min-h-12 items-center gap-3 rounded-xl px-3 py-2.5 text-base font-semibold transition-colors duration-200 ${focusRing} ${
+                className={`group flex min-h-14 items-center gap-3 rounded-2xl border border-transparent px-3 py-3 text-[15px] font-semibold transition-all duration-200 hover:translate-x-0.5 ${focusRing} ${
                   monochrome
                     ? "ep-nav-monochrome-link"
                     : isActive
-                      ? "bg-[var(--ep-accent)] text-[var(--ep-on-accent,#ffffff)]"
+                      ? "border-[var(--ep-accent)]/20 bg-[var(--ep-accent)] text-[var(--ep-on-accent,#ffffff)] shadow-sm"
                       : "text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]"
                 }`}
                 style={monochrome ? { backgroundColor: isActive ? (darkMode ? "#ffffff" : "#000000") : "transparent", color: isActive ? (darkMode ? "#000000" : "#ffffff") : (darkMode ? "#ffffff" : "#000000") } : undefined}
@@ -112,7 +119,7 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
                       ? ""
                       : isActive
                         ? "bg-white/20"
-                        : "bg-[var(--ep-tint)] text-[var(--ep-secondary)]"
+                        : "bg-[var(--ep-surface)] text-[var(--ep-primary)] shadow-[0_1px_5px_rgba(8,30,34,0.08)] group-hover:bg-[var(--ep-tint)]"
                   }`}
                 >
                   <NavIcon label={label} size={18} />
