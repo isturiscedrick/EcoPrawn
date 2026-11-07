@@ -155,7 +155,7 @@ export function LandingPage() {
           <div className="ep-hero-layout mx-auto grid w-full max-w-[1440px] grid-cols-1 justify-items-center gap-5 px-5 pb-10 pt-9 sm:gap-6 sm:px-8 sm:pb-12 sm:pt-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,.95fr)] lg:items-center lg:justify-items-stretch lg:gap-10 lg:px-12 lg:py-16">
             <div
               data-hero="text"
-              className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center lg:mx-0 lg:max-w-[660px] lg:text-left"
+              className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center lg:mx-auto lg:max-w-[660px]"
             >
               <div
                 data-hero="eyebrow"
@@ -174,7 +174,7 @@ export function LandingPage() {
               <h1
                 data-hero="headline"
                 aria-label="Smarter shrimp farming, always in range."
-                className="ep-font-display mx-auto max-w-[1000px] text-[clamp(40px,6.4vw,88px)] font-bold leading-[1.02] tracking-[-0.055em] lg:mx-0 lg:text-[clamp(48px,5.2vw,76px)]"
+                className="ep-font-display mx-auto max-w-[1000px] text-[clamp(40px,6.4vw,88px)] font-bold leading-[1.02] tracking-[-0.055em] lg:mx-auto lg:text-[clamp(48px,5.2vw,76px)]"
               >
                 <span className="block ep-hero-headline-primary">
                   <Words text="Smarter shrimp farming," />
@@ -186,7 +186,7 @@ export function LandingPage() {
 
               <p
                 data-hero="lead"
-                className="mx-auto mt-5 max-w-[650px] text-base leading-[1.75] text-[var(--ep-text-muted)] sm:text-lg lg:mx-0"
+                className="mx-auto mt-5 max-w-[650px] text-base leading-[1.75] text-[var(--ep-text-muted)] sm:text-lg"
               >
                 Bring water quality, automated feeding, and AI growth insights
                 together in one calm, connected view of your shrimp farm.
@@ -194,7 +194,7 @@ export function LandingPage() {
 
               <div
                 data-hero="cta"
-                className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start"
+                className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center"
               >
                 <AuthLink
                   className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-3 text-sm font-semibold text-[var(--ep-on-accent)] shadow-sm hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
@@ -225,7 +225,7 @@ export function LandingPage() {
             >
               <HeroLens />
             </div>
-            <p data-hero="signature" className="order-3 -mt-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ep-text-muted)] sm:text-xs lg:col-start-1 lg:row-start-2 lg:mt-[-1.5rem] lg:text-left">
+            <p data-hero="signature" className="order-3 -mt-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ep-text-muted)] sm:text-xs lg:col-start-1 lg:row-start-2 lg:mt-[-1.5rem]">
               Live insight · Automated care · Healthier harvests
             </p>
           </div>
