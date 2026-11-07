@@ -26,11 +26,7 @@ export function AboutMotion() {
           if (title) intro.from(title, { y: 42, rotateX: -8, transformPerspective: 1000, duration: .85 }, "-=.24");
           if (lead) intro.from(lead, { y: 18, duration: .6 }, "-=.42");
 
-          const atmosphere = hero.querySelector<HTMLElement>(".ep-hero-atmosphere");
-          if (atmosphere) gsap.to(atmosphere, {
-            yPercent: 18, scale: 1.08, ease: "none",
-            scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: .8 },
-          });
+          // Keep the hero atmosphere fixed to its section; no scroll parallax.
         }
 
         // Every section gets a heading sequence and a subtle scroll-linked depth shift.
@@ -47,11 +43,8 @@ export function AboutMotion() {
             tl.from(heading, { y: 28, rotateX: -4, transformPerspective: 900, duration: .7 }, "-=.12");
             if (copy?.length) tl.from(copy, { y: 14, duration: .5, stagger: .09 }, "-=.3");
           }
-          const inner = section.querySelector<HTMLElement>(":scope > div");
-          if (inner) gsap.fromTo(inner, { y: 12 }, {
-            y: 0, ease: "none",
-            scrollTrigger: { trigger: section, start: "top bottom", end: "top 30%", scrub: .7 },
-          });
+          // Section content and its background remain anchored during scrolling.
+          // Individual headings/cards still use one-time entrance reveals.
         });
 
         // Objective, system, scope and limitation cards use a clean
