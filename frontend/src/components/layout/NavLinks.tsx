@@ -114,15 +114,9 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
               >
                 <span
                   aria-hidden="true"
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-colors duration-200 ${
-                    monochrome
-                      ? ""
-                      : isActive
-                        ? "bg-white/20"
-                        : "bg-[var(--ep-surface)] text-[var(--ep-primary)] shadow-[0_1px_5px_rgba(8,30,34,0.08)] group-hover:bg-[var(--ep-tint)]"
-                  }`}
+                  className="flex h-6 w-6 shrink-0 items-center justify-center bg-transparent text-current"
                 >
-                  <NavIcon label={label} size={18} />
+                  <NavIcon label={label} size={19} />
                 </span>
                 {label}
                 {isActive && (
