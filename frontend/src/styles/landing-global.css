@@ -1815,3 +1815,46 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
     animation-iteration-count: 1 !important;
   }
 }
+
+
+/* ---------- Stable page backgrounds and horizontal overflow guard ----------
+   Scroll-driven decorative layers previously extended beyond the viewport.
+   Clip overflow at the document/page boundary so transformed artwork cannot
+   expose a white strip on the right, while keeping vertical scrolling native. */
+html:has(.ep-landing),
+body.ecoprawn-root:has(.ep-landing) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body.ecoprawn-root:has(.ep-landing) {
+  margin-inline: 0;
+}
+
+.ep-landing {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.ep-landing .ep-hero-atmosphere {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  transform: none !important;
+  will-change: auto;
+  background-attachment: scroll;
+}
+
+.ep-landing main > section {
+  position: relative;
+  max-width: 100%;
+}
+
+.ep-landing main > section > * {
+  min-width: 0;
+}
