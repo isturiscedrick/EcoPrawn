@@ -100,7 +100,7 @@ export function AboutPage() {
             backgroundPosition: "center",
           }}
         >
-          <div className="mx-auto w-full max-w-[1440px]">
+          <div className="mx-auto w-full max-w-[1200px]">
             <Reveal>
               <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
                 <div className={`${eyebrow} text-[var(--ep-on-deep-muted)]`}>
