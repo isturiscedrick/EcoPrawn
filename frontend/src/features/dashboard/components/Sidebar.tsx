@@ -16,12 +16,24 @@ interface SidebarProps {
 export function Sidebar({
   collapsed = false,
   onToggle = () => {},
+  mobileOpen = false,
+  onMobileClose = () => {},
 }: SidebarProps) {
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   });
   const activeView = (pathname.split("/dashboard/")[1] ??
     "overview") as DashboardView;
+
+  useEffect(() => { onMobileClose(); }, [pathname]);
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") onMobileClose(); };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener("keydown", closeOnEscape); };
+  }, [mobileOpen, onMobileClose]);
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === "undefined") return false;
     return window.localStorage.getItem("ep-dashboard-theme") === "dark";
@@ -106,9 +118,16 @@ export function Sidebar({
   }, [confirmingLogout]);
 
   return (
+    <>
+    {mobileOpen && <button type="button" aria-label="Close dashboard menu" onClick={onMobileClose} className="fixed inset-0 z-[60] bg-slate-950/55 backdrop-blur-sm lg:hidden" />}
     <aside
-      className={`relative flex h-full min-w-0 flex-row items-center gap-1.5 overflow-x-auto bg-white p-3 text-[var(--water-deep)] shadow-[1px_0_0_rgba(11,46,51,0.08)] lg:flex-col lg:items-stretch lg:gap-0 lg:overflow-x-visible ${collapsed ? "lg:p-0" : "lg:p-4"}`}
+      id="dashboard-sidebar"
+      className={`fixed inset-y-0 left-0 right-auto z-[70] flex h-dvh w-[min(86vw,300px)] min-w-0 flex-col items-stretch gap-0 overflow-y-auto overflow-x-hidden bg-[var(--ep-surface)] p-4 pt-[max(1rem,env(safe-area-inset-top))] text-[var(--water-deep)] shadow-2xl transition-transform duration-300 ease-out lg:sticky lg:top-0 lg:z-50 lg:h-screen lg:w-auto lg:translate-x-0 lg:overflow-y-auto lg:shadow-[1px_0_0_rgba(11,46,51,0.08)] ${mobileOpen ? "translate-x-0" : "-translate-x-full"} ${collapsed ? "lg:p-0" : "lg:p-4"}`}
     >
+      <div className="mb-4 flex w-full items-center justify-between border-b border-[var(--ep-line)] pb-4 lg:hidden">
+        <BrandMark size={30} showWordmark />
+        <button type="button" onClick={onMobileClose} aria-label="Close dashboard menu" className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-[var(--ep-accent-tint)]"><Icon name="x" size={20} /></button>
+      </div>
       {/* BRAND */}
       <div
         className={`group relative flex min-w-0 shrink-0 items-center gap-2 overflow-visible px-1 pb-4 mb-4 border-b border-[var(--ep-line)] lg:mb-4 lg:w-full lg:border-b lg:border-[rgba(11,46,51,0.12)] ${collapsed ? "lg:justify-center lg:px-0 lg:pb-6 lg:pt-3" : "lg:px-2.5 lg:pb-4 lg:pt-1"}`}
@@ -295,5 +314,6 @@ export function Sidebar({
         </div>
       )}
     </aside>
+    </>
   );
 }
