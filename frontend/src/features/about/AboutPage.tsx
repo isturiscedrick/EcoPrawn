@@ -120,39 +120,33 @@ export function AboutPage() {
               </div>
             </Reveal>
 
-            <div className="border-t border-white/20">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {features.map((feature, i) => (
-                <Reveal key={feature.index}>
-                  <article className="group relative grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-3 gap-y-3 border-b border-white/20 px-2 py-6 transition-colors duration-200 hover:bg-white/[0.07] sm:grid-cols-[3.5rem_0.8fr_1.2fr] sm:gap-x-8 sm:px-4 sm:py-8">
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 bg-[var(--ep-marker)] transition-transform duration-200 group-hover:scale-y-100"
-                    />
-
-                    <span
-                      aria-hidden="true"
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/35 bg-white/[0.08] text-[var(--ep-marker)]"
-                    >
-                      <Icon name={FEATURE_ICONS[i] ?? "layers"} size={18} />
-                    </span>
-
-                    <div>
-                      <div className="mb-1 hidden text-sm font-semibold uppercase tracking-wide text-[var(--ep-on-deep-muted)] sm:block">
-                        System Module
+                <Reveal key={feature.index} className="h-full">
+                  <article className="group h-full rounded-2xl border border-white/20 bg-white/[0.06] p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ep-marker)] hover:bg-white/[0.09]">
+                    <div className="mb-5 flex items-center gap-4">
+                      <span
+                        aria-hidden="true"
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/35 text-[var(--ep-marker)]"
+                      >
+                        <Icon name={FEATURE_ICONS[i] ?? "layers"} size={19} />
+                      </span>
+                      <div className="min-w-0">
+                        <div className="mb-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--ep-on-deep-muted)]">
+                          System module {String(i + 1).padStart(2, "0")}
+                        </div>
+                        <h3 className="ep-font-display text-xl font-semibold leading-tight transition-colors duration-200 group-hover:text-[var(--ep-marker)] sm:text-2xl">
+                          {feature.title}
+                        </h3>
                       </div>
-
-                      <h3 className="ep-font-display text-xl font-semibold leading-tight transition-colors duration-200 group-hover:text-[var(--ep-marker)] sm:text-2xl">
-                        {feature.title}
-                      </h3>
                     </div>
 
-                    <div className="col-start-2 col-span-1 flex min-w-0 flex-col gap-3 pl-0 sm:col-start-auto sm:col-span-1">
+                    <div className="flex min-w-0 flex-col gap-3 border-t border-white/15 pt-5">
                       {feature.points.map((point) => (
                         <div key={point.bold} className="flex min-w-0 gap-3">
-                          <span aria-hidden="true" className="text-[var(--ep-marker)]">
+                          <span aria-hidden="true" className="shrink-0 text-[var(--ep-marker)]">
                             ›
                           </span>
-
                           <span className="min-w-0 break-words text-sm leading-relaxed text-[var(--ep-on-deep-muted)] sm:text-base">
                             <b className="font-semibold text-[var(--ep-on-deep)]">{point.bold}</b>{" "}
                             {point.body}
