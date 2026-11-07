@@ -46,16 +46,9 @@ export function LandingMotion() {
         .from('[data-hero="stat"]', { y: 14, opacity: 0, duration: 0.6, stagger: 0.1 }, "-=0.8")
         .from('[data-hero="console"]', { opacity: 0, y: 32, duration: 1.1 }, 0.35);
 
-      /* ---------- GSAP: hero parallax (scrubbed). Wrappers own y, children own the intro. ---------- */
-      const heroScroll = { trigger: "#top", start: "top top", end: "bottom top", scrub: true };
-      gsap.to('[data-hero="text"]', { y: -40, opacity: 0.3, ease: "none", scrollTrigger: heroScroll });
-      gsap.to('[data-hero="parallax-console"]', { y: 36, ease: "none", scrollTrigger: heroScroll });
-      gsap.to('[data-hero="grid"]', { yPercent: 10, ease: "none", scrollTrigger: heroScroll });
-      gsap.to("[data-readings-bg]", {
-        yPercent: -8,
-        ease: "none",
-        scrollTrigger: { trigger: "#readings", start: "top bottom", end: "bottom top", scrub: true },
-      });
+      /* Decorative hero/section backgrounds stay anchored while scrolling.
+         Keep the entrance and reveal animations, but do not scrub background
+         layers or hero wrappers against the page scroll. */
 
       /* ---------- GSAP: heading reveals ---------- */
       q("[data-reveal]").forEach((el) => {
