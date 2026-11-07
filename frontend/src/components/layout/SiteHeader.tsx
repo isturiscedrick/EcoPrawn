@@ -154,14 +154,31 @@ export function SiteHeader({
         {/* Three columns (logo | nav | actions) so the nav is truly centered and can never overlap. */}
         <div
           className={`mx-auto min-h-[66px] max-w-[1440px] items-center gap-3 px-4 sm:gap-4 sm:px-8 lg:px-12 ${
-            showLinks ? "grid grid-cols-[auto_1fr] lg:grid-cols-[1fr_auto_1fr]" : "flex justify-between"
+            showLinks ? "grid grid-cols-[1fr_auto_1fr] lg:grid-cols-[1fr_auto_1fr]" : "flex justify-between"
           } ${isAuth ? "w-full" : ""}`}
         >
+          {showLinks && (
+            <button
+              ref={menuButtonRef}
+              type="button"
+              onClick={() => setMobileNavOpen(true)}
+              aria-expanded={mobileNavOpen}
+              aria-controls="mobile-nav-panel"
+              aria-label="Open menu"
+              className={`flex h-10 w-10 items-center justify-center justify-self-start rounded-full border lg:hidden ${focusRing}`}
+              style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
+            >
+              <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+            </button>
+          )}
+
           <Link
             to="/"
             aria-label="EcoPrawn home"
             activeOptions={{ exact: true }}
-            className={`flex shrink-0 items-center justify-self-start rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
+            className={`flex shrink-0 items-center justify-self-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing} ${showLinks ? "lg:justify-self-start" : ""}`}
           >
             <BrandMark size={36} />
           </Link>
@@ -216,22 +233,7 @@ export function SiteHeader({
               </>
             )}
 
-            {showLinks && (
-              <button
-                ref={menuButtonRef}
-                type="button"
-                onClick={() => setMobileNavOpen(true)}
-                aria-expanded={mobileNavOpen}
-                aria-controls="mobile-nav-panel"
-                aria-label="Open menu"
-                className={`flex h-10 w-10 items-center justify-center rounded-full border lg:hidden ${focusRing}`}
-                style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
-              >
-                <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                </svg>
-              </button>
-            )}
+
           </div>
         </div>
       </header>
@@ -306,16 +308,7 @@ export function SiteHeader({
               >
                 Log in
               </AuthLink>
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className={`mt-1 flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-medium text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] ${focusRing}`}
-              >
-                <span className="flex w-4 justify-center" aria-hidden="true">
-                  <ThemeIcon dark={darkMode} />
-                </span>
-                {darkMode ? "Light mode" : "Dark mode"}
-              </button>
+
             </div>
           </div>
         </div>
