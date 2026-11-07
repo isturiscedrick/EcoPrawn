@@ -1798,18 +1798,8 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
 }
 
 @media (min-width: 1200px) {
-  /*
-   * Every public landing section shares the hero's 1440px content frame,
-   * horizontal gutters and centered alignment at wide desktop/zoom levels.
-   */
-  .ep-business-landing main > section > div,
-  .ep-business-landing main > section > .mx-auto,
-  .ep-business-landing .ep-hero-layout {
-    width: 100% !important;
-    max-width: 1440px !important;
-    margin-inline: auto;
-  }
-
+  /* Limit only card sizing here; decorative section background layers must
+     remain free to span the full section width at every browser zoom level. */
   .ep-business-landing #capabilities [data-business-card],
   .ep-business-landing #process [data-step],
   .ep-business-landing #readings [data-reading] {
@@ -2080,9 +2070,9 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
    only the inner .ep-hero-layout should use the centered content max-width. */
 .ep-business-landing #top.ep-hero {
   display: block;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  margin-inline: calc(50% - 50vw) !important;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
   box-sizing: border-box;
   background-color: var(--ep-bg);
   background-size: cover, cover;
@@ -2183,5 +2173,46 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
   .ep-business-landing #capabilities > div:not([aria-hidden="true"]),
   .ep-business-landing #process > div:not([aria-hidden="true"]) {
     width: min(calc(100% - 6rem), 1440px);
+  }
+}
+
+
+/* At wide CSS viewports (including browser zoom-out), keep backgrounds
+   viewport-wide while constraining only the readable content containers. */
+.ep-business-landing,
+.ep-business-landing > main,
+.ep-business-landing main {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+.ep-business-landing main > section {
+  display: flow-root;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  box-sizing: border-box;
+}
+
+.ep-business-landing main > section > [aria-hidden="true"],
+.ep-business-landing main > section > [data-hero],
+.ep-business-landing main > section > [data-readings-bg] {
+  max-width: none;
+}
+
+.ep-business-landing main > section > [data-readings-bg] {
+  inset: 0;
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .ep-business-landing #top.ep-hero > .ep-hero-layout,
+  .ep-business-landing #readings > div:not([aria-hidden="true"]),
+  .ep-business-landing #capabilities > div:not([aria-hidden="true"]),
+  .ep-business-landing #process > div:not([aria-hidden="true"]) {
+    width: min(calc(100% - 6rem), 1440px);
+    max-width: 1440px;
+    margin-inline: auto;
   }
 }
