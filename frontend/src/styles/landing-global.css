@@ -1858,3 +1858,67 @@ body.ecoprawn-root:has(.ep-landing) {
 .ep-landing main > section > * {
   min-width: 0;
 }
+
+
+/* ---------- Hard viewport boundary + full-bleed deep-water bands ---------- */
+/*
+ * Keep translated/pinned children from widening the document. Apply the
+ * boundary to the app mount as well as the marketing page: clipping only the
+ * page element still leaves a horizontal strip when a sibling/portal paints
+ * outside it. Use hidden as the compatibility fallback for older engines.
+ */
+html:has(.ep-landing),
+body.ecoprawn-root:has(.ep-landing),
+body.ecoprawn-root:has(.ep-landing) #root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+  html:has(.ep-landing),
+  body.ecoprawn-root:has(.ep-landing),
+  body.ecoprawn-root:has(.ep-landing) #root {
+    overflow-x: clip;
+  }
+}
+
+body.ecoprawn-root:has(.ep-landing) {
+  position: relative;
+  background-color: var(--ep-bg, #f4f7f6);
+}
+
+.ep-landing,
+.ep-landing > main,
+.ep-landing main > section {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* The deep-water bands must paint edge-to-edge in both themes. */
+.ep-landing #readings,
+.ep-about-page #systems {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: 0;
+  overflow: hidden;
+  background-color: var(--ep-deep);
+  background-clip: border-box;
+}
+
+.ep-landing #readings > [data-readings-bg],
+.ep-about-page #systems > [aria-hidden="true"] {
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  transform: none !important;
+}
+
+.ep-landing #readings > *,
+.ep-about-page #systems > * {
+  min-width: 0;
+  max-width: 100%;
+}
