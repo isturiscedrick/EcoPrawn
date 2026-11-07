@@ -218,7 +218,7 @@ export function LandingPage() {
           aria-label="EcoPrawn at a glance"
           className="border-y border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-8 sm:px-8"
         >
-          <div className="ep-stats-panel mx-auto grid max-w-[1040px] grid-cols-2 gap-2.5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 shadow-[0_18px_45px_-30px_rgba(15,76,92,.42)] sm:grid-cols-4 sm:gap-3 sm:rounded-3xl sm:p-4">
+          <div className="ep-stats-panel mx-auto grid max-w-[1440px] grid-cols-2 gap-2.5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 shadow-[0_18px_45px_-30px_rgba(15,76,92,.42)] sm:grid-cols-4 sm:gap-3 sm:rounded-3xl sm:p-4">
             {STATS.map((stat) => (
               <div
                 key={stat.label}
@@ -251,7 +251,7 @@ export function LandingPage() {
             }}
           />
 
-          <div className="mx-auto w-full max-w-[1200px] px-5 py-20 sm:px-8 sm:py-24">
+          <div className="mx-auto w-full max-w-[1440px] px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-24">
             <div data-reveal="" className="max-w-[40rem]">
               <div className={`${eyebrow} text-[var(--ep-on-deep-muted)]`}>
                 <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-zone)]" />
@@ -368,7 +368,7 @@ export function LandingPage() {
           aria-labelledby="capabilities-title"
           className="ep-business-capabilities bg-[var(--ep-bg)] px-5 py-20 sm:px-8 sm:py-24"
         >
-          <div className="mx-auto max-w-[1200px]">
+          <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
             <div data-reveal="" className="mb-12 grid gap-5 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
               <div>
                 <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
