@@ -73,15 +73,8 @@ export function AboutMotion() {
           if (points.length) tl.from(points, { x: 16, duration: .42, stagger: .075 }, "-=.22");
         });
 
-        // Scroll-linked system markers draw as each row crosses the viewport.
-        root.querySelectorAll<HTMLElement>("#systems article").forEach((row) => {
-          const marker = row.querySelector<HTMLElement>(":scope > span");
-          if (marker) gsap.fromTo(marker,
-            { scaleY: 0, transformOrigin: "top center" },
-            { scaleY: 1, ease: "none",
-              scrollTrigger: { trigger: row, start: "top 82%", end: "bottom 42%", scrub: .55 } }
-          );
-        });
+        // System-section accent markers remain static during page scrolling.
+        // The decorative deep-water background is not driven by ScrollTrigger.
 
         // Scope list items reveal in reading order.
         root.querySelectorAll<HTMLElement>("#scope article").forEach((card) => {
