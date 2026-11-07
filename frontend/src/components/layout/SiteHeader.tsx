@@ -192,16 +192,44 @@ export function SiteHeader({
       </div>
 
       {showLinks && (
-        <div className={`grid overflow-hidden transition-all duration-300 ease-out lg:hidden ${mobileNavOpen ? "visible grid-rows-[1fr] opacity-100" : "invisible grid-rows-[0fr] opacity-0"}`}>
-          <div className="min-h-0">
-            <NavLinks variant="mobile" activeHref={navHref} onLinkClick={() => setMobileNavOpen(false)} />
-            <div className="flex gap-3 px-5 pb-5 lg:hidden">
-              <AuthLink className="flex-1 rounded-full border px-4 py-3 text-center text-sm font-semibold" style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>Log in</AuthLink>
-              <AuthLink mode="signup" className="flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold" style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}>Get started</AuthLink>
+        <>
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            tabIndex={mobileNavOpen ? 0 : -1}
+            onClick={() => setMobileNavOpen(false)}
+            className={`fixed inset-x-0 bottom-0 top-[66px] z-40 bg-slate-950/35 backdrop-blur-[2px] transition-opacity duration-300 lg:hidden ${mobileNavOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"}`}
+          />
+          <aside
+            id="mobile-nav-panel"
+            aria-label="Mobile sidebar navigation"
+            aria-hidden={!mobileNavOpen}
+            className={`fixed bottom-0 left-0 top-[66px] z-50 flex w-[min(84vw,320px)] flex-col border-r shadow-2xl transition-transform duration-300 ease-out lg:hidden ${mobileNavOpen ? "translate-x-0" : "-translate-x-full"}`}
+            style={{ backgroundColor: "var(--ep-bg)", borderColor: "var(--ep-line)" }}
+          >
+            <div className="flex items-center justify-between border-b px-5 py-4" style={{ borderColor: "var(--ep-line)" }}>
+              <span className="text-xs font-bold uppercase tracking-[0.18em]" style={{ color: "var(--ep-secondary)" }}>Navigation</span>
+              <button
+                type="button"
+                onClick={() => setMobileNavOpen(false)}
+                aria-label="Close menu"
+                className={`flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${focusRing}`}
+                style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
+              >
+                <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+              </button>
             </div>
-          </div>
-        </div>
+            <div className="flex-1 overflow-y-auto py-3">
+              <NavLinks variant="mobile" activeHref={navHref} onLinkClick={() => setMobileNavOpen(false)} />
+            </div>
+            <div className="flex flex-col gap-2 border-t p-5" style={{ borderColor: "var(--ep-line)" }}>
+              <AuthLink className="w-full rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors" style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}>Log in</AuthLink>
+              <AuthLink mode="signup" className="w-full rounded-full px-4 py-3 text-center text-sm font-semibold transition-transform hover:-translate-y-0.5" style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}>Get started</AuthLink>
+            </div>
+          </aside>
+        </>
       )}
+
     </header>
   );
 }
