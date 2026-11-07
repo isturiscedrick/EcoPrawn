@@ -79,3 +79,82 @@
     display: none !important;
   }
 }
+
+
+/* Keep compact header controls perfectly square and prevent label glyphs
+   from wrapping vertically on narrow and intermediate mobile widths. */
+#site-header .ep-mobile-menu-toggle,
+#site-header .ep-theme-toggle {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  line-height: 1;
+  writing-mode: horizontal-tb;
+}
+
+#site-header .ep-mobile-menu-toggle svg,
+#site-header .ep-theme-toggle svg {
+  display: block;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+}
+
+#site-header .ep-header-button-label {
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  writing-mode: horizontal-tb;
+}
+
+@media (max-width: 639px) {
+  #site-header .ep-mobile-menu-toggle,
+  #site-header .ep-theme-toggle {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    border-radius: 9999px;
+  }
+
+  #site-header .ep-header-button-label {
+    display: none !important;
+  }
+
+  #site-header > div {
+    grid-template-columns: 42px minmax(0, 1fr) 42px !important;
+    column-gap: clamp(6px, 2.5vw, 12px);
+    min-height: 66px;
+  }
+
+  #site-header > div > a[aria-label="EcoPrawn home"] {
+    justify-self: center;
+    max-width: 100%;
+  }
+
+  #site-header .ep-theme-toggle {
+    justify-self: end;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  #site-header .ep-mobile-menu-toggle,
+  #site-header .ep-theme-toggle {
+    height: 40px;
+    min-height: 40px;
+    padding-inline: 12px;
+    gap: 7px;
+  }
+
+  #site-header .ep-header-button-label {
+    display: inline !important;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #site-header .ep-mobile-menu-toggle,
+  #site-header .ep-theme-toggle {
+    transition: none !important;
+  }
+}
