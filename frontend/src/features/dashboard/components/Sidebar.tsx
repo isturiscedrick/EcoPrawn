@@ -8,25 +8,14 @@ import { SidebarNavItem } from "./SidebarNavItem";
 interface SidebarProps {
   collapsed?: boolean;
   onToggle?: () => void;
+  mobileOpen?: boolean;
+  onMobileClose?: () => void;
 }
 
 function MenuIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
       <path d="M4 7h16M4 12h16M4 17h16" />
-    </svg>
-  );
-}
-
-function ThemeIcon({ dark }: { dark: boolean }) {
-  return dark ? (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
-    </svg>
-  ) : (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
     </svg>
   );
 }
@@ -47,6 +36,8 @@ const drawerRowClass =
 export function Sidebar({
   collapsed = false,
   onToggle = () => {},
+  mobileOpen = false,
+  onMobileClose = () => {},
 }: SidebarProps) {
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
@@ -58,17 +49,11 @@ export function Sidebar({
       ? "Settings"
       : DASHBOARD_NAV_ITEMS.find((item) => item.view === activeView)?.label ?? "Dashboard";
 
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.localStorage.getItem("ep-dashboard-theme") === "dark";
-  });
   const [confirmingLogout, setConfirmingLogout] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
 
   const drawerRef = useRef<HTMLDivElement>(null);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const touchStartX = useRef<number | null>(null);
 
@@ -82,24 +67,8 @@ export function Sidebar({
 
   // Explicit closes (backdrop, X, swipe, Escape) hand focus back to the menu button.
   const closeDrawer = useCallback(() => {
-    setMobileOpen(false);
-    menuButtonRef.current?.focus({ preventScroll: true });
-  }, []);
-
-  useEffect(() => {
-    const syncTheme = () => {
-      const enabled = window.localStorage.getItem("ep-dashboard-theme") === "dark";
-      setDarkMode(enabled);
-      document.documentElement.classList.toggle("dark", enabled);
-    };
-    syncTheme();
-    window.addEventListener("ecoprawn-theme-change", syncTheme);
-    window.addEventListener("storage", syncTheme);
-    return () => {
-      window.removeEventListener("ecoprawn-theme-change", syncTheme);
-      window.removeEventListener("storage", syncTheme);
-    };
-  }, [pathname]);
+    onMobileClose();
+  }, [onMobileClose]);
 
   useEffect(() => {
     const savedName = window.localStorage.getItem("ep-profile-name");
@@ -110,8 +79,8 @@ export function Sidebar({
 
   // Any route change closes the mobile drawer.
   useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+    onMobileClose();
+  }, [pathname, onMobileClose]);
 
   // Drawer open: lock page scroll, focus the close button, trap Tab,
   // close on Escape, and close if the viewport grows to desktop width.
@@ -156,21 +125,6 @@ export function Sidebar({
     };
   }, [mobileOpen, closeDrawer]);
 
-  function toggleTheme() {
-    setDarkMode((current) => {
-      const next = !current;
-      window.localStorage.setItem(
-        "ep-dashboard-theme",
-        next ? "dark" : "light",
-      );
-      const root = document.documentElement;
-      root.classList.add("theme-transitioning");
-      window.setTimeout(() => root.classList.remove("theme-transitioning"), 480);
-      root.classList.toggle("dark", next);
-      window.dispatchEvent(new Event("ecoprawn-theme-change"));
-      return next;
-    });
-  }
 
   const [logoutError, setLogoutError] = useState("");
   const [loggingOut, setLoggingOut] = useState(false);
@@ -213,39 +167,6 @@ export function Sidebar({
 
   return (
     <>
-      {/* MOBILE TOP BAR (below lg) */}
-      <header className="flex items-center gap-2 border-b border-[rgba(11,46,51,0.12)] bg-white px-3 py-2 shadow-[0_6px_16px_-14px_rgba(11,46,51,0.5)] lg:hidden">
-        <button
-          ref={menuButtonRef}
-          type="button"
-          onClick={() => setMobileOpen(true)}
-          aria-label="Open navigation menu"
-          aria-expanded={mobileOpen}
-          aria-controls="dashboard-mobile-drawer"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-[var(--water-deep)] transition-colors hover:bg-[rgba(11,46,51,0.08)]"
-        >
-          <MenuIcon />
-        </button>
-        <Link
-          to="/dashboard"
-          aria-label="EcoPrawn overview"
-          className="flex shrink-0 items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coral)]"
-        >
-          <BrandMark size={26} showWordmark={false} />
-        </Link>
-        <span className="min-w-0 flex-1 truncate text-[15px] font-semibold text-[var(--water-deep)]">
-          {currentLabel}
-        </span>
-        <button
-          type="button"
-          onClick={toggleTheme}
-          aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-[rgba(11,46,51,0.68)] transition-colors hover:bg-[rgba(11,46,51,0.08)] hover:text-[var(--water-deep)]"
-        >
-          <ThemeIcon dark={darkMode} />
-        </button>
-      </header>
-
       {/* MOBILE DRAWER (below lg) */}
       <div className="lg:hidden">
         <div
@@ -348,12 +269,6 @@ export function Sidebar({
               </span>
               Settings
             </Link>
-            <button type="button" onClick={toggleTheme} className={drawerRowClass}>
-              <span className="flex w-4 justify-center" aria-hidden="true">
-                <ThemeIcon dark={darkMode} />
-              </span>
-              {darkMode ? "Light mode" : "Dark mode"}
-            </button>
             <button
               type="button"
               onClick={() => {
@@ -471,22 +386,6 @@ export function Sidebar({
             </span>
             <span className={collapsed ? "lg:hidden" : undefined}>Settings</span>
           </Link>
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
-            className={`flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[13.5px] font-medium text-[rgba(11,46,51,0.62)] transition-colors hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--water-deep)] ${collapsed ? "lg:mx-auto lg:h-11 lg:w-11 lg:justify-center lg:px-0 lg:py-0" : ""}`}
-          >
-            <span
-              aria-hidden="true"
-              className="flex w-4 justify-center text-base"
-            >
-              {darkMode ? "☀" : "◐"}
-            </span>
-            <span className={collapsed ? "lg:hidden" : undefined}>
-              {darkMode ? "Light mode" : "Dark mode"}
-            </span>
-          </button>
           <button
             type="button"
             onClick={onLogoutClick}
