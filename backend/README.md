@@ -31,6 +31,9 @@ The API listens on [http://localhost:4000](http://localhost:4000). Run the front
 | `/api/water` | GET, POST | Read or record telemetry, with optional `tankId` query filter |
 | `/api/hardware` | GET, POST | Read or record partial ESP32 temperature/distance measurements for an owned tank |
 | `/api/seed` | POST | Populate demo data when there are no tanks |
+| `/api/growth` | GET, POST, PATCH, DELETE | Owned sampling sessions, calibrated tray images, reviewed measurements and gated forecasts |
+
+Growth setup, the additive database migration, local Python service configuration, dataset collection and evaluation are documented in [the growth AI guide](../ai/README.md). The new sampling records do not overwrite legacy `VisionScan` data. Run `bun run test:growth` for isolated API/storage checks.
 
 Use `bun run db:seed` during local setup. The HTTP seed endpoint now requires an authenticated administrator and a same-origin POST.
 

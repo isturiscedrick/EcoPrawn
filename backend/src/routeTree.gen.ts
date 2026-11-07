@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ApiDashboardRouteImport } from './routes/api.dashboard'
 import { Route as ApiDemoRouteImport } from './routes/api.demo'
+import { Route as ApiGrowthRouteImport } from './routes/api.growth'
 import { Route as ApiHardwareRouteImport } from './routes/api.hardware'
 import { Route as ApiSeedRouteImport } from './routes/api.seed'
 import { Route as ApiTanksRouteImport } from './routes/api.tanks'
@@ -33,6 +34,11 @@ const ApiDashboardRoute = ApiDashboardRouteImport.update({
 const ApiDemoRoute = ApiDemoRouteImport.update({
   id: '/api/demo',
   path: '/api/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGrowthRoute = ApiGrowthRouteImport.update({
+  id: '/api/growth',
+  path: '/api/growth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiHardwareRoute = ApiHardwareRouteImport.update({
@@ -104,6 +110,7 @@ const ApiAuthGoogleCallbackRoute = ApiAuthGoogleCallbackRouteImport.update({
 export interface FileRoutesByFullPath {
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/demo': typeof ApiDemoRoute
+  '/api/growth': typeof ApiGrowthRoute
   '/api/hardware': typeof ApiHardwareRoute
   '/api/seed': typeof ApiSeedRoute
   '/api/tanks': typeof ApiTanksRouteWithChildren
@@ -121,6 +128,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/demo': typeof ApiDemoRoute
+  '/api/growth': typeof ApiGrowthRoute
   '/api/hardware': typeof ApiHardwareRoute
   '/api/seed': typeof ApiSeedRoute
   '/api/tanks': typeof ApiTanksRouteWithChildren
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/demo': typeof ApiDemoRoute
+  '/api/growth': typeof ApiGrowthRoute
   '/api/hardware': typeof ApiHardwareRoute
   '/api/seed': typeof ApiSeedRoute
   '/api/tanks': typeof ApiTanksRouteWithChildren
@@ -158,6 +167,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/api/dashboard'
     | '/api/demo'
+    | '/api/growth'
     | '/api/hardware'
     | '/api/seed'
     | '/api/tanks'
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
   to:
     | '/api/dashboard'
     | '/api/demo'
+    | '/api/growth'
     | '/api/hardware'
     | '/api/seed'
     | '/api/tanks'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/api/dashboard'
     | '/api/demo'
+    | '/api/growth'
     | '/api/hardware'
     | '/api/seed'
     | '/api/tanks'
@@ -210,6 +222,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   ApiDashboardRoute: typeof ApiDashboardRoute
   ApiDemoRoute: typeof ApiDemoRoute
+  ApiGrowthRoute: typeof ApiGrowthRoute
   ApiHardwareRoute: typeof ApiHardwareRoute
   ApiSeedRoute: typeof ApiSeedRoute
   ApiTanksRoute: typeof ApiTanksRouteWithChildren
@@ -237,6 +250,13 @@ declare module '@tanstack/react-router' {
       path: '/api/demo'
       fullPath: '/api/demo'
       preLoaderRoute: typeof ApiDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/growth': {
+      id: '/api/growth'
+      path: '/api/growth'
+      fullPath: '/api/growth'
+      preLoaderRoute: typeof ApiGrowthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/hardware': {
@@ -360,6 +380,7 @@ const ApiAuthGoogleRouteWithChildren = ApiAuthGoogleRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   ApiDashboardRoute: ApiDashboardRoute,
   ApiDemoRoute: ApiDemoRoute,
+  ApiGrowthRoute: ApiGrowthRoute,
   ApiHardwareRoute: ApiHardwareRoute,
   ApiSeedRoute: ApiSeedRoute,
   ApiTanksRoute: ApiTanksRouteWithChildren,

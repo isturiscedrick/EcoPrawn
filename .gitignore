@@ -16,3 +16,11 @@ dist
 .nitro
 .tanstack
 .vite
+
+# Private growth images, local models and Python environments
+.growth-storage/
+ai/.venv/
+__pycache__/
+*.pyc
+ai/artifacts/
+ai/data/

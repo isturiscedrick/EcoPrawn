@@ -4,6 +4,7 @@
   "private": true,
   "packageManager": "bun@1.4.0",
   "scripts": {
+    "test:growth-ui": "bun --no-env-file scripts/test-growth-ui.mjs",
     "dev": "bun --bun vite dev --port 3000",
     "build": "bun --bun vite build",
     "start": "bun --env-file=.env --env-file=.env.local .output/server/index.mjs",

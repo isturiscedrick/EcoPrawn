@@ -110,6 +110,8 @@ frontend/
 
 ## Current limitations
 
+The sampling-tray growth workflow now has a local Python analysis service, calibrated image review, independent measurement labels, private image storage, training/evaluation scripts and gated forecasting. See [growth AI setup and capture protocol](ai/README.md). Apply the additive growth schema before using it. No validated real-shrimp model is included; weight and forecasting remain unavailable until local data passes evaluation.
+
 The dashboard combines database-backed tanks with demo data and optional ESP32 USB testing:
 
 - Tanks, telemetry, scans, growth history, feeding schedules, biofloc metrics, effluent logs, and alerts load from PostgreSQL through `/api/dashboard`. Run `bun run db:seed` in `backend/` to import sample records into an empty database. Existing tanks prevent reseeding.

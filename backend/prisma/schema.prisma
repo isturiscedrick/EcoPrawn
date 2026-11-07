@@ -24,6 +24,7 @@ model Tank {
   telemetries     SensorTelemetry[]
   hardwareTelemetries HardwareTelemetry[]
   visionScans     VisionScan[]
+  growthSessions  GrowthSession[]
   feedSchedules   FeedSchedule[]
   effluentLogs    EffluentLog[]
   alerts          Alert[]
@@ -69,6 +70,41 @@ model VisionScan {
   recordedAt    DateTime @default(now())
 
   @@index([tankId, recordedAt])
+}
+
+// New measurements never overwrite legacy/demo VisionScan records.
+model GrowthSession {
+  id            String @id @default(cuid())
+  tankId        String
+  tank          Tank @relation(fields: [tankId], references: [id], onDelete: Restrict)
+  batch         String
+  sampledAt     DateTime
+  stockedAt     DateTime
+  setupId       String
+  calibration   Json
+  invalidatedAt DateTime?
+  createdAt     DateTime @default(now())
+  measurements  GrowthMeasurement[]
+  @@index([tankId, batch, sampledAt])
+}
+
+model GrowthMeasurement {
+  id                String @id @default(cuid())
+  sessionId         String
+  session           GrowthSession @relation(fields: [sessionId], references: [id], onDelete: Restrict)
+  specimenId        String
+  imageHash         String
+  imageKey          String @unique
+  capturedAt        DateTime
+  status            String @default("review")
+  original          Json
+  correction        Json?
+  manualLengthMm    Float?
+  measuredWeightG   Float?
+  approvedAt        DateTime?
+  createdAt         DateTime @default(now())
+  @@unique([sessionId, imageHash])
+  @@index([sessionId, specimenId])
 }
 
 model FeedSchedule {

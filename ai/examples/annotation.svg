@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260">
+  <rect width="800" height="260" fill="#10282a"/>
+  <text x="25" y="35" fill="white" font-size="20">Annotation convention only: schematic, not a real shrimp</text>
+  <path d="M170 120 Q290 65 400 125 Q510 200 630 135 Q500 235 380 170 Q270 110 170 120" fill="#dfc9b2"/>
+  <path d="M170 120 Q100 50 60 85 M170 120 Q100 90 65 120" fill="none" stroke="#dfc9b2" stroke-width="3"/>
+  <path d="M170 120 Q290 85 390 148 Q510 215 630 135" fill="none" stroke="#40ffab" stroke-width="4"/>
+  <circle cx="170" cy="120" r="6" fill="#ff784f"/><circle cx="630" cy="135" r="6" fill="#ff784f"/>
+  <text x="105" y="190" fill="white" font-size="17">Rostrum tip</text>
+  <text x="620" y="185" fill="white" font-size="17">Telson tip</text>
+  <text x="20" y="235" fill="white" font-size="16">Exclude antennae. Follow the curved body centerline. Verify endpoints on every photograph.</text>
+</svg>
