@@ -236,4 +236,6 @@ export function SiteHeader({
         </aside>
       </>
     )}
+    </>
   );
+}
