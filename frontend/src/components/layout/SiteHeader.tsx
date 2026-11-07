@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { BrandMark } from "./BrandMark";
 import { NavLinks } from "./NavLinks";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
-import "./site-header.css";
+import { Icon } from "@/components/ui/Icon";
 
 interface SiteHeaderProps {
   showLinks?: boolean;
@@ -14,6 +14,18 @@ interface SiteHeaderProps {
 
 const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
+
+function ThemeIcon({ dark }: { dark: boolean }) {
+  return dark ? (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+    </svg>
+  ) : (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
+    </svg>
+  );
+}
 
 export function SiteHeader({
   showLinks = true,
@@ -27,10 +39,20 @@ export function SiteHeader({
   const navHref = pathname === "/login" ? "/" : pathname;
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === "undefined") return false;
     return window.localStorage.getItem("ep-dashboard-theme") === "dark";
   });
+
+  // Explicit closes (backdrop, X, swipe, Escape) hand focus back to the menu button.
+  const closeDrawer = useCallback(() => {
+    setMobileNavOpen(false);
+    menuButtonRef.current?.focus({ preventScroll: true });
+  }, []);
 
   useEffect(() => {
     const syncTheme = () => {
@@ -71,21 +93,48 @@ export function SiteHeader({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Drawer open: lock page scroll, focus the close button, trap Tab,
+  // close on Escape, and close if the viewport grows to desktop width.
   useEffect(() => {
     if (!mobileNavOpen) return;
     const original = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = original; };
-  }, [mobileNavOpen]);
+    closeButtonRef.current?.focus({ preventScroll: true });
 
-  useEffect(() => {
-    if (!mobileNavOpen) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMobileNavOpen(false);
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        closeDrawer();
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = drawerRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])',
+      );
+      if (!focusable || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const onChange = (event: MediaQueryListEvent) => {
+      if (event.matches) setMobileNavOpen(false);
     };
+
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [mobileNavOpen]);
+    desktop.addEventListener("change", onChange);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      desktop.removeEventListener("change", onChange);
+      document.body.style.overflow = original;
+    };
+  }, [mobileNavOpen, closeDrawer]);
 
   // Every public page sits inside `.ep-landing`, so the header follows the landing tokens.
   const headerSurface = `color-mix(in srgb, var(--ep-bg) ${scrolled ? 94 : 82}%, transparent)`;
@@ -93,152 +142,184 @@ export function SiteHeader({
 
   return (
     <>
-    <header
-      id="site-header"
-      className="sticky top-0 z-50 border-b transition-all duration-300 backdrop-blur-2xl"
-      style={{
-        backgroundColor: headerSurface,
-        borderColor: headerBorder,
-        boxShadow: scrolled ? "0 10px 28px -24px rgba(0,0,0,.28)" : "none",
-      }}
-    >
-      {/* Three columns (logo | nav | actions) so the nav is truly centered and can never overlap. */}
-      <div
-        className={`mx-auto min-h-[66px] max-w-[1440px] items-center gap-3 px-4 sm:gap-4 sm:px-8 lg:px-12 ${
-          showLinks ? "grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr]" : "flex justify-between"
-        } ${isAuth ? "w-full" : ""}`}
+      <header
+        id="site-header"
+        className="sticky top-0 z-50 border-b transition-all duration-300 backdrop-blur-2xl"
+        style={{
+          backgroundColor: headerSurface,
+          borderColor: headerBorder,
+          boxShadow: scrolled ? "0 10px 28px -24px rgba(0,0,0,.28)" : "none",
+        }}
       >
-        {showLinks && (
-          <button
-            type="button"
-            onClick={() => setMobileNavOpen((open) => !open)}
-            aria-expanded={mobileNavOpen}
-            aria-controls="mobile-nav-panel"
-            aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-            className={`ep-mobile-menu-toggle inline-flex h-10 w-10 min-w-10 shrink-0 items-center justify-center gap-1.5 rounded-full border px-0 text-[11px] font-semibold leading-none whitespace-nowrap transition-[background-color,border-color,color,transform,box-shadow] duration-200 active:scale-95 lg:hidden sm:w-auto sm:min-w-10 sm:px-2.5 ${focusRing}`}
-            style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
-          >
-            <svg className="shrink-0" width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              {mobileNavOpen ? <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /> : <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
-            </svg>
-          </button>
-        )}
-
-        <Link
-          to="/"
-          aria-label="EcoPrawn home"
-          activeOptions={{ exact: true }}
-          className={`flex shrink-0 items-center justify-self-start rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
+        {/* Three columns (logo | nav | actions) so the nav is truly centered and can never overlap. */}
+        <div
+          className={`mx-auto min-h-[66px] max-w-[1440px] items-center gap-3 px-4 sm:gap-4 sm:px-8 lg:px-12 ${
+            showLinks ? "grid grid-cols-[auto_1fr] lg:grid-cols-[1fr_auto_1fr]" : "flex justify-between"
+          } ${isAuth ? "w-full" : ""}`}
         >
-          <BrandMark size={36} />
-        </Link>
+          <Link
+            to="/"
+            aria-label="EcoPrawn home"
+            activeOptions={{ exact: true }}
+            className={`flex shrink-0 items-center justify-self-start rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
+          >
+            <BrandMark size={36} />
+          </Link>
 
-        {showLinks && (
-          <div className="hidden justify-self-center lg:block">
-            <NavLinks variant="desktop" activeHref={navHref} />
-          </div>
-        )}
-
-        <div className="flex shrink-0 items-center justify-self-end gap-1.5 sm:gap-3">
-          {!isAuth && (
-            <button
-              type="button"
-              onClick={toggleTheme}
-              role="switch"
-              aria-checked={darkMode}
-              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              className={`ep-theme-toggle inline-flex h-10 w-10 min-w-10 shrink-0 items-center justify-center gap-1.5 rounded-full border px-0 text-[11px] font-semibold leading-none whitespace-nowrap transition-[background-color,border-color,color,transform,box-shadow] duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 sm:w-auto sm:px-2.5 ${focusRing}`}
-              style={{
-                color: "var(--ep-primary)",
-                borderColor: "var(--ep-line)",
-                backgroundColor: "var(--ep-surface)",
-              }}
-            >
-              {darkMode ? (
-                <svg className="shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
-                </svg>
-              ) : (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
-                </svg>
-              )}
-              <span className="ep-header-button-label hidden sm:inline">{darkMode ? "Light" : "Dark"}</span>
-            </button>
+          {showLinks && (
+            <div className="hidden justify-self-center lg:block">
+              <NavLinks variant="desktop" activeHref={navHref} />
+            </div>
           )}
 
-          {isAuth ? (
-            <Link to="/" className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition-all hover:-translate-y-0.5 ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>
-              <span aria-hidden="true">←</span> Back to home
-            </Link>
-          ) : (
-            <>
+          <div className="flex shrink-0 items-center justify-self-end gap-1.5 sm:gap-3">
+            {!isAuth && (
+              <button
+                type="button"
+                onClick={toggleTheme}
+                role="switch"
+                aria-checked={darkMode}
+                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+                title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+                className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
+                style={{
+                  color: "var(--ep-primary)",
+                  borderColor: "var(--ep-line)",
+                  backgroundColor: "var(--ep-surface)",
+                }}
+              >
+                <ThemeIcon dark={darkMode} />
+              </button>
+            )}
+
+            {isAuth ? (
+              <Link to="/" className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition-all hover:-translate-y-0.5 ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>
+                <span aria-hidden="true">←</span> Back to home
+              </Link>
+            ) : (
+              <>
+                <AuthLink
+                  className={`hidden h-10 items-center rounded-full border px-5 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex ${focusRing}`}
+                  style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}
+                >
+                  Log in
+                </AuthLink>
+                <AuthLink
+                  mode="signup"
+                  aria-label="Get started"
+                  className={`hidden h-10 min-w-10 items-center justify-center gap-2 rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex lg:px-5 ${focusRing}`}
+                  style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}
+                >
+                  <span className="hidden lg:inline">Get started</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
+                </AuthLink>
+              </>
+            )}
+
+            {showLinks && (
+              <button
+                ref={menuButtonRef}
+                type="button"
+                onClick={() => setMobileNavOpen(true)}
+                aria-expanded={mobileNavOpen}
+                aria-controls="mobile-nav-panel"
+                aria-label="Open menu"
+                className={`flex h-10 w-10 items-center justify-center rounded-full border lg:hidden ${focusRing}`}
+                style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
+              >
+                <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              </button>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {/* MOBILE DRAWER: a sibling of the header (not a child), because the header's
+          backdrop-blur would otherwise trap this fixed layer inside the header box. */}
+      {showLinks && (
+        <div className="lg:hidden">
+          <div
+            aria-hidden="true"
+            onClick={closeDrawer}
+            className={`fixed inset-0 z-[80] bg-[rgba(8,30,34,0.55)] backdrop-blur-sm transition-opacity duration-300 dark:bg-[rgba(0,0,0,0.72)] ${
+              mobileNavOpen ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
+          />
+          <div
+            ref={drawerRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
+            inert={!mobileNavOpen}
+            onTouchStart={(event) => {
+              touchStartX.current = event.touches[0].clientX;
+            }}
+            onTouchEnd={(event) => {
+              const start = touchStartX.current;
+              touchStartX.current = null;
+              if (start !== null && event.changedTouches[0].clientX - start < -60) closeDrawer();
+            }}
+            className={`fixed inset-y-0 left-0 z-[90] flex w-[min(86vw,320px)] flex-col border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] transition-transform duration-300 ease-out ${
+              mobileNavOpen
+                ? "translate-x-0 shadow-[8px_0_40px_-12px_rgba(8,30,34,0.45)]"
+                : "-translate-x-full shadow-none"
+            }`}
+          >
+            {/* Drawer header */}
+            <div className="flex shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-4 py-3">
+              <BrandMark size={30} logoColor="#d94416" logoTextColor="var(--ep-secondary)" />
+              <button
+                ref={closeButtonRef}
+                type="button"
+                onClick={closeDrawer}
+                aria-label="Close menu"
+                className={`flex h-11 w-11 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] ${focusRing}`}
+              >
+                <Icon name="x" size={20} strokeWidth={2} />
+              </button>
+            </div>
+
+            {/* Navigation */}
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-3">
+              <div className="px-6 pb-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">
+                Navigation
+              </div>
+              <NavLinks variant="mobile" activeHref={navHref} onLinkClick={() => setMobileNavOpen(false)} />
+            </div>
+
+            {/* Account + theme */}
+            <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
               <AuthLink
-                className={`ep-header-desktop-auth hidden h-10 items-center rounded-full border px-5 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex ${focusRing}`}
+                mode="signup"
+                onClick={() => setMobileNavOpen(false)}
+                className={`flex min-h-12 w-full items-center justify-center rounded-xl px-4 py-3 text-center text-sm font-semibold ${focusRing}`}
+                style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-on-accent, #ffffff)" }}
+              >
+                Get started
+              </AuthLink>
+              <AuthLink
+                onClick={() => setMobileNavOpen(false)}
+                className={`flex min-h-12 w-full items-center justify-center rounded-xl border px-4 py-3 text-center text-sm font-semibold ${focusRing}`}
                 style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}
               >
                 Log in
               </AuthLink>
-              <AuthLink
-                mode="signup"
-                aria-label="Get started"
-                className={`ep-header-desktop-auth hidden h-10 min-w-10 items-center justify-center gap-2 rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex lg:px-5 ${focusRing}`}
-                style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className={`mt-1 flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-medium text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] ${focusRing}`}
               >
-                <span className="hidden lg:inline">Get started</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
-              </AuthLink>
-            </>
-          )}
-
-        </div>
-      </div>
-
-    </header>
-
-    {showLinks && (
-      <>
-        <button
-          type="button"
-          aria-label="Close navigation menu"
-          tabIndex={mobileNavOpen ? 0 : -1}
-          onClick={() => setMobileNavOpen(false)}
-          className={`fixed inset-0 z-[60] bg-slate-950/40 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileNavOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"}`}
-        />
-        <aside
-          id="mobile-nav-panel"
-          aria-label="Mobile sidebar navigation"
-          aria-hidden={!mobileNavOpen}
-          inert={!mobileNavOpen}
-          className={`fixed bottom-0 left-0 top-0 z-[70] flex w-[min(86vw,340px)] flex-col border-r shadow-2xl transition-transform duration-300 ease-out lg:hidden ${mobileNavOpen ? "translate-x-0" : "-translate-x-full"}`}
-          style={{ backgroundColor: "var(--ep-bg)", borderColor: "var(--ep-line)", paddingTop: "env(safe-area-inset-top)" }}
-        >
-          <div className="flex min-h-[66px] items-center justify-between border-b px-5 py-4" style={{ borderColor: "var(--ep-line)" }}>
-            <div className="flex items-center gap-3">
-              <BrandMark size={30} />
-              <span className="text-xs font-bold uppercase tracking-[0.16em]" style={{ color: "var(--ep-secondary)" }}>Menu</span>
+                <span className="flex w-4 justify-center" aria-hidden="true">
+                  <ThemeIcon dark={darkMode} />
+                </span>
+                {darkMode ? "Light mode" : "Dark mode"}
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={() => setMobileNavOpen(false)}
-              aria-label="Close menu"
-              className={`flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${focusRing}`}
-              style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
-            >
-              <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
-            </button>
           </div>
-          <div className="flex-1 overflow-y-auto py-3">
-            <NavLinks variant="mobile" activeHref={navHref} onLinkClick={() => setMobileNavOpen(false)} />
-          </div>
-          <div className="flex flex-col gap-2 border-t p-5" style={{ borderColor: "var(--ep-line)", paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}>
-            <AuthLink className="w-full rounded-full border px-4 py-3 text-center text-sm font-semibold transition-colors" style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}>Log in</AuthLink>
-            <AuthLink mode="signup" className="w-full rounded-full px-4 py-3 text-center text-sm font-semibold transition-transform hover:-translate-y-0.5" style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}>Get started</AuthLink>
-          </div>
-        </aside>
-      </>
-    )}
+        </div>
+      )}
     </>
   );
 }
