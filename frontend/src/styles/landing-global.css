@@ -2216,3 +2216,21 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
     margin-inline: auto;
   }
 }
+
+
+/* About page: keep every section's readable content in the same centered
+   frame. The full-bleed Systems background remains edge-to-edge; only its
+   heading and cards share the narrower frame used by Objectives and Scope. */
+.ep-about-page main > section > .ep-about-content-frame {
+  width: min(calc(100% - 2rem), 1200px) !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
+}
+
+@media (max-width: 639px) {
+  .ep-about-page main > section > .ep-about-content-frame {
+    width: 100% !important;
+  }
+}
