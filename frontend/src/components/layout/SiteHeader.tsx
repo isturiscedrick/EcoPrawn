@@ -121,7 +121,6 @@ export function SiteHeader({
             <svg className="shrink-0" width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               {mobileNavOpen ? <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /> : <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
             </svg>
-            <span className="ep-header-button-label hidden sm:inline">{mobileNavOpen ? "Close" : "Menu"}</span>
           </button>
         )}
 
