@@ -3,6 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { BrandMark } from "./BrandMark";
 import { NavLinks } from "./NavLinks";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
+import "./site-header.css";
 
 interface SiteHeaderProps {
   showLinks?: boolean;
@@ -114,13 +115,13 @@ export function SiteHeader({
             aria-expanded={mobileNavOpen}
             aria-controls="mobile-nav-panel"
             aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-            className={`inline-flex h-10 items-center justify-center gap-1.5 rounded-full border px-2.5 text-[11px] font-semibold lg:hidden ${focusRing}`}
+            className={`ep-mobile-menu-toggle inline-flex h-10 items-center justify-center gap-1.5 rounded-full border px-2.5 text-[11px] font-semibold lg:hidden ${focusRing}`}
             style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
           >
             <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               {mobileNavOpen ? <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /> : <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
             </svg>
-            <span>{mobileNavOpen ? "Close" : "Menu"}</span>
+            <span className="ep-header-button-label">{mobileNavOpen ? "Close" : "Menu"}</span>
           </button>
         )}
 
@@ -148,7 +149,7 @@ export function SiteHeader({
               aria-checked={darkMode}
               aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
               title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              className={`inline-flex h-10 items-center justify-center gap-1.5 rounded-full border px-2.5 text-[11px] font-semibold transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
+              className={`ep-theme-toggle inline-flex h-10 items-center justify-center gap-1.5 rounded-full border px-2.5 text-[11px] font-semibold transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
               style={{
                 color: "var(--ep-primary)",
                 borderColor: "var(--ep-line)",
@@ -164,7 +165,7 @@ export function SiteHeader({
                   <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
                 </svg>
               )}
-              <span>{darkMode ? "Light" : "Dark"}</span>
+              <span className="ep-header-button-label">{darkMode ? "Light" : "Dark"}</span>
             </button>
           )}
 
@@ -175,7 +176,7 @@ export function SiteHeader({
           ) : (
             <>
               <AuthLink
-                className={`hidden h-10 items-center rounded-full border px-5 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex ${focusRing}`}
+                className={`ep-header-desktop-auth hidden h-10 items-center rounded-full border px-5 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex ${focusRing}`}
                 style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}
               >
                 Log in
@@ -183,7 +184,7 @@ export function SiteHeader({
               <AuthLink
                 mode="signup"
                 aria-label="Get started"
-                className={`hidden h-10 min-w-10 items-center justify-center gap-2 rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex lg:px-5 ${focusRing}`}
+                className={`ep-header-desktop-auth hidden h-10 min-w-10 items-center justify-center gap-2 rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex lg:px-5 ${focusRing}`}
                 style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}
               >
                 <span className="hidden lg:inline">Get started</span>
