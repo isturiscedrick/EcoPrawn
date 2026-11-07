@@ -1798,9 +1798,20 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
 }
 
 @media (min-width: 1600px) {
+  /*
+   * Browser zoom-out expands the CSS viewport. Keep content fluid at those
+   * very wide viewport widths instead of leaving it trapped at 1280px
+   * (which becomes a tiny centered strip on screen).
+   */
   .ep-landing main > section > div,
   .ep-landing main > section > .mx-auto {
-    max-width: 1280px;
+    width: min(92vw, 3200px);
+    max-width: min(92vw, 3200px);
+  }
+
+  .ep-business-landing .ep-hero-layout {
+    width: min(92vw, 3200px);
+    max-width: min(92vw, 3200px);
   }
 }
 
