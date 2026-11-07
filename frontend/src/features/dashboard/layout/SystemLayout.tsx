@@ -27,8 +27,8 @@ export function SystemLayout({ children }: SystemLayoutProps) {
 
         {/* MAIN */}
         <main className="min-w-0 px-3 pb-16 pt-3 sm:px-5 sm:pt-5 md:px-8 lg:px-10 lg:pt-8">
-          <div className="mb-5 flex min-h-14 items-center justify-between gap-3 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 shadow-sm lg:hidden">
-            <button type="button" onClick={() => setMobileSidebarOpen(true)} aria-label="Open dashboard menu" aria-expanded={mobileSidebarOpen} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-accent-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
+          <div className="mb-5 flex min-h-14 items-center justify-between gap-3 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 shadow-sm">
+            <button type="button" onClick={() => { if (window.matchMedia("(min-width: 1024px)").matches) setSidebarCollapsed((current) => !current); else setMobileSidebarOpen(true); }} aria-label="Open dashboard sidebar" aria-expanded={mobileSidebarOpen} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-accent-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
               <Icon name="menu" size={21} />
             </button>
             <BrandMark size={28} showWordmark />
