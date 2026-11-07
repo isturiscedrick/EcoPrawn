@@ -36,3 +36,128 @@ html.dark .dashboard-shell {
 }
 
 
+
+
+/* Responsive dashboard safety pass: prevent dense monitoring content from
+   overflowing while preserving the existing desktop navigation layout. */
+.dashboard-shell,
+.dashboard-shell main,
+.dashboard-shell main > div,
+.dashboard-shell main section,
+.dashboard-shell main article {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main :is(h1,h2,h3,h4,p,span,dd,dt,label,button,a) {
+  overflow-wrap: anywhere;
+}
+
+.dashboard-shell main :is(input,textarea,select) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main svg {
+  max-width: 100%;
+}
+
+.dashboard-shell main :is(.grid,.flex) > * {
+  min-width: 0;
+}
+
+.dashboard-shell [role="tablist"] {
+  max-width: 100%;
+  scrollbar-width: thin;
+  overscroll-behavior-inline: contain;
+}
+
+.dashboard-shell [role="tablist"] > [role="tab"] {
+  flex: 0 0 auto;
+  min-height: 42px;
+  white-space: nowrap;
+}
+
+.dashboard-shell main table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dashboard-shell main :is(.overflow-x-auto,[data-scroll-container]) {
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dashboard-shell main :is(button,a) {
+  touch-action: manipulation;
+}
+
+@media (max-width: 767px) {
+  .dashboard-shell main {
+    padding: 1rem .875rem 5rem !important;
+  }
+
+  .dashboard-shell main > div {
+    width: 100%;
+  }
+
+  .dashboard-shell main :is(h1) {
+    font-size: clamp(1.45rem, 6vw, 1.8rem);
+    line-height: 1.2;
+    letter-spacing: -.025em;
+  }
+
+  .dashboard-shell main :is(h2) {
+    font-size: clamp(1.15rem, 4.5vw, 1.45rem);
+    line-height: 1.25;
+  }
+
+  .dashboard-shell main :is(.grid) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-shell main :is(.flex.justify-between) {
+    align-items: flex-start;
+  }
+
+  .dashboard-shell main :is(button,a) {
+    max-width: 100%;
+  }
+
+  .dashboard-shell main :is(input,select,textarea) {
+    font-size: 16px;
+  }
+
+  .dashboard-shell main svg[viewBox="0 0 560 200"] {
+    height: auto;
+    min-height: 150px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .dashboard-shell main :is(.grid.grid-cols-1.sm\\:grid-cols-2,.grid.grid-cols-1.sm\\:grid-cols-3) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .dashboard-shell main {
+    padding-inline: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .dashboard-shell main :is(.grid) {
+    gap: clamp(.75rem, 1.5vw, 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell *,
+  .dashboard-shell *::before,
+  .dashboard-shell *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
