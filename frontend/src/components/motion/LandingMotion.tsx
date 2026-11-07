@@ -577,7 +577,7 @@ export function LandingMotion() {
     // the four process stages travel horizontally. Mobile keeps its natural
     // stacked layout and reduced-motion users are not pinned.
     mm.add(
-      "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
+      "(min-width: 1200px) and (prefers-reduced-motion: no-preference)",
       () => {
         const viewport = document.querySelector<HTMLElement>("#process [data-process-viewport]");
         const track = viewport?.querySelector<HTMLElement>("[data-process-track]");
