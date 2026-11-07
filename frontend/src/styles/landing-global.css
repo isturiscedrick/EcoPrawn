@@ -1922,3 +1922,57 @@ body.ecoprawn-root:has(.ep-landing) {
   min-width: 0;
   max-width: 100%;
 }
+
+
+/* Business-oriented landing page refinement */
+.ep-business-landing .ep-hero {
+  background:
+    radial-gradient(ellipse at 78% 40%, rgba(139,213,166,.15), transparent 34%),
+    linear-gradient(135deg, var(--ep-bg) 0%, var(--ep-tint) 100%);
+}
+html.dark .ep-business-landing .ep-hero {
+  background:
+    radial-gradient(ellipse at 78% 40%, rgba(139,213,166,.11), transparent 36%),
+    linear-gradient(135deg, var(--ep-bg) 0%, var(--ep-surface) 100%);
+}
+.ep-business-landing .ep-hero-layout {
+  min-height: min(760px, calc(100svh - 76px));
+}
+.ep-business-landing .ep-hero-copy {
+  text-wrap: pretty;
+}
+.ep-business-landing .ep-hero-headline-primary {
+  color: var(--ep-text);
+}
+.ep-business-landing .ep-hero-headline-secondary {
+  color: var(--ep-accent);
+}
+.ep-business-landing .ep-hero-visual {
+  filter: drop-shadow(0 26px 48px rgba(10,40,38,.14));
+}
+.ep-business-landing .ep-stats-panel {
+  box-shadow: 0 18px 50px -34px rgba(10,40,38,.26);
+}
+.ep-business-landing .ep-business-capabilities [data-business-card] {
+  min-height: 270px;
+  box-shadow: 0 16px 40px -34px rgba(10,40,38,.38);
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+.ep-business-landing .ep-business-capabilities [data-business-card]:hover {
+  transform: translateY(-5px);
+  border-color: var(--ep-accent);
+  box-shadow: 0 22px 48px -34px rgba(10,40,38,.34);
+}
+html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
+  box-shadow: 0 18px 42px -34px rgba(0,0,0,.8);
+}
+@media (max-width: 1023px) {
+  .ep-business-landing .ep-hero-layout { min-height: 0; }
+  .ep-business-landing .ep-hero-copy { text-align: center; }
+  .ep-business-landing .ep-hero-copy [data-hero="cta"] { justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-business-capabilities [data-business-card] {
+    transition: none;
+  }
+}
