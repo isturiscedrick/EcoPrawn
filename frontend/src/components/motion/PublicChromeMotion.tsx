@@ -34,7 +34,6 @@ export function PublicChromeMotion() {
 
           links.forEach((link) => {
             const enter = () => {
-              moveIndicator(link);
               gsap.to(link, {
                 y: -2,
                 scale: 1.035,
