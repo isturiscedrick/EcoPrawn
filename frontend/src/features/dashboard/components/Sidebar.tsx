@@ -9,6 +9,8 @@ import { SidebarNavItem } from "./SidebarNavItem";
 interface SidebarProps {
   collapsed?: boolean;
   onToggle?: () => void;
+  mobileOpen?: boolean;
+  onMobileClose?: () => void;
 }
 
 export function Sidebar({
@@ -109,7 +111,7 @@ export function Sidebar({
     >
       {/* BRAND */}
       <div
-        className={`group relative flex min-w-0 shrink-0 items-center gap-2 overflow-visible px-1 lg:mb-4 lg:w-full lg:border-b lg:border-[rgba(11,46,51,0.12)] ${collapsed ? "lg:justify-center lg:px-0 lg:pb-6 lg:pt-3" : "lg:px-2.5 lg:pb-4 lg:pt-1"}`}
+        className={`group relative flex min-w-0 shrink-0 items-center gap-2 overflow-visible px-1 pb-4 mb-4 border-b border-[var(--ep-line)] lg:mb-4 lg:w-full lg:border-b lg:border-[rgba(11,46,51,0.12)] ${collapsed ? "lg:justify-center lg:px-0 lg:pb-6 lg:pt-3" : "lg:px-2.5 lg:pb-4 lg:pt-1"}`}
       >
         <BrandMark
           size={30}
@@ -172,7 +174,7 @@ export function Sidebar({
       {/* NAV ITEMS */}
       <nav
         aria-label="Dashboard modules"
-        className={`flex shrink-0 flex-row items-center gap-1.5 lg:w-full lg:flex-col lg:gap-2 ${collapsed ? "lg:items-center lg:pt-3" : "lg:items-stretch lg:px-2"}`}
+        className={`flex w-full shrink-0 flex-col items-stretch gap-2 lg:w-full lg:flex-col lg:gap-2 ${collapsed ? "lg:items-center lg:pt-3" : "lg:items-stretch lg:px-2"}`}
       >
         {DASHBOARD_NAV_ITEMS.map((item) => (
           <SidebarNavItem
@@ -186,7 +188,7 @@ export function Sidebar({
 
       {/* SIDEBAR ACTIONS (desktop only) */}
       <div
-        className={`mt-auto hidden shrink-0 flex-col gap-1 border-t border-[rgba(11,46,51,0.1)] lg:flex lg:w-full lg:pt-4 ${collapsed ? "lg:px-0" : "lg:px-2"}`}
+        className={`mt-auto flex shrink-0 flex-col gap-1 border-t border-[var(--ep-line)] pt-4 lg:w-full lg:pt-4 ${collapsed ? "lg:px-0" : "lg:px-2"}`}
       >
         <Link
           to="/dashboard/profile"
