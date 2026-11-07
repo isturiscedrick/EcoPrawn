@@ -24,7 +24,7 @@ export function PageHero({ kicker, title, lead }: PageHeroProps) {
       />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 ep-hero-atmosphere" />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center px-4 pb-10 pt-8 text-center sm:px-8 sm:pb-16 sm:pt-14 lg:pb-20 lg:pt-16">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col items-center px-4 pb-10 pt-16 text-center sm:px-8 sm:pb-16 sm:pt-20 lg:pb-20 lg:pt-24">
         <p
           data-page-kicker=""
           className="mb-4 inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] sm:px-4 sm:text-[11px] sm:tracking-[0.16em] text-[var(--ep-accent)] shadow-sm"
