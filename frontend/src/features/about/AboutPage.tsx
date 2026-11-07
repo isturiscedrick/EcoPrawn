@@ -47,7 +47,7 @@ export function AboutPage() {
             OBJECTIVES
         ========================================================= */}
         <section id="objectives" className={`w-full box-border scroll-mt-[140px] md:scroll-mt-[150px] ${SECTION_PAD}`}>
-          <div className="mx-auto w-full max-w-[1200px]">
+          <div className="ep-about-content-frame mx-auto w-full max-w-[1200px]">
             <Reveal>
               <div className="ep-about-objective mb-6 rounded-3xl border border-l-4 border-[var(--ep-line)] border-l-[var(--ep-accent)] bg-[var(--ep-surface)] px-6 py-8 shadow-[0_16px_30px_-28px_rgba(11,46,51,0.5)] sm:px-10 sm:py-10">
                 <div className="mb-3 text-sm font-semibold text-[var(--ep-text-muted)]">
@@ -100,7 +100,7 @@ export function AboutPage() {
             backgroundPosition: "center",
           }}
         >
-          <div className="mx-auto w-full max-w-[1200px]">
+          <div className="ep-about-content-frame mx-auto w-full max-w-[1200px]">
             <Reveal>
               <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
                 <div className={`${eyebrow} text-[var(--ep-on-deep-muted)]`}>
@@ -165,7 +165,7 @@ export function AboutPage() {
             SCOPE / LIMITATIONS
         ========================================================= */}
         <section id="scope" className={`w-full box-border scroll-mt-[140px] md:scroll-mt-[150px] ${SECTION_PAD}`}>
-          <div className="mx-auto w-full max-w-[1200px]">
+          <div className="ep-about-content-frame mx-auto w-full max-w-[1200px]">
             <Reveal>
               <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
                 <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
