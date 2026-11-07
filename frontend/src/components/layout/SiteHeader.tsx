@@ -115,13 +115,13 @@ export function SiteHeader({
             aria-expanded={mobileNavOpen}
             aria-controls="mobile-nav-panel"
             aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-            className={`ep-mobile-menu-toggle inline-flex h-10 items-center justify-center gap-1.5 rounded-full border px-2.5 text-[11px] font-semibold lg:hidden ${focusRing}`}
+            className={`ep-mobile-menu-toggle inline-flex h-10 w-10 min-w-10 shrink-0 items-center justify-center gap-1.5 rounded-full border px-0 text-[11px] font-semibold whitespace-nowrap lg:hidden sm:w-auto sm:min-w-10 sm:px-2.5 ${focusRing}`}
             style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
           >
-            <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <svg className="shrink-0" width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               {mobileNavOpen ? <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /> : <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
             </svg>
-            <span className="ep-header-button-label">{mobileNavOpen ? "Close" : "Menu"}</span>
+            <span className="ep-header-button-label hidden sm:inline">{mobileNavOpen ? "Close" : "Menu"}</span>
           </button>
         )}
 
@@ -149,7 +149,7 @@ export function SiteHeader({
               aria-checked={darkMode}
               aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
               title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              className={`ep-theme-toggle inline-flex h-10 items-center justify-center gap-1.5 rounded-full border px-2.5 text-[11px] font-semibold transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
+              className={`ep-theme-toggle inline-flex h-10 w-10 min-w-10 shrink-0 items-center justify-center gap-1.5 rounded-full border px-0 text-[11px] font-semibold whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5 sm:w-auto sm:px-2.5 ${focusRing}`}
               style={{
                 color: "var(--ep-primary)",
                 borderColor: "var(--ep-line)",
@@ -165,7 +165,7 @@ export function SiteHeader({
                   <path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z" />
                 </svg>
               )}
-              <span className="ep-header-button-label">{darkMode ? "Light" : "Dark"}</span>
+              <span className="ep-header-button-label hidden sm:inline">{darkMode ? "Light" : "Dark"}</span>
             </button>
           )}
 
