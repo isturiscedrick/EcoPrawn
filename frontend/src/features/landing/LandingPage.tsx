@@ -157,20 +157,6 @@ export function LandingPage() {
               data-hero="text"
               className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center lg:mx-auto lg:max-w-[660px]"
             >
-              <div
-                data-hero="eyebrow"
-                className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--ep-accent)] shadow-sm"
-              >
-                <span className="relative flex h-2 w-2" aria-hidden="true">
-                  <span
-                    data-live-ping=""
-                    className="absolute inline-flex h-full w-full rounded-full bg-[var(--ep-accent)] opacity-60"
-                  />
-                  <span className="relative h-2 w-2 rounded-full bg-[var(--ep-accent)]" />
-                </span>
-                AIoT-powered indoor shrimp farming
-              </div>
-
               <h1
                 data-hero="headline"
                 aria-label="Smarter shrimp farming, always in range."
@@ -188,8 +174,7 @@ export function LandingPage() {
                 data-hero="lead"
                 className="mx-auto mt-5 max-w-[650px] text-base leading-[1.75] text-[var(--ep-text-muted)] sm:text-lg"
               >
-                Bring water quality, automated feeding, and AI growth insights
-                together in one calm, connected view of your shrimp farm.
+                One platform for water monitoring, growth insights, and automated farm care.
               </p>
 
               <div
@@ -199,7 +184,7 @@ export function LandingPage() {
                 <AuthLink
                   className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-3 text-sm font-semibold text-[var(--ep-on-accent)] shadow-sm hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
                 >
-                  Open farm dashboard
+                  Open dashboard
                   <span
                     aria-hidden="true"
                     className="inline-flex items-center transition-transform duration-200 group-hover:translate-x-1"
@@ -214,7 +199,7 @@ export function LandingPage() {
                   className={`inline-flex min-h-12 items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-6 py-3 text-sm font-semibold text-[var(--ep-text)] shadow-sm hover:border-[var(--ep-accent)] hover:text-[var(--ep-accent)] ${buttonMotion} ${focusRing}`}
                   activeOptions={{ exact: true }}
                 >
-                  Explore the system
+                  How it works
                 </Link>
               </div>
             </div>
@@ -225,9 +210,6 @@ export function LandingPage() {
             >
               <HeroLens />
             </div>
-            <p data-hero="signature" className="order-3 -mt-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ep-text-muted)] sm:text-xs lg:col-start-1 lg:row-start-2 lg:mt-[-1.5rem]">
-              Live insight · Automated care · Healthier harvests
-            </p>
           </div>
         </section>
 
