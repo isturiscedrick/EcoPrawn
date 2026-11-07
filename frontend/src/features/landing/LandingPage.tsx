@@ -251,7 +251,7 @@ export function LandingPage() {
             }}
           />
 
-          <div className="mx-auto max-w-[1200px] px-5 py-20 sm:px-8 sm:py-24">
+          <div className="mx-auto w-full max-w-[1200px] px-5 py-20 sm:px-8 sm:py-24">
             <div data-reveal="" className="max-w-[40rem]">
               <div className={`${eyebrow} text-[var(--ep-on-deep-muted)]`}>
                 <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-zone)]" />
@@ -268,7 +268,7 @@ export function LandingPage() {
               </p>
             </div>
 
-            <dl className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+            <dl className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
               {heroReadouts.map((r) => {
                 const zone = ZONES[r.label];
                 const value = parseFloat(r.value);
@@ -286,7 +286,7 @@ export function LandingPage() {
                     key={r.label}
                     data-reading=""
                     data-hover-lift=""
-                    className="rounded-2xl border border-white/20 bg-white/[0.07] p-5 transition-colors duration-200 hover:bg-white/[0.12] last:col-span-2 md:last:col-span-1"
+                    className="h-full rounded-2xl border border-white/20 bg-white/[0.07] p-5 transition-colors duration-200 hover:bg-white/[0.12]"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <dt className="text-base font-semibold">{r.label}</dt>
