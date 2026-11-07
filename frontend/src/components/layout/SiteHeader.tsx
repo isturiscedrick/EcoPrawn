@@ -270,28 +270,31 @@ export function SiteHeader({
               touchStartX.current = null;
               if (start !== null && event.changedTouches[0].clientX - start < -60) closeDrawer();
             }}
-            className={`fixed inset-y-0 left-0 z-[90] flex w-[min(86vw,320px)] flex-col border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] transition-transform duration-300 ease-out ${
+            className={`fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out ${
               mobileNavOpen
                 ? "translate-x-0 shadow-[8px_0_40px_-12px_rgba(8,30,34,0.45)]"
                 : "-translate-x-full shadow-none"
             }`}
           >
             {/* Drawer header */}
-            <div className="flex shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-4 py-3">
-              <BrandMark size={30} logoColor="#d94416" logoTextColor="var(--ep-secondary)" />
+            <div className="relative flex shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-5 py-4">
+              <div className="flex min-w-0 flex-col gap-1">
+                <BrandMark size={32} logoColor="#d94416" logoTextColor="var(--ep-secondary)" />
+                <span className="pl-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ep-text-muted)]">Explore EcoPrawn</span>
+              </div>
               <button
                 ref={closeButtonRef}
                 type="button"
                 onClick={closeDrawer}
                 aria-label="Close menu"
-                className={`flex h-11 w-11 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] ${focusRing}`}
+                className={`flex h-11 w-11 items-center justify-center rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] shadow-sm transition-all duration-200 hover:rotate-90 hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] ${focusRing}`}
               >
                 <Icon name="x" size={20} strokeWidth={2} />
               </button>
             </div>
 
             {/* Navigation */}
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-3">
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-4">
               <div className="px-6 pb-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">
                 Navigation
               </div>
@@ -299,7 +302,7 @@ export function SiteHeader({
             </div>
 
             {/* Account + theme */}
-            <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+            <div className="flex shrink-0 flex-col gap-2.5 border-t border-[var(--ep-line)] bg-[var(--ep-surface)]/70 px-5 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
               <AuthLink
                 mode="signup"
                 onClick={() => setMobileNavOpen(false)}
