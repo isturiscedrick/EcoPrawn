@@ -33,12 +33,12 @@ export function AboutPage() {
           kicker="How it works"
           title={
             <>
-              <span data-page-hero-accent="">One general objective.</span>
+              <span data-page-hero-accent="">One platform.</span>
               <br className="hidden sm:block" />
-              <span>Six systems achieving it.</span>
+              <span>Six connected systems.</span>
             </>
           }
-          lead="A focused system architecture built around measurable aquaculture outcomes, now fully operational."
+          lead="Connected tools for smarter, more efficient shrimp farming."
         />
 
         <SectionNav />
@@ -55,11 +55,7 @@ export function AboutPage() {
                 </div>
 
                 <p className="ep-font-display max-w-[52rem] text-xl font-medium leading-relaxed sm:text-2xl">
-                  &quot;EcoPrawn was designed and developed as an AIoT-enabled
-                  smart aquaculture system that automates water quality
-                  monitoring and precision feeding, maintaining suitable
-                  aquatic conditions and improving the efficiency of
-                  small-scale indoor shrimp farming.&quot;
+                  &quot;An AIoT-enabled system for water monitoring, precision feeding, and healthier indoor shrimp farming.&quot;
                 </p>
               </div>
             </Reveal>
@@ -119,8 +115,7 @@ export function AboutPage() {
                 </h2>
 
                 <p className="mt-3 max-w-[36rem] text-lg leading-relaxed text-[var(--ep-on-deep-muted)]">
-                  Every system below is deployed and operating. Nothing here is
-                  a mockup.
+                  Integrated tools built for everyday farm operations.
                 </p>
               </div>
             </Reveal>
