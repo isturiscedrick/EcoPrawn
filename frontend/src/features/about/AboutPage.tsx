@@ -90,17 +90,17 @@ export function AboutPage() {
         ========================================================= */}
         <section
           id="systems"
-          className={`relative isolate scroll-mt-[140px] overflow-hidden bg-[var(--ep-deep)] text-[var(--ep-on-deep)] ${SECTION_PAD}`}
+          className={`relative isolate box-border w-full max-w-none scroll-mt-[140px] overflow-hidden bg-[var(--ep-deep)] text-[var(--ep-on-deep)] ${SECTION_PAD}`}
+          style={{
+            backgroundColor: "var(--ep-deep)",
+            backgroundImage:
+              "radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.16), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(0,0,0,.28), transparent 48%)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "100% 100%",
+            backgroundPosition: "center",
+          }}
         >
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.16), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(0,0,0,.28), transparent 48%)",
-            }}
-          />
-          <div className="mx-auto max-w-[1200px]">
+          <div className="mx-auto w-full max-w-[1440px]">
             <Reveal>
               <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
                 <div className={`${eyebrow} text-[var(--ep-on-deep-muted)]`}>
