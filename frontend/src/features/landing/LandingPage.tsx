@@ -102,7 +102,7 @@ function Words({ text }: { text: string }) {
 
 export function LandingPage() {
   return (
-    <div className="ep-landing flex min-h-screen flex-col">
+    <div className="ep-landing ep-business-landing flex min-h-screen flex-col">
       <LandingMotion />
       <PublicChromeMotion />
       <a
@@ -152,10 +152,10 @@ export function LandingPage() {
           </div>
 
           {/* The header is sticky (in flow), so the hero needs only a small top pad. */}
-          <div className="ep-hero-layout mx-auto grid w-full max-w-[1440px] grid-cols-1 justify-items-center gap-5 px-5 pb-10 pt-9 sm:gap-6 sm:px-8 sm:pb-12 sm:pt-12 lg:px-12 lg:pt-14">
+          <div className="ep-hero-layout mx-auto grid w-full max-w-[1440px] grid-cols-1 justify-items-center gap-5 px-5 pb-10 pt-9 sm:gap-6 sm:px-8 sm:pb-12 sm:pt-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,.95fr)] lg:items-center lg:justify-items-stretch lg:gap-10 lg:px-12 lg:py-16">
             <div
               data-hero="text"
-              className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center"
+              className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center lg:mx-0 lg:max-w-[660px] lg:text-left"
             >
               <div
                 data-hero="eyebrow"
@@ -174,7 +174,7 @@ export function LandingPage() {
               <h1
                 data-hero="headline"
                 aria-label="Smarter shrimp farming, always in range."
-                className="ep-font-display mx-auto max-w-[1000px] text-[clamp(40px,6.4vw,88px)] font-bold leading-[1.02] tracking-[-0.055em]"
+                className="ep-font-display mx-auto max-w-[1000px] text-[clamp(40px,6.4vw,88px)] font-bold leading-[1.02] tracking-[-0.055em] lg:mx-0 lg:text-[clamp(48px,5.2vw,76px)]"
               >
                 <span className="block ep-hero-headline-primary">
                   <Words text="Smarter shrimp farming," />
@@ -186,7 +186,7 @@ export function LandingPage() {
 
               <p
                 data-hero="lead"
-                className="mx-auto mt-5 max-w-[650px] text-base leading-[1.75] text-[var(--ep-text-muted)] sm:text-lg"
+                className="mx-auto mt-5 max-w-[650px] text-base leading-[1.75] text-[var(--ep-text-muted)] sm:text-lg lg:mx-0"
               >
                 Bring water quality, automated feeding, and AI growth insights
                 together in one calm, connected view of your shrimp farm.
@@ -194,7 +194,7 @@ export function LandingPage() {
 
               <div
                 data-hero="cta"
-                className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center"
+                className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start"
               >
                 <AuthLink
                   className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-3 text-sm font-semibold text-[var(--ep-on-accent)] shadow-sm hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
@@ -221,11 +221,11 @@ export function LandingPage() {
 
             <div
               data-hero="parallax-console"
-              className="ep-hero-visual order-2 relative mx-auto flex w-full max-w-[390px] items-center justify-center sm:max-w-[420px]"
+              className="ep-hero-visual order-2 relative mx-auto flex w-full max-w-[390px] items-center justify-center sm:max-w-[420px] lg:max-w-[520px]"
             >
               <HeroLens />
             </div>
-            <p data-hero="signature" className="order-3 -mt-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ep-text-muted)] sm:text-xs">
+            <p data-hero="signature" className="order-3 -mt-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--ep-text-muted)] sm:text-xs lg:col-start-1 lg:row-start-2 lg:mt-[-1.5rem] lg:text-left">
               Live insight · Automated care · Healthier harvests
             </p>
           </div>
@@ -376,6 +376,60 @@ export function LandingPage() {
                 <span aria-hidden="true" className="h-3.5 w-3.5 rounded-full border-2 border-white bg-[var(--ep-marker)]" />
                 Current reading
               </span>
+            </div>
+          </div>
+        </section>
+
+        {/* BUSINESS CAPABILITIES */}
+        <section
+          id="capabilities"
+          aria-labelledby="capabilities-title"
+          className="ep-business-capabilities bg-[var(--ep-bg)] px-5 py-20 sm:px-8 sm:py-24"
+        >
+          <div className="mx-auto max-w-[1200px]">
+            <div data-reveal="" className="mb-12 grid gap-5 lg:grid-cols-[.9fr_1.1fr] lg:items-end">
+              <div>
+                <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
+                  <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
+                  One connected platform
+                </div>
+                <h2 id="capabilities-title" className="ep-font-display max-w-[560px] text-[clamp(30px,4vw,48px)] font-semibold leading-[1.08] tracking-tight">
+                  The essential parts of farm operations, working together.
+                </h2>
+              </div>
+              <p className="max-w-[560px] text-base leading-relaxed text-[var(--ep-text-muted)] lg:justify-self-end lg:text-lg">
+                EcoPrawn brings water monitoring, feeding, visual growth tracking, and effluent management into one operational workflow—so teams can understand what is happening and respond with better context.
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <article data-business-card="" className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6">
+                <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="activity" size={24} /></span>
+                <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">01 / Monitor</p>
+                <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Water quality intelligence</h3>
+                <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Track dissolved oxygen, pH, temperature, salinity, and water level against operating thresholds.</p>
+              </article>
+              <article data-business-card="" className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6">
+                <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="eye" size={24} /></span>
+                <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">02 / Understand</p>
+                <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Growth and biomass insights</h3>
+                <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Use camera-based observation to follow shrimp growth and biomass without routine handling.</p>
+              </article>
+              <article data-business-card="" className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 md:col-span-2 lg:col-span-1">
+                <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="zap" size={24} /></span>
+                <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">03 / Respond</p>
+                <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Automated farm actions</h3>
+                <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Connect readings to aeration control and biomass-informed feeding for a more coordinated workflow.</p>
+              </article>
+            </div>
+            <div className="mt-7 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-5 sm:px-7">
+              <div>
+                <p className="font-semibold text-[var(--ep-text)]">A more complete view of the production cycle</p>
+                <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Includes biofloc and effluent routing for responsible water management.</p>
+              </div>
+              <Link to="/about" className={`inline-flex min-h-10 items-center gap-2 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-sm font-semibold text-[var(--ep-text)] hover:border-[var(--ep-accent)] hover:text-[var(--ep-accent)] ${focusRing}`}>
+                View platform details <Icon name="arrow-right" size={16} />
+              </Link>
             </div>
           </div>
         </section>
