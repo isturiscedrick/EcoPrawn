@@ -2004,3 +2004,73 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
     padding-top: clamp(5rem, 8vh, 7rem) !important;
   }
 }
+
+/* ---------- Responsive section backgrounds ---------- */
+/* Background artwork scales with each section instead of keeping desktop
+   gradient focal points and fixed-size effects on narrow/wide viewports. */
+.ep-business-landing main > section {
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-origin: border-box;
+  background-clip: border-box;
+}
+
+.ep-business-landing .ep-hero,
+.ep-business-landing #readings {
+  background-size: cover;
+  background-position: center;
+}
+
+.ep-business-landing .ep-hero-atmosphere,
+.ep-business-landing #readings > [data-readings-bg] {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 767px) {
+  .ep-business-landing .ep-hero {
+    background-position: 58% center;
+  }
+
+  .ep-business-landing .ep-hero-atmosphere {
+    background-size: 150% 125%, 135% 115%;
+    background-position: 72% 18%, 0% 100%;
+  }
+
+  .ep-business-landing #readings > [data-readings-bg] {
+    background-size: 160% 130%, 145% 125%;
+    background-position: 12% 0%, 100% 100%;
+  }
+
+  .ep-business-landing #readings,
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process {
+    background-size: cover;
+    background-position: center top;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .ep-business-landing .ep-hero,
+  .ep-business-landing #readings,
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process,
+  .ep-business-landing .ep-hero-atmosphere,
+  .ep-business-landing #readings > [data-readings-bg] {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (min-width: 1600px) {
+  .ep-business-landing .ep-hero,
+  .ep-business-landing #readings,
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process,
+  .ep-business-landing .ep-hero-atmosphere,
+  .ep-business-landing #readings > [data-readings-bg] {
+    background-size: 100% 100%;
+    background-position: center;
+  }
+}
