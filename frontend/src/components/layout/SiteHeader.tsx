@@ -97,8 +97,30 @@ export function SiteHeader({
   // close on Escape, and close if the viewport grows to desktop width.
   useEffect(() => {
     if (!mobileNavOpen) return;
-    const original = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+
+    // Lock both the document and body. Fixed-body locking also prevents
+    // background scrolling on iOS Safari, where overflow:hidden alone can fail.
+    const scrollY = window.scrollY;
+    const html = document.documentElement;
+    const body = document.body;
+    const previousHtmlOverflow = html.style.overflow;
+    const previousBodyStyles = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
+    };
+
+    html.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+
     closeButtonRef.current?.focus({ preventScroll: true });
 
     function onKeyDown(event: KeyboardEvent) {
@@ -132,7 +154,16 @@ export function SiteHeader({
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       desktop.removeEventListener("change", onChange);
-      document.body.style.overflow = original;
+
+      // Restore every inline style and return to the exact previous page offset.
+      html.style.overflow = previousHtmlOverflow;
+      body.style.position = previousBodyStyles.position;
+      body.style.top = previousBodyStyles.top;
+      body.style.left = previousBodyStyles.left;
+      body.style.right = previousBodyStyles.right;
+      body.style.width = previousBodyStyles.width;
+      body.style.overflow = previousBodyStyles.overflow;
+      window.scrollTo(0, scrollY);
     };
   }, [mobileNavOpen, closeDrawer]);
 
