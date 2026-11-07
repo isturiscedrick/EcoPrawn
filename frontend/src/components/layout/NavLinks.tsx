@@ -83,7 +83,6 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
 
   return (
     <nav
-      id="mobile-nav-panel"
       aria-label="Mobile navigation"
       className={`border-t px-4 py-2 sm:px-5 lg:hidden ${monochrome ? "ep-nav-monochrome" : "border-[var(--ep-line)] bg-[var(--ep-bg)]"}`}
       style={monochrome ? { backgroundColor: darkMode ? "#000000" : "#ffffff", borderColor: darkMode ? "#ffffff" : "#000000", color: darkMode ? "#ffffff" : "#000000" } : undefined}
