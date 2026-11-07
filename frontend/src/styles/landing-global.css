@@ -2115,3 +2115,74 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
     background-size: 22px 22px;
   }
 }
+
+/* Full-bleed section backgrounds across the entire public landing page.
+   Keep each section background viewport-wide; constrain only its content
+   wrapper so no section inherits a narrow background painting area. */
+.ep-business-landing main {
+  width: 100%;
+  max-width: 100%;
+  overflow: clip;
+}
+
+.ep-business-landing main > section {
+  position: relative;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-origin: border-box;
+  background-clip: border-box;
+}
+
+.ep-business-landing main > section > .ep-hero-layout,
+.ep-business-landing main > section > .ep-stats-panel,
+.ep-business-landing main > section > div:not([aria-hidden="true"]) {
+  box-sizing: border-box;
+}
+
+.ep-business-landing main > section > div:not([aria-hidden="true"]) {
+  width: min(100% - 2.5rem, 1440px);
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ep-business-landing #top.ep-hero > .ep-hero-layout {
+  width: min(100% - 2.5rem, 1440px);
+}
+
+.ep-business-landing #readings > [data-readings-bg] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+}
+
+@media (max-width: 639px) {
+  .ep-business-landing main > section {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .ep-business-landing main > section > div:not([aria-hidden="true"]) {
+    width: calc(100% - 2rem);
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1199px) {
+  .ep-business-landing main > section {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ep-business-landing main > section > div:not([aria-hidden="true"]) {
+    width: min(100% - 6rem, 1440px);
+  }
+}
