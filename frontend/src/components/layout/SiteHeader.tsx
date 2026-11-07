@@ -115,7 +115,7 @@ export function SiteHeader({
             aria-expanded={mobileNavOpen}
             aria-controls="mobile-nav-panel"
             aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-            className={`ep-mobile-menu-toggle inline-flex h-10 w-10 min-w-10 shrink-0 items-center justify-center gap-1.5 rounded-full border px-0 text-[11px] font-semibold whitespace-nowrap lg:hidden sm:w-auto sm:min-w-10 sm:px-2.5 ${focusRing}`}
+            className={`ep-mobile-menu-toggle inline-flex h-10 w-10 min-w-10 shrink-0 items-center justify-center gap-1.5 rounded-full border px-0 text-[11px] font-semibold leading-none whitespace-nowrap transition-[background-color,border-color,color,transform,box-shadow] duration-200 active:scale-95 lg:hidden sm:w-auto sm:min-w-10 sm:px-2.5 ${focusRing}`}
             style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
           >
             <svg className="shrink-0" width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -149,7 +149,7 @@ export function SiteHeader({
               aria-checked={darkMode}
               aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
               title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              className={`ep-theme-toggle inline-flex h-10 w-10 min-w-10 shrink-0 items-center justify-center gap-1.5 rounded-full border px-0 text-[11px] font-semibold whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5 sm:w-auto sm:px-2.5 ${focusRing}`}
+              className={`ep-theme-toggle inline-flex h-10 w-10 min-w-10 shrink-0 items-center justify-center gap-1.5 rounded-full border px-0 text-[11px] font-semibold leading-none whitespace-nowrap transition-[background-color,border-color,color,transform,box-shadow] duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 sm:w-auto sm:px-2.5 ${focusRing}`}
               style={{
                 color: "var(--ep-primary)",
                 borderColor: "var(--ep-line)",
@@ -157,7 +157,7 @@ export function SiteHeader({
               }}
             >
               {darkMode ? (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg className="shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
                 </svg>
               ) : (
