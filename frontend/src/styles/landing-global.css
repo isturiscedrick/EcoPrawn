@@ -1976,3 +1976,17 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
     transition: none;
   }
 }
+
+
+/* Final business landing hero spacing: override legacy compact hero rules.
+   The header is 66px tall; keep a clear visual gap before the headline. */
+@media (max-width: 767px) {
+  .ep-business-landing #top.ep-hero > .ep-hero-layout {
+    padding-top: 5rem !important;
+  }
+}
+@media (min-width: 768px) {
+  .ep-business-landing #top.ep-hero > .ep-hero-layout {
+    padding-top: clamp(5rem, 8vh, 7rem) !important;
+  }
+}
