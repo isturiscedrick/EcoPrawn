@@ -3743,3 +3743,68 @@ html.dark .ep-landing {
     transition: none !important;
   }
 }
+
+
+/* The process section stays open and editorial instead of turning every step
+   into another boxed card. The numbered rhythm carries through on mobile. */
+.ep-business-landing #process [data-step] {
+  padding-inline: .15rem;
+}
+.ep-business-landing #process [data-step] h3 {
+  letter-spacing: -.035em;
+}
+.ep-business-landing #process [data-step] > div:first-of-type > span:last-child {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ep-secondary) 8%, transparent);
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), background-color .35s ease;
+}
+.ep-business-landing #process [data-step]:hover > div:first-of-type > span:last-child {
+  transform: translateY(-3px) rotate(-5deg);
+  background: color-mix(in srgb, var(--ep-accent) 12%, var(--ep-tint));
+}
+
+/* Footer: stronger brand anchor and clearer small-screen grouping. */
+.ep-business-landing [data-site-footer] {
+  background:
+    radial-gradient(ellipse at 8% 100%, color-mix(in srgb, var(--ep-zone) 9%, transparent), transparent 28rem),
+    var(--ep-surface);
+}
+.ep-business-landing [data-site-footer] .ep-footer-grid {
+  align-items: start;
+}
+.ep-business-landing [data-site-footer] .ep-footer-brand > p {
+  max-width: 28rem;
+}
+.ep-business-landing [data-site-footer] .ep-footer-bottom {
+  gap: .5rem 1.5rem;
+}
+@media (max-width: 639px) {
+  .ep-business-landing [data-site-footer] {
+    padding-top: 2.5rem;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+  .ep-business-landing [data-site-footer] .ep-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.25rem;
+    row-gap: 1.75rem;
+    padding-bottom: 1.5rem;
+  }
+  .ep-business-landing [data-site-footer] .ep-footer-brand {
+    grid-column: 1 / -1;
+    padding-bottom: .35rem;
+  }
+  .ep-business-landing [data-site-footer] .ep-footer-brand > p {
+    max-width: 30rem;
+    font-size: .875rem;
+    line-height: 1.65;
+  }
+  .ep-business-landing [data-site-footer] .ep-footer-bottom {
+    align-items: flex-start;
+    font-size: .7rem;
+    line-height: 1.55;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing #process [data-step] > div:first-of-type > span:last-child {
+    transition: none !important;
+  }
+}
