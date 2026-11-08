@@ -595,3 +595,328 @@
     gap: 1.75rem !important;
   }
 }
+
+
+/* ==========================================================================
+   EcoPrawn landing — mobile-first composition
+   Desktop layouts are intentionally untouched. On phones, prioritize a
+   readable editorial hero, a compact monitoring snapshot and clear sections.
+   HeroLens keeps its own sizing and animation system.
+   ========================================================================== */
+@media (max-width: 767px) {
+  .ep-business-landing {
+    overflow-x: clip;
+  }
+
+  .ep-business-landing #top.ep-hero {
+    overflow: hidden;
+  }
+
+  .ep-business-landing #top > .ep-hero-layout {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch !important;
+    justify-items: initial !important;
+    gap: 1.5rem !important;
+    padding: clamp(5.75rem, 15vw, 7rem) 1.1rem 2.4rem !important;
+  }
+
+  .ep-business-landing #top [data-hero="text"] {
+    order: 1;
+    width: 100%;
+    max-width: 38rem;
+    margin-inline: auto;
+    text-align: left !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    max-width: 12ch !important;
+    margin-inline: 0 !important;
+    font-size: clamp(2.55rem, 10.5vw, 4.1rem) !important;
+    line-height: .99 !important;
+    letter-spacing: -.065em !important;
+    text-wrap: balance;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] > span {
+    display: inline;
+  }
+
+  .ep-business-landing #top [data-hero="lead"] {
+    max-width: 31rem !important;
+    margin: 1rem 0 0 !important;
+    font-size: 1rem !important;
+    line-height: 1.65 !important;
+    text-wrap: pretty;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    width: 100% !important;
+    max-width: 30rem !important;
+    margin: 1.35rem 0 0 !important;
+    gap: .65rem !important;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] > a {
+    display: inline-flex;
+    min-width: 0;
+    min-height: 3.25rem !important;
+    padding: .8rem .85rem !important;
+    border-radius: .95rem !important;
+    font-size: .83rem !important;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] > a:first-child {
+    box-shadow: 0 10px 22px -14px rgba(217, 68, 22, .65);
+  }
+
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    order: 2;
+    width: 100% !important;
+    max-width: 31rem !important;
+    margin: .2rem auto 0 !important;
+    overflow: visible;
+  }
+
+  .ep-business-landing #top [data-hero="grid"] {
+    opacity: .08;
+    background-size: 27px 27px !important;
+  }
+
+  /* At-a-glance: compact dashboard-like tiles with comfortable touch spacing. */
+  .ep-business-landing section[aria-label="EcoPrawn at a glance"] {
+    padding: 1.1rem !important;
+  }
+
+  .ep-business-landing .ep-stats-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: .65rem !important;
+    padding: .65rem !important;
+    border-radius: 1.2rem !important;
+  }
+
+  .ep-business-landing .ep-stats-panel > div {
+    min-height: 6rem;
+    padding: .95rem .9rem !important;
+    border-radius: .85rem !important;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    font-size: clamp(1.2rem, 5.8vw, 1.65rem) !important;
+    line-height: 1.05 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    margin-top: .55rem !important;
+    font-size: .7rem !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Section rhythm: less dead space, more content visible per screen. */
+  .ep-business-landing #readings,
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process {
+    padding-block: 0 !important;
+  }
+
+  .ep-business-landing #readings > div:not([aria-hidden="true"]),
+  .ep-business-landing #capabilities > div:not([aria-hidden="true"]),
+  .ep-business-landing #process > div:not([aria-hidden="true"]) {
+    padding-block: 3.5rem !important;
+  }
+
+  .ep-business-landing main section :is(h2) {
+    font-size: clamp(1.8rem, 8vw, 2.45rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -.045em !important;
+  }
+
+  .ep-business-landing main section .mb-12 {
+    margin-bottom: 1.75rem !important;
+  }
+
+  .ep-business-landing #readings [data-reveal] p {
+    margin-top: .7rem !important;
+    font-size: .95rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .ep-business-landing #readings dl {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: .75rem !important;
+    margin-top: 1.65rem !important;
+  }
+
+  .ep-business-landing #readings dl > div[data-reading] {
+    min-height: 0;
+    padding: 1rem 1.05rem !important;
+    border-radius: 1.1rem !important;
+  }
+
+  .ep-business-landing #readings dl > div[data-reading] dt {
+    font-size: .9rem !important;
+  }
+
+  .ep-business-landing #readings dl > div[data-reading] dd {
+    margin-top: .55rem !important;
+    font-size: 1.9rem !important;
+    line-height: 1.05 !important;
+  }
+
+  .ep-business-landing #readings dl > div[data-reading] dd span:last-child {
+    font-size: .85rem !important;
+  }
+
+  .ep-business-landing #readings dl > div[data-reading] > div[aria-hidden="true"] {
+    margin-top: 1.1rem !important;
+  }
+
+  .ep-business-landing #readings > div:not([aria-hidden="true"]) > div:last-child {
+    gap: .8rem 1.2rem !important;
+    margin-top: 1.25rem !important;
+    font-size: .75rem !important;
+  }
+
+  /* Capabilities remain a vertical reading flow: no clipped horizontal carousel. */
+  .ep-business-landing #capabilities > div > .grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: .85rem !important;
+  }
+
+  .ep-business-landing #capabilities article[data-business-card] {
+    min-height: 0 !important;
+    padding: 1.2rem !important;
+    border-radius: 1.15rem !important;
+  }
+
+  .ep-business-landing #capabilities article[data-business-card] > span:first-child {
+    width: 2.7rem !important;
+    height: 2.7rem !important;
+    margin-bottom: 1.1rem !important;
+  }
+
+  .ep-business-landing #capabilities article[data-business-card] h3 {
+    margin-bottom: .55rem !important;
+    font-size: 1.3rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .ep-business-landing #capabilities article[data-business-card] p:last-child {
+    font-size: .9rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .ep-business-landing #capabilities > div > .mt-7 {
+    align-items: flex-start !important;
+    gap: .85rem !important;
+    margin-top: 1rem !important;
+    padding: 1.1rem !important;
+    border-radius: 1.1rem !important;
+  }
+
+  .ep-business-landing #capabilities > div > .mt-7 > div {
+    flex: 1 1 100% !important;
+  }
+
+  .ep-business-landing #capabilities > div > .mt-7 a {
+    width: 100%;
+    justify-content: center;
+    min-height: 2.9rem;
+  }
+
+  /* Turn the process into a calm vertical timeline with a visible rail. */
+  .ep-business-landing #process [data-process-viewport] {
+    margin-left: .15rem;
+    padding-left: 1.15rem;
+    border-left: 1px solid var(--ep-line);
+  }
+
+  .ep-business-landing #process [data-process-track] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.55rem !important;
+  }
+
+  .ep-business-landing #process [data-process-track] > li {
+    position: relative;
+    padding: 0 0 .25rem !important;
+    border: 0 !important;
+  }
+
+  .ep-business-landing #process [data-step-node] {
+    display: block !important;
+    position: absolute !important;
+    top: .3rem !important;
+    left: -1.57rem !important;
+    width: .55rem !important;
+    height: .55rem !important;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px var(--ep-bg) !important;
+  }
+
+  .ep-business-landing #process [data-step] > div:first-of-type {
+    margin-bottom: .65rem !important;
+  }
+
+  .ep-business-landing #process [data-step] h3 {
+    margin-bottom: .35rem !important;
+    font-size: 1.35rem !important;
+  }
+
+  .ep-business-landing #process [data-step] p {
+    max-width: 32rem !important;
+    font-size: .92rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Touch devices should not inherit desktop hover-lift transforms. */
+  .ep-business-landing main :is(article, [data-reading], [data-step], a, button) {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .ep-business-landing main :is(article, [data-reading], [data-step]) {
+    transform: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .ep-business-landing #top > .ep-hero-layout {
+    padding-inline: .95rem !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    font-size: clamp(2.35rem, 10.4vw, 2.8rem) !important;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ep-business-landing #top [data-hero="cta"] > a {
+    width: 100%;
+  }
+
+  .ep-business-landing .ep-stats-panel > div {
+    padding: .8rem .7rem !important;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    font-size: .66rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing #top [data-hero="cta"] > a,
+  .ep-business-landing #capabilities article,
+  .ep-business-landing #readings [data-reading],
+  .ep-business-landing #process [data-step] {
+    transition: none !important;
+    animation: none !important;
+  }
+}
