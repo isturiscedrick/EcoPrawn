@@ -121,7 +121,7 @@ function AuthDialog({
   return (
     <div
       ref={overlayRef}
-      className="ep-auth-overlay fixed inset-0 z-[100] flex items-start overflow-y-auto overscroll-contain p-3 sm:p-6"
+      className="ep-auth-overlay fixed inset-0 z-[100] flex items-center justify-center overflow-hidden overscroll-none p-3 sm:p-6"
     >
       {/* Backdrop (faded in and out by AuthModalMotion) */}
       <div
