@@ -1525,3 +1525,297 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
     animation-duration: .01ms !important;
   }
 }
+
+
+/* ---------- Desktop counterpart to the mobile welcome + form-sheet auth design ---------- */
+@media (min-width: 640px) {
+  .ep-auth-overlay {
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 28px !important;
+  }
+
+  .ep-auth-panel.ep-auth-modal {
+    position: relative !important;
+    isolation: isolate !important;
+    display: grid !important;
+    grid-template-columns: minmax(250px, .78fr) minmax(0, 1.22fr) !important;
+    align-items: stretch !important;
+    width: min(100%, 940px) !important;
+    max-width: 940px !important;
+    max-height: min(900px, calc(100dvh - 56px)) !important;
+    min-height: 590px !important;
+    margin: auto !important;
+    padding: 0 !important;
+    overflow: hidden auto !important;
+    border: 1px solid rgba(15, 76, 92, .18) !important;
+    border-radius: 30px !important;
+    background: #f1f7f6 !important;
+    box-shadow: 0 36px 110px rgba(0, 18, 22, .38), 0 2px 10px rgba(0, 18, 22, .08) !important;
+  }
+
+  /* Teal welcome panel mirrors the mobile header, now as a full-height column. */
+  .ep-auth-panel.ep-auth-modal::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0 auto 0 0;
+    width: 38.5%;
+    background:
+      radial-gradient(circle at 82% 20%, rgba(156, 220, 224, .22) 0 42px, transparent 43px),
+      radial-gradient(circle at 16% 76%, rgba(86, 190, 200, .16) 0 66px, transparent 67px),
+      radial-gradient(circle at 78% 88%, rgba(241, 247, 248, .1) 0 24px, transparent 25px),
+      linear-gradient(145deg, #046f7c 0%, #0f4c5c 72%, #073d49 100%);
+    border-radius: 29px 0 0 29px;
+  }
+
+  .ep-auth-panel .ep-auth-brand {
+    grid-column: 1;
+    grid-row: 1;
+    position: relative !important;
+    display: flex !important;
+    align-self: stretch !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 46px 28px !important;
+    border: 0 !important;
+  }
+
+  .ep-auth-panel .ep-auth-brand > div {
+    width: 100%;
+    padding: 0 !important;
+  }
+
+  .ep-auth-panel .ep-auth-brand .ep-logo {
+    max-width: 250px !important;
+  }
+
+  .ep-auth-panel button[aria-label="Close"] {
+    position: absolute !important;
+    top: 18px !important;
+    right: 18px !important;
+    width: 40px !important;
+    height: 40px !important;
+    border: 1px solid rgba(241, 247, 248, .28) !important;
+    border-radius: 50% !important;
+    background: rgba(241, 247, 248, .1) !important;
+    color: #f1f7f8 !important;
+  }
+
+  .ep-auth-panel button[aria-label="Close"]:hover {
+    background: rgba(241, 247, 248, .2) !important;
+  }
+
+  /* Right column holds the complete existing LoginForm component. */
+  .ep-auth-panel > div:not(.ep-auth-brand) {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 48px clamp(28px, 4vw, 58px) !important;
+  }
+
+  .ep-auth-panel > div:not(.ep-auth-brand) > div:first-child {
+    max-width: 440px;
+  }
+
+  .ep-auth-panel h1 {
+    color: #0f4c5c !important;
+    font-size: clamp(28px, 3vw, 36px) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -.045em !important;
+    text-align: left !important;
+  }
+
+  .ep-auth-panel h1 + p {
+    max-width: 410px !important;
+    margin: 9px 0 0 !important;
+    color: #526b70 !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    text-align: left !important;
+  }
+
+  .ep-auth-panel div:has(> form) {
+    width: 100% !important;
+    margin: 24px 0 0 !important;
+    padding: clamp(18px, 2.5vw, 26px) !important;
+    gap: 17px !important;
+    border: 1px solid #dce8e4 !important;
+    border-radius: 22px !important;
+    background: #ffffff !important;
+    box-shadow: 0 16px 42px rgba(4, 55, 62, .08) !important;
+  }
+
+  .ep-auth-panel [role="group"][aria-label="Account access"] {
+    gap: 5px !important;
+    padding: 4px !important;
+    border: 0 !important;
+    border-radius: 13px !important;
+    background: #edf4f3 !important;
+  }
+
+  .ep-auth-panel [role="group"][aria-label="Account access"] button {
+    min-height: 44px !important;
+    border: 0 !important;
+    border-radius: 10px !important;
+    background: transparent !important;
+    color: #0f4c5c !important;
+  }
+
+  .ep-auth-panel [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
+    background: #046f7c !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(4, 111, 124, .18) !important;
+  }
+
+  .ep-auth-panel label {
+    color: #172d30 !important;
+    font-size: 13px !important;
+    font-weight: 650 !important;
+  }
+
+  .ep-auth-panel input {
+    min-height: 50px !important;
+    border: 1px solid #e2e9e8 !important;
+    border-radius: 13px !important;
+    background: #f7f9f9 !important;
+    color: #172d30 !important;
+    font-size: 15px !important;
+    box-shadow: none !important;
+  }
+
+  .ep-auth-panel input:focus {
+    border-color: #56bec8 !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(86, 190, 200, .16) !important;
+  }
+
+  .ep-auth-panel input::placeholder {
+    color: #849491 !important;
+    opacity: 1 !important;
+  }
+
+  .ep-auth-panel button[type="submit"] {
+    min-height: 51px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: #d94416 !important;
+    color: #ffffff !important;
+    box-shadow: 0 8px 18px rgba(217, 68, 22, .18) !important;
+    transform: none !important;
+  }
+
+  .ep-auth-panel button[type="submit"]:not(:disabled):hover {
+    background: #b83a0f !important;
+    transform: translateY(-1px) !important;
+  }
+
+  .ep-auth-panel button:has(> svg[viewBox="0 0 48 48"]) {
+    min-height: 49px !important;
+    border: 1px solid #e2e9e8 !important;
+    border-radius: 999px !important;
+    background: #ffffff !important;
+    color: #172d30 !important;
+    box-shadow: none !important;
+  }
+
+  .ep-auth-panel button:has(> svg[viewBox="0 0 48 48"]):hover {
+    background: #f1f7f6 !important;
+  }
+
+  .ep-auth-panel > div:not(.ep-auth-brand) > div:last-child {
+    margin: 18px 0 0 !important;
+    color: #607371 !important;
+    font-size: 12px !important;
+    text-align: center !important;
+  }
+
+  /* Dark mode uses the same two-column composition with EcoPrawn dark surfaces. */
+  html.dark .ep-auth-panel.ep-auth-modal {
+    background: #181f20 !important;
+    border-color: rgba(139, 213, 166, .2) !important;
+  }
+
+  html.dark .ep-auth-panel.ep-auth-modal::before {
+    background:
+      radial-gradient(circle at 82% 20%, rgba(139, 213, 166, .14) 0 42px, transparent 43px),
+      radial-gradient(circle at 16% 76%, rgba(242, 138, 104, .12) 0 66px, transparent 67px),
+      linear-gradient(145deg, #0f4c5c 0%, #123b40 72%, #181f20 100%);
+  }
+
+  html.dark .ep-auth-panel h1 {
+    color: #f1f7f6 !important;
+  }
+
+  html.dark .ep-auth-panel h1 + p {
+    color: #b7c6c1 !important;
+  }
+
+  html.dark .ep-auth-panel div:has(> form) {
+    border-color: rgba(139, 213, 166, .16) !important;
+    background: #242d2e !important;
+    box-shadow: 0 16px 42px rgba(0, 0, 0, .24) !important;
+  }
+
+  html.dark .ep-auth-panel [role="group"][aria-label="Account access"] {
+    background: #293735 !important;
+  }
+
+  html.dark .ep-auth-panel [role="group"][aria-label="Account access"] button {
+    color: #8bd5a6 !important;
+  }
+
+  html.dark .ep-auth-panel [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
+    background: #f28a68 !important;
+    color: #18191a !important;
+  }
+
+  html.dark .ep-auth-panel label {
+    color: #f1f7f6 !important;
+  }
+
+  html.dark .ep-auth-panel input {
+    border-color: rgba(139, 213, 166, .2) !important;
+    background: #181f20 !important;
+    color: #f1f7f6 !important;
+  }
+
+  html.dark .ep-auth-panel input::placeholder {
+    color: #aab8b3 !important;
+  }
+
+  html.dark .ep-auth-panel input:focus {
+    border-color: #8bd5a6 !important;
+    box-shadow: 0 0 0 3px rgba(139, 213, 166, .14) !important;
+  }
+
+  html.dark .ep-auth-panel button[type="submit"] {
+    background: #f28a68 !important;
+    color: #18191a !important;
+  }
+
+  html.dark .ep-auth-panel button:has(> svg[viewBox="0 0 48 48"]) {
+    border-color: rgba(139, 213, 166, .22) !important;
+    background: #202729 !important;
+    color: #f1f7f6 !important;
+  }
+
+  html.dark .ep-auth-panel > div:not(.ep-auth-brand) > div:last-child {
+    color: #aab8b3 !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 767px) {
+  .ep-auth-panel.ep-auth-modal {
+    grid-template-columns: minmax(190px, .68fr) minmax(0, 1.32fr) !important;
+    min-height: 560px !important;
+  }
+
+  .ep-auth-panel > div:not(.ep-auth-brand) {
+    padding: 34px 24px !important;
+  }
+}
