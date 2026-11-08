@@ -195,8 +195,7 @@ function AuthDialog({
 
         {/* Existing form and all its logic */}
         <LoginForm initialMode={mode} />
-      </div>
-    </div>
+      </div>,
     document.body,
   );
 }
