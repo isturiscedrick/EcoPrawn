@@ -750,3 +750,146 @@ html.dark :where(.ep-about-page,.ep-contact-page) [data-page-hero] > div.ep-hero
     transition-duration:.01ms !important;
   }
 }
+
+
+/* -------------------------------------------------------------------------
+   Shared landing / About / Contact card language + compact hero eyebrow.
+   Matches the reference pill: quiet neutral capsule, teal lettering, orange dot.
+   ------------------------------------------------------------------------- */
+
+:where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+  #top .ep-hero-kicker,
+  [data-page-kicker]
+) {
+  display: inline-flex !important;
+  width: fit-content !important;
+  max-width: min(100%, 100vw - 2rem) !important;
+  min-height: 2.1rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .6rem !important;
+  padding: .42rem 1.1rem !important;
+  border: 1px solid color-mix(in srgb,#0f4c5c 24%,transparent) !important;
+  border-radius: 999px !important;
+  background: #f3f6f6 !important;
+  color: #0f4c5c !important;
+  box-shadow: 0 5px 18px -16px rgba(15,76,92,.55) !important;
+  font-size: .65rem !important;
+  font-weight: 750 !important;
+  line-height: 1.2 !important;
+  letter-spacing: .19em !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  white-space: normal;
+}
+:where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+  #top .ep-hero-kicker .ep-pulse-dot,
+  [data-page-kicker] .ep-pulse-dot
+) {
+  width: .48rem !important;
+  height: .48rem !important;
+  min-width: .48rem !important;
+  border-radius: 50% !important;
+  background: #d94416 !important;
+  box-shadow: 0 0 0 3px rgba(217,68,22,.08);
+}
+html.dark :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+  #top .ep-hero-kicker,
+  [data-page-kicker]
+) {
+  border-color: rgba(139,178,185,.32) !important;
+  background: #111819 !important;
+  color: #e7f0f1 !important;
+  box-shadow: 0 7px 22px -17px rgba(0,0,0,.8) !important;
+}
+
+/* Shared card geometry and surface treatment. Each section keeps its own
+   established palette, while cards now share the same radius, border and depth. */
+:where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+  #readings [data-reading],
+  #capabilities .ep-capability-card,
+  #capabilities article[data-business-card],
+  #objectives article,
+  #scope article,
+  [data-contact-card],
+  [data-contact-form] > form
+) {
+  min-width: 0;
+  border: 1px solid var(--ep-line) !important;
+  border-radius: 1.4rem !important;
+  box-shadow: 0 16px 42px -34px rgba(0,0,0,.38) !important;
+  transition:
+    border-color .28s ease,
+    box-shadow .32s ease,
+    transform .32s cubic-bezier(.2,.7,.2,1),
+    background-color .28s ease !important;
+}
+:where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+  #capabilities .ep-capability-card,
+  #capabilities article[data-business-card],
+  #objectives article,
+  #scope article,
+  [data-contact-card]
+):hover {
+  border-color: color-mix(in srgb,#d94416 58%,var(--ep-line)) !important;
+  box-shadow: 0 22px 48px -34px rgba(15,76,92,.34) !important;
+}
+.ep-business-landing #readings [data-reading] {
+  border-color: rgba(255,255,255,.2) !important;
+  border-radius: 1.4rem !important;
+  background: linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07),0 18px 42px -34px rgba(0,0,0,.42) !important;
+}
+.ep-about-page #systems article {
+  border-radius: 1.4rem !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06),0 18px 42px -36px rgba(0,0,0,.38) !important;
+}
+.ep-about-page #systems article:hover {
+  transform: translateY(-3px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08),0 24px 48px -34px rgba(0,0,0,.48) !important;
+}
+.ep-about-page #scope article {
+  border-width: 1px !important;
+}
+.ep-about-page #scope article:first-child {
+  border-top: 3px solid #0f4c5c !important;
+}
+.ep-about-page #scope article:last-child {
+  border-top: 3px solid #d94416 !important;
+}
+@media (max-width: 767px) {
+  :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+    #readings [data-reading],
+    #capabilities .ep-capability-card,
+    #capabilities article[data-business-card],
+    #objectives article,
+    #scope article,
+    [data-contact-card],
+    [data-contact-form] > form
+  ) {
+    border-radius: 1.15rem !important;
+  }
+  :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+    #top .ep-hero-kicker,
+    [data-page-kicker]
+  ) {
+    max-width: calc(100vw - 2rem) !important;
+    padding-inline: .9rem !important;
+    font-size: .6rem !important;
+    letter-spacing: .14em !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+    #readings [data-reading],
+    #capabilities .ep-capability-card,
+    #capabilities article[data-business-card],
+    #objectives article,
+    #scope article,
+    #systems article,
+    [data-contact-card],
+    [data-contact-form] > form
+  ) {
+    transition: none !important;
+  }
+}
