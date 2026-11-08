@@ -2833,3 +2833,82 @@ html.dark .ep-business-landing #top .ep-hero-visual::before {
     transition-duration: .01ms !important;
   }
 }
+
+
+/* ---------- HeroLens telemetry moved above the instrument ---------- */
+@media (min-width: 640px) {
+  .ep-landing #top .ep-lens-diagram {
+    height: 440px !important;
+    min-height: 440px !important;
+  }
+  .ep-landing #top .ep-lens-core {
+    top: 112px !important;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: absolute !important;
+    inset: 8px 2% auto !important;
+    z-index: 4 !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    gap: clamp(.35rem, 1.2vw, .8rem) !important;
+    width: 96% !important;
+    padding: .65rem .4rem !important;
+    border-top: 1px solid var(--ep-line) !important;
+    border-bottom: 1px solid var(--ep-line) !important;
+    background: color-mix(in srgb, var(--ep-bg) 88%, transparent) !important;
+    border-radius: .9rem !important;
+    backdrop-filter: blur(10px);
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    display: flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    transform: none !important;
+    align-items: center !important;
+    text-align: center !important;
+    pointer-events: auto !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout > span:first-child {
+    justify-content: center !important;
+    white-space: normal !important;
+    font-size: clamp(.58rem, .85vw, .72rem) !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout > span:last-child {
+    padding: 0 !important;
+    font-size: clamp(.85rem, 1.25vw, 1.05rem) !important;
+    white-space: nowrap !important;
+  }
+  .ep-landing #top .ep-lens-connectors {
+    opacity: .35;
+  }
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-diagram {
+    flex-direction: column !important;
+  }
+  .ep-landing #top .ep-lens-readings {
+    order: -1 !important;
+    margin: 0 0 .35rem !important;
+    padding: .7rem .25rem !important;
+    border-top: 0 !important;
+    border-bottom: 1px solid var(--ep-line) !important;
+    background: color-mix(in srgb, var(--ep-bg) 90%, transparent);
+    border-radius: .75rem;
+  }
+  .ep-landing #top .ep-lens-stage {
+    order: 1 !important;
+  }
+}
