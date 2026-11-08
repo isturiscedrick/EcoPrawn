@@ -236,7 +236,7 @@ export function SiteHeader({
             }}
             aria-label="EcoPrawn home — back to top"
             activeOptions={{ exact: true }}
-            className={`flex w-max shrink-0 items-center justify-self-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing} ${showLinks ? "absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 lg:justify-self-start" : ""}`}
+            className={`relative flex w-max shrink-0 items-center justify-self-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing} ${showLinks ? "lg:justify-self-start" : ""}`}
           >
             <BrandMark size={36} />
           </Link>
