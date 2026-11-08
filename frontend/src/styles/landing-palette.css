@@ -1,0 +1,108 @@
+/*
+ * Landing-page-only 60 / 30 / 10 color system.
+ * 60% neutral space (white/black), 30% Deep Teal, 10% Terracotta.
+ * Keep the palette identical in light and dark mode; only the neutral
+ * background and foreground values switch with the active theme.
+ */
+.ep-business-landing {
+  --ep-bg: #ffffff !important;
+  --ep-surface: #ffffff !important;
+  --ep-tint: #f5f5f5 !important;
+  --ep-line: rgba(15, 76, 92, 0.22) !important;
+  --ep-primary: #0f4c5c !important;
+  --ep-secondary: #0f4c5c !important;
+  --ep-text: #000000 !important;
+  --ep-text-muted: #262626 !important;
+  --ep-accent: #d94416 !important;
+  --ep-accent-hover: #b83a0f !important;
+  --ep-on-accent: #ffffff !important;
+  --ep-deep: #0f4c5c !important;
+  --ep-on-deep: #ffffff !important;
+  --ep-on-deep-muted: rgba(255, 255, 255, 0.86) !important;
+  --ep-zone: #d94416 !important;
+  --ep-marker: #d94416 !important;
+  --ep-ok: #d94416 !important;
+  --ep-warn-text: #d94416 !important;
+  --ep-danger: #d94416 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+html.dark .ep-business-landing {
+  --ep-bg: #000000 !important;
+  --ep-surface: #000000 !important;
+  --ep-tint: #111111 !important;
+  --ep-line: rgba(15, 76, 92, 0.62) !important;
+  --ep-primary: #0f4c5c !important;
+  --ep-secondary: #0f4c5c !important;
+  --ep-text: #ffffff !important;
+  --ep-text-muted: rgba(255, 255, 255, 0.82) !important;
+  --ep-accent: #d94416 !important;
+  --ep-accent-hover: #b83a0f !important;
+  --ep-on-accent: #ffffff !important;
+  --ep-deep: #0f4c5c !important;
+  --ep-on-deep: #ffffff !important;
+  --ep-on-deep-muted: rgba(255, 255, 255, 0.86) !important;
+  --ep-zone: #d94416 !important;
+  --ep-marker: #d94416 !important;
+  --ep-ok: #d94416 !important;
+  --ep-warn-text: #d94416 !important;
+  --ep-danger: #d94416 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Keep the landing page's large surfaces neutral, reserving teal for
+   the water-reading feature band and supporting accents. */
+.ep-business-landing #top.ep-hero,
+.ep-business-landing #capabilities,
+.ep-business-landing #process {
+  background-color: var(--ep-bg) !important;
+}
+.ep-business-landing #readings {
+  background-color: #0f4c5c !important;
+  color: #ffffff !important;
+}
+.ep-business-landing #readings [data-reading] {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  color: #ffffff !important;
+}
+.ep-business-landing #readings :is(h2, p, dt, dd, span, div) {
+  color: inherit;
+}
+.ep-business-landing #readings [data-zone] {
+  background-color: #d94416 !important;
+}
+.ep-business-landing #readings [data-marker] > span:last-child {
+  background-color: #d94416 !important;
+}
+
+/* Hero headline: Deep Teal leads, Terracotta is the restrained highlight. */
+.ep-business-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+  color: #0f4c5c !important;
+  -webkit-text-fill-color: #0f4c5c !important;
+}
+.ep-business-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
+  color: #d94416 !important;
+  -webkit-text-fill-color: #d94416 !important;
+}
+.ep-business-landing #top [data-hero="grid"] {
+  background-image: radial-gradient(#0f4c5c 1px, transparent 1px) !important;
+}
+.ep-business-landing .ep-hero-atmosphere {
+  background:
+    radial-gradient(680px circle at 78% 38%, rgba(15, 76, 92, 0.10), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(217, 68, 22, 0.055), transparent 60%) !important;
+}
+
+/* Secondary color belongs on icons, markers, rules and small labels;
+   primary Terracotta is reserved for actions and brief emphasis. */
+.ep-business-landing :is(.ep-capability-icon, [data-step] [class*="rounded-full"]) {
+  color: #0f4c5c !important;
+}
+.ep-business-landing :is([data-process-line], [data-step-node]) {
+  background-color: #d94416 !important;
+}
+.ep-business-landing :is(a:hover, button:hover) {
+  --ep-accent: #d94416;
+}
