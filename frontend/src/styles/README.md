@@ -11,12 +11,10 @@ components.
 | `globals.css` | Single global entry point and cascade order only |
 | `base/foundations.css` | Tailwind theme bridge, base tokens, typography, global element defaults, and shared motion primitives |
 | `themes/theme-components.css` | Shared theme compatibility plus dashboard and public-page theme mappings |
-| `themes/brand-monochrome.css` | Global brand color normalization rules |
 | `dashboard/dashboard.css` | Dashboard-only brand tokens, layout safeguards, and dashboard responsive rules |
 | `marketing/marketing-overrides.css` | Legacy public-page compatibility rules not yet safely migrated |
 | `marketing/landing-global.css` | Core public-site layout, hero, lens, and shared Landing/About/Contact styling |
-| `marketing/landing-palette.css` | Public landing-page palette and visual refinements |
-| `marketing/public-pages-theme.css` | Shared public-page theme, surfaces, and final landing card treatment |
+| `marketing/public-site-theme.css` | Ordered landing-page palette, shared public-page themes, surfaces, and final card refinements |
 | `responsive/site-responsive.css` | Ordered responsive safeguards, brand normalization, and shared layout corrections in one final cascade layer |
 
 Feature-owned styles stay beside their feature. For example, authentication
@@ -33,11 +31,13 @@ The order in `globals.css` is intentional and must be preserved:
 4. Dashboard-specific styles.
 5. Legacy marketing compatibility.
 6. Canonical public-page styles.
-7. Responsive safeguards and final visual refinements, in their current order.
+7. Responsive safeguards.
+8. Combined public-site theme and final visual refinements (landing palette first, shared public-page rules second).
 
 Do not alphabetize these imports. Later styles intentionally override earlier
-compatibility rules. Keep the responsive and final public-page layers in the
-same order unless the cascade has been audited and verified.
+compatibility rules. Keep the responsive layer before the combined public-site theme file. Inside
+`marketing/public-site-theme.css`, preserve the landing palette before the
+shared public-page theme rules.
 
 ## Refactoring rules
 

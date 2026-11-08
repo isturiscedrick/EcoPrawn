@@ -19,5 +19,4 @@
 
 /* Responsive rules intentionally come last */
 @import "./responsive/site-responsive.css";
-@import "./marketing/landing-palette.css";
-@import "./marketing/public-pages-theme.css";
+@import "./marketing/public-site-theme.css";
