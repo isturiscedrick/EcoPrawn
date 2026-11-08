@@ -3137,3 +3137,47 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
     font-size: .68rem !important;
   }
 }
+
+
+/* Keep auth action labels and operator notice readable at narrow widths. */
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-google-button {
+  box-sizing: border-box;
+  min-height: 48px;
+  white-space: normal;
+  flex-wrap: nowrap;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-google-button .ep-auth-google-label {
+  min-width: 0;
+  max-width: 100%;
+  line-height: 1.3;
+  text-align: center;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-access-note {
+  width: 100%;
+  box-sizing: border-box;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-access-note > svg {
+  flex: 0 0 14px;
+}
+@media (max-width: 420px) {
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-google-button {
+    gap: .55rem;
+    padding-inline: .75rem;
+    font-size: .875rem;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-access-note {
+    justify-content: flex-start;
+    font-size: .75rem;
+    line-height: 1.4;
+  }
+}
+@media (max-width: 340px) {
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-google-button {
+    font-size: .8rem;
+  }
+}
