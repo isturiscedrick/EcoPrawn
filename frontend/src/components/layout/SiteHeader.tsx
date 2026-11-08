@@ -195,7 +195,7 @@ export function SiteHeader({
       >
         {/* Three columns (logo | nav | actions) so the nav is truly centered and can never overlap. */}
         <div
-          className={`mx-auto min-h-[66px] max-w-[1440px] items-center gap-3 px-4 sm:gap-4 sm:px-8 lg:px-12 ${
+          className={`relative mx-auto min-h-[66px] max-w-[1440px] items-center gap-3 px-4 sm:gap-4 sm:px-8 lg:px-12 ${
             showLinks ? "grid grid-cols-[1fr_auto_1fr] lg:grid-cols-[1fr_auto_1fr]" : "flex justify-between"
           } ${isAuth ? "w-full" : ""}`}
         >
@@ -236,7 +236,7 @@ export function SiteHeader({
             }}
             aria-label="EcoPrawn home — back to top"
             activeOptions={{ exact: true }}
-            className={`flex shrink-0 items-center justify-self-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing} ${showLinks ? "lg:justify-self-start" : ""}`}
+            className={`flex w-max shrink-0 items-center justify-self-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing} ${showLinks ? "absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 lg:justify-self-start" : ""}`}
           >
             <BrandMark size={36} />
           </Link>
