@@ -309,33 +309,23 @@ export function LandingMotion() {
           handlers.push(() => observer.disconnect());
         });
 
-        // The horizontal process-story interaction is preserved as a
-        // separate desktop-only interaction; it does not target the hero lens.
-        const viewport = root.querySelector<HTMLElement>("#process [data-process-viewport]");
-        const track = viewport?.querySelector<HTMLElement>("[data-process-track]");
-        const line = viewport?.querySelector<HTMLElement>("[data-process-line]");
-        if (viewport && track) {
-          const getDistance = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
-          if (getDistance() >= 40) {
-            gsap.to(track, {
-              x: () => -getDistance(),
-              ease: "none",
-              scrollTrigger: {
-                trigger: viewport,
-                start: "top 16%",
-                end: () => `+=${getDistance()}`,
-                scrub: 1,
-                pin: viewport,
-                anticipatePin: 1,
-                invalidateOnRefresh: true,
-                onUpdate: (self) => {
-                  if (line) gsap.set(line, {
-                    scaleX: self.progress, transformOrigin: "left center",
-                  });
-                },
-              },
-            });
-          }
+        // Process steps use the same ordinary scroll-reveal pattern as About:
+        // no horizontal translation, pinning, scrubbing, or scroll hijacking.
+        const processSteps = root.querySelectorAll<HTMLElement>("#process [data-step]");
+        if (processSteps.length) {
+          gsap.from(processSteps, {
+            y: 28,
+            opacity: 0,
+            duration: .72,
+            stagger: .14,
+            ease: "power3.out",
+            clearProps: "transform,opacity",
+            scrollTrigger: {
+              trigger: "#process [data-process-viewport]",
+              start: "top 82%",
+              once: true,
+            },
+          });
         }
       }, root);
 
