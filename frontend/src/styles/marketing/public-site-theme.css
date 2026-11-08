@@ -323,9 +323,7 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   color: #0f4c5c !important;
   font-size: clamp(1.25rem, 2vw, 1.8rem) !important;
 }
-html.dark .ep-business-landing .ep-stats-panel > div > span:first-child {
-  color: #ffffff !important;
-}
+
 .ep-business-landing .ep-stats-panel > div > span:last-child {
   border: 0 !important;
   color: var(--ep-text-muted) !important;
@@ -799,9 +797,7 @@ html.dark .ep-business-landing .ep-stats-panel > div > span:first-child {
   .ep-business-landing #top [data-hero="headline"] {
     font-size: clamp(2.55rem, 11.5vw, 3.1rem) !important;
   }
-  .ep-business-landing #top .ep-product-window-bar {
-    align-items: flex-start;
-  }
+  
   .ep-business-landing #top .ep-product-status {
     white-space: normal;
     max-width: 7.5rem;
@@ -1586,10 +1582,7 @@ html.dark :where(.ep-about-page,.ep-contact-page) {
   border-radius: 999px !important;
   font-size: .76rem !important;
 }
-:where(.ep-about-page,.ep-contact-page) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] {
-  background: #0f4c5c !important;
-  color: #ffffff !important;
-}
+
 :where(.ep-about-page,.ep-contact-page) #site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]):hover {
   background: rgba(15,76,92,.09) !important;
   color: #0f4c5c !important;
@@ -1622,9 +1615,7 @@ html.dark :where(.ep-about-page,.ep-contact-page) {
   background: var(--ep-surface) !important;
   color: var(--ep-text) !important;
 }
-:where(.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-inner {
-  max-width: 1320px !important;
-}
+
 :where(.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-grid {
   grid-template-columns: minmax(0,1.5fr) minmax(7rem,.55fr) minmax(12rem,.9fr) !important;
   column-gap: clamp(2rem,5vw,5.5rem) !important;
@@ -1714,15 +1705,9 @@ html.dark :where(.ep-about-page,.ep-contact-page) {
   border-color: #d94416 !important;
   transform: translateY(-4px);
 }
-.ep-about-page #scope article {
-  border-width: 1px !important;
-}
-.ep-about-page #scope article:first-child {
-  border-top: 3px solid #0f4c5c !important;
-}
-.ep-about-page #scope article:last-child {
-  border-top: 3px solid #d94416 !important;
-}
+
+
+
 .ep-about-page #scope article :is(span,svg) {
   color: inherit;
 }
@@ -1773,9 +1758,7 @@ html.dark :where(.ep-about-page,.ep-contact-page) {
   background: #b83a0f !important;
 }
 @media(max-width:1023px) {
-  :where(.ep-about-page,.ep-contact-page) #site-header nav[aria-label="Primary navigation"] {
-    display: none !important;
-  }
+  
 }
 @media(max-width:767px) {
   :where(.ep-about-page,.ep-contact-page) #site-header > div {
@@ -1789,9 +1772,7 @@ html.dark :where(.ep-about-page,.ep-contact-page) {
   :where(.ep-about-page,.ep-contact-page) [data-page-hero-headline] {
     font-size: clamp(2.65rem,11vw,4rem) !important;
   }
-  :where(.ep-about-page,.ep-contact-page) footer[data-site-footer] {
-    padding: 2.5rem 1.15rem 1.2rem !important;
-  }
+  
   :where(.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-grid {
     grid-template-columns: repeat(2,minmax(0,1fr)) !important;
     gap: 1.5rem 1.1rem !important;

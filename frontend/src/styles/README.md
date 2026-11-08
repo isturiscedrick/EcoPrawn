@@ -55,3 +55,4 @@ shared public-page theme rules.
   `overrides`; some still support older markup and theme behavior.
 - Consolidate duplicate selectors only after comparing computed behavior and
   checking light mode, dark mode, desktop, mobile, and reduced-motion states.
+- Remove an earlier rule block only when its selector, declarations, and conditional context are identical to a later block; keep the later copy so the final cascade remains authoritative.

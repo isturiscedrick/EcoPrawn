@@ -3068,9 +3068,7 @@ html.dark .ep-business-landing #capabilities article[data-business-card] > span:
   background: #e6f1ef;
   color: #0f4c5c;
 }
-.ep-business-landing #process [data-step] h3 {
-  letter-spacing: -.035em;
-}
+
 .ep-business-landing #process [data-step-node] {
   display: none;
 }
