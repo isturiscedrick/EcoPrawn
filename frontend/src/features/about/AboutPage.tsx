@@ -1,6 +1,5 @@
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
-import { SiteFooter } from "@/components/layout/SiteFooter";
+import { PublicPageLayout } from "@/components/layout/PublicPageLayout";
+import { SurfaceCard } from "@/components/ui/SurfaceCard";
 import { PageHero } from "@/components/layout/PageHero";
 import { Icon, IconChip, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
@@ -23,12 +22,7 @@ const FEATURE_ICONS: IconName[] = ["wrench", "gauge", "eye", "repeat", "leaf"];
 
 export function AboutPage() {
   return (
-    <div className="ep-landing ep-about-page flex min-h-screen flex-col">
-      <AboutMotion />
-      <PublicChromeMotion />
-      <SiteHeader tone="white" integrated />
-
-      <main className="flex-1">
+    <PublicPageLayout className="ep-about-page" motion={<AboutMotion />}>
         <PageHero
           kicker="How it works"
           title={
@@ -49,7 +43,7 @@ export function AboutPage() {
         <section id="objectives" className={`w-full box-border scroll-mt-[140px] md:scroll-mt-[150px] ${SECTION_PAD}`}>
           <div className="ep-about-content-frame mx-auto w-full max-w-[1200px]">
             <Reveal>
-              <div className="ep-about-objective mb-6 rounded-3xl border border-l-4 border-[var(--ep-line)] border-l-[var(--ep-accent)] bg-[var(--ep-surface)] px-6 py-8 shadow-[0_16px_30px_-28px_rgba(11,46,51,0.5)] sm:px-10 sm:py-10">
+              <SurfaceCard className="ep-about-objective mb-6 rounded-3xl border-l-4 border-l-[var(--ep-accent)] px-6 py-8 shadow-[0_16px_30px_-28px_rgba(11,46,51,0.5)] sm:px-10 sm:py-10">
                 <div className="mb-3 text-sm font-semibold text-[var(--ep-text-muted)]">
                   General objective
                 </div>
@@ -57,13 +51,13 @@ export function AboutPage() {
                 <p className="ep-font-display max-w-[52rem] text-xl font-medium leading-relaxed sm:text-2xl">
                   &quot;An AIoT-enabled system for water monitoring, precision feeding, and healthier indoor shrimp farming.&quot;
                 </p>
-              </div>
+              </SurfaceCard>
             </Reveal>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {objectives.map((objective, i) => (
                 <Reveal key={objective.num} delay={(i % 3) * 90} className="h-full">
-                  <article className="group h-full rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)]">
+                  <SurfaceCard as="article" className="group h-full p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)]">
                     <IconChip
                       name={OBJECTIVE_ICONS[i] ?? "layers"}
                       tone="brand"
@@ -78,7 +72,7 @@ export function AboutPage() {
                     <p className="text-base leading-relaxed text-[var(--ep-text-muted)]">
                       {objective.body}
                     </p>
-                  </article>
+                  </SurfaceCard>
                 </Reveal>
               ))}
             </div>
@@ -123,7 +117,7 @@ export function AboutPage() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {features.map((feature, i) => (
                 <Reveal key={feature.index} className="h-full">
-                  <article className="group h-full rounded-2xl border border-white/20 bg-white/[0.06] p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ep-marker)] hover:bg-white/[0.09]">
+                  <SurfaceCard as="article" tone="inverse" className="group h-full p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ep-marker)] hover:bg-white/[0.09]">
                     <div className="mb-5 flex items-center gap-4">
                       <span
                         aria-hidden="true"
@@ -154,7 +148,7 @@ export function AboutPage() {
                         </div>
                       ))}
                     </div>
-                  </article>
+                  </SurfaceCard>
                 </Reveal>
               ))}
             </div>
@@ -185,7 +179,7 @@ export function AboutPage() {
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               {/* In scope: solid outline */}
               <Reveal className="h-full">
-                <article className="h-full rounded-2xl border-2 border-[var(--ep-primary)] bg-[var(--ep-surface)] p-6 sm:p-8">
+                <SurfaceCard as="article" className="h-full p-6 sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
                     <h3 className="ep-font-display flex items-center gap-3 text-2xl font-semibold">
                       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-ok)] text-[var(--ep-on-status)]">
@@ -220,12 +214,12 @@ export function AboutPage() {
                       </div>
                     ))}
                   </div>
-                </article>
+                </SurfaceCard>
               </Reveal>
 
               {/* Out of scope: dashed outline, a second signal beyond colour */}
               <Reveal delay={120} className="h-full">
-                <article className="ep-about-outscope h-full rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] sm:p-8">
+                <SurfaceCard as="article" className="ep-about-outscope h-full border-dashed p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
                     <h3 className="ep-font-display flex items-center gap-3 text-2xl font-semibold">
                       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-warn-text)] text-[var(--ep-on-status)]">
@@ -260,14 +254,11 @@ export function AboutPage() {
                       </div>
                     ))}
                   </div>
-                </article>
+                </SurfaceCard>
               </Reveal>
             </div>
           </div>
         </section>
-      </main>
-
-      <SiteFooter />
-    </div>
+    </PublicPageLayout>
   );
 }
