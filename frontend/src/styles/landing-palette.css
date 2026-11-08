@@ -21,7 +21,7 @@
   --ep-on-deep-muted: rgba(255, 255, 255, 0.86) !important;
   --ep-zone: #d94416 !important;
   --ep-marker: #d94416 !important;
-  --ep-ok: #d94416 !important;
+  --ep-ok: #0f4c5c !important;
   --ep-warn-text: #d94416 !important;
   --ep-danger: #d94416 !important;
   background-color: #ffffff !important;
@@ -45,7 +45,7 @@ html.dark .ep-business-landing {
   --ep-on-deep-muted: rgba(255, 255, 255, 0.86) !important;
   --ep-zone: #d94416 !important;
   --ep-marker: #d94416 !important;
-  --ep-ok: #d94416 !important;
+  --ep-ok: #0f4c5c !important;
   --ep-warn-text: #d94416 !important;
   --ep-danger: #d94416 !important;
   background-color: #000000 !important;
@@ -105,4 +105,17 @@ html.dark .ep-business-landing {
 }
 .ep-business-landing :is(a:hover, button:hover) {
   --ep-accent: #d94416;
+}
+
+/* Match the page canvas outside the root as well (including overscroll). */
+html:not(.dark) body.ecoprawn-root:has(.ep-business-landing) {
+  background: #ffffff !important;
+}
+html.dark body.ecoprawn-root:has(.ep-business-landing) {
+  background: #000000 !important;
+}
+
+/* Remove legacy mint/green decorative wash from the readings section. */
+.ep-business-landing #readings [data-readings-bg] {
+  background-image: radial-gradient(ellipse at 12% 8%, rgba(255,255,255,.08), transparent 42%) !important;
 }
