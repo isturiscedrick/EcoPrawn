@@ -188,108 +188,6 @@ html.dark .ep-business-landing #top .ep-hero-kicker {
 .ep-business-landing #top [data-hero="cta"] > a:first-child {
   box-shadow: 0 12px 28px -16px rgba(217,68,22,.8);
 }
-.ep-business-landing #top .ep-product-showcase {
-  
-  max-width: 720px !important;
-  
-  margin: 0 !important;
-  padding: 1.25rem 0;
-}
-.ep-business-landing #top .ep-product-window {
-  position: relative;
-  border-color: rgba(15,76,92,.16) !important;
-  border-radius: 2rem !important;
-  background: #ffffff !important;
-  box-shadow:
-    0 36px 90px -42px rgba(4,31,38,.42),
-    0 8px 26px -16px rgba(15,76,92,.24);
-  transform: rotate(1.1deg);
-  transition: transform .35s ease, box-shadow .35s ease;
-}
-.ep-business-landing #top .ep-product-showcase:hover .ep-product-window {
-  transform: rotate(0deg) translateY(-5px);
-  box-shadow:
-    0 44px 100px -42px rgba(4,31,38,.48),
-    0 12px 30px -16px rgba(15,76,92,.28);
-}
-.ep-business-landing #top .ep-product-window-bar {
-  border-color: rgba(15,76,92,.12) !important;
-}
-.ep-business-landing #top .ep-product-mark {
-  background: #0f4c5c !important;
-}
-.ep-business-landing #top .ep-product-status {
-  background: rgba(15,76,92,.09);
-  color: #0f4c5c;
-}
-.ep-business-landing #top .ep-product-metric {
-  border-color: rgba(15,76,92,.14) !important;
-  background: #f8faf9 !important;
-}
-.ep-business-landing #top .ep-product-meter {
-  background: rgba(15,76,92,.12);
-}
-.ep-business-landing #top .ep-product-meter > span {
-  background: #0f4c5c;
-}
-.ep-business-landing #top .ep-product-insight {
-  background: #0f4c5c !important;
-  color: #ffffff !important;
-}
-.ep-business-landing #top .ep-product-insight :is(p, strong, span) {
-  color: #ffffff !important;
-}
-.ep-business-landing #top .ep-product-bars span {
-  width: 7px;
-  min-width: 4px;
-  border-radius: 999px 999px 2px 2px;
-  background: rgba(255,255,255,.78);
-}
-.ep-business-landing #top .ep-product-bars span:nth-child(3n) {
-  background: #d94416;
-}
-.ep-business-landing #top .ep-product-float {
-  position: absolute;
-  z-index: 2;
-  align-items: center;
-  gap: .7rem;
-  padding: .85rem 1rem;
-  border: 1px solid rgba(15,76,92,.13);
-  border-radius: 1rem;
-  background: #ffffff;
-  color: #000000;
-  box-shadow: 0 18px 42px -24px rgba(0,0,0,.45);
-}
-.ep-business-landing #top .ep-product-float-top {
-  top: 2%;
-  right: -4%;
-}
-.ep-business-landing #top .ep-product-float-bottom {
-  bottom: 1%;
-  left: -5%;
-}
-.ep-business-landing #top .ep-product-float-icon {
-  display: grid;
-  width: 2.4rem;
-  height: 2.4rem;
-  place-items: center;
-  border-radius: .8rem;
-  background: rgba(15,76,92,.1);
-  color: #0f4c5c;
-}
-.ep-business-landing #top .ep-product-float strong,
-.ep-business-landing #top .ep-product-float small {
-  display: block;
-}
-.ep-business-landing #top .ep-product-float strong {
-  font-size: .82rem;
-  line-height: 1.25;
-}
-.ep-business-landing #top .ep-product-float small {
-  margin-top: .15rem;
-  color: #4b5563;
-  font-size: .68rem;
-}
 
 /* Horizontal proof strip, with typography-led stats rather than heavy cards. */
 .ep-business-landing > main > section[aria-label="EcoPrawn at a glance"] {
@@ -372,8 +270,6 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
 .ep-business-landing :is(a, button):focus-visible {
   outline-color: #d94416 !important;
 }
-.ep-business-landing #top .ep-product-showcase,
-.ep-business-landing #top .ep-product-window,
 .ep-business-landing .ep-capability-card {
   will-change: transform;
 }
@@ -408,9 +304,6 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   .ep-business-landing #top [data-hero="cta"] {
     justify-content: center !important;
   }
-  .ep-business-landing #top .ep-product-showcase {
-    max-width: 720px !important;
-  }
 }
 @media (max-width: 639px) {
   .ep-business-landing #top .ep-hero-layout {
@@ -444,40 +337,6 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   .ep-business-landing #top [data-hero="cta"] > a {
     width: 100%;
   }
-  .ep-business-landing #top .ep-product-showcase {
-    
-    padding: .5rem 0 1rem;
-  }
-  .ep-business-landing #top .ep-product-window {
-    border-radius: 1.25rem !important;
-    transform: none;
-  }
-  .ep-business-landing #top .ep-product-showcase:hover .ep-product-window {
-    transform: none;
-  }
-  .ep-business-landing #top .ep-product-window-bar {
-    padding: .8rem .9rem;
-  }
-  .ep-business-landing #top .ep-product-window .grid.gap-5 {
-    gap: .9rem;
-    padding: .9rem;
-  }
-  .ep-business-landing #top .ep-product-metrics {
-    gap: .5rem;
-  }
-  .ep-business-landing #top .ep-product-metric {
-    padding: .75rem;
-    border-radius: .9rem;
-  }
-  .ep-business-landing #top .ep-product-metric > span:nth-child(2) {
-    font-size: 1.2rem;
-  }
-  .ep-business-landing #top .ep-product-insight {
-    
-  }
-  .ep-business-landing #top .ep-product-float {
-    display: none !important;
-  }
   .ep-business-landing .ep-stats-panel {
     grid-template-columns: repeat(2, minmax(0,1fr));
     gap: .5rem;
@@ -498,7 +357,6 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ep-business-landing #top .ep-product-window,
   .ep-business-landing .ep-capability-card {
     transition: none !important;
     transform: none !important;
@@ -567,50 +425,6 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   background: color-mix(in srgb, var(--ep-secondary) 7%, var(--ep-surface));
 }
 
-/* Product preview: stable sizing and better information grouping. */
-.ep-business-landing #top .ep-product-showcase {
-  
-  isolation: isolate;
-}
-.ep-business-landing #top .ep-product-window {
-  
-  border: 1px solid rgba(15,76,92,.18) !important;
-}
-.ep-business-landing #top .ep-product-window-bar {
-  min-width: 0;
-  gap: .75rem;
-}
-.ep-business-landing #top .ep-product-window-bar > div {
-  min-width: 0;
-}
-.ep-business-landing #top .ep-product-window-bar p {
-  margin: 0;
-}
-.ep-business-landing #top .ep-product-status {
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-.ep-business-landing #top .ep-product-metric {
-  
-}
-.ep-business-landing #top .ep-product-metric > span:first-child {
-  min-height: 2.25em;
-  line-height: 1.35;
-}
-.ep-business-landing #top .ep-product-metric > span:nth-child(2) {
-  white-space: nowrap;
-}
-.ep-business-landing #top .ep-product-insight {
-  min-width: 0;
-}
-.ep-business-landing #top .ep-product-bars {
-  
-  min-width: 7rem;
-}
-.ep-business-landing #top .ep-product-float {
-  max-width: min(13rem, 42%);
-}
-
 /* Keep each section on one consistent content grid. */
 .ep-business-landing #readings > div,
 .ep-business-landing #capabilities > div,
@@ -661,15 +475,6 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   .ep-business-landing #top.ep-hero--lens-hidden .ep-hero-layout {
     min-height: 0 !important;
   }
-  .ep-business-landing #top .ep-product-showcase {
-    width: min(100%, 680px);
-  }
-  .ep-business-landing #top .ep-product-float-top {
-    right: -1%;
-  }
-  .ep-business-landing #top .ep-product-float-bottom {
-    left: -1%;
-  }
 }
 @media (max-width: 767px) {
   .ep-business-landing main > section {
@@ -701,44 +506,6 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   .ep-business-landing #top [data-hero="cta"] > a {
     min-height: 3.15rem !important;
     flex: 1 1 100%;
-  }
-  .ep-business-landing #top .ep-product-showcase {
-    padding: .25rem 0 .5rem !important;
-  }
-  .ep-business-landing #top .ep-product-window {
-    border-radius: 1.2rem !important;
-    box-shadow: 0 22px 55px -34px rgba(0,0,0,.36);
-  }
-  .ep-business-landing #top .ep-product-window-bar {
-    padding: .8rem .9rem !important;
-  }
-  .ep-business-landing #top .ep-product-status {
-    padding: .4rem .55rem;
-    font-size: .62rem;
-  }
-  .ep-business-landing #top .ep-product-status > span {
-    width: .35rem;
-    height: .35rem;
-  }
-  .ep-business-landing #top .ep-product-metric > span:first-child {
-    min-height: 0;
-    font-size: .68rem;
-  }
-  .ep-business-landing #top .ep-product-metric > span:nth-child(2) {
-    margin-top: .55rem;
-    font-size: 1.15rem;
-  }
-  .ep-business-landing #top .ep-product-insight {
-    gap: .75rem;
-  }
-  .ep-business-landing #top .ep-product-insight > div:first-child {
-    max-width: none;
-  }
-  .ep-business-landing #top .ep-product-bars {
-    width: 100%;
-    max-width: 12rem;
-    height: 2.75rem;
-    margin-left: auto;
   }
   .ep-business-landing > main > section[aria-label="EcoPrawn at a glance"] {
     padding: 1.35rem 1rem !important;
@@ -796,15 +563,6 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
 @media (max-width: 380px) {
   .ep-business-landing #top [data-hero="headline"] {
     font-size: clamp(2.55rem, 11.5vw, 3.1rem) !important;
-  }
-  
-  .ep-business-landing #top .ep-product-status {
-    white-space: normal;
-    max-width: 7.5rem;
-    line-height: 1.2;
-  }
-  .ep-business-landing #top .ep-product-metrics {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .ep-business-landing .ep-stats-panel > div {
     padding-inline: .35rem !important;

@@ -666,34 +666,6 @@ html.dark :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
     transition: none !important;
   }
 }
-
-
-/* Plain public-page content groups: remove decorative card chrome consistently.
-   Keep neutral surfaces and existing spacing so all copy stays readable. */
-:where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
-  .ep-stats-panel,
-  .ep-stats-panel > div,
-  #readings [data-reading],
-  #capabilities .ep-capability-card,
-  #capabilities article[data-business-card],
-  #objectives article,
-  #systems article,
-  #scope article,
-  [data-contact-card],
-  [data-contact-form] > form,
-  [data-contact-preview],
-  [data-contact-preview] dl,
-  .ep-product-metric
-) {
-  border: 0 !important;
-  border-top: 0 !important;
-  border-radius: 0 !important;
-  background: var(--ep-surface) !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  transform: none !important;
-  transition: none !important;
-}
 .ep-business-landing .ep-stats-panel {
   padding: 0 !important;
   background: transparent !important;

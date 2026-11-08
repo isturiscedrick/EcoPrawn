@@ -120,10 +120,7 @@ html.dark :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
    and clearer hierarchy without changing card content or layout. */
 .ep-business-landing .ep-stats-panel > div,
 .ep-business-landing #capabilities .ep-capability-card,
-.ep-business-landing #readings [data-reading],
-.ep-business-landing #top .ep-product-metric,
-.ep-business-landing #top .ep-product-insight,
-.ep-business-landing #top .ep-product-float {
+.ep-business-landing #readings [data-reading]{
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -137,8 +134,7 @@ html.dark :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
 
 .ep-business-landing .ep-stats-panel > div::before,
 .ep-business-landing #capabilities .ep-capability-card::after,
-.ep-business-landing #readings [data-reading]::after,
-.ep-business-landing #top .ep-product-metric::after {
+.ep-business-landing #readings [data-reading]::after{
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -162,16 +158,11 @@ html.dark :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
     radial-gradient(ellipse at 100% 0%, rgba(217,68,22,.16), transparent 45%),
     linear-gradient(145deg, rgba(15,76,92,.25), rgba(255,255,255,.035));
 }
-.ep-business-landing #top .ep-product-metric::after {
-  background: linear-gradient(135deg, rgba(15,76,92,.10), rgba(217,68,22,.075));
-}
 
 @media (hover: hover) and (pointer: fine) {
   .ep-business-landing .ep-stats-panel > div:hover,
   .ep-business-landing #capabilities .ep-capability-card:hover,
-  .ep-business-landing #readings [data-reading]:hover,
-  .ep-business-landing #top .ep-product-metric:hover,
-  .ep-business-landing #top .ep-product-float:hover {
+  .ep-business-landing #readings [data-reading]:hover{
     transform: translateY(-6px);
   }
 
@@ -184,15 +175,10 @@ html.dark :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
   .ep-business-landing #readings [data-reading]:hover {
     box-shadow: 0 24px 48px -30px rgba(0,0,0,.58), 0 0 28px -18px rgba(217,68,22,.24);
   }
-  .ep-business-landing #top .ep-product-metric:hover,
-  .ep-business-landing #top .ep-product-float:hover {
-    box-shadow: 0 20px 36px -26px rgba(15,76,92,.3), 0 8px 22px -20px rgba(217,68,22,.2);
-  }
 
   .ep-business-landing .ep-stats-panel > div:hover::before,
   .ep-business-landing #capabilities .ep-capability-card:hover::after,
-  .ep-business-landing #readings [data-reading]:hover::after,
-  .ep-business-landing #top .ep-product-metric:hover::after {
+  .ep-business-landing #readings [data-reading]:hover::after{
     opacity: 1;
   }
 }
@@ -222,29 +208,11 @@ html.dark .ep-business-landing #readings [data-reading]::after {
     radial-gradient(ellipse at 100% 0%, rgba(217,68,22,.2), transparent 46%),
     linear-gradient(145deg, rgba(15,76,92,.35), rgba(255,255,255,.025));
 }
-html.dark .ep-business-landing #top .ep-product-metric {
-  background: linear-gradient(145deg, #202d30, #182326) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-}
-html.dark .ep-business-landing #top .ep-product-metric::after {
-  background: linear-gradient(135deg, rgba(15,76,92,.34), rgba(217,68,22,.16));
-}
-html.dark .ep-business-landing #top .ep-product-insight {
-  background: linear-gradient(125deg, #0f4c5c, #123b43 68%, #38251f) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 18px 38px -28px rgba(0,0,0,.65);
-}
-html.dark .ep-business-landing #top .ep-product-float {
-  background: linear-gradient(145deg, #202d30, #172225) !important;
-  border-color: rgba(255,255,255,.09) !important;
-  box-shadow: 0 18px 38px -28px rgba(0,0,0,.85);
-}
 
 @media (max-width: 767px) {
   .ep-business-landing .ep-stats-panel > div,
   .ep-business-landing #capabilities .ep-capability-card,
-  .ep-business-landing #readings [data-reading],
-  .ep-business-landing #top .ep-product-metric,
-  .ep-business-landing #top .ep-product-float {
+  .ep-business-landing #readings [data-reading]{
     transform: none !important;
     transition: box-shadow .25s ease, background-color .25s ease;
   }
@@ -254,12 +222,9 @@ html.dark .ep-business-landing #top .ep-product-float {
   .ep-business-landing .ep-stats-panel > div,
   .ep-business-landing #capabilities .ep-capability-card,
   .ep-business-landing #readings [data-reading],
-  .ep-business-landing #top .ep-product-metric,
-  .ep-business-landing #top .ep-product-float,
   .ep-business-landing .ep-stats-panel > div::before,
   .ep-business-landing #capabilities .ep-capability-card::after,
-  .ep-business-landing #readings [data-reading]::after,
-  .ep-business-landing #top .ep-product-metric::after {
+  .ep-business-landing #readings [data-reading]::after{
     transition: none !important;
     transform: none !important;
   }
@@ -482,61 +447,6 @@ html.dark .ep-business-landing #readings [data-reading] {
   }
 }
 
-/* Explicit premium card outlines across the landing page.
-   Light mode: quiet teal-tinted edge; dark mode: crisp low-contrast edge. */
-.ep-business-landing :is(
-  .ep-stats-panel > div,
-  #capabilities .ep-capability-card,
-  #readings [data-reading],
-  #top .ep-product-window,
-  #top .ep-product-metric,
-  #top .ep-product-insight,
-  #top .ep-product-float
-) {
-  border: 1px solid rgba(15, 76, 92, .22) !important;
-}
-
-.ep-business-landing #top .ep-product-window {
-  box-shadow:
-    0 24px 64px -42px rgba(15, 76, 92, .3),
-    0 8px 24px -20px rgba(16, 32, 35, .18) !important;
-}
-
-html.dark .ep-business-landing :is(
-  .ep-stats-panel > div,
-  #capabilities .ep-capability-card,
-  #readings [data-reading],
-  #top .ep-product-window,
-  #top .ep-product-metric,
-  #top .ep-product-insight,
-  #top .ep-product-float
-) {
-  border-color: rgba(255, 255, 255, .16) !important;
-}
-
 @media (hover: hover) and (pointer: fine) {
-  .ep-business-landing :is(
-    .ep-stats-panel > div,
-    #capabilities .ep-capability-card,
-    #readings [data-reading],
-    #top .ep-product-window,
-    #top .ep-product-metric,
-    #top .ep-product-insight,
-    #top .ep-product-float
-  ):hover {
-    border-color: rgba(15, 76, 92, .42) !important;
-  }
-
-  html.dark .ep-business-landing :is(
-    .ep-stats-panel > div,
-    #capabilities .ep-capability-card,
-    #readings [data-reading],
-    #top .ep-product-window,
-    #top .ep-product-metric,
-    #top .ep-product-insight,
-    #top .ep-product-float
-  ):hover {
-    border-color: rgba(217, 68, 22, .48) !important;
-  }
 }
 
