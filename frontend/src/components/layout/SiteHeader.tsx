@@ -335,19 +335,16 @@ export function SiteHeader({
             }`}
           >
             {/* Drawer header */}
-            <div className="relative flex shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-5 py-4">
-              <div className="flex min-w-0 flex-col gap-1">
-                <BrandMark size={32} logoColor="#d94416" logoTextColor="var(--ep-secondary)" />
-                <span className="pl-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ep-text-muted)]">Explore EcoPrawn</span>
-              </div>
+            <div className="relative flex min-h-[66px] shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-4 py-2.5">
+              <BrandMark size={30} logoColor="#d94416" logoTextColor="var(--ep-secondary)" />
               <button
                 ref={closeButtonRef}
                 type="button"
                 onClick={closeDrawer}
                 aria-label="Close menu"
-                className={`flex h-11 w-11 items-center justify-center rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] shadow-sm transition-all duration-200 hover:rotate-90 hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] ${focusRing}`}
+                className={`flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] shadow-sm transition-colors duration-200 hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] ${focusRing}`}
               >
-                <Icon name="x" size={20} strokeWidth={2} />
+                <Icon name="x" size={19} strokeWidth={2} />
               </button>
             </div>
 
