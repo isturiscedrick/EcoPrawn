@@ -66,6 +66,30 @@ function AuthDialog({
     playAuthExit(overlayRef.current, panelRef.current, onClose);
   }, [onClose]);
 
+  // Keep the dialog inside the visible area when the on-screen keyboard opens.
+  // 100dvh does not shrink for the keyboard, so the submit button can end up behind it.
+  useEffect(() => {
+    const overlay = overlayRef.current;
+    const vv = window.visualViewport;
+    if (!overlay || !vv) return;
+    if (!window.matchMedia("(pointer: coarse)").matches) return;
+    const fit = () => {
+      overlay.style.top = `${vv.offsetTop}px`;
+      overlay.style.bottom = "auto";
+      overlay.style.height = `${vv.height}px`;
+    };
+    fit();
+    vv.addEventListener("resize", fit);
+    vv.addEventListener("scroll", fit);
+    return () => {
+      vv.removeEventListener("resize", fit);
+      vv.removeEventListener("scroll", fit);
+      overlay.style.top = "";
+      overlay.style.bottom = "";
+      overlay.style.height = "";
+    };
+  }, []);
+
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null;
     const originalOverflow = document.body.style.overflow;

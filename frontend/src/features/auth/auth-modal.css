@@ -1034,6 +1034,31 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
   }
 }
 
+/* Mobile fit: keep the logo clear of the close button on narrow phones. */
+@media (max-width: 479px) {
+  .ep-auth-modal .ep-auth-brand > div:first-child {
+    padding-inline: 2.5rem;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .ep-auth-modal .ep-auth-brand .ep-logo {
+    gap: 6px !important;
+  }
+  .ep-auth-modal .ep-auth-brand .ep-logo > svg {
+    height: 32px !important;
+  }
+  .ep-auth-modal .ep-auth-brand .ep-logo-wordmark {
+    font-size: 26px !important;
+  }
+}
+
+/* Mobile fit: size the panel to the visible area (see the visualViewport effect in AuthModalProvider). */
+@media (max-width: 639px) {
+  .ep-auth-overlay .ep-auth-modal {
+    max-height: 100% !important;
+  }
+}
+
 /* ---------- Native-feeling mobile authentication screen ---------- */
 @media (max-width: 639px) {
   .ep-auth-overlay {
@@ -3748,10 +3773,13 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
   }
 
   .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand .ep-logo {
-    display: block !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     flex: 0 0 auto !important;
     width: auto !important;
     max-width: min(100%, 190px) !important;
+    max-height: none !important;
     margin-inline: auto !important;
   }
 
