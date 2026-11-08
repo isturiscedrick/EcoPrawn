@@ -114,21 +114,19 @@ export function AboutPage() {
                     <div className="mb-5 flex items-center gap-4">
                       <span
                         aria-hidden="true"
-                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/35 text-[var(--ep-marker)]"
+                        className="flex h-11 w-11 shrink-0 items-center justify-center text-[var(--ep-marker)]"
                       >
                         <Icon name={FEATURE_ICONS[i] ?? "layers"} size={19} />
                       </span>
                       <div className="min-w-0">
-                        <div className="mb-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--ep-on-deep-muted)]">
-                          System module {String(i + 1).padStart(2, "0")}
-                        </div>
+                        
                         <h3 className="ep-font-display text-xl font-semibold leading-tight transition-colors duration-200 group-hover:text-[var(--ep-marker)] sm:text-2xl">
                           {feature.title}
                         </h3>
                       </div>
                     </div>
 
-                    <div className="flex min-w-0 flex-col gap-3 border-t border-white/15 pt-5">
+                    <div className="flex min-w-0 flex-col gap-3">
                       {feature.points.map((point) => (
                         <div key={point.bold} className="flex min-w-0 gap-3">
                           <span aria-hidden="true" className="shrink-0 text-[var(--ep-marker)]">
@@ -168,7 +166,7 @@ export function AboutPage() {
             </Reveal>
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-              {/* In scope: solid outline */}
+              {/* In scope */}
               <Reveal className="h-full">
                 <SurfaceCard as="article" className="h-full p-6 sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
@@ -179,9 +177,7 @@ export function AboutPage() {
                       In scope
                     </h3>
 
-                    <span className="rounded-full border-2 border-[var(--ep-ok)] px-3 py-1 text-sm font-semibold text-[var(--ep-ok)]">
-                      Included
-                    </span>
+                    <span className="text-sm font-semibold text-[var(--ep-ok)]">Included</span>
                   </div>
 
                   <div>
@@ -191,9 +187,7 @@ export function AboutPage() {
                         className={`py-4 ${index !== 0 ? "border-t border-[var(--ep-line)]" : "pt-0"}`}
                       >
                         <div className="flex gap-3">
-                          <span className="mt-0.5 text-sm font-semibold tabular-nums text-[var(--ep-ok)]">
-                            0{index + 1}
-                          </span>
+                          
 
                           <div>
                             <b className="mb-1 block text-base font-semibold">{item.title}</b>
@@ -208,7 +202,7 @@ export function AboutPage() {
                 </SurfaceCard>
               </Reveal>
 
-              {/* Out of scope: dashed outline, a second signal beyond colour */}
+              {/* Out of scope */}
               <Reveal delay={120} className="h-full">
                 <SurfaceCard as="article" className="ep-about-outscope h-full border-dashed p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
@@ -219,9 +213,7 @@ export function AboutPage() {
                       Out of scope
                     </h3>
 
-                    <span className="rounded-full border-2 border-[var(--ep-warn-text)] px-3 py-1 text-sm font-semibold text-[var(--ep-warn-text)]">
-                      Excluded
-                    </span>
+                    <span className="text-sm font-semibold text-[var(--ep-warn-text)]">Excluded</span>
                   </div>
 
                   <div>
@@ -231,9 +223,7 @@ export function AboutPage() {
                         className={`py-4 ${index !== 0 ? "border-t border-[var(--ep-line)]" : "pt-0"}`}
                       >
                         <div className="flex gap-3">
-                          <span className="mt-0.5 text-sm font-semibold tabular-nums text-[var(--ep-warn-text)]">
-                            0{index + 1}
-                          </span>
+                          
 
                           <div>
                             <b className="mb-1 block text-base font-semibold">{item.title}</b>
