@@ -1,3 +1,16 @@
+/* ==========================================================================
+   Public-site final layout layer
+   Ordered to preserve the original global cascade:
+   1. Responsive safeguards
+   2. Brand monochrome normalization
+   3. Shared responsive layout audit
+   Keep these sections in this order.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Responsive safeguards
+   Source: responsive-overrides.css
+   -------------------------------------------------------------------------- */
 /* EcoPrawn responsive layout safeguards.
    Shared by Landing, About, Contact and authentication surfaces. */
 
@@ -1711,3 +1724,788 @@
     z-index: 6 !important;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   2. Brand normalization
+   Source: brand-monochrome.css
+   -------------------------------------------------------------------------- */
+/*
+ * EcoPrawn monochrome brand system.
+ * Brand palette: terracotta primary, deep-teal/mint secondary, black and white neutrals.
+ */
+
+:root {
+  color-scheme: light;
+  --ep-brand: #d94416;
+  --ep-accent: #d94416 !important;
+  --ep-accent-hover: #b83a0f !important;
+  --ep-primary: #0f4c5c !important;
+  --ep-primary-soft: #13596b !important;
+  --ep-secondary: #0f4c5c !important;
+  --ep-text-muted: #000000 !important;
+  --ep-bg: #ffffff !important;
+  --ep-surface: #ffffff !important;
+  --ep-tint: #ffffff !important;
+  --ep-line: rgba(0, 0, 0, .18) !important;
+  --ep-ok: #d94416 !important;
+  --ep-danger: #d94416 !important;
+  --ep-warn-text: #d94416 !important;
+  --coral: #d94416 !important;
+  --coral-dim: #b83a0f !important;
+  --water-deep: #0f4c5c !important;
+  --water-mid: #13596b !important;
+  --mangrove: #d94416 !important;
+  --mangrove-light: #d94416 !important;
+  --mangrove-text: #000000 !important;
+  --sand: #ffffff !important;
+  --sand-dim: rgba(0, 0, 0, .18) !important;
+  --amber: #d94416 !important;
+  --amber-text: #d94416 !important;
+  --ink: #000000 !important;
+}
+
+html.dark {
+  color-scheme: dark;
+  --ep-accent: #d94416 !important;
+  --ep-accent-hover: #b83a0f !important;
+  --ep-primary: #ffffff !important;
+  --ep-primary-soft: #ffffff !important;
+  --ep-secondary: #8bd5a6 !important;
+  --ep-text-muted: #ffffff !important;
+  --ep-bg: #000000 !important;
+  --ep-surface: #000000 !important;
+  --ep-tint: #000000 !important;
+  --ep-line: rgba(255, 255, 255, .2) !important;
+  --ep-ok: #d94416 !important;
+  --ep-danger: #d94416 !important;
+  --ep-warn-text: #d94416 !important;
+  --coral: #d94416 !important;
+  --coral-dim: #b83a0f !important;
+  --water-deep: #ffffff !important;
+  --water-mid: #8bd5a6 !important;
+  --mangrove: #d94416 !important;
+  --mangrove-light: #d94416 !important;
+  --mangrove-text: #ffffff !important;
+  --sand: #000000 !important;
+  --sand-dim: rgba(255, 255, 255, .2) !important;
+  --amber: #d94416 !important;
+  --amber-text: #d94416 !important;
+  --ink: #ffffff !important;
+}
+
+html,
+body,
+body.ecoprawn-root {
+  background: #ffffff;
+  color: #000000;
+}
+
+html.dark,
+html.dark body,
+html.dark body.ecoprawn-root {
+  background: #000000;
+  color: #ffffff;
+}
+
+.marketing-shell,
+.dashboard-shell,
+.ep-auth-modal {
+  --ep-brand-primary: #d94416 !important;
+  --ep-brand-secondary: #0f4c5c !important;
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #0f4c5c !important;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) {
+  --ep-brand-primary: #d94416 !important;
+  --ep-brand-secondary: #8bd5a6 !important;
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #8bd5a6 !important;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, small, strong, em, b, th, td,
+  input, textarea, select, summary, blockquote
+) {
+  color: #000000;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, small, strong, em, b, th, td,
+  input, textarea, select, summary, blockquote
+) {
+  color: #ffffff;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  a, button, [role="button"], input, textarea, select
+):focus-visible {
+  outline-color: #d94416 !important;
+  --tw-ring-color: #d94416 !important;
+  --tw-ring-offset-color: #ffffff;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  a, button, [role="button"], input, textarea, select
+):focus-visible {
+  --tw-ring-offset-color: #000000;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .bg-\[var\(--ep-accent\)\], .bg-\[var\(--coral\)\],
+  .bg-\[var\(--ep-brand-primary\)\]
+) {
+  background-color: #d94416 !important;
+  border-color: #d94416 !important;
+  color: #000000 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="text-emerald"], [class*="text-green"], [class*="text-teal"],
+  [class*="text-sky"], [class*="text-blue"], [class*="text-cyan"],
+  [class*="text-amber"], [class*="text-yellow"], [class*="text-orange"],
+  [class*="text-red"], [class*="text-rose"], [class*="text-lime"],
+  [class*="text-violet"], [class*="text-purple"], [class*="text-pink"]
+) {
+  color: #d94416 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="bg-emerald"], [class*="bg-green"], [class*="bg-teal"],
+  [class*="bg-sky"], [class*="bg-blue"], [class*="bg-cyan"],
+  [class*="bg-amber"], [class*="bg-yellow"], [class*="bg-orange"],
+  [class*="bg-red"], [class*="bg-rose"], [class*="bg-lime"],
+  [class*="bg-violet"], [class*="bg-purple"], [class*="bg-pink"]
+) {
+  background-color: #d94416 !important;
+  color: #000000 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="border-emerald"], [class*="border-green"], [class*="border-teal"],
+  [class*="border-sky"], [class*="border-blue"], [class*="border-cyan"],
+  [class*="border-amber"], [class*="border-yellow"], [class*="border-orange"],
+  [class*="border-red"], [class*="border-rose"], [class*="border-lime"],
+  [class*="border-violet"], [class*="border-purple"], [class*="border-pink"]
+) {
+  border-color: #d94416 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="from-emerald"], [class*="to-emerald"], [class*="via-emerald"],
+  [class*="from-teal"], [class*="to-teal"], [class*="via-teal"],
+  [class*="from-blue"], [class*="to-blue"], [class*="via-blue"],
+  [class*="from-cyan"], [class*="to-cyan"], [class*="via-cyan"],
+  [class*="from-green"], [class*="to-green"], [class*="via-green"]
+) {
+  --tw-gradient-from: #d94416 !important;
+  --tw-gradient-via: #d94416 !important;
+  --tw-gradient-to: #d94416 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .bg-white, .bg-\[\#ffffff\], .bg-\[\#fff\]
+) {
+  background-color: #ffffff;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .bg-white, .bg-\[\#ffffff\], .bg-\[\#fff\]
+) {
+  background-color: #000000 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .text-white, .text-\[\#ffffff\], .text-\[\#fff\]
+) {
+  color: #ffffff;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .text-black, .text-\[\#000000\], .text-\[\#000\]
+) {
+  color: #000000 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="border-gray-"], [class*="border-slate-"], [class*="border-zinc-"], [class*="border-neutral-"]
+) {
+  border-color: rgba(0, 0, 0, .18);
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="border-gray-"], [class*="border-slate-"], [class*="border-zinc-"], [class*="border-neutral-"]
+) {
+  border-color: rgba(255, 255, 255, .2);
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) svg :is(path, line, polyline, polygon, circle, rect) {
+  stroke: currentColor;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) input,
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) textarea,
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) select {
+  border-color: rgba(0, 0, 0, .25);
+  background-color: #ffffff;
+  color: #000000;
+  accent-color: #d94416;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) input,
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) textarea,
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) select {
+  border-color: rgba(255, 255, 255, .25);
+  background-color: #000000;
+  color: #ffffff;
+  accent-color: #d94416;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) ::placeholder {
+  color: #000000;
+  opacity: .58;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) ::placeholder {
+  color: #ffffff;
+  opacity: .58;
+}
+
+/* Restore the EcoPrawn secondary color while keeping body copy neutral. */
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="text-emerald"], [class*="text-green"], [class*="text-teal"],
+  [class*="text-sky"], [class*="text-blue"], [class*="text-cyan"], [class*="text-lime"]
+) { color: var(--ep-secondary) !important; }
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="bg-emerald"], [class*="bg-green"], [class*="bg-teal"],
+  [class*="bg-sky"], [class*="bg-blue"], [class*="bg-cyan"], [class*="bg-lime"]
+) { background-color: var(--ep-secondary) !important; }
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="border-emerald"], [class*="border-green"], [class*="border-teal"],
+  [class*="border-sky"], [class*="border-blue"], [class*="border-cyan"], [class*="border-lime"]
+) { border-color: var(--ep-secondary) !important; }
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="text-emerald"], [class*="text-green"], [class*="text-teal"],
+  [class*="text-sky"], [class*="text-blue"], [class*="text-cyan"], [class*="text-lime"]
+) { color: var(--ep-secondary) !important; }
+
+/* Replace any legacy teal/green decorative fills with the brand primary. */
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#8bd5a6"],
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#0f4c5c"],
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#38bdf8"],
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#e8623a"] {
+  color: #d94416 !important;
+  border-color: #d94416 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) *,
+  :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) *::before,
+  :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   3. Shared layout audit
+   Source: responsive-layout-audit.css
+   -------------------------------------------------------------------------- */
+/*
+ * EcoPrawn responsive layout audit
+ * Shared layout rules for public pages, auth surfaces and dashboard views.
+ * Keep this file last in globals.css so it can normalize legacy page styles.
+ */
+
+:root {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body,
+#root,
+.ecoprawn-root {
+  width: 100%;
+  min-width: 320px;
+  max-width: 100%;
+  margin: 0;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+[role="button"],
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ep-landing,
+.ep-landing main,
+.ep-landing main > section,
+.ep-landing footer,
+.dashboard-shell,
+.dashboard-shell main {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing {
+  width: 100%;
+  overflow-x: clip;
+}
+
+.ep-landing main > section {
+  width: 100%;
+  margin-inline: auto;
+}
+
+.ep-landing :is(.grid, .flex) > *,
+.dashboard-shell :is(.grid, .flex) > * {
+  min-width: 0;
+}
+
+.ep-landing :is(h1, h2, h3, h4, p, li, dd, dt, a, label),
+.dashboard-shell main :is(h1, h2, h3, h4, p, li, dd, dt, label) {
+  min-width: 0;
+  max-width: 100%;
+  text-wrap: pretty;
+}
+
+.ep-landing :is(input, textarea, select),
+.dashboard-shell :is(input, textarea, select) {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing :is(button, a),
+.dashboard-shell main :is(button, a) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Public header: keep the brand, menu and theme controls in separate tracks. */
+#site-header {
+  width: 100%;
+  max-width: 100%;
+}
+
+#site-header > div {
+  width: 100%;
+  min-width: 0;
+}
+
+#site-header > div > a[aria-label="EcoPrawn home"] {
+  min-width: 0;
+  max-width: 100%;
+}
+
+#site-header .ep-logo {
+  max-width: 100%;
+}
+
+/* Shared About / Contact page hero. */
+.ep-landing [data-page-hero] {
+  width: 100%;
+  min-width: 0;
+}
+
+.ep-landing [data-page-hero] > div:last-child {
+  width: 100%;
+  max-width: 1200px;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  margin-inline: auto;
+}
+
+.ep-landing [data-page-hero-headline] {
+  max-width: 100%;
+  font-size: clamp(2.25rem, 6.2vw, 4.75rem);
+  line-height: 1.04;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.ep-landing [data-page-lead] {
+  width: 100%;
+  max-width: 42rem;
+}
+
+/* Public page content frames and card grids. */
+.ep-landing main > section:not([data-page-hero]) > div {
+  min-width: 0;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.ep-landing .ep-about-content-frame,
+.ep-landing .ep-contact-page main > section > div {
+  width: 100%;
+  min-width: 0;
+}
+
+.ep-landing .ep-about-content-frame > .grid,
+.ep-landing .ep-contact-page main > section > div > .grid {
+  min-width: 0;
+  align-items: stretch;
+}
+
+.ep-landing article,
+.ep-landing [data-contact-card],
+.ep-landing [data-contact-form],
+.ep-landing form {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing [data-contact-card] dd {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.ep-landing form :is(input, textarea, select) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+.ep-landing form textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.ep-landing form button {
+  min-height: 48px;
+}
+
+/* Footer columns should collapse cleanly without squeezing the wordmark. */
+.ep-landing footer,
+.ep-landing footer > div,
+.ep-landing footer .grid,
+.ep-landing footer .grid > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing footer a,
+.ep-landing footer p {
+  overflow-wrap: anywhere;
+}
+
+/* Dashboard frame: preserve the sidebar/main split on desktop and allow
+   the content column to shrink instead of forcing horizontal page scroll. */
+.dashboard-shell {
+  width: 100%;
+  overflow-x: clip;
+}
+
+.dashboard-shell > div {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dashboard-shell aside#dashboard-sidebar {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main > div {
+  width: 100%;
+  min-width: 0;
+  max-width: 1320px;
+}
+
+.dashboard-shell main > div > * {
+  min-width: 0;
+}
+
+.dashboard-shell main :is(.rounded-xl, .rounded-2xl, .rounded-3xl, article, section) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main :is(input, textarea, select) {
+  min-height: 44px;
+  font-size: 16px;
+}
+
+.dashboard-shell main :is(button, [role="button"]) {
+  min-height: 40px;
+  touch-action: manipulation;
+}
+
+.dashboard-shell main img,
+.dashboard-shell main svg,
+.dashboard-shell main canvas {
+  max-width: 100%;
+}
+
+.dashboard-shell main svg {
+  height: auto;
+}
+
+.dashboard-shell main :is(.overflow-x-auto, [data-scroll-container]) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dashboard-shell main table {
+  width: 100%;
+  min-width: 560px;
+}
+
+.dashboard-shell [role="tablist"] {
+  display: flex;
+  max-width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  overscroll-behavior-x: contain;
+}
+
+.dashboard-shell [role="tablist"] > [role="tab"] {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+/* Drawers and dialogs must fit the visible viewport, including mobile safe areas. */
+[role="dialog"] {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.dashboard-shell [role="dialog"] > :last-child {
+  max-width: min(100%, 34rem);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (min-width: 1024px) {
+  /* Preserve the existing collapsed/expanded sidebar grid classes. */
+  .dashboard-shell > div {
+    align-items: start;
+  }
+
+  .dashboard-shell main {
+    padding-inline: clamp(1.25rem, 2.2vw, 2.5rem);
+  }
+
+  .ep-landing footer .grid {
+    grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ep-landing [data-page-hero] > div:last-child {
+    padding-top: clamp(4.5rem, 9vw, 6rem);
+    padding-bottom: clamp(3rem, 7vw, 4.5rem);
+  }
+
+  .ep-landing .ep-about-content-frame > .grid,
+  .ep-landing .ep-contact-page main > section > div > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ep-landing .ep-about-content-frame > .grid > :only-child {
+    grid-column: 1 / -1;
+  }
+
+  .dashboard-shell main {
+    padding-inline: clamp(1rem, 2.5vw, 1.75rem);
+  }
+
+  .dashboard-shell main .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  #site-header > div {
+    min-height: 64px;
+  }
+
+  .ep-landing [data-page-hero] > div:last-child {
+    padding-top: clamp(4.25rem, 16vw, 5.75rem);
+    padding-bottom: 2.75rem;
+    padding-inline: 1rem;
+  }
+
+  .ep-landing [data-page-hero-headline] {
+    font-size: clamp(2.1rem, 9.4vw, 3.5rem);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+  }
+
+  .ep-landing [data-page-lead] {
+    max-width: 34rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .ep-landing main > section:not([data-page-hero]) {
+    padding-inline: 1rem;
+  }
+
+  .ep-landing .ep-about-content-frame > .grid,
+  .ep-landing .ep-contact-page main > section > div > .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ep-landing .ep-about-content-frame article,
+  .ep-landing .ep-contact-page [data-contact-card],
+  .ep-landing .ep-contact-page [data-contact-form] {
+    width: 100%;
+  }
+
+  .ep-landing footer .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .ep-landing footer .grid > * {
+    width: 100%;
+  }
+
+  .dashboard-shell > div {
+    display: block;
+  }
+
+  .dashboard-shell main {
+    width: 100%;
+    padding: .875rem .75rem calc(5rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  .dashboard-shell main > div {
+    width: 100%;
+  }
+
+  .dashboard-shell main .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-shell main :is(.flex.items-center.justify-between, .flex.justify-between) {
+    flex-wrap: wrap;
+    row-gap: .75rem;
+  }
+
+  .dashboard-shell main :is(h1, .ep-font-display[class*="text-[28px]"]) {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+    line-height: 1.2;
+  }
+
+  .dashboard-shell main :is(h2) {
+    font-size: clamp(1.1rem, 4.7vw, 1.4rem);
+    line-height: 1.25;
+  }
+
+  .dashboard-shell main .grid.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-shell main .grid.grid-cols-3,
+  .dashboard-shell main .grid.grid-cols-4,
+  .dashboard-shell main .grid.grid-cols-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-shell main :is(button, a) {
+    overflow-wrap: normal;
+  }
+
+  .dashboard-shell main :is(input, textarea, select) {
+    font-size: 16px;
+  }
+
+  .dashboard-shell main table {
+    min-width: 560px;
+  }
+}
+
+@media (max-width: 420px) {
+  .ep-landing [data-page-hero-headline] {
+    font-size: clamp(2rem, 9vw, 2.65rem);
+  }
+
+  .ep-landing .ep-about-content-frame article,
+  .ep-landing .ep-about-objective {
+    padding: 1.1rem;
+  }
+
+  .dashboard-shell main {
+    padding-inline: .625rem !important;
+  }
+
+  .dashboard-shell main .grid.grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-shell main .grid.grid-cols-3,
+  .dashboard-shell main .grid.grid-cols-4,
+  .dashboard-shell main .grid.grid-cols-5 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ep-landing *,
+  .dashboard-shell *,
+  .ep-landing *::before,
+  .dashboard-shell *::before,
+  .ep-landing *::after,
+  .dashboard-shell *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+

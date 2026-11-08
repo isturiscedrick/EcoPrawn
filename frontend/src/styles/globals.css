@@ -18,8 +18,6 @@
 @import "./marketing/landing-global.css";
 
 /* Responsive rules intentionally come last */
-@import "./responsive/responsive-overrides.css";
-@import "./themes/brand-monochrome.css";
-@import "./responsive/responsive-layout-audit.css";
+@import "./responsive/site-responsive.css";
 @import "./marketing/landing-palette.css";
 @import "./marketing/public-pages-theme.css";
