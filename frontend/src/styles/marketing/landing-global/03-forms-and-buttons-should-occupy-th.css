@@ -952,3 +952,119 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
     padding: .95rem;
   }
 }
+
+/* Mobile layout correction: reserve a predictable width for every stat and
+   stack reading labels/status on narrow screens so neither can force overflow.
+   This intentionally comes after legacy mobile rules above. */
+@media (max-width: 479px) {
+  .ep-business-landing .ep-stats-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: .65rem;
+    padding: .65rem;
+  }
+
+  .ep-business-landing .ep-stats-panel > div {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 6rem;
+    padding: .8rem .7rem;
+    overflow: hidden;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    display: block;
+    max-width: 100%;
+    font-size: clamp(1rem, 4.3vw, 1.2rem);
+    line-height: 1.15;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: manual;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    display: block;
+    max-width: 100%;
+    margin-top: .5rem;
+    padding-top: 0;
+    font-size: .72rem;
+    line-height: 1.35;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: manual;
+  }
+
+  .ep-business-landing #readings [data-reading] {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 1rem;
+  }
+
+  .ep-business-landing #readings [data-reading] > div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: .55rem;
+    min-width: 0;
+  }
+
+  .ep-business-landing #readings [data-reading] dt {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    font-size: .95rem;
+    line-height: 1.3;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .ep-business-landing #readings [data-reading] > div:first-of-type > span {
+    display: inline-flex;
+    flex: 0 1 auto;
+    width: fit-content;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .ep-business-landing #readings [data-reading] dd {
+    min-width: 0;
+    font-size: clamp(1.85rem, 7.5vw, 2.2rem);
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .ep-business-landing #readings [data-reading] dd > span:last-child {
+    white-space: nowrap;
+    font-size: .88rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .ep-business-landing .ep-stats-panel {
+    gap: .5rem;
+    padding: .55rem;
+  }
+
+  .ep-business-landing .ep-stats-panel > div {
+    padding: .7rem .55rem;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    font-size: 1rem;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    font-size: .68rem;
+  }
+
+  .ep-business-landing #readings [data-reading] {
+    padding: .9rem;
+  }
+}
+
