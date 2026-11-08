@@ -429,3 +429,112 @@
     padding-inline: 0 !important;
   }
 }
+
+
+/* ---------- Landing: one shared frame at every browser zoom level ---------- */
+/* About/Contact use a 1200px content frame. Match that same frame on every
+   landing section; backgrounds remain full-bleed while content aligns. */
+.ep-business-landing main > section {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+.ep-business-landing main > section > :is(.ep-hero-layout, div:not([aria-hidden="true"])) {
+  box-sizing: border-box;
+}
+.ep-business-landing #top > .ep-hero-layout,
+.ep-business-landing #readings > div:not([aria-hidden="true"]),
+.ep-business-landing #capabilities > div:not([aria-hidden="true"]),
+.ep-business-landing #process > div:not([aria-hidden="true"]),
+.ep-business-landing .ep-stats-panel {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin-inline: auto !important;
+  box-sizing: border-box !important;
+}
+.ep-business-landing #top > .ep-hero-layout {
+  padding-inline: clamp(1rem, 3.2vw, 2.5rem) !important;
+}
+.ep-business-landing #readings {
+  padding-inline: clamp(1rem, 3.2vw, 2.5rem) !important;
+}
+.ep-business-landing #readings > div:not([aria-hidden="true"]) {
+  padding-inline: 0 !important;
+}
+.ep-business-landing #capabilities {
+  padding-inline: clamp(1rem, 3.2vw, 2.5rem) !important;
+}
+.ep-business-landing #capabilities > div:not([aria-hidden="true"]) {
+  padding-inline: 0 !important;
+}
+.ep-business-landing #process {
+  padding-inline: clamp(1rem, 3.2vw, 2.5rem) !important;
+}
+.ep-business-landing #process > div:not([aria-hidden="true"]) {
+  max-width: 1200px !important;
+  padding-inline: 0 !important;
+}
+.ep-business-landing > main {
+  width: 100%;
+  min-width: 0;
+}
+.ep-business-landing main > section :is(.grid, [data-process-track], article, li) {
+  min-width: 0;
+}
+.ep-business-landing main > section h2,
+.ep-business-landing main > section h3,
+.ep-business-landing main > section p {
+  max-width: 100%;
+  text-wrap: pretty;
+}
+.ep-business-landing #capabilities article {
+  height: 100%;
+}
+.ep-business-landing #readings dl {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.ep-business-landing #process [data-process-track] {
+  width: 100%;
+  max-width: 100%;
+}
+@media (max-width: 1023px) {
+  .ep-business-landing #readings dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .ep-business-landing #top > .ep-hero-layout,
+  .ep-business-landing #readings,
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process {
+    padding-inline: 1rem !important;
+  }
+  .ep-business-landing #readings dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-business-landing #capabilities > div > .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-business-landing #process [data-process-track] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  .ep-business-landing #readings dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ep-business-landing #capabilities > div > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ep-business-landing #process [data-process-track] {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 2rem 1.5rem !important;
+    transform: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing main * {
+    scroll-behavior: auto !important;
+  }
+}
