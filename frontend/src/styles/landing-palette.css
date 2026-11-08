@@ -506,3 +506,326 @@ html.dark .ep-business-landing .ep-stats-panel > div > span:first-child {
     transform: none !important;
   }
 }
+
+
+/* -----------------------------------------------------------------------
+   Final UX polish: predictable spacing, clearer hierarchy, robust responsive
+   behavior, accessible interaction states, and restrained motion.
+   All rules remain scoped to the public landing page.
+   ----------------------------------------------------------------------- */
+
+.ep-business-landing {
+  --ep-content-width: 1320px;
+  --ep-card-radius: 1.5rem;
+  --ep-control-height: 3.25rem;
+  overflow: clip;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+.ep-business-landing main > section {
+  scroll-margin-top: 6rem;
+}
+.ep-business-landing :is(h1, h2, h3) {
+  text-wrap: balance;
+}
+.ep-business-landing :is(p, li) {
+  text-wrap: pretty;
+}
+.ep-business-landing :is(button, a) {
+  -webkit-tap-highlight-color: transparent;
+}
+.ep-business-landing :is(a, button, [tabindex]):focus-visible {
+  outline: 3px solid #d94416 !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 3px var(--ep-bg);
+}
+.ep-business-landing :is(a, button):active {
+  transform: translateY(1px);
+}
+.ep-business-landing .ep-hero-kicker {
+  line-height: 1.25;
+}
+.ep-business-landing #top [data-hero="headline"] {
+  text-wrap: balance;
+}
+.ep-business-landing #top [data-hero="lead"] {
+  color: var(--ep-text-muted);
+}
+.ep-business-landing #top [data-hero="cta"] > a {
+  min-height: var(--ep-control-height);
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+.ep-business-landing #top [data-hero="cta"] > a:first-child {
+  box-shadow: 0 12px 28px -18px rgba(217,68,22,.9);
+}
+.ep-business-landing #top [data-hero="cta"] > a:first-child:hover {
+  box-shadow: 0 16px 34px -17px rgba(217,68,22,.75);
+}
+.ep-business-landing #top [data-hero="cta"] > a:last-child {
+  border-color: color-mix(in srgb, var(--ep-secondary) 24%, transparent) !important;
+}
+.ep-business-landing #top [data-hero="cta"] > a:last-child:hover {
+  background: color-mix(in srgb, var(--ep-secondary) 7%, var(--ep-surface));
+}
+
+/* Product preview: stable sizing and better information grouping. */
+.ep-business-landing #top .ep-product-showcase {
+  min-width: 0;
+  isolation: isolate;
+}
+.ep-business-landing #top .ep-product-window {
+  min-width: 0;
+  border: 1px solid rgba(15,76,92,.18) !important;
+}
+.ep-business-landing #top .ep-product-window-bar {
+  min-width: 0;
+  gap: .75rem;
+}
+.ep-business-landing #top .ep-product-window-bar > div {
+  min-width: 0;
+}
+.ep-business-landing #top .ep-product-window-bar p {
+  margin: 0;
+}
+.ep-business-landing #top .ep-product-status {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.ep-business-landing #top .ep-product-metric {
+  min-width: 0;
+}
+.ep-business-landing #top .ep-product-metric > span:first-child {
+  min-height: 2.25em;
+  line-height: 1.35;
+}
+.ep-business-landing #top .ep-product-metric > span:nth-child(2) {
+  white-space: nowrap;
+}
+.ep-business-landing #top .ep-product-insight {
+  min-width: 0;
+}
+.ep-business-landing #top .ep-product-bars {
+  flex: 0 1 12rem;
+  min-width: 7rem;
+}
+.ep-business-landing #top .ep-product-float {
+  max-width: min(13rem, 42%);
+}
+
+/* Keep each section on one consistent content grid. */
+.ep-business-landing #readings > div,
+.ep-business-landing #capabilities > div,
+.ep-business-landing #process > div {
+  width: min(100%, var(--ep-content-width));
+}
+.ep-business-landing #capabilities .ep-capability-card {
+  height: 100%;
+  min-width: 0;
+}
+.ep-business-landing #capabilities .ep-capability-card :is(h3, p) {
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #capabilities > div > div:last-child {
+  gap: 1rem;
+}
+.ep-business-landing #readings [data-reading] {
+  min-width: 0;
+}
+.ep-business-landing #readings [data-reading] dt {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #readings [data-reading] dd {
+  white-space: nowrap;
+}
+.ep-business-landing #readings [data-reading] dd > span:first-child {
+  font-variant-numeric: tabular-nums;
+}
+.ep-business-landing #process [data-step] p {
+  max-width: 32ch;
+}
+
+/* Avoid layout jumps from reveal elements and ensure content remains visible
+   when scripts are unavailable or reduced motion is requested. */
+@media (scripting: none), (prefers-reduced-motion: reduce) {
+  .ep-business-landing [data-hero="text"],
+  .ep-business-landing [data-reveal],
+  .ep-business-landing [data-business-card],
+  .ep-business-landing [data-reading],
+  .ep-business-landing [data-step] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .ep-business-landing #top.ep-hero--lens-hidden .ep-hero-layout {
+    min-height: 0 !important;
+  }
+  .ep-business-landing #top .ep-product-showcase {
+    width: min(100%, 680px);
+  }
+  .ep-business-landing #top .ep-product-float-top {
+    right: -1%;
+  }
+  .ep-business-landing #top .ep-product-float-bottom {
+    left: -1%;
+  }
+}
+@media (max-width: 767px) {
+  .ep-business-landing main > section {
+    scroll-margin-top: 5rem;
+  }
+  .ep-business-landing #top.ep-hero--lens-hidden .ep-hero-layout {
+    min-height: 0 !important;
+    padding-top: clamp(3.25rem, 9vh, 5rem) !important;
+    padding-bottom: 3rem !important;
+  }
+  .ep-business-landing #top .ep-hero-kicker {
+    margin-bottom: 1.15rem !important;
+  }
+  .ep-business-landing #top [data-hero="headline"] {
+    max-width: 12ch !important;
+    font-size: clamp(2.8rem, 10.6vw, 4.5rem) !important;
+    line-height: .97 !important;
+    letter-spacing: -.07em !important;
+  }
+  .ep-business-landing #top [data-hero="lead"] {
+    max-width: 34rem !important;
+    margin-top: 1.1rem !important;
+    font-size: clamp(.96rem, 2.5vw, 1.08rem) !important;
+    line-height: 1.65 !important;
+  }
+  .ep-business-landing #top [data-hero="cta"] {
+    gap: .65rem !important;
+  }
+  .ep-business-landing #top [data-hero="cta"] > a {
+    min-height: 3.15rem !important;
+    flex: 1 1 100%;
+  }
+  .ep-business-landing #top .ep-product-showcase {
+    padding: .25rem 0 .5rem !important;
+  }
+  .ep-business-landing #top .ep-product-window {
+    border-radius: 1.2rem !important;
+    box-shadow: 0 22px 55px -34px rgba(0,0,0,.36);
+  }
+  .ep-business-landing #top .ep-product-window-bar {
+    padding: .8rem .9rem !important;
+  }
+  .ep-business-landing #top .ep-product-status {
+    padding: .4rem .55rem;
+    font-size: .62rem;
+  }
+  .ep-business-landing #top .ep-product-status > span {
+    width: .35rem;
+    height: .35rem;
+  }
+  .ep-business-landing #top .ep-product-metric > span:first-child {
+    min-height: 0;
+    font-size: .68rem;
+  }
+  .ep-business-landing #top .ep-product-metric > span:nth-child(2) {
+    margin-top: .55rem;
+    font-size: 1.15rem;
+  }
+  .ep-business-landing #top .ep-product-insight {
+    gap: .75rem;
+  }
+  .ep-business-landing #top .ep-product-insight > div:first-child {
+    max-width: none;
+  }
+  .ep-business-landing #top .ep-product-bars {
+    width: 100%;
+    max-width: 12rem;
+    height: 2.75rem;
+    margin-left: auto;
+  }
+  .ep-business-landing > main > section[aria-label="EcoPrawn at a glance"] {
+    padding: 1.35rem 1rem !important;
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    min-width: 0;
+  }
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    overflow-wrap: anywhere;
+    font-size: clamp(1.15rem, 5vw, 1.5rem) !important;
+  }
+  .ep-business-landing #readings > div {
+    padding-top: 3.75rem !important;
+    padding-bottom: 3.75rem !important;
+  }
+  .ep-business-landing #readings dl {
+    margin-top: 2rem !important;
+    gap: .75rem !important;
+  }
+  .ep-business-landing #readings [data-reading] {
+    min-height: 0 !important;
+    padding: 1.1rem !important;
+  }
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process {
+    padding-top: 3.75rem !important;
+    padding-bottom: 3.75rem !important;
+  }
+  .ep-business-landing #capabilities > div > .mb-12 {
+    margin-bottom: 2rem !important;
+  }
+  .ep-business-landing #capabilities .ep-capability-card {
+    min-height: 0 !important;
+    padding: 1.35rem !important;
+  }
+  .ep-business-landing #capabilities .ep-capability-icon {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1.5rem !important;
+  }
+  .ep-business-landing #capabilities .ep-capability-card h3 {
+    font-size: 1.45rem !important;
+  }
+  .ep-business-landing #process [data-process-track] {
+    gap: 1.5rem !important;
+  }
+  .ep-business-landing #process [data-step] {
+    padding-top: 1.25rem !important;
+    padding-bottom: .25rem;
+  }
+  .ep-business-landing #process [data-step] > div:first-of-type {
+    margin-bottom: .85rem !important;
+  }
+}
+@media (max-width: 380px) {
+  .ep-business-landing #top [data-hero="headline"] {
+    font-size: clamp(2.55rem, 11.5vw, 3.1rem) !important;
+  }
+  .ep-business-landing #top .ep-product-window-bar {
+    align-items: flex-start;
+  }
+  .ep-business-landing #top .ep-product-status {
+    white-space: normal;
+    max-width: 7.5rem;
+    line-height: 1.2;
+  }
+  .ep-business-landing #top .ep-product-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    padding-inline: .35rem !important;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .ep-business-landing #capabilities .ep-capability-card:hover {
+    transform: translateY(-4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing *,
+  .ep-business-landing *::before,
+  .ep-business-landing *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
