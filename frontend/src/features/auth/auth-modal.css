@@ -3723,3 +3723,112 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
     padding-top: .8rem !important;
   }
 }
+
+
+/* Final mobile alignment: center brand and action labels; give close control a filled circle. */
+@media (max-width: 639px) {
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-brand {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-brand > div:first-child {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+    padding: 0 2.75rem !important;
+    text-align: center !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand .ep-logo {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: min(100%, 190px) !important;
+    margin-inline: auto !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand-tagline {
+    width: 100% !important;
+    margin: .3rem auto 0 !important;
+    text-align: center !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand button[aria-label="Close"] {
+    position: absolute !important;
+    top: 1rem !important;
+    right: .9rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    padding: 0 !important;
+    border: 1px solid #dfe8e4 !important;
+    border-radius: 9999px !important;
+    background: #f2f6f4 !important;
+    color: #0F4C5C !important;
+    box-shadow: 0 1px 3px rgba(15, 76, 92, .08) !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    text-align: center !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content > h1,
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content > p {
+    width: 100% !important;
+    margin-inline: auto !important;
+    text-align: center !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-form {
+    width: 100% !important;
+    align-items: stretch !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-form [role="group"][aria-label="Account access"] button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content form button[type="submit"],
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-google-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content form button[type="submit"] > span[aria-hidden="true"] {
+    position: absolute !important;
+    right: 1.15rem !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-google-button .ep-auth-google-label {
+    flex: 0 1 auto !important;
+    text-align: center !important;
+  }
+
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-access-note {
+    display: flex !important;
+    width: 100% !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-inline: auto !important;
+    text-align: center !important;
+  }
+}
