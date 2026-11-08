@@ -98,16 +98,50 @@ export function LandingMotion() {
             defaults: { ease: "power4.out" },
             delay: playWaterIntro ? 1.7 : .12,
           });
-          if (eyebrow) intro.from(eyebrow, { y: 22, duration: .55 });
+          if (eyebrow) intro.from(eyebrow, {
+            y: 18, autoAlpha: 0, duration: .65,
+          });
           if (words.length) intro.from(words, {
-            y: 42, rotateX: -8, transformPerspective: 1000,
-            duration: .85, stagger: .055,
-          }, "-=.24");
-          if (lead) intro.from(lead, { y: 18, duration: .6 }, "-=.42");
+            yPercent: 115,
+            rotateX: -12,
+            transformOrigin: "50% 100%",
+            transformPerspective: 1100,
+            autoAlpha: 0,
+            duration: 1.05,
+            stagger: { each: .045, from: "start" },
+            ease: "expo.out",
+          }, "-=.28");
+          if (lead) intro.from(lead, {
+            y: 24, autoAlpha: 0, duration: .75, ease: "power3.out",
+          }, "-=.55");
           if (actions) intro.from(actions.children, {
-            y: 18, duration: .5, stagger: .09,
+            y: 20, autoAlpha: 0, scale: .97, duration: .65, stagger: .12,
+            ease: "power3.out",
+          }, "-=.42");
+          if (signature) intro.from(signature, {
+            y: 14, autoAlpha: 0, duration: .55,
           }, "-=.3");
-          if (signature) intro.from(signature, { y: 12, duration: .5 }, "-=.25");
+
+          // Subtle ambient movement adds depth without pinning or taking over scroll.
+          const atmosphere = hero?.querySelector<HTMLElement>(".ep-hero-atmosphere");
+          if (atmosphere) gsap.to(atmosphere, {
+            yPercent: 12,
+            ease: "none",
+            scrollTrigger: {
+              trigger: hero,
+              start: "top top",
+              end: "bottom top",
+              scrub: .8,
+            },
+          });
+          const crosses = hero?.querySelectorAll<HTMLElement>("[data-cross]");
+          if (crosses?.length) gsap.fromTo(crosses,
+            { scale: .5, autoAlpha: 0, rotate: -18 },
+            {
+              scale: 1, autoAlpha: .2, rotate: 0, duration: .9,
+              stagger: .08, ease: "back.out(1.6)", delay: .25,
+            }
+          );
         }
 
         // About-style section heading reveals: eyebrow, heading, then supporting copy.
