@@ -12,6 +12,7 @@ import {
 } from "react";
 
 import { Link } from "@tanstack/react-router";
+import { createPortal } from "react-dom";
 import { Icon } from "@/components/ui/Icon";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { LoginForm, type AuthMode } from "./LoginForm";
@@ -142,7 +143,7 @@ function AuthDialog({
     };
   }, [requestClose]);
 
-  return (
+  return createPortal(
     <div
       ref={overlayRef}
       className="ep-auth-overlay fixed inset-0 z-[100] flex items-center justify-center overflow-hidden overscroll-none p-3 sm:p-6"
@@ -196,6 +197,7 @@ function AuthDialog({
         <LoginForm initialMode={mode} />
       </div>
     </div>
+    document.body,
   );
 }
 
