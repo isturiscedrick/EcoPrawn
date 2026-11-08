@@ -1,6 +1,6 @@
 /* Ordered modules for auth-modal.css. Keep this list in source order. */
-@import "./01-ecoprawn-authentication-modal-clea.css";
-@import "./02-keep-the-form-logic-untouched-thes.css";
-@import "./03-desktop-counterpart-to-the-mobile-.css";
-@import "./04-final-landing-system-pass-for-the-.css";
-@import "./05-mobile-auth-bottom-sheet-treatment.css";
+@import "./modal-base.css";
+@import "./form-layout.css";
+@import "./desktop-layout.css";
+@import "./brand-header.css";
+@import "./mobile-sheet.css";
