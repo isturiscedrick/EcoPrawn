@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { SurfaceCard } from "@/components/ui/SurfaceCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
@@ -275,9 +276,9 @@ export function LandingPage() {
         >
           <div className="ep-stats-panel mx-auto grid w-full max-w-[1200px] grid-cols-2 gap-2.5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 shadow-[0_18px_45px_-30px_rgba(15,76,92,.42)] sm:grid-cols-4 sm:gap-3 sm:rounded-3xl sm:p-4">
             {STATS.map((stat) => (
-              <div
+              <SurfaceCard
                 key={stat.label}
-                className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-4 text-left"
+                className="rounded-xl px-4 py-4 text-left"
               >
                 <span className="block text-[clamp(20px,2.5vw,28px)] font-bold leading-none tracking-tight text-[var(--ep-primary)]">
                   {stat.value}
@@ -285,7 +286,7 @@ export function LandingPage() {
                 <span className="mt-2 block text-xs font-medium leading-snug text-[var(--ep-text-muted)]">
                   {stat.label}
                 </span>
-              </div>
+              </SurfaceCard>
             ))}
           </div>
         </section>
@@ -337,11 +338,12 @@ export function LandingPage() {
                   : true;
                 const range = targetRangeFor(r.label);
                 return (
-                  <div
+                  <SurfaceCard
                     key={r.label}
+                    tone="inverse"
                     data-reading=""
                     data-hover-lift=""
-                    className="h-full rounded-2xl border border-white/20 bg-white/[0.07] p-5 transition-colors duration-200 hover:bg-white/[0.12]"
+                    className="h-full p-5 transition-colors duration-200 hover:bg-white/[0.12]"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <dt className="text-base font-semibold">{r.label}</dt>
@@ -399,7 +401,7 @@ export function LandingPage() {
                         Target {range}
                       </p>
                     )}
-                  </div>
+                  </SurfaceCard>
                 );
               })}
             </dl>
@@ -440,27 +442,27 @@ export function LandingPage() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <article data-business-card="" className="ep-capability-card group relative isolate min-h-[340px] overflow-hidden rounded-[1.5rem] border border-[var(--ep-line)] bg-[var(--ep-surface)] p-7 sm:p-8">
+              <SurfaceCard as="article" data-business-card="" className="ep-capability-card group relative isolate min-h-[340px] overflow-hidden p-7 sm:p-8">
                 <span aria-hidden="true" className="ep-capability-index absolute right-7 top-6 ep-font-display text-6xl font-semibold tracking-[-.08em] text-[var(--ep-text)] opacity-[.07]">01</span>
                 <span className="ep-capability-icon mb-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="activity" size={26} /></span>
                 <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">01 / Monitor</p>
                 <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Water quality intelligence</h3>
                 <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Track dissolved oxygen, pH, temperature, salinity, and water level against operating thresholds.</p>
-              </article>
-              <article data-business-card="" className="ep-capability-card group relative isolate min-h-[340px] overflow-hidden rounded-[1.5rem] border border-[var(--ep-line)] bg-[var(--ep-surface)] p-7 sm:p-8">
+              </SurfaceCard>
+              <SurfaceCard as="article" data-business-card="" className="ep-capability-card group relative isolate min-h-[340px] overflow-hidden p-7 sm:p-8">
                 <span aria-hidden="true" className="ep-capability-index absolute right-7 top-6 ep-font-display text-6xl font-semibold tracking-[-.08em] text-[var(--ep-text)] opacity-[.07]">02</span>
                 <span className="ep-capability-icon mb-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="eye" size={26} /></span>
                 <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">02 / Understand</p>
                 <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Growth and biomass insights</h3>
                 <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Use camera-based observation to follow shrimp growth and biomass without routine handling.</p>
-              </article>
-              <article data-business-card="" className="ep-capability-card group relative isolate min-h-[340px] overflow-hidden rounded-[1.5rem] border border-[var(--ep-line)] bg-[var(--ep-surface)] p-7 sm:p-8 md:col-span-2 lg:col-span-1">
+              </SurfaceCard>
+              <SurfaceCard as="article" data-business-card="" className="ep-capability-card group relative isolate min-h-[340px] overflow-hidden p-7 sm:p-8 md:col-span-2 lg:col-span-1">
                 <span aria-hidden="true" className="ep-capability-index absolute right-7 top-6 ep-font-display text-6xl font-semibold tracking-[-.08em] text-[var(--ep-text)] opacity-[.07]">03</span>
                 <span className="ep-capability-icon mb-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="zap" size={26} /></span>
                 <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">03 / Respond</p>
                 <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Automated farm actions</h3>
                 <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Connect readings to aeration control and biomass-informed feeding for a more coordinated workflow.</p>
-              </article>
+              </SurfaceCard>
             </div>
             <div className="mt-7 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-5 sm:px-7">
               <div>
