@@ -1903,3 +1903,103 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
     transform: translateY(-1px);
   }
 }
+
+
+/* Desktop welcome panel: stronger brand contrast and subtle aquaculture-inspired detail. */
+@media (min-width: 640px) {
+  .ep-auth-panel .ep-auth-brand {
+    position: relative !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+    background:
+      radial-gradient(ellipse at 50% 46%, rgba(139,213,166,.16), transparent 46%),
+      radial-gradient(circle at 12% 12%, rgba(255,255,255,.08) 0 1px, transparent 1.8px),
+      radial-gradient(circle at 88% 74%, rgba(255,255,255,.09) 0 1px, transparent 1.8px),
+      linear-gradient(155deg, rgba(5,111,124,.16), rgba(7,61,73,.12)) !important;
+    background-size: auto, 24px 24px, 31px 31px, auto !important;
+  }
+  .ep-auth-panel .ep-auth-brand::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: min(78%, 360px);
+    aspect-ratio: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(210,245,235,.13);
+    border-radius: 50%;
+    box-shadow: 0 0 0 22px rgba(210,245,235,.035), 0 0 0 54px rgba(210,245,235,.025), 0 0 65px rgba(139,213,166,.14);
+    pointer-events: none;
+  }
+  .ep-auth-panel .ep-auth-brand::after {
+    content: "SMART FARMING  •  BETTER WATER  •  HEALTHIER GROWTH";
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 32px;
+    color: rgba(255,255,255,.58);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    line-height: 1.8;
+    text-align: center;
+    pointer-events: none;
+  }
+  .ep-auth-panel .ep-auth-brand .ep-logo {
+    --ep-logo-color: #ffffff !important;
+    --ep-logo-text: #ffffff !important;
+    position: relative !important;
+    z-index: 2 !important;
+    justify-content: center !important;
+    max-width: 280px !important;
+    filter: drop-shadow(0 5px 18px rgba(0,0,0,.12));
+  }
+  .ep-auth-panel .ep-auth-brand .ep-logo .ep-logo-shrimp {
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+  }
+  .ep-auth-panel .ep-auth-brand .ep-logo .ep-logo-wordmark {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow: 0 2px 14px rgba(0,0,0,.12);
+    font-weight: 700 !important;
+  }
+  .ep-auth-panel .ep-auth-brand-tagline {
+    position: relative !important;
+    z-index: 2 !important;
+    max-width: 250px !important;
+    color: rgba(255,255,255,.92) !important;
+    text-shadow: 0 2px 12px rgba(0,0,0,.12);
+  }
+  .ep-auth-panel .ep-auth-brand > div::before,
+  .ep-auth-panel .ep-auth-brand > div::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 8px;
+    height: 8px;
+    border: 1px solid rgba(255,255,255,.65);
+    border-radius: 50%;
+    background: #8bd5a6;
+    box-shadow: 0 0 0 6px rgba(139,213,166,.12), 0 0 20px rgba(139,213,166,.45);
+    pointer-events: none;
+  }
+  .ep-auth-panel .ep-auth-brand > div::before { top: 27%; left: 16%; }
+  .ep-auth-panel .ep-auth-brand > div::after {
+    right: 15%;
+    bottom: 25%;
+    width: 6px;
+    height: 6px;
+    background: #f28a68;
+    box-shadow: 0 0 0 6px rgba(242,138,104,.12), 0 0 20px rgba(242,138,104,.4);
+  }
+  html.dark .ep-auth-panel .ep-auth-brand {
+    background:
+      radial-gradient(ellipse at 50% 46%, rgba(139,213,166,.13), transparent 46%),
+      radial-gradient(circle at 12% 12%, rgba(255,255,255,.07) 0 1px, transparent 1.8px),
+      radial-gradient(circle at 88% 74%, rgba(255,255,255,.07) 0 1px, transparent 1.8px),
+      linear-gradient(155deg, rgba(15,76,92,.28), rgba(7,35,42,.18)) !important;
+    background-size: auto, 24px 24px, 31px 31px, auto !important;
+  }
+}
