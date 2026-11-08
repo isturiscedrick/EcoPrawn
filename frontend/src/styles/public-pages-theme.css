@@ -1066,3 +1066,78 @@ html.dark :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
     transform: none !important;
   }
 }
+
+
+/* Definitive flat, neutral public-card treatment.
+   Explicitly includes the objective's div SurfaceCard and nested scope
+   markers/labels so older component and utility styles cannot reintroduce chrome. */
+.ep-business-landing :is(
+  .ep-stats-panel,
+  .ep-stats-panel > div,
+  #readings [data-reading],
+  #capabilities .ep-capability-card,
+  #capabilities article[data-business-card],
+  #process [data-step]
+),
+.ep-about-page :is(
+  .ep-about-objective,
+  #objectives article,
+  #systems article,
+  #scope article
+),
+.ep-contact-page :is(
+  [data-contact-card],
+  [data-contact-form] > form,
+  [data-contact-preview]
+) {
+  border: 0 !important;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+  background: var(--ep-surface) !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  transform: none !important;
+  transition: none !important;
+}
+.ep-about-page #scope article :is(h3 span, header span, [data-status]) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--ep-text-muted) !important;
+  box-shadow: none !important;
+}
+.ep-about-page #scope article > div:not(:first-child) > div {
+  border-top: 0 !important;
+}
+.ep-about-page #scope article :is(svg, h3, span) {
+  color: var(--ep-text-muted) !important;
+}
+.ep-about-page #scope article b {
+  color: var(--ep-text) !important;
+}
+.ep-about-page .ep-about-objective {
+  padding-inline: 0 !important;
+}
+.ep-business-landing #capabilities article[data-business-card]::before,
+.ep-business-landing #capabilities article[data-business-card] > span:first-child {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing :is(
+    .ep-stats-panel,
+    .ep-stats-panel > div,
+    #readings [data-reading],
+    #capabilities .ep-capability-card,
+    #capabilities article[data-business-card],
+    #process [data-step]
+  ),
+  .ep-about-page :is(.ep-about-objective, #objectives article, #systems article, #scope article),
+  .ep-contact-page :is([data-contact-card], [data-contact-form] > form, [data-contact-preview]) {
+    transition: none !important;
+    transform: none !important;
+  }
+}
