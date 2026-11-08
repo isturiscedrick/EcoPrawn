@@ -1,6 +1,7 @@
 import { PublicPageLayout } from "@/components/layout/PublicPageLayout";
 import { SurfaceCard } from "@/components/ui/SurfaceCard";
 import { PageHero } from "@/components/layout/PageHero";
+import { SectionHeading } from "@/components/layout/SectionHeading";
 import { Icon, IconChip, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { AboutMotion } from "@/components/motion/AboutMotion";
@@ -11,10 +12,6 @@ const SECTION_PAD = "px-4 py-16 sm:px-8 sm:py-24";
 const SECTION_HEADER_MARGIN = "mb-10 sm:mb-14";
 
 // Same eyebrow / heading scale as the landing sections.
-const eyebrow = "mb-4 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.14em]";
-const heading =
-  "ep-font-display text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight";
-const lead = "mt-3 max-w-[36rem] text-lg leading-relaxed text-[var(--ep-text-muted)]";
 
 // One icon per objective / system, in the same order as the arrays in content/site.ts.
 const OBJECTIVE_ICONS: IconName[] = ["cpu", "droplet", "wifi", "utensils", "camera", "layers"];
@@ -96,22 +93,20 @@ export function AboutPage() {
         >
           <div className="ep-about-content-frame mx-auto w-full max-w-[1200px]">
             <Reveal>
-              <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
-                <div className={`${eyebrow} text-[var(--ep-on-deep-muted)]`}>
-                  <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-zone)]" />
-                  What&apos;s running
-                </div>
-
-                <h2 className={heading}>
-                  Five systems,
-                  <br className="hidden sm:block" />
-                  one tank.
-                </h2>
-
-                <p className="mt-3 max-w-[36rem] text-lg leading-relaxed text-[var(--ep-on-deep-muted)]">
-                  Integrated tools built for everyday farm operations.
-                </p>
-              </div>
+              <SectionHeading
+                kicker="What&apos;s running"
+                marker="zone"
+                tone="inverse"
+                className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}
+                title={
+                  <>
+                    Five systems,
+                    <br className="hidden sm:block" />
+                    one tank.
+                  </>
+                }
+                description="Integrated tools built for everyday farm operations."
+              />
             </Reveal>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -161,19 +156,17 @@ export function AboutPage() {
         <section id="scope" className={`w-full box-border scroll-mt-[140px] md:scroll-mt-[150px] ${SECTION_PAD}`}>
           <div className="ep-about-content-frame mx-auto w-full max-w-[1200px]">
             <Reveal>
-              <div className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}>
-                <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
-                  <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
-                  Boundaries
-                </div>
-
-                <h2 className={heading}>Scope and limitations.</h2>
-
-                <p className={lead}>
-                  Stated plainly, so expectations line up with what the system
-                  actually does.
-                </p>
-              </div>
+              <SectionHeading
+                kicker="Boundaries"
+                className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}
+                title="Scope and limitations."
+                description={
+                  <>
+                    Stated plainly, so expectations line up with what the system
+                    actually does.
+                  </>
+                }
+              />
             </Reveal>
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
