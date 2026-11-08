@@ -3808,3 +3808,46 @@ html.dark .ep-landing {
     transition: none !important;
   }
 }
+
+
+/* Native reveal motion — no GSAP or Anime.js required. */
+.ep-business-landing [data-hero="text"],
+.ep-business-landing [data-reveal],
+.ep-business-landing [data-business-card],
+.ep-business-landing [data-reading],
+.ep-business-landing [data-step],
+.ep-native-reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity .65s ease,
+    transform .65s cubic-bezier(.2,.7,.2,1);
+  transition-delay: var(--ep-reveal-delay, 0ms);
+}
+.ep-business-landing [data-hero="text"] {
+  transform: translate3d(0, 12px, 0);
+}
+.ep-business-landing .ep-native-in-view,
+.ep-business-landing .ep-native-in-view [data-business-card],
+.ep-business-landing .ep-native-in-view [data-reading],
+.ep-business-landing .ep-native-in-view [data-step],
+.ep-business-landing [data-hero="text"].ep-native-in-view,
+.ep-business-landing [data-reveal].ep-native-in-view,
+.ep-business-landing [data-business-card].ep-native-in-view,
+.ep-business-landing [data-reading].ep-native-in-view,
+.ep-business-landing [data-step].ep-native-in-view {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing [data-hero="text"],
+  .ep-business-landing [data-reveal],
+  .ep-business-landing [data-business-card],
+  .ep-business-landing [data-reading],
+  .ep-business-landing [data-step],
+  .ep-native-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
