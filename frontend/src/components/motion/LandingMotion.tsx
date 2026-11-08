@@ -238,15 +238,16 @@ export function LandingMotion() {
           });
           card.addEventListener("pointerenter", enter);
           card.addEventListener("pointerleave", leave);
-          card.addEventListener("focusin", enter);
-          card.addEventListener("focusout", (event) => {
+          const onFocusOut = (event: FocusEvent) => {
             if (!card.contains(event.relatedTarget as Node | null)) leave();
-          });
+          };
+          card.addEventListener("focusin", enter);
+          card.addEventListener("focusout", onFocusOut);
           handlers.push(() => {
             card.removeEventListener("pointerenter", enter);
             card.removeEventListener("pointerleave", leave);
             card.removeEventListener("focusin", enter);
-            // Removing the node also releases its delegated focus behavior.
+            card.removeEventListener("focusout", onFocusOut);
           });
         });
 
