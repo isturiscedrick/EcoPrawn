@@ -1,7 +1,6 @@
 /*
  * EcoPrawn monochrome brand system.
- * The sole chromatic color is the brand primary, terracotta #D94416.
- * Everything else is black, white, or a transparent black/white tint.
+ * Brand palette: terracotta primary, deep-teal/mint secondary, black and white neutrals.
  */
 
 :root {
@@ -9,9 +8,9 @@
   --ep-brand: #d94416;
   --ep-accent: #d94416 !important;
   --ep-accent-hover: #b83a0f !important;
-  --ep-primary: #000000 !important;
-  --ep-primary-soft: #000000 !important;
-  --ep-secondary: #000000 !important;
+  --ep-primary: #0f4c5c !important;
+  --ep-primary-soft: #13596b !important;
+  --ep-secondary: #0f4c5c !important;
   --ep-text-muted: #000000 !important;
   --ep-bg: #ffffff !important;
   --ep-surface: #ffffff !important;
@@ -22,8 +21,8 @@
   --ep-warn-text: #d94416 !important;
   --coral: #d94416 !important;
   --coral-dim: #b83a0f !important;
-  --water-deep: #000000 !important;
-  --water-mid: #000000 !important;
+  --water-deep: #0f4c5c !important;
+  --water-mid: #13596b !important;
   --mangrove: #d94416 !important;
   --mangrove-light: #d94416 !important;
   --mangrove-text: #000000 !important;
@@ -40,7 +39,7 @@ html.dark {
   --ep-accent-hover: #b83a0f !important;
   --ep-primary: #ffffff !important;
   --ep-primary-soft: #ffffff !important;
-  --ep-secondary: #ffffff !important;
+  --ep-secondary: #8bd5a6 !important;
   --ep-text-muted: #ffffff !important;
   --ep-bg: #000000 !important;
   --ep-surface: #000000 !important;
@@ -52,7 +51,7 @@ html.dark {
   --coral: #d94416 !important;
   --coral-dim: #b83a0f !important;
   --water-deep: #ffffff !important;
-  --water-mid: #ffffff !important;
+  --water-mid: #8bd5a6 !important;
   --mangrove: #d94416 !important;
   --mangrove-light: #d94416 !important;
   --mangrove-text: #ffffff !important;
@@ -81,18 +80,18 @@ html.dark body.ecoprawn-root {
 .dashboard-shell,
 .ep-auth-modal {
   --ep-brand-primary: #d94416 !important;
-  --ep-brand-secondary: #000000 !important;
+  --ep-brand-secondary: #0f4c5c !important;
   --ep-logo-color: #d94416 !important;
-  --ep-logo-text: #000000 !important;
+  --ep-logo-text: #0f4c5c !important;
   background-color: #ffffff;
   color: #000000;
 }
 
 html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) {
   --ep-brand-primary: #d94416 !important;
-  --ep-brand-secondary: #ffffff !important;
+  --ep-brand-secondary: #8bd5a6 !important;
   --ep-logo-color: #d94416 !important;
-  --ep-logo-text: #ffffff !important;
+  --ep-logo-text: #8bd5a6 !important;
   background-color: #000000;
   color: #ffffff;
 }
@@ -244,6 +243,27 @@ html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) ::placeholder 
   color: #ffffff;
   opacity: .58;
 }
+
+/* Restore the EcoPrawn secondary color while keeping body copy neutral. */
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="text-emerald"], [class*="text-green"], [class*="text-teal"],
+  [class*="text-sky"], [class*="text-blue"], [class*="text-cyan"], [class*="text-lime"]
+) { color: var(--ep-secondary) !important; }
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="bg-emerald"], [class*="bg-green"], [class*="bg-teal"],
+  [class*="bg-sky"], [class*="bg-blue"], [class*="bg-cyan"], [class*="bg-lime"]
+) { background-color: var(--ep-secondary) !important; }
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="border-emerald"], [class*="border-green"], [class*="border-teal"],
+  [class*="border-sky"], [class*="border-blue"], [class*="border-cyan"], [class*="border-lime"]
+) { border-color: var(--ep-secondary) !important; }
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="text-emerald"], [class*="text-green"], [class*="text-teal"],
+  [class*="text-sky"], [class*="text-blue"], [class*="text-cyan"], [class*="text-lime"]
+) { color: var(--ep-secondary) !important; }
 
 /* Replace any legacy teal/green decorative fills with the brand primary. */
 :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#8bd5a6"],
