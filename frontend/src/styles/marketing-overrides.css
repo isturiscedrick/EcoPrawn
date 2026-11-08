@@ -756,12 +756,8 @@ html.dark .marketing-shell #process [data-step] :is(h3, p) {
 .marketing-shell #process {
   color: var(--ep-primary);
 }
-.ep-landing-hero [data-hero="text"] h1 span:first-child {
-  color: var(--ep-accent) !important;
-}
-.ep-landing-hero [data-hero="text"] h1 span:last-child {
-  color: var(--ep-primary) !important;
-}
+
+
 .ep-landing-hero [data-hero="lead"],
 .marketing-shell #process [data-step] p {
   color: var(--ep-text-muted) !important;
@@ -769,12 +765,8 @@ html.dark .marketing-shell #process [data-step] :is(h3, p) {
 .ep-landing-hero [data-hero="eyebrow"] {
   color: var(--ep-accent) !important;
 }
-.marketing-shell section[aria-label="EcoPrawn at a glance"] > div > div span:first-child {
-  color: var(--ep-accent) !important;
-}
-.marketing-shell section[aria-label="EcoPrawn at a glance"] > div > div span:last-child {
-  color: var(--ep-text-muted) !important;
-}
+
+
 .ep-landing-hero [data-hero="cta"] a:last-child {
   color: var(--ep-primary) !important;
 }
@@ -1283,9 +1275,7 @@ html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-lab
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]) svg {
   color: #173b35 !important;
 }
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg {
-  color: #ffffff !important;
-}
+
 html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a svg,
 html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a svg * {
   color: inherit !important;
