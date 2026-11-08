@@ -1424,3 +1424,220 @@ html.dark .ep-business-landing #top .ep-product-float {
   }
 }
 
+/* Landing page — premium editorial card system (final layer).
+   Stronger silhouette and hierarchy; accents remain limited to the brand palette. */
+.ep-business-landing #capabilities .ep-capability-card {
+  min-height: 340px !important;
+  padding: clamp(1.5rem, 2.4vw, 2.15rem) !important;
+  border: 1px solid rgba(15,76,92,.13) !important;
+  border-radius: 1.65rem !important;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(15,76,92,.075), transparent 42%),
+    linear-gradient(150deg, #ffffff 0%, #f8faf9 72%, #f5f7f6 100%) !important;
+  box-shadow:
+    0 2px 4px rgba(16,32,35,.025),
+    0 18px 44px -34px rgba(15,76,92,.32),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
+}
+.ep-business-landing #capabilities .ep-capability-card::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 0 auto !important;
+  height: 3px !important;
+  width: 100% !important;
+  right: auto !important;
+  bottom: auto !important;
+  border-radius: 1.65rem 1.65rem 0 0 !important;
+  background: linear-gradient(90deg, #0f4c5c 0%, #0f4c5c 68%, #d94416 100%) !important;
+  opacity: .85 !important;
+  transform: none !important;
+}
+.ep-business-landing #capabilities .ep-capability-card::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 15rem !important;
+  height: 15rem !important;
+  top: -7rem !important;
+  right: -7rem !important;
+  left: auto !important;
+  bottom: auto !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle, rgba(15,76,92,.12), rgba(217,68,22,.035) 48%, transparent 70%) !important;
+  opacity: .8 !important;
+  pointer-events: none !important;
+}
+.ep-business-landing #capabilities .ep-capability-icon {
+  display: inline-flex !important;
+  width: 3.35rem !important;
+  height: 3.35rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 1.7rem !important;
+  border: 1px solid rgba(15,76,92,.13) !important;
+  border-radius: 1.1rem !important;
+  background: linear-gradient(145deg, rgba(15,76,92,.12), rgba(15,76,92,.045)) !important;
+  color: #0f4c5c !important;
+  box-shadow: 0 8px 20px -15px rgba(15,76,92,.45), inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+.ep-business-landing #capabilities .ep-capability-card > p:nth-of-type(1) {
+  color: #d94416 !important;
+  letter-spacing: .17em !important;
+  font-size: .68rem !important;
+}
+.ep-business-landing #capabilities .ep-capability-card h3 {
+  max-width: 15ch !important;
+  font-size: clamp(1.45rem, 2vw, 1.85rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.045em !important;
+}
+.ep-business-landing #capabilities .ep-capability-card > p:last-child {
+  max-width: 34ch !important;
+  font-size: .94rem !important;
+  line-height: 1.8 !important;
+}
+
+.ep-business-landing .ep-stats-panel > div {
+  min-height: 112px !important;
+  padding: 1.25rem 1.35rem !important;
+  border: 1px solid rgba(15,76,92,.12) !important;
+  border-radius: 1.2rem !important;
+  background: linear-gradient(145deg, #ffffff, #f5f8f7) !important;
+  box-shadow: 0 10px 26px -24px rgba(15,76,92,.42), inset 0 1px 0 #fff !important;
+}
+.ep-business-landing .ep-stats-panel > div > span:first-child {
+  display: block !important;
+  color: #0f4c5c !important;
+  font-size: clamp(1.8rem, 3vw, 2.45rem) !important;
+  font-weight: 750 !important;
+  letter-spacing: -.065em !important;
+  line-height: 1 !important;
+}
+.ep-business-landing .ep-stats-panel > div > span:last-child {
+  margin-top: .65rem !important;
+  color: #53666a !important;
+  font-size: .76rem !important;
+  font-weight: 600 !important;
+  letter-spacing: .015em !important;
+}
+
+.ep-business-landing #readings [data-reading] {
+  min-height: 230px !important;
+  padding: 1.55rem !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 1.45rem !important;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(217,68,22,.14), transparent 46%),
+    linear-gradient(145deg, rgba(255,255,255,.13), rgba(255,255,255,.045)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 18px 42px -34px rgba(0,0,0,.55) !important;
+  backdrop-filter: blur(14px);
+}
+.ep-business-landing #readings [data-reading] dd {
+  font-size: clamp(2.4rem, 4vw, 3.2rem) !important;
+  letter-spacing: -.065em !important;
+  line-height: 1 !important;
+}
+.ep-business-landing #readings [data-reading] > div[aria-hidden="true"] {
+  overflow: visible;
+  box-shadow: 0 0 18px rgba(255,255,255,.08);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ep-business-landing #capabilities .ep-capability-card {
+    transition: transform .38s cubic-bezier(.2,.75,.25,1), box-shadow .38s ease, border-color .3s ease !important;
+  }
+  .ep-business-landing #capabilities .ep-capability-card:hover {
+    transform: translateY(-9px) !important;
+    border-color: rgba(15,76,92,.32) !important;
+    box-shadow: 0 28px 58px -34px rgba(15,76,92,.36), 0 14px 30px -25px rgba(217,68,22,.22), inset 0 1px 0 #fff !important;
+  }
+  .ep-business-landing #capabilities .ep-capability-card:hover .ep-capability-icon {
+    transform: translateY(-3px) rotate(-7deg) scale(1.06) !important;
+    background: linear-gradient(145deg, rgba(15,76,92,.18), rgba(217,68,22,.09)) !important;
+  }
+  .ep-business-landing .ep-stats-panel > div,
+  .ep-business-landing #readings [data-reading] {
+    transition: transform .35s cubic-bezier(.2,.75,.25,1), box-shadow .35s ease !important;
+  }
+  .ep-business-landing .ep-stats-panel > div:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 18px 34px -25px rgba(15,76,92,.38), 0 8px 20px -18px rgba(217,68,22,.18) !important;
+  }
+  .ep-business-landing #readings [data-reading]:hover {
+    transform: translateY(-6px) !important;
+    border-color: rgba(255,255,255,.32) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 26px 48px -30px rgba(0,0,0,.65), 0 0 28px -20px rgba(217,68,22,.38) !important;
+  }
+}
+
+html.dark .ep-business-landing #capabilities .ep-capability-card {
+  border-color: rgba(255,255,255,.085) !important;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(15,76,92,.42), transparent 48%),
+    linear-gradient(150deg, #202a2c 0%, #171f21 72%, #151b1d 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 22px 48px -34px rgba(0,0,0,.9) !important;
+}
+html.dark .ep-business-landing #capabilities .ep-capability-card::before {
+  background: linear-gradient(90deg, #0f4c5c 0%, #0f4c5c 65%, #d94416 100%) !important;
+}
+html.dark .ep-business-landing #capabilities .ep-capability-card::after {
+  background: radial-gradient(circle, rgba(15,76,92,.35), rgba(217,68,22,.09) 48%, transparent 70%) !important;
+}
+html.dark .ep-business-landing #capabilities .ep-capability-icon {
+  border-color: rgba(139,184,190,.18) !important;
+  background: linear-gradient(145deg, rgba(15,76,92,.55), rgba(15,76,92,.18)) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.09), 0 10px 24px -18px rgba(0,0,0,.8) !important;
+}
+html.dark .ep-business-landing #capabilities .ep-capability-card > p:nth-of-type(1) {
+  color: #f08a69 !important;
+}
+html.dark .ep-business-landing .ep-stats-panel > div {
+  border-color: rgba(255,255,255,.08) !important;
+  background: linear-gradient(145deg, #202a2c, #171f21) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 18px 36px -30px rgba(0,0,0,.9) !important;
+}
+html.dark .ep-business-landing .ep-stats-panel > div > span:first-child {
+  color: #ffffff !important;
+}
+html.dark .ep-business-landing .ep-stats-panel > div > span:last-child {
+  color: rgba(255,255,255,.66) !important;
+}
+html.dark .ep-business-landing #readings [data-reading] {
+  border-color: rgba(255,255,255,.13) !important;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(217,68,22,.2), transparent 48%),
+    linear-gradient(145deg, rgba(15,76,92,.62), rgba(18,29,32,.96)) !important;
+}
+
+@media (max-width: 767px) {
+  .ep-business-landing #capabilities .ep-capability-card {
+    min-height: 0 !important;
+    padding: 1.45rem !important;
+    border-radius: 1.3rem !important;
+  }
+  .ep-business-landing #capabilities .ep-capability-icon {
+    width: 3rem !important;
+    height: 3rem !important;
+    margin-bottom: 1.25rem !important;
+  }
+  .ep-business-landing #readings [data-reading] {
+    min-height: 205px !important;
+    padding: 1.15rem !important;
+    backdrop-filter: none;
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    min-height: 96px !important;
+    padding: 1rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing #capabilities .ep-capability-card,
+  .ep-business-landing #capabilities .ep-capability-icon,
+  .ep-business-landing .ep-stats-panel > div,
+  .ep-business-landing #readings [data-reading] {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
