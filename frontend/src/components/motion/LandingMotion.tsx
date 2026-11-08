@@ -547,38 +547,7 @@ export function LandingMotion() {
       };
     });
 
-    // HORIZONTAL PROCESS STORY: desktop users scroll vertically while
-    // the four process stages travel horizontally. Mobile keeps its natural
-    // stacked layout and reduced-motion users are not pinned.
-    mm.add(
-      "(min-width: 1200px) and (prefers-reduced-motion: no-preference)",
-      () => {
-        const viewport = document.querySelector<HTMLElement>("#process [data-process-viewport]");
-        const track = viewport?.querySelector<HTMLElement>("[data-process-track]");
-        const line = viewport?.querySelector<HTMLElement>("[data-process-line]");
-        if (!viewport || !track) return;
-
-        const getDistance = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
-        if (getDistance() < 40) return;
-
-        gsap.to(track, {
-          x: () => -getDistance(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: viewport,
-            start: "top 16%",
-            end: () => `+=${getDistance()}`,
-            scrub: 1,
-            pin: viewport,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              if (line) gsap.set(line, { scaleX: self.progress, transformOrigin: "left center" });
-            },
-          },
-        });
-      }
-    );
+    // PROCESS: the four stages remain in a natural, responsive grid.
 
     // HERO DEPTH: keep the lens figure free of competing transforms.
     // Its internal rings and glare are scroll-linked inside HeroLens.
