@@ -11,8 +11,6 @@ import { objectives, features, inScope, outOfScope } from "@/content/site";
 const SECTION_PAD = "px-4 py-16 sm:px-8 sm:py-24";
 const SECTION_HEADER_MARGIN = "mb-10 sm:mb-14";
 
-// Same eyebrow / heading scale as the landing sections.
-
 // One icon per objective / system, in the same order as the arrays in content/site.ts.
 const OBJECTIVE_ICONS: IconName[] = ["cpu", "droplet", "wifi", "utensils", "camera", "layers"];
 const FEATURE_ICONS: IconName[] = ["wrench", "gauge", "eye", "repeat", "leaf"];
@@ -94,7 +92,7 @@ export function AboutPage() {
           <div className="ep-about-content-frame mx-auto w-full max-w-[1200px]">
             <Reveal>
               <SectionHeading
-                kicker="What&apos;s running"
+                kicker={"What's running"}
                 marker="zone"
                 tone="inverse"
                 className={`max-w-[700px] ${SECTION_HEADER_MARGIN}`}
