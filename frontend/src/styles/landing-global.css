@@ -2522,3 +2522,75 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
     padding-right: 3.5rem;
   }
 }
+
+
+/* Footer responsive layout — use the footer's actual available width rather
+   than viewport breakpoints, so it also works at browser zoom and in embeds. */
+footer[data-site-footer] {
+  overflow: clip;
+}
+footer[data-site-footer] .ep-footer-inner {
+  width: 100%;
+  min-width: 0;
+  container: ep-footer / inline-size;
+}
+footer[data-site-footer] .ep-footer-grid,
+footer[data-site-footer] .ep-footer-grid > * {
+  min-width: 0;
+}
+footer[data-site-footer] .ep-footer-grid h2 {
+  max-width: 100%;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  line-height: 1.25;
+  letter-spacing: clamp(.035em, .6cqi, .14em);
+}
+footer[data-site-footer] .ep-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: .5rem 1rem;
+  min-width: 0;
+}
+footer[data-site-footer] .ep-footer-bottom p {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+@container ep-footer (max-width: 760px) {
+  footer[data-site-footer] .ep-footer-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: clamp(.9rem, 3cqi, 1.5rem) !important;
+    row-gap: 1.25rem !important;
+  }
+  footer[data-site-footer] .ep-footer-brand {
+    grid-column: 1 / -1 !important;
+  }
+  footer[data-site-footer] .ep-footer-explore,
+  footer[data-site-footer] .ep-footer-account {
+    grid-column: auto !important;
+  }
+  footer[data-site-footer] .ep-footer-grid h2 {
+    font-size: clamp(.72rem, 2.2cqi, .875rem);
+    letter-spacing: .07em;
+  }
+  footer[data-site-footer] .ep-footer-bottom {
+    padding-right: 3.75rem;
+  }
+}
+@container ep-footer (max-width: 420px) {
+  footer[data-site-footer] .ep-footer-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 1rem !important;
+  }
+  footer[data-site-footer] .ep-footer-brand,
+  footer[data-site-footer] .ep-footer-explore,
+  footer[data-site-footer] .ep-footer-account {
+    grid-column: 1 / -1 !important;
+  }
+  footer[data-site-footer] .ep-footer-bottom {
+    padding-right: 3.75rem;
+  }
+}
