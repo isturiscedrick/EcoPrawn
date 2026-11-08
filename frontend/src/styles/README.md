@@ -1,43 +1,78 @@
 # Frontend styles
 
 All application-wide styles are loaded through `globals.css`, imported once by
-`src/routes/__root.tsx`. Do not import these files from individual pages or
+`src/routes/__root.tsx`. Do not import global styles from individual pages or
 components.
 
-## Component and feature styles
+## Structure and ownership
 
-Styles that previously lived beside React components are grouped here by owner.
-Active component/feature styles are imported from `globals.css` so the entry
-point and cascade remain centralized. Styles not currently referenced by the
-application remain organized here but are intentionally not imported until used.
+```text
+styles/
+├── globals.css
+├── base/
+│   └── foundations.css
+├── themes/
+│   └── theme-components.css
+├── dashboard/
+│   └── dashboard.css
+├── marketing/
+│   ├── marketing-overrides.css
+│   ├── marketing-overrides/
+│   │   ├── dark-theme-compat.css
+│   │   └── landing-section-compat.css
+│   ├── landing-global.css
+│   ├── landing-global/
+│   │   ├── tokens.css
+│   │   ├── hero-lens.css
+│   │   ├── forms-and-controls.css
+│   │   ├── footer-layout.css
+│   │   └── editorial-layout.css
+│   └── public-site-theme.css
+│       └── public-site-theme/
+│           ├── landing-palette.css
+│           ├── landing-header-drawer.css
+│           ├── shared-page-header.css
+│           └── card-interactions.css
+├── responsive/
+│   └── site-responsive.css
+│       └── site-responsive/
+│           ├── public-layout.css
+│           ├── landing-mobile-layout.css
+│           ├── landing-mobile-polish.css
+│           └── dialogs-and-drawers.css
+├── components/
+│   ├── layout/
+│   └── motion/
+└── features/
+    └── auth/
+        ├── auth-modal.css
+        └── auth-modal/
+            ├── modal-base.css
+            ├── form-layout.css
+            ├── desktop-layout.css
+            ├── brand-header.css
+            └── mobile-sheet.css
+```
 
-| Folder / file | Owns |
+| Area | Responsibility |
 | --- | --- |
-| `components/layout/brand-mark.css` | EcoPrawn brand-mark drawing and reveal styles |
-| `components/layout/site-header.css` | Site-header styles (currently not imported) |
-| `components/motion/logo-intro.css` | Logo-intro motion styles (currently not imported) |
-| `features/auth/auth-modal.css` | Authentication modal, form, and responsive sheet styles |
+| `base/foundations.css` | Tailwind theme bridge, global tokens, typography, element defaults, shared motion primitives |
+| `themes/theme-components.css` | Shared theme compatibility and theme mappings |
+| `dashboard/dashboard.css` | Dashboard-only palette, layout safeguards, and responsive behavior |
+| `marketing/landing-global/` | Public-site tokens, hero lens, forms, footer, and editorial composition |
+| `marketing/marketing-overrides/` | Legacy public-page compatibility rules not yet safely migrated |
+| `marketing/public-site-theme/` | Landing palette, landing header/drawer, shared page header, and card interactions |
+| `responsive/site-responsive/` | Public layout, mobile landing layout/polish, and dialog/drawer constraints |
+| `features/auth/auth-modal/` | Authentication modal base, form layout, desktop layout, brand header, and mobile sheet |
+| `components/` | Styles owned by reusable layout and motion components |
 
-## Folder ownership
+The numbered filenames have been replaced with names that describe each
+module's responsibility. The wrapper stylesheets remain stable entry points
+and preserve the original module order.
 
-| Folder / file | Owns |
-| --- | --- |
-| `globals.css` | Single global entry point and cascade order only |
-| `base/foundations.css` | Tailwind theme bridge, base tokens, typography, global element defaults, and shared motion primitives |
-| `themes/theme-components.css` | Shared theme compatibility plus dashboard and public-page theme mappings |
-| `dashboard/dashboard.css` | Dashboard-only brand tokens, layout safeguards, and dashboard responsive rules |
-| `marketing/marketing-overrides.css` | Legacy public-page compatibility rules not yet safely migrated |
-| `marketing/landing-global.css` | Core public-site layout, hero, lens, and shared Landing/About/Contact styling |
-| `marketing/public-site-theme.css` | Ordered landing-page palette, shared public-page themes, surfaces, and final card refinements |
-| `responsive/site-responsive.css` | Ordered responsive safeguards, brand normalization, and shared layout corrections in one final cascade layer |
+## Global import order
 
-All CSS files are centralized under `src/styles/`. Keep each stylesheet in the
-folder that represents its owner (component, feature, dashboard, marketing,
-responsive, or shared theme), rather than placing CSS beside TSX files.
-
-## Import order
-
-The order in `globals.css` is intentional and must be preserved:
+Keep the order in `globals.css` intentional:
 
 1. Framework imports (Google Fonts, Tailwind, animation utilities).
 2. Base foundations.
@@ -46,29 +81,29 @@ The order in `globals.css` is intentional and must be preserved:
 5. Legacy marketing compatibility.
 6. Canonical public-page styles.
 7. Responsive safeguards.
-8. Combined public-site theme and final visual refinements (landing palette first, shared public-page rules second).
-9. Component and feature styles (brand mark, then authentication modal).
+8. Final public-site theme refinements.
+9. Component and feature styles.
 
-Do not alphabetize these imports. Later styles intentionally override earlier
-compatibility rules. The responsive layer is followed by the final public-site
-theme refinements; component and feature styles load after those. Inside
-`marketing/public-site-theme.css`, preserve the landing palette before the
-shared public-page theme rules.
+Do not alphabetize these imports. Later styles intentionally refine or override
+earlier compatibility rules. Within each wrapper, preserve its current
+`@import` order. In particular, keep the landing palette before the shared
+public-page theme rules and keep responsive safeguards before final theme
+refinements.
 
 ## Refactoring rules
 
 - Keep exactly one global entry point: `globals.css`.
 - Never import global styles again from route components.
 - Scope dashboard rules to `.dashboard-shell`.
-- Scope public-page rules to `.ep-landing`, `.ep-about-page`,
-  `.ep-contact-page`, or a documented shared public-page root.
-- Put new styles in the folder that owns the component; do not append one-off
-  overrides to unrelated stylesheets.
+- Scope public-page rules to the appropriate public-page root.
+- Put new styles in the folder that owns the component or feature.
 - Before deleting or merging rules, search the entire repository for their
-  selectors, custom properties, and imports. Preserve specificity and cascade
-  order when migrating declarations.
+  selectors, custom properties, and imports.
 - Do not remove legacy rules merely because their filename says
-  `overrides`; some still support older markup and theme behavior.
-- Consolidate duplicate selectors only after comparing computed behavior and
-  checking light mode, dark mode, desktop, mobile, and reduced-motion states.
-- Remove an earlier rule block only when its selector, declarations, and conditional context are identical to a later block; keep the later copy so the final cascade remains authoritative.
+  `compat` or `overrides`.
+- Consolidate duplicate selectors only after comparing declarations,
+  specificity, media/support conditions, and cascade order.
+- Verify light/dark themes, desktop/mobile layouts, and reduced-motion behavior
+  before changing visual declarations.
+- Keep wrapper files focused on ordered imports; put actual CSS rules in the
+  responsibility-specific modules.
