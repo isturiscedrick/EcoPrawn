@@ -2619,3 +2619,22 @@ footer[data-site-footer] .ep-footer-grid > .ep-footer-account::after {
   content: none !important;
   display: none !important;
 }
+
+
+/* Header navigation hover: keep the Home item on-brand instead of allowing
+   generic hover/focus styles to wash it out to white after the transition. */
+#site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]):hover,
+#site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]):focus-visible {
+  background-color: var(--ep-accent) !important;
+  color: var(--ep-on-accent, #ffffff) !important;
+  -webkit-text-fill-color: var(--ep-on-accent, #ffffff) !important;
+  border-color: transparent !important;
+}
+#site-header nav[aria-label="Primary navigation"] a[aria-current="page"] {
+  background-color: var(--ep-accent);
+  color: var(--ep-on-accent, #ffffff);
+  -webkit-text-fill-color: var(--ep-on-accent, #ffffff);
+}
+#site-header nav[aria-label="Primary navigation"] a {
+  transition: color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
