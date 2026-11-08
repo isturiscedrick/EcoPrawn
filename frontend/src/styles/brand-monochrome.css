@@ -131,7 +131,7 @@ html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
 ) {
   background-color: #d94416 !important;
   border-color: #d94416 !important;
-  color: #ffffff !important;
+  color: #000000 !important;
 }
 
 :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
@@ -152,7 +152,7 @@ html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
   [class*="bg-violet"], [class*="bg-purple"], [class*="bg-pink"]
 ) {
   background-color: #d94416 !important;
-  color: #ffffff !important;
+  color: #000000 !important;
 }
 
 :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
@@ -202,13 +202,13 @@ html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
 }
 
 :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
-  .border-gray-*, .border-slate-*, .border-zinc-*, .border-neutral-*
+  [class*="border-gray-"], [class*="border-slate-"], [class*="border-zinc-"], [class*="border-neutral-"]
 ) {
   border-color: rgba(0, 0, 0, .18);
 }
 
 html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
-  .border-gray-*, .border-slate-*, .border-zinc-*, .border-neutral-*
+  [class*="border-gray-"], [class*="border-slate-"], [class*="border-zinc-"], [class*="border-neutral-"]
 ) {
   border-color: rgba(255, 255, 255, .2);
 }
