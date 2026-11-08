@@ -157,6 +157,10 @@ export function LandingPage() {
               data-hero="text"
               className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center lg:mx-auto lg:max-w-[660px]"
             >
+              <div data-hero="eyebrow" className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3.5 py-2 text-[11px] font-bold uppercase tracking-[.16em] text-[var(--ep-secondary)] shadow-sm">
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[var(--ep-zone)] shadow-[0_0_0_4px_rgba(139,213,166,.16)]" />
+                Smart aquaculture platform
+              </div>
               <h1
                 data-hero="headline"
                 aria-label="Smarter shrimp farming, always in range."
@@ -206,7 +210,7 @@ export function LandingPage() {
 
             <div
               data-hero="parallax-console"
-              className="ep-hero-visual order-2 relative mx-auto flex w-full max-w-[390px] items-center justify-center sm:max-w-[420px] lg:max-w-[520px]"
+              className="ep-hero-visual order-2 relative mx-auto flex w-full max-w-[390px] items-center justify-center sm:max-w-[420px] lg:max-w-[560px]"
             >
               <HeroLens />
             </div>
