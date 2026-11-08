@@ -3541,3 +3541,29 @@ html.dark .ep-landing {
     transition: none !important;
   }
 }
+
+
+/* Landing page variant: keep HeroLens implementation intact, but omit it
+   from the visible hero composition. Center the copy in the freed space. */
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="parallax-console"] {
+  display: none !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden .ep-hero-layout {
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="text"] {
+  width: 100% !important;
+  max-width: 900px !important;
+  justify-self: center !important;
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="headline"],
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="lead"] {
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="cta"] {
+  justify-content: center !important;
+}
