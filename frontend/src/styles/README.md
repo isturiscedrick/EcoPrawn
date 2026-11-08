@@ -4,17 +4,21 @@ All application-wide styles are loaded through `globals.css`, imported once by
 `src/routes/__root.tsx`. Do not import these files from individual pages or
 components.
 
-## Stylesheet ownership
+## Folder ownership
 
-| File | Owns |
+| Folder / file | Owns |
 | --- | --- |
-| `globals.css` | Global CSS entry point and import order only |
-| `foundations.css` | Tailwind theme bridge, base design tokens, typography defaults, and global element styles |
-| `theme-components.css` | Shared theme compatibility and dashboard component color fixes |
-| `dashboard.css` | Dashboard-only brand tokens, layout safeguards, and dashboard responsive rules |
-| `marketing-overrides.css` | Legacy public-page compatibility rules that have not yet been safely migrated |
-| `landing-global.css` | Canonical public-site tokens and shared Landing, About, Contact, hero, and lens styling |
-| `responsive-overrides.css` | Cross-page responsive safeguards for public pages and auth surfaces |
+| `globals.css` | Single global entry point and cascade order only |
+| `base/foundations.css` | Tailwind theme bridge, base tokens, typography, global element defaults, and shared motion primitives |
+| `themes/theme-components.css` | Shared theme compatibility plus dashboard and public-page theme mappings |
+| `themes/brand-monochrome.css` | Global brand color normalization rules |
+| `dashboard/dashboard.css` | Dashboard-only brand tokens, layout safeguards, and dashboard responsive rules |
+| `marketing/marketing-overrides.css` | Legacy public-page compatibility rules not yet safely migrated |
+| `marketing/landing-global.css` | Core public-site layout, hero, lens, and shared Landing/About/Contact styling |
+| `marketing/landing-palette.css` | Public landing-page palette and visual refinements |
+| `marketing/public-pages-theme.css` | Shared public-page theme, surfaces, and final landing card treatment |
+| `responsive/responsive-overrides.css` | Cross-page responsive safeguards for public pages and auth surfaces |
+| `responsive/responsive-layout-audit.css` | Shared header, footer, public-page, drawer, and dashboard layout corrections |
 
 Feature-owned styles stay beside their feature. For example, authentication
 modal styles live in `features/auth/auth-modal.css`. Component-specific styles
@@ -22,28 +26,33 @@ belong beside their component.
 
 ## Import order
 
-1. Foundations and Tailwind theme bridge.
-2. Shared theme compatibility.
-3. Dashboard-specific styles.
-4. Legacy marketing compatibility.
-5. Canonical public-page styles.
-6. Responsive safeguards, last, so breakpoint rules can adapt the completed
-   component styles.
+The order in `globals.css` is intentional and must be preserved:
 
-Keep this order until the legacy marketing rules have been audited and migrated.
+1. Framework imports (Google Fonts, Tailwind, animation utilities).
+2. Base foundations.
+3. Shared theme compatibility.
+4. Dashboard-specific styles.
+5. Legacy marketing compatibility.
+6. Canonical public-page styles.
+7. Responsive safeguards and final visual refinements, in their current order.
 
-## Cleanup rules
+Do not alphabetize these imports. Later styles intentionally override earlier
+compatibility rules. Keep the responsive and final public-page layers in the
+same order unless the cascade has been audited and verified.
+
+## Refactoring rules
 
 - Keep exactly one global entry point: `globals.css`.
-- Never import `landing-global.css` or `responsive-overrides.css` again from
-  route components.
+- Never import global styles again from route components.
 - Scope dashboard rules to `.dashboard-shell`.
 - Scope public-page rules to `.ep-landing`, `.ep-about-page`,
   `.ep-contact-page`, or a documented shared public-page root.
-- Put new styles in the file that owns the component; do not append one-off
-  overrides to the bottom of unrelated stylesheets.
-- Before deleting or merging a stylesheet, search the entire repository for
-  its import, unique selectors, and custom properties. Preserve cascade order
-  when migrating rules.
-- Do not remove legacy rules merely because their filename says "overrides";
-  some still support older markup and theme behavior.
+- Put new styles in the folder that owns the component; do not append one-off
+  overrides to unrelated stylesheets.
+- Before deleting or merging rules, search the entire repository for their
+  selectors, custom properties, and imports. Preserve specificity and cascade
+  order when migrating declarations.
+- Do not remove legacy rules merely because their filename says
+  `overrides`; some still support older markup and theme behavior.
+- Consolidate duplicate selectors only after comparing computed behavior and
+  checking light mode, dark mode, desktop, mobile, and reduced-motion states.

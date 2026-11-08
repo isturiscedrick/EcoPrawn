@@ -7,19 +7,19 @@
 @import "tw-animate-css";
 
 /* Foundations and shared theme */
-@import "./foundations.css";
-@import "./theme-components.css";
+@import "./base/foundations.css";
+@import "./themes/theme-components.css";
 
 /* Feature surfaces */
-@import "./dashboard.css";
+@import "./dashboard/dashboard.css";
 
 /* Public site: compatibility first, canonical styles second */
-@import "./marketing-overrides.css";
-@import "./landing-global.css";
+@import "./marketing/marketing-overrides.css";
+@import "./marketing/landing-global.css";
 
 /* Responsive rules intentionally come last */
-@import "./responsive-overrides.css";
-@import "./brand-monochrome.css";
-@import "./responsive-layout-audit.css";
-@import "./landing-palette.css";
-@import "./public-pages-theme.css";
+@import "./responsive/responsive-overrides.css";
+@import "./themes/brand-monochrome.css";
+@import "./responsive/responsive-layout-audit.css";
+@import "./marketing/landing-palette.css";
+@import "./marketing/public-pages-theme.css";
