@@ -18,7 +18,7 @@ export function SiteFooter() {
       >
         <div className="ep-footer-inner mx-auto w-full max-w-[1200px]">
           <div className="ep-footer-grid grid grid-cols-2 gap-x-4 gap-y-6 border-b border-[var(--ep-line)] pb-6 sm:gap-x-8 sm:gap-y-8 sm:pb-8 md:grid-cols-[1.4fr_0.7fr_1fr] md:gap-10">
-            <div className="ep-footer-brand col-span-2 min-w-0 md:col-span-1">
+            <div className="ep-footer-brand col-span-2 min-w-0 border-0 bg-transparent p-0 shadow-none ring-0 md:col-span-1">
               <Link
                 to="/"
                 resetScroll
@@ -33,7 +33,7 @@ export function SiteFooter() {
               </p>
             </div>
 
-            <div className="ep-footer-explore min-w-0">
+            <div className="ep-footer-explore min-w-0 border-0 bg-transparent p-0 shadow-none ring-0">
               <h2 className={headingClass}>Explore</h2>
               <nav
                 className="mt-2 flex flex-col items-start gap-0 text-[var(--ep-primary)] sm:mt-3"
@@ -51,7 +51,7 @@ export function SiteFooter() {
               </nav>
             </div>
 
-            <div className="ep-footer-account min-w-0">
+            <div className="ep-footer-account min-w-0 border-0 bg-transparent p-0 shadow-none ring-0">
               <h2 className={headingClass}>Built for better water</h2>
               <p className="mt-2 text-xs leading-5 text-[var(--ep-text-muted)] sm:text-sm sm:leading-6">
                 Monitor water quality, feeding, and growth in one place.
