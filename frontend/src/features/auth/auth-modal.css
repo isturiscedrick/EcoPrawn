@@ -2224,3 +2224,30 @@ html.dark .ep-auth-modal :is(input,button,a):focus-visible {
     transition-duration:.01ms !important;
   }
 }
+
+/* The auth dialog logo uses the same coral shrimp + teal wordmark as the
+   public header; override the component's white inline fallback. */
+.ep-auth-modal .ep-logo {
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #0f4c5c !important;
+}
+.ep-auth-modal .ep-logo .ep-logo-shrimp {
+  fill: #d94416 !important;
+  stroke: #d94416 !important;
+}
+.ep-auth-modal .ep-logo .ep-logo-wordmark {
+  color: #0f4c5c !important;
+  -webkit-text-fill-color: #0f4c5c !important;
+}
+html.dark .ep-auth-modal .ep-logo {
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #ffffff !important;
+}
+html.dark .ep-auth-modal .ep-logo .ep-logo-shrimp {
+  fill: #d94416 !important;
+  stroke: #d94416 !important;
+}
+html.dark .ep-auth-modal .ep-logo .ep-logo-wordmark {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
