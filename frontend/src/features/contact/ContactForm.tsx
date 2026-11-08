@@ -34,13 +34,13 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="h-full rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center shadow-[0_16px_32px_-24px_rgba(11,46,51,0.55)] sm:gap-5 sm:p-8"
+        data-contact-preview="" className="h-full p-6 text-center sm:gap-5 sm:p-8"
       >
         <h2 className="ep-font-display mb-2 text-2xl font-semibold text-[var(--ep-text)]">Review your message</h2>
         <p className="mb-6 text-base leading-relaxed text-[var(--ep-text-muted)]">
           This is a local preview only. Nothing has been sent.
         </p>
-        <dl className="mb-6 space-y-4 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4 text-left">
+        <dl className="mb-6 space-y-4 p-4 text-left">
           <div>
             <dt className="text-xs font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">From</dt>
             <dd className="mt-1 break-words text-sm font-medium text-[var(--ep-text)]">{name.trim()}</dd>
@@ -68,7 +68,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex h-full flex-col gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-[0_16px_32px_-24px_rgba(11,46,51,0.45)] sm:p-8"
+      className="flex h-full flex-col gap-4 p-4 sm:p-8"
     >
       <div className="mb-1">
         <h2 className="ep-font-display text-2xl font-semibold tracking-tight text-[var(--ep-text)]">
