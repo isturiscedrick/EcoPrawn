@@ -116,6 +116,8 @@ export function HeroEnhance() {
           cleanups.push(() => {
             zone.removeEventListener("pointermove", onMove);
             zone.removeEventListener("pointerleave", onLeave);
+            gsap.killTweensOf(panel, "rotationX,rotationY");
+            gsap.set(panel, { clearProps: "transform,transformPerspective" });
           });
         }
 
@@ -147,6 +149,8 @@ export function HeroEnhance() {
             cleanups.push(() => {
               btn.removeEventListener("pointermove", onMove);
               btn.removeEventListener("pointerleave", onLeave);
+              gsap.killTweensOf(btn, "x,y");
+              gsap.set(btn, { clearProps: "transform" });
             });
           });
 
