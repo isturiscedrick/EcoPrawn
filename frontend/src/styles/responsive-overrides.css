@@ -1277,3 +1277,77 @@
     font-size: clamp(3.65rem, 4.5vw, 5rem) !important;
   }
 }
+
+
+/* ---------- Desktop hero follow-up: protect the headline/visual boundary ---------- */
+@media (min-width: 1024px) {
+  .ep-business-landing #top .ep-hero-layout {
+    grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr) !important;
+    column-gap: clamp(2.75rem, 5vw, 5rem) !important;
+  }
+
+  .ep-business-landing #top [data-hero="text"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 640px !important;
+    min-width: 0 !important;
+    justify-self: start !important;
+    text-align: left !important;
+    margin: 0 !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 640px !important;
+    margin: 0 !important;
+    text-align: left !important;
+    font-size: clamp(3rem, 3.85vw, 4.15rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -.06em !important;
+    text-wrap: balance !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] > span {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .ep-business-landing #top [data-hero="lead"] {
+    max-width: 35rem !important;
+    margin: 1.35rem 0 0 !important;
+    text-align: left !important;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] {
+    justify-content: flex-start !important;
+  }
+
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    width: 100% !important;
+    max-width: 610px !important;
+    min-width: 0 !important;
+    justify-self: end !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .ep-business-landing #top .ep-hero-layout {
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr) !important;
+    column-gap: 2rem !important;
+  }
+
+  .ep-business-landing #top [data-hero="text"] {
+    max-width: 540px !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    max-width: 540px !important;
+    font-size: clamp(2.8rem, 4vw, 3.4rem) !important;
+  }
+
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    max-width: 500px !important;
+  }
+}
