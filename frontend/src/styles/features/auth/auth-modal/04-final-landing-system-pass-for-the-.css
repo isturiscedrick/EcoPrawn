@@ -237,7 +237,7 @@ html.dark .ep-auth-panel.ep-auth-modal button[type="submit"] {
 }
 .ep-auth-panel.ep-auth-modal .ep-auth-brand {
   position: relative !important;
-  display: flex !important;
+  
   flex: 0 0 auto !important;
   min-height: 132px !important;
   margin: 0 !important;
@@ -573,9 +573,9 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
 }
 @media (max-width: 639px) {
   .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal {
-    width: 100% !important;
     
-    min-height: 0 !important;
+    
+    
     max-height: calc(100dvh - 1rem) !important;
     margin: auto !important;
     border-radius: 1.2rem !important;
@@ -815,7 +815,7 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
 @media (max-width: 639px) {
   .ep-auth-overlay {
     align-items: center !important;
-    justify-content: center !important;
+    
     padding: .5rem !important;
   }
   .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal {
@@ -833,10 +833,10 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
     max-width: 190px !important;
   }
   .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand-tagline {
-    font-size: .68rem !important;
+    
   }
   .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-content {
-    max-width: none !important;
+    
     padding: .9rem 1rem 1rem !important;
   }
   .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content > h1 {
@@ -844,7 +844,7 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
   }
   .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content > p {
     margin-top: .35rem !important;
-    font-size: .84rem !important;
+    
     line-height: 1.4 !important;
   }
 }

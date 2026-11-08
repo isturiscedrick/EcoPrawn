@@ -484,7 +484,7 @@
   background: transparent;
 }
 .ep-auth-overlay [data-auth-backdrop] {
-  background: rgba(0,0,0,.72) !important;
+  
   -webkit-backdrop-filter: blur(14px) saturate(125%);
   backdrop-filter: blur(14px) saturate(125%);
 }
@@ -670,7 +670,7 @@ html.dark .ep-auth-modal :is(input,button,a):focus-visible {
   outline-color: #d94416 !important;
 }
 @media(max-width:639px) {
-  .ep-auth-overlay { padding: .5rem !important; }
+  .ep-auth-overlay {  }
   .ep-auth-modal {
     max-height: calc(100dvh - 1rem) !important;
     padding: 1rem !important;

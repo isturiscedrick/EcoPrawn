@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: 12px;
-  background: transparent;
+  
 }
 
 .ep-auth-overlay [data-auth-backdrop] {
@@ -15,14 +15,14 @@
 
 .ep-auth-modal {
   --ep-bg: #f4f7f6;
-  --ep-surface: #ffffff;
+  
   --ep-tint: #eaf1ee;
   --ep-line: #cbd9d4;
   --ep-primary: #172d30;
-  --ep-secondary: #0f4c5c;
+  
   --ep-text-muted: #405653;
-  --ep-accent: #d94416;
-  --ep-accent-hover: #b83a0f;
+  
+  
   width: min(100%, 480px);
   max-height: min( min(860px, calc(100dvh - 24px)), 860px);
   padding: clamp(20px, 4vw, 34px);
@@ -102,9 +102,9 @@
 .ep-auth-modal button[type="submit"] {
   min-height: 50px;
   border-radius: 12px;
-  background: #d94416 !important;
+  
   border-color: #d94416 !important;
-  color: #ffffff !important;
+  
   box-shadow: 0 10px 24px -14px rgba(217, 68, 22, .9);
   transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
@@ -311,7 +311,7 @@ html.dark .ep-auth-modal input:focus-visible {
   border: 1px solid transparent !important;
   border-radius: 9px !important;
   background: transparent !important;
-  color: #0f4c5c !important;
+  
   box-shadow: none !important;
   outline-offset: 2px;
   transition: background-color .2s ease, color .2s ease, box-shadow .2s ease, transform .2s ease;
@@ -581,8 +581,8 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
 @media (max-width: 639px) {
   .ep-auth-overlay {
     align-items: stretch !important;
-    justify-content: stretch !important;
-    padding: 0 !important;
+    
+    
     background: #f1f7f6 !important;
   }
 
@@ -597,7 +597,7 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
     isolation: isolate;
     display: flex;
     flex-direction: column;
-    width: 100% !important;
+    
     max-width: none !important;
     min-height: 100svh;
     min-height: 100dvh;
@@ -764,7 +764,7 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
     border: 0 !important;
     border-radius: 999px !important;
     background: #046f7c !important;
-    color: #ffffff !important;
+    
     font-size: 15px !important;
     font-weight: 700 !important;
     box-shadow: 0 8px 18px rgba(4, 111, 124, .2) !important;
@@ -772,7 +772,7 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
   }
 
   .ep-auth-panel button[type="submit"]:not(:disabled):active {
-    transform: scale(.985) !important;
+    
   }
 
   .ep-auth-panel button:has(> svg[viewBox="0 0 48 48"]) {
@@ -877,8 +877,8 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
   }
 
   html.dark .ep-auth-panel button[type="submit"] {
-    background: #f28a68 !important;
-    color: #18191a !important;
+    
+    
   }
 
   html.dark .ep-auth-panel button:has(> svg[viewBox="0 0 48 48"]) {
