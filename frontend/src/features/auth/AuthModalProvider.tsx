@@ -142,7 +142,7 @@ function AuthDialog({
         aria-label="Sign in or create an account"
         tabIndex={-1}
         style={SCOPE}
-        className="ep-landing ep-auth-modal ep-auth-panel relative z-10 mx-auto my-auto w-full max-w-[520px] overflow-y-auto outline-none"
+        data-auth-layout="stacked" className="ep-landing ep-auth-modal ep-auth-panel relative z-10 mx-auto my-auto w-full max-w-[520px] overflow-y-auto outline-none"
       >
         {/* Logo and close button */}
         <div className="ep-auth-brand relative mb-6 flex min-h-[72px] items-center justify-center border-b border-[var(--ep-line)] pb-5">
