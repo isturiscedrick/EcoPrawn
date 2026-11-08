@@ -16,9 +16,9 @@ export function SiteFooter() {
         data-site-footer
         className="relative isolate overflow-hidden border-t border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-7 sm:px-6 sm:py-9 lg:px-8 lg:py-12"
       >
-        <div className="mx-auto w-full max-w-[1200px]">
-          <div className="grid grid-cols-2 gap-x-4 gap-y-6 border-b border-[var(--ep-line)] pb-6 sm:gap-x-8 sm:gap-y-8 sm:pb-8 md:grid-cols-[1.4fr_0.7fr_1fr] md:gap-10">
-            <div className="col-span-2 min-w-0 md:col-span-1">
+        <div className="ep-footer-inner mx-auto w-full max-w-[1200px]">
+          <div className="ep-footer-grid grid grid-cols-2 gap-x-4 gap-y-6 border-b border-[var(--ep-line)] pb-6 sm:gap-x-8 sm:gap-y-8 sm:pb-8 md:grid-cols-[1.4fr_0.7fr_1fr] md:gap-10">
+            <div className="ep-footer-brand col-span-2 min-w-0 md:col-span-1">
               <Link
                 to="/"
                 className="inline-flex rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]"
@@ -67,7 +67,7 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-1.5 pt-4 text-[11px] leading-4 text-[var(--ep-text-muted)] sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs sm:leading-5">
+          <div className="ep-footer-bottom flex flex-col gap-1.5 pt-4 text-[11px] leading-4 text-[var(--ep-text-muted)] sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs sm:leading-5">
             <p>
               University of Caloocan City · Computer Studies Department · CS 118
             </p>
