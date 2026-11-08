@@ -1171,25 +1171,6 @@
   }
 }
 
-/* Mobile brand is centered against the viewport, independent of side-control widths. */
-@media (max-width: 767px) {
-  #site-header > div > a[aria-label^="EcoPrawn"] {
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    justify-self: auto !important;
-    grid-column: auto !important;
-    margin: 0 !important;
-  }
-  #site-header > div > a[aria-label^="EcoPrawn"] .ep-logo {
-    justify-content: center;
-    width: max-content;
-    max-width: min(48vw, 180px);
-  }
-}
-
-
 /* ---------- Desktop hero: enforce two genuinely separate columns ---------- */
 @media (min-width: 1024px) {
   .ep-business-landing #top .ep-hero-layout {
