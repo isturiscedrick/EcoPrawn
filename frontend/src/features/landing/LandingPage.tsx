@@ -152,18 +152,11 @@ export function LandingPage() {
           </div>
 
           {/* The header is sticky (in flow), so the hero needs only a small top pad. */}
-          <div className="ep-hero-layout mx-auto grid w-full max-w-[1200px] grid-cols-1 justify-items-center gap-5 px-5 pb-10 pt-32 sm:gap-6 sm:px-8 sm:pb-12 sm:pt-36 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,.95fr)] lg:items-center lg:justify-items-stretch lg:gap-10 lg:px-12 lg:pb-16 lg:pt-36">
+          <div className="ep-hero-layout mx-auto grid w-full max-w-[1440px] grid-cols-1 justify-items-center gap-5 px-5 pb-10 pt-32 sm:gap-6 sm:px-8 sm:pb-12 sm:pt-36 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,.95fr)] lg:items-center lg:justify-items-stretch lg:gap-10 lg:px-12 lg:pb-16 lg:pt-36">
             <div
               data-hero="text"
               className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center lg:mx-auto lg:max-w-[660px]"
             >
-              <div
-                data-hero="eyebrow"
-                className="ep-hero-eyebrow mb-6 inline-flex w-fit items-center gap-2.5 rounded-full border border-white/20 bg-white/[0.08] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white/85"
-              >
-                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#8bd5a6] shadow-[0_0_0_4px_rgba(139,213,166,.13)]" />
-                Smarter aquaculture operations
-              </div>
               <h1
                 data-hero="headline"
                 aria-label="Smarter shrimp farming, always in range."
