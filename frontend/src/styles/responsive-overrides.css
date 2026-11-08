@@ -561,3 +561,37 @@
     display: block;
   }
 }
+
+/* ---------- Process loop: standard in-flow section, no horizontal scroll story ---------- */
+.ep-business-landing #process [data-process-viewport] {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+.ep-business-landing #process [data-process-track] {
+  display: grid !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(1.25rem, 2.4vw, 2rem) !important;
+  transform: none !important;
+}
+.ep-business-landing #process [data-process-track] > li {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+.ep-business-landing #process [data-process-line] {
+  display: none !important;
+}
+@media (max-width: 1023px) {
+  .ep-business-landing #process [data-process-track] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 639px) {
+  .ep-business-landing #process [data-process-track] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.75rem !important;
+  }
+}
