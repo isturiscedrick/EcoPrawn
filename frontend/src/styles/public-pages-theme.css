@@ -893,3 +893,96 @@ html.dark :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
     transition: none !important;
   }
 }
+
+
+/* Final card consistency pass: one neutral card surface across Landing,
+   About and Contact. Section backgrounds may differ; the cards do not. */
+:where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+  #readings [data-reading],
+  #capabilities .ep-capability-card,
+  #capabilities article[data-business-card],
+  #objectives article,
+  #systems article,
+  #scope article,
+  [data-contact-card],
+  [data-contact-form] > form
+) {
+  border: 1px solid var(--ep-line) !important;
+  border-top: 1px solid var(--ep-line) !important;
+  border-radius: 1.25rem !important;
+  background: var(--ep-surface) !important;
+  color: var(--ep-text) !important;
+  box-shadow: 0 10px 28px -24px rgba(0,0,0,.32) !important;
+  backdrop-filter: none !important;
+}
+:where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+  #readings [data-reading],
+  #capabilities .ep-capability-card,
+  #capabilities article[data-business-card],
+  #objectives article,
+  #systems article,
+  #scope article,
+  [data-contact-card],
+  [data-contact-form] > form
+) :is(h2,h3,h4,p,span,small,b,strong,dt,dd) {
+  color: var(--ep-text);
+}
+:where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+  #readings [data-reading],
+  #capabilities .ep-capability-card,
+  #capabilities article[data-business-card],
+  #objectives article,
+  #systems article,
+  #scope article,
+  [data-contact-card],
+  [data-contact-form] > form
+) :is(p,small,dt) {
+  color: var(--ep-text-muted);
+}
+:where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+  #readings [data-reading],
+  #capabilities .ep-capability-card,
+  #capabilities article[data-business-card],
+  #objectives article,
+  #systems article,
+  #scope article,
+  [data-contact-card]
+):hover {
+  border-color: color-mix(in srgb,#0f4c5c 38%,var(--ep-line)) !important;
+  box-shadow: 0 16px 34px -26px rgba(15,76,92,.28) !important;
+}
+.ep-about-page #systems article :is(h3,b) {
+  color: var(--ep-text) !important;
+}
+.ep-about-page #systems article :is(p,span) {
+  color: var(--ep-text-muted) !important;
+}
+.ep-about-page #systems article:hover {
+  border-color: color-mix(in srgb,#0f4c5c 38%,var(--ep-line)) !important;
+}
+.ep-about-page #scope article:first-child,
+.ep-about-page #scope article:last-child {
+  border-top: 1px solid var(--ep-line) !important;
+}
+.ep-business-landing #readings [data-reading] {
+  background: var(--ep-surface) !important;
+  border-color: var(--ep-line) !important;
+  box-shadow: 0 10px 28px -24px rgba(0,0,0,.32) !important;
+}
+.ep-business-landing #capabilities .ep-capability-card::before {
+  display: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
+    #readings [data-reading],
+    #capabilities .ep-capability-card,
+    #capabilities article[data-business-card],
+    #objectives article,
+    #systems article,
+    #scope article,
+    [data-contact-card],
+    [data-contact-form] > form
+  ) {
+    transition: none !important;
+  }
+}
