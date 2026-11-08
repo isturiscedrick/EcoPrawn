@@ -67,6 +67,7 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
             <Link
               key={label}
               to={href}
+              resetScroll={href === "/"}
               aria-current={isActive ? "page" : undefined}
               className={`inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-xs font-semibold leading-none transition-colors duration-200 ${focusRing} ${monochrome ? "ep-nav-monochrome-link" : isActive ? "bg-[var(--ep-accent)] text-[var(--ep-bg)]" : "text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]"}`}
               style={monochrome ? { backgroundColor: isActive ? (darkMode ? "#ffffff" : "#000000") : "transparent", color: isActive ? (darkMode ? "#000000" : "#ffffff") : (darkMode ? "#ffffff" : "#000000"), borderColor: darkMode ? "#ffffff" : "#000000" } : undefined}
@@ -100,6 +101,7 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
             <li key={label}>
               <Link
                 to={href}
+                resetScroll={href === "/"}
                 onClick={onLinkClick}
                 aria-current={isActive ? "page" : undefined}
                 className={`group flex min-h-14 items-center gap-3 rounded-2xl border border-transparent px-3 py-3 text-[15px] font-semibold transition-all duration-200 hover:translate-x-0.5 ${focusRing} ${
