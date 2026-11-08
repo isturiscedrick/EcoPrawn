@@ -16,40 +16,40 @@
     max-width: 1380px !important;
     min-height: 650px;
     grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr) !important;
-    align-items: center !important;
+    
     gap: clamp(2.5rem, 5vw, 5.5rem) !important;
     padding: clamp(4rem, 7vh, 6rem) 0 !important;
   }
   .ep-business-landing #top [data-hero="text"] {
-    width: 100% !important;
+    
     max-width: 620px !important;
-    margin: 0 !important;
-    justify-self: start !important;
-    text-align: left !important;
+    
+    
+    
   }
   .ep-business-landing #top [data-hero="headline"] {
-    width: 100% !important;
+    
     max-width: 11.5ch !important;
-    margin: 0 !important;
+    
     font-size: clamp(3.7rem, 5.15vw, 6rem) !important;
     line-height: .98 !important;
     letter-spacing: -.072em !important;
-    text-align: left !important;
-    text-wrap: balance !important;
+    
+    
   }
   .ep-business-landing #top [data-hero="headline"] > span {
-    display: block !important;
-    width: 100% !important;
+    
+    
   }
   .ep-business-landing #top [data-hero="lead"] {
     max-width: 32rem !important;
     margin: 1.65rem 0 0 !important;
     font-size: clamp(1.05rem, 1.3vw, 1.22rem) !important;
     line-height: 1.72 !important;
-    text-align: left !important;
+    
   }
   .ep-business-landing #top [data-hero="cta"] {
-    justify-content: flex-start !important;
+    
     align-items: center !important;
     margin: 2rem 0 0 !important;
     gap: .85rem !important;
@@ -64,12 +64,12 @@
   .ep-business-landing #top [data-hero="parallax-console"] {
     position: relative !important;
     isolation: isolate;
-    width: 100% !important;
+    
     max-width: 680px !important;
-    min-width: 0 !important;
+    
     min-height: 580px;
-    justify-self: end !important;
-    margin: 0 !important;
+    
+    
     overflow: visible !important;
     border: 0 !important;
     border-radius: 0 !important;
@@ -127,9 +127,9 @@
   }
   .ep-business-landing .ep-stats-panel > div {
     min-height: 94px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    
+    
+    
     padding: .8rem 1.6rem !important;
     border: 0 !important;
     border-right: 1px solid var(--ep-line) !important;
@@ -202,7 +202,7 @@
 @media (min-width: 1024px) and (max-width: 1279px) {
   .ep-business-landing #top .ep-hero-layout {
     width: min(calc(100% - 4rem), 1160px) !important;
-    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr) !important;
+    
     gap: 2rem !important;
   }
   .ep-business-landing #top [data-hero="headline"] {
@@ -331,7 +331,7 @@
 /* Editorial capability cards: generous spacing, quiet depth, and responsive rhythm. */
 .ep-business-landing #capabilities .ep-capability-card {
   display: flex;
-  min-width: 0;
+  
   flex-direction: column;
   justify-content: flex-start;
   isolation: isolate;
@@ -385,12 +385,12 @@
   border-radius: 1.5rem;
 }
 .ep-business-landing #readings [data-reading] {
-  min-width: 0;
+  
   border-radius: 1.35rem;
   background:
     linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.025));
   box-shadow: 0 20px 45px -34px rgba(0,0,0,.55);
-  backdrop-filter: blur(8px);
+  
   transition: border-color .3s ease, background-color .3s ease;
 }
 .ep-business-landing #process [data-step] {
@@ -411,7 +411,7 @@
   }
   .ep-business-landing #readings [data-reading] {
     padding: 1.2rem;
-    backdrop-filter: none;
+    
   }
 }
 @media (prefers-reduced-motion: reduce) {

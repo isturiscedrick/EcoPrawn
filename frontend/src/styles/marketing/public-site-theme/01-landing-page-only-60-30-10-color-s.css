@@ -60,7 +60,7 @@ html.dark .ep-business-landing {
   background-color: var(--ep-bg) !important;
 }
 .ep-business-landing #readings {
-  background-color: #0f4c5c !important;
+  
   color: #ffffff !important;
 }
 .ep-business-landing #readings [data-reading] {
@@ -189,9 +189,9 @@ html.dark .ep-business-landing #top .ep-hero-kicker {
   box-shadow: 0 12px 28px -16px rgba(217,68,22,.8);
 }
 .ep-business-landing #top .ep-product-showcase {
-  width: 100%;
+  
   max-width: 720px !important;
-  min-width: 0;
+  
   margin: 0 !important;
   padding: 1.25rem 0;
 }
@@ -303,9 +303,9 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
 .ep-business-landing .ep-stats-panel {
   border: 0 !important;
   border-radius: 0 !important;
-  background: transparent !important;
+  
   box-shadow: none !important;
-  padding: 0 !important;
+  
 }
 .ep-business-landing .ep-stats-panel > div {
   min-height: 0 !important;
@@ -320,7 +320,7 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   border-left: 0 !important;
 }
 .ep-business-landing .ep-stats-panel > div > span:first-child {
-  color: #0f4c5c !important;
+  
   font-size: clamp(1.25rem, 2vw, 1.8rem) !important;
 }
 
@@ -445,7 +445,7 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
     width: 100%;
   }
   .ep-business-landing #top .ep-product-showcase {
-    width: 100%;
+    
     padding: .5rem 0 1rem;
   }
   .ep-business-landing #top .ep-product-window {
@@ -473,7 +473,7 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
     font-size: 1.2rem;
   }
   .ep-business-landing #top .ep-product-insight {
-    padding: .9rem;
+    
   }
   .ep-business-landing #top .ep-product-float {
     display: none !important;
@@ -569,11 +569,11 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
 
 /* Product preview: stable sizing and better information grouping. */
 .ep-business-landing #top .ep-product-showcase {
-  min-width: 0;
+  
   isolation: isolate;
 }
 .ep-business-landing #top .ep-product-window {
-  min-width: 0;
+  
   border: 1px solid rgba(15,76,92,.18) !important;
 }
 .ep-business-landing #top .ep-product-window-bar {
@@ -591,7 +591,7 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   white-space: nowrap;
 }
 .ep-business-landing #top .ep-product-metric {
-  min-width: 0;
+  
 }
 .ep-business-landing #top .ep-product-metric > span:first-child {
   min-height: 2.25em;
@@ -604,7 +604,7 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   min-width: 0;
 }
 .ep-business-landing #top .ep-product-bars {
-  flex: 0 1 12rem;
+  
   min-width: 7rem;
 }
 .ep-business-landing #top .ep-product-float {
@@ -684,7 +684,7 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
     margin-bottom: 1.15rem !important;
   }
   .ep-business-landing #top [data-hero="headline"] {
-    max-width: 12ch !important;
+    
     font-size: clamp(2.8rem, 10.6vw, 4.5rem) !important;
     line-height: .97 !important;
     letter-spacing: -.07em !important;
@@ -693,10 +693,10 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
     max-width: 34rem !important;
     margin-top: 1.1rem !important;
     font-size: clamp(.96rem, 2.5vw, 1.08rem) !important;
-    line-height: 1.65 !important;
+    
   }
   .ep-business-landing #top [data-hero="cta"] {
-    gap: .65rem !important;
+    
   }
   .ep-business-landing #top [data-hero="cta"] > a {
     min-height: 3.15rem !important;
@@ -747,7 +747,7 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
     min-width: 0;
   }
   .ep-business-landing .ep-stats-panel > div > span:first-child {
-    overflow-wrap: anywhere;
+    
     font-size: clamp(1.15rem, 5vw, 1.5rem) !important;
   }
   .ep-business-landing #readings > div {
@@ -756,7 +756,7 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
   }
   .ep-business-landing #readings dl {
     margin-top: 2rem !important;
-    gap: .75rem !important;
+    
   }
   .ep-business-landing #readings [data-reading] {
     min-height: 0 !important;
@@ -771,7 +771,7 @@ html.dark .ep-business-landing > main > section[aria-label="EcoPrawn at a glance
     margin-bottom: 2rem !important;
   }
   .ep-business-landing #capabilities .ep-capability-card {
-    min-height: 0 !important;
+    
     padding: 1.35rem !important;
   }
   .ep-business-landing #capabilities .ep-capability-icon {

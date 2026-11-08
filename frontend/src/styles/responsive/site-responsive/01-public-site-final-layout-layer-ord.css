@@ -24,9 +24,9 @@
   min-width: 0;
 }
 .ep-landing {
-  width: 100%;
+  
   max-width: 100%;
-  overflow-x: clip;
+  
 }
 .ep-landing img,
 .ep-landing video,
@@ -99,7 +99,7 @@
 /* Phones and small tablets: stack all content-first layouts. */
 @media (max-width: 767px) {
   .ep-landing [data-page-hero] > div:last-child {
-    padding-inline: 1rem;
+    
   }
   .ep-landing .ep-about-objective {
     padding: 1.25rem;
@@ -109,7 +109,7 @@
     padding: 1.1rem;
   }
   .ep-landing footer .grid {
-    grid-template-columns: minmax(0, 1fr);
+    
   }
   .ep-landing footer .grid > div {
     min-width: 0;
@@ -400,7 +400,7 @@
   width: 100% !important;
   max-width: 1440px;
   margin-inline: auto;
-  padding-inline: 0 !important;
+  
   box-sizing: border-box;
 }
 .ep-business-landing #process > div:not([aria-hidden="true"]) {

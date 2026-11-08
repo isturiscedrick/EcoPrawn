@@ -2,9 +2,9 @@
 @media (max-width: 767px) {
   /* A true three-part header: menu | centered brand | theme. */
   #site-header > div {
-    display: grid !important;
+    
     grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem !important;
-    align-items: center !important;
+    
     min-height: 62px !important;
     gap: .35rem !important;
     padding-inline: .85rem !important;
@@ -12,42 +12,42 @@
 
   #site-header > div > button[aria-controls="mobile-nav-panel"] {
     display: inline-flex !important;
-    grid-column: 1 !important;
-    grid-row: 1 !important;
+    
+    
     position: relative !important;
     z-index: 2 !important;
     width: 2.5rem !important;
     height: 2.5rem !important;
-    justify-self: start !important;
+    
     align-items: center !important;
     justify-content: center !important;
   }
 
   #site-header > div > a[aria-label^="EcoPrawn"] {
-    position: absolute !important;
+    
     left: 50% !important;
     top: 50% !important;
-    display: inline-flex !important;
+    
     grid-column: 2 !important;
     grid-row: 1 !important;
-    width: max-content !important;
+    
     max-width: min(54vw, 190px) !important;
-    transform: translate(-50%, -50%) !important;
+    
     justify-self: center !important;
-    margin: 0 !important;
+    
     z-index: 1 !important;
   }
 
   #site-header > div > a[aria-label^="EcoPrawn"] .ep-logo {
-    width: max-content !important;
-    max-width: 100% !important;
-    justify-content: center !important;
+    
+    
+    
   }
 
   #site-header > div > div:last-child {
-    grid-column: 3 !important;
-    grid-row: 1 !important;
-    justify-self: end !important;
+    
+    
+    
     gap: 0 !important;
     z-index: 2 !important;
   }

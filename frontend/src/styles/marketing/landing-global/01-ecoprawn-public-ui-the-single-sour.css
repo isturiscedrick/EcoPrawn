@@ -522,7 +522,7 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
   color: inherit;
 }
 .ep-landing #top .ep-lens-showcase .ep-lens-readout .ep-lens-dot {
-  background: var(--ep-secondary);
+  
 }
 .ep-landing #top .ep-lens-showcase .ep-lens-caption {
   position: static;
@@ -621,7 +621,7 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
 .ep-landing #top .ep-lens-diagram {
   height: 390px;
   max-width: 620px;
-  margin-inline: auto;
+  
 }
 .ep-landing #top .ep-lens-core {
   position: absolute;
@@ -632,7 +632,7 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
   transform: translateX(-50%);
 }
 .ep-landing #top .ep-lens-connectors {
-  color: var(--ep-secondary);
+  
 }
 .ep-landing #top .ep-lens-readout {
   width: 104px;
@@ -644,31 +644,31 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
   box-shadow: none;
   color: var(--ep-text);
 }
-.ep-landing #top .ep-lens-readout-0 { left: 0; top: 72px; }
-.ep-landing #top .ep-lens-readout-1 { right: 0; top: 72px; }
-.ep-landing #top .ep-lens-readout-2 { left: 0; top: 266px; }
-.ep-landing #top .ep-lens-readout-3 { right: 0; top: 266px; }
+.ep-landing #top .ep-lens-readout-0 {  top: 72px; }
+.ep-landing #top .ep-lens-readout-1 {  top: 72px; }
+.ep-landing #top .ep-lens-readout-2 {   }
+.ep-landing #top .ep-lens-readout-3 {   }
 .ep-landing #top .ep-lens-readout-4 {
-  left: 50%;
+  
   top: 350px;
   width: 140px;
-  transform: translateX(-50%);
+  
 }
 .ep-landing #top .ep-lens-readout > span:first-child {
-  color: var(--ep-text-muted);
+  
   font-size: .78rem;
-  font-weight: 650;
+  
   white-space: nowrap;
 }
 .ep-landing #top .ep-lens-readout > span:last-child {
-  color: var(--ep-text);
+  
   font-size: 1.15rem;
   font-weight: 750;
   line-height: 1.2;
-  white-space: nowrap;
+  
 }
 .ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
-  color: var(--ep-text-muted);
+  
   font-size: .76em;
   font-weight: 600;
 }
@@ -680,15 +680,15 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
 }
 @media (max-width: 639px) {
   .ep-landing #top .ep-lens-diagram {
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .85rem;
+    
+    
+    
+    
+    
   }
   .ep-landing #top .ep-lens-core {
-    position: relative;
-    inset: auto;
+    
+    
     width: min(70vw, 230px);
     max-width: 230px;
     transform: none;
@@ -697,14 +697,14 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
     display: none;
   }
   .ep-landing #top .ep-lens-readings {
-    position: relative;
-    inset: auto;
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    
+    
+    
+    
+    
     gap: .8rem 1rem;
     padding: .85rem .25rem .25rem;
-    border-top: 1px solid var(--ep-line);
+    
   }
   .ep-landing #top .ep-lens-readout,
   .ep-landing #top .ep-lens-readout-0,
@@ -712,12 +712,12 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
   .ep-landing #top .ep-lens-readout-2,
   .ep-landing #top .ep-lens-readout-3,
   .ep-landing #top .ep-lens-readout-4 {
-    position: relative;
-    inset: auto;
-    width: auto;
-    transform: none;
-    align-items: flex-start;
-    text-align: left;
+    
+    
+    
+    
+    
+    
   }
   .ep-landing #top .ep-lens-readout > span:first-child { font-size: .72rem; }
   .ep-landing #top .ep-lens-readout > span:last-child { font-size: 1.05rem; }
@@ -729,7 +729,7 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
 
 /* ---------- Premium HeroLens instrument finish ---------- */
 .ep-landing #top .ep-lens-diagram {
-  isolation: isolate;
+  
 }
 .ep-landing #top .ep-lens-core {
   filter: drop-shadow(0 22px 34px rgba(0,0,0,.24));
@@ -757,17 +757,17 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
   pointer-events: none;
 }
 .ep-landing #top .ep-lens-connectors {
-  color: var(--ep-secondary);
+  
   filter: drop-shadow(0 0 3px color-mix(in srgb, var(--ep-secondary) 32%, transparent));
 }
 .ep-landing #top .ep-lens-connectors path {
-  stroke-width: 1.35;
+  
   opacity: .82;
 }
 .ep-landing #top .ep-lens-connectors circle {
   transform-box: fill-box;
   transform-origin: center;
-  fill: var(--ep-accent);
+  
   filter: drop-shadow(0 0 4px color-mix(in srgb, var(--ep-accent) 55%, transparent));
 }
 .ep-landing #top .ep-lens-readout {
@@ -786,13 +786,13 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
   color: var(--ep-text);
   font-size: clamp(1.2rem, 1.8vw, 1.42rem);
   font-weight: 780;
-  letter-spacing: -.035em;
+  
   font-variant-numeric: tabular-nums;
 }
 .ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
   color: var(--ep-text-muted);
   font-size: .72em;
-  letter-spacing: 0;
+  
 }
 .ep-landing #top .ep-lens-readout .ep-lens-dot {
   width: .48rem;

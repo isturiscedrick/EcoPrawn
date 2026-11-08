@@ -682,70 +682,70 @@ html.dark :where(.ep-about-page,.ep-contact-page) {
   backdrop-filter: blur(22px) saturate(150%);
 }
 :where(.ep-about-page,.ep-contact-page) #site-header > div {
-  min-height: 4.5rem !important;
+  
   max-width: 1440px !important;
-  padding-inline: clamp(1rem,4vw,3.5rem) !important;
+  
 }
 :where(.ep-about-page,.ep-contact-page) #site-header nav[aria-label="Primary navigation"] {
-  gap: .2rem !important;
-  padding: .3rem !important;
+  
+  
   border: 1px solid var(--ep-line) !important;
-  border-radius: 999px !important;
-  background: var(--ep-surface) !important;
+  
+  
 }
 :where(.ep-about-page,.ep-contact-page) #site-header nav[aria-label="Primary navigation"] a {
   min-height: 2.45rem;
-  padding-inline: 1rem !important;
-  border-radius: 999px !important;
-  font-size: .76rem !important;
+  
+  
+  
 }
 
 :where(.ep-about-page,.ep-contact-page) #site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]):hover {
-  background: rgba(15,76,92,.09) !important;
-  color: #0f4c5c !important;
+  
+  
 }
 :where(.ep-about-page,.ep-contact-page) #site-header button[role="switch"] {
-  width: 2.65rem !important;
-  height: 2.65rem !important;
-  border: 1px solid var(--ep-line) !important;
-  background: var(--ep-surface) !important;
+  
+  
+  
+  
   color: var(--ep-text) !important;
 }
 :where(.ep-about-page,.ep-contact-page) #site-header a[aria-label="Get started"] {
   min-height: 2.65rem;
-  border-radius: 999px !important;
-  background: #d94416 !important;
-  color: #ffffff !important;
+  
+  
+  
 }
 :where(.ep-about-page,.ep-contact-page) [role="dialog"][aria-label="Site menu"] {
-  border-color: var(--ep-line) !important;
-  background: var(--ep-bg) !important;
-  color: var(--ep-text) !important;
+  
+  
+  
 }
 :where(.ep-about-page,.ep-contact-page) [role="dialog"][aria-label="Site menu"] nav a[aria-current="page"] {
   background: #0f4c5c !important;
   color: #ffffff !important;
 }
 :where(.ep-about-page,.ep-contact-page) footer[data-site-footer] {
-  padding: clamp(2.75rem,5vw,4.25rem) clamp(1rem,4vw,3.5rem) 1.5rem !important;
+  
   border-top: 1px solid var(--ep-line) !important;
   background: var(--ep-surface) !important;
   color: var(--ep-text) !important;
 }
 
 :where(.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-grid {
-  grid-template-columns: minmax(0,1.5fr) minmax(7rem,.55fr) minmax(12rem,.9fr) !important;
-  column-gap: clamp(2rem,5vw,5.5rem) !important;
+  
+  
   row-gap: 2rem !important;
 }
 :where(.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-grid h2 {
   color: var(--ep-secondary) !important;
-  font-size: .7rem !important;
-  letter-spacing: .16em !important;
+  
+  
 }
 :where(.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-grid nav a {
-  color: var(--ep-text) !important;
-  min-height: 2.35rem !important;
+  
+  
 }
 :where(.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-grid nav a:hover {
   color: var(--ep-accent) !important;
@@ -770,14 +770,14 @@ html.dark :where(.ep-about-page,.ep-contact-page) {
   box-shadow: 0 10px 28px -24px rgba(0,0,0,.5);
 }
 :where(.ep-about-page,.ep-contact-page) [data-page-hero-headline] {
-  max-width: 900px !important;
+  
   font-size: clamp(2.8rem,6.2vw,5.5rem) !important;
-  line-height: .99 !important;
+  
   letter-spacing: -.07em !important;
 }
 :where(.ep-about-page,.ep-contact-page) [data-page-lead] {
   max-width: 40rem !important;
-  color: var(--ep-text-muted) !important;
+  
   font-size: clamp(1rem,1.5vw,1.18rem) !important;
   line-height: 1.75 !important;
 }
@@ -880,7 +880,7 @@ html.dark :where(.ep-about-page,.ep-contact-page) {
 @media(max-width:767px) {
   :where(.ep-about-page,.ep-contact-page) #site-header > div {
     min-height: 4.1rem !important;
-    padding-inline: 1rem !important;
+    
   }
   :where(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
     padding-top: 4.5rem !important;
@@ -891,7 +891,7 @@ html.dark :where(.ep-about-page,.ep-contact-page) {
   }
   
   :where(.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-grid {
-    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+    
     gap: 1.5rem 1.1rem !important;
   }
   :where(.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-brand,

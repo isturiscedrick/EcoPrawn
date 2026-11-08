@@ -167,7 +167,7 @@ footer[data-site-footer] .ep-footer-grid > .ep-footer-account::after {
     var(--ep-bg);
 }
 .ep-business-landing #capabilities article[data-business-card] {
-  position: relative;
+  
   display: flex;
   min-height: 100%;
   flex-direction: column;
@@ -198,7 +198,7 @@ footer[data-site-footer] .ep-footer-grid > .ep-footer-account::after {
   isolation: isolate;
 }
 .ep-business-landing #process [data-step] {
-  min-width: 0;
+  
   padding-inline: .25rem;
 }
 .ep-business-landing #process [data-step] h3 {

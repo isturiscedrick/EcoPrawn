@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: minmax(280px, 1.35fr) minmax(180px, .85fr);
   align-items: stretch;
-  width: min(100%, 620px);
+  
   min-height: 390px;
   margin-inline: auto;
   isolation: isolate;
@@ -12,13 +12,13 @@
   min-width: 0;
 }
 .ep-landing #top .ep-lens-core {
-  position: relative;
-  inset: auto;
+  
+  
   left: auto;
   top: auto;
   width: min(100%, 300px);
   max-width: 300px;
-  transform: none;
+  
 }
 .ep-landing #top .ep-lens-readings {
   min-width: 0;
@@ -38,9 +38,9 @@
   top: auto;
   bottom: auto;
   width: auto;
-  min-height: 0;
+  
   padding: .22rem 0;
-  transform: none;
+  
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -54,7 +54,7 @@
   font-size: .82rem;
   font-weight: 700;
   letter-spacing: .015em;
-  white-space: normal;
+  
 }
 .ep-landing #top .ep-lens-readout > span:last-child {
   margin-top: .3rem;
@@ -128,23 +128,23 @@ html.dark .ep-landing #top .ep-lens-core::before {
 }
 @media (max-width: 639px) {
   .ep-landing #top .ep-lens-diagram {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    gap: .85rem;
+    
+    
+    
+    
   }
-  .ep-landing #top .ep-lens-stage { width: 100%; }
+  .ep-landing #top .ep-lens-stage {  }
   .ep-landing #top .ep-lens-core {
-    width: min(72vw, 250px);
-    max-width: 250px;
+    
+    
   }
   
   .ep-landing #top .ep-lens-readings {
-    display: grid;
+    
     grid-template-columns: repeat(2, minmax(0,1fr));
-    width: 100%;
+    
     padding: .9rem .25rem .25rem;
-    border-top: 1px solid var(--ep-line);
+    
     gap: .65rem 1rem;
   }
   .ep-landing #top .ep-lens-readout,
@@ -153,8 +153,8 @@ html.dark .ep-landing #top .ep-lens-core::before {
   .ep-landing #top .ep-lens-readout-2,
   .ep-landing #top .ep-lens-readout-3,
   .ep-landing #top .ep-lens-readout-4 {
-    align-items: flex-start;
-    text-align: left;
+    
+    
   }
   .ep-landing #top .ep-lens-readout > span:first-child { font-size: .75rem; }
   
@@ -248,8 +248,8 @@ html.dark .ep-landing #top .ep-lens-connectors {
 @media (max-width: 639px) {
   .ep-landing #top .ep-lens-diagram {
     display: flex;
-    height: auto;
-    min-height: 0;
+    
+    
     flex-direction: column;
     align-items: center;
     gap: .85rem;
@@ -267,11 +267,11 @@ html.dark .ep-landing #top .ep-lens-connectors {
   }
   
   .ep-landing #top .ep-lens-readings {
-    position: relative;
-    inset: auto;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
+    
+    
+    
+    
+    
     gap: .7rem 1rem;
     padding: .9rem .25rem .2rem;
     border-top: 1px solid var(--ep-line);
@@ -300,8 +300,8 @@ html.dark .ep-landing #top .ep-lens-connectors {
 }
 @media (min-width: 640px) and (max-width: 767px) {
   .ep-landing #top .ep-lens-diagram {
-    height: 420px;
-    min-height: 420px;
+    
+    
   }
   .ep-landing #top .ep-lens-core { width: 235px; max-width: 235px; }
   .ep-landing #top .ep-lens-readout { width: 108px; }
@@ -335,7 +335,7 @@ html.dark .ep-landing #top .ep-lens-connectors {
     position: absolute;
     inset: 0;
     display: block;
-    pointer-events: none;
+    
   }
   .ep-landing #top .ep-lens-readout,
   .ep-landing #top .ep-lens-readout-0,
@@ -553,7 +553,7 @@ html:not(.dark) .ep-landing #top .ep-lens-readout > span:first-child {
 }
 html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child {
   color: #101B19 !important;
-  font-weight: 800 !important;
+  
   text-shadow: none !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child > span:last-child {

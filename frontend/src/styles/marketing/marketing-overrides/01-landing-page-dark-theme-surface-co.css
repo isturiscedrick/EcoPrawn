@@ -589,7 +589,7 @@ html.dark .ep-landing-hero [data-hero="grid"] {
   color: var(--ep-primary) !important;
 }
 .ep-landing-hero [data-hero="eyebrow"] {
-  color: var(--ep-accent) !important;
+  
   border-color: var(--ep-line) !important;
   background: var(--ep-surface) !important;
 }
@@ -609,7 +609,7 @@ html.dark .ep-landing-hero [data-hero="grid"] {
 .ep-landing-hero [data-hero="cta"] a:last-child {
   border-color: var(--ep-line) !important;
   background: var(--ep-surface) !important;
-  color: var(--ep-primary) !important;
+  
 }
 .ep-landing-hero [data-hero="cta"] a {
   min-width: 168px;
