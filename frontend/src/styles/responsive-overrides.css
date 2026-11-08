@@ -256,3 +256,117 @@
     font-size: .875rem;
   }
 }
+
+
+/* Landing-page card layouts: preserve readable text at every intermediate
+   width instead of forcing long labels into narrow grid tracks. */
+.ep-business-landing #readings dl,
+.ep-business-landing #capabilities .grid,
+.ep-business-landing #process [data-process-track] {
+  min-width: 0;
+}
+.ep-business-landing #readings dl > div,
+.ep-business-landing #capabilities article,
+.ep-business-landing #process [data-process-track] > li {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #readings dl > div {
+  display: flex;
+  flex-direction: column;
+}
+.ep-business-landing #readings dl > div > div:first-child {
+  min-width: 0;
+  align-items: flex-start;
+}
+.ep-business-landing #readings dl > div dt {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #readings dl > div dd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .2rem .35rem;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #readings dl > div dd [data-countto] {
+  min-width: 0;
+}
+.ep-business-landing #readings dl > div dd span {
+  margin-left: 0;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #capabilities article h3,
+.ep-business-landing #process [data-process-track] h3 {
+  max-width: 100%;
+  font-size: clamp(1.15rem, 2.1vw, 1.5rem);
+  line-height: 1.2;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #capabilities article p,
+.ep-business-landing #process [data-process-track] p {
+  min-width: 0;
+  max-width: 100%;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #capabilities > div,
+.ep-business-landing #capabilities > div > div,
+.ep-business-landing #process > div {
+  min-width: 0;
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .ep-business-landing #readings dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ep-business-landing #readings dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ep-business-landing #capabilities > div > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ep-business-landing #capabilities article {
+    padding: clamp(1rem, 2.2vw, 1.5rem);
+  }
+  .ep-business-landing #process [data-process-track] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .ep-business-landing #readings dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .ep-business-landing #capabilities > div > .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .ep-business-landing #capabilities article {
+    padding: clamp(1rem, 1.7vw, 1.5rem);
+  }
+}
+@media (max-width: 639px) {
+  .ep-business-landing #readings dl > div {
+    padding: clamp(1rem, 4vw, 1.25rem);
+  }
+  .ep-business-landing #capabilities article {
+    padding: 1.15rem;
+  }
+  .ep-business-landing #capabilities article h3,
+  .ep-business-landing #process [data-process-track] h3 {
+    font-size: clamp(1.15rem, 5vw, 1.4rem);
+  }
+  .ep-business-landing #capabilities > div > .mt-7 {
+    align-items: flex-start;
+  }
+  .ep-business-landing #capabilities > div > .mt-7 > div {
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+}
