@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { BrandMark } from "./BrandMark";
 import { NavLinks } from "./NavLinks";
@@ -98,9 +98,10 @@ export function SiteHeader({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Drawer open: lock page scroll, focus the close button, trap Tab,
-  // close on Escape, and close if the viewport grows to desktop width.
-  useEffect(() => {
+  // Run the scroll lock before paint so closing the drawer never briefly
+  // renders the document at scrollY=0 before restoring its previous position.
+  // useLayoutEffect also restores the body styles and scroll offset atomically.
+  useLayoutEffect(() => {
     if (!mobileNavOpen) return;
 
     // Lock both the document and body. Fixed-body locking also prevents
