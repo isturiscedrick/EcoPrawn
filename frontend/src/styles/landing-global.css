@@ -2835,80 +2835,114 @@ html.dark .ep-business-landing #top .ep-hero-visual::before {
 }
 
 
-/* ---------- HeroLens telemetry moved above the instrument ---------- */
-@media (min-width: 640px) {
+
+/* ---------- HeroLens layout: only water level sits above the lens ---------- */
+@container lens (min-width: 440px) {
   .ep-landing #top .ep-lens-diagram {
-    height: 440px !important;
-    min-height: 440px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 620 / 440 !important;
   }
   .ep-landing #top .ep-lens-core {
-    top: 112px !important;
+    top: auto !important;
   }
   .ep-landing #top .ep-lens-readings {
     position: absolute !important;
-    inset: 8px 2% auto !important;
-    z-index: 4 !important;
-    display: grid !important;
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-    align-items: center !important;
-    gap: clamp(.35rem, 1.2vw, .8rem) !important;
-    width: 96% !important;
-    padding: .65rem .4rem !important;
-    border-top: 1px solid var(--ep-line) !important;
-    border-bottom: 1px solid var(--ep-line) !important;
-    background: color-mix(in srgb, var(--ep-bg) 88%, transparent) !important;
-    border-radius: .9rem !important;
-    backdrop-filter: blur(10px);
-  }
-  .ep-landing #top .ep-lens-readings > .ep-lens-readout,
-  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0,
-  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1,
-  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2,
-  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3,
-  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
-    position: relative !important;
-    inset: auto !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    bottom: auto !important;
-    display: flex !important;
+    inset: 0 !important;
+    display: block !important;
     width: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    pointer-events: none !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout {
+    position: absolute !important;
+    inset: auto !important;
+    width: max-content !important;
+    max-width: 20.3% !important;
     min-width: 0 !important;
-    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
     transform: none !important;
-    align-items: center !important;
-    text-align: center !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    text-align: left !important;
     pointer-events: auto !important;
   }
-  .ep-landing #top .ep-lens-readings > .ep-lens-readout > span:first-child {
-    justify-content: center !important;
-    white-space: normal !important;
-    font-size: clamp(.58rem, .85vw, .72rem) !important;
+  /* Two water-quality readouts on each side of the lens. */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 {
+    right: 79.7% !important;
+    left: auto !important;
+    align-items: flex-end !important;
+    text-align: right !important;
   }
-  .ep-landing #top .ep-lens-readings > .ep-lens-readout > span:last-child {
-    padding: 0 !important;
-    font-size: clamp(.85rem, 1.25vw, 1.05rem) !important;
-    white-space: nowrap !important;
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 { top: 26.8% !important; }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 { top: 66.4% !important; }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3 {
+    left: 79.7% !important;
+    right: auto !important;
   }
-  .ep-landing #top .ep-lens-connectors {
-    opacity: .35;
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1 { top: 26.8% !important; }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3 { top: 66.4% !important; }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 > span:first-child,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 > span:first-child {
+    flex-direction: row-reverse !important;
+    justify-content: flex-start !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 > span:last-child,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 > span:last-child {
+    width: 100% !important;
+    text-align: right !important;
+    padding-left: 0 !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1 > span:last-child,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3 > span:last-child {
+    padding-left: 1.02rem !important;
+  }
+  /* Water level is the only parameter centered above the lens. */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    left: 50% !important;
+    right: auto !important;
+    top: 1.5% !important;
+    width: max-content !important;
+    max-width: 34% !important;
+    transform: translateX(-50%) !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: .35rem .8rem !important;
+    border: 1px solid var(--ep-line) !important;
+    border-radius: .8rem !important;
+    background: color-mix(in srgb, var(--ep-bg) 88%, transparent) !important;
+    backdrop-filter: blur(8px);
+  }
+  .ep-landing #top .ep-lens-connectors path:last-of-type,
+  .ep-landing #top .ep-lens-connectors circle:last-of-type {
+    display: none !important;
   }
 }
-@media (max-width: 639px) {
-  .ep-landing #top .ep-lens-diagram {
-    flex-direction: column !important;
-  }
+@container lens (max-width: 439px) {
+  /* On narrow screens, keep the water-level indicator first, then the other
+     four readings in a compact two-column group below the lens. */
   .ep-landing #top .ep-lens-readings {
-    order: -1 !important;
-    margin: 0 0 .35rem !important;
-    padding: .7rem .25rem !important;
-    border-top: 0 !important;
-    border-bottom: 1px solid var(--ep-line) !important;
-    background: color-mix(in srgb, var(--ep-bg) 90%, transparent);
-    border-radius: .75rem;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: .65rem .9rem !important;
+    border: 0 !important;
+    background: transparent !important;
+    padding: .65rem .15rem !important;
   }
-  .ep-landing #top .ep-lens-stage {
-    order: 1 !important;
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    grid-column: 1 / -1 !important;
+    justify-self: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    border: 1px solid var(--ep-line) !important;
+    border-radius: .8rem !important;
+    padding: .45rem .8rem !important;
   }
 }
