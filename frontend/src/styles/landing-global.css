@@ -2237,3 +2237,17 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
     width: 100% !important;
   }
 }
+
+
+/* The public-page SVG safety rule caps every SVG at 100% width. The hero
+   bezel intentionally extends beyond the lens core, so release that cap and
+   explicitly center its 111% square over the core. */
+.ep-landing .ep-lens-core > .ep-lens-outer-ring {
+  position: absolute;
+  inset: -5.5% auto auto -5.5%;
+  width: 111% !important;
+  height: 111% !important;
+  max-width: none !important;
+  transform-origin: 50% 50%;
+  overflow: visible;
+}
