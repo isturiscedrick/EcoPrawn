@@ -1,17 +1,45 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 interface RevealProps {
   children: ReactNode;
-  /** Kept for backwards compatibility with existing page markup. */
+  /** Optional entrance delay in milliseconds. */
   delay?: number;
   className?: string;
 }
 
-/**
- * Layout wrapper for content that is animated by the page-level GSAP
- * choreography. It deliberately never hides its children: if a ScrollTrigger
- * is delayed, disabled, or fails to initialize, all content remains readable.
- */
-export function Reveal({ children, className = "" }: RevealProps) {
-  return <div className={className}>{children}</div>;
+/** Progressive enhancement: content stays visible if observers are unavailable. */
+export function Reveal({ children, delay = 0, className = "" }: RevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !("IntersectionObserver" in window)
+    ) {
+      element.classList.add("ep-native-in-view");
+      return;
+    }
+
+    element.style.setProperty("--ep-reveal-delay", `${Math.max(0, delay)}ms`);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        element.classList.add("ep-native-in-view");
+        observer.disconnect();
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -4% 0px" },
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [delay]);
+
+  return (
+    <div ref={ref} className={className}>
+      {children}
+    </div>
+  );
 }
