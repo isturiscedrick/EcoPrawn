@@ -259,18 +259,25 @@ export function SiteHeader({
             ) : (
               <>
                 <AuthLink
-                  className={`hidden h-10 items-center rounded-full border px-5 text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex ${focusRing}`}
+                  aria-label="Log in"
+                  title="Log in"
+                  className={`hidden h-10 w-10 items-center justify-center whitespace-nowrap rounded-full border text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
                   style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}
                 >
-                  Log in
+                  <svg className="xl:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <span className="hidden xl:inline">Log in</span>
                 </AuthLink>
                 <AuthLink
                   mode="signup"
                   aria-label="Get started"
-                  className={`hidden h-10 min-w-10 items-center justify-center gap-2 rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex lg:px-5 ${focusRing}`}
+                  title="Get started"
+                  className={`hidden h-10 w-10 items-center justify-center gap-2 whitespace-nowrap rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
                   style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}
                 >
-                  <span className="hidden lg:inline">Get started</span>
+                  <span className="hidden whitespace-nowrap xl:inline">Get started</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
                 </AuthLink>
               </>

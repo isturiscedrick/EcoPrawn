@@ -78,10 +78,12 @@ export function PublicChromeMotion() {
           const icon = themeButton.querySelector<SVGElement>("svg");
           const onThemeClick = () => {
             if (icon) animeRuns.push(animate(icon, {
-              rotate: [0, 180],
-              scale: [1, .72, 1],
+              rotate: [-180, 0],
+              scale: [0.72, 1],
               duration: 520,
               ease: "outBack(1.7)",
+              // anime.js leaves its last transform inline; clear it so the icon rests unrotated.
+              onComplete: () => { icon.style.transform = ""; },
             }));
             gsap.fromTo(themeButton,
               { scale: .92 },
