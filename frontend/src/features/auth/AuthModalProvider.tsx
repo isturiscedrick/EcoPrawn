@@ -17,7 +17,6 @@ import { Icon } from "@/components/ui/Icon";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { LoginForm, type AuthMode } from "./LoginForm";
 import { AuthModalMotion, playAuthExit } from "./AuthModalMotion";
-import "./auth-modal.css";
 
 interface AuthModalValue {
   /** Opens the modal on the Sign in tab (default) or the Sign up tab. */

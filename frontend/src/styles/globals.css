@@ -20,3 +20,7 @@
 /* Responsive rules intentionally come last */
 @import "./responsive/site-responsive.css";
 @import "./marketing/public-site-theme.css";
+
+/* Component-scoped styles, centralized in the global entry point. */
+@import "./components/layout/brand-mark.css";
+@import "./features/auth/auth-modal.css";

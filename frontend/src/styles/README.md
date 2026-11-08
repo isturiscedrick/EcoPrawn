@@ -4,6 +4,20 @@ All application-wide styles are loaded through `globals.css`, imported once by
 `src/routes/__root.tsx`. Do not import these files from individual pages or
 components.
 
+## Component and feature styles
+
+Styles that previously lived beside React components are grouped here by owner.
+Active component/feature styles are imported from `globals.css` so the entry
+point and cascade remain centralized. Styles not currently referenced by the
+application remain organized here but are intentionally not imported until used.
+
+| Folder / file | Owns |
+| --- | --- |
+| `components/layout/brand-mark.css` | EcoPrawn brand-mark drawing and reveal styles |
+| `components/layout/site-header.css` | Site-header styles (currently not imported) |
+| `components/motion/logo-intro.css` | Logo-intro motion styles (currently not imported) |
+| `features/auth/auth-modal.css` | Authentication modal, form, and responsive sheet styles |
+
 ## Folder ownership
 
 | Folder / file | Owns |
