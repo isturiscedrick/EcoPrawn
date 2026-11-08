@@ -1275,3 +1275,152 @@ html.dark :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
   }
 }
 
+/* Premium landing card finish: richer surfaces, restrained brand light,
+   and clearer hierarchy without changing card content or layout. */
+.ep-business-landing .ep-stats-panel > div,
+.ep-business-landing #capabilities .ep-capability-card,
+.ep-business-landing #readings [data-reading],
+.ep-business-landing #top .ep-product-metric,
+.ep-business-landing #top .ep-product-insight,
+.ep-business-landing #top .ep-product-float {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 1.35rem;
+  transition:
+    transform .42s cubic-bezier(.2,.75,.25,1),
+    box-shadow .42s cubic-bezier(.2,.75,.25,1),
+    background-color .32s ease,
+    background-image .32s ease;
+}
+
+.ep-business-landing .ep-stats-panel > div::before,
+.ep-business-landing #capabilities .ep-capability-card::after,
+.ep-business-landing #readings [data-reading]::after,
+.ep-business-landing #top .ep-product-metric::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .38s ease;
+}
+
+.ep-business-landing .ep-stats-panel > div::before {
+  background: linear-gradient(135deg, rgba(15,76,92,.10), rgba(217,68,22,.055));
+}
+.ep-business-landing #capabilities .ep-capability-card::after {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(15,76,92,.17), transparent 48%),
+    linear-gradient(145deg, rgba(15,76,92,.075), rgba(217,68,22,.045));
+}
+.ep-business-landing #readings [data-reading]::after {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(217,68,22,.16), transparent 45%),
+    linear-gradient(145deg, rgba(15,76,92,.25), rgba(255,255,255,.035));
+}
+.ep-business-landing #top .ep-product-metric::after {
+  background: linear-gradient(135deg, rgba(15,76,92,.10), rgba(217,68,22,.075));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ep-business-landing .ep-stats-panel > div:hover,
+  .ep-business-landing #capabilities .ep-capability-card:hover,
+  .ep-business-landing #readings [data-reading]:hover,
+  .ep-business-landing #top .ep-product-metric:hover,
+  .ep-business-landing #top .ep-product-float:hover {
+    transform: translateY(-6px);
+  }
+
+  .ep-business-landing .ep-stats-panel > div:hover {
+    box-shadow: 0 22px 42px -28px rgba(15,76,92,.28), 0 10px 24px -22px rgba(217,68,22,.2);
+  }
+  .ep-business-landing #capabilities .ep-capability-card:hover {
+    box-shadow: 0 28px 58px -34px rgba(15,76,92,.32), 0 12px 28px -24px rgba(217,68,22,.22);
+  }
+  .ep-business-landing #readings [data-reading]:hover {
+    box-shadow: 0 24px 48px -30px rgba(0,0,0,.58), 0 0 28px -18px rgba(217,68,22,.24);
+  }
+  .ep-business-landing #top .ep-product-metric:hover,
+  .ep-business-landing #top .ep-product-float:hover {
+    box-shadow: 0 20px 36px -26px rgba(15,76,92,.3), 0 8px 22px -20px rgba(217,68,22,.2);
+  }
+
+  .ep-business-landing .ep-stats-panel > div:hover::before,
+  .ep-business-landing #capabilities .ep-capability-card:hover::after,
+  .ep-business-landing #readings [data-reading]:hover::after,
+  .ep-business-landing #top .ep-product-metric:hover::after {
+    opacity: 1;
+  }
+}
+
+html.dark .ep-business-landing .ep-stats-panel > div {
+  background: linear-gradient(145deg, #1d292b, #151e20) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.055), 0 14px 32px -28px rgba(0,0,0,.9);
+}
+html.dark .ep-business-landing .ep-stats-panel > div::before {
+  background: linear-gradient(135deg, rgba(15,76,92,.34), rgba(217,68,22,.13));
+}
+html.dark .ep-business-landing #capabilities .ep-capability-card {
+  background: linear-gradient(150deg, #1b292b, #141d1f 72%) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.055), 0 18px 44px -34px rgba(0,0,0,.9);
+}
+html.dark .ep-business-landing #capabilities .ep-capability-card::after {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(15,76,92,.46), transparent 52%),
+    linear-gradient(145deg, rgba(15,76,92,.22), rgba(217,68,22,.12));
+}
+html.dark .ep-business-landing #readings [data-reading] {
+  background: linear-gradient(145deg, rgba(24,57,62,.96), rgba(17,31,34,.98)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.075), 0 18px 42px -32px rgba(0,0,0,.9);
+}
+html.dark .ep-business-landing #readings [data-reading]::after {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(217,68,22,.2), transparent 46%),
+    linear-gradient(145deg, rgba(15,76,92,.35), rgba(255,255,255,.025));
+}
+html.dark .ep-business-landing #top .ep-product-metric {
+  background: linear-gradient(145deg, #202d30, #182326) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+html.dark .ep-business-landing #top .ep-product-metric::after {
+  background: linear-gradient(135deg, rgba(15,76,92,.34), rgba(217,68,22,.16));
+}
+html.dark .ep-business-landing #top .ep-product-insight {
+  background: linear-gradient(125deg, #0f4c5c, #123b43 68%, #38251f) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 18px 38px -28px rgba(0,0,0,.65);
+}
+html.dark .ep-business-landing #top .ep-product-float {
+  background: linear-gradient(145deg, #202d30, #172225) !important;
+  border-color: rgba(255,255,255,.09) !important;
+  box-shadow: 0 18px 38px -28px rgba(0,0,0,.85);
+}
+
+@media (max-width: 767px) {
+  .ep-business-landing .ep-stats-panel > div,
+  .ep-business-landing #capabilities .ep-capability-card,
+  .ep-business-landing #readings [data-reading],
+  .ep-business-landing #top .ep-product-metric,
+  .ep-business-landing #top .ep-product-float {
+    transform: none !important;
+    transition: box-shadow .25s ease, background-color .25s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-stats-panel > div,
+  .ep-business-landing #capabilities .ep-capability-card,
+  .ep-business-landing #readings [data-reading],
+  .ep-business-landing #top .ep-product-metric,
+  .ep-business-landing #top .ep-product-float,
+  .ep-business-landing .ep-stats-panel > div::before,
+  .ep-business-landing #capabilities .ep-capability-card::after,
+  .ep-business-landing #readings [data-reading]::after,
+  .ep-business-landing #top .ep-product-metric::after {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
