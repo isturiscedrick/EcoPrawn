@@ -829,3 +829,51 @@ html.dark .ep-business-landing .ep-stats-panel > div > span:first-child {
     transition-duration: .01ms !important;
   }
 }
+
+
+/* Fix the Target ranges band: paint the section itself, not a negative
+   z-index child. This keeps the teal backdrop continuous at every zoom
+   level and viewport width, including when the content container narrows. */
+.ep-business-landing #readings {
+  position: relative !important;
+  isolation: isolate !important;
+  display: flow-root !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin-inline: 0 !important;
+  overflow: hidden !important;
+  background-color: #0f4c5c !important;
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(255,255,255,.09), transparent 42%),
+    radial-gradient(ellipse at 88% 82%, rgba(0,0,0,.2), transparent 48%),
+    linear-gradient(145deg, #0f4c5c, #0b3b46 78%) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+html.dark .ep-business-landing #readings {
+  background-color: #0f4c5c !important;
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(255,255,255,.07), transparent 42%),
+    radial-gradient(ellipse at 88% 82%, rgba(0,0,0,.24), transparent 48%),
+    linear-gradient(145deg, #0f4c5c, #0b3b46 78%) !important;
+}
+.ep-business-landing #readings > [data-readings-bg] {
+  display: none !important;
+}
+.ep-business-landing #readings > div:not([data-readings-bg]) {
+  position: relative;
+  z-index: 1;
+  width: min(calc(100% - 2rem), 1200px);
+  max-width: 1200px;
+  margin-inline: auto;
+}
+@media (min-width: 1200px) {
+  .ep-business-landing #readings > div:not([data-readings-bg]) {
+    width: min(calc(100% - 6rem), 1440px);
+    max-width: 1440px;
+  }
+}
