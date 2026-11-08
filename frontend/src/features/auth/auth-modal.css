@@ -2981,3 +2981,159 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
     font-size: clamp(1.35rem, 6vw, 1.75rem) !important;
   }
 }
+
+
+/* Stable auth dialog geometry: keep both tabs the same size and prevent
+   scrolling on the panel or the page behind it. */
+.ep-auth-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  padding: clamp(.5rem, 2vh, 1.5rem) !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal {
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex: 0 0 auto !important;
+  flex-direction: column !important;
+  width: min(520px, calc(100vw - 2rem)) !important;
+  height: min(780px, calc(100svh - 2rem)) !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: auto !important;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-brand {
+  flex: 0 0 112px !important;
+  min-height: 112px !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-content {
+  box-sizing: border-box !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content > h1 {
+  flex: 0 0 auto !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content > p {
+  flex: 0 0 auto !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content .ep-auth-form {
+  flex: 0 1 auto !important;
+  min-height: 0 !important;
+  margin-top: clamp(.65rem, 1.8vh, 1.25rem) !important;
+  gap: clamp(.55rem, 1.5vh, .9rem) !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content > div:last-child {
+  flex: 0 0 auto !important;
+  margin-top: clamp(.5rem, 1.5vh, .9rem) !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup {
+  max-width: 460px !important;
+  padding-top: clamp(.6rem, 1.5vh, 1rem) !important;
+  padding-bottom: clamp(.6rem, 1.5vh, 1rem) !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup > h1 {
+  white-space: nowrap !important;
+  font-size: clamp(1.4rem, 3.2vw, 1.9rem) !important;
+  line-height: 1.08 !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup .ep-auth-form {
+  margin-top: clamp(.55rem, 1.3vh, .85rem) !important;
+  gap: clamp(.45rem, 1.2vh, .75rem) !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form fieldset {
+  gap: clamp(.45rem, 1.2vh, .7rem) !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form input {
+  min-height: 2.55rem !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form button[type="submit"] {
+  min-height: 2.6rem !important;
+}
+@media (max-width: 639px) {
+  .ep-auth-overlay {
+    align-items: center !important;
+    justify-content: center !important;
+    padding: .5rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal {
+    width: calc(100vw - 1rem) !important;
+    height: min(760px, calc(100svh - 1rem)) !important;
+    max-width: 520px !important;
+    border-radius: 1.15rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-brand {
+    flex-basis: 96px !important;
+    min-height: 96px !important;
+    padding: .75rem 3rem .65rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand .ep-logo {
+    max-width: 190px !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand-tagline {
+    font-size: .68rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-content {
+    max-width: none !important;
+    padding: .9rem 1rem 1rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content > h1 {
+    font-size: clamp(1.45rem, 6vw, 1.85rem) !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content > p {
+    margin-top: .35rem !important;
+    font-size: .84rem !important;
+    line-height: 1.4 !important;
+  }
+}
+@media (max-height: 700px) {
+  .ep-auth-overlay {
+    padding: .35rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal {
+    height: calc(100svh - .7rem) !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-brand {
+    flex-basis: 82px !important;
+    min-height: 82px !important;
+    padding: .5rem 3rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-content {
+    padding-top: .5rem !important;
+    padding-bottom: .5rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content .ep-auth-form {
+    margin-top: .5rem !important;
+    gap: .45rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form fieldset {
+    gap: .4rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form input {
+    min-height: 2.3rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form button[type="submit"] {
+    min-height: 2.4rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content > div:last-child {
+    margin-top: .4rem !important;
+    font-size: .68rem !important;
+  }
+}
