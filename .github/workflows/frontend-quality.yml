@@ -1,0 +1,59 @@
+name: Frontend quality checks
+
+on:
+  push:
+    branches:
+      - fix/animation-audit
+  pull_request:
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend-quality.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frontend-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Typecheck, build, and regression tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.0
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: bunx playwright install --with-deps chromium
+
+      - name: TypeScript typecheck
+        run: bun run typecheck
+
+      - name: Production build
+        run: bun run build
+
+      - name: Tank validation tests
+        run: bun run test:tank-validation
+
+      - name: Dashboard response validation tests
+        run: bun run test:responses
+
+      - name: Authentication proxy regression tests
+        run: bun run test:auth-proxy
+
+      - name: Navigation and session regression tests
+        run: bun run test:navigation
