@@ -225,6 +225,7 @@ export function SiteHeader({
 
           <Link
             to="/"
+            resetScroll
             aria-label="EcoPrawn home"
             activeOptions={{ exact: true }}
             className={`flex shrink-0 items-center justify-self-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing} ${showLinks ? "lg:justify-self-start" : ""}`}
