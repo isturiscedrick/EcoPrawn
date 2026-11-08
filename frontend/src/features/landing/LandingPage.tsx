@@ -392,14 +392,14 @@ export function LandingPage() {
                 <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Water quality intelligence</h3>
                 <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Track dissolved oxygen, pH, temperature, salinity, and water level against operating thresholds.</p>
               </article>
-              <article data-business-card="" className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6">
+              <article data-business-card="" className="ep-capability-card group relative isolate min-h-[340px] overflow-hidden rounded-[1.5rem] border border-[var(--ep-line)] bg-[var(--ep-surface)] p-7 sm:p-8">
                 <span aria-hidden="true" className="ep-capability-index absolute right-7 top-6 ep-font-display text-6xl font-semibold tracking-[-.08em] text-[var(--ep-text)] opacity-[.07]">02</span>
                 <span className="ep-capability-icon mb-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="eye" size={26} /></span>
                 <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">02 / Understand</p>
                 <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Growth and biomass insights</h3>
                 <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Use camera-based observation to follow shrimp growth and biomass without routine handling.</p>
               </article>
-              <article data-business-card="" className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 md:col-span-2 lg:col-span-1">
+              <article data-business-card="" className="ep-capability-card group relative isolate min-h-[340px] overflow-hidden rounded-[1.5rem] border border-[var(--ep-line)] bg-[var(--ep-surface)] p-7 sm:p-8 md:col-span-2 lg:col-span-1">
                 <span aria-hidden="true" className="ep-capability-index absolute right-7 top-6 ep-font-display text-6xl font-semibold tracking-[-.08em] text-[var(--ep-text)] opacity-[.07]">03</span>
                 <span className="ep-capability-icon mb-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="zap" size={26} /></span>
                 <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">03 / Respond</p>
