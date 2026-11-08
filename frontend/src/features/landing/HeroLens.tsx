@@ -380,7 +380,7 @@ export function HeroLens() {
         aria-hidden="true"
         viewBox="0 0 440 440"
         fill="none"
-        className="ep-lens-outer-ring pointer-events-none absolute -inset-[5.5%] z-[2] h-[111%] w-[111%] overflow-visible text-[#0F4C5C] dark:text-[#8BD5A6]"
+        className="ep-lens-outer-ring pointer-events-none absolute -inset-[5.5%] z-[2] h-[111%] w-[111%] max-w-none overflow-visible text-[#0F4C5C] dark:text-[#8BD5A6]"
       >
         <circle cx="220" cy="220" r="211" stroke="currentColor" strokeWidth="1.4" opacity=".72" />
         <circle cx="220" cy="220" r="204" stroke="currentColor" strokeWidth="1" strokeDasharray="2 7" opacity=".5" />

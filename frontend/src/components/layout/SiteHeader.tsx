@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { BrandMark } from "./BrandMark";
 import { NavLinks } from "./NavLinks";
@@ -98,9 +98,10 @@ export function SiteHeader({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Drawer open: lock page scroll, focus the close button, trap Tab,
-  // close on Escape, and close if the viewport grows to desktop width.
-  useEffect(() => {
+  // Run the scroll lock before paint so closing the drawer never briefly
+  // renders the document at scrollY=0 before restoring its previous position.
+  // useLayoutEffect also restores the body styles and scroll offset atomically.
+  useLayoutEffect(() => {
     if (!mobileNavOpen) return;
 
     // Lock both the document and body. Fixed-body locking also prevents
@@ -109,6 +110,7 @@ export function SiteHeader({
     const html = document.documentElement;
     const body = document.body;
     const previousHtmlOverflow = html.style.overflow;
+    const previousHtmlScrollBehavior = html.style.scrollBehavior;
     const previousBodyStyles = {
       position: body.style.position,
       top: body.style.top,
@@ -168,7 +170,11 @@ export function SiteHeader({
       body.style.right = previousBodyStyles.right;
       body.style.width = previousBodyStyles.width;
       body.style.overflow = previousBodyStyles.overflow;
-      window.scrollTo(0, scrollY);
+      // Global smooth-scroll styles can animate this restoration from the top.
+      // Temporarily disable smooth behavior so the saved offset is restored in one frame.
+      html.style.scrollBehavior = "auto";
+      window.scrollTo({ left: 0, top: scrollY, behavior: "instant" });
+      html.style.scrollBehavior = previousHtmlScrollBehavior;
     };
   }, [mobileNavOpen, closeDrawer]);
 
