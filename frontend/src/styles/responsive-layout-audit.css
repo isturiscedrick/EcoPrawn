@@ -303,13 +303,9 @@ a {
 }
 
 @media (min-width: 1024px) {
+  /* Preserve the existing collapsed/expanded sidebar grid classes. */
   .dashboard-shell > div {
-    grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
     align-items: start;
-  }
-
-  .dashboard-shell > div:has(aside [data-collapsed="true"]) {
-    grid-template-columns: 76px minmax(0, 1fr);
   }
 
   .dashboard-shell main {
