@@ -217,20 +217,6 @@ export function LandingMotion() {
           }, "-=.22");
         });
 
-        // Capability cards use the same subtle entrance timing as About articles.
-        // Their own card-level selector is explicit so layout wrappers are not animated.
-        const capabilityCards = root.querySelectorAll<HTMLElement>("#capabilities [data-business-card]");
-        if (capabilityCards.length) {
-          gsap.from(capabilityCards, {
-            y: 32, duration: .72, stagger: .1, ease: "expo.out",
-            scrollTrigger: {
-              trigger: "#capabilities .grid",
-              start: "top 88%",
-              once: true,
-            },
-          });
-        }
-
         // Card hover treatment mirrors About: small lift, accent border,
         // soft shadow and a brief icon reaction. No 3D tilt.
         const hoverCards = gsap.utils.toArray<HTMLElement>(
