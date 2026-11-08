@@ -150,9 +150,12 @@ function AuthDialog({
             <BrandMark
               size={44}
               className="max-w-[230px] sm:max-w-[260px]"
-              logoColor="#d94416"
-              logoTextColor="var(--ep-secondary)"
+              logoColor="#ffffff"
+              logoTextColor="#ffffff"
             />
+            <p className="ep-auth-brand-tagline">
+              Smarter shrimp farming, always in range.
+            </p>
           </div>
 
           <button
