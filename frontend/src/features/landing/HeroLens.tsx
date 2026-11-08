@@ -458,7 +458,7 @@ export function HeroLens() {
           >
             <BrandIcon
               className="h-auto w-[44%] text-white dark:text-black"
-              timeScale={1.2}
+              timeScale={1.4}
             />
           </div>
 
