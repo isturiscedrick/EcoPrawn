@@ -1,0 +1,265 @@
+/*
+ * EcoPrawn monochrome brand system.
+ * The sole chromatic color is the brand primary, terracotta #D94416.
+ * Everything else is black, white, or a transparent black/white tint.
+ */
+
+:root {
+  color-scheme: light;
+  --ep-brand: #d94416;
+  --ep-accent: #d94416 !important;
+  --ep-accent-hover: #b83a0f !important;
+  --ep-primary: #000000 !important;
+  --ep-primary-soft: #000000 !important;
+  --ep-secondary: #000000 !important;
+  --ep-text-muted: #000000 !important;
+  --ep-bg: #ffffff !important;
+  --ep-surface: #ffffff !important;
+  --ep-tint: #ffffff !important;
+  --ep-line: rgba(0, 0, 0, .18) !important;
+  --ep-ok: #d94416 !important;
+  --ep-danger: #d94416 !important;
+  --ep-warn-text: #d94416 !important;
+  --coral: #d94416 !important;
+  --coral-dim: #b83a0f !important;
+  --water-deep: #000000 !important;
+  --water-mid: #000000 !important;
+  --mangrove: #d94416 !important;
+  --mangrove-light: #d94416 !important;
+  --mangrove-text: #000000 !important;
+  --sand: #ffffff !important;
+  --sand-dim: rgba(0, 0, 0, .18) !important;
+  --amber: #d94416 !important;
+  --amber-text: #d94416 !important;
+  --ink: #000000 !important;
+}
+
+html.dark {
+  color-scheme: dark;
+  --ep-accent: #d94416 !important;
+  --ep-accent-hover: #b83a0f !important;
+  --ep-primary: #ffffff !important;
+  --ep-primary-soft: #ffffff !important;
+  --ep-secondary: #ffffff !important;
+  --ep-text-muted: #ffffff !important;
+  --ep-bg: #000000 !important;
+  --ep-surface: #000000 !important;
+  --ep-tint: #000000 !important;
+  --ep-line: rgba(255, 255, 255, .2) !important;
+  --ep-ok: #d94416 !important;
+  --ep-danger: #d94416 !important;
+  --ep-warn-text: #d94416 !important;
+  --coral: #d94416 !important;
+  --coral-dim: #b83a0f !important;
+  --water-deep: #ffffff !important;
+  --water-mid: #ffffff !important;
+  --mangrove: #d94416 !important;
+  --mangrove-light: #d94416 !important;
+  --mangrove-text: #ffffff !important;
+  --sand: #000000 !important;
+  --sand-dim: rgba(255, 255, 255, .2) !important;
+  --amber: #d94416 !important;
+  --amber-text: #d94416 !important;
+  --ink: #ffffff !important;
+}
+
+html,
+body,
+body.ecoprawn-root {
+  background: #ffffff;
+  color: #000000;
+}
+
+html.dark,
+html.dark body,
+html.dark body.ecoprawn-root {
+  background: #000000;
+  color: #ffffff;
+}
+
+.marketing-shell,
+.dashboard-shell,
+.ep-auth-modal {
+  --ep-brand-primary: #d94416 !important;
+  --ep-brand-secondary: #000000 !important;
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #000000 !important;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) {
+  --ep-brand-primary: #d94416 !important;
+  --ep-brand-secondary: #ffffff !important;
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #ffffff !important;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, small, strong, em, b, th, td,
+  input, textarea, select, summary, blockquote
+) {
+  color: #000000;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, small, strong, em, b, th, td,
+  input, textarea, select, summary, blockquote
+) {
+  color: #ffffff;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  a, button, [role="button"], input, textarea, select
+):focus-visible {
+  outline-color: #d94416 !important;
+  --tw-ring-color: #d94416 !important;
+  --tw-ring-offset-color: #ffffff;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  a, button, [role="button"], input, textarea, select
+):focus-visible {
+  --tw-ring-offset-color: #000000;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .bg-\[var\(--ep-accent\)\], .bg-\[var\(--coral\)\],
+  .bg-\[var\(--ep-brand-primary\)\]
+) {
+  background-color: #d94416 !important;
+  border-color: #d94416 !important;
+  color: #ffffff !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="text-emerald"], [class*="text-green"], [class*="text-teal"],
+  [class*="text-sky"], [class*="text-blue"], [class*="text-cyan"],
+  [class*="text-amber"], [class*="text-yellow"], [class*="text-orange"],
+  [class*="text-red"], [class*="text-rose"], [class*="text-lime"],
+  [class*="text-violet"], [class*="text-purple"], [class*="text-pink"]
+) {
+  color: #d94416 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="bg-emerald"], [class*="bg-green"], [class*="bg-teal"],
+  [class*="bg-sky"], [class*="bg-blue"], [class*="bg-cyan"],
+  [class*="bg-amber"], [class*="bg-yellow"], [class*="bg-orange"],
+  [class*="bg-red"], [class*="bg-rose"], [class*="bg-lime"],
+  [class*="bg-violet"], [class*="bg-purple"], [class*="bg-pink"]
+) {
+  background-color: #d94416 !important;
+  color: #ffffff !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="border-emerald"], [class*="border-green"], [class*="border-teal"],
+  [class*="border-sky"], [class*="border-blue"], [class*="border-cyan"],
+  [class*="border-amber"], [class*="border-yellow"], [class*="border-orange"],
+  [class*="border-red"], [class*="border-rose"], [class*="border-lime"],
+  [class*="border-violet"], [class*="border-purple"], [class*="border-pink"]
+) {
+  border-color: #d94416 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="from-emerald"], [class*="to-emerald"], [class*="via-emerald"],
+  [class*="from-teal"], [class*="to-teal"], [class*="via-teal"],
+  [class*="from-blue"], [class*="to-blue"], [class*="via-blue"],
+  [class*="from-cyan"], [class*="to-cyan"], [class*="via-cyan"],
+  [class*="from-green"], [class*="to-green"], [class*="via-green"]
+) {
+  --tw-gradient-from: #d94416 !important;
+  --tw-gradient-via: #d94416 !important;
+  --tw-gradient-to: #d94416 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .bg-white, .bg-\[\#ffffff\], .bg-\[\#fff\]
+) {
+  background-color: #ffffff;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .bg-white, .bg-\[\#ffffff\], .bg-\[\#fff\]
+) {
+  background-color: #000000 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .text-white, .text-\[\#ffffff\], .text-\[\#fff\]
+) {
+  color: #ffffff;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .text-black, .text-\[\#000000\], .text-\[\#000\]
+) {
+  color: #000000 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .border-gray-*, .border-slate-*, .border-zinc-*, .border-neutral-*
+) {
+  border-color: rgba(0, 0, 0, .18);
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .border-gray-*, .border-slate-*, .border-zinc-*, .border-neutral-*
+) {
+  border-color: rgba(255, 255, 255, .2);
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) svg :is(path, line, polyline, polygon, circle, rect) {
+  stroke: currentColor;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) input,
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) textarea,
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) select {
+  border-color: rgba(0, 0, 0, .25);
+  background-color: #ffffff;
+  color: #000000;
+  accent-color: #d94416;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) input,
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) textarea,
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) select {
+  border-color: rgba(255, 255, 255, .25);
+  background-color: #000000;
+  color: #ffffff;
+  accent-color: #d94416;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) ::placeholder {
+  color: #000000;
+  opacity: .58;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) ::placeholder {
+  color: #ffffff;
+  opacity: .58;
+}
+
+/* Replace any legacy teal/green decorative fills with the brand primary. */
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#8bd5a6"],
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#0f4c5c"],
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#38bdf8"],
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#e8623a"] {
+  color: #d94416 !important;
+  border-color: #d94416 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) *,
+  :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) *::before,
+  :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
