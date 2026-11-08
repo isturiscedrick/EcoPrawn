@@ -3132,3 +3132,203 @@ html.dark .ep-business-landing #process [data-step] > div:first-of-type > span:l
     transition: none;
   }
 }
+
+
+/* ============================================================
+   EcoPrawn design-system alignment
+   Shared public-page surfaces, controls, typography and spacing.
+   HeroLens-specific geometry and animation rules are intentionally untouched.
+============================================================ */
+.ep-landing {
+  --ep-content-width: 1200px;
+  --ep-radius-sm: 0.75rem;
+  --ep-radius-md: 1rem;
+  --ep-radius-lg: 1.35rem;
+  --ep-radius-xl: 1.75rem;
+  --ep-shadow-soft: 0 10px 30px -24px rgba(7, 43, 49, .42);
+  --ep-shadow-card: 0 18px 42px -30px rgba(7, 43, 49, .38);
+  --ep-control-height: 3rem;
+  --ep-section-space: clamp(3.5rem, 7vw, 6rem);
+}
+
+html.dark .ep-landing {
+  --ep-shadow-soft: 0 12px 32px -22px rgba(0, 0, 0, .72);
+  --ep-shadow-card: 0 20px 46px -28px rgba(0, 0, 0, .78);
+}
+
+/* Keep content frames and section headings aligned across public pages. */
+.ep-landing main > section:not(#top) {
+  scroll-margin-top: 6.5rem;
+}
+.ep-landing .ep-about-content-frame,
+.ep-landing main > section:not(#top) > .mx-auto,
+.ep-landing [data-page-hero] > div:not([aria-hidden="true"]) {
+  width: min(100% - 2rem, var(--ep-content-width));
+  margin-inline: auto;
+}
+.ep-landing main h2,
+.ep-landing main h3 {
+  text-wrap: balance;
+}
+.ep-landing main p {
+  text-wrap: pretty;
+}
+
+/* Common card language: quiet borders, soft surface, consistent corner radius. */
+.ep-landing .ep-stats-panel > div,
+.ep-landing #capabilities article[data-business-card],
+.ep-landing .ep-about-objective,
+.ep-landing .ep-about-outscope,
+.ep-landing [data-contact-card],
+.ep-landing [data-contact-form] form,
+.ep-landing [data-contact-form] [role="status"] {
+  border-radius: var(--ep-radius-lg);
+  border-color: var(--ep-line);
+  box-shadow: var(--ep-shadow-soft);
+}
+.ep-landing #capabilities article[data-business-card],
+.ep-landing .ep-about-objective,
+.ep-landing .ep-about-outscope,
+.ep-landing [data-contact-card],
+.ep-landing [data-contact-form] form,
+.ep-landing [data-contact-form] [role="status"] {
+  background-color: var(--ep-surface);
+}
+.ep-landing #capabilities article[data-business-card] {
+  padding: clamp(1.15rem, 2vw, 1.65rem);
+}
+.ep-landing [data-contact-card] {
+  min-height: 5.5rem;
+  padding: 1.1rem 1.2rem;
+}
+
+/* Shared button language. Keep the primary action coral and secondary actions quiet. */
+.ep-landing button,
+.ep-landing a[role="button"],
+.ep-landing [data-contact-form] button {
+  -webkit-tap-highlight-color: transparent;
+}
+.ep-landing button:focus-visible,
+.ep-landing a:focus-visible,
+.ep-landing input:focus-visible,
+.ep-landing textarea:focus-visible,
+.ep-landing select:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--ep-accent) 62%, transparent);
+  outline-offset: 3px;
+}
+.ep-landing button:not(:disabled),
+.ep-landing a {
+  touch-action: manipulation;
+}
+.ep-landing [data-contact-form] input,
+.ep-landing [data-contact-form] textarea,
+.ep-landing [data-contact-form] select {
+  min-height: var(--ep-control-height);
+  border-radius: var(--ep-radius-sm);
+  border-color: var(--ep-line);
+  background-color: var(--ep-bg);
+  color: var(--ep-text);
+}
+.ep-landing [data-contact-form] textarea {
+  min-height: 8rem;
+}
+
+/* Header and footer share the same quiet, structured visual hierarchy. */
+#site-header {
+  border-color: var(--ep-line);
+}
+#site-header > div {
+  min-height: 4.25rem;
+}
+#site-header a[aria-label^="EcoPrawn"] .ep-logo {
+  color: var(--ep-primary);
+}
+#site-header a[aria-label^="EcoPrawn"] .ep-logo-wordmark {
+  color: var(--ep-secondary);
+}
+.ep-landing [data-site-footer] {
+  border-top-color: var(--ep-line);
+  background: var(--ep-surface);
+}
+.ep-landing [data-site-footer] .ep-footer-inner {
+  max-width: var(--ep-content-width);
+}
+.ep-landing [data-site-footer] .ep-footer-bottom {
+  border-color: var(--ep-line);
+}
+
+/* Auth modal now uses the same radius, border and shadow vocabulary as the site. */
+.ep-auth-panel {
+  border-radius: var(--ep-radius-xl);
+  border-color: var(--ep-line);
+  box-shadow: 0 34px 90px -42px rgba(0, 0, 0, .52);
+}
+.ep-auth-panel .ep-auth-brand {
+  border-radius: var(--ep-radius-xl) 0 0 var(--ep-radius-xl);
+}
+.ep-auth-panel .ep-auth-form,
+.ep-auth-panel form {
+  border-radius: var(--ep-radius-lg);
+}
+.ep-auth-panel input,
+.ep-auth-panel button {
+  -webkit-tap-highlight-color: transparent;
+}
+.ep-auth-panel input:focus-visible,
+.ep-auth-panel button:focus-visible,
+.ep-auth-panel a:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--ep-accent) 62%, transparent);
+  outline-offset: 3px;
+}
+
+/* Motion stays restrained and respects touch and reduced-motion users. */
+@media (hover: hover) and (pointer: fine) {
+  .ep-landing #capabilities article[data-business-card],
+  .ep-landing .ep-about-objective,
+  .ep-landing [data-contact-card] {
+    transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  }
+  .ep-landing #capabilities article[data-business-card]:hover,
+  .ep-landing .ep-about-objective:hover,
+  .ep-landing [data-contact-card]:hover {
+    border-color: color-mix(in srgb, var(--ep-accent) 55%, var(--ep-line));
+    box-shadow: var(--ep-shadow-card);
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .ep-landing #capabilities article[data-business-card],
+  .ep-landing .ep-about-objective,
+  .ep-landing [data-contact-card] {
+    transform: none !important;
+  }
+}
+@media (max-width: 639px) {
+  .ep-landing {
+    --ep-section-space: 3.25rem;
+  }
+  .ep-landing main > section:not(#top) {
+    scroll-margin-top: 5.5rem;
+  }
+  .ep-landing [data-contact-form] form,
+  .ep-landing [data-contact-form] [role="status"] {
+    padding: 1.1rem;
+  }
+  .ep-landing [data-contact-card] {
+    padding: .95rem 1rem;
+  }
+  .ep-auth-panel {
+    border-radius: 1.25rem;
+  }
+  .ep-auth-panel .ep-auth-brand {
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-landing *,
+  .ep-auth-panel * {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
