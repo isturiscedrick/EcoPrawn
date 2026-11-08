@@ -45,14 +45,14 @@ export function ContactPage() {
                     <div
                       key={item.label}
                       data-contact-card=""
-                      className="flex min-w-0 items-start gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)]"
+                      className="flex min-w-0 items-start gap-3 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-[0_8px_20px_-18px_rgba(11,46,51,0.35)]"
                     >
-                      <IconChip name={item.icon} tone="brand" size={20} />
-                      <div className="min-w-0">
+                      <span className="shrink-0"><IconChip name={item.icon} tone="brand" size={20} /></span>
+                      <div className="min-w-0 flex-1">
                         <dt className="mb-1 text-sm font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">
                           {item.label}
                         </dt>
-                        <dd className="break-words text-sm font-semibold leading-relaxed text-[var(--ep-text)] sm:text-lg">{item.value}</dd>
+                        <dd className="min-w-0 break-words [overflow-wrap:anywhere] text-sm font-semibold leading-relaxed text-[var(--ep-text)] sm:text-base lg:text-lg">{item.value}</dd>
                       </div>
                     </div>
                   ))}
