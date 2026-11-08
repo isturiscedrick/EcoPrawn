@@ -2251,3 +2251,45 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
   transform-origin: 50% 50%;
   overflow: visible;
 }
+
+
+/* HeroLens: mirror the left telemetry callouts toward the lens.
+   This balances the two side columns: left labels/values align to the right,
+   with their status dot nearest the instrument; right callouts remain left-aligned. */
+@media (min-width: 640px) {
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 {
+    justify-self: end !important;
+    align-items: flex-end !important;
+    text-align: right !important;
+  }
+
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 > span:first-child,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 > span:first-child {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 > span:last-child,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 > span:last-child {
+    width: 100%;
+    text-align: right;
+  }
+}
+
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 > span:first-child,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 > span:first-child {
+    flex-direction: row;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 > span:last-child,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 > span:last-child {
+    text-align: left;
+  }
+}
