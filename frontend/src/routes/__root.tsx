@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import {
   createRootRoute,
   HeadContent,
@@ -26,6 +28,27 @@ export const Route = createRootRoute({
   }),
   component: Root,
 });
+function HomeScrollReset() {
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+
+    // TanStack scroll restoration can restore the previous position for the
+    // home route. Run after the route commit as well, so Home always starts at 0.
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
+
+  return null;
+}
+
 function Root() {
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
@@ -41,6 +64,7 @@ function Root() {
       <body className="ecoprawn-root">
         <LogoIntroGate />
         <AuthModalProvider>
+          <HomeScrollReset />
           <Outlet />
         </AuthModalProvider>
         <Scripts />
