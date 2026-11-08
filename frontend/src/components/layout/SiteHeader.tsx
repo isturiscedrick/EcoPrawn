@@ -226,7 +226,15 @@ export function SiteHeader({
           <Link
             to="/"
             resetScroll
-            aria-label="EcoPrawn home"
+            onClick={() => {
+              // TanStack Router does not reset scroll when navigating to the
+              // route that is already active. On the home view, the brand mark
+              // should still behave like a "back to top" control.
+              if (onLanding) {
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+              }
+            }}
+            aria-label="EcoPrawn home — back to top"
             activeOptions={{ exact: true }}
             className={`flex shrink-0 items-center justify-self-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing} ${showLinks ? "lg:justify-self-start" : ""}`}
           >
