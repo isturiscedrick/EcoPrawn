@@ -1141,3 +1141,18 @@ html.dark :where(.ep-business-landing,.ep-about-page,.ep-contact-page) :is(
     transform: none !important;
   }
 }
+
+
+/* Scope panels: explicitly remove the surviving top-edge accents. */
+.ep-about-page #scope article:first-child,
+.ep-about-page #scope article:last-child,
+.ep-about-page #scope article:first-of-type,
+.ep-about-page #scope article:last-of-type {
+  border: 0 !important;
+  border-top: 0 !important;
+  border-inline: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
