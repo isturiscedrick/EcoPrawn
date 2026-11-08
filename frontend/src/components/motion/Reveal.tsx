@@ -2,12 +2,11 @@ import { useEffect, useRef, type ReactNode } from "react";
 
 interface RevealProps {
   children: ReactNode;
-  /** Optional entrance delay in milliseconds. */
   delay?: number;
   className?: string;
 }
 
-/** Progressive enhancement: content stays visible if observers are unavailable. */
+/** Progressive enhancement: content remains visible without observer support. */
 export function Reveal({ children, delay = 0, className = "" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -32,14 +31,9 @@ export function Reveal({ children, delay = 0, className = "" }: RevealProps) {
       },
       { threshold: 0.12, rootMargin: "0px 0px -4% 0px" },
     );
-
     observer.observe(element);
     return () => observer.disconnect();
   }, [delay]);
 
-  return (
-    <div ref={ref} className={className}>
-      {children}
-    </div>
-  );
+  return <div ref={ref} className={className}>{children}</div>;
 }
