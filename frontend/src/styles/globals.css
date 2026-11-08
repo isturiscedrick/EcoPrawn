@@ -1,10 +1,21 @@
+/* Global stylesheet entry point.
+ * Import once from src/routes/__root.tsx.
+ * Keep framework imports first and application styles in documented order.
+ */
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Foundations and shared theme */
 @import "./foundations.css";
 @import "./theme-components.css";
+
+/* Feature surfaces */
 @import "./dashboard.css";
+
+/* Public site: compatibility first, canonical styles second */
 @import "./marketing-overrides.css";
 @import "./landing-global.css";
+
+/* Responsive rules intentionally come last */
 @import "./responsive-overrides.css";
