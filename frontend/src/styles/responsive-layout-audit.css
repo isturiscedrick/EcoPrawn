@@ -1,0 +1,491 @@
+/*
+ * EcoPrawn responsive layout audit
+ * Shared layout rules for public pages, auth surfaces and dashboard views.
+ * Keep this file last in globals.css so it can normalize legacy page styles.
+ */
+
+:root {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body,
+#root,
+.ecoprawn-root {
+  width: 100%;
+  min-width: 320px;
+  max-width: 100%;
+  margin: 0;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+[role="button"],
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ep-landing,
+.ep-landing main,
+.ep-landing main > section,
+.ep-landing footer,
+.dashboard-shell,
+.dashboard-shell main {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing {
+  width: 100%;
+  overflow-x: clip;
+}
+
+.ep-landing main > section {
+  width: 100%;
+  margin-inline: auto;
+}
+
+.ep-landing :is(.grid, .flex) > *,
+.dashboard-shell :is(.grid, .flex) > * {
+  min-width: 0;
+}
+
+.ep-landing :is(h1, h2, h3, h4, p, li, dd, dt, a, label),
+.dashboard-shell main :is(h1, h2, h3, h4, p, li, dd, dt, label) {
+  min-width: 0;
+  max-width: 100%;
+  text-wrap: pretty;
+}
+
+.ep-landing :is(input, textarea, select),
+.dashboard-shell :is(input, textarea, select) {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing :is(button, a),
+.dashboard-shell main :is(button, a) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Public header: keep the brand, menu and theme controls in separate tracks. */
+#site-header {
+  width: 100%;
+  max-width: 100%;
+}
+
+#site-header > div {
+  width: 100%;
+  min-width: 0;
+}
+
+#site-header > div > a[aria-label="EcoPrawn home"] {
+  min-width: 0;
+  max-width: 100%;
+}
+
+#site-header .ep-logo {
+  max-width: 100%;
+}
+
+/* Shared About / Contact page hero. */
+.ep-landing [data-page-hero] {
+  width: 100%;
+  min-width: 0;
+}
+
+.ep-landing [data-page-hero] > div:last-child {
+  width: 100%;
+  max-width: 1200px;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  margin-inline: auto;
+}
+
+.ep-landing [data-page-hero-headline] {
+  max-width: 100%;
+  font-size: clamp(2.25rem, 6.2vw, 4.75rem);
+  line-height: 1.04;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.ep-landing [data-page-lead] {
+  width: 100%;
+  max-width: 42rem;
+}
+
+/* Public page content frames and card grids. */
+.ep-landing main > section:not([data-page-hero]) > div {
+  min-width: 0;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.ep-landing .ep-about-content-frame,
+.ep-landing .ep-contact-page main > section > div {
+  width: 100%;
+  min-width: 0;
+}
+
+.ep-landing .ep-about-content-frame > .grid,
+.ep-landing .ep-contact-page main > section > div > .grid {
+  min-width: 0;
+  align-items: stretch;
+}
+
+.ep-landing article,
+.ep-landing [data-contact-card],
+.ep-landing [data-contact-form],
+.ep-landing form {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing [data-contact-card] dd {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.ep-landing form :is(input, textarea, select) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+.ep-landing form textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.ep-landing form button {
+  min-height: 48px;
+}
+
+/* Footer columns should collapse cleanly without squeezing the wordmark. */
+.ep-landing footer,
+.ep-landing footer > div,
+.ep-landing footer .grid,
+.ep-landing footer .grid > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing footer a,
+.ep-landing footer p {
+  overflow-wrap: anywhere;
+}
+
+/* Dashboard frame: preserve the sidebar/main split on desktop and allow
+   the content column to shrink instead of forcing horizontal page scroll. */
+.dashboard-shell {
+  width: 100%;
+  overflow-x: clip;
+}
+
+.dashboard-shell > div {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dashboard-shell aside#dashboard-sidebar {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main > div {
+  width: 100%;
+  min-width: 0;
+  max-width: 1320px;
+}
+
+.dashboard-shell main > div > * {
+  min-width: 0;
+}
+
+.dashboard-shell main :is(.rounded-xl, .rounded-2xl, .rounded-3xl, article, section) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main :is(input, textarea, select) {
+  min-height: 44px;
+  font-size: 16px;
+}
+
+.dashboard-shell main :is(button, [role="button"]) {
+  min-height: 40px;
+  touch-action: manipulation;
+}
+
+.dashboard-shell main img,
+.dashboard-shell main svg,
+.dashboard-shell main canvas {
+  max-width: 100%;
+}
+
+.dashboard-shell main svg {
+  height: auto;
+}
+
+.dashboard-shell main :is(.overflow-x-auto, [data-scroll-container]) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dashboard-shell main table {
+  width: 100%;
+  min-width: 560px;
+}
+
+.dashboard-shell [role="tablist"] {
+  display: flex;
+  max-width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  overscroll-behavior-x: contain;
+}
+
+.dashboard-shell [role="tablist"] > [role="tab"] {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+/* Drawers and dialogs must fit the visible viewport, including mobile safe areas. */
+[role="dialog"] {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.dashboard-shell [role="dialog"] > :last-child {
+  max-width: min(100%, 34rem);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-shell > div {
+    grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .dashboard-shell > div:has(aside [data-collapsed="true"]) {
+    grid-template-columns: 76px minmax(0, 1fr);
+  }
+
+  .dashboard-shell main {
+    padding-inline: clamp(1.25rem, 2.2vw, 2.5rem);
+  }
+
+  .ep-landing footer .grid {
+    grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ep-landing [data-page-hero] > div:last-child {
+    padding-top: clamp(4.5rem, 9vw, 6rem);
+    padding-bottom: clamp(3rem, 7vw, 4.5rem);
+  }
+
+  .ep-landing .ep-about-content-frame > .grid,
+  .ep-landing .ep-contact-page main > section > div > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ep-landing .ep-about-content-frame > .grid > :only-child {
+    grid-column: 1 / -1;
+  }
+
+  .dashboard-shell main {
+    padding-inline: clamp(1rem, 2.5vw, 1.75rem);
+  }
+
+  .dashboard-shell main .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  #site-header > div {
+    min-height: 64px;
+  }
+
+  .ep-landing [data-page-hero] > div:last-child {
+    padding-top: clamp(4.25rem, 16vw, 5.75rem);
+    padding-bottom: 2.75rem;
+    padding-inline: 1rem;
+  }
+
+  .ep-landing [data-page-hero-headline] {
+    font-size: clamp(2.1rem, 9.4vw, 3.5rem);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+  }
+
+  .ep-landing [data-page-lead] {
+    max-width: 34rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .ep-landing main > section:not([data-page-hero]) {
+    padding-inline: 1rem;
+  }
+
+  .ep-landing .ep-about-content-frame > .grid,
+  .ep-landing .ep-contact-page main > section > div > .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ep-landing .ep-about-content-frame article,
+  .ep-landing .ep-contact-page [data-contact-card],
+  .ep-landing .ep-contact-page [data-contact-form] {
+    width: 100%;
+  }
+
+  .ep-landing footer .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .ep-landing footer .grid > * {
+    width: 100%;
+  }
+
+  .dashboard-shell > div {
+    display: block;
+  }
+
+  .dashboard-shell main {
+    width: 100%;
+    padding: .875rem .75rem calc(5rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  .dashboard-shell main > div {
+    width: 100%;
+  }
+
+  .dashboard-shell main .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-shell main :is(.flex.items-center.justify-between, .flex.justify-between) {
+    flex-wrap: wrap;
+    row-gap: .75rem;
+  }
+
+  .dashboard-shell main :is(h1, .ep-font-display[class*="text-[28px]"]) {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+    line-height: 1.2;
+  }
+
+  .dashboard-shell main :is(h2) {
+    font-size: clamp(1.1rem, 4.7vw, 1.4rem);
+    line-height: 1.25;
+  }
+
+  .dashboard-shell main .grid.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-shell main .grid.grid-cols-3,
+  .dashboard-shell main .grid.grid-cols-4,
+  .dashboard-shell main .grid.grid-cols-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-shell main :is(button, a) {
+    overflow-wrap: normal;
+  }
+
+  .dashboard-shell main :is(input, textarea, select) {
+    font-size: 16px;
+  }
+
+  .dashboard-shell main table {
+    min-width: 560px;
+  }
+}
+
+@media (max-width: 420px) {
+  .ep-landing [data-page-hero-headline] {
+    font-size: clamp(2rem, 9vw, 2.65rem);
+  }
+
+  .ep-landing .ep-about-content-frame article,
+  .ep-landing .ep-about-objective {
+    padding: 1.1rem;
+  }
+
+  .dashboard-shell main {
+    padding-inline: .625rem !important;
+  }
+
+  .dashboard-shell main .grid.grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-shell main .grid.grid-cols-3,
+  .dashboard-shell main .grid.grid-cols-4,
+  .dashboard-shell main .grid.grid-cols-5 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ep-landing *,
+  .dashboard-shell *,
+  .ep-landing *::before,
+  .dashboard-shell *::before,
+  .ep-landing *::after,
+  .dashboard-shell *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
