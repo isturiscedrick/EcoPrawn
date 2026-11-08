@@ -2437,3 +2437,21 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
     padding-left: 0 !important;
   }
 }
+
+
+/* HeroLens outer bezel: the page-wide SVG max-width rule must not clamp
+   this intentionally oversized ring. Explicitly center its 111% square
+   around the lens core so its center matches the glass at every size. */
+.ep-landing #top .ep-lens-core > .ep-lens-outer-ring {
+  position: absolute !important;
+  top: -5.5% !important;
+  left: -5.5% !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 111% !important;
+  height: 111% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  transform-origin: 50% 50% !important;
+}
