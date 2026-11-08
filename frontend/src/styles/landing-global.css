@@ -2594,3 +2594,28 @@ footer[data-site-footer] .ep-footer-bottom p {
     padding-right: 3.75rem;
   }
 }
+
+/* Footer columns are content groups, not cards. Keep this override last so
+   shared card styles cannot reintroduce surfaces inside the footer. */
+footer[data-site-footer] .ep-footer-grid > .ep-footer-brand,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-explore,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-account {
+  display: block;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  margin: 0;
+}
+footer[data-site-footer] .ep-footer-grid > .ep-footer-brand::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-brand::after,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-explore::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-explore::after,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-account::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-account::after {
+  content: none !important;
+  display: none !important;
+}
