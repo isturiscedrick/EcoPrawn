@@ -1188,3 +1188,92 @@
     max-width: min(48vw, 180px);
   }
 }
+
+
+/* ---------- Desktop hero: enforce two genuinely separate columns ---------- */
+@media (min-width: 1024px) {
+  .ep-business-landing #top .ep-hero-layout {
+    width: min(calc(100% - 4rem), 1440px) !important;
+    max-width: 1440px !important;
+    grid-template-columns: minmax(0, .98fr) minmax(0, 1.02fr) !important;
+    gap: clamp(2rem, 4vw, 4.25rem) !important;
+    align-items: center !important;
+  }
+
+  .ep-business-landing #top [data-hero="text"] {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 610px !important;
+    justify-self: start !important;
+    margin-inline: 0 !important;
+    text-align: left !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    display: block;
+    width: 100% !important;
+    max-width: 11.8ch !important;
+    min-width: 0 !important;
+    margin-inline: 0 !important;
+    font-size: clamp(3.05rem, 4.45vw, 4.65rem) !important;
+    line-height: 1.015 !important;
+    letter-spacing: -.058em !important;
+    overflow-wrap: normal;
+    text-wrap: pretty !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] > span {
+    max-width: 100%;
+  }
+
+  .ep-business-landing #top [data-hero="lead"] {
+    max-width: 34rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] {
+    justify-content: flex-start !important;
+  }
+
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 590px !important;
+    justify-self: end !important;
+    margin-inline: 0 !important;
+  }
+
+  .ep-business-landing #top .ep-lens-diagram {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .ep-business-landing #top .ep-hero-layout {
+    width: min(calc(100% - 3rem), 1160px) !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, .95fr) !important;
+    gap: 1.75rem !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    max-width: 10.8ch !important;
+    font-size: clamp(3rem, 4.4vw, 3.65rem) !important;
+  }
+
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    max-width: 500px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .ep-business-landing #top .ep-hero-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: clamp(3rem, 5vw, 5rem) !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    max-width: 12ch !important;
+    font-size: clamp(3.65rem, 4.5vw, 5rem) !important;
+  }
+}
