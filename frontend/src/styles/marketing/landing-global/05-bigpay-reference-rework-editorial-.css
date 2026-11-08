@@ -1,0 +1,531 @@
+/* BigPay reference rework — editorial desktop composition for EcoPrawn.
+   Keep the product's own colors, copy, responsive structure and live HeroLens. */
+@media (min-width: 1024px) {
+  .ep-business-landing #top {
+    display: flex;
+    align-items: center;
+    min-height: min(790px, calc(100svh - 76px));
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 76% 48%, color-mix(in srgb, var(--ep-zone) 20%, transparent), transparent 34rem),
+      radial-gradient(ellipse at 4% 100%, color-mix(in srgb, var(--ep-accent) 9%, transparent), transparent 30rem),
+      var(--ep-bg);
+  }
+  .ep-business-landing #top .ep-hero-layout {
+    width: min(calc(100% - 7rem), 1380px) !important;
+    max-width: 1380px !important;
+    min-height: 650px;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr) !important;
+    align-items: center !important;
+    gap: clamp(2.5rem, 5vw, 5.5rem) !important;
+    padding: clamp(4rem, 7vh, 6rem) 0 !important;
+  }
+  .ep-business-landing #top [data-hero="text"] {
+    width: 100% !important;
+    max-width: 620px !important;
+    margin: 0 !important;
+    justify-self: start !important;
+    text-align: left !important;
+  }
+  .ep-business-landing #top [data-hero="headline"] {
+    width: 100% !important;
+    max-width: 11.5ch !important;
+    margin: 0 !important;
+    font-size: clamp(3.7rem, 5.15vw, 6rem) !important;
+    line-height: .98 !important;
+    letter-spacing: -.072em !important;
+    text-align: left !important;
+    text-wrap: balance !important;
+  }
+  .ep-business-landing #top [data-hero="headline"] > span {
+    display: block !important;
+    width: 100% !important;
+  }
+  .ep-business-landing #top [data-hero="lead"] {
+    max-width: 32rem !important;
+    margin: 1.65rem 0 0 !important;
+    font-size: clamp(1.05rem, 1.3vw, 1.22rem) !important;
+    line-height: 1.72 !important;
+    text-align: left !important;
+  }
+  .ep-business-landing #top [data-hero="cta"] {
+    justify-content: flex-start !important;
+    align-items: center !important;
+    margin: 2rem 0 0 !important;
+    gap: .85rem !important;
+  }
+  .ep-business-landing #top [data-hero="cta"] > a {
+    min-height: 3.65rem !important;
+    border-radius: 999px !important;
+    padding-inline: 1.7rem !important;
+  }
+
+  /* The lens is the hero artwork: no enclosing dashboard-card frame. */
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    position: relative !important;
+    isolation: isolate;
+    width: 100% !important;
+    max-width: 680px !important;
+    min-width: 0 !important;
+    min-height: 580px;
+    justify-self: end !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .ep-business-landing #top [data-hero="parallax-console"]::before {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    width: min(88%, 570px);
+    aspect-ratio: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, color-mix(in srgb, var(--ep-zone) 27%, transparent) 0 28%, color-mix(in srgb, var(--ep-secondary) 10%, transparent) 52%, transparent 72%);
+    filter: blur(5px);
+  }
+  .ep-business-landing #top [data-hero="parallax-console"]::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: min(78%, 500px);
+    aspect-ratio: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid color-mix(in srgb, var(--ep-secondary) 16%, transparent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 26px color-mix(in srgb, var(--ep-secondary) 3%, transparent),
+                0 0 0 54px color-mix(in srgb, var(--ep-secondary) 2%, transparent);
+  }
+  .ep-business-landing #top .ep-lens-showcase {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 660px;
+    margin-inline: auto;
+  }
+
+  /* Broad, quiet stat strip like a polished product landing page. */
+  .ep-business-landing > main > section[aria-label="EcoPrawn at a glance"] {
+    padding: 2.25rem 3.5rem !important;
+    background: var(--ep-tint);
+  }
+  .ep-business-landing .ep-stats-panel {
+    max-width: 1380px !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+    padding: 1.1rem 1.5rem !important;
+    border-radius: 1.5rem !important;
+    box-shadow: 0 22px 55px -42px rgba(7,43,49,.42) !important;
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    min-height: 94px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: .8rem 1.6rem !important;
+    border: 0 !important;
+    border-right: 1px solid var(--ep-line) !important;
+    border-radius: 0 !important;
+  }
+  .ep-business-landing .ep-stats-panel > div:last-child {
+    border-right: 0 !important;
+  }
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    font-size: clamp(1.7rem, 2.2vw, 2.35rem) !important;
+    letter-spacing: -.055em;
+  }
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    margin-top: .55rem !important;
+    font-size: .8rem !important;
+  }
+
+  /* More breathing room and a cleaner card rhythm through the page. */
+  .ep-business-landing #readings > div,
+  .ep-business-landing #capabilities > div,
+  .ep-business-landing #process > div {
+    max-width: 1380px !important;
+  }
+  .ep-business-landing #readings > div {
+    padding-block: clamp(6rem, 8vw, 8rem) !important;
+  }
+  .ep-business-landing #readings dl {
+    gap: 1rem !important;
+    margin-top: 3rem !important;
+  }
+  .ep-business-landing #readings dl > div[data-reading] {
+    min-height: 245px;
+    padding: 1.45rem !important;
+    border-radius: 1.4rem !important;
+    background: rgba(255,255,255,.075) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+  }
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process {
+    padding-block: clamp(6rem, 8vw, 8rem) !important;
+  }
+  .ep-business-landing #capabilities > div > .mb-12 {
+    margin-bottom: 3.5rem !important;
+  }
+  .ep-business-landing #capabilities article[data-business-card] {
+    min-height: 340px;
+    padding: clamp(1.6rem, 2.2vw, 2.35rem) !important;
+    border-radius: 1.5rem !important;
+    box-shadow: 0 18px 50px -42px rgba(7,43,49,.34);
+  }
+  .ep-business-landing #capabilities article[data-business-card] h3 {
+    max-width: 14ch;
+    font-size: clamp(1.5rem, 1.9vw, 1.95rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -.035em;
+  }
+  .ep-business-landing #process [data-process-track] {
+    gap: clamp(1.5rem, 3vw, 3rem) !important;
+  }
+  .ep-business-landing #process [data-step] {
+    padding: 2rem .5rem 0 !important;
+  }
+  html.dark .ep-business-landing #top {
+    background:
+      radial-gradient(ellipse at 76% 48%, rgba(139,213,166,.11), transparent 34rem),
+      radial-gradient(ellipse at 4% 100%, rgba(242,138,104,.07), transparent 30rem),
+      var(--ep-bg);
+  }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .ep-business-landing #top .ep-hero-layout {
+    width: min(calc(100% - 4rem), 1160px) !important;
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr) !important;
+    gap: 2rem !important;
+  }
+  .ep-business-landing #top [data-hero="headline"] {
+    max-width: 10.5ch !important;
+    font-size: clamp(3.2rem, 4.3vw, 4rem) !important;
+  }
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    min-height: 500px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing #top [data-hero="parallax-console"]::before,
+  .ep-business-landing #top [data-hero="parallax-console"]::after {
+    transition: none !important;
+  }
+}
+
+
+/* Landing page variant: keep HeroLens implementation intact, but omit it
+   from the visible hero composition. Center the copy in the freed space. */
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="parallax-console"] {
+  display: none !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden .ep-hero-layout {
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="text"] {
+  width: 100% !important;
+  max-width: 900px !important;
+  justify-self: center !important;
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="headline"],
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="lead"] {
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="cta"] {
+  justify-content: center !important;
+}
+
+
+/* NK-inspired editorial finish: bold type, open space, quiet graphic depth. */
+.ep-business-landing #top.ep-hero--lens-hidden {
+  min-height: min(780px, calc(100svh - 68px));
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(ellipse at 84% 18%, color-mix(in srgb, var(--ep-zone) 18%, transparent), transparent 32rem),
+    radial-gradient(ellipse at 12% 88%, color-mix(in srgb, var(--ep-accent) 9%, transparent), transparent 30rem),
+    var(--ep-bg);
+}
+.ep-business-landing #top.ep-hero--lens-hidden .ep-hero-layout {
+  width: min(calc(100% - 3rem), 1440px) !important;
+  max-width: 1440px !important;
+  min-height: min(690px, calc(100svh - 120px));
+  padding-block: clamp(4rem, 9vh, 8rem) !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="text"] {
+  max-width: 1120px !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="headline"] {
+  max-width: 13ch !important;
+  font-size: clamp(3.5rem, 9.1vw, 8.4rem) !important;
+  line-height: .91 !important;
+  letter-spacing: -.085em !important;
+  text-wrap: balance !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="headline"] > span {
+  display: block;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="lead"] {
+  max-width: 42rem !important;
+  margin-top: clamp(1.35rem, 2.5vw, 2rem) !important;
+  font-size: clamp(1rem, 1.55vw, 1.3rem) !important;
+  line-height: 1.7 !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="cta"] {
+  margin-top: clamp(1.75rem, 3vw, 2.6rem) !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="cta"] > a {
+  min-height: 3.5rem;
+  border-radius: 999px !important;
+  padding-inline: 1.7rem !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-hero="grid"] {
+  opacity: .09;
+  background-size: 30px 30px !important;
+}
+.ep-business-landing #top.ep-hero--lens-hidden [data-cross] {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+@media (max-width: 767px) {
+  .ep-business-landing #top.ep-hero--lens-hidden {
+    min-height: auto;
+  }
+  .ep-business-landing #top.ep-hero--lens-hidden .ep-hero-layout {
+    width: 100% !important;
+    min-height: min(680px, calc(100svh - 62px));
+    padding: clamp(4.5rem, 13vh, 7rem) 1.1rem !important;
+  }
+  .ep-business-landing #top.ep-hero--lens-hidden [data-hero="headline"] {
+    max-width: 11ch !important;
+    font-size: clamp(3rem, 12.2vw, 5rem) !important;
+    line-height: .94 !important;
+    letter-spacing: -.075em !important;
+  }
+  .ep-business-landing #top.ep-hero--lens-hidden [data-hero="lead"] {
+    max-width: 31rem !important;
+    font-size: 1rem !important;
+  }
+  .ep-business-landing #top.ep-hero--lens-hidden [data-hero="cta"] {
+    max-width: 27rem;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .ep-business-landing #top.ep-hero--lens-hidden [data-hero="cta"] > a {
+    flex: 1 1 10rem;
+  }
+}
+
+
+/* Editorial capability cards: generous spacing, quiet depth, and responsive rhythm. */
+.ep-business-landing #capabilities .ep-capability-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  isolation: isolate;
+  box-shadow: 0 18px 48px -38px color-mix(in srgb, var(--ep-secondary) 45%, transparent);
+  transition:
+    border-color .35s ease,
+    background-color .35s ease,
+    box-shadow .45s ease;
+}
+.ep-business-landing #capabilities .ep-capability-card::before {
+  position: absolute;
+  z-index: -1;
+  right: -5rem;
+  bottom: -7rem;
+  width: 17rem;
+  height: 17rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--ep-zone) 17%, transparent), transparent 68%);
+  content: "";
+  opacity: .7;
+  transition: transform .65s cubic-bezier(.2,.7,.2,1), opacity .45s ease;
+}
+.ep-business-landing #capabilities .ep-capability-card:hover {
+  border-color: color-mix(in srgb, var(--ep-accent) 65%, var(--ep-line));
+  box-shadow: 0 28px 60px -38px color-mix(in srgb, var(--ep-secondary) 48%, transparent);
+}
+.ep-business-landing #capabilities .ep-capability-card:hover::before {
+  transform: scale(1.18) translate(-.5rem, -.5rem);
+  opacity: 1;
+}
+.ep-business-landing #capabilities .ep-capability-icon {
+  flex: 0 0 auto;
+  transition: transform .45s cubic-bezier(.2,.7,.2,1), background-color .35s ease;
+}
+.ep-business-landing #capabilities .ep-capability-card:hover .ep-capability-icon {
+  transform: translateY(-4px) rotate(-5deg);
+  background: color-mix(in srgb, var(--ep-accent) 13%, var(--ep-tint));
+}
+.ep-business-landing #capabilities .ep-capability-card h3 {
+  max-width: 16ch;
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.ep-business-landing #capabilities .ep-capability-card > p:last-child {
+  max-width: 36ch;
+  font-size: .94rem;
+  line-height: 1.75;
+}
+.ep-business-landing #capabilities > div > div:last-child {
+  border-radius: 1.5rem;
+}
+.ep-business-landing #readings [data-reading] {
+  min-width: 0;
+  border-radius: 1.35rem;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.025));
+  box-shadow: 0 20px 45px -34px rgba(0,0,0,.55);
+  backdrop-filter: blur(8px);
+  transition: border-color .3s ease, background-color .3s ease;
+}
+.ep-business-landing #process [data-step] {
+  min-width: 0;
+}
+@media (max-width: 767px) {
+  .ep-business-landing #capabilities .ep-capability-card {
+    min-height: 0;
+    padding: 1.5rem;
+  }
+  .ep-business-landing #capabilities .ep-capability-icon {
+    margin-bottom: 2rem;
+  }
+  .ep-business-landing #capabilities .ep-capability-index {
+    right: 1.5rem;
+    top: 1.2rem;
+    font-size: 3.5rem;
+  }
+  .ep-business-landing #readings [data-reading] {
+    padding: 1.2rem;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing #capabilities .ep-capability-card,
+  .ep-business-landing #capabilities .ep-capability-card::before,
+  .ep-business-landing #capabilities .ep-capability-icon {
+    transition: none !important;
+  }
+}
+
+
+/* The process section stays open and editorial instead of turning every step
+   into another boxed card. The numbered rhythm carries through on mobile. */
+.ep-business-landing #process [data-step] {
+  padding-inline: .15rem;
+}
+.ep-business-landing #process [data-step] h3 {
+  letter-spacing: -.035em;
+}
+.ep-business-landing #process [data-step] > div:first-of-type > span:last-child {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ep-secondary) 8%, transparent);
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), background-color .35s ease;
+}
+.ep-business-landing #process [data-step]:hover > div:first-of-type > span:last-child {
+  transform: translateY(-3px) rotate(-5deg);
+  background: color-mix(in srgb, var(--ep-accent) 12%, var(--ep-tint));
+}
+
+/* Footer: stronger brand anchor and clearer small-screen grouping. */
+.ep-business-landing [data-site-footer] {
+  background:
+    radial-gradient(ellipse at 8% 100%, color-mix(in srgb, var(--ep-zone) 9%, transparent), transparent 28rem),
+    var(--ep-surface);
+}
+.ep-business-landing [data-site-footer] .ep-footer-grid {
+  align-items: start;
+}
+.ep-business-landing [data-site-footer] .ep-footer-brand > p {
+  max-width: 28rem;
+}
+.ep-business-landing [data-site-footer] .ep-footer-bottom {
+  gap: .5rem 1.5rem;
+}
+@media (max-width: 639px) {
+  .ep-business-landing [data-site-footer] {
+    padding-top: 2.5rem;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+  .ep-business-landing [data-site-footer] .ep-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.25rem;
+    row-gap: 1.75rem;
+    padding-bottom: 1.5rem;
+  }
+  .ep-business-landing [data-site-footer] .ep-footer-brand {
+    grid-column: 1 / -1;
+    padding-bottom: .35rem;
+  }
+  .ep-business-landing [data-site-footer] .ep-footer-brand > p {
+    max-width: 30rem;
+    font-size: .875rem;
+    line-height: 1.65;
+  }
+  .ep-business-landing [data-site-footer] .ep-footer-bottom {
+    align-items: flex-start;
+    font-size: .7rem;
+    line-height: 1.55;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing #process [data-step] > div:first-of-type > span:last-child {
+    transition: none !important;
+  }
+}
+
+
+/* Native reveal motion — no GSAP or Anime.js required. */
+.ep-business-landing [data-hero="text"],
+.ep-business-landing [data-reveal],
+.ep-business-landing [data-business-card],
+.ep-business-landing [data-reading],
+.ep-business-landing [data-step],
+.ep-native-reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity .65s ease,
+    transform .65s cubic-bezier(.2,.7,.2,1);
+  transition-delay: var(--ep-reveal-delay, 0ms);
+}
+.ep-business-landing [data-hero="text"] {
+  transform: translate3d(0, 12px, 0);
+}
+.ep-business-landing .ep-native-in-view,
+.ep-business-landing .ep-native-in-view [data-business-card],
+.ep-business-landing .ep-native-in-view [data-reading],
+.ep-business-landing .ep-native-in-view [data-step],
+.ep-business-landing [data-hero="text"].ep-native-in-view,
+.ep-business-landing [data-reveal].ep-native-in-view,
+.ep-business-landing [data-business-card].ep-native-in-view,
+.ep-business-landing [data-reading].ep-native-in-view,
+.ep-business-landing [data-step].ep-native-in-view {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing [data-hero="text"],
+  .ep-business-landing [data-reveal],
+  .ep-business-landing [data-business-card],
+  .ep-business-landing [data-reading],
+  .ep-business-landing [data-step],
+  .ep-native-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,612 @@
+/* ==========================================================================
+   Public-site final layout layer
+   Ordered to preserve the original global cascade:
+   1. Responsive safeguards
+   2. Brand monochrome normalization
+   3. Shared responsive layout audit
+   Keep these sections in this order.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Responsive safeguards
+   Source: responsive-overrides.css
+   -------------------------------------------------------------------------- */
+/* EcoPrawn responsive layout safeguards.
+   Shared by Landing, About, Contact and authentication surfaces. */
+
+/* Prevent long labels, cards and visual effects from widening the viewport. */
+.ep-landing,
+.ep-landing main,
+.ep-landing section,
+.ep-landing article,
+.ep-landing header,
+.ep-landing footer {
+  min-width: 0;
+}
+.ep-landing {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+.ep-landing img,
+.ep-landing video,
+.ep-landing canvas,
+.ep-landing svg {
+  max-width: 100%;
+}
+.ep-landing :is(h1, h2, h3, p, dd, li, a, button, label) {
+  overflow-wrap: anywhere;
+}
+.ep-landing :is(input, textarea, select, button) {
+  max-width: 100%;
+}
+
+/* Compact phones: keep the header, lens and cards inside narrow viewports. */
+@media (max-width: 359px) {
+  #site-header > div {
+    column-gap: .35rem;
+    padding-inline: .55rem;
+  }
+  #site-header > div > a[aria-label="EcoPrawn home"] .ep-logo {
+    max-width: 128px;
+  }
+  #site-header button[role="switch"],
+  #site-header button[aria-controls="mobile-nav-panel"] {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+  .ep-landing #top .ep-hero-layout {
+    padding-inline: .75rem;
+    padding-top: 1.25rem;
+  }
+  .ep-landing #top [data-hero="text"] h1 {
+    font-size: clamp(2rem, 10vw, 2.65rem);
+    line-height: 1.08;
+    letter-spacing: -.045em;
+  }
+  .ep-landing #top .ep-hero-visual {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: .25rem;
+  }
+  .ep-landing #top .ep-lens-showcase {
+    width: 100%;
+  }
+  .ep-landing #top .ep-lens-readings {
+    column-gap: .5rem !important;
+  }
+  .ep-landing #top .ep-lens-readout {
+    min-width: 0;
+    font-size: .75rem;
+  }
+  .ep-landing .ep-stats-panel {
+    gap: .5rem;
+    padding: .65rem;
+  }
+  .ep-landing .ep-stats-panel > div {
+    min-width: 0;
+    padding: .65rem .45rem;
+  }
+  .ep-landing .ep-stats-panel :is(p, span) {
+    overflow-wrap: anywhere;
+  }
+  .ep-landing .ep-contact-page [data-contact-card] {
+    gap: .65rem;
+    padding: .85rem;
+  }
+}
+
+/* Phones and small tablets: stack all content-first layouts. */
+@media (max-width: 767px) {
+  .ep-landing [data-page-hero] > div:last-child {
+    padding-inline: 1rem;
+  }
+  .ep-landing .ep-about-objective {
+    padding: 1.25rem;
+  }
+  .ep-landing .ep-contact-page form,
+  .ep-landing .ep-contact-page [role="status"] {
+    padding: 1.1rem;
+  }
+  .ep-landing footer .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-landing footer .grid > div {
+    min-width: 0;
+  }
+  .ep-landing footer .grid > div p {
+    max-width: 42rem;
+  }
+  .ep-landing [data-process-track] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+  .ep-landing [data-process-track] > li {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+/* Tablets and compact laptops: avoid the large fixed desktop lens footprint. */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .ep-landing #top .ep-lens-diagram {
+    height: clamp(340px, 48vw, 420px) !important;
+    min-height: clamp(340px, 48vw, 420px) !important;
+  }
+  .ep-landing #top .ep-lens-core {
+    width: clamp(205px, 31vw, 255px) !important;
+    max-width: 255px !important;
+  }
+  .ep-landing #top .ep-lens-readings {
+    grid-template-columns: minmax(82px, 1fr) minmax(0, 1.5fr) minmax(82px, 1fr) !important;
+    gap: 0 5px !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout {
+    width: 100% !important;
+    max-width: 105px;
+    font-size: .78rem;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    width: 145px !important;
+  }
+}
+
+/* Medium desktop: use a balanced two-column process grid instead of pinning. */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .ep-landing #process [data-process-viewport] {
+    overflow: visible;
+  }
+  .ep-landing #process [data-process-track] {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    transform: none !important;
+  }
+  .ep-landing #process [data-process-track] > li {
+    width: auto;
+    min-width: 0;
+    min-height: 240px;
+    padding: 1.5rem;
+  }
+  .ep-landing #process [data-process-line] {
+    display: none;
+  }
+}
+
+/* Wide desktop: retain the horizontal scroll story only where it has room. */
+@media (min-width: 1200px) {
+  .ep-landing #top .ep-hero-layout {
+    padding-inline: clamp(2.5rem, 5vw, 5rem);
+  }
+}
+
+/* Short landscape windows: reduce vertical hero whitespace. */
+@media (max-height: 700px) and (min-width: 768px) {
+  .ep-landing #top .ep-hero-layout {
+    padding-top: 1.25rem;
+    padding-bottom: 1.5rem;
+    gap: 1rem;
+  }
+  .ep-landing #top [data-hero="text"] h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+  }
+  .ep-landing [data-page-hero] > div:last-child {
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* Authentication modal remains usable on short and narrow screens. */
+.ep-auth-modal {
+  width: min(100%, 32rem);
+  max-width: calc(100vw - 1.25rem);
+  max-height: calc(100dvh - 1.25rem);
+}
+@media (max-width: 480px) {
+  .ep-auth-modal {
+    max-width: calc(100vw - .75rem);
+    max-height: calc(100dvh - .75rem);
+    border-radius: 1.15rem;
+    padding: 1.1rem !important;
+  }
+  .ep-auth-modal h1 {
+    font-size: clamp(1.35rem, 6vw, 1.7rem);
+  }
+}
+
+/* Contact page: let every grid/flex child shrink before text wraps. This
+   prevents long institution/department labels from painting over card edges
+   when the viewport or browser zoom changes. */
+.ep-contact-page main,
+.ep-contact-page main section,
+.ep-contact-page main section > div,
+.ep-contact-page [data-contact-details],
+.ep-contact-page [data-contact-card],
+.ep-contact-page [data-contact-card] > div {
+  min-width: 0;
+  max-width: 100%;
+}
+.ep-contact-page main section > div > .grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+.ep-contact-page [data-contact-card] {
+  width: 100%;
+  align-items: flex-start;
+  gap: .75rem;
+  padding: clamp(.75rem, 2.2vw, 1rem);
+  overflow: hidden;
+}
+.ep-contact-page [data-contact-card] dt,
+.ep-contact-page [data-contact-card] dd {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.ep-contact-page [data-contact-card] dd {
+  line-height: 1.55;
+}
+.ep-contact-page [data-contact-card] > :first-child {
+  flex: 0 0 auto;
+}
+.ep-contact-page [data-contact-card] > div {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+@media (min-width: 1024px) {
+  .ep-contact-page main section > div > .grid {
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  }
+}
+@media (max-width: 480px) {
+  .ep-contact-page [data-contact-card] {
+    gap: .65rem;
+    padding: .8rem;
+  }
+  .ep-contact-page [data-contact-card] dd {
+    font-size: .875rem;
+  }
+}
+
+
+/* Landing-page card layouts: preserve readable text at every intermediate
+   width instead of forcing long labels into narrow grid tracks. */
+.ep-business-landing #readings dl,
+.ep-business-landing #capabilities .grid,
+.ep-business-landing #process [data-process-track] {
+  min-width: 0;
+}
+.ep-business-landing #readings dl > div,
+.ep-business-landing #capabilities article,
+.ep-business-landing #process [data-process-track] > li {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #readings dl > div {
+  display: flex;
+  flex-direction: column;
+}
+.ep-business-landing #readings dl > div > div:first-child {
+  min-width: 0;
+  align-items: flex-start;
+}
+.ep-business-landing #readings dl > div dt {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #readings dl > div dd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .2rem .35rem;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #readings dl > div dd [data-countto] {
+  min-width: 0;
+}
+.ep-business-landing #readings dl > div dd span {
+  margin-left: 0;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #capabilities article h3,
+.ep-business-landing #process [data-process-track] h3 {
+  max-width: 100%;
+  font-size: clamp(1.15rem, 2.1vw, 1.5rem);
+  line-height: 1.2;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #capabilities article p,
+.ep-business-landing #process [data-process-track] p {
+  min-width: 0;
+  max-width: 100%;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.ep-business-landing #capabilities > div,
+.ep-business-landing #capabilities > div > div,
+.ep-business-landing #process > div {
+  min-width: 0;
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .ep-business-landing #readings dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ep-business-landing #readings dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ep-business-landing #capabilities > div > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ep-business-landing #capabilities article {
+    padding: clamp(1rem, 2.2vw, 1.5rem);
+  }
+  .ep-business-landing #process [data-process-track] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .ep-business-landing #readings dl {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .ep-business-landing #capabilities > div > .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .ep-business-landing #capabilities article {
+    padding: clamp(1rem, 1.7vw, 1.5rem);
+  }
+}
+@media (max-width: 639px) {
+  .ep-business-landing #readings dl > div {
+    padding: clamp(1rem, 4vw, 1.25rem);
+  }
+  .ep-business-landing #capabilities article {
+    padding: 1.15rem;
+  }
+  .ep-business-landing #capabilities article h3,
+  .ep-business-landing #process [data-process-track] h3 {
+    font-size: clamp(1.15rem, 5vw, 1.4rem);
+  }
+  .ep-business-landing #capabilities > div > .mt-7 {
+    align-items: flex-start;
+  }
+  .ep-business-landing #capabilities > div > .mt-7 > div {
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+}
+
+
+/* Landing layout audit: remove compounded horizontal gutters. The section
+   owns the outer padding where present; inner content frames own it elsewhere.
+   Keeping one spacing owner prevents cards becoming cramped at tablet widths. */
+.ep-business-landing #top.ep-hero > .ep-hero-layout,
+.ep-business-landing #readings > div:not([aria-hidden="true"]),
+.ep-business-landing #process > div:not([aria-hidden="true"]) {
+  width: 100% !important;
+  max-width: 1440px;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+.ep-business-landing #capabilities > div:not([aria-hidden="true"]) {
+  width: 100% !important;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 0 !important;
+  box-sizing: border-box;
+}
+.ep-business-landing #process > div:not([aria-hidden="true"]) {
+  max-width: 1200px;
+}
+.ep-business-landing #readings > div:not([aria-hidden="true"]) {
+  padding-inline: clamp(1.25rem, 3.2vw, 3rem);
+}
+.ep-business-landing #top.ep-hero > .ep-hero-layout {
+  padding-inline: clamp(1.25rem, 3.2vw, 3rem);
+}
+.ep-business-landing #capabilities,
+.ep-business-landing #readings,
+.ep-business-landing #process {
+  min-width: 0;
+  overflow-x: clip;
+}
+.ep-business-landing #capabilities .grid,
+.ep-business-landing #capabilities article,
+.ep-business-landing #process [data-process-track],
+.ep-business-landing #process [data-step] {
+  min-width: 0;
+  max-width: 100%;
+}
+.ep-business-landing #capabilities article h3,
+.ep-business-landing #process [data-step] h3 {
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+@media (max-width: 639px) {
+  .ep-business-landing #readings > div:not([aria-hidden="true"]),
+  .ep-business-landing #top.ep-hero > .ep-hero-layout {
+    padding-inline: 1rem;
+  }
+  .ep-business-landing #capabilities {
+    padding-inline: 1rem;
+  }
+  .ep-business-landing #capabilities > div:not([aria-hidden="true"]) {
+    padding-inline: 0 !important;
+  }
+}
+
+
+/* ---------- Landing: one shared frame at every browser zoom level ---------- */
+/* About/Contact use a 1200px content frame. Match that same frame on every
+   landing section; backgrounds remain full-bleed while content aligns. */
+.ep-business-landing main > section {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+.ep-business-landing main > section > :is(.ep-hero-layout, div:not([aria-hidden="true"])) {
+  box-sizing: border-box;
+}
+.ep-business-landing #top > .ep-hero-layout,
+.ep-business-landing #readings > div:not([aria-hidden="true"]),
+.ep-business-landing #capabilities > div:not([aria-hidden="true"]),
+.ep-business-landing #process > div:not([aria-hidden="true"]),
+.ep-business-landing .ep-stats-panel {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin-inline: auto !important;
+  box-sizing: border-box !important;
+}
+.ep-business-landing #top > .ep-hero-layout {
+  padding-inline: clamp(1rem, 3.2vw, 2.5rem) !important;
+}
+.ep-business-landing #readings {
+  padding-inline: clamp(1rem, 3.2vw, 2.5rem) !important;
+}
+.ep-business-landing #readings > div:not([aria-hidden="true"]) {
+  padding-inline: 0 !important;
+}
+.ep-business-landing #capabilities {
+  padding-inline: clamp(1rem, 3.2vw, 2.5rem) !important;
+}
+.ep-business-landing #capabilities > div:not([aria-hidden="true"]) {
+  padding-inline: 0 !important;
+}
+.ep-business-landing #process {
+  padding-inline: clamp(1rem, 3.2vw, 2.5rem) !important;
+}
+.ep-business-landing #process > div:not([aria-hidden="true"]) {
+  max-width: 1200px !important;
+  padding-inline: 0 !important;
+}
+.ep-business-landing > main {
+  width: 100%;
+  min-width: 0;
+}
+.ep-business-landing main > section :is(.grid, [data-process-track], article, li) {
+  min-width: 0;
+}
+.ep-business-landing main > section h2,
+.ep-business-landing main > section h3,
+.ep-business-landing main > section p {
+  max-width: 100%;
+  text-wrap: pretty;
+}
+.ep-business-landing #capabilities article {
+  height: 100%;
+}
+.ep-business-landing #readings dl {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.ep-business-landing #process [data-process-track] {
+  width: 100%;
+  max-width: 100%;
+}
+@media (max-width: 1023px) {
+  .ep-business-landing #readings dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .ep-business-landing #top > .ep-hero-layout,
+  .ep-business-landing #readings,
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process {
+    padding-inline: 1rem !important;
+  }
+  .ep-business-landing #readings dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-business-landing #capabilities > div > .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-business-landing #process [data-process-track] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  .ep-business-landing #readings dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ep-business-landing #capabilities > div > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ep-business-landing #process [data-process-track] {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 2rem 1.5rem !important;
+    transform: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing main * {
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* At wide/zoomed-out desktop sizes, keep the four process stages on one
+     aligned row rather than letting the scroll-story pin change section flow. */
+  .ep-business-landing #process [data-process-viewport] {
+    overflow: visible !important;
+  }
+  .ep-business-landing #process [data-process-track] {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: clamp(1rem, 2vw, 2rem) !important;
+    transform: none !important;
+  }
+  .ep-business-landing #process [data-process-track] > li {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .ep-business-landing #process [data-process-line] {
+    display: block;
+  }
+}
+
+/* ---------- Process loop: standard in-flow section, no horizontal scroll story ---------- */
+.ep-business-landing #process [data-process-viewport] {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+.ep-business-landing #process [data-process-track] {
+  display: grid !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(1.25rem, 2.4vw, 2rem) !important;
+  transform: none !important;
+}
+.ep-business-landing #process [data-process-track] > li {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+.ep-business-landing #process [data-process-line] {
+  display: none !important;
+}
+@media (max-width: 1023px) {
+  .ep-business-landing #process [data-process-track] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 639px) {
+  .ep-business-landing #process [data-process-track] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.75rem !important;
+  }
+}
+
+

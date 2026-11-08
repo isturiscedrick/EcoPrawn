@@ -1,0 +1,644 @@
+
+/*
+ * EcoPrawn Authentication Modal
+ * Clean, centered, responsive design.
+ * UI-only changes — authentication logic stays intact.
+ */
+
+/* ========================================
+   1. MODAL CONTAINER
+======================================== */
+
+.ep-auth-modal {
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  /* Hide scrollbar but preserve scrolling */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.ep-auth-modal::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========================================
+   2. BRANDING HEADER
+======================================== */
+
+.ep-auth-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  min-height: 60px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+}
+
+.ep-auth-brand img {
+  display: block;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* ========================================
+   3. FORM CONTENT
+======================================== */
+
+.ep-auth-modal > div:not(.ep-auth-brand) {
+  width: 100%;
+  max-width: none;
+}
+
+/* Center all authentication titles */
+.ep-auth-modal h1 {
+  width: 100%;
+  margin: 0;
+
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+
+  color: var(--ep-primary);
+}
+
+/* Center descriptions below titles */
+.ep-auth-modal h1 + p {
+  max-width: 340px;
+  margin: 8px auto 0;
+
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: var(--ep-text-muted);
+}
+
+/* ========================================
+   4. FORM CARD
+======================================== */
+
+.ep-auth-modal div:has(> form) {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 14px;
+  padding: 20px;
+  gap: 12px;
+
+  border: 1px solid var(--ep-line);
+  border-radius: 18px;
+
+  background: var(--ep-bg);
+
+  box-shadow: 0 12px 28px -22px rgba(11, 46, 51, 0.45);
+}
+
+/* ========================================
+   5. SIGN IN / SIGN UP TABS
+======================================== */
+
+.ep-auth-modal [role="group"][aria-label="Account access"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 4px;
+  padding: 4px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: var(--ep-tint);
+}
+
+.ep-auth-modal [role="group"][aria-label="Account access"] button {
+  min-height: 42px;
+  border-radius: 9px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+/* ========================================
+   6. FORM INPUTS
+======================================== */
+
+.ep-auth-modal fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Keep the existing input colors and validation states */
+.ep-auth-modal input {
+  min-height: 50px;
+
+  border-width: 1px;
+  border-radius: 12px;
+  font-size: 16px;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.ep-auth-modal input::placeholder {
+  opacity: 0.65;
+}
+
+/* Form labels */
+.ep-auth-modal label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ========================================
+   7. PRIMARY BUTTON
+======================================== */
+
+.ep-auth-modal button[type="submit"] {
+  min-height: 48px;
+  border-radius: 11px;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ========================================
+   8. GOOGLE SIGN IN
+======================================== */
+
+.ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
+  min-height: 48px;
+
+  border-radius: 11px;
+  background: #ffffff;
+  box-shadow: none;
+
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
+  background: var(--ep-tint);
+}
+
+/* ========================================
+   9. FOOTER MESSAGE
+======================================== */
+
+.ep-auth-modal > div:not(.ep-auth-brand) > div:last-child {
+  margin-top: 14px;
+
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ========================================
+   10. DESKTOP
+======================================== */
+
+@media (min-width: 640px) {
+  .ep-auth-modal {
+    max-height: calc(100dvh - 64px);
+  }
+
+  .ep-auth-modal h1 {
+    font-size: 30px;
+  }
+
+  .ep-auth-modal h1 + p {
+    font-size: 14px;
+  }
+}
+
+/* ========================================
+   11. MOBILE
+======================================== */
+
+@media (max-width: 639px) {
+  .ep-auth-overlay {
+    padding: 10px;
+  }
+
+  .ep-auth-modal {
+    max-height: calc(100dvh - 32px);
+
+    border-radius: 20px;
+    padding: 16px;
+  }
+
+  .ep-auth-brand {
+    min-height: 54px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+
+  .ep-auth-modal h1 {
+    font-size: 25px;
+  }
+
+  .ep-auth-modal h1 + p {
+    max-width: 300px;
+
+    margin: 6px auto 0;
+
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .ep-auth-modal div:has(> form) {
+    margin-top: 14px;
+    padding: 14px;
+    gap: 12px;
+    border-radius: 14px;
+  }
+
+  .ep-auth-modal fieldset {
+    gap: 12px;
+  }
+
+  .ep-auth-modal input {
+    font-size: 16px;
+  }
+
+  .ep-auth-modal button[type="submit"] {
+    min-height: 46px;
+  }
+
+  .ep-auth-modal > div:not(.ep-auth-brand) > div:last-child {
+    margin-top: 12px;
+  }
+}
+
+/* ========================================
+   12. ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-auth-modal *,
+  .ep-auth-modal *::before,
+  .ep-auth-modal *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* The landing page keeps its hidden water-intro element in the DOM, which
+   makes the logo wait 1.4s (see brand-mark.css). Inside the modal the logo
+   should draw right away, a beat after the panel pops in. */
+/* The modal logo is always static: filled, no draw-on animation. */
+.ep-auth-modal .ep-logo-shape {
+  animation: none;
+}
+
+
+/* Keep the authentication dialog in its intended light palette.
+   The panel is deliberately white; inheriting html.dark text/surface tokens
+   made light text render on the white dialog and darkened the form card. */
+.ep-auth-modal {
+  color-scheme: light;
+  --ep-bg: #ffffff;
+  --ep-surface: #ffffff;
+  --ep-tint: #f3f7f6;
+  --ep-line: #d8e0de;
+  --ep-primary: #0f4c5c;
+  --ep-secondary: #0f4c5c;
+  --ep-text-muted: #3d5a61;
+  --ep-accent: #d94416;
+  --ep-accent-hover: #b83a0f;
+  color: #0f4c5c;
+  background-color: #ffffff;
+}
+
+/* Match the root panel even when the application itself is in dark mode. */
+html.dark .ep-auth-modal.bg-white {
+  background-color: #ffffff;
+  color: #0f4c5c;
+}
+
+html.dark .ep-auth-modal .bg-white {
+  background-color: #ffffff;
+}
+
+/* Keep supporting text readable and placeholders visible on light inputs. */
+.ep-auth-modal h1,
+.ep-auth-modal label {
+  color: #0f4c5c;
+}
+
+.ep-auth-modal h1 + p,
+.ep-auth-modal > div:not(.ep-auth-brand) > div:last-child {
+  color: #3d5a61;
+}
+
+.ep-auth-modal input {
+  color: #0f4c5c;
+  background-color: #ffffff;
+}
+
+.ep-auth-modal input::placeholder {
+  color: #526b70;
+  opacity: 1;
+}
+
+/* Disabled is still visibly disabled, without making the button unreadable. */
+.ep-auth-modal button:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+/* Dark-mode authentication modal: charcoal surfaces with coral and mint accents. */
+html.dark .ep-auth-modal {
+  color-scheme: dark;
+  --ep-bg: #18191a;
+  --ep-surface: #242729;
+  --ep-tint: #29332f;
+  --ep-line: rgba(139, 213, 166, 0.28);
+  --ep-primary: #f28a68;
+  --ep-secondary: #8bd5a6;
+  --ep-text-muted: #b8c0c2;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #e87552;
+  background-color: #202122 !important;
+  border-color: rgba(139, 213, 166, 0.32) !important;
+  color: #e4e6eb !important;
+}
+
+html.dark .ep-auth-modal :is(h1, label, .text-\[var\(--ep-primary\)\]) {
+  color: #e4e6eb !important;
+}
+html.dark .ep-auth-modal :is(h1 + p, .text-\[var\(--ep-text-muted\)\]) {
+  color: #b8c0c2 !important;
+}
+html.dark .ep-auth-modal div:has(> form),
+html.dark .ep-auth-modal [role="status"],
+html.dark .ep-auth-modal [role="alert"] {
+  background-color: #242729 !important;
+  border-color: rgba(139, 213, 166, 0.24) !important;
+  color: #e4e6eb !important;
+}
+html.dark .ep-auth-modal input {
+  background-color: #181b1c !important;
+  border-color: rgba(139, 213, 166, 0.32) !important;
+  color: #e4e6eb !important;
+  caret-color: #8bd5a6;
+}
+html.dark .ep-auth-modal input::placeholder {
+  color: #9ba5a7 !important;
+  opacity: 1;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] {
+  background-color: #29332f !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button {
+  color: #c5ceca !important;
+}
+html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
+  background-color: #292d2f !important;
+  border: 1px solid rgba(139, 213, 166, 0.32) !important;
+  color: #e4e6eb !important;
+}
+html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
+  background-color: #343a3b !important;
+}
+html.dark .ep-auth-modal button:not([type="submit"]):not(:has(> svg[viewBox="0 0 48 48"])) {
+  --tw-ring-offset-color: #202122;
+}
+html.dark .ep-auth-modal .ep-auth-brand {
+  border-color: rgba(139, 213, 166, 0.24) !important;
+}
+html.dark .ep-auth-modal button[aria-label="Close"] {
+  color: #b8c0c2 !important;
+}
+html.dark .ep-auth-modal button[aria-label="Close"]:hover {
+  background-color: rgba(139, 213, 166, 0.12) !important;
+  color: #8bd5a6 !important;
+}
+html.dark .ep-auth-modal :is(a, button) {
+  --tw-ring-offset-color: #202122;
+}
+
+/* Final contrast safeguards: override legacy white-panel rules above in dark mode. */
+html.dark .ep-auth-modal.bg-white,
+html.dark .ep-auth-modal .bg-white {
+  background-color: #202122 !important;
+  color: #e4e6eb !important;
+}
+html.dark .ep-auth-modal :is(p, small, span, div) {
+  color: inherit;
+}
+html.dark .ep-auth-modal :is(.text-\[var\(--ep-text-muted\)\], [data-muted]) {
+  color: #b8c0c2 !important;
+}
+html.dark .ep-auth-modal a:not([class*="bg-"]) {
+  color: #8bd5a6 !important;
+}
+html.dark .ep-auth-modal button[type="submit"] :is(span, svg) {
+  color: #18191a !important;
+}
+
+
+/* Final EcoPrawn brand alignment: charcoal ink, coral actions, mint details. */
+.ep-auth-modal {
+  --ep-primary: #142b2e;
+  --ep-secondary: #0f4c5c;
+  --ep-text-muted: #405653;
+  --ep-accent: #d94416;
+  --ep-accent-hover: #b83a0f;
+  --ep-line: #d8e0de;
+  --ep-tint: #edf3f1;
+  color: #142b2e;
+}
+.ep-auth-modal :is(h1,label) { color: #142b2e; }
+.ep-auth-modal :is(h1 + p,small,[data-muted]) { color: #405653; }
+.ep-auth-modal button[type="submit"] {
+  background-color: #d94416;
+  border-color: #d94416;
+  color: #ffffff;
+}
+.ep-auth-modal button[type="submit"]:hover {
+  background-color: #b83a0f;
+  border-color: #b83a0f;
+}
+html.dark .ep-auth-modal {
+  --ep-primary: #f4f7f6;
+  --ep-secondary: #8bd5a6;
+  --ep-text-muted: #c0cbca;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #e87552;
+  --ep-line: rgba(139,213,166,.22);
+  --ep-tint: #29332f;
+  background-color: #202729 !important;
+  border-color: rgba(139,213,166,.22) !important;
+  color: #f4f7f6 !important;
+}
+html.dark .ep-auth-modal :is(h1,label) { color: #f4f7f6 !important; }
+html.dark .ep-auth-modal :is(h1 + p,small,[data-muted]) { color: #c0cbca !important; }
+html.dark .ep-auth-modal :is(input,textarea,select) {
+  background-color: #181f20 !important;
+  border-color: rgba(139,213,166,.3) !important;
+  color: #f4f7f6 !important;
+}
+html.dark .ep-auth-modal input::placeholder { color: #aab8b6 !important; }
+html.dark .ep-auth-modal button[type="submit"] {
+  background-color: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
+html.dark .ep-auth-modal button[type="submit"]:hover {
+  background-color: #e87552 !important;
+  border-color: #e87552 !important;
+}
+html.dark .ep-auth-modal :is(a:not([class*="bg-"]),button[aria-label="Close"]) {
+  color: #8bd5a6 !important;
+}
+
+
+/* Modal finish: consistent focus, spacing and EcoPrawn action treatment. */
+.ep-auth-modal {
+  border-radius: 26px;
+  box-shadow: 0 32px 100px rgba(5,25,28,.38);
+}
+.ep-auth-modal :is(input,button,a):focus-visible {
+  outline: 2px solid #d94416;
+  outline-offset: 3px;
+}
+.ep-auth-modal button[type="submit"] {
+  min-height: 48px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 10px 22px -14px rgba(217,68,22,.8);
+}
+html.dark .ep-auth-modal :is(input,button,a):focus-visible { outline-color: #f28a68; }
+html.dark .ep-auth-modal button[type="submit"] {
+  box-shadow: 0 10px 22px -14px rgba(242,138,104,.8);
+}
+
+
+/* Strict four-color EcoPrawn palette only — light and dark modal surfaces. */
+.ep-auth-modal {
+  --ep-bg: #f4f7f6;
+  --ep-surface: #f4f7f6;
+  --ep-primary: #142b2e;
+  --ep-secondary: #0f4c5c;
+  --ep-accent: #d94416;
+  --ep-text-muted: #142b2e;
+  --ep-line: #0f4c5c;
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: #0f4c5c !important;
+}
+.ep-auth-modal :is(h1,h2,h3,p,label,small,span) { color: #142b2e; }
+.ep-auth-modal :is(input,textarea,select)::placeholder { color: #142b2e !important; opacity: .72; }
+html.dark .ep-auth-modal {
+  --ep-bg: #18191a;
+  --ep-surface: #202729;
+  --ep-primary: #8bd5a6;
+  --ep-secondary: #8bd5a6;
+  --ep-accent: #f28a68;
+  --ep-text-muted: #8bd5a6;
+  --ep-line: #8bd5a6;
+  background: #202729 !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.3) !important;
+}
+html.dark .ep-auth-modal :is(h1,h2,h3,p,label,small,span,a) { color: #8bd5a6 !important; }
+html.dark .ep-auth-modal :is(input,textarea,select) {
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.45) !important;
+}
+html.dark .ep-auth-modal :is(input,textarea,select)::placeholder { color: #8bd5a6 !important; opacity: .75; }
+
+
+/* Final strict palette enforcement for the auth modal (including provider,
+   close, and secondary actions). */
+.ep-auth-modal {
+  --ep-bg: #f4f7f6;
+  --ep-surface: #f4f7f6;
+  --ep-primary: #142b2e;
+  --ep-secondary: #0f4c5c;
+  --ep-accent: #d94416;
+  --ep-text-muted: #142b2e;
+  --ep-line: #0f4c5c;
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: #0f4c5c !important;
+}
+.ep-auth-modal :is(h1,h2,h3,h4,p,label,small,span,div,svg) {
+  color: #142b2e;
+}
+.ep-auth-modal :is(input,textarea,select) {
+  background: #f4f7f6 !important;
+  color: #142b2e !important;
+  border-color: #0f4c5c !important;
+}
+.ep-auth-modal :is(input,textarea,select)::placeholder {
+  color: #142b2e !important;
+  opacity: .72;
+}
+.ep-auth-modal button[type="submit"] {
+  background: #d94416 !important;
+  border-color: #d94416 !important;
+  color: #f4f7f6 !important;
+}
+.ep-auth-modal :is(button:not([type="submit"]),a) {
+  color: #0f4c5c !important;
+}
+.ep-auth-modal :is(button,a):focus-visible {
+  outline: 2px solid #d94416 !important;
+  outline-offset: 3px;
+}
+html.dark .ep-auth-modal {
+  --ep-bg: #18191a;
+  --ep-surface: #202729;
+  --ep-primary: #8bd5a6;
+  --ep-secondary: #8bd5a6;
+  --ep-accent: #f28a68;
+  --ep-text-muted: #8bd5a6;
+  --ep-line: #8bd5a6;
+  background: #202729 !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.42) !important;
+}
+html.dark .ep-auth-modal :is(h1,h2,h3,h4,p,label,small,span,div,svg) {
+  color: #8bd5a6 !important;
+}
+html.dark .ep-auth-modal :is(input,textarea,select) {
+  background: #18191a !important;
+  color: #8bd5a6 !important;
+  border-color: rgba(139,213,166,.45) !important;
+  caret-color: #8bd5a6;
+}
+html.dark .ep-auth-modal :is(input,textarea,select)::placeholder {
+  color: #8bd5a6 !important;
+  opacity: .75;
+}
+html.dark .ep-auth-modal button[type="submit"] {
+  background: #f28a68 !important;
+  border-color: #f28a68 !important;
+  color: #18191a !important;
+}
+html.dark .ep-auth-modal :is(button:not([type="submit"]),a) {
+  color: #8bd5a6 !important;
+}
+html.dark .ep-auth-modal :is(button,a):focus-visible {
+  outline: 2px solid #f28a68 !important;
+  outline-offset: 3px;
+}
+
+
+/* ---------- Refined authentication dialog UI ---------- */

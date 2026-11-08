@@ -1,0 +1,896 @@
+/* ---------- Mobile landing polish: compact header, balanced hero, complete lens ---------- */
+@media (max-width: 767px) {
+  /* A true three-part header: menu | centered brand | theme. */
+  #site-header > div {
+    display: grid !important;
+    grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem !important;
+    align-items: center !important;
+    min-height: 62px !important;
+    gap: .35rem !important;
+    padding-inline: .85rem !important;
+  }
+
+  #site-header > div > button[aria-controls="mobile-nav-panel"] {
+    display: inline-flex !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    justify-self: start !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  #site-header > div > a[aria-label^="EcoPrawn"] {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    display: inline-flex !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    width: max-content !important;
+    max-width: min(54vw, 190px) !important;
+    transform: translate(-50%, -50%) !important;
+    justify-self: center !important;
+    margin: 0 !important;
+    z-index: 1 !important;
+  }
+
+  #site-header > div > a[aria-label^="EcoPrawn"] .ep-logo {
+    width: max-content !important;
+    max-width: 100% !important;
+    justify-content: center !important;
+  }
+
+  #site-header > div > div:last-child {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    gap: 0 !important;
+    z-index: 2 !important;
+  }
+
+  #site-header button[role="switch"] {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+
+  /* Remove the oversized blank band between the sticky header and hero copy. */
+  .ep-business-landing #top > .ep-hero-layout {
+    gap: 1.15rem !important;
+    padding: 1.65rem 1rem 2rem !important;
+  }
+
+  .ep-business-landing #top [data-hero="text"] {
+    width: 100% !important;
+    max-width: 34rem !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    width: 100% !important;
+    max-width: 12.5ch !important;
+    margin: 0 auto !important;
+    font-size: clamp(2.25rem, 9.2vw, 3.15rem) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.06em !important;
+    text-align: center !important;
+    text-wrap: balance !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] > span {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .ep-business-landing #top [data-hero="lead"] {
+    max-width: 29rem !important;
+    margin: .85rem auto 0 !important;
+    font-size: .96rem !important;
+    line-height: 1.55 !important;
+    text-align: center !important;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] {
+    width: 100% !important;
+    max-width: 27rem !important;
+    margin: 1.1rem auto 0 !important;
+    gap: .6rem !important;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] > a {
+    min-height: 3.1rem !important;
+    padding: .7rem .65rem !important;
+    font-size: .8rem !important;
+  }
+
+  /* Keep the instrument visually strong, but leave room for every readout. */
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    width: 100% !important;
+    max-width: 22rem !important;
+    margin: .1rem auto 0 !important;
+    padding: 0 !important;
+  }
+
+  .ep-business-landing #top .ep-lens-showcase {
+    width: 100% !important;
+    max-width: 22rem !important;
+    gap: .35rem !important;
+  }
+
+  .ep-business-landing #top .ep-lens-diagram {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    gap: .7rem !important;
+    overflow: visible !important;
+    transform: none !important;
+    margin: 0 auto !important;
+  }
+
+  .ep-business-landing #top .ep-lens-stage {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .ep-business-landing #top .ep-lens-core {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    top: auto !important;
+    width: min(62vw, 218px) !important;
+    max-width: 218px !important;
+    margin: 0 auto !important;
+    transform: none !important;
+  }
+
+  .ep-business-landing #top .ep-lens-connectors {
+    display: none !important;
+  }
+
+  .ep-business-landing #top .ep-lens-readings {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    gap: .6rem .9rem !important;
+    margin: .1rem 0 0 !important;
+    padding: .75rem .35rem .55rem !important;
+    border-top: 1px solid var(--ep-line) !important;
+    border-bottom: 1px solid var(--ep-line) !important;
+    background: transparent !important;
+  }
+
+  .ep-business-landing #top .ep-lens-readings > .ep-lens-readout,
+  .ep-business-landing #top .ep-lens-readings > .ep-lens-readout-0,
+  .ep-business-landing #top .ep-lens-readings > .ep-lens-readout-1,
+  .ep-business-landing #top .ep-lens-readings > .ep-lens-readout-2,
+  .ep-business-landing #top .ep-lens-readings > .ep-lens-readout-3,
+  .ep-business-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    position: relative !important;
+    inset: auto !important;
+    display: flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    align-items: flex-start !important;
+    justify-self: stretch !important;
+    text-align: left !important;
+    transform: none !important;
+    padding: .15rem .1rem !important;
+    margin: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .ep-business-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    grid-column: 1 / -1 !important;
+    justify-self: center !important;
+    align-items: center !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    padding: .35rem .85rem !important;
+    border: 1px solid var(--ep-line) !important;
+    border-radius: .75rem !important;
+    background: var(--ep-surface) !important;
+    text-align: center !important;
+  }
+
+  .ep-business-landing #top .ep-lens-readout > span:first-child {
+    font-size: .72rem !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+  }
+
+  .ep-business-landing #top .ep-lens-readout > span:last-child {
+    margin-top: .2rem !important;
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+  }
+
+  .ep-business-landing #top .ep-lens-caption {
+    width: 100% !important;
+    margin: .15rem 0 0 !important;
+    padding-top: .55rem !important;
+    font-size: .66rem !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .ep-business-landing #top > .ep-hero-layout {
+    padding-inline: .85rem !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    font-size: clamp(2.1rem, 9vw, 2.55rem) !important;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] {
+    grid-template-columns: minmax(0, 1fr) minmax(0, .88fr) !important;
+  }
+
+  .ep-business-landing #top [data-hero="parallax-console"],
+  .ep-business-landing #top .ep-lens-showcase {
+    max-width: 20rem !important;
+  }
+
+  .ep-business-landing #top .ep-lens-core {
+    width: min(60vw, 198px) !important;
+    max-width: 198px !important;
+  }
+}
+
+
+/* ---------- Mobile brand: center against the full viewport, not the grid track ---------- */
+@media (max-width: 767px) {
+  #site-header {
+    position: sticky !important;
+    isolation: isolate;
+  }
+
+  /* Make the full-width header the positioning reference. */
+  #site-header > div {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items: center !important;
+  }
+
+  #site-header > div > button[aria-controls="mobile-nav-panel"] {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+  }
+
+  #site-header > div > a[aria-label^="EcoPrawn"] {
+    position: absolute !important;
+    left: 50vw !important;
+    top: 33px !important;
+    transform: translate(-50%, -50%) !important;
+    display: inline-flex !important;
+    width: max-content !important;
+    max-width: min(52vw, 190px) !important;
+    margin: 0 !important;
+    justify-self: auto !important;
+    z-index: 5 !important;
+  }
+
+  #site-header > div > a[aria-label^="EcoPrawn"] .ep-logo {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+  }
+
+  #site-header > div > div:last-child {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    position: relative !important;
+    z-index: 6 !important;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   2. Brand normalization
+   Source: brand-monochrome.css
+   -------------------------------------------------------------------------- */
+/*
+ * EcoPrawn monochrome brand system.
+ * Brand palette: terracotta primary, deep-teal/mint secondary, black and white neutrals.
+ */
+
+:root {
+  color-scheme: light;
+  --ep-brand: #d94416;
+  --ep-accent: #d94416 !important;
+  --ep-accent-hover: #b83a0f !important;
+  --ep-primary: #0f4c5c !important;
+  --ep-primary-soft: #13596b !important;
+  --ep-secondary: #0f4c5c !important;
+  --ep-text-muted: #000000 !important;
+  --ep-bg: #ffffff !important;
+  --ep-surface: #ffffff !important;
+  --ep-tint: #ffffff !important;
+  --ep-line: rgba(0, 0, 0, .18) !important;
+  --ep-ok: #d94416 !important;
+  --ep-danger: #d94416 !important;
+  --ep-warn-text: #d94416 !important;
+  --coral: #d94416 !important;
+  --coral-dim: #b83a0f !important;
+  --water-deep: #0f4c5c !important;
+  --water-mid: #13596b !important;
+  --mangrove: #d94416 !important;
+  --mangrove-light: #d94416 !important;
+  --mangrove-text: #000000 !important;
+  --sand: #ffffff !important;
+  --sand-dim: rgba(0, 0, 0, .18) !important;
+  --amber: #d94416 !important;
+  --amber-text: #d94416 !important;
+  --ink: #000000 !important;
+}
+
+html.dark {
+  color-scheme: dark;
+  --ep-accent: #d94416 !important;
+  --ep-accent-hover: #b83a0f !important;
+  --ep-primary: #ffffff !important;
+  --ep-primary-soft: #ffffff !important;
+  --ep-secondary: #8bd5a6 !important;
+  --ep-text-muted: #ffffff !important;
+  --ep-bg: #000000 !important;
+  --ep-surface: #000000 !important;
+  --ep-tint: #000000 !important;
+  --ep-line: rgba(255, 255, 255, .2) !important;
+  --ep-ok: #d94416 !important;
+  --ep-danger: #d94416 !important;
+  --ep-warn-text: #d94416 !important;
+  --coral: #d94416 !important;
+  --coral-dim: #b83a0f !important;
+  --water-deep: #ffffff !important;
+  --water-mid: #8bd5a6 !important;
+  --mangrove: #d94416 !important;
+  --mangrove-light: #d94416 !important;
+  --mangrove-text: #ffffff !important;
+  --sand: #000000 !important;
+  --sand-dim: rgba(255, 255, 255, .2) !important;
+  --amber: #d94416 !important;
+  --amber-text: #d94416 !important;
+  --ink: #ffffff !important;
+}
+
+html,
+body,
+body.ecoprawn-root {
+  background: #ffffff;
+  color: #000000;
+}
+
+html.dark,
+html.dark body,
+html.dark body.ecoprawn-root {
+  background: #000000;
+  color: #ffffff;
+}
+
+.marketing-shell,
+.dashboard-shell,
+.ep-auth-modal {
+  --ep-brand-primary: #d94416 !important;
+  --ep-brand-secondary: #0f4c5c !important;
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #0f4c5c !important;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) {
+  --ep-brand-primary: #d94416 !important;
+  --ep-brand-secondary: #8bd5a6 !important;
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #8bd5a6 !important;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, small, strong, em, b, th, td,
+  input, textarea, select, summary, blockquote
+) {
+  color: #000000;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  h1, h2, h3, h4, h5, h6, p, li, label, small, strong, em, b, th, td,
+  input, textarea, select, summary, blockquote
+) {
+  color: #ffffff;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  a, button, [role="button"], input, textarea, select
+):focus-visible {
+  outline-color: #d94416 !important;
+  --tw-ring-color: #d94416 !important;
+  --tw-ring-offset-color: #ffffff;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  a, button, [role="button"], input, textarea, select
+):focus-visible {
+  --tw-ring-offset-color: #000000;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .bg-\[var\(--ep-accent\)\], .bg-\[var\(--coral\)\],
+  .bg-\[var\(--ep-brand-primary\)\]
+) {
+  background-color: #d94416 !important;
+  border-color: #d94416 !important;
+  color: #000000 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="text-emerald"], [class*="text-green"], [class*="text-teal"],
+  [class*="text-sky"], [class*="text-blue"], [class*="text-cyan"],
+  [class*="text-amber"], [class*="text-yellow"], [class*="text-orange"],
+  [class*="text-red"], [class*="text-rose"], [class*="text-lime"],
+  [class*="text-violet"], [class*="text-purple"], [class*="text-pink"]
+) {
+  color: #d94416 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="bg-emerald"], [class*="bg-green"], [class*="bg-teal"],
+  [class*="bg-sky"], [class*="bg-blue"], [class*="bg-cyan"],
+  [class*="bg-amber"], [class*="bg-yellow"], [class*="bg-orange"],
+  [class*="bg-red"], [class*="bg-rose"], [class*="bg-lime"],
+  [class*="bg-violet"], [class*="bg-purple"], [class*="bg-pink"]
+) {
+  background-color: #d94416 !important;
+  color: #000000 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="border-emerald"], [class*="border-green"], [class*="border-teal"],
+  [class*="border-sky"], [class*="border-blue"], [class*="border-cyan"],
+  [class*="border-amber"], [class*="border-yellow"], [class*="border-orange"],
+  [class*="border-red"], [class*="border-rose"], [class*="border-lime"],
+  [class*="border-violet"], [class*="border-purple"], [class*="border-pink"]
+) {
+  border-color: #d94416 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="from-emerald"], [class*="to-emerald"], [class*="via-emerald"],
+  [class*="from-teal"], [class*="to-teal"], [class*="via-teal"],
+  [class*="from-blue"], [class*="to-blue"], [class*="via-blue"],
+  [class*="from-cyan"], [class*="to-cyan"], [class*="via-cyan"],
+  [class*="from-green"], [class*="to-green"], [class*="via-green"]
+) {
+  --tw-gradient-from: #d94416 !important;
+  --tw-gradient-via: #d94416 !important;
+  --tw-gradient-to: #d94416 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .bg-white, .bg-\[\#ffffff\], .bg-\[\#fff\]
+) {
+  background-color: #ffffff;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .bg-white, .bg-\[\#ffffff\], .bg-\[\#fff\]
+) {
+  background-color: #000000 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .text-white, .text-\[\#ffffff\], .text-\[\#fff\]
+) {
+  color: #ffffff;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  .text-black, .text-\[\#000000\], .text-\[\#000\]
+) {
+  color: #000000 !important;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="border-gray-"], [class*="border-slate-"], [class*="border-zinc-"], [class*="border-neutral-"]
+) {
+  border-color: rgba(0, 0, 0, .18);
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="border-gray-"], [class*="border-slate-"], [class*="border-zinc-"], [class*="border-neutral-"]
+) {
+  border-color: rgba(255, 255, 255, .2);
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) svg :is(path, line, polyline, polygon, circle, rect) {
+  stroke: currentColor;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) input,
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) textarea,
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) select {
+  border-color: rgba(0, 0, 0, .25);
+  background-color: #ffffff;
+  color: #000000;
+  accent-color: #d94416;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) input,
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) textarea,
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) select {
+  border-color: rgba(255, 255, 255, .25);
+  background-color: #000000;
+  color: #ffffff;
+  accent-color: #d94416;
+}
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) ::placeholder {
+  color: #000000;
+  opacity: .58;
+}
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) ::placeholder {
+  color: #ffffff;
+  opacity: .58;
+}
+
+/* Restore the EcoPrawn secondary color while keeping body copy neutral. */
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="text-emerald"], [class*="text-green"], [class*="text-teal"],
+  [class*="text-sky"], [class*="text-blue"], [class*="text-cyan"], [class*="text-lime"]
+) { color: var(--ep-secondary) !important; }
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="bg-emerald"], [class*="bg-green"], [class*="bg-teal"],
+  [class*="bg-sky"], [class*="bg-blue"], [class*="bg-cyan"], [class*="bg-lime"]
+) { background-color: var(--ep-secondary) !important; }
+
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="border-emerald"], [class*="border-green"], [class*="border-teal"],
+  [class*="border-sky"], [class*="border-blue"], [class*="border-cyan"], [class*="border-lime"]
+) { border-color: var(--ep-secondary) !important; }
+
+html.dark :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) :is(
+  [class*="text-emerald"], [class*="text-green"], [class*="text-teal"],
+  [class*="text-sky"], [class*="text-blue"], [class*="text-cyan"], [class*="text-lime"]
+) { color: var(--ep-secondary) !important; }
+
+/* Replace any legacy teal/green decorative fills with the brand primary. */
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#8bd5a6"],
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#0f4c5c"],
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#38bdf8"],
+:is(.marketing-shell, .dashboard-shell, .ep-auth-modal) [style*="#e8623a"] {
+  color: #d94416 !important;
+  border-color: #d94416 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) *,
+  :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) *::before,
+  :is(.marketing-shell, .dashboard-shell, .ep-auth-modal) *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   3. Shared layout audit
+   Source: responsive-layout-audit.css
+   -------------------------------------------------------------------------- */
+/*
+ * EcoPrawn responsive layout audit
+ * Shared layout rules for public pages, auth surfaces and dashboard views.
+ * Keep this file last in globals.css so it can normalize legacy page styles.
+ */
+
+:root {
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body,
+#root,
+.ecoprawn-root {
+  width: 100%;
+  min-width: 320px;
+  max-width: 100%;
+  margin: 0;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+[role="button"],
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ep-landing,
+.ep-landing main,
+.ep-landing main > section,
+.ep-landing footer,
+.dashboard-shell,
+.dashboard-shell main {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing {
+  width: 100%;
+  overflow-x: clip;
+}
+
+.ep-landing main > section {
+  width: 100%;
+  margin-inline: auto;
+}
+
+.ep-landing :is(.grid, .flex) > *,
+.dashboard-shell :is(.grid, .flex) > * {
+  min-width: 0;
+}
+
+.ep-landing :is(h1, h2, h3, h4, p, li, dd, dt, a, label),
+.dashboard-shell main :is(h1, h2, h3, h4, p, li, dd, dt, label) {
+  min-width: 0;
+  max-width: 100%;
+  text-wrap: pretty;
+}
+
+.ep-landing :is(input, textarea, select),
+.dashboard-shell :is(input, textarea, select) {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing :is(button, a),
+.dashboard-shell main :is(button, a) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Public header: keep the brand, menu and theme controls in separate tracks. */
+#site-header {
+  width: 100%;
+  max-width: 100%;
+}
+
+#site-header > div {
+  width: 100%;
+  min-width: 0;
+}
+
+#site-header > div > a[aria-label="EcoPrawn home"] {
+  min-width: 0;
+  max-width: 100%;
+}
+
+#site-header .ep-logo {
+  max-width: 100%;
+}
+
+/* Shared About / Contact page hero. */
+.ep-landing [data-page-hero] {
+  width: 100%;
+  min-width: 0;
+}
+
+.ep-landing [data-page-hero] > div:last-child {
+  width: 100%;
+  max-width: 1200px;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  margin-inline: auto;
+}
+
+.ep-landing [data-page-hero-headline] {
+  max-width: 100%;
+  font-size: clamp(2.25rem, 6.2vw, 4.75rem);
+  line-height: 1.04;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.ep-landing [data-page-lead] {
+  width: 100%;
+  max-width: 42rem;
+}
+
+/* Public page content frames and card grids. */
+.ep-landing main > section:not([data-page-hero]) > div {
+  min-width: 0;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.ep-landing .ep-about-content-frame,
+.ep-landing .ep-contact-page main > section > div {
+  width: 100%;
+  min-width: 0;
+}
+
+.ep-landing .ep-about-content-frame > .grid,
+.ep-landing .ep-contact-page main > section > div > .grid {
+  min-width: 0;
+  align-items: stretch;
+}
+
+.ep-landing article,
+.ep-landing [data-contact-card],
+.ep-landing [data-contact-form],
+.ep-landing form {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing [data-contact-card] dd {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.ep-landing form :is(input, textarea, select) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+.ep-landing form textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.ep-landing form button {
+  min-height: 48px;
+}
+
+/* Footer columns should collapse cleanly without squeezing the wordmark. */
+.ep-landing footer,
+.ep-landing footer > div,
+.ep-landing footer .grid,
+.ep-landing footer .grid > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ep-landing footer a,
+.ep-landing footer p {
+  overflow-wrap: anywhere;
+}
+
+/* Dashboard frame: preserve the sidebar/main split on desktop and allow
+   the content column to shrink instead of forcing horizontal page scroll. */
+.dashboard-shell {
+  width: 100%;
+  overflow-x: clip;
+}
+
+.dashboard-shell > div {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dashboard-shell aside#dashboard-sidebar {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main > div {
+  width: 100%;
+  min-width: 0;
+  max-width: 1320px;
+}
+
+.dashboard-shell main > div > * {
+  min-width: 0;
+}
+
+.dashboard-shell main :is(.rounded-xl, .rounded-2xl, .rounded-3xl, article, section) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main :is(input, textarea, select) {
+  min-height: 44px;
+  font-size: 16px;
+}
+
+.dashboard-shell main :is(button, [role="button"]) {
+  min-height: 40px;
+  touch-action: manipulation;
+}
+
+.dashboard-shell main img,
+.dashboard-shell main svg,
+.dashboard-shell main canvas {
+  max-width: 100%;
+}
+
+.dashboard-shell main svg {
+  height: auto;
+}
+
+.dashboard-shell main :is(.overflow-x-auto, [data-scroll-container]) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dashboard-shell main table {
+  width: 100%;
+  min-width: 560px;
+}
+
+.dashboard-shell [role="tablist"] {
+  display: flex;
+  max-width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  overscroll-behavior-x: contain;
+}
+
+.dashboard-shell [role="tablist"] > [role="tab"] {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+

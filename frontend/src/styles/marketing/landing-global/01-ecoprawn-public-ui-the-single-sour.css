@@ -1,0 +1,820 @@
+/* EcoPrawn public UI: the single source of truth for its colors.
+ *
+ * `.ep-landing` is the root of the landing page, About, Contact, and the
+ * sign-in dialog panel. Everything here is plain tokens; no !important.
+ */
+
+/* ---------- Tokens ---------- */
+.ep-landing {
+  color-scheme: light;
+  --ep-bg: #f4f7f6;
+  --ep-surface: #ffffff;
+  --ep-tint: #e8f0ef;
+  --ep-line: rgba(15, 76, 92, 0.22);
+  --ep-primary: #0f4c5c; /* ink: text, icons, outlines */
+  --ep-secondary: #0f4c5c;
+  --ep-text: #0b2320;
+  --ep-text-muted: #3f5753;
+  --ep-accent: #c43d14; /* white text on it is about 5.2:1 */
+  --ep-accent-hover: #a8330f;
+  --ep-on-accent: #ffffff;
+  --ep-deep: #0f4c5c; /* deep-water band + CTA band */
+  --ep-on-deep: #f4f7f6;
+  --ep-on-deep-muted: #cfe2e6;
+  --ep-zone: #8bd5a6;
+  --ep-marker: #f28a68;
+  --ep-ok: #1e7a46;
+  --ep-warn-text: #8f5a12;
+  --ep-danger: #b3261e;
+  --ep-on-status: #ffffff;
+  --coral: var(--ep-accent);
+  background-color: var(--ep-bg);
+  color: var(--ep-text);
+}
+
+html.dark .ep-landing {
+  color-scheme: dark;
+  --ep-bg: #18191a;
+  --ep-surface: #202729;
+  --ep-tint: #1f2a2b;
+  --ep-line: rgba(139, 213, 166, 0.26);
+  --ep-primary: #eaf4ef;
+  --ep-secondary: #8bd5a6;
+  --ep-text: #eaf4ef;
+  --ep-text-muted: #b7cbc1;
+  --ep-accent: #f28a68;
+  --ep-accent-hover: #ffab91;
+  --ep-on-accent: #1b0a04;
+  --ep-deep: #10353a;
+  --ep-on-deep: #f1f5f3;
+  --ep-on-deep-muted: #c3d4d0;
+  --ep-ok: #5fbf8a;
+  --ep-warn-text: #e8a23a;
+  --ep-danger: #ff8a80;
+  --ep-on-status: #0b1417;
+}
+
+/* Page background behind/overscroll. */
+html:not(.dark) body.ecoprawn-root:has(.ep-landing) {
+  background: #f4f7f6;
+}
+html.dark body.ecoprawn-root:has(.ep-landing) {
+  background: #18191a;
+}
+
+/* In-page anchors land below the sticky header. */
+html:has(.ep-landing) {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.ep-landing) {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- Hero atmosphere (landing hero and the About/Contact hero) ---------- */
+.ep-landing .ep-hero-atmosphere {
+  background:
+    radial-gradient(680px circle at 78% 38%, rgba(15, 76, 92, 0.1), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(196, 61, 20, 0.06), transparent 60%);
+}
+html.dark .ep-landing .ep-hero-atmosphere {
+  background:
+    radial-gradient(680px circle at 78% 38%, rgba(139, 213, 166, 0.12), transparent 62%),
+    radial-gradient(520px circle at 8% 95%, rgba(242, 138, 104, 0.08), transparent 60%);
+}
+
+/* ---------- Header logo: don't wait for an intro that was skipped ---------- */
+body:has(.ep-water-curtain[style*="display: none"]) .ep-logo {
+  --ep-logo-wait: 0s;
+}
+
+/* ---------- Hero lens: always deep-water glass, in both themes ---------- */
+.ep-landing figure[aria-label^="A shrimp"] > div {
+  background: linear-gradient(145deg, #1a6173 0%, #0f4c5c 55%, #0b3a47 100%);
+  box-shadow: 0 40px 70px -34px rgba(8, 47, 57, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.14);
+}
+html .ep-landing figure[aria-label^="A shrimp"] > div > div {
+  background: radial-gradient(circle at 50% 46%, #14596a 0%, #0f4c5c 45%, #082f39 100%);
+  --tw-ring-color: rgb(255 255 255 / 0.25);
+}
+html .ep-landing figure[aria-label^="A shrimp"] div[class*="inset-[22%]"] {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.07) 45%, transparent 72%);
+}
+html .ep-landing figure[aria-label^="A shrimp"] span[class*="border-t-2"] {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+html .ep-landing .ep-lens-rings,
+html .ep-landing .ep-lens-ticks {
+  color: #ffffff;
+}
+html .ep-landing .ep-lens-arcs {
+  color: #f28a68;
+}
+html .ep-landing .ep-lens-speck,
+html .ep-landing .ep-lens-flash {
+  background: #ffffff;
+}
+html .ep-landing .ep-lens-ping {
+  border-color: #f28a68;
+}
+html .ep-landing .ep-lens-scan {
+  background: linear-gradient(90deg, transparent, #8bd5a6, transparent);
+  box-shadow: 0 0 14px rgba(139, 213, 166, 0.55);
+}
+html .ep-landing .ep-lens-iris {
+  background: #0b3a47;
+}
+html .ep-landing .ep-lens-glare {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 45%, transparent 70%);
+}
+html .ep-landing .ep-lens-readout,
+html .ep-landing .ep-lens-readout span,
+html .ep-landing .ep-lens-caption {
+  color: #ffffff;
+}
+html .ep-landing .ep-lens-readout .ep-lens-dot {
+  background-color: #8bd5a6;
+}
+.ep-landing .ep-lens-shrimp .ep-logo {
+  --ep-logo-color: #f28a68;
+}
+
+/* Landing hero headline: use the two official brand colors, not generic
+   body ink/accent tokens. Keep this scoped to the landing hero only. */
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+  color: #0F4C5C !important;
+  -webkit-text-fill-color: #0F4C5C !important;
+}
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
+  color: #D94416 !important;
+  -webkit-text-fill-color: #D94416 !important;
+}
+html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+  color: #F28A68 !important;
+  -webkit-text-fill-color: #F28A68 !important;
+}
+html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
+  color: #8BD5A6 !important;
+  -webkit-text-fill-color: #8BD5A6 !important;
+}
+
+
+/* About and Contact page hero headlines share the same two-tone
+   EcoPrawn brand treatment as the landing hero. */
+.ep-about-page [data-page-hero-headline] > span:first-child {
+  color: #0F4C5C !important;
+  -webkit-text-fill-color: #0F4C5C !important;
+}
+.ep-about-page [data-page-hero-headline] > span:last-child {
+  color: #D94416 !important;
+  -webkit-text-fill-color: #D94416 !important;
+}
+.ep-contact-page [data-page-hero-headline] > span:first-child {
+  color: #D94416 !important;
+  -webkit-text-fill-color: #D94416 !important;
+}
+.ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #0F4C5C !important;
+  -webkit-text-fill-color: #0F4C5C !important;
+}
+html.dark .ep-about-page [data-page-hero-headline] > span:first-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:first-child {
+  color: #F28A68 !important;
+  -webkit-text-fill-color: #F28A68 !important;
+}
+html.dark .ep-about-page [data-page-hero-headline] > span:last-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #8BD5A6 !important;
+  -webkit-text-fill-color: #8BD5A6 !important;
+}
+
+
+/* ---------- Hero lens: dedicated dark-mode instrument finish ----------
+   Keep the light lens teal, but give dark mode a darker graphite-water
+   glass, mint instrumentation and a coral shrimp mark for clear contrast. */
+html.dark .ep-landing figure[aria-label^="A shrimp"] > div {
+  background: linear-gradient(145deg, #26383A 0%, #142629 52%, #0A171A 100%);
+  box-shadow: 0 42px 78px -32px rgba(0, 0, 0, 0.82),
+    inset 0 2px 0 rgba(139, 213, 166, 0.18),
+    0 0 36px rgba(139, 213, 166, 0.08);
+}
+html.dark .ep-landing figure[aria-label^="A shrimp"] > div > div {
+  background: radial-gradient(circle at 50% 44%, #244044 0%, #142B2F 48%, #091619 100%);
+  --tw-ring-color: rgba(139, 213, 166, 0.34);
+}
+html.dark .ep-landing .ep-lens-rings,
+html.dark .ep-landing .ep-lens-ticks {
+  color: #8BD5A6;
+}
+html.dark .ep-landing .ep-lens-arcs {
+  color: #F28A68;
+}
+html.dark .ep-landing .ep-lens-ping {
+  border-color: #F28A68;
+}
+html.dark .ep-landing .ep-lens-scan {
+  background: linear-gradient(90deg, transparent, #8BD5A6, transparent);
+  box-shadow: 0 0 16px rgba(139, 213, 166, 0.72);
+}
+html.dark .ep-landing .ep-lens-iris {
+  background: #071417;
+}
+html.dark .ep-landing .ep-lens-readout,
+html.dark .ep-landing .ep-lens-readout span,
+html.dark .ep-landing .ep-lens-caption {
+  color: #EAF4EF;
+}
+html.dark .ep-landing .ep-lens-readout .ep-lens-dot {
+  background-color: #8BD5A6;
+}
+html.dark .ep-landing .ep-lens-speck {
+  background: #DDF8E7;
+}
+html.dark .ep-landing .ep-lens-flash {
+  background: #F28A68;
+}
+html.dark .ep-landing .ep-lens-shrimp .ep-logo {
+  --ep-logo-color: #F28A68;
+  --ep-logo-text: #8BD5A6;
+}
+
+
+/* ---------- Centered hero showcase layout (reference-inspired) ---------- */
+.ep-landing #top.ep-hero {
+  background-color: var(--ep-bg);
+}
+.ep-landing #top .ep-hero-layout {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1rem, 2.4vw, 1.8rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  padding-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+.ep-landing #top .ep-hero-copy {
+  max-width: 920px;
+}
+.ep-landing #top [data-hero="eyebrow"] {
+  margin-bottom: 1.1rem;
+  padding: .48rem .95rem;
+  font-size: .66rem;
+  letter-spacing: .13em;
+}
+.ep-landing #top [data-hero="headline"] {
+  max-width: 1050px;
+  margin-inline: auto;
+  font-size: clamp(2.7rem, 6.8vw, 5.6rem);
+  line-height: .99;
+  letter-spacing: -.058em;
+  text-align: center;
+}
+.ep-landing #top [data-hero="lead"] {
+  max-width: 660px;
+  margin: 1.15rem auto 0;
+  text-align: center;
+}
+.ep-landing #top [data-hero="cta"] {
+  justify-content: center;
+  margin-top: 1.6rem;
+}
+.ep-landing #top [data-hero="parallax-console"] {
+  width: min(100%, 410px);
+  max-width: 410px;
+  margin: .2rem auto 0;
+}
+.ep-landing #top .ep-hero-visual figure {
+  max-width: 410px;
+}
+.ep-landing #top [data-hero="signature"] {
+  margin-top: -.25rem;
+  letter-spacing: .2em;
+}
+.ep-landing .ep-stats-panel {
+  width: min(100%, 1040px);
+  margin-inline: auto;
+}
+.ep-landing .ep-stats-panel > div {
+  min-height: 92px;
+  border-color: var(--ep-line);
+  background: var(--ep-surface);
+  box-shadow: 0 3px 14px -12px rgba(15, 76, 92, .45);
+}
+.ep-landing .ep-stats-panel > div > span:first-child {
+  font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+}
+.ep-landing .ep-stats-panel > div > span:last-child {
+  border-top: 1px solid var(--ep-line);
+  padding-top: .55rem;
+}
+@media (min-width: 640px) {
+  .ep-landing #top .ep-hero-layout { gap: 1.25rem; }
+  .ep-landing #top [data-hero="parallax-console"] { width: min(100%, 430px); max-width: 430px; }
+}
+@media (max-width: 639px) {
+  .ep-landing #top [data-hero="headline"] {
+    font-size: clamp(2.35rem, 10.2vw, 3.65rem);
+    line-height: 1.02;
+  }
+  .ep-landing #top [data-hero="cta"] > a { width: 100%; }
+  .ep-landing .ep-stats-panel > div { min-height: 82px; padding: .8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-landing #top [data-hero="parallax-console"] { transform: none !important; }
+}
+
+
+/* ---------- Hero sizing and crisp lens rendering ---------- */
+.ep-landing #top .ep-hero-layout {
+  gap: clamp(.75rem, 1.5vw, 1.2rem);
+  padding-top: clamp(1.65rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1.5rem, 2.8vw, 2.4rem);
+}
+.ep-landing #top [data-hero="headline"] {
+  max-width: 900px;
+  font-size: clamp(2.45rem, 6vw, 5rem);
+  line-height: 1;
+}
+.ep-landing #top [data-hero="lead"] {
+  margin-top: .9rem;
+  max-width: 620px;
+}
+.ep-landing #top [data-hero="cta"] {
+  margin-top: 1.25rem;
+}
+.ep-landing #top [data-hero="parallax-console"] {
+  width: min(100%, 360px);
+  max-width: 360px;
+  margin-top: 0;
+}
+.ep-landing #top .ep-hero-visual figure {
+  width: 100%;
+  max-width: 360px;
+  filter: none !important;
+  image-rendering: auto;
+  backface-visibility: visible;
+}
+.ep-landing #top .ep-lens-shrimp,
+.ep-landing #top .ep-lens-shrimp .ep-logo,
+.ep-landing #top .ep-lens-shrimp .ep-logo-shape {
+  filter: none !important;
+}
+.ep-landing #top [data-hero="signature"] {
+  margin-top: -.45rem;
+  font-size: .68rem;
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-hero-layout {
+    gap: .9rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .ep-landing #top [data-hero="headline"] {
+    font-size: clamp(2.2rem, 9.5vw, 3.25rem);
+    line-height: 1.04;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(88vw, 320px);
+    max-width: 320px;
+  }
+  .ep-landing #top .ep-hero-visual figure {
+    max-width: 320px;
+  }
+}
+
+
+/* ---------- Laptop viewport fit: keep the complete hero composition visible ---------- */
+@media (min-width: 768px) {
+  .ep-landing #top .ep-hero-layout {
+    gap: clamp(.55rem, 1vw, .9rem);
+    padding-top: clamp(1.1rem, 2.2vh, 1.8rem);
+    padding-bottom: clamp(1rem, 2vh, 1.5rem);
+  }
+  .ep-landing #top .ep-hero-copy {
+    max-width: 1240px;
+  }
+  .ep-landing #top [data-hero="headline"] {
+    width: 100%;
+    max-width: 1200px;
+    font-size: clamp(2.65rem, 5.2vw, 4.8rem);
+    line-height: .99;
+    letter-spacing: -.06em;
+  }
+  .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+    white-space: nowrap;
+  }
+  .ep-landing #top [data-hero="lead"] {
+    margin-top: .65rem;
+    line-height: 1.55;
+  }
+  .ep-landing #top [data-hero="cta"] {
+    margin-top: 1rem;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(30vw, 320px);
+    max-width: 320px;
+  }
+  .ep-landing #top .ep-hero-visual figure {
+    max-width: 320px;
+  }
+  .ep-landing #top [data-hero="signature"] {
+    margin-top: -.35rem;
+    font-size: .62rem;
+  }
+}
+
+/* Short laptop screens: reduce vertical footprint rather than cropping the lens. */
+@media (min-width: 768px) and (max-height: 900px) {
+  .ep-landing #top .ep-hero-layout {
+    gap: .5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .ep-landing #top [data-hero="eyebrow"] {
+    margin-bottom: .65rem;
+    padding: .38rem .8rem;
+  }
+  .ep-landing #top [data-hero="headline"] {
+    font-size: clamp(2.5rem, 4.7vw, 4.25rem);
+  }
+  .ep-landing #top [data-hero="lead"] {
+    margin-top: .55rem;
+    font-size: 1rem;
+  }
+  .ep-landing #top [data-hero="cta"] {
+    margin-top: .8rem;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(27vw, 285px);
+    max-width: 285px;
+  }
+  .ep-landing #top .ep-hero-visual figure {
+    max-width: 285px;
+  }
+}
+
+/* At medium laptop widths allow the headline to wrap naturally without overflow. */
+@media (min-width: 768px) and (max-width: 1100px) {
+  .ep-landing #top [data-hero="headline"] {
+    font-size: clamp(2.45rem, 5.4vw, 3.75rem);
+  }
+  .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+    white-space: normal;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(34vw, 285px);
+    max-width: 285px;
+  }
+  .ep-landing #top .ep-hero-visual figure {
+    max-width: 285px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ep-landing #top .ep-hero-layout {
+    gap: .85rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+  .ep-landing #top [data-hero="headline"] {
+    max-width: 100%;
+    overflow-wrap: normal;
+  }
+  .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+    white-space: normal;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(82vw, 300px);
+    max-width: 300px;
+  }
+  .ep-landing #top .ep-hero-visual figure {
+    max-width: 300px;
+  }
+}
+
+
+/* ---------- Hero lens/readout layout: keep controls clear and values outside glass ---------- */
+.ep-landing #top [data-hero="parallax-console"] {
+  width: min(100%, 560px);
+  max-width: 560px;
+  margin: .65rem auto 0;
+  overflow: visible;
+}
+.ep-landing #top .ep-lens-showcase {
+  width: 100%;
+  max-width: 560px;
+  gap: clamp(.8rem, 1.8vw, 1.15rem);
+}
+.ep-landing #top .ep-lens-showcase figure {
+  width: min(100%, 300px);
+  max-width: 300px;
+  margin-inline: auto;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout {
+  position: relative;
+  inset: auto;
+  min-height: 62px;
+  border-color: var(--ep-line);
+  background: var(--ep-surface);
+  color: var(--ep-text);
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout span {
+  color: inherit;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout .ep-lens-dot {
+  background: var(--ep-secondary);
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-caption {
+  position: static;
+  width: auto;
+  transform: none;
+  color: var(--ep-text-muted);
+}
+@media (min-width: 768px) {
+  .ep-landing #top [data-hero="cta"] {
+    position: relative;
+    z-index: 2;
+    margin-bottom: .35rem;
+  }
+  .ep-landing #top [data-hero="parallax-console"] {
+    margin-top: .5rem;
+  }
+}
+@media (max-width: 639px) {
+  .ep-landing #top [data-hero="parallax-console"] {
+    width: min(100%, 340px);
+    max-width: 340px;
+    margin-top: .25rem;
+  }
+  .ep-landing #top .ep-lens-showcase figure {
+    width: min(82vw, 270px);
+    max-width: 270px;
+  }
+  .ep-landing #top .ep-lens-showcase .ep-lens-readout {
+    min-height: 58px;
+    padding: .55rem .4rem;
+  }
+}
+
+
+/* ---------- Hero parameter strip: clean typography, no individual cards ---------- */
+.ep-landing #top .ep-lens-showcase .ep-lens-readings {
+  width: min(100%, 620px);
+  margin-top: .15rem;
+  padding: .9rem .25rem;
+  border-top: 1px solid var(--ep-line);
+  border-bottom: 1px solid var(--ep-line);
+  column-gap: clamp(.7rem, 2vw, 1.4rem);
+  row-gap: .9rem;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout {
+  min-height: 0;
+  padding: .15rem .1rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout > span:first-child {
+  color: var(--ep-text-muted);
+  font-size: clamp(.7rem, 1vw, .82rem);
+  font-weight: 600;
+  letter-spacing: .015em;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout > span:last-child {
+  margin-top: .35rem;
+  color: var(--ep-text);
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  font-weight: 750;
+  line-height: 1.2;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout > span:last-child > span:last-child {
+  color: var(--ep-text-muted);
+  font-size: .75em;
+  font-weight: 600;
+}
+.ep-landing #top .ep-lens-showcase .ep-lens-readout .ep-lens-dot {
+  width: .42rem;
+  height: .42rem;
+  background: var(--ep-secondary);
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-showcase .ep-lens-readings {
+    padding: .75rem .1rem;
+    column-gap: .5rem;
+    row-gap: .75rem;
+  }
+  .ep-landing #top .ep-lens-showcase .ep-lens-readout > span:first-child {
+    font-size: .72rem;
+  }
+  .ep-landing #top .ep-lens-showcase .ep-lens-readout > span:last-child {
+    font-size: 1.05rem;
+  }
+}
+
+
+/* ---------- Connected HeroLens callouts (unboxed sensor annotations) ---------- */
+.ep-landing #top .ep-lens-showcase {
+  max-width: 620px;
+  gap: .25rem;
+}
+.ep-landing #top .ep-lens-diagram {
+  height: 390px;
+  max-width: 620px;
+  margin-inline: auto;
+}
+.ep-landing #top .ep-lens-core {
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  width: 280px;
+  max-width: 280px;
+  transform: translateX(-50%);
+}
+.ep-landing #top .ep-lens-connectors {
+  color: var(--ep-secondary);
+}
+.ep-landing #top .ep-lens-readout {
+  width: 104px;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--ep-text);
+}
+.ep-landing #top .ep-lens-readout-0 { left: 0; top: 72px; }
+.ep-landing #top .ep-lens-readout-1 { right: 0; top: 72px; }
+.ep-landing #top .ep-lens-readout-2 { left: 0; top: 266px; }
+.ep-landing #top .ep-lens-readout-3 { right: 0; top: 266px; }
+.ep-landing #top .ep-lens-readout-4 {
+  left: 50%;
+  top: 350px;
+  width: 140px;
+  transform: translateX(-50%);
+}
+.ep-landing #top .ep-lens-readout > span:first-child {
+  color: var(--ep-text-muted);
+  font-size: .78rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+.ep-landing #top .ep-lens-readout > span:last-child {
+  color: var(--ep-text);
+  font-size: 1.15rem;
+  font-weight: 750;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
+  color: var(--ep-text-muted);
+  font-size: .76em;
+  font-weight: 600;
+}
+.ep-landing #top .ep-lens-readout .ep-lens-dot {
+  background: var(--ep-secondary);
+}
+.ep-landing #top .ep-lens-caption {
+  margin-top: -.1rem;
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-diagram {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .85rem;
+  }
+  .ep-landing #top .ep-lens-core {
+    position: relative;
+    inset: auto;
+    width: min(70vw, 230px);
+    max-width: 230px;
+    transform: none;
+  }
+  .ep-landing #top .ep-lens-connectors {
+    display: none;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: relative;
+    inset: auto;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .8rem 1rem;
+    padding: .85rem .25rem .25rem;
+    border-top: 1px solid var(--ep-line);
+  }
+  .ep-landing #top .ep-lens-readout,
+  .ep-landing #top .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readout-2,
+  .ep-landing #top .ep-lens-readout-3,
+  .ep-landing #top .ep-lens-readout-4 {
+    position: relative;
+    inset: auto;
+    width: auto;
+    transform: none;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .ep-landing #top .ep-lens-readout > span:first-child { font-size: .72rem; }
+  .ep-landing #top .ep-lens-readout > span:last-child { font-size: 1.05rem; }
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .ep-landing #top .ep-lens-diagram { transform: scale(.92); transform-origin: top center; margin-bottom: -30px; }
+}
+
+
+/* ---------- Premium HeroLens instrument finish ---------- */
+.ep-landing #top .ep-lens-diagram {
+  isolation: isolate;
+}
+.ep-landing #top .ep-lens-core {
+  filter: drop-shadow(0 22px 34px rgba(0,0,0,.24));
+}
+.ep-landing #top .ep-lens-core::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  inset: -8px;
+  border: 1px solid color-mix(in srgb, var(--ep-secondary) 58%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--ep-secondary) 8%, transparent),
+    0 0 28px color-mix(in srgb, var(--ep-secondary) 12%, transparent),
+    inset 0 0 18px color-mix(in srgb, var(--ep-secondary) 8%, transparent);
+}
+.ep-landing #top .ep-lens-core::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  inset: 5px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.ep-landing #top .ep-lens-connectors {
+  color: var(--ep-secondary);
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--ep-secondary) 32%, transparent));
+}
+.ep-landing #top .ep-lens-connectors path {
+  stroke-width: 1.35;
+  opacity: .82;
+}
+.ep-landing #top .ep-lens-connectors circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  fill: var(--ep-accent);
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--ep-accent) 55%, transparent));
+}
+.ep-landing #top .ep-lens-readout {
+  width: 116px;
+  gap: 2px;
+  padding: 2px 0;
+}
+.ep-landing #top .ep-lens-readout > span:first-child {
+  color: var(--ep-text-muted);
+  font-size: clamp(.72rem, .9vw, .84rem);
+  font-weight: 650;
+  letter-spacing: .025em;
+}
+.ep-landing #top .ep-lens-readout > span:last-child {
+  margin-top: .24rem;
+  color: var(--ep-text);
+  font-size: clamp(1.2rem, 1.8vw, 1.42rem);
+  font-weight: 780;
+  letter-spacing: -.035em;
+  font-variant-numeric: tabular-nums;
+}
+.ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
+  color: var(--ep-text-muted);
+  font-size: .72em;
+  letter-spacing: 0;
+}
+.ep-landing #top .ep-lens-readout .ep-lens-dot {
+  width: .48rem;
+  height: .48rem;
+  background: var(--ep-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent) 13%, transparent);
+}
+.ep-landing #top .ep-lens-caption {
+  margin-top: .35rem;
+  padding-top: .7rem;
+  border-top: 1px solid var(--ep-line);
+  width: min(100%, 560px);
+  font-size: .72rem;
+  letter-spacing: .015em;
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-core::before { inset: -5px; }
+  .ep-landing #top .ep-lens-readout { width: auto; }
+  .ep-landing #top .ep-lens-readout > span:last-child { font-size: 1.12rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-landing #top .ep-lens-connectors path { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
+}
+
+

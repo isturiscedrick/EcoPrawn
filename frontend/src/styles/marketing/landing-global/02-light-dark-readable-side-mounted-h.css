@@ -1,0 +1,831 @@
+/* ---------- Light/dark readable side-mounted HeroLens telemetry ---------- */
+.ep-landing #top .ep-lens-diagram {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.35fr) minmax(180px, .85fr);
+  align-items: stretch;
+  width: min(100%, 620px);
+  min-height: 390px;
+  margin-inline: auto;
+  isolation: isolate;
+}
+.ep-landing #top .ep-lens-stage {
+  min-width: 0;
+}
+.ep-landing #top .ep-lens-core {
+  position: relative;
+  inset: auto;
+  left: auto;
+  top: auto;
+  width: min(100%, 300px);
+  max-width: 300px;
+  transform: none;
+}
+.ep-landing #top .ep-lens-readings {
+  min-width: 0;
+  padding: 1.1rem 0 1.1rem .6rem;
+  gap: .7rem;
+}
+.ep-landing #top .ep-lens-readout,
+.ep-landing #top .ep-lens-readout-0,
+.ep-landing #top .ep-lens-readout-1,
+.ep-landing #top .ep-lens-readout-2,
+.ep-landing #top .ep-lens-readout-3,
+.ep-landing #top .ep-lens-readout-4 {
+  position: relative;
+  inset: auto;
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  width: auto;
+  min-height: 0;
+  padding: .22rem 0;
+  transform: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #0b2320;
+  text-align: left;
+  align-items: flex-start;
+}
+.ep-landing #top .ep-lens-readout > span:first-child {
+  color: #3f5753;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .015em;
+  white-space: normal;
+}
+.ep-landing #top .ep-lens-readout > span:last-child {
+  margin-top: .3rem;
+  color: #0b2320;
+  font-size: clamp(1.2rem, 1.9vw, 1.48rem);
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+.ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
+  color: #3f5753;
+  font-size: .74em;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+.ep-landing #top .ep-lens-readout .ep-lens-dot {
+  width: .52rem;
+  height: .52rem;
+  background: #0f4c5c;
+  box-shadow: 0 0 0 3px rgba(15,76,92,.12);
+}
+.ep-landing #top .ep-lens-connectors {
+  z-index: 0;
+  color: #0f4c5c;
+  overflow: visible;
+}
+.ep-landing #top .ep-lens-connectors path {
+  stroke: #0f4c5c;
+  stroke-width: 1.35;
+  opacity: .72;
+}
+.ep-landing #top .ep-lens-connectors circle {
+  fill: #c43d14;
+  filter: drop-shadow(0 0 4px rgba(196,61,20,.3));
+}
+.ep-landing #top .ep-lens-core::before {
+  border-color: rgba(15,76,92,.62);
+  box-shadow: 0 0 0 4px rgba(15,76,92,.08), 0 0 26px rgba(15,76,92,.14), inset 0 0 18px rgba(15,76,92,.1);
+}
+.ep-landing #top .ep-lens-rings { color: #d9f0e7; }
+.ep-landing #top .ep-lens-ticks { color: #d9f0e7; }
+.ep-landing #top .ep-lens-arcs { color: #f28a68; }
+.ep-landing #top .ep-lens-caption {
+  width: min(100%, 620px);
+  color: #3f5753;
+  border-color: rgba(15,76,92,.2);
+}
+html.dark .ep-landing #top .ep-lens-readout,
+html.dark .ep-landing #top .ep-lens-readout > span:last-child {
+  color: #eaf4ef;
+}
+html.dark .ep-landing #top .ep-lens-readout > span:first-child,
+html.dark .ep-landing #top .ep-lens-readout > span:last-child > span:last-child,
+html.dark .ep-landing #top .ep-lens-caption {
+  color: #b7cbc1;
+}
+html.dark .ep-landing #top .ep-lens-readout .ep-lens-dot {
+  background: #8bd5a6;
+  box-shadow: 0 0 0 3px rgba(139,213,166,.14);
+}
+html.dark .ep-landing #top .ep-lens-connectors path {
+  stroke: #8bd5a6;
+}
+html.dark .ep-landing #top .ep-lens-connectors circle {
+  fill: #f28a68;
+}
+html.dark .ep-landing #top .ep-lens-core::before {
+  border-color: rgba(139,213,166,.62);
+  box-shadow: 0 0 0 4px rgba(139,213,166,.1), 0 0 28px rgba(139,213,166,.16), inset 0 0 18px rgba(139,213,166,.1);
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-diagram {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    gap: .85rem;
+  }
+  .ep-landing #top .ep-lens-stage { width: 100%; }
+  .ep-landing #top .ep-lens-core {
+    width: min(72vw, 250px);
+    max-width: 250px;
+  }
+  
+  .ep-landing #top .ep-lens-readings {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    width: 100%;
+    padding: .9rem .25rem .25rem;
+    border-top: 1px solid var(--ep-line);
+    gap: .65rem 1rem;
+  }
+  .ep-landing #top .ep-lens-readout,
+  .ep-landing #top .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readout-2,
+  .ep-landing #top .ep-lens-readout-3,
+  .ep-landing #top .ep-lens-readout-4 {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .ep-landing #top .ep-lens-readout > span:first-child { font-size: .75rem; }
+  
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .ep-landing #top .ep-lens-diagram {
+    grid-template-columns: minmax(250px, 1.2fr) minmax(150px, .8fr);
+    min-height: 340px;
+  }
+  .ep-landing #top .ep-lens-core { max-width: 250px; }
+  .ep-landing #top .ep-lens-readings { gap: .45rem; }
+  .ep-landing #top .ep-lens-readout > span:first-child { font-size: .72rem; }
+  .ep-landing #top .ep-lens-readout > span:last-child { font-size: 1.12rem; }
+}
+
+
+/* ---------- Balanced bilateral HeroLens telemetry ---------- */
+/* Two readings on each side of the lens; the fifth anchors the lower center. */
+.ep-landing #top .ep-lens-diagram {
+  position: relative;
+  display: block;
+  width: min(100%, 620px);
+  height: 440px;
+  min-height: 440px;
+}
+.ep-landing #top .ep-lens-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ep-landing #top .ep-lens-core {
+  position: relative;
+  inset: auto;
+  width: min(44vw, 270px);
+  max-width: 270px;
+  transform: none;
+}
+.ep-landing #top .ep-lens-readings {
+  position: absolute;
+  inset: 0;
+  display: contents;
+}
+.ep-landing #top .ep-lens-readout,
+.ep-landing #top .ep-lens-readout-0,
+.ep-landing #top .ep-lens-readout-1,
+.ep-landing #top .ep-lens-readout-2,
+.ep-landing #top .ep-lens-readout-3,
+.ep-landing #top .ep-lens-readout-4 {
+  position: absolute;
+  width: 118px;
+  min-height: 0;
+  padding: 0;
+  transform: none;
+}
+.ep-landing #top .ep-lens-readout-0 { left: 0; right: auto; top: 92px; }
+.ep-landing #top .ep-lens-readout-2 { left: 0; right: auto; top: 266px; }
+.ep-landing #top .ep-lens-readout-1 { left: auto; right: 0; top: 92px; }
+.ep-landing #top .ep-lens-readout-3 { left: auto; right: 0; top: 266px; }
+.ep-landing #top .ep-lens-readout-4 {
+  left: 50%;
+  right: auto;
+  top: 386px;
+  width: 160px;
+  transform: translateX(-50%);
+  align-items: center;
+  text-align: center;
+}
+.ep-landing #top .ep-lens-readout > span:first-child {
+  font-size: clamp(.68rem, .95vw, .8rem);
+  white-space: normal;
+}
+.ep-landing #top .ep-lens-readout > span:last-child {
+  font-size: clamp(1.08rem, 1.55vw, 1.3rem);
+}
+.ep-landing #top .ep-lens-connectors {
+  display: block;
+  z-index: 1;
+  color: var(--ep-secondary);
+}
+.ep-landing #top .ep-lens-connectors path {
+  stroke: currentColor;
+}
+.ep-landing #top .ep-lens-connectors circle {
+  fill: var(--ep-accent);
+}
+html.dark .ep-landing #top .ep-lens-connectors {
+  color: #8bd5a6;
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-diagram {
+    display: flex;
+    height: auto;
+    min-height: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: .85rem;
+  }
+  .ep-landing #top .ep-lens-stage {
+    position: relative;
+    inset: auto;
+    width: 100%;
+  }
+  .ep-landing #top .ep-lens-core {
+    position: relative;
+    inset: auto;
+    width: min(72vw, 250px);
+    max-width: 250px;
+  }
+  
+  .ep-landing #top .ep-lens-readings {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: .7rem 1rem;
+    padding: .9rem .25rem .2rem;
+    border-top: 1px solid var(--ep-line);
+  }
+  .ep-landing #top .ep-lens-readout,
+  .ep-landing #top .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readout-2,
+  .ep-landing #top .ep-lens-readout-3,
+  .ep-landing #top .ep-lens-readout-4 {
+    position: relative;
+    inset: auto;
+    left: auto;
+    right: auto;
+    top: auto;
+    width: auto;
+    transform: none;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .ep-landing #top .ep-lens-readout-4 {
+    grid-column: 1 / -1;
+    align-items: center;
+    text-align: center;
+  }
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .ep-landing #top .ep-lens-diagram {
+    height: 420px;
+    min-height: 420px;
+  }
+  .ep-landing #top .ep-lens-core { width: 235px; max-width: 235px; }
+  .ep-landing #top .ep-lens-readout { width: 108px; }
+}
+
+
+/* ---------- Final HeroLens balance: two callouts per side + one below ---------- */
+@media (min-width: 640px) {
+  .ep-landing #top .ep-lens-diagram {
+    position: relative;
+    display: block;
+    width: min(100%, 620px);
+    height: 440px;
+    min-height: 440px;
+  }
+  .ep-landing #top .ep-lens-stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ep-landing #top .ep-lens-core {
+    position: relative;
+    inset: auto;
+    width: min(42vw, 270px);
+    max-width: 270px;
+    transform: none;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: absolute;
+    inset: 0;
+    display: block;
+    pointer-events: none;
+  }
+  .ep-landing #top .ep-lens-readout,
+  .ep-landing #top .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readout-2,
+  .ep-landing #top .ep-lens-readout-3,
+  .ep-landing #top .ep-lens-readout-4 {
+    position: absolute;
+    width: 116px;
+    min-height: 0;
+    padding: 0;
+    transform: none;
+    pointer-events: auto;
+  }
+  /* First two sensors on the left. */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 {
+    left: 0;
+    right: auto;
+    top: 104px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1 {
+    left: 0;
+    right: auto;
+    top: 264px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  /* Next two sensors mirror them on the right. */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 {
+    left: auto;
+    right: 0;
+    top: 104px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3 {
+    left: auto;
+    right: 0;
+    top: 264px;
+    align-items: flex-start;
+    text-align: left;
+  }
+  /* Fifth sensor centered beneath the lens. */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    left: 50%;
+    right: auto;
+    top: 386px;
+    width: 160px;
+    transform: translateX(-50%);
+    align-items: center;
+    text-align: center;
+  }
+  .ep-landing #top .ep-lens-connectors {
+    display: block;
+    z-index: 1;
+  }
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .ep-landing #top .ep-lens-diagram {
+    width: 100%;
+    height: 420px;
+    min-height: 420px;
+  }
+  .ep-landing #top .ep-lens-readout,
+  .ep-landing #top .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readout-2,
+  .ep-landing #top .ep-lens-readout-3 { width: 102px; }
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-diagram {
+    height: auto;
+    min-height: 0;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    grid-column: 1 / -1;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+
+/* Definitive desktop layout: readings are placed in a real 3-column grid,
+   not absolutely positioned against the diagram (which caused them to stack left). */
+@media (min-width: 640px) {
+  .ep-landing #top .ep-lens-diagram {
+    position: relative !important;
+    display: block !important;
+    width: min(100%, 620px) !important;
+    height: 440px !important;
+    min-height: 440px !important;
+  }
+  .ep-landing #top .ep-lens-stage {
+    position: absolute !important;
+    inset: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1 !important;
+  }
+  .ep-landing #top .ep-lens-core {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    top: auto !important;
+    width: min(42vw, 270px) !important;
+    max-width: 270px !important;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: absolute !important;
+    inset: 0 !important;
+    display: grid !important;
+    grid-template-columns: 116px minmax(0, 1fr) 116px !important;
+    grid-template-rows: 1fr 1fr 54px !important;
+    align-items: center !important;
+    gap: 0 8px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 2 !important;
+    pointer-events: none;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: 116px !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    justify-self: start !important;
+    pointer-events: auto;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 {
+    grid-column: 1 !important; grid-row: 1 !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1 {
+    grid-column: 3 !important; grid-row: 1 !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 {
+    grid-column: 1 !important; grid-row: 2 !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3 {
+    grid-column: 3 !important; grid-row: 2 !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+    width: 160px !important;
+    justify-self: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+}
+@media (max-width: 639px) {
+  .ep-landing #top .ep-lens-diagram {
+    display: flex !important;
+    height: auto !important;
+    min-height: 0 !important;
+    flex-direction: column !important;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    padding: .9rem .25rem .25rem !important;
+    gap: .65rem 1rem !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout {
+    position: relative !important;
+    inset: auto !important;
+    width: auto !important;
+    transform: none !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    grid-column: 1 / -1 !important;
+    justify-self: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+}
+
+
+/* ---------- HeroLens light-theme contrast correction ---------- */
+/* Older lens defaults forced white telemetry text in both themes.
+   Keep dark mode styling intact and use high-contrast ink in light mode. */
+html:not(.dark) .ep-landing #top .ep-lens-readout,
+html:not(.dark) .ep-landing #top .ep-lens-readout span,
+html:not(.dark) .ep-landing #top .ep-lens-caption {
+  color: #172321 !important;
+  -webkit-text-fill-color: #172321;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:first-child {
+  color: #344943 !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child {
+  color: #101B19 !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
+  color: #40534D !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout .ep-lens-dot {
+  background-color: #0F4C5C !important;
+  box-shadow: 0 0 0 3px rgba(15, 76, 92, .12) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-caption {
+  color: #40534D !important;
+  font-weight: 650;
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors {
+  color: #0F4C5C !important;
+  filter: drop-shadow(0 0 2px rgba(15, 76, 92, .18));
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors path {
+  stroke: #0F4C5C !important;
+  opacity: .9 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors circle {
+  fill: #D94416 !important;
+  filter: none !important;
+}
+/* Keep the instrument itself distinct against the warm light canvas. */
+html:not(.dark) .ep-landing figure[aria-label^="A shrimp"] > div {
+  background: linear-gradient(145deg, #24484B 0%, #102F34 55%, #0B2024 100%);
+  box-shadow: 0 32px 64px -30px rgba(16, 47, 52, .42),
+    inset 0 1px 0 rgba(255,255,255,.28),
+    0 0 0 1px rgba(15,76,92,.16);
+}
+html:not(.dark) .ep-landing figure[aria-label^="A shrimp"] > div > div {
+  background: radial-gradient(circle at 50% 42%, #31585A 0%, #193B3F 54%, #10282C 100%);
+}
+
+
+/* ---------- Refined light-mode HeroLens palette ---------- */
+/* A lighter, clearer teal instrument replaces the near-black glass;
+   telemetry uses the brand's deep teal ink and terracotta signal accents. */
+html:not(.dark) .ep-landing #top figure[aria-label^="A shrimp"] > div {
+  background: linear-gradient(145deg, #477F86 0%, #28636D 48%, #174B55 100%) !important;
+  border: 1px solid rgba(15, 76, 92, .32);
+  box-shadow:
+    0 30px 58px -30px rgba(15, 76, 92, .42),
+    inset 0 2px 0 rgba(255, 255, 255, .62),
+    inset 0 -8px 18px rgba(5, 37, 43, .24),
+    0 0 0 5px rgba(15, 76, 92, .08) !important;
+}
+html:not(.dark) .ep-landing #top figure[aria-label^="A shrimp"] > div > div {
+  background: radial-gradient(circle at 48% 38%,
+    #397780 0%, #245D67 48%, #123F49 100%) !important;
+  --tw-ring-color: rgba(15, 76, 92, .48) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-rings,
+html:not(.dark) .ep-landing #top .ep-lens-ticks {
+  color: #D9EFEB !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-rings circle {
+  stroke: currentColor;
+}
+html:not(.dark) .ep-landing #top .ep-lens-arcs {
+  color: #F28A68 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-shrimp .ep-logo {
+  --ep-logo-color: #F28A68 !important;
+  --ep-logo-text: #F28A68 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-speck {
+  background: #EAF7F2 !important;
+  opacity: .34 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-glare {
+  background-image: radial-gradient(circle,
+    rgba(255,255,255,.28) 0%,
+    rgba(255,255,255,.08) 48%,
+    transparent 72%) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-iris {
+  background: #123F49 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-ping {
+  border-color: #F28A68 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-scan {
+  background: linear-gradient(90deg, transparent, #D9EFEB, transparent) !important;
+  box-shadow: 0 0 12px rgba(217,239,235,.6) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:first-child {
+  color: #31504C !important;
+  font-weight: 750 !important;
+  letter-spacing: .01em;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child {
+  color: #0F3439 !important;
+  font-weight: 800 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
+  color: #315A5C !important;
+  font-weight: 700 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout .ep-lens-dot {
+  background: #0F4C5C !important;
+  box-shadow: 0 0 0 3px rgba(15,76,92,.13) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors path {
+  stroke: #477780 !important;
+  stroke-width: 1.6 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors circle {
+  fill: #0F4C5C !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-caption {
+  color: #31504C !important;
+  text-shadow: none !important;
+}
+
+
+/* ---------- GSAP 3D HeroLens instrument depth ---------- */
+.ep-landing #top .ep-lens-stage {
+  perspective: 1100px;
+  perspective-origin: 50% 48%;
+  transform-style: preserve-3d;
+}
+.ep-landing #top .ep-lens-core {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+  filter: drop-shadow(0 28px 24px rgba(5, 35, 39, .22));
+}
+.ep-landing #top .ep-lens-core > div:first-child {
+  transform: translateZ(0);
+  transform-style: preserve-3d;
+}
+.ep-landing #top .ep-lens-core .ep-lens-rings { transform: translateZ(9px); }
+.ep-landing #top .ep-lens-core .ep-lens-ticks { transform: translateZ(13px); }
+.ep-landing #top .ep-lens-core .ep-lens-shrimp { transform: translateZ(25px); }
+.ep-landing #top .ep-lens-core .ep-lens-arcs { transform: translateZ(19px); }
+.ep-landing #top .ep-lens-core .ep-lens-glare { transform: translateZ(31px); }
+.ep-landing #top .ep-lens-core .ep-lens-scan { transform: translateZ(28px); }
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .ep-landing #top .ep-lens-core { will-change: auto; }
+}
+
+
+/* ---------- Horizontal process story (desktop only) ----------
+   Vertical page scrolling drives the four process stages horizontally.
+   Tablet/mobile retain the accessible stacked list. */
+@media (min-width: 1200px) and (prefers-reduced-motion: no-preference) {
+  .ep-landing #process [data-process-viewport] {
+    width: 100%;
+    overflow: hidden;
+    padding-top: 1.75rem;
+    padding-bottom: 1.25rem;
+    overscroll-behavior: contain;
+  }
+
+  .ep-landing #process [data-process-track] {
+    display: flex;
+    width: max-content;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: clamp(1.25rem, 2.2vw, 2rem);
+    will-change: transform;
+  }
+
+  .ep-landing #process [data-process-track] > li {
+    flex: 0 0 min(72vw, 760px);
+    width: min(72vw, 760px);
+    min-width: 560px;
+    min-height: 270px;
+    padding: 2rem 2.25rem 2.25rem;
+    border: 1px solid var(--ep-line);
+    border-top: 1px solid var(--ep-line);
+    border-radius: 1.25rem;
+    background: var(--ep-surface);
+    box-shadow: 0 18px 48px -38px rgba(7, 42, 48, .38);
+  }
+
+  .ep-landing #process [data-process-track] > li [data-step-node] {
+    display: none;
+  }
+
+  .ep-landing #process [data-process-line] {
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+}
+
+@media (max-width: 1199px), (prefers-reduced-motion: reduce) {
+  .ep-landing #process [data-process-viewport] {
+    overflow: visible;
+  }
+  .ep-landing #process [data-process-track] {
+    width: auto;
+    transform: none !important;
+  }
+}
+
+
+/* ================================================================
+   Fluid content system — Landing, About and Contact
+   Keep content readable at narrow phones, tablets, laptops and
+   ultra-wide screens without changing the existing brand palette.
+================================================================ */
+
+/* Prevent long labels, card copy and embedded controls from widening pages. */
+.ep-landing,
+.ep-landing main,
+.ep-landing section,
+.ep-landing article,
+.ep-landing [class*="grid"] > *,
+.ep-landing [class*="flex"] > * {
+  min-width: 0;
+}
+
+.ep-landing img,
+.ep-landing video,
+.ep-landing svg {
+  max-width: 100%;
+}
+
+.ep-landing p,
+.ep-landing li,
+.ep-landing dd,
+.ep-landing h1,
+.ep-landing h2,
+.ep-landing h3,
+.ep-landing h4 {
+  overflow-wrap: anywhere;
+}
+
+.ep-landing p {
+  text-wrap: pretty;
+}
+
+.ep-landing h1,
+.ep-landing h2,
+.ep-landing h3 {
+  text-wrap: balance;
+}
+
+/* Make section containers and card surfaces use fluid spacing. */
+.ep-landing main > section > div,
+.ep-landing main > section > .mx-auto {
+  max-width: min(100% - 2rem, 1200px);
+}
+
+.ep-landing article,
+.ep-landing [data-contact-card],
+.ep-landing .ep-about-objective {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ep-landing article :where(p, li, dd, span),
+.ep-landing [data-contact-card] :where(dd, span) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Keep icons crisp and proportionate instead of letting flexbox squash them. */
+.ep-landing :where([class*="rounded-full"], [class*="rounded-xl"], [class*="rounded-2xl"]) > svg,
+.ep-landing :where([class*="IconChip"], [data-icon-chip]) svg {
+  flex: 0 0 auto;
+}
+
+.ep-landing svg {
+  flex-shrink: 0;
+}
+

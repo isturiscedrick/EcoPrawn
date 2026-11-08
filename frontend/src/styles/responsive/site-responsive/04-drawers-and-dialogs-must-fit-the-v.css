@@ -1,0 +1,197 @@
+/* Drawers and dialogs must fit the visible viewport, including mobile safe areas. */
+[role="dialog"] {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.dashboard-shell [role="dialog"] > :last-child {
+  max-width: min(100%, 34rem);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (min-width: 1024px) {
+  /* Preserve the existing collapsed/expanded sidebar grid classes. */
+  .dashboard-shell > div {
+    align-items: start;
+  }
+
+  .dashboard-shell main {
+    padding-inline: clamp(1.25rem, 2.2vw, 2.5rem);
+  }
+
+  .ep-landing footer .grid {
+    grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ep-landing [data-page-hero] > div:last-child {
+    padding-top: clamp(4.5rem, 9vw, 6rem);
+    padding-bottom: clamp(3rem, 7vw, 4.5rem);
+  }
+
+  .ep-landing .ep-about-content-frame > .grid,
+  .ep-landing .ep-contact-page main > section > div > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ep-landing .ep-about-content-frame > .grid > :only-child {
+    grid-column: 1 / -1;
+  }
+
+  .dashboard-shell main {
+    padding-inline: clamp(1rem, 2.5vw, 1.75rem);
+  }
+
+  .dashboard-shell main .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  #site-header > div {
+    min-height: 64px;
+  }
+
+  .ep-landing [data-page-hero] > div:last-child {
+    padding-top: clamp(4.25rem, 16vw, 5.75rem);
+    padding-bottom: 2.75rem;
+    padding-inline: 1rem;
+  }
+
+  .ep-landing [data-page-hero-headline] {
+    font-size: clamp(2.1rem, 9.4vw, 3.5rem);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+  }
+
+  .ep-landing [data-page-lead] {
+    max-width: 34rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .ep-landing main > section:not([data-page-hero]) {
+    padding-inline: 1rem;
+  }
+
+  .ep-landing .ep-about-content-frame > .grid,
+  .ep-landing .ep-contact-page main > section > div > .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ep-landing .ep-about-content-frame article,
+  .ep-landing .ep-contact-page [data-contact-card],
+  .ep-landing .ep-contact-page [data-contact-form] {
+    width: 100%;
+  }
+
+  .ep-landing footer .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .ep-landing footer .grid > * {
+    width: 100%;
+  }
+
+  .dashboard-shell > div {
+    display: block;
+  }
+
+  .dashboard-shell main {
+    width: 100%;
+    padding: .875rem .75rem calc(5rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  .dashboard-shell main > div {
+    width: 100%;
+  }
+
+  .dashboard-shell main .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-shell main :is(.flex.items-center.justify-between, .flex.justify-between) {
+    flex-wrap: wrap;
+    row-gap: .75rem;
+  }
+
+  .dashboard-shell main :is(h1, .ep-font-display[class*="text-[28px]"]) {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+    line-height: 1.2;
+  }
+
+  .dashboard-shell main :is(h2) {
+    font-size: clamp(1.1rem, 4.7vw, 1.4rem);
+    line-height: 1.25;
+  }
+
+  .dashboard-shell main .grid.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-shell main .grid.grid-cols-3,
+  .dashboard-shell main .grid.grid-cols-4,
+  .dashboard-shell main .grid.grid-cols-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-shell main :is(button, a) {
+    overflow-wrap: normal;
+  }
+
+  .dashboard-shell main :is(input, textarea, select) {
+    font-size: 16px;
+  }
+
+  .dashboard-shell main table {
+    min-width: 560px;
+  }
+}
+
+@media (max-width: 420px) {
+  .ep-landing [data-page-hero-headline] {
+    font-size: clamp(2rem, 9vw, 2.65rem);
+  }
+
+  .ep-landing .ep-about-content-frame article,
+  .ep-landing .ep-about-objective {
+    padding: 1.1rem;
+  }
+
+  .dashboard-shell main {
+    padding-inline: .625rem !important;
+  }
+
+  .dashboard-shell main .grid.grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-shell main .grid.grid-cols-3,
+  .dashboard-shell main .grid.grid-cols-4,
+  .dashboard-shell main .grid.grid-cols-5 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ep-landing *,
+  .dashboard-shell *,
+  .ep-landing *::before,
+  .dashboard-shell *::before,
+  .ep-landing *::after,
+  .dashboard-shell *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
