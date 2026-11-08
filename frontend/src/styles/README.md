@@ -17,8 +17,7 @@ components.
 | `marketing/landing-global.css` | Core public-site layout, hero, lens, and shared Landing/About/Contact styling |
 | `marketing/landing-palette.css` | Public landing-page palette and visual refinements |
 | `marketing/public-pages-theme.css` | Shared public-page theme, surfaces, and final landing card treatment |
-| `responsive/responsive-overrides.css` | Cross-page responsive safeguards for public pages and auth surfaces |
-| `responsive/responsive-layout-audit.css` | Shared header, footer, public-page, drawer, and dashboard layout corrections |
+| `responsive/site-responsive.css` | Ordered responsive safeguards, brand normalization, and shared layout corrections in one final cascade layer |
 
 Feature-owned styles stay beside their feature. For example, authentication
 modal styles live in `features/auth/auth-modal.css`. Component-specific styles
