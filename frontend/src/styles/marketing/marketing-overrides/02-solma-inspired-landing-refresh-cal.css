@@ -1,123 +1,44 @@
-/* Solma-inspired landing refresh: calm, friendly, soft-glass surfaces.
-   Preserve EcoPrawn's own teal, coral, and mangrove palette. */
-.marketing-shell .ep-landing-hero {
-  background: #f3f5f2 !important;
-  color: #173b35;
-}
-html.dark .marketing-shell .ep-landing-hero {
-  background: #101d1b !important;
-  color: #f3f7f4;
-}
-.marketing-shell .ep-landing-hero [data-hero="grid"] {
-  opacity: .035 !important;
-  background-size: 88px 88px !important;
-}
-.marketing-shell .ep-landing-hero > div[aria-hidden="true"]:not([data-hero="grid"]) {
-  background:
-    radial-gradient(ellipse at 76% 28%, rgba(139,213,166,.18), transparent 48%),
-    radial-gradient(ellipse at 15% 82%, rgba(217,68,22,.07), transparent 48%),
-    linear-gradient(145deg,#f8faf7 0%,#edf3ef 100%) !important;
-}
-html.dark .marketing-shell .ep-landing-hero > div[aria-hidden="true"]:not([data-hero="grid"]) {
-  background:
-    radial-gradient(ellipse at 76% 28%, rgba(139,213,166,.12), transparent 48%),
-    radial-gradient(ellipse at 15% 82%, rgba(217,68,22,.08), transparent 48%),
-    linear-gradient(145deg,#14231f 0%,#0d1917 100%) !important;
-}
-.marketing-shell .ep-landing-hero [data-hero="text"] h1 {
-  max-width: 780px;
-  letter-spacing: -.065em;
-}
-.marketing-shell .ep-landing-hero [data-hero="eyebrow"] {
-  border-radius: 999px;
-  border-color: rgba(15,76,60,.16);
-  background: rgba(255,255,255,.72);
-  box-shadow: 0 8px 28px rgba(23,59,53,.06);
-  backdrop-filter: blur(16px);
-}
-html.dark .marketing-shell .ep-landing-hero [data-hero="eyebrow"] {
-  border-color: rgba(255,255,255,.12);
-  background: rgba(255,255,255,.06);
-}
-.marketing-shell .ep-landing-hero [data-hero="lead"] {
-  max-width: 620px;
-  font-size: clamp(15px,1.35vw,18px);
-}
-.marketing-shell .ep-landing-hero [data-hero="cta"] a {
-  min-height: 50px;
-  border-radius: 999px;
-  padding-inline: 28px;
-}
-.marketing-shell .ep-hero-console {
-  border-radius: 30px !important;
-  border-color: rgba(255,255,255,.76) !important;
-  background: rgba(255,255,255,.42) !important;
-  box-shadow: 0 30px 80px -42px rgba(15,76,60,.34) !important;
-  backdrop-filter: blur(24px);
-}
-html.dark .marketing-shell .ep-hero-console {
-  border-color: rgba(255,255,255,.12) !important;
-  background: rgba(255,255,255,.035) !important;
-  box-shadow: 0 30px 80px -42px rgba(0,0,0,.75) !important;
-}
-.marketing-shell .ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]) {
-  border-radius: 18px;
-  border-color: rgba(15,76,60,.12);
-  box-shadow: 0 16px 42px rgba(23,59,53,.12);
-  backdrop-filter: blur(18px);
-}
 .marketing-shell section[aria-label="EcoPrawn at a glance"] {
   background: #f3f5f2 !important;
   border-color: transparent !important;
-}
-html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] {
+}html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] {
   background: #101d1b !important;
-}
-.marketing-shell section[aria-label="EcoPrawn at a glance"] > div {
+}.marketing-shell section[aria-label="EcoPrawn at a glance"] > div {
   max-width: 1040px;
   border-radius: 26px;
   border-color: rgba(15,76,60,.12);
   background: rgba(255,255,255,.72);
   box-shadow: 0 18px 55px -38px rgba(15,76,60,.35);
   backdrop-filter: blur(18px);
-}
-html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] > div {
+}html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] > div {
   border-color: rgba(255,255,255,.09);
   background: rgba(255,255,255,.035);
-}
-.marketing-shell section[aria-label="EcoPrawn at a glance"] > div > div {
+}.marketing-shell section[aria-label="EcoPrawn at a glance"] > div > div {
   min-height: 94px;
   border-radius: 18px;
   border-color: rgba(15,76,60,.12) !important;
   background: rgba(255,255,255,.78);
   padding: 18px;
-}
-html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] > div > div {
+}html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] > div > div {
   border-color: rgba(255,255,255,.1) !important;
   background: rgba(255,255,255,.035);
-}
-.marketing-shell #readings {
+}.marketing-shell #readings {
   border: 0;
   background: #173f39 !important;
-}
-.marketing-shell #readings [data-reading] {
+}.marketing-shell #readings [data-reading] {
   min-height: 230px;
   border-radius: 22px;
   border-color: rgba(255,255,255,.16);
   background: rgba(255,255,255,.075);
   padding: 22px;
   backdrop-filter: blur(16px);
-}
-.marketing-shell #readings [data-reading]:hover {
+}.marketing-shell #readings [data-reading]:hover {
   background: rgba(255,255,255,.12);
-}
-.marketing-shell #process {
+}.marketing-shell #process {
   background: #f3f5f2 !important;
-}
-html.dark .marketing-shell #process {
+}html.dark .marketing-shell #process {
   background: #101d1b !important;
-}
-.marketing-shell #process [data-step] {
+}.marketing-shell #process [data-step] {
   min-height: 250px;
   border: 1px solid rgba(15,76,60,.13);
   border-radius: 22px;
@@ -125,44 +46,21 @@ html.dark .marketing-shell #process {
   padding: 24px;
   box-shadow: 0 16px 45px -38px rgba(15,76,60,.45);
   transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-}
-.marketing-shell #process [data-step]:hover {
+}.marketing-shell #process [data-step]:hover {
   transform: translateY(-5px);
   box-shadow: 0 22px 48px -34px rgba(15,76,60,.32);
-}
-html.dark .marketing-shell #process [data-step] {
+}html.dark .marketing-shell #process [data-step] {
   border-color: rgba(255,255,255,.1);
   background: rgba(255,255,255,.035);
-}
-.marketing-shell #process [data-step] > div span:last-child {
+}.marketing-shell #process [data-step] > div span:last-child {
   border-radius: 14px;
-}
-@media (max-width: 639px) {
-  .marketing-shell .ep-landing-hero > .mx-auto {
-    padding-top: 58px;
-    padding-bottom: 52px;
-  }
-  .marketing-shell .ep-landing-hero [data-hero="text"] h1 {
-    font-size: clamp(38px,11vw,58px);
-    line-height: 1.02;
-  }
-  .marketing-shell .ep-landing-hero .ep-hero-visual {
-    max-width: 360px;
-  }
-  .marketing-shell #readings [data-reading] {
+}@media (max-width: 639px) {.marketing-shell #readings [data-reading] {
     min-height: 0;
     padding: 16px;
-  }
-  .marketing-shell #process [data-step] {
+  }.marketing-shell #process [data-step] {
     min-height: 0;
     padding: 20px;
-  }
-}
-
-/* Light theme typography: use true black ink on pale landing-page surfaces.
-   Keep white text on intentionally dark teal/navy sections and filled buttons. */
-html:not(.dark) .marketing-shell .ep-landing-hero,
-html:not(.dark) .marketing-shell .ep-landing-hero :is(h1, h2, h3, h4, p, small, label, [data-hero="lead"], [data-hero="eyebrow"]),
+  }}
 html:not(.dark) .marketing-shell section[aria-label="EcoPrawn at a glance"],
 html:not(.dark) .marketing-shell section[aria-label="EcoPrawn at a glance"] :is(h2, h3, p, span),
 html:not(.dark) .marketing-shell #process,
@@ -170,71 +68,34 @@ html:not(.dark) .marketing-shell #process :is(h2, h3, p, span, small, label),
 html:not(.dark) .marketing-shell footer,
 html:not(.dark) .marketing-shell footer :is(h2, h3, p, span, small, label, a) {
   color: #000000 !important;
-}
-
-/* Preserve contrast for light text on dark sections and filled actions. */
-html:not(.dark) .marketing-shell #readings,
+}html:not(.dark) .marketing-shell #readings,
 html:not(.dark) .marketing-shell #readings *,
 html:not(.dark) .marketing-shell [data-band],
-html:not(.dark) .marketing-shell [data-band] *,
-html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:first-child {
+html:not(.dark) .marketing-shell [data-band] *{
   color: #ffffff !important;
 }
-
-/* Keep labels and icons readable on light buttons in light mode.
-   Filled primary actions retain white foreground for contrast. */
-html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:not(:first-child),
-html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:not(:first-child) :is(span, svg, i),
 html:not(.dark) #site-header :is(button, a)[style*="background-color: var(--ep-surface)"],
 html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
   color: #000000 !important;
-}
-
-html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:first-child,
-html:not(.dark) .marketing-shell .ep-landing-hero [data-hero="cta"] a:first-child :is(span, svg, i) {
-  color: #ffffff !important;
-}
-
-/* Global light-mode contrast pass for the complete public site.
-   Include text, links, button labels, and icon glyphs in the header/footer.
-   Light surfaces use black ink; the dark teal footer and dark bands use white. */
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header,
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header,
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(a, button, span, svg, path, i, small, strong, nav, li) {
   color: #000000 !important;
-}
-
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header a[style*="background-color: var(--ep-accent)"],
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header a[style*="background-color: var(--ep-accent)"],
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header a[style*="backgroundColor: var(--ep-accent)"],
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header a[style*="background-color: var(--ep-accent)"] :is(span, svg),
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header a[style*="backgroundColor: var(--ep-accent)"] :is(span, svg) {
   color: #ffffff !important;
-}
-
-/* Footer has a deep teal background in light mode, so all footer copy,
-   links, social icons, and logo marks stay white for accessible contrast. */
-html:not(.dark) .marketing-shell footer,
+}html:not(.dark) .marketing-shell footer,
 html:not(.dark) .marketing-shell footer :is(a, button, p, span, small, strong, h1, h2, h3, h4, li, svg, path, i) {
   color: #ffffff !important;
-}
-html:not(.dark) .marketing-shell footer :is(a, button):hover {
+}html:not(.dark) .marketing-shell footer :is(a, button):hover {
   color: #e8f3ed !important;
-}
-html:not(.dark) .marketing-shell footer .ep-logo {
+}html:not(.dark) .marketing-shell footer .ep-logo {
   --ep-logo-color: #ffffff !important;
   --ep-logo-text: #ffffff !important;
-}
-
-/* Ensure button icons follow the same foreground as their button labels
-   across every public-page section, including header and footer controls. */
-html:not(.dark) .marketing-shell :is(a, button, [role="button"]) :is(svg, i, [data-icon]) {
+}html:not(.dark) .marketing-shell :is(a, button, [role="button"]) :is(svg, i, [data-icon]) {
   color: inherit;
 }
-
-
-/* Dark-mode public-site contrast: keep all landing, header, and footer
-   typography and iconography white against their dark surfaces. */
-html.dark .marketing-shell .ep-landing-hero,
-html.dark .marketing-shell .ep-landing-hero :is(h1, h2, h3, h4, p, small, label, span, a, button, li, strong, svg, i),
 html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"],
 html.dark .marketing-shell section[aria-label="EcoPrawn at a glance"] :is(h1, h2, h3, h4, p, small, label, span, a, button, li, strong, svg, i),
 html.dark .marketing-shell #process,
@@ -244,264 +105,144 @@ html.dark .marketing-shell:not(.ep-landing-page) #site-header :is(a, button, spa
 html.dark .marketing-shell footer,
 html.dark .marketing-shell footer :is(a, button, p, span, small, strong, h1, h2, h3, h4, li, svg, i) {
   color: #ffffff !important;
-}
-
-/* Ensure outline icons inherit the white foreground in dark mode. */
-html.dark .marketing-shell :is(#site-header, .ep-landing-hero, #process, footer, section[aria-label="EcoPrawn at a glance"]) svg,
-html.dark .marketing-shell :is(#site-header, .ep-landing-hero, #process, footer, section[aria-label="EcoPrawn at a glance"]) svg * {
-  stroke: currentColor;
-}
-
-/* Floating hero chips sit on pale glass surfaces, so retain dark ink there
-   instead of making their white-on-white labels disappear. */
-html.dark .marketing-shell .ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]),
-html.dark .marketing-shell .ep-landing-hero .ep-hero-visual > div:not([data-hero="console"]) :is(span, p, small, svg, i) {
-  color: #173b3d !important;
-}
-
-
-/* Final public header/footer contrast correction.
-   The footer uses a pale surface in light mode, so its text must be dark;
-   dark mode keeps the footer dark with white text. Header controls sit on
-   a pale surface in light mode and use dark ink, except the filled CTA. */
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header,
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header,
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(a, button, span, nav, li) {
   color: #0b2320 !important;
-}
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(button, a) svg,
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(button, a) svg,
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(button, a) svg * {
   stroke: currentColor;
-}
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header a[style*="background-color: var(--ep-accent)"],
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header a[style*="background-color: var(--ep-accent)"],
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header a[style*="backgroundColor: var(--ep-accent)"],
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header a[style*="background-color: var(--ep-accent)"] *,
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header a[style*="backgroundColor: var(--ep-accent)"] * {
   color: #ffffff !important;
-}
-
-/* Light footer = pale background + dark readable copy and icons. */
-html:not(.dark) .marketing-shell footer[data-site-footer] {
+}html:not(.dark) .marketing-shell footer[data-site-footer] {
   background: #f4f7f6 !important;
   color: #18343b !important;
-}
-html:not(.dark) .marketing-shell footer[data-site-footer] :is(p, h2, h3, h4, a, span, small, strong, li, nav) {
+}html:not(.dark) .marketing-shell footer[data-site-footer] :is(p, h2, h3, h4, a, span, small, strong, li, nav) {
   color: #18343b !important;
-}
-html:not(.dark) .marketing-shell footer[data-site-footer] nav a:hover {
+}html:not(.dark) .marketing-shell footer[data-site-footer] nav a:hover {
   color: #b23f1c !important;
-}
-html:not(.dark) .marketing-shell footer[data-site-footer] .ep-logo {
+}html:not(.dark) .marketing-shell footer[data-site-footer] .ep-logo {
   --ep-logo-color: #d94416 !important;
   --ep-logo-text: #0f4c5c !important;
-}
-html:not(.dark) .marketing-shell footer[data-site-footer] :is(svg:not(.ep-logo svg), [data-icon]) {
+}html:not(.dark) .marketing-shell footer[data-site-footer] :is(svg:not(.ep-logo svg), [data-icon]) {
   color: #18343b !important;
   stroke: currentColor;
-}
-
-/* Dark footer = deep teal + white copy/icons, with brand logo accents. */
-html.dark .marketing-shell footer[data-site-footer] {
+}html.dark .marketing-shell footer[data-site-footer] {
   background: #101f1c !important;
   color: #ffffff !important;
-}
-html.dark .marketing-shell footer[data-site-footer] :is(p, h2, h3, h4, a, span, small, strong, li, nav) {
+}html.dark .marketing-shell footer[data-site-footer] :is(p, h2, h3, h4, a, span, small, strong, li, nav) {
   color: #ffffff !important;
-}
-html.dark .marketing-shell footer[data-site-footer] nav a:hover {
+}html.dark .marketing-shell footer[data-site-footer] nav a:hover {
   color: #8bd5a6 !important;
-}
-
-
-/* Refined site-header hierarchy: balanced spacing and intentional control colors.
-   Avoid applying one foreground color to every child (which erased active-state contrast). */
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header {
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header {
   color: #173b35 !important;
-}
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] {
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] {
   background: rgba(255,255,255,.88) !important;
   border-color: rgba(23,59,53,.14) !important;
   box-shadow: 0 5px 18px rgba(23,59,53,.08) !important;
-}
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a {
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a {
   color: #173b35 !important;
-}
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] {
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] {
   color: #ffffff !important;
   background: #14545a !important;
-}
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg {
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg {
   color: #ffffff !important;
-}
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(button, a)[style*="background-color: var(--ep-surface)"] {
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(button, a)[style*="background-color: var(--ep-surface)"] {
   color: #173b35 !important;
-}
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(button, a)[style*="background-color: var(--ep-accent)"] {
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(button, a)[style*="background-color: var(--ep-accent)"] {
   color: #ffffff !important;
-}
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(button, a)[style*="background-color: var(--ep-accent)"] span {
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header :is(button, a)[style*="background-color: var(--ep-accent)"] span {
   color: #ffffff !important;
-}
-html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] {
+}html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] {
   background: rgba(32,33,34,.92) !important;
   border-color: rgba(255,255,255,.14) !important;
-}
-html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a {
+}html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a {
   color: #f1f5f3 !important;
-}
-html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] {
+}html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] {
   color: #ffffff !important;
   background: #276b60 !important;
-}
-html.dark .marketing-shell:not(.ep-landing-page) #site-header :is(button, a)[style*="background-color: var(--ep-accent)"] {
+}html.dark .marketing-shell:not(.ep-landing-page) #site-header :is(button, a)[style*="background-color: var(--ep-accent)"] {
   color: #17100d !important;
-}
-html.dark .marketing-shell:not(.ep-landing-page) #site-header :is(button, a)[style*="background-color: var(--ep-surface)"] {
+}html.dark .marketing-shell:not(.ep-landing-page) #site-header :is(button, a)[style*="background-color: var(--ep-surface)"] {
   color: #f1f5f3 !important;
-}
-@media (min-width: 768px) {
-  .marketing-shell:not(.ep-landing-page) #site-header > div:first-child {
+}@media (min-width: 768px) {.marketing-shell:not(.ep-landing-page) #site-header > div:first-child {
     min-height: 76px;
-  }
-}
-@media (max-width: 767px) {
-  .marketing-shell:not(.ep-landing-page) #site-header > div:first-child {
+  }}@media (max-width: 767px) {.marketing-shell:not(.ep-landing-page) #site-header > div:first-child {
     min-height: 64px;
     gap: 10px;
-  }
-}
-
-
-/* Navigation icon colors must explicitly track each link's foreground.
-   This overrides broad site-wide icon rules without changing other header icons. */
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a svg,
+  }}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a svg,
 html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a svg * {
   color: inherit !important;
   stroke: currentColor !important;
-}
-html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]) svg {
+}html:not(.dark) .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]) svg {
   color: #173b35 !important;
-}
-
-html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a svg,
+}html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a svg,
 html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a svg * {
   color: inherit !important;
   stroke: currentColor !important;
-}
-html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]) svg {
+}html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a:not([aria-current="page"]) svg {
   color: #f1f5f3 !important;
-}
-html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg {
+}html.dark .marketing-shell:not(.ep-landing-page) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg {
   color: #ffffff !important;
-}
-
-
-/* HeroLens is a dark-glass instrument in BOTH themes. Keep every live
-   reading and its caption white regardless of the page's light-mode ink rules. */
-html:not(.dark) .marketing-shell .ep-lens-readout,
-html:not(.dark) .marketing-shell .ep-lens-readout > span,
-html:not(.dark) .marketing-shell .ep-lens-readout [data-count],
-html:not(.dark) .marketing-shell .ep-lens-caption,
-html.dark .marketing-shell .ep-lens-readout,
-html.dark .marketing-shell .ep-lens-readout > span,
-html.dark .marketing-shell .ep-lens-readout [data-count],
-html.dark .marketing-shell .ep-lens-caption {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
-  text-shadow: 0 1px 5px rgba(0, 0, 0, .7);
-}
-html:not(.dark) .marketing-shell .ep-lens-readout .ep-lens-dot,
-html.dark .marketing-shell .ep-lens-readout .ep-lens-dot {
-  color: #38bdf8 !important;
-  background-color: #38bdf8 !important;
-  text-shadow: none;
-}
-
-
-/* Process section: use dark ink on its pale surface and white ink on dark mode.
-   The stage tiles stay distinct from the section background in both themes. */
-html:not(.dark) .marketing-shell #process {
+}html:not(.dark) .marketing-shell #process {
   background: #f1f5f2 !important;
   color: #101b19 !important;
-}
-html:not(.dark) .marketing-shell #process :is(h2, h3, p, li, li > div > span:first-child) {
+}html:not(.dark) .marketing-shell #process :is(h2, h3, p, li, li > div > span:first-child) {
   color: #101b19 !important;
   -webkit-text-fill-color: #101b19 !important;
-}
-html:not(.dark) .marketing-shell #process li > div > span:last-child {
+}html:not(.dark) .marketing-shell #process li > div > span:last-child {
   color: #14545a !important;
   border-color: rgba(20,84,90,.22) !important;
   background: rgba(255,255,255,.82) !important;
-}
-html.dark .marketing-shell #process {
+}html.dark .marketing-shell #process {
   background: #111d2c !important;
   color: #ffffff !important;
-}
-html.dark .marketing-shell #process :is(h2, h3, p, li, li > div > span:first-child) {
+}html.dark .marketing-shell #process :is(h2, h3, p, li, li > div > span:first-child) {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-}
-html.dark .marketing-shell #process li > div > span:last-child {
+}html.dark .marketing-shell #process li > div > span:last-child {
   color: #ffffff !important;
   border-color: rgba(255,255,255,.24) !important;
   background: rgba(255,255,255,.07) !important;
-}
-
-/* The CTA band is always dark teal: keep its copy white, while the
-   filled light button uses dark teal ink for clear contrast. */
-html:not(.dark) .marketing-shell [data-band],
+}html:not(.dark) .marketing-shell [data-band],
 html.dark .marketing-shell [data-band] {
   color: #ffffff !important;
-}
-html:not(.dark) .marketing-shell [data-band] :is(h2, p),
+}html:not(.dark) .marketing-shell [data-band] :is(h2, p),
 html.dark .marketing-shell [data-band] :is(h2, p) {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-}
-html:not(.dark) .marketing-shell [data-band] a:first-child,
+}html:not(.dark) .marketing-shell [data-band] a:first-child,
 html:not(.dark) .marketing-shell [data-band] a:first-child *,
 html.dark .marketing-shell [data-band] a:first-child,
 html.dark .marketing-shell [data-band] a:first-child * {
   color: #104b58 !important;
   -webkit-text-fill-color: #104b58 !important;
-}
-html:not(.dark) .marketing-shell [data-band] a:last-child,
+}html:not(.dark) .marketing-shell [data-band] a:last-child,
 html:not(.dark) .marketing-shell [data-band] a:last-child *,
 html.dark .marketing-shell [data-band] a:last-child,
 html.dark .marketing-shell [data-band] a:last-child * {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
-}
-
-
-/* Landing-page motion polish: native scrolling stays responsive, while
-   in-page anchors glide beneath the sticky header. */
-html:has(.marketing-shell) {
+}html:has(.marketing-shell) {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
-}
-.marketing-shell :is(a, button, [role="button"]) {
+}.marketing-shell :is(a, button, [role="button"]) {
   transition-property: color, background-color, border-color, box-shadow, opacity, transform;
   transition-duration: 240ms;
   transition-timing-function: cubic-bezier(.22, 1, .36, 1);
-}
-.marketing-shell :is([data-hover-lift], [data-reading], #process ol > li) {
+}.marketing-shell :is([data-hover-lift], [data-reading], #process ol > li) {
   will-change: transform;
-}
-.marketing-shell :is(a, button):focus-visible {
+}.marketing-shell :is(a, button):focus-visible {
   scroll-margin-block: 6rem;
-}
-@media (prefers-reduced-motion: reduce) {
-  html:has(.marketing-shell) {
+}@media (prefers-reduced-motion: reduce) {html:has(.marketing-shell) {
     scroll-behavior: auto;
-  }
-  .marketing-shell *,
+  }.marketing-shell *,
   .marketing-shell *::before,
   .marketing-shell *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-
+  }}
