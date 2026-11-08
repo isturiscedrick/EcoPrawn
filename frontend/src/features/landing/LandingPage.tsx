@@ -191,9 +191,74 @@ export function LandingPage() {
             </div>
 
             <div
-              data-hero="parallax-console"
-              className="ep-hero-visual order-2 relative mx-auto flex w-full max-w-[390px] items-center justify-center sm:max-w-[420px] lg:max-w-[560px]"
+              data-hero="product-showcase"
+              className="ep-product-showcase order-2 relative mx-auto flex w-full max-w-[680px] items-center justify-center"
+              aria-label="EcoPrawn monitoring dashboard preview"
             >
+              <div className="ep-product-window w-full overflow-hidden rounded-[2rem] border bg-[var(--ep-surface)]">
+                <div className="ep-product-window-bar flex items-center justify-between border-b px-5 py-4 sm:px-7">
+                  <div className="flex items-center gap-3">
+                    <span className="ep-product-mark flex h-9 w-9 items-center justify-center rounded-xl text-white">
+                      <Icon name="waves" size={19} />
+                    </span>
+                    <div>
+                      <p className="text-sm font-bold tracking-tight text-[var(--ep-text)]">EcoPrawn</p>
+                      <p className="text-[11px] text-[var(--ep-text-muted)]">Farm overview</p>
+                    </div>
+                  </div>
+                  <span className="ep-product-status inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold">
+                    <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                    Monitoring active
+                  </span>
+                </div>
+
+                <div className="grid gap-5 p-5 sm:p-7">
+                  <div className="flex flex-wrap items-end justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[.13em] text-[var(--ep-text-muted)]">Live overview</p>
+                      <h2 className="ep-font-display mt-1 text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Tank 01</h2>
+                    </div>
+                    <span className="rounded-full border px-3 py-1.5 text-xs font-medium text-[var(--ep-text-muted)]">Sample readings</span>
+                  </div>
+
+                  <div className="ep-product-metrics grid grid-cols-2 gap-3 sm:grid-cols-3">
+                    {heroReadouts.slice(0, 3).map((reading, index) => (
+                      <div key={reading.label} className="ep-product-metric rounded-2xl border p-4">
+                        <span className="block text-xs font-medium text-[var(--ep-text-muted)]">{reading.label}</span>
+                        <span className="mt-3 block text-2xl font-bold tracking-tight text-[var(--ep-text)] tabular-nums">
+                          {reading.value}
+                          <span className="ml-1 text-xs font-semibold text-[var(--ep-text-muted)]">{heroReadoutUnits[reading.label]}</span>
+                        </span>
+                        <span className="ep-product-meter mt-3 block h-1.5 overflow-hidden rounded-full">
+                          <span className="block h-full rounded-full" style={{ width: `${[78, 64, 86][index]}%` }} />
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="ep-product-insight flex flex-col gap-4 rounded-2xl p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+                    <div className="max-w-[15rem]">
+                      <p className="text-xs font-semibold uppercase tracking-[.12em]">Connected operations</p>
+                      <p className="ep-font-display mt-1 text-xl font-semibold leading-tight">See the whole pond at a glance.</p>
+                    </div>
+                    <div className="ep-product-bars flex h-16 items-end gap-1.5" aria-hidden="true">
+                      {[28, 42, 34, 55, 44, 63, 51, 72, 58, 84, 68, 94].map((height, index) => (
+                        <span key={index} style={{ height: `${height}%` }} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="ep-product-float ep-product-float-top hidden sm:flex">
+                <span className="ep-product-float-icon"><Icon name="activity" size={17} /></span>
+                <span><strong>24/7</strong><small>Water monitoring</small></span>
+              </div>
+              <div className="ep-product-float ep-product-float-bottom hidden sm:flex">
+                <span className="ep-product-float-icon"><Icon name="eye" size={17} /></span>
+                <span><strong>Growth insights</strong><small>Camera-based tracking</small></span>
+              </div>
+            </div>
+            <div className="hidden" aria-hidden="true">
               <HeroLens />
             </div>
           </div>
