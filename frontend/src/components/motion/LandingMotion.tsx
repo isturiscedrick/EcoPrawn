@@ -132,6 +132,9 @@ export function LandingMotion() {
         // Reveal the existing data-reveal wrappers as complete content groups.
         // This keeps eyebrow, heading and supporting copy moving together.
         root.querySelectorAll<HTMLElement>("main [data-reveal]").forEach((group) => {
+          // Section headings already have their own About-style timeline above.
+          // Avoid animating the same heading group a second time.
+          if (group.querySelector("h2")) return;
           gsap.from(group, {
             y: 24,
             duration: .68,
@@ -173,19 +176,9 @@ export function LandingMotion() {
         // The process progress rule fills as the four stages move through view.
         const processViewport = root.querySelector<HTMLElement>("#process [data-process-viewport]");
         const processLine = processViewport?.querySelector<HTMLElement>("[data-process-line]");
-        if (processViewport && processLine) {
-          gsap.fromTo(processLine,
-            { scaleX: 0, transformOrigin: "left center" },
-            { scaleX: 1, ease: "none",
-              scrollTrigger: {
-                trigger: processViewport,
-                start: "top 78%",
-                end: "bottom 38%",
-                scrub: .8,
-                invalidateOnRefresh: true,
-              } }
-          );
-        }
+        // The process progress line has one owner: the desktop horizontal
+        // story below. Do not attach a second vertical scrub trigger to it.
+        // On tablet/mobile the line is hidden by the responsive layout.
         const processNodes = root.querySelectorAll<HTMLElement>("#process [data-step-node]");
         if (processNodes.length) {
           gsap.from(processNodes, {
@@ -246,12 +239,14 @@ export function LandingMotion() {
           card.addEventListener("pointerenter", enter);
           card.addEventListener("pointerleave", leave);
           card.addEventListener("focusin", enter);
-          card.addEventListener("focusout", leave);
+          card.addEventListener("focusout", (event) => {
+            if (!card.contains(event.relatedTarget as Node | null)) leave();
+          });
           handlers.push(() => {
             card.removeEventListener("pointerenter", enter);
             card.removeEventListener("pointerleave", leave);
             card.removeEventListener("focusin", enter);
-            card.removeEventListener("focusout", leave);
+            // Removing the node also releases its delegated focus behavior.
           });
         });
 
