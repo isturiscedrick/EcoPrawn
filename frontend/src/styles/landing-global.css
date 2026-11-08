@@ -2455,3 +2455,70 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
   margin: 0 !important;
   transform-origin: 50% 50% !important;
 }
+
+
+/* ---------- Footer: prevent cramped columns and clipped bottom row ---------- */
+.ep-landing footer[data-site-footer] {
+  overflow: visible;
+}
+.ep-landing footer[data-site-footer] .ep-footer-inner {
+  container-type: inline-size;
+  container-name: ep-footer;
+  min-width: 0;
+}
+.ep-landing footer[data-site-footer] .ep-footer-grid > * {
+  min-width: 0;
+}
+.ep-landing footer[data-site-footer] .ep-footer-grid h2 {
+  max-width: 100%;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  text-wrap: pretty;
+  line-height: 1.2;
+}
+.ep-landing footer[data-site-footer] .ep-footer-bottom {
+  min-width: 0;
+}
+.ep-landing footer[data-site-footer] .ep-footer-bottom p {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@container ep-footer (max-width: 700px) {
+  .ep-landing footer[data-site-footer] .ep-footer-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: 1.25rem !important;
+    row-gap: 1.5rem !important;
+  }
+  .ep-landing footer[data-site-footer] .ep-footer-brand {
+    grid-column: 1 / -1 !important;
+  }
+  .ep-landing footer[data-site-footer] .ep-footer-explore,
+  .ep-landing footer[data-site-footer] .ep-footer-account {
+    grid-column: auto !important;
+  }
+  .ep-landing footer[data-site-footer] .ep-footer-grid h2 {
+    font-size: .78rem;
+    letter-spacing: .09em;
+    white-space: normal;
+  }
+  .ep-landing footer[data-site-footer] .ep-footer-bottom {
+    padding-right: 3.5rem;
+    gap: .45rem;
+  }
+}
+
+@container ep-footer (max-width: 380px) {
+  .ep-landing footer[data-site-footer] .ep-footer-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 1.15rem !important;
+  }
+  .ep-landing footer[data-site-footer] .ep-footer-brand,
+  .ep-landing footer[data-site-footer] .ep-footer-explore,
+  .ep-landing footer[data-site-footer] .ep-footer-account {
+    grid-column: 1 / -1 !important;
+  }
+  .ep-landing footer[data-site-footer] .ep-footer-bottom {
+    padding-right: 3.5rem;
+  }
+}
