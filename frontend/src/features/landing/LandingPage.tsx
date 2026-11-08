@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { Link } from "@tanstack/react-router";
 import { HeroLens } from "@/features/landing/HeroLens";
@@ -87,19 +86,6 @@ function targetRangeFor(label: string): string | undefined {
   return waterQualityThresholds.find((t) => t.label === label)?.range;
 }
 
-// Splits a line into words, each in a clipping wrapper so GSAP can slide it up.
-function Words({ text }: { text: string }) {
-  return text.split(" ").map((word, i) => (
-    <Fragment key={`${word}-${i}`}>
-      <span className="inline-block align-baseline overflow-visible">
-        <span data-hero="word" className="inline-block">
-          {word}
-        </span>
-      </span>{" "}
-    </Fragment>
-  ));
-}
-
 export function LandingPage() {
   return (
     <div className="ep-landing ep-business-landing flex min-h-screen flex-col">
@@ -163,10 +149,10 @@ export function LandingPage() {
                 className="ep-font-display mx-auto max-w-[1000px] text-[clamp(40px,6.4vw,88px)] font-bold leading-[1.02] tracking-[-0.055em] lg:mx-auto lg:text-[clamp(48px,5.2vw,76px)]"
               >
                 <span className="block ep-hero-headline-primary">
-                  <Words text="Smarter shrimp farming," />
+                  Smarter shrimp farming,
                 </span>
                 <span className="block ep-hero-headline-secondary">
-                  <Words text="always in range." />
+                  always in range.
                 </span>
               </h1>
 
