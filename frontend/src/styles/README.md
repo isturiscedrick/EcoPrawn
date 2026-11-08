@@ -1,26 +1,49 @@
-# Frontend stylesheet ownership
+# Frontend styles
 
-This directory is the single global stylesheet entry point for the frontend.
+All application-wide styles are loaded through `globals.css`, imported once by
+`src/routes/__root.tsx`. Do not import these files from individual pages or
+components.
 
-## Load order
+## Stylesheet ownership
 
-`globals.css` is imported once by the TanStack root route. Keep feature styles out of page components so routes do not load the same global CSS more than once.
+| File | Owns |
+| --- | --- |
+| `globals.css` | Global CSS entry point and import order only |
+| `foundations.css` | Tailwind theme bridge, base design tokens, typography defaults, and global element styles |
+| `theme-components.css` | Shared theme compatibility and dashboard component color fixes |
+| `dashboard.css` | Dashboard-only brand tokens, layout safeguards, and dashboard responsive rules |
+| `marketing-overrides.css` | Legacy public-page compatibility rules that have not yet been safely migrated |
+| `landing-global.css` | Canonical public-site tokens and shared Landing, About, Contact, hero, and lens styling |
+| `responsive-overrides.css` | Cross-page responsive safeguards for public pages and auth surfaces |
 
-1. `foundations.css` — Tailwind theme bridge, base tokens, fonts, and global element defaults.
-2. `theme-components.css` — shared theme compatibility rules and dashboard component theming.
-3. `dashboard.css` — dashboard-only brand tokens and dashboard overrides.
-4. `marketing-overrides.css` — compatibility overrides for older public-page class hooks. Keep selectors scoped; migrate these rules into the canonical public-page styles before deleting them.
-5. `landing-global.css` — canonical EcoPrawn public-page tokens and shared landing/About/Contact hero and lens styling.
+Feature-owned styles stay beside their feature. For example, authentication
+modal styles live in `features/auth/auth-modal.css`. Component-specific styles
+belong beside their component.
 
-## Feature styles
+## Import order
 
-Feature-specific styles belong beside the feature that owns them (for example, `features/auth/auth-modal.css`). Shared layout styles belong with their component under `components/`.
+1. Foundations and Tailwind theme bridge.
+2. Shared theme compatibility.
+3. Dashboard-specific styles.
+4. Legacy marketing compatibility.
+5. Canonical public-page styles.
+6. Responsive safeguards, last, so breakpoint rules can adapt the completed
+   component styles.
 
-## Rules for future cleanup
+Keep this order until the legacy marketing rules have been audited and migrated.
 
-- Import `globals.css` only from the root route.
-- Do not import `landing-global.css` again from individual page components.
-- Keep dashboard selectors under `.dashboard-shell`.
-- Keep public-page selectors under `.ep-landing`, `.ep-about-page`, or `.ep-contact-page`.
-- Before deleting a stylesheet, search the whole repository for its filename and its unique class names.
-- Avoid appending corrective overrides at the end of a stylesheet; edit the owning rule instead.
+## Cleanup rules
+
+- Keep exactly one global entry point: `globals.css`.
+- Never import `landing-global.css` or `responsive-overrides.css` again from
+  route components.
+- Scope dashboard rules to `.dashboard-shell`.
+- Scope public-page rules to `.ep-landing`, `.ep-about-page`,
+  `.ep-contact-page`, or a documented shared public-page root.
+- Put new styles in the file that owns the component; do not append one-off
+  overrides to the bottom of unrelated stylesheets.
+- Before deleting or merging a stylesheet, search the entire repository for
+  its import, unique selectors, and custom properties. Preserve cascade order
+  when migrating rules.
+- Do not remove legacy rules merely because their filename says "overrides";
+  some still support older markup and theme behavior.
