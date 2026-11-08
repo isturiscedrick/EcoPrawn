@@ -1351,3 +1351,82 @@
     max-width: 500px !important;
   }
 }
+
+
+/* ---------- Final desktop hero separation: fit headline before lens telemetry ---------- */
+@media (min-width: 1024px) {
+  .ep-business-landing #top .ep-hero-layout {
+    width: min(calc(100% - 5rem), 1360px) !important;
+    max-width: 1360px !important;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr) !important;
+    column-gap: clamp(3.25rem, 5.5vw, 5.5rem) !important;
+    align-items: center !important;
+  }
+
+  .ep-business-landing #top [data-hero="text"] {
+    width: 100% !important;
+    max-width: 590px !important;
+    min-width: 0 !important;
+    justify-self: start !important;
+    text-align: left !important;
+    margin: 0 !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    width: 100% !important;
+    max-width: 590px !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    text-align: left !important;
+    font-size: clamp(2.85rem, 3.35vw, 3.55rem) !important;
+    line-height: 1.055 !important;
+    letter-spacing: -.055em !important;
+    text-wrap: balance !important;
+    overflow-wrap: normal !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] > span {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .ep-business-landing #top [data-hero="lead"] {
+    max-width: 34rem !important;
+    margin: 1.35rem 0 0 !important;
+    text-align: left !important;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] {
+    justify-content: flex-start !important;
+  }
+
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    width: 100% !important;
+    max-width: 560px !important;
+    min-width: 0 !important;
+    justify-self: end !important;
+    margin: 0 !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .ep-business-landing #top .ep-hero-layout {
+    width: min(calc(100% - 3rem), 1160px) !important;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr) !important;
+    column-gap: 2.25rem !important;
+  }
+
+  .ep-business-landing #top [data-hero="text"],
+  .ep-business-landing #top [data-hero="headline"] {
+    max-width: 500px !important;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    font-size: clamp(2.65rem, 3.5vw, 3.1rem) !important;
+  }
+
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    max-width: 470px !important;
+  }
+}
