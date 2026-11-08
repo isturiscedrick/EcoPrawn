@@ -143,6 +143,10 @@ export function LandingPage() {
               data-hero="text"
               className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center lg:mx-auto lg:max-w-[660px]"
             >
+              <div className="ep-hero-kicker mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[11px] font-bold uppercase tracking-[.16em]">
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[var(--ep-accent)]" />
+                Smart aquaculture platform
+              </div>
               <h1
                 data-hero="headline"
                 aria-label="Smarter shrimp farming, always in range."
