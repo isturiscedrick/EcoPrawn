@@ -21,6 +21,7 @@ export function SiteFooter() {
             <div className="ep-footer-brand col-span-2 min-w-0 md:col-span-1">
               <Link
                 to="/"
+                resetScroll
                 className="inline-flex rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]"
                 aria-label="EcoPrawn home"
                 activeOptions={{ exact: true }}
@@ -38,7 +39,7 @@ export function SiteFooter() {
                 className="mt-2 flex flex-col items-start gap-0 text-[var(--ep-primary)] sm:mt-3"
                 aria-label="Footer navigation"
               >
-                <Link className={linkClass} to="/" activeOptions={{ exact: true }}>
+                <Link className={linkClass} to="/" resetScroll activeOptions={{ exact: true }}>
                   Home
                 </Link>
                 <Link className={linkClass} to="/about" activeOptions={{ exact: true }}>
