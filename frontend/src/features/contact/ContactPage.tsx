@@ -1,6 +1,5 @@
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
-import { SiteFooter } from "@/components/layout/SiteFooter";
+import { PublicPageLayout } from "@/components/layout/PublicPageLayout";
+import { SurfaceCard } from "@/components/ui/SurfaceCard";
 import { PageHero } from "@/components/layout/PageHero";
 import { IconChip, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
@@ -19,12 +18,7 @@ const CONTACT_DETAILS: { label: string; value: string; icon: IconName }[] = [
 
 export function ContactPage() {
   return (
-    <div className="ep-landing ep-contact-page flex min-h-screen flex-col">
-      <ContactMotion />
-      <PublicChromeMotion />
-      <SiteHeader tone="white" integrated />
-
-      <main className="flex-1">
+    <PublicPageLayout className="ep-contact-page" motion={<ContactMotion />}>
         <PageHero
           kicker="Get in touch"
           title={
@@ -42,10 +36,10 @@ export function ContactPage() {
               <Reveal>
                 <dl data-contact-details="" className="flex flex-col gap-4">
                   {CONTACT_DETAILS.map((item) => (
-                    <div
+                    <SurfaceCard
                       key={item.label}
                       data-contact-card=""
-                      className="flex min-w-0 items-start gap-3 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-[0_8px_20px_-18px_rgba(11,46,51,0.35)]"
+                      className="flex items-start gap-3 p-4 shadow-[0_8px_20px_-18px_rgba(11,46,51,0.35)]"
                     >
                       <span className="shrink-0"><IconChip name={item.icon} tone="brand" size={20} /></span>
                       <div className="min-w-0 flex-1">
@@ -54,7 +48,7 @@ export function ContactPage() {
                         </dt>
                         <dd className="min-w-0 break-words [overflow-wrap:anywhere] text-sm font-semibold leading-relaxed text-[var(--ep-text)] sm:text-base lg:text-lg">{item.value}</dd>
                       </div>
-                    </div>
+                    </SurfaceCard>
                   ))}
                 </dl>
               </Reveal>
@@ -67,9 +61,6 @@ export function ContactPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <SiteFooter />
-    </div>
+    </PublicPageLayout>
   );
 }
