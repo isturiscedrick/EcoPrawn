@@ -864,3 +864,91 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
 }
 
 
+/* Mobile polish: keep stats readable without breaking words mid-character. */
+@media (max-width: 479px) {
+  .ep-business-landing .ep-stats-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem;
+    padding: .7rem;
+  }
+
+  .ep-business-landing .ep-stats-panel > div {
+    display: flex;
+    min-width: 0;
+    min-height: 6.25rem;
+    flex-direction: column;
+    justify-content: center;
+    padding: .85rem .8rem;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    max-width: 100%;
+    font-size: clamp(1.05rem, 4.7vw, 1.25rem);
+    line-height: 1.15;
+    letter-spacing: -.035em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    max-width: 100%;
+    margin-top: .55rem;
+    padding-top: .45rem;
+    font-size: .74rem;
+    line-height: 1.35;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+  }
+
+  .ep-business-landing #readings [data-reading] {
+    width: 100%;
+    min-width: 0;
+    padding: 1.1rem;
+  }
+
+  .ep-business-landing #readings [data-reading] dt {
+    min-width: 0;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .ep-business-landing #readings [data-reading] dd {
+    min-width: 0;
+    font-size: clamp(1.9rem, 8vw, 2.25rem);
+    line-height: 1.1;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .ep-business-landing #readings [data-reading] dd > span:last-child {
+    white-space: nowrap;
+    font-size: .9rem;
+  }
+
+  .ep-business-landing #readings [data-reading] > div:first-of-type > span {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 360px) {
+  .ep-business-landing .ep-stats-panel > div {
+    padding-inline: .65rem;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    font-size: 1rem;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    font-size: .7rem;
+  }
+
+  .ep-business-landing #readings [data-reading] {
+    padding: .95rem;
+  }
+}
