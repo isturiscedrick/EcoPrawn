@@ -1819,3 +1819,87 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
     padding: 34px 24px !important;
   }
 }
+
+
+/* ---------- Auth modal refinement: contrast, compact mobile flow, desktop brand ---------- */
+.ep-auth-brand-tagline { display: none; }
+
+@media (min-width: 640px) {
+  .ep-auth-panel .ep-auth-brand {
+    position: static !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .ep-auth-panel .ep-auth-brand > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 24px !important;
+  }
+  .ep-auth-panel .ep-auth-brand .ep-logo {
+    justify-content: center !important;
+    max-width: 260px !important;
+  }
+  .ep-auth-brand-tagline {
+    display: block;
+    max-width: 230px;
+    margin: 0;
+    color: rgba(255,255,255,.84) !important;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.65;
+    letter-spacing: .01em;
+  }
+  /* Position close against the full dialog rather than the brand column. */
+  .ep-auth-panel button[aria-label="Close"] {
+    position: absolute !important;
+    top: 18px !important;
+    right: 18px !important;
+    z-index: 20 !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .ep-auth-panel.ep-auth-modal {
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    height: auto !important;
+    padding-bottom: max(16px, env(safe-area-inset-bottom)) !important;
+  }
+  .ep-auth-panel .ep-auth-brand {
+    margin-bottom: 25px !important;
+  }
+  .ep-auth-panel .ep-auth-brand .ep-logo {
+    justify-content: center !important;
+  }
+  /* Keep the primary action coral; teal is reserved for the active tab. */
+  .ep-auth-panel button[type="submit"] {
+    background: #d94416 !important;
+    border-color: #d94416 !important;
+    color: #ffffff !important;
+    box-shadow: 0 9px 20px rgba(217, 68, 22, .2) !important;
+  }
+  .ep-auth-panel button[type="submit"]:not(:disabled):active {
+    background: #b83a0f !important;
+    transform: scale(.985) !important;
+  }
+  html.dark .ep-auth-panel button[type="submit"] {
+    background: #f28a68 !important;
+    border-color: #f28a68 !important;
+    color: #18191a !important;
+  }
+  html.dark .ep-auth-panel button[type="submit"]:not(:disabled):active {
+    background: #e87552 !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ep-auth-panel .ep-auth-brand .ep-logo {
+    transition: transform 220ms ease;
+  }
+  .ep-auth-panel .ep-auth-brand .ep-logo:hover {
+    transform: translateY(-1px);
+  }
+}
