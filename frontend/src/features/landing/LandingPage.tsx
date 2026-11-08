@@ -156,6 +156,17 @@ export function LandingPage() {
               data-hero="text"
               className="ep-hero-copy order-1 mx-auto w-full max-w-[900px] text-center lg:mx-auto lg:max-w-[660px]"
             >
+              <div className="mb-5 flex justify-center">
+                <Link
+                  to="/about"
+                  activeOptions={{ exact: true }}
+                  className={`group inline-flex min-h-11 items-center justify-center gap-2.5 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-[var(--ep-accent)] shadow-[0_2px_5px_rgba(15,76,92,.10),0_8px_18px_-12px_rgba(15,76,92,.25)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-[0_5px_14px_-6px_rgba(15,76,92,.28)] active:translate-y-0 ${focusRing}`}
+                >
+                  <span aria-hidden="true" className="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--ep-accent)] transition-transform duration-200 group-hover:scale-110" />
+                  How it works
+                </Link>
+              </div>
+
               <h1
                 data-hero="headline"
                 aria-label="Smarter shrimp farming, always in range."
@@ -195,10 +206,9 @@ export function LandingPage() {
                 </AuthLink>
                 <Link
                   to="/about"
-                  className={`group inline-flex min-h-12 items-center justify-center gap-2.5 whitespace-nowrap rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-[var(--ep-accent)] shadow-[0_2px_5px_rgba(15,76,92,.10),0_8px_18px_-12px_rgba(15,76,92,.25)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-[0_5px_14px_-6px_rgba(15,76,92,.28)] active:translate-y-0 ${focusRing}`}
+                  className={`inline-flex min-h-12 items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-6 py-3 text-sm font-semibold text-[var(--ep-text)] shadow-sm hover:border-[var(--ep-accent)] hover:text-[var(--ep-accent)] ${buttonMotion} ${focusRing}`}
                   activeOptions={{ exact: true }}
                 >
-                  <span aria-hidden="true" className="h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--ep-accent)] transition-transform duration-200 group-hover:scale-110" />
                   How it works
                 </Link>
               </div>
