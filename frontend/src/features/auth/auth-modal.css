@@ -2852,3 +2852,44 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
     transition-duration: .01ms !important;
   }
 }
+
+
+/* Auth brand header: plain white so the original brand colors remain visible. */
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand {
+  background: #ffffff !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-bottom: 1px solid #e7ecea !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand::before,
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand::after,
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand > div::before,
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand > div::after {
+  content: none !important;
+  display: none !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand .ep-logo {
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #0f4c5c !important;
+  color: #0f4c5c !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand .ep-logo-shrimp {
+  fill: #d94416 !important;
+  stroke: #d94416 !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand .ep-logo-wordmark {
+  color: #0f4c5c !important;
+  -webkit-text-fill-color: #0f4c5c !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand-tagline {
+  color: #0f4c5c !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-brand button[aria-label="Close"],
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal button[aria-label="Close"] {
+  border-color: rgba(15,76,92,.2) !important;
+  background: #ffffff !important;
+  color: #0f4c5c !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal button[aria-label="Close"]:hover {
+  background: #f5f7f6 !important;
+}
