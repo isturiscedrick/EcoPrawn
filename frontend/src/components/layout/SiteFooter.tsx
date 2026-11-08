@@ -32,7 +32,7 @@ export function SiteFooter() {
               </p>
             </div>
 
-            <div className="min-w-0">
+            <div className="ep-footer-explore min-w-0">
               <h2 className={headingClass}>Explore</h2>
               <nav
                 className="mt-2 flex flex-col items-start gap-0 text-[var(--ep-primary)] sm:mt-3"
@@ -50,7 +50,7 @@ export function SiteFooter() {
               </nav>
             </div>
 
-            <div className="min-w-0">
+            <div className="ep-footer-account min-w-0">
               <h2 className={headingClass}>Built for better water</h2>
               <p className="mt-2 text-xs leading-5 text-[var(--ep-text-muted)] sm:text-sm sm:leading-6">
                 Monitor water quality, feeding, and growth in one place.
