@@ -1521,35 +1521,30 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
 }
 
 
-/* ---------- Horizontal process story (desktop only) ----------
-   Vertical page scrolling drives the four process stages horizontally.
-   Tablet/mobile retain the accessible stacked list. */
-@media (min-width: 1200px) and (prefers-reduced-motion: no-preference) {
+/* ---------- Static four-card process grid ---------- */
+@media (min-width: 1200px) {
   .ep-landing #process [data-process-viewport] {
     width: 100%;
-    overflow: hidden;
+    overflow: visible;
     padding-top: 1.75rem;
     padding-bottom: 1.25rem;
-    overscroll-behavior: contain;
   }
 
   .ep-landing #process [data-process-track] {
-    display: flex;
-    width: max-content;
-    flex-wrap: nowrap;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: stretch;
-    gap: clamp(1.25rem, 2.2vw, 2rem);
-    will-change: transform;
+    gap: clamp(1rem, 1.6vw, 1.5rem);
+    transform: none !important;
   }
 
   .ep-landing #process [data-process-track] > li {
-    flex: 0 0 min(72vw, 760px);
-    width: min(72vw, 760px);
-    min-width: 560px;
-    min-height: 270px;
-    padding: 2rem 2.25rem 2.25rem;
+    width: auto;
+    min-width: 0;
+    min-height: 240px;
+    padding: 1.75rem;
     border: 1px solid var(--ep-line);
-    border-top: 1px solid var(--ep-line);
     border-radius: 1.25rem;
     background: var(--ep-surface);
     box-shadow: 0 18px 48px -38px rgba(7, 42, 48, .38);
@@ -1558,23 +1553,14 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
   .ep-landing #process [data-process-track] > li [data-step-node] {
     display: none;
   }
-
-  .ep-landing #process [data-process-line] {
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: left center;
-  }
 }
 
-@media (max-width: 1199px), (prefers-reduced-motion: reduce) {
+@media (max-width: 1199px) {
   .ep-landing #process [data-process-viewport] {
     overflow: visible;
   }
   .ep-landing #process [data-process-track] {
-    width: auto;
+    width: 100%;
     transform: none !important;
   }
 }
