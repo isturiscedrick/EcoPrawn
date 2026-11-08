@@ -129,6 +129,17 @@ export function LandingMotion() {
           }, "-=.3");
         });
 
+        // Reveal the existing data-reveal wrappers as complete content groups.
+        // This keeps eyebrow, heading and supporting copy moving together.
+        root.querySelectorAll<HTMLElement>("main [data-reveal]").forEach((group) => {
+          gsap.from(group, {
+            y: 24,
+            duration: .68,
+            ease: "power3.out",
+            scrollTrigger: { trigger: group, start: "top 90%", once: true },
+          });
+        });
+
         // About-style vertical card entrances. Keep content visible while
         // ScrollTrigger waits for each card to enter the viewport.
         const cards = gsap.utils.toArray<HTMLElement>(
@@ -143,6 +154,50 @@ export function LandingMotion() {
             scrollTrigger: { trigger: card, start: "top 91%", once: true },
           });
         });
+
+        // Water-quality range bars and markers animate once as their cards enter.
+        root.querySelectorAll<HTMLElement>("#readings [data-reading]").forEach((card) => {
+          const zone = card.querySelector<HTMLElement>("[data-zone]");
+          const marker = card.querySelector<HTMLElement>("[data-marker]");
+          if (zone) gsap.fromTo(zone,
+            { scaleX: 0, transformOrigin: "left center" },
+            { scaleX: 1, duration: .9, ease: "power3.out",
+              scrollTrigger: { trigger: card, start: "top 88%", once: true } }
+          );
+          if (marker) gsap.from(marker, {
+            scale: .35, duration: .55, ease: "back.out(1.8)",
+            scrollTrigger: { trigger: card, start: "top 88%", once: true },
+          });
+        });
+
+        // The process progress rule fills as the four stages move through view.
+        const processViewport = root.querySelector<HTMLElement>("#process [data-process-viewport]");
+        const processLine = processViewport?.querySelector<HTMLElement>("[data-process-line]");
+        if (processViewport && processLine) {
+          gsap.fromTo(processLine,
+            { scaleX: 0, transformOrigin: "left center" },
+            { scaleX: 1, ease: "none",
+              scrollTrigger: {
+                trigger: processViewport,
+                start: "top 78%",
+                end: "bottom 38%",
+                scrub: .8,
+                invalidateOnRefresh: true,
+              } }
+          );
+        }
+        const processNodes = root.querySelectorAll<HTMLElement>("#process [data-step-node]");
+        if (processNodes.length) {
+          gsap.from(processNodes, {
+            scale: .4, autoAlpha: 0, duration: .5, stagger: .12,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+              trigger: processViewport ?? root.querySelector("#process"),
+              start: "top 78%",
+              once: true,
+            },
+          });
+        }
 
         // Readings and process details reveal in sequence, as About system rows do.
         root.querySelectorAll<HTMLElement>("#readings [data-reading], #process [data-step]").forEach((item) => {
@@ -161,6 +216,20 @@ export function LandingMotion() {
             x: 16, duration: .42, stagger: .075,
           }, "-=.22");
         });
+
+        // Capability cards use the same subtle entrance timing as About articles.
+        // Their own card-level selector is explicit so layout wrappers are not animated.
+        const capabilityCards = root.querySelectorAll<HTMLElement>("#capabilities [data-business-card]");
+        if (capabilityCards.length) {
+          gsap.from(capabilityCards, {
+            y: 32, duration: .72, stagger: .1, ease: "expo.out",
+            scrollTrigger: {
+              trigger: "#capabilities .grid",
+              start: "top 88%",
+              once: true,
+            },
+          });
+        }
 
         // Card hover treatment mirrors About: small lift, accent border,
         // soft shadow and a brief icon reaction. No 3D tilt.
