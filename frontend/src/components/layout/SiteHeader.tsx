@@ -110,6 +110,7 @@ export function SiteHeader({
     const html = document.documentElement;
     const body = document.body;
     const previousHtmlOverflow = html.style.overflow;
+    const previousHtmlScrollBehavior = html.style.scrollBehavior;
     const previousBodyStyles = {
       position: body.style.position,
       top: body.style.top,
@@ -169,7 +170,11 @@ export function SiteHeader({
       body.style.right = previousBodyStyles.right;
       body.style.width = previousBodyStyles.width;
       body.style.overflow = previousBodyStyles.overflow;
-      window.scrollTo(0, scrollY);
+      // Global smooth-scroll styles can animate this restoration from the top.
+      // Temporarily disable smooth behavior so the saved offset is restored in one frame.
+      html.style.scrollBehavior = "auto";
+      window.scrollTo({ left: 0, top: scrollY, behavior: "instant" });
+      html.style.scrollBehavior = previousHtmlScrollBehavior;
     };
   }, [mobileNavOpen, closeDrawer]);
 
