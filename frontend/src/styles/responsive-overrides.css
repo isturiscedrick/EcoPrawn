@@ -1028,3 +1028,163 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+ 
+/* ---------- Desktop landing composition: editorial SaaS / agri-tech hero ---------- */
+@media (min-width: 1024px) {
+  .ep-business-landing #top.ep-hero {
+    min-height: min(790px, calc(100svh - 66px));
+    display: flex;
+    align-items: center;
+    overflow: clip;
+    background:
+      radial-gradient(ellipse at 76% 46%, color-mix(in srgb, var(--ep-secondary) 13%, transparent), transparent 36%),
+      radial-gradient(ellipse at 12% 92%, color-mix(in srgb, var(--ep-accent) 7%, transparent), transparent 34%),
+      linear-gradient(180deg, var(--ep-bg), color-mix(in srgb, var(--ep-bg) 91%, var(--ep-tint)));
+  }
+
+  .ep-business-landing #top .ep-hero-layout {
+    width: min(100% - 6rem, 1440px);
+    max-width: 1440px;
+    min-height: 680px;
+    grid-template-columns: minmax(0, 1.04fr) minmax(460px, .96fr);
+    align-items: center;
+    justify-items: stretch;
+    gap: clamp(2.5rem, 5vw, 5.5rem);
+    padding: clamp(4rem, 7vh, 6.5rem) 0;
+  }
+
+  .ep-business-landing #top [data-hero="text"] {
+    width: 100%;
+    max-width: 700px;
+    margin: 0;
+    text-align: left;
+    justify-self: start;
+  }
+
+  .ep-business-landing #top [data-hero="headline"] {
+    max-width: 760px;
+    margin: 0;
+    font-size: clamp(3.6rem, 5.15vw, 5.65rem);
+    line-height: .99;
+    letter-spacing: -.065em;
+    text-wrap: balance;
+  }
+
+  .ep-business-landing #top [data-hero="lead"] {
+    max-width: 34rem;
+    margin: 1.65rem 0 0;
+    font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+    line-height: 1.75;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] {
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .ep-business-landing #top [data-hero="cta"] > a {
+    min-height: 3.5rem;
+    padding-inline: 1.65rem;
+    border-radius: .95rem;
+  }
+
+  .ep-business-landing #top [data-hero="parallax-console"] {
+    width: 100%;
+    max-width: 650px;
+    min-width: 0;
+    justify-self: end;
+    margin: 0;
+  }
+
+  .ep-business-landing #top .ep-hero-visual::before {
+    width: 96%;
+    filter: blur(34px);
+  }
+
+  .ep-business-landing .ep-stats-panel {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 1.6rem;
+  }
+
+  .ep-business-landing .ep-stats-panel > div {
+    min-height: 116px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.35rem 1.5rem;
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    font-size: clamp(1.65rem, 2vw, 2.15rem);
+  }
+
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    margin-top: .7rem;
+    font-size: .82rem;
+  }
+
+  .ep-business-landing #readings > div,
+  .ep-business-landing #capabilities > div,
+  .ep-business-landing #process > div {
+    max-width: 1440px;
+  }
+
+  .ep-business-landing #readings > div {
+    padding-block: clamp(5.5rem, 8vw, 7.5rem);
+  }
+
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process {
+    padding-block: clamp(5.5rem, 8vw, 7.5rem);
+  }
+
+  .ep-business-landing #capabilities > div > .mb-12 {
+    margin-bottom: 3.25rem;
+  }
+
+  .ep-business-landing #capabilities article[data-business-card] {
+    min-height: 330px;
+    padding: clamp(1.65rem, 2.1vw, 2.25rem);
+  }
+
+  .ep-business-landing #capabilities article[data-business-card] h3 {
+    font-size: clamp(1.45rem, 1.8vw, 1.85rem);
+    line-height: 1.12;
+  }
+
+  .ep-business-landing #process [data-process-track] {
+    gap: clamp(1.5rem, 2.6vw, 2.75rem);
+  }
+
+  .ep-business-landing #process [data-step] {
+    padding: 2rem .5rem 0;
+  }
+}
+
+@media (min-width: 1440px) {
+  .ep-business-landing #top .ep-hero-layout {
+    width: min(100% - 8rem, 1440px);
+  }
+}
+
+/* Mobile brand is centered against the viewport, independent of side-control widths. */
+@media (max-width: 767px) {
+  #site-header > div > a[aria-label^="EcoPrawn"] {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    justify-self: auto !important;
+    grid-column: auto !important;
+    margin: 0 !important;
+  }
+  #site-header > div > a[aria-label^="EcoPrawn"] .ep-logo {
+    justify-content: center;
+    width: max-content;
+    max-width: min(48vw, 180px);
+  }
+}
