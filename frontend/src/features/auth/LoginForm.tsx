@@ -439,7 +439,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
           : "Sign in with your username or mobile number and password."}
       </p>
 
-      <div className="mt-8 flex flex-col gap-5 rounded-2xl border-2 border-[var(--ep-primary)] bg-white p-6 shadow-[8px_8px_0_0_var(--ep-accent)] sm:p-7">
+      <div className="ep-auth-form mt-7 flex flex-col gap-5 p-0">
         {(step === "signin" || step === "signup") && (
           <div
             role="group"
