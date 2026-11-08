@@ -2461,3 +2461,295 @@ html.dark .ep-auth-panel.ep-auth-modal button[type="submit"] {
     transition-duration:.01ms !important;
   }
 }
+
+
+/* ============================================================
+   Canonical auth layout — aligned with the EcoPrawn landing page.
+   Neutral canvas, deep-teal brand header, terracotta primary action.
+   These final rules intentionally supersede the legacy modal experiments
+   above while leaving authentication behavior untouched.
+============================================================ */
+.ep-auth-overlay {
+  align-items: center !important;
+  justify-content: center !important;
+  padding: clamp(.75rem, 2.5vw, 2rem) !important;
+}
+.ep-auth-panel.ep-auth-modal {
+  display: flex !important;
+  flex-direction: column !important;
+  width: min(100%, 520px) !important;
+  max-height: min(900px, calc(100dvh - 2rem)) !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  border: 1px solid var(--ep-line) !important;
+  border-radius: 1.5rem !important;
+  background: var(--ep-surface) !important;
+  color: var(--ep-text) !important;
+  box-shadow: 0 32px 90px -42px rgba(0, 0, 0, .5) !important;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ep-secondary) transparent;
+}
+.ep-auth-panel.ep-auth-modal .ep-auth-brand {
+  position: relative !important;
+  display: flex !important;
+  flex: 0 0 auto !important;
+  min-height: 132px !important;
+  margin: 0 !important;
+  padding: 1.5rem 3.5rem 1.25rem !important;
+  border: 0 !important;
+  border-radius: 1.45rem 1.45rem 0 0 !important;
+  background: var(--ep-secondary) !important;
+}
+.ep-auth-panel.ep-auth-modal .ep-auth-brand > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: .5rem !important;
+  padding: 0 !important;
+}
+.ep-auth-panel.ep-auth-modal .ep-auth-brand .ep-logo {
+  max-width: 240px !important;
+  --ep-logo-color: #ffffff !important;
+  --ep-logo-text: #ffffff !important;
+}
+.ep-auth-panel.ep-auth-modal .ep-auth-brand .ep-logo-shrimp,
+.ep-auth-panel.ep-auth-modal .ep-auth-brand .ep-logo-wordmark {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.ep-auth-panel.ep-auth-modal .ep-auth-brand-tagline {
+  display: block !important;
+  max-width: 25rem !important;
+  margin: 0 !important;
+  color: rgba(255,255,255,.86) !important;
+  font-size: .76rem !important;
+  line-height: 1.45 !important;
+  text-align: center !important;
+}
+.ep-auth-panel.ep-auth-modal button[aria-label="Close"] {
+  top: .85rem !important;
+  right: .85rem !important;
+  width: 2.4rem !important;
+  height: 2.4rem !important;
+  border: 1px solid rgba(255,255,255,.25) !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.1) !important;
+  color: #ffffff !important;
+}
+.ep-auth-panel.ep-auth-modal button[aria-label="Close"]:hover {
+  background: rgba(255,255,255,.2) !important;
+}
+.ep-auth-panel.ep-auth-modal > :not(.ep-auth-brand) {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem) !important;
+}
+.ep-auth-panel.ep-auth-modal > .ep-auth-brand + * {
+  padding-top: clamp(1.5rem, 4vw, 2.1rem) !important;
+  padding-bottom: clamp(1.5rem, 4vw, 2.1rem) !important;
+}
+.ep-auth-panel.ep-auth-modal h1 {
+  margin: 0 !important;
+  color: var(--ep-text) !important;
+  font-size: clamp(1.8rem, 4vw, 2.15rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.055em !important;
+  text-align: left !important;
+}
+.ep-auth-panel.ep-auth-modal h1 + p {
+  max-width: 100% !important;
+  margin: .65rem 0 0 !important;
+  color: var(--ep-text-muted) !important;
+  font-size: .95rem !important;
+  line-height: 1.6 !important;
+  text-align: left !important;
+}
+.ep-auth-panel.ep-auth-modal .ep-auth-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.1rem !important;
+  margin-top: 1.5rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.ep-auth-panel.ep-auth-modal [role="group"][aria-label="Account access"] {
+  display: grid !important;
+  grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+  gap: .35rem !important;
+  padding: .3rem !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: var(--ep-tint) !important;
+}
+.ep-auth-panel.ep-auth-modal [role="group"][aria-label="Account access"] button {
+  min-height: 2.8rem !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: var(--ep-text-muted) !important;
+  font-size: .9rem !important;
+  font-weight: 600 !important;
+}
+.ep-auth-panel.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
+  background: var(--ep-secondary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 14px -10px rgba(0,0,0,.55) !important;
+}
+.ep-auth-panel.ep-auth-modal label {
+  color: var(--ep-text) !important;
+  font-size: .84rem !important;
+  font-weight: 600 !important;
+}
+.ep-auth-panel.ep-auth-modal :is(input,textarea,select) {
+  min-height: 3.15rem !important;
+  border: 1px solid var(--ep-line) !important;
+  border-radius: .85rem !important;
+  background: var(--ep-bg) !important;
+  color: var(--ep-text) !important;
+  box-shadow: none !important;
+}
+.ep-auth-panel.ep-auth-modal :is(input,textarea,select)::placeholder {
+  color: var(--ep-text-muted) !important;
+  opacity: .65 !important;
+}
+.ep-auth-panel.ep-auth-modal :is(input,textarea,select):focus {
+  border-color: var(--ep-accent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent) 14%, transparent) !important;
+}
+.ep-auth-panel.ep-auth-modal button[type="submit"] {
+  min-height: 3.25rem !important;
+  border: 1px solid var(--ep-accent) !important;
+  border-radius: 999px !important;
+  background: var(--ep-accent) !important;
+  color: #ffffff !important;
+  font-size: .95rem !important;
+  font-weight: 700 !important;
+  box-shadow: 0 12px 28px -18px color-mix(in srgb, var(--ep-accent) 85%, transparent) !important;
+}
+.ep-auth-panel.ep-auth-modal button[type="submit"]:hover {
+  border-color: var(--ep-accent-hover) !important;
+  background: var(--ep-accent-hover) !important;
+}
+.ep-auth-panel.ep-auth-modal [role="alert"],
+.ep-auth-panel.ep-auth-modal [role="status"] {
+  border: 1px solid var(--ep-line) !important;
+  border-radius: .9rem !important;
+  background: var(--ep-tint) !important;
+  color: var(--ep-text) !important;
+}
+.ep-auth-panel.ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
+  min-height: 3.15rem !important;
+  border: 1px solid var(--ep-line) !important;
+  border-radius: 999px !important;
+  background: var(--ep-surface) !important;
+  color: var(--ep-text) !important;
+  box-shadow: none !important;
+}
+.ep-auth-panel.ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
+  background: var(--ep-tint) !important;
+}
+.ep-auth-panel.ep-auth-modal > div:last-child {
+  margin-top: 1.35rem !important;
+  color: var(--ep-text-muted) !important;
+  font-size: .78rem !important;
+  line-height: 1.5 !important;
+  text-align: center !important;
+}
+.ep-auth-panel.ep-auth-modal :is(a,button,input):focus-visible {
+  outline: 2px solid var(--ep-accent) !important;
+  outline-offset: 3px !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal {
+  --ep-bg: #000000;
+  --ep-surface: #111111;
+  --ep-tint: #111111;
+  --ep-line: rgba(255,255,255,.18);
+  --ep-primary: #ffffff;
+  --ep-secondary: #0f4c5c;
+  --ep-text: #ffffff;
+  --ep-text-muted: rgba(255,255,255,.76);
+  --ep-accent: #d94416;
+  --ep-accent-hover: #b83a0f;
+  background: #111111 !important;
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,.18) !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal .ep-auth-brand {
+  background: #0f4c5c !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal :is(h1,label) {
+  color: #ffffff !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal h1 + p,
+html.dark .ep-auth-panel.ep-auth-modal > div:last-child {
+  color: rgba(255,255,255,.76) !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal [role="group"][aria-label="Account access"] {
+  background: #000000 !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal [role="group"][aria-label="Account access"] button {
+  color: rgba(255,255,255,.76) !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
+  background: #0f4c5c !important;
+  color: #ffffff !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal :is(input,textarea,select) {
+  background: #000000 !important;
+  border-color: rgba(255,255,255,.22) !important;
+  color: #ffffff !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal :is(input,textarea,select)::placeholder {
+  color: rgba(255,255,255,.65) !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
+  background: #111111 !important;
+  border-color: rgba(255,255,255,.2) !important;
+  color: #ffffff !important;
+}
+html.dark .ep-auth-panel.ep-auth-modal [role="alert"],
+html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
+  background: #111111 !important;
+  border-color: rgba(255,255,255,.18) !important;
+  color: #ffffff !important;
+}
+@media (max-width: 639px) {
+  .ep-auth-overlay {
+    align-items: flex-start !important;
+    padding: .5rem !important;
+  }
+  .ep-auth-panel.ep-auth-modal {
+    width: 100% !important;
+    max-height: calc(100dvh - 1rem) !important;
+    border-radius: 1.2rem !important;
+  }
+  .ep-auth-panel.ep-auth-modal .ep-auth-brand {
+    min-height: 112px !important;
+    padding: 1.1rem 3.25rem .95rem !important;
+    border-radius: 1.1rem 1.1rem 0 0 !important;
+  }
+  .ep-auth-panel.ep-auth-modal .ep-auth-brand .ep-logo {
+    max-width: 205px !important;
+  }
+  .ep-auth-panel.ep-auth-modal .ep-auth-brand-tagline {
+    font-size: .7rem !important;
+  }
+  .ep-auth-panel.ep-auth-modal > :not(.ep-auth-brand) {
+    padding-inline: 1.1rem !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-auth-panel.ep-auth-modal *,
+  .ep-auth-panel.ep-auth-modal *::before,
+  .ep-auth-panel.ep-auth-modal *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
