@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { SurfaceCard } from "@/components/ui/SurfaceCard";
+import { SectionHeading } from "@/components/layout/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
@@ -308,20 +309,16 @@ export function LandingPage() {
           />
 
           <div className="mx-auto w-full max-w-[1200px] py-20 sm:py-24 lg:py-24">
-            <div data-reveal="" className="max-w-[40rem]">
-              <div className={`${eyebrow} text-[var(--ep-on-deep-muted)]`}>
-                <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-zone)]" />
-                Target ranges
-              </div>
-              <h2
+            <div data-reveal="">
+              <SectionHeading
                 id="readings-title"
-                className="ep-font-display text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
-              >
-                Five readings, each held in range.
-              </h2>
-              <p className="mt-3 text-lg leading-relaxed text-[var(--ep-on-deep-muted)]">
-                Sample values from Tank 1, shown against the range shrimp need.
-              </p>
+                kicker="Target ranges"
+                tone="inverse"
+                marker="zone"
+                className="max-w-[40rem]"
+                title="Five readings, each held in range."
+                description="Sample values from Tank 1, shown against the range shrimp need."
+              />
             </div>
 
             <dl className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
@@ -483,17 +480,13 @@ export function LandingPage() {
           className="bg-[var(--ep-bg)] px-4 py-20 sm:px-8 sm:py-24"
         >
           <div className="mx-auto max-w-[1200px]">
-            <div data-reveal="" className="mb-14 max-w-[40rem]">
-              <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
-                <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
-                The loop
-              </div>
-              <h2
+            <div data-reveal="">
+              <SectionHeading
                 id="process-title"
-                className="ep-font-display text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
-              >
-                From sensor to mangrove.
-              </h2>
+                kicker="The loop"
+                className="mb-14 max-w-[40rem]"
+                title="From sensor to mangrove."
+              />
             </div>
 
             <div data-process-viewport="" className="ep-process-viewport relative lg:border-t lg:border-[var(--ep-line)]">
