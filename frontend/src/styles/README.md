@@ -31,9 +31,9 @@ application remain organized here but are intentionally not imported until used.
 | `marketing/public-site-theme.css` | Ordered landing-page palette, shared public-page themes, surfaces, and final card refinements |
 | `responsive/site-responsive.css` | Ordered responsive safeguards, brand normalization, and shared layout corrections in one final cascade layer |
 
-Feature-owned styles stay beside their feature. For example, authentication
-modal styles live in `features/auth/auth-modal.css`. Component-specific styles
-belong beside their component.
+All CSS files are centralized under `src/styles/`. Keep each stylesheet in the
+folder that represents its owner (component, feature, dashboard, marketing,
+responsive, or shared theme), rather than placing CSS beside TSX files.
 
 ## Import order
 
@@ -47,9 +47,11 @@ The order in `globals.css` is intentional and must be preserved:
 6. Canonical public-page styles.
 7. Responsive safeguards.
 8. Combined public-site theme and final visual refinements (landing palette first, shared public-page rules second).
+9. Component and feature styles (brand mark, then authentication modal).
 
 Do not alphabetize these imports. Later styles intentionally override earlier
-compatibility rules. Keep the responsive layer before the combined public-site theme file. Inside
+compatibility rules. The responsive layer is followed by the final public-site
+theme refinements; component and feature styles load after those. Inside
 `marketing/public-site-theme.css`, preserve the landing palette before the
 shared public-page theme rules.
 

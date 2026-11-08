@@ -17,7 +17,7 @@
 @import "./marketing/marketing-overrides.css";
 @import "./marketing/landing-global.css";
 
-/* Responsive rules intentionally come last */
+/* Responsive safeguards precede the final public-site theme refinements. */
 @import "./responsive/site-responsive.css";
 @import "./marketing/public-site-theme.css";
 
