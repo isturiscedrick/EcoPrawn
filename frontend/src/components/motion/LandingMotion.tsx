@@ -135,7 +135,6 @@ export function LandingMotion() {
       const headlineWords = hero?.querySelectorAll<HTMLElement>("[data-hero=word]");
       const lead = hero?.querySelector<HTMLElement>("[data-hero=lead]");
       const actions = hero?.querySelector<HTMLElement>("[data-hero=cta]");
-      const visual = hero?.querySelector<HTMLElement>("[data-hero=parallax-console]");
       const signature = hero?.querySelector<HTMLElement>("[data-hero=signature]");
 
       if (heroText) {
@@ -159,16 +158,6 @@ export function LandingMotion() {
         if (signature) intro.from(signature, {
           y: 12, autoAlpha: 0, duration: .55,
         }, "-=.28");
-      }
-
-      if (visual) {
-        gsap.from(visual, {
-          y: 48, scale: .9, autoAlpha: 0, rotateX: -8,
-          transformPerspective: 1100, duration: 1.15,
-          ease: "expo.out", delay: playWaterIntro ? 1.9 : .28,
-        });
-        // HeroLens owns its own scroll-linked depth. Do not animate this
-        // wrapper's y here: it is already used by the entrance tween above.
       }
 
       // READINGS: each reading rises in, then its bar fills while its
@@ -579,9 +568,6 @@ export function LandingMotion() {
         });
       }
     );
-
-    // HERO DEPTH: keep the lens figure free of competing transforms.
-    // Its internal rings and glare are scroll-linked inside HeroLens.
 
     // MORE SCROLL EFFECTS
     mm.add("(prefers-reduced-motion: no-preference)", () => {
