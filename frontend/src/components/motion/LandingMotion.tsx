@@ -557,18 +557,8 @@ export function LandingMotion() {
       // Keep hero copy and all section surfaces stationary relative to their
       // own layout while scrolling. Only one-time entrance reveals remain.
 
-      // 2. Readings band heading + intro line rise in before the readings.
-      gsap.from("#readings-title, #readings-title + p", {
-        y: 20,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: '[aria-labelledby="readings-title"]',
-          start: "top 80%",
-          once: true,
-        },
-      });
+      // The readings heading already has a single masked reveal above.
+      // Avoid a second GSAP tween on the same heading/paragraph transforms.
 
       // 3. Preview heading + paragraph rise in.
       gsap.from("#preview-title, #preview-title + p", {
