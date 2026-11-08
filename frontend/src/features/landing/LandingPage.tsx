@@ -425,7 +425,7 @@ export function LandingPage() {
           aria-labelledby="process-title"
           className="bg-[var(--ep-bg)] px-5 py-20 sm:px-8 sm:py-24"
         >
-          <div className="mx-auto max-w-[1200px]">
+          <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
             <div data-reveal="" className="mb-14 max-w-[40rem]">
               <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
                 <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
