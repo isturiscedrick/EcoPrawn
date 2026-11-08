@@ -115,7 +115,7 @@ export function LandingPage() {
 
       <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
         {/* HERO */}
-        <section id="top" className="ep-hero relative isolate overflow-hidden">
+        <section id="top" className="ep-hero ep-hero--lens-hidden relative isolate overflow-hidden">
           <div
             aria-hidden="true"
             data-hero="grid"
