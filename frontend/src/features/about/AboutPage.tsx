@@ -38,7 +38,7 @@ export function AboutPage() {
         <section id="objectives" className={`w-full box-border scroll-mt-[140px] md:scroll-mt-[150px] ${SECTION_PAD}`}>
           <div className="ep-about-content-frame mx-auto w-full max-w-[1200px]">
             <Reveal>
-              <SurfaceCard className="ep-about-objective mb-6 rounded-3xl border-l-4 border-l-[var(--ep-accent)] px-6 py-8 shadow-[0_16px_30px_-28px_rgba(11,46,51,0.5)] sm:px-10 sm:py-10">
+              <SurfaceCard className="ep-about-objective mb-6 px-6 py-8 sm:px-10 sm:py-10">
                 <div className="mb-3 text-sm font-semibold text-[var(--ep-text-muted)]">
                   General objective
                 </div>
@@ -171,20 +171,20 @@ export function AboutPage() {
                 <SurfaceCard as="article" className="h-full p-6 sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
                     <h3 className="ep-font-display flex items-center gap-3 text-2xl font-semibold">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-ok)] text-[var(--ep-on-status)]">
+                      <span className="flex h-8 w-8 items-center justify-center text-[var(--ep-text-muted)]">
                         <Icon name="check" size={18} strokeWidth={2.5} />
                       </span>
                       In scope
                     </h3>
 
-                    <span className="text-sm font-semibold text-[var(--ep-ok)]">Included</span>
+                    <span className="text-sm font-semibold text-[var(--ep-text-muted)]">Included</span>
                   </div>
 
                   <div>
                     {inScope.map((item, index) => (
                       <div
                         key={item.title}
-                        className={`py-4 ${index !== 0 ? "border-t border-[var(--ep-line)]" : "pt-0"}`}
+                        className={`py-4 ${index !== 0 ? "pt-4" : "pt-0"}`}
                       >
                         <div className="flex gap-3">
                           
@@ -204,23 +204,23 @@ export function AboutPage() {
 
               {/* Out of scope */}
               <Reveal delay={120} className="h-full">
-                <SurfaceCard as="article" className="ep-about-outscope h-full border-dashed p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] sm:p-8">
+                <SurfaceCard as="article" className="ep-about-outscope h-full p-6 sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
                     <h3 className="ep-font-display flex items-center gap-3 text-2xl font-semibold">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-warn-text)] text-[var(--ep-on-status)]">
+                      <span className="flex h-8 w-8 items-center justify-center text-[var(--ep-text-muted)]">
                         <Icon name="x" size={18} strokeWidth={2.5} />
                       </span>
                       Out of scope
                     </h3>
 
-                    <span className="text-sm font-semibold text-[var(--ep-warn-text)]">Excluded</span>
+                    <span className="text-sm font-semibold text-[var(--ep-text-muted)]">Excluded</span>
                   </div>
 
                   <div>
                     {outOfScope.map((item, index) => (
                       <div
                         key={item.title}
-                        className={`py-4 ${index !== 0 ? "border-t border-[var(--ep-line)]" : "pt-0"}`}
+                        className={`py-4 ${index !== 0 ? "pt-4" : "pt-0"}`}
                       >
                         <div className="flex gap-3">
                           
