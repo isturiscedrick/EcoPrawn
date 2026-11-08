@@ -1641,3 +1641,61 @@ html.dark .ep-business-landing #readings [data-reading] {
   }
 }
 
+/* Explicit premium card outlines across the landing page.
+   Light mode: quiet teal-tinted edge; dark mode: crisp low-contrast edge. */
+.ep-business-landing :is(
+  .ep-stats-panel > div,
+  #capabilities .ep-capability-card,
+  #readings [data-reading],
+  #top .ep-product-window,
+  #top .ep-product-metric,
+  #top .ep-product-insight,
+  #top .ep-product-float
+) {
+  border: 1px solid rgba(15, 76, 92, .22) !important;
+}
+
+.ep-business-landing #top .ep-product-window {
+  box-shadow:
+    0 24px 64px -42px rgba(15, 76, 92, .3),
+    0 8px 24px -20px rgba(16, 32, 35, .18) !important;
+}
+
+html.dark .ep-business-landing :is(
+  .ep-stats-panel > div,
+  #capabilities .ep-capability-card,
+  #readings [data-reading],
+  #top .ep-product-window,
+  #top .ep-product-metric,
+  #top .ep-product-insight,
+  #top .ep-product-float
+) {
+  border-color: rgba(255, 255, 255, .16) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ep-business-landing :is(
+    .ep-stats-panel > div,
+    #capabilities .ep-capability-card,
+    #readings [data-reading],
+    #top .ep-product-window,
+    #top .ep-product-metric,
+    #top .ep-product-insight,
+    #top .ep-product-float
+  ):hover {
+    border-color: rgba(15, 76, 92, .42) !important;
+  }
+
+  html.dark .ep-business-landing :is(
+    .ep-stats-panel > div,
+    #capabilities .ep-capability-card,
+    #readings [data-reading],
+    #top .ep-product-window,
+    #top .ep-product-metric,
+    #top .ep-product-insight,
+    #top .ep-product-float
+  ):hover {
+    border-color: rgba(217, 68, 22, .48) !important;
+  }
+}
+
