@@ -202,3 +202,57 @@
     font-size: clamp(1.35rem, 6vw, 1.7rem);
   }
 }
+
+/* Contact page: let every grid/flex child shrink before text wraps. This
+   prevents long institution/department labels from painting over card edges
+   when the viewport or browser zoom changes. */
+.ep-contact-page main,
+.ep-contact-page main section,
+.ep-contact-page main section > div,
+.ep-contact-page [data-contact-details],
+.ep-contact-page [data-contact-card],
+.ep-contact-page [data-contact-card] > div {
+  min-width: 0;
+  max-width: 100%;
+}
+.ep-contact-page main section > div > .grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+.ep-contact-page [data-contact-card] {
+  width: 100%;
+  align-items: flex-start;
+  gap: .75rem;
+  padding: clamp(.75rem, 2.2vw, 1rem);
+  overflow: hidden;
+}
+.ep-contact-page [data-contact-card] dt,
+.ep-contact-page [data-contact-card] dd {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.ep-contact-page [data-contact-card] dd {
+  line-height: 1.55;
+}
+.ep-contact-page [data-contact-card] > :first-child {
+  flex: 0 0 auto;
+}
+.ep-contact-page [data-contact-card] > div {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+@media (min-width: 1024px) {
+  .ep-contact-page main section > div > .grid {
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  }
+}
+@media (max-width: 480px) {
+  .ep-contact-page [data-contact-card] {
+    gap: .65rem;
+    padding: .8rem;
+  }
+  .ep-contact-page [data-contact-card] dd {
+    font-size: .875rem;
+  }
+}
