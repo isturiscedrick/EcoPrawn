@@ -145,12 +145,12 @@ html .ep-landing .ep-lens-readout .ep-lens-dot {
 /* Landing hero headline: use the two official brand colors, not generic
    body ink/accent tokens. Keep this scoped to the landing hero only. */
 .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
-  color: #D94416 !important;
-  -webkit-text-fill-color: #D94416 !important;
-}
-.ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
   color: #0F4C5C !important;
   -webkit-text-fill-color: #0F4C5C !important;
+}
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
+  color: #D94416 !important;
+  -webkit-text-fill-color: #D94416 !important;
 }
 html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
   color: #F28A68 !important;
@@ -164,12 +164,18 @@ html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary 
 
 /* About and Contact page hero headlines share the same two-tone
    EcoPrawn brand treatment as the landing hero. */
-.ep-about-page [data-page-hero-headline] > span:first-child,
+.ep-about-page [data-page-hero-headline] > span:first-child {
+  color: #0F4C5C !important;
+  -webkit-text-fill-color: #0F4C5C !important;
+}
+.ep-about-page [data-page-hero-headline] > span:last-child {
+  color: #D94416 !important;
+  -webkit-text-fill-color: #D94416 !important;
+}
 .ep-contact-page [data-page-hero-headline] > span:first-child {
   color: #D94416 !important;
   -webkit-text-fill-color: #D94416 !important;
 }
-.ep-about-page [data-page-hero-headline] > span:last-child,
 .ep-contact-page [data-page-hero-headline] > span:last-child {
   color: #0F4C5C !important;
   -webkit-text-fill-color: #0F4C5C !important;
@@ -290,12 +296,9 @@ html.dark .ep-landing .ep-lens-shrimp .ep-logo {
 }
 .ep-landing .ep-stats-panel > div {
   min-height: 92px;
-  border-color: var(--ep-accent);
+  border-color: var(--ep-line);
   background: var(--ep-surface);
   box-shadow: 0 3px 14px -12px rgba(15, 76, 92, .45);
-}
-.ep-landing .ep-stats-panel > div:nth-child(even) {
-  border-color: var(--ep-secondary);
 }
 .ep-landing .ep-stats-panel > div > span:first-child {
   font-size: clamp(1.35rem, 2.3vw, 1.85rem);
@@ -1475,15 +1478,15 @@ html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child > span:last-
   font-weight: 700 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-readout .ep-lens-dot {
-  background: #D94416 !important;
-  box-shadow: 0 0 0 3px rgba(217,68,22,.13) !important;
+  background: #0F4C5C !important;
+  box-shadow: 0 0 0 3px rgba(15,76,92,.13) !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-connectors path {
   stroke: #477780 !important;
   stroke-width: 1.6 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-connectors circle {
-  fill: #D94416 !important;
+  fill: #0F4C5C !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-caption {
   color: #31504C !important;
@@ -1546,7 +1549,7 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
     min-height: 270px;
     padding: 2rem 2.25rem 2.25rem;
     border: 1px solid var(--ep-line);
-    border-top: 2px solid var(--ep-accent);
+    border-top: 1px solid var(--ep-line);
     border-radius: 1.25rem;
     background: var(--ep-surface);
     box-shadow: 0 18px 48px -38px rgba(7, 42, 48, .38);

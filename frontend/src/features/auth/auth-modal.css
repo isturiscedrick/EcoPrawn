@@ -380,7 +380,7 @@ html.dark .ep-auth-modal {
 html.dark .ep-auth-modal :is(h1, label, .text-\[var\(--ep-primary\)\]) {
   color: #e4e6eb !important;
 }
-html.dark .ep-auth-modal :is(h1 + p, .text-\[var\(--ep-text-muted\)]) {
+html.dark .ep-auth-modal :is(h1 + p, .text-\[var\(--ep-text-muted\)\]) {
   color: #b8c0c2 !important;
 }
 html.dark .ep-auth-modal div:has(> form),
@@ -449,7 +449,7 @@ html.dark .ep-auth-modal .bg-white {
 html.dark .ep-auth-modal :is(p, small, span, div) {
   color: inherit;
 }
-html.dark .ep-auth-modal :is(.text-\[var\(--ep-text-muted\)], [data-muted]) {
+html.dark .ep-auth-modal :is(.text-\[var\(--ep-text-muted\)\], [data-muted]) {
   color: #b8c0c2 !important;
 }
 html.dark .ep-auth-modal a:not([class*="bg-"]) {
@@ -714,7 +714,7 @@ html.dark .ep-auth-modal :is(button,a):focus-visible {
   font-size: clamp(25px, 4vw, 30px);
   line-height: 1.12;
   letter-spacing: -.04em;
-  color: #172d30 !important;
+  color: #0f4c5c !important;
 }
 
 .ep-auth-modal h1 + p {
@@ -986,10 +986,10 @@ html.dark .ep-auth-modal input:focus-visible {
 }
 
 .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
-  background: #d94416 !important;
-  border-color: #d94416 !important;
+  background: #0f4c5c !important;
+  border-color: #0f4c5c !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(217, 68, 22, .2) !important;
+  box-shadow: 0 4px 12px rgba(15, 76, 92, .2) !important;
 }
 
 .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled) {

@@ -47,7 +47,7 @@ export function ContactPage() {
                       data-contact-card=""
                       className="flex min-w-0 items-start gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)]"
                     >
-                      <IconChip name={item.icon} tone="coral" size={20} />
+                      <IconChip name={item.icon} tone="brand" size={20} />
                       <div className="min-w-0">
                         <dt className="mb-1 text-sm font-semibold uppercase tracking-wide text-[var(--ep-text-muted)]">
                           {item.label}

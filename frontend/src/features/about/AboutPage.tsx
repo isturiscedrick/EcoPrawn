@@ -66,7 +66,7 @@ export function AboutPage() {
                   <article className="group h-full rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)]">
                     <IconChip
                       name={OBJECTIVE_ICONS[i] ?? "layers"}
-                      tone="coral"
+                      tone="brand"
                       size={20}
                       className="mb-5"
                     />
