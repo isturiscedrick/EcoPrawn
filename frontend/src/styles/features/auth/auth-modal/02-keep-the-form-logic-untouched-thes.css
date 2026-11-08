@@ -202,7 +202,7 @@ html.dark .ep-auth-modal [role="alert"] {
 }
 
 html.dark .ep-auth-modal [role="group"][aria-label="Account access"] {
-  background: #29332f !important;
+  
 }
 
 html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button {
@@ -419,42 +419,42 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
 /* ---------- Native-feeling mobile authentication screen ---------- */
 @media (max-width: 639px) {
   .ep-auth-overlay {
-    align-items: stretch !important;
-    justify-content: stretch !important;
-    padding: 0 !important;
+    
+    
+    
     overflow-y: auto !important;
     overscroll-behavior-y: contain;
   }
 
   .ep-auth-overlay [data-auth-backdrop] {
     background: var(--ep-bg, #f4f7f6) !important;
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
+    
+    
   }
 
   .ep-auth-panel.ep-auth-modal {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100% !important;
-    max-width: none !important;
-    min-height: 100dvh;
-    max-height: none !important;
-    height: auto;
-    margin: 0 !important;
+    
+    
+    
+    
+    
+    
+    
+    
+    
     padding:
       max(18px, env(safe-area-inset-top))
       22px
       max(24px, env(safe-area-inset-bottom)) !important;
     overflow: visible !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
+    
+    
+    
     background: #f4f7f6 !important;
   }
 
   .ep-auth-panel .ep-auth-brand {
-    flex: 0 0 auto;
+    
     min-height: 58px !important;
     margin: 0 0 30px !important;
     padding: 4px 42px 18px !important;
@@ -462,15 +462,15 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
   }
 
   .ep-auth-panel .ep-auth-brand > div {
-    padding-inline: 0 !important;
+    
   }
 
   .ep-auth-panel .ep-auth-brand .ep-logo {
-    max-width: 210px;
+    
   }
 
   .ep-auth-panel button[aria-label="Close"] {
-    top: 0 !important;
+    
     right: -4px !important;
     width: 40px;
     height: 40px;
@@ -485,7 +485,7 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
     width: 100%;
     margin: 0 !important;
     padding: 0 !important;
-    gap: 17px !important;
+    
     border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
@@ -494,20 +494,20 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
 
   .ep-auth-panel h1 {
     margin-top: 2px;
-    font-size: clamp(27px, 7vw, 32px) !important;
-    line-height: 1.12 !important;
+    
+    
     letter-spacing: -.045em;
   }
 
   .ep-auth-panel h1 + p {
     margin-top: 8px !important;
     font-size: 14px;
-    line-height: 1.55 !important;
+    
   }
 
   .ep-auth-panel [role="group"][aria-label="Account access"] {
     margin-bottom: 3px;
-    padding: 4px !important;
+    
     border-radius: 14px !important;
   }
 
@@ -518,7 +518,7 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
 
   .ep-auth-panel label {
     margin-bottom: 8px !important;
-    font-size: 13px !important;
+    
     font-weight: 700;
   }
 
@@ -526,8 +526,8 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
     min-height: 54px !important;
     padding-top: 14px !important;
     padding-bottom: 14px !important;
-    border-radius: 13px !important;
-    font-size: 16px !important; /* prevents iOS Safari input zoom */
+    
+     /* prevents iOS Safari input zoom */
   }
 
   .ep-auth-panel button[type="submit"],
@@ -538,7 +538,7 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focu
   }
 
   .ep-auth-panel :is(a, button, input) {
-    -webkit-tap-highlight-color: transparent;
+    
   }
 
   .ep-auth-panel :is(button, a):focus-visible,

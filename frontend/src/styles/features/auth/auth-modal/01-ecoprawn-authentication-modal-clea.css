@@ -167,11 +167,11 @@
 ======================================== */
 
 .ep-auth-modal button[type="submit"] {
-  min-height: 48px;
+  
   border-radius: 11px;
 
   font-size: 14px;
-  font-weight: 700;
+  
 }
 
 /* ========================================
@@ -313,12 +313,12 @@
   --ep-bg: #ffffff;
   --ep-surface: #ffffff;
   --ep-tint: #f3f7f6;
-  --ep-line: #d8e0de;
+  
   --ep-primary: #0f4c5c;
-  --ep-secondary: #0f4c5c;
+  
   --ep-text-muted: #3d5a61;
-  --ep-accent: #d94416;
-  --ep-accent-hover: #b83a0f;
+  
+  
   color: #0f4c5c;
   background-color: #ffffff;
 }
@@ -363,15 +363,15 @@ html.dark .ep-auth-modal .bg-white {
 /* Dark-mode authentication modal: charcoal surfaces with coral and mint accents. */
 html.dark .ep-auth-modal {
   color-scheme: dark;
-  --ep-bg: #18191a;
+  
   --ep-surface: #242729;
-  --ep-tint: #29332f;
+  
   --ep-line: rgba(139, 213, 166, 0.28);
   --ep-primary: #f28a68;
-  --ep-secondary: #8bd5a6;
+  
   --ep-text-muted: #b8c0c2;
-  --ep-accent: #f28a68;
-  --ep-accent-hover: #e87552;
+  
+  
   background-color: #202122 !important;
   border-color: rgba(139, 213, 166, 0.32) !important;
   color: #e4e6eb !important;
@@ -453,10 +453,10 @@ html.dark .ep-auth-modal button[type="submit"] :is(span, svg) {
 
 /* Final EcoPrawn brand alignment: charcoal ink, coral actions, mint details. */
 .ep-auth-modal {
-  --ep-primary: #142b2e;
-  --ep-secondary: #0f4c5c;
+  
+  
   --ep-text-muted: #405653;
-  --ep-accent: #d94416;
+  
   --ep-accent-hover: #b83a0f;
   --ep-line: #d8e0de;
   --ep-tint: #edf3f1;
@@ -475,9 +475,9 @@ html.dark .ep-auth-modal button[type="submit"] :is(span, svg) {
 }
 html.dark .ep-auth-modal {
   --ep-primary: #f4f7f6;
-  --ep-secondary: #8bd5a6;
+  
   --ep-text-muted: #c0cbca;
-  --ep-accent: #f28a68;
+  
   --ep-accent-hover: #e87552;
   --ep-line: rgba(139,213,166,.22);
   --ep-tint: #29332f;
@@ -495,8 +495,8 @@ html.dark .ep-auth-modal :is(input,textarea,select) {
 html.dark .ep-auth-modal input::placeholder { color: #aab8b6 !important; }
 html.dark .ep-auth-modal button[type="submit"] {
   background-color: #f28a68 !important;
-  border-color: #f28a68 !important;
-  color: #18191a !important;
+  
+  
 }
 html.dark .ep-auth-modal button[type="submit"]:hover {
   background-color: #e87552 !important;
@@ -530,38 +530,38 @@ html.dark .ep-auth-modal button[type="submit"] {
 
 /* Strict four-color EcoPrawn palette only — light and dark modal surfaces. */
 .ep-auth-modal {
-  --ep-bg: #f4f7f6;
-  --ep-surface: #f4f7f6;
-  --ep-primary: #142b2e;
-  --ep-secondary: #0f4c5c;
-  --ep-accent: #d94416;
-  --ep-text-muted: #142b2e;
-  --ep-line: #0f4c5c;
-  background: #f4f7f6 !important;
-  color: #142b2e !important;
-  border-color: #0f4c5c !important;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }
 .ep-auth-modal :is(h1,h2,h3,p,label,small,span) { color: #142b2e; }
-.ep-auth-modal :is(input,textarea,select)::placeholder { color: #142b2e !important; opacity: .72; }
+.ep-auth-modal :is(input,textarea,select)::placeholder {   }
 html.dark .ep-auth-modal {
-  --ep-bg: #18191a;
-  --ep-surface: #202729;
-  --ep-primary: #8bd5a6;
-  --ep-secondary: #8bd5a6;
-  --ep-accent: #f28a68;
-  --ep-text-muted: #8bd5a6;
-  --ep-line: #8bd5a6;
-  background: #202729 !important;
-  color: #8bd5a6 !important;
+  
+  
+  
+  
+  
+  
+  
+  
+  
   border-color: rgba(139,213,166,.3) !important;
 }
 html.dark .ep-auth-modal :is(h1,h2,h3,p,label,small,span,a) { color: #8bd5a6 !important; }
 html.dark .ep-auth-modal :is(input,textarea,select) {
-  background: #18191a !important;
-  color: #8bd5a6 !important;
-  border-color: rgba(139,213,166,.45) !important;
+  
+  
+  
 }
-html.dark .ep-auth-modal :is(input,textarea,select)::placeholder { color: #8bd5a6 !important; opacity: .75; }
+html.dark .ep-auth-modal :is(input,textarea,select)::placeholder {   }
 
 
 /* Final strict palette enforcement for the auth modal (including provider,

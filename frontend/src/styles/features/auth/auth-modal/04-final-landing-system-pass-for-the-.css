@@ -2,7 +2,7 @@
    The teal brand strip is the modal's 30% color anchor; neutral form space
    stays dominant and Terracotta remains reserved for the primary action. */
 .ep-auth-overlay {
-  align-items: center !important;
+  
   padding: 1rem !important;
 }
 .ep-auth-overlay [data-auth-backdrop] {
@@ -13,7 +13,7 @@
 .ep-auth-panel.ep-auth-modal {
   width: min(100%,500px) !important;
   max-height: min(900px,calc(100dvh - 2rem)) !important;
-  padding: 0 !important;
+  
   overflow: auto !important;
   border: 1px solid rgba(15,76,92,.2) !important;
   border-radius: 1.65rem !important;
@@ -22,12 +22,12 @@
   box-shadow: 0 36px 110px rgba(0,0,0,.38),0 2px 10px rgba(0,0,0,.08) !important;
 }
 .ep-auth-panel.ep-auth-modal .ep-auth-brand {
-  position: relative !important;
+  
   min-height: 7.25rem !important;
-  margin: 0 !important;
+  
   padding: 1.35rem 3.5rem 1.25rem !important;
   overflow: hidden !important;
-  border: 0 !important;
+  
   border-radius: 1.55rem 1.55rem 0 0 !important;
   background:
     radial-gradient(circle at 85% 18%,rgba(255,255,255,.11),transparent 28%),
@@ -48,16 +48,16 @@
 .ep-auth-panel.ep-auth-modal .ep-auth-brand > div {
   position: relative !important;
   z-index: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
+  
+  
   gap: .6rem !important;
-  padding: 0 !important;
+  
 }
 .ep-auth-panel.ep-auth-modal .ep-auth-brand .ep-logo {
-  --ep-logo-color: #ffffff !important;
-  --ep-logo-text: #ffffff !important;
+  
+  
   justify-content: center !important;
-  max-width: 240px !important;
+  
 }
 .ep-auth-panel.ep-auth-modal .ep-auth-brand .ep-logo-shrimp {
   fill: #ffffff !important;
@@ -68,26 +68,26 @@
   -webkit-text-fill-color: #ffffff !important;
 }
 .ep-auth-panel.ep-auth-modal .ep-auth-brand-tagline {
-  display: block !important;
-  max-width: 25rem !important;
-  margin: 0 !important;
+  
+  
+  
   color: rgba(255,255,255,.84) !important;
   font-size: .78rem !important;
   line-height: 1.5 !important;
-  text-align: center !important;
+  
 }
 .ep-auth-panel.ep-auth-modal button[aria-label="Close"] {
-  top: .85rem !important;
-  right: .85rem !important;
+  
+  
   width: 2.35rem !important;
   height: 2.35rem !important;
-  border: 1px solid rgba(255,255,255,.25) !important;
+  
   border-radius: .75rem !important;
-  background: rgba(255,255,255,.1) !important;
-  color: #ffffff !important;
+  
+  
 }
 .ep-auth-panel.ep-auth-modal button[aria-label="Close"]:hover {
-  background: rgba(255,255,255,.2) !important;
+  
 }
 .ep-auth-panel.ep-auth-modal > :not(.ep-auth-brand) {
   padding-inline: clamp(1.15rem,4vw,2.25rem) !important;
@@ -114,11 +114,11 @@
 }
 .ep-auth-panel.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
   background: #0f4c5c !important;
-  color: #ffffff !important;
+  
 }
 .ep-auth-panel.ep-auth-modal :is(input,textarea,select) {
   border-color: rgba(15,76,92,.24) !important;
-  border-radius: .85rem !important;
+  
   background: #ffffff !important;
   color: #000000 !important;
 }
@@ -129,9 +129,9 @@
 .ep-auth-panel.ep-auth-modal button[type="submit"] {
   min-height: 3.1rem !important;
   border: 1px solid #d94416 !important;
-  border-radius: 999px !important;
+  
   background: #d94416 !important;
-  color: #ffffff !important;
+  
 }
 .ep-auth-panel.ep-auth-modal button[type="submit"]:hover {
   border-color: #b83a0f !important;
@@ -139,8 +139,8 @@
 }
 html.dark .ep-auth-panel.ep-auth-modal {
   border-color: rgba(255,255,255,.16) !important;
-  background: #111111 !important;
-  color: #ffffff !important;
+  
+  
 }
 html.dark .ep-auth-panel.ep-auth-modal .ep-auth-brand {
   background:
@@ -161,13 +161,13 @@ html.dark .ep-auth-panel.ep-auth-modal [role="group"][aria-label="Account access
   color: #ffffff !important;
 }
 html.dark .ep-auth-panel.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
-  background: #0f4c5c !important;
-  color: #ffffff !important;
+  
+  
 }
 html.dark .ep-auth-panel.ep-auth-modal :is(input,textarea,select) {
   border-color: rgba(255,255,255,.2) !important;
   background: #191919 !important;
-  color: #ffffff !important;
+  
 }
 html.dark .ep-auth-panel.ep-auth-modal :is(input,textarea,select)::placeholder {
   color: #b8c0c2 !important;
@@ -215,8 +215,8 @@ html.dark .ep-auth-panel.ep-auth-modal button[type="submit"] {
    above while leaving authentication behavior untouched.
 ============================================================ */
 .ep-auth-overlay {
-  align-items: center !important;
-  justify-content: center !important;
+  
+  
   padding: clamp(.75rem, 2.5vw, 2rem) !important;
 }
 .ep-auth-panel.ep-auth-modal {
@@ -467,7 +467,7 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
 @media (max-width: 639px) {
   .ep-auth-overlay {
     align-items: flex-start !important;
-    padding: .5rem !important;
+    
   }
   .ep-auth-panel.ep-auth-modal {
     width: 100% !important;
@@ -505,17 +505,17 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
    pseudo-element behind the form. The modal now uses one centered column:
    full-width brand header, then a clean neutral form surface. */
 .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal {
-  display: flex !important;
-  flex-direction: column !important;
+  
+  
   align-items: stretch !important;
   justify-content: flex-start !important;
   width: min(100%, 520px) !important;
   max-width: 520px !important;
   min-width: 0 !important;
-  min-height: 0 !important;
+  
   height: auto !important;
   max-height: min(900px, calc(100dvh - 2rem)) !important;
-  margin: auto !important;
+  
   padding: 0 !important;
   overflow-x: hidden !important;
   overflow-y: auto !important;
@@ -574,7 +574,7 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
 @media (max-width: 639px) {
   .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal {
     width: 100% !important;
-    max-width: 520px !important;
+    
     min-height: 0 !important;
     max-height: calc(100dvh - 1rem) !important;
     margin: auto !important;
@@ -585,7 +585,7 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
     border-radius: 1.1rem 1.1rem 0 0 !important;
   }
   .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal > .ep-auth-content {
-    max-width: none !important;
+    
     padding: 1.25rem 1.1rem 1.5rem !important;
   }
 }
@@ -647,16 +647,16 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
   overflow-y: hidden !important;
 }
 .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup {
-  max-width: 460px !important;
+  
   padding-top: clamp(.85rem, 2.2vh, 1.35rem) !important;
   padding-bottom: clamp(.85rem, 2.2vh, 1.35rem) !important;
 }
 .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup > h1 {
   width: 100% !important;
   max-width: none !important;
-  white-space: nowrap !important;
+  
   font-size: clamp(1.55rem, 3vw, 2rem) !important;
-  line-height: 1.08 !important;
+  
   letter-spacing: -.045em !important;
 }
 .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup > p {
