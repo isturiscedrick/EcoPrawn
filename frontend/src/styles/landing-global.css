@@ -2527,7 +2527,7 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
 /* Footer responsive layout — use the footer's actual available width rather
    than viewport breakpoints, so it also works at browser zoom and in embeds. */
 footer[data-site-footer] {
-  overflow: clip;
+  overflow: visible;
 }
 footer[data-site-footer] .ep-footer-inner {
   width: 100%;
