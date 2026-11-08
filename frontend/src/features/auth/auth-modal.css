@@ -2893,3 +2893,91 @@ html.dark .ep-auth-panel.ep-auth-modal [role="status"] {
 .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal button[aria-label="Close"]:hover {
   background: #f5f7f6 !important;
 }
+
+
+/* Signup is a single-screen flow: keep the first step compact enough to fit
+   the available browser viewport without an inner modal scrollbar. */
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal:has(.ep-auth-content.is-signup) {
+  max-height: calc(100svh - 1.5rem) !important;
+  overflow-y: hidden !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup {
+  max-width: 460px !important;
+  padding-top: clamp(.85rem, 2.2vh, 1.35rem) !important;
+  padding-bottom: clamp(.85rem, 2.2vh, 1.35rem) !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup > h1 {
+  width: 100% !important;
+  max-width: none !important;
+  white-space: nowrap !important;
+  font-size: clamp(1.55rem, 3vw, 2rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.045em !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup > p {
+  margin-top: .4rem !important;
+  font-size: .88rem !important;
+  line-height: 1.4 !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup .ep-auth-form {
+  gap: .8rem !important;
+  margin-top: 1rem !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup [role="group"][aria-label="Account access"] button {
+  min-height: 2.35rem !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form fieldset {
+  gap: .7rem !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form label {
+  margin-bottom: .25rem !important;
+  font-size: .78rem !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form input {
+  min-height: 2.65rem !important;
+  padding-top: .55rem !important;
+  padding-bottom: .55rem !important;
+  font-size: .9rem !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form button[type="submit"] {
+  min-height: 2.75rem !important;
+  margin-top: 0 !important;
+  padding-top: .55rem !important;
+  padding-bottom: .55rem !important;
+  font-size: .88rem !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup .ep-auth-form > div[aria-live="polite"] > div > div > div:last-child {
+  margin-top: .25rem !important;
+  font-size: .68rem !important;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup .ep-auth-form > :is(div,button) {
+  min-width: 0;
+}
+.ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup > div:last-child {
+  margin-top: .8rem !important;
+  font-size: .7rem !important;
+}
+@media (max-height: 820px) {
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal:has(.ep-auth-content.is-signup) {
+    max-height: calc(100svh - .75rem) !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup {
+    padding-top: .65rem !important;
+    padding-bottom: .65rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup .ep-auth-form {
+    gap: .6rem !important;
+    margin-top: .7rem !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup form fieldset {
+    gap: .55rem !important;
+  }
+}
+@media (max-width: 639px) {
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal:has(.ep-auth-content.is-signup) {
+    max-height: calc(100svh - .75rem) !important;
+  }
+  .ep-auth-panel[data-auth-layout="stacked"].ep-auth-modal .ep-auth-content.is-signup > h1 {
+    font-size: clamp(1.35rem, 6vw, 1.75rem) !important;
+  }
+}
