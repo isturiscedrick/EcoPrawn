@@ -2946,3 +2946,302 @@ html.dark .ep-business-landing #top .ep-hero-visual::before {
     padding: .45rem .8rem !important;
   }
 }
+
+
+/* ============================================================
+   EcoPrawn landing visual system — aligned with auth experience
+   Cool mist surfaces, deep-teal feature panels, coral actions,
+   soft rounded cards and restrained decorative circles.
+   ============================================================ */
+
+.ep-business-landing {
+  --ep-page-glow: rgba(15, 76, 92, .075);
+  --ep-card-shadow: 0 18px 48px -32px rgba(8, 47, 57, .28);
+  --ep-card-shadow-hover: 0 24px 54px -30px rgba(8, 47, 57, .34);
+  background:
+    radial-gradient(ellipse at 88% 12%, var(--ep-page-glow), transparent 34rem),
+    var(--ep-bg);
+}
+
+html.dark .ep-business-landing {
+  --ep-page-glow: rgba(139, 213, 166, .07);
+  --ep-card-shadow: 0 18px 48px -32px rgba(0, 0, 0, .62);
+  --ep-card-shadow-hover: 0 24px 54px -30px rgba(0, 0, 0, .72);
+}
+
+/* Header should feel like the auth modal's clean, softly elevated surface. */
+.ep-business-landing #site-header {
+  border-color: var(--ep-line);
+  box-shadow: 0 8px 28px -24px rgba(8, 47, 57, .35);
+}
+.ep-business-landing #site-header > div {
+  min-height: 72px;
+}
+.ep-business-landing #site-header a[aria-label*="EcoPrawn"] .ep-logo {
+  filter: none;
+}
+.ep-business-landing #site-header button[role="switch"],
+.ep-business-landing #site-header a[aria-label="Log in"],
+.ep-business-landing #site-header a[aria-label="Get started"] {
+  border-radius: 999px;
+}
+.ep-business-landing #site-header a[aria-label="Get started"] {
+  box-shadow: 0 8px 18px rgba(196, 61, 20, .18);
+}
+
+/* Hero: light cool-mist canvas with the same teal/coral identity as auth. */
+.ep-business-landing #top.ep-hero {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 78% 34%, rgba(15, 76, 92, .09), transparent 27rem),
+    radial-gradient(circle at 12% 92%, rgba(196, 61, 20, .075), transparent 25rem),
+    var(--ep-bg);
+}
+.ep-business-landing #top .ep-hero-layout {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(3.25rem, 7vw, 6.75rem);
+  padding-bottom: clamp(3rem, 6vw, 5.5rem);
+}
+.ep-business-landing #top [data-hero="headline"] {
+  text-wrap: balance;
+  letter-spacing: -.062em;
+}
+.ep-business-landing #top [data-hero="lead"] {
+  max-width: 38rem;
+  color: var(--ep-text-muted);
+}
+.ep-business-landing #top [data-hero="cta"] > a {
+  min-height: 3.25rem;
+  border-radius: 999px;
+  padding-inline: 1.65rem;
+  box-shadow: 0 10px 22px -14px rgba(196, 61, 20, .5);
+}
+.ep-business-landing #top [data-hero="cta"] > a:first-child {
+  background: #d94416;
+  border-color: #d94416;
+  color: #fff;
+}
+.ep-business-landing #top [data-hero="cta"] > a:first-child:hover {
+  background: #b83a0f;
+  border-color: #b83a0f;
+}
+.ep-business-landing #top [data-hero="cta"] > a:last-child {
+  background: var(--ep-surface);
+  border-color: var(--ep-line);
+  color: var(--ep-primary);
+  box-shadow: 0 8px 22px -18px rgba(8, 47, 57, .42);
+}
+.ep-business-landing #top [data-hero="cta"] > a:last-child:hover {
+  border-color: var(--ep-secondary);
+  color: var(--ep-secondary);
+}
+html.dark .ep-business-landing #top.ep-hero {
+  background:
+    radial-gradient(circle at 78% 34%, rgba(139, 213, 166, .09), transparent 27rem),
+    radial-gradient(circle at 12% 92%, rgba(242, 138, 104, .075), transparent 25rem),
+    var(--ep-bg);
+}
+html.dark .ep-business-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+  color: #f1f7f6 !important;
+  -webkit-text-fill-color: #f1f7f6 !important;
+}
+html.dark .ep-business-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
+  color: #f28a68 !important;
+  -webkit-text-fill-color: #f28a68 !important;
+}
+html.dark .ep-business-landing #top [data-hero="cta"] > a:first-child {
+  background: #f28a68;
+  border-color: #f28a68;
+  color: #18191a;
+}
+html.dark .ep-business-landing #top [data-hero="cta"] > a:first-child:hover {
+  background: #ffab91;
+  border-color: #ffab91;
+}
+
+/* Stats: floating white-sheet treatment borrowed from the auth form surface. */
+.ep-business-landing .ep-stats-panel {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 2rem, 1200px);
+  padding: clamp(.7rem, 1.6vw, 1rem);
+  border-radius: 28px;
+  background: var(--ep-surface);
+  box-shadow: var(--ep-card-shadow);
+}
+.ep-business-landing .ep-stats-panel > div {
+  min-height: 104px;
+  padding: 1.15rem 1.25rem;
+  border-radius: 19px;
+  background: linear-gradient(155deg, var(--ep-surface), var(--ep-bg));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.75);
+}
+html.dark .ep-business-landing .ep-stats-panel > div {
+  background: linear-gradient(155deg, #263335, #202729);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+/* Readings: retain the deep-water identity but make the data tiles feel like
+   premium glass cards from the auth welcome panel. */
+.ep-business-landing #readings {
+  position: relative;
+  background:
+    radial-gradient(circle at 8% 14%, rgba(139,213,166,.15), transparent 24rem),
+    radial-gradient(circle at 94% 82%, rgba(242,138,104,.11), transparent 27rem),
+    linear-gradient(145deg, #0f4c5c, #0b3b46 78%);
+}
+.ep-business-landing #readings [data-reading] {
+  border: 1px solid rgba(230, 247, 243, .2);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(255,255,255,.105), rgba(255,255,255,.045));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.11), 0 18px 38px -30px rgba(0,0,0,.7);
+  backdrop-filter: blur(12px);
+}
+.ep-business-landing #readings [data-reading] > div:first-child > span {
+  border-radius: 999px;
+  border-color: rgba(255,255,255,.26);
+  background: rgba(255,255,255,.07);
+}
+.ep-business-landing #readings [data-reading] dd {
+  letter-spacing: -.045em;
+}
+html.dark .ep-business-landing #readings {
+  background:
+    radial-gradient(circle at 8% 14%, rgba(139,213,166,.11), transparent 24rem),
+    radial-gradient(circle at 94% 82%, rgba(242,138,104,.09), transparent 27rem),
+    linear-gradient(145deg, #102f34, #101d20 82%);
+}
+
+/* Capabilities: clean white cards with a subtle teal halo and coral category. */
+.ep-business-landing #capabilities {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 100% 5%, rgba(15,76,92,.055), transparent 30rem),
+    var(--ep-bg);
+}
+.ep-business-landing #capabilities article[data-business-card] {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  border-color: var(--ep-line);
+  background: var(--ep-surface);
+  box-shadow: var(--ep-card-shadow);
+  transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+.ep-business-landing #capabilities article[data-business-card]::before {
+  content: "";
+  position: absolute;
+  top: -3.5rem;
+  right: -3.5rem;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background: rgba(15,76,92,.045);
+  pointer-events: none;
+}
+.ep-business-landing #capabilities article[data-business-card] > span:first-child {
+  position: relative;
+  z-index: 1;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 17px;
+  background: linear-gradient(145deg, #e4f0ee, #f5f8f7);
+  color: #0f4c5c;
+}
+.ep-business-landing #capabilities article[data-business-card] > p:first-of-type {
+  letter-spacing: .12em;
+}
+.ep-business-landing #capabilities article[data-business-card] h3 {
+  letter-spacing: -.035em;
+}
+@media (hover: hover) and (pointer: fine) {
+  .ep-business-landing #capabilities article[data-business-card]:hover {
+    border-color: color-mix(in srgb, var(--ep-secondary) 48%, var(--ep-line));
+    box-shadow: var(--ep-card-shadow-hover);
+  }
+}
+html.dark .ep-business-landing #capabilities {
+  background:
+    radial-gradient(ellipse at 100% 5%, rgba(139,213,166,.055), transparent 30rem),
+    var(--ep-bg);
+}
+html.dark .ep-business-landing #capabilities article[data-business-card]::before {
+  background: rgba(139,213,166,.055);
+}
+html.dark .ep-business-landing #capabilities article[data-business-card] > span:first-child {
+  background: linear-gradient(145deg, #293b39, #202c2d);
+  color: #8bd5a6;
+}
+
+/* Process: turn each step into a clear, consistent card without changing
+   the GSAP reveal hooks or the normal document scroll behavior. */
+.ep-business-landing #process {
+  background: var(--ep-tint);
+}
+.ep-business-landing #process [data-step] {
+  min-height: 250px;
+  padding: 1.5rem;
+  border: 1px solid var(--ep-line);
+  border-radius: 22px;
+  background: var(--ep-surface);
+  box-shadow: var(--ep-card-shadow);
+}
+.ep-business-landing #process [data-step] > div:first-of-type > span:last-child {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 16px;
+  background: #e6f1ef;
+  color: #0f4c5c;
+}
+.ep-business-landing #process [data-step] h3 {
+  letter-spacing: -.035em;
+}
+.ep-business-landing #process [data-step-node] {
+  display: none;
+}
+html.dark .ep-business-landing #process [data-step] > div:first-of-type > span:last-child {
+  background: #293b39;
+  color: #8bd5a6;
+}
+
+/* Shared section rhythm and small-screen touch behavior. */
+.ep-business-landing #capabilities,
+.ep-business-landing #process {
+  padding-top: clamp(4rem, 7vw, 6.5rem);
+  padding-bottom: clamp(4rem, 7vw, 6.5rem);
+}
+@media (max-width: 767px) {
+  .ep-business-landing #top .ep-hero-layout {
+    padding-top: 2.25rem;
+    padding-bottom: 2.5rem;
+  }
+  .ep-business-landing #top [data-hero="cta"] {
+    gap: .7rem;
+  }
+  .ep-business-landing #top [data-hero="cta"] > a {
+    min-height: 3.15rem;
+  }
+  .ep-business-landing .ep-stats-panel {
+    width: 100%;
+    border-radius: 22px;
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    min-height: 86px;
+    border-radius: 16px;
+  }
+  .ep-business-landing #capabilities article[data-business-card],
+  .ep-business-landing #process [data-step] {
+    border-radius: 20px;
+  }
+  .ep-business-landing #process [data-step] {
+    min-height: 0;
+    padding: 1.2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing #capabilities article[data-business-card] {
+    transition: none;
+  }
+}
