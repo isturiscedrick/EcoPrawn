@@ -370,3 +370,62 @@
     flex: 1 1 100%;
   }
 }
+
+
+/* Landing layout audit: remove compounded horizontal gutters. The section
+   owns the outer padding where present; inner content frames own it elsewhere.
+   Keeping one spacing owner prevents cards becoming cramped at tablet widths. */
+.ep-business-landing #top.ep-hero > .ep-hero-layout,
+.ep-business-landing #readings > div:not([aria-hidden="true"]),
+.ep-business-landing #process > div:not([aria-hidden="true"]) {
+  width: 100% !important;
+  max-width: 1440px;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+.ep-business-landing #capabilities > div:not([aria-hidden="true"]) {
+  width: 100% !important;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 0 !important;
+  box-sizing: border-box;
+}
+.ep-business-landing #process > div:not([aria-hidden="true"]) {
+  max-width: 1200px;
+}
+.ep-business-landing #readings > div:not([aria-hidden="true"]) {
+  padding-inline: clamp(1.25rem, 3.2vw, 3rem);
+}
+.ep-business-landing #top.ep-hero > .ep-hero-layout {
+  padding-inline: clamp(1.25rem, 3.2vw, 3rem);
+}
+.ep-business-landing #capabilities,
+.ep-business-landing #readings,
+.ep-business-landing #process {
+  min-width: 0;
+  overflow-x: clip;
+}
+.ep-business-landing #capabilities .grid,
+.ep-business-landing #capabilities article,
+.ep-business-landing #process [data-process-track],
+.ep-business-landing #process [data-step] {
+  min-width: 0;
+  max-width: 100%;
+}
+.ep-business-landing #capabilities article h3,
+.ep-business-landing #process [data-step] h3 {
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+@media (max-width: 639px) {
+  .ep-business-landing #readings > div:not([aria-hidden="true"]),
+  .ep-business-landing #top.ep-hero > .ep-hero-layout {
+    padding-inline: 1rem;
+  }
+  .ep-business-landing #capabilities {
+    padding-inline: 1rem;
+  }
+  .ep-business-landing #capabilities > div:not([aria-hidden="true"]) {
+    padding-inline: 0 !important;
+  }
+}
