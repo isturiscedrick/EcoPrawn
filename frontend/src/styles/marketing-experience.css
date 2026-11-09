@@ -1076,3 +1076,69 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-
     transition: none !important;
   }
 }
+
+
+/* Landing Phase 2: editorial dashboard preview with responsive sample-data cards. */
+.ep-business-landing .ep-dashboard-preview {
+  position: relative;
+  isolation: isolate;
+}
+.ep-business-landing .ep-dashboard-preview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 88% 18%,rgba(37,99,235,.08),transparent 34%),
+    radial-gradient(ellipse at 12% 90%,rgba(37,99,235,.045),transparent 36%);
+}
+html.dark .ep-business-landing .ep-dashboard-preview::before {
+  background:
+    radial-gradient(ellipse at 88% 18%,rgba(96,165,250,.12),transparent 34%),
+    radial-gradient(ellipse at 12% 90%,rgba(96,165,250,.06),transparent 36%);
+}
+.ep-business-landing .ep-dashboard-preview-window {
+  min-width: 0;
+  transform: translateZ(0);
+}
+.ep-business-landing .ep-dashboard-preview-window > div {
+  min-width: 0;
+}
+.ep-business-landing .ep-preview-chart {
+  align-items: end;
+  border-bottom: 1px solid var(--ep-line);
+  background: repeating-linear-gradient(to bottom,transparent 0,transparent 27px,var(--ep-line) 28px);
+}
+.ep-business-landing .ep-preview-chart > span {
+  flex: 1 1 0;
+  min-width: 3px;
+  border-radius: .35rem .35rem 0 0;
+  background: linear-gradient(180deg,var(--ep-accent),rgba(37,99,235,.24));
+  transform-origin: bottom;
+  transition: opacity .2s ease, transform .2s ease;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .ep-business-landing .ep-dashboard-preview-window:hover .ep-preview-chart > span {
+    opacity: .88;
+  }
+  .ep-business-landing .ep-dashboard-preview-window:hover .ep-preview-chart > span:nth-child(3n) {
+    transform: scaleY(1.06);
+  }
+}
+html.dark .ep-business-landing .ep-preview-chart > span {
+  background: linear-gradient(180deg,#60a5fa,rgba(96,165,250,.24));
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-dashboard-preview {
+    padding-inline: 1rem;
+  }
+  .ep-business-landing .ep-dashboard-preview-window {
+    border-radius: 1.1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-preview-chart > span {
+    transition: none;
+  }
+}
