@@ -554,3 +554,45 @@ html.dark .ep-business-landing .ep-readings-section [data-readings-bg] {
 .ep-business-landing #readings.ep-readings-section > div:last-child span {
   color: inherit !important;
 }
+
+
+/* Inside the platform: use the same page canvas and token-based surfaces as
+   Target ranges, rather than a separate tinted band. */
+.ep-business-landing .ep-inside-platform {
+  color: var(--ep-text) !important;
+  background: var(--ep-bg) !important;
+}
+.ep-business-landing .ep-inside-platform [data-reveal] > :is(div,h2,p),
+.ep-business-landing .ep-inside-platform [data-reveal] > p,
+.ep-business-landing .ep-inside-platform [data-reveal] h2 {
+  color: var(--ep-text) !important;
+}
+.ep-business-landing .ep-inside-platform [data-reveal] > p,
+.ep-business-landing .ep-inside-platform [data-reveal] > div:first-child {
+  color: var(--ep-text-muted) !important;
+}
+.ep-business-landing .ep-inside-platform .ep-dashboard-preview-window {
+  border-color: var(--ep-line) !important;
+  background: var(--ep-surface) !important;
+}
+.ep-business-landing .ep-inside-platform .ep-dashboard-preview-window :is(p,strong,span) {
+  color: inherit;
+}
+.ep-business-landing .ep-inside-platform .ep-dashboard-preview-window :is(.text-xs,.text-\\[10px\\]) {
+  color: var(--ep-text-muted);
+}
+html:not(.dark) .ep-business-landing #readings.ep-readings-section .ep-readings-title {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+html:not(.dark) .ep-business-landing #readings.ep-readings-section .ep-readings-description {
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+}
+html:not(.dark) .ep-business-landing #readings.ep-readings-section .ep-reading-card {
+  color: #111827 !important;
+}
+html:not(.dark) .ep-business-landing #readings.ep-readings-section .ep-reading-card :is(dt,dd,[data-countto]) {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
