@@ -127,56 +127,6 @@ export function ContactMotion() {
           });
         }
 
-        // Information cards use a simple lift and icon reaction,
-        // keeping the card plane flat (no pointer-driven 3D tilt).
-        cards.forEach((card) => {
-          const enter = () => {
-            gsap.to(card, {
-              y: -6, scale: 1.01,
-              boxShadow: "0 24px 54px -32px rgba(7,42,48,.42)",
-              duration: .3, ease: "power3.out", overwrite: "auto",
-            });
-          };
-          const leave = () => gsap.to(card, {
-            y: 0, scale: 1,
-            duration: .42, ease: "power3.out", overwrite: "auto",
-          });
-          card.addEventListener("pointerenter", enter);
-          card.addEventListener("pointerleave", leave);
-          card.addEventListener("focusin", enter);
-          card.addEventListener("focusout", leave);
-          cleanups.push(() => {
-            card.removeEventListener("pointerenter", enter);
-            card.removeEventListener("pointerleave", leave);
-            card.removeEventListener("focusin", enter);
-            card.removeEventListener("focusout", leave);
-          });
-        });
-
-        // GSAP hover depth for the form panel and footer content groups.
-        // These surfaces complement the individual contact-card interactions.
-        const contactSurfaces = root.querySelectorAll<HTMLElement>(
-          "[data-contact-form], [data-site-footer] .grid > div"
-        );
-        contactSurfaces.forEach((surface) => {
-          const enter = () => gsap.to(surface, {
-            y: -5, borderColor: "var(--ep-accent)",
-            boxShadow: "0 26px 56px -34px rgba(7,42,48,.5)",
-            duration: .3, ease: "power3.out", overwrite: "auto",
-          });
-          const leave = () => gsap.to(surface, {
-            y: 0, borderColor: "var(--ep-line)",
-            boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
-            duration: .42, ease: "power3.out", overwrite: "auto",
-          });
-          surface.addEventListener("pointerenter", enter);
-          surface.addEventListener("pointerleave", leave);
-          cleanups.push(() => {
-            surface.removeEventListener("pointerenter", enter);
-            surface.removeEventListener("pointerleave", leave);
-          });
-        });
-
         // Form controls respond with a calm focus halo; Anime.js accents the label.
         form?.querySelectorAll<HTMLElement>("input, textarea, select").forEach((field) => {
           const focus = () => {
@@ -190,19 +140,6 @@ export function ContactMotion() {
           cleanups.push(() => {
             field.removeEventListener("focus", focus);
             field.removeEventListener("blur", blur);
-          });
-        });
-
-        root.querySelectorAll<HTMLElement>("main a, main button").forEach((control) => {
-          const enter = () => {
-            gsap.to(control, { y: -3, duration: .2, ease: "power2.out" });
-          };
-          const leave = () => gsap.to(control, { y: 0, duration: .25, ease: "power2.out" });
-          control.addEventListener("pointerenter", enter);
-          control.addEventListener("pointerleave", leave);
-          cleanups.push(() => {
-            control.removeEventListener("pointerenter", enter);
-            control.removeEventListener("pointerleave", leave);
           });
         });
 
