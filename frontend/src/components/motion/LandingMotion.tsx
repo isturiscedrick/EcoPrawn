@@ -3,37 +3,13 @@ import gsap from "gsap";
 import { animate, stagger } from "animejs";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { HeroEnhance } from "./HeroEnhance";
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, MorphSVGPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // Water surfaces on a 100x100 viewBox stretched over the screen. Every path
 // has the same command structure (M, C, C, V, H, z) so MorphSVG can
 // interpolate cleanly. "covered" and "gone" keep the whole wave off-screen.
-const WAVE = {
-  covered: "M 0 -18 C 17 -26 33 -10 50 -18 C 67 -26 83 -10 100 -18 V 140 H 0 z",
-  high: "M 0 35 C 17 28 33 42 50 35 C 67 28 83 42 100 35 V 140 H 0 z",
-  low: "M 0 68 C 17 76 33 60 50 68 C 67 76 83 60 100 68 V 140 H 0 z",
-  gone: "M 0 110 C 17 104 33 116 50 110 C 67 104 83 116 100 110 V 140 H 0 z",
-};
-
-// Fixed positions (no Math.random) so server and client markup match.
-const BUBBLES = [
-  { left: "6%", size: 10 },
-  { left: "14%", size: 6 },
-  { left: "23%", size: 14 },
-  { left: "33%", size: 8 },
-  { left: "42%", size: 12 },
-  { left: "51%", size: 6 },
-  { left: "60%", size: 16 },
-  { left: "69%", size: 8 },
-  { left: "78%", size: 12 },
-  { left: "86%", size: 6 },
-  { left: "93%", size: 10 },
-  { left: "48%", size: 9 },
-];
-
 const WATER_INTRO_KEY = "ep-water-intro-seen";
 
 /**
@@ -42,25 +18,9 @@ const WATER_INTRO_KEY = "ep-water-intro-seen";
  * already has. Only runs when the user has not asked for reduced motion.
  */
 export function LandingMotion() {
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const backRef = useRef<SVGPathElement>(null);
-  const frontRef = useRef<SVGPathElement>(null);
-
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
     let cancelled = false;
-    // Keep the first-visit water curtain disabled so all three public-page heroes share one entrance style.
-    let playWaterIntro = false;
-
-    try {
-      playWaterIntro = sessionStorage.getItem(WATER_INTRO_KEY) !== "1";
-      if (playWaterIntro) {
-        sessionStorage.setItem(WATER_INTRO_KEY, "1");
-      }
-    } catch {
-      // Session storage may be unavailable; the intro can still fail safely.
-    }
-
     // Google Fonts (Lexend/Inter) swap in after first paint and reflow the
     // text, which shifts every scroll trigger's start position. Re-measure
     // once they are ready.
@@ -329,16 +289,6 @@ export function LandingMotion() {
         );
       });
 
-      // Reading tiles get a soft 3D entrance, while their contents stay legible.
-      const readingTiles = gsap.utils.toArray<HTMLElement>('[aria-labelledby="readings-title"] dl > div');
-      readingTiles.forEach((tile) => {
-        gsap.from(tile, {
-          y: 42, duration: .78,
-          ease: "expo.out",
-          scrollTrigger: { trigger: tile, start: "top 90%", once: true },
-        });
-      });
-
       //      // SECTION FLOW: reveal supporting sections with a restrained,
       // consistent lift-and-fade as they enter the viewport.
       const sectionReveals = [
@@ -353,12 +303,6 @@ export function LandingMotion() {
           targets: "#capabilities [data-business-card]",
           y: 26,
           stagger: 0.12,
-        },
-        {
-          trigger: "#dashboard-preview",
-          targets: "#dashboard-preview > div > :first-child, #dashboard-preview .ep-dashboard-preview-window",
-          y: 24,
-          stagger: 0.14,
         },
         {
           trigger: "#process",
@@ -625,66 +569,6 @@ export function LandingMotion() {
       }
     });
 
-    // UNDERWATER INTRO: the page starts submerged (markup), bubbles rise,
-    // then the water level drains down with a wavy surface.
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const overlay = overlayRef.current;
-      const back = backRef.current;
-      const front = frontRef.current;
-      if (!overlay || !back || !front) return;
-      if (!playWaterIntro) {
-        gsap.set(overlay, { display: "none" });
-        return;
-      }
-
-      const bubbles = gsap.utils.toArray<HTMLElement>(
-        ".ep-water-bubble",
-        overlay
-      );
-
-      const tl = gsap.timeline({
-        onComplete: () => {
-          gsap.set(overlay, { display: "none" });
-        },
-      });
-
-      tl.fromTo(
-        bubbles,
-        { y: 0.7 },
-        {
-          y: -(window.innerHeight + 80),
-          duration: 2.2,
-          ease: "none",
-          stagger: 0.12,
-        },
-        0
-      );
-
-      // The surface passes through two wave shapes on its way down, so it
-      // ripples instead of sliding flat.
-      const drain = (target: SVGPathElement, at: number) => {
-        tl.to(
-          target,
-          { morphSVG: WAVE.high, duration: 0.55, ease: "power1.in" },
-          at
-        )
-          .to(
-            target,
-            { morphSVG: WAVE.low, duration: 0.55, ease: "sine.inOut" },
-            at + 0.55
-          )
-          .to(
-            target,
-            { morphSVG: WAVE.gone, duration: 0.6, ease: "power1.out" },
-            at + 1.1
-          );
-      };
-
-      // The lighter back layer trails the front one: it stays higher, so a
-      // pale band of shallower water rides above the deep surface.
-      drain(front, 0.5);
-      drain(back, 0.7);
-    });
 
     return () => {
       cancelled = true;
@@ -692,53 +576,5 @@ export function LandingMotion() {
     };
   }, []);
 
-  return (
-    <>
-      <style>{`
-        @keyframes ep-water-failsafe { to { visibility: hidden; } }
-        .ep-water-curtain { animation: ep-water-failsafe 0.01s linear 5s forwards; }
-        @media (prefers-reduced-motion: reduce) { .ep-water-curtain { display: none; } }
-      `}</style>
-      <div
-        ref={overlayRef}
-        aria-hidden="true"
-        className="ep-water-curtain pointer-events-none fixed inset-0 z-[70] overflow-hidden"
-      >
-        <svg
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          className="absolute inset-0 h-full w-full"
-        >
-          <defs>
-            <linearGradient
-              id="ep-water-curtain-grad"
-              gradientUnits="userSpaceOnUse"
-              x1="0"
-              y1="0"
-              x2="0"
-              y2="100"
-            >
-              <stop offset="0%" stopColor="#1D5B62" />
-              <stop offset="100%" stopColor="#0B2E33" />
-            </linearGradient>
-          </defs>
-          <path ref={backRef} d={WAVE.covered} fill="#2F8791" />
-          <path
-            ref={frontRef}
-            d={WAVE.covered}
-            fill="url(#ep-water-curtain-grad)"
-          />
-        </svg>
-
-        {BUBBLES.map((b) => (
-          <span
-            key={b.left}
-            className="ep-water-bubble absolute rounded-full border border-[rgba(255,255,255,0.5)] bg-[rgba(255,255,255,0.18)]"
-            style={{ left: b.left, bottom: -24, width: b.size, height: b.size }}
-          />
-        ))}
-      </div>
-      <HeroEnhance />
-    </>
-  );
+  return <HeroEnhance />;
 }
