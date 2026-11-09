@@ -23,7 +23,7 @@ export function LogoIntroGate() {
   const screenRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   // Marks the intro as seen only once it has actually finished or been skipped.
   const finish = useRef(() => {
@@ -41,16 +41,16 @@ export function LogoIntroGate() {
     }
   }, [pathname]);
 
-  // Read-only check on mount. The server and first client render both start
-  // visible, so hydration matches; returning visitors drop the overlay before paint.
-  useLayoutEffect(() => {
+  // Decide whether to show the intro before mounting the overlay. Starting
+  // hidden prevents a one-frame flash on reloads after the intro was completed.
+  useEffect(() => {
     let seen = false;
     try {
       seen = window.sessionStorage.getItem(SEEN_KEY) === "1";
     } catch {
-      // Fall back to playing the intro.
+      // If storage is unavailable, play the intro.
     }
-    if (seen || firstPath.current.startsWith("/dashboard")) setVisible(false);
+    if (!seen && !firstPath.current.startsWith("/dashboard")) setVisible(true);
   }, []);
 
   // Escape skips the intro.
