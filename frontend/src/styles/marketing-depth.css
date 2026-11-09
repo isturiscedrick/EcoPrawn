@@ -251,3 +251,39 @@ html.dark .ep-contact-page [data-contact-form] > form {
     transition: none !important;
   }
 }
+
+
+/* Landing target-ranges section: keep the light theme consistent with the
+   surrounding page surfaces instead of introducing a lone dark band. */
+html:not(.dark) .ep-business-landing #readings {
+  color: var(--ep-text);
+  background-color: var(--ep-bg);
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(37,99,235,.075), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(37,99,235,.045), transparent 48%);
+}
+html:not(.dark) .ep-business-landing #readings :is(h1,h2,h3,h4,dt,dd,strong,b,label) {
+  color: var(--ep-text);
+}
+html:not(.dark) .ep-business-landing #readings :is(p,small,figcaption,li) {
+  color: var(--ep-text-muted);
+}
+html:not(.dark) .ep-business-landing #readings [data-reading] {
+  color: var(--ep-text);
+  border-color: var(--ep-line);
+  background: var(--ep-surface);
+  box-shadow: 0 18px 42px -32px rgba(15,23,42,.20);
+}
+html:not(.dark) .ep-business-landing #readings [data-reading] :is(dt,dd),
+html:not(.dark) .ep-business-landing #readings [data-reading] [data-countto] {
+  color: var(--ep-text);
+}
+html:not(.dark) .ep-business-landing #readings [data-reading] :is(p,span:not([data-countto])) {
+  color: var(--ep-text-muted);
+}
+html:not(.dark) .ep-business-landing #readings [data-reading] > div[aria-hidden="true"].relative {
+  background-color: #dbe4f0;
+}
+html:not(.dark) .ep-business-landing #readings [data-reading] [data-marker] span:last-child {
+  border-color: #fff;
+}
