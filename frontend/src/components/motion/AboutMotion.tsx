@@ -127,14 +127,12 @@ export function AboutMotion() {
 
         // Cards keep a restrained lift and shadow on hover; no 3D tilt.
         root.querySelectorAll<HTMLElement>("main article").forEach((card) => {
-          const icon = card.querySelector<SVGElement>("svg");
           const enter = () => {
             gsap.to(card, {
               y: -6, scale: 1.01, borderColor: "var(--ep-accent)",
               boxShadow: "0 24px 48px -30px rgba(7,42,48,.42)",
               duration: .3, ease: "power3.out", overwrite: "auto",
             });
-            if (icon) animate(icon, { scale: [1, 1.14, 1], rotate: [0, -8, 5, 0], duration: 520, ease: "outElastic(1,.6)" });
           };
           const leave = () => gsap.to(card, {
             y: 0, scale: 1, borderColor: "var(--ep-line)",
@@ -154,10 +152,8 @@ export function AboutMotion() {
         });
 
         root.querySelectorAll<HTMLElement>("main a, main button").forEach((control) => {
-          const icon = control.querySelector<SVGElement>("svg");
           const enter = () => {
             gsap.to(control, { y: -3, duration: .2, ease: "power2.out" });
-            if (icon) animate(icon, { translateX: [0, 4], rotate: [0, -6, 0], duration: 340, ease: "outBack(1.5)" });
           };
           const leave = () => gsap.to(control, { y: 0, duration: .25, ease: "power2.out" });
           control.addEventListener("pointerenter", enter);
