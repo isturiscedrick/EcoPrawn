@@ -627,8 +627,8 @@ html:not(.dark) .ep-business-landing #readings.ep-readings-section .ep-readings-
   -webkit-text-fill-color: #111827 !important;
 }
 html.dark .ep-business-landing #readings.ep-readings-section .ep-readings-kicker {
-  color: #111827 !important;
-  -webkit-text-fill-color: #111827 !important;
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
 }
 
 
