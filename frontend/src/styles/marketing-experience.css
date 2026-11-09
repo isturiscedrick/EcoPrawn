@@ -598,20 +598,15 @@ html.dark .ep-business-landing .ep-field-landscape {
 }
 
 
-/* Full-bleed aquaculture pond photograph behind the complete landing hero. */
+/* Full-bleed original gradient treatment. No third-party photography is used. */
 .ep-business-landing .ep-aquaculture-hero {
   min-height: clamp(640px,76vw,820px);
   display: flex;
   align-items: center;
   background-color: #071a2b;
   background-image:
-    linear-gradient(
-      180deg,
-      rgba(5,16,29,.34) 0%,
-      rgba(5,20,36,.48) 42%,
-      rgba(5,18,32,.78) 100%
-    ),
-    url("https://cdn.agrimag.my/nQdab9130.jpeg");
+    radial-gradient(ellipse at 50% 42%,rgba(37,99,235,.30),transparent 48%),
+    linear-gradient(180deg,rgba(5,16,29,.40),rgba(5,18,32,.88));
   background-size: cover;
   background-position: center 54%;
   background-repeat: no-repeat;
@@ -660,13 +655,8 @@ html.dark .ep-business-landing .ep-field-landscape {
 }
 html.dark .ep-business-landing .ep-aquaculture-hero {
   background-image:
-    linear-gradient(
-      180deg,
-      rgba(3,10,20,.42) 0%,
-      rgba(3,12,24,.56) 48%,
-      rgba(3,10,20,.82) 100%
-    ),
-    url("https://cdn.agrimag.my/nQdab9130.jpeg");
+    radial-gradient(ellipse at 50% 42%,rgba(37,99,235,.22),transparent 48%),
+    linear-gradient(180deg,rgba(3,10,20,.50),rgba(3,10,20,.92));
 }
 @media (max-width: 639px) {
   .ep-business-landing .ep-aquaculture-hero {
