@@ -4,11 +4,18 @@ const CARD_SELECTOR = [
   "main article",
   "main [data-reading]",
   "main [data-step]",
+  "main [data-hover-lift]",
+  "main [data-business-card]",
+  "main [data-contact-card]",
   "main .ep-stats-panel > div",
   "main [data-band]",
   "main [data-contact-form]",
+  "main [data-contact-form] > form",
   "main .ep-about-objective",
+  "main .ep-about-mission-panel",
   "main .ep-about-journey-card",
+  "main .ep-contact-intro-panel",
+  "main #process ol > li",
   "[data-site-footer] .grid > div",
 ].join(",");
 
