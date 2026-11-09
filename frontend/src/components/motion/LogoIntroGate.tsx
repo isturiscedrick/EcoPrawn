@@ -71,24 +71,53 @@ export function LogoIntroGate() {
     const progress = progressRef.current;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const context = gsap.context(() => {
+      const logoShapes = content.querySelectorAll<SVGPathElement>(".ep-logo-shape");
       gsap.set(content, { autoAlpha: 0, y: reducedMotion ? 0 : 16, scale: reducedMotion ? 1 : 0.98 });
       gsap.set(progress, { scaleX: 0, transformOrigin: "left center" });
+      if (!reducedMotion && logoShapes.length) {
+        gsap.set(logoShapes, {
+          strokeDasharray: 1,
+          strokeDashoffset: 1,
+          fillOpacity: 0,
+          strokeOpacity: 1,
+        });
+      }
 
       const timeline = gsap.timeline({
         defaults: { ease: "power3.out" },
         onComplete: () => finish.current(),
       });
 
-      // Give the logo enough time to finish its entrance and remain readable
-      // while the progress bar completes. Reduced motion keeps the same beat
-      // but removes translation, scaling and ambient particle movement.
+      // Draw the actual EcoPrawn SVG paths with GSAP. This is deliberately
+      // scoped to the intro so global header-logo keyframes cannot shorten it.
       timeline
-        .to(content, { autoAlpha: 1, y: 0, scale: 1, duration: reducedMotion ? 0.55 : 0.9 })
-        .to(".ep-loading-caption", { autoAlpha: 1, y: 0, duration: reducedMotion ? 0.35 : 0.55 }, "-=0.2")
-        .to(progress, { scaleX: 1, duration: reducedMotion ? 1.8 : 2.8, ease: "power2.inOut" }, "-=0.02")
-        .to(".ep-loading-shimmer", { xPercent: 260, duration: 0.9, ease: "power1.inOut" }, "<0.45")
-        .to(content, { autoAlpha: 0, y: reducedMotion ? 0 : -6, duration: reducedMotion ? 0.25 : 0.4 }, "+=0.75")
-        .to(screen, { autoAlpha: 0, duration: reducedMotion ? 0.3 : 0.55, ease: "power1.out" }, "<0.02");
+        .to(content, { autoAlpha: 1, y: 0, scale: 1, duration: reducedMotion ? 0.5 : 0.65 })
+        .to(
+          logoShapes,
+          {
+            strokeDashoffset: 0,
+            duration: 0.72,
+            stagger: 0.075,
+            ease: "power2.inOut",
+          },
+          reducedMotion ? "<" : "-=0.08"
+        )
+        .to(
+          logoShapes,
+          {
+            fillOpacity: 1,
+            strokeOpacity: 0,
+            duration: 0.32,
+            stagger: 0.035,
+            ease: "power1.out",
+          },
+          "-=0.18"
+        )
+        .to(".ep-loading-caption", { autoAlpha: 1, y: 0, duration: 0.45 }, "-=0.12")
+        .to(progress, { scaleX: 1, duration: reducedMotion ? 1.6 : 2.5, ease: "power2.inOut" }, "-=0.02")
+        .to(".ep-loading-shimmer", { xPercent: 260, duration: 0.9, ease: "power1.inOut" }, "<0.4")
+        .to(content, { autoAlpha: 0, y: reducedMotion ? 0 : -6, duration: 0.4 }, "+=0.8")
+        .to(screen, { autoAlpha: 0, duration: 0.5, ease: "power1.out" }, "<0.02");
     }, screen);
 
     let particleMotion: ReturnType<typeof animate> | undefined;
