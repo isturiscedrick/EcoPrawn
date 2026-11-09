@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { Link } from "@tanstack/react-router";
+import { AuthLink } from "@/features/auth/AuthModalProvider";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { CtaBand } from "@/components/CtaBand";
@@ -171,10 +172,11 @@ export function LandingPage() {
                 Bringing water-quality monitoring, shrimp growth insights, and responsive farm operations together in one connected system.
               </p>
               <div data-hero="cta" className="mt-6 flex justify-center sm:mt-7">
-                <Link
-                  to="/dashboard"
-                  aria-label="Open dashboard"
-                  title="Open dashboard"
+                <AuthLink
+                  mode="signin"
+                  aria-label="Open dashboard sign in"
+                  aria-haspopup="dialog"
+                  title="Open dashboard sign in"
                   data-dashboard-entry=""
                   className={`group relative z-10 inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3 text-sm font-semibold text-[var(--ep-on-accent)] shadow-[0_10px_28px_-12px_rgba(37,99,235,.58)] transition-[transform,background-color,box-shadow] duration-300 ease-out hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_16px_34px_-14px_rgba(37,99,235,.62)] active:scale-[.98] ${focusRing}`}
                 >
@@ -182,7 +184,7 @@ export function LandingPage() {
                   <span aria-hidden="true" className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-current/20 bg-black/10 text-current transition-transform duration-200 group-hover:translate-x-0.5">
                     <Icon name="arrow-up-right" size={16} strokeWidth={2.2} className="block shrink-0" />
                   </span>
-                </Link>
+                </AuthLink>
               </div>
             </div>
 
