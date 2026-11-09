@@ -825,3 +825,119 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-
   opacity: .24;
   mix-blend-mode: multiply;
 }
+
+
+/* ==========================================================================
+   Phase 1 polish: shared public-page rhythm, responsive surfaces and focus.
+   Kept token-driven so light/dark mode stay in sync with the brand palette.
+   ========================================================================== */
+
+/* Keep page sections aligned to one editorial content width. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) main > section > :is(div,article) {
+  min-width: 0;
+}
+:is(.ep-about-page,.ep-contact-page) main {
+  overflow: clip;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(h1,h2,h3) {
+  color: var(--ep-text);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(a,button,input,textarea,select):focus-visible {
+  outline: 2px solid var(--ep-accent);
+  outline-offset: 3px;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Shared hero sizing: the public pages use the same comfortable title rhythm. */
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  min-height: clamp(360px, 42vw, 540px);
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
+  width: min(100%, 1440px);
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] {
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 1.02;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-lead] {
+  line-height: 1.75;
+}
+
+/* Public page content keeps consistent side gutters at every breakpoint. */
+:is(.ep-about-page,.ep-contact-page) main > section:not([data-page-hero]) {
+  padding-inline: clamp(1rem, 3.2vw, 2.5rem);
+}
+.ep-about-page #objectives,
+.ep-about-page #scope {
+  padding-block: clamp(3.75rem, 7vw, 6rem);
+}
+.ep-about-page #systems {
+  padding-block: clamp(3.75rem, 7vw, 6rem);
+}
+.ep-about-page #systems article,
+.ep-about-page #objectives article,
+.ep-about-page #scope article {
+  height: 100%;
+}
+.ep-contact-page main > section {
+  padding-block: clamp(3.5rem, 6vw, 5.5rem);
+}
+.ep-contact-page [data-contact-details],
+.ep-contact-page [data-contact-form] > form {
+  height: 100%;
+}
+
+/* The header and footer remain neutral; blue is reserved for interaction. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) #site-header {
+  border-color: color-mix(in srgb, var(--ep-line) 72%, transparent);
+  transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] {
+  background: var(--ep-surface) !important;
+  color: var(--ep-text) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) {
+  color: var(--ep-text) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] nav a:hover {
+  color: var(--ep-accent) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-bottom {
+  border-top: 1px solid var(--ep-line);
+}
+
+/* Avoid hover-only movement on touch devices and honor reduced motion. */
+@media (hover: none) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) :is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article) {
+    transform: none !important;
+  }
+}
+@media (max-width: 767px) {
+  :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+    min-height: 0;
+  }
+  :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
+    min-height: 310px;
+    padding-top: 5.5rem;
+    padding-bottom: 3.25rem;
+  }
+  :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] {
+    font-size: clamp(2.35rem, 10vw, 3.75rem);
+  }
+  .ep-contact-page main > section > div > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-contact-page [data-contact-details],
+  .ep-contact-page [data-contact-form] > form {
+    border-radius: 1.2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) #site-header {
+    transition: none;
+  }
+}
