@@ -1142,3 +1142,52 @@ html.dark .ep-business-landing .ep-preview-chart > span {
     transition: none;
   }
 }
+
+
+/* Landing contrast correction: the deep readings band uses its own
+   foreground tokens instead of inheriting the page's dark-on-light text. */
+.ep-business-landing #readings {
+  color: var(--ep-on-deep);
+  background-color: var(--ep-deep);
+}
+.ep-business-landing #readings :is(h1,h2,h3,h4,dt,dd,strong,b,label) {
+  color: var(--ep-on-deep);
+}
+.ep-business-landing #readings :is(p,small,figcaption,li,.text-\\[var\\(--ep-text-muted\\)\\]) {
+  color: var(--ep-on-deep-muted);
+}
+.ep-business-landing #readings [data-reading] {
+  color: var(--ep-on-deep);
+  border-color: rgba(203,213,225,.24);
+}
+.ep-business-landing #readings [data-reading] :is(dt,dd) {
+  color: var(--ep-on-deep);
+}
+.ep-business-landing #readings [data-reading] :is(p,span:not([data-countto])) {
+  color: var(--ep-on-deep-muted);
+}
+.ep-business-landing #readings [data-reading] [data-countto] {
+  color: var(--ep-on-deep);
+}
+.ep-business-landing #readings [data-reading] [data-marker] span:last-child {
+  color: var(--ep-on-deep);
+}
+.ep-business-landing #readings [data-reading] [data-zone],
+.ep-business-landing #readings [data-reading] [data-marker] {
+  color: inherit;
+}
+
+/* Explicit foregrounds for capability and process cards prevent inherited
+   theme or animation styles from making copy disappear on card surfaces. */
+.ep-business-landing #capabilities [data-business-card],
+.ep-business-landing #process [data-step] {
+  color: var(--ep-text);
+}
+.ep-business-landing #capabilities [data-business-card] :is(h3,p),
+.ep-business-landing #process [data-step] :is(h3,p) {
+  color: inherit;
+}
+.ep-business-landing #capabilities [data-business-card] p:not(.text-\\[var\\(--ep-accent\\)\\]),
+.ep-business-landing #process [data-step] > p {
+  color: var(--ep-text-muted);
+}
