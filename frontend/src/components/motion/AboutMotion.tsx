@@ -125,69 +125,6 @@ export function AboutMotion() {
           });
         });
 
-        // Cards keep a restrained lift and shadow on hover; no 3D tilt.
-        root.querySelectorAll<HTMLElement>("main article").forEach((card) => {
-          const enter = () => {
-            gsap.to(card, {
-              y: -6, scale: 1.01, borderColor: "var(--ep-accent)",
-              boxShadow: "0 24px 48px -30px rgba(7,42,48,.42)",
-              duration: .3, ease: "power3.out", overwrite: "auto",
-            });
-          };
-          const leave = () => gsap.to(card, {
-            y: 0, scale: 1, borderColor: "var(--ep-line)",
-            boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
-            duration: .42, ease: "power3.out", overwrite: "auto",
-          });
-          card.addEventListener("pointerenter", enter);
-          card.addEventListener("pointerleave", leave);
-          card.addEventListener("focusin", enter);
-          card.addEventListener("focusout", leave);
-          cleanups.push(() => {
-            card.removeEventListener("pointerenter", enter);
-            card.removeEventListener("pointerleave", leave);
-            card.removeEventListener("focusin", enter);
-            card.removeEventListener("focusout", leave);
-          });
-        });
-
-        root.querySelectorAll<HTMLElement>("main a, main button").forEach((control) => {
-          const enter = () => {
-            gsap.to(control, { y: -3, duration: .2, ease: "power2.out" });
-          };
-          const leave = () => gsap.to(control, { y: 0, duration: .25, ease: "power2.out" });
-          control.addEventListener("pointerenter", enter);
-          control.addEventListener("pointerleave", leave);
-          cleanups.push(() => {
-            control.removeEventListener("pointerenter", enter);
-            control.removeEventListener("pointerleave", leave);
-          });
-        });
-
-        // The objective statement and section navigation get the same tactile
-        // response as the article cards, using only existing theme tokens.
-        const featureSurfaces = root.querySelectorAll<HTMLElement>(
-          ".ep-about-objective, [data-section-nav] a"
-        );
-        featureSurfaces.forEach((surface) => {
-          const enter = () => gsap.to(surface, {
-            y: -5, borderColor: "var(--ep-accent)",
-            boxShadow: "0 24px 48px -32px rgba(7,42,48,.48)",
-            duration: .28, ease: "power3.out", overwrite: "auto",
-          });
-          const leave = () => gsap.to(surface, {
-            y: 0, borderColor: "var(--ep-line)",
-            boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
-            duration: .4, ease: "power3.out", overwrite: "auto",
-          });
-          surface.addEventListener("pointerenter", enter);
-          surface.addEventListener("pointerleave", leave);
-          cleanups.push(() => {
-            surface.removeEventListener("pointerenter", enter);
-            surface.removeEventListener("pointerleave", leave);
-          });
-        });
-
         // Decorative dots and markers have a gentle stagger, never affecting layout.
         const markers = root.querySelectorAll<HTMLElement>("section [aria-hidden='true'].h-2, section [aria-hidden='true'].rounded-full");
         if (markers.length) animate(markers, {
