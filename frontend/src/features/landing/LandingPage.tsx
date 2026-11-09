@@ -163,7 +163,7 @@ export function LandingPage() {
                 className="ep-font-display max-w-[900px] text-[clamp(40px,6.1vw,76px)] font-semibold leading-[1.02] tracking-[-0.065em]"
               >
                 <span className="block ep-hero-headline-primary">Smarter Shrimp Farming</span>
-                <span className="block ep-hero-headline-secondary">Starts with Better Insight</span>
+                <span className="block ep-hero-headline-secondary">Always in Range</span>
               </h1>
               <p
                 data-hero="lead"
