@@ -396,7 +396,7 @@ export function LandingPage() {
           aria-labelledby="dashboard-preview-title"
           className="ep-dashboard-preview border-y border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-20 sm:px-8 sm:py-24"
         >
-          <div className="mx-auto grid w-full max-w-[1440px] items-center gap-10 lg:grid-cols-[.82fr_1.18fr] lg:gap-16">
+          <div className="mx-auto grid w-full max-w-[1440px] items-center gap-10 px-5 sm:px-8 lg:px-12 lg:grid-cols-[.82fr_1.18fr] lg:gap-16">
             <div data-reveal="" className="max-w-[34rem]">
               <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
                 <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
