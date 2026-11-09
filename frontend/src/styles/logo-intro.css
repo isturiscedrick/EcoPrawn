@@ -199,3 +199,29 @@ html.dark .ep-loading-screen {
   opacity: 1;
   visibility: visible;
 }
+
+
+/* Prevent the brand mark's global SVG/text keyframes from flashing before
+   the intro's GSAP timeline takes control of the lockup. */
+.ep-loading-content {
+  opacity: 0;
+  visibility: hidden;
+}
+.ep-loading-content .ep-loading-brand {
+  opacity: 0;
+  visibility: hidden;
+  clip-path: inset(0 0 100% 0);
+  transform: translate3d(0, 18px, 0) scale(.82);
+}
+.ep-loading-content .ep-logo-shape {
+  animation: none !important;
+}
+.ep-loading-content .ep-logo-wordmark {
+  animation: none !important;
+  opacity: 0;
+  visibility: hidden;
+}
+.ep-loading-content .ep-loading-caption {
+  opacity: 0;
+  visibility: hidden;
+}
