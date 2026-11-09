@@ -64,11 +64,16 @@
   color: #0f4c5c !important;
 }
 
+.ep-auth-modal h1 {
+  text-align: center;
+}
+
 .ep-auth-modal h1 + p {
   max-width: 360px;
-  margin-top: 9px;
+  margin: 9px auto 0;
   color: #405653 !important;
   line-height: 1.6;
+  text-align: center;
 }
 
 .ep-auth-modal div:has(> form) {
