@@ -220,3 +220,166 @@ html.dark .dashboard-shell {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* ---------- Dashboard Monitoring Experience ---------- */
+.dashboard-shell main > div > .relative.mb-5 {
+  min-height: 4rem;
+  border-color: var(--ep-line);
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--ep-accent-tint), transparent 58%),
+    var(--ep-surface);
+  box-shadow: 0 12px 32px -26px rgba(15,23,42,.32);
+  backdrop-filter: blur(14px);
+}
+.dashboard-shell .dashboard-panel,
+.dashboard-shell .dashboard-kpi {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--ep-line);
+  background: var(--ep-surface);
+  box-shadow: 0 18px 44px -34px rgba(15,23,42,.30);
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease, background-color .22s ease;
+}
+.dashboard-shell .dashboard-panel::before,
+.dashboard-shell .dashboard-kpi::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ep-accent), transparent);
+  opacity: .48;
+  pointer-events: none;
+}
+.dashboard-shell .dashboard-panel-icon {
+  background: var(--ep-accent-tint);
+  color: var(--ep-accent);
+}
+.dashboard-shell .dashboard-panel h3 {
+  color: var(--ep-text, var(--water-deep));
+  letter-spacing: -.025em;
+}
+.dashboard-shell .dashboard-kpi {
+  min-height: 142px;
+  padding: 1.2rem 1.3rem;
+}
+.dashboard-shell .dashboard-kpi > div:nth-child(2) {
+  font-size: clamp(1.65rem, 2.2vw, 2rem);
+  letter-spacing: -.045em;
+  line-height: 1.15;
+  color: var(--ep-text, var(--water-deep));
+}
+.dashboard-shell .dashboard-kpi > div:first-child > div:first-child {
+  letter-spacing: .09em;
+  color: var(--ep-text-muted);
+}
+.dashboard-shell .dashboard-kpi > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 1.5rem;
+  font-size: .78rem;
+  line-height: 1.35;
+}
+.dashboard-shell .dashboard-sensor-gauge {
+  min-width: 0;
+  border-color: var(--ep-line);
+  border-radius: 1rem;
+  background: linear-gradient(155deg,var(--ep-surface),var(--ep-tint));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.dashboard-shell .dashboard-sensor-gauge svg {
+  filter: drop-shadow(0 5px 8px rgba(37,99,235,.10));
+}
+.dashboard-shell .dashboard-trend-chart {
+  border: 1px solid var(--ep-line);
+  border-radius: 1rem;
+  padding: 1rem;
+  background:
+    radial-gradient(ellipse at 90% 0%,var(--ep-accent-tint),transparent 48%),
+    var(--ep-tint);
+}
+.dashboard-shell .dashboard-trend-chart svg {
+  display: block;
+  overflow: visible;
+}
+.dashboard-shell .dashboard-trend-chart polyline {
+  stroke: var(--ep-accent);
+  filter: drop-shadow(0 3px 4px rgba(37,99,235,.18));
+}
+.dashboard-shell .dashboard-trend-chart circle[stroke="var(--coral)"] {
+  stroke: var(--ep-accent);
+}
+.dashboard-shell .dashboard-trend-chart circle[fill="var(--ep-surface)"] {
+  fill: var(--ep-surface);
+}
+.dashboard-shell .dashboard-trend-chart [role="button"]:focus-visible {
+  outline: none;
+  stroke: var(--ep-accent);
+  stroke-width: 2;
+}
+.dashboard-shell .dashboard-hover {
+  border-color: var(--ep-line);
+  background: var(--ep-surface);
+}
+.dashboard-shell .dashboard-hover:hover {
+  border-color: var(--ep-accent);
+  background: color-mix(in srgb,var(--ep-surface) 94%,var(--ep-accent));
+  box-shadow: 0 14px 28px -22px rgba(37,99,235,.34);
+}
+.dashboard-shell main > div > .mb-7.flex {
+  border-color: var(--ep-line);
+}
+.dashboard-shell main > div > .mb-7.flex h1 {
+  letter-spacing: -.045em;
+}
+.dashboard-shell main :is(button,a):focus-visible {
+  outline: 2px solid var(--ep-accent);
+  outline-offset: 3px;
+}
+html.dark .dashboard-shell .dashboard-panel,
+html.dark .dashboard-shell .dashboard-kpi {
+  box-shadow: 0 20px 48px -32px rgba(0,0,0,.72);
+}
+html.dark .dashboard-shell .dashboard-sensor-gauge {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+}
+html.dark .dashboard-shell .dashboard-trend-chart {
+  background:
+    radial-gradient(ellipse at 90% 0%,rgba(96,165,250,.13),transparent 48%),
+    var(--ep-tint);
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .dashboard-shell .dashboard-panel:hover,
+  .dashboard-shell .dashboard-kpi:hover,
+  .dashboard-shell .dashboard-sensor-gauge:hover {
+    transform: translateY(-3px);
+    border-color: var(--ep-accent);
+    box-shadow: 0 24px 48px -32px rgba(37,99,235,.28);
+  }
+}
+@media (max-width: 767px) {
+  .dashboard-shell .dashboard-panel {
+    padding: 1rem;
+    border-radius: 1.1rem;
+  }
+  .dashboard-shell .dashboard-panel > div:first-child {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .dashboard-shell .dashboard-panel h3 {
+    font-size: 1rem;
+  }
+  .dashboard-shell .dashboard-kpi {
+    min-height: 126px;
+    padding: 1rem;
+  }
+  .dashboard-shell .dashboard-sensor-gauge {
+    padding: .8rem .5rem;
+  }
+  .dashboard-shell .dashboard-trend-chart {
+    padding: .75rem;
+  }
+}
