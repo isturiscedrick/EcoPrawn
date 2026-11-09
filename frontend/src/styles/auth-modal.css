@@ -622,3 +622,29 @@ html.dark .ep-auth-modal input:focus-visible { outline-color: #60a5fa !important
   }
   html.dark .ep-auth-modal::before { background: #60a5fa !important; opacity: .7 !important; }
 }
+
+/* Desktop modal: keep long forms scrollable without showing a scrollbar.
+   The overlay itself never scrolls; only the dialog panel can scroll if needed. */
+@media (min-width: 640px) {
+  .ep-auth-overlay {
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    padding: 24px !important;
+  }
+
+  .ep-auth-modal {
+    max-height: calc(100dvh - 48px) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none;
+  }
+
+  .ep-auth-modal::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
