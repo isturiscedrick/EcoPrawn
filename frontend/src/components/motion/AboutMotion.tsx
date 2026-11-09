@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
+import { bindPublicHoverMotion } from "./PublicHoverMotion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { animate, stagger } from "animejs";
 
@@ -236,7 +237,10 @@ export function AboutMotion() {
         cleanups.push(() => sectionAccentObserver?.disconnect());
       }, root);
 
+      const cleanupSharedHover = bindPublicHoverMotion(root);
+
       return () => {
+        cleanupSharedHover();
         cleanups.forEach((cleanup) => cleanup());
         ctx.revert();
       };
