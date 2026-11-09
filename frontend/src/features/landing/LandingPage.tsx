@@ -390,6 +390,92 @@ export function LandingPage() {
           </div>
         </section>
 
+        {/* DASHBOARD PREVIEW: illustrative sample values, not live telemetry. */}
+        <section
+          id="dashboard-preview"
+          aria-labelledby="dashboard-preview-title"
+          className="ep-dashboard-preview border-y border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-20 sm:px-8 sm:py-24"
+        >
+          <div className="mx-auto grid w-full max-w-[1440px] items-center gap-10 lg:grid-cols-[.82fr_1.18fr] lg:gap-16">
+            <div data-reveal="" className="max-w-[34rem]">
+              <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
+                <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
+                Inside the platform
+              </div>
+              <h2
+                id="dashboard-preview-title"
+                className="ep-font-display text-[clamp(30px,4vw,48px)] font-semibold leading-[1.08] tracking-tight text-[var(--ep-text)]"
+              >
+                A clearer picture of every tank.
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-[var(--ep-text-muted)] sm:text-lg">
+                Bring key water-quality readings and operating context into one view, so your team can spot changes and make informed decisions.
+              </p>
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                <AuthLink className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--ep-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] shadow-lg shadow-blue-600/15 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-accent-hover)] ${focusRing}`}>
+                  Explore dashboard <Icon name="arrow-up-right" size={16} />
+                </AuthLink>
+                <span className="text-xs text-[var(--ep-text-muted)]">Illustrative interface preview</span>
+              </div>
+            </div>
+
+            <div className="ep-dashboard-preview-window min-w-0 overflow-hidden rounded-[1.5rem] border border-[var(--ep-line)] bg-[var(--ep-surface)] shadow-[0_30px_80px_-42px_rgba(15,23,42,.42)]" aria-label="Illustrative EcoPrawn monitoring dashboard preview">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--ep-line)] px-4 py-4 sm:px-6">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--ep-accent)] text-white"><Icon name="activity" size={19} /></span>
+                  <div>
+                    <p className="text-sm font-bold text-[var(--ep-text)]">Farm overview</p>
+                    <p className="text-xs text-[var(--ep-text-muted)]">Tank 1 · Monitoring snapshot</p>
+                  </div>
+                </div>
+                <span className="inline-flex items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-tint)] px-3 py-1.5 text-xs font-semibold text-[var(--ep-text-muted)]">
+                  <span className="h-2 w-2 rounded-full bg-[var(--ep-accent)]" />
+                  Sample preview
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-3 sm:p-5">
+                {heroReadouts.slice(0, 3).map((reading) => (
+                  <div key={reading.label} className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                    <p className="text-xs font-medium text-[var(--ep-text-muted)]">{reading.label}</p>
+                    <p className="mt-2 text-2xl font-bold tracking-tight tabular-nums text-[var(--ep-text)]">
+                      {reading.value}<span className="ml-1 text-xs font-semibold text-[var(--ep-text-muted)]">{heroReadoutUnits[reading.label]}</span>
+                    </p>
+                    <p className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[var(--ep-accent)]">
+                      <Icon name="check" size={12} /> Within sample target
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid gap-4 px-4 pb-5 sm:grid-cols-[1.4fr_.8fr] sm:px-5">
+                <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-sm font-semibold text-[var(--ep-text)]">Water quality trend</p>
+                    <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--ep-text-muted)]">Illustrative</span>
+                  </div>
+                  <div className="ep-preview-chart mt-4 flex h-28 items-end gap-2" aria-hidden="true">
+                    {[34, 48, 42, 62, 54, 73, 66, 84, 76, 92, 82, 96].map((height, index) => (
+                      <span key={index} style={{ height: `${height}%` }} />
+                    ))}
+                  </div>
+                  <div className="mt-2 flex justify-between text-[10px] text-[var(--ep-text-muted)]"><span>Earlier</span><span>Latest sample</span></div>
+                </div>
+                <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                  <p className="text-sm font-semibold text-[var(--ep-text)]">Farm systems</p>
+                  <div className="mt-4 space-y-3">
+                    <div className="flex items-center justify-between gap-2 text-xs"><span className="text-[var(--ep-text-muted)]">Water monitoring</span><span className="font-semibold text-[var(--ep-accent)]">Connected</span></div>
+                    <div className="h-1.5 overflow-hidden rounded-full bg-[var(--ep-line)]"><span className="block h-full w-[88%] rounded-full bg-[var(--ep-accent)]" /></div>
+                    <div className="flex items-center justify-between gap-2 text-xs"><span className="text-[var(--ep-text-muted)]">Growth insights</span><span className="font-semibold text-[var(--ep-text)]">Available</span></div>
+                    <div className="h-1.5 overflow-hidden rounded-full bg-[var(--ep-line)]"><span className="block h-full w-[72%] rounded-full bg-[var(--ep-accent)]/70" /></div>
+                    <p className="border-t border-[var(--ep-line)] pt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Concept preview only. Values and status are illustrative, not live farm data.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* PROCESS: four stages in a responsive, static grid */}
         <section
           id="process"
