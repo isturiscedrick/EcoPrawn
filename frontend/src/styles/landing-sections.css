@@ -223,3 +223,133 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
 .ep-about-page .ep-about-objective {
   min-width: 0;
 }
+
+
+/* ==========================================================================
+   Editorial aquaculture hero — adapted from the supplied smart-agriculture
+   reference while retaining EcoPrawn's monochrome + blue 60/30/10 palette.
+   ========================================================================== */
+.ep-business-landing .ep-hero {
+  background:
+    radial-gradient(ellipse at 82% 44%, rgba(37,99,235,.11), transparent 38%),
+    linear-gradient(135deg, var(--ep-bg) 0%, var(--ep-surface) 62%, var(--ep-tint) 100%);
+}
+html.dark .ep-business-landing .ep-hero {
+  background:
+    radial-gradient(ellipse at 78% 48%, rgba(96,165,250,.16), transparent 40%),
+    linear-gradient(135deg, #090d16 0%, #111827 68%, #0b1220 100%);
+}
+.ep-business-landing .ep-hero-layout {
+  min-height: min(790px, calc(100svh - 76px));
+}
+.ep-business-landing .ep-hero-copy { position: relative; z-index: 2; }
+.ep-business-landing .ep-hero-headline-primary,
+.ep-business-landing .ep-hero-headline-secondary { display: block; }
+.ep-business-landing .ep-hero-showcase { min-width: 0; }
+.ep-business-landing .ep-showcase-frame {
+  overflow: hidden;
+  border: 1px solid rgba(148,163,184,.32);
+  border-radius: 28px;
+  background: var(--ep-surface);
+  box-shadow: 0 34px 90px -48px rgba(15,23,42,.38), 0 8px 24px -18px rgba(37,99,235,.2);
+}
+.ep-business-landing .ep-showcase-topbar,
+.ep-business-landing .ep-showcase-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 16px 20px;
+  color: var(--ep-text-muted); font-size: 10px; font-weight: 800;
+  letter-spacing: .14em;
+}
+.ep-business-landing .ep-showcase-topbar { border-bottom: 1px solid var(--ep-line); }
+.ep-business-landing .ep-showcase-live-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+}
+html.dark .ep-business-landing .ep-showcase-live-dot { background: #60a5fa; box-shadow: 0 0 0 4px rgba(96,165,250,.16); }
+.ep-business-landing .ep-showcase-device { color: var(--ep-accent); }
+.ep-business-landing .ep-showcase-water {
+  position: relative; min-height: 320px; overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(145deg,#0b1c35 0%,#123d70 48%,#1761a4 100%);
+}
+.ep-business-landing .ep-showcase-water-grid {
+  position: absolute; inset: 0; opacity: .22;
+  background-image: linear-gradient(rgba(219,234,254,.2) 1px,transparent 1px),linear-gradient(90deg,rgba(219,234,254,.2) 1px,transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(90deg,transparent,#000 30%,#000 85%,transparent);
+}
+.ep-business-landing .ep-showcase-water-orbit {
+  position: absolute; left: 54%; top: 46%; aspect-ratio: 1; border: 1px solid rgba(191,219,254,.26);
+  border-radius: 50%; transform: translate(-50%,-50%);
+}
+.ep-business-landing .ep-showcase-water-orbit-one { width: min(66%,390px); }
+.ep-business-landing .ep-showcase-water-orbit-two { width: min(46%,270px); }
+.ep-business-landing .ep-showcase-water-glow {
+  position: absolute; width: 240px; height: 240px; left: 54%; top: 46%;
+  transform: translate(-50%,-50%); border-radius: 50%;
+  background: radial-gradient(circle,rgba(96,165,250,.34),rgba(37,99,235,.08) 48%,transparent 72%);
+  filter: blur(4px);
+}
+.ep-business-landing .ep-showcase-wave {
+  position: absolute; inset: auto 0 0; width: 100%; height: 72%; opacity: .95;
+}
+.ep-business-landing .ep-showcase-water-label {
+  position: absolute; left: clamp(20px,4vw,38px); top: 28px; z-index: 2; color: #fff;
+}
+.ep-business-landing .ep-showcase-water-label span {
+  display: block; margin-bottom: 12px; color: #bfdbfe; font-size: 10px; font-weight: 800; letter-spacing: .18em;
+}
+.ep-business-landing .ep-showcase-water-label strong {
+  display: block; font-size: clamp(26px,3vw,40px); line-height: 1.04; letter-spacing: -.045em;
+}
+.ep-business-landing .ep-showcase-water-coordinate {
+  position: absolute; right: 20px; bottom: 18px; color: rgba(239,246,255,.72);
+  font-size: 9px; font-weight: 700; letter-spacing: .12em;
+}
+.ep-business-landing .ep-showcase-metrics {
+  display: grid; grid-template-columns: repeat(3,minmax(0,1fr));
+  border-bottom: 1px solid var(--ep-line);
+}
+.ep-business-landing .ep-showcase-metric {
+  min-width: 0; padding: 20px 18px; border-right: 1px solid var(--ep-line);
+}
+.ep-business-landing .ep-showcase-metric:last-child { border-right: 0; }
+.ep-business-landing .ep-showcase-metric > span {
+  display: block; margin-bottom: 8px; color: var(--ep-text-muted);
+  font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+}
+.ep-business-landing .ep-showcase-metric strong {
+  display: block; color: var(--ep-text); font-size: clamp(20px,2.2vw,28px);
+  line-height: 1; letter-spacing: -.04em; white-space: nowrap;
+}
+.ep-business-landing .ep-showcase-metric small {
+  margin-left: 4px; color: var(--ep-text-muted); font-size: 11px; font-weight: 600; letter-spacing: 0;
+}
+.ep-business-landing .ep-showcase-footer { padding-block: 14px; font-size: 10px; letter-spacing: .04em; }
+.ep-business-landing .ep-showcase-footer > span:first-child { display: inline-flex; align-items: center; gap: 8px; }
+.ep-business-landing .ep-showcase-footer svg { color: var(--ep-accent); }
+.ep-business-landing .ep-showcase-arrow {
+  display: grid; width: 34px; height: 34px; place-items: center; flex: 0 0 auto;
+  border-radius: 50%; background: var(--ep-tint); color: var(--ep-accent);
+}
+.ep-business-landing .ep-showcase-caption {
+  display: flex; justify-content: space-between; gap: 1rem; padding: 14px 4px 0;
+  color: var(--ep-text-muted); font-size: 9px; font-weight: 800; letter-spacing: .13em;
+}
+@media (max-width: 1023px) {
+  .ep-business-landing .ep-hero-layout { min-height: 0; }
+  .ep-business-landing .ep-hero-copy { text-align: center; }
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-showcase-frame { border-radius: 22px; }
+  .ep-business-landing .ep-showcase-water { min-height: 270px; }
+  .ep-business-landing .ep-showcase-metric { padding: 16px 10px; }
+  .ep-business-landing .ep-showcase-metric > span { font-size: 8px; letter-spacing: .04em; }
+  .ep-business-landing .ep-showcase-metric strong { font-size: clamp(17px,5vw,22px); }
+  .ep-business-landing .ep-showcase-caption { flex-direction: column; gap: 5px; }
+  .ep-business-landing .ep-showcase-footer { padding-inline: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-showcase-frame,
+  .ep-business-landing .ep-showcase-water-orbit { animation: none !important; }
+}
