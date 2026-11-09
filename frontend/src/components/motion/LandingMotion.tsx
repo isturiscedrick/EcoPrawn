@@ -350,6 +350,24 @@ export function LandingMotion() {
           stagger: 0.08,
         },
         {
+          trigger: "#capabilities",
+          targets: "#capabilities [data-business-card]",
+          y: 26,
+          stagger: 0.12,
+        },
+        {
+          trigger: "#dashboard-preview",
+          targets: "#dashboard-preview > div > :first-child, #dashboard-preview .ep-dashboard-preview-window",
+          y: 24,
+          stagger: 0.14,
+        },
+        {
+          trigger: "#process",
+          targets: "#process [data-process-track] > li",
+          y: 22,
+          stagger: 0.1,
+        },
+        {
           trigger: "[data-band]",
           targets: "[data-band] > div",
           y: 24,
@@ -369,6 +387,7 @@ export function LandingMotion() {
         if (!section || !items.length) return;
         gsap.from(items, {
           y,
+          autoAlpha: 0,
           duration: 0.75,
           stagger,
           ease: "power3.out",
