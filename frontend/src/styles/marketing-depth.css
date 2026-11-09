@@ -164,3 +164,90 @@ html.dark .ep-contact-page [data-contact-form] > form {
   .ep-about-orbit-b,.ep-contact-signal-ring-two { animation: none !important; }
   .ep-business-capabilities [data-business-card],.ep-about-mission-panel,.ep-contact-intro-panel { transition: none !important; }
 }
+
+
+/* Third-pass UX audit: keyboard clarity, touch behavior, and narrow layouts. */
+.ep-about-mission,
+.ep-about-journey,
+.ep-contact-intro {
+  scroll-margin-top: 6.5rem;
+}
+.ep-about-mission-panel h2,
+.ep-contact-intro-panel h2,
+.ep-about-journey h2,
+.ep-business-capabilities h2 {
+  text-wrap: balance;
+}
+.ep-about-mission-panel p,
+.ep-contact-intro-panel p,
+.ep-about-journey-card p,
+.ep-business-capabilities [data-business-card] p {
+  text-wrap: pretty;
+}
+.ep-about-mission-panel a:focus-visible,
+.ep-contact-page a:focus-visible,
+.ep-contact-page button:focus-visible,
+.ep-contact-page input:focus-visible,
+.ep-contact-page textarea:focus-visible,
+.ep-contact-page select:focus-visible {
+  outline: 2px solid var(--ep-accent);
+  outline-offset: 4px;
+  border-radius: .4rem;
+}
+.ep-contact-page input:focus-visible,
+.ep-contact-page textarea:focus-visible,
+.ep-contact-page select:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb,var(--ep-accent) 16%,transparent);
+}
+.ep-contact-page [data-contact-card] {
+  overflow-wrap: anywhere;
+}
+.ep-business-capabilities [data-business-card] h3 {
+  text-wrap: balance;
+}
+.ep-about-journey-card h3 {
+  text-wrap: balance;
+}
+@media (hover:none), (pointer:coarse) {
+  .ep-business-capabilities [data-business-card]:hover,
+  .ep-about-journey-card:hover,
+  .ep-about-mission-panel:hover,
+  .ep-contact-intro-panel:hover,
+  .ep-contact-page [data-contact-form] > form:hover {
+    transform: none !important;
+    box-shadow: inherit;
+    border-color: var(--ep-line);
+  }
+  .ep-business-capabilities [data-business-card]:hover::after {
+    transform: none;
+    border-color: rgba(37,99,235,.15);
+  }
+}
+@media (max-width: 639px) {
+  .ep-about-mission-panel {
+    border-radius: 1.4rem;
+    gap: 1.5rem;
+  }
+  .ep-about-journey-card {
+    min-height: 0;
+  }
+  .ep-contact-intro-panel {
+    border-radius: 1.4rem;
+  }
+  .ep-contact-page [data-contact-form] > form {
+    border-radius: 1.25rem;
+  }
+  .ep-business-capabilities [data-business-card] {
+    min-height: 0;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .ep-about-orbit-visual {
+    width: min(100%,330px);
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .ep-business-capabilities [data-business-card]::after {
+    transition: none !important;
+  }
+}
