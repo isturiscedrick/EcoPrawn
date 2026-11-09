@@ -596,3 +596,25 @@ html:not(.dark) .ep-business-landing #readings.ep-readings-section .ep-reading-c
   color: #111827 !important;
   -webkit-text-fill-color: #111827 !important;
 }
+
+
+/* Remove the blue atmospheric wash from Inside the platform. Match the
+   neutral canvas used by the surrounding landing-page sections exactly. */
+.ep-business-landing .ep-inside-platform {
+  background-color: #f8fafc !important;
+  background-image: none !important;
+}
+.ep-business-landing .ep-inside-platform::before {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+html.dark .ep-business-landing .ep-inside-platform {
+  background-color: #090d16 !important;
+  background-image: none !important;
+}
+html.dark .ep-business-landing .ep-inside-platform::before {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
