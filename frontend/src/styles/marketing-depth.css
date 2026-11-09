@@ -348,3 +348,34 @@ html.dark .ep-business-landing #readings [data-reading] > div:first-child > span
   border-color: rgba(203,213,225,.34);
   background-color: rgba(255,255,255,.08);
 }
+
+/* Shared public-page hover motion: GSAP owns transform timing on every page.
+   Remove older per-page transform transitions so they cannot stack or race. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(
+  main article,
+  main [data-reading],
+  main [data-step],
+  main [data-hover-lift],
+  main [data-business-card],
+  main [data-contact-card],
+  main .ep-stats-panel > div,
+  main [data-band],
+  main [data-contact-form],
+  main [data-contact-form] > form,
+  main .ep-about-objective,
+  main .ep-about-mission-panel,
+  main .ep-about-journey-card,
+  main .ep-contact-intro-panel,
+  main #process ol > li,
+  [data-site-footer] .grid > div
+) {
+  transition-property: background-color, border-color, color, box-shadow !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(main a,main button,#site-header nav a,[data-site-footer] nav a) {
+  transition-property: background-color, border-color, color, box-shadow !important;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-business-capabilities [data-business-card]:hover::after {
+    transform: none;
+  }
+}
