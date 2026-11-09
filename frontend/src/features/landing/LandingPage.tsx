@@ -435,9 +435,9 @@ export function LandingPage() {
                 Bring key water-quality readings and operating context into one view, so your team can spot changes and make informed decisions.
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
-                <AuthLink className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--ep-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] shadow-lg shadow-blue-600/15 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-accent-hover)] ${focusRing}`}>
+                <Link to="/dashboard" className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--ep-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] shadow-lg shadow-blue-600/15 transition-colors duration-200 hover:bg-[var(--ep-accent-hover)] ${focusRing}`}>
                   Explore dashboard <Icon name="arrow-up-right" size={16} />
-                </AuthLink>
+                </Link>
                 <span className="text-xs text-[var(--ep-text-muted)]">Illustrative interface preview</span>
               </div>
             </div>
