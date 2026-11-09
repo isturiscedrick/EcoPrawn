@@ -223,8 +223,7 @@ export function LandingMotion() {
           );
         });
 
-      // No dashboard-preview animation here: the current landing page
-      // intentionally has no preview section, so avoid registering dead triggers.
+      // The dashboard preview has its own heading, sample KPI cards and CSS chart bars below.
 
       const hoverCleanups: Array<() => void> = [];
       const microAnimations: Array<{ revert: () => unknown }> = [];
@@ -567,54 +566,62 @@ export function LandingMotion() {
       // The readings heading already has a single masked reveal above.
       // Avoid a second GSAP tween on the same heading/paragraph transforms.
 
-      // 3. Preview heading + paragraph rise in.
-      gsap.from("#preview-title, #preview-title + p", {
-        y: 20,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: '[aria-labelledby="preview-title"]',
-          start: "top 80%",
-          once: true,
-        },
-      });
+      // Dashboard preview: animate the real heading, sample KPI tiles and CSS chart bars.
+      const dashboardPreview = document.querySelector<HTMLElement>("#dashboard-preview");
+      const previewHeading = dashboardPreview?.querySelector<HTMLElement>("#dashboard-preview-title");
+      const previewLead = previewHeading?.nextElementSibling as HTMLElement | null;
+      if (previewHeading) {
+        gsap.from([previewHeading, ...(previewLead ? [previewLead] : [])], {
+          y: 22,
+          autoAlpha: 0,
+          duration: 0.68,
+          stagger: 0.1,
+          ease: "power3.out",
+          clearProps: "all",
+          scrollTrigger: {
+            trigger: previewHeading,
+            start: "top 84%",
+            once: true,
+          },
+        });
+      }
 
-      // 4. Preview KPI tiles pop up one by one after the card arrives.
-      gsap.from('[aria-labelledby="preview-title"] .grid-cols-3 > div', {
-        y: 16,
-        duration: 0.5,
-        stagger: 0.1,
-        delay: 0.4,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: '[aria-labelledby="preview-title"] .grid-cols-3',
-          start: "top 80%",
-          once: true,
-        },
-      });
-
-      // 5. Oxygen chart is revealed left to right, tied to scroll.
-      //    clip-path, not stroke-dash: the chart uses non-scaling strokes
-      //    on a stretched viewBox, which breaks the dash trick.
-      const chart = document.querySelector<SVGSVGElement>(
-        '[aria-labelledby="preview-title"] svg'
+      const previewReadings = dashboardPreview?.querySelectorAll<HTMLElement>(
+        ".ep-dashboard-preview-window > .grid > div"
       );
-      if (chart) {
-        gsap.fromTo(
-          chart,
-          { clipPath: "inset(0 100% 0 0)" },
-          {
-            clipPath: "inset(0 0% 0 0)",
-            ease: "none",
-            scrollTrigger: {
-              trigger: chart,
-              start: "top 85%",
-              end: "top 50%",
-              scrub: true,
-            },
-          }
-        );
+      if (previewReadings?.length) {
+        gsap.from(previewReadings, {
+          y: 18,
+          autoAlpha: 0,
+          duration: 0.52,
+          stagger: 0.09,
+          ease: "power3.out",
+          clearProps: "all",
+          scrollTrigger: {
+            trigger: previewReadings[0],
+            start: "top 88%",
+            once: true,
+          },
+        });
+      }
+
+      const previewBars = dashboardPreview?.querySelectorAll<HTMLElement>(
+        ".ep-preview-chart > span"
+      );
+      if (previewBars?.length) {
+        gsap.from(previewBars, {
+          scaleY: 0,
+          transformOrigin: "bottom",
+          duration: 0.7,
+          stagger: 0.045,
+          ease: "power3.out",
+          clearProps: "transform",
+          scrollTrigger: {
+            trigger: ".ep-preview-chart",
+            start: "top 88%",
+            once: true,
+          },
+        });
       }
     });
 
