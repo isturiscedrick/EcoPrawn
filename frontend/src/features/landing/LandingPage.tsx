@@ -176,8 +176,8 @@ export function LandingPage() {
                   className={`group inline-flex min-h-11 items-center justify-center gap-3 rounded-full border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] shadow-[0_8px_22px_-12px_rgba(37,99,235,.65)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
                 >
                   Open dashboard
-                  <span aria-hidden="true" className="grid h-6 w-6 place-items-center rounded-full bg-white/20 transition-transform duration-200 group-hover:translate-x-0.5">
-                    <Icon name="arrow-up-right" size={14} />
+                  <span aria-hidden="true" className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-current/20 bg-black/10 text-current transition-transform duration-200 group-hover:translate-x-0.5">
+                    <Icon name="arrow-up-right" size={16} strokeWidth={2.2} className="block shrink-0" />
                   </span>
                 </AuthLink>
               </div>
