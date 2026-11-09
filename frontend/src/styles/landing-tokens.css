@@ -106,12 +106,12 @@ html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary 
   -webkit-text-fill-color: #2563eb !important;
 }
 .ep-contact-page [data-page-hero-headline] > span:first-child {
-  color: #D94416 !important;
-  -webkit-text-fill-color: #D94416 !important;
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
 }
 .ep-contact-page [data-page-hero-headline] > span:last-child {
-  color: #0F4C5C !important;
-  -webkit-text-fill-color: #0F4C5C !important;
+  color: #2563eb !important;
+  -webkit-text-fill-color: #2563eb !important;
 }
 html.dark .ep-about-page [data-page-hero-headline] > span:first-child,
 html.dark .ep-contact-page [data-page-hero-headline] > span:first-child {

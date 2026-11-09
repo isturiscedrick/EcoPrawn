@@ -101,3 +101,76 @@ footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) { co
 html.dark footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) { color: #f8fafc !important; }
 footer[data-site-footer] nav a:hover { color: #2563eb !important; }
 html.dark footer[data-site-footer] nav a:hover { color: #60a5fa !important; }
+
+
+/* Final marketing-page cleanup: neutralize legacy green/teal utility colors. */
+:is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-deep: #111827;
+  --ep-on-deep: #ffffff;
+  --ep-on-deep-muted: #cbd5e1;
+  --ep-primary: #111827;
+  --ep-secondary: #1f2937;
+  --ep-accent: #2563eb;
+  --ep-accent-hover: #1d4ed8;
+}
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-deep: #090d16;
+  --ep-on-deep: #f8fafc;
+  --ep-on-deep-muted: #cbd5e1;
+  --ep-primary: #f8fafc;
+  --ep-secondary: #e2e8f0;
+  --ep-accent: #60a5fa;
+  --ep-accent-hover: #93c5fd;
+}
+/* Legacy Tailwind green/teal utility classes still present in marketing JSX. */
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="emerald-"],
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="green-"],
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="teal-"] {
+  --tw-text-opacity: 1;
+  --tw-bg-opacity: 1;
+  --tw-border-opacity: 1;
+  color: #1d4ed8 !important;
+  border-color: #2563eb !important;
+}
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-emerald-"],
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-green-"],
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-teal-"] {
+  background-color: #f1f5f9 !important;
+}
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="emerald-"],
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="green-"],
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="teal-"] {
+  color: #93c5fd !important;
+  border-color: #60a5fa !important;
+}
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-emerald-"],
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-green-"],
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-teal-"] {
+  background-color: #1f2937 !important;
+}
+
+/* Logo must be strictly monochrome on every page, including legacy footer rules. */
+html:not(.dark) .ep-logo,
+html:not(.dark) .ep-logo .ep-logo-wordmark {
+  --ep-logo-color: #111827 !important;
+  --ep-logo-text: #111827 !important;
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+html:not(.dark) .ep-logo .ep-logo-shrimp,
+html:not(.dark) .ep-logo .ep-logo-text {
+  fill: #111827 !important;
+  stroke: #111827 !important;
+}
+html.dark .ep-logo,
+html.dark .ep-logo .ep-logo-wordmark {
+  --ep-logo-color: #ffffff !important;
+  --ep-logo-text: #ffffff !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .ep-logo .ep-logo-shrimp,
+html.dark .ep-logo .ep-logo-text {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
