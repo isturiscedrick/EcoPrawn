@@ -379,3 +379,24 @@ html.dark .ep-business-landing #readings [data-reading] > div:first-child > span
     transform: none;
   }
 }
+
+/* Final light-theme contrast override for the Target ranges heading and copy.
+   The original section utilities and later deep-surface rules set on-deep
+   foreground colors, so use a narrowly scoped, higher-priority override. */
+html:not(.dark) .ep-business-landing #readings {
+  color: var(--ep-text) !important;
+  background-color: var(--ep-bg) !important;
+}
+html:not(.dark) .ep-business-landing #readings .max-w-\\[40rem\\] :is(div,h2,p),
+html:not(.dark) .ep-business-landing #readings .max-w-\\[40rem\\] h2,
+html:not(.dark) .ep-business-landing #readings .max-w-\\[40rem\\] p {
+  color: var(--ep-text) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+html:not(.dark) .ep-business-landing #readings .max-w-\\[40rem\\] > div {
+  color: var(--ep-accent) !important;
+}
+html:not(.dark) .ep-business-landing #readings .max-w-\\[40rem\\] p {
+  color: var(--ep-text-muted) !important;
+}
