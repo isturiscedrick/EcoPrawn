@@ -596,3 +596,89 @@ html.dark .ep-business-landing .ep-field-landscape {
     object-position: center;
   }
 }
+
+
+/* Full-bleed aquaculture pond photograph behind the complete landing hero. */
+.ep-business-landing .ep-aquaculture-hero {
+  min-height: clamp(640px,76vw,820px);
+  display: flex;
+  align-items: center;
+  background-color: #071a2b;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(5,16,29,.34) 0%,
+      rgba(5,20,36,.48) 42%,
+      rgba(5,18,32,.78) 100%
+    ),
+    url("https://cdn.agrimag.my/nQdab9130.jpeg");
+  background-size: cover;
+  background-position: center 54%;
+  background-repeat: no-repeat;
+}
+.ep-business-landing .ep-aquaculture-hero .ep-hero-atmosphere {
+  background:
+    linear-gradient(90deg,rgba(4,16,29,.20),transparent 55%,rgba(4,16,29,.12)),
+    linear-gradient(180deg,rgba(4,16,29,.12),transparent 34%,rgba(4,16,29,.22));
+}
+.ep-business-landing .ep-aquaculture-hero [data-hero="grid"] {
+  opacity: .10;
+  mix-blend-mode: screen;
+}
+.ep-business-landing .ep-aquaculture-hero [data-cross] {
+  opacity: .32;
+}
+.ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+  width: 100%;
+  padding-top: clamp(5.5rem,9vw,8rem);
+  padding-bottom: clamp(5rem,8vw,7rem);
+}
+.ep-business-landing .ep-aquaculture-hero .ep-field-hero-copy {
+  max-width: 980px;
+}
+.ep-business-landing .ep-aquaculture-hero .ep-field-hero-copy > p:first-child {
+  border-color: rgba(255,255,255,.36);
+  background: rgba(8,24,42,.48);
+  color: #dbeafe;
+  box-shadow: 0 12px 32px -18px rgba(0,0,0,.55);
+  backdrop-filter: blur(12px);
+}
+.ep-business-landing .ep-aquaculture-hero .ep-hero-headline-primary {
+  color: #fff;
+  text-shadow: 0 3px 24px rgba(0,0,0,.20);
+}
+.ep-business-landing .ep-aquaculture-hero .ep-hero-headline-secondary {
+  color: #93c5fd;
+  text-shadow: 0 3px 24px rgba(0,0,0,.22);
+}
+.ep-business-landing .ep-aquaculture-hero [data-hero="lead"] {
+  color: rgba(255,255,255,.88);
+  text-shadow: 0 2px 16px rgba(0,0,0,.3);
+}
+.ep-business-landing .ep-aquaculture-hero [data-hero="cta"] {
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+}
+html.dark .ep-business-landing .ep-aquaculture-hero {
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(3,10,20,.42) 0%,
+      rgba(3,12,24,.56) 48%,
+      rgba(3,10,20,.82) 100%
+    ),
+    url("https://cdn.agrimag.my/nQdab9130.jpeg");
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-aquaculture-hero {
+    min-height: 640px;
+    background-position: 52% center;
+  }
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-top: 5.5rem;
+    padding-bottom: 4.5rem;
+  }
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero-copy h1 {
+    font-size: clamp(2.5rem,10vw,3.7rem);
+    line-height: 1.02;
+  }
+}
