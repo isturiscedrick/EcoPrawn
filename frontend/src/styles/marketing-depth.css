@@ -503,3 +503,54 @@ html.dark .ep-business-landing .ep-readings-section [data-readings-bg] {
     radial-gradient(ellipse at 14% 12%, rgba(37,99,235,.20), transparent 42%),
     radial-gradient(ellipse at 88% 78%, rgba(96,165,250,.10), transparent 46%) !important;
 }
+
+
+/* Target ranges now uses the exact shared page surfaces and text tokens used
+   by the neighboring Capabilities section. Blue remains an accent only. */
+.ep-business-landing #readings.ep-readings-section {
+  color: var(--ep-text) !important;
+  background: var(--ep-bg) !important;
+  background-image: none !important;
+}
+.ep-business-landing #readings.ep-readings-section [data-readings-bg] {
+  background: none !important;
+}
+.ep-business-landing #readings.ep-readings-section .ep-readings-kicker {
+  color: var(--ep-accent) !important;
+}
+.ep-business-landing #readings.ep-readings-section .ep-readings-title {
+  color: var(--ep-text) !important;
+  -webkit-text-fill-color: var(--ep-text) !important;
+}
+.ep-business-landing #readings.ep-readings-section .ep-readings-description {
+  color: var(--ep-text-muted) !important;
+  -webkit-text-fill-color: var(--ep-text-muted) !important;
+}
+.ep-business-landing #readings.ep-readings-section .ep-reading-card {
+  color: var(--ep-text) !important;
+  border-color: var(--ep-line) !important;
+  background: var(--ep-surface) !important;
+  box-shadow: 0 16px 40px -34px rgba(15,23,42,.16) !important;
+}
+.ep-business-landing #readings.ep-readings-section .ep-reading-card :is(dt,dd,[data-countto]) {
+  color: var(--ep-text) !important;
+  -webkit-text-fill-color: var(--ep-text) !important;
+}
+.ep-business-landing #readings.ep-readings-section .ep-reading-card :is(p,dd > span:not([data-countto]),.text-xs) {
+  color: var(--ep-text-muted) !important;
+  -webkit-text-fill-color: var(--ep-text-muted) !important;
+}
+.ep-business-landing #readings.ep-readings-section .ep-reading-card > div:first-child > span {
+  color: var(--ep-accent) !important;
+  border-color: var(--ep-line) !important;
+  background: var(--ep-tint) !important;
+}
+.ep-business-landing #readings.ep-readings-section .ep-reading-card > div[aria-hidden="true"].relative {
+  background-color: var(--ep-tint) !important;
+}
+.ep-business-landing #readings.ep-readings-section > div:last-child {
+  color: var(--ep-text-muted) !important;
+}
+.ep-business-landing #readings.ep-readings-section > div:last-child span {
+  color: inherit !important;
+}
