@@ -36,8 +36,33 @@ export function ContactPage() {
           lead="Questions about EcoPrawn? Send us a message."
         />
 
+        <section className="ep-contact-intro px-4 pb-2 pt-12 sm:px-8 sm:pt-16">
+          <div className="ep-contact-intro-panel mx-auto grid w-full max-w-[1200px] gap-6 rounded-[1.75rem] border border-[var(--ep-line)] bg-[var(--ep-tint)] p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center lg:p-10">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[.16em] text-[var(--ep-accent)]">Start a conversation</p>
+              <h2 className="ep-font-display mt-3 max-w-[18ch] text-[clamp(1.75rem,3.8vw,2.75rem)] font-semibold leading-[1.08] tracking-[-.045em] text-[var(--ep-text)]">
+                Tell us what you want to understand better.
+              </h2>
+              <p className="mt-3 max-w-[42rem] text-sm leading-relaxed text-[var(--ep-text-muted)] sm:text-base">
+                Share a question about the platform, its monitoring systems, or the project. The details below help you identify the team behind EcoPrawn.
+              </p>
+            </div>
+            <div aria-hidden="true" className="ep-contact-signal">
+              <span className="ep-contact-signal-ring ep-contact-signal-ring-one" />
+              <span className="ep-contact-signal-ring ep-contact-signal-ring-two" />
+              <span className="ep-contact-signal-ring ep-contact-signal-ring-three" />
+              <span className="ep-contact-signal-core" />
+            </div>
+          </div>
+        </section>
+
         <section className={SECTION_PAD}>
           <div className="mx-auto max-w-[1200px]">
+            <div className="mb-5 max-w-[32rem]">
+              <p className="text-xs font-bold uppercase tracking-[.16em] text-[var(--ep-accent)]">Contact details</p>
+              <h2 className="ep-font-display mt-2 text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Find the right starting point.</h2>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">Use the form to send your message, and refer to the project details here.</p>
+            </div>
             <div className="grid grid-cols-1 items-stretch gap-5 sm:gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
               <Reveal>
                 <dl data-contact-details="" className="flex flex-col gap-4">
