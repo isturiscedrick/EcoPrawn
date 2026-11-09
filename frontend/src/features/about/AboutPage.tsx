@@ -43,6 +43,35 @@ export function AboutPage() {
 
         <SectionNav />
 
+        <section id="mission" className="ep-about-mission px-4 py-14 sm:px-8 sm:py-20">
+          <div className="ep-about-mission-panel mx-auto grid w-full max-w-[1200px] gap-8 overflow-hidden rounded-[2rem] border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 sm:p-10 lg:grid-cols-[1.1fr_.9fr] lg:items-center lg:p-14">
+            <div className="relative z-10">
+              <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
+                <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
+                Our purpose
+              </div>
+              <h2 className="ep-font-display max-w-[15ch] text-[clamp(2rem,4.5vw,3.75rem)] font-semibold leading-[1.04] tracking-[-.055em]">
+                Better visibility for every stage of shrimp farming.
+              </h2>
+              <p className="mt-5 max-w-[38rem] text-base leading-relaxed text-[var(--ep-text-muted)] sm:text-lg">
+                EcoPrawn brings water monitoring, growth observation, and farm operations into a connected workflow—helping teams see conditions more clearly and respond with context.
+              </p>
+              <a href="#systems" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--ep-accent)] transition-transform hover:translate-x-1">
+                Explore the connected systems <Icon name="arrow-down-right" size={17} />
+              </a>
+            </div>
+            <div aria-hidden="true" className="ep-about-orbit-visual">
+              <span className="ep-about-orbit ep-about-orbit-a" />
+              <span className="ep-about-orbit ep-about-orbit-b" />
+              <span className="ep-about-orbit ep-about-orbit-c" />
+              <span className="ep-about-orbit-core"><Icon name="droplets" size={34} /></span>
+              <span className="ep-about-orbit-tag ep-about-orbit-tag-top">WATER</span>
+              <span className="ep-about-orbit-tag ep-about-orbit-tag-right">INSIGHT</span>
+              <span className="ep-about-orbit-tag ep-about-orbit-tag-bottom">ACTION</span>
+            </div>
+          </div>
+        </section>
+
         {/* =========================================================
             OBJECTIVES
         ========================================================= */}
@@ -158,6 +187,38 @@ export function AboutPage() {
                 </Reveal>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="ep-about-journey px-4 py-14 sm:px-8 sm:py-20" aria-labelledby="ep-about-journey-title">
+          <div className="mx-auto w-full max-w-[1200px]">
+            <Reveal>
+              <div className="mb-10 max-w-[42rem]">
+                <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
+                  <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
+                  A connected workflow
+                </div>
+                <h2 id="ep-about-journey-title" className={heading}>From water conditions to informed action.</h2>
+                <p className={lead}>Each part contributes to a clearer picture of what is happening across the farm.</p>
+              </div>
+            </Reveal>
+            <ol className="ep-about-journey-grid grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { step: "01", title: "Observe", body: "Collect water-quality readings and monitor changing conditions.", icon: "activity" as const },
+                { step: "02", title: "Interpret", body: "Bring readings and growth observations into one operational view.", icon: "eye" as const },
+                { step: "03", title: "Coordinate", body: "Use operating context to guide aeration and feeding workflows.", icon: "sliders-horizontal" as const },
+                { step: "04", title: "Manage", body: "Include biofloc and effluent routing in the production picture.", icon: "leaf" as const },
+              ].map((item) => (
+                <li key={item.step} className="ep-about-journey-card rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 sm:p-6">
+                  <div className="mb-8 flex items-center justify-between">
+                    <span className="text-xs font-bold tracking-[.16em] text-[var(--ep-accent)]">{item.step}</span>
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name={item.icon} size={21} /></span>
+                  </div>
+                  <h3 className="ep-font-display text-xl font-semibold text-[var(--ep-text)]">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">{item.body}</p>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
