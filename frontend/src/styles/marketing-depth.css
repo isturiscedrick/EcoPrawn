@@ -630,3 +630,24 @@ html.dark .ep-business-landing #readings.ep-readings-section .ep-readings-kicker
   color: #111827 !important;
   -webkit-text-fill-color: #111827 !important;
 }
+
+
+/* Target ranges legend: the legend is the element immediately after the
+   readings grid, not the section's direct child. Set its text explicitly so
+   the deep-surface muted token cannot render pale text on the light canvas. */
+html:not(.dark) .ep-business-landing #readings.ep-readings-section dl + div {
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+}
+html:not(.dark) .ep-business-landing #readings.ep-readings-section dl + div span {
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+}
+html.dark .ep-business-landing #readings.ep-readings-section dl + div {
+  color: #cbd5e1 !important;
+  -webkit-text-fill-color: #cbd5e1 !important;
+}
+html.dark .ep-business-landing #readings.ep-readings-section dl + div span {
+  color: #cbd5e1 !important;
+  -webkit-text-fill-color: #cbd5e1 !important;
+}
