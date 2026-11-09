@@ -313,7 +313,7 @@ export function LandingMotion() {
 
       // Scroll-linked section headings: masked upward reveal with a subtle
       // accent underline that draws as each section reaches the viewport.
-      ["#readings-title", "#preview-title", "#process h2"].forEach((selector) => {
+      ["#readings-title", "#process h2"].forEach((selector) => {
         const heading = document.querySelector<HTMLElement>(selector);
         if (!heading) return;
         const underline = heading.parentElement?.querySelector<HTMLElement>("[data-heading-accent]");
