@@ -1,0 +1,110 @@
+/* ==========================================================================
+   EcoPrawn marketing depth — original CSS visuals and editorial page rhythm.
+   Scoped to the public pages; no external imagery or fabricated contact data.
+   ========================================================================== */
+
+.ep-platform-ribbon { position: relative; isolation: isolate; }
+.ep-platform-ribbon-item { position: relative; min-width: 0; }
+.ep-platform-ribbon-number {
+  display: grid; width: 2.5rem; height: 2.5rem; flex: 0 0 auto; place-items: center;
+  border: 1px solid var(--ep-line); border-radius: .85rem; background: var(--ep-tint);
+  color: var(--ep-accent); font-size: .72rem; font-weight: 800; letter-spacing: .08em;
+}
+.ep-platform-ribbon-divider {
+  position: absolute; top: 50%; right: 0; width: 1px; height: 2rem;
+  transform: translateY(-50%); background: var(--ep-line);
+}
+
+.ep-about-mission-panel {
+  position: relative; isolation: isolate;
+  box-shadow: 0 30px 90px -64px rgba(15,23,42,.42);
+}
+.ep-about-mission-panel::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse at 85% 50%,rgba(37,99,235,.09),transparent 42%);
+}
+html.dark .ep-about-mission-panel::before {
+  background: radial-gradient(ellipse at 85% 50%,rgba(96,165,250,.14),transparent 44%);
+}
+.ep-about-orbit-visual {
+  position: relative; display: grid; width: min(100%,390px); aspect-ratio: 1;
+  place-items: center; justify-self: center; isolation: isolate;
+}
+.ep-about-orbit {
+  position: absolute; left: 50%; top: 50%; aspect-ratio: 1; border: 1px solid rgba(37,99,235,.24);
+  border-radius: 50%; transform: translate(-50%,-50%);
+}
+.ep-about-orbit-a { width: 96%; }
+.ep-about-orbit-b { width: 70%; border-style: dashed; opacity: .8; }
+.ep-about-orbit-c { width: 43%; border-color: rgba(37,99,235,.38); }
+.ep-about-orbit-core {
+  display: grid; width: 5.5rem; height: 5.5rem; place-items: center; border: 1px solid rgba(37,99,235,.32);
+  border-radius: 1.7rem; background: linear-gradient(145deg,#2563eb,#60a5fa); color: white;
+  box-shadow: 0 18px 55px -20px rgba(37,99,235,.7);
+}
+.ep-about-orbit-tag {
+  position: absolute; z-index: 2; padding: .5rem .75rem; border: 1px solid var(--ep-line);
+  border-radius: 999px; background: var(--ep-surface); color: var(--ep-text-muted);
+  box-shadow: 0 12px 30px -22px rgba(15,23,42,.45); font-size: .62rem; font-weight: 800; letter-spacing: .14em;
+}
+.ep-about-orbit-tag-top { top: 8%; left: 50%; transform: translateX(-50%); }
+.ep-about-orbit-tag-right { right: 0; top: 50%; transform: translateY(-50%); }
+.ep-about-orbit-tag-bottom { bottom: 8%; left: 50%; transform: translateX(-50%); }
+.ep-about-journey { background: var(--ep-tint); }
+.ep-about-journey-card {
+  position: relative; overflow: hidden; transition: transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.ep-about-journey-card::after {
+  content: ""; position: absolute; right: -2.5rem; bottom: -3rem; width: 8rem; height: 8rem;
+  border: 1px solid rgba(37,99,235,.16); border-radius: 50%; pointer-events: none;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .ep-about-journey-card:hover { transform: translateY(-5px); border-color: var(--ep-accent); box-shadow: 0 22px 48px -34px rgba(37,99,235,.34); }
+  .ep-platform-ribbon-item:hover .ep-platform-ribbon-number { border-color: var(--ep-accent); }
+}
+
+.ep-contact-intro-panel {
+  position: relative; isolation: isolate; overflow: hidden;
+  box-shadow: 0 24px 70px -56px rgba(15,23,42,.34);
+}
+.ep-contact-intro-panel::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse at 90% 50%,rgba(37,99,235,.12),transparent 42%);
+}
+html.dark .ep-contact-intro-panel::before {
+  background: radial-gradient(ellipse at 90% 50%,rgba(96,165,250,.16),transparent 45%);
+}
+.ep-contact-signal {
+  position: relative; width: 9rem; height: 9rem; flex: 0 0 auto; justify-self: center;
+  display: grid; place-items: center; isolation: isolate;
+}
+.ep-contact-signal-ring {
+  position: absolute; left: 50%; top: 50%; aspect-ratio: 1; border: 1px solid rgba(37,99,235,.34);
+  border-radius: 50%; transform: translate(-50%,-50%);
+}
+.ep-contact-signal-ring-one { width: 100%; }
+.ep-contact-signal-ring-two { width: 70%; border-style: dashed; }
+.ep-contact-signal-ring-three { width: 40%; border-color: rgba(37,99,235,.56); }
+.ep-contact-signal-core {
+  width: 1rem; height: 1rem; border-radius: 50%; background: var(--ep-accent);
+  box-shadow: 0 0 0 12px rgba(37,99,235,.12),0 0 38px rgba(37,99,235,.42);
+}
+.ep-contact-page [data-contact-card] {
+  min-height: 6.5rem; border-radius: 1.25rem;
+}
+.ep-contact-page [data-contact-form] > form {
+  border: 1px solid var(--ep-line); border-radius: 1.5rem;
+  box-shadow: 0 24px 70px -54px rgba(15,23,42,.42);
+}
+html.dark .ep-contact-page [data-contact-form] > form {
+  background: var(--ep-surface);
+}
+@media (max-width: 639px) {
+  .ep-about-orbit-visual { width: min(100%,290px); }
+  .ep-about-orbit-tag { font-size: .55rem; padding: .4rem .6rem; }
+  .ep-contact-signal { width: 6rem; height: 6rem; }
+  .ep-platform-ribbon-item { padding-inline: 0; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .ep-about-journey-card,.ep-platform-ribbon-number { transition: none !important; }
+}
