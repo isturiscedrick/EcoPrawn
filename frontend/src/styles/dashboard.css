@@ -447,3 +447,106 @@ html.dark .dashboard-shell .dashboard-trend-chart {
   }
   .dashboard-shell .dashboard-trend-chart circle[role="button"] { transition: none; }
 }
+
+
+/* ---------- Responsive, accessibility & rendering safeguards ---------- */
+/* Keep chart interaction targets visible to keyboard users. */
+.dashboard-shell .dashboard-trend-chart circle[role="button"] {
+  cursor: pointer;
+  outline: none;
+}
+.dashboard-shell .dashboard-trend-chart circle[role="button"]:focus-visible + circle {
+  stroke: var(--ep-accent);
+  stroke-width: 4;
+}
+.dashboard-shell :is(button, a, input, select, textarea) {
+  scroll-margin-block: 1rem;
+}
+.dashboard-shell :is(button, a):focus-visible {
+  border-radius: .65rem;
+  outline: 3px solid color-mix(in srgb, var(--ep-accent) 72%, white);
+  outline-offset: 3px;
+}
+.dashboard-shell .dashboard-panel,
+.dashboard-shell .dashboard-kpi,
+.dashboard-shell .dashboard-sensor-gauge,
+.dashboard-shell .dashboard-trend-chart {
+  min-width: 0;
+}
+.dashboard-shell .dashboard-trend-chart {
+  contain: layout style;
+}
+.dashboard-shell .dashboard-trend-chart svg {
+  width: 100%;
+  height: auto;
+  min-height: 10rem;
+  aspect-ratio: 2.8 / 1;
+}
+.dashboard-shell .dashboard-trend-chart circle[role="button"] {
+  vector-effect: non-scaling-stroke;
+}
+.dashboard-shell .dashboard-kpi button,
+.dashboard-shell .dashboard-panel button {
+  min-height: 44px;
+  min-width: 44px;
+}
+.dashboard-shell [aria-pressed="true"] {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ep-accent) 24%, transparent);
+}
+@media (max-width: 767px) {
+  .dashboard-shell main > div > .mb-7.flex {
+    align-items: flex-start;
+    gap: 1rem;
+    padding-bottom: 1.1rem;
+  }
+  .dashboard-shell main > div > .mb-7.flex > div:last-child {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .dashboard-shell .dashboard-trend-chart svg {
+    min-height: 9rem;
+    aspect-ratio: 2 / 1;
+  }
+  .dashboard-shell .dashboard-panel :is(button, a) {
+    min-height: 44px;
+  }
+}
+@media (max-width: 390px) {
+  .dashboard-shell .dashboard-kpi {
+    min-height: 0;
+  }
+  .dashboard-shell .dashboard-kpi > div:nth-child(2) {
+    font-size: 1.5rem;
+  }
+  .dashboard-shell .dashboard-trend-chart {
+    padding: .65rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dashboard-shell .dashboard-kpi {
+    min-height: 132px;
+  }
+  .dashboard-shell .dashboard-sensor-gauge {
+    padding-inline: .5rem;
+  }
+}
+@media print {
+  .dashboard-shell aside,
+  .dashboard-shell main > div > .relative.mb-5,
+  .dashboard-shell main button {
+    display: none !important;
+  }
+  .dashboard-shell,
+  .dashboard-shell main,
+  .dashboard-shell .dashboard-panel,
+  .dashboard-shell .dashboard-kpi {
+    color: #111 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+  .dashboard-shell .dashboard-panel,
+  .dashboard-shell .dashboard-kpi {
+    break-inside: avoid;
+    border: 1px solid #bbb !important;
+  }
+}
