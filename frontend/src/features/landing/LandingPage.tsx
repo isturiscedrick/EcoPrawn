@@ -185,7 +185,7 @@ export function LandingPage() {
 
             <figure data-hero="landscape" className="ep-field-landscape relative mt-8 overflow-hidden sm:mt-10 lg:mt-12">
               <img
-                src="https://images.unsplash.com/photo-1769365246446-6eefaa834b11?auto=format&fit=crop&w=2400&q=85"
+                src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2400&q=85"
                 alt="Expansive green rice fields stretching toward a tree-lined horizon beneath an open sky"
                 className="h-full w-full object-cover"
                 fetchPriority="high"
