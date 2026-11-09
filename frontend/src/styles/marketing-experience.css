@@ -1188,3 +1188,16 @@ html.dark .ep-business-landing .ep-preview-chart > span {
 .ep-business-landing #process [data-step] > p {
   color: var(--ep-text-muted);
 }
+
+
+/* CTA band heading contrast: global marketing heading rules must not
+   override the light foreground on this deep-blue surface. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] {
+  color: var(--ep-on-deep, #f4f7f6);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] h2 {
+  color: var(--ep-on-deep, #f4f7f6) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] p {
+  color: var(--ep-on-deep-muted, #cfe2e6);
+}
