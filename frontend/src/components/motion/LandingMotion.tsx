@@ -194,16 +194,6 @@ export function LandingMotion() {
       const homeRoot = document.querySelector<HTMLElement>(".ep-landing:not(.ep-about-page):not(.ep-contact-page)");
       if (homeRoot) {
         homeRoot.querySelectorAll<HTMLElement>("#top [data-hero=cta] a, #top [data-hero=cta] button").forEach((control) => {
-          // GSAP owns the subtle magnetic x/y offset; Anime.js owns the
-          // icon reaction and small hover lift, so the transform channels do not compete.
-          const magnetX = gsap.quickTo(control, "x", { duration: .36, ease: "power3.out", overwrite: "auto" });
-          const magnetY = gsap.quickTo(control, "y", { duration: .36, ease: "power3.out", overwrite: "auto" });
-          const move = (event: PointerEvent) => {
-            const rect = control.getBoundingClientRect();
-            magnetX(((event.clientX - rect.left - rect.width / 2) / Math.max(rect.width / 2, 1)) * 5);
-            magnetY(((event.clientY - rect.top - rect.height / 2) / Math.max(rect.height / 2, 1)) * 4);
-          };
-          const resetMagnet = () => { magnetX(0); magnetY(0); };
           const enter = () => {
             microAnimations.push(animate(control, {
               scale: 1.025, duration: 230, ease: "out(3)",
@@ -218,16 +208,11 @@ export function LandingMotion() {
           control.addEventListener("mouseleave", leave);
           control.addEventListener("focusin", enter);
           control.addEventListener("focusout", leave);
-          control.addEventListener("pointermove", move);
-          control.addEventListener("pointerleave", resetMagnet);
           hoverCleanups.push(() => {
             control.removeEventListener("mouseenter", enter);
             control.removeEventListener("mouseleave", leave);
             control.removeEventListener("focusin", enter);
             control.removeEventListener("focusout", leave);
-            control.removeEventListener("pointermove", move);
-            control.removeEventListener("pointerleave", resetMagnet);
-            gsap.killTweensOf(control, "x,y");
           });
         });
 
@@ -242,20 +227,6 @@ export function LandingMotion() {
           });
         });
 
-        homeRoot.querySelectorAll<HTMLElement>("#site-header nav a, [data-site-footer] nav a").forEach((link) => {
-          const enter = () => microAnimations.push(animate(link, {
-            translateX: 3, duration: 200, ease: "out(3)",
-          }));
-          const leave = () => microAnimations.push(animate(link, {
-            translateX: 0, duration: 240, ease: "out(3)",
-          }));
-          link.addEventListener("mouseenter", enter);
-          link.addEventListener("mouseleave", leave);
-          hoverCleanups.push(() => {
-            link.removeEventListener("mouseenter", enter);
-            link.removeEventListener("mouseleave", leave);
-          });
-        });
       }
 
       // Keep the hero background and hero copy anchored during page scroll.
