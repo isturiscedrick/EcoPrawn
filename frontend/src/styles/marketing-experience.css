@@ -941,3 +941,138 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-
     transition: none;
   }
 }
+
+
+/* ==========================================================================
+   Landing page Phase 1: hero, section rhythm, cards and mobile safeguards.
+   Original CSS-only decoration; no third-party imagery or business claims.
+   ========================================================================== */
+.ep-business-landing {
+  min-width: 0;
+  overflow-x: clip;
+}
+.ep-business-landing .ep-aquaculture-hero {
+  min-height: clamp(590px, 68vw, 760px);
+  scroll-margin-top: 5rem;
+}
+.ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+  padding-top: clamp(4.75rem, 7vw, 6.5rem);
+  padding-bottom: clamp(4.5rem, 6vw, 5.75rem);
+}
+.ep-business-landing .ep-field-hero-copy h1 {
+  max-width: 16ch;
+  font-size: clamp(2.75rem, 6.4vw, 5.25rem);
+  line-height: 1.02;
+  letter-spacing: -.06em;
+  text-wrap: balance;
+}
+.ep-business-landing .ep-field-hero-copy [data-hero="lead"] {
+  max-width: 42rem;
+  font-size: clamp(.98rem, 1.35vw, 1.125rem);
+  line-height: 1.8;
+}
+.ep-business-landing .ep-field-hero-copy [data-hero="cta"] {
+  margin-top: 2rem;
+}
+.ep-business-landing .ep-field-hero-copy [data-hero="cta"] a {
+  min-height: 3.25rem;
+  padding-inline: 1.5rem;
+  box-shadow: 0 14px 34px -18px rgba(37,99,235,.72);
+}
+.ep-business-landing .ep-stats-panel {
+  position: relative;
+  z-index: 2;
+  margin-top: -1px;
+}
+.ep-business-landing #readings,
+.ep-business-landing #capabilities,
+.ep-business-landing #process {
+  scroll-margin-top: 5rem;
+}
+.ep-business-landing #readings [data-reading] {
+  min-width: 0;
+  box-shadow: 0 18px 42px -32px rgba(0,0,0,.38);
+  transition: transform .22s ease, border-color .22s ease, background-color .22s ease, box-shadow .22s ease;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .ep-business-landing #readings [data-reading]:hover,
+  .ep-business-landing [data-business-card]:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--ep-accent) 58%, var(--ep-line));
+    box-shadow: 0 22px 48px -30px rgba(37,99,235,.28);
+  }
+}
+.ep-business-landing [data-business-card] {
+  min-width: 0;
+  height: 100%;
+  box-shadow: 0 16px 42px -34px rgba(15,23,42,.30);
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.ep-business-landing [data-business-card] h3 {
+  text-wrap: balance;
+}
+.ep-business-landing #process [data-reveal] {
+  max-width: 46rem;
+}
+.ep-business-landing :is(#readings,#capabilities,#process) h2 {
+  text-wrap: balance;
+}
+.ep-business-landing :is(#readings,#capabilities,#process) p {
+  text-wrap: pretty;
+}
+.ep-business-landing a:focus-visible,
+.ep-business-landing button:focus-visible {
+  outline-offset: 4px;
+}
+@media (max-width: 767px) {
+  .ep-business-landing .ep-aquaculture-hero {
+    min-height: auto;
+  }
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-top: 5.25rem;
+    padding-bottom: 4rem;
+  }
+  .ep-business-landing .ep-field-hero-copy h1 {
+    max-width: 13ch;
+    font-size: clamp(2.55rem, 9.4vw, 4.25rem);
+    line-height: 1.04;
+    letter-spacing: -.055em;
+  }
+  .ep-business-landing .ep-field-hero-copy [data-hero="lead"] {
+    max-width: 34rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .ep-business-landing .ep-stats-panel {
+    margin-inline: auto;
+  }
+  .ep-business-landing #readings > div,
+  .ep-business-landing #capabilities > div,
+  .ep-business-landing #process > div {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+@media (max-width: 420px) {
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-inline: 1.125rem;
+  }
+  .ep-business-landing .ep-field-hero-copy h1 {
+    font-size: clamp(2.35rem, 10.2vw, 2.9rem);
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    padding: .875rem;
+  }
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    font-size: 1.2rem;
+    overflow-wrap: anywhere;
+  }
+  .ep-business-landing #readings [data-reading] {
+    padding: 1.125rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing :is([data-reading],[data-business-card]) {
+    transition: none !important;
+  }
+}
