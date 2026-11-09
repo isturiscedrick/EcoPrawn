@@ -49,7 +49,7 @@ export function AboutPage() {
         <section id="objectives" className={`w-full box-border scroll-mt-[140px] md:scroll-mt-[150px] ${SECTION_PAD}`}>
           <div className="ep-about-content-frame mx-auto w-full max-w-[1200px]">
             <Reveal>
-              <div className="ep-about-objective mb-6 rounded-3xl border border-l-4 border-[var(--ep-line)] border-l-[var(--ep-accent)] bg-[var(--ep-surface)] px-6 py-8 shadow-[0_16px_30px_-28px_rgba(11,46,51,0.5)] sm:px-10 sm:py-10">
+              <div className="ep-about-objective mb-6 rounded-3xl border border-l-4 border-[var(--ep-line)] border-l-[var(--ep-accent)] bg-[var(--ep-surface)] px-6 py-8 shadow-[0_16px_30px_-28px_rgba(15,23,42,0.18)] sm:px-10 sm:py-10">
                 <div className="mb-3 text-sm font-semibold text-[var(--ep-text-muted)]">
                   General objective
                 </div>
@@ -63,7 +63,7 @@ export function AboutPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {objectives.map((objective, i) => (
                 <Reveal key={objective.num} delay={(i % 3) * 90} className="h-full">
-                  <article className="group h-full rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(11,46,51,0.6)]">
+                  <article className="group h-full rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.16)] transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ep-accent)] hover:shadow-[0_18px_32px_-24px_rgba(15,23,42,0.22)]">
                     <IconChip
                       name={OBJECTIVE_ICONS[i] ?? "layers"}
                       tone="brand"
@@ -94,7 +94,7 @@ export function AboutPage() {
           style={{
             backgroundColor: "var(--ep-deep)",
             backgroundImage:
-              "radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.16), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(0,0,0,.28), transparent 48%)",
+              "radial-gradient(ellipse at 12% 8%, rgba(96,165,250,.10), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(0,0,0,.28), transparent 48%)",
             backgroundRepeat: "no-repeat",
             backgroundSize: "100% 100%",
             backgroundPosition: "center",
@@ -225,7 +225,7 @@ export function AboutPage() {
 
               {/* Out of scope: dashed outline, a second signal beyond colour */}
               <Reveal delay={120} className="h-full">
-                <article className="ep-about-outscope h-full rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(11,46,51,0.45)] sm:p-8">
+                <article className="ep-about-outscope h-full rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.16)] sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
                     <h3 className="ep-font-display flex items-center gap-3 text-2xl font-semibold">
                       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-warn-text)] text-[var(--ep-on-status)]">

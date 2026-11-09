@@ -217,7 +217,7 @@ export function LandingPage() {
           aria-label="EcoPrawn at a glance"
           className="border-y border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-8 sm:px-8"
         >
-          <div className="ep-stats-panel mx-auto grid max-w-[1440px] grid-cols-2 gap-2.5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 shadow-[0_18px_45px_-30px_rgba(15,76,92,.42)] sm:grid-cols-4 sm:gap-3 sm:rounded-3xl sm:p-4">
+          <div className="ep-stats-panel mx-auto grid max-w-[1440px] grid-cols-2 gap-2.5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 shadow-[0_18px_45px_-30px_rgba(15,23,42,.18)] sm:grid-cols-4 sm:gap-3 sm:rounded-3xl sm:p-4">
             {STATS.map((stat) => (
               <div
                 key={stat.label}
@@ -246,7 +246,7 @@ export function LandingPage() {
             className="pointer-events-none absolute inset-0 -z-10"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse at 12% 8%, rgba(139,213,166,.16), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(0,0,0,.28), transparent 48%)",
+                "radial-gradient(ellipse at 12% 8%, rgba(96,165,250,.10), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(0,0,0,.28), transparent 48%)",
             }}
           />
 
