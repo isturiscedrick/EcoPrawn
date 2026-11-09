@@ -150,117 +150,52 @@ export function LandingPage() {
             ))}
           </div>
 
-          {/* The header is sticky (in flow), so the hero needs only a small top pad. */}
-          <div className="ep-hero-layout mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-10 px-5 pb-14 pt-28 sm:gap-12 sm:px-8 sm:pb-16 sm:pt-32 lg:grid-cols-[minmax(0,0.92fr)_minmax(420px,1.08fr)] lg:gap-12 lg:px-12 lg:pb-20 lg:pt-28">
-            <div
-              data-hero="text"
-              className="ep-hero-copy order-1 mx-auto w-full max-w-[760px] text-center lg:mx-0 lg:max-w-none lg:text-left"
-            >
-              <div className="mb-6 flex justify-center lg:justify-start">
-                <p className="inline-flex min-h-10 items-center justify-center gap-2.5 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--ep-accent)] shadow-sm">
-                  <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-[var(--ep-accent)]" />
-                  REAL-TIME AQUACULTURE
-                </p>
-              </div>
-
+          {/* Centered editorial hero with a full-width farm landscape image. */}
+          <div className="ep-field-hero mx-auto w-full max-w-[1440px] px-5 pt-16 sm:px-8 sm:pt-20 lg:px-10 lg:pt-20">
+            <div data-hero="text" className="ep-field-hero-copy mx-auto flex max-w-[920px] flex-col items-center text-center">
+              <p className="mb-5 inline-flex min-h-9 items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.17em] text-[var(--ep-accent)] shadow-sm sm:text-[11px]">
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[var(--ep-accent)]" />
+                REAL-TIME AQUACULTURE
+              </p>
               <h1
                 data-hero="headline"
                 aria-label="Smarter shrimp farming, always in range."
-                className="ep-font-display mx-auto max-w-[820px] text-[clamp(42px,6.2vw,84px)] font-bold leading-[0.98] tracking-[-0.06em] lg:mx-0 lg:text-[clamp(48px,5.4vw,78px)]"
+                className="ep-font-display max-w-[900px] text-[clamp(40px,6.1vw,76px)] font-semibold leading-[1.02] tracking-[-0.065em]"
               >
-                <span className="block ep-hero-headline-primary">
-                  <Words text="Smarter shrimp" />
-                </span>
-                <span className="block ep-hero-headline-primary">
-                  <Words text="farming," />
-                </span>
-                <span className="block ep-hero-headline-secondary">
-                  <Words text="always in range." />
-                </span>
+                <span className="block ep-hero-headline-primary">Smarter Shrimp Farming</span>
+                <span className="block ep-hero-headline-secondary">Starts with Better Insight</span>
               </h1>
-
               <p
                 data-hero="lead"
-                className="mx-auto mt-6 max-w-[560px] text-base leading-[1.8] text-[var(--ep-text-muted)] sm:text-lg lg:mx-0"
+                className="mx-auto mt-5 max-w-[620px] text-sm leading-[1.75] text-[var(--ep-text-muted)] sm:mt-6 sm:text-base"
               >
-                One connected system for water quality, shrimp growth, and responsive farm operations—built around the conditions that matter.
+                Bringing water-quality monitoring, shrimp growth insights, and responsive farm operations together in one connected system.
               </p>
-
-              <div
-                data-hero="cta"
-                className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start"
-              >
+              <div data-hero="cta" className="mt-6 flex justify-center sm:mt-7">
                 <AuthLink
-                  className={`group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-3 text-sm font-semibold text-[var(--ep-on-accent)] shadow-sm hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
+                  className={`group inline-flex min-h-11 items-center justify-center gap-3 rounded-full border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] shadow-[0_8px_22px_-12px_rgba(37,99,235,.65)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
                 >
                   Open dashboard
-                  <span
-                    aria-hidden="true"
-                    className="inline-flex items-center transition-transform duration-200 group-hover:translate-x-1"
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M5 12h14m-6-6 6 6-6 6" />
-                    </svg>
+                  <span aria-hidden="true" className="grid h-6 w-6 place-items-center rounded-full bg-white/20 transition-transform duration-200 group-hover:translate-x-0.5">
+                    <Icon name="arrow-up-right" size={14} />
                   </span>
                 </AuthLink>
-                <Link
-                  to="/about"
-                  className={`inline-flex min-h-12 items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-6 py-3 text-sm font-semibold text-[var(--ep-text)] shadow-sm hover:border-[var(--ep-accent)] hover:text-[var(--ep-accent)] ${buttonMotion} ${focusRing}`}
-                  activeOptions={{ exact: true }}
-                >
-                  How it works
-                </Link>
-              </div>
-              <div className="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--ep-text-muted)] lg:justify-start">
-                <span className="inline-flex items-center gap-2"><Icon name="activity" size={15} /> Water intelligence</span>
-                <span className="inline-flex items-center gap-2"><Icon name="eye" size={15} /> Growth visibility</span>
-                <span className="inline-flex items-center gap-2"><Icon name="zap" size={15} /> Automated response</span>
               </div>
             </div>
 
-            <aside data-hero="visual" aria-label="EcoPrawn farm monitoring preview" className="ep-hero-showcase order-2 mx-auto w-full max-w-[680px] lg:max-w-none">
-              <div className="ep-showcase-frame">
-                <div className="ep-showcase-topbar">
-                  <div className="flex items-center gap-2">
-                    <span className="ep-showcase-live-dot" />
-                    <span>FARM OVERVIEW</span>
-                  </div>
-                  <span className="ep-showcase-device">TANK 01</span>
-                </div>
-                <div className="ep-showcase-water" aria-hidden="true">
-                  <div className="ep-showcase-water-grid" />
-                  <div className="ep-showcase-water-orbit ep-showcase-water-orbit-one" />
-                  <div className="ep-showcase-water-orbit ep-showcase-water-orbit-two" />
-                  <div className="ep-showcase-water-glow" />
-                  <svg viewBox="0 0 640 300" role="presentation" className="ep-showcase-wave">
-                    <path d="M0 178 C80 138 128 212 214 174 S350 132 430 174 S560 214 640 166 L640 300 L0 300Z" fill="rgba(96,165,250,.24)" />
-                    <path d="M0 204 C92 168 148 238 240 198 S382 164 466 202 S570 234 640 194" fill="none" stroke="rgba(219,234,254,.68)" strokeWidth="2" />
-                    <path d="M0 226 C86 194 164 258 252 222 S402 190 492 224 S578 250 640 218" fill="none" stroke="rgba(147,197,253,.5)" strokeWidth="1.5" />
-                  </svg>
-                  <div className="ep-showcase-water-label">
-                    <span>ECOPRAWN MONITORING</span>
-                    <strong>Every reading.<br />One clear picture.</strong>
-                  </div>
-                  <div className="ep-showcase-water-coordinate">14° 35' N&nbsp; · &nbsp;121° 00' E</div>
-                </div>
-                <div className="ep-showcase-metrics">
-                  {heroReadouts.slice(0, 3).map((reading) => (
-                    <div className="ep-showcase-metric" key={reading.label}>
-                      <span>{reading.label}</span>
-                      <strong>{reading.value}<small>{heroReadoutUnits[reading.label]}</small></strong>
-                    </div>
-                  ))}
-                </div>
-                <div className="ep-showcase-footer">
-                  <span><Icon name="shield-check" size={16} /> Continuous water-quality visibility</span>
-                  <span className="ep-showcase-arrow"><Icon name="arrow-up-right" size={17} /></span>
-                </div>
-              </div>
-              <div className="ep-showcase-caption">
-                <span>01 / INTELLIGENCE IN EVERY TANK</span>
-                <span>MONITOR · UNDERSTAND · RESPOND</span>
-              </div>
-            </aside>
+            <figure data-hero="landscape" className="ep-field-landscape relative mt-8 overflow-hidden sm:mt-10 lg:mt-12">
+              <img
+                src="https://images.unsplash.com/photo-1769365246446-6eefaa834b11?auto=format&fit=crop&w=2400&q=85"
+                alt="Expansive green rice fields stretching toward a tree-lined horizon beneath an open sky"
+                className="h-full w-full object-cover"
+                fetchPriority="high"
+              />
+              <div aria-hidden="true" className="ep-field-landscape-shade" />
+              <figcaption className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4 text-[9px] font-bold uppercase tracking-[0.15em] text-white drop-shadow sm:bottom-5 sm:left-7 sm:right-7 sm:text-[10px]">
+                <span>ECOPRAWN · SMART AQUACULTURE</span>
+                <span className="hidden sm:inline">MONITOR · UNDERSTAND · RESPOND</span>
+              </figcaption>
+            </figure>
           </div>
         </section>
 
