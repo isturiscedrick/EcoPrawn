@@ -20,10 +20,22 @@ export function ContactMotion() {
           const kicker = hero.querySelector<HTMLElement>("[data-page-kicker]");
           const title = hero.querySelector<HTMLElement>("h1");
           const lead = hero.querySelector<HTMLElement>("[data-page-lead]");
-          const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
-          if (kicker) intro.from(kicker, { y: 22, duration: .55 });
-          if (title) intro.from(title, { y: 44, rotateX: -7, transformPerspective: 1000, duration: .85 }, "-=.24");
-          if (lead) intro.from(lead, { y: 18, duration: .6 }, "-=.42");
+          // Shared public-page hero choreography: matching timing, easing,
+          // distance and stagger across Home, About and Contact.
+          const intro = gsap.timeline({
+            defaults: { ease: "power4.out" },
+            delay: 0.12,
+          });
+          if (kicker) intro.from(kicker, {
+            y: 22, autoAlpha: 0, scale: .96, duration: .65,
+          });
+          if (title) intro.from(title, {
+            y: 38, rotateX: -8, transformPerspective: 1000,
+            autoAlpha: 0, duration: .9,
+          }, "-=.28");
+          if (lead) intro.from(lead, {
+            y: 20, autoAlpha: 0, duration: .7,
+          }, "-=.42");
 
           // Keep the hero atmosphere fixed to its section; no scroll parallax.
         }
