@@ -725,3 +725,59 @@ html.dark .ep-business-landing .ep-aquaculture-hero .ep-hero-headline-secondary 
 html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="lead"] {
   color: rgba(248,250,252,.90);
 }
+
+
+/* Final hero theme correction: keep the dark canvas unmistakably dark and
+   make the dashboard CTA icon independently visible in both themes. */
+.ep-business-landing .ep-aquaculture-hero {
+  isolation: isolate;
+  background-color: #f8fafc;
+  background-image:
+    radial-gradient(ellipse at 50% 34%, rgba(37,99,235,.10), transparent 52%),
+    radial-gradient(circle, rgba(37,99,235,.11) .8px, transparent 1.2px),
+    linear-gradient(180deg, #ffffff 0%, #eef4fb 100%);
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-size: auto, 22px 22px, auto;
+}
+html.dark .ep-business-landing .ep-aquaculture-hero {
+  background-color: #070d18 !important;
+  background-image:
+    radial-gradient(ellipse at 50% 28%, rgba(37,99,235,.28), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(30,64,175,.16), transparent 58%),
+    radial-gradient(circle, rgba(147,197,253,.13) .8px, transparent 1.2px),
+    linear-gradient(180deg, #101d32 0%, #090f1d 58%, #070d18 100%) !important;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-size: auto, auto, 22px 22px, auto;
+  color: #f8fafc;
+}
+html.dark .ep-business-landing .ep-aquaculture-hero .ep-hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 18%, rgba(59,130,246,.16), transparent 58%),
+    linear-gradient(180deg, rgba(7,13,24,.08), rgba(7,13,24,.24));
+}
+html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="grid"] {
+  opacity: .18 !important;
+  mix-blend-mode: screen;
+}
+html.dark .ep-business-landing .ep-aquaculture-hero [data-cross] {
+  opacity: .46 !important;
+}
+.ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
+  color: inherit;
+}
+.ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  stroke: currentColor;
+}
+html:not(.dark) .ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
+  color: #ffffff;
+  background-color: rgba(7,20,38,.18);
+}
+html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
+  color: #071426;
+  background-color: rgba(255,255,255,.42);
+  border-color: rgba(7,20,38,.22);
+}
