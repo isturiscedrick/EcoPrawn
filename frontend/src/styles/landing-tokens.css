@@ -6,22 +6,24 @@
 /* ---------- Light theme tokens ---------- */
 .ep-landing {
   color-scheme: light;
-  --ep-bg: #f4f7f6;
+  /* 60% white/light neutral canvas, 30% black/charcoal structure,
+     10% blue accents for actions, links, and active states. */
+  --ep-bg: #f8fafc;
   --ep-surface: #ffffff;
-  --ep-tint: #e8f0ef;
-  --ep-line: rgba(15, 76, 92, 0.22);
-  --ep-primary: #0f4c5c; /* ink: text, icons, outlines */
-  --ep-secondary: #0f4c5c;
-  --ep-text: #0b2320;
-  --ep-text-muted: #3f5753;
-  --ep-accent: #c43d14; /* contrast against white > 5.2:1 */
-  --ep-accent-hover: #a8330f;
+  --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea;
+  --ep-primary: #111827;
+  --ep-secondary: #1f2937;
+  --ep-text: #111827;
+  --ep-text-muted: #475569;
+  --ep-accent: #2563eb;
+  --ep-accent-hover: #1d4ed8;
   --ep-on-accent: #ffffff;
-  --ep-deep: #0f4c5c; /* deep-water band + CTA band */
-  --ep-on-deep: #f4f7f6;
-  --ep-on-deep-muted: #cfe2e6;
-  --ep-zone: #8bd5a6;
-  --ep-marker: #f28a68;
+  --ep-deep: #111827;
+  --ep-on-deep: #ffffff;
+  --ep-on-deep-muted: #cbd5e1;
+  --ep-zone: #2563eb;
+  --ep-marker: #60a5fa;
   --ep-ok: #1e7a46;
   --ep-warn-text: #8f5a12;
   --ep-danger: #b3261e;
@@ -34,20 +36,20 @@
 /* ---------- Dark theme tokens ---------- */
 html.dark .ep-landing {
   color-scheme: dark;
-  --ep-bg: #18191a;
-  --ep-surface: #202729;
-  --ep-tint: #1f2a2b;
-  --ep-line: rgba(139, 213, 166, 0.26);
-  --ep-primary: #eaf4ef;
-  --ep-secondary: #8bd5a6;
-  --ep-text: #eaf4ef;
-  --ep-text-muted: #b7cbc1;
-  --ep-accent: #f28a68;
-  --ep-accent-hover: #ffab91;
-  --ep-on-accent: #1b0a04;
-  --ep-deep: #10353a;
-  --ep-on-deep: #f1f5f3;
-  --ep-on-deep-muted: #c3d4d0;
+  --ep-bg: #090d16;
+  --ep-surface: #111827;
+  --ep-tint: #1f2937;
+  --ep-line: #334155;
+  --ep-primary: #f8fafc;
+  --ep-secondary: #e2e8f0;
+  --ep-text: #f8fafc;
+  --ep-text-muted: #cbd5e1;
+  --ep-accent: #60a5fa;
+  --ep-accent-hover: #93c5fd;
+  --ep-on-accent: #071426;
+  --ep-deep: #050914;
+  --ep-on-deep: #f8fafc;
+  --ep-on-deep-muted: #cbd5e1;
   --ep-ok: #5fbf8a;
   --ep-warn-text: #e8a23a;
   --ep-danger: #ff8a80;
@@ -57,10 +59,10 @@ html.dark .ep-landing {
 
 /* ---------- Overscroll & document background ---------- */
 html:not(.dark) body.ecoprawn-root:has(.ep-landing) {
-  background: #f4f7f6;
+  background: #f8fafc;
 }
 html.dark body.ecoprawn-root:has(.ep-landing) {
-  background: #18191a;
+  background: #090d16;
 }
 
 /* ---------- Smooth scrolling with sticky header offset ---------- */
@@ -78,19 +80,19 @@ html:has(.ep-landing) {
 /* ---------- Brand Two-Tone Hero Headlines ---------- */
 /* Landing hero headline: deep teal primary + terracotta secondary */
 .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
-  color: #0F4C5C !important;
+  color: #111827 !important;
   -webkit-text-fill-color: #0F4C5C !important;
 }
 .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
-  color: #D94416 !important;
+  color: #2563eb !important;
   -webkit-text-fill-color: #D94416 !important;
 }
 html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
-  color: #F28A68 !important;
+  color: #f8fafc !important;
   -webkit-text-fill-color: #F28A68 !important;
 }
 html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
-  color: #8BD5A6 !important;
+  color: #60a5fa !important;
   -webkit-text-fill-color: #8BD5A6 !important;
 }
 
