@@ -51,18 +51,18 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #0b2e33;
+  --primary: #111827;
   --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: #4a5553;
+  --muted-foreground: #475569;
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #b9b09a;
+  --border: #dbe2ea;
   --input: oklch(0.922 0 0);
-  --ring: #b23f1c;
+  --ring: #2563eb;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -78,21 +78,21 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   /* EcoPrawn theme tokens */
-  --water-deep: #0b2e33;
-  --water-mid: #12474d;
-  --mangrove: #3c7a5c;
-  --mangrove-light: #5b9b78;
-  --mangrove-text: #2a5c43;
-  --coral: #e8623a;
-  --coral-dim: #c9512e;
-  --coral-strong: #b23f1c;
+  --water-deep: #111827;
+  --water-mid: #1f2937;
+  --mangrove: #2563eb;
+  --mangrove-light: #60a5fa;
+  --mangrove-text: #1d4ed8;
+  --coral: #2563eb;
+  --coral-dim: #1d4ed8;
+  --coral-strong: #1d4ed8;
   --sand: #ffffff;
-  --sand-dim: #d8e0de;
+  --sand-dim: #dbe2ea;
   --amber: #e8a23a;
   --amber-text: #8f5a12;
   --danger: #d64545;
   --danger-text: #a82020;
-  --ink: #0b2320;
+  --ink: #111827;
 
   /* Typography */
   --font-display: 'Lexend', system-ui, sans-serif;
@@ -171,7 +171,7 @@
   outline: none;
 }
 .ep-focus-ring:focus-visible {
-  outline: 2px solid var(--coral);
+  outline: 2px solid #2563eb;
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -179,8 +179,8 @@
 /* ---------- Interactive Root Elements ---------- */
 .ecoprawn-root {
   font-family: var(--font-body);
-  background: var(--sand);
-  color: var(--ink);
+  background: #f8fafc;
+  color: #111827;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }

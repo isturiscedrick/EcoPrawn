@@ -1,0 +1,103 @@
+/* ==========================================================================
+   EcoPrawn Unified Palette
+   60% neutral canvas, 30% black/charcoal structure, 10% blue accents.
+   Loaded last so legacy page-specific declarations cannot reintroduce old
+   brand colors. Semantic success, warning, and error indicators are retained.
+   ========================================================================== */
+:root {
+  --background: #f8fafc; --foreground: #111827;
+  --card: #ffffff; --card-foreground: #111827;
+  --popover: #ffffff; --popover-foreground: #111827;
+  --primary: #2563eb; --primary-foreground: #ffffff;
+  --secondary: #f1f5f9; --secondary-foreground: #1f2937;
+  --muted: #f1f5f9; --muted-foreground: #475569;
+  --accent: #2563eb; --accent-foreground: #ffffff;
+  --border: #dbe2ea; --input: #dbe2ea; --ring: #2563eb;
+  --sidebar: #ffffff; --sidebar-foreground: #111827;
+  --sidebar-primary: #2563eb; --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eff6ff; --sidebar-accent-foreground: #1d4ed8;
+  --sidebar-border: #dbe2ea; --sidebar-ring: #2563eb;
+  --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea; --ep-primary: #111827; --ep-primary-soft: #1f2937;
+  --ep-secondary: #1f2937; --ep-text-muted: #475569;
+  --ep-accent: #2563eb; --ep-accent-hover: #1d4ed8; --ep-on-accent: #ffffff;
+  --water-deep: #111827; --water-mid: #1f2937; --mangrove: #2563eb;
+  --mangrove-light: #60a5fa; --mangrove-text: #1d4ed8;
+  --coral: #2563eb; --coral-dim: #1d4ed8; --coral-strong: #1d4ed8;
+  --sand: #ffffff; --sand-dim: #dbe2ea; --ink: #111827;
+}
+html.dark {
+  --background: #090d16; --foreground: #f8fafc;
+  --card: #111827; --card-foreground: #f8fafc;
+  --popover: #111827; --popover-foreground: #f8fafc;
+  --primary: #60a5fa; --primary-foreground: #071426;
+  --secondary: #1f2937; --secondary-foreground: #e2e8f0;
+  --muted: #1f2937; --muted-foreground: #cbd5e1;
+  --accent: #60a5fa; --accent-foreground: #071426;
+  --border: #334155; --input: #334155; --ring: #60a5fa;
+  --sidebar: #111827; --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #60a5fa; --sidebar-primary-foreground: #071426;
+  --sidebar-accent: #1f2937; --sidebar-accent-foreground: #93c5fd;
+  --sidebar-border: #334155; --sidebar-ring: #60a5fa;
+  --ep-bg: #090d16; --ep-surface: #111827; --ep-tint: #1f2937;
+  --ep-line: #334155; --ep-primary: #f8fafc; --ep-primary-soft: #e2e8f0;
+  --ep-secondary: #e2e8f0; --ep-text-muted: #cbd5e1;
+  --ep-accent: #60a5fa; --ep-accent-hover: #93c5fd; --ep-on-accent: #071426;
+  --water-deep: #f8fafc; --water-mid: #e2e8f0; --mangrove: #60a5fa;
+  --mangrove-light: #93c5fd; --mangrove-text: #93c5fd;
+  --coral: #60a5fa; --coral-dim: #93c5fd; --coral-strong: #93c5fd;
+  --sand: #111827; --sand-dim: #334155; --ink: #f8fafc;
+}
+html:not(.dark) body.ecoprawn-root { background: #f8fafc; color: #111827; }
+html.dark body.ecoprawn-root { background: #090d16; color: #f8fafc; }
+.dashboard-shell {
+  --ep-brand-primary: #2563eb; --ep-brand-secondary: #1f2937;
+  --ep-accent: #2563eb; --ep-accent-hover: #1d4ed8;
+  --ep-secondary: #1f2937; --coral: #2563eb; --coral-dim: #1d4ed8;
+  --ep-accent-tint: rgba(37,99,235,.12); --ep-accent-tint-soft: rgba(37,99,235,.08);
+  --ep-secondary-tint: rgba(31,41,55,.08);
+  background: #f8fafc !important; color: #111827;
+}
+html.dark .dashboard-shell {
+  --ep-brand-primary: #60a5fa; --ep-brand-secondary: #e2e8f0;
+  --ep-accent: #60a5fa; --ep-accent-hover: #93c5fd;
+  --ep-secondary: #e2e8f0; --coral: #60a5fa; --coral-dim: #93c5fd;
+  --ep-accent-tint: rgba(96,165,250,.14); --ep-accent-tint-soft: rgba(96,165,250,.08);
+  --ep-secondary-tint: rgba(226,232,240,.08);
+  background: #090d16 !important; color: #f8fafc;
+}
+.dashboard-shell aside,
+html:not(.dark) .dashboard-shell aside { background: #ffffff !important; color: #111827 !important; border-color: #dbe2ea !important; }
+html.dark .dashboard-shell aside { background: #111827 !important; color: #f8fafc !important; border-color: #334155 !important; }
+.dashboard-shell .dashboard-nav-active,
+html:not(.dark) .dashboard-shell .dashboard-nav-active { background: #2563eb !important; border-color: #2563eb !important; color: #ffffff !important; }
+html.dark .dashboard-shell .dashboard-nav-active { background: #60a5fa !important; border-color: #60a5fa !important; color: #071426 !important; }
+.dashboard-shell .dashboard-nav-active-dot { background: #2563eb !important; }
+html.dark .dashboard-shell .dashboard-nav-active-dot { background: #60a5fa !important; }
+.ep-landing, .ep-about-page, .ep-contact-page {
+  --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea; --ep-primary: #111827; --ep-secondary: #1f2937;
+  --ep-text: #111827; --ep-text-muted: #475569; --ep-accent: #2563eb;
+  --ep-accent-hover: #1d4ed8; --ep-on-accent: #ffffff;
+}
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-bg: #090d16; --ep-surface: #111827; --ep-tint: #1f2937;
+  --ep-line: #334155; --ep-primary: #f8fafc; --ep-secondary: #e2e8f0;
+  --ep-text: #f8fafc; --ep-text-muted: #cbd5e1; --ep-accent: #60a5fa;
+  --ep-accent-hover: #93c5fd; --ep-on-accent: #071426;
+}
+:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a)[class*="bg-"] { --tw-ring-color: #2563eb; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a):focus-visible { outline-color: #2563eb !important; }
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a):focus-visible { outline-color: #60a5fa !important; }
+.ep-logo { --ep-logo-color: #111827 !important; --ep-logo-text: #111827 !important; }
+.ep-logo .ep-logo-shrimp { fill: #111827 !important; stroke: #111827 !important; }
+.ep-logo .ep-logo-wordmark { color: #111827 !important; -webkit-text-fill-color: #111827 !important; }
+html.dark .ep-logo { --ep-logo-color: #f8fafc !important; --ep-logo-text: #f8fafc !important; }
+html.dark .ep-logo .ep-logo-shrimp { fill: #f8fafc !important; stroke: #f8fafc !important; }
+html.dark .ep-logo .ep-logo-wordmark { color: #f8fafc !important; -webkit-text-fill-color: #f8fafc !important; }
+footer[data-site-footer] { background: #f8fafc !important; color: #111827 !important; }
+html.dark footer[data-site-footer] { background: #090d16 !important; color: #f8fafc !important; }
+footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) { color: #111827 !important; }
+html.dark footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) { color: #f8fafc !important; }
+footer[data-site-footer] nav a:hover { color: #2563eb !important; }
+html.dark footer[data-site-footer] nav a:hover { color: #60a5fa !important; }

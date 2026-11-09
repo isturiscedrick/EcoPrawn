@@ -5,7 +5,7 @@
 
 .ep-logo {
   --ep-logo-wait: 0s;
-  --ep-logo-color: #d94416;
+  --ep-logo-color: #111827;
   --ep-logo-text: #000000;
   overflow: visible;
 }
@@ -26,7 +26,7 @@ body:has(.ep-water-curtain) .ep-logo {
 }
 
 html.dark .ep-logo {
-  --ep-logo-text: #8bd5a6;
+  --ep-logo-text: #f8fafc;
 }
 
 .ep-logo-shrimp {
@@ -104,8 +104,8 @@ html.dark footer .ep-logo .ep-logo-wordmark {
 }
 
 html.dark footer[data-site-footer] .ep-logo {
-  --ep-logo-color: #d94416 !important;
-  --ep-logo-text: #8bd5a6 !important;
+  --ep-logo-color: #ffffff !important;
+  --ep-logo-text: #ffffff !important;
 }
 html.dark footer[data-site-footer] .ep-logo .ep-logo-shrimp {
   fill: #d94416 !important;
@@ -140,17 +140,17 @@ html.theme-transitioning *::after {
 
 /* Auth modal wordmark */
 html:not(.dark) .ep-auth-modal .ep-logo {
-  --ep-logo-text: var(--ep-secondary, #0f4c5c) !important;
+  --ep-logo-text: var(--ep-secondary, #111827) !important;
 }
 html:not(.dark) .ep-auth-modal .ep-logo .ep-logo-wordmark {
-  color: var(--ep-secondary, #0f4c5c) !important;
+  color: var(--ep-secondary, #111827) !important;
   -webkit-text-fill-color: var(--ep-secondary, #0f4c5c) !important;
 }
 html.dark .ep-auth-modal .ep-logo {
-  --ep-logo-text: var(--ep-secondary, #8bd5a6) !important;
+  --ep-logo-text: var(--ep-secondary, #f8fafc) !important;
 }
 html.dark .ep-auth-modal .ep-logo .ep-logo-wordmark {
-  color: var(--ep-secondary, #8bd5a6) !important;
+  color: var(--ep-secondary, #f8fafc) !important;
   -webkit-text-fill-color: var(--ep-secondary, #8bd5a6) !important;
 }
 
