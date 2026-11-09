@@ -183,3 +183,19 @@ html.dark .ep-loading-screen {
     transition-duration: 1ms !important;
   }
 }
+
+
+/* The intro owns its logo draw sequence; prevent the global header keyframes
+   from racing or finishing independently while the overlay is still visible. */
+.ep-loading-content .ep-logo-shape {
+  animation: none !important;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  fill-opacity: 1;
+  stroke-opacity: 0;
+}
+.ep-loading-content .ep-logo-wordmark {
+  animation: none !important;
+  opacity: 1;
+  visibility: visible;
+}
