@@ -320,7 +320,7 @@ export function SiteHeader({
               touchStartX.current = null;
               if (start !== null && event.changedTouches[0].clientX - start < -60) closeDrawer();
             }}
-            className={`fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out ${
+            className={`ep-mobile-site-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out ${
               mobileNavOpen
                 ? "translate-x-0 shadow-[8px_0_40px_-12px_rgba(8,30,34,0.45)]"
                 : "-translate-x-full shadow-none"
@@ -330,7 +330,7 @@ export function SiteHeader({
             <div className="relative flex shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-5 py-4">
               <div className="flex min-w-0 flex-col gap-1">
                 <BrandMark size={32} logoColor="#d94416" logoTextColor="var(--ep-secondary)" />
-                <span className="pl-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ep-text-muted)]">Explore EcoPrawn</span>
+                <span className="ep-mobile-drawer-caption pl-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ep-text-muted)]">Explore EcoPrawn</span>
               </div>
               <button
                 ref={closeButtonRef}

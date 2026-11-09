@@ -460,3 +460,155 @@ html.dark .ep-auth-modal input:focus-visible {
     animation-duration: 0.01ms !important;
   }
 }
+
+
+/* ---------- Black / white / blue public palette overrides ---------- */
+.ep-auth-modal {
+  --ep-bg: #f8fafc;
+  --ep-surface: #ffffff;
+  --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea;
+  --ep-primary: #111827;
+  --ep-secondary: #1f2937;
+  --ep-text-muted: #475569;
+  --ep-accent: #2563eb;
+  --ep-accent-hover: #1d4ed8;
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #dbe2ea !important;
+}
+.ep-auth-modal h1,
+.ep-auth-modal label { color: #111827 !important; }
+.ep-auth-modal h1 + p,
+.ep-auth-modal > div:not(.ep-auth-brand) > div:last-child { color: #475569 !important; }
+.ep-auth-modal .ep-auth-brand { border-color: #dbe2ea !important; }
+.ep-auth-modal .ep-auth-brand .ep-logo {
+  --ep-logo-color: #111827 !important;
+  --ep-logo-text: #111827 !important;
+}
+.ep-auth-modal .ep-auth-brand .ep-logo-shrimp {
+  fill: #111827 !important; stroke: #111827 !important;
+}
+.ep-auth-modal .ep-auth-brand .ep-logo-wordmark {
+  color: #111827 !important; -webkit-text-fill-color: #111827 !important;
+}
+.ep-auth-modal div:has(> form),
+.ep-auth-modal [role="status"],
+.ep-auth-modal [role="alert"] {
+  background: #ffffff !important; border-color: #dbe2ea !important; color: #111827 !important;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] {
+  background: #f1f5f9 !important; border-color: #dbe2ea !important;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] button {
+  color: #1f2937 !important;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
+  background: #2563eb !important; border-color: #2563eb !important; color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, .18) !important;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled) {
+  background: #eaf1ff !important; color: #1d4ed8 !important;
+}
+.ep-auth-modal input {
+  background: #f8fafc !important; border-color: #dbe2ea !important; color: #111827 !important; caret-color: #2563eb;
+}
+.ep-auth-modal input:focus {
+  background: #ffffff !important; border-color: #2563eb !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, .12) !important;
+}
+.ep-auth-modal input::placeholder { color: #64748b !important; }
+.ep-auth-modal button[type="submit"] {
+  background: #2563eb !important; border-color: #2563eb !important; color: #ffffff !important;
+  box-shadow: 0 10px 24px -14px rgba(37, 99, 235, .72) !important;
+}
+.ep-auth-modal button[type="submit"]:not(:disabled):hover {
+  background: #1d4ed8 !important; border-color: #1d4ed8 !important;
+}
+.ep-auth-modal button[aria-label="Close"] { color: #475569 !important; }
+.ep-auth-modal button[aria-label="Close"]:hover {
+  background: #f1f5f9 !important; border-color: #dbe2ea !important; color: #111827 !important;
+}
+.ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
+  background: #ffffff !important; border-color: #dbe2ea !important; color: #111827 !important;
+}
+.ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
+  background: #f1f5f9 !important; border-color: #2563eb !important;
+}
+.ep-auth-modal :is(button, a):focus-visible,
+.ep-auth-modal input:focus-visible { outline-color: #2563eb !important; }
+
+html.dark .ep-auth-modal {
+  --ep-bg: #090d16; --ep-surface: #111827; --ep-tint: #1f2937;
+  --ep-line: #334155; --ep-primary: #f8fafc; --ep-secondary: #e2e8f0;
+  --ep-text-muted: #cbd5e1; --ep-accent: #60a5fa; --ep-accent-hover: #93c5fd;
+  background: #111827 !important; color: #f8fafc !important; border-color: #334155 !important;
+}
+html.dark .ep-auth-modal :is(h1, label) { color: #f8fafc !important; }
+html.dark .ep-auth-modal :is(h1 + p, small, [data-muted]),
+html.dark .ep-auth-modal > div:not(.ep-auth-brand) > div:last-child { color: #cbd5e1 !important; }
+html.dark .ep-auth-modal .ep-auth-brand { border-color: #334155 !important; }
+html.dark .ep-auth-modal .ep-auth-brand .ep-logo {
+  --ep-logo-color: #f8fafc !important; --ep-logo-text: #f8fafc !important;
+}
+html.dark .ep-auth-modal .ep-auth-brand .ep-logo-shrimp {
+  fill: #f8fafc !important; stroke: #f8fafc !important;
+}
+html.dark .ep-auth-modal .ep-auth-brand .ep-logo-wordmark {
+  color: #f8fafc !important; -webkit-text-fill-color: #f8fafc !important;
+}
+html.dark .ep-auth-modal div:has(> form),
+html.dark .ep-auth-modal [role="status"],
+html.dark .ep-auth-modal [role="alert"] {
+  background: #1f2937 !important; border-color: #334155 !important; color: #f8fafc !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] {
+  background: #1f2937 !important; border-color: #334155 !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button { color: #cbd5e1 !important; }
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
+  background: #60a5fa !important; border-color: #60a5fa !important; color: #071426 !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled) {
+  background: rgba(96, 165, 250, .12) !important; color: #f8fafc !important;
+}
+html.dark .ep-auth-modal input {
+  background: #090d16 !important; border-color: #334155 !important; color: #f8fafc !important; caret-color: #60a5fa;
+}
+html.dark .ep-auth-modal input::placeholder { color: #94a3b8 !important; }
+html.dark .ep-auth-modal input:focus {
+  border-color: #60a5fa !important; box-shadow: 0 0 0 4px rgba(96, 165, 250, .14) !important;
+}
+html.dark .ep-auth-modal button[type="submit"] {
+  background: #60a5fa !important; border-color: #60a5fa !important; color: #071426 !important;
+  box-shadow: 0 10px 24px -14px rgba(96, 165, 250, .65) !important;
+}
+html.dark .ep-auth-modal button[type="submit"]:not(:disabled):hover {
+  background: #93c5fd !important; border-color: #93c5fd !important;
+}
+html.dark .ep-auth-modal button[aria-label="Close"] { color: #cbd5e1 !important; }
+html.dark .ep-auth-modal button[aria-label="Close"]:hover {
+  background: #1f2937 !important; border-color: #334155 !important; color: #f8fafc !important;
+}
+html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
+  background: #111827 !important; border-color: #334155 !important; color: #f8fafc !important;
+}
+html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
+  background: #1f2937 !important; border-color: #60a5fa !important;
+}
+html.dark .ep-auth-modal :is(button, a):focus-visible,
+html.dark .ep-auth-modal input:focus-visible { outline-color: #60a5fa !important; }
+
+@media (max-width: 639px) {
+  .ep-auth-overlay [data-auth-backdrop] { background: rgba(9, 13, 22, .68) !important; }
+  .ep-auth-modal {
+    background: #ffffff !important; border-color: #dbe2ea !important;
+    box-shadow: 0 -18px 60px rgba(15, 23, 42, .2) !important;
+  }
+  .ep-auth-modal::before { background: #2563eb !important; opacity: .5 !important; }
+  html.dark .ep-auth-modal {
+    background: #111827 !important; border-color: #334155 !important;
+    box-shadow: 0 -18px 60px rgba(0, 0, 0, .48) !important;
+  }
+  html.dark .ep-auth-modal::before { background: #60a5fa !important; opacity: .7 !important; }
+}
