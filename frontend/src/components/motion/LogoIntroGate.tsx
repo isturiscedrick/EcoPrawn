@@ -9,10 +9,10 @@ const particles = Array.from({ length: 10 }, (_, index) => index);
 const SEEN_KEY = "ep-logo-intro-seen";
 
 /**
- * A short branded intro (about 3.5 s) for the first page load of a session.
+ * A short branded intro (about 5 seconds) for the first page load of a session.
  * It is skipped on dashboard routes and once it has finished or been skipped
  * in this browser session. The button or Escape skips it early.
- * Reduced-motion users get the same duration with no movement, only fades.
+ * Reduced-motion users get a shorter fade-only intro.
  * GSAP controls the entrance, progress and exit; Anime.js adds ambient particles.
  */
 export function LogoIntroGate() {
@@ -79,15 +79,16 @@ export function LogoIntroGate() {
         onComplete: () => finish.current(),
       });
 
-      // Same timing for everyone. Reduced motion only removes movement
-      // (the y and scale offsets above and the particles below), not the time on screen.
+      // Give the logo enough time to finish its entrance and remain readable
+      // while the progress bar completes. Reduced motion keeps the same beat
+      // but removes translation, scaling and ambient particle movement.
       timeline
-        .to(content, { autoAlpha: 1, y: 0, scale: 1, duration: 0.65 })
-        .to(".ep-loading-caption", { autoAlpha: 1, y: 0, duration: 0.42 }, "-=0.16")
-        .to(progress, { scaleX: 1, duration: 1.8, ease: "power2.inOut" }, "-=0.02")
-        .to(".ep-loading-shimmer", { xPercent: 260, duration: 0.72, ease: "power1.inOut" }, "<0.35")
-        .to(content, { autoAlpha: 0, y: reducedMotion ? 0 : -6, duration: 0.3 }, "+=0.25")
-        .to(screen, { autoAlpha: 0, duration: 0.35, ease: "power1.out" }, "<0.02");
+        .to(content, { autoAlpha: 1, y: 0, scale: 1, duration: reducedMotion ? 0.55 : 0.9 })
+        .to(".ep-loading-caption", { autoAlpha: 1, y: 0, duration: reducedMotion ? 0.35 : 0.55 }, "-=0.2")
+        .to(progress, { scaleX: 1, duration: reducedMotion ? 1.8 : 2.8, ease: "power2.inOut" }, "-=0.02")
+        .to(".ep-loading-shimmer", { xPercent: 260, duration: 0.9, ease: "power1.inOut" }, "<0.45")
+        .to(content, { autoAlpha: 0, y: reducedMotion ? 0 : -6, duration: reducedMotion ? 0.25 : 0.4 }, "+=0.75")
+        .to(screen, { autoAlpha: 0, duration: reducedMotion ? 0.3 : 0.55, ease: "power1.out" }, "<0.02");
     }, screen);
 
     let particleMotion: ReturnType<typeof animate> | undefined;
