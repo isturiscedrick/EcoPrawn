@@ -1,0 +1,177 @@
+/* ==========================================================================
+   EcoPrawn Site Chrome (Header & Footer)
+   Header contrast safeguards, footer container queries and theme surfaces,
+   and interactive hero preview depth.
+   ========================================================================== */
+
+/* ---------- Site Header Theme Safeguards ---------- */
+html:not(.dark) #site-header :is(button, a)[style*="background-color: var(--ep-surface)"],
+html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
+  color: #000000 !important;
+}
+
+/* ---------- Site Footer: Container Query & Layout ---------- */
+footer[data-site-footer] {
+  position: relative;
+  width: 100%;
+}
+
+footer[data-site-footer] .ep-footer-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  container: ep-footer / inline-size;
+}
+
+footer[data-site-footer] .ep-footer-grid,
+footer[data-site-footer] .ep-footer-grid > * {
+  min-width: 0;
+}
+
+footer[data-site-footer] .ep-footer-grid h2 {
+  white-space: nowrap;
+}
+
+footer[data-site-footer] .ep-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-top: 1.5rem;
+}
+
+footer[data-site-footer] .ep-footer-bottom p {
+  margin: 0;
+}
+
+@container ep-footer (max-width: 760px) {
+  footer[data-site-footer] .ep-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.5rem 1.25rem !important;
+  }
+  footer[data-site-footer] .ep-footer-brand {
+    grid-column: 1 / -1 !important;
+  }
+  footer[data-site-footer] .ep-footer-explore,
+  footer[data-site-footer] .ep-footer-account {
+    grid-column: span 1 !important;
+  }
+  footer[data-site-footer] .ep-footer-grid h2 {
+    white-space: normal !important;
+  }
+  footer[data-site-footer] .ep-footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+}
+
+@container ep-footer (max-width: 420px) {
+  footer[data-site-footer] .ep-footer-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.25rem !important;
+  }
+  footer[data-site-footer] .ep-footer-brand,
+  footer[data-site-footer] .ep-footer-explore,
+  footer[data-site-footer] .ep-footer-account {
+    grid-column: 1 / -1 !important;
+  }
+  footer[data-site-footer] .ep-footer-bottom {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Footer columns are content groups, not cards. Ensure no pseudo-card surfaces appear */
+footer[data-site-footer] .ep-footer-grid > .ep-footer-brand,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-explore,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-account {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+footer[data-site-footer] .ep-footer-grid > .ep-footer-brand::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-brand::after,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-explore::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-explore::after,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-account::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-account::after {
+  content: none !important;
+}
+
+/* ---------- Site Footer: Light Theme Surfaces & Contrast ---------- */
+html:not(.dark) footer[data-site-footer] {
+  background: linear-gradient(155deg, #ffffff 0%, #f4f7f6 58%, #eaf1ef 100%) !important;
+  color: #18343b !important;
+}
+
+html:not(.dark) footer[data-site-footer] :is(p, h2, nav a, small, span, li, address, strong) {
+  color: #18343b !important;
+}
+
+html:not(.dark) footer[data-site-footer] nav a:hover {
+  color: #d94416 !important;
+}
+
+html:not(.dark) footer[data-site-footer] .ep-logo {
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #0f4c5c !important;
+}
+
+html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-wordmark {
+  color: #0f4c5c !important;
+}
+
+html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-shrimp {
+  fill: #d94416 !important;
+  stroke: #d94416 !important;
+}
+
+/* ---------- Site Footer: Dark Theme Surfaces & Contrast ---------- */
+html.dark footer[data-site-footer] {
+  background: linear-gradient(155deg, #172326 0%, #101718 58%, #0b1214 100%) !important;
+  color: #ffffff !important;
+}
+
+html.dark footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong, nav a, span) {
+  color: #ffffff !important;
+}
+
+html.dark footer[data-site-footer] nav a:hover {
+  color: #8bd5a6 !important;
+}
+
+html.dark footer[data-site-footer] .ep-logo {
+  --ep-logo-color: #d94416 !important;
+  --ep-logo-text: #8bd5a6 !important;
+}
+
+html.dark footer[data-site-footer] .ep-logo .ep-logo-shrimp {
+  fill: #d94416 !important;
+  stroke: #d94416 !important;
+}
+
+html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
+  color: #8bd5a6 !important;
+}
+
+/* ---------- Interactive Hero Console Depth ---------- */
+.ep-hero-console {
+  transition: transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1), box-shadow 700ms ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ep-hero-visual:hover .ep-hero-console {
+    transform: translateY(-5px) rotateX(1deg);
+    box-shadow: 0 36px 100px -38px rgba(38, 75, 112, 0.48);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-hero-console {
+    transition: none;
+  }
+}

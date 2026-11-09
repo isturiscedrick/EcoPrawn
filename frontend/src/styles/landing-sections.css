@@ -1,0 +1,225 @@
+/* ==========================================================================
+   EcoPrawn Landing & Marketing Sections
+   Canonical styles for Business Hero, Deep-Water Bands, Capabilities,
+   Process Grid, and About/Contact content frames.
+   ========================================================================== */
+
+/* ---------- Business Hero Background & Atmosphere ---------- */
+.ep-business-landing .ep-hero {
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  box-sizing: border-box;
+  background-color: var(--ep-bg);
+  background:
+    radial-gradient(ellipse at 78% 40%, rgba(139, 213, 166, 0.15), transparent 34%),
+    linear-gradient(135deg, var(--ep-bg) 0%, var(--ep-tint) 100%);
+}
+
+html.dark .ep-business-landing .ep-hero {
+  background:
+    radial-gradient(ellipse at 78% 40%, rgba(139, 213, 166, 0.11), transparent 36%),
+    linear-gradient(135deg, var(--ep-bg) 0%, var(--ep-surface) 100%);
+}
+
+.ep-business-landing #top.ep-hero > [data-hero="grid"],
+.ep-business-landing #top.ep-hero > .ep-hero-atmosphere,
+.ep-business-landing #top.ep-hero > [aria-hidden="true"] {
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.ep-business-landing .ep-hero-layout {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  min-height: min(760px, calc(100svh - 76px));
+}
+
+@media (max-width: 767px) {
+  .ep-business-landing #top.ep-hero > .ep-hero-layout {
+    padding-top: 5rem !important;
+  }
+}
+@media (min-width: 768px) {
+  .ep-business-landing #top.ep-hero > .ep-hero-layout {
+    padding-top: clamp(5rem, 8vh, 7rem) !important;
+  }
+}
+
+.ep-business-landing .ep-hero-copy {
+  text-wrap: pretty;
+}
+.ep-business-landing .ep-hero-headline-primary {
+  color: var(--ep-text);
+}
+.ep-business-landing .ep-hero-headline-secondary {
+  color: var(--ep-accent);
+}
+.ep-business-landing .ep-hero-visual {
+  filter: drop-shadow(0 26px 48px rgba(10, 40, 38, 0.14));
+}
+
+@media (max-width: 1023px) {
+  .ep-business-landing .ep-hero-layout {
+    min-height: 0;
+  }
+  .ep-business-landing .ep-hero-copy {
+    text-align: center;
+  }
+  .ep-business-landing .ep-hero-copy [data-hero="cta"] {
+    justify-content: center;
+  }
+}
+
+/* ---------- At a Glance Stats Panel ---------- */
+.ep-business-landing .ep-stats-panel {
+  box-shadow: 0 18px 50px -34px rgba(10, 40, 38, 0.26);
+}
+
+/* ---------- Full-Bleed Deep-Water Bands (Readings & Systems) ---------- */
+.ep-landing #readings,
+.ep-about-page #systems {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: 0;
+  overflow: hidden;
+  background-color: var(--ep-deep);
+  background-clip: border-box;
+}
+
+.ep-landing #readings > [data-readings-bg],
+.ep-about-page #systems > [aria-hidden="true"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  transform: none !important;
+}
+
+.ep-landing #readings > *,
+.ep-about-page #systems > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Section container centering */
+.ep-business-landing #top.ep-hero > .ep-hero-layout,
+.ep-business-landing #readings > div:not([aria-hidden="true"]),
+.ep-business-landing #capabilities > div:not([aria-hidden="true"]),
+.ep-business-landing #process > div:not([aria-hidden="true"]) {
+  width: min(calc(100% - 2.5rem), 1440px);
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+@media (max-width: 639px) {
+  .ep-business-landing #top.ep-hero > .ep-hero-layout,
+  .ep-business-landing #readings > div:not([aria-hidden="true"]),
+  .ep-business-landing #capabilities > div:not([aria-hidden="true"]),
+  .ep-business-landing #process > div:not([aria-hidden="true"]) {
+    width: calc(100% - 2rem);
+  }
+}
+
+@media (min-width: 1200px) {
+  .ep-business-landing #top.ep-hero > .ep-hero-layout,
+  .ep-business-landing #readings > div:not([aria-hidden="true"]),
+  .ep-business-landing #capabilities > div:not([aria-hidden="true"]),
+  .ep-business-landing #process > div:not([aria-hidden="true"]) {
+    width: min(calc(100% - 6rem), 1440px);
+  }
+}
+
+/* ---------- Business Capabilities Cards ---------- */
+.ep-business-landing .ep-business-capabilities [data-business-card] {
+  min-height: 270px;
+  box-shadow: 0 16px 40px -34px rgba(10, 40, 38, 0.38);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.ep-business-landing .ep-business-capabilities [data-business-card]:hover {
+  transform: translateY(-5px);
+  border-color: var(--ep-accent);
+  box-shadow: 0 22px 48px -34px rgba(10, 40, 38, 0.34);
+}
+
+html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
+  box-shadow: 0 18px 42px -34px rgba(0, 0, 0, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-business-capabilities [data-business-card] {
+    transition: none;
+  }
+}
+
+/* ---------- Static Four-Card Process Grid ---------- */
+@media (min-width: 1200px) {
+  .ep-landing #process [data-process-viewport] {
+    width: 100%;
+    overflow: visible;
+    padding-top: 1.75rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .ep-landing #process [data-process-track] {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: clamp(1rem, 1.6vw, 1.5rem);
+    transform: none !important;
+  }
+
+  .ep-landing #process [data-process-track] > li {
+    width: auto;
+    min-width: 0;
+    min-height: 240px;
+    padding: 1.75rem;
+    border: 1px solid var(--ep-line);
+    border-radius: 1.25rem;
+    background: var(--ep-surface);
+    box-shadow: 0 18px 48px -38px rgba(7, 42, 48, 0.38);
+  }
+
+  .ep-landing #process [data-process-track] > li [data-step-node] {
+    display: none;
+  }
+}
+
+@media (max-width: 1199px) {
+  .ep-landing #process [data-process-viewport] {
+    overflow: visible;
+  }
+  .ep-landing #process [data-process-track] {
+    width: 100%;
+    transform: none !important;
+  }
+}
+
+/* ---------- About Page Centered Frame & Cards ---------- */
+.ep-about-page main > section > .ep-about-content-frame {
+  width: min(calc(100% - 2rem), 1200px) !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box;
+}
+
+@media (max-width: 639px) {
+  .ep-about-page main > section > .ep-about-content-frame {
+    width: 100% !important;
+  }
+}
+
+.ep-about-page .ep-about-objective {
+  min-width: 0;
+}

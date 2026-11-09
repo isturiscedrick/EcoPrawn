@@ -1,0 +1,360 @@
+/* ==========================================================================
+   HeroLens Instrument & Telemetry
+   Single-coordinate responsive system (620x440) for lens, connectors, and readouts.
+   Light and dark glass finishes, 3D perspective depth, and optics.
+   ========================================================================== */
+
+/* ---------- GSAP 3D depth and hardware layer assignment ---------- */
+.ep-landing #top .ep-lens-stage {
+  perspective: 1100px;
+  perspective-origin: 50% 48%;
+  transform-style: preserve-3d;
+}
+.ep-landing #top .ep-lens-core {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+  filter: drop-shadow(0 28px 24px rgba(5, 35, 39, 0.22));
+}
+.ep-landing #top .ep-lens-core > div:first-child {
+  transform: translateZ(0);
+  transform-style: preserve-3d;
+}
+.ep-landing #top .ep-lens-core .ep-lens-rings { transform: translateZ(9px); }
+.ep-landing #top .ep-lens-core .ep-lens-ticks { transform: translateZ(13px); }
+.ep-landing #top .ep-lens-core .ep-lens-arcs  { transform: translateZ(19px); }
+.ep-landing #top .ep-lens-core .ep-lens-shrimp{ transform: translateZ(25px); }
+.ep-landing #top .ep-lens-core .ep-lens-scan  { transform: translateZ(28px); }
+.ep-landing #top .ep-lens-core .ep-lens-glare { transform: translateZ(31px); }
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .ep-landing #top .ep-lens-core {
+    will-change: auto;
+  }
+}
+
+/* ---------- Outer mechanical bezel ring ---------- */
+.ep-landing #top .ep-lens-core > .ep-lens-outer-ring {
+  position: absolute !important;
+  top: -5.5% !important;
+  left: -5.5% !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 111% !important;
+  height: 111% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  transform-origin: 50% 50% !important;
+}
+
+/* ---------- Container Query Layout (620x440 coordinate system) ---------- */
+.ep-landing #top .ep-lens-showcase {
+  container-type: inline-size;
+  container-name: lens;
+}
+
+/* Side-by-side instrument layout (Desktop / Tablet) */
+@container lens (min-width: 440px) {
+  .ep-landing #top .ep-lens-diagram {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 620 / 440;
+    margin: 0 auto 0.5rem !important;
+  }
+  .ep-landing #top .ep-lens-stage {
+    position: absolute !important;
+    inset: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .ep-landing #top .ep-lens-core {
+    position: relative !important;
+    inset: auto !important;
+    width: 43.5% !important; /* 270 / 620 */
+    max-width: none !important;
+  }
+  .ep-landing #top .ep-lens-connectors {
+    display: block !important;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    pointer-events: none;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout {
+    position: absolute !important;
+    right: auto !important;
+    bottom: auto !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: 20.3% !important; /* 126 / 620 */
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    justify-self: auto !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    pointer-events: auto;
+  }
+
+  /* Left column: mirrored row-reverse toward the lens (x = 126 of 620) */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 {
+    left: auto !important;
+    right: 79.7% !important;
+    width: max-content !important;
+    align-items: flex-end !important;
+    text-align: right !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 {
+    top: calc(26.8% - 1.5rem) !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 {
+    top: calc(66.4% - 1.5rem) !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 > span:first-child,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 > span:first-child {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    text-align: right !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0 > span:last-child,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2 > span:last-child {
+    width: 100% !important;
+    text-align: right !important;
+    padding-left: 0 !important;
+  }
+
+  /* Right column: connector lines start at x = 494 */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1 {
+    left: 79.7% !important;
+    top: calc(26.8% - 1.5rem) !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3 {
+    left: 79.7% !important;
+    top: calc(66.4% - 1.5rem) !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1 > span:last-child,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3 > span:last-child {
+    padding-left: 1.02rem;
+  }
+
+  /* Center bottom: water level beneath the lens */
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    left: 37.1% !important;
+    top: 86.5% !important;
+    width: 25.8% !important; /* 160 / 620 */
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .ep-landing #top .ep-lens-readout > span:first-child {
+    font-size: clamp(0.68rem, 2.3cqw, 0.82rem) !important;
+    white-space: normal !important;
+  }
+  .ep-landing #top .ep-lens-readout > span:last-child {
+    font-size: clamp(1.05rem, 3.3cqw, 1.4rem) !important;
+  }
+}
+
+/* Narrow viewports: lens on top, readings below in 2-column grid */
+@container lens (max-width: 439px) {
+  .ep-landing #top .ep-lens-diagram {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    aspect-ratio: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    gap: 0.85rem !important;
+    transform: none !important;
+    margin-bottom: 0 !important;
+  }
+  .ep-landing #top .ep-lens-stage {
+    position: relative !important;
+    inset: auto !important;
+    display: flex !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .ep-landing #top .ep-lens-core {
+    position: relative !important;
+    inset: auto !important;
+    width: min(72cqw, 250px) !important;
+    max-width: 250px !important;
+  }
+  .ep-landing #top .ep-lens-connectors {
+    display: none !important;
+  }
+  .ep-landing #top .ep-lens-readings {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: none !important;
+    gap: 0.7rem 1rem !important;
+    width: 100% !important;
+    padding: 0.9rem 0.25rem 0.2rem !important;
+    border-top: 1px solid var(--ep-line);
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-0,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-1,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-2,
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-3 {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: auto !important;
+    justify-self: stretch !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    transform: none !important;
+  }
+  .ep-landing #top .ep-lens-readings > .ep-lens-readout-4 {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    width: auto !important;
+    justify-self: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    transform: none !important;
+  }
+}
+
+/* ---------- Light Theme: Instrument Finish & Optics ---------- */
+html:not(.dark) .ep-landing #top figure[aria-label^="A shrimp"] > div {
+  background: linear-gradient(145deg, #477F86 0%, #28636D 48%, #174B55 100%) !important;
+  border: 1px solid rgba(15, 76, 92, 0.32);
+  box-shadow:
+    0 30px 58px -30px rgba(15, 76, 92, 0.42),
+    inset 0 2px 0 rgba(255, 255, 255, 0.62),
+    inset 0 -8px 18px rgba(5, 37, 43, 0.24),
+    0 0 0 5px rgba(15, 76, 92, 0.08) !important;
+}
+html:not(.dark) .ep-landing #top figure[aria-label^="A shrimp"] > div > div {
+  background: radial-gradient(circle at 48% 38%, #397780 0%, #245D67 48%, #123F49 100%) !important;
+  --tw-ring-color: rgba(15, 76, 92, 0.48) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-rings,
+html:not(.dark) .ep-landing #top .ep-lens-ticks {
+  color: #D9EFEB !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-rings circle {
+  stroke: currentColor;
+}
+html:not(.dark) .ep-landing #top .ep-lens-arcs {
+  color: #F28A68 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-shrimp .ep-logo {
+  --ep-logo-color: #F28A68 !important;
+  --ep-logo-text: #F28A68 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-speck {
+  background: #EAF7F2 !important;
+  opacity: 0.34 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-glare {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 48%, transparent 72%) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-iris {
+  background: #123F49 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-ping {
+  border-color: #F28A68 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-scan {
+  background: linear-gradient(90deg, transparent, #D9EFEB, transparent) !important;
+  box-shadow: 0 0 12px rgba(217, 239, 235, 0.6) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:first-child {
+  color: #31504C !important;
+  font-weight: 750 !important;
+  letter-spacing: 0.01em;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child {
+  color: #0F3439 !important;
+  font-weight: 800 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
+  color: #315A5C !important;
+  font-weight: 700 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-readout .ep-lens-dot {
+  background: #0F4C5C !important;
+  box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.13) !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors path {
+  stroke: #477780 !important;
+  stroke-width: 1.6 !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-connectors circle {
+  fill: #0F4C5C !important;
+}
+html:not(.dark) .ep-landing #top .ep-lens-caption {
+  color: #31504C !important;
+  text-shadow: none !important;
+}
+
+/* ---------- Dark Theme: Instrument Finish & Optics ---------- */
+html.dark .ep-landing figure[aria-label^="A shrimp"] > div {
+  background: linear-gradient(145deg, #26383A 0%, #142629 52%, #0A171A 100%) !important;
+  box-shadow: 0 42px 78px -32px rgba(0, 0, 0, 0.82),
+    inset 0 2px 0 rgba(139, 213, 166, 0.18),
+    0 0 36px rgba(139, 213, 166, 0.08) !important;
+}
+html.dark .ep-landing figure[aria-label^="A shrimp"] > div > div {
+  background: radial-gradient(circle at 50% 44%, #244044 0%, #142B2F 48%, #091619 100%) !important;
+  --tw-ring-color: rgba(139, 213, 166, 0.34) !important;
+}
+html.dark .ep-landing .ep-lens-rings,
+html.dark .ep-landing .ep-lens-ticks {
+  color: #8BD5A6 !important;
+}
+html.dark .ep-landing .ep-lens-arcs {
+  color: #F28A68 !important;
+}
+html.dark .ep-landing .ep-lens-ping {
+  border-color: #F28A68 !important;
+}
+html.dark .ep-landing .ep-lens-scan {
+  background: linear-gradient(90deg, transparent, #8BD5A6, transparent) !important;
+  box-shadow: 0 0 16px rgba(139, 213, 166, 0.72) !important;
+}
+html.dark .ep-landing .ep-lens-iris {
+  background: #071417 !important;
+}
+html.dark .ep-landing .ep-lens-readout,
+html.dark .ep-landing .ep-lens-readout span,
+html.dark .ep-landing .ep-lens-caption {
+  color: #EAF4EF !important;
+}
+html.dark .ep-landing .ep-lens-readout .ep-lens-dot {
+  background-color: #8BD5A6 !important;
+}
+html.dark .ep-landing .ep-lens-speck {
+  background: #DDF8E7 !important;
+}
+html.dark .ep-landing .ep-lens-flash {
+  background: #F28A68 !important;
+}
+html.dark .ep-landing .ep-lens-shrimp .ep-logo {
+  --ep-logo-color: #F28A68 !important;
+  --ep-logo-text: #8BD5A6 !important;
+}

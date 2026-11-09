@@ -1,3 +1,8 @@
+/* ==========================================================================
+   EcoPrawn Foundations
+   Tailwind theme bridge, base tokens, typography, accessibility, and UI animations.
+   ========================================================================== */
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -46,18 +51,18 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: #0b2e33;
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: #4a5553;
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
+  --border: #b9b09a;
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: #b23f1c;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -77,30 +82,30 @@
   --water-mid: #12474d;
   --mangrove: #3c7a5c;
   --mangrove-light: #5b9b78;
+  --mangrove-text: #2a5c43;
   --coral: #e8623a;
   --coral-dim: #c9512e;
+  --coral-strong: #b23f1c;
   --sand: #ffffff;
   --sand-dim: #d8e0de;
   --amber: #e8a23a;
+  --amber-text: #8f5a12;
   --danger: #d64545;
+  --danger-text: #a82020;
   --ink: #0b2320;
-  --font-display: 'Lexend', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-mono: 'Inter', sans-serif;
 
-  /* Shared elevation/radius — replaces one-off shadow/radius values
-     that were scattered across Panel, KpiCard, and modal overlays. */
+  /* Typography */
+  --font-display: 'Lexend', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Inter', system-ui, sans-serif;
+
+  /* Shared elevation and radius */
   --shadow-sm: 0 1px 2px rgba(11, 35, 32, 0.04);
   --shadow-md: 0 8px 20px -12px rgba(11, 35, 32, 0.18);
   --shadow-pill: 0 2px 8px -4px rgba(11, 35, 32, 0.12);
   --shadow-overlay: 0 30px 70px -20px rgba(0, 0, 0, 0.4);
   --shadow-overlay-dark: 0 30px 70px -20px rgba(0, 0, 0, 0.6);
   --radius-card: 14px;
-
-  /* --amber (#E8A23A) is ~2.17:1 against white — fails WCAG AA's 4.5:1
-     for text. This darker variant (~5.8:1) is for amber used as text;
-     --amber itself stays for dots/fills/backgrounds. */
-  --amber-text: #8f5a12;
 }
 
 .dark {
@@ -139,6 +144,8 @@
 
 @layer base {
   html {
+    font-size: 112.5%; /* 18px base; all rem units scale cleanly */
+    scrollbar-gutter: stable;
     scroll-behavior: smooth;
   }
   * {
@@ -149,12 +156,32 @@
   }
 }
 
-/* ---------- EcoPrawn root + effects ---------- */
+/* ---------- Typography & Utility Classes ---------- */
+.ep-font-display {
+  font-family: var(--font-display);
+  font-style: normal;
+}
+.ep-font-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
 
+/* Consistent keyboard focus ring */
+.ep-focus-ring {
+  outline: none;
+}
+.ep-focus-ring:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ---------- Interactive Root Elements ---------- */
 .ecoprawn-root {
   font-family: var(--font-body);
   background: var(--sand);
   color: var(--ink);
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -169,6 +196,13 @@
 .ecoprawn-root button:not(:disabled),
 .ecoprawn-root [role="button"]:not([aria-disabled="true"]) {
   cursor: pointer;
+}
+
+/* 44px minimum touch targets */
+.ecoprawn-root button,
+.ecoprawn-root select,
+.ecoprawn-root input:not([type="checkbox"]):not([type="radio"]) {
+  min-height: 44px;
 }
 
 .ecoprawn-root :is(a, button, [role="button"]):focus-visible {
@@ -189,66 +223,30 @@
   transform: translateY(-2px);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .ecoprawn-root :where(a, button, [role="button"]) {
-    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
-  }
-
-  .ecoprawn-root :where(a, button, [role="button"]):hover {
-    transform: none;
-  }
+.ecoprawn-root ::selection {
+  background: var(--coral);
+  color: var(--sand);
 }
 
-.dashboard-shell {
+/* ---------- Shell and Dialog Fonts ---------- */
+.dashboard-shell,
+[role="dialog"],
+.ep-auth-modal {
   font-family: var(--font-body);
 }
 
-.dashboard-shell :is(h1, h2, h3, h4, h5, h6, .ep-font-display) {
+.dashboard-shell :is(h1, h2, h3, h4, h5, h6, .ep-font-display),
+[role="dialog"] :is(h1, h2, h3, h4, h5, h6),
+.ep-auth-modal :is(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-display);
 }
 
 .dashboard-skeleton-block {
   background: #d7e1df;
 }
-
 .dark .dashboard-skeleton-block {
   background: #3a3b3c;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-}
-
-[role="dialog"],
-.ep-auth-modal {
-  font-family: var(--font-body);
-}
-
-[role="dialog"] :is(h1, h2, h3, h4, h5, h6),
-.ep-auth-modal :is(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-display);
-}
-
-.ecoprawn-root ::selection {
-  background: var(--coral);
-  color: var(--sand);
-}
-
-.ep-font-display {
-  font-family: var(--font-display);
-}
-.ep-font-mono {
-  font-family: var(--font-mono);
-}
-
-/* Consistent keyboard focus state for interactive elements that don't
-   already define their own focus-visible ring (nav buttons, table row
-   actions, etc). Doesn't touch elements that already have a bespoke
-   focus-visible treatment (inputs, header links). */
-.ep-focus-ring {
-  outline: none;
-}
-.ep-focus-ring:focus-visible {
-  outline: 2px solid var(--coral);
-  outline-offset: 2px;
-  border-radius: 6px;
 }
 
 .dashboard-hover {
@@ -271,16 +269,7 @@
   box-shadow: 0 0 0 3px rgba(178, 63, 28, 0.14);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .dashboard-hover {
-    transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
-  }
-
-  .dashboard-hover:hover {
-    transform: none;
-  }
-}
-
+/* ---------- Motion Keyframes ---------- */
 @keyframes ep-pulse-dot {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.3; }
@@ -335,8 +324,7 @@
   transform-origin: center;
 }
 
-/* Dashboard UI motion: modal backdrop/panel entrance and tank row
-   insert/remove. Short and one-shot; nothing loops. */
+/* One-shot entrance/exit animations */
 @keyframes ep-fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -369,67 +357,19 @@
   animation: ep-row-out 200ms ease-in both;
 }
 
+/* Reduced motion global overrides */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .ecoprawn-root * {
+  .ecoprawn-root *,
+  .dashboard-hover {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .ecoprawn-root :where(a, button, [role="button"]):hover,
+  .dashboard-hover:hover {
+    transform: none;
+  }
 }
-
-/* ---------- Accessibility pass (users 30+, outdoor light) ----------
-   Appended last so it overrides the values above. Delete this whole
-   block to revert (and restore line 1 if you want the old fonts). */
-
-:root {
-  /* Two sans-serif fonts only: Lexend (headings) + Inter (everything
-     else). --font-mono points to Inter, so existing .ep-font-mono
-     usages keep working with no component edits. */
-  --font-display: 'Lexend', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'Inter', system-ui, sans-serif;
-
-  /* Darker text-safe variants (about 6:1 or better on --sand).
-     Keep the original tokens for dots, fills, and borders. */
-  --danger-text: #a82020;
-  --mangrove-text: #2a5c43;
-  --coral-strong: #b23f1c; /* button fill, about 5.8:1 with white text */
-
-  /* shadcn tokens: only matter where components use them */
-  --primary: var(--water-deep);
-  --primary-foreground: #ffffff;
-  --muted-foreground: #4a5553;
-  --border: #b9b09a;
-  --ring: var(--coral-strong);
-}
-
-html {
-  font-size: 112.5%; /* 18px base; all rem sizes scale up */
-  /* Keep the scrollbar's space reserved so locking body scroll (modals)
-     doesn't widen the viewport and make the page jump sideways. */
-  scrollbar-gutter: stable;
-}
-
-.ecoprawn-root {
-  line-height: 1.55;
-}
-
-/* Headings stay upright: no slanted/synthesized italics */
-.ep-font-display {
-  font-style: normal;
-}
-
-.ep-font-mono {
-  font-variant-numeric: tabular-nums;
-}
-
-/* 44px minimum touch target, but not for checkboxes/radios */
-.ecoprawn-root button,
-.ecoprawn-root select,
-.ecoprawn-root input:not([type="checkbox"]):not([type="radio"]) {
-  min-height: 44px;
-}
-
