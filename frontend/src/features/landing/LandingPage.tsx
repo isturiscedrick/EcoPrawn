@@ -238,7 +238,7 @@ export function LandingPage() {
         <section
           id="readings"
           aria-labelledby="readings-title"
-          className="relative isolate overflow-hidden bg-[var(--ep-deep)] text-[var(--ep-on-deep)]"
+          className="ep-readings-section relative isolate overflow-hidden"
         >
           <div
             aria-hidden="true"
@@ -251,18 +251,18 @@ export function LandingPage() {
           />
 
           <div className="mx-auto w-full max-w-[1440px] px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-24">
-            <div data-reveal="" className="max-w-[40rem]">
-              <div className={`${eyebrow} text-[var(--ep-on-deep-muted)]`}>
+            <div data-reveal="" className="ep-readings-intro max-w-[40rem]">
+              <div className={`${eyebrow} ep-readings-kicker`}>
                 <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-zone)]" />
                 Target ranges
               </div>
               <h2
                 id="readings-title"
-                className="ep-font-display text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
+                className="ep-readings-title ep-font-display text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
               >
                 Five readings, each held in range.
               </h2>
-              <p className="mt-3 text-lg leading-relaxed text-[var(--ep-on-deep-muted)]">
+              <p className="ep-readings-description mt-3 text-lg leading-relaxed">
                 Sample values from Tank 1, shown against the range shrimp need.
               </p>
             </div>
@@ -285,7 +285,7 @@ export function LandingPage() {
                     key={r.label}
                     data-reading=""
                     data-hover-lift=""
-                    className="h-full rounded-2xl border border-white/20 bg-white/[0.07] p-5 transition-colors duration-200 hover:bg-white/[0.12]"
+                    className="ep-reading-card h-full rounded-2xl border p-5 transition-colors duration-200"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <dt className="text-base font-semibold">{r.label}</dt>
