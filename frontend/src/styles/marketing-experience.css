@@ -1130,9 +1130,6 @@ html.dark .ep-business-landing .ep-preview-chart > span {
   background: linear-gradient(180deg,#60a5fa,rgba(96,165,250,.24));
 }
 @media (max-width: 639px) {
-  .ep-business-landing .ep-dashboard-preview {
-    padding-inline: 1rem;
-  }
   .ep-business-landing .ep-dashboard-preview-window {
     border-radius: 1.1rem;
   }
