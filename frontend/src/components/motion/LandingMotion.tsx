@@ -186,7 +186,9 @@ export function LandingMotion() {
 
       // The dashboard preview has its own heading, sample KPI cards and CSS chart bars below.
 
-      const hoverCleanups: Array<() => void> = [];
+      const homeRoot = document.querySelector<HTMLElement>(
+        ".ep-landing:not(.ep-about-page):not(.ep-contact-page)"
+      );
       const microAnimations: Array<{ revert: () => unknown }> = [];
 
       // Keep the hero background and hero copy anchored during page scroll.
@@ -329,7 +331,6 @@ export function LandingMotion() {
       return () => {
         cleanupSharedHover();
         restores.forEach((restore) => restore());
-        hoverCleanups.forEach((cleanup) => cleanup());
         microAnimations.forEach((animation) => animation.revert());
         homeIconObserver?.disconnect();
         homeAccentObserver?.disconnect();
