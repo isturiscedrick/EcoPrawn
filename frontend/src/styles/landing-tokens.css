@@ -81,19 +81,19 @@ html:has(.ep-landing) {
 /* Landing hero headline: deep teal primary + terracotta secondary */
 .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
   color: #111827 !important;
-  -webkit-text-fill-color: #0F4C5C !important;
+  -webkit-text-fill-color: #111827 !important;
 }
 .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
   color: #2563eb !important;
-  -webkit-text-fill-color: #D94416 !important;
+  -webkit-text-fill-color: #2563EB !important;
 }
 html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
   color: #f8fafc !important;
-  -webkit-text-fill-color: #F28A68 !important;
+  -webkit-text-fill-color: #F8FAFC !important;
 }
 html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
   color: #60a5fa !important;
-  -webkit-text-fill-color: #8BD5A6 !important;
+  -webkit-text-fill-color: #60A5FA !important;
 }
 
 /* About and Contact page hero headlines share the same two-tone brand treatment */
@@ -122,4 +122,31 @@ html.dark .ep-about-page [data-page-hero-headline] > span:last-child,
 html.dark .ep-contact-page [data-page-hero-headline] > span:last-child {
   color: #8BD5A6 !important;
   -webkit-text-fill-color: #8BD5A6 !important;
+}
+
+
+/* Landing header logo: monochrome in light mode, white in dark mode. */
+.ep-business-landing header .ep-logo {
+  --ep-logo-color: #111827 !important;
+  --ep-logo-text: #111827 !important;
+}
+.ep-business-landing header .ep-logo .ep-logo-shrimp {
+  fill: #111827 !important;
+  stroke: #111827 !important;
+}
+.ep-business-landing header .ep-logo .ep-logo-wordmark {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+html.dark .ep-business-landing header .ep-logo {
+  --ep-logo-color: #f8fafc !important;
+  --ep-logo-text: #f8fafc !important;
+}
+html.dark .ep-business-landing header .ep-logo .ep-logo-shrimp {
+  fill: #f8fafc !important;
+  stroke: #f8fafc !important;
+}
+html.dark .ep-business-landing header .ep-logo .ep-logo-wordmark {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
 }
