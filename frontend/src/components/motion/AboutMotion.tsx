@@ -85,6 +85,33 @@ export function AboutMotion() {
           if (points.length) tl.from(points, { x: 16, duration: .42, stagger: .075 }, "-=.22");
         });
 
+        // New editorial mission panel: reveal copy and the orbital system graphic
+        // as one composed unit, then gently draw the orbit rings into view.
+        const mission = root.querySelector<HTMLElement>(".ep-about-mission-panel");
+        if (mission) {
+          const copy = mission.querySelectorAll<HTMLElement>(":scope > div:first-child > *");
+          const visual = mission.querySelector<HTMLElement>(".ep-about-orbit-visual");
+          const rings = mission.querySelectorAll<HTMLElement>(".ep-about-orbit");
+          const tl = gsap.timeline({
+            scrollTrigger: { trigger: mission, start: "top 82%", once: true },
+            defaults: { ease: "power3.out" },
+          });
+          if (copy.length) tl.from(copy, { y: 22, autoAlpha: 0, stagger: .09, duration: .62 });
+          if (visual) tl.from(visual, { scale: .9, autoAlpha: 0, duration: .8 }, "-=.42");
+          if (rings.length) tl.from(rings, { scale: .72, autoAlpha: 0, stagger: .1, duration: .72 }, "-=.5");
+        }
+
+        // Workflow cards enter in sequence. Their CSS hover state remains
+        // independent of the entrance transform.
+        const journeyCards = root.querySelectorAll<HTMLElement>(".ep-about-journey-card");
+        if (journeyCards.length) {
+          gsap.from(journeyCards, {
+            y: 30, autoAlpha: 0, stagger: .1, duration: .68, ease: "power3.out",
+            clearProps: "opacity,visibility,transform",
+            scrollTrigger: { trigger: ".ep-about-journey-grid", start: "top 84%", once: true },
+          });
+        }
+
         // System-section accent markers remain static during page scrolling.
         // The decorative deep-water background is not driven by ScrollTrigger.
 
