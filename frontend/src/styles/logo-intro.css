@@ -5,13 +5,13 @@
    ========================================================================== */
 
 .ep-loading-screen {
-  --loading-bg: #f4f7f6;
-  --loading-text: #0f4c5c;
-  --loading-muted: #315e65;
-  --loading-track: rgba(15, 76, 92, 0.16);
-  --loading-start: #d94416;
-  --loading-end: #0f4c5c;
-  --loading-particle: #d94416;
+  --loading-bg: #f8fafc;
+  --loading-text: #0f172a;
+  --loading-muted: #475569;
+  --loading-track: rgba(15, 23, 42, 0.14);
+  --loading-start: #2563eb;
+  --loading-end: #0f172a;
+  --loading-particle: #2563eb;
 
   position: fixed;
   inset: 0;
@@ -27,13 +27,13 @@
 }
 
 html.dark .ep-loading-screen {
-  --loading-bg: #18191a;
-  --loading-text: #eaf4ef;
-  --loading-muted: #b7cbc1;
-  --loading-track: rgba(139, 213, 166, 0.2);
-  --loading-start: #f28a68;
-  --loading-end: #8bd5a6;
-  --loading-particle: #8bd5a6;
+  --loading-bg: #080d18;
+  --loading-text: #f8fafc;
+  --loading-muted: #a8b4c7;
+  --loading-track: rgba(148, 163, 184, 0.24);
+  --loading-start: #60a5fa;
+  --loading-end: #2563eb;
+  --loading-particle: #60a5fa;
   color-scheme: dark;
 }
 
