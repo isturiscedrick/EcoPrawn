@@ -187,6 +187,26 @@ export function LandingPage() {
           </div>
         </section>
 
+        {/* PLATFORM SIGNALS */}
+        <section aria-label="Connected EcoPrawn capabilities" className="ep-platform-ribbon border-y border-[var(--ep-line)] bg-[var(--ep-surface)] px-5 py-5 sm:px-8">
+          <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-0">
+            {[
+              { number: "01", label: "Monitor", detail: "Water conditions" },
+              { number: "02", label: "Understand", detail: "Growth and biomass" },
+              { number: "03", label: "Respond", detail: "Coordinated farm actions" },
+            ].map((item, index) => (
+              <div key={item.number} className="ep-platform-ribbon-item flex items-center gap-4 px-2 py-2 sm:px-6">
+                <span className="ep-platform-ribbon-number">{item.number}</span>
+                <span className="min-w-0">
+                  <strong className="block text-sm font-semibold text-[var(--ep-text)]">{item.label}</strong>
+                  <span className="mt-0.5 block text-xs text-[var(--ep-text-muted)]">{item.detail}</span>
+                </span>
+                {index !== 2 && <span aria-hidden="true" className="ep-platform-ribbon-divider hidden sm:block" />}
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* AT A GLANCE */}
         <section
           aria-label="EcoPrawn at a glance"
