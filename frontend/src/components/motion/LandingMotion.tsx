@@ -194,7 +194,6 @@ export function LandingMotion() {
       const homeRoot = document.querySelector<HTMLElement>(".ep-landing:not(.ep-about-page):not(.ep-contact-page)");
       if (homeRoot) {
         homeRoot.querySelectorAll<HTMLElement>("#top [data-hero=cta] a, #top [data-hero=cta] button").forEach((control) => {
-          const icon = control.querySelector<HTMLElement>("svg");
           // GSAP owns the subtle magnetic x/y offset; Anime.js owns the
           // icon reaction and small hover lift, so the transform channels do not compete.
           const magnetX = gsap.quickTo(control, "x", { duration: .36, ease: "power3.out", overwrite: "auto" });
@@ -209,16 +208,10 @@ export function LandingMotion() {
             microAnimations.push(animate(control, {
               scale: 1.025, duration: 230, ease: "out(3)",
             }));
-            if (icon) microAnimations.push(animate(icon, {
-              translateX: 3, duration: 260, ease: "out(3)",
-            }));
           };
           const leave = () => {
             microAnimations.push(animate(control, {
               scale: 1, duration: 300, ease: "out(3)",
-            }));
-            if (icon) microAnimations.push(animate(icon, {
-              translateX: 0, duration: 280, ease: "out(3)",
             }));
           };
           control.addEventListener("mouseenter", enter);
@@ -239,11 +232,7 @@ export function LandingMotion() {
         });
 
         homeRoot.querySelectorAll<HTMLElement>("[data-reading], #process ol > li, .ep-stats-panel > div").forEach((card) => {
-          const icon = card.querySelector<HTMLElement>("svg");
           const enter = () => {
-            if (icon) microAnimations.push(animate(icon, {
-              scale: [1, 1.13, 1], rotate: [0, -5, 0], duration: 420, ease: "out(3)",
-            }));
           };
           card.addEventListener("mouseenter", enter);
           card.addEventListener("focusin", enter);
@@ -460,16 +449,11 @@ export function LandingMotion() {
       // Data cards and process steps use a restrained lift on hover.
       // Their surfaces remain flat; the hero lens keeps its own 3D motion.
       gsap.utils.toArray<HTMLElement>("[data-hover-lift]").forEach((el) => {
-        const icon = el.querySelector<HTMLElement>("svg");
         const enter = () => {
           gsap.to(el, {
             y: -6, scale: 1.012,
             boxShadow: "0 24px 52px -32px rgba(7,42,48,.38)",
             duration: .3, ease: "power3.out", overwrite: "auto",
-          });
-          if (icon) animate(icon, {
-            scale: [1, 1.14, 1], rotate: [0, -8, 5, 0],
-            duration: 540, ease: "outElastic(1,.6)",
           });
         };
         const leave = () => gsap.to(el, {
