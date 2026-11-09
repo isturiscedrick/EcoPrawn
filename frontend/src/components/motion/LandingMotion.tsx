@@ -49,7 +49,8 @@ export function LandingMotion() {
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
     let cancelled = false;
-    let playWaterIntro = true;
+    // Keep the first-visit water curtain disabled so all three public-page heroes share one entrance style.
+    let playWaterIntro = false;
 
     try {
       playWaterIntro = sessionStorage.getItem(WATER_INTRO_KEY) !== "1";
@@ -131,44 +132,31 @@ export function LandingMotion() {
       // changed to a centered single-column composition.
       const hero = document.querySelector<HTMLElement>("#top");
       const heroText = hero?.querySelector<HTMLElement>("[data-hero=text]");
-      const eyebrow = hero?.querySelector<HTMLElement>("[data-hero=eyebrow]");
-      const headlineWords = hero?.querySelectorAll<HTMLElement>("[data-hero=word]");
-      const lead = hero?.querySelector<HTMLElement>("[data-hero=lead]");
-      const actions = hero?.querySelector<HTMLElement>("[data-hero=cta]");
-      const visual = hero?.querySelector<HTMLElement>("[data-hero=parallax-console]");
-      const signature = hero?.querySelector<HTMLElement>("[data-hero=signature]");
+      const eyebrow = heroText?.querySelector<HTMLElement>("p:first-child");
+      const headline = heroText?.querySelector<HTMLElement>("[data-hero=headline]");
+      const lead = heroText?.querySelector<HTMLElement>("[data-hero=lead]");
+      const actions = heroText?.querySelector<HTMLElement>("[data-hero=cta]");
 
+      // Match the About and Contact hero choreography exactly: one restrained
+      // staggered lift-and-fade, with the same timing and easing on every page.
       if (heroText) {
         const intro = gsap.timeline({
           defaults: { ease: "power4.out" },
-          delay: playWaterIntro ? 1.7 : 0.12,
+          delay: 0.12,
         });
         if (eyebrow) intro.from(eyebrow, {
-          y: 22, autoAlpha: 0, scale: .94, duration: .65,
+          y: 22, autoAlpha: 0, scale: .96, duration: .65,
         });
-        if (headlineWords?.length) intro.from(headlineWords, {
-          yPercent: 115, rotateX: -55, transformPerspective: 900,
-          autoAlpha: 0, duration: .9, stagger: .055, ease: "power4.out",
+        if (headline) intro.from(headline, {
+          y: 38, rotateX: -8, transformPerspective: 1000,
+          autoAlpha: 0, duration: .9,
         }, "-=.28");
         if (lead) intro.from(lead, {
           y: 20, autoAlpha: 0, duration: .7,
         }, "-=.42");
-        if (actions) intro.from(actions.children, {
-          y: 18, autoAlpha: 0, scale: .96, duration: .58, stagger: .12,
+        if (actions) intro.from(actions, {
+          y: 18, autoAlpha: 0, scale: .98, duration: .58,
         }, "-=.38");
-        if (signature) intro.from(signature, {
-          y: 12, autoAlpha: 0, duration: .55,
-        }, "-=.28");
-      }
-
-      if (visual) {
-        gsap.from(visual, {
-          y: 48, scale: .9, autoAlpha: 0, rotateX: -8,
-          transformPerspective: 1100, duration: 1.15,
-          ease: "expo.out", delay: playWaterIntro ? 1.9 : .28,
-        });
-        // HeroLens owns its own scroll-linked depth. Do not animate this
-        // wrapper's y here: it is already used by the entrance tween above.
       }
 
       // READINGS: each reading rises in, then its bar fills while its
