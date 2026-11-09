@@ -189,46 +189,6 @@ export function LandingMotion() {
       const hoverCleanups: Array<() => void> = [];
       const microAnimations: Array<{ revert: () => unknown }> = [];
 
-      // HOME micro-interactions: Anime.js handles icon/button details while
-      // GSAP owns scroll reveals and card elevation. Keep those transforms separate.
-      const homeRoot = document.querySelector<HTMLElement>(".ep-landing:not(.ep-about-page):not(.ep-contact-page)");
-      if (homeRoot) {
-        homeRoot.querySelectorAll<HTMLElement>("#top [data-hero=cta] a, #top [data-hero=cta] button").forEach((control) => {
-          const enter = () => {
-            microAnimations.push(animate(control, {
-              scale: 1.025, duration: 230, ease: "out(3)",
-            }));
-          };
-          const leave = () => {
-            microAnimations.push(animate(control, {
-              scale: 1, duration: 300, ease: "out(3)",
-            }));
-          };
-          control.addEventListener("mouseenter", enter);
-          control.addEventListener("mouseleave", leave);
-          control.addEventListener("focusin", enter);
-          control.addEventListener("focusout", leave);
-          hoverCleanups.push(() => {
-            control.removeEventListener("mouseenter", enter);
-            control.removeEventListener("mouseleave", leave);
-            control.removeEventListener("focusin", enter);
-            control.removeEventListener("focusout", leave);
-          });
-        });
-
-        homeRoot.querySelectorAll<HTMLElement>("[data-reading], #process ol > li, .ep-stats-panel > div").forEach((card) => {
-          const enter = () => {
-          };
-          card.addEventListener("mouseenter", enter);
-          card.addEventListener("focusin", enter);
-          hoverCleanups.push(() => {
-            card.removeEventListener("mouseenter", enter);
-            card.removeEventListener("focusin", enter);
-          });
-        });
-
-      }
-
       // Keep the hero background and hero copy anchored during page scroll.
       // No scroll-scrubbed transforms are applied to the hero atmosphere.
 
@@ -304,33 +264,6 @@ export function LandingMotion() {
         });
       });
 
-      // Give the CTA a soft hover response without changing its layout.
-      const ctaBand = document.querySelector<HTMLElement>("[data-band]");
-      if (ctaBand) {
-        const enter = () =>
-          gsap.to(ctaBand, {
-            y: -3,
-            boxShadow: "0 24px 55px -32px rgba(11,46,51,.55)",
-            duration: 0.35,
-            ease: "power2.out",
-            overwrite: "auto",
-          });
-        const leave = () =>
-          gsap.to(ctaBand, {
-            y: 0,
-            boxShadow: "0 12px 32px -24px rgba(11,46,51,.35)",
-            duration: 0.45,
-            ease: "power2.out",
-            overwrite: "auto",
-          });
-        ctaBand.addEventListener("mouseenter", enter);
-        ctaBand.addEventListener("mouseleave", leave);
-        hoverCleanups.push(() => {
-          ctaBand.removeEventListener("mouseenter", enter);
-          ctaBand.removeEventListener("mouseleave", leave);
-        });
-      }
-
       // Process cards are driven by the horizontal pinned timeline on
       // desktop. Do not attach vertical ScrollTriggers to the same cards:
       // those triggers fire at the wrong time while the track is translated.
@@ -390,59 +323,6 @@ export function LandingMotion() {
         }, { threshold: 0.35 });
         homeAccents.forEach((accent) => homeAccentObserver?.observe(accent));
       }
-
-      // Consistent GSAP hover treatment for remaining Home section surfaces.
-      // Skip elements already handled by the richer data-hover-lift interaction.
-      const homeSurfaces = gsap.utils.toArray<HTMLElement>(
-        ".ep-stats-panel > div, [data-band], [data-site-footer] .grid > div"
-      ).filter((el) => !el.matches("[data-hover-lift]"));
-      homeSurfaces.forEach((surface) => {
-        const enter = () => gsap.to(surface, {
-          y: -6, scale: 1.012,
-          borderColor: "var(--ep-accent)",
-          boxShadow: "0 24px 52px -34px rgba(7,42,48,.48)",
-          duration: .3, ease: "power3.out", overwrite: "auto",
-        });
-        const leave = () => gsap.to(surface, {
-          y: 0, scale: 1,
-          borderColor: "var(--ep-line)",
-          boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
-          duration: .42, ease: "power3.out", overwrite: "auto",
-        });
-        surface.addEventListener("pointerenter", enter);
-        surface.addEventListener("pointerleave", leave);
-        hoverCleanups.push(() => {
-          surface.removeEventListener("pointerenter", enter);
-          surface.removeEventListener("pointerleave", leave);
-        });
-      });
-
-      // Data cards and process steps use a restrained lift on hover.
-      // Their surfaces remain flat; the hero lens keeps its own 3D motion.
-      gsap.utils.toArray<HTMLElement>("[data-hover-lift]").forEach((el) => {
-        const enter = () => {
-          gsap.to(el, {
-            y: -6, scale: 1.012,
-            boxShadow: "0 24px 52px -32px rgba(7,42,48,.38)",
-            duration: .3, ease: "power3.out", overwrite: "auto",
-          });
-        };
-        const leave = () => gsap.to(el, {
-          y: 0, scale: 1,
-          boxShadow: "0 12px 28px -24px rgba(11,46,51,.25)",
-          duration: .45, ease: "power3.out", overwrite: "auto",
-        });
-        el.addEventListener("mouseenter", enter);
-        el.addEventListener("mouseleave", leave);
-        el.addEventListener("focusin", enter);
-        el.addEventListener("focusout", leave);
-        hoverCleanups.push(() => {
-          el.removeEventListener("mouseenter", enter);
-          el.removeEventListener("mouseleave", leave);
-          el.removeEventListener("focusin", enter);
-          el.removeEventListener("focusout", leave);
-        });
-      });
 
       const cleanupSharedHover = homeRoot ? bindPublicHoverMotion(homeRoot) : () => {};
 
