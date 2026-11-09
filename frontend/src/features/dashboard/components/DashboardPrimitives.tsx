@@ -27,13 +27,13 @@ export function Panel({ title, badge, onDetails, icon = "layers", children }: Pa
   return (
     <div
       {...interactiveProps}
-      className={`group rounded-2xl border border-[rgba(11,46,51,0.12)] bg-white p-[22px_24px] shadow-[0_8px_24px_-18px_rgba(11,46,51,0.38)] ${
+      className={`dashboard-panel group rounded-2xl border border-[rgba(11,46,51,0.12)] bg-white p-[22px_24px] shadow-[0_8px_24px_-18px_rgba(11,46,51,0.38)] ${
         onDetails ? "cursor-pointer transition-all hover:-translate-y-0.5 hover:border-[var(--coral)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]" : ""
       }`}
     >
       <div className="mb-[18px] flex items-center justify-between gap-3">
         <h3 className="flex items-center gap-2 ep-font-display text-[18px] font-semibold text-[var(--water-deep)]">
-          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[rgba(232,98,58,0.12)] text-[var(--coral)]">
+          <span className="dashboard-panel-icon flex h-8 w-8 items-center justify-center rounded-xl bg-[rgba(232,98,58,0.12)] text-[var(--coral)]">
             <Icon name={icon} size={15} />
           </span>
           <span>{title}</span>
@@ -98,7 +98,7 @@ export function KpiCard({ label, value, unit, delta, deltaTone, onDetails }: Kpi
   return (
     <div
       {...interactiveProps}
-      className={`group rounded-2xl border border-[rgba(11,46,51,0.12)] bg-white p-5 px-[22px] shadow-[0_8px_24px_-18px_rgba(11,46,51,0.38)] transition-all hover:-translate-y-0.5 hover:border-[var(--coral)] hover:shadow-[0_14px_28px_-18px_rgba(11,46,51,0.42)] ${
+      className={`dashboard-kpi group rounded-2xl border border-[rgba(11,46,51,0.12)] bg-white p-5 px-[22px] shadow-[0_8px_24px_-18px_rgba(11,46,51,0.38)] transition-all hover:-translate-y-0.5 hover:border-[var(--coral)] hover:shadow-[0_14px_28px_-18px_rgba(11,46,51,0.42)] ${
         onDetails ? "cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]" : ""
       }`}
     >
