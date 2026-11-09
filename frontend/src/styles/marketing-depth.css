@@ -651,3 +651,44 @@ html.dark .ep-business-landing #readings.ep-readings-section dl + div span {
   color: #cbd5e1 !important;
   -webkit-text-fill-color: #cbd5e1 !important;
 }
+
+
+/* About > What's running: theme-aware card hover treatment.
+   Keep the resting card on the shared surface token, then use a restrained
+   blue-tinted surface and border on hover/focus in both themes. */
+.ep-about-page #systems article {
+  transition:
+    transform .28s cubic-bezier(.2,.8,.2,1),
+    background-color .28s ease,
+    border-color .28s ease,
+    box-shadow .28s ease !important;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ep-about-page #systems article:hover {
+    transform: translateY(-5px);
+    border-color: color-mix(in srgb, var(--ep-accent) 62%, var(--ep-line));
+    background-color: color-mix(in srgb, var(--ep-surface) 94%, var(--ep-accent) 6%);
+    box-shadow: 0 24px 54px -34px rgba(37,99,235,.24);
+  }
+  html.dark .ep-about-page #systems article:hover {
+    border-color: rgba(96,165,250,.62);
+    background-color: color-mix(in srgb, var(--ep-surface) 90%, #3b82f6 10%);
+    box-shadow:
+      inset 0 1px 0 rgba(191,219,254,.08),
+      0 24px 54px -34px rgba(37,99,235,.42);
+  }
+}
+.ep-about-page #systems article:focus-within {
+  border-color: var(--ep-accent);
+}
+.ep-about-page #systems article .group-hover\\:text-\\[var\\(--ep-marker\\)\\] {
+  transition: color .25s ease;
+}
+html.dark .ep-about-page #systems article:hover h3,
+html.dark .ep-about-page #systems article:focus-within h3 {
+  color: #bfdbfe !important;
+}
+html:not(.dark) .ep-about-page #systems article:hover h3,
+html:not(.dark) .ep-about-page #systems article:focus-within h3 {
+  color: #1d4ed8 !important;
+}
