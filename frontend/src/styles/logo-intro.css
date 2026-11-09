@@ -1,4 +1,9 @@
-/* EcoPrawn loading intro. Motion sequencing lives in LogoIntroGate.tsx. */
+/* ==========================================================================
+   EcoPrawn Loading Intro Animation
+   Screen backdrop, orbits, progress track, particle field, and captions.
+   Sequencing is controlled by LogoIntroGate.tsx.
+   ========================================================================== */
+
 .ep-loading-screen {
   --loading-bg: #f4f7f6;
   --loading-text: #0f4c5c;
@@ -107,7 +112,7 @@ html.dark .ep-loading-screen {
   position: absolute;
   inset: 0 auto 0 -35%;
   width: 35%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
   transform: translateX(0);
   will-change: transform;
 }
@@ -128,12 +133,12 @@ html.dark .ep-loading-screen {
 .ep-loading-orbit-one {
   width: min(310px, 76vw);
   border-style: dashed;
-  opacity: .42;
+  opacity: 0.42;
 }
 
 .ep-loading-orbit-two {
   width: min(390px, 90vw);
-  opacity: .24;
+  opacity: 0.24;
 }
 
 .ep-loading-particle {
@@ -146,7 +151,7 @@ html.dark .ep-loading-screen {
   border-radius: 50%;
   background: var(--loading-particle);
   box-shadow: 0 0 12px color-mix(in srgb, var(--loading-particle) 55%, transparent);
-  opacity: .16;
+  opacity: 0.16;
   pointer-events: none;
   will-change: transform, opacity;
 }

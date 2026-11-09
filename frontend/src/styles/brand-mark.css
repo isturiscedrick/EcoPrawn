@@ -1,28 +1,16 @@
-/*
- * EcoPrawn logo: draw-on animation.
- *
- * Every shape is one <path pathLength="1">. Phase 1 draws its outline by
- * animating stroke-dashoffset 1 -> 0. Phase 2 fades the solid fill in while
- * the outline fades out, so the resting logo is a plain filled shape.
- *
- * Per-shape timing comes from BrandMark.tsx through two custom properties:
- *   --d  delay before this shape starts drawing
- *   --t  how long the outline takes to draw
- */
+/* ==========================================================================
+   EcoPrawn Brand Mark SVG Draw-On & Colors
+   Outline draw-on animation, theme transitions, wordmark typography, and colors.
+   ========================================================================== */
 
 .ep-logo {
-  /* Extra delay for the whole logo. See the landing-page rule below. */
   --ep-logo-wait: 0s;
   --ep-logo-color: #d94416;
-  /* Wordmark color. Override with a utility class on dark backgrounds,
-     e.g. className="[--ep-logo-text:#ffffff]". */
   --ep-logo-text: #000000;
   overflow: visible;
 }
 
-/* The landing page covers the screen with a water intro for the first
-   ~2 seconds. Hold the drawing until the water has drained past the header
-   (same 1.4s the old logo entrance waited). */
+/* Delay drawing while the water intro animation plays */
 body:has(.ep-water-curtain) .ep-logo {
   --ep-logo-wait: 1.4s;
 }
@@ -30,12 +18,9 @@ body:has(.ep-water-curtain) .ep-logo {
 .ep-logo-shape {
   stroke-width: 6;
   stroke-linejoin: round;
-  /* Butt caps: a round cap would leave a dot at the start of every
-     hidden outline. */
   stroke-linecap: butt;
   stroke-dasharray: 1;
   stroke-dashoffset: 0;
-  /* Resting state (also what reduced-motion users see): filled, no outline. */
   fill-opacity: 1;
   stroke-opacity: 0;
 }
@@ -67,30 +52,23 @@ html.dark .ep-logo {
   to   { stroke-dashoffset: 0; }
 }
 
-/* "both" holds the first keyframe during the delay, so the outline is
-   visible (and the fill hidden) while the stroke is being drawn. */
 @keyframes ep-logo-settle {
   from { fill-opacity: 0; stroke-opacity: 1; }
   to   { fill-opacity: 1; stroke-opacity: 0; }
 }
 
-/* The global reduced-motion rule only shortens durations, which would still
-   honor the delays above and leave the logo invisible. Skip it entirely. */
 @media (prefers-reduced-motion: reduce) {
   .ep-logo-shape {
     animation: none;
   }
 }
 
-/* Header logo: after the first in-app navigation, show it static.
-   Reload resets <html>, so the draw-on plays again. Scoped to <header>,
-   so the hero shrimp icon is unaffected. */
+/* Static logo after first in-app navigation */
 html.ep-nav-seen header .ep-logo-shape {
   animation: none;
 }
 
-/* Wordmark: real text beside the shrimp. It fades in once the shrimp has
-   started drawing. --ep-logo-wait and --ep-logo-text come from .ep-logo. */
+/* Wordmark typography & fade-in */
 .ep-logo-wordmark {
   color: var(--ep-logo-text);
   animation: ep-wordmark-in 0.7s ease-out calc(var(--ep-logo-wait) + 0.9s) both;
@@ -107,13 +85,12 @@ html.ep-nav-seen header .ep-logo-shape {
   }
 }
 
-/* Same static rules the shrimp follows. */
 html.ep-nav-seen header .ep-logo-wordmark,
 .ep-auth-modal .ep-logo-wordmark {
   animation: none;
 }
 
-/* Footer brand mark: force both the shrimp symbol and the actual text wordmark to white. */
+/* Footer brand mark: match header in dark mode */
 html.dark footer .ep-logo {
   --ep-logo-color: #ffffff !important;
   --ep-logo-text: #ffffff !important;
@@ -126,7 +103,6 @@ html.dark footer .ep-logo .ep-logo-wordmark {
   color: #ffffff !important;
 }
 
-/* Footer must use the exact same dark-mode brand mark colors as the header. */
 html.dark footer[data-site-footer] .ep-logo {
   --ep-logo-color: #d94416 !important;
   --ep-logo-text: #8bd5a6 !important;
@@ -139,9 +115,7 @@ html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
   color: #8bd5a6 !important;
 }
 
-
-/* Smoothly blend the full interface when the user changes color themes.
-   The class is applied only for the brief switch animation, not on page load. */
+/* Theme switch smooth transition */
 html.theme-transitioning,
 html.theme-transitioning *,
 html.theme-transitioning *::before,
@@ -164,8 +138,7 @@ html.theme-transitioning *::after {
   }
 }
 
-/* Auth modal wordmark must match the site header in both themes.
-   !important is intentional: BrandMark receives an inline fallback prop. */
+/* Auth modal wordmark */
 html:not(.dark) .ep-auth-modal .ep-logo {
   --ep-logo-text: var(--ep-secondary, #0f4c5c) !important;
 }
@@ -181,8 +154,7 @@ html.dark .ep-auth-modal .ep-logo .ep-logo-wordmark {
   -webkit-text-fill-color: var(--ep-secondary, #8bd5a6) !important;
 }
 
-/* Header wordmark uses the EcoPrawn secondary brand color.
-   Keep the shrimp mark coral and adapt the wordmark to each theme. */
+/* Header wordmark */
 html:not(.dark) header .ep-logo {
   --ep-logo-text: var(--ep-secondary, #0f4c5c) !important;
 }

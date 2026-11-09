@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import "./brand-mark.css";
+import "@/styles/brand-mark.css";
 
 interface BrandMarkProps {
   size?: number;

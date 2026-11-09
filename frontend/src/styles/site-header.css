@@ -1,6 +1,8 @@
-/* Header-specific responsive safeguards. These rules intentionally supplement
-   Tailwind utilities so the mobile header remains correct even if utility output
-   is stale or overridden by component styles. */
+/* ==========================================================================
+   EcoPrawn Site Header Layout & Responsive Safeguards
+   Mobile header grid, menu toggle button, theme toggle, and button labels.
+   ========================================================================== */
+
 #site-header {
   width: 100%;
   max-width: 100vw;
@@ -80,9 +82,7 @@
   }
 }
 
-
-/* Keep compact header controls perfectly square and prevent label glyphs
-   from wrapping vertically on narrow and intermediate mobile widths. */
+/* Compact header control alignment */
 #site-header .ep-mobile-menu-toggle,
 #site-header .ep-theme-toggle {
   box-sizing: border-box;

@@ -3,7 +3,7 @@ import { useRouterState } from "@tanstack/react-router";
 import { animate } from "animejs";
 import { gsap } from "gsap";
 import { BrandMark } from "@/components/layout/BrandMark";
-import "./logo-intro.css";
+import "@/styles/logo-intro.css";
 
 const particles = Array.from({ length: 10 }, (_, index) => index);
 

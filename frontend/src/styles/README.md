@@ -1,29 +1,32 @@
 # Frontend Stylesheet Ownership & Architecture
 
-This directory is the single global stylesheet entry point for the frontend. All stylesheets are modularized with single responsibilities and kept well under 400 lines to avoid monolithic cascade bloat.
+This directory is the single source of truth and storage location for all CSS in the frontend. All stylesheets are modularized with single responsibilities and kept well under 400 lines to avoid monolithic cascade bloat.
 
-## Load Order
+## Directory Structure
 
-`globals.css` is imported once by the TanStack root route (`src/routes/__root.tsx`).
-
-1. `foundations.css` — Tailwind v4 theme bridge, base tokens, typography tokens, base layer elements, keyframes, and global touch/focus accessibility defaults.
-2. `theme-components.css` — Theme compatibility rules, surfaces, charts, active item indicators, and component theming for the dashboard.
-3. `dashboard.css` — Dashboard shell brand palette tokens, responsive monitoring layout, table scrolling, and mobile drawer styles.
-4. `landing-global.css` — Public marketing stylesheet index, importing:
-   - `landing-tokens.css` — Canonical `.ep-landing` color tokens (light & dark mode), overscroll backgrounds, smooth scroll padding, and brand two-tone headlines.
-   - `hero-lens.css` — HeroLens 3D depth, responsive single-coordinate system (620x440 container queries), optics, and light/dark instrument glass finishes.
-   - `landing-sections.css` — Business hero background, full-bleed `#readings` and `#systems` bands, capabilities cards, static 4-card `#process` grid, and About content frame.
-   - `site-chrome.css` — Header contrast guards, `SiteFooter` container queries and themes, and interactive `.ep-hero-console` preview tilt.
-5. `responsive-overrides.css` — Viewport boundaries, overflow clipping guards, text wrapping, and authentication modal responsive rules.
-
-## Feature Styles
-
-Feature-specific styles belong beside the feature that owns them (for example, `features/auth/auth-modal.css`). Shared component styles belong with their component under `components/layout/` (for example, `BrandMark.css`).
+```text
+src/styles/
+├── globals.css              # Global root entry point (imported by src/routes/__root.tsx)
+├── foundations.css          # Tailwind v4 theme bridge, base tokens, typography, keyframes, touch targets
+├── theme-components.css     # Theme compatibility rules, surfaces, charts, active item indicators
+├── dashboard.css            # Dashboard shell brand palette tokens, monitoring layout, mobile drawer
+├── landing-global.css       # Public marketing stylesheet index, importing:
+│   ├── landing-tokens.css   # Canonical .ep-landing color tokens, overscroll, two-tone headlines
+│   ├── hero-lens.css        # HeroLens 3D depth, 620x440 container queries, optics, instrument glass
+│   ├── landing-sections.css # Business hero background, deep-water bands, capabilities, process grid
+│   └── site-chrome.css      # Header contrast guards, SiteFooter container queries & themes, preview tilt
+├── site-header.css          # SiteHeader responsive grid, mobile menu toggle button, label wrapping
+├── brand-mark.css           # BrandMark SVG outline draw-on animation, theme transitions, wordmark
+├── logo-intro.css           # Loading screen intro animation, orbit tracks, particles, progress bar
+├── auth-modal.css           # Authentication dialog & mobile bottom sheet, segmented tabs, form inputs
+├── responsive-overrides.css # Viewport boundaries, overflow clipping guards, text wrapping
+└── marketing-overrides.css  # Deprecated compatibility notice (rules migrated to canonical files)
+```
 
 ## Rules for Future Maintenance
 
-- Import `globals.css` only from the root route.
-- Do not import `landing-global.css` again from individual page components.
+- Import `globals.css` from the TanStack root route (`src/routes/__root.tsx`).
+- Keep all CSS files inside `src/styles/`; do not scatter `.css` files into component or feature directories.
 - Keep dashboard selectors scoped under `.dashboard-shell`.
 - Keep public-page selectors scoped under `.ep-landing`, `.ep-about-page`, or `.ep-contact-page`.
 - **Never append corrective overrides at the end of a stylesheet**; always edit the owning rule directly.
