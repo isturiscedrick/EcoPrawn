@@ -114,7 +114,7 @@ export function LandingPage() {
 
       <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
         {/* HERO */}
-        <section id="top" className="ep-hero relative isolate overflow-hidden">
+        <section id="top" className="ep-hero ep-aquaculture-hero relative isolate overflow-hidden" aria-label="EcoPrawn smart aquaculture introduction" style={{ "--ep-hero-image": "url(https://cdn.agrimag.my/nQdab9130.jpeg)" } as React.CSSProperties}>
           <div
             aria-hidden="true"
             data-hero="grid"
@@ -183,19 +183,7 @@ export function LandingPage() {
               </div>
             </div>
 
-            <figure data-hero="landscape" className="ep-field-landscape relative mt-8 overflow-hidden sm:mt-10 lg:mt-12">
-              <img
-                src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2400&q=85"
-                alt="Expansive green rice fields stretching toward a tree-lined horizon beneath an open sky"
-                className="h-full w-full object-cover"
-                fetchPriority="high"
-              />
-              <div aria-hidden="true" className="ep-field-landscape-shade" />
-              <figcaption className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4 text-[9px] font-bold uppercase tracking-[0.15em] text-white drop-shadow sm:bottom-5 sm:left-7 sm:right-7 sm:text-[10px]">
-                <span>ECOPRAWN · SMART AQUACULTURE</span>
-                <span className="hidden sm:inline">MONITOR · UNDERSTAND · RESPOND</span>
-              </figcaption>
-            </figure>
+
           </div>
         </section>
 
