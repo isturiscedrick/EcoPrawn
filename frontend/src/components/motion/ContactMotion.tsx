@@ -91,6 +91,22 @@ export function ContactMotion() {
           scrollTrigger: { trigger: footer, start: "top 92%", once: true },
         });
 
+        // The intro banner uses the same scroll rhythm as the other public
+        // pages, with a small signal pulse that does not move the layout.
+        const introPanel = root.querySelector<HTMLElement>(".ep-contact-intro-panel");
+        if (introPanel) {
+          const copy = introPanel.querySelectorAll<HTMLElement>(":scope > div:first-child > *");
+          const signal = introPanel.querySelector<HTMLElement>(".ep-contact-signal");
+          const rings = introPanel.querySelectorAll<HTMLElement>(".ep-contact-signal-ring");
+          const tl = gsap.timeline({
+            scrollTrigger: { trigger: introPanel, start: "top 84%", once: true },
+            defaults: { ease: "power3.out" },
+          });
+          if (copy.length) tl.from(copy, { x: -22, autoAlpha: 0, stagger: .08, duration: .62 });
+          if (signal) tl.from(signal, { scale: .82, autoAlpha: 0, duration: .72 }, "-=.38");
+          if (rings.length) tl.from(rings, { scale: .65, autoAlpha: 0, stagger: .1, duration: .62 }, "-=.42");
+        }
+
         // Contact details stay in their natural document position. Cards still
         // reveal once as they enter view, without continuous scroll-linked drift.
         const details = root.querySelector<HTMLElement>("[data-contact-details]");
