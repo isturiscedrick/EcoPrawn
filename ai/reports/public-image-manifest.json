@@ -1,0 +1,281 @@
+{
+  "originalSource": "https://data.mendeley.com/datasets/h8tcn6ykky/2",
+  "mirror": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset",
+  "revision": "0000d38824377c03318e3cb0d775a808261f8f80",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "Ramirez-Coronel, Esquer-Miranda, Rodriguez-Elias, Garcia-Hinostro and Parra-Salazar (2024), Mendeley Data V2, DOI 10.17632/h8tcn6ykky.2. Mirror by DeepanSadhukhan.",
+  "selection": "Six evenly spaced specimen IDs per group, earliest numbered frame per animal. Original image bytes, no edits.",
+  "images": [
+    {
+      "group": "DB1",
+      "specimenId": "1",
+      "path": "DB1/s1_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB1/s1_1.png",
+      "bytes": 239645,
+      "sha256": "eb1b34b061ac37ed32907c7a5eaef27c0b1064e90545edb901aee9fa67edc341",
+      "expectedSha256": "eb1b34b061ac37ed32907c7a5eaef27c0b1064e90545edb901aee9fa67edc341"
+    },
+    {
+      "group": "DB1",
+      "specimenId": "5",
+      "path": "DB1/s5_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB1/s5_1.png",
+      "bytes": 345631,
+      "sha256": "5ce610a099025424564f4ee619ff834eb9ed105f95246abe027916b05c65d861",
+      "expectedSha256": "5ce610a099025424564f4ee619ff834eb9ed105f95246abe027916b05c65d861"
+    },
+    {
+      "group": "DB1",
+      "specimenId": "9",
+      "path": "DB1/s9_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB1/s9_1.png",
+      "bytes": 350377,
+      "sha256": "86c96bb3c8015e268126d0795c66f9c265dd94d474a8f15f33d2005b5fd2e5c6",
+      "expectedSha256": "86c96bb3c8015e268126d0795c66f9c265dd94d474a8f15f33d2005b5fd2e5c6"
+    },
+    {
+      "group": "DB1",
+      "specimenId": "14",
+      "path": "DB1/s14_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB1/s14_1.png",
+      "bytes": 333395,
+      "sha256": "40294f1150382cc4f181844616bf746b7b7686543b251a9d2f52a1ad6e7880b2",
+      "expectedSha256": "40294f1150382cc4f181844616bf746b7b7686543b251a9d2f52a1ad6e7880b2"
+    },
+    {
+      "group": "DB1",
+      "specimenId": "18",
+      "path": "DB1/s18_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB1/s18_1.png",
+      "bytes": 352014,
+      "sha256": "1b2c1a41f304f373968741661bfa43e086097144db3c987c02fbeec0e794ce96",
+      "expectedSha256": "1b2c1a41f304f373968741661bfa43e086097144db3c987c02fbeec0e794ce96"
+    },
+    {
+      "group": "DB1",
+      "specimenId": "22",
+      "path": "DB1/s22_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB1/s22_1.png",
+      "bytes": 346257,
+      "sha256": "9c0b9e11fe611931e54bfbb3762b4d7348b9df23104ca8fe7cd72a3b2a27ec77",
+      "expectedSha256": "9c0b9e11fe611931e54bfbb3762b4d7348b9df23104ca8fe7cd72a3b2a27ec77"
+    },
+    {
+      "group": "DB2",
+      "specimenId": "1",
+      "path": "DB2/s1_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB2/s1_1.png",
+      "bytes": 35691,
+      "sha256": "fa27dcd5e10f2caf4e3cfeca56776364fac626005fdbe0b1dafb2f4d8afb1a99",
+      "expectedSha256": "fa27dcd5e10f2caf4e3cfeca56776364fac626005fdbe0b1dafb2f4d8afb1a99"
+    },
+    {
+      "group": "DB2",
+      "specimenId": "12",
+      "path": "DB2/s12_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB2/s12_1.png",
+      "bytes": 285006,
+      "sha256": "550f8f91c4558731c5f858bec6a3cddc697ae68bd6ddcb642b3258d632f1ce4b",
+      "expectedSha256": "550f8f91c4558731c5f858bec6a3cddc697ae68bd6ddcb642b3258d632f1ce4b"
+    },
+    {
+      "group": "DB2",
+      "specimenId": "24",
+      "path": "DB2/s24_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB2/s24_1.png",
+      "bytes": 295791,
+      "sha256": "323afc1631e06d8398e2c427ffa71885eb6f29a6b2c6717041d9304ee84ce938",
+      "expectedSha256": "323afc1631e06d8398e2c427ffa71885eb6f29a6b2c6717041d9304ee84ce938"
+    },
+    {
+      "group": "DB2",
+      "specimenId": "35",
+      "path": "DB2/s35_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB2/s35_1.png",
+      "bytes": 332904,
+      "sha256": "7c88f6fe9dd26975ec6025795c4156e319ccf91a25686669aab180e5c13a4cca",
+      "expectedSha256": "7c88f6fe9dd26975ec6025795c4156e319ccf91a25686669aab180e5c13a4cca"
+    },
+    {
+      "group": "DB2",
+      "specimenId": "47",
+      "path": "DB2/s47_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB2/s47_1.png",
+      "bytes": 352201,
+      "sha256": "9e3aba36d359e0d4ec96dbef70cb75acbfb8a7d06897a7cd043678b62d1352e0",
+      "expectedSha256": "9e3aba36d359e0d4ec96dbef70cb75acbfb8a7d06897a7cd043678b62d1352e0"
+    },
+    {
+      "group": "DB2",
+      "specimenId": "58",
+      "path": "DB2/s58_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB2/s58_1.png",
+      "bytes": 370262,
+      "sha256": "6a148e3ea1127c87ad83d8435c258857e378e2a71b8f025f5e7ce18f59172b57",
+      "expectedSha256": "6a148e3ea1127c87ad83d8435c258857e378e2a71b8f025f5e7ce18f59172b57"
+    },
+    {
+      "group": "DB3",
+      "specimenId": "1",
+      "path": "DB3/s1_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB3/s1_1.png",
+      "bytes": 253682,
+      "sha256": "be7210ca6c8508386b5559fff9e4e54c61caf5fe367605089aeeae2b1ad81dc9",
+      "expectedSha256": "be7210ca6c8508386b5559fff9e4e54c61caf5fe367605089aeeae2b1ad81dc9"
+    },
+    {
+      "group": "DB3",
+      "specimenId": "11",
+      "path": "DB3/s11_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB3/s11_1.png",
+      "bytes": 259392,
+      "sha256": "b672aa14d15e8412f6709e4b682d80278ca2d153b5de85bfc0b3811a331813bb",
+      "expectedSha256": "b672aa14d15e8412f6709e4b682d80278ca2d153b5de85bfc0b3811a331813bb"
+    },
+    {
+      "group": "DB3",
+      "specimenId": "21",
+      "path": "DB3/s21_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB3/s21_1.png",
+      "bytes": 256785,
+      "sha256": "976d7c05a02d38c8110c01b1058fcc953cf797fec83b137f93ecfa20822aa059",
+      "expectedSha256": "976d7c05a02d38c8110c01b1058fcc953cf797fec83b137f93ecfa20822aa059"
+    },
+    {
+      "group": "DB3",
+      "specimenId": "30",
+      "path": "DB3/s30_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB3/s30_1.png",
+      "bytes": 287321,
+      "sha256": "ad65ccd23bdbb4853dd83a0730f5f7a7e96f38a732798f188afd261ba68203ab",
+      "expectedSha256": "ad65ccd23bdbb4853dd83a0730f5f7a7e96f38a732798f188afd261ba68203ab"
+    },
+    {
+      "group": "DB3",
+      "specimenId": "40",
+      "path": "DB3/s40_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB3/s40_1.png",
+      "bytes": 266141,
+      "sha256": "df8df6e54654d936483ffa5da7bbf0c342e715d1472a7d821d90050295e37561",
+      "expectedSha256": "df8df6e54654d936483ffa5da7bbf0c342e715d1472a7d821d90050295e37561"
+    },
+    {
+      "group": "DB3",
+      "specimenId": "50",
+      "path": "DB3/s50_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB3/s50_1.png",
+      "bytes": 283397,
+      "sha256": "6337c37a60cab709413fdcd9a9fc2d2b77115d07ecafc7a98f8a2f032ff42c9f",
+      "expectedSha256": "6337c37a60cab709413fdcd9a9fc2d2b77115d07ecafc7a98f8a2f032ff42c9f"
+    },
+    {
+      "group": "DB4",
+      "specimenId": "1",
+      "path": "DB4/s1_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB4/s1_1.png",
+      "bytes": 289918,
+      "sha256": "1f355e076401dc370cc4c635f231b226b4bf3ef6ad6eceb3c36a0823eda1aab8",
+      "expectedSha256": "1f355e076401dc370cc4c635f231b226b4bf3ef6ad6eceb3c36a0823eda1aab8"
+    },
+    {
+      "group": "DB4",
+      "specimenId": "5",
+      "path": "DB4/s5_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB4/s5_1.png",
+      "bytes": 283382,
+      "sha256": "05166ec4e4a6f21dd62874af3a7f20a3b1aa6d62220a7bdf64c747733550c6e7",
+      "expectedSha256": "05166ec4e4a6f21dd62874af3a7f20a3b1aa6d62220a7bdf64c747733550c6e7"
+    },
+    {
+      "group": "DB4",
+      "specimenId": "9",
+      "path": "DB4/s9_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB4/s9_1.png",
+      "bytes": 276381,
+      "sha256": "99dd21d7e9d352f3d7ffcd1ec61f67dfb0e1c2b44df6abcf6a09a53437b68df5",
+      "expectedSha256": "99dd21d7e9d352f3d7ffcd1ec61f67dfb0e1c2b44df6abcf6a09a53437b68df5"
+    },
+    {
+      "group": "DB4",
+      "specimenId": "12",
+      "path": "DB4/s12_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB4/s12_1.png",
+      "bytes": 286748,
+      "sha256": "1950e68bb3fc62192eba1fb951518b43da2520954bdf64ea9c4204776a0b935f",
+      "expectedSha256": "1950e68bb3fc62192eba1fb951518b43da2520954bdf64ea9c4204776a0b935f"
+    },
+    {
+      "group": "DB4",
+      "specimenId": "16",
+      "path": "DB4/s16_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB4/s16_1.png",
+      "bytes": 296892,
+      "sha256": "9ded0707887eece04469142f75fb7eb452af3135b99a56dbd4ac3f6d46ef2147",
+      "expectedSha256": "9ded0707887eece04469142f75fb7eb452af3135b99a56dbd4ac3f6d46ef2147"
+    },
+    {
+      "group": "DB4",
+      "specimenId": "20",
+      "path": "DB4/s20_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB4/s20_1.png",
+      "bytes": 290085,
+      "sha256": "4a8125232c11806acce67bf3710115975518ad661c45e1a83a79a8be73b69873",
+      "expectedSha256": "4a8125232c11806acce67bf3710115975518ad661c45e1a83a79a8be73b69873"
+    },
+    {
+      "group": "DB5",
+      "specimenId": "1",
+      "path": "DB5/s1_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB5/s1_1.png",
+      "bytes": 265353,
+      "sha256": "00819ba73dfeb7b5f01dfc8ebc20a7551b973fb4c33d403be283c9242e0251ca",
+      "expectedSha256": "00819ba73dfeb7b5f01dfc8ebc20a7551b973fb4c33d403be283c9242e0251ca"
+    },
+    {
+      "group": "DB5",
+      "specimenId": "5",
+      "path": "DB5/s5_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB5/s5_1.png",
+      "bytes": 272657,
+      "sha256": "3727ed02ace32dd08b1155c6c425447b1cef2248536de115efb2391bb3ba908b",
+      "expectedSha256": "3727ed02ace32dd08b1155c6c425447b1cef2248536de115efb2391bb3ba908b"
+    },
+    {
+      "group": "DB5",
+      "specimenId": "9",
+      "path": "DB5/s9_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB5/s9_1.png",
+      "bytes": 271220,
+      "sha256": "7ef85772f599293d2468a7b246c143b5a172080fa89bd4c5f0b984406880db91",
+      "expectedSha256": "7ef85772f599293d2468a7b246c143b5a172080fa89bd4c5f0b984406880db91"
+    },
+    {
+      "group": "DB5",
+      "specimenId": "12",
+      "path": "DB5/s12_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB5/s12_1.png",
+      "bytes": 261408,
+      "sha256": "9eb8a87ef6e1d0f1b8b6e4cfb85c06cb0e9016346987a3d0a4ecd594aade0273",
+      "expectedSha256": "9eb8a87ef6e1d0f1b8b6e4cfb85c06cb0e9016346987a3d0a4ecd594aade0273"
+    },
+    {
+      "group": "DB5",
+      "specimenId": "16",
+      "path": "DB5/s16_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB5/s16_1.png",
+      "bytes": 262287,
+      "sha256": "9a5714935a47610959d4e14e471383358575e08a0489b51e75c66b696abe6054",
+      "expectedSha256": "9a5714935a47610959d4e14e471383358575e08a0489b51e75c66b696abe6054"
+    },
+    {
+      "group": "DB5",
+      "specimenId": "20",
+      "path": "DB5/s20_1.png",
+      "url": "https://huggingface.co/datasets/DeepanSadhukhan/vannamei-shrimp-biomass-dataset/resolve/0000d38824377c03318e3cb0d775a808261f8f80/DB5/s20_1.png",
+      "bytes": 256842,
+      "sha256": "aa43f7ac037ddd84e486268e43582cdccf096edc4a74b9e835c916561eba3816",
+      "expectedSha256": "aa43f7ac037ddd84e486268e43582cdccf096edc4a74b9e835c916561eba3816"
+    }
+  ]
+}

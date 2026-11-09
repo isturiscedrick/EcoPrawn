@@ -1,0 +1,437 @@
+{
+  "createdAtUtc": "2026-11-08T07:16:54.998867+00:00",
+  "config": {
+    "seed": 20261108,
+    "featureVersion": "color-local-contrast-v1",
+    "imageSize": [
+      320,
+      240
+    ],
+    "domainHoldout": "DB5",
+    "partitions": {
+      "train": [
+        "DB1:15",
+        "DB1:18",
+        "DB1:2",
+        "DB1:14",
+        "DB1:6",
+        "DB1:12",
+        "DB1:7",
+        "DB1:13",
+        "DB1:21",
+        "DB1:10",
+        "DB2:40",
+        "DB2:7",
+        "DB2:18",
+        "DB2:16",
+        "DB2:32",
+        "DB2:53",
+        "DB2:49",
+        "DB2:12",
+        "DB2:3",
+        "DB2:34",
+        "DB2:41",
+        "DB2:38",
+        "DB2:33",
+        "DB2:22",
+        "DB2:9",
+        "DB2:27",
+        "DB2:48",
+        "DB2:30",
+        "DB2:25",
+        "DB2:51",
+        "DB2:47",
+        "DB2:21",
+        "DB2:14",
+        "DB2:20",
+        "DB2:58",
+        "DB2:54",
+        "DB2:55",
+        "DB2:15",
+        "DB3:49",
+        "DB3:33",
+        "DB3:29",
+        "DB3:34",
+        "DB3:46",
+        "DB3:11",
+        "DB3:37",
+        "DB3:18",
+        "DB3:41",
+        "DB3:14",
+        "DB3:17",
+        "DB3:21",
+        "DB3:43",
+        "DB3:36",
+        "DB3:15",
+        "DB3:35",
+        "DB3:7",
+        "DB3:5",
+        "DB3:45",
+        "DB3:8",
+        "DB3:24",
+        "DB3:16",
+        "DB3:28",
+        "DB3:3",
+        "DB3:1",
+        "DB3:40",
+        "DB4:18",
+        "DB4:2",
+        "DB4:13",
+        "DB4:12",
+        "DB4:4",
+        "DB4:1",
+        "DB4:3",
+        "DB4:5",
+        "DB4:10",
+        "DB4:17",
+        "DB4:11",
+        "DB4:6"
+      ],
+      "validation": [
+        "DB1:9",
+        "DB1:11",
+        "DB1:19",
+        "DB1:16",
+        "DB2:4",
+        "DB2:13",
+        "DB2:29",
+        "DB2:8",
+        "DB2:17",
+        "DB2:6",
+        "DB2:37",
+        "DB2:36",
+        "DB2:2",
+        "DB2:39",
+        "DB3:38",
+        "DB3:48",
+        "DB3:27",
+        "DB3:39",
+        "DB3:47",
+        "DB3:6",
+        "DB3:44",
+        "DB3:4",
+        "DB4:20",
+        "DB4:15",
+        "DB4:16",
+        "DB4:8"
+      ],
+      "test": [
+        "DB1:3",
+        "DB1:17",
+        "DB1:1",
+        "DB1:8",
+        "DB2:42",
+        "DB2:5",
+        "DB2:50",
+        "DB2:23",
+        "DB2:52",
+        "DB2:19",
+        "DB2:28",
+        "DB2:1",
+        "DB2:26",
+        "DB2:46",
+        "DB3:12",
+        "DB3:23",
+        "DB3:9",
+        "DB3:20",
+        "DB3:13",
+        "DB3:31",
+        "DB3:26",
+        "DB3:42",
+        "DB4:9",
+        "DB4:19",
+        "DB4:7",
+        "DB4:14"
+      ],
+      "domain_test": [
+        "DB5:1",
+        "DB5:2",
+        "DB5:3",
+        "DB5:4",
+        "DB5:5",
+        "DB5:6",
+        "DB5:7",
+        "DB5:8",
+        "DB5:9",
+        "DB5:10",
+        "DB5:11",
+        "DB5:12",
+        "DB5:13",
+        "DB5:14",
+        "DB5:15",
+        "DB5:16",
+        "DB5:17",
+        "DB5:18",
+        "DB5:19",
+        "DB5:20"
+      ]
+    },
+    "source": "https://data.mendeley.com/datasets/n244f3kyd3/1",
+    "license": "CC BY 4.0",
+    "labelsSha256": "73c37819f93df9694bcfc802bc1c70bb7a02fe914284f6bbd7ef422218763314"
+  },
+  "segmentationValidation": {
+    "forest": {
+      "0.35": 0.8663387569670314,
+      "0.5": 0.8985756007850522,
+      "0.65": 0.9208747848180193
+    },
+    "baseline": {
+      "0.03": 0.732975012043631,
+      "0.05": 0.7301054577025357,
+      "0.08": 0.4852394441156533
+    }
+  },
+  "thresholds": {
+    "forest": 0.65,
+    "baseline": 0.03
+  },
+  "segmentation": {
+    "validation": {
+      "count": 26,
+      "model": {
+        "dice": 0.9208747848180193,
+        "iou": 0.8558400403655019
+      },
+      "baseline": {
+        "dice": 0.732975012043631,
+        "iou": 0.6735091303668479
+      },
+      "byGroup": {
+        "DB1": {
+          "model": {
+            "dice": 0.8518004404978171,
+            "iou": 0.7438384356248788
+          },
+          "baseline": {
+            "dice": 0.3866684669182986,
+            "iou": 0.261418809089569
+          }
+        },
+        "DB2": {
+          "model": {
+            "dice": 0.9410788126828665,
+            "iou": 0.8890788073713434
+          },
+          "baseline": {
+            "dice": 0.847092233161252,
+            "iou": 0.8018962269715229
+          }
+        },
+        "DB3": {
+          "model": {
+            "dice": 0.9468485062915928,
+            "iou": 0.8991630859847567
+          },
+          "baseline": {
+            "dice": 0.6538283449991842,
+            "iou": 0.6013539695733985
+          }
+        },
+        "DB4": {
+          "model": {
+            "dice": 0.8874916165289573,
+            "iou": 0.7980986363530116
+          },
+          "baseline": {
+            "dice": 0.9522818384638049,
+            "iou": 0.908942031719338
+          }
+        }
+      },
+      "failedMasks": 0,
+      "p95InferenceMs": 92.84442499483703
+    },
+    "test": {
+      "count": 26,
+      "model": {
+        "dice": 0.9213915405940042,
+        "iou": 0.8555916893010962
+      },
+      "baseline": {
+        "dice": 0.6822542491735886,
+        "iou": 0.6247813666158643
+      },
+      "byGroup": {
+        "DB1": {
+          "model": {
+            "dice": 0.8986359812399487,
+            "iou": 0.8164196250632025
+          },
+          "baseline": {
+            "dice": 0.1435401482588924,
+            "iou": 0.10067062781248634
+          }
+        },
+        "DB2": {
+          "model": {
+            "dice": 0.9261154109741592,
+            "iou": 0.8639700656948583
+          },
+          "baseline": {
+            "dice": 0.6739409148122846,
+            "iou": 0.5923647908808317
+          }
+        },
+        "DB3": {
+          "model": {
+            "dice": 0.9421902949523049,
+            "iou": 0.8909562458908322
+          },
+          "baseline": {
+            "dice": 0.8239441595825467,
+            "iou": 0.7797083100893123
+          }
+        },
+        "DB4": {
+          "model": {
+            "dice": 0.8907399152810705,
+            "iou": 0.8030886993751123
+          },
+          "baseline": {
+            "dice": 0.9583718651736276,
+            "iou": 0.9200796578099273
+          }
+        }
+      },
+      "failedMasks": 0,
+      "p95InferenceMs": 85.28712499537505
+    },
+    "domain_test": {
+      "count": 20,
+      "model": {
+        "dice": 0.16774356248976902,
+        "iou": 0.1374260063532069
+      },
+      "baseline": {
+        "dice": 0.1688835390751605,
+        "iou": 0.10876514978250433
+      },
+      "byGroup": {
+        "DB5": {
+          "model": {
+            "dice": 0.16774356248976902,
+            "iou": 0.1374260063532069
+          },
+          "baseline": {
+            "dice": 0.1688835390751605,
+            "iou": 0.10876514978250433
+          }
+        }
+      },
+      "failedMasks": 14,
+      "p95InferenceMs": 84.10411498043686
+    }
+  },
+  "weight": {
+    "selected": "forest",
+    "trainingCount": 65,
+    "validation": {
+      "forest": {
+        "count": 21,
+        "maeG": 2.4388023552610756,
+        "meanRelativeError": 0.10048156463581864,
+        "biasG": -0.1592813806915235
+      },
+      "power": {
+        "count": 21,
+        "maeG": 2.8774061450302355,
+        "meanRelativeError": 0.10818625553125552,
+        "biasG": 0.1811042430120376
+      },
+      "constant": {
+        "count": 21,
+        "maeG": 7.238095238095238,
+        "meanRelativeError": 0.6449726765817513,
+        "biasG": 3.142857142857143
+      }
+    },
+    "testUndisputed": {
+      "forest": {
+        "count": 25,
+        "maeG": 2.0636275989036563,
+        "meanRelativeError": 0.08681125013203791,
+        "biasG": 0.6181648562556985
+      },
+      "power": {
+        "count": 25,
+        "maeG": 2.899020687131746,
+        "meanRelativeError": 0.11510101721137539,
+        "biasG": -0.44101131639995067
+      },
+      "constant": {
+        "count": 25,
+        "maeG": 6.32,
+        "meanRelativeError": 0.5677724470518588,
+        "biasG": 4.24
+      }
+    },
+    "testIncludingDisputed": {
+      "forest": {
+        "count": 26,
+        "maeG": 2.0827735065655286,
+        "meanRelativeError": 0.08686946623851435,
+        "biasG": 0.692905484788647
+      },
+      "power": {
+        "count": 26,
+        "maeG": 2.8005585489890157,
+        "meanRelativeError": 0.11112366389080627,
+        "biasG": -0.41101068517607736
+      },
+      "constant": {
+        "count": 26,
+        "maeG": 6.153846153846154,
+        "meanRelativeError": 0.5485875651360712,
+        "biasG": 4.153846153846154
+      }
+    },
+    "domainUndisputed": {
+      "forest": {
+        "count": 6,
+        "maeG": 1.4786496489621488,
+        "meanRelativeError": 0.19168235097271558,
+        "biasG": 0.3367425976800984
+      },
+      "power": {
+        "count": 6,
+        "maeG": 5.842968839632307,
+        "meanRelativeError": 0.684705895181212,
+        "biasG": -5.842968839632307
+      },
+      "constant": {
+        "count": 6,
+        "maeG": 22.5,
+        "meanRelativeError": 2.805477392977393,
+        "biasG": 22.5
+      }
+    }
+  },
+  "productionEnabled": false,
+  "limitations": [
+    "No local camera evaluation or independent physical calibration.",
+    "DB5 is one held-out dataset condition, not evidence of arbitrary-camera transfer.",
+    "Weight uses predicted geometry in pixels and may depend on acquisition scale.",
+    "Weight training masks are in-sample segmentation predictions; final weight tests use unseen specimens.",
+    "No temporal data, no forecasting, no use of px_por_cm_base, manual length or weight-defined cohort as a feature.",
+    "Do not tune this version against its now-observed test sets."
+  ],
+  "weightCoverage": {
+    "train": {
+      "eligible": 65,
+      "usable": 65
+    },
+    "validation": {
+      "eligible": 21,
+      "usable": 21
+    },
+    "test": {
+      "eligible": 25,
+      "usable": 25
+    },
+    "domain_test": {
+      "eligible": 20,
+      "usable": 6
+    }
+  }
+}

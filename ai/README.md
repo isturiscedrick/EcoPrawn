@@ -58,6 +58,8 @@ Collect 300 distinct measured specimens across at least 10 sessions and availabl
 
 ## Dataset and training
 
+A reproducible smoke test of 30 public research images is available in [reports/public-image-test.md](reports/public-image-test.md). Run `.venv/Scripts/python test_public_images.py --download` to fetch the pinned, attributed sample and test it, or omit `--download` to reuse cached files. These images do not include EcoPrawn camera calibration or its required marker, so the current pipeline rejects them without producing physical measurements. They are kept separate from local training records.
+
 Export the tank dataset from the review panel. JSON contains specimen/session/tank/batch identifiers, timestamps, calibration versions, independent labels, original features and corrections. Image URLs require a signed-in session. For durable raw-image archiving, back up the private image directory together with the database; JSON export is not an image backup. Combine exports from several tanks by passing multiple filenames:
 
 ```powershell
@@ -73,6 +75,8 @@ The report distinguishes automatic and corrected lengths. Corrected weights are 
 To deploy a passing artifact, set `GROWTH_WEIGHT_MODEL` to its absolute path in the Python service environment and restart the service. Never load a joblib file from an untrusted source. Inference refuses measurements outside the intersection of training and held-out feature ranges.
 
 ## Forecasting experiment
+
+For camera-free development, the separate [P3 segmentation experiment](reports/p3-segmentation-v1.md) trains on downloaded labeled shrimp photographs and tests unseen specimens and a held-out capture group. Run `train_p3_experiment.py DATASET --output artifacts/NEW_RUN` from this directory. Use `predict_segmentation.py IMAGE --model artifacts/p3-segmentation-v1/segmentation.joblib --output artifacts/NEW_CHECK` to save a predicted mask from the local trained artifact. This tool returns no physical length or weight. The experimental models are not compatible deployment replacements for the calibrated service: held-out DB5 segmentation failed on many images. See the report for exact commands and results.
 
 ```powershell
 .venv/Scripts/python forecast.py data/tank-a.json data/tank-b.json --output artifacts/forecast-001

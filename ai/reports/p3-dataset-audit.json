@@ -1,0 +1,4020 @@
+{
+  "root": "C:\\Users\\perey\\Downloads\\P3_DATASET_RELEASE_v1_3\\P3_DATASET_RELEASE",
+  "checksumEntries": 782,
+  "checksumsMatched": 782,
+  "missingFiles": [],
+  "checksumMismatches": [],
+  "images": 148,
+  "specimensByGroup": {
+    "DB1": 18,
+    "DB2": 48,
+    "DB3": 42,
+    "DB4": 20,
+    "DB5": 20
+  },
+  "originalMasks": 592,
+  "correctedOrganMasks": 36,
+  "disputedLabels": [
+    "DB3_s33",
+    "DB3_s34",
+    "DB3_s35",
+    "DB3_s36",
+    "DB3_s37",
+    "DB3_s38",
+    "DB3_s39",
+    "DB3_s40",
+    "DB3_s41",
+    "DB3_s42",
+    "DB3_s43",
+    "DB3_s44",
+    "DB3_s45",
+    "DB3_s46",
+    "DB3_s47",
+    "DB3_s48",
+    "DB3_s49"
+  ],
+  "organStatus": {
+    "posicion_correcta": 96,
+    "sin_resolver": 16,
+    "corregida_traslacion": 35,
+    "corregida_rotacion_traslacion": 1
+  },
+  "organIdsMatch": true,
+  "foldIdsMatch": true,
+  "foldAudit": {
+    "fold_semilla_42": {
+      "counts": {
+        "3": 15,
+        "8": 14,
+        "7": 15,
+        "6": 15,
+        "2": 15,
+        "5": 15,
+        "0": 15,
+        "1": 15,
+        "9": 14,
+        "4": 15
+      },
+      "valid": true
+    },
+    "fold_semilla_0": {
+      "counts": {
+        "6": 15,
+        "5": 15,
+        "2": 15,
+        "4": 15,
+        "0": 15,
+        "1": 15,
+        "9": 14,
+        "7": 15,
+        "8": 14,
+        "3": 15
+      },
+      "valid": true
+    },
+    "fold_semilla_1": {
+      "counts": {
+        "8": 14,
+        "4": 15,
+        "7": 15,
+        "2": 15,
+        "0": 15,
+        "5": 15,
+        "3": 15,
+        "6": 15,
+        "1": 15,
+        "9": 14
+      },
+      "valid": true
+    },
+    "fold_semilla_2": {
+      "counts": {
+        "3": 15,
+        "5": 15,
+        "1": 15,
+        "0": 15,
+        "8": 14,
+        "4": 15,
+        "9": 14,
+        "6": 15,
+        "2": 15,
+        "7": 15
+      },
+      "valid": true
+    },
+    "fold_semilla_3": {
+      "counts": {
+        "9": 14,
+        "6": 15,
+        "0": 15,
+        "3": 15,
+        "1": 15,
+        "8": 14,
+        "4": 15,
+        "5": 15,
+        "2": 15,
+        "7": 15
+      },
+      "valid": true
+    }
+  },
+  "duplicateSpecimenIds": 0,
+  "duplicateImages": 0,
+  "standaloneFiles": {
+    "C:\\Users\\perey\\Downloads\\labels.csv": {
+      "matchesRelease": true,
+      "sha256": "73c37819f93df9694bcfc802bc1c70bb7a02fe914284f6bbd7ef422218763314"
+    },
+    "C:\\Users\\perey\\Downloads\\organs_auditoria.csv": {
+      "matchesRelease": true,
+      "sha256": "af42830db9c5020175fd4a4c138cbddf408335a83077744f87e6279b313cd03d"
+    }
+  },
+  "numericLabels": {
+    "longitud_cm": {
+      "min": 7.25,
+      "max": 14.4,
+      "missing": 0,
+      "invalid": 0
+    },
+    "peso_g": {
+      "min": 6.0,
+      "max": 41.0,
+      "missing": 0,
+      "invalid": 0
+    },
+    "cefalotorax_cm": {
+      "min": 2.2,
+      "max": 3.89,
+      "missing": 18,
+      "invalid": 0
+    },
+    "px_por_cm_base": {
+      "min": 24.784,
+      "max": 27.605,
+      "missing": 0,
+      "invalid": 0
+    }
+  },
+  "maskErrors": [],
+  "imageErrors": [],
+  "crosswalkEntries": 740,
+  "crosswalkMismatches": [
+    {
+      "path": "DB1/M1_s01_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s01_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s01_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s01_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s02_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s02_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s02_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s02_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s03_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s03_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s03_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s03_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s06_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s06_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s06_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s06_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s07_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s07_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s07_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s07_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s08_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s08_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s08_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s08_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s09_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s09_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s09_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s09_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s10_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s10_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s10_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s10_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s11_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s11_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s11_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s11_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s12_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s12_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s12_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s12_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s13_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s13_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s13_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s13_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s14_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s14_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s14_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s14_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s15_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s15_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s15_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s15_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s16_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s16_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s16_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s16_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s17_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s17_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s17_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s17_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s18_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s18_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s18_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s18_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s19_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s19_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s19_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s19_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s21_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s21_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s21_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB1/M1_s21_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s01_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s01_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s01_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s01_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s02_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s02_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s02_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s02_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s03_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s03_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s03_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s03_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s04_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s04_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s04_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s04_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s05_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s05_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s05_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s05_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s06_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s06_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s06_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s06_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s07_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s07_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s07_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s07_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s08_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s08_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s08_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s08_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s09_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s09_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s09_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s09_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s12_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s12_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s12_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s12_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s13_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s13_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s13_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s13_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s14_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s14_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s14_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s14_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s15_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s15_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s15_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s15_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s16_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s16_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s16_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s16_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s17_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s17_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s17_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s17_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s18_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s18_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s18_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s18_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s19_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s19_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s19_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s19_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s20_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s20_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s20_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s20_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s21_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s21_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s21_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s21_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s22_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s22_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s22_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s22_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s23_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s23_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s23_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s23_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s25_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s25_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s25_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s25_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s26_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s26_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s26_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s26_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s27_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s27_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s27_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s27_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s28_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s28_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s28_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s28_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s29_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s29_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s29_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s29_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s30_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s30_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s30_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s30_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s32_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s32_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s32_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s32_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s33_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s33_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s33_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s33_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s34_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s34_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s34_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s34_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s36_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s36_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s36_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s36_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s37_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s37_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s37_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s37_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s38_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s38_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s38_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s38_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s39_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s39_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s39_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s39_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s40_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s40_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s40_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s40_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s41_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s41_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s41_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s41_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s42_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s42_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s42_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s42_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s46_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s46_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s46_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s46_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s47_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s47_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s47_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s47_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s48_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s48_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s48_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s48_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s49_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s49_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s49_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s49_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s50_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s50_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s50_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s50_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s51_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s51_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s51_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s51_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s52_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s52_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s52_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s52_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s53_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s53_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s53_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s53_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s54_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s54_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s54_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s54_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s55_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s55_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s55_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s55_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s58_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s58_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s58_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB2/M2_s58_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s01_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s01_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s01_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s01_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s03_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s03_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s03_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s03_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s04_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s04_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s04_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s04_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s05_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s05_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s05_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s05_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s06_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s06_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s06_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s06_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s07_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s07_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s07_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s07_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s08_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s08_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s08_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s08_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s09_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s09_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s09_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s09_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s11_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s11_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s11_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s11_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s12_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s12_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s12_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s12_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s13_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s13_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s13_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s13_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s14_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s14_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s14_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s14_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s15_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s15_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s15_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s15_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s16_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s16_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s16_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s16_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s17_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s17_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s17_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s17_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s18_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s18_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s18_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s18_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s20_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s20_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s20_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s20_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s21_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s21_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s21_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s21_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s23_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s23_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s23_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s23_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s24_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s24_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s24_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s24_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s26_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s26_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s26_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s26_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s27_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s27_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s27_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s27_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s28_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s28_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s28_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s28_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s29_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s29_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s29_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s29_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s31_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s31_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s31_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s31_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s33_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s33_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s33_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s33_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s34_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s34_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s34_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s34_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s35_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s35_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s35_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s35_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s36_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s36_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s36_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s36_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s37_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s37_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s37_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s37_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s38_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s38_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s38_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s38_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s39_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s39_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s39_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s39_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s40_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s40_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s40_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s40_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s41_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s41_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s41_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s41_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s42_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s42_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s42_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s42_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s43_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s43_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s43_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s43_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s44_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s44_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s44_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s44_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s45_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s45_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s45_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s45_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s46_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s46_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s46_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s46_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s47_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s47_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s47_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s47_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s48_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s48_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s48_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s48_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s49_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s49_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s49_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB3/M3_s49_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s01_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s01_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s01_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s01_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s02_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s02_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s02_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s02_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s03_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s03_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s03_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s03_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s04_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s04_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s04_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s04_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s05_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s05_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s05_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s05_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s06_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s06_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s06_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s06_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s07_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s07_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s07_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s07_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s08_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s08_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s08_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s08_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s09_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s09_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s09_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s09_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s10_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s10_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s10_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s10_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s11_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s11_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s11_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s11_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s12_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s12_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s12_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s12_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s13_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s13_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s13_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s13_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s14_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s14_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s14_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s14_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s15_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s15_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s15_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s15_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s16_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s16_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s16_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s16_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s17_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s17_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s17_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s17_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s18_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s18_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s18_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s18_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s19_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s19_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s19_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s19_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s20_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s20_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s20_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB4/M4_s20_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s01_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s01_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s01_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s01_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s02_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s02_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s02_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s02_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s03_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s03_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s03_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s03_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s04_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s04_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s04_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s04_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s05_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s05_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s05_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s05_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s06_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s06_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s06_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s06_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s07_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s07_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s07_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s07_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s08_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s08_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s08_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s08_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s09_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s09_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s09_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s09_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s10_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s10_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s10_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s10_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s11_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s11_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s11_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s11_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s12_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s12_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s12_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s12_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s13_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s13_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s13_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s13_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s14_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s14_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s14_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s14_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s15_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s15_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s15_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s15_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s16_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s16_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s16_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s16_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s17_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s17_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s17_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s17_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s18_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s18_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s18_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s18_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s19_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s19_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s19_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s19_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s20_mask_full.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s20_mask_organs.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s20_mask_without_tail.png",
+      "type": "mascara binaria derivada"
+    },
+    {
+      "path": "DB5/M5_s20_mask_without_tail_and_eyes.png",
+      "type": "mascara binaria derivada"
+    }
+  ],
+  "crosswalkMismatchTypes": {
+    "mascara binaria derivada": 592
+  },
+  "offsetsRows": 592,
+  "geometries": [
+    {
+      "id": "DB1_s1",
+      "image": "DB1/M1_s01_frame73.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10638,
+      "innerInsideFullFraction": 0.9973353635325466,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s2",
+      "image": "DB1/M1_s02_frame12.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10322,
+      "innerInsideFullFraction": 0.9806671204901294,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s3",
+      "image": "DB1/M1_s03_frame09.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10360,
+      "innerInsideFullFraction": 0.9498629063846455,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s4",
+      "image": "DB1/M1_s06_frame18.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10178,
+      "innerInsideFullFraction": 0.9831081081081081,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s5",
+      "image": "DB1/M1_s07_frame13.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 7344,
+      "innerInsideFullFraction": 0.9581643936601548,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s6",
+      "image": "DB1/M1_s08_frame17.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9589,
+      "innerInsideFullFraction": 0.968728088627121,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s7",
+      "image": "DB1/M1_s09_frame17.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11882,
+      "innerInsideFullFraction": 0.9924217095731639,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s8",
+      "image": "DB1/M1_s10_frame03.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9966,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s9",
+      "image": "DB1/M1_s11_frame06.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9694,
+      "innerInsideFullFraction": 0.9453048695409516,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s10",
+      "image": "DB1/M1_s12_frame17.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 12401,
+      "innerInsideFullFraction": 0.985654789449329,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s11",
+      "image": "DB1/M1_s13_frame05.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9018,
+      "innerInsideFullFraction": 0.9699939686369119,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s12",
+      "image": "DB1/M1_s14_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10550,
+      "innerInsideFullFraction": 0.9502518118167301,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s13",
+      "image": "DB1/M1_s15_frame19.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 8698,
+      "innerInsideFullFraction": 0.9804595904330154,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s14",
+      "image": "DB1/M1_s16_frame04.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10099,
+      "innerInsideFullFraction": 0.9862717681454176,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s15",
+      "image": "DB1/M1_s17_frame06.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9013,
+      "innerInsideFullFraction": 0.9892873777363763,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s16",
+      "image": "DB1/M1_s18_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9685,
+      "innerInsideFullFraction": 0.9866135004272287,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s17",
+      "image": "DB1/M1_s19_frame03.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9914,
+      "innerInsideFullFraction": 0.9816309490676315,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB1_s18",
+      "image": "DB1/M1_s21_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 8050,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": true
+    },
+    {
+      "id": "DB2_s1",
+      "image": "DB2/M2_s01_frame40.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 7367,
+      "innerInsideFullFraction": 0.9831158864159631,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s2",
+      "image": "DB2/M2_s02_frame05.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9686,
+      "innerInsideFullFraction": 0.9729395604395604,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s3",
+      "image": "DB2/M2_s03_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9434,
+      "innerInsideFullFraction": 0.97932278656675,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s4",
+      "image": "DB2/M2_s04_frame23.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9570,
+      "innerInsideFullFraction": 0.9592636114375245,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s5",
+      "image": "DB2/M2_s05_frame37.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9393,
+      "innerInsideFullFraction": 0.9717612419700214,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s6",
+      "image": "DB2/M2_s06_frame13.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11232,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s7",
+      "image": "DB2/M2_s07_frame39.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11911,
+      "innerInsideFullFraction": 0.9899654725938714,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s8",
+      "image": "DB2/M2_s08_frame37.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11914,
+      "innerInsideFullFraction": 0.9669811320754716,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s9",
+      "image": "DB2/M2_s09_frame36.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9555,
+      "innerInsideFullFraction": 0.9876494547365655,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s12",
+      "image": "DB2/M2_s12_frame09.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10084,
+      "innerInsideFullFraction": 0.9763522341259472,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s13",
+      "image": "DB2/M2_s13_frame19.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9342,
+      "innerInsideFullFraction": 0.9676643506146446,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s14",
+      "image": "DB2/M2_s14_frame36.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9448,
+      "innerInsideFullFraction": 0.9812834224598931,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s15",
+      "image": "DB2/M2_s15_frame10.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9302,
+      "innerInsideFullFraction": 0.9865634584489558,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s16",
+      "image": "DB2/M2_s16_frame04.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9413,
+      "innerInsideFullFraction": 0.961363948851918,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s17",
+      "image": "DB2/M2_s17_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10997,
+      "innerInsideFullFraction": 0.970771001150748,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s18",
+      "image": "DB2/M2_s18_frame32.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9388,
+      "innerInsideFullFraction": 0.9738509233050276,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s19",
+      "image": "DB2/M2_s19_frame05.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9806,
+      "innerInsideFullFraction": 0.9797637003519356,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s20",
+      "image": "DB2/M2_s20_frame15.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9818,
+      "innerInsideFullFraction": 0.9885485651214128,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s21",
+      "image": "DB2/M2_s21_frame17.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9023,
+      "innerInsideFullFraction": 0.9866870696250957,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s22",
+      "image": "DB2/M2_s22_frame21.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 7331,
+      "innerInsideFullFraction": 0.9757760631616723,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s23",
+      "image": "DB2/M2_s23_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9232,
+      "innerInsideFullFraction": 0.973088423750534,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s25",
+      "image": "DB2/M2_s25_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 8873,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s26",
+      "image": "DB2/M2_s26_frame17.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10152,
+      "innerInsideFullFraction": 0.9817970565453137,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s27",
+      "image": "DB2/M2_s27_frame17.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9093,
+      "innerInsideFullFraction": 0.986516520966069,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s28",
+      "image": "DB2/M2_s28_frame12.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10041,
+      "innerInsideFullFraction": 0.951382750347266,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s29",
+      "image": "DB2/M2_s29_frame11.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10511,
+      "innerInsideFullFraction": 0.9877871825876663,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s30",
+      "image": "DB2/M2_s30_frame02.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 8760,
+      "innerInsideFullFraction": 0.9844398340248963,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s32",
+      "image": "DB2/M2_s32_frame18.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11192,
+      "innerInsideFullFraction": 0.9862061703695904,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s33",
+      "image": "DB2/M2_s33_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10342,
+      "innerInsideFullFraction": 0.9757269279393174,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s34",
+      "image": "DB2/M2_s34_frame04.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10048,
+      "innerInsideFullFraction": 0.9686956521739131,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s36",
+      "image": "DB2/M2_s36_frame10.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11272,
+      "innerInsideFullFraction": 0.9866267004842056,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s37",
+      "image": "DB2/M2_s37_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 8753,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s38",
+      "image": "DB2/M2_s38_frame18.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10411,
+      "innerInsideFullFraction": 0.943076738321124,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s39",
+      "image": "DB2/M2_s39_frame18.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9240,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s40",
+      "image": "DB2/M2_s40_frame14.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10546,
+      "innerInsideFullFraction": 0.9820775420629115,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s41",
+      "image": "DB2/M2_s41_frame14.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9683,
+      "innerInsideFullFraction": 0.9711624346050785,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s42",
+      "image": "DB2/M2_s42_frame04.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9517,
+      "innerInsideFullFraction": 0.9816079141702662,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s46",
+      "image": "DB2/M2_s46_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10650,
+      "innerInsideFullFraction": 0.9545119252520285,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s47",
+      "image": "DB2/M2_s47_frame12.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10706,
+      "innerInsideFullFraction": 0.9573712255772646,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s48",
+      "image": "DB2/M2_s48_frame10.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9729,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s49",
+      "image": "DB2/M2_s49_frame11.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9879,
+      "innerInsideFullFraction": 0.9827163678576035,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s50",
+      "image": "DB2/M2_s50_frame18.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10632,
+      "innerInsideFullFraction": 0.9651894974456457,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s51",
+      "image": "DB2/M2_s51_frame05.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9867,
+      "innerInsideFullFraction": 0.9637365453613531,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s52",
+      "image": "DB2/M2_s52_frame28.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10290,
+      "innerInsideFullFraction": 0.9888233077985684,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s53",
+      "image": "DB2/M2_s53_frame02.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10252,
+      "innerInsideFullFraction": 0.9719825038420618,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s54",
+      "image": "DB2/M2_s54_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10070,
+      "innerInsideFullFraction": 0.9450137465633591,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s55",
+      "image": "DB2/M2_s55_frame28.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9039,
+      "innerInsideFullFraction": 0.98560553633218,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB2_s58",
+      "image": "DB2/M2_s58_frame28.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10066,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s1",
+      "image": "DB3/M3_s01_frame22.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11556,
+      "innerInsideFullFraction": 0.9741455836662228,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s3",
+      "image": "DB3/M3_s03_frame04.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11190,
+      "innerInsideFullFraction": 0.9877546349279012,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s4",
+      "image": "DB3/M3_s04_frame33.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 8781,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s5",
+      "image": "DB3/M3_s05_frame16.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9806,
+      "innerInsideFullFraction": 0.9684882329477463,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s6",
+      "image": "DB3/M3_s06_frame27.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11092,
+      "innerInsideFullFraction": 0.9646223670429419,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s7",
+      "image": "DB3/M3_s07_frame03.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9215,
+      "innerInsideFullFraction": 0.9797530155083285,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s8",
+      "image": "DB3/M3_s08_frame26.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10540,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s9",
+      "image": "DB3/M3_s09_frame40.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 6716,
+      "innerInsideFullFraction": 0.9699705593719332,
+      "touchesImageBoundary": true
+    },
+    {
+      "id": "DB3_s11",
+      "image": "DB3/M3_s11_frame69.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10917,
+      "innerInsideFullFraction": 0.9732488560366068,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s12",
+      "image": "DB3/M3_s12_frame05.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9709,
+      "innerInsideFullFraction": 0.9565626681011297,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s13",
+      "image": "DB3/M3_s13_frame26.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9169,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s14",
+      "image": "DB3/M3_s14_frame22.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9037,
+      "innerInsideFullFraction": 0.9727101175787487,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s15",
+      "image": "DB3/M3_s15_frame34.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9976,
+      "innerInsideFullFraction": 0.9837670703426952,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s16",
+      "image": "DB3/M3_s16_frame11.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9300,
+      "innerInsideFullFraction": 0.9814110688635403,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s17",
+      "image": "DB3/M3_s17_frame31.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10424,
+      "innerInsideFullFraction": 0.9859437751004017,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s18",
+      "image": "DB3/M3_s18_frame04.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11495,
+      "innerInsideFullFraction": 0.9613659882718179,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s20",
+      "image": "DB3/M3_s20_frame24.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9905,
+      "innerInsideFullFraction": 0.9952521493648145,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s21",
+      "image": "DB3/M3_s21_frame20.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10732,
+      "innerInsideFullFraction": 0.9854654654654654,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s23",
+      "image": "DB3/M3_s23_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9571,
+      "innerInsideFullFraction": 0.986578947368421,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s24",
+      "image": "DB3/M3_s24_frame18.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9073,
+      "innerInsideFullFraction": 0.9732855962544753,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s26",
+      "image": "DB3/M3_s26_frame19.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9541,
+      "innerInsideFullFraction": 0.9737158105403603,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s27",
+      "image": "DB3/M3_s27_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10414,
+      "innerInsideFullFraction": 0.9880765988197037,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s28",
+      "image": "DB3/M3_s28_frame23.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10231,
+      "innerInsideFullFraction": 0.9815347721822542,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s29",
+      "image": "DB3/M3_s29_frame15.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10408,
+      "innerInsideFullFraction": 0.9759458782260085,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s31",
+      "image": "DB3/M3_s31_frame29.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10168,
+      "innerInsideFullFraction": 0.9810027654202237,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s33",
+      "image": "DB3/M3_s33_frame08.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10182,
+      "innerInsideFullFraction": 0.9752991123118487,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s34",
+      "image": "DB3/M3_s34_frame02.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10436,
+      "innerInsideFullFraction": 0.9867064231581563,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s35",
+      "image": "DB3/M3_s35_frame29.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10726,
+      "innerInsideFullFraction": 0.9646885728298186,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s36",
+      "image": "DB3/M3_s36_frame10.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10582,
+      "innerInsideFullFraction": 0.9840760399950623,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s37",
+      "image": "DB3/M3_s37_frame28.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10528,
+      "innerInsideFullFraction": 0.9888288730665358,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s38",
+      "image": "DB3/M3_s38_frame06.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10671,
+      "innerInsideFullFraction": 0.9765625,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s39",
+      "image": "DB3/M3_s39_frame03.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11198,
+      "innerInsideFullFraction": 1.0,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s40",
+      "image": "DB3/M3_s40_frame29.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9863,
+      "innerInsideFullFraction": 0.983580922595778,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s41",
+      "image": "DB3/M3_s41_frame02.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11296,
+      "innerInsideFullFraction": 0.97936564084424,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s42",
+      "image": "DB3/M3_s42_frame21.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 9800,
+      "innerInsideFullFraction": 0.9752475247524752,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s43",
+      "image": "DB3/M3_s43_frame02.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 8334,
+      "innerInsideFullFraction": 0.9869607211848036,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s44",
+      "image": "DB3/M3_s44_frame16.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10878,
+      "innerInsideFullFraction": 0.9716329252030549,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s45",
+      "image": "DB3/M3_s45_frame16.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4572,
+      "innerInsideFullFraction": 0.9900900900900901,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s46",
+      "image": "DB3/M3_s46_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11023,
+      "innerInsideFullFraction": 0.9882506527415144,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s47",
+      "image": "DB3/M3_s47_frame22.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11286,
+      "innerInsideFullFraction": 0.9712663654269493,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s48",
+      "image": "DB3/M3_s48_frame03.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 11422,
+      "innerInsideFullFraction": 0.9761554977963611,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB3_s49",
+      "image": "DB3/M3_s49_frame12.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 10299,
+      "innerInsideFullFraction": 0.9878125392637266,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s1",
+      "image": "DB4/M4_s01_frame42.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4657,
+      "innerInsideFullFraction": 0.9517702815723446,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s2",
+      "image": "DB4/M4_s02_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4632,
+      "innerInsideFullFraction": 0.9614293817356778,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s3",
+      "image": "DB4/M4_s03_frame25.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4621,
+      "innerInsideFullFraction": 0.9591025276909969,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s4",
+      "image": "DB4/M4_s04_frame07.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 5489,
+      "innerInsideFullFraction": 0.9557733683958881,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s5",
+      "image": "DB4/M4_s05_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 5071,
+      "innerInsideFullFraction": 0.9316849349987255,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s6",
+      "image": "DB4/M4_s06_frame28.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 5535,
+      "innerInsideFullFraction": 0.9585826046939715,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s7",
+      "image": "DB4/M4_s07_frame10.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4361,
+      "innerInsideFullFraction": 0.9446976602856275,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s8",
+      "image": "DB4/M4_s08_frame04.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4487,
+      "innerInsideFullFraction": 0.9444931346771838,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s9",
+      "image": "DB4/M4_s09_frame05.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4411,
+      "innerInsideFullFraction": 0.9483125570082092,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s10",
+      "image": "DB4/M4_s10_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4854,
+      "innerInsideFullFraction": 0.9478646699944537,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s11",
+      "image": "DB4/M4_s11_frame29.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4887,
+      "innerInsideFullFraction": 0.9362784471218206,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s12",
+      "image": "DB4/M4_s12_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4546,
+      "innerInsideFullFraction": 0.9704236610711431,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s13",
+      "image": "DB4/M4_s13_frame02.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4874,
+      "innerInsideFullFraction": 0.9542262678803641,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s14",
+      "image": "DB4/M4_s14_frame05.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4195,
+      "innerInsideFullFraction": 0.9404911838790933,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s15",
+      "image": "DB4/M4_s15_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 3818,
+      "innerInsideFullFraction": 0.946747556454331,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s16",
+      "image": "DB4/M4_s16_frame05.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 3958,
+      "innerInsideFullFraction": 0.9479578392621871,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s17",
+      "image": "DB4/M4_s17_frame05.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4532,
+      "innerInsideFullFraction": 0.9448294243070362,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s18",
+      "image": "DB4/M4_s18_frame15.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4009,
+      "innerInsideFullFraction": 0.9300813008130081,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s19",
+      "image": "DB4/M4_s19_frame01.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4594,
+      "innerInsideFullFraction": 0.9440798858773182,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB4_s20",
+      "image": "DB4/M4_s20_frame03.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4903,
+      "innerInsideFullFraction": 0.9361468895587832,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s1",
+      "image": "DB5/M5_s01_frame22.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4590,
+      "innerInsideFullFraction": 0.9616535218928475,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s2",
+      "image": "DB5/M5_s02_frame03.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4453,
+      "innerInsideFullFraction": 0.9484953703703703,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s3",
+      "image": "DB5/M5_s03_frame02.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4698,
+      "innerInsideFullFraction": 0.9553688632186925,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s4",
+      "image": "DB5/M5_s04_frame47.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 3936,
+      "innerInsideFullFraction": 0.9453621346886912,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s5",
+      "image": "DB5/M5_s05_frame25.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4351,
+      "innerInsideFullFraction": 0.962844702467344,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s6",
+      "image": "DB5/M5_s06_frame21.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 5307,
+      "innerInsideFullFraction": 0.9507874015748031,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s7",
+      "image": "DB5/M5_s07_frame16.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4690,
+      "innerInsideFullFraction": 0.9658296660626456,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s8",
+      "image": "DB5/M5_s08_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4667,
+      "innerInsideFullFraction": 0.9459305634604439,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s9",
+      "image": "DB5/M5_s09_frame29.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4588,
+      "innerInsideFullFraction": 0.9500998003992016,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s10",
+      "image": "DB5/M5_s10_frame15.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4703,
+      "innerInsideFullFraction": 0.9546200109349371,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s11",
+      "image": "DB5/M5_s11_frame02.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4629,
+      "innerInsideFullFraction": 0.9869688385269122,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s12",
+      "image": "DB5/M5_s12_frame15.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 3537,
+      "innerInsideFullFraction": 0.9528849436667804,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s13",
+      "image": "DB5/M5_s13_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 5556,
+      "innerInsideFullFraction": 0.9362722704431247,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s14",
+      "image": "DB5/M5_s14_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4133,
+      "innerInsideFullFraction": 0.9516077682266794,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s15",
+      "image": "DB5/M5_s15_frame26.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 5290,
+      "innerInsideFullFraction": 0.9627835839918429,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s16",
+      "image": "DB5/M5_s16_frame03.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4221,
+      "innerInsideFullFraction": 0.9495133819951338,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s17",
+      "image": "DB5/M5_s17_frame10.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4621,
+      "innerInsideFullFraction": 0.9706575844904375,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s18",
+      "image": "DB5/M5_s18_frame25.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 5211,
+      "innerInsideFullFraction": 0.9500234631628344,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s19",
+      "image": "DB5/M5_s19_frame30.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4907,
+      "innerInsideFullFraction": 0.9638424177010254,
+      "touchesImageBoundary": false
+    },
+    {
+      "id": "DB5_s20",
+      "image": "DB5/M5_s20_frame19.png",
+      "width": 640,
+      "height": 480,
+      "mode": "RGB",
+      "fullAreaPx": 4099,
+      "innerInsideFullFraction": 0.9634105404498153,
+      "touchesImageBoundary": false
+    }
+  ],
+  "fullMasksTouchingBoundary": 2,
+  "medianInnerInsideFull": 0.9735007033974178
+}
