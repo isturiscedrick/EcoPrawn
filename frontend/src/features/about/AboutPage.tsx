@@ -188,13 +188,13 @@ export function AboutPage() {
                 <article className="h-full rounded-2xl border-2 border-[var(--ep-primary)] bg-[var(--ep-surface)] p-6 sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
                     <h3 className="ep-font-display flex items-center gap-3 text-2xl font-semibold">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-ok)] text-[var(--ep-on-status)]">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-accent)] text-[var(--ep-on-status)]">
                         <Icon name="check" size={18} strokeWidth={2.5} />
                       </span>
                       In scope
                     </h3>
 
-                    <span className="rounded-full border-2 border-[var(--ep-ok)] px-3 py-1 text-sm font-semibold text-[var(--ep-ok)]">
+                    <span className="rounded-full border-2 border-[var(--ep-accent)] px-3 py-1 text-sm font-semibold text-[var(--ep-accent)]">
                       Included
                     </span>
                   </div>
@@ -206,7 +206,7 @@ export function AboutPage() {
                         className={`py-4 ${index !== 0 ? "border-t border-[var(--ep-line)]" : "pt-0"}`}
                       >
                         <div className="flex gap-3">
-                          <span className="mt-0.5 text-sm font-semibold tabular-nums text-[var(--ep-ok)]">
+                          <span className="mt-0.5 text-sm font-semibold tabular-nums text-[var(--ep-accent)]">
                             0{index + 1}
                           </span>
 
@@ -228,13 +228,13 @@ export function AboutPage() {
                 <article className="ep-about-outscope h-full rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_12px_28px_-24px_rgba(15,23,42,0.16)] sm:p-8">
                   <div className="mb-6 flex items-center justify-between gap-3">
                     <h3 className="ep-font-display flex items-center gap-3 text-2xl font-semibold">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-warn-text)] text-[var(--ep-on-status)]">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ep-accent)] text-[var(--ep-on-status)]">
                         <Icon name="x" size={18} strokeWidth={2.5} />
                       </span>
                       Out of scope
                     </h3>
 
-                    <span className="rounded-full border-2 border-[var(--ep-warn-text)] px-3 py-1 text-sm font-semibold text-[var(--ep-warn-text)]">
+                    <span className="rounded-full border-2 border-[var(--ep-accent)] px-3 py-1 text-sm font-semibold text-[var(--ep-accent)]">
                       Excluded
                     </span>
                   </div>
@@ -246,7 +246,7 @@ export function AboutPage() {
                         className={`py-4 ${index !== 0 ? "border-t border-[var(--ep-line)]" : "pt-0"}`}
                       >
                         <div className="flex gap-3">
-                          <span className="mt-0.5 text-sm font-semibold tabular-nums text-[var(--ep-warn-text)]">
+                          <span className="mt-0.5 text-sm font-semibold tabular-nums text-[var(--ep-accent)]">
                             0{index + 1}
                           </span>
 
