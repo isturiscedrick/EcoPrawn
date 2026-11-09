@@ -287,3 +287,64 @@ html:not(.dark) .ep-business-landing #readings [data-reading] > div[aria-hidden=
 html:not(.dark) .ep-business-landing #readings [data-reading] [data-marker] span:last-child {
   border-color: #fff;
 }
+
+
+/* Target-ranges visual correction: remove the muddy black vignette and use
+   restrained blue water-like light instead. Explicitly set every text tier so
+   inherited deep-surface utility classes cannot reduce contrast. */
+.ep-business-landing #readings [data-readings-bg] {
+  background-image:
+    radial-gradient(ellipse at 14% 12%, rgba(59,130,246,.13), transparent 42%),
+    radial-gradient(ellipse at 88% 78%, rgba(96,165,250,.10), transparent 46%) !important;
+}
+.ep-business-landing #readings .max-w-\\[40rem\\] {
+  color: var(--ep-text);
+}
+.ep-business-landing #readings .max-w-\\[40rem\\] > div {
+  color: var(--ep-text-muted) !important;
+}
+.ep-business-landing #readings .max-w-\\[40rem\\] h2 {
+  color: var(--ep-text) !important;
+}
+.ep-business-landing #readings .max-w-\\[40rem\\] p {
+  color: var(--ep-text-muted) !important;
+}
+.ep-business-landing #readings [data-reading] dt,
+.ep-business-landing #readings [data-reading] dd,
+.ep-business-landing #readings [data-reading] [data-countto] {
+  color: var(--ep-text) !important;
+}
+.ep-business-landing #readings [data-reading] dd > span:not([data-countto]) {
+  color: var(--ep-text-muted) !important;
+}
+.ep-business-landing #readings [data-reading] > div:first-child > span {
+  color: var(--ep-text) !important;
+  border-color: var(--ep-line);
+  background-color: var(--ep-tint);
+}
+.ep-business-landing #readings [data-reading] p {
+  color: var(--ep-text-muted) !important;
+}
+.ep-business-landing #readings > div:last-child {
+  color: var(--ep-text-muted) !important;
+}
+.ep-business-landing #readings > div:last-child span {
+  color: inherit;
+}
+html.dark .ep-business-landing #readings [data-readings-bg] {
+  background-image:
+    radial-gradient(ellipse at 14% 12%, rgba(37,99,235,.24), transparent 42%),
+    radial-gradient(ellipse at 88% 78%, rgba(96,165,250,.13), transparent 46%) !important;
+}
+html.dark .ep-business-landing #readings .max-w-\\[40rem\\] > div,
+html.dark .ep-business-landing #readings .max-w-\\[40rem\\] p,
+html.dark .ep-business-landing #readings [data-reading] dd > span:not([data-countto]),
+html.dark .ep-business-landing #readings [data-reading] p,
+html.dark .ep-business-landing #readings > div:last-child {
+  color: var(--ep-on-deep-muted) !important;
+}
+html.dark .ep-business-landing #readings [data-reading] > div:first-child > span {
+  color: var(--ep-on-deep) !important;
+  border-color: rgba(203,213,225,.34);
+  background-color: rgba(255,255,255,.08);
+}
