@@ -328,3 +328,189 @@ html.dark .ep-contact-page [data-contact-details] {
     animation-iteration-count: 1 !important;
   }
 }
+
+
+/* Screenshot-matched finish for About and Contact: quiet dotted canvas,
+   crisp white surfaces, deep navy typography and deliberate blue accents. */
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  background-color: var(--ep-bg);
+  background-image:
+    radial-gradient(circle at 8% 42%,rgba(37,99,235,.10) 1px,transparent 1.5px),
+    radial-gradient(circle at 91% 66%,rgba(37,99,235,.10) 1px,transparent 1.5px),
+    linear-gradient(180deg,var(--ep-surface),var(--ep-bg));
+  background-size: 22px 22px,22px 22px,auto;
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  background-color: #0b1220;
+  background-image:
+    radial-gradient(circle at 8% 42%,rgba(96,165,250,.17) 1px,transparent 1.5px),
+    radial-gradient(circle at 91% 66%,rgba(96,165,250,.17) 1px,transparent 1.5px),
+    linear-gradient(180deg,#111827,#0b1220);
+  background-size: 22px 22px,22px 22px,auto;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero]::before,
+:is(.ep-about-page,.ep-contact-page) [data-page-hero]::after {
+  content: "+";
+  position: absolute;
+  z-index: 0;
+  color: rgba(37,99,235,.38);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+  pointer-events: none;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero]::before {
+  top: 27%;
+  left: max(5%,calc((100vw - 1320px)/2));
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero]::after {
+  right: max(6%,calc((100vw - 1300px)/2));
+  bottom: 24%;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
+  position: relative;
+  z-index: 1;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero-kicker],
+:is(.ep-about-page,.ep-contact-page) [data-page-kicker] {
+  box-shadow: 0 8px 24px -18px rgba(15,23,42,.35);
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] {
+  max-width: 18ch;
+  font-size: clamp(2.8rem,6.3vw,5.25rem);
+  line-height: .99;
+  letter-spacing: -.065em;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-lead] {
+  max-width: 40rem;
+  font-size: clamp(1rem,1.4vw,1.18rem);
+}
+
+/* Keep About's five modules on the same light surface language as the hero.
+   Blue remains the accent; it no longer turns an entire page section into a
+   competing full-bleed block. */
+.ep-about-page #systems {
+  color: var(--ep-text);
+  background-color: var(--ep-bg);
+  background-image:
+    radial-gradient(ellipse at 90% 8%,rgba(37,99,235,.075),transparent 32%),
+    radial-gradient(ellipse at 8% 92%,rgba(37,99,235,.045),transparent 34%);
+}
+html.dark .ep-about-page #systems {
+  color: var(--ep-text);
+  background-color: var(--ep-bg);
+  background-image:
+    radial-gradient(ellipse at 90% 8%,rgba(96,165,250,.13),transparent 32%),
+    radial-gradient(ellipse at 8% 92%,rgba(96,165,250,.07),transparent 34%);
+}
+.ep-about-page #systems .text-\\[var\\(--ep-on-deep-muted\\)\\],
+.ep-about-page #systems .text-\\[var\\(--ep-on-deep\\)\\] {
+  color: var(--ep-text-muted);
+}
+.ep-about-page #systems article {
+  border: 1px solid var(--ep-line);
+  background: var(--ep-surface);
+  color: var(--ep-text);
+  box-shadow: 0 18px 42px -34px rgba(15,23,42,.28);
+}
+.ep-about-page #systems article h3,
+.ep-about-page #systems article b {
+  color: var(--ep-text);
+}
+.ep-about-page #systems article span {
+  color: var(--ep-text-muted);
+}
+.ep-about-page #systems article > div:first-child > span {
+  border-color: rgba(37,99,235,.28);
+  color: var(--ep-accent);
+  background: rgba(37,99,235,.06);
+}
+.ep-about-page #systems article > div:first-child > span svg {
+  color: var(--ep-accent);
+}
+.ep-about-page #systems article > div:last-child {
+  border-color: var(--ep-line);
+}
+.ep-about-page #systems article > div:last-child > div > span:first-child {
+  color: var(--ep-accent);
+}
+.ep-about-page #systems .text-\\[var\\(--ep-on-deep-muted\\)\\] {
+  color: var(--ep-text-muted);
+}
+.ep-about-page #systems .text-\\[var\\(--ep-on-deep\\)\\] {
+  color: var(--ep-text);
+}
+.ep-about-page #systems .ep-font-display {
+  color: var(--ep-text);
+}
+.ep-about-page #systems .text-\\[var\\(--ep-marker\\)\\] {
+  color: var(--ep-accent);
+}
+.ep-about-page #systems .border-white\\/20,
+.ep-about-page #systems .border-white\\/15 {
+  border-color: var(--ep-line);
+}
+.ep-about-page #systems .bg-white\\/\\[0\\.06\\] {
+  background: var(--ep-surface);
+}
+.ep-about-page #systems .text-\\[var\\(--ep-on-deep-muted\\)\\] {
+  color: var(--ep-text-muted);
+}
+
+/* Contact: make the details rail read as a designed information panel, not
+   three unrelated boxes. The form remains the main action. */
+.ep-contact-page [data-contact-details] {
+  gap: .85rem;
+  padding: clamp(1.25rem,2.6vw,2rem);
+  background:
+    radial-gradient(circle at 90% 8%,rgba(37,99,235,.10),transparent 34%),
+    var(--ep-surface);
+  box-shadow: 0 24px 60px -48px rgba(15,23,42,.32);
+}
+html.dark .ep-contact-page [data-contact-details] {
+  background:
+    radial-gradient(circle at 90% 8%,rgba(96,165,250,.15),transparent 34%),
+    #111827;
+}
+.ep-contact-page [data-contact-details]::after {
+  content: "We'd love to hear what you're working on.";
+  display: block;
+  margin: .35rem .25rem 0;
+  max-width: 19rem;
+  color: var(--ep-text-muted);
+  font-size: .95rem;
+  line-height: 1.7;
+}
+.ep-contact-page [data-contact-card] {
+  border-color: var(--ep-line);
+  transition: transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+@media (hover:hover) {
+  .ep-contact-page [data-contact-card]:hover {
+    transform: translateY(-3px);
+    border-color: var(--ep-accent);
+    box-shadow: 0 18px 36px -26px rgba(37,99,235,.30);
+  }
+}
+.ep-contact-page [data-contact-form] {
+  min-width: 0;
+}
+.ep-contact-page [data-contact-form] form {
+  border: 1px solid var(--ep-line);
+  background: var(--ep-surface);
+}
+.ep-contact-page [data-contact-form] form label {
+  color: var(--ep-text);
+  font-weight: 600;
+}
+.ep-contact-page [data-contact-form] input:focus,
+.ep-contact-page [data-contact-form] textarea:focus {
+  outline: 2px solid rgba(37,99,235,.22);
+  outline-offset: 1px;
+  border-color: var(--ep-accent);
+}
+@media (max-width: 767px) {
+  :is(.ep-about-page,.ep-contact-page) [data-page-hero]::before { left: 5%; }
+  :is(.ep-about-page,.ep-contact-page) [data-page-hero]::after { right: 5%; }
+  .ep-about-page #systems article { padding: 1.25rem; }
+}
