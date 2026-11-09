@@ -114,7 +114,7 @@ export function LandingPage() {
 
       <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
         {/* HERO */}
-        <section id="top" className="ep-hero ep-aquaculture-hero relative isolate overflow-hidden" aria-label="EcoPrawn smart aquaculture introduction" style={{ "--ep-hero-image": "url(https://cdn.agrimag.my/nQdab9130.jpeg)" } as React.CSSProperties}>
+        <section id="top" className="ep-hero ep-aquaculture-hero relative isolate overflow-hidden" aria-label="EcoPrawn smart aquaculture introduction">
           <div
             aria-hidden="true"
             data-hero="grid"
