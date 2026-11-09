@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import { bindPublicHoverMotion } from "./PublicHoverMotion";
 import { animate, stagger } from "animejs";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
@@ -488,7 +489,10 @@ export function LandingMotion() {
         });
       });
 
+      const cleanupSharedHover = homeRoot ? bindPublicHoverMotion(homeRoot) : () => {};
+
       return () => {
+        cleanupSharedHover();
         restores.forEach((restore) => restore());
         hoverCleanups.forEach((cleanup) => cleanup());
         microAnimations.forEach((animation) => animation.revert());
