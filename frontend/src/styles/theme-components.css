@@ -267,3 +267,119 @@ html.dark .ep-auth-modal {
 .ep-auth-modal .focus\:ring-\[rgba\(178\,63\,28\,0\.15\)\]:focus {
   --tw-ring-color: color-mix(in srgb, var(--ep-accent, #c43d14) 15%, transparent);
 }
+
+
+/* ---------- Dashboard palette: monochrome + blue (60/30/10) ---------- */
+/* 60% light/dark neutral canvas, 30% monochrome structure and typography,
+   10% blue for primary actions, active navigation, focus and data emphasis. */
+.dashboard-shell {
+  --ep-bg: #f8fafc;
+  --ep-surface: #ffffff;
+  --ep-tint: #f1f5f9;
+  --ep-line: #d8e0ea;
+  --ep-primary: #111827;
+  --ep-primary-soft: #1f2937;
+  --ep-text-muted: #475569;
+  --ep-text: #111827;
+  --ep-accent: #2563eb;
+  --ep-accent-hover: #1d4ed8;
+  --ep-accent-tint: rgba(37, 99, 235, .10);
+  --ep-accent-tint-soft: rgba(37, 99, 235, .06);
+  --ep-secondary: #1d4ed8;
+  --ep-secondary-tint: rgba(37, 99, 235, .10);
+  --coral: #2563eb;
+  --coral-dim: #1d4ed8;
+  background: var(--ep-bg);
+  color: var(--ep-primary);
+}
+
+html:not(.dark) .dashboard-shell {
+  --ep-bg: #f8fafc;
+  --ep-surface: #ffffff;
+  --ep-line: #d8e0ea;
+  --ep-primary: #111827;
+  --ep-primary-soft: #1f2937;
+  --ep-text-muted: #475569;
+  --ep-text: #111827;
+}
+
+html:not(.dark) .dashboard-shell aside {
+  background: #111827;
+  color: #f8fafc;
+  border-color: #1f2937;
+  box-shadow: 2px 0 12px rgba(15, 23, 42, .10);
+}
+
+html:not(.dark) .dashboard-shell aside :is(a, button, p, span, h1, h2, h3) {
+  color: inherit;
+}
+
+html:not(.dark) .dashboard-shell aside .ep-logo {
+  --ep-logo-color: #60a5fa;
+  --ep-logo-text: #f8fafc;
+}
+
+html.dark .dashboard-shell {
+  --ep-bg: #090d16;
+  --ep-surface: #111827;
+  --ep-tint: #1f2937;
+  --ep-line: #334155;
+  --ep-primary: #f8fafc;
+  --ep-primary-soft: #e2e8f0;
+  --ep-text-muted: #cbd5e1;
+  --ep-text: #f8fafc;
+  --ep-accent: #60a5fa;
+  --ep-accent-hover: #93c5fd;
+  --ep-accent-tint: rgba(96, 165, 250, .14);
+  --ep-accent-tint-soft: rgba(96, 165, 250, .08);
+  --ep-secondary: #93c5fd;
+  --ep-secondary-tint: rgba(96, 165, 250, .14);
+  --coral: #60a5fa;
+  --coral-dim: #93c5fd;
+  background: var(--ep-bg);
+  color: var(--ep-primary);
+}
+
+html.dark .dashboard-shell :is(aside, .bg-white) {
+  background-color: var(--ep-surface);
+}
+
+html.dark .dashboard-shell aside {
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+html.dark .dashboard-shell aside .ep-logo {
+  --ep-logo-color: #60a5fa;
+  --ep-logo-text: #f8fafc;
+}
+
+.dashboard-shell main :is(.text-\\[var\\(--water-deep\\)\\], .text-\\[var\\(--ep-primary\\)\\]) {
+  color: var(--ep-primary);
+}
+
+.dashboard-shell main :is(.border-\\[rgba\\(11\\,46\\,51\\,0\\.12\\)\\], .border-\\[var\\(--sand-dim\\)\\]) {
+  border-color: var(--ep-line);
+}
+
+.dashboard-shell main :is(.bg-\\[var\\(--coral\\)\\], .bg-\\[var\\(--ep-accent\\)]) {
+  background-color: var(--ep-accent);
+  color: #ffffff;
+}
+
+.dashboard-shell main :is(.hover\\:bg-\\[var\\(--coral-dim\\)\\]:hover, .hover\\:border-\\[var\\(--coral\\)\\]:hover) {
+  border-color: var(--ep-accent-hover);
+}
+
+.dashboard-shell main :is(button, a, input, select, textarea):focus-visible {
+  outline-color: var(--ep-accent);
+}
+
+.dashboard-shell main .bg-gradient-to-r {
+  --tw-gradient-from: var(--ep-accent);
+  --tw-gradient-to: #93c5fd;
+}
+
+html.dark .dashboard-shell main .from-white {
+  --tw-gradient-from: #111827;
+}
