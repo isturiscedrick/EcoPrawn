@@ -12,7 +12,7 @@ const CARD_SELECTOR = [
   "[data-site-footer] .grid > div",
 ].join(",");
 
-const CONTROL_SELECTOR = "main a, main button";
+const CONTROL_SELECTOR = "main a, main button, #site-header nav a, [data-site-footer] nav a";
 
 /**
  * One shared hover/focus language for all public marketing pages.
