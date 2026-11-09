@@ -618,3 +618,15 @@ html.dark .ep-business-landing .ep-inside-platform::before {
   display: none !important;
   background: none !important;
 }
+
+
+/* Target ranges eyebrow: keep this label dark in light mode instead of
+   inheriting the blue accent color. Preserve readable contrast in dark mode. */
+html:not(.dark) .ep-business-landing #readings.ep-readings-section .ep-readings-kicker {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+html.dark .ep-business-landing #readings.ep-readings-section .ep-readings-kicker {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+}
