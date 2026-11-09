@@ -9,7 +9,7 @@ const particles = Array.from({ length: 10 }, (_, index) => index);
 const SEEN_KEY = "ep-logo-intro-seen";
 
 /**
- * A short branded intro (about 5 s) for the first page load of a session.
+ * A short branded intro (about 3.5 s) for the first page load of a session.
  * It is skipped on dashboard routes and once it has finished or been skipped
  * in this browser session. The button or Escape skips it early.
  * Reduced-motion users get the same duration with no movement, only fades.
@@ -82,12 +82,12 @@ export function LogoIntroGate() {
       // Same timing for everyone. Reduced motion only removes movement
       // (the y and scale offsets above and the particles below), not the time on screen.
       timeline
-        .to(content, { autoAlpha: 1, y: 0, scale: 1, duration: 0.9 })
-        .to(".ep-loading-caption", { autoAlpha: 1, y: 0, duration: 0.6 }, "-=0.18")
-        .to(progress, { scaleX: 1, duration: 2.6, ease: "power2.inOut" }, "-=0.02")
-        .to(".ep-loading-shimmer", { xPercent: 260, duration: 0.9, ease: "power1.inOut" }, "<0.5")
-        .to(content, { autoAlpha: 0, y: reducedMotion ? 0 : -8, duration: 0.4 }, "+=0.5")
-        .to(screen, { autoAlpha: 0, duration: 0.5, ease: "power1.out" }, "<0.04");
+        .to(content, { autoAlpha: 1, y: 0, scale: 1, duration: 0.65 })
+        .to(".ep-loading-caption", { autoAlpha: 1, y: 0, duration: 0.42 }, "-=0.16")
+        .to(progress, { scaleX: 1, duration: 1.8, ease: "power2.inOut" }, "-=0.02")
+        .to(".ep-loading-shimmer", { xPercent: 260, duration: 0.72, ease: "power1.inOut" }, "<0.35")
+        .to(content, { autoAlpha: 0, y: reducedMotion ? 0 : -6, duration: 0.3 }, "+=0.25")
+        .to(screen, { autoAlpha: 0, duration: 0.35, ease: "power1.out" }, "<0.02");
     }, screen);
 
     let particleMotion: ReturnType<typeof animate> | undefined;
