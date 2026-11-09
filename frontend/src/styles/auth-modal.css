@@ -398,12 +398,17 @@ html.dark .ep-auth-modal input:focus-visible {
     max-height: 38px;
   }
 
+  /* Center the welcome heading and supporting copy on the mobile sheet. */
   .ep-auth-modal h1 {
     font-size: clamp(24px, 6vw, 28px);
+    text-align: center;
   }
 
   .ep-auth-modal h1 + p {
     max-width: 320px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
     font-size: 13px;
   }
 
