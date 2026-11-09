@@ -37,7 +37,7 @@ export function TrendChart({ values = [], onPointClick, label = "Trend", unit = 
   }
 
   return (
-    <div className="space-y-3">
+    <div className="dashboard-trend-chart space-y-3">
       <div className="flex items-center justify-between gap-3 text-sm font-medium text-[var(--ep-text-muted)]">
         <span>{label}{unit ? ` (${unit})` : ""}</span>
         {selectedValue !== null && (
