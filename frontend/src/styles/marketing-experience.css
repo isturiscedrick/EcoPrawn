@@ -781,3 +781,47 @@ html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
   background-color: rgba(255,255,255,.42);
   border-color: rgba(7,20,38,.22);
 }
+
+
+/* Match the About and Contact hero canvases to the Landing aquaculture hero.
+   Keep the shared grid and crosshair overlays, but use the exact same
+   light/dark background layers so all three page heroes feel continuous. */
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  isolation: isolate;
+  background-color: #f8fafc;
+  background-image:
+    radial-gradient(ellipse at 50% 34%, rgba(37,99,235,.10), transparent 52%),
+    radial-gradient(circle, rgba(37,99,235,.11) .8px, transparent 1.2px),
+    linear-gradient(180deg, #ffffff 0%, #eef4fb 100%);
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-size: auto, 22px 22px, auto;
+  background-position: center, center top, center;
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  background-color: #070d18 !important;
+  background-image:
+    radial-gradient(ellipse at 50% 28%, rgba(37,99,235,.28), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(30,64,175,.16), transparent 58%),
+    radial-gradient(circle, rgba(147,197,253,.13) .8px, transparent 1.2px),
+    linear-gradient(180deg, #101d32 0%, #090f1d 58%, #070d18 100%) !important;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-size: auto, auto, 22px 22px, auto;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] > .ep-hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 12%,rgba(255,255,255,.72),transparent 58%),
+    linear-gradient(180deg,rgba(255,255,255,.12),rgba(226,232,240,.18));
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] > .ep-hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 18%, rgba(59,130,246,.16), transparent 58%),
+    linear-gradient(180deg, rgba(7,13,24,.08), rgba(7,13,24,.24));
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-child(1) {
+  opacity: .18;
+  mix-blend-mode: screen;
+}
+html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-child(1) {
+  opacity: .24;
+  mix-blend-mode: multiply;
+}
