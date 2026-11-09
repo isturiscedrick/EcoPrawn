@@ -391,17 +391,17 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
    competing full-bleed block. */
 .ep-about-page #systems {
   color: var(--ep-text);
-  background-color: var(--ep-bg);
+  background-color: var(--ep-bg) !important;
   background-image:
     radial-gradient(ellipse at 90% 8%,rgba(37,99,235,.075),transparent 32%),
-    radial-gradient(ellipse at 8% 92%,rgba(37,99,235,.045),transparent 34%);
+    radial-gradient(ellipse at 8% 92%,rgba(37,99,235,.045),transparent 34%) !important;
 }
 html.dark .ep-about-page #systems {
   color: var(--ep-text);
-  background-color: var(--ep-bg);
+  background-color: var(--ep-bg) !important;
   background-image:
     radial-gradient(ellipse at 90% 8%,rgba(96,165,250,.13),transparent 32%),
-    radial-gradient(ellipse at 8% 92%,rgba(96,165,250,.07),transparent 34%);
+    radial-gradient(ellipse at 8% 92%,rgba(96,165,250,.07),transparent 34%) !important;
 }
 .ep-about-page #systems .text-\\[var\\(--ep-on-deep-muted\\)\\],
 .ep-about-page #systems .text-\\[var\\(--ep-on-deep\\)\\] {
