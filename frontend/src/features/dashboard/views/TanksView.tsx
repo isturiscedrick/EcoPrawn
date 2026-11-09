@@ -83,8 +83,9 @@ export function TanksView() {
                 key={t.id}
                 {...t}
                 onRemove={async (id) => {
-                  showToast("Tank removed.");
-                  if (!(await removeTank(id))) showToast("Could not remove tank. Please try again.");
+                  const removed = await removeTank(id);
+                  if (removed) showToast("Tank removed.");
+                  else showToast("Could not remove tank. Please try again.", "error");
                 }}
               />
             ))}
@@ -100,8 +101,9 @@ export function TanksView() {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         onSubmit={async (input) => {
-          showToast(`${input.name} added.`);
-          if (!(await addTank(input))) showToast(`Could not save ${input.name}. Please try again.`);
+          const added = await addTank(input);
+          if (added) showToast(`${input.name} added.`);
+          else showToast(`Could not save ${input.name}. Please try again.`, "error");
         }}
         existingCount={tankCount}
       />

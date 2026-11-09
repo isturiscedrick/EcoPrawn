@@ -100,11 +100,17 @@ html.dark .dashboard-shell .text-\[var\(--water-deep\)\] {
   color: #e4e6eb;
 }
 
-html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.55\)\],
-html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.68\)\],
-html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\],
-html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.4\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.45\)\],
 html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.55\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.6\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.65\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.68\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.7\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.58\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
+html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\],
 html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.72\)\] {
   color: #b0b3b8;
 }

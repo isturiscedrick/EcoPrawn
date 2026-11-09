@@ -648,12 +648,17 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
                 wrapperClassName={onDetailsPage ? "hidden" : undefined}
                 labelAside={
                   step === "signin" ? (
-                    <a
-                      href="#"
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setError("");
+                        setNotice("Password reset isn't available yet. Contact your facility administrator.");
+                      }}
                       className="rounded text-[13px] font-semibold text-[var(--ep-accent)] underline-offset-4 transition-colors hover:text-[var(--ep-accent-hover)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
+                      style={{ minHeight: 0 }}
                     >
                       Forgot password?
-                    </a>
+                    </button>
                   ) : undefined
                 }
                 trailing={

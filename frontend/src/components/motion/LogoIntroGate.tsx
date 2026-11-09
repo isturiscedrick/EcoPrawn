@@ -6,9 +6,13 @@ import { BrandMark } from "@/components/layout/BrandMark";
 import "@/styles/logo-intro.css";
 
 const particles = Array.from({ length: 10 }, (_, index) => index);
+const SEEN_KEY = "ep-logo-intro-seen";
 
 /**
- * A short branded intro for a fresh page load.
+ * A short branded intro (about 5 s) for the first page load of a session.
+ * It is skipped on dashboard routes and once it has finished or been skipped
+ * in this browser session. The button or Escape skips it early.
+ * Reduced-motion users get the same duration with no movement, only fades.
  * GSAP controls the entrance, progress and exit; Anime.js adds ambient particles.
  */
 export function LogoIntroGate() {
@@ -21,11 +25,43 @@ export function LogoIntroGate() {
   const progressRef = useRef<HTMLSpanElement>(null);
   const [visible, setVisible] = useState(true);
 
+  // Marks the intro as seen only once it has actually finished or been skipped.
+  const finish = useRef(() => {
+    try {
+      window.sessionStorage.setItem(SEEN_KEY, "1");
+    } catch {
+      // Session storage can be unavailable; the intro may replay, which is harmless.
+    }
+    setVisible(false);
+  });
+
   useLayoutEffect(() => {
     if (pathname !== firstPath.current) {
       document.documentElement.classList.add("ep-nav-seen");
     }
   }, [pathname]);
+
+  // Read-only check on mount. The server and first client render both start
+  // visible, so hydration matches; returning visitors drop the overlay before paint.
+  useLayoutEffect(() => {
+    let seen = false;
+    try {
+      seen = window.sessionStorage.getItem(SEEN_KEY) === "1";
+    } catch {
+      // Fall back to playing the intro.
+    }
+    if (seen || firstPath.current.startsWith("/dashboard")) setVisible(false);
+  }, []);
+
+  // Escape skips the intro.
+  useEffect(() => {
+    if (!visible) return;
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") finish.current();
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [visible]);
 
   useLayoutEffect(() => {
     if (!visible || !screenRef.current || !contentRef.current || !progressRef.current) return;
@@ -40,16 +76,18 @@ export function LogoIntroGate() {
 
       const timeline = gsap.timeline({
         defaults: { ease: "power3.out" },
-        onComplete: () => setVisible(false),
+        onComplete: () => finish.current(),
       });
 
+      // Same timing for everyone. Reduced motion only removes movement
+      // (the y and scale offsets above and the particles below), not the time on screen.
       timeline
-        .to(content, { autoAlpha: 1, y: 0, scale: 1, duration: reducedMotion ? 0.12 : 0.65 })
-        .to(".ep-loading-caption", { autoAlpha: 1, y: 0, duration: reducedMotion ? 0.08 : 0.42 }, "-=0.18")
-        .to(progress, { scaleX: 1, duration: reducedMotion ? 0.12 : 1.35, ease: "power2.inOut" }, reducedMotion ? "+=0.02" : "-=0.02")
-        .to(".ep-loading-shimmer", { xPercent: 260, duration: 0.65, ease: "power1.inOut" }, "<0.35")
-        .to(content, { autoAlpha: 0, y: reducedMotion ? 0 : -8, duration: reducedMotion ? 0.08 : 0.28 }, "+=0.12")
-        .to(screen, { autoAlpha: 0, duration: reducedMotion ? 0.08 : 0.38, ease: "power1.out" }, "<0.04");
+        .to(content, { autoAlpha: 1, y: 0, scale: 1, duration: 0.9 })
+        .to(".ep-loading-caption", { autoAlpha: 1, y: 0, duration: 0.6 }, "-=0.18")
+        .to(progress, { scaleX: 1, duration: 2.6, ease: "power2.inOut" }, "-=0.02")
+        .to(".ep-loading-shimmer", { xPercent: 260, duration: 0.9, ease: "power1.inOut" }, "<0.5")
+        .to(content, { autoAlpha: 0, y: reducedMotion ? 0 : -8, duration: 0.4 }, "+=0.5")
+        .to(screen, { autoAlpha: 0, duration: 0.5, ease: "power1.out" }, "<0.04");
     }, screen);
 
     let particleMotion: ReturnType<typeof animate> | undefined;
@@ -61,7 +99,7 @@ export function LogoIntroGate() {
         opacity: [0.12, 0.72, 0.12],
         scale: [0.75, 1.15],
         duration: 2300,
-        delay: (element, index) => index * 115,
+        delay: (element, index) => (index ?? 0) * 115,
         alternate: true,
         loop: true,
         ease: "inOutSine",
@@ -94,6 +132,13 @@ export function LogoIntroGate() {
           </span>
         </div>
       </div>
+      <button
+        type="button"
+        onClick={() => finish.current()}
+        className="absolute bottom-6 right-6 z-3 min-h-11 rounded-lg border border-current px-4 text-sm font-semibold opacity-80 hover:opacity-100"
+      >
+        Skip intro
+      </button>
     </div>
   );
 }
