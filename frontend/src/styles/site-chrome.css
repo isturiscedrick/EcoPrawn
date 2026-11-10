@@ -106,30 +106,30 @@ footer[data-site-footer] .ep-footer-grid > .ep-footer-account::after {
 
 /* ---------- Site Footer: Light Theme Surfaces & Contrast ---------- */
 html:not(.dark) footer[data-site-footer] {
-  background: linear-gradient(155deg, #ffffff 0%, #f4f7f6 58%, #eaf1ef 100%) !important;
-  color: #18343b !important;
+  background: linear-gradient(155deg, #ffffff 0%, #f8fafc 58%, #f1f5f9 100%) !important;
+  color: #111827 !important;
 }
 
 html:not(.dark) footer[data-site-footer] :is(p, h2, nav a, small, span, li, address, strong) {
-  color: #18343b !important;
+  color: #111827 !important;
 }
 
 html:not(.dark) footer[data-site-footer] nav a:hover {
-  color: #d94416 !important;
+  color: #1d4ed8 !important;
 }
 
 html:not(.dark) footer[data-site-footer] .ep-logo {
-  --ep-logo-color: #d94416 !important;
-  --ep-logo-text: #0f4c5c !important;
+  --ep-logo-color: #1d4ed8 !important;
+  --ep-logo-text: #111827 !important;
 }
 
 html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-wordmark {
-  color: #0f4c5c !important;
+  color: #111827 !important;
 }
 
 html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-shrimp {
-  fill: #d94416 !important;
-  stroke: #d94416 !important;
+  fill: #1d4ed8 !important;
+  stroke: #1d4ed8 !important;
 }
 
 /* ---------- Site Footer: Dark Theme Surfaces & Contrast ---------- */
@@ -143,21 +143,21 @@ html.dark footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong
 }
 
 html.dark footer[data-site-footer] nav a:hover {
-  color: #8bd5a6 !important;
+  color: #93c5fd !important;
 }
 
 html.dark footer[data-site-footer] .ep-logo {
-  --ep-logo-color: #d94416 !important;
-  --ep-logo-text: #8bd5a6 !important;
+  --ep-logo-color: #1d4ed8 !important;
+  --ep-logo-text: #93c5fd !important;
 }
 
 html.dark footer[data-site-footer] .ep-logo .ep-logo-shrimp {
-  fill: #d94416 !important;
-  stroke: #d94416 !important;
+  fill: #1d4ed8 !important;
+  stroke: #1d4ed8 !important;
 }
 
 html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
-  color: #8bd5a6 !important;
+  color: #93c5fd !important;
 }
 
 /* ---------- Interactive Hero Console Depth ---------- */
@@ -186,7 +186,7 @@ html:not(.dark) footer[data-site-footer] {
 html:not(.dark) footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong, nav a, span) {
   color: #111827 !important;
 }
-html:not(.dark) footer[data-site-footer] nav a:hover { color: #2563eb !important; }
+html:not(.dark) footer[data-site-footer] nav a:hover { color: #1d4ed8 !important; }
 html:not(.dark) footer[data-site-footer] .ep-logo {
   --ep-logo-color: #111827 !important; --ep-logo-text: #111827 !important;
 }
@@ -223,14 +223,14 @@ html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
 .ep-mobile-site-drawer .ep-mobile-drawer-caption { color: #475569 !important; }
 .ep-mobile-site-drawer #mobile-nav-panel a { color: #1f2937 !important; }
 .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
-  background: #2563eb !important; border-color: #2563eb !important; color: #ffffff !important;
+  background: #1d4ed8 !important; border-color: #1d4ed8 !important; color: #ffffff !important;
 }
 .ep-mobile-site-drawer #mobile-nav-panel a:not([aria-current="page"]):hover {
-  background: #f1f5f9 !important; color: #1d4ed8 !important;
+  background: #f1f5f9 !important; color: #1e40af !important;
 }
 .ep-mobile-site-drawer > div:last-child { background: #f8fafc !important; border-color: #dbe2ea !important; }
 .ep-mobile-site-drawer > div:last-child a:first-child {
-  background: #2563eb !important; color: #ffffff !important;
+  background: #1d4ed8 !important; color: #ffffff !important;
 }
 .ep-mobile-site-drawer > div:last-child a:last-child {
   background: #ffffff !important; border-color: #dbe2ea !important; color: #111827 !important;

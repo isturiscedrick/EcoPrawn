@@ -70,7 +70,7 @@ export function TankHeroSvg() {
 
       {/* DO / pH probe: label sits left of the probe line, inside the tank */}
       <line x1="270" y1="60" x2="270" y2="170" stroke="#FBF8F1" strokeWidth="2" />
-      <circle className="ep-probe-pulse" cx="270" cy="175" r="6" fill="#FF8A63" />
+      <circle className="ep-probe-pulse" cx="270" cy="175" r="6" fill="#60a5fa" />
       <text x="258" y="152" fill="#FBF8F1" fontFamily="Inter, system-ui, sans-serif" fontSize="12" fontWeight="500" textAnchor="end">
         DO / pH probe
       </text>
@@ -118,19 +118,19 @@ export function TankHeroSvg() {
 
       {/* shrimp school: bright coral and amber so they stand out from the water */}
       <g className="ep-shrimp-drift" style={{ transformOrigin: "150px 260px", animationDuration: "7s", animationDelay: "0s" }}>
-        <path d="M150 260 q14 -14 28 -2 q6 6 0 12 q-4 4 -10 0 l-4 -4 q-6 6 -14 2 q-6 -3 0 -8z" fill="#FF8A63" />
+        <path d="M150 260 q14 -14 28 -2 q6 6 0 12 q-4 4 -10 0 l-4 -4 q-6 6 -14 2 q-6 -3 0 -8z" fill="#60a5fa" />
       </g>
       <g className="ep-shrimp-drift" style={{ transformOrigin: "210px 310px", animationDuration: "8.4s", animationDelay: "1.8s" }}>
         <path d="M210 310 q12 -12 24 -2 q5 5 0 10 q-3 3 -9 0 l-3 -3 q-5 5 -12 2 q-5 -3 0 -7z" fill="#F2A93B" />
       </g>
       <g className="ep-shrimp-drift" style={{ transformOrigin: "95px 220px", animationDuration: "6.2s", animationDelay: "3.4s" }}>
-        <path d="M95 220 q10 -10 20 -2 q4 4 0 8 q-3 3 -7 0 l-3 -3 q-4 4 -10 1 q-4 -2 0 -6z" fill="#FF8A63" />
+        <path d="M95 220 q10 -10 20 -2 q4 4 0 8 q-3 3 -7 0 l-3 -3 q-4 4 -10 1 q-4 -2 0 -6z" fill="#60a5fa" />
       </g>
       <g className="ep-shrimp-drift" style={{ transformOrigin: "255px 235px", animationDuration: "9s", animationDelay: "0.9s" }}>
         <path d="M255 235 q11 -11 22 -2 q5 5 0 9 q-3 3 -8 0 l-3 -3 q-5 5 -11 1 q-5 -3 0 -5z" fill="#F2A93B" />
       </g>
       <g className="ep-shrimp-drift" style={{ transformOrigin: "130px 340px", animationDuration: "5.6s", animationDelay: "2.6s" }}>
-        <path d="M130 340 q9 -9 18 -2 q4 4 0 7 q-2 2 -6 0 l-3 -3 q-4 4 -9 1 q-4 -2 0 -5z" fill="#FF8A63" />
+        <path d="M130 340 q9 -9 18 -2 q4 4 0 7 q-2 2 -6 0 l-3 -3 q-4 4 -9 1 q-4 -2 0 -5z" fill="#60a5fa" />
       </g>
       <g className="ep-shrimp-drift" style={{ transformOrigin: "185px 190px", animationDuration: "7.8s", animationDelay: "4.2s" }}>
         <path d="M185 190 q8 -8 16 -1 q3 3 0 6 q-2 2 -5 0 l-2 -2 q-3 3 -8 1 q-3 -2 0 -4z" fill="#F2A93B" />
@@ -138,7 +138,7 @@ export function TankHeroSvg() {
 
       {/* Vision camera, label centered above it */}
       <rect x="110" y="34" width="30" height="16" rx="3" fill="#FBF8F1" />
-      <circle cx="125" cy="42" r="4" fill="#0B2E33" />
+      <circle cx="125" cy="42" r="4" fill="#111827" />
       <line
         x1="125"
         y1="50"

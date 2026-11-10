@@ -8,22 +8,22 @@
   --background: #f8fafc; --foreground: #111827;
   --card: #ffffff; --card-foreground: #111827;
   --popover: #ffffff; --popover-foreground: #111827;
-  --primary: #2563eb; --primary-foreground: #ffffff;
+  --primary: #1d4ed8; --primary-foreground: #ffffff;
   --secondary: #f1f5f9; --secondary-foreground: #1f2937;
   --muted: #f1f5f9; --muted-foreground: #475569;
-  --accent: #2563eb; --accent-foreground: #ffffff;
-  --border: #dbe2ea; --input: #dbe2ea; --ring: #2563eb;
+  --accent: #1d4ed8; --accent-foreground: #ffffff;
+  --border: #dbe2ea; --input: #dbe2ea; --ring: #1d4ed8;
   --sidebar: #ffffff; --sidebar-foreground: #111827;
-  --sidebar-primary: #2563eb; --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #eff6ff; --sidebar-accent-foreground: #1d4ed8;
-  --sidebar-border: #dbe2ea; --sidebar-ring: #2563eb;
+  --sidebar-primary: #1d4ed8; --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eff6ff; --sidebar-accent-foreground: #1e40af;
+  --sidebar-border: #dbe2ea; --sidebar-ring: #1d4ed8;
   --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
   --ep-line: #dbe2ea; --ep-primary: #111827; --ep-primary-soft: #1f2937;
   --ep-secondary: #1f2937; --ep-text-muted: #475569;
-  --ep-accent: #2563eb; --ep-accent-hover: #1d4ed8; --ep-on-accent: #ffffff;
-  --water-deep: #111827; --water-mid: #1f2937; --mangrove: #2563eb;
-  --mangrove-light: #60a5fa; --mangrove-text: #1d4ed8;
-  --coral: #2563eb; --coral-dim: #1d4ed8; --coral-strong: #1d4ed8;
+  --ep-accent: #1d4ed8; --ep-accent-hover: #1e40af; --ep-on-accent: #ffffff;
+  --water-deep: #111827; --water-mid: #1f2937; --mangrove: #1d4ed8;
+  --mangrove-light: #60a5fa; --mangrove-text: #1e40af;
+  --coral: #1d4ed8; --coral-dim: #1e40af; --coral-strong: #1e40af;
   --sand: #ffffff; --sand-dim: #dbe2ea; --ink: #111827;
 }
 html.dark {
@@ -51,10 +51,10 @@ html.dark {
 html:not(.dark) body.ecoprawn-root { background: #f8fafc; color: #111827; }
 html.dark body.ecoprawn-root { background: #090d16; color: #f8fafc; }
 .dashboard-shell {
-  --ep-brand-primary: #2563eb; --ep-brand-secondary: #1f2937;
-  --ep-accent: #2563eb; --ep-accent-hover: #1d4ed8;
-  --ep-secondary: #1f2937; --coral: #2563eb; --coral-dim: #1d4ed8;
-  --ep-accent-tint: rgba(37,99,235,.12); --ep-accent-tint-soft: rgba(37,99,235,.08);
+  --ep-brand-primary: #1d4ed8; --ep-brand-secondary: #1f2937;
+  --ep-accent: #1d4ed8; --ep-accent-hover: #1e40af;
+  --ep-secondary: #1f2937; --coral: #1d4ed8; --coral-dim: #1e40af;
+  --ep-accent-tint: rgba(29,78,216,.12); --ep-accent-tint-soft: rgba(29,78,216,.08);
   --ep-secondary-tint: rgba(31,41,55,.08);
   background: #f8fafc !important; color: #111827;
 }
@@ -70,15 +70,15 @@ html.dark .dashboard-shell {
 html:not(.dark) .dashboard-shell aside { background: #ffffff !important; color: #111827 !important; border-color: #dbe2ea !important; }
 html.dark .dashboard-shell aside { background: #111827 !important; color: #f8fafc !important; border-color: #334155 !important; }
 .dashboard-shell .dashboard-nav-active,
-html:not(.dark) .dashboard-shell .dashboard-nav-active { background: #2563eb !important; border-color: #2563eb !important; color: #ffffff !important; }
+html:not(.dark) .dashboard-shell .dashboard-nav-active { background: #1d4ed8 !important; border-color: #1d4ed8 !important; color: #ffffff !important; }
 html.dark .dashboard-shell .dashboard-nav-active { background: #60a5fa !important; border-color: #60a5fa !important; color: #071426 !important; }
-.dashboard-shell .dashboard-nav-active-dot { background: #2563eb !important; }
+.dashboard-shell .dashboard-nav-active-dot { background: #1d4ed8 !important; }
 html.dark .dashboard-shell .dashboard-nav-active-dot { background: #60a5fa !important; }
 .ep-landing, .ep-about-page, .ep-contact-page {
   --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
   --ep-line: #dbe2ea; --ep-primary: #111827; --ep-secondary: #1f2937;
-  --ep-text: #111827; --ep-text-muted: #475569; --ep-accent: #2563eb;
-  --ep-accent-hover: #1d4ed8; --ep-on-accent: #ffffff;
+  --ep-text: #111827; --ep-text-muted: #475569; --ep-accent: #1d4ed8;
+  --ep-accent-hover: #1e40af; --ep-on-accent: #ffffff;
 }
 html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
   --ep-bg: #090d16; --ep-surface: #111827; --ep-tint: #1f2937;
@@ -86,8 +86,8 @@ html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
   --ep-text: #f8fafc; --ep-text-muted: #cbd5e1; --ep-accent: #60a5fa;
   --ep-accent-hover: #93c5fd; --ep-on-accent: #071426;
 }
-:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a)[class*="bg-"] { --tw-ring-color: #2563eb; }
-:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a):focus-visible { outline-color: #2563eb !important; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a)[class*="bg-"] { --tw-ring-color: #1d4ed8; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a):focus-visible { outline-color: #1d4ed8 !important; }
 html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a):focus-visible { outline-color: #60a5fa !important; }
 .ep-logo { --ep-logo-color: #111827 !important; --ep-logo-text: #111827 !important; }
 .ep-logo .ep-logo-shrimp { fill: #111827 !important; stroke: #111827 !important; }
@@ -99,7 +99,7 @@ footer[data-site-footer] { background: #f8fafc !important; color: #111827 !impor
 html.dark footer[data-site-footer] { background: #090d16 !important; color: #f8fafc !important; }
 footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) { color: #111827 !important; }
 html.dark footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) { color: #f8fafc !important; }
-footer[data-site-footer] nav a:hover { color: #2563eb !important; }
+footer[data-site-footer] nav a:hover { color: #1d4ed8 !important; }
 html.dark footer[data-site-footer] nav a:hover { color: #60a5fa !important; }
 
 
@@ -110,8 +110,8 @@ html.dark footer[data-site-footer] nav a:hover { color: #60a5fa !important; }
   --ep-on-deep-muted: #cbd5e1;
   --ep-primary: #111827;
   --ep-secondary: #1f2937;
-  --ep-accent: #2563eb;
-  --ep-accent-hover: #1d4ed8;
+  --ep-accent: #1d4ed8;
+  --ep-accent-hover: #1e40af;
 }
 html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
   --ep-deep: #090d16;
@@ -129,8 +129,8 @@ html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
   --tw-text-opacity: 1;
   --tw-bg-opacity: 1;
   --tw-border-opacity: 1;
-  color: #1d4ed8 !important;
-  border-color: #2563eb !important;
+  color: #1e40af !important;
+  border-color: #1d4ed8 !important;
 }
 :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-emerald-"],
 :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-green-"],

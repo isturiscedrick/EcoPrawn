@@ -50,8 +50,8 @@ function GrowthTrendChart({ values }: { values: number[] }) {
       <svg viewBox={`0 0 ${w} ${h}`} width="100%" height="250" role="group" aria-label="Interactive growth trend chart">
         <defs>
           <linearGradient id="ep-growth-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#E8623A" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#E8623A" stopOpacity="0" />
+            <stop offset="0%" stopColor="#1d4ed8" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0" />
           </linearGradient>
         </defs>
         {[0, 0.33, 0.66, 1].map((position) => {
@@ -78,7 +78,7 @@ function GrowthTrendChart({ values }: { values: number[] }) {
         <polyline
           points={points}
           fill="none"
-          stroke="#E8623A"
+          stroke="#1d4ed8"
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"

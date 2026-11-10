@@ -329,7 +329,7 @@ export function SiteHeader({
             {/* Drawer header */}
             <div className="relative flex shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-5 py-4">
               <div className="flex min-w-0 flex-col gap-1">
-                <BrandMark size={32} logoColor="#d94416" logoTextColor="var(--ep-secondary)" />
+                <BrandMark size={32} logoColor="#1d4ed8" logoTextColor="var(--ep-secondary)" />
                 <span className="ep-mobile-drawer-caption pl-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ep-text-muted)]">Explore EcoPrawn</span>
               </div>
               <button

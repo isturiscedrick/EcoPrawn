@@ -24,7 +24,7 @@
 :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   position: relative;
   background:
-    radial-gradient(ellipse at 78% 28%,rgba(37,99,235,.10),transparent 38%),
+    radial-gradient(ellipse at 78% 28%,rgba(29,78,216,.10),transparent 38%),
     linear-gradient(135deg,var(--ep-bg),var(--ep-surface) 64%,var(--ep-tint));
   border-bottom: 1px solid var(--ep-line);
 }
@@ -71,7 +71,7 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   .ep-business-landing .ep-stats-panel > div:hover {
     transform: translateY(-3px);
     border-color: var(--ep-accent);
-    box-shadow: 0 16px 30px -24px rgba(37,99,235,.35);
+    box-shadow: 0 16px 30px -24px rgba(29,78,216,.35);
   }
 }
 .ep-business-landing #readings [data-reading] {
@@ -101,9 +101,9 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   height: 150px;
   right: -72px;
   bottom: -82px;
-  border: 1px solid rgba(37,99,235,.14);
+  border: 1px solid rgba(29,78,216,.14);
   border-radius: 50%;
-  box-shadow: 0 0 0 18px rgba(37,99,235,.035),0 0 0 38px rgba(37,99,235,.025);
+  box-shadow: 0 0 0 18px rgba(29,78,216,.035),0 0 0 38px rgba(29,78,216,.025);
   pointer-events: none;
 }
 html.dark .ep-business-landing .ep-business-capabilities [data-business-card]::after {
@@ -122,7 +122,7 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card]::a
   .ep-business-landing #process [data-process-track] > li:hover {
     transform: translateY(-5px);
     border-color: var(--ep-accent);
-    box-shadow: 0 24px 48px -34px rgba(37,99,235,.25);
+    box-shadow: 0 24px 48px -34px rgba(29,78,216,.25);
   }
 }
 .ep-business-landing #process [data-process-track] > li > div:first-of-type > span:first-child {
@@ -134,7 +134,7 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card]::a
 .ep-about-page #objectives,
 .ep-about-page #scope {
   background:
-    radial-gradient(ellipse at 8% 10%,rgba(37,99,235,.045),transparent 36%),
+    radial-gradient(ellipse at 8% 10%,rgba(29,78,216,.045),transparent 36%),
     var(--ep-bg);
 }
 html.dark .ep-about-page #objectives,
@@ -157,9 +157,9 @@ html.dark .ep-about-page #scope {
   top: -4.5rem;
   width: 13rem;
   aspect-ratio: 1;
-  border: 1px solid rgba(37,99,235,.18);
+  border: 1px solid rgba(29,78,216,.18);
   border-radius: 50%;
-  box-shadow: 0 0 0 22px rgba(37,99,235,.035),0 0 0 48px rgba(37,99,235,.025);
+  box-shadow: 0 0 0 22px rgba(29,78,216,.035),0 0 0 48px rgba(29,78,216,.025);
   pointer-events: none;
 }
 .ep-about-page #objectives article,
@@ -177,7 +177,7 @@ html.dark .ep-about-page #scope {
 .ep-about-page #systems {
   background-image:
     radial-gradient(circle at 90% 12%,rgba(96,165,250,.16),transparent 28%),
-    radial-gradient(circle at 8% 90%,rgba(37,99,235,.12),transparent 32%);
+    radial-gradient(circle at 8% 90%,rgba(29,78,216,.12),transparent 32%);
 }
 .ep-about-page #systems article {
   min-height: 250px;
@@ -199,7 +199,7 @@ html.dark .ep-about-page #scope {
 /* Contact page: split information rail and focused message panel. */
 .ep-contact-page main > section {
   background:
-    radial-gradient(ellipse at 5% 18%,rgba(37,99,235,.045),transparent 34%),
+    radial-gradient(ellipse at 5% 18%,rgba(29,78,216,.045),transparent 34%),
     var(--ep-bg);
 }
 html.dark .ep-contact-page main > section {
@@ -218,7 +218,7 @@ html.dark .ep-contact-page main > section {
   border: 1px solid var(--ep-line);
   border-radius: 1.5rem;
   background:
-    radial-gradient(ellipse at 0 0,rgba(37,99,235,.10),transparent 58%),
+    radial-gradient(ellipse at 0 0,rgba(29,78,216,.10),transparent 58%),
     var(--ep-tint);
 }
 html.dark .ep-contact-page [data-contact-details] {
@@ -266,7 +266,7 @@ html.dark .ep-contact-page [data-contact-details] {
 }
 .ep-contact-page [data-contact-form] button[type="submit"] {
   min-width: 12rem;
-  box-shadow: 0 12px 24px -14px rgba(37,99,235,.65);
+  box-shadow: 0 12px 24px -14px rgba(29,78,216,.65);
 }
 
 /* Shared final call-to-action and footer transitions. */
@@ -335,8 +335,8 @@ html.dark .ep-contact-page [data-contact-details] {
 :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   background-color: var(--ep-bg);
   background-image:
-    radial-gradient(circle at 8% 42%,rgba(37,99,235,.10) 1px,transparent 1.5px),
-    radial-gradient(circle at 91% 66%,rgba(37,99,235,.10) 1px,transparent 1.5px),
+    radial-gradient(circle at 8% 42%,rgba(29,78,216,.10) 1px,transparent 1.5px),
+    radial-gradient(circle at 91% 66%,rgba(29,78,216,.10) 1px,transparent 1.5px),
     linear-gradient(180deg,var(--ep-surface),var(--ep-bg));
   background-size: 22px 22px,22px 22px,auto;
 }
@@ -353,7 +353,7 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   content: "+";
   position: absolute;
   z-index: 0;
-  color: rgba(37,99,235,.38);
+  color: rgba(29,78,216,.38);
   font-size: 22px;
   font-weight: 300;
   line-height: 1;
@@ -393,8 +393,8 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   color: var(--ep-text);
   background-color: var(--ep-bg) !important;
   background-image:
-    radial-gradient(ellipse at 90% 8%,rgba(37,99,235,.075),transparent 32%),
-    radial-gradient(ellipse at 8% 92%,rgba(37,99,235,.045),transparent 34%) !important;
+    radial-gradient(ellipse at 90% 8%,rgba(29,78,216,.075),transparent 32%),
+    radial-gradient(ellipse at 8% 92%,rgba(29,78,216,.045),transparent 34%) !important;
 }
 html.dark .ep-about-page #systems {
   color: var(--ep-text);
@@ -421,9 +421,9 @@ html.dark .ep-about-page #systems {
   color: var(--ep-text-muted);
 }
 .ep-about-page #systems article > div:first-child > span {
-  border-color: rgba(37,99,235,.28);
+  border-color: rgba(29,78,216,.28);
   color: var(--ep-accent);
-  background: rgba(37,99,235,.06);
+  background: rgba(29,78,216,.06);
 }
 .ep-about-page #systems article > div:first-child > span svg {
   color: var(--ep-accent);
@@ -463,7 +463,7 @@ html.dark .ep-about-page #systems {
   gap: .85rem;
   padding: clamp(1.25rem,2.6vw,2rem);
   background:
-    radial-gradient(circle at 90% 8%,rgba(37,99,235,.10),transparent 34%),
+    radial-gradient(circle at 90% 8%,rgba(29,78,216,.10),transparent 34%),
     var(--ep-surface);
   box-shadow: 0 24px 60px -48px rgba(15,23,42,.32);
 }
@@ -489,7 +489,7 @@ html.dark .ep-contact-page [data-contact-details] {
   .ep-contact-page [data-contact-card]:hover {
     transform: translateY(-3px);
     border-color: var(--ep-accent);
-    box-shadow: 0 18px 36px -26px rgba(37,99,235,.30);
+    box-shadow: 0 18px 36px -26px rgba(29,78,216,.30);
   }
 }
 .ep-contact-page [data-contact-form] {
@@ -505,7 +505,7 @@ html.dark .ep-contact-page [data-contact-details] {
 }
 .ep-contact-page [data-contact-form] input:focus,
 .ep-contact-page [data-contact-form] textarea:focus {
-  outline: 2px solid rgba(37,99,235,.22);
+  outline: 2px solid rgba(29,78,216,.22);
   outline-offset: 1px;
   border-color: var(--ep-accent);
 }
@@ -522,7 +522,7 @@ html.dark .ep-contact-page [data-contact-details] {
   overflow: hidden;
   background-color: var(--ep-bg);
   background-image:
-    radial-gradient(circle,rgba(37,99,235,.10) .8px,transparent 1.2px),
+    radial-gradient(circle,rgba(29,78,216,.10) .8px,transparent 1.2px),
     linear-gradient(180deg,var(--ep-surface),var(--ep-bg));
   background-size: 22px 22px,auto;
   background-position: center top;
@@ -536,7 +536,7 @@ html.dark .ep-business-landing .ep-hero {
 }
 .ep-business-landing .ep-hero-atmosphere {
   background:
-    radial-gradient(ellipse at 50% 5%,rgba(37,99,235,.045),transparent 48%),
+    radial-gradient(ellipse at 50% 5%,rgba(29,78,216,.045),transparent 48%),
     linear-gradient(180deg,transparent 72%,var(--ep-bg));
 }
 .ep-business-landing .ep-field-hero {
@@ -605,7 +605,7 @@ html.dark .ep-business-landing .ep-field-landscape {
   align-items: center;
   background-color: #071a2b;
   background-image:
-    radial-gradient(ellipse at 50% 42%,rgba(37,99,235,.30),transparent 48%),
+    radial-gradient(ellipse at 50% 42%,rgba(29,78,216,.30),transparent 48%),
     linear-gradient(180deg,rgba(5,16,29,.40),rgba(5,18,32,.88));
   background-size: cover;
   background-position: center 54%;
@@ -655,7 +655,7 @@ html.dark .ep-business-landing .ep-field-landscape {
 }
 html.dark .ep-business-landing .ep-aquaculture-hero {
   background-image:
-    radial-gradient(ellipse at 50% 42%,rgba(37,99,235,.22),transparent 48%),
+    radial-gradient(ellipse at 50% 42%,rgba(29,78,216,.22),transparent 48%),
     linear-gradient(180deg,rgba(3,10,20,.50),rgba(3,10,20,.92));
 }
 @media (max-width: 639px) {
@@ -681,7 +681,7 @@ html:not(.dark) .ep-business-landing .ep-aquaculture-hero {
   background-color: #f8fafc;
   background-image:
     radial-gradient(ellipse at 50% 36%,rgba(59,130,246,.13),transparent 48%),
-    radial-gradient(circle,rgba(37,99,235,.10) .8px,transparent 1.2px),
+    radial-gradient(circle,rgba(29,78,216,.10) .8px,transparent 1.2px),
     linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%);
   background-size: auto,22px 22px,auto;
   background-position: center,center top,center;
@@ -699,7 +699,7 @@ html:not(.dark) .ep-business-landing .ep-aquaculture-hero [data-cross] {
   opacity: .58;
 }
 html:not(.dark) .ep-business-landing .ep-aquaculture-hero .ep-field-hero-copy > p:first-child {
-  color: #1d4ed8;
+  color: #1e40af;
   background: rgba(255,255,255,.94);
   border-color: #dbe3ef;
   box-shadow: 0 8px 24px -16px rgba(15,23,42,.24);
@@ -709,7 +709,7 @@ html:not(.dark) .ep-business-landing .ep-aquaculture-hero .ep-hero-headline-prim
   text-shadow: none;
 }
 html:not(.dark) .ep-business-landing .ep-aquaculture-hero .ep-hero-headline-secondary {
-  color: #2563eb;
+  color: #1d4ed8;
   text-shadow: none;
 }
 html:not(.dark) .ep-business-landing .ep-aquaculture-hero [data-hero="lead"] {
@@ -733,8 +733,8 @@ html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="lead"] {
   isolation: isolate;
   background-color: #f8fafc;
   background-image:
-    radial-gradient(ellipse at 50% 34%, rgba(37,99,235,.10), transparent 52%),
-    radial-gradient(circle, rgba(37,99,235,.11) .8px, transparent 1.2px),
+    radial-gradient(ellipse at 50% 34%, rgba(29,78,216,.10), transparent 52%),
+    radial-gradient(circle, rgba(29,78,216,.11) .8px, transparent 1.2px),
     linear-gradient(180deg, #ffffff 0%, #eef4fb 100%);
   background-repeat: no-repeat, repeat, no-repeat;
   background-size: auto, 22px 22px, auto;
@@ -742,7 +742,7 @@ html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="lead"] {
 html.dark .ep-business-landing .ep-aquaculture-hero {
   background-color: #070d18 !important;
   background-image:
-    radial-gradient(ellipse at 50% 28%, rgba(37,99,235,.28), transparent 55%),
+    radial-gradient(ellipse at 50% 28%, rgba(29,78,216,.28), transparent 55%),
     radial-gradient(ellipse at 50% 100%, rgba(30,64,175,.16), transparent 58%),
     radial-gradient(circle, rgba(147,197,253,.13) .8px, transparent 1.2px),
     linear-gradient(180deg, #101d32 0%, #090f1d 58%, #070d18 100%) !important;
@@ -790,8 +790,8 @@ html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
   isolation: isolate;
   background-color: #f8fafc;
   background-image:
-    radial-gradient(ellipse at 50% 34%, rgba(37,99,235,.10), transparent 52%),
-    radial-gradient(circle, rgba(37,99,235,.11) .8px, transparent 1.2px),
+    radial-gradient(ellipse at 50% 34%, rgba(29,78,216,.10), transparent 52%),
+    radial-gradient(circle, rgba(29,78,216,.11) .8px, transparent 1.2px),
     linear-gradient(180deg, #ffffff 0%, #eef4fb 100%);
   background-repeat: no-repeat, repeat, no-repeat;
   background-size: auto, 22px 22px, auto;
@@ -800,7 +800,7 @@ html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   background-color: #070d18 !important;
   background-image:
-    radial-gradient(ellipse at 50% 28%, rgba(37,99,235,.28), transparent 55%),
+    radial-gradient(ellipse at 50% 28%, rgba(29,78,216,.28), transparent 55%),
     radial-gradient(ellipse at 50% 100%, rgba(30,64,175,.16), transparent 58%),
     radial-gradient(circle, rgba(147,197,253,.13) .8px, transparent 1.2px),
     linear-gradient(180deg, #101d32 0%, #090f1d 58%, #070d18 100%) !important;
@@ -977,7 +977,7 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-
 .ep-business-landing .ep-field-hero-copy [data-hero="cta"] a {
   min-height: 3.25rem;
   padding-inline: 1.5rem;
-  box-shadow: 0 14px 34px -18px rgba(37,99,235,.72);
+  box-shadow: 0 14px 34px -18px rgba(29,78,216,.72);
 }
 .ep-business-landing .ep-stats-panel {
   position: relative;
@@ -999,7 +999,7 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-
   .ep-business-landing [data-business-card]:hover {
     transform: translateY(-4px);
     border-color: color-mix(in srgb, var(--ep-accent) 58%, var(--ep-line));
-    box-shadow: 0 22px 48px -30px rgba(37,99,235,.28);
+    box-shadow: 0 22px 48px -30px rgba(29,78,216,.28);
   }
 }
 .ep-business-landing [data-business-card] {
@@ -1090,8 +1090,8 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 88% 18%,rgba(37,99,235,.08),transparent 34%),
-    radial-gradient(ellipse at 12% 90%,rgba(37,99,235,.045),transparent 36%);
+    radial-gradient(ellipse at 88% 18%,rgba(29,78,216,.08),transparent 34%),
+    radial-gradient(ellipse at 12% 90%,rgba(29,78,216,.045),transparent 36%);
 }
 html.dark .ep-business-landing .ep-dashboard-preview::before {
   background:
@@ -1114,7 +1114,7 @@ html.dark .ep-business-landing .ep-dashboard-preview::before {
   flex: 1 1 0;
   min-width: 3px;
   border-radius: .35rem .35rem 0 0;
-  background: linear-gradient(180deg,var(--ep-accent),rgba(37,99,235,.24));
+  background: linear-gradient(180deg,var(--ep-accent),rgba(29,78,216,.24));
   transform-origin: bottom;
   transition: opacity .2s ease, transform .2s ease;
 }
@@ -1193,11 +1193,11 @@ html.dark .ep-business-landing .ep-preview-chart > span {
 /* CTA band heading contrast: global marketing heading rules must not
    override the light foreground on this deep-blue surface. */
 :is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] {
-  color: var(--ep-on-deep, #f4f7f6);
+  color: var(--ep-on-deep, #f8fafc);
 }
 :is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] h2 {
-  color: var(--ep-on-deep, #f4f7f6) !important;
+  color: var(--ep-on-deep, #f8fafc) !important;
 }
 :is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] p {
-  color: var(--ep-on-deep-muted, #cfe2e6);
+  color: var(--ep-on-deep-muted, #cbd5e1);
 }

@@ -14,7 +14,7 @@
   box-sizing: border-box;
   background-color: var(--ep-bg);
   background:
-    radial-gradient(ellipse at 78% 40%, rgba(37, 99, 235, 0.10), transparent 34%),
+    radial-gradient(ellipse at 78% 40%, rgba(29,78,216, 0.10), transparent 34%),
     linear-gradient(135deg, var(--ep-bg) 0%, var(--ep-tint) 100%);
 }
 
@@ -231,7 +231,7 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
    ========================================================================== */
 .ep-business-landing .ep-hero {
   background:
-    radial-gradient(ellipse at 82% 44%, rgba(37,99,235,.11), transparent 38%),
+    radial-gradient(ellipse at 82% 44%, rgba(29,78,216,.11), transparent 38%),
     linear-gradient(135deg, var(--ep-bg) 0%, var(--ep-surface) 62%, var(--ep-tint) 100%);
 }
 html.dark .ep-business-landing .ep-hero {
@@ -251,7 +251,7 @@ html.dark .ep-business-landing .ep-hero {
   border: 1px solid rgba(148,163,184,.32);
   border-radius: 28px;
   background: var(--ep-surface);
-  box-shadow: 0 34px 90px -48px rgba(15,23,42,.38), 0 8px 24px -18px rgba(37,99,235,.2);
+  box-shadow: 0 34px 90px -48px rgba(15,23,42,.38), 0 8px 24px -18px rgba(29,78,216,.2);
 }
 .ep-business-landing .ep-showcase-topbar,
 .ep-business-landing .ep-showcase-footer {
@@ -262,8 +262,8 @@ html.dark .ep-business-landing .ep-hero {
 }
 .ep-business-landing .ep-showcase-topbar { border-bottom: 1px solid var(--ep-line); }
 .ep-business-landing .ep-showcase-live-dot {
-  width: 8px; height: 8px; border-radius: 50%; background: #2563eb;
-  box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+  width: 8px; height: 8px; border-radius: 50%; background: #1d4ed8;
+  box-shadow: 0 0 0 4px rgba(29,78,216,.12);
 }
 html.dark .ep-business-landing .ep-showcase-live-dot { background: #60a5fa; box-shadow: 0 0 0 4px rgba(96,165,250,.16); }
 .ep-business-landing .ep-showcase-device { color: var(--ep-accent); }
@@ -287,7 +287,7 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #60a5fa; box-
 .ep-business-landing .ep-showcase-water-glow {
   position: absolute; width: 240px; height: 240px; left: 54%; top: 46%;
   transform: translate(-50%,-50%); border-radius: 50%;
-  background: radial-gradient(circle,rgba(96,165,250,.34),rgba(37,99,235,.08) 48%,transparent 72%);
+  background: radial-gradient(circle,rgba(96,165,250,.34),rgba(29,78,216,.08) 48%,transparent 72%);
   filter: blur(4px);
 }
 .ep-business-landing .ep-showcase-wave {

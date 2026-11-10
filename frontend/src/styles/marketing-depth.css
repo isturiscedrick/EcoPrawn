@@ -21,7 +21,7 @@
 }
 .ep-about-mission-panel::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(ellipse at 85% 50%,rgba(37,99,235,.09),transparent 42%);
+  background: radial-gradient(ellipse at 85% 50%,rgba(29,78,216,.09),transparent 42%);
 }
 html.dark .ep-about-mission-panel::before {
   background: radial-gradient(ellipse at 85% 50%,rgba(96,165,250,.14),transparent 44%);
@@ -31,16 +31,16 @@ html.dark .ep-about-mission-panel::before {
   place-items: center; justify-self: center; isolation: isolate;
 }
 .ep-about-orbit {
-  position: absolute; left: 50%; top: 50%; aspect-ratio: 1; border: 1px solid rgba(37,99,235,.24);
+  position: absolute; left: 50%; top: 50%; aspect-ratio: 1; border: 1px solid rgba(29,78,216,.24);
   border-radius: 50%; transform: translate(-50%,-50%);
 }
 .ep-about-orbit-a { width: 96%; }
 .ep-about-orbit-b { width: 70%; border-style: dashed; opacity: .8; }
-.ep-about-orbit-c { width: 43%; border-color: rgba(37,99,235,.38); }
+.ep-about-orbit-c { width: 43%; border-color: rgba(29,78,216,.38); }
 .ep-about-orbit-core {
-  display: grid; width: 5.5rem; height: 5.5rem; place-items: center; border: 1px solid rgba(37,99,235,.32);
-  border-radius: 1.7rem; background: linear-gradient(145deg,#2563eb,#60a5fa); color: white;
-  box-shadow: 0 18px 55px -20px rgba(37,99,235,.7);
+  display: grid; width: 5.5rem; height: 5.5rem; place-items: center; border: 1px solid rgba(29,78,216,.32);
+  border-radius: 1.7rem; background: linear-gradient(145deg,#1d4ed8,#60a5fa); color: white;
+  box-shadow: 0 18px 55px -20px rgba(29,78,216,.7);
 }
 .ep-about-orbit-tag {
   position: absolute; z-index: 2; padding: .5rem .75rem; border: 1px solid var(--ep-line);
@@ -56,10 +56,10 @@ html.dark .ep-about-mission-panel::before {
 }
 .ep-about-journey-card::after {
   content: ""; position: absolute; right: -2.5rem; bottom: -3rem; width: 8rem; height: 8rem;
-  border: 1px solid rgba(37,99,235,.16); border-radius: 50%; pointer-events: none;
+  border: 1px solid rgba(29,78,216,.16); border-radius: 50%; pointer-events: none;
 }
 @media (hover:hover) and (prefers-reduced-motion:no-preference) {
-  .ep-about-journey-card:hover { transform: translateY(-5px); border-color: var(--ep-accent); box-shadow: 0 22px 48px -34px rgba(37,99,235,.34); }
+  .ep-about-journey-card:hover { transform: translateY(-5px); border-color: var(--ep-accent); box-shadow: 0 22px 48px -34px rgba(29,78,216,.34); }
   .ep-platform-ribbon-item:hover .ep-platform-ribbon-number { border-color: var(--ep-accent); }
 }
 
@@ -69,7 +69,7 @@ html.dark .ep-about-mission-panel::before {
 }
 .ep-contact-intro-panel::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(ellipse at 90% 50%,rgba(37,99,235,.12),transparent 42%);
+  background: radial-gradient(ellipse at 90% 50%,rgba(29,78,216,.12),transparent 42%);
 }
 html.dark .ep-contact-intro-panel::before {
   background: radial-gradient(ellipse at 90% 50%,rgba(96,165,250,.16),transparent 45%);
@@ -79,15 +79,15 @@ html.dark .ep-contact-intro-panel::before {
   display: grid; place-items: center; isolation: isolate;
 }
 .ep-contact-signal-ring {
-  position: absolute; left: 50%; top: 50%; aspect-ratio: 1; border: 1px solid rgba(37,99,235,.34);
+  position: absolute; left: 50%; top: 50%; aspect-ratio: 1; border: 1px solid rgba(29,78,216,.34);
   border-radius: 50%; transform: translate(-50%,-50%);
 }
 .ep-contact-signal-ring-one { width: 100%; }
 .ep-contact-signal-ring-two { width: 70%; border-style: dashed; }
-.ep-contact-signal-ring-three { width: 40%; border-color: rgba(37,99,235,.56); }
+.ep-contact-signal-ring-three { width: 40%; border-color: rgba(29,78,216,.56); }
 .ep-contact-signal-core {
   width: 1rem; height: 1rem; border-radius: 50%; background: var(--ep-accent);
-  box-shadow: 0 0 0 12px rgba(37,99,235,.12),0 0 38px rgba(37,99,235,.42);
+  box-shadow: 0 0 0 12px rgba(29,78,216,.12),0 0 38px rgba(29,78,216,.42);
 }
 .ep-contact-page [data-contact-card] {
   min-height: 6.5rem; border-radius: 1.25rem;
@@ -118,47 +118,47 @@ html.dark .ep-contact-page [data-contact-form] > form {
 }
 .ep-business-capabilities [data-business-card]::after {
   content: ""; position: absolute; z-index: -1; right: -3.5rem; top: -3.5rem;
-  width: 10rem; height: 10rem; border: 1px solid rgba(37,99,235,.15);
-  border-radius: 50%; box-shadow: 0 0 0 1.2rem rgba(37,99,235,.025),0 0 0 2.4rem rgba(37,99,235,.02);
+  width: 10rem; height: 10rem; border: 1px solid rgba(29,78,216,.15);
+  border-radius: 50%; box-shadow: 0 0 0 1.2rem rgba(29,78,216,.025),0 0 0 2.4rem rgba(29,78,216,.02);
   pointer-events: none; transition: transform .4s ease,border-color .3s ease;
 }
 .ep-business-capabilities [data-business-card]:nth-child(2) { background-image: linear-gradient(145deg,var(--ep-surface),var(--ep-tint)); }
 .ep-business-capabilities [data-business-card] > span:first-child {
-  border: 1px solid rgba(37,99,235,.14);
-  box-shadow: 0 10px 26px -18px rgba(37,99,235,.5);
+  border: 1px solid rgba(29,78,216,.14);
+  box-shadow: 0 10px 26px -18px rgba(29,78,216,.5);
 }
 .ep-dashboard-preview-window {
   position: relative;
-  box-shadow: 0 36px 90px -48px rgba(15,23,42,.48),0 0 0 1px rgba(37,99,235,.06);
+  box-shadow: 0 36px 90px -48px rgba(15,23,42,.48),0 0 0 1px rgba(29,78,216,.06);
 }
 .ep-dashboard-preview-window::before {
   content: ""; position: absolute; z-index: 2; inset: 0 0 auto; height: 1px;
-  background: linear-gradient(90deg,transparent,rgba(37,99,235,.45),transparent);
+  background: linear-gradient(90deg,transparent,rgba(29,78,216,.45),transparent);
   pointer-events: none;
 }
 .ep-platform-ribbon { box-shadow: 0 18px 50px -44px rgba(15,23,42,.35); }
 .ep-about-mission-panel { transition: border-color .28s ease,box-shadow .28s ease; }
-.ep-about-orbit-a { box-shadow: 0 0 0 14px rgba(37,99,235,.025); }
+.ep-about-orbit-a { box-shadow: 0 0 0 14px rgba(29,78,216,.025); }
 .ep-about-orbit-b { animation: ep-orbit-drift 28s linear infinite; }
-.ep-about-orbit-c { box-shadow: 0 0 34px rgba(37,99,235,.07); }
+.ep-about-orbit-c { box-shadow: 0 0 34px rgba(29,78,216,.07); }
 .ep-about-journey-card { min-height: 14rem; }
 .ep-about-journey-card:nth-child(even) { background-image: linear-gradient(145deg,var(--ep-surface),var(--ep-tint)); }
 .ep-contact-intro-panel { transition: border-color .28s ease,box-shadow .28s ease; }
-.ep-contact-signal-ring-one { box-shadow: 0 0 0 10px rgba(37,99,235,.025); }
+.ep-contact-signal-ring-one { box-shadow: 0 0 0 10px rgba(29,78,216,.025); }
 .ep-contact-signal-ring-two { animation: ep-orbit-drift 32s linear infinite; }
-.ep-contact-signal-ring-three { box-shadow: 0 0 24px rgba(37,99,235,.08); }
+.ep-contact-signal-ring-three { box-shadow: 0 0 24px rgba(29,78,216,.08); }
 .ep-contact-page [data-contact-form] > form { transition: border-color .25s ease,box-shadow .25s ease; }
 @keyframes ep-orbit-drift { to { transform: translate(-50%,-50%) rotate(360deg); } }
 
 @media (hover:hover) and (prefers-reduced-motion:no-preference) {
   .ep-business-capabilities [data-business-card]:hover {
     transform: translateY(-6px); border-color: var(--ep-accent);
-    box-shadow: 0 28px 62px -38px rgba(37,99,235,.34);
+    box-shadow: 0 28px 62px -38px rgba(29,78,216,.34);
   }
-  .ep-business-capabilities [data-business-card]:hover::after { transform: scale(1.12) rotate(12deg); border-color: rgba(37,99,235,.32); }
-  .ep-about-mission-panel:hover { border-color: rgba(37,99,235,.42); box-shadow: 0 36px 100px -60px rgba(37,99,235,.3); }
-  .ep-contact-intro-panel:hover { border-color: rgba(37,99,235,.42); box-shadow: 0 30px 80px -52px rgba(37,99,235,.3); }
-  .ep-contact-page [data-contact-form] > form:hover { border-color: rgba(37,99,235,.38); box-shadow: 0 30px 76px -52px rgba(37,99,235,.34); }
+  .ep-business-capabilities [data-business-card]:hover::after { transform: scale(1.12) rotate(12deg); border-color: rgba(29,78,216,.32); }
+  .ep-about-mission-panel:hover { border-color: rgba(29,78,216,.42); box-shadow: 0 36px 100px -60px rgba(29,78,216,.3); }
+  .ep-contact-intro-panel:hover { border-color: rgba(29,78,216,.42); box-shadow: 0 30px 80px -52px rgba(29,78,216,.3); }
+  .ep-contact-page [data-contact-form] > form:hover { border-color: rgba(29,78,216,.38); box-shadow: 0 30px 76px -52px rgba(29,78,216,.34); }
 }
 @media (prefers-reduced-motion:reduce) {
   .ep-about-orbit-b,.ep-contact-signal-ring-two { animation: none !important; }
@@ -220,7 +220,7 @@ html.dark .ep-contact-page [data-contact-form] > form {
   }
   .ep-business-capabilities [data-business-card]:hover::after {
     transform: none;
-    border-color: rgba(37,99,235,.15);
+    border-color: rgba(29,78,216,.15);
   }
 }
 @media (max-width: 639px) {
@@ -259,8 +259,8 @@ html:not(.dark) .ep-business-landing #readings {
   color: var(--ep-text);
   background-color: var(--ep-bg);
   background-image:
-    radial-gradient(ellipse at 12% 8%, rgba(37,99,235,.075), transparent 42%),
-    radial-gradient(ellipse at 88% 76%, rgba(37,99,235,.045), transparent 48%);
+    radial-gradient(ellipse at 12% 8%, rgba(29,78,216,.075), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(29,78,216,.045), transparent 48%);
 }
 html:not(.dark) .ep-business-landing #readings :is(h1,h2,h3,h4,dt,dd,strong,b,label) {
   color: var(--ep-text);
@@ -333,7 +333,7 @@ html:not(.dark) .ep-business-landing #readings [data-reading] [data-marker] span
 }
 html.dark .ep-business-landing #readings [data-readings-bg] {
   background-image:
-    radial-gradient(ellipse at 14% 12%, rgba(37,99,235,.24), transparent 42%),
+    radial-gradient(ellipse at 14% 12%, rgba(29,78,216,.24), transparent 42%),
     radial-gradient(ellipse at 88% 78%, rgba(96,165,250,.13), transparent 46%) !important;
 }
 html.dark .ep-business-landing #readings .max-w-\\[40rem\\] > div,
@@ -408,11 +408,11 @@ html:not(.dark) .ep-business-landing #readings .max-w-\\[40rem\\] p {
   color: #111827 !important;
   background-color: #f1f5f9 !important;
   background-image:
-    radial-gradient(ellipse at 12% 8%, rgba(37,99,235,.075), transparent 42%),
-    radial-gradient(ellipse at 88% 76%, rgba(37,99,235,.045), transparent 48%) !important;
+    radial-gradient(ellipse at 12% 8%, rgba(29,78,216,.075), transparent 42%),
+    radial-gradient(ellipse at 88% 76%, rgba(29,78,216,.045), transparent 48%) !important;
 }
 .ep-business-landing .ep-readings-section .ep-readings-kicker {
-  color: #2563eb !important;
+  color: #1d4ed8 !important;
 }
 .ep-business-landing .ep-readings-section .ep-readings-title {
   color: #111827 !important;
@@ -460,7 +460,7 @@ html.dark .ep-business-landing .ep-readings-section {
   color: #f8fafc !important;
   background-color: #0b1220 !important;
   background-image:
-    radial-gradient(ellipse at 14% 12%, rgba(37,99,235,.24), transparent 42%),
+    radial-gradient(ellipse at 14% 12%, rgba(29,78,216,.24), transparent 42%),
     radial-gradient(ellipse at 88% 78%, rgba(96,165,250,.12), transparent 46%),
     linear-gradient(145deg,#111c2f 0%,#0b1220 58%,#080e19 100%) !important;
 }
@@ -500,7 +500,7 @@ html.dark .ep-business-landing .ep-readings-section .ep-reading-card > div[aria-
 }
 html.dark .ep-business-landing .ep-readings-section [data-readings-bg] {
   background-image:
-    radial-gradient(ellipse at 14% 12%, rgba(37,99,235,.20), transparent 42%),
+    radial-gradient(ellipse at 14% 12%, rgba(29,78,216,.20), transparent 42%),
     radial-gradient(ellipse at 88% 78%, rgba(96,165,250,.10), transparent 46%) !important;
 }
 
@@ -668,14 +668,14 @@ html.dark .ep-business-landing #readings.ep-readings-section dl + div span {
     transform: translateY(-5px);
     border-color: color-mix(in srgb, var(--ep-accent) 62%, var(--ep-line));
     background-color: color-mix(in srgb, var(--ep-surface) 94%, var(--ep-accent) 6%);
-    box-shadow: 0 24px 54px -34px rgba(37,99,235,.24);
+    box-shadow: 0 24px 54px -34px rgba(29,78,216,.24);
   }
   html.dark .ep-about-page #systems article:hover {
     border-color: rgba(96,165,250,.62);
     background-color: color-mix(in srgb, var(--ep-surface) 90%, #3b82f6 10%);
     box-shadow:
       inset 0 1px 0 rgba(191,219,254,.08),
-      0 24px 54px -34px rgba(37,99,235,.42);
+      0 24px 54px -34px rgba(29,78,216,.42);
   }
 }
 .ep-about-page #systems article:focus-within {
@@ -690,5 +690,5 @@ html.dark .ep-about-page #systems article:focus-within h3 {
 }
 html:not(.dark) .ep-about-page #systems article:hover h3,
 html:not(.dark) .ep-about-page #systems article:focus-within h3 {
-  color: #1d4ed8 !important;
+  color: #1e40af !important;
 }

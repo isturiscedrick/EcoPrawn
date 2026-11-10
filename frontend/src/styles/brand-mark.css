@@ -159,13 +159,13 @@ html:not(.dark) header .ep-logo {
   --ep-logo-text: var(--ep-secondary, #111827) !important;
 }
 html:not(.dark) header .ep-logo .ep-logo-wordmark {
-  color: var(--ep-secondary, #0f4c5c) !important;
-  -webkit-text-fill-color: var(--ep-secondary, #0f4c5c) !important;
+  color: var(--ep-secondary, #111827) !important;
+  -webkit-text-fill-color: var(--ep-secondary, #111827) !important;
 }
 html.dark header .ep-logo {
   --ep-logo-text: var(--ep-secondary, #ffffff) !important;
 }
 html.dark header .ep-logo .ep-logo-wordmark {
-  color: var(--ep-secondary, #8bd5a6) !important;
-  -webkit-text-fill-color: var(--ep-secondary, #8bd5a6) !important;
+  color: var(--ep-secondary, #93c5fd) !important;
+  -webkit-text-fill-color: var(--ep-secondary, #93c5fd) !important;
 }

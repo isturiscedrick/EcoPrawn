@@ -150,7 +150,7 @@ function AuthDialog({
             <BrandMark
               size={44}
               className="max-w-[230px] sm:max-w-[260px]"
-              logoColor="#d94416"
+              logoColor="#1d4ed8"
               logoTextColor="var(--ep-secondary)"
             />
           </div>

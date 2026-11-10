@@ -62,7 +62,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: #dbe2ea;
   --input: oklch(0.922 0 0);
-  --ring: #2563eb;
+  --ring: #1d4ed8;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -80,12 +80,12 @@
   /* EcoPrawn theme tokens */
   --water-deep: #111827;
   --water-mid: #1f2937;
-  --mangrove: #2563eb;
+  --mangrove: #1d4ed8;
   --mangrove-light: #60a5fa;
-  --mangrove-text: #1d4ed8;
-  --coral: #2563eb;
-  --coral-dim: #1d4ed8;
-  --coral-strong: #1d4ed8;
+  --mangrove-text: #1e40af;
+  --coral: #1d4ed8;
+  --coral-dim: #1e40af;
+  --coral-strong: #1e40af;
   --sand: #ffffff;
   --sand-dim: #dbe2ea;
   --amber: #e8a23a;
@@ -171,7 +171,7 @@
   outline: none;
 }
 .ep-focus-ring:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid #1d4ed8;
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -242,10 +242,10 @@
 }
 
 .dashboard-skeleton-block {
-  background: #d7e1df;
+  background: #e2e8f0;
 }
 .dark .dashboard-skeleton-block {
-  background: #3a3b3c;
+  background: #1f2937;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 

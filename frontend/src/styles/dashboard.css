@@ -5,10 +5,10 @@
 
 /* ---------- Dashboard Brand Palette Tokens ---------- */
 .dashboard-shell {
-  --ep-brand-primary: #2563eb;
+  --ep-brand-primary: #1d4ed8;
   --ep-brand-secondary: #1f2937;
   --ep-accent: var(--ep-brand-primary);
-  --ep-accent-hover: #1d4ed8;
+  --ep-accent-hover: #1e40af;
   --coral: var(--ep-brand-primary);
   --coral-dim: var(--ep-accent-hover);
   --ep-secondary: var(--ep-brand-secondary);
@@ -291,7 +291,7 @@ html.dark .dashboard-shell {
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 .dashboard-shell .dashboard-sensor-gauge svg {
-  filter: drop-shadow(0 5px 8px rgba(37,99,235,.10));
+  filter: drop-shadow(0 5px 8px rgba(29,78,216,.10));
 }
 .dashboard-shell .dashboard-trend-chart {
   border: 1px solid var(--ep-line);
@@ -307,7 +307,7 @@ html.dark .dashboard-shell {
 }
 .dashboard-shell .dashboard-trend-chart polyline {
   stroke: var(--ep-accent);
-  filter: drop-shadow(0 3px 4px rgba(37,99,235,.18));
+  filter: drop-shadow(0 3px 4px rgba(29,78,216,.18));
 }
 .dashboard-shell .dashboard-trend-chart circle[stroke="var(--coral)"] {
   stroke: var(--ep-accent);
@@ -327,7 +327,7 @@ html.dark .dashboard-shell {
 .dashboard-shell .dashboard-hover:hover {
   border-color: var(--ep-accent);
   background: color-mix(in srgb,var(--ep-surface) 94%,var(--ep-accent));
-  box-shadow: 0 14px 28px -22px rgba(37,99,235,.34);
+  box-shadow: 0 14px 28px -22px rgba(29,78,216,.34);
 }
 .dashboard-shell main > div > .mb-7.flex {
   border-color: var(--ep-line);
@@ -357,7 +357,7 @@ html.dark .dashboard-shell .dashboard-trend-chart {
   .dashboard-shell .dashboard-sensor-gauge:hover {
     transform: translateY(-3px);
     border-color: var(--ep-accent);
-    box-shadow: 0 24px 48px -32px rgba(37,99,235,.28);
+    box-shadow: 0 24px 48px -32px rgba(29,78,216,.28);
   }
 }
 @media (max-width: 767px) {

@@ -260,11 +260,11 @@ html:not(.dark) .ep-landing #top .ep-lens-rings circle {
   stroke: currentColor;
 }
 html:not(.dark) .ep-landing #top .ep-lens-arcs {
-  color: #F28A68 !important;
+  color: #60a5fa !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-shrimp .ep-logo {
-  --ep-logo-color: #F28A68 !important;
-  --ep-logo-text: #F28A68 !important;
+  --ep-logo-color: #60a5fa !important;
+  --ep-logo-text: #60a5fa !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-speck {
   background: #EAF7F2 !important;
@@ -277,7 +277,7 @@ html:not(.dark) .ep-landing #top .ep-lens-iris {
   background: #123F49 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-ping {
-  border-color: #F28A68 !important;
+  border-color: #60a5fa !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-scan {
   background: linear-gradient(90deg, transparent, #D9EFEB, transparent) !important;
@@ -297,7 +297,7 @@ html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child > span:last-
   font-weight: 700 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-readout .ep-lens-dot {
-  background: #0F4C5C !important;
+  background: #111827 !important;
   box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.13) !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-connectors path {
@@ -305,7 +305,7 @@ html:not(.dark) .ep-landing #top .ep-lens-connectors path {
   stroke-width: 1.6 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-connectors circle {
-  fill: #0F4C5C !important;
+  fill: #111827 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-caption {
   color: #31504C !important;
@@ -325,16 +325,16 @@ html.dark .ep-landing figure[aria-label^="A shrimp"] > div > div {
 }
 html.dark .ep-landing .ep-lens-rings,
 html.dark .ep-landing .ep-lens-ticks {
-  color: #8BD5A6 !important;
+  color: #93c5fd !important;
 }
 html.dark .ep-landing .ep-lens-arcs {
-  color: #F28A68 !important;
+  color: #60a5fa !important;
 }
 html.dark .ep-landing .ep-lens-ping {
-  border-color: #F28A68 !important;
+  border-color: #60a5fa !important;
 }
 html.dark .ep-landing .ep-lens-scan {
-  background: linear-gradient(90deg, transparent, #8BD5A6, transparent) !important;
+  background: linear-gradient(90deg, transparent, #93c5fd, transparent) !important;
   box-shadow: 0 0 16px rgba(139, 213, 166, 0.72) !important;
 }
 html.dark .ep-landing .ep-lens-iris {
@@ -346,15 +346,15 @@ html.dark .ep-landing .ep-lens-caption {
   color: #EAF4EF !important;
 }
 html.dark .ep-landing .ep-lens-readout .ep-lens-dot {
-  background-color: #8BD5A6 !important;
+  background-color: #93c5fd !important;
 }
 html.dark .ep-landing .ep-lens-speck {
   background: #DDF8E7 !important;
 }
 html.dark .ep-landing .ep-lens-flash {
-  background: #F28A68 !important;
+  background: #60a5fa !important;
 }
 html.dark .ep-landing .ep-lens-shrimp .ep-logo {
-  --ep-logo-color: #F28A68 !important;
-  --ep-logo-text: #8BD5A6 !important;
+  --ep-logo-color: #60a5fa !important;
+  --ep-logo-text: #93c5fd !important;
 }

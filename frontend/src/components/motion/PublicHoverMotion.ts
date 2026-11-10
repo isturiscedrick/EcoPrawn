@@ -34,7 +34,7 @@ export function bindPublicHoverMotion(root: HTMLElement): () => void {
       y: lift,
       scale,
       borderColor: "var(--ep-accent)",
-      boxShadow: "0 22px 48px -32px rgba(37,99,235,.34)",
+      boxShadow: "0 22px 48px -32px rgba(29,78,216,.34)",
       duration: 0.28,
       ease: "power3.out",
       overwrite: "auto",

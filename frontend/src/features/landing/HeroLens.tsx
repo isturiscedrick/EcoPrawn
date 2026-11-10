@@ -380,13 +380,13 @@ export function HeroLens() {
         aria-hidden="true"
         viewBox="0 0 440 440"
         fill="none"
-        className="ep-lens-outer-ring pointer-events-none absolute -inset-[5.5%] z-[2] h-[111%] w-[111%] max-w-none overflow-visible text-[#0F4C5C] dark:text-[#8BD5A6]"
+        className="ep-lens-outer-ring pointer-events-none absolute -inset-[5.5%] z-[2] h-[111%] w-[111%] max-w-none overflow-visible text-[#111827] dark:text-[#93c5fd]"
       >
         <circle cx="220" cy="220" r="211" stroke="currentColor" strokeWidth="1.4" opacity=".72" />
         <circle cx="220" cy="220" r="204" stroke="currentColor" strokeWidth="1" strokeDasharray="2 7" opacity=".5" />
         <circle cx="220" cy="220" r="198" stroke="currentColor" strokeWidth="2" strokeDasharray="34 18 7 18" strokeLinecap="round" opacity=".82" />
         <path d="M220 4v13 M436 220h-13 M220 436v-13 M4 220h13" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity=".9" />
-        <circle cx="220" cy="9" r="3.2" fill="#D94416" className="dark:fill-[#F28A68]" />
+        <circle cx="220" cy="9" r="3.2" fill="#1d4ed8" className="dark:fill-[#60a5fa]" />
         <circle cx="431" cy="220" r="2.4" fill="currentColor" />
         <circle cx="220" cy="431" r="2.4" fill="currentColor" />
         <circle cx="9" cy="220" r="2.4" fill="currentColor" />

@@ -25,21 +25,21 @@
 
 /* ---------- Modal Container: Light Mode ---------- */
 .ep-auth-modal {
-  --ep-bg: #f4f7f6;
+  --ep-bg: #f8fafc;
   --ep-surface: #ffffff;
-  --ep-tint: #eaf1ee;
-  --ep-line: #cbd9d4;
-  --ep-primary: #172d30;
-  --ep-secondary: #0f4c5c;
-  --ep-text-muted: #405653;
-  --ep-accent: #d94416;
-  --ep-accent-hover: #b83a0f;
+  --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea;
+  --ep-primary: #111827;
+  --ep-secondary: #111827;
+  --ep-text-muted: #475569;
+  --ep-accent: #1d4ed8;
+  --ep-accent-hover: #1e40af;
   width: min(100%, 480px);
   max-height: min(860px, calc(100dvh - 24px));
   padding: clamp(20px, 4vw, 34px);
   border-radius: 26px;
-  background: #f4f7f6 !important;
-  color: #172d30 !important;
+  background: #f8fafc !important;
+  color: #111827 !important;
   border: 1px solid rgba(15, 76, 92, 0.2) !important;
   box-shadow: 0 36px 110px rgba(0, 18, 22, 0.38), 0 2px 10px rgba(0, 18, 22, 0.08);
   scrollbar-width: thin;
@@ -61,7 +61,7 @@
   font-size: clamp(25px, 4vw, 30px);
   line-height: 1.12;
   letter-spacing: -0.04em;
-  color: #0f4c5c !important;
+  color: #111827 !important;
 }
 
 .ep-auth-modal h1 {
@@ -71,7 +71,7 @@
 .ep-auth-modal h1 + p {
   max-width: 360px;
   margin: 9px auto 0;
-  color: #405653 !important;
+  color: #475569 !important;
   line-height: 1.6;
   text-align: center;
 }
@@ -80,7 +80,7 @@
   margin-top: 22px;
   padding: clamp(16px, 3vw, 22px);
   gap: 16px;
-  border: 1px solid #cbd9d4;
+  border: 1px solid #dbe2ea;
   border-radius: 18px;
   background: #ffffff;
   box-shadow: 0 14px 38px -30px rgba(7, 42, 48, 0.45);
@@ -93,7 +93,7 @@
 }
 
 .ep-auth-modal label {
-  color: #0f4c5c;
+  color: #111827;
   font-size: 0.875rem;
   font-weight: 600;
 }
@@ -106,7 +106,7 @@
   padding: 4px !important;
   border: 1px solid rgba(15, 76, 92, 0.16) !important;
   border-radius: 12px !important;
-  background: #eaf1ee !important;
+  background: #f1f5f9 !important;
 }
 
 .ep-auth-modal [role="group"][aria-label="Account access"] button {
@@ -115,7 +115,7 @@
   border: 1px solid transparent !important;
   border-radius: 9px !important;
   background: transparent !important;
-  color: #0f4c5c !important;
+  color: #111827 !important;
   font-weight: 600;
   box-shadow: none !important;
   outline-offset: 2px;
@@ -123,19 +123,19 @@
 }
 
 .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
-  background: #0f4c5c !important;
-  border-color: #0f4c5c !important;
+  background: #111827 !important;
+  border-color: #111827 !important;
   color: #ffffff !important;
   box-shadow: 0 4px 12px rgba(15, 76, 92, 0.2) !important;
 }
 
 .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled) {
   background: rgba(15, 76, 92, 0.08) !important;
-  color: #142b2e !important;
+  color: #111827 !important;
 }
 
 .ep-auth-modal [role="group"][aria-label="Account access"] button:focus-visible {
-  outline: 2px solid #d94416 !important;
+  outline: 2px solid #1d4ed8 !important;
   outline-offset: 2px;
 }
 
@@ -143,28 +143,28 @@
 .ep-auth-modal input {
   min-height: 50px;
   border-radius: 12px;
-  border: 1px solid #cbd9d4 !important;
-  background: #f8faf9 !important;
-  color: #172d30 !important;
+  border: 1px solid #dbe2ea !important;
+  background: #f8fafc !important;
+  color: #111827 !important;
   box-shadow: inset 0 1px 2px rgba(7, 42, 48, 0.035);
 }
 
 .ep-auth-modal input:focus {
-  border-color: #d94416 !important;
+  border-color: #1d4ed8 !important;
   background: #ffffff !important;
   box-shadow: 0 0 0 4px rgba(217, 68, 22, 0.12);
 }
 
 .ep-auth-modal input::placeholder {
-  color: #647773 !important;
+  color: #64748b !important;
   opacity: 1;
 }
 
 .ep-auth-modal button[type="submit"] {
   min-height: 50px;
   border-radius: 12px;
-  background: #d94416 !important;
-  border-color: #d94416 !important;
+  background: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
   color: #ffffff !important;
   box-shadow: 0 10px 24px -14px rgba(217, 68, 22, 0.9);
   transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
@@ -172,7 +172,7 @@
 
 .ep-auth-modal button[type="submit"]:not(:disabled):hover {
   transform: translateY(-2px);
-  background: #b83a0f !important;
+  background: #1e40af !important;
   box-shadow: 0 14px 28px -14px rgba(217, 68, 22, 0.65);
 }
 
@@ -187,51 +187,51 @@
 
 .ep-auth-modal button[aria-label="Close"] {
   border: 1px solid transparent;
-  color: #405653 !important;
+  color: #475569 !important;
   transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
 .ep-auth-modal button[aria-label="Close"]:hover {
-  border-color: #cbd9d4;
-  background: #eaf1ee !important;
-  color: #172d30 !important;
+  border-color: #dbe2ea;
+  background: #f1f5f9 !important;
+  color: #111827 !important;
 }
 
 .ep-auth-modal button:focus-visible,
 .ep-auth-modal a:focus-visible,
 .ep-auth-modal input:focus-visible {
-  outline: 2px solid #d94416 !important;
+  outline: 2px solid #1d4ed8 !important;
   outline-offset: 3px;
 }
 
 .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
   min-height: 50px;
-  border: 1px solid #cbd9d4 !important;
+  border: 1px solid #dbe2ea !important;
   border-radius: 12px;
   background: #ffffff !important;
-  color: #172d30 !important;
+  color: #111827 !important;
 }
 
 .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
-  border-color: #0f4c5c !important;
-  background: #eaf1ee !important;
+  border-color: #111827 !important;
+  background: #f1f5f9 !important;
 }
 
 .ep-auth-modal > div:not(.ep-auth-brand) > div:last-child {
-  color: #405653 !important;
+  color: #475569 !important;
 }
 
 /* ---------- Modal Container: Dark Mode ---------- */
 html.dark .ep-auth-modal {
-  --ep-bg: #18191a;
+  --ep-bg: #090d16;
   --ep-surface: #242729;
   --ep-tint: #29332f;
   --ep-line: rgba(139, 213, 166, 0.25);
   --ep-primary: #f2f5f3;
-  --ep-secondary: #8bd5a6;
+  --ep-secondary: #93c5fd;
   --ep-text-muted: #b8c4c0;
-  --ep-accent: #f28a68;
-  --ep-accent-hover: #e87552;
+  --ep-accent: #60a5fa;
+  --ep-accent-hover: #93c5fd;
   background: #202729 !important;
   color: #f2f5f3 !important;
   border-color: rgba(139, 213, 166, 0.28) !important;
@@ -271,30 +271,30 @@ html.dark .ep-auth-modal [role="group"][aria-label="Account access"] {
 
 html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button {
   background: transparent !important;
-  color: #8bd5a6 !important;
+  color: #93c5fd !important;
 }
 
 html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
-  background: #f28a68 !important;
-  border-color: #f28a68 !important;
-  color: #18191a !important;
+  background: #60a5fa !important;
+  border-color: #60a5fa !important;
+  color: #090d16 !important;
   box-shadow: 0 4px 14px rgba(242, 138, 104, 0.2) !important;
 }
 
 html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled) {
   background: rgba(139, 213, 166, 0.1) !important;
-  color: #f4f7f6 !important;
+  color: #f8fafc !important;
 }
 
 html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button:focus-visible {
-  outline-color: #f28a68 !important;
+  outline-color: #60a5fa !important;
 }
 
 html.dark .ep-auth-modal input {
   background: #181f20 !important;
   border-color: rgba(139, 213, 166, 0.3) !important;
   color: #f2f5f3 !important;
-  caret-color: #8bd5a6;
+  caret-color: #93c5fd;
 }
 
 html.dark .ep-auth-modal input::placeholder {
@@ -302,20 +302,20 @@ html.dark .ep-auth-modal input::placeholder {
 }
 
 html.dark .ep-auth-modal input:focus {
-  border-color: #8bd5a6 !important;
+  border-color: #93c5fd !important;
   box-shadow: 0 0 0 4px rgba(139, 213, 166, 0.12);
 }
 
 html.dark .ep-auth-modal button[type="submit"] {
-  background: #f28a68 !important;
-  border-color: #f28a68 !important;
-  color: #18191a !important;
+  background: #60a5fa !important;
+  border-color: #60a5fa !important;
+  color: #090d16 !important;
   box-shadow: 0 10px 24px -14px rgba(242, 138, 104, 0.85);
 }
 
 html.dark .ep-auth-modal button[type="submit"]:not(:disabled):hover {
-  background: #e87552 !important;
-  border-color: #e87552 !important;
+  background: #93c5fd !important;
+  border-color: #93c5fd !important;
 }
 
 html.dark .ep-auth-modal button[aria-label="Close"] {
@@ -325,7 +325,7 @@ html.dark .ep-auth-modal button[aria-label="Close"] {
 html.dark .ep-auth-modal button[aria-label="Close"]:hover {
   background: rgba(139, 213, 166, 0.1) !important;
   border-color: rgba(139, 213, 166, 0.22);
-  color: #8bd5a6 !important;
+  color: #93c5fd !important;
 }
 
 html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
@@ -336,12 +336,12 @@ html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]) {
 
 html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
   background: #29332f !important;
-  border-color: #8bd5a6 !important;
+  border-color: #93c5fd !important;
 }
 
 html.dark .ep-auth-modal :is(button, a):focus-visible,
 html.dark .ep-auth-modal input:focus-visible {
-  outline-color: #f28a68 !important;
+  outline-color: #60a5fa !important;
 }
 
 /* ---------- Mobile Authentication Sheet (max-width: 639px) ---------- */
@@ -371,7 +371,7 @@ html.dark .ep-auth-modal input:focus-visible {
     border: 1px solid rgba(15, 76, 92, 0.14) !important;
     border-bottom: 0 !important;
     border-radius: 28px 28px 0 0 !important;
-    background: #f4f7f6 !important;
+    background: #f8fafc !important;
     box-shadow: 0 -18px 60px rgba(0, 18, 22, 0.18), 0 2px 12px rgba(0, 18, 22, 0.08) !important;
     scrollbar-width: none;
   }
@@ -388,7 +388,7 @@ html.dark .ep-auth-modal input:focus-visible {
     width: 42px;
     height: 4px;
     border-radius: 999px;
-    background: #0f4c5c;
+    background: #111827;
     opacity: 0.22;
     transform: translateX(-50%);
   }
@@ -456,7 +456,7 @@ html.dark .ep-auth-modal input:focus-visible {
   }
 
   html.dark .ep-auth-modal::before {
-    background: #8bd5a6;
+    background: #93c5fd;
     opacity: 0.45;
   }
 }
@@ -481,8 +481,8 @@ html.dark .ep-auth-modal input:focus-visible {
   --ep-primary: #111827;
   --ep-secondary: #1f2937;
   --ep-text-muted: #475569;
-  --ep-accent: #2563eb;
-  --ep-accent-hover: #1d4ed8;
+  --ep-accent: #1d4ed8;
+  --ep-accent-hover: #1e40af;
   background: #ffffff !important;
   color: #111827 !important;
   border-color: #dbe2ea !important;
@@ -514,26 +514,26 @@ html.dark .ep-auth-modal input:focus-visible {
   color: #1f2937 !important;
 }
 .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"] {
-  background: #2563eb !important; border-color: #2563eb !important; color: #ffffff !important;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, .18) !important;
+  background: #1d4ed8 !important; border-color: #1d4ed8 !important; color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(29,78,216, .18) !important;
 }
 .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled) {
-  background: #eaf1ff !important; color: #1d4ed8 !important;
+  background: #eaf1ff !important; color: #1e40af !important;
 }
 .ep-auth-modal input {
-  background: #f8fafc !important; border-color: #dbe2ea !important; color: #111827 !important; caret-color: #2563eb;
+  background: #f8fafc !important; border-color: #dbe2ea !important; color: #111827 !important; caret-color: #1d4ed8;
 }
 .ep-auth-modal input:focus {
-  background: #ffffff !important; border-color: #2563eb !important;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, .12) !important;
+  background: #ffffff !important; border-color: #1d4ed8 !important;
+  box-shadow: 0 0 0 4px rgba(29,78,216, .12) !important;
 }
 .ep-auth-modal input::placeholder { color: #64748b !important; }
 .ep-auth-modal button[type="submit"] {
-  background: #2563eb !important; border-color: #2563eb !important; color: #ffffff !important;
-  box-shadow: 0 10px 24px -14px rgba(37, 99, 235, .72) !important;
+  background: #1d4ed8 !important; border-color: #1d4ed8 !important; color: #ffffff !important;
+  box-shadow: 0 10px 24px -14px rgba(29,78,216, .72) !important;
 }
 .ep-auth-modal button[type="submit"]:not(:disabled):hover {
-  background: #1d4ed8 !important; border-color: #1d4ed8 !important;
+  background: #1e40af !important; border-color: #1e40af !important;
 }
 .ep-auth-modal button[aria-label="Close"] { color: #475569 !important; }
 .ep-auth-modal button[aria-label="Close"]:hover {
@@ -543,10 +543,10 @@ html.dark .ep-auth-modal input:focus-visible {
   background: #ffffff !important; border-color: #dbe2ea !important; color: #111827 !important;
 }
 .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
-  background: #f1f5f9 !important; border-color: #2563eb !important;
+  background: #f1f5f9 !important; border-color: #1d4ed8 !important;
 }
 .ep-auth-modal :is(button, a):focus-visible,
-.ep-auth-modal input:focus-visible { outline-color: #2563eb !important; }
+.ep-auth-modal input:focus-visible { outline-color: #1d4ed8 !important; }
 
 html.dark .ep-auth-modal {
   --ep-bg: #090d16; --ep-surface: #111827; --ep-tint: #1f2937;
@@ -615,7 +615,7 @@ html.dark .ep-auth-modal input:focus-visible { outline-color: #60a5fa !important
     background: #ffffff !important; border-color: #dbe2ea !important;
     box-shadow: 0 -18px 60px rgba(15, 23, 42, .2) !important;
   }
-  .ep-auth-modal::before { background: #2563eb !important; opacity: .5 !important; }
+  .ep-auth-modal::before { background: #1d4ed8 !important; opacity: .5 !important; }
   html.dark .ep-auth-modal {
     background: #111827 !important; border-color: #334155 !important;
     box-shadow: 0 -18px 60px rgba(0, 0, 0, .48) !important;

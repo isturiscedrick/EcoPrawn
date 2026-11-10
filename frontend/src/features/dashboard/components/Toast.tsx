@@ -34,7 +34,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           <div
             key={toast.id}
             role={toast.tone === "error" ? "alert" : "status"}
-            className="pointer-events-auto flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-3 text-sm text-[var(--ep-primary)] shadow-[0_16px_40px_-18px_rgba(8,30,34,0.55)] dark:border-[rgba(255,255,255,0.12)] dark:bg-[#242526] dark:text-[#e4e6eb] dark:shadow-[0_16px_40px_-18px_rgba(0,0,0,0.75)]"
+            className="pointer-events-auto flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-3 text-sm text-[var(--ep-primary)] shadow-[0_16px_40px_-18px_rgba(8,30,34,0.55)] dark:border-[rgba(255,255,255,0.12)] dark:bg-[#111827] dark:text-[#f8fafc] dark:shadow-[0_16px_40px_-18px_rgba(0,0,0,0.75)]"
           >
             <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
               toast.tone === "error"
@@ -48,7 +48,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
               type="button"
               aria-label="Dismiss notification"
               onClick={() => setToasts((current) => current.filter((item) => item.id !== toast.id))}
-              className="rounded-md p-1 text-[var(--ep-text-muted)] hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--ep-primary)] dark:text-[#b0b3b8] dark:hover:bg-[rgba(255,255,255,0.08)] dark:hover:text-[#e4e6eb]"
+              className="rounded-md p-1 text-[var(--ep-text-muted)] hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--ep-primary)] dark:text-[#cbd5e1] dark:hover:bg-[rgba(255,255,255,0.08)] dark:hover:text-[#f8fafc]"
             >
               <Icon name="x" size={14} />
             </button>

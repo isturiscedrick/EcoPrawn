@@ -9,9 +9,9 @@
   --loading-text: #0f172a;
   --loading-muted: #475569;
   --loading-track: rgba(15, 23, 42, 0.14);
-  --loading-start: #2563eb;
+  --loading-start: #1d4ed8;
   --loading-end: #0f172a;
-  --loading-particle: #2563eb;
+  --loading-particle: #1d4ed8;
 
   position: fixed;
   inset: 0;
@@ -32,7 +32,7 @@ html.dark .ep-loading-screen {
   --loading-muted: #a8b4c7;
   --loading-track: rgba(148, 163, 184, 0.24);
   --loading-start: #60a5fa;
-  --loading-end: #2563eb;
+  --loading-end: #1d4ed8;
   --loading-particle: #60a5fa;
   color-scheme: dark;
 }

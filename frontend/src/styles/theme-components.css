@@ -8,12 +8,12 @@
   --ep-bg: #ffffff;
   --ep-surface: #ffffff;
   --ep-tint: #ffffff;
-  --ep-line: #d8e0de;
-  --ep-primary: #0b2e33;
-  --ep-primary-soft: #12474d;
-  --ep-text-muted: #3f5753;
-  --ep-accent: #b23f1c;
-  --ep-accent-hover: #8f3115;
+  --ep-line: #dbe2ea;
+  --ep-primary: #111827;
+  --ep-primary-soft: #111827;
+  --ep-text-muted: #475569;
+  --ep-accent: #1d4ed8;
+  --ep-accent-hover: #1e40af;
   --ep-ok: #1e7a46;
   --ep-warn-text: #8f5a12;
   --ep-danger: #b3261e;
@@ -21,25 +21,25 @@
 
 /* ---------- Dashboard: Light Mode Surfaces ---------- */
 html:not(.dark) .dashboard-shell {
-  --ep-bg: #f3f7f6;
+  --ep-bg: #f8fafc;
   --ep-surface: #ffffff;
-  --ep-line: #9fb3b0;
+  --ep-line: #cbd5e1;
   background: var(--ep-bg);
 }
 
 html:not(.dark) .dashboard-shell aside {
-  border-right: 1px solid #b5c5c2;
+  border-right: 1px solid #cbd5e1;
   box-shadow: 2px 0 8px rgba(11, 46, 51, 0.06);
 }
 
 html:not(.dark) .dashboard-shell aside .ep-logo {
-  --ep-logo-color: #d94416;
-  --ep-logo-text: #0b4f3a;
+  --ep-logo-color: #1d4ed8;
+  --ep-logo-text: #111827;
 }
 
 html:not(.dark) .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.12\)\],
 html:not(.dark) .dashboard-shell .border-\[var\(--sand-dim\)\] {
-  border-color: #9fb3b0;
+  border-color: #cbd5e1;
 }
 
 html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.55\)\],
@@ -47,57 +47,57 @@ html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.6\)\],
 html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.68\)\],
 html:not(.dark) .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
 html:not(.dark) .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\] {
-  color: #35534f;
+  color: #475569;
 }
 
 html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.45\)\],
 html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\] {
-  color: #4a6561;
+  color: #475569;
 }
 
 html:not(.dark) .dashboard-shell .dashboard-nav-active {
   background-color: #ffffff;
-  border-color: var(--coral, #e8623a);
+  border-color: var(--coral, #1d4ed8);
   color: var(--ep-primary);
   border-width: 2px;
   box-shadow: 0 6px 16px -10px rgba(11, 46, 51, 0.45);
 }
 
 html:not(.dark) .dashboard-shell .dashboard-nav-active-dot {
-  background-color: var(--coral, #e8623a);
+  background-color: var(--coral, #1d4ed8);
 }
 
 /* ---------- Dashboard: Dark Mode Surfaces ---------- */
 html.dark .dashboard-shell {
-  --ep-bg: #18191a;
-  --ep-surface: #242526;
-  --ep-tint: #3a3b3c;
+  --ep-bg: #090d16;
+  --ep-surface: #111827;
+  --ep-tint: #1f2937;
   --ep-line: rgba(255, 255, 255, 0.12);
-  --ep-primary: #e4e6eb;
-  --ep-primary-soft: #f0f2f5;
-  --ep-text-muted: #b0b3b8;
+  --ep-primary: #f8fafc;
+  --ep-primary-soft: #e2e8f0;
+  --ep-text-muted: #cbd5e1;
   --amber-text: #e8a23a;
   background: var(--ep-bg);
-  color: #e4e6eb;
+  color: #f8fafc;
 }
 
 html.dark .dashboard-shell .bg-white {
-  background-color: #242526;
+  background-color: #111827;
 }
 
 html.dark .dashboard-shell aside {
-  background-color: #242526;
-  color: #e4e6eb;
+  background-color: #111827;
+  color: #f8fafc;
   box-shadow: 1px 0 0 rgba(255, 255, 255, 0.12);
 }
 
 html.dark .dashboard-shell aside .ep-logo {
-  --ep-logo-color: #f28a68;
-  --ep-logo-text: #8bd5a6;
+  --ep-logo-color: #60a5fa;
+  --ep-logo-text: #93c5fd;
 }
 
 html.dark .dashboard-shell .text-\[var\(--water-deep\)\] {
-  color: #e4e6eb;
+  color: #f8fafc;
 }
 
 html.dark .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.4\)\],
@@ -112,7 +112,7 @@ html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.58\)\],
 html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.62\)\],
 html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.68\)\],
 html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.72\)\] {
-  color: #b0b3b8;
+  color: #cbd5e1;
 }
 
 html.dark .dashboard-shell .border-\[var\(--sand-dim\)\],
@@ -122,26 +122,26 @@ html.dark .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.1\)\] {
 }
 
 html.dark .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\] {
-  background-color: #3a3b3c;
+  background-color: #1f2937;
 }
 
 html.dark .dashboard-shell .bg-\[var\(--water-deep\)\] {
-  background-color: #0b2e33;
+  background-color: #111827;
 }
 
 html.dark .dashboard-shell .dashboard-nav-active {
-  background-color: #3a3b3c;
+  background-color: #1f2937;
   border-color: rgba(242, 138, 104, 0.7);
-  color: #e4e6eb;
+  color: #f8fafc;
   box-shadow: 0 6px 16px -10px rgba(0, 0, 0, 0.8);
 }
 
 html.dark .dashboard-shell .dashboard-nav-active-dot {
-  background-color: var(--coral, #f28a68);
+  background-color: var(--coral, #60a5fa);
 }
 
 html.dark .dashboard-shell aside .hover\:text-\[var\(--water-deep\)\]:hover {
-  color: #e4e6eb;
+  color: #f8fafc;
 }
 
 html.dark .dashboard-shell :is(.text-\[var\(--mangrove\)\], .text-\[var\(--mangrove-text\)\]) {
@@ -150,7 +150,7 @@ html.dark .dashboard-shell :is(.text-\[var\(--mangrove\)\], .text-\[var\(--mangr
 
 /* Coral fills text color in dark mode */
 html.dark .dashboard-shell :is(.bg-\[var\(--coral\)\], .bg-\[var\(--ep-accent\)\]) {
-  color: #1b0a04;
+  color: #071426;
 }
 
 /* ---------- Dashboard Component Accents & Interactions ---------- */
@@ -203,7 +203,7 @@ html:not(.dark) .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(-
   border-color: var(--ep-secondary);
 }
 html.dark .dashboard-shell .bg-\[var\(--mangrove\)\].text-white {
-  color: #04202b;
+  color: #071426;
 }
 .dashboard-shell .hover\:border-\[var\(--mangrove\)\]:hover {
   border-color: var(--ep-secondary);
@@ -214,14 +214,14 @@ html.dark .dashboard-shell .bg-\[var\(--mangrove\)\].text-white {
   color: #ffffff;
 }
 html.dark .dashboard-shell [style*="var(--coral)"] {
-  color: #1b0a04;
+  color: #071426;
 }
 
 /* SVG Chart lines and gradient stops */
-.dashboard-shell polyline[stroke="#E8623A"] {
+.dashboard-shell polyline[stroke="#1d4ed8"] {
   stroke: var(--coral);
 }
-.dashboard-shell stop[stop-color="#E8623A"] {
+.dashboard-shell stop[stop-color="#1d4ed8"] {
   stop-color: var(--coral);
 }
 
@@ -251,7 +251,7 @@ html.dark .dashboard-shell [style*="var(--coral)"] {
 
 /* Table scroll fade edges in dark mode */
 html.dark .dashboard-shell .from-white {
-  --tw-gradient-from: #242526;
+  --tw-gradient-from: #111827;
 }
 
 /* Add Tank Modal buttons */
@@ -265,6 +265,6 @@ html.dark .ep-auth-modal {
 }
 
 .ep-auth-modal .focus\:ring-\[rgba\(178\,63\,28\,0\.15\)\]:focus {
-  --tw-ring-color: color-mix(in srgb, var(--ep-accent, #c43d14) 15%, transparent);
+  --tw-ring-color: color-mix(in srgb, var(--ep-accent, #1d4ed8) 15%, transparent);
 }
 

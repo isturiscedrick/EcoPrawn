@@ -176,7 +176,7 @@ export function LandingMotion() {
 
       gsap.utils.toArray<HTMLElement>("[data-step-node]").forEach((node) => {
         gsap.to(node, {
-          backgroundColor: "#b23f1c",
+          backgroundColor: "#1d4ed8",
           scale: 1.5,
           duration: 0.3,
           ease: "power2.out",

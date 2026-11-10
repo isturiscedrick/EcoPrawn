@@ -11,7 +11,7 @@ const shapes = [...src.matchAll(/kind:\s*"(shrimp|text)",\s*d:\s*"([^"]+)"/g)].m
 );
 if (!shapes.length) throw new Error("No shapes found in BrandMark.tsx");
 
-const COLORS = { shrimp: "#d94416", text: "#02262b" };
+const COLORS = { shrimp: "#1d4ed8", text: "#111827" };
 const path = (s) => `<path fill="${COLORS[s.kind]}" fill-rule="evenodd" d="${s.d}"/>`;
 
 const svg = (viewBox, items) =>

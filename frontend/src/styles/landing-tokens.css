@@ -16,13 +16,13 @@
   --ep-secondary: #1f2937;
   --ep-text: #111827;
   --ep-text-muted: #475569;
-  --ep-accent: #2563eb;
-  --ep-accent-hover: #1d4ed8;
+  --ep-accent: #1d4ed8;
+  --ep-accent-hover: #1e40af;
   --ep-on-accent: #ffffff;
   --ep-deep: #111827;
   --ep-on-deep: #ffffff;
   --ep-on-deep-muted: #cbd5e1;
-  --ep-zone: #2563eb;
+  --ep-zone: #1d4ed8;
   --ep-marker: #60a5fa;
   --ep-ok: #1e7a46;
   --ep-warn-text: #8f5a12;
@@ -84,8 +84,8 @@ html:has(.ep-landing) {
   -webkit-text-fill-color: #111827 !important;
 }
 .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
-  color: #2563eb !important;
-  -webkit-text-fill-color: #2563EB !important;
+  color: #1d4ed8 !important;
+  -webkit-text-fill-color: #1d4ed8 !important;
 }
 html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
   color: #f8fafc !important;
@@ -102,16 +102,16 @@ html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary 
   -webkit-text-fill-color: #111827 !important;
 }
 .ep-about-page [data-page-hero-headline] > span:last-child {
-  color: #2563eb !important;
-  -webkit-text-fill-color: #2563eb !important;
+  color: #1d4ed8 !important;
+  -webkit-text-fill-color: #1d4ed8 !important;
 }
 .ep-contact-page [data-page-hero-headline] > span:first-child {
   color: #111827 !important;
   -webkit-text-fill-color: #111827 !important;
 }
 .ep-contact-page [data-page-hero-headline] > span:last-child {
-  color: #2563eb !important;
-  -webkit-text-fill-color: #2563eb !important;
+  color: #1d4ed8 !important;
+  -webkit-text-fill-color: #1d4ed8 !important;
 }
 html.dark .ep-about-page [data-page-hero-headline] > span:first-child,
 html.dark .ep-contact-page [data-page-hero-headline] > span:first-child {
