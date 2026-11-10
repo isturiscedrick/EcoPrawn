@@ -407,6 +407,67 @@ export function LandingMotion() {
           },
         });
       }
+
+      // Anime.js counts the illustrative dashboard values up only when the
+      // KPI row enters view. Keep the unit spans untouched and restore the
+      // exact original text on cleanup (including React Strict Mode reruns).
+      const previewCounterNodes = dashboardPreview?.querySelectorAll<HTMLElement>(
+        ".ep-dashboard-preview-window > .grid > div > p.mt-2"
+      );
+      const previewCounterAnimations: Array<{ revert: () => unknown }> = [];
+      const previewCounterRestores: Array<() => void> = [];
+      let previewCounterObserver: IntersectionObserver | undefined;
+
+      if (previewCounterNodes?.length) {
+        previewCounterObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const valueElement = entry.target as HTMLElement;
+            const valueNode = valueElement.firstChild;
+            if (!valueNode || valueNode.nodeType !== Node.TEXT_NODE) {
+              previewCounterObserver?.unobserve(valueElement);
+              return;
+            }
+
+            const original = valueNode.nodeValue ?? "";
+            const target = Number.parseFloat(original);
+            if (!Number.isFinite(target)) {
+              previewCounterObserver?.unobserve(valueElement);
+              return;
+            }
+
+            const decimals = (original.trim().split(".")[1] ?? "").length;
+            const counter = { value: 0 };
+            valueNode.nodeValue = counter.value.toFixed(decimals);
+            previewCounterRestores.push(() => {
+              valueNode.nodeValue = original;
+            });
+
+            previewCounterAnimations.push(animate(counter, {
+              value: target,
+              duration: 1050,
+              ease: "out(3)",
+              onUpdate: () => {
+                valueNode.nodeValue = counter.value.toFixed(decimals);
+              },
+              onComplete: () => {
+                valueNode.nodeValue = original;
+              },
+            }));
+            previewCounterObserver?.unobserve(valueElement);
+          });
+        }, { threshold: 0.55 });
+
+        previewCounterNodes.forEach((node) => previewCounterObserver?.observe(node));
+      }
+
+      // Anime.js owns these number counters; GSAP continues to own the
+      // dashboard's entrance, card reveals, and chart-bar choreography.
+      return () => {
+        previewCounterObserver?.disconnect();
+        previewCounterAnimations.forEach((animation) => animation.revert());
+        previewCounterRestores.forEach((restore) => restore());
+      };
     });
 
 
