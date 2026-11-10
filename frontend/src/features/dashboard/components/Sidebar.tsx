@@ -183,32 +183,32 @@ export function Sidebar({
             touchStartX.current = null;
             if (start !== null && e.changedTouches[0].clientX - start < -60) closeDrawer();
           }}
-          className={`fixed inset-y-0 left-0 z-[90] flex w-[min(86vw,320px)] flex-col bg-white text-[var(--water-deep)] transition-transform duration-300 ease-out ${
+          className={`ep-mobile-dashboard-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out ${
             mobileOpen
               ? "translate-x-0 shadow-[8px_0_40px_-12px_rgba(8,30,34,0.45)]"
               : "-translate-x-full shadow-none"
           }`}
         >
           {/* Drawer header */}
-          <div className="flex shrink-0 items-center justify-between border-b border-[rgba(11,46,51,0.12)] px-4 py-3">
-            <BrandMark size={30} />
+          <div className="relative flex shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-5 py-4">
+            <div className="flex min-w-0 flex-col gap-1">\n              <BrandMark size={32} logoColor="#111827" logoTextColor="var(--ep-text)" />\n              <span className="ep-mobile-drawer-caption pl-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ep-text-muted)]">EcoPrawn Dashboard</span>\n            </div>
             <button
               ref={closeButtonRef}
               type="button"
               onClick={closeDrawer}
               aria-label="Close navigation menu"
-              className="flex h-11 w-11 items-center justify-center rounded-lg text-[rgba(11,46,51,0.68)] transition-colors hover:bg-[rgba(11,46,51,0.08)] hover:text-[var(--water-deep)]"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] shadow-sm transition-all duration-200 hover:rotate-90 hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)]"
             >
               <Icon name="x" size={20} strokeWidth={2} />
             </button>
           </div>
 
           {/* Profile */}
-          <div className="shrink-0 border-b border-[rgba(11,46,51,0.1)] px-3 py-3">
+          <div className="shrink-0 border-b border-[var(--ep-line)] px-4 py-3">
             <Link
               to="/dashboard/profile"
               aria-label="Edit user profile"
-              className="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors hover:bg-[rgba(232,98,58,0.08)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--coral)]"
+              className="flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-3 text-left transition-colors hover:bg-[var(--ep-tint)] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
               activeOptions={{ exact: true }}
             >
               <div
@@ -230,8 +230,8 @@ export function Sidebar({
           </div>
 
           {/* Navigation */}
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-3">
-            <div className="ep-font-mono px-3 pb-2 text-[11px] font-medium uppercase tracking-[0.1em] text-[rgba(11,46,51,0.58)]">
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
+            <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">
               Navigation
             </div>
             <nav aria-label="Dashboard modules" className="flex flex-col items-stretch gap-1.5">
@@ -247,7 +247,7 @@ export function Sidebar({
           </div>
 
           {/* Account actions */}
-          <div className="flex shrink-0 flex-col gap-1 border-t border-[rgba(11,46,51,0.1)] px-3 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-surface)]/70 px-5 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
             <Link
               to="/dashboard/profile"
               aria-current={pathname === "/dashboard/profile" ? "page" : undefined}
