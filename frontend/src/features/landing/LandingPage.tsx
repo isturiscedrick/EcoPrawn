@@ -459,44 +459,55 @@ export function LandingPage() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-3 sm:p-5">
-                {heroReadouts.slice(0, 3).map((reading) => (
-                  <div key={reading.label} className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
-                    <p className="text-xs font-medium text-[var(--ep-text-muted)]">{reading.label}</p>
-                    <p className="mt-2 text-2xl font-bold tracking-tight tabular-nums text-[var(--ep-text)]">
-                      {reading.value}<span className="ml-1 text-xs font-semibold text-[var(--ep-text-muted)]">{heroReadoutUnits[reading.label]}</span>
-                    </p>
-                    <p className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[var(--ep-accent)]">
-                      <Icon name="check" size={12} /> Within sample target
-                    </p>
-                  </div>
-                ))}
+              <div data-preview-kpis="" className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-3 sm:p-5">
+                {heroReadouts.slice(0, 3).map((reading) => {
+                  const range = targetRangeFor(reading.label);
+                  return (
+                    <div data-preview-reading="" key={reading.label} className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-xs font-semibold text-[var(--ep-text-muted)]">{reading.label}</p>
+                        <span className="rounded-full bg-[var(--ep-tint)] px-2 py-1 text-[9px] font-bold uppercase tracking-[.12em] text-[var(--ep-text-muted)]">Sample</span>
+                      </div>
+                      <p className="mt-3 text-[clamp(1.45rem,2.4vw,1.9rem)] font-bold leading-none tracking-tight tabular-nums text-[var(--ep-text)]">
+                        {reading.value}<span className="ml-1 text-xs font-semibold text-[var(--ep-text-muted)]">{heroReadoutUnits[reading.label]}</span>
+                      </p>
+                      {range && <p className="mt-3 border-t border-[var(--ep-line)] pt-2 text-[11px] leading-relaxed text-[var(--ep-text-muted)]">Target {range}</p>}
+                      <p className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[var(--ep-accent)]">
+                        <Icon name="check" size={12} /> Within sample target
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
 
               <div className="grid gap-4 px-4 pb-5 sm:grid-cols-[1.4fr_.8fr] sm:px-5">
-                <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
-                  <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
                     <p className="text-sm font-semibold text-[var(--ep-text)]">Water quality trend</p>
-                    <span className="text-[10px] font-medium uppercase tracking-wider text-[var(--ep-text-muted)]">Illustrative</span>
+                    <span className="rounded-full border border-[var(--ep-line)] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-[var(--ep-text-muted)]">Illustrative</span>
                   </div>
                   <div className="ep-preview-chart mt-4 flex h-28 items-end gap-2" aria-hidden="true">
                     {[34, 48, 42, 62, 54, 73, 66, 84, 76, 92, 82, 96].map((height, index) => (
                       <span key={index} style={{ height: `${height}%` }} />
                     ))}
                   </div>
-                  <div className="mt-2 flex justify-between text-[10px] text-[var(--ep-text-muted)]"><span>Earlier</span><span>Latest sample</span></div>
+                  <p className="mt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Illustrative pattern only — not historical telemetry.</p>
                 </div>
-                <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
-                  <p className="text-sm font-semibold text-[var(--ep-text)]">Farm systems</p>
+                <div className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                  <p className="text-sm font-semibold text-[var(--ep-text)]">Platform modules</p>
                   <div className="mt-4 space-y-3">
-                    <div className="flex items-center justify-between gap-2 text-xs"><span className="text-[var(--ep-text-muted)]">Water monitoring</span><span className="font-semibold text-[var(--ep-accent)]">Connected</span></div>
-                    <div className="h-1.5 overflow-hidden rounded-full bg-[var(--ep-line)]"><span className="block h-full w-[88%] rounded-full bg-[var(--ep-accent)]" /></div>
-                    <div className="flex items-center justify-between gap-2 text-xs"><span className="text-[var(--ep-text-muted)]">Growth insights</span><span className="font-semibold text-[var(--ep-text)]">Available</span></div>
-                    <div className="h-1.5 overflow-hidden rounded-full bg-[var(--ep-line)]"><span className="block h-full w-[72%] rounded-full bg-[var(--ep-accent)]/70" /></div>
-                    <p className="border-t border-[var(--ep-line)] pt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Concept preview only. Values and status are illustrative, not live farm data.</p>
+                    <div className="flex items-center gap-3 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3">
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="activity" size={16} /></span>
+                      <span className="min-w-0"><span className="block text-xs font-semibold text-[var(--ep-text)]">Water monitoring</span><span className="mt-0.5 block text-[10px] text-[var(--ep-text-muted)]">Sensor readings and target ranges</span></span>
+                    </div>
+                    <div className="flex items-center gap-3 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3">
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="eye" size={16} /></span>
+                      <span className="min-w-0"><span className="block text-xs font-semibold text-[var(--ep-text)]">Growth insights</span><span className="mt-0.5 block text-[10px] text-[var(--ep-text-muted)]">Visual growth and biomass context</span></span>
+                    </div>
                   </div>
+                  <p className="mt-4 border-t border-[var(--ep-line)] pt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Concept preview only. Values and visual patterns are illustrative, not live farm data.</p>
                 </div>
-              </div>
+              </div>>
             </div>
           </div>
         </section>
