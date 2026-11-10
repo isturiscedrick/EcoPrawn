@@ -468,7 +468,7 @@ export function LandingPage() {
                         <p className="text-xs font-semibold text-[var(--ep-text-muted)]">{reading.label}</p>
                         <span className="rounded-full bg-[var(--ep-tint)] px-2 py-1 text-[9px] font-bold uppercase tracking-[.12em] text-[var(--ep-text-muted)]">Sample</span>
                       </div>
-                      <p className="mt-3 text-[clamp(1.45rem,2.4vw,1.9rem)] font-bold leading-none tracking-tight tabular-nums text-[var(--ep-text)]">
+                      <p className="mt-2 text-[clamp(1.45rem,2.4vw,1.9rem)] font-bold leading-none tracking-tight tabular-nums text-[var(--ep-text)]">
                         {reading.value}<span className="ml-1 text-xs font-semibold text-[var(--ep-text-muted)]">{heroReadoutUnits[reading.label]}</span>
                       </p>
                       {range && <p className="mt-3 border-t border-[var(--ep-line)] pt-2 text-[11px] leading-relaxed text-[var(--ep-text-muted)]">Target {range}</p>}
@@ -507,7 +507,7 @@ export function LandingPage() {
                   </div>
                   <p className="mt-4 border-t border-[var(--ep-line)] pt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Concept preview only. Values and visual patterns are illustrative, not live farm data.</p>
                 </div>
-              </div>>
+              </div>
             </div>
           </div>
         </section>
