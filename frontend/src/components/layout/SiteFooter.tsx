@@ -4,7 +4,7 @@ import { AuthLink } from "@/features/auth/AuthModalProvider";
 import { BrandMark } from "./BrandMark";
 
 const linkClass =
-  "inline-flex min-h-8 items-center rounded-md text-sm transition-colors hover:text-[var(--ep-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
+  "inline-flex min-h-11 items-center rounded-md text-sm transition-colors hover:text-[var(--ep-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
 
 const headingClass =
   "text-sm font-semibold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]";
@@ -36,7 +36,7 @@ export function SiteFooter() {
             <div className="ep-footer-explore min-w-0 border-0 bg-transparent p-0 shadow-none ring-0">
               <h2 className={headingClass}>Explore</h2>
               <nav
-                className="mt-2 flex flex-col items-start gap-0 text-[var(--ep-primary)] sm:mt-3"
+                className="mt-2 flex flex-col items-start gap-1 text-[var(--ep-primary)] sm:mt-3"
                 aria-label="Footer navigation"
               >
                 <Link className={linkClass} to="/" resetScroll activeOptions={{ exact: true }}>
