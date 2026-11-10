@@ -1189,3 +1189,118 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] [d
     max-width: 46rem;
   }
 }
+
+
+/* Phase 9 — shared landing-page visual language.
+   These final component rules are the authoritative surface layer: neutral
+   cards share the same border, radius, and elevation while the readings band
+   retains its intentionally deep contrast treatment. */
+.ep-business-landing {
+  --ep-card-radius: 1.25rem;
+  --ep-card-border: var(--ep-line);
+  --ep-card-shadow: 0 18px 44px -34px rgba(15, 23, 42, .28);
+  --ep-card-shadow-hover: 0 24px 52px -34px rgba(29, 78, 216, .22);
+  --ep-section-title-size: clamp(1.9rem, 3.6vw, 2.85rem);
+  --ep-section-title-leading: 1.1;
+}
+html.dark .ep-business-landing {
+  --ep-card-shadow: 0 20px 48px -34px rgba(0, 0, 0, .68);
+  --ep-card-shadow-hover: 0 24px 54px -34px rgba(0, 0, 0, .76);
+}
+.ep-business-landing :is(#readings, #capabilities, #process) h2 {
+  font-size: var(--ep-section-title-size);
+  line-height: var(--ep-section-title-leading);
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+.ep-business-landing :is(#capabilities, #process) [data-reveal] > div:first-child {
+  color: var(--ep-text-muted);
+}
+.ep-business-landing :is(#capabilities, #process) [data-reveal] h2 {
+  color: var(--ep-text);
+}
+.ep-business-landing :is(#capabilities, #process) [data-reveal] > p {
+  color: var(--ep-text-muted);
+  font-size: clamp(.98rem, 1.2vw, 1.1rem);
+  line-height: 1.75;
+}
+.ep-business-landing .ep-business-capabilities [data-business-card],
+.ep-business-landing #process [data-process-track] > li,
+.ep-business-landing .ep-stats-panel > div {
+  border-color: var(--ep-card-border);
+  border-radius: var(--ep-card-radius);
+  box-shadow: var(--ep-card-shadow);
+}
+.ep-business-landing .ep-business-capabilities [data-business-card],
+.ep-business-landing #process [data-process-track] > li {
+  background-color: var(--ep-surface);
+}
+.ep-business-landing .ep-business-capabilities [data-business-card] h3,
+.ep-business-landing #process [data-process-track] > li h3 {
+  color: var(--ep-text);
+  font-size: clamp(1.25rem, 1.65vw, 1.5rem);
+  line-height: 1.22;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+.ep-business-landing .ep-business-capabilities [data-business-card] > p:last-of-type,
+.ep-business-landing #process [data-process-track] > li p {
+  color: var(--ep-text-muted);
+  font-size: .9rem;
+  line-height: 1.72;
+}
+.ep-business-landing .ep-business-capabilities [data-business-card] [data-capability-detail] {
+  border-color: var(--ep-card-border);
+}
+.ep-business-landing .ep-stats-panel > div {
+  background: var(--ep-surface);
+}
+.ep-business-landing .ep-stats-panel > div > span:first-child {
+  color: var(--ep-primary);
+  font-variant-numeric: tabular-nums;
+}
+.ep-business-landing .ep-stats-panel > div > span:last-child {
+  color: var(--ep-text-muted);
+  line-height: 1.45;
+}
+.ep-business-landing #readings [data-reading] {
+  border-radius: var(--ep-card-radius);
+}
+.ep-business-landing #dashboard-preview .ep-dashboard-preview-window {
+  border: 1px solid var(--ep-card-border);
+  border-radius: 1.5rem;
+  box-shadow: 0 30px 76px -46px rgba(15, 23, 42, .42), 0 0 0 1px color-mix(in srgb, var(--ep-accent) 5%, transparent);
+}
+html.dark .ep-business-landing #dashboard-preview .ep-dashboard-preview-window {
+  box-shadow: 0 34px 84px -48px rgba(0, 0, 0, .82), 0 0 0 1px color-mix(in srgb, var(--ep-accent) 12%, transparent);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ep-business-landing .ep-business-capabilities [data-business-card]:hover,
+  .ep-business-landing #process [data-process-track] > li:hover,
+  .ep-business-landing .ep-stats-panel > div:hover {
+    border-color: color-mix(in srgb, var(--ep-accent) 52%, var(--ep-line));
+    box-shadow: var(--ep-card-shadow-hover);
+  }
+}
+@media (max-width: 639px) {
+  .ep-business-landing {
+    --ep-card-radius: 1.1rem;
+  }
+  .ep-business-landing :is(#readings, #capabilities, #process) h2 {
+    font-size: clamp(1.8rem, 7.4vw, 2.2rem);
+    line-height: 1.12;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] h3,
+  .ep-business-landing #process [data-process-track] > li h3 {
+    font-size: 1.3rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-business-capabilities [data-business-card],
+  .ep-business-landing #process [data-process-track] > li,
+  .ep-business-landing .ep-stats-panel > div,
+  .ep-business-landing #readings [data-reading] {
+    transition: none !important;
+    transform: none !important;
+  }
+}
