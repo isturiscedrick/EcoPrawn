@@ -6,8 +6,6 @@ import { Icon } from "@/components/ui/Icon";
 import { SidebarNavItem } from "./SidebarNavItem";
 
 interface SidebarProps {
-  collapsed?: boolean;
-  onToggle?: () => void;
   mobileOpen?: boolean;
   onMobileClose?: () => void;
 }
@@ -23,11 +21,9 @@ function LogoutIcon() {
 }
 
 const drawerRowClass =
-  "flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-medium text-[rgba(11,46,51,0.68)] transition-colors duration-200 hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--water-deep)]";
+  "flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-[14.5px] font-medium text-[var(--ep-text-muted)] transition-colors duration-200 hover:bg-[var(--ep-tint)] hover:text-[var(--ep-text)]";
 
 export function Sidebar({
-  collapsed = false,
-  onToggle = () => {},
   mobileOpen = false,
   onMobileClose = () => {},
 }: SidebarProps) {
@@ -36,11 +32,6 @@ export function Sidebar({
   });
   const segment = pathname.split("/dashboard/")[1] || "overview";
   const activeView = segment as DashboardView;
-  const currentLabel =
-    segment === "profile"
-      ? "Settings"
-      : DASHBOARD_NAV_ITEMS.find((item) => item.view === activeView)?.label ?? "Dashboard";
-
   const [confirmingLogout, setConfirmingLogout] = useState(false);
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
