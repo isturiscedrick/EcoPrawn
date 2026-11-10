@@ -57,7 +57,7 @@ export function ContactForm() {
         <button
           type="button"
           onClick={handleReset}
-          className={`inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-primary)] px-6 py-3 text-base font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${buttonMotion} ${focusRing}`}
+          className={`ep-cta-control ep-cta-secondary inline-flex items-center justify-center rounded-xl border-2 border-[var(--ep-primary)] px-6 py-3 text-base font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-primary)] hover:text-[var(--ep-bg)] ${buttonMotion} ${focusRing}`}
         >
           Edit message
         </button>
@@ -130,7 +130,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className={`inline-flex min-h-12 w-full items-center justify-center rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 sm:w-auto text-base font-semibold text-[var(--ep-on-accent)] hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
+        className={`ep-cta-control ep-cta-primary inline-flex min-h-12 w-full items-center justify-center rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3.5 sm:w-auto text-base font-semibold text-[var(--ep-on-accent)] hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] ${buttonMotion} ${focusRing}`}
       >
         Preview message
       </button>
