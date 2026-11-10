@@ -920,3 +920,151 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] [d
     transition: none !important;
   }
 }
+
+
+/* Phase 7 — mobile-first landing layout safeguards.
+   The section shells own horizontal gutters; inner max-width wrappers do not
+   add a second set of mobile gutters. Keep cards fluid at narrow widths. */
+@media (max-width: 639px) {
+  .ep-business-landing .ep-aquaculture-hero {
+    min-height: auto;
+    align-items: stretch;
+  }
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-top: clamp(4.75rem, 17vw, 6.25rem);
+    padding-bottom: clamp(4rem, 14vw, 5.5rem);
+  }
+  .ep-business-landing .ep-field-hero-copy h1 {
+    max-width: 12ch;
+    font-size: clamp(2.35rem, 9.5vw, 3.35rem);
+    line-height: 1.04;
+    letter-spacing: -.06em;
+    overflow-wrap: anywhere;
+  }
+  .ep-business-landing .ep-field-hero-copy [data-hero="lead"] {
+    max-width: 34rem;
+    font-size: .95rem;
+    line-height: 1.7;
+  }
+  .ep-business-landing .ep-field-hero-copy [data-hero="cta"] {
+    width: 100%;
+  }
+  .ep-business-landing .ep-field-hero-copy [data-hero="cta"] a {
+    width: min(100%, 22rem);
+    min-height: 3.25rem;
+    justify-content: center;
+    padding-inline: 1.25rem;
+  }
+  .ep-business-landing .ep-platform-ribbon {
+    padding-block: 1rem;
+  }
+  .ep-business-landing .ep-platform-ribbon-item {
+    gap: .85rem;
+    padding-block: .55rem;
+  }
+  .ep-business-landing .ep-stats-panel {
+    gap: .6rem;
+    padding: .65rem;
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    min-width: 0;
+    padding: .85rem .75rem;
+  }
+  .ep-business-landing .ep-business-capabilities > div,
+  .ep-business-landing #process > div,
+  .ep-business-landing #dashboard-preview > div {
+    padding-inline: 1.25rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] {
+    min-height: 0;
+    padding: 1.25rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] > span:first-child {
+    margin-bottom: 1.1rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] h3 {
+    font-size: 1.35rem;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+  .ep-business-landing .ep-business-capabilities [data-capability-detail] {
+    margin-top: 1.25rem;
+    align-items: center;
+  }
+  .ep-business-landing #process [data-process-track] {
+    gap: 1.25rem;
+  }
+  .ep-business-landing #process [data-process-track] > li {
+    min-width: 0;
+    padding: 1.15rem 0 0;
+  }
+  .ep-business-landing #process [data-process-track] > li h3 {
+    font-size: 1.4rem;
+    line-height: 1.2;
+  }
+  .ep-business-landing #dashboard-preview .ep-dashboard-preview-window {
+    width: 100%;
+    min-width: 0;
+    border-radius: 1rem;
+  }
+  .ep-business-landing #dashboard-preview [data-preview-kpis] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .6rem;
+    padding: .75rem;
+  }
+  .ep-business-landing #dashboard-preview [data-preview-reading] {
+    min-width: 0;
+    padding: .75rem;
+  }
+  .ep-business-landing #dashboard-preview [data-preview-reading] > div:first-child {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .ep-business-landing #dashboard-preview [data-preview-reading] > p.mt-2 {
+    font-size: clamp(1.2rem, 6vw, 1.55rem);
+    overflow-wrap: anywhere;
+  }
+  .ep-business-landing #dashboard-preview > div > div:first-child > div:last-child {
+    align-items: stretch;
+  }
+  .ep-business-landing #dashboard-preview > div > div:first-child > div:last-child a {
+    justify-content: center;
+  }
+  .ep-business-landing .ep-readings-section > div {
+    padding-block: 4rem;
+  }
+  .ep-business-landing .ep-readings-section dl {
+    margin-top: 2rem;
+    gap: .75rem;
+  }
+  .ep-business-landing .ep-readings-section .ep-reading-card {
+    min-height: 0;
+    padding: 1.1rem;
+  }
+  .ep-business-landing #process [data-process-track] > li,
+  .ep-business-landing .ep-business-capabilities [data-business-card],
+  .ep-business-landing #dashboard-preview .ep-dashboard-preview-window {
+    max-width: 100%;
+  }
+}
+@media (max-width: 359px) {
+  .ep-business-landing .ep-field-hero-copy h1 {
+    font-size: 2.2rem;
+  }
+  .ep-business-landing .ep-stats-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-business-landing #dashboard-preview [data-preview-kpis] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-business-landing #dashboard-preview .ep-dashboard-preview-window > div:first-child {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-field-hero-copy [data-hero="cta"] a {
+    transition: none !important;
+    transform: none !important;
+  }
+}
