@@ -101,3 +101,65 @@ html.dark .ep-business-landing #process [data-process-track] > li {
     transition: none !important;
   }
 }
+
+/* Premium hero dashboard CTA: restrained gloss, clear focus, and arrow motion. */
+.ep-landing [data-dashboard-entry] {
+  isolation: isolate;
+  min-width: 12.9rem;
+  min-height: 3.25rem;
+  border-color: color-mix(in srgb,var(--ep-accent) 82%,white 18%);
+  background-image: linear-gradient(180deg,rgba(255,255,255,.13),transparent 58%);
+  box-shadow:
+    0 12px 28px -13px color-mix(in srgb,var(--ep-accent) 68%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.22);
+  -webkit-tap-highlight-color: transparent;
+}
+.ep-landing [data-dashboard-entry] > span {
+  position: relative;
+  z-index: 1;
+  transition: background-color .22s ease,border-color .22s ease;
+}
+.ep-landing [data-dashboard-entry] > span svg {
+  transition: transform .22s cubic-bezier(.2,.75,.25,1);
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .ep-landing [data-dashboard-entry]:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 17px 34px -13px color-mix(in srgb,var(--ep-accent) 76%,transparent),
+      inset 0 1px 0 rgba(255,255,255,.25);
+  }
+  .ep-landing [data-dashboard-entry]:hover > span {
+    border-color: rgba(255,255,255,.48);
+    background-color: rgba(255,255,255,.18);
+  }
+  .ep-landing [data-dashboard-entry]:hover > span svg {
+    transform: translate(2px,-2px);
+  }
+}
+.ep-landing [data-dashboard-entry]:active {
+  transform: translateY(0) scale(.985);
+  box-shadow:
+    0 6px 16px -10px color-mix(in srgb,var(--ep-accent) 70%,transparent),
+    inset 0 1px 2px rgba(0,0,0,.12);
+}
+.ep-landing [data-dashboard-entry]:focus-visible {
+  outline: 3px solid color-mix(in srgb,var(--ep-accent) 55%,white 45%);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px color-mix(in srgb,var(--ep-accent) 14%,transparent);
+}
+@media (max-width: 639px) {
+  .ep-landing [data-dashboard-entry] {
+    min-width: min(13.5rem,100%);
+    min-height: 3.25rem;
+    padding-inline: 1.35rem;
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .ep-landing [data-dashboard-entry],
+  .ep-landing [data-dashboard-entry] > span,
+  .ep-landing [data-dashboard-entry] > span svg {
+    transition: none !important;
+    transform: none !important;
+  }
+}
