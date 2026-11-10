@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { Link } from "@tanstack/react-router";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
@@ -100,6 +100,8 @@ function Words({ text }: { text: string }) {
 }
 
 export function LandingPage() {
+  const [previewTab, setPreviewTab] = useState<"water" | "growth" | "systems">("water");
+
   return (
     <div className="ep-landing ep-business-landing flex min-h-screen flex-col">
       <LandingMotion />
@@ -462,54 +464,118 @@ export function LandingPage() {
                 </span>
               </div>
 
-              <div data-preview-kpis="" className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-3 sm:p-5">
-                {heroReadouts.slice(0, 3).map((reading) => {
-                  const range = targetRangeFor(reading.label);
-                  return (
-                    <div data-preview-reading="" key={reading.label} className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
-                      <div className="flex items-center justify-between gap-2">
-                        <p className="text-xs font-semibold text-[var(--ep-text-muted)]">{reading.label}</p>
-                        <span className="rounded-full bg-[var(--ep-tint)] px-2 py-1 text-[9px] font-bold uppercase tracking-[.12em] text-[var(--ep-text-muted)]">Sample</span>
-                      </div>
-                      <p className="mt-2 text-[clamp(1.45rem,2.4vw,1.9rem)] font-bold leading-none tracking-tight tabular-nums text-[var(--ep-text)]">
-                        {reading.value}<span className="ml-1 text-xs font-semibold text-[var(--ep-text-muted)]">{heroReadoutUnits[reading.label]}</span>
-                      </p>
-                      {range && <p className="mt-3 border-t border-[var(--ep-line)] pt-2 text-[11px] leading-relaxed text-[var(--ep-text-muted)]">Target {range}</p>}
-                      <p className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[var(--ep-accent)]">
-                        <Icon name="check" size={12} /> Within sample target
-                      </p>
-                    </div>
-                  );
-                })}
+              <div className="ep-preview-tab-list" aria-label="Choose a dashboard preview" role="group">
+                {([
+                  { id: "water", label: "Water Quality" },
+                  { id: "growth", label: "Growth Insights" },
+                  { id: "systems", label: "Farm Systems" },
+                ] as const).map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    className="ep-preview-tab"
+                    aria-pressed={previewTab === tab.id}
+                    onClick={() => setPreviewTab(tab.id)}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
               </div>
 
-              <div className="grid gap-4 px-4 pb-5 sm:grid-cols-[1.4fr_.8fr] sm:px-5">
-                <div className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <p className="text-sm font-semibold text-[var(--ep-text)]">Water quality trend</p>
-                    <span className="rounded-full border border-[var(--ep-line)] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-[var(--ep-text-muted)]">Illustrative</span>
+              <div
+                className="ep-preview-tab-panel"
+                role="region"
+                aria-label={
+                  previewTab === "water"
+                    ? "Water quality sample preview"
+                    : previewTab === "growth"
+                      ? "Growth insights concept preview"
+                      : "Farm systems concept preview"
+                }
+                aria-live="polite"
+              >
+                {previewTab === "water" ? (
+                  <>
+                                <div data-preview-kpis="" className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-3 sm:p-5">
+                                  {heroReadouts.slice(0, 3).map((reading) => {
+                                    const range = targetRangeFor(reading.label);
+                                    return (
+                                      <div data-preview-reading="" key={reading.label} className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                                        <div className="flex items-center justify-between gap-2">
+                                          <p className="text-xs font-semibold text-[var(--ep-text-muted)]">{reading.label}</p>
+                                          <span className="rounded-full bg-[var(--ep-tint)] px-2 py-1 text-[9px] font-bold uppercase tracking-[.12em] text-[var(--ep-text-muted)]">Sample</span>
+                                        </div>
+                                        <p className="mt-2 text-[clamp(1.45rem,2.4vw,1.9rem)] font-bold leading-none tracking-tight tabular-nums text-[var(--ep-text)]">
+                                          {reading.value}<span className="ml-1 text-xs font-semibold text-[var(--ep-text-muted)]">{heroReadoutUnits[reading.label]}</span>
+                                        </p>
+                                        {range && <p className="mt-3 border-t border-[var(--ep-line)] pt-2 text-[11px] leading-relaxed text-[var(--ep-text-muted)]">Target {range}</p>}
+                                        <p className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[var(--ep-accent)]">
+                                          <Icon name="check" size={12} /> Within sample target
+                                        </p>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                  
+                                <div className="grid gap-4 px-4 pb-5 sm:grid-cols-[1.4fr_.8fr] sm:px-5">
+                                  <div className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                                    <div className="flex flex-wrap items-center justify-between gap-2">
+                                      <p className="text-sm font-semibold text-[var(--ep-text)]">Water quality trend</p>
+                                      <span className="rounded-full border border-[var(--ep-line)] px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-[var(--ep-text-muted)]">Illustrative</span>
+                                    </div>
+                                    <div className="ep-preview-chart mt-4 flex h-28 items-end gap-2" aria-hidden="true">
+                                      {[34, 48, 42, 62, 54, 73, 66, 84, 76, 92, 82, 96].map((height, index) => (
+                                        <span key={index} style={{ height: `${height}%` }} />
+                                      ))}
+                                    </div>
+                                    <p className="mt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Illustrative pattern only — not historical telemetry.</p>
+                                  </div>
+                                  <div className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                                    <p className="text-sm font-semibold text-[var(--ep-text)]">Platform modules</p>
+                                    <div className="mt-4 space-y-3">
+                                      <div className="flex items-center gap-3 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3">
+                                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="activity" size={16} /></span>
+                                        <span className="min-w-0"><span className="block text-xs font-semibold text-[var(--ep-text)]">Water monitoring</span><span className="mt-0.5 block text-[10px] text-[var(--ep-text-muted)]">Sensor readings and target ranges</span></span>
+                                      </div>
+                                      <div className="flex items-center gap-3 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3">
+                                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="eye" size={16} /></span>
+                                        <span className="min-w-0"><span className="block text-xs font-semibold text-[var(--ep-text)]">Growth insights</span><span className="mt-0.5 block text-[10px] text-[var(--ep-text-muted)]">Visual growth and biomass context</span></span>
+                                      </div>
+                                    </div>
+                                    <p className="mt-4 border-t border-[var(--ep-line)] pt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Concept preview only. Values and visual patterns are illustrative, not live farm data.</p>
+                                  </div>
+                                </div>
+                  </>
+                ) : previewTab === "growth" ? (
+                  <div className="grid gap-3 p-4 sm:grid-cols-2 sm:p-5">
+                    <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-5">
+                      <span className="mb-4 grid h-10 w-10 place-items-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="eye" size={20} /></span>
+                      <p className="text-sm font-semibold text-[var(--ep-text)]">Camera-based observation</p>
+                      <p className="mt-2 text-xs leading-relaxed text-[var(--ep-text-muted)]">A visual approach to observing shrimp growth without routine handling.</p>
+                    </div>
+                    <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-5">
+                      <span className="mb-4 grid h-10 w-10 place-items-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="chart-no-axes-combined" size={20} /></span>
+                      <p className="text-sm font-semibold text-[var(--ep-text)]">Growth and biomass context</p>
+                      <p className="mt-2 text-xs leading-relaxed text-[var(--ep-text-muted)]">Visual insights can help teams understand growth patterns and inform feeding decisions.</p>
+                    </div>
+                    <p className="sm:col-span-2 rounded-lg border border-dashed border-[var(--ep-line)] px-4 py-3 text-xs leading-relaxed text-[var(--ep-text-muted)]">Concept view only. No live camera feed, measured biomass, or real growth history is displayed.</p>
                   </div>
-                  <div className="ep-preview-chart mt-4 flex h-28 items-end gap-2" aria-hidden="true">
-                    {[34, 48, 42, 62, 54, 73, 66, 84, 76, 92, 82, 96].map((height, index) => (
-                      <span key={index} style={{ height: `${height}%` }} />
+                ) : (
+                  <div className="grid gap-3 p-4 sm:grid-cols-3 sm:p-5">
+                    {[
+                      { icon: "activity" as const, title: "Aeration", detail: "Aerator response based on operating conditions." },
+                      { icon: "zap" as const, title: "Feeding", detail: "Feeding workflow informed by biomass context." },
+                      { icon: "leaf" as const, title: "Effluent", detail: "Treated wastewater routing to mangrove and wetland." },
+                    ].map((item) => (
+                      <div key={item.title} className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                        <span className="mb-4 grid h-10 w-10 place-items-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name={item.icon} size={19} /></span>
+                        <p className="text-sm font-semibold text-[var(--ep-text)]">{item.title}</p>
+                        <p className="mt-2 text-xs leading-relaxed text-[var(--ep-text-muted)]">{item.detail}</p>
+                      </div>
                     ))}
+                    <p className="sm:col-span-3 rounded-lg border border-dashed border-[var(--ep-line)] px-4 py-3 text-xs leading-relaxed text-[var(--ep-text-muted)]">Concept view only. This preview does not control equipment or report live system status.</p>
                   </div>
-                  <p className="mt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Illustrative pattern only — not historical telemetry.</p>
-                </div>
-                <div className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
-                  <p className="text-sm font-semibold text-[var(--ep-text)]">Platform modules</p>
-                  <div className="mt-4 space-y-3">
-                    <div className="flex items-center gap-3 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3">
-                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="activity" size={16} /></span>
-                      <span className="min-w-0"><span className="block text-xs font-semibold text-[var(--ep-text)]">Water monitoring</span><span className="mt-0.5 block text-[10px] text-[var(--ep-text-muted)]">Sensor readings and target ranges</span></span>
-                    </div>
-                    <div className="flex items-center gap-3 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3">
-                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="eye" size={16} /></span>
-                      <span className="min-w-0"><span className="block text-xs font-semibold text-[var(--ep-text)]">Growth insights</span><span className="mt-0.5 block text-[10px] text-[var(--ep-text-muted)]">Visual growth and biomass context</span></span>
-                    </div>
-                  </div>
-                  <p className="mt-4 border-t border-[var(--ep-line)] pt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Concept preview only. Values and visual patterns are illustrative, not live farm data.</p>
-                </div>
+                )}
               </div>
             </div>
           </div>
