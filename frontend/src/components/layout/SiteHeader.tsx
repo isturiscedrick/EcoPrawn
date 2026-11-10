@@ -151,16 +151,9 @@ export function SiteHeader({
       }
     }
 
-    const desktop = window.matchMedia("(min-width: 1024px)");
-    const onChange = (event: MediaQueryListEvent) => {
-      if (event.matches) setMobileNavOpen(false);
-    };
-
     window.addEventListener("keydown", onKeyDown);
-    desktop.addEventListener("change", onChange);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
-      desktop.removeEventListener("change", onChange);
 
       // Restore every inline style and return to the exact previous page offset.
       html.style.overflow = previousHtmlOverflow;
@@ -207,7 +200,7 @@ export function SiteHeader({
               aria-expanded={mobileNavOpen}
               aria-controls="mobile-nav-panel"
               aria-label="Open menu"
-              className={`flex h-10 w-10 items-center justify-center justify-self-start rounded-none border-0 bg-transparent shadow-none transition-colors hover:bg-transparent focus-visible:bg-transparent lg:hidden ${focusRing}`}
+              className={`flex h-10 w-10 items-center justify-center justify-self-start rounded-none border-0 bg-transparent shadow-none transition-colors hover:bg-transparent focus-visible:bg-transparent ${focusRing}`}
               style={{ color: "var(--ep-primary)", backgroundColor: "transparent" }}
             >
               <svg
@@ -233,11 +226,6 @@ export function SiteHeader({
             <BrandMark size={36} />
           </Link>
 
-          {showLinks && (
-            <div className="hidden justify-self-center lg:block">
-              <NavLinks variant="desktop" activeHref={navHref} />
-            </div>
-          )}
 
           <div className="flex shrink-0 items-center justify-self-end gap-1.5 sm:gap-3">
             {!isAuth && (
@@ -295,10 +283,9 @@ export function SiteHeader({
         </div>
       </header>
 
-      {/* MOBILE DRAWER: a sibling of the header (not a child), because the header's
-          backdrop-blur would otherwise trap this fixed layer inside the header box. */}
+      {/* Shared slide-out navigation is available at every viewport size. */}
       {showLinks && (
-        <div className="lg:hidden">
+        <div>
           <div
             aria-hidden="true"
             onClick={closeDrawer}
