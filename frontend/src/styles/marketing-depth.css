@@ -883,3 +883,36 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] > 
     transition: none !important;
   }
 }
+
+
+/* Landing capability cards: compact, consistent proof-points at the foot
+   of each card. Keep the details informational rather than implying live data. */
+.ep-business-landing .ep-business-capabilities [data-business-card] [data-capability-detail] {
+  min-height: 3rem;
+  margin-top: auto;
+  color: var(--ep-text);
+}
+.ep-business-landing .ep-business-capabilities [data-business-card] [data-capability-detail] > span:first-child {
+  font-size: .72rem;
+  line-height: 1.4;
+  letter-spacing: .01em;
+}
+.ep-business-landing .ep-business-capabilities [data-business-card] [data-capability-detail] > span:last-child {
+  flex: 0 0 auto;
+}
+.ep-business-landing .ep-business-capabilities [data-business-card] [data-capability-detail] svg {
+  display: block;
+}
+html.dark .ep-business-landing .ep-business-capabilities [data-business-card] [data-capability-detail] {
+  border-color: color-mix(in srgb, var(--ep-line) 80%, var(--ep-accent) 20%);
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-business-capabilities [data-business-card] [data-capability-detail] {
+    margin-top: 1.5rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-business-capabilities [data-business-card] [data-capability-detail] {
+    transition: none !important;
+  }
+}
