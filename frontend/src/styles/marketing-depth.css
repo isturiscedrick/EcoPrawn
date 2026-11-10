@@ -1068,3 +1068,124 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] [d
     transform: none !important;
   }
 }
+
+
+/* Phase 8 — tablet and desktop composition.
+   Keep intermediate widths from inheriting cramped desktop columns, then
+   restore balanced multi-column layouts once each panel has enough room. */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .ep-business-landing .ep-aquaculture-hero {
+    min-height: auto;
+  }
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-top: clamp(5.5rem, 9vw, 7.25rem);
+    padding-bottom: clamp(4.5rem, 8vw, 6.5rem);
+  }
+  .ep-business-landing .ep-field-hero-copy {
+    max-width: 52rem;
+  }
+  .ep-business-landing .ep-field-hero-copy h1 {
+    max-width: 14ch;
+    font-size: clamp(3.25rem, 7.2vw, 4.75rem);
+    line-height: 1.03;
+  }
+  .ep-business-landing .ep-field-hero-copy [data-hero="lead"] {
+    max-width: 40rem;
+    font-size: 1.05rem;
+  }
+  .ep-business-landing .ep-platform-ribbon > div {
+    max-width: 100%;
+  }
+  .ep-business-landing .ep-platform-ribbon-item {
+    gap: .8rem;
+    padding-inline: 1rem;
+  }
+  .ep-business-landing .ep-stats-panel {
+    gap: .75rem;
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    padding: 1.1rem;
+  }
+  .ep-business-landing .ep-readings-section dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .ep-business-landing .ep-readings-section dl > .ep-reading-card:last-child {
+    grid-column: 1 / -1;
+    width: min(100%, calc((100% - 1rem) / 2));
+    justify-self: center;
+  }
+  .ep-business-landing .ep-business-capabilities > div > .grid {
+    align-items: stretch;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] {
+    min-height: 17rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card]:nth-child(3) {
+    width: min(100%, calc((100% - 1rem) / 2));
+    justify-self: center;
+  }
+  .ep-business-landing #process [data-process-track] {
+    gap: 1rem;
+  }
+  .ep-business-landing #process [data-process-track] > li {
+    min-height: 15rem;
+    padding: 1.2rem;
+  }
+  .ep-business-landing #dashboard-preview > div {
+    gap: 2rem;
+  }
+  .ep-business-landing #dashboard-preview .ep-dashboard-preview-window {
+    width: 100%;
+  }
+}
+@media (min-width: 640px) and (max-width: 899px) {
+  .ep-business-landing #dashboard-preview .ep-dashboard-preview-window > div:nth-child(3) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-top: clamp(6.5rem, 8vw, 8.5rem);
+    padding-bottom: clamp(5.5rem, 7vw, 7.5rem);
+  }
+  .ep-business-landing .ep-field-hero-copy {
+    max-width: 64rem;
+  }
+  .ep-business-landing .ep-field-hero-copy h1 {
+    max-width: 12.5ch;
+    font-size: clamp(4.25rem, 5.5vw, 5.25rem);
+  }
+  .ep-business-landing .ep-field-hero-copy [data-hero="lead"] {
+    max-width: 42rem;
+    font-size: 1.125rem;
+  }
+  .ep-business-landing .ep-platform-ribbon > div {
+    width: min(100%, 1180px);
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] {
+    min-height: 19rem;
+    padding: clamp(1.5rem, 2vw, 2rem);
+  }
+  .ep-business-landing #process [data-process-track] > li {
+    min-height: 16rem;
+    padding: 1.5rem;
+  }
+  .ep-business-landing #dashboard-preview > div {
+    gap: clamp(3rem, 5vw, 5rem);
+  }
+}
+@media (min-width: 1440px) {
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-top: 8.5rem;
+    padding-bottom: 7.5rem;
+  }
+  .ep-business-landing .ep-field-hero-copy h1 {
+    font-size: 5.25rem;
+  }
+  .ep-business-landing #readings .ep-readings-intro,
+  .ep-business-landing #capabilities [data-reveal],
+  .ep-business-landing #process [data-reveal] {
+    max-width: 46rem;
+  }
+}
