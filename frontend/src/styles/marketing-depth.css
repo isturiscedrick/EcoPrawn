@@ -1362,3 +1362,75 @@ html.dark .ep-business-landing #dashboard-preview .ep-dashboard-preview-window {
     outline-offset: 3px;
   }
 }
+
+
+/* Phase 11 — interactive dashboard preview controls and content panels. */
+.ep-business-landing .ep-preview-tab-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid var(--ep-line);
+  background: color-mix(in srgb, var(--ep-surface) 92%, var(--ep-tint));
+}
+.ep-business-landing .ep-preview-tab {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ep-line);
+  border-radius: 999px;
+  padding: .55rem .95rem;
+  color: var(--ep-text-muted);
+  background: var(--ep-bg);
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: color .18s ease, background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.ep-business-landing .ep-preview-tab[aria-pressed="true"] {
+  border-color: var(--ep-accent);
+  color: var(--ep-on-accent);
+  background: var(--ep-accent);
+  box-shadow: 0 8px 20px -12px color-mix(in srgb, var(--ep-accent) 72%, transparent);
+}
+.ep-business-landing .ep-preview-tab:focus-visible {
+  outline: 3px solid var(--ep-accent);
+  outline-offset: 3px;
+}
+.ep-business-landing .ep-preview-tab-panel {
+  min-width: 0;
+  animation: ep-preview-panel-enter .24s ease both;
+}
+@keyframes ep-preview-panel-enter {
+  from { opacity: .55; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+html.dark .ep-business-landing .ep-preview-tab-list {
+  background: color-mix(in srgb, var(--ep-surface) 88%, #60a5fa 12%);
+}
+html.dark .ep-business-landing .ep-preview-tab[aria-pressed="false"] {
+  background: var(--ep-bg);
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-preview-tab-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .4rem;
+    padding: .7rem;
+  }
+  .ep-business-landing .ep-preview-tab {
+    min-width: 0;
+    min-height: 2.8rem;
+    padding-inline: .4rem;
+    font-size: .65rem;
+    text-align: center;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-preview-tab,
+  .ep-business-landing .ep-preview-tab-panel {
+    animation: none !important;
+    transition: none !important;
+  }
+}
