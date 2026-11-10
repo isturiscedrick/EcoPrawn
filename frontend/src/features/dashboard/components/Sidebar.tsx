@@ -296,7 +296,7 @@ export function Sidebar({
               <button
                 type="button"
                 onClick={onCancelLogout}
-                className="flex-1 rounded-lg border border-[rgba(255,255,255,0.22)] px-4 py-2.5 text-[13.5px] font-semibold text-[rgba(255,255,255,0.84)] transition-colors duration-200 hover:bg-[rgba(255,255,255,0.08)] hover:text-white"
+                className="ep-dashboard-action flex-1 rounded-lg border border-[rgba(255,255,255,0.22)] px-4 py-2.5 text-[13.5px] font-semibold text-[rgba(255,255,255,0.84)] transition-colors duration-200 hover:bg-[rgba(255,255,255,0.08)] hover:text-white"
               >
                 Cancel
               </button>
@@ -304,7 +304,7 @@ export function Sidebar({
                 type="button"
                 onClick={onConfirmLogout}
                 disabled={loggingOut}
-                className="flex-1 rounded-lg bg-[var(--coral)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--sand)] transition-colors duration-200 hover:bg-[var(--coral-dim)] disabled:opacity-60"
+                className="ep-dashboard-action ep-dashboard-action-danger flex-1 rounded-lg bg-[var(--coral)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--sand)] transition-colors duration-200 hover:bg-[var(--coral-dim)] disabled:opacity-60"
               >
                 {loggingOut ? "Logging out…" : "Log out"}
               </button>
