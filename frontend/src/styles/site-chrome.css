@@ -262,3 +262,46 @@ html.dark .ep-mobile-site-drawer > div:last-child a:last-child {
 html.dark .ep-mobile-site-drawer button[aria-label="Close"] {
   background: #111827 !important; border-color: #334155 !important; color: #cbd5e1 !important;
 }
+
+
+/* Dashboard mobile drawer mirrors the public site's mobile navigation shell.
+   Scoped to the mobile drawer so desktop dashboard navigation is unaffected. */
+.ep-mobile-dashboard-drawer { background:#fff !important; color:#111827 !important; border-color:#dbe2ea !important; }
+.ep-mobile-dashboard-drawer .ep-logo { --ep-logo-color:#111827 !important; --ep-logo-text:#111827 !important; }
+.ep-mobile-dashboard-drawer .ep-logo-shrimp { fill:#111827 !important; stroke:#111827 !important; }
+.ep-mobile-dashboard-drawer .ep-logo-wordmark { color:#111827 !important; -webkit-text-fill-color:#111827 !important; }
+.ep-mobile-dashboard-drawer .ep-mobile-drawer-caption,
+.ep-mobile-dashboard-drawer .ep-font-mono { color:#475569 !important; }
+.ep-mobile-dashboard-drawer > div:nth-child(2) a { background:#fff !important; border-color:#dbe2ea !important; }
+.ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:first-child { color:#111827 !important; }
+.ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:last-child { color:#475569 !important; }
+.ep-mobile-dashboard-drawer > div:nth-child(2) a > div:first-child { background:#dbeafe !important; color:#1e40af !important; }
+.ep-mobile-dashboard-drawer nav a > span { color:#1f2937 !important; }
+.ep-mobile-dashboard-drawer nav a[aria-current="page"] > span { background:#1d4ed8 !important; border-color:#1d4ed8 !important; color:#fff !important; box-shadow:0 8px 20px -12px rgba(29,78,216,.65) !important; }
+.ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span { color:#fff !important; }
+.ep-mobile-dashboard-drawer nav a:not([aria-current="page"]):hover > span { background:#f1f5f9 !important; color:#1e40af !important; }
+.ep-mobile-dashboard-drawer nav a:focus-visible { outline:2px solid #2563eb; outline-offset:2px; }
+.ep-mobile-dashboard-drawer > div:last-child { background:#f8fafc !important; border-color:#dbe2ea !important; }
+.ep-mobile-dashboard-drawer > div:last-child a[aria-current="page"] { background:#1d4ed8 !important; border-color:#1d4ed8 !important; color:#fff !important; }
+.ep-mobile-dashboard-drawer > div:last-child button { border:1px solid #dbe2ea !important; border-radius:.75rem !important; background:#fff !important; color:#111827 !important; }
+.ep-mobile-dashboard-drawer > div:last-child button:hover { background:#f1f5f9 !important; color:#1e40af !important; }
+.ep-mobile-dashboard-drawer button[aria-label="Close navigation menu"] { background:#fff !important; border-color:#dbe2ea !important; color:#475569 !important; }
+html.dark .ep-mobile-dashboard-drawer { background:#111827 !important; color:#f8fafc !important; border-color:#334155 !important; }
+html.dark .ep-mobile-dashboard-drawer .ep-logo { --ep-logo-color:#f8fafc !important; --ep-logo-text:#f8fafc !important; }
+html.dark .ep-mobile-dashboard-drawer .ep-logo-shrimp { fill:#f8fafc !important; stroke:#f8fafc !important; }
+html.dark .ep-mobile-dashboard-drawer .ep-logo-wordmark { color:#f8fafc !important; -webkit-text-fill-color:#f8fafc !important; }
+html.dark .ep-mobile-dashboard-drawer .ep-mobile-drawer-caption,
+html.dark .ep-mobile-dashboard-drawer .ep-font-mono { color:#cbd5e1 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a { background:#1f2937 !important; border-color:#334155 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:first-child { color:#f8fafc !important; }
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:last-child { color:#cbd5e1 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:first-child { background:rgba(96,165,250,.15) !important; color:#bfdbfe !important; }
+html.dark .ep-mobile-dashboard-drawer nav a > span { color:#e2e8f0 !important; }
+html.dark .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span { background:#60a5fa !important; border-color:#60a5fa !important; color:#071426 !important; }
+html.dark .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span { color:#071426 !important; }
+html.dark .ep-mobile-dashboard-drawer nav a:not([aria-current="page"]):hover > span { background:#1f2937 !important; color:#93c5fd !important; }
+html.dark .ep-mobile-dashboard-drawer > div:last-child { background:#090d16 !important; border-color:#334155 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:last-child a[aria-current="page"] { background:#60a5fa !important; border-color:#60a5fa !important; color:#071426 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:last-child button { background:#111827 !important; border-color:#334155 !important; color:#f8fafc !important; }
+html.dark .ep-mobile-dashboard-drawer > div:last-child button:hover { background:#1f2937 !important; color:#93c5fd !important; }
+html.dark .ep-mobile-dashboard-drawer button[aria-label="Close navigation menu"] { background:#111827 !important; border-color:#334155 !important; color:#cbd5e1 !important; }
