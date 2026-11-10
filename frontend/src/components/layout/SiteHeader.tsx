@@ -268,7 +268,7 @@ export function SiteHeader({
                 <AuthLink
                   aria-label="Log in"
                   title="Log in"
-                  className={`hidden h-10 w-10 items-center justify-center whitespace-nowrap rounded-full border text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
+                  className={`ep-cta-control ep-cta-secondary hidden h-10 w-10 items-center justify-center whitespace-nowrap rounded-full border text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
                   style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}
                 >
                   <svg className="xl:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -281,7 +281,7 @@ export function SiteHeader({
                   mode="signup"
                   aria-label="Get started"
                   title="Get started"
-                  className={`hidden h-10 w-10 items-center justify-center gap-2 whitespace-nowrap rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
+                  className={`ep-cta-control ep-cta-primary hidden h-10 w-10 items-center justify-center gap-2 whitespace-nowrap rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
                   style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}
                 >
                   <span className="hidden whitespace-nowrap xl:inline">Get started</span>
@@ -356,14 +356,14 @@ export function SiteHeader({
               <AuthLink
                 mode="signup"
                 onClick={() => setMobileNavOpen(false)}
-                className={`flex min-h-12 w-full items-center justify-center rounded-xl px-4 py-3 text-center text-sm font-semibold ${focusRing}`}
+                className={`ep-cta-control ep-cta-primary flex min-h-12 w-full items-center justify-center rounded-xl px-4 py-3 text-center text-sm font-semibold ${focusRing}`}
                 style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-on-accent, #ffffff)" }}
               >
                 Get started
               </AuthLink>
               <AuthLink
                 onClick={() => setMobileNavOpen(false)}
-                className={`flex min-h-12 w-full items-center justify-center rounded-xl border px-4 py-3 text-center text-sm font-semibold ${focusRing}`}
+                className={`ep-cta-control ep-cta-secondary flex min-h-12 w-full items-center justify-center rounded-xl border px-4 py-3 text-center text-sm font-semibold ${focusRing}`}
                 style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}
               >
                 Log in
