@@ -155,6 +155,12 @@ const PATHS = {
       <path d="m12 5 7 7-7 7" />
     </>
   ),
+  "arrow-up-right": (
+    <>
+      <path d="M7 17 17 7" />
+      <path d="M8 7h9v9" />
+    </>
+  ),
   sun: (
     <>
       <circle cx="12" cy="12" r="4" />
