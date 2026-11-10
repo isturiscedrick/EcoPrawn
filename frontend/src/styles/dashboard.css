@@ -120,7 +120,7 @@ html.dark .dashboard-shell {
 }
 
 /* ---------- Viewport Breakpoints ---------- */
-@media (max-width: 767px) {
+@media (min-width: 0px) {
   .dashboard-shell main {
     width: 100%;
     min-width: 0;
@@ -186,11 +186,7 @@ html.dark .dashboard-shell {
   }
 }
 
-@media (min-width: 480px) and (max-width: 767px) {
-  .dashboard-shell main :is(.grid.grid-cols-1.sm\:grid-cols-2, .grid.grid-cols-1.sm\:grid-cols-3) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
+/* (removed: the dashboard always uses the single-column mobile layout) */
 
 @media (max-width: 380px) {
   .dashboard-shell main {

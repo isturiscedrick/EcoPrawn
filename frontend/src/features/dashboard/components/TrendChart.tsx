@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 
 interface TrendChartProps {
   values?: number[];
@@ -9,6 +9,7 @@ interface TrendChartProps {
 
 export function TrendChart({ values = [], onPointClick, label = "Trend", unit = "" }: TrendChartProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const gradientId = `ep-trend-fill-${useId().replace(/:/g, "")}`;
 
   if (values.length < 2)
     return (
@@ -41,7 +42,7 @@ export function TrendChart({ values = [], onPointClick, label = "Trend", unit = 
       <div className="flex items-center justify-between gap-3 text-sm font-medium text-[var(--ep-text-muted)]">
         <span>{label}{unit ? ` (${unit})` : ""}</span>
         {selectedValue !== null && (
-          <span className="rounded-full bg-[rgba(232,98,58,0.12)] px-3 py-1 font-semibold text-[var(--ep-accent)]">
+          <span className="rounded-full bg-[var(--ep-accent-tint)] px-3 py-1 font-semibold text-[var(--ep-accent)]">
             {selectedValue.toFixed(2)}{unit ? ` ${unit}` : ""}
           </span>
         )}
@@ -52,19 +53,26 @@ export function TrendChart({ values = [], onPointClick, label = "Trend", unit = 
         role="group"
         aria-label={`${label} chart. Select a point for details.`}
       >
+        <defs>
+          <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="var(--ep-accent)" stopOpacity="0.28" />
+            <stop offset="100%" stopColor="var(--ep-accent)" stopOpacity="0" />
+          </linearGradient>
+        </defs>
         {[30, 78, 126, 174].map((y) => (
           <line key={y} x1="0" x2="560" y1={y} y2={y} stroke="var(--ep-line)" strokeWidth="1" strokeDasharray="4 6" />
         ))}
         <text x="0" y="24" fill="var(--ep-text-muted)" fontSize="13">{max.toFixed(1)}</text>
         <text x="0" y="198" fill="var(--ep-text-muted)" fontSize="13">{min.toFixed(1)}</text>
-      <polyline
-        points={points}
-        fill="none"
-        stroke="var(--mangrove)"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+        <polygon points={`${points} 560,174 0,174`} fill={`url(#${gradientId})`} />
+        <polyline
+          points={points}
+          fill="none"
+          stroke="var(--ep-accent)"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
         {pointCoordinates.map((point, index) => (
           <g key={`${point.x}-${point.y}`}>
             <circle
@@ -89,7 +97,7 @@ export function TrendChart({ values = [], onPointClick, label = "Trend", unit = 
               cy={point.y}
               r={selectedIndex === index ? 8 : 6}
               fill="var(--ep-surface)"
-              stroke="var(--coral)"
+              stroke="var(--ep-accent)"
               strokeWidth={selectedIndex === index ? 4 : 3}
               pointerEvents="none"
             />

@@ -187,7 +187,7 @@ export function WaterQuality() {
               />
               <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
                 <span className="flex items-center gap-1.5">
-                  <span className="inline-block w-3 h-[2px] bg-[var(--mangrove)]" /> DO (mg/L)
+                  <span className="inline-block w-3 h-[2px] bg-[var(--ep-accent)]" /> DO (mg/L)
                 </span>
                 <span className="flex items-center gap-1.5 text-[var(--coral)]">
                   <span className="inline-block w-3 h-[2px]" style={{ borderTop: "2px dashed var(--coral)" }} />
