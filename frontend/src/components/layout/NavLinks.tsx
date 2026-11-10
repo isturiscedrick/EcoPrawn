@@ -91,7 +91,7 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
     <nav
       id="mobile-nav-panel"
       aria-label="Mobile navigation"
-      className={`px-3 pb-3 pt-4 sm:px-4 lg:hidden ${monochrome ? "ep-nav-monochrome" : ""}`}
+      className={`w-full px-3 pb-3 pt-4 sm:px-4 ${monochrome ? "ep-nav-monochrome" : ""}`}
       style={monochrome ? { backgroundColor: darkMode ? "#000000" : "#ffffff", borderColor: darkMode ? "#ffffff" : "#000000", color: darkMode ? "#ffffff" : "#000000" } : undefined}
     >
       <ul className="flex flex-col gap-2">
