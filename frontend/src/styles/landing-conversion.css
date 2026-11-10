@@ -1,0 +1,103 @@
+/* Landing Phase 3: clear process sequencing and a mobile-friendly final CTA. */
+.ep-business-landing #process [data-process-track] {
+  align-items: stretch;
+  gap: 1rem;
+}
+.ep-business-landing #process [data-process-track] > li {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 15rem;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--ep-line);
+  border-radius: 1.25rem;
+  background: var(--ep-surface);
+  padding: 1.35rem;
+  box-shadow: 0 18px 46px -38px rgba(15,23,42,.34);
+}
+.ep-business-landing #process [data-process-track] > li::before {
+  position: absolute;
+  inset: 0 1.35rem auto;
+  height: 3px;
+  background: linear-gradient(90deg,var(--ep-accent),color-mix(in srgb,var(--ep-accent) 12%,transparent));
+  content: "";
+}
+.ep-business-landing #process [data-process-track] > li > div:first-of-type {
+  margin-bottom: 1.5rem;
+}
+.ep-business-landing #process [data-process-track] > li > div:first-of-type > span:last-child {
+  width: 2.9rem;
+  height: 2.9rem;
+  border: 1px solid color-mix(in srgb,var(--ep-accent) 22%,var(--ep-line));
+  background: color-mix(in srgb,var(--ep-accent) 9%,var(--ep-tint));
+  color: var(--ep-accent);
+}
+.ep-business-landing #process [data-process-track] > li h3 {
+  margin-top: auto;
+  text-wrap: balance;
+}
+.ep-business-landing #process [data-process-track] > li p {
+  max-width: 30ch;
+  text-wrap: pretty;
+}
+html.dark .ep-business-landing #process [data-process-track] > li {
+  background: color-mix(in srgb,var(--ep-surface) 94%,#1d4ed8 6%);
+  box-shadow: 0 22px 54px -40px rgba(0,0,0,.72);
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .ep-business-landing #process [data-process-track] > li:hover {
+    border-color: color-mix(in srgb,var(--ep-accent) 58%,var(--ep-line));
+    box-shadow: 0 24px 54px -34px rgba(29,78,216,.28);
+  }
+}
+.ep-landing [data-band] {
+  border: 1px solid color-mix(in srgb,var(--ep-on-deep) 12%,transparent);
+  box-shadow: 0 28px 70px -44px rgba(15,23,42,.52);
+}
+.ep-landing [data-band] h2 {
+  max-width: 13ch;
+  text-wrap: balance;
+}
+.ep-landing [data-band] > div:last-child > :is(a,button) {
+  min-height: 3.25rem;
+  border-radius: .9rem;
+  text-align: center;
+}
+@media (max-width: 639px) {
+  .ep-business-landing #process [data-process-track] {
+    gap: .9rem;
+  }
+  .ep-business-landing #process [data-process-track] > li {
+    min-height: 0;
+    padding: 1.2rem;
+  }
+  .ep-business-landing #process [data-process-track] > li::before {
+    inset-inline: 1.2rem;
+  }
+  .ep-landing [data-band] {
+    gap: 1.5rem;
+    border-radius: 1.35rem;
+    padding: 1.5rem;
+  }
+  .ep-landing [data-band] > div:last-child {
+    width: 100%;
+    flex-direction: column;
+  }
+  .ep-landing [data-band] > div:last-child > :is(a,button) {
+    width: 100%;
+    min-height: 3.35rem;
+    white-space: normal;
+    padding-inline: 1rem;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .ep-business-landing #process [data-process-track] > li {
+    min-height: 14rem;
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .ep-business-landing #process [data-process-track] > li {
+    transition: none !important;
+  }
+}
