@@ -389,18 +389,21 @@ export function LandingPage() {
                 <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">01 / Monitor</p>
                 <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Water quality intelligence</h3>
                 <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Track dissolved oxygen, pH, temperature, salinity, and water level against operating thresholds.</p>
+                <div data-capability-detail="" className="mt-7 flex items-center justify-between gap-3 border-t border-[var(--ep-line)] pt-4"><span className="text-xs font-semibold text-[var(--ep-text)]">5 water parameters</span><span aria-hidden="true" className="flex items-end gap-1"><i className="h-3 w-1.5 rounded-full bg-[var(--ep-accent)]/45" /><i className="h-5 w-1.5 rounded-full bg-[var(--ep-accent)]/70" /><i className="h-4 w-1.5 rounded-full bg-[var(--ep-accent)]" /><i className="h-6 w-1.5 rounded-full bg-[var(--ep-accent)]/70" /><i className="h-3 w-1.5 rounded-full bg-[var(--ep-accent)]/45" /></span></div>
               </article>
               <article data-business-card="" className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6">
                 <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="eye" size={24} /></span>
                 <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">02 / Understand</p>
                 <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Growth and biomass insights</h3>
                 <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Use camera-based observation to follow shrimp growth and biomass without routine handling.</p>
+                <div data-capability-detail="" className="mt-7 flex items-center justify-between gap-3 border-t border-[var(--ep-line)] pt-4"><span className="text-xs font-semibold text-[var(--ep-text)]">Camera-based observation</span><span aria-hidden="true" className="grid h-7 w-7 place-items-center rounded-full border border-[var(--ep-accent)]/30 text-[var(--ep-accent)]"><Icon name="scan-eye" size={15} /></span></div>
               </article>
               <article data-business-card="" className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 md:col-span-2 lg:col-span-1">
                 <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="zap" size={24} /></span>
                 <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">03 / Respond</p>
                 <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Automated farm actions</h3>
                 <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Connect readings to aeration control and biomass-informed feeding for a more coordinated workflow.</p>
+                <div data-capability-detail="" className="mt-7 flex items-center justify-between gap-3 border-t border-[var(--ep-line)] pt-4"><span className="text-xs font-semibold text-[var(--ep-text)]">Aeration + feeding workflow</span><span aria-hidden="true" className="grid h-7 w-7 place-items-center rounded-full border border-[var(--ep-accent)]/30 text-[var(--ep-accent)]"><Icon name="workflow" size={15} /></span></div>
               </article>
             </div>
             <div className="mt-7 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-5 sm:px-7">
