@@ -444,7 +444,7 @@ export function LandingPage() {
               </div>
             </div>
 
-            <div className="ep-dashboard-preview-window min-w-0 overflow-hidden rounded-[1.5rem] border border-[var(--ep-line)] bg-[var(--ep-surface)] shadow-[0_30px_80px_-42px_rgba(15,23,42,.42)]" aria-label="Illustrative EcoPrawn monitoring dashboard preview">
+            <div role="group" aria-label="Illustrative EcoPrawn monitoring dashboard preview" className="ep-dashboard-preview-window min-w-0 overflow-hidden rounded-[1.5rem] border border-[var(--ep-line)] bg-[var(--ep-surface)] shadow-[0_30px_80px_-42px_rgba(15,23,42,.42)]">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--ep-line)] px-4 py-4 sm:px-6">
                 <div className="flex items-center gap-3">
                   <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--ep-accent)] text-white"><Icon name="activity" size={19} /></span>
