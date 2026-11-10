@@ -167,7 +167,7 @@ export function Sidebar({
             touchStartX.current = null;
             if (start !== null && e.changedTouches[0].clientX - start < -60) closeDrawer();
           }}
-          className={`ep-mobile-site-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] transition-transform duration-300 ease-out ${
+          className={`ep-dashboard-sidebar-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] transition-transform duration-300 ease-out ${
             mobileOpen
               ? "translate-x-0 shadow-[8px_0_40px_-12px_rgba(8,30,34,0.45)]"
               : "-translate-x-full shadow-none"
