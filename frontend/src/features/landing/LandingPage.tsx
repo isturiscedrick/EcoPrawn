@@ -554,7 +554,7 @@ export function LandingPage() {
                       <p className="mt-2 text-xs leading-relaxed text-[var(--ep-text-muted)]">A visual approach to observing shrimp growth without routine handling.</p>
                     </div>
                     <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-5">
-                      <span className="mb-4 grid h-10 w-10 place-items-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="chart-no-axes-combined" size={20} /></span>
+                      <span className="mb-4 grid h-10 w-10 place-items-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="camera" size={20} /></span>
                       <p className="text-sm font-semibold text-[var(--ep-text)]">Growth and biomass context</p>
                       <p className="mt-2 text-xs leading-relaxed text-[var(--ep-text-muted)]">Visual insights can help teams understand growth patterns and inform feeding decisions.</p>
                     </div>
