@@ -1304,3 +1304,61 @@ html.dark .ep-business-landing #dashboard-preview .ep-dashboard-preview-window {
     transform: none !important;
   }
 }
+
+
+/* Phase 10 — accessibility and usability.
+   Keep keyboard focus unmistakable, provide comfortable touch targets, and
+   honor system motion preferences without changing the visual identity. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(
+  a, button, input, select, textarea, summary, [role="button"], [role="switch"]
+):focus-visible {
+  outline: 3px solid var(--ep-accent, #2563eb);
+  outline-offset: 3px;
+  scroll-margin-block: 6rem;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(
+  h1, h2, h3, [id]
+) {
+  scroll-margin-top: 6.5rem;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(
+  #site-header nav a,
+  .ep-mobile-site-drawer nav a,
+  [data-site-footer] nav a
+) {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+@media (hover: none), (pointer: coarse) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) :is(
+    #site-header button,
+    .ep-mobile-site-drawer button,
+    [data-site-footer] nav a
+  ) {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto !important;
+  }
+  :is(.ep-landing,.ep-about-page,.ep-contact-page),
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) *,
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) *::before,
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+@media (forced-colors: active) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) :is(
+    a, button, input, select, textarea, summary, [role="button"], [role="switch"]
+  ):focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 3px;
+  }
+}
