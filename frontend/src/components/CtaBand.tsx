@@ -32,7 +32,7 @@ export function CtaBand({ secondaryHref, secondaryLabel }: CtaBandProps) {
 
         <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
           <AuthLink
-            className={`group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[var(--ep-on-deep,#f8fafc)] px-7 py-3.5 text-base font-semibold text-[var(--ep-deep,#111827)] hover:bg-white hover:shadow-[0_10px_24px_-12px_rgba(0,0,0,0.6)] ${motion} ${focusRing}`}
+            className={`ep-cta-control ep-cta-primary group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[var(--ep-on-deep,#f8fafc)] px-7 py-3.5 text-base font-semibold text-[var(--ep-deep,#111827)] hover:bg-white hover:shadow-[0_10px_24px_-12px_rgba(0,0,0,0.6)] ${motion} ${focusRing}`}
           >
             Sign in to dashboard
             <span
@@ -47,7 +47,7 @@ export function CtaBand({ secondaryHref, secondaryLabel }: CtaBandProps) {
 
           <Link
             to={secondaryHref}
-            className={`inline-flex items-center justify-center whitespace-nowrap rounded-xl border-2 border-white/60 px-7 py-3.5 text-base font-semibold text-[var(--ep-on-deep,#f8fafc)] hover:bg-white/10 ${motion} ${focusRing}`}
+            className={`ep-cta-control ep-cta-secondary inline-flex items-center justify-center whitespace-nowrap rounded-xl border-2 border-white/60 px-7 py-3.5 text-base font-semibold text-[var(--ep-on-deep,#f8fafc)] hover:bg-white/10 ${motion} ${focusRing}`}
             activeOptions={{ exact: true }}
           >
             {secondaryLabel}
