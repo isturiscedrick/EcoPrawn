@@ -1201,3 +1201,64 @@ html.dark .ep-business-landing .ep-preview-chart > span {
 :is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] p {
   color: var(--ep-on-deep-muted, #cbd5e1);
 }
+
+
+/* Shared CTA interaction language: consistent across public pages and account entry points. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition:
+    transform .22s cubic-bezier(.2,.75,.25,1),
+    box-shadow .22s ease,
+    background-color .22s ease,
+    border-color .22s ease,
+    color .22s ease;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(112deg,transparent 18%,rgba(255,255,255,.24) 48%,transparent 76%);
+  transform: translateX(-115%);
+  transition: transform .65s cubic-bezier(.2,.75,.25,1),opacity .2s ease;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control:hover {
+    transform: translateY(-2px);
+  }
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control:hover::before {
+    opacity: 1;
+    transform: translateX(115%);
+  }
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control:active {
+  transform: translateY(0) scale(.985);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control:focus-visible {
+  outline: 3px solid color-mix(in srgb,var(--ep-accent) 68%,white);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px color-mix(in srgb,var(--ep-accent) 18%,transparent);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-primary {
+  box-shadow: 0 10px 24px -14px color-mix(in srgb,var(--ep-accent) 78%,transparent);
+}
+@media (hover:hover) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-primary:hover {
+    box-shadow: 0 16px 30px -14px color-mix(in srgb,var(--ep-accent) 70%,transparent);
+  }
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-primary {
+  box-shadow: 0 12px 28px -14px rgba(96,165,250,.62);
+}
+@media (prefers-reduced-motion:reduce) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control,
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control::before {
+    transition: none !important;
+    transform: none !important;
+  }
+}
