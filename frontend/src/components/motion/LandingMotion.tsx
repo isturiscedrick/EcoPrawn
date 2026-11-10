@@ -196,7 +196,7 @@ export function LandingMotion() {
 
       // Scroll-linked section headings: masked upward reveal with a subtle
       // accent underline that draws as each section reaches the viewport.
-      ["#readings-title", "#process h2"].forEach((selector) => {
+      ["#readings-title", "#capabilities-title", "#process h2"].forEach((selector) => {
         const heading = document.querySelector<HTMLElement>(selector);
         if (!heading) return;
         const underline = heading.parentElement?.querySelector<HTMLElement>("[data-heading-accent]");
@@ -274,6 +274,29 @@ export function LandingMotion() {
       // Keep every landing-page section surface in its natural position.
       // One-time reveal effects remain, but section backgrounds/content do not drift.
 
+      // Capability-card detail rows receive a small secondary reveal after
+      // their parent cards enter view. Keep this separate from GSAP's card motion.
+      const capabilityDetails = homeRoot?.querySelectorAll<HTMLElement>(
+        "#capabilities [data-capability-detail]"
+      );
+      let capabilityDetailObserver: IntersectionObserver | undefined;
+      if (capabilityDetails?.length) {
+        capabilityDetailObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const detail = entry.target as HTMLElement;
+            microAnimations.push(animate(detail, {
+              opacity: [0, 1],
+              translateY: [8, 0],
+              duration: 520,
+              ease: "out(3)",
+            }));
+            capabilityDetailObserver?.unobserve(detail);
+          });
+        }, { threshold: 0.4 });
+        capabilityDetails.forEach((detail) => capabilityDetailObserver?.observe(detail));
+      }
+
       // Anime.js handles icon personality across all Home sections.
       // Each icon animates once as it enters view; hover listeners below can
       // then provide a separate, short response.
@@ -334,6 +357,7 @@ export function LandingMotion() {
         microAnimations.forEach((animation) => animation.revert());
         homeIconObserver?.disconnect();
         homeAccentObserver?.disconnect();
+        capabilityDetailObserver?.disconnect();
       };
     });
 
@@ -371,7 +395,7 @@ export function LandingMotion() {
       }
 
       const previewReadings = dashboardPreview?.querySelectorAll<HTMLElement>(
-        ".ep-dashboard-preview-window > .grid > div"
+        "[data-preview-reading]"
       );
       if (previewReadings?.length) {
         gsap.from(previewReadings, {
@@ -412,7 +436,7 @@ export function LandingMotion() {
       // KPI row enters view. Keep the unit spans untouched and restore the
       // exact original text on cleanup (including React Strict Mode reruns).
       const previewCounterNodes = dashboardPreview?.querySelectorAll<HTMLElement>(
-        ".ep-dashboard-preview-window > .grid > div > p.mt-2"
+        "[data-preview-reading] > p.mt-2"
       );
       const previewCounterAnimations: Array<{ revert: () => unknown }> = [];
       const previewCounterRestores: Array<() => void> = [];
