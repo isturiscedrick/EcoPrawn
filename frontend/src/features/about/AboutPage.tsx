@@ -57,7 +57,7 @@ export function AboutPage() {
                 EcoPrawn brings water monitoring, growth observation, and farm operations into a connected workflow—helping teams see conditions more clearly and respond with context.
               </p>
               <a href="#systems" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--ep-accent)] transition-transform hover:translate-x-1">
-                Explore the connected systems <Icon name="arrow-down-right" size={17} />
+                Explore the connected systems <Icon name="arrow-right" size={17} />
               </a>
             </div>
             <div aria-hidden="true" className="ep-about-orbit-visual">
