@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
 import { animate, stagger, utils } from "animejs";
+import { MOTION_ALLOWED_QUERY, MOTION_FINE_POINTER_QUERY, motionIsAllowed } from "./motionRuntime";
 
 // Fixed values (no Math.random) so the markup is stable between renders.
 const SPECKS = [
@@ -33,7 +34,7 @@ export function HeroEnhance() {
 
   // Only mount the specks when motion is allowed.
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!motionIsAllowed()) return;
     setHost(document.getElementById("top"));
   }, []);
 
@@ -102,7 +103,7 @@ export function HeroEnhance() {
 
     // Pointer effects: real mouse, tablet width and up.
     mm.add(
-      "(hover: hover) and (pointer: fine) and (min-width: 768px) and (prefers-reduced-motion: no-preference)",
+      `${MOTION_FINE_POINTER_QUERY} and ${MOTION_ALLOWED_QUERY}`,
       () => {
         const cleanups: Array<() => void> = [];
 
