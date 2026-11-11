@@ -16,6 +16,7 @@ export function AboutMotion() {
     const mm = gsap.matchMedia();
     mm.add(MOTION_ALLOWED_QUERY, () => {
       const cleanups: Array<() => void> = [];
+      const animeRuns: Array<{ revert: () => unknown }> = [];
       const ctx = gsap.context(() => {
         const hero = root.querySelector<HTMLElement>("[data-page-hero]");
         if (hero) {
@@ -127,9 +128,9 @@ export function AboutMotion() {
 
         // Decorative dots and markers have a gentle stagger, never affecting layout.
         const markers = root.querySelectorAll<HTMLElement>("section [aria-hidden='true'].h-2, section [aria-hidden='true'].rounded-full");
-        if (markers.length) animate(markers, {
+        if (markers.length) animeRuns.push(animate(markers, {
           scale: [0.7, 1], delay: stagger(65), duration: 480, ease: "outBack(1.7)",
-        });
+        }));
 
         // Anime.js gives every About section a small, readable accent sequence.
         // Only icons, index markers and chevrons animate; cards stay visible.
@@ -142,13 +143,13 @@ export function AboutMotion() {
             entries.forEach((entry) => {
               if (!entry.isIntersecting) return;
               const target = entry.target as HTMLElement;
-              animate(target, {
+              animeRuns.push(animate(target, {
                 scale: [0.78, 1],
                 rotate: target.tagName.toLowerCase() === "svg" ? [-10, 0] : [0, 0],
                 translateY: [5, 0],
                 duration: 540,
                 ease: "outElastic(1,.65)",
-              });
+              }));
               sectionAccentObserver?.unobserve(target);
             });
           }, { threshold: 0.35 });
@@ -161,7 +162,7 @@ export function AboutMotion() {
           if (!dot) return;
           const observer = new IntersectionObserver((entries) => {
             if (!entries.some((entry) => entry.isIntersecting)) return;
-            animate(dot, { scale: [0.65, 1.35, 1], duration: 620, ease: "outElastic(1,.6)" });
+            animeRuns.push(animate(dot, { scale: [0.65, 1.35, 1], duration: 620, ease: "outElastic(1,.6)" }));
             observer.disconnect();
           }, { threshold: 0.5 });
           observer.observe(section);
@@ -175,6 +176,7 @@ export function AboutMotion() {
       return () => {
         cleanupSharedHover();
         cleanups.forEach((cleanup) => cleanup());
+        animeRuns.forEach((run) => run.revert());
         ctx.revert();
       };
     });
