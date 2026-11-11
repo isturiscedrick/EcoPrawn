@@ -4,11 +4,12 @@ import { bindPublicHoverMotion } from "./PublicHoverMotion";
 import { registerMotionPlugins, MOTION_ALLOWED_QUERY } from "./motionRuntime";
 import { animate, stagger } from "animejs";
 
-registerMotionPlugins();
+
 
 /** Contact-page motion with transform-only entrances and resilient cleanup. */
 export function ContactMotion() {
   useLayoutEffect(() => {
+    registerMotionPlugins();
     const root = document.querySelector<HTMLElement>(".ep-contact-page");
     if (!root) return;
 
