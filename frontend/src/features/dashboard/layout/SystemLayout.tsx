@@ -113,7 +113,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} />
 
       {/* Phone-width content column at every screen size. */}
-      <main className="mx-auto min-w-0 max-w-[560px] px-3 pb-16 pt-3 sm:px-5 sm:pt-5">
+      <main className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-16 pt-3 sm:px-5 sm:pt-5 lg:max-w-[1440px]">
         <div className="w-full">{children}</div>
       </main>
     </div>
