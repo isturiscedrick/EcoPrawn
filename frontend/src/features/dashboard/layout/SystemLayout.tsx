@@ -1,4 +1,7 @@
-import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState, type ReactNode } from "react";
+import gsap from "gsap";
+import { useRouterState } from "@tanstack/react-router";
+import { MOTION_ALLOWED_QUERY } from "@/components/motion/motionRuntime";
 import { Link } from "@tanstack/react-router";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { Icon } from "@/components/ui/Icon";
@@ -12,6 +15,7 @@ const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
 
 export function SystemLayout({ children }: SystemLayoutProps) {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const closeMobileSidebar = useCallback(() => setMobileSidebarOpen(false), []);
@@ -113,7 +117,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} darkMode={darkMode} onToggleTheme={toggleTheme} />
 
       {/* Responsive dashboard content area. */}
-      <main className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-16 pt-3 sm:px-5 sm:pt-5 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
+      <main data-dashboard-route-content="" className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-16 pt-3 sm:px-5 sm:pt-5 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
         <div className="w-full">{children}</div>
       </main>
     </div>
