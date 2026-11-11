@@ -64,7 +64,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
             onClick={() => setMobileSidebarOpen(true)}
             aria-label="Open dashboard sidebar"
             aria-expanded={mobileSidebarOpen}
-            className={`flex h-10 w-10 items-center justify-center justify-self-start rounded-none border-0 bg-transparent shadow-none transition-colors hover:bg-transparent focus-visible:bg-transparent ${focusRing}`}
+            className={`flex h-10 w-10 items-center justify-center justify-self-start rounded-none border-0 bg-transparent shadow-none transition-colors hover:bg-transparent focus-visible:bg-transparent lg:hidden ${focusRing}`}
             style={{ color: "var(--ep-primary)", backgroundColor: "transparent" }}
           >
             <svg
@@ -109,11 +109,11 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         </div>
       </header>
 
-      {/* Drawer-only navigation at every screen size. */}
+      {/* Persistent desktop navigation and mobile drawer. */}
       <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} />
 
-      {/* Phone-width content column at every screen size. */}
-      <main className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-16 pt-3 sm:px-5 sm:pt-5 lg:max-w-[1440px]">
+      {/* Responsive dashboard content area. */}
+      <main className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-16 pt-3 sm:px-5 sm:pt-5 lg:max-w-[1440px] lg:ml-[260px] lg:w-[calc(100%-260px)]">
         <div className="w-full">{children}</div>
       </main>
     </div>
