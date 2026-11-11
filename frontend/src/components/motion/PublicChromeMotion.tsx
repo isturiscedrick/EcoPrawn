@@ -1,9 +1,9 @@
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { animate, stagger } from "animejs";
+import { MOTION_ALLOWED_QUERY, registerMotionPlugins } from "./motionRuntime";
 
-gsap.registerPlugin(ScrollTrigger);
+registerMotionPlugins();
 
 /**
  * Shared motion for the public-site chrome. Page-specific motion components
@@ -16,7 +16,7 @@ export function PublicChromeMotion() {
     if (!root) return;
 
     const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    mm.add(MOTION_ALLOWED_QUERY, () => {
       const cleanups: Array<() => void> = [];
       const animeRuns: Array<{ revert: () => unknown }> = [];
       const ctx = gsap.context(() => {
