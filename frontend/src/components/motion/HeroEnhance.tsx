@@ -44,7 +44,9 @@ export function HeroEnhance() {
     const specks = Array.from(
       host.querySelectorAll<HTMLElement>(".ep-hero-speck")
     );
-    const dots = Array.from(host.querySelectorAll<HTMLElement>("ul li > span"));
+    const dots = Array.from(host.querySelectorAll<HTMLElement>("[data-hero-sensor-dot]"));
+    const bars = Array.from(host.querySelectorAll<HTMLElement>("[data-hero-sensor-bar]"));
+    const glow = host.querySelector<HTMLElement>(".ep-hero-monitor-glow");
 
     const drift = animate(specks, {
       x: () => utils.random(-40, 40),
@@ -57,20 +59,40 @@ export function HeroEnhance() {
       alternate: true,
     });
 
-    // The dots are flex items (their <li> is flex), so transforms apply.
+    // Sensor status lights breathe softly; progress tracks fill once on entry.
     const pulse = animate(dots, {
-      scale: [1, 1.6],
-      duration: 800,
-      delay: stagger(250),
-      loopDelay: 1400,
+      scale: [1, 1.55],
+      opacity: [.72, 1],
+      duration: 900,
+      delay: stagger(180),
+      loopDelay: 1500,
       ease: "inOutSine",
       loop: true,
       alternate: true,
+    });
+    const glowBreath = glow ? animate(glow, {
+      scale: [.9, 1.12],
+      opacity: [.38, .72],
+      duration: 5200,
+      ease: "inOutSine",
+      loop: true,
+      alternate: true,
+    }) : null;
+    bars.forEach((bar, index) => {
+      animate(bar, {
+        scaleX: [0, 1],
+        transformOrigin: "left center",
+        duration: 850,
+        delay: 240 + index * 95,
+        ease: "out(3)",
+      });
     });
 
     return () => {
       drift.revert();
       pulse.revert();
+      glowBreath?.revert();
+      bars.forEach((bar) => { bar.style.transform = ""; });
     };
   }, [host]);
 
@@ -86,10 +108,8 @@ export function HeroEnhance() {
 
         // Tank panel tilts toward the cursor. Rotation only, so it stacks
         // with the scroll parallax (y) and the intro (scale on the wrapper).
-        const zone = document.querySelector<HTMLElement>(
-          "#top [data-hero=parallax-console]"
-        );
-        const panel = zone?.querySelector<HTMLElement>(":scope > *") ?? null;
+        const zone = document.querySelector<HTMLElement>("#top [data-hero=monitor-panel]");
+        const panel = zone;
         if (zone && panel) {
           gsap.set(panel, { transformPerspective: 900 });
           const rotX = gsap.quickTo(panel, "rotationX", {
@@ -123,7 +143,7 @@ export function HeroEnhance() {
         // Tailwind hover lift uses the separate `translate` property, so
         // they combine instead of overwriting each other.
         gsap
-          .utils.toArray<HTMLElement>('#top a[href="/login"], #top a[href="/about"]')
+          .utils.toArray<HTMLElement>('#top [data-dashboard-entry], #top a[href="/about"]')
           .forEach((btn) => {
             const moveX = gsap.quickTo(btn, "x", {
               duration: 0.5,
