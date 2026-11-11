@@ -320,7 +320,7 @@ export function SiteHeader({
               touchStartX.current = null;
               if (start !== null && event.changedTouches[0].clientX - start < -60) closeDrawer();
             }}
-            className={`ep-mobile-site-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(94vw,400px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out ${
+            className={`ep-mobile-site-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out ${
               mobileNavOpen
                 ? "translate-x-0 shadow-[8px_0_40px_-12px_rgba(8,30,34,0.45)]"
                 : "-translate-x-full shadow-none"
@@ -344,8 +344,8 @@ export function SiteHeader({
             </div>
 
             {/* Navigation */}
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-4">
-              <div className="px-6 pb-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
+              <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">
                 Navigation
               </div>
               <NavLinks variant="mobile" activeHref={navHref} onLinkClick={() => setMobileNavOpen(false)} />
