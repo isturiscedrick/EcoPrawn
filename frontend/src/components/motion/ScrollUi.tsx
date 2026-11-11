@@ -130,55 +130,6 @@ export function BackToTop() {
   );
 }
 
-/**
- * Mobile-only section shortcuts for the long landing page.
- * Active state follows the section currently in view.
- */
-export function MobileLandingNav() {
-  const [activeSection, setActiveSection] = useState("top");
-  const items = [
-    { id: "top", label: "Home" },
-    { id: "capabilities", label: "Features" },
-    { id: "readings", label: "Readings" },
-    { id: "dashboard-preview", label: "Preview" },
-  ];
-
-  useEffect(() => {
-    const sections = items
-      .map((item) => document.getElementById(item.id))
-      .filter((section): section is HTMLElement => section !== null);
-    if (!("IntersectionObserver" in window)) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-22% 0px -62% 0px", threshold: [0, 0.15, 0.35, 0.6] },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <nav className="ep-mobile-landing-nav" aria-label="Quick page navigation">
-      {items.map((item) => (
-        <a
-          key={item.id}
-          href={`#${item.id}`}
-          aria-current={activeSection === item.id ? "location" : undefined}
-          onClick={() => setActiveSection(item.id)}
-        >
-          <span>{item.label}</span>
-        </a>
-      ))}
-    </nav>
-  );
-}
-
 /** Enable both scroll features. */
 export function ScrollEnhancements() {
   return (
