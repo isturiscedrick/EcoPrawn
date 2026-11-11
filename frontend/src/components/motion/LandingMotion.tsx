@@ -6,7 +6,7 @@ import { animate, stagger } from "animejs";
 import { HeroEnhance } from "./HeroEnhance";
 import { MOTION_ALLOWED_QUERY, registerMotionPlugins } from "./motionRuntime";
 
-registerMotionPlugins();
+
 
 // Water surfaces on a 100x100 viewBox stretched over the screen. Every path
 // has the same command structure (M, C, C, V, H, z) so MorphSVG can
@@ -20,6 +20,7 @@ const WATER_INTRO_KEY = "ep-water-intro-seen";
  */
 export function LandingMotion() {
   useLayoutEffect(() => {
+    registerMotionPlugins();
     const mm = gsap.matchMedia();
     let cancelled = false;
     let previewTabCleanup: (() => void) | undefined;
