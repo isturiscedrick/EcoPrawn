@@ -57,15 +57,7 @@ export function ContactPage() {
                 <span className="ep-contact-signal-core" />
               </div>
             </div>
-            {/* Contact signal is decorative; the message form remains the actual contact action. */}
-            {/*
-            <div aria-hidden="true" className="ep-contact-signal">
-              <span className="ep-contact-signal-ring ep-contact-signal-ring-one" />
-              <span className="ep-contact-signal-ring ep-contact-signal-ring-two" />
-              <span className="ep-contact-signal-ring ep-contact-signal-ring-three" />
-              <span className="ep-contact-signal-core" />
-            </div>
-            */}
+
           </div>
         </section>
 
