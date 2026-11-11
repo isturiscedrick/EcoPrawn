@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { animate, utils } from "animejs";
 
-gsap.registerPlugin(ScrollTrigger);
+
 
 /**
  * Landing page motion. Renders nothing; targets data-* hooks in LandingPage.
@@ -16,6 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
  */
 export function LandingMotion() {
   useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     const mm = gsap.matchMedia();
     let cancelled = false;
 
