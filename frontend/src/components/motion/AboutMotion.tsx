@@ -1,10 +1,10 @@
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { bindPublicHoverMotion } from "./PublicHoverMotion";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { registerMotionPlugins, MOTION_ALLOWED_QUERY } from "./motionRuntime";
 import { animate, stagger } from "animejs";
 
-gsap.registerPlugin(ScrollTrigger);
+registerMotionPlugins();
 
 /** Rich About-page choreography. Entrances use transforms only so cards
  * remain visible if a ScrollTrigger is delayed, disabled, or unavailable. */
@@ -14,7 +14,7 @@ export function AboutMotion() {
     if (!root) return;
 
     const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    mm.add(MOTION_ALLOWED_QUERY, () => {
       const cleanups: Array<() => void> = [];
       const ctx = gsap.context(() => {
         const hero = root.querySelector<HTMLElement>("[data-page-hero]");
