@@ -8,6 +8,8 @@ import { SidebarNavItem } from "./SidebarNavItem";
 interface SidebarProps {
   mobileOpen?: boolean;
   onMobileClose?: () => void;
+  darkMode?: boolean;
+  onToggleTheme?: () => void;
 }
 
 function LogoutIcon() {
@@ -26,6 +28,8 @@ const drawerRowClass =
 export function Sidebar({
   mobileOpen = false,
   onMobileClose = () => {},
+  darkMode = false,
+  onToggleTheme = () => {},
 }: SidebarProps) {
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
@@ -144,11 +148,24 @@ export function Sidebar({
       {/* Persistent desktop sidebar; the drawer below remains mobile-only. */}
       <aside
         id="dashboard-sidebar"
-        className="fixed bottom-0 left-0 top-[66px] z-30 hidden w-[260px] flex-col border-r border-[var(--ep-line)] bg-[var(--ep-surface)] lg:flex"
+        className="fixed bottom-0 left-0 top-0 z-30 hidden w-[260px] flex-col border-r border-[var(--ep-line)] bg-[var(--ep-surface)] lg:flex"
       >
-        <div className="flex shrink-0 items-center gap-3 border-b border-[var(--ep-line)] px-5 py-4">
-          <BrandMark size={32} />
-          <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-text-muted)]">Dashboard</span>
+        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--ep-line)] px-5 py-4">
+          <div className="flex min-w-0 items-center gap-3">
+            <BrandMark size={32} />
+            <span className="truncate text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-text-muted)]">Dashboard</span>
+          </div>
+          <button
+            type="button"
+            onClick={onToggleTheme}
+            role="switch"
+            aria-checked={darkMode}
+            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
+          >
+            {darkMode ? <Icon name="moon" size={17} strokeWidth={1.8} /> : <Icon name="sun" size={17} strokeWidth={1.8} />}
+          </button>
         </div>
         <div className="shrink-0 border-b border-[var(--ep-line)] px-4 py-3">
           <Link to="/dashboard/profile" className="flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-3 text-left transition-colors hover:bg-[var(--ep-tint)]">
