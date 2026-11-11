@@ -6,6 +6,7 @@ import { IconChip, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "./ContactForm";
 import { ContactMotion } from "@/components/motion/ContactMotion";
+import { AquacultureIllustration } from "@/components/illustrations/AquacultureIllustration";
 
 const SECTION_PAD = "px-4 py-16 sm:px-8 sm:py-24";
 
@@ -47,12 +48,24 @@ export function ContactPage() {
                 Share a question about the platform, its monitoring systems, or the project. The details below help you identify the team behind EcoPrawn.
               </p>
             </div>
+            <div className="ep-contact-visuals" aria-hidden="true">
+              <AquacultureIllustration variant="contact" />
+              <div className="ep-contact-signal">
+                <span className="ep-contact-signal-ring ep-contact-signal-ring-one" />
+                <span className="ep-contact-signal-ring ep-contact-signal-ring-two" />
+                <span className="ep-contact-signal-ring ep-contact-signal-ring-three" />
+                <span className="ep-contact-signal-core" />
+              </div>
+            </div>
+            {/* Contact signal is decorative; the message form remains the actual contact action. */}
+            {/*
             <div aria-hidden="true" className="ep-contact-signal">
               <span className="ep-contact-signal-ring ep-contact-signal-ring-one" />
               <span className="ep-contact-signal-ring ep-contact-signal-ring-two" />
               <span className="ep-contact-signal-ring ep-contact-signal-ring-three" />
               <span className="ep-contact-signal-core" />
             </div>
+            */}
           </div>
         </section>
 
