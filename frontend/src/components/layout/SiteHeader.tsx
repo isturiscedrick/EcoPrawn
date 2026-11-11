@@ -345,7 +345,7 @@ export function SiteHeader({
 
             {/* Navigation */}
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
-              <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">
+              <div className="pb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">
                 Navigation
               </div>
               <NavLinks variant="mobile" activeHref={navHref} onLinkClick={() => setMobileNavOpen(false)} />
