@@ -31,6 +31,7 @@ export function HeroAquaticScene() {
     let pageVisible = document.visibilityState === "visible";
 
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    let tick: () => void = () => {};
 
     const onPointerMove = (event: PointerEvent) => {
       const rect = host.getBoundingClientRect();
@@ -159,7 +160,7 @@ export function HeroAquaticScene() {
         }
 
         const clock = new THREE.Clock();
-        const tick = () => {
+        tick = () => {
           frame = 0;
           if (disposed || !pageVisible || !inViewport) return;
           const elapsed = clock.getElapsedTime();
