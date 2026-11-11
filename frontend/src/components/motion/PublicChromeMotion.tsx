@@ -176,7 +176,7 @@ export function PublicChromeMotion() {
         // Premium pointer interactions: small magnetic pull on primary actions,
         // plus restrained image zoom. Keep these effects desktop-only and local
         // to the hovered element so page/card transforms retain ownership.
-        const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+        const finePointer = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 768px)");
         if (finePointer.matches && main) {
           const magneticTargets = main.querySelectorAll<HTMLElement>(
             '[data-band] a, [data-contact-form] button[type="submit"]'
