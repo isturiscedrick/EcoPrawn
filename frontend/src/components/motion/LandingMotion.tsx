@@ -22,6 +22,8 @@ export function LandingMotion() {
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
     let cancelled = false;
+    let previewTabCleanup: (() => void) | undefined;
+    let previewPanelCleanup: (() => void) | undefined;
     // Google Fonts (Lexend/Inter) swap in after first paint and reflow the
     // text, which shifts every scroll trigger's start position. Re-measure
     // once they are ready.
@@ -377,6 +379,103 @@ export function LandingMotion() {
       };
     });
 
+    // HERO + WATER DEPTH: restrained scrubbed movement on desktop only.
+    // These transforms belong exclusively to decorative background layers;
+    // content, cards, and the monitoring panel keep their own motion owners.
+    mm.add(
+      `(min-width: 1024px) and ${MOTION_ALLOWED_QUERY}`,
+      () => {
+        const hero = document.querySelector<HTMLElement>("#top");
+        if (hero) {
+          const grid = hero.querySelector<HTMLElement>('[data-hero="grid"]');
+          const atmosphere = hero.querySelector<HTMLElement>(".ep-hero-atmosphere");
+          const specks = hero.querySelector<HTMLElement>(".ep-hero-speck");
+          if (grid) gsap.to(grid, {
+            yPercent: 12,
+            ease: "none",
+            scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 1.1 },
+          });
+          if (atmosphere) gsap.to(atmosphere, {
+            yPercent: 7,
+            scale: 1.035,
+            ease: "none",
+            scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 1.35 },
+          });
+          if (specks) gsap.to(specks, {
+            yPercent: -8,
+            ease: "none",
+            scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 1.5 },
+          });
+        }
+
+        const readings = document.querySelector<HTMLElement>("#readings");
+        const readingsBackdrop = readings?.querySelector<HTMLElement>("[data-readings-bg]");
+        if (readings && readingsBackdrop) gsap.to(readingsBackdrop, {
+          yPercent: 5,
+          ease: "none",
+          scrollTrigger: { trigger: readings, start: "top bottom", end: "bottom top", scrub: 1.2 },
+        });
+      }
+    );
+
+    // Dashboard preview tabs keep their existing React state and keyboard
+    // behavior. Animate only the newly-rendered panel content after a real
+    // tab change; no data values or tab semantics are altered.
+    const previewPanel = document.querySelector<HTMLElement>(
+      "#dashboard-preview .ep-preview-tab-panel"
+    );
+    if (previewPanel) {
+      let previousLabel = previewPanel.getAttribute("aria-label");
+      const previewObserver = new MutationObserver(() => {
+        const nextLabel = previewPanel.getAttribute("aria-label");
+        if (nextLabel === previousLabel) return;
+        previousLabel = nextLabel;
+        const content = Array.from(previewPanel.children) as HTMLElement[];
+        if (!content.length) return;
+        gsap.fromTo(content,
+          { y: 12, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.46,
+            stagger: 0.055,
+            ease: "power3.out",
+            clearProps: "transform,opacity,visibility",
+            overwrite: "auto",
+          }
+        );
+      });
+      previewObserver.observe(previewPanel, {
+        attributes: true,
+        attributeFilter: ["aria-label"],
+        childList: true,
+        subtree: false,
+      });
+      // Observe tab-label changes as the reliable React commit signal.
+      const tabList = previewPanel.previousElementSibling;
+      if (tabList) {
+        const tabObserver = new MutationObserver(() => {
+          const selected = tabList.querySelector<HTMLElement>('[aria-pressed="true"]');
+          const label = selected?.textContent?.trim() ?? "";
+          if (!label || label === previousLabel) return;
+          previousLabel = label;
+          const content = Array.from(previewPanel.children) as HTMLElement[];
+          if (content.length) gsap.fromTo(content,
+            { y: 12, autoAlpha: 0 },
+            { y: 0, autoAlpha: 1, duration: 0.46, stagger: 0.055,
+              ease: "power3.out", clearProps: "transform,opacity,visibility", overwrite: "auto" }
+          );
+        });
+        tabObserver.observe(tabList, { subtree: true, attributes: true, attributeFilter: ["aria-pressed"] });
+        // The panel and tab observer are both owned by this effect.
+        previewPanel.dataset.motionTabs = "ready";
+        const cleanup = () => tabObserver.disconnect();
+        // Store cleanup in the existing landing motion cleanup collection.
+        previewTabCleanup = cleanup;
+      }
+      previewPanelCleanup = () => previewObserver.disconnect();
+    }
+
     // PROCESS: the four stages remain in a natural, responsive grid.
 
     // HERO DEPTH: keep the lens figure free of competing transforms.
@@ -513,6 +612,8 @@ export function LandingMotion() {
 
     return () => {
       cancelled = true;
+      previewTabCleanup?.();
+      previewPanelCleanup?.();
       mm.revert();
     };
   }, []);
