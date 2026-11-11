@@ -7,10 +7,11 @@ interface PageHeroProps {
 }
 
 const GRID_STYLE = {
-  backgroundImage: "radial-gradient(var(--ep-secondary) 1px, transparent 1px)",
-  backgroundSize: "22px 22px",
-  WebkitMaskImage: "radial-gradient(ellipse at 60% 40%, black 25%, transparent 72%)",
-  maskImage: "radial-gradient(ellipse at 60% 40%, black 25%, transparent 72%)",
+  backgroundImage:
+    "radial-gradient(ellipse at 22% 58%, rgba(14,165,233,.12), transparent 42%), radial-gradient(ellipse at 78% 24%, rgba(37,99,235,.12), transparent 46%), linear-gradient(120deg, transparent 25%, rgba(14,165,233,.035) 50%, transparent 75%)",
+  backgroundSize: "auto, auto, 100% 100%",
+  WebkitMaskImage: "radial-gradient(ellipse at 50% 48%, black 24%, transparent 82%)",
+  maskImage: "radial-gradient(ellipse at 50% 48%, black 24%, transparent 82%)",
 } as const;
 
 /** Landing-style hero shared by the About and Contact pages. */
