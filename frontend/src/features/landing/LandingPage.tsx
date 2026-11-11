@@ -8,6 +8,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
+import { HeroAquaticScene } from "./HeroAquaticScene";
 import { heroReadoutUnits } from "@/config/sensors";
 import {
   heroReadouts,
@@ -123,6 +124,7 @@ export function LandingPage() {
       <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
         {/* HERO */}
         <section id="top" className="ep-hero ep-aquaculture-hero relative isolate overflow-hidden" aria-label="EcoPrawn smart aquaculture introduction">
+          <HeroAquaticScene />
           <div
             aria-hidden="true"
             data-hero="grid"
