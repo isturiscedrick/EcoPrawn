@@ -350,22 +350,35 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
 }
 :is(.ep-about-page,.ep-contact-page) [data-page-hero]::before,
 :is(.ep-about-page,.ep-contact-page) [data-page-hero]::after {
-  content: "+";
+  content: "";
   position: absolute;
   z-index: 0;
-  color: rgba(29,78,216,.38);
-  font-size: 22px;
-  font-weight: 300;
-  line-height: 1;
   pointer-events: none;
+  border-radius: 50%;
 }
 :is(.ep-about-page,.ep-contact-page) [data-page-hero]::before {
-  top: 27%;
-  left: max(5%,calc((100vw - 1320px)/2));
+  width: clamp(22rem, 42vw, 42rem);
+  height: clamp(12rem, 22vw, 22rem);
+  top: -35%;
+  right: -8%;
+  border: 1px solid rgba(37,99,235,.12);
+  box-shadow: 0 0 0 24px rgba(37,99,235,.025), 0 0 0 54px rgba(14,165,233,.025);
+  transform: rotate(-16deg);
 }
 :is(.ep-about-page,.ep-contact-page) [data-page-hero]::after {
-  right: max(6%,calc((100vw - 1300px)/2));
-  bottom: 24%;
+  width: clamp(18rem, 34vw, 34rem);
+  height: clamp(9rem, 18vw, 18rem);
+  left: -10%;
+  bottom: -48%;
+  background: radial-gradient(ellipse, rgba(14,165,233,.10), transparent 68%);
+  filter: blur(10px);
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero]::before {
+  border-color: rgba(96,165,250,.2);
+  box-shadow: 0 0 0 24px rgba(59,130,246,.035), 0 0 0 54px rgba(14,165,233,.03);
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero]::after {
+  background: radial-gradient(ellipse, rgba(37,99,235,.2), transparent 68%);
 }
 :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
   position: relative;
