@@ -91,10 +91,10 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
     <nav
       id="mobile-nav-panel"
       aria-label="Mobile navigation"
-      className={`px-3 pb-3 pt-4 sm:px-4 lg:hidden ${monochrome ? "ep-nav-monochrome" : ""}`}
+      className={`px-0 pb-0 pt-0 lg:hidden ${monochrome ? "ep-nav-monochrome" : ""}`}
       style={monochrome ? { backgroundColor: darkMode ? "#000000" : "#ffffff", borderColor: darkMode ? "#ffffff" : "#000000", color: darkMode ? "#ffffff" : "#000000" } : undefined}
     >
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-1.5">
         {LANDING_NAV_LINKS.map(([label, href]) => {
           const isActive = href === activeHref;
           return (
@@ -104,7 +104,7 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
                 resetScroll={href === "/"}
                 onClick={onLinkClick}
                 aria-current={isActive ? "page" : undefined}
-                className={`group flex min-h-14 items-center gap-3 rounded-2xl border border-transparent px-3 py-3 text-[15px] font-semibold transition-all duration-200 hover:translate-x-0.5 ${focusRing} ${
+                className={`group flex min-h-11 items-center gap-2.5 rounded-lg border border-transparent px-3 py-2.5 text-[14.5px] font-medium transition-colors duration-200 ${focusRing} ${
                   monochrome
                     ? "ep-nav-monochrome-link"
                     : isActive
