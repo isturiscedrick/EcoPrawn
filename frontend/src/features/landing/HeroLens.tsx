@@ -79,7 +79,7 @@ export function HeroLens() {
       const readouts = many(".ep-lens-readout");
       const dots = many(".ep-lens-dot");
       const specks = many(".ep-lens-speck");
-      const connectorPaths = many(".ep-lens-connectors path");
+      const connectorPaths = Array.from(root.querySelectorAll<SVGPathElement>(".ep-lens-connectors path"));
       const connectorNodes = many(".ep-lens-connectors circle");
       if (!iris || !rings || !outerRing || !ticks || !shrimp || !arcs || !glare || !pingEl || !scan || !flash || !caption) return;
 
@@ -210,7 +210,7 @@ export function HeroLens() {
          the lens, then their endpoint markers breathe gently. */
       if (connectorPaths.length) {
         connectorPaths.forEach((path) => {
-          const length = (path as SVGPathElement).getTotalLength?.() ?? 180;
+          const length = path.getTotalLength?.() ?? 180;
           gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
         });
         gsap.to(connectorPaths, {
