@@ -5,8 +5,9 @@ import { animate, stagger } from "animejs";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { HeroEnhance } from "./HeroEnhance";
+import { MOTION_ALLOWED_QUERY, registerMotionPlugins } from "./motionRuntime";
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+registerMotionPlugins();
 
 // Water surfaces on a 100x100 viewBox stretched over the screen. Every path
 // has the same command structure (M, C, C, V, H, z) so MorphSVG can
@@ -34,7 +35,7 @@ export function LandingMotion() {
     // SMOOTH SCROLL: normalize touch/inertial scrolling with GSAP.
     // ScrollSmoother is a paid plugin, so this uses the free ScrollTrigger
     // normalizer and ScrollToPlugin already included with GSAP.
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    mm.add(MOTION_ALLOWED_QUERY, () => {
       // Keep native wheel/touch scrolling responsive. GSAP is used only
       // for deliberate in-page anchor navigation, not to intercept every wheel event.
       const anchorLinks = gsap.utils.toArray<HTMLAnchorElement>(
@@ -87,7 +88,7 @@ export function LandingMotion() {
       };
     });
 
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    mm.add(MOTION_ALLOWED_QUERY, () => {
       // HERO INTRO: target the real data attributes in LandingPage.
       // The old grid-column selector no longer matched after the hero layout
       // changed to a centered single-column composition.
@@ -383,7 +384,7 @@ export function LandingMotion() {
     // Its internal rings and glare are scroll-linked inside HeroLens.
 
     // MORE SCROLL EFFECTS
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    mm.add(MOTION_ALLOWED_QUERY, () => {
       // Keep hero copy and all section surfaces stationary relative to their
       // own layout while scrolling. Only one-time entrance reveals remain.
 
