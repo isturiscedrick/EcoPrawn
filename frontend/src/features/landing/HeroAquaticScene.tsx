@@ -136,7 +136,7 @@ export function HeroAquaticScene() {
           renderer.setSize(width, height, false);
         };
         resize();
-        if ("ResizeObserver" in window) {
+        if (typeof window.ResizeObserver !== "undefined") {
           resizeObserver = new ResizeObserver(resize);
           resizeObserver.observe(host);
         } else {
