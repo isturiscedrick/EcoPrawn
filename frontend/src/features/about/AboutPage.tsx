@@ -64,10 +64,25 @@ export function AboutPage() {
               <span className="ep-about-orbit ep-about-orbit-a" />
               <span className="ep-about-orbit ep-about-orbit-b" />
               <span className="ep-about-orbit ep-about-orbit-c" />
-              <span className="ep-about-orbit-core"><Icon name="droplets" size={34} /></span>
-              <span className="ep-about-orbit-tag ep-about-orbit-tag-top">WATER</span>
-              <span className="ep-about-orbit-tag ep-about-orbit-tag-right">INSIGHT</span>
-              <span className="ep-about-orbit-tag ep-about-orbit-tag-bottom">ACTION</span>
+              <span className="ep-about-orbit-node ep-about-orbit-node-one" />
+              <span className="ep-about-orbit-node ep-about-orbit-node-two" />
+              <span className="ep-about-orbit-node ep-about-orbit-node-three" />
+              <span className="ep-about-orbit-core">
+                <Icon name="droplet" size={42} strokeWidth={1.6} />
+                <Icon name="waves" size={34} strokeWidth={1.7} />
+              </span>
+              <span className="ep-about-orbit-tag ep-about-orbit-tag-top">
+                <Icon name="droplet" size={17} />
+                <span><b>WATER</b><small>Quality &amp; clarity</small></span>
+              </span>
+              <span className="ep-about-orbit-tag ep-about-orbit-tag-right">
+                <Icon name="activity" size={17} />
+                <span><b>INSIGHT</b><small>Readings &amp; trends</small></span>
+              </span>
+              <span className="ep-about-orbit-tag ep-about-orbit-tag-bottom">
+                <Icon name="zap" size={17} />
+                <span><b>ACTION</b><small>Farm workflows</small></span>
+              </span>
             </div>
           </div>
         </section>
