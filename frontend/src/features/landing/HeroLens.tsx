@@ -51,7 +51,7 @@ const SPECKS = [
 ];
 
 export function HeroLens() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -81,7 +81,7 @@ export function HeroLens() {
       const specks = many(".ep-lens-speck");
       const connectorPaths = many(".ep-lens-connectors path");
       const connectorNodes = many(".ep-lens-connectors circle");
-      if (!iris || !rings || !ticks || !shrimp || !arcs || !glare || !pingEl || !scan || !flash || !caption) return;
+      if (!iris || !rings || !outerRing || !ticks || !shrimp || !arcs || !glare || !pingEl || !scan || !flash || !caption) return;
 
       // Scroll-linked depth: the instrument drifts and subtly tilts as it
       // travels through the viewport. Scrubbing keeps motion tied to scrolling.
@@ -300,7 +300,7 @@ export function HeroLens() {
           transformOrigin: "50% 50%",
           force3D: true,
         });
-        const opts = { duration: 0.72, ease: "power3.out", overwrite: "auto" };
+        const opts: gsap.TweenVars = { duration: 0.72, ease: "power3.out", overwrite: "auto" };
         const tiltX = gsap.quickTo(lens, "rotationX", opts);
         const tiltY = gsap.quickTo(lens, "rotationY", opts);
         const lift = gsap.quickTo(lens, "z", opts);
