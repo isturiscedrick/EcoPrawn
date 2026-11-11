@@ -175,6 +175,14 @@ const PATHS = {
       <path d="M4 18h16" />
     </>
   ),
+  "sliders-horizontal": (
+    <>
+      <path d="M4 6h16M4 12h16M4 18h16" />
+      <circle cx="8" cy="6" r="2" fill="currentColor" />
+      <circle cx="16" cy="12" r="2" fill="currentColor" />
+      <circle cx="10" cy="18" r="2" fill="currentColor" />
+    </>
+  ),
   "sidebar-toggle": (
     <>
       <rect x="3" y="4" width="18" height="16" rx="2" />
