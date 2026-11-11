@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { MOTION_ALLOWED_QUERY } from "@/components/motion/motionRuntime";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
@@ -68,6 +70,39 @@ export function Sidebar({
   useEffect(() => {
     onMobileClose();
   }, [pathname, onMobileClose]);
+
+  // Drawer content choreography. The drawer's existing CSS transform owns
+  // its slide-in; GSAP animates only the inner rows to avoid transform conflicts.
+  useLayoutEffect(() => {
+    if (!mobileOpen) return;
+    const drawer = drawerRef.current;
+    if (!drawer) return;
+    const mm = gsap.matchMedia();
+    mm.add(MOTION_ALLOWED_QUERY, () => {
+      const ctx = gsap.context(() => {
+        const header = drawer.querySelector<HTMLElement>(":scope > div:first-child");
+        const profile = drawer.querySelector<HTMLElement>(":scope > div:nth-child(2)");
+        const navItems = drawer.querySelectorAll<HTMLElement>("nav > a, nav > button");
+        const footer = drawer.querySelector<HTMLElement>(":scope > div:last-child");
+        if (header) gsap.fromTo(header, { y: -8, autoAlpha: 0 }, {
+          y: 0, autoAlpha: 1, duration: 0.32, ease: "power3.out", clearProps: "transform,opacity,visibility",
+        });
+        if (profile) gsap.fromTo(profile, { y: 10, autoAlpha: 0 }, {
+          y: 0, autoAlpha: 1, duration: 0.38, delay: 0.06, ease: "power3.out", clearProps: "transform,opacity,visibility",
+        });
+        if (navItems.length) gsap.fromTo(navItems, { x: -12, autoAlpha: 0 }, {
+          x: 0, autoAlpha: 1, duration: 0.34, stagger: 0.045, delay: 0.1,
+          ease: "power3.out", clearProps: "transform,opacity,visibility",
+        });
+        if (footer) gsap.fromTo(footer, { y: 12, autoAlpha: 0 }, {
+          y: 0, autoAlpha: 1, duration: 0.34, delay: 0.18, ease: "power3.out",
+          clearProps: "transform,opacity,visibility",
+        });
+      }, drawer);
+      return () => ctx.revert();
+    });
+    return () => mm.revert();
+  }, [mobileOpen]);
 
   // Drawer open: lock page scroll, focus the close button, trap Tab, close on Escape.
   useEffect(() => {
