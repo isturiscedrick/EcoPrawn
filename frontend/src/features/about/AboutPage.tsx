@@ -6,6 +6,7 @@ import { Icon, IconChip, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { AboutMotion } from "@/components/motion/AboutMotion";
 import { SectionNav } from "./SectionNav";
+import { AquacultureIllustration } from "@/components/illustrations/AquacultureIllustration";
 import { objectives, features, inScope, outOfScope } from "@/content/site";
 
 const SECTION_PAD = "px-4 py-16 sm:px-8 sm:py-24";
@@ -217,6 +218,7 @@ export function AboutPage() {
                 <p className={lead}>Each part contributes to a clearer picture of what is happening across the farm.</p>
               </div>
             </Reveal>
+            <AquacultureIllustration variant="about" className="ep-about-workflow-illustration" />
             <ol className="ep-about-journey-grid grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 { step: "01", title: "Observe", body: "Collect water-quality readings and monitor changing conditions.", icon: "activity" as const },
