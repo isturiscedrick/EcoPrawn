@@ -51,7 +51,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     <div className="dashboard-shell min-h-screen bg-[var(--ep-bg)]">
       <header
         id="site-header"
-        className="ep-landing sticky top-0 z-40 border-b transition-all duration-300 backdrop-blur-2xl"
+        className="ep-landing sticky top-0 z-40 border-b transition-all duration-300 backdrop-blur-2xl lg:hidden"
         style={{
           backgroundColor: headerSurface,
           borderColor: headerBorder,
@@ -110,10 +110,10 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       </header>
 
       {/* Persistent desktop navigation and mobile drawer. */}
-      <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} />
+      <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} darkMode={darkMode} onToggleTheme={toggleTheme} />
 
       {/* Responsive dashboard content area. */}
-      <main className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-16 pt-3 sm:px-5 sm:pt-5 lg:max-w-[1440px] lg:ml-[260px] lg:w-[calc(100%-260px)]">
+      <main className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-16 pt-3 sm:px-5 sm:pt-5 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
         <div className="w-full">{children}</div>
       </main>
     </div>
