@@ -1448,3 +1448,47 @@ html.dark .ep-business-landing .ep-hero-sensor-tile {
     will-change: auto !important;
   }
 }
+
+
+/* Phase 3 — cinematic landing-page depth. Decorative layers only: the hero
+   content and page geometry remain stable while the background drifts subtly. */
+.ep-business-landing .ep-hero-atmosphere,
+.ep-business-landing [data-hero="grid"],
+.ep-business-landing [data-readings-bg] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+.ep-business-landing .ep-hero-atmosphere {
+  transform-origin: 50% 35%;
+}
+.ep-business-landing .ep-hero-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 8% 4% 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 42%, rgba(59,130,246,.10), transparent 68%);
+  filter: blur(28px);
+  opacity: .75;
+  pointer-events: none;
+}
+.ep-business-landing #dashboard-preview .ep-preview-tab-panel {
+  transform-origin: 50% 0;
+  will-change: opacity, transform;
+}
+@media (max-width: 1023px) {
+  .ep-business-landing .ep-hero-atmosphere,
+  .ep-business-landing [data-hero="grid"],
+  .ep-business-landing [data-readings-bg] {
+    will-change: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-hero-atmosphere,
+  .ep-business-landing [data-hero="grid"],
+  .ep-business-landing [data-readings-bg],
+  .ep-business-landing #dashboard-preview .ep-preview-tab-panel {
+    will-change: auto !important;
+    transform: none !important;
+  }
+}
