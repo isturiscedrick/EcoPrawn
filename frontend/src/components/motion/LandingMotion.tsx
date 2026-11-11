@@ -317,15 +317,6 @@ export function LandingMotion() {
         homeIcons.forEach((icon) => homeIconObserver?.observe(icon));
       }
 
-      // Animate small decorative marks with a soft stagger as the hero arrives.
-      const crosses = homeRoot?.querySelectorAll<HTMLElement>("[data-cross]");
-      if (crosses?.length) {
-        microAnimations.push(animate(crosses, {
-          opacity: [.12, .55, .18], scale: [.65, 1.15, 1],
-          delay: stagger(90), duration: 1100, ease: "inOutSine",
-        }));
-      }
-
       // Animate section-specific labels and markers with Anime.js as they enter.
       // The existing GSAP timelines continue to own the larger card/section motion.
       const homeAccents = homeRoot?.querySelectorAll<HTMLElement>(
