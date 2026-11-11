@@ -7,7 +7,7 @@ import { heroReadouts } from "@/content/landing-preview";
 import { heroReadoutUnits } from "@/config/sensors";
 
 // LandingMotion fades the right column in at 1.2s. Start just after it.
-gsap.registerPlugin(ScrollTrigger);
+
 const INTRO_DELAY = 1.35;
 
 // Iris overlay: transparent inside the radius, solid outside. GSAP tweens --iris.
@@ -54,6 +54,7 @@ export function HeroLens() {
   const ref = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     const root = ref.current;
     if (!root) return;
 
