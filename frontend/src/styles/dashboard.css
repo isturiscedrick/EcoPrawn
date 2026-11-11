@@ -561,3 +561,47 @@ html.dark .dashboard-shell .dashboard-trend-chart {
     top: 0;
   }
 }
+
+
+/* ---------- Desktop: allow every dashboard route to grow and scroll ---------- */
+@media (min-width: 1024px) {
+  html:has(.dashboard-shell),
+  body:has(.dashboard-shell),
+  #root:has(.dashboard-shell) {
+    height: auto !important;
+    min-height: 100%;
+    overflow-y: auto !important;
+  }
+
+  .dashboard-shell {
+    height: auto !important;
+    min-height: 100vh;
+    overflow-x: clip;
+    overflow-y: visible !important;
+  }
+
+  .dashboard-shell main,
+  .dashboard-shell main > div,
+  .dashboard-shell main > div > * {
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+
+  .dashboard-shell main {
+    min-height: 100vh;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar {
+    position: fixed;
+    inset-block: 0;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > :is(div:nth-child(3)) {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+}
