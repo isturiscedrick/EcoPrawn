@@ -8,7 +8,6 @@ import { CtaBand } from "@/components/CtaBand";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
-import { MobileLandingNav } from "@/components/motion/ScrollUi";
 import { heroReadoutUnits } from "@/config/sensors";
 import {
   heroReadouts,
@@ -660,7 +659,6 @@ export function LandingPage() {
         </Reveal>
       </main>
 
-      <MobileLandingNav />
       <SiteFooter />
     </div>
   );
