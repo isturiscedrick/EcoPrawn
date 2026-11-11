@@ -203,14 +203,14 @@ export function LandingPage() {
                     return (
                       <div key={reading.label} className="ep-hero-sensor-tile min-w-0 rounded-xl border border-white/10 bg-white/[.055] px-3 py-3">
                         <div className="flex items-center gap-1.5 text-[10px] font-semibold text-blue-100/75">
-                          <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+                          <span aria-hidden="true" data-hero-sensor-dot="" className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
                           <span className="truncate">{reading.label}</span>
                         </div>
                         <p className="mt-2 whitespace-nowrap text-[clamp(18px,2vw,25px)] font-semibold leading-none tracking-tight text-white tabular-nums">
                           {reading.value}<span className="ml-1 text-[10px] font-medium text-blue-100/65">{heroReadoutUnits[reading.label]}</span>
                         </p>
                         <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/10">
-                          <span className="block h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-300" style={{ width: `${reading.pct}%` }} />
+                          <span data-hero-sensor-bar="" className="block h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-300" style={{ width: `${reading.pct}%` }} />
                         </div>
                         <p className="mt-2 truncate text-[9px] leading-tight text-blue-100/65" title={range}>Target {range}</p>
                       </div>
