@@ -1,9 +1,7 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { bindPublicHoverMotion } from "./PublicHoverMotion";
 import { animate, stagger } from "animejs";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { HeroEnhance } from "./HeroEnhance";
 import { MOTION_ALLOWED_QUERY, registerMotionPlugins } from "./motionRuntime";
 
