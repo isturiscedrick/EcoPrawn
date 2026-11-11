@@ -23,7 +23,6 @@ export function LandingMotion() {
     const mm = gsap.matchMedia();
     let cancelled = false;
     let previewTabCleanup: (() => void) | undefined;
-    let previewPanelCleanup: (() => void) | undefined;
     // Google Fonts (Lexend/Inter) swap in after first paint and reflow the
     // text, which shifts every scroll trigger's start position. Re-measure
     // once they are ready.
@@ -389,7 +388,7 @@ export function LandingMotion() {
         if (hero) {
           const grid = hero.querySelector<HTMLElement>('[data-hero="grid"]');
           const atmosphere = hero.querySelector<HTMLElement>(".ep-hero-atmosphere");
-          const specks = hero.querySelector<HTMLElement>(".ep-hero-speck");
+          const specks = hero.querySelectorAll<HTMLElement>(".ep-hero-speck");
           if (grid) gsap.to(grid, {
             yPercent: 12,
             ease: "none",
@@ -418,21 +417,22 @@ export function LandingMotion() {
       }
     );
 
-    // Dashboard preview tabs keep their existing React state and keyboard
-    // behavior. Animate only the newly-rendered panel content after a real
-    // tab change; no data values or tab semantics are altered.
+    // Dashboard preview tabs retain their React state and accessibility.
+    // Animate the panel once when the selected tab changes; the observer is
+    // disconnected with this effect so route changes cannot leave stale work.
     const previewPanel = document.querySelector<HTMLElement>(
       "#dashboard-preview .ep-preview-tab-panel"
     );
-    if (previewPanel) {
-      let previousLabel = previewPanel.getAttribute("aria-label");
-      const previewObserver = new MutationObserver(() => {
-        const nextLabel = previewPanel.getAttribute("aria-label");
-        if (nextLabel === previousLabel) return;
-        previousLabel = nextLabel;
+    const tabList = previewPanel?.previousElementSibling;
+    if (previewPanel && tabList) {
+      let previousTab = tabList.querySelector<HTMLElement>('[aria-pressed="true"]')?.textContent?.trim();
+      const tabObserver = new MutationObserver(() => {
+        const selected = tabList.querySelector<HTMLElement>('[aria-pressed="true"]');
+        const nextTab = selected?.textContent?.trim();
+        if (!nextTab || nextTab === previousTab) return;
+        previousTab = nextTab;
         const content = Array.from(previewPanel.children) as HTMLElement[];
-        if (!content.length) return;
-        gsap.fromTo(content,
+        if (content.length) gsap.fromTo(content,
           { y: 12, autoAlpha: 0 },
           {
             y: 0,
@@ -445,35 +445,12 @@ export function LandingMotion() {
           }
         );
       });
-      previewObserver.observe(previewPanel, {
+      tabObserver.observe(tabList, {
+        subtree: true,
         attributes: true,
-        attributeFilter: ["aria-label"],
-        childList: true,
-        subtree: false,
+        attributeFilter: ["aria-pressed"],
       });
-      // Observe tab-label changes as the reliable React commit signal.
-      const tabList = previewPanel.previousElementSibling;
-      if (tabList) {
-        const tabObserver = new MutationObserver(() => {
-          const selected = tabList.querySelector<HTMLElement>('[aria-pressed="true"]');
-          const label = selected?.textContent?.trim() ?? "";
-          if (!label || label === previousLabel) return;
-          previousLabel = label;
-          const content = Array.from(previewPanel.children) as HTMLElement[];
-          if (content.length) gsap.fromTo(content,
-            { y: 12, autoAlpha: 0 },
-            { y: 0, autoAlpha: 1, duration: 0.46, stagger: 0.055,
-              ease: "power3.out", clearProps: "transform,opacity,visibility", overwrite: "auto" }
-          );
-        });
-        tabObserver.observe(tabList, { subtree: true, attributes: true, attributeFilter: ["aria-pressed"] });
-        // The panel and tab observer are both owned by this effect.
-        previewPanel.dataset.motionTabs = "ready";
-        const cleanup = () => tabObserver.disconnect();
-        // Store cleanup in the existing landing motion cleanup collection.
-        previewTabCleanup = cleanup;
-      }
-      previewPanelCleanup = () => previewObserver.disconnect();
+      previewTabCleanup = () => tabObserver.disconnect();
     }
 
     // PROCESS: the four stages remain in a natural, responsive grid.
@@ -613,7 +590,6 @@ export function LandingMotion() {
     return () => {
       cancelled = true;
       previewTabCleanup?.();
-      previewPanelCleanup?.();
       mm.revert();
     };
   }, []);
