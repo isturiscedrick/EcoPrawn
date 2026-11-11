@@ -545,3 +545,14 @@ html.dark .dashboard-shell .dashboard-trend-chart {
     border: 1px solid #bbb !important;
   }
 }
+
+
+/* Desktop dashboard composition: persistent sidebar and a centered, readable workspace. */
+@media (min-width: 1024px) {
+  .dashboard-shell main {
+    width: calc(100% - 260px);
+    max-width: 1440px;
+    margin-left: 260px;
+    padding: 1.5rem clamp(1.5rem, 2.4vw, 2.5rem) 5rem !important;
+  }
+}
