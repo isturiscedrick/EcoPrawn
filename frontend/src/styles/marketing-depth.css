@@ -1434,3 +1434,172 @@ html.dark .ep-business-landing .ep-preview-tab[aria-pressed="false"] {
     transition: none !important;
   }
 }
+
+
+/* Phase 12 — reduce mobile page length without hiding content or changing
+   tablet/desktop composition. Tighten vertical rhythm across the landing page. */
+@media (max-width: 639px) {
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-top: clamp(3.25rem, 12vw, 4.25rem);
+    padding-bottom: clamp(2.75rem, 10vw, 3.5rem);
+  }
+  .ep-business-landing .ep-field-hero-copy > p:first-child {
+    min-height: 2rem;
+    margin-bottom: .9rem;
+    padding-block: .4rem;
+  }
+  .ep-business-landing .ep-field-hero-copy h1 {
+    line-height: 1.01;
+  }
+  .ep-business-landing .ep-field-hero-copy [data-hero="lead"] {
+    margin-top: 1rem;
+    font-size: .9rem;
+    line-height: 1.55;
+  }
+  .ep-business-landing .ep-field-hero-copy [data-hero="cta"] {
+    margin-top: 1.2rem;
+  }
+
+  .ep-business-landing .ep-platform-ribbon {
+    padding-block: .65rem;
+  }
+  .ep-business-landing .ep-platform-ribbon-item {
+    gap: .7rem;
+    padding-block: .35rem;
+  }
+
+  .ep-business-landing section[aria-label="EcoPrawn at a glance"] {
+    padding-block: 1.25rem;
+  }
+  .ep-business-landing .ep-stats-panel {
+    gap: .5rem;
+    padding: .5rem;
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    padding: .7rem .7rem;
+  }
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    margin-top: .4rem;
+    font-size: .68rem;
+  }
+
+  .ep-business-landing .ep-readings-section > div {
+    padding-block: 2.75rem;
+  }
+  .ep-business-landing .ep-readings-section .ep-readings-kicker {
+    margin-bottom: .7rem;
+  }
+  .ep-business-landing .ep-readings-section dl {
+    margin-top: 1.35rem;
+    gap: .65rem;
+  }
+  .ep-business-landing .ep-readings-section .ep-reading-card {
+    padding: .9rem 1rem;
+  }
+  .ep-business-landing .ep-readings-section .ep-reading-card dd {
+    margin-top: .55rem;
+    font-size: 1.8rem;
+  }
+  .ep-business-landing .ep-readings-section .ep-reading-card [aria-hidden="true"].relative {
+    margin-top: 1rem;
+  }
+
+  .ep-business-landing .ep-business-capabilities {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-reveal] {
+    margin-bottom: 1.75rem;
+    gap: 1rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-reveal] > div:first-child > div {
+    margin-bottom: .7rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-reveal] > p {
+    font-size: .9rem;
+    line-height: 1.6;
+  }
+  .ep-business-landing .ep-business-capabilities > div > .grid {
+    gap: .75rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] {
+    padding: 1rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] > span:first-child {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: .8rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] > p:last-of-type {
+    font-size: .85rem;
+    line-height: 1.55;
+  }
+  .ep-business-landing .ep-business-capabilities [data-capability-detail] {
+    margin-top: .9rem;
+    padding-top: .7rem;
+  }
+
+  .ep-business-landing #process {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .ep-business-landing #process [data-reveal] {
+    margin-bottom: 1.75rem;
+  }
+  .ep-business-landing #process [data-process-track] {
+    gap: .85rem;
+  }
+  .ep-business-landing #process [data-process-track] > li {
+    padding-top: .9rem;
+  }
+  .ep-business-landing #process [data-process-track] > li > div {
+    margin-bottom: .85rem;
+  }
+  .ep-business-landing #process [data-process-track] > li p {
+    font-size: .85rem;
+    line-height: 1.55;
+  }
+
+  .ep-business-landing #dashboard-preview {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .ep-business-landing #dashboard-preview > div {
+    gap: 1.5rem;
+  }
+  .ep-business-landing #dashboard-preview [data-reveal] > p {
+    margin-top: .75rem;
+    font-size: .9rem;
+    line-height: 1.6;
+  }
+  .ep-business-landing #dashboard-preview [data-reveal] > div:last-child {
+    margin-top: 1rem;
+    gap: .6rem;
+  }
+  .ep-business-landing #dashboard-preview .ep-dashboard-preview-window > div:first-child {
+    padding-block: .7rem;
+  }
+  .ep-business-landing .ep-preview-tab-list {
+    padding-block: .5rem;
+  }
+  .ep-business-landing #dashboard-preview [data-preview-kpis] {
+    padding: .6rem;
+    gap: .5rem;
+  }
+  .ep-business-landing #dashboard-preview [data-preview-reading] {
+    padding: .65rem;
+  }
+  .ep-business-landing #dashboard-preview .ep-preview-tab-panel > div {
+    padding-block: .7rem;
+  }
+}
+
+/* Keep the compact layout accessible at very narrow widths. */
+@media (max-width: 359px) {
+  .ep-business-landing .ep-field-hero-copy [data-hero="cta"] a {
+    min-height: 3rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] {
+    padding: .9rem;
+  }
+}
