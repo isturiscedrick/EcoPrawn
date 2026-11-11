@@ -1415,3 +1415,36 @@ html.dark .ep-business-landing .ep-hero-sensor-tile {
   border-color: rgba(255,255,255,.1);
   background-color: rgba(255,255,255,.055);
 }
+
+
+/* Landing motion polish: depth is limited to the hero console and cards. */
+.ep-business-landing [data-hero="monitor-panel"] {
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform;
+}
+.ep-business-landing .ep-hero-sensor-tile { backface-visibility: hidden; }
+.ep-business-landing [data-hero-sensor-bar] {
+  transform: scaleX(1);
+  transform-origin: left center;
+  will-change: transform;
+}
+.ep-business-landing [data-hero-sensor-dot],
+.ep-business-landing .ep-hero-monitor-glow,
+.ep-business-landing .ep-hero-speck { will-change: transform, opacity; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .ep-business-landing [data-hero="monitor-panel"] {
+    transition: box-shadow .35s ease, border-color .35s ease;
+  }
+  .ep-business-landing [data-hero="monitor-panel"]:hover {
+    border-color: color-mix(in srgb, var(--ep-accent) 48%, var(--ep-line));
+    box-shadow: 0 34px 90px -42px rgba(29,78,216,.34), inset 0 1px 0 rgba(255,255,255,.18);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing :is([data-hero="monitor-panel"],[data-hero-sensor-bar],[data-hero-sensor-dot],.ep-hero-monitor-glow,.ep-hero-speck) {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
