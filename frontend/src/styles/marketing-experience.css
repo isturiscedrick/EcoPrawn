@@ -1536,3 +1536,42 @@ html.dark .ep-business-landing .ep-aquatic-scene {
     display: none !important;
   }
 }
+
+
+/* Custom SVG illustrations shared by the public pages. */
+.ep-illustration-strip { position: relative; overflow: hidden; }
+.ep-page-illustration { width: min(100%, 18rem); flex: 0 0 auto; color: var(--ep-accent); }
+.ep-page-illustration svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ep-illustration-orbit { stroke: color-mix(in srgb,var(--ep-accent) 32%,transparent); stroke-width: 1.25; stroke-dasharray: 5 9; transform-origin: 260px 140px; animation: ep-illustration-orbit 28s linear infinite; }
+.ep-illustration-orbit--inner { stroke: color-mix(in srgb,#38bdf8 36%,transparent); stroke-dasharray: 2 8; animation-direction: reverse; animation-duration: 22s; }
+.ep-illustration-wave,.ep-illustration-connector,.ep-illustration-envelope,.ep-illustration-detail,.ep-illustration-sensor { stroke: var(--ep-accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.ep-illustration-wave { opacity: .7; stroke-width: 4; stroke-dasharray: 12 10; animation: ep-illustration-dash 8s linear infinite; }
+.ep-illustration-creature,.ep-illustration-core,.ep-illustration-card { fill: color-mix(in srgb,var(--ep-accent) 13%,var(--ep-surface)); stroke: var(--ep-accent); stroke-width: 2.5; }
+.ep-illustration-eye { fill: var(--ep-accent); }
+.ep-illustration-node { fill: var(--ep-surface); stroke: var(--ep-accent); stroke-width: 2.5; }
+.ep-illustration-node--alt { fill: color-mix(in srgb,#38bdf8 18%,var(--ep-surface)); }
+.ep-illustration-bubbles { fill: #38bdf8; opacity: .72; animation: ep-illustration-bubbles 4.5s ease-in-out infinite alternate; }
+.ep-illustration-art { transform-origin: center; animation: ep-illustration-float 5.5s ease-in-out infinite; }
+.ep-page-illustration--landing { width: min(38vw, 15rem); }
+.ep-about-workflow-illustration { margin: -1.25rem auto 1.5rem; width: min(100%, 25rem); }
+.ep-contact-visuals { display: flex; align-items: center; justify-content: center; gap: .25rem; }
+.ep-contact-visuals .ep-page-illustration { width: min(100%, 16rem); }
+.ep-contact-visuals .ep-contact-signal { flex: 0 0 5rem; }
+.ep-contact-signal-ring { animation: ep-contact-signal-pulse 3.4s ease-out infinite; }
+.ep-contact-signal-ring-two { animation-delay: .8s; }
+.ep-contact-signal-ring-three { animation-delay: 1.6s; }
+@keyframes ep-illustration-orbit { to { transform: rotate(360deg); } }
+@keyframes ep-illustration-dash { to { stroke-dashoffset: -88; } }
+@keyframes ep-illustration-bubbles { from { transform: translateY(7px); opacity: .38; } to { transform: translateY(-8px); opacity: .9; } }
+@keyframes ep-illustration-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes ep-contact-signal-pulse { 0% { transform: scale(.72); opacity: .65; } 75%,100% { transform: scale(1.18); opacity: 0; } }
+@media (max-width: 639px) {
+  .ep-page-illustration--landing { width: min(100%, 14rem); }
+  .ep-contact-visuals .ep-page-illustration { width: min(100%, 13rem); }
+  .ep-contact-visuals .ep-contact-signal { flex-basis: 3.5rem; transform: scale(.78); }
+  .ep-about-workflow-illustration { margin-top: -1rem; margin-bottom: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-page-illustration *,
+  .ep-contact-signal-ring { animation: none !important; }
+}
