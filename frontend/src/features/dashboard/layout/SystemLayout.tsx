@@ -21,6 +21,32 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const closeMobileSidebar = useCallback(() => setMobileSidebarOpen(false), []);
   const [darkMode, setDarkMode] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ep-dashboard-theme") === "dark");
 
+  useLayoutEffect(() => {
+    const main = document.querySelector<HTMLElement>("[data-dashboard-route-content]");
+    if (!main) return;
+    const mm = gsap.matchMedia();
+    mm.add(MOTION_ALLOWED_QUERY, () => {
+      const ctx = gsap.context(() => {
+        const content = Array.from(main.children) as HTMLElement[];
+        if (content.length) gsap.fromTo(
+          content,
+          { y: 12, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.42,
+            stagger: 0.045,
+            ease: "power3.out",
+            clearProps: "transform,opacity,visibility",
+            overwrite: "auto",
+          }
+        );
+      }, main);
+      return () => ctx.revert();
+    });
+    return () => mm.revert();
+  }, [pathname]);
+
   useEffect(() => {
     const syncTheme = () => setDarkMode(window.localStorage.getItem("ep-dashboard-theme") === "dark");
     window.addEventListener("ecoprawn-theme-change", syncTheme);
