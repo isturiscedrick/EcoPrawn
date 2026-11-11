@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { Link } from "@tanstack/react-router";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
@@ -8,6 +8,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
+import { MobileLandingNav } from "@/components/motion/ScrollUi";
 import { heroReadoutUnits } from "@/config/sensors";
 import {
   heroReadouts,
@@ -101,6 +102,21 @@ function Words({ text }: { text: string }) {
 
 export function LandingPage() {
   const [previewTab, setPreviewTab] = useState<"water" | "growth" | "systems">("water");
+  const processDetailsRef = useRef<HTMLOListElement>(null);
+
+  useEffect(() => {
+    const compactViewport = window.matchMedia("(max-width: 639px)");
+    const syncProcessDetails = () => {
+      processDetailsRef.current?.querySelectorAll("details").forEach((item) => {
+        if (compactViewport.matches) item.removeAttribute("open");
+        else item.setAttribute("open", "");
+      });
+    };
+
+    syncProcessDetails();
+    compactViewport.addEventListener("change", syncProcessDetails);
+    return () => compactViewport.removeEventListener("change", syncProcessDetails);
+  }, []);
 
   return (
     <div className="ep-landing ep-business-landing flex min-h-screen flex-col">
@@ -602,33 +618,36 @@ export function LandingPage() {
             </div>
 
             <div data-process-viewport="" className="ep-process-viewport relative lg:border-t lg:border-[var(--ep-line)]">
-              <ol data-process-track="" className="ep-process-track grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+              <ol ref={processDetailsRef} data-process-track="" className="ep-process-track grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
                 {STEPS.map((s) => (
                   <li
                     key={s.step}
                     data-step=""
                     data-hover-lift=""
-                    className="group relative border-t border-[var(--ep-line)] pt-8 transition-colors duration-200 hover:border-[var(--ep-accent)] lg:border-t-0"
+                    className="group relative border-t border-[var(--ep-line)] pt-4 transition-colors duration-200 hover:border-[var(--ep-accent)] lg:border-t-0 lg:pt-8"
                   >
                     <span
                       aria-hidden="true"
                       data-step-node=""
                       className="absolute -top-[5px] left-0 hidden h-2.5 w-2.5 bg-[var(--ep-accent)] lg:block"
                     />
-                    <div className="mb-6 flex items-center justify-between">
-                      <span className="text-sm font-semibold tabular-nums tracking-wide text-[var(--ep-text-muted)]">
-                        {s.step}
-                      </span>
-                      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--ep-tint)] text-[var(--ep-secondary)]">
-                        <Icon name={s.icon} size={22} />
-                      </span>
-                    </div>
-                    <h3 className="ep-font-display mb-2 text-2xl font-semibold text-[var(--ep-text)] transition-colors duration-200 group-hover:text-[var(--ep-accent)]">
-                      {s.title}
-                    </h3>
-                    <p className="text-base leading-relaxed text-[var(--ep-text-muted)]">
-                      {s.body}
-                    </p>
+                    <details open className="ep-process-disclosure">
+                      <summary className="flex min-h-12 cursor-pointer list-none items-center gap-3 [&::-webkit-details-marker]:hidden">
+                        <span className="text-xs font-semibold tabular-nums tracking-wide text-[var(--ep-text-muted)]">
+                          {s.step}
+                        </span>
+                        <span className="ep-font-display min-w-0 flex-1 text-lg font-semibold text-[var(--ep-text)] transition-colors duration-200 group-hover:text-[var(--ep-accent)]">
+                          {s.title}
+                        </span>
+                        <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--ep-tint)] text-[var(--ep-secondary)]">
+                          <Icon name={s.icon} size={19} />
+                        </span>
+                        <span aria-hidden="true" className="ep-process-disclosure-indicator ml-1 text-sm text-[var(--ep-text-muted)]">+</span>
+                      </summary>
+                      <p className="ep-process-disclosure-body pt-2 text-sm leading-relaxed text-[var(--ep-text-muted)] sm:text-base">
+                        {s.body}
+                      </p>
+                    </details>
                   </li>
                 ))}
               </ol>
@@ -641,6 +660,7 @@ export function LandingPage() {
         </Reveal>
       </main>
 
+      <MobileLandingNav />
       <SiteFooter />
     </div>
   );
