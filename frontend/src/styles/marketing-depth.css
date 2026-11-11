@@ -1826,3 +1826,180 @@ html.dark .ep-contact-page [data-contact-form] > form {
     transition: none !important;
   }
 }
+
+
+/* About mission orbit — richer water-intelligence illustration. */
+.ep-about-page .ep-about-orbit-visual {
+  width: min(100%, 440px);
+  overflow: visible;
+  filter: drop-shadow(0 26px 34px rgba(37,99,235,.12));
+}
+.ep-about-page .ep-about-orbit {
+  border-style: solid;
+  background: transparent;
+}
+.ep-about-page .ep-about-orbit-a {
+  width: 96%;
+  border-width: 1.5px;
+  border-color: rgba(56,189,248,.36);
+  box-shadow: 0 0 0 13px rgba(59,130,246,.025), inset 0 0 34px rgba(59,130,246,.035);
+}
+.ep-about-page .ep-about-orbit-b {
+  width: 76%;
+  border-width: 1.5px;
+  border-color: rgba(37,99,235,.28);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.35), 0 0 30px rgba(37,99,235,.08);
+}
+.ep-about-page .ep-about-orbit-c {
+  width: 53%;
+  border-width: 2px;
+  border-color: rgba(14,165,233,.48);
+  background: radial-gradient(circle, rgba(59,130,246,.09), rgba(14,165,233,.025) 62%, transparent 72%);
+  box-shadow: 0 0 28px rgba(14,165,233,.13), inset 0 0 24px rgba(14,165,233,.06);
+}
+.ep-about-page .ep-about-orbit-core {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  width: clamp(6rem, 8vw, 7.5rem);
+  height: clamp(6rem, 8vw, 7.5rem);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .1rem;
+  border: 1px solid rgba(191,219,254,.72);
+  border-radius: 1.8rem;
+  color: #fff;
+  background:
+    radial-gradient(circle at 78% 14%, rgba(103,232,249,.5), transparent 34%),
+    linear-gradient(145deg, #1d4ed8 5%, #0284c7 65%, #06b6d4);
+  box-shadow: 0 24px 58px -18px rgba(29,78,216,.68), inset 0 1px 0 rgba(255,255,255,.48), inset 0 -12px 24px rgba(8,47,73,.16);
+}
+.ep-about-page .ep-about-orbit-core svg:first-child {
+  filter: drop-shadow(0 2px 5px rgba(0,30,80,.2));
+}
+.ep-about-page .ep-about-orbit-core svg:last-child {
+  margin-top: -.3rem;
+  opacity: .92;
+}
+.ep-about-page .ep-about-orbit-tag {
+  display: inline-flex;
+  min-width: 9.5rem;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .65rem;
+  padding: .7rem .9rem;
+  border: 1px solid rgba(147,197,253,.52);
+  border-radius: 1rem;
+  color: #1e3a8a;
+  background: linear-gradient(145deg, rgba(255,255,255,.97), rgba(239,246,255,.94));
+  box-shadow: 0 14px 34px -22px rgba(30,64,175,.4), inset 0 1px 0 #fff;
+  letter-spacing: 0;
+  backdrop-filter: blur(14px);
+}
+.ep-about-page .ep-about-orbit-tag > svg {
+  flex: 0 0 auto;
+  color: #2563eb;
+}
+.ep-about-page .ep-about-orbit-tag > span {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: .12rem;
+  text-align: left;
+}
+.ep-about-page .ep-about-orbit-tag b {
+  font-size: .64rem;
+  font-weight: 850;
+  letter-spacing: .13em;
+  line-height: 1.15;
+}
+.ep-about-page .ep-about-orbit-tag small {
+  color: #526783;
+  font-size: .62rem;
+  font-weight: 550;
+  letter-spacing: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.ep-about-page .ep-about-orbit-tag-top {
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.ep-about-page .ep-about-orbit-tag-right {
+  top: 50%;
+  right: -2%;
+  transform: translateY(-50%);
+}
+.ep-about-page .ep-about-orbit-tag-bottom {
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.ep-about-page .ep-about-orbit-node {
+  position: absolute;
+  z-index: 2;
+  width: .72rem;
+  height: .72rem;
+  border: 2px solid rgba(255,255,255,.95);
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 0 4px rgba(56,189,248,.16), 0 0 18px rgba(14,165,233,.65);
+}
+.ep-about-page .ep-about-orbit-node-one { top: 19%; left: 14%; }
+.ep-about-page .ep-about-orbit-node-two { top: 48%; left: 2%; }
+.ep-about-page .ep-about-orbit-node-three { right: 14%; bottom: 18%; }
+html.dark .ep-about-page .ep-about-orbit-a {
+  border-color: rgba(56,189,248,.48);
+  box-shadow: 0 0 0 13px rgba(59,130,246,.045), inset 0 0 34px rgba(59,130,246,.07);
+}
+html.dark .ep-about-page .ep-about-orbit-b {
+  border-color: rgba(96,165,250,.4);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 0 30px rgba(37,99,235,.14);
+}
+html.dark .ep-about-page .ep-about-orbit-c {
+  border-color: rgba(34,211,238,.55);
+  background: radial-gradient(circle, rgba(37,99,235,.16), rgba(14,165,233,.05) 62%, transparent 72%);
+}
+html.dark .ep-about-page .ep-about-orbit-tag {
+  border-color: rgba(96,165,250,.35);
+  color: #dbeafe;
+  background: linear-gradient(145deg, rgba(20,39,67,.97), rgba(12,26,48,.96));
+  box-shadow: 0 16px 38px -24px rgba(0,0,0,.7), inset 0 1px 0 rgba(191,219,254,.1);
+}
+html.dark .ep-about-page .ep-about-orbit-tag small {
+  color: #a9c2e4;
+}
+html.dark .ep-about-page .ep-about-orbit-tag > svg {
+  color: #7dd3fc;
+}
+@media (max-width: 639px) {
+  .ep-about-page .ep-about-orbit-visual {
+    width: min(100%, 340px);
+  }
+  .ep-about-page .ep-about-orbit-tag {
+    min-width: 8.8rem;
+    gap: .5rem;
+    padding: .58rem .72rem;
+    border-radius: .85rem;
+  }
+  .ep-about-page .ep-about-orbit-tag b { font-size: .58rem; }
+  .ep-about-page .ep-about-orbit-tag small { font-size: .56rem; }
+  .ep-about-page .ep-about-orbit-tag-right { right: -1%; }
+  .ep-about-page .ep-about-orbit-node { width: .58rem; height: .58rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ep-about-page .ep-about-orbit-node {
+    animation: ep-about-orbit-node-pulse 3.8s ease-in-out infinite;
+  }
+  .ep-about-page .ep-about-orbit-node-two { animation-delay: 1.1s; }
+  .ep-about-page .ep-about-orbit-node-three { animation-delay: 2.2s; }
+}
+@keyframes ep-about-orbit-node-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(56,189,248,.12), 0 0 12px rgba(14,165,233,.42); }
+  50% { box-shadow: 0 0 0 7px rgba(56,189,248,.2), 0 0 22px rgba(14,165,233,.72); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-about-page .ep-about-orbit-node { animation: none !important; }
+}
