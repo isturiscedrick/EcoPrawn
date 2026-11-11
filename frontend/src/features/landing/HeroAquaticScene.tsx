@@ -26,6 +26,9 @@ export function HeroAquaticScene() {
     let scene: any;
     let resizeObserver: ResizeObserver | undefined;
     let resizeFallback: (() => void) | undefined;
+    let intersectionObserver: IntersectionObserver | undefined;
+    let inViewport = true;
+    let pageVisible = document.visibilityState === "visible";
 
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
 
@@ -39,10 +42,21 @@ export function HeroAquaticScene() {
       pointer.targetY = 0;
     };
 
+    const onVisibilityChange = () => {
+      pageVisible = document.visibilityState === "visible";
+      if (pageVisible && inViewport && !disposed && !frame) frame = requestAnimationFrame(tick);
+      if (!pageVisible && frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
+    };
+
     const cleanup = () => {
       cancelAnimationFrame(frame);
       resizeObserver?.disconnect();
       if (resizeFallback) window.removeEventListener("resize", resizeFallback);
+      intersectionObserver?.disconnect();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       host.removeEventListener("pointermove", onPointerMove);
       host.removeEventListener("pointerleave", onPointerLeave);
       if (points) scene?.remove(points);
@@ -131,10 +145,23 @@ export function HeroAquaticScene() {
 
         host.addEventListener("pointermove", onPointerMove, { passive: true });
         host.addEventListener("pointerleave", onPointerLeave, { passive: true });
+        document.addEventListener("visibilitychange", onVisibilityChange);
+        if ("IntersectionObserver" in window) {
+          intersectionObserver = new IntersectionObserver(([entry]) => {
+            inViewport = Boolean(entry?.isIntersecting);
+            if (inViewport && pageVisible && !disposed && !frame) frame = requestAnimationFrame(tick);
+            if (!inViewport && frame) {
+              cancelAnimationFrame(frame);
+              frame = 0;
+            }
+          }, { threshold: 0.01 });
+          intersectionObserver.observe(host);
+        }
 
         const clock = new THREE.Clock();
         const tick = () => {
-          if (disposed) return;
+          frame = 0;
+          if (disposed || !pageVisible || !inViewport) return;
           const elapsed = clock.getElapsedTime();
           const positionAttribute = geometry.attributes.position;
           const array = positionAttribute.array as Float32Array;
@@ -154,7 +181,7 @@ export function HeroAquaticScene() {
           renderer.render(scene, camera);
           frame = requestAnimationFrame(tick);
         };
-        tick();
+        if (pageVisible && inViewport) frame = requestAnimationFrame(tick);
       } catch {
         // The CSS atmosphere remains visible if WebGL is unavailable.
         cleanup();
