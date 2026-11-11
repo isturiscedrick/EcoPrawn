@@ -98,9 +98,10 @@ export function LandingMotion() {
       const lead = heroText?.querySelector<HTMLElement>("[data-hero=lead]");
       const actions = heroText?.querySelector<HTMLElement>("[data-hero=cta]");
 
-      // Match the About and Contact hero choreography exactly: one restrained
-      // staggered lift-and-fade, with the same timing and easing on every page.
-      if (heroText) {
+      // Hero choreography: copy arrives first, followed by the water
+      // monitoring console and its individual sensor tiles.
+      const monitorPanel = hero?.querySelector<HTMLElement>("[data-hero=monitor-panel]");
+      if (heroText || monitorPanel) {
         const intro = gsap.timeline({
           defaults: { ease: "power4.out" },
           delay: 0.12,
@@ -118,6 +119,18 @@ export function LandingMotion() {
         if (actions) intro.from(actions, {
           y: 18, autoAlpha: 0, scale: .98, duration: .58,
         }, "-=.38");
+        if (monitorPanel) {
+          gsap.set(monitorPanel, { transformPerspective: 1200, transformStyle: "preserve-3d" });
+          intro.from(monitorPanel, {
+            x: 42, y: 24, rotateY: 7, autoAlpha: 0,
+            duration: 1.05, ease: "power4.out",
+          }, "-=.68");
+          const sensorTiles = monitorPanel.querySelectorAll<HTMLElement>(".ep-hero-sensor-tile");
+          if (sensorTiles.length) intro.from(sensorTiles, {
+            y: 16, scale: .96, autoAlpha: 0,
+            duration: .62, stagger: .085, ease: "power3.out",
+          }, "-=.62");
+        }
       }
 
       // READINGS: each reading rises in, then its bar fills while its
@@ -228,6 +241,18 @@ export function LandingMotion() {
           stagger: 0.12,
         },
         {
+          trigger: '[aria-label="Connected EcoPrawn capabilities"]',
+          targets: '[aria-label="Connected EcoPrawn capabilities"] .ep-platform-ribbon-item',
+          y: 14,
+          stagger: 0.1,
+        },
+        {
+          trigger: '[aria-label="EcoPrawn at a glance"]',
+          targets: '.ep-stats-panel > div',
+          y: 18,
+          stagger: 0.08,
+        },
+        {
           trigger: "#process",
           targets: "#process [data-process-track] > li",
           y: 22,
@@ -300,7 +325,7 @@ export function LandingMotion() {
       // Anime.js handles icon personality across all Home sections.
       // Each icon animates once as it enters view; hover listeners below can
       // then provide a separate, short response.
-      const homeIcons = homeRoot?.querySelectorAll<HTMLElement>("main svg");
+      const homeIcons = homeRoot?.querySelectorAll<HTMLElement>("#capabilities [data-business-card] > span:first-child svg, #dashboard-preview-window svg");
       let homeIconObserver: IntersectionObserver | undefined;
       if (homeIcons?.length) {
         homeIconObserver = new IntersectionObserver((entries) => {
