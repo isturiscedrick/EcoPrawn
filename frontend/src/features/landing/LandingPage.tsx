@@ -70,15 +70,6 @@ const ZONES: Record<
   "Water Level": { min: 0, max: 100, lo: 90, hi: 100 },
 };
 
-const CROSSES = [
-  { left: "6%", top: "18%" },
-  { left: "44%", top: "9%" },
-  { left: "93%", top: "26%" },
-  { left: "12%", top: "82%" },
-  { left: "52%", top: "90%" },
-  { left: "88%", top: "78%" },
-];
-
 const pct = (v: number, min: number, max: number) =>
   Math.max(0, Math.min(100, ((v - min) / (max - min)) * 100));
 
@@ -150,23 +141,6 @@ export function LandingPage() {
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10 ep-hero-atmosphere"
           />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10"
-          >
-            {CROSSES.map((c) => (
-              <span
-                key={`${c.left}-${c.top}`}
-                data-cross=""
-                className="absolute h-4 w-4 opacity-[0.18]"
-                style={{ left: c.left, top: c.top }}
-              >
-                <span className="absolute left-1/2 top-0 h-full w-px bg-[var(--ep-accent)]" />
-                <span className="absolute left-0 top-1/2 h-px w-full bg-[var(--ep-accent)]" />
-              </span>
-            ))}
-          </div>
-
           {/* Centered editorial hero with a full-width farm landscape image. */}
           <div className="ep-field-hero mx-auto w-full max-w-[1440px] px-5 pt-16 sm:px-8 sm:pt-20 lg:px-10 lg:pt-20">
             <div data-hero="text" className="ep-field-hero-copy mx-auto flex max-w-[920px] flex-col items-center text-center">
