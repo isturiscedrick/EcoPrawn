@@ -15,6 +15,7 @@ export function ContactMotion() {
     const mm = gsap.matchMedia();
     mm.add(MOTION_ALLOWED_QUERY, () => {
       const cleanups: Array<() => void> = [];
+      const animeRuns: Array<{ revert: () => unknown }> = [];
       const ctx = gsap.context(() => {
         const hero = root.querySelector<HTMLElement>("[data-page-hero]");
         if (hero) {
@@ -132,7 +133,7 @@ export function ContactMotion() {
           const focus = () => {
             gsap.to(field, { scale: 1.006, borderColor: "var(--ep-accent)", boxShadow: "0 0 0 4px color-mix(in srgb, var(--ep-accent) 16%, transparent)", duration: .22, ease: "power2.out" });
             const label = field.parentElement?.querySelector<HTMLElement>("label");
-            if (label) animate(label, { translateX: [0, 4, 0], duration: 320, ease: "outBack(1.5)" });
+            if (label) animeRuns.push(animate(label, { translateX: [0, 4, 0], duration: 320, ease: "outBack(1.5)" }));
           };
           const blur = () => gsap.to(field, { scale: 1, boxShadow: "0 0 0 0 transparent", duration: .28, ease: "power2.out" });
           field.addEventListener("focus", focus);
@@ -140,6 +141,7 @@ export function ContactMotion() {
           cleanups.push(() => {
             field.removeEventListener("focus", focus);
             field.removeEventListener("blur", blur);
+            gsap.killTweensOf(field);
           });
         });
 
@@ -159,19 +161,19 @@ export function ContactMotion() {
             ease: "power2.out", delay: .12, clearProps: "transform,opacity",
           });
           const action = review.querySelector<HTMLElement>("button");
-          if (action) animate(action, {
+          if (action) animeRuns.push(animate(action, {
             scale: [0.96, 1.035, 1],
             duration: 520,
             delay: 220,
             ease: "outElastic(1,.65)",
-          });
+          }));
         });
         reviewObserver.observe(root, { childList: true, subtree: true });
         cleanups.push(() => reviewObserver.disconnect());
 
         // Tiny ornamental marks pulse in a short, non-looping sequence.
         const marks = root.querySelectorAll<HTMLElement>("main [aria-hidden='true'].h-2");
-        if (marks.length) animate(marks, { scale: [0.7, 1], delay: stagger(70), duration: 460, ease: "outBack(1.7)" });
+        if (marks.length) animeRuns.push(animate(marks, { scale: [0.7, 1], delay: stagger(70), duration: 460, ease: "outBack(1.7)" }));
 
         // Anime.js adds a section-by-section entrance for the contact details,
         // form labels and supporting icons without making any content invisible.
@@ -185,13 +187,13 @@ export function ContactMotion() {
               if (!entry.isIntersecting) return;
               const target = entry.target as HTMLElement;
               const isIcon = target.tagName.toLowerCase() === "svg";
-              animate(target, {
+              animeRuns.push(animate(target, {
                 translateY: [isIcon ? 7 : 5, 0],
                 scale: isIcon ? [0.76, 1] : [0.985, 1],
                 rotate: isIcon ? [-9, 0] : [0, 0],
                 duration: isIcon ? 560 : 430,
                 ease: isIcon ? "outElastic(1,.6)" : "out(3)",
-              });
+              }));
               accentObserver?.unobserve(target);
             });
           }, { threshold: 0.3 });
@@ -205,6 +207,7 @@ export function ContactMotion() {
       return () => {
         cleanupSharedHover();
         cleanups.forEach((cleanup) => cleanup());
+        animeRuns.forEach((run) => run.revert());
         ctx.revert();
       };
     });
