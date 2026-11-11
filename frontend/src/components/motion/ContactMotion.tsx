@@ -1,10 +1,10 @@
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
 import { bindPublicHoverMotion } from "./PublicHoverMotion";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { registerMotionPlugins, MOTION_ALLOWED_QUERY } from "./motionRuntime";
 import { animate, stagger } from "animejs";
 
-gsap.registerPlugin(ScrollTrigger);
+registerMotionPlugins();
 
 /** Contact-page motion with transform-only entrances and resilient cleanup. */
 export function ContactMotion() {
@@ -13,7 +13,7 @@ export function ContactMotion() {
     if (!root) return;
 
     const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
+    mm.add(MOTION_ALLOWED_QUERY, () => {
       const cleanups: Array<() => void> = [];
       const ctx = gsap.context(() => {
         const hero = root.querySelector<HTMLElement>("[data-page-hero]");
