@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
  *
  *  GSAP     hero intro timeline, scroll parallax, section reveals,
  *           readings count-up and range bars, scrubbed process rule
- *  anime.js ambient loops: crosshair blink, live-status ping, marker pings
+ *  anime.js ambient loops: live-status ping and marker pings
  *
  * Everything is skipped when the user prefers reduced motion.
  */
@@ -135,17 +135,6 @@ export function LandingMotion() {
       });
 
       /* ---------- anime.js: ambient loops ---------- */
-      anims.push(
-        animate("[data-cross]", {
-          opacity: [0.12, 0.7],
-          scale: [1, 1.25],
-          duration: 2400,
-          delay: () => utils.random(0, 2500),
-          ease: "inOutSine",
-          loop: true,
-          alternate: true,
-        })
-      );
       anims.push(
         animate("[data-live-ping]", {
           scale: [1, 2.8],
