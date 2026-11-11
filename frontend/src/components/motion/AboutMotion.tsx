@@ -4,12 +4,13 @@ import { bindPublicHoverMotion } from "./PublicHoverMotion";
 import { registerMotionPlugins, MOTION_ALLOWED_QUERY } from "./motionRuntime";
 import { animate, stagger } from "animejs";
 
-registerMotionPlugins();
+
 
 /** Rich About-page choreography. Entrances use transforms only so cards
  * remain visible if a ScrollTrigger is delayed, disabled, or unavailable. */
 export function AboutMotion() {
   useLayoutEffect(() => {
+    registerMotionPlugins();
     const root = document.querySelector<HTMLElement>(".ep-about-page");
     if (!root) return;
 
