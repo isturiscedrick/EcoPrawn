@@ -620,9 +620,6 @@ html.dark .ep-business-landing .ep-field-landscape {
   opacity: .10;
   mix-blend-mode: screen;
 }
-.ep-business-landing .ep-aquaculture-hero [data-cross] {
-  opacity: .32;
-}
 .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
   width: 100%;
   padding-top: clamp(5.5rem,9vw,8rem);
@@ -695,9 +692,6 @@ html:not(.dark) .ep-business-landing .ep-aquaculture-hero [data-hero="grid"] {
   opacity: .24;
   mix-blend-mode: multiply;
 }
-html:not(.dark) .ep-business-landing .ep-aquaculture-hero [data-cross] {
-  opacity: .58;
-}
 html:not(.dark) .ep-business-landing .ep-aquaculture-hero .ep-field-hero-copy > p:first-child {
   color: #1e40af;
   background: rgba(255,255,255,.94);
@@ -759,9 +753,6 @@ html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="grid"] {
   opacity: .18 !important;
   mix-blend-mode: screen;
 }
-html.dark .ep-business-landing .ep-aquaculture-hero [data-cross] {
-  opacity: .46 !important;
-}
 .ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
   color: inherit;
 }
@@ -784,7 +775,7 @@ html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
 
 
 /* Match the About and Contact hero canvases to the Landing aquaculture hero.
-   Keep the shared grid and crosshair overlays, but use the exact same
+   Keep the subtle grid texture, but use the exact same
    light/dark background layers so all three page heroes feel continuous. */
 :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   isolation: isolate;
