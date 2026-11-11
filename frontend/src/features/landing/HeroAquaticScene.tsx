@@ -25,6 +25,7 @@ export function HeroAquaticScene() {
     let camera: any;
     let scene: any;
     let resizeObserver: ResizeObserver | undefined;
+    let resizeFallback: (() => void) | undefined;
 
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
 
@@ -41,12 +42,14 @@ export function HeroAquaticScene() {
     const cleanup = () => {
       cancelAnimationFrame(frame);
       resizeObserver?.disconnect();
+      if (resizeFallback) window.removeEventListener("resize", resizeFallback);
       host.removeEventListener("pointermove", onPointerMove);
       host.removeEventListener("pointerleave", onPointerLeave);
       if (points) scene?.remove(points);
       geometry?.dispose();
       material?.dispose();
       renderer?.dispose();
+      renderer?.forceContextLoss?.();
       renderer?.domElement?.remove();
     };
 
@@ -76,6 +79,7 @@ export function HeroAquaticScene() {
 
         const count = 190;
         const positions = new Float32Array(count * 3);
+        const basePositions = new Float32Array(count * 3);
         const colors = new Float32Array(count * 3);
         const phases = new Float32Array(count);
         const speeds = new Float32Array(count);
@@ -85,6 +89,7 @@ export function HeroAquaticScene() {
           positions[i3] = ((seed * 0.017) % 1 - 0.5) * 17;
           positions[i3 + 1] = (((seed * 0.031) % 1) - 0.5) * 8;
           positions[i3 + 2] = -((i * 37) % 90) / 15;
+          basePositions.set(positions.subarray(i3, i3 + 3), i3);
           const cool = (i % 4) / 3;
           colors[i3] = 0.28 + cool * 0.12;
           colors[i3 + 1] = 0.58 + cool * 0.22;
@@ -120,7 +125,8 @@ export function HeroAquaticScene() {
           resizeObserver = new ResizeObserver(resize);
           resizeObserver.observe(host);
         } else {
-          window.addEventListener("resize", resize);
+          resizeFallback = resize;
+          window.addEventListener("resize", resizeFallback);
         }
 
         host.addEventListener("pointermove", onPointerMove, { passive: true });
@@ -134,8 +140,8 @@ export function HeroAquaticScene() {
           const array = positionAttribute.array as Float32Array;
           for (let i = 0; i < count; i += 1) {
             const i3 = i * 3;
-            array[i3 + 1] += Math.sin(elapsed * speeds[i] + phases[i]) * 0.0009;
-            array[i3] += Math.cos(elapsed * speeds[i] * 0.7 + phases[i]) * 0.00045;
+            array[i3 + 1] = basePositions[i3 + 1] + Math.sin(elapsed * speeds[i] + phases[i]) * 0.055;
+            array[i3] = basePositions[i3] + Math.cos(elapsed * speeds[i] * 0.7 + phases[i]) * 0.028;
           }
           positionAttribute.needsUpdate = true;
           pointer.x += (pointer.targetX - pointer.x) * 0.025;
@@ -159,7 +165,6 @@ export function HeroAquaticScene() {
     return () => {
       disposed = true;
       cleanup();
-      window.removeEventListener("resize", () => {});
     };
   }, []);
 
