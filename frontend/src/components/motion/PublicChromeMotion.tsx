@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { animate, stagger } from "animejs";
 import { MOTION_ALLOWED_QUERY, registerMotionPlugins } from "./motionRuntime";
 
-registerMotionPlugins();
+
 
 /**
  * Shared motion for the public-site chrome. Page-specific motion components
@@ -12,6 +12,7 @@ registerMotionPlugins();
  */
 export function PublicChromeMotion() {
   useLayoutEffect(() => {
+    registerMotionPlugins();
     const root = document.querySelector<HTMLElement>(".ep-landing");
     if (!root) return;
 
