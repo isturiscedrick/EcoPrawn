@@ -12,6 +12,20 @@ export const MOTION_REDUCED_QUERY = "(prefers-reduced-motion: reduce)";
 export const MOTION_FINE_POINTER_QUERY =
   "(hover: hover) and (pointer: fine) and (min-width: 768px)";
 
+/** Keep Anime.js instances reversible so route changes never leave stale motion behind. */
+export function trackAnime<T extends { revert: () => unknown }>(
+  runs: T[],
+  run: T
+): T {
+  runs.push(run);
+  return run;
+}
+
+/** Disconnect an observer and stop observing every target during effect cleanup. */
+export function disconnectObserver(observer: IntersectionObserver | undefined): void {
+  observer?.disconnect();
+}
+
 let pluginsRegistered = false;
 
 /** Register the free GSAP plugins once, before page motion is initialized. */
