@@ -278,7 +278,8 @@ export function AuthModalMotion({ overlayRef, panelRef }: AuthModalMotionProps) 
         observer.disconnect();
         panel.removeEventListener("focusin", onFocusIn);
         cleanups.forEach((fn) => fn());
-        anims.forEach((a) => a.revert());\n        gsap.killTweensOf(panel.querySelectorAll("button, input, [role=alert], [role=status]"));
+        anims.forEach((a) => a.revert());
+        gsap.killTweensOf(panel.querySelectorAll("button, input, [role=alert], [role=status]"));
       };
     });
 
