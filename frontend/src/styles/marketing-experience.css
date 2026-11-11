@@ -1253,3 +1253,87 @@ html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-primary {
     transform: none !important;
   }
 }
+
+
+/* ---------- Aquaculture hero monitoring panel and water-inspired section flow ---------- */
+.ep-business-landing .ep-hero-monitor-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(1rem, 2.2vw, 1.5rem);
+  border: 1px solid rgba(147,197,253,.24);
+  border-radius: 1.35rem;
+  background:
+    radial-gradient(ellipse at 88% 0%, rgba(59,130,246,.25), transparent 48%),
+    radial-gradient(ellipse at 0% 100%, rgba(6,182,212,.12), transparent 48%),
+    linear-gradient(145deg, rgba(15,35,62,.96), rgba(5,17,34,.97));
+  box-shadow: 0 30px 80px -38px rgba(2,8,23,.78), inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(18px);
+}
+.ep-business-landing .ep-hero-monitor-glow {
+  position: absolute;
+  z-index: -1;
+  width: 17rem;
+  height: 17rem;
+  top: -10rem;
+  right: -5rem;
+  border-radius: 50%;
+  background: rgba(37,99,235,.3);
+  filter: blur(42px);
+  pointer-events: none;
+}
+.ep-business-landing .ep-hero-sensor-tile {
+  min-height: 104px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+  transition: transform .22s ease, border-color .22s ease, background-color .22s ease;
+}
+.ep-business-landing .ep-hero-sensor-tile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(147,197,253,.35);
+  background-color: rgba(255,255,255,.085);
+}
+.ep-business-landing .ep-platform-ribbon {
+  position: relative;
+  isolation: isolate;
+  background-image:
+    radial-gradient(ellipse at 12% 0%, rgba(59,130,246,.09), transparent 42%),
+    linear-gradient(110deg, rgba(219,234,254,.24), transparent 48%, rgba(14,165,233,.06));
+}
+.ep-business-landing .ep-business-capabilities {
+  background-image:
+    radial-gradient(ellipse at 100% 10%, rgba(59,130,246,.09), transparent 38%),
+    radial-gradient(ellipse at 0% 90%, rgba(14,165,233,.055), transparent 34%);
+}
+html.dark .ep-business-landing .ep-platform-ribbon {
+  background-image:
+    radial-gradient(ellipse at 12% 0%, rgba(37,99,235,.17), transparent 42%),
+    linear-gradient(110deg, rgba(30,64,175,.10), transparent 48%, rgba(8,145,178,.08));
+}
+html.dark .ep-business-landing .ep-business-capabilities {
+  background-image:
+    radial-gradient(ellipse at 100% 10%, rgba(37,99,235,.16), transparent 38%),
+    radial-gradient(ellipse at 0% 90%, rgba(8,145,178,.09), transparent 34%);
+}
+@media (max-width: 1023px) {
+  .ep-business-landing .ep-hero-monitor-panel {
+    margin-top: .25rem;
+  }
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-hero-monitor-panel {
+    padding: .9rem;
+    border-radius: 1rem;
+  }
+  .ep-business-landing .ep-hero-sensor-tile {
+    min-height: 98px;
+    padding: .65rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-hero-sensor-tile {
+    transition: none;
+  }
+  .ep-business-landing .ep-hero-sensor-tile:hover {
+    transform: none;
+  }
+}
