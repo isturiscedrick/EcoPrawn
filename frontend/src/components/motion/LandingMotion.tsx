@@ -424,7 +424,7 @@ export function LandingMotion() {
       "#dashboard-preview .ep-preview-tab-panel"
     );
     const tabList = previewPanel?.previousElementSibling;
-    if (previewPanel && tabList) {
+    if (previewPanel && tabList && window.matchMedia(MOTION_ALLOWED_QUERY).matches) {
       let previousTab = tabList.querySelector<HTMLElement>('[aria-pressed="true"]')?.textContent?.trim();
       const tabObserver = new MutationObserver(() => {
         const selected = tabList.querySelector<HTMLElement>('[aria-pressed="true"]');
@@ -450,7 +450,10 @@ export function LandingMotion() {
         attributes: true,
         attributeFilter: ["aria-pressed"],
       });
-      previewTabCleanup = () => tabObserver.disconnect();
+      previewTabCleanup = () => {
+        tabObserver.disconnect();
+        gsap.killTweensOf(Array.from(previewPanel.children));
+      };
     }
 
     // PROCESS: the four stages remain in a natural, responsive grid.
