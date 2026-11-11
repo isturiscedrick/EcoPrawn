@@ -104,7 +104,7 @@ export function NavLinks({ variant, activeHref, onLinkClick, monochrome = false,
                 resetScroll={href === "/"}
                 onClick={onLinkClick}
                 aria-current={isActive ? "page" : undefined}
-                className={`group flex min-h-11 items-center gap-2.5 rounded-lg border border-transparent px-3 py-2.5 text-[14.5px] font-medium transition-colors duration-200 ${focusRing} ${
+                className={`group flex min-h-11 w-full items-center gap-2.5 rounded-lg border border-transparent px-3 py-2.5 text-left text-[14.5px] font-medium transition-colors duration-200 ${focusRing} ${
                   monochrome
                     ? "ep-nav-monochrome-link"
                     : isActive
