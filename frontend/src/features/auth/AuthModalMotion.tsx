@@ -244,7 +244,7 @@ export function AuthModalMotion({ overlayRef, panelRef }: AuthModalMotionProps) 
 
       /* ---------- GSAP: magnetic submit button ---------- */
       const cleanups: Array<() => void> = [];
-      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      if (window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 768px)").matches) {
         const submitOf = (target: EventTarget | null) => {
           const button = (target as Element | null)?.closest?.('button[type="submit"]');
           return button instanceof HTMLButtonElement ? button : null;
@@ -278,7 +278,7 @@ export function AuthModalMotion({ overlayRef, panelRef }: AuthModalMotionProps) 
         observer.disconnect();
         panel.removeEventListener("focusin", onFocusIn);
         cleanups.forEach((fn) => fn());
-        anims.forEach((a) => a.revert());
+        anims.forEach((a) => a.revert());\n        gsap.killTweensOf(panel.querySelectorAll("button, input, [role=alert], [role=status]"));
       };
     });
 
