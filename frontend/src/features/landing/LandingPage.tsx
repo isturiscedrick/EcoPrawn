@@ -9,6 +9,7 @@ import { Icon, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
 import { HeroAquaticScene } from "./HeroAquaticScene";
+import { AquacultureIllustration } from "@/components/illustrations/AquacultureIllustration";
 import { heroReadoutUnits } from "@/config/sensors";
 import {
   heroReadouts,
@@ -246,6 +247,16 @@ export function LandingPage() {
                 {index !== 2 && <span aria-hidden="true" className="ep-platform-ribbon-divider hidden sm:block" />}
               </div>
             ))}
+          </div>
+        </section>
+
+        <section aria-label="Connected aquaculture overview" className="ep-illustration-strip border-b border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-5 sm:px-8">
+          <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-3 sm:flex-row sm:justify-between">
+            <div className="max-w-[34rem] text-center sm:text-left">
+              <p className="text-[10px] font-bold uppercase tracking-[.18em] text-[var(--ep-accent)]">Connected aquaculture</p>
+              <p className="mt-1 text-sm font-medium text-[var(--ep-text-muted)] sm:text-base">A clearer view of water conditions, growth, and farm operations.</p>
+            </div>
+            <AquacultureIllustration variant="landing" />
           </div>
         </section>
 
