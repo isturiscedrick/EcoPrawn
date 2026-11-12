@@ -605,3 +605,161 @@
     transform: none !important;
   }
 }
+
+
+/* Step 4 — page-by-page responsive refinement using verified page markup. */
+@media (max-width: 639px) {
+  /* Landing: give the sensor preview a clean two-column rhythm and prevent
+     long labels or values from widening the viewport. */
+  .ep-business-landing .ep-hero-monitor-panel {
+    min-width: 0;
+    padding: 1rem;
+    border-radius: 1.15rem;
+  }
+  .ep-business-landing .ep-hero-monitor-panel h2 {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+  .ep-business-landing .ep-hero-sensor-tile {
+    min-width: 0;
+    padding: .7rem;
+  }
+  .ep-business-landing .ep-hero-sensor-tile > div:first-child,
+  .ep-business-landing .ep-hero-sensor-tile p:last-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .ep-business-landing .ep-hero-sensor-tile:nth-child(5) {
+    grid-column: 1 / -1;
+  }
+  .ep-business-landing .ep-hero-monitor-panel > div > div:last-child {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .ep-business-landing .ep-platform-ribbon-item {
+    min-width: 0;
+  }
+  .ep-business-landing .ep-platform-ribbon-item span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .ep-business-landing #dashboard-preview,
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process {
+    min-width: 0;
+  }
+  .ep-business-landing .ep-dashboard-preview-window,
+  .ep-business-landing .ep-dashboard-preview-window > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .ep-business-landing .ep-preview-tab {
+    overflow-wrap: anywhere;
+  }
+
+  /* About: preserve comfortable reading width inside the full-bleed systems band. */
+  .ep-about-page #mission,
+  .ep-about-page #objectives,
+  .ep-about-page #systems,
+  .ep-about-page #scope {
+    min-width: 0;
+  }
+  .ep-about-page .ep-about-mission-panel > *,
+  .ep-about-page .ep-about-content-frame,
+  .ep-about-page .ep-about-journey > div {
+    min-width: 0;
+  }
+  .ep-about-page #systems article h3,
+  .ep-about-page #scope article h3 {
+    overflow-wrap: anywhere;
+  }
+  .ep-about-page #scope article > div:first-child {
+    gap: .75rem;
+  }
+
+  /* Contact: long institution details wrap naturally and the form never
+     exceeds its grid track on narrow devices. */
+  .ep-contact-page main > section > div,
+  .ep-contact-page [data-contact-details],
+  .ep-contact-page [data-contact-card],
+  .ep-contact-page [data-contact-form],
+  .ep-contact-page [data-contact-form] form {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .ep-contact-page [data-contact-card] dd {
+    overflow-wrap: anywhere;
+  }
+  .ep-contact-page .ep-contact-intro-panel > * {
+    min-width: 0;
+  }
+  .ep-contact-page .ep-contact-visuals {
+    width: 100%;
+  }
+
+  /* Page hero: keep kicker, headline and lead from creating a wide line. */
+  .ep-landing [data-page-kicker] {
+    max-width: calc(100vw - 2rem);
+    overflow-wrap: anywhere;
+  }
+  .ep-landing [data-page-hero-headline],
+  .ep-landing [data-page-lead] {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+}
+
+/* At phone widths the footer brand stays full-width while its two link groups
+   sit side by side, reducing unnecessary vertical travel. */
+@container ep-footer (max-width: 420px) {
+  footer[data-site-footer] .ep-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1rem .85rem !important;
+  }
+  footer[data-site-footer] .ep-footer-brand {
+    grid-column: 1 / -1 !important;
+  }
+  footer[data-site-footer] .ep-footer-explore,
+  footer[data-site-footer] .ep-footer-account {
+    grid-column: span 1 !important;
+    min-width: 0;
+  }
+  footer[data-site-footer] .ep-footer-brand p,
+  footer[data-site-footer] .ep-footer-account p {
+    max-width: 100%;
+    font-size: .72rem !important;
+    line-height: 1.45 !important;
+  }
+  footer[data-site-footer] .ep-footer-grid nav {
+    gap: .15rem !important;
+  }
+  footer[data-site-footer] .ep-footer-grid nav a {
+    min-height: 40px;
+    font-size: .78rem;
+  }
+  footer[data-site-footer] .ep-footer-grid h2 {
+    font-size: .72rem !important;
+    line-height: 1.35;
+  }
+  footer[data-site-footer] .ep-footer-bottom {
+    gap: .4rem !important;
+    font-size: .68rem !important;
+    line-height: 1.4 !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .ep-business-landing .ep-hero-monitor-panel {
+    width: min(100%, 44rem);
+  }
+  .ep-about-page .ep-about-mission-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-about-page .ep-about-orbit-visual {
+    width: min(100%, 34rem);
+    margin-inline: auto;
+  }
+  .ep-contact-page main > section > div {
+    max-width: 52rem;
+  }
+}
