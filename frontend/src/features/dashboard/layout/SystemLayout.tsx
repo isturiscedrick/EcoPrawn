@@ -87,18 +87,17 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     window.dispatchEvent(new Event("ecoprawn-theme-change"));
   };
 
-  const headerSurface = `color-mix(in srgb, var(--ep-bg) ${scrolled ? 94 : 82}%, transparent)`;
-  const headerBorder = scrolled ? "var(--ep-line)" : "transparent";
+  // Keep the mobile dashboard chrome visually light; only its controls float above content.
 
   return (
     <div className="dashboard-shell min-h-screen bg-[var(--ep-bg)]">
       <header
         id="site-header"
-        className="ep-landing sticky top-0 z-40 border-b transition-all duration-300 backdrop-blur-2xl lg:hidden"
+        className="ep-landing sticky top-0 z-40 border-b border-transparent bg-transparent shadow-none transition-all duration-300 backdrop-blur-none lg:hidden"
         style={{
-          backgroundColor: headerSurface,
-          borderColor: headerBorder,
-          boxShadow: scrolled ? "0 10px 28px -24px rgba(0,0,0,.28)" : "none",
+          backgroundColor: "transparent",
+          borderColor: "transparent",
+          boxShadow: "none",
         }}
       >
         <div className="mx-auto grid min-h-[66px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 sm:gap-4 sm:px-8 lg:px-12">
