@@ -1426,3 +1426,39 @@ html.dark .dashboard-shell .dashboard-trend-chart {
 .dashboard-shell .dashboard-status-text-warning { color: var(--ep-status-warning) !important; }
 .dashboard-shell .dashboard-status-text-danger { color: var(--ep-status-danger) !important; }
 .dashboard-shell .dashboard-status-text-info { color: var(--ep-status-info) !important; }
+
+/* Logout is a destructive account action: use the danger palette in both themes. */
+.dashboard-shell .dashboard-logout-button {
+  color: var(--ep-status-danger);
+  background: transparent;
+  border: 1px solid transparent;
+}
+.dashboard-shell .dashboard-logout-button:hover {
+  color: var(--ep-status-danger);
+  background: var(--ep-status-danger-bg);
+  border-color: color-mix(in srgb, var(--ep-status-danger) 30%, transparent);
+}
+.dashboard-shell .dashboard-logout-button:focus-visible {
+  outline: 2px solid var(--ep-status-danger);
+  outline-offset: 2px;
+}
+.dashboard-shell .dashboard-logout-confirm {
+  color: #fff;
+  background: #b91c1c;
+  border: 1px solid #b91c1c;
+}
+.dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
+  color: #fff;
+  background: #991b1b;
+  border-color: #991b1b;
+}
+html.dark .dashboard-shell .dashboard-logout-confirm {
+  color: #190809;
+  background: #fca5a5;
+  border-color: #fca5a5;
+}
+html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
+  color: #190809;
+  background: #fecaca;
+  border-color: #fecaca;
+}
