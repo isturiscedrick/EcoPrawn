@@ -12,7 +12,7 @@ html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
   color: #000000 !important;
 }
 
-/* ---------- Desktop landing header: transparent / floating treatment ----------
+/* ---------- Desktop landing header: transparent at rest, blurred on scroll ----------
    Scope this to the public landing page at desktop widths only. The shared
    mobile header, other public pages, and dashboard header keep their surfaces. */
 @media (min-width: 1024px) {
@@ -22,6 +22,20 @@ html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
     box-shadow: none !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
+    transition: backdrop-filter 220ms ease, -webkit-backdrop-filter 220ms ease;
+  }
+
+  html:has(.ep-business-landing) #site-header[data-scrolled="true"] {
+    -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
+    backdrop-filter: blur(16px) saturate(140%) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @media (min-width: 1024px) {
+    html:has(.ep-business-landing) #site-header {
+      transition: none;
+    }
   }
 }
 
