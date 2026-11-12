@@ -45,7 +45,7 @@ export function Panel({ title, badge, onDetails, icon = "layers", children }: Pa
             </button>
           )}
           {badge && (
-            <span className="ep-font-mono text-xs font-medium text-[var(--mangrove-text)] bg-[rgba(60,122,92,0.1)] px-3 py-1.5 rounded-full whitespace-nowrap">
+            <span className="dashboard-status-badge dashboard-status-info ep-font-mono whitespace-nowrap">
               {badge}
             </span>
           )}
@@ -114,7 +114,7 @@ export function KpiCard({ label, value, unit, delta, deltaTone, onDetails }: Kpi
       </div>
       <div
         className={`ep-font-display text-[28px] font-semibold transition-colors duration-500 ${
-          flash ? "text-[var(--coral)]" : "text-[var(--water-deep)]"
+          flash ? "text-[var(--ep-accent)]" : "text-[var(--water-deep)]"
         }`}
       >
         {value}
@@ -122,7 +122,7 @@ export function KpiCard({ label, value, unit, delta, deltaTone, onDetails }: Kpi
       </div>
       <div
         className={`text-sm mt-2 font-semibold ${
-          deltaTone === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
+          deltaTone === "ok" ? "dashboard-status-text-success" : "dashboard-status-text-warning"
         }`}
       >
         {delta}
