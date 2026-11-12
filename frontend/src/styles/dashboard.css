@@ -605,3 +605,186 @@ html.dark .dashboard-shell .dashboard-trend-chart {
     overscroll-behavior-y: contain;
   }
 }
+
+
+/* ---------- Step 5: mobile dashboard workspace ---------- */
+@media (max-width: 639px) {
+  .dashboard-shell main {
+    padding-top: .75rem !important;
+    padding-inline: .75rem !important;
+    padding-bottom: max(5rem, env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Keep the overview heading compact and let its actions wrap cleanly. */
+  .dashboard-shell main > div > .mb-7.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: .9rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+  .dashboard-shell main > div > .mb-7.flex > div:first-child {
+    min-width: 0;
+  }
+  .dashboard-shell main > div > .mb-7.flex > div:last-child {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    gap: .55rem;
+  }
+  .dashboard-shell main > div > .mb-7.flex > div:last-child > :first-child {
+    flex: 1 1 auto;
+    justify-content: flex-start;
+    min-width: 0;
+    padding-inline: .75rem;
+    font-size: .75rem;
+    line-height: 1.3;
+    white-space: normal;
+  }
+  .dashboard-shell main > div > .mb-7.flex > div:last-child > button {
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding-inline: .85rem;
+  }
+
+  /* Two compact KPI columns make the key facility readings scannable
+     without turning the overview into a very long stack. */
+  .dashboard-shell main > div > .grid:has(> .dashboard-kpi) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem;
+    margin-bottom: .85rem;
+  }
+  .dashboard-shell .dashboard-kpi {
+    min-height: 116px;
+    padding: .85rem;
+    border-radius: 1rem;
+  }
+  .dashboard-shell .dashboard-kpi > div:first-child > div:first-child {
+    min-height: 2.3em;
+    font-size: .62rem;
+    line-height: 1.25;
+    letter-spacing: .055em;
+  }
+  .dashboard-shell .dashboard-kpi > div:nth-child(2) {
+    margin-top: .2rem;
+    font-size: clamp(1.35rem, 6vw, 1.7rem);
+    overflow-wrap: normal;
+  }
+  .dashboard-shell .dashboard-kpi > div:last-child {
+    align-items: flex-start;
+    font-size: .67rem;
+    line-height: 1.3;
+  }
+
+  /* Keep dashboard panels in a predictable vertical reading order. */
+  .dashboard-shell main > div > .grid.grid-cols-1.lg\:grid-cols-\[2fr_1fr\],
+  .dashboard-shell main > div > .grid.grid-cols-1.lg\:grid-cols-\[1\.3fr_1fr\] {
+    gap: .8rem;
+    margin-bottom: .8rem;
+  }
+  .dashboard-shell .dashboard-panel {
+    padding: .9rem;
+    border-radius: 1rem;
+  }
+  .dashboard-shell .dashboard-panel > div:first-child {
+    gap: .55rem;
+  }
+
+  /* Tank filters become a horizontal, thumb-scrollable strip instead of
+     wrapping into multiple rows above the gauges. */
+  .dashboard-shell main [aria-label="Sensor readings by tank"] {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: .1rem .1rem .45rem;
+    margin-inline: -.1rem;
+    scrollbar-width: thin;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .dashboard-shell main [aria-label="Sensor readings by tank"] > button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .dashboard-shell main [aria-label="Sensor readings by tank"] > button:first-child {
+    order: 0;
+  }
+
+  .dashboard-shell .dashboard-sensor-gauge {
+    min-height: 0;
+    padding: .7rem .4rem;
+    border-radius: .85rem;
+  }
+  .dashboard-shell .dashboard-sensor-gauge :is(p, span, div) {
+    overflow-wrap: normal;
+  }
+  .dashboard-shell .dashboard-trend-chart {
+    padding: .65rem;
+  }
+
+  /* Compact AI vision metrics while keeping all four values visible. */
+  .dashboard-shell main .dashboard-panel .grid.grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .6rem;
+  }
+  .dashboard-shell main .dashboard-panel .grid.grid-cols-2.lg\:grid-cols-4 > div {
+    padding: .8rem;
+    border-radius: .9rem;
+  }
+  .dashboard-shell main .dashboard-panel .grid.grid-cols-2.lg\:grid-cols-4 > div > div:first-child {
+    min-height: 2.4em;
+    font-size: .62rem;
+    line-height: 1.3;
+  }
+  .dashboard-shell main .dashboard-panel .grid.grid-cols-2.lg\:grid-cols-4 > div > div:last-child {
+    font-size: 1.25rem;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .dashboard-shell main :is(button, a) {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 359px) {
+  .dashboard-shell main {
+    padding-inline: .6rem !important;
+  }
+  .dashboard-shell main > div > .grid:has(> .dashboard-kpi) {
+    gap: .5rem;
+  }
+  .dashboard-shell .dashboard-kpi {
+    padding: .7rem;
+  }
+  .dashboard-shell .dashboard-kpi > div:first-child > div:first-child {
+    font-size: .57rem;
+  }
+  .dashboard-shell .dashboard-kpi > div:nth-child(2) {
+    font-size: 1.3rem;
+  }
+}
+
+/* Tablet: use the available width without introducing a desktop sidebar gap. */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .dashboard-shell main {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+    padding: 1.25rem clamp(1rem, 3vw, 2rem) 5rem !important;
+  }
+  .dashboard-shell main > div > .grid:has(> .dashboard-kpi) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dashboard-shell .dashboard-kpi {
+    min-height: 126px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell main [aria-label="Sensor readings by tank"] {
+    scroll-behavior: auto;
+  }
+}
