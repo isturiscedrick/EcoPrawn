@@ -532,3 +532,76 @@
     font-size: 11px;
   }
 }
+
+
+/* Step 3 — mobile interaction polish and overflow protection. */
+@media (max-width: 1023px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* Keep touch gestures predictable: vertical scrolling belongs to the drawer,
+     while the header controls remain comfortably tappable. */
+  .ep-mobile-site-drawer {
+    touch-action: pan-y;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ep-mobile-site-drawer nav a,
+  .ep-mobile-site-drawer button,
+  #site-header button[aria-controls="mobile-nav-panel"],
+  #site-header button[role="switch"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .ep-mobile-site-drawer nav a {
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      transform 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .ep-mobile-site-drawer nav a:active {
+    transform: scale(.985);
+  }
+
+  .ep-mobile-site-drawer button:active,
+  #site-header button[aria-controls="mobile-nav-panel"]:active,
+  #site-header button[role="switch"]:active {
+    transform: scale(.96);
+  }
+}
+
+/* Do not leave a hidden drawer exposed to assistive technology or pointer input. */
+.ep-mobile-site-drawer[data-state="closed"] {
+  pointer-events: none;
+}
+
+.ep-mobile-site-drawer[data-state="open"] {
+  pointer-events: auto;
+}
+
+/* The drawer and backdrop should respect the user's motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  .ep-mobile-site-drawer,
+  .ep-mobile-site-drawer nav a,
+  #site-header button[aria-controls="mobile-nav-panel"],
+  #site-header button[role="switch"] {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .ep-mobile-site-drawer nav a:active,
+  .ep-mobile-site-drawer button:active,
+  #site-header button[aria-controls="mobile-nav-panel"]:active,
+  #site-header button[role="switch"]:active {
+    transform: none !important;
+  }
+}
