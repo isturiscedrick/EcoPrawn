@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import gsap from "gsap";
 import { useRouterState } from "@tanstack/react-router";
 import { MOTION_ALLOWED_QUERY } from "@/components/motion/motionRuntime";
@@ -17,8 +17,21 @@ const focusRing =
 export function SystemLayout({ children }: SystemLayoutProps) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const wasMobileSidebarOpen = useRef(false);
   const [scrolled, setScrolled] = useState(false);
   const closeMobileSidebar = useCallback(() => setMobileSidebarOpen(false), []);
+
+  useEffect(() => {
+    if (mobileSidebarOpen) {
+      wasMobileSidebarOpen.current = true;
+      return;
+    }
+    if (wasMobileSidebarOpen.current) {
+      mobileMenuButtonRef.current?.focus({ preventScroll: true });
+      wasMobileSidebarOpen.current = false;
+    }
+  }, [mobileSidebarOpen]);
   const [darkMode, setDarkMode] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ep-dashboard-theme") === "dark");
 
   useLayoutEffect(() => {
@@ -90,9 +103,12 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       >
         <div className="mx-auto grid min-h-[66px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 sm:gap-4 sm:px-8 lg:px-12">
           <button
+            ref={mobileMenuButtonRef}
             type="button"
             onClick={() => setMobileSidebarOpen(true)}
             aria-label="Open dashboard sidebar"
+            aria-controls="dashboard-mobile-drawer"
+            aria-haspopup="dialog"
             aria-expanded={mobileSidebarOpen}
             className={`flex h-10 w-10 items-center justify-center justify-self-start rounded-none border-0 bg-transparent shadow-none transition-colors hover:bg-transparent focus-visible:bg-transparent lg:hidden ${focusRing}`}
             style={{ color: "var(--ep-primary)", backgroundColor: "transparent" }}
