@@ -205,8 +205,9 @@ export function SiteHeader({
               type="button"
               onClick={() => setMobileNavOpen(true)}
               aria-expanded={mobileNavOpen}
+              aria-haspopup="dialog"
               aria-controls="mobile-nav-panel"
-              aria-label="Open menu"
+              aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
               className={`flex h-10 w-10 items-center justify-center justify-self-start rounded-none border-0 bg-transparent shadow-none transition-colors hover:bg-transparent focus-visible:bg-transparent lg:hidden ${focusRing}`}
               style={{ color: "var(--ep-primary)", backgroundColor: "transparent" }}
             >
@@ -311,6 +312,8 @@ export function SiteHeader({
             role="dialog"
             aria-modal="true"
             aria-label="Site menu"
+            aria-hidden={!mobileNavOpen}
+            data-state={mobileNavOpen ? "open" : "closed"}
             inert={!mobileNavOpen}
             onTouchStart={(event) => {
               touchStartX.current = event.touches[0].clientX;
@@ -319,6 +322,9 @@ export function SiteHeader({
               const start = touchStartX.current;
               touchStartX.current = null;
               if (start !== null && event.changedTouches[0].clientX - start < -60) closeDrawer();
+            }}
+            onTouchCancel={() => {
+              touchStartX.current = null;
             }}
             className={`ep-mobile-site-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out ${
               mobileNavOpen
