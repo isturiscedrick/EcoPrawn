@@ -338,3 +338,22 @@ html.dark .ep-mobile-dashboard-drawer > div:last-child a[aria-current="page"] { 
 html.dark .ep-mobile-dashboard-drawer > div:last-child button { background:#111827 !important; border-color:#334155 !important; color:#f8fafc !important; }
 html.dark .ep-mobile-dashboard-drawer > div:last-child button:hover { background:#1f2937 !important; color:#93c5fd !important; }
 html.dark .ep-mobile-dashboard-drawer button[aria-label="Close navigation menu"] { background:#111827 !important; border-color:#334155 !important; color:#cbd5e1 !important; }
+
+
+/* Mobile header surface: keep the public navigation visibly grounded on small screens. */
+@media (max-width: 1023px) {
+  #site-header {
+    background-color: var(--ep-bg, #ffffff) !important;
+    background-image: none !important;
+    border-bottom: 1px solid var(--ep-line, #dbe2ea) !important;
+    box-shadow: 0 6px 20px -18px rgba(15, 23, 42, 0.42) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  html.dark #site-header {
+    background-color: var(--ep-bg, #090d16) !important;
+    border-bottom-color: var(--ep-line, #334155) !important;
+    box-shadow: 0 6px 20px -18px rgba(0, 0, 0, 0.7) !important;
+  }
+}
