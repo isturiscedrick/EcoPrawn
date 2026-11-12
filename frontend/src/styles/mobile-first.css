@@ -335,3 +335,200 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+
+/* Phase 2 — make the page sections feel intentionally designed for touch. */
+@media (max-width: 639px) {
+  /* Landing page: compress the three-stage ribbon into a single glanceable row. */
+  .ep-business-landing .ep-platform-ribbon {
+    padding: .8rem .75rem;
+  }
+  .ep-business-landing .ep-platform-ribbon > div {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .25rem;
+  }
+  .ep-business-landing .ep-platform-ribbon-item {
+    min-width: 0;
+    align-items: flex-start;
+    gap: .45rem;
+    padding: .55rem .35rem;
+  }
+  .ep-business-landing .ep-platform-ribbon-number {
+    flex: 0 0 auto;
+    font-size: 9px;
+  }
+  .ep-business-landing .ep-platform-ribbon-item strong {
+    font-size: 11px;
+    line-height: 1.25;
+  }
+  .ep-business-landing .ep-platform-ribbon-item span span {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+  .ep-business-landing .ep-illustration-strip {
+    min-height: 0;
+    padding: .85rem 1rem;
+  }
+  .ep-business-landing .ep-illustration-strip > div {
+    gap: .15rem;
+  }
+  .ep-business-landing .ep-illustration-strip > div > div:first-child {
+    max-width: 24rem;
+  }
+  .ep-business-landing .ep-illustration-strip > div > :last-child {
+    width: min(100%, 15rem);
+    max-height: 7rem;
+  }
+  .ep-business-landing .ep-stats-panel {
+    gap: .5rem;
+    padding: .6rem;
+    border-radius: 1.15rem;
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    min-width: 0;
+    padding: .8rem .7rem;
+    border-radius: .8rem;
+  }
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    overflow-wrap: anywhere;
+    font-size: clamp(1rem, 5.4vw, 1.45rem);
+  }
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  /* About section navigation: thumb-scrollable pills, with space below sticky header. */
+  .ep-about-page nav[aria-label="On this page"] {
+    top: 64px;
+  }
+  .ep-about-page nav[aria-label="On this page"] > div {
+    gap: .5rem;
+    padding: .55rem 1rem;
+    scroll-padding-inline: 1rem;
+    scroll-snap-type: x proximity;
+  }
+  .ep-about-page nav[aria-label="On this page"] a {
+    min-height: 42px;
+    padding-inline: 1rem;
+    scroll-snap-align: start;
+    font-size: 12px;
+  }
+  .ep-about-page #mission {
+    padding-block: 2.5rem;
+  }
+  .ep-about-page #mission .ep-about-mission-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.15rem;
+    border-radius: 1.2rem;
+  }
+  .ep-about-page #objectives,
+  .ep-about-page #systems,
+  .ep-about-page #scope {
+    scroll-margin-top: 7.5rem;
+  }
+  .ep-about-page #objectives .ep-about-content-frame,
+  .ep-about-page #systems .ep-about-content-frame,
+  .ep-about-page #scope .ep-about-content-frame {
+    padding-inline: 1rem;
+  }
+  .ep-about-page #objectives .ep-about-objective {
+    padding: 1.15rem;
+    border-radius: 1.1rem;
+  }
+  .ep-about-page #objectives .ep-about-objective p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .ep-about-page #systems article {
+    padding: 1.05rem;
+  }
+  .ep-about-page .ep-about-journey {
+    padding-inline: 1rem;
+  }
+  .ep-about-page .ep-about-journey > div {
+    min-width: 0;
+  }
+  .ep-about-page .ep-about-workflow-illustration {
+    max-width: 100%;
+    margin-block: .5rem 1rem;
+  }
+  .ep-about-page #scope article {
+    padding: 1.15rem;
+    border-radius: 1.1rem;
+  }
+  .ep-about-page #scope article > div:first-child {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .ep-about-page #scope article > div:first-child h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Contact: make the form and its inputs comfortable without adding needless height. */
+  .ep-contact-page main > section:last-child {
+    padding-inline: 1rem;
+  }
+  .ep-contact-page main > section:last-child > div {
+    min-width: 0;
+  }
+  .ep-contact-page main > section:last-child > div > div:first-child {
+    margin-bottom: 1.1rem;
+  }
+  .ep-contact-page [data-contact-details] {
+    margin-bottom: .25rem;
+  }
+  .ep-contact-page [data-contact-card] {
+    min-height: 0;
+    align-items: center;
+    gap: .8rem;
+    padding: .9rem;
+  }
+  .ep-contact-page [data-contact-card] dd {
+    font-size: .9rem;
+    line-height: 1.45;
+  }
+  .ep-contact-page [data-contact-form] form {
+    gap: 1rem;
+    padding: 1.1rem;
+  }
+  .ep-contact-page [data-contact-form] form h2 {
+    font-size: 1.35rem;
+  }
+  .ep-contact-page [data-contact-form] form button {
+    min-height: 3rem;
+  }
+  .ep-contact-page .ep-contact-intro-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-contact-page .ep-contact-visuals {
+    min-height: 6.5rem;
+    max-height: 8rem;
+    overflow: hidden;
+  }
+
+  /* Prevent anchored section headings from hiding behind the sticky chrome. */
+  .ep-landing main section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+@media (max-width: 359px) {
+  .ep-business-landing .ep-platform-ribbon-item {
+    gap: .25rem;
+    padding-inline: .2rem;
+  }
+  .ep-business-landing .ep-platform-ribbon-item strong {
+    font-size: 10px;
+  }
+  .ep-business-landing .ep-platform-ribbon-item span span {
+    font-size: 8px;
+  }
+  .ep-about-page nav[aria-label="On this page"] a {
+    min-height: 40px;
+    padding-inline: .8rem;
+    font-size: 11px;
+  }
+}
