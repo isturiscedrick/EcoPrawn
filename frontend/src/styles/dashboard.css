@@ -1270,3 +1270,100 @@ html.dark .dashboard-shell .dashboard-trend-chart {
     scroll-behavior: auto;
   }
 }
+
+
+/* ---------- Step 9: cross-module mobile consistency and overflow audit ---------- */
+@media (max-width: 639px) {
+  /* Normalize the rhythm between modules while preserving each page's
+     existing grid structure and desktop composition. */
+  .dashboard-shell main > div {
+    min-width: 0;
+    gap: 0;
+  }
+
+  .dashboard-shell main > div > .grid {
+    min-width: 0;
+    column-gap: .65rem;
+    row-gap: .75rem;
+  }
+
+  .dashboard-shell main :is(.dashboard-panel, .dashboard-kpi, .dashboard-sensor-gauge) {
+    min-width: 0;
+    max-width: 100%;
+    border-radius: 1rem;
+  }
+
+  .dashboard-shell main .dashboard-panel {
+    padding: .9rem;
+  }
+
+  .dashboard-shell main .dashboard-panel :is(h2, h3, h4) {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    line-height: 1.3;
+  }
+
+  /* Prevent long identifiers, timestamps and helper text from stretching
+     cards beyond the phone viewport. */
+  .dashboard-shell main :is(code, time, small, [data-value], .ep-font-mono) {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .dashboard-shell main :is(img, video, canvas, svg) {
+    max-width: 100%;
+  }
+
+  .dashboard-shell main :is(.flex, .grid) > * {
+    min-width: 0;
+  }
+
+  /* Keep primary actions consistent across modules without changing their
+     labels, order, color, or click behavior. */
+  .dashboard-shell main :is(button, a[href]) {
+    max-width: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .dashboard-shell main :is(button, a[href]):focus-visible,
+  .dashboard-shell main :is(input, select, textarea):focus-visible {
+    outline-offset: 2px;
+  }
+
+  /* The main workspace itself must never become wider than the viewport. */
+  .dashboard-shell,
+  .dashboard-shell main,
+  .dashboard-shell main > div {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+}
+
+@media (max-width: 380px) {
+  .dashboard-shell main > div > .grid {
+    column-gap: .5rem;
+    row-gap: .65rem;
+  }
+
+  .dashboard-shell main .dashboard-panel {
+    padding: .8rem;
+  }
+
+  .dashboard-shell main :is(h1, h2) {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .dashboard-shell main > div,
+  .dashboard-shell main > div > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .dashboard-shell main .dashboard-panel {
+    min-width: 0;
+  }
+}
