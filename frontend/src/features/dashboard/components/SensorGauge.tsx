@@ -6,7 +6,7 @@ export function SensorGauge({ label, value, pct, status, statusLabel, note }: Se
   const circumference = 2 * Math.PI * 26;
   const clampedPct = Math.max(0, Math.min(100, pct ?? 0));
   const dashLength = circumference * (clampedPct / 100);
-  const color = status === "ok" ? "var(--ep-accent)" : "var(--amber)";
+  const color = status === "ok" ? "var(--ep-status-success)" : "var(--ep-status-warning)";
 
   return (
     <div className="dashboard-sensor-gauge border border-[var(--sand-dim)] rounded-[10px] p-3.5 text-center">
@@ -33,7 +33,7 @@ export function SensorGauge({ label, value, pct, status, statusLabel, note }: Se
       </div>
       <div
         className={`text-[10px] mt-0.5 font-semibold ${
-          status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
+          status === "ok" ? "dashboard-status-text-success" : "dashboard-status-text-warning"
         }`}
       >
         {statusLabel ?? (status === "ok" ? "Nominal" : "Watch")}
