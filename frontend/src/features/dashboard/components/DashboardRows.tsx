@@ -29,13 +29,13 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
       <div className="flex items-center gap-3">
         <span
           className={`w-[9px] h-[9px] rounded-full ${
-            status === "ok" ? "bg-[var(--mangrove)]" : "bg-[var(--amber)]"
+            status === "ok" ? "bg-[var(--ep-status-success)]" : "bg-[var(--ep-status-warning)]"
           }`}
         />
         <div>
           <div className="text-[13.5px] font-semibold text-[var(--water-deep)]">{name}</div>
           <div className="ep-font-mono text-[11.5px] text-[rgba(11,35,32,0.5)]">
-            {pl} &middot; {status === "ok" ? "stable" : "DO watch"}
+            {pl} &middot; <span className={status === "ok" ? "dashboard-status-text-success" : "dashboard-status-text-warning"}>{status === "ok" ? "stable" : "DO watch"}</span>
           </div>
         </div>
       </div>
@@ -79,8 +79,8 @@ export function AlertRow({ icon, title, detail, time }: AlertItem) {
       <div
         className={`w-[26px] h-[26px] rounded-[7px] flex items-center justify-center text-xs flex-shrink-0 ${
           icon === "warn"
-            ? "bg-[rgba(232,162,58,0.16)] text-[var(--amber)]"
-            : "bg-[rgba(60,122,92,0.14)] text-[var(--mangrove)]"
+            ? "dashboard-status-warning"
+            : "dashboard-status-success"
         }`}
       >
         {icon === "warn" ? "!" : "✓"}
