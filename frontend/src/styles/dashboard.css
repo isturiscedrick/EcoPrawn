@@ -944,3 +944,146 @@ html.dark .dashboard-shell .dashboard-trend-chart {
     transition: none !important;
   }
 }
+
+
+/* ---------- Step 7: mobile dashboard navigation and drawer polish ---------- */
+@media (max-width: 1023px) {
+  .dashboard-shell #dashboard-mobile-drawer {
+    width: min(88vw, 22.5rem);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    border-color: var(--ep-line);
+    background: var(--ep-surface);
+    color: var(--ep-text);
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    will-change: transform;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer > div:first-child {
+    min-height: 4.5rem;
+    padding-inline: 1.1rem;
+    background: color-mix(in srgb, var(--ep-surface) 94%, var(--ep-accent));
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer > div:first-child button {
+    min-width: 44px;
+    min-height: 44px;
+    flex: 0 0 44px;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer > div:nth-child(2) {
+    padding: .8rem 1rem;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer > div:nth-child(2) > a {
+    min-height: 3.5rem;
+    border-color: var(--ep-line);
+    background: var(--ep-bg);
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer > div:nth-child(2) > a > div:first-child {
+    background: var(--ep-accent-tint) !important;
+    color: var(--ep-accent) !important;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer > div:nth-child(3) {
+    padding: .9rem 1rem 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ep-line) transparent;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer nav {
+    gap: .35rem;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer nav > a {
+    min-height: 48px;
+    border-radius: .85rem;
+    color: var(--ep-text-muted);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer nav > a > span {
+    min-height: 48px;
+    padding: .75rem .85rem;
+    border: 1px solid transparent;
+    border-radius: .85rem;
+    color: inherit;
+    background: transparent;
+    box-shadow: none;
+    transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer nav > a[aria-current="page"] > span {
+    border-color: color-mix(in srgb, var(--ep-accent) 26%, var(--ep-line));
+    background: var(--ep-accent-tint);
+    color: var(--ep-accent);
+    box-shadow: inset 3px 0 0 var(--ep-accent);
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer nav > a:focus-visible,
+  .dashboard-shell #dashboard-mobile-drawer nav > a:focus-visible > span {
+    outline: 2px solid var(--ep-accent);
+    outline-offset: 2px;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer > div:last-child {
+    gap: .35rem;
+    padding: .75rem 1rem max(.85rem, env(safe-area-inset-bottom));
+    border-color: var(--ep-line);
+    background: var(--ep-surface);
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer > div:last-child :is(a, button) {
+    min-height: 48px;
+    border-radius: .85rem;
+    color: var(--ep-text-muted);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer > div:last-child :is(a, button):hover {
+    background: var(--ep-accent-tint);
+    color: var(--ep-accent);
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer[data-state="closed"] {
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform .28s cubic-bezier(.22,.75,.25,1), visibility 0s linear .28s;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer[data-state="open"] {
+    visibility: visible;
+    pointer-events: auto;
+    transition: transform .32s cubic-bezier(.22,.75,.25,1), visibility 0s;
+  }
+
+  .dashboard-shell .dashboard-shell-menu-trigger {
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 380px) {
+  .dashboard-shell #dashboard-mobile-drawer {
+    width: min(90vw, 21rem);
+    border-radius: 0 1rem 1rem 0;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer > div:nth-child(3) {
+    padding-inline: .8rem;
+  }
+
+  .dashboard-shell #dashboard-mobile-drawer nav > a > span {
+    padding-inline: .75rem;
+    font-size: .9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell #dashboard-mobile-drawer,
+  .dashboard-shell #dashboard-mobile-drawer nav > a > span {
+    transition: none !important;
+  }
+}
