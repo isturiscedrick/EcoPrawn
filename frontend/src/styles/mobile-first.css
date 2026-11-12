@@ -13,8 +13,8 @@
     column-gap: 10px !important;
     padding-inline: max(14px, env(safe-area-inset-left)) max(14px, env(safe-area-inset-right)) !important;
   }
-  #site-header .ep-mobile-menu-toggle,
-  #site-header .ep-theme-toggle {
+  #site-header button[aria-controls="mobile-nav-panel"],
+  #site-header button[role="switch"] {
     display: inline-flex;
     width: 44px !important;
     min-width: 44px !important;
