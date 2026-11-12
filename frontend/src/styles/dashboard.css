@@ -784,3 +784,163 @@ html.dark .dashboard-shell .dashboard-trend-chart {
     scroll-behavior: auto;
   }
 }
+
+
+/* ---------- Step 6: mobile layouts for individual dashboard modules ---------- */
+@media (max-width: 639px) {
+  /* Shared route headers: keep status chips readable and inside the viewport. */
+  .dashboard-shell main > div > .mb-7.flex > div:last-child > span,
+  .dashboard-shell main > div > .mb-7.flex > div:last-child:not(:has(button)) {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  /* KPI groups on Water, Feeding, Tanks, Vision and Alerts use the same
+     compact two-column rhythm as the dashboard overview. */
+  .dashboard-shell main > div > .grid:has(> .dashboard-kpi) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem;
+  }
+
+  /* Panel headings may contain a long title and a status badge. Stack only
+     the heading metadata when the available width is narrow. */
+  .dashboard-shell .dashboard-panel > div:first-child {
+    align-items: flex-start;
+    gap: .65rem;
+  }
+  .dashboard-shell .dashboard-panel > div:first-child > h3 {
+    min-width: 0;
+    flex: 1 1 100%;
+    line-height: 1.3;
+  }
+  .dashboard-shell .dashboard-panel > div:first-child > div {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+  .dashboard-shell .dashboard-panel > div:first-child > div > span {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  /* Tank cards: keep tank identity and biomass together, with a thumb-sized
+     remove action that does not squeeze the text. */
+  .dashboard-shell .dashboard-panel .dashboard-hover.flex.items-center.justify-between.p-3\.5 {
+    flex-wrap: wrap;
+    gap: .75rem;
+    padding: .85rem;
+  }
+  .dashboard-shell .dashboard-panel .dashboard-hover.flex.items-center.justify-between.p-3\.5 > div:first-child {
+    flex: 1 1 55%;
+    min-width: 0;
+  }
+  .dashboard-shell .dashboard-panel .dashboard-hover.flex.items-center.justify-between.p-3\.5 > div:last-of-type {
+    gap: .5rem;
+  }
+  .dashboard-shell .dashboard-panel .dashboard-hover.flex.items-center.justify-between.p-3\.5 button {
+    width: 44px;
+    height: 44px;
+    border-radius: .75rem;
+  }
+
+  /* Alert rows put the timestamp on its own line instead of forcing the
+     event description into a narrow column. */
+  .dashboard-shell .dashboard-panel .dashboard-hover.flex.gap-3 {
+    display: grid;
+    grid-template-columns: 26px minmax(0, 1fr);
+    align-items: start;
+    column-gap: .7rem;
+    row-gap: .25rem;
+  }
+  .dashboard-shell .dashboard-panel .dashboard-hover.flex.gap-3 > div:last-child {
+    grid-column: 2;
+    margin-left: 0;
+    justify-self: start;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  /* Sensor threshold rows remain two clear columns even for long labels. */
+  .dashboard-shell #water-tank-details .dashboard-hover.flex.items-center.justify-between {
+    align-items: flex-start;
+    gap: .65rem;
+    padding: .75rem;
+  }
+  .dashboard-shell #water-tank-details .dashboard-hover.flex.items-center.justify-between > div {
+    min-width: 0;
+  }
+  .dashboard-shell #water-tank-details .dashboard-hover.flex.items-center.justify-between > div:last-child {
+    flex: 0 1 auto;
+    overflow-wrap: anywhere;
+  }
+
+  /* Feeding schedule entries and progress values should wrap without
+     creating sideways scrolling. */
+  .dashboard-shell .dashboard-panel .dashboard-hover.flex.items-center.justify-between.rounded-\[10px\] {
+    gap: .65rem;
+    padding: .75rem;
+  }
+  .dashboard-shell .dashboard-panel .dashboard-hover.flex.items-center.justify-between.rounded-\[10px\] > div {
+    min-width: 0;
+  }
+  .dashboard-shell .dashboard-panel .ep-font-mono.text-\[26px\] {
+    font-size: clamp(1.35rem, 6vw, 1.65rem);
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+  .dashboard-shell .dashboard-panel .ep-font-mono.text-\[26px\] span {
+    display: inline;
+    font-size: .8rem;
+  }
+
+  /* Growth chart has a fixed SVG viewBox; scale it to the card and preserve
+     a comfortable touch target around each selectable reading. */
+  .dashboard-shell .dashboard-panel svg[viewBox^="0 0 560"] {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+  .dashboard-shell .dashboard-panel svg[viewBox^="0 0 560"] circle[role="button"] {
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* SMS settings actions wrap into full-width, easy-to-tap controls. */
+  .dashboard-shell .dashboard-panel form > div.flex.flex-wrap.gap-3 {
+    align-items: stretch;
+  }
+  .dashboard-shell .dashboard-panel form > div.flex.flex-wrap.gap-3 > button {
+    min-height: 44px;
+    flex: 1 1 auto;
+    padding-inline: .85rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .dashboard-shell .dashboard-panel .dashboard-hover.flex.gap-3 {
+    column-gap: .55rem;
+  }
+  .dashboard-shell .dashboard-panel > div:first-child > h3 {
+    font-size: .95rem;
+  }
+  .dashboard-shell main > div > .mb-7.flex > div:last-child {
+    align-items: flex-start;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .dashboard-shell .dashboard-panel > div:first-child {
+    align-items: flex-start;
+  }
+  .dashboard-shell .dashboard-panel .dashboard-hover.flex.items-center.justify-between.p-3\.5 {
+    gap: .75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell .dashboard-panel svg[viewBox^="0 0 560"] circle[role="button"] {
+    transition: none !important;
+  }
+}
