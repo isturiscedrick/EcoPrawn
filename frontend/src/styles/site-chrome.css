@@ -12,6 +12,19 @@ html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
   color: #000000 !important;
 }
 
+/* ---------- Desktop landing header: transparent / floating treatment ----------
+   Scope this to the public landing page at desktop widths only. The shared
+   mobile header, other public pages, and dashboard header keep their surfaces. */
+@media (min-width: 1024px) {
+  html:has(.ep-business-landing) #site-header {
+    background-color: transparent !important;
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
 /* ---------- Site Footer: Container Query & Layout ---------- */
 footer[data-site-footer] {
   position: relative;
