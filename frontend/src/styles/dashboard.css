@@ -708,10 +708,6 @@ html.dark .dashboard-shell .dashboard-trend-chart {
     flex: 0 0 auto;
     white-space: nowrap;
   }
-  .dashboard-shell main [aria-label="Sensor readings by tank"] > button:first-child {
-    order: 0;
-  }
-
   .dashboard-shell .dashboard-sensor-gauge {
     min-height: 0;
     padding: .7rem .4rem;
