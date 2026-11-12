@@ -224,7 +224,7 @@ export function Sidebar({
             <span className="flex w-4 justify-center" aria-hidden="true"><Icon name="wrench" size={16} strokeWidth={1.8} /></span>
             Settings
           </Link>
-          <button type="button" onClick={onLogoutClick} className="flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-medium text-[var(--ep-text-muted)] transition-colors hover:bg-blue-50 hover:text-blue-700">
+          <button type="button" onClick={onLogoutClick} className="dashboard-logout-button flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-semibold transition-colors">
             <span className="flex w-4 justify-center" aria-hidden="true"><LogoutIcon /></span>
             Log out
           </button>
@@ -346,7 +346,7 @@ export function Sidebar({
                 onMobileClose();
                 onLogoutClick();
               }}
-              className="flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-medium text-[rgba(11,46,51,0.68)] transition-colors duration-200 hover:bg-[rgba(232,98,58,0.12)] hover:text-[var(--coral)]"
+              className="dashboard-logout-button flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-semibold transition-colors duration-200"
             >
               <span className="flex w-4 justify-center" aria-hidden="true">
                 <LogoutIcon />
@@ -398,7 +398,7 @@ export function Sidebar({
                 type="button"
                 onClick={onConfirmLogout}
                 disabled={loggingOut}
-                className="ep-dashboard-action ep-dashboard-action-danger flex-1 rounded-lg bg-[var(--coral)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--sand)] transition-colors duration-200 hover:bg-[var(--coral-dim)] disabled:opacity-60"
+                className="dashboard-logout-confirm ep-dashboard-action ep-dashboard-action-danger flex-1 rounded-lg px-4 py-2.5 text-[13.5px] font-semibold transition-colors duration-200 disabled:opacity-60"
               >
                 {loggingOut ? "Logging out…" : "Log out"}
               </button>
