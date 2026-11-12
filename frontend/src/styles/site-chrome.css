@@ -12,11 +12,13 @@ html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
   color: #000000 !important;
 }
 
-/* ---------- Desktop landing header: transparent at rest, blurred on scroll ----------
-   Scope this to the public landing page at desktop widths only. The shared
-   mobile header, other public pages, and dashboard header keep their surfaces. */
+/* ---------- Desktop public-page headers: transparent at rest, blurred on scroll ----------
+   Apply the same floating-header treatment to Landing, About, and Contact.
+   Mobile/tablet and dashboard headers retain their own solid surfaces. */
 @media (min-width: 1024px) {
-  html:has(.ep-business-landing) #site-header {
+  html:has(.ep-business-landing) #site-header,
+  html:has(.ep-about-page) #site-header,
+  html:has(.ep-contact-page) #site-header {
     background-color: transparent !important;
     border-bottom-color: transparent !important;
     box-shadow: none !important;
@@ -25,7 +27,9 @@ html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
     transition: backdrop-filter 220ms ease, -webkit-backdrop-filter 220ms ease;
   }
 
-  html:has(.ep-business-landing) #site-header[data-scrolled="true"] {
+  html:has(.ep-business-landing) #site-header[data-scrolled="true"],
+  html:has(.ep-about-page) #site-header[data-scrolled="true"],
+  html:has(.ep-contact-page) #site-header[data-scrolled="true"] {
     -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
     backdrop-filter: blur(16px) saturate(140%) !important;
   }
@@ -33,7 +37,9 @@ html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
 
 @media (prefers-reduced-motion: reduce) {
   @media (min-width: 1024px) {
-    html:has(.ep-business-landing) #site-header {
+    html:has(.ep-business-landing) #site-header,
+    html:has(.ep-about-page) #site-header,
+    html:has(.ep-contact-page) #site-header {
       transition: none;
     }
   }
