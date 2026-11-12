@@ -186,6 +186,7 @@ export function SiteHeader({
     <>
       <header
         id="site-header"
+        data-scrolled={scrolled ? "true" : "false"}
         className="sticky top-0 z-50 border-b transition-all duration-300 backdrop-blur-2xl"
         style={{
           backgroundColor: headerSurface,
