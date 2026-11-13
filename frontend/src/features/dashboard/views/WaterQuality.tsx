@@ -55,33 +55,33 @@ export function WaterQuality() {
     ? [
         {
           label: "Dissolved O₂",
-          range: "≥ 4.5 mg/L",
+          range: `≥ ${THRESHOLDS.dissolvedOxygen.min} mg/L`,
           current: `${selectedTank.dissolvedOxygen.toFixed(1)} mg/L`,
-          status: selectedTank.dissolvedOxygen >= 4.5 ? "ok" : "warn",
+          status: selectedTank.dissolvedOxygen >= THRESHOLDS.dissolvedOxygen.min ? "ok" : "warn",
         },
         {
           label: "pH",
-          range: "7.5 – 8.5",
+          range: `${THRESHOLDS.ph.min} – ${THRESHOLDS.ph.max}`,
           current: selectedTank.ph.toFixed(1),
-          status: selectedTank.ph >= 7.5 && selectedTank.ph <= 8.5 ? "ok" : "warn",
+          status: selectedTank.ph >= THRESHOLDS.ph.min && selectedTank.ph <= THRESHOLDS.ph.max ? "ok" : "warn",
         },
         {
           label: "Temperature",
-          range: "26 – 30 °C",
+          range: `${THRESHOLDS.temperature.min} – ${THRESHOLDS.temperature.max} °C`,
           current: `${selectedTank.temperature.toFixed(1)} °C`,
-          status: selectedTank.temperature >= 26 && selectedTank.temperature <= 30 ? "ok" : "warn",
+          status: selectedTank.temperature >= THRESHOLDS.temperature.min && selectedTank.temperature <= THRESHOLDS.temperature.max ? "ok" : "warn",
         },
         {
           label: "Salinity",
-          range: "10 – 20 ppt",
+          range: `${THRESHOLDS.salinity.min} – ${THRESHOLDS.salinity.max} ppt`,
           current: `${selectedTank.salinity} ppt`,
-          status: selectedTank.salinity >= 10 && selectedTank.salinity <= 20 ? "ok" : "warn",
+          status: selectedTank.salinity >= THRESHOLDS.salinity.min && selectedTank.salinity <= THRESHOLDS.salinity.max ? "ok" : "warn",
         },
         {
           label: "Water Level",
-          range: "≥ 90%",
+          range: `≥ ${THRESHOLDS.waterLevel.min}%`,
           current: `${selectedTank.waterLevel}%`,
-          status: selectedTank.waterLevel >= 90 ? "ok" : "warn",
+          status: selectedTank.waterLevel >= THRESHOLDS.waterLevel.min ? "ok" : "warn",
         },
       ]
     : [];
@@ -117,21 +117,21 @@ export function WaterQuality() {
               label="Dissolved O₂ (avg)"
               value={avgDO.toFixed(1)}
               unit="mg/L"
-              delta={doStatus === "ok" ? "▲ within target range" : "Below target (≥ 4.5)"}
+              delta={doStatus === "ok" ? "▲ within target range" : `Below target (≥ ${THRESHOLDS.dissolvedOxygen.min})`}
               deltaTone={doStatus}
             />
             <KpiCard
               label="pH (avg)"
               value={avgPh.toFixed(1)}
               unit="pH"
-              delta={phStatus === "ok" ? "▲ within target range" : "Outside target (7.5 – 8.5)"}
+              delta={phStatus === "ok" ? "▲ within target range" : `Outside target (${THRESHOLDS.ph.min} – ${THRESHOLDS.ph.max})`}
               deltaTone={phStatus}
             />
             <KpiCard
               label="Temperature (avg)"
               value={avgTemp.toFixed(1)}
               unit="°C"
-              delta={tempStatus === "ok" ? "▲ within target range" : "Outside target (26 – 30 °C)"}
+              delta={tempStatus === "ok" ? "▲ within target range" : `Outside target (${THRESHOLDS.temperature.min} – ${THRESHOLDS.temperature.max} °C)`}
               deltaTone={tempStatus}
             />
             <KpiCard
