@@ -104,11 +104,30 @@ export function Sidebar({
     return () => mm.revert();
   }, [mobileOpen]);
 
-  // Drawer open: lock page scroll, focus the close button, trap Tab, close on Escape.
+  // Lock the document without losing its scroll position (including on iOS).
+  // Restore the exact inline styles and scroll offset when the drawer closes.
   useEffect(() => {
     if (!mobileOpen) return;
-    const original = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const body = document.body;
+    const root = document.documentElement;
+    const scrollY = window.scrollY;
+    const previous = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
+      overscrollBehavior: root.style.overscrollBehavior,
+    };
+
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    root.style.overscrollBehavior = "none";
     closeButtonRef.current?.focus({ preventScroll: true });
 
     function onKeyDown(e: KeyboardEvent) {
@@ -135,7 +154,14 @@ export function Sidebar({
     window.addEventListener("keydown", onKeyDown);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = original;
+      body.style.position = previous.position;
+      body.style.top = previous.top;
+      body.style.left = previous.left;
+      body.style.right = previous.right;
+      body.style.width = previous.width;
+      body.style.overflow = previous.overflow;
+      root.style.overscrollBehavior = previous.overscrollBehavior;
+      window.scrollTo(0, scrollY);
     };
   }, [mobileOpen, closeDrawer]);
 
@@ -237,7 +263,7 @@ export function Sidebar({
           aria-hidden="true"
           data-state={mobileOpen ? "open" : "closed"}
           onClick={closeDrawer}
-          className={`fixed inset-0 z-[80] bg-[rgba(8,30,34,0.55)] backdrop-blur-sm transition-opacity duration-300 dark:bg-[rgba(0,0,0,0.72)] ${
+          className={`fixed inset-0 z-[80] bg-[rgba(8,30,34,0.55)] backdrop-blur-sm transition-opacity duration-300 motion-reduce:transition-none dark:bg-[rgba(0,0,0,0.72)] ${
             mobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
         />
@@ -259,7 +285,7 @@ export function Sidebar({
             if (start !== null && e.changedTouches[0].clientX - start < -60) closeDrawer();
           }}
           onTouchCancel={() => { touchStartX.current = null; }}
-          className={`ep-mobile-dashboard-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out ${
+          className={`ep-mobile-dashboard-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out motion-reduce:transition-none ${
             mobileOpen
               ? "translate-x-0 shadow-[8px_0_40px_-12px_rgba(8,30,34,0.45)]"
               : "-translate-x-full shadow-none"
