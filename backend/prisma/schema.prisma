@@ -27,6 +27,7 @@ model Tank {
   feedSchedules   FeedSchedule[]
   effluentLogs    EffluentLog[]
   alerts          Alert[]
+  activities      TankActivity[]
   @@index([userId])
 }
 
@@ -126,6 +127,20 @@ model Alert {
   @@index([tankId])
 }
 
+model TankActivity {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tankId    String?
+  tank      Tank?    @relation(fields: [tankId], references: [id], onDelete: SetNull)
+  tankName  String
+  type      String
+  summary   String
+  createdAt DateTime @default(now())
+
+  @@index([userId, tankId, createdAt])
+}
+
 model AuthThrottle {
   key       String @id
   count     Int
@@ -145,6 +160,7 @@ model User {
   role      String   @default("operator") // "operator" | "admin"
   createdAt DateTime @default(now())
   tanks     Tank[]
+  tankActivities TankActivity[]
   bioflocMetrics BioflocMetric[]
   effluentLogs EffluentLog[]
   alerts    Alert[]
