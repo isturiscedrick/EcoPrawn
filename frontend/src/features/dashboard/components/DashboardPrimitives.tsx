@@ -27,7 +27,7 @@ export function Panel({ title, badge, onDetails, icon = "layers", children }: Pa
               aria-label={`View details for ${title}`}
               className="inline-flex min-h-10 items-center gap-1 rounded-lg px-2.5 text-xs font-semibold text-[var(--ep-accent)] transition-colors hover:bg-[var(--ep-accent-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
             >
-              <Icon name="info" size={14} />
+              <Icon name="eye" size={14} />
               <span>Details</span>
             </button>
           )}
@@ -78,7 +78,7 @@ export function KpiCard({ label, value, unit, delta, deltaTone, onDetails }: Kpi
             aria-label={`View details for ${label}`}
             className="inline-flex min-h-10 shrink-0 items-center gap-1 rounded-lg px-2 text-xs font-semibold text-[var(--ep-accent)] transition-colors hover:bg-[var(--ep-accent-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
           >
-            <Icon name="info" size={14} />
+            <Icon name="eye" size={14} />
             <span>Details</span>
           </button>
         )}
