@@ -2,7 +2,7 @@
 
 Project: `uzedgsewqhehhnddlvsh`.
 
-The application tables live in the private `ecoprawn` schema. The existing local records were copied with their IDs, timestamps, and relationships intact. Row-level security and account policies are enabled on all eight tables. Application access goes through the backend's PostgreSQL connection, not the browser Data API. The schema remains inaccessible to browser roles.
+The application tables live in the private `ecoprawn` schema. The existing local records were copied with their IDs, timestamps, and relationships intact. Row-level security is enabled on all nine application tables. Account policies protect the user-owned operational tables; the `TankActivity` audit table intentionally has no browser-role policy and is accessible only through authenticated backend handlers. Application access goes through the backend's PostgreSQL connection, not the browser Data API. The schema remains inaccessible to browser roles.
 
 ## Account ownership
 
