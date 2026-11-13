@@ -21,6 +21,15 @@ const db = { tank: {
   async update({ where, data }) { const row = tanks.find(t => match(t, where)); if (!row) throw missing(); Object.assign(row, data); return row; },
   async delete({ where }) { const index = tanks.findIndex(t => match(t, where)); if (index < 0) throw missing(); return tanks.splice(index, 1)[0]; },
 } };
+const activities = ["a", "b"].map(account => ({
+  id: `activity-${account}`, userId: `account-${account}`, tankId: `tank-${account}`,
+  tankName: account.toUpperCase(), type: "created", summary: "Tank added",
+  createdAt: new Date(),
+}));
+db.tankActivity = {
+  async findMany({ where } = {}) { return activities.filter(row => match(row, where)); },
+  async create({ data }) { const row = { id: `activity-${activities.length}`, createdAt: new Date(), ...data }; activities.push(row); return row; },
+};
 for (const model of ["sensorTelemetry", "visionScan", "feedSchedule", "bioflocMetric", "effluentLog", "alert"]) {
   const rows = ["a", "b"].map(account => ({
     id: `${model}-${account}`, userId: `account-${account}`, tankId: `tank-${account}`,
@@ -72,6 +81,8 @@ assert.equal((await detail.PATCH(request({ name: "stolen" }), params("tank-a")))
 assert.equal((await detail.PATCH(request({ userId: "account-a", telemetries: { deleteMany: {} } }), params("tank-b"))).status, 400);
 assert.equal(tanks.find(t => t.id === "tank-b").userId, "account-b");
 assert.equal((await detail.PATCH(request({ name: "Updated" }), params("tank-b"))).status, 200);
+assert.equal(activities.at(-1).tankId, "tank-b");
+assert.equal(activities.at(-1).userId, "account-b");
 assert.equal((await list.POST(request({ name: "Created", userId: "account-a" }))).status, 400);
 const created = await (await list.POST(request({ name: "Created" }))).json();
 assert.equal(created.tank.userId, "account-b");
@@ -87,6 +98,7 @@ assert.equal(data.feedSchedule.length, 1);
 assert.equal(data.effluentLog.length, 1);
 assert.equal(data.alertsLog.length, 1);
 assert.equal(data.waterTrend.length, 1);
+assert.ok(data.tankActivity.every(event => event.userId === undefined || event.userId === "account-b"));
 assert.equal(data.bioflocMetrics.length, 4);
 user = { id: "account-a", role: "admin" };
 assert.deepEqual((await (await list.GET()).json()).tanks.map(t => t.id), ["tank-a"]);
