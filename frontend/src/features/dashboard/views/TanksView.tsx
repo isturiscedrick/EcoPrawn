@@ -9,7 +9,7 @@ import { EditTankModal } from "@/features/dashboard/components/EditTankModal";
 import { useToast } from "@/features/dashboard/components/Toast";
 
 export function TanksView() {
-  const { tanks, addTank, removeTank, updateTank, loading, waterTrend, visionScanLog, alertsLog, tankActivity } = useTanks();
+  const { tanks, addTank, removeTank, updateTank, loading, waterTrend, visionScanLog } = useTanks();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
   const [editingTankId, setEditingTankId] = useState<string | null>(null);
@@ -24,11 +24,7 @@ export function TanksView() {
   const selectedTank = tanks.find((tank) => tank.id === selectedTankId) ?? null;
   const selectedTankTrend = selectedTank ? waterTrend.filter((reading) => reading.tankId === selectedTank.id).slice(-8).reverse() : [];
   const selectedTankScan = selectedTank ? visionScanLog.find((scan) => scan.tank === selectedTank.name) : undefined;
-  const selectedTankEvents = selectedTank ? [
-    ...tankActivity.filter((event) => event.tankId === selectedTank.id).map((event) => ({ id: event.id, title: event.type === "created" ? "Tank created" : "Tank updated", detail: event.summary, time: event.occurredAt, kind: event.type === "sensor_reading" ? "reading" as const : "activity" as const })),
-    ...visionScanLog.filter((scan) => scan.tank === selectedTank.name).map((scan) => ({ id: scan.id, title: "Vision scan", detail: scan.note, time: scan.time, kind: "scan" as const })),
-    ...alertsLog.filter((alert) => alert.detail.includes(`${selectedTank.name} —`)).map((alert, index) => ({ id: `alert-${selectedTank.id}-${index}`, title: alert.title, detail: alert.detail, time: alert.time, kind: "alert" as const })),
-  ].sort((a, b) => (Date.parse(b.time) || 0) - (Date.parse(a.time) || 0)).slice(0, 12) : [];
+
 
   return (
     <>
@@ -154,34 +150,7 @@ export function TanksView() {
               )}
             </section>
           </div>
-          <section className="mt-5 rounded-xl border border-[var(--ep-line)] p-4" aria-labelledby="tank-activity-heading">
-            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-              <div>
-                <h3 id="tank-activity-heading" className="text-sm font-semibold text-[var(--ep-text)]">Tank activity</h3>
-                <p className="mt-1 text-[11px] text-[var(--ep-text-muted)]">Recent recorded events for this tank</p>
-              </div>
-              <span className="rounded-full bg-[var(--ep-bg-subtle)] px-2.5 py-1 text-[10px] font-semibold text-[var(--ep-text-muted)]">{selectedTankEvents.length} events</span>
-            </div>
-            {selectedTankEvents.length ? (
-              <ol className="relative space-y-0 before:absolute before:bottom-3 before:left-[5px] before:top-3 before:w-px before:bg-[var(--ep-line)]">
-                {selectedTankEvents.map((event) => (
-                  <li key={event.id} className="relative flex gap-3 pb-4 last:pb-0">
-                    <span className={`relative z-[1] mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full border-2 border-[var(--ep-surface)] ${event.kind === "alert" ? "bg-[var(--ep-status-warning)]" : event.kind === "scan" ? "bg-[var(--ep-primary)]" : "bg-[var(--ep-status-success)]"}`} />
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                        <p className="text-xs font-semibold text-[var(--ep-text)]">{event.title}</p>
-                        <time className="text-[10px] text-[var(--ep-text-muted)]">{Number.isNaN(Date.parse(event.time)) ? event.time : new Date(event.time).toLocaleString()}</time>
-                      </div>
-                      <p className="mt-0.5 break-words text-xs text-[var(--ep-text-muted)]">{event.detail}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            ) : (
-              <p className="py-4 text-center text-xs text-[var(--ep-text-muted)]">No activity has been recorded for this tank yet.</p>
-            )}
-            <p className="mt-3 border-t border-[var(--ep-line)] pt-3 text-[10px] text-[var(--ep-text-muted)]">Tank creation and edit events are kept for this session. Vision scans and logged alerts come from the available dashboard records.</p>
-          </section>
+
         </Panel>
       )}
 
