@@ -63,6 +63,10 @@ export function parseTankMutationResponse(value: unknown): ApiTank {
 export function parseDashboardResponse(value: unknown): DashboardData & { tanks: ApiTank[] } {
   if (!record(value) || value.success !== true ||
     !list(value.tanks, isTank) ||
+    !list(value.tankActivity, item => record(item) &&
+      text(item.id) && (item.tankId === null || tankId(item.tankId)) &&
+      text(item.tankName) && (item.type === "created" || item.type === "updated" || item.type === "sensor_reading") &&
+      text(item.summary) && date(item.occurredAt)) ||
     !list(value.waterTrend, item => record(item) && tankId(item.tankId) && number(item.value, 0, 100)) ||
     !list(value.growthTrend, item => number(item, 0)) ||
     !list(value.visionScanLog, item => record(item) && text(item.id) && date(item.time) && text(item.tank) && text(item.note)) ||
