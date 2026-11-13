@@ -26,7 +26,7 @@ export function SidebarNavItem({
       preload={active ? false : "viewport"}
       aria-label={item.label}
       aria-current={active ? "page" : undefined}
-      className={`rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove-light)] ${
+      className={`rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] ${
         collapsed ? "lg:mx-auto lg:w-11" : "lg:w-full"
       }`}
       activeOptions={{ exact: true }}
@@ -39,8 +39,8 @@ export function SidebarNavItem({
             : ""
         } ${
           active || pending
-            ? "dashboard-nav-active border border-[rgba(232,98,58,0.7)] bg-white font-semibold text-[var(--water-deep)] shadow-[0_6px_14px_-10px_rgba(11,46,51,0.55)]"
-            : "text-[rgba(11,46,51,0.68)] hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--water-deep)]"
+            ? "dashboard-nav-active border border-[var(--ep-accent)] bg-[var(--ep-accent-tint)] font-semibold text-[var(--ep-text)] shadow-sm"
+            : "text-[var(--ep-text-muted)] hover:bg-[var(--ep-tint)] hover:text-[var(--ep-text)]"
         }`}
       >
         <span
