@@ -3,14 +3,14 @@ import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimiti
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { SmsSettings } from "@/features/dashboard/components/SmsSettings";
-import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
+import { DashboardViewSkeleton, DashboardErrorState, DashboardEmptyState } from "@/features/dashboard/components/DashboardStates";
 
 export function AlertsView() {
-  const { tanks, alertsLog, loading } = useTanks();
+  const { tanks, alertsLog, loading, error, refreshTanks } = useTanks();
 
   if (loading) return <DashboardViewSkeleton variant="alerts" />;
 
-  const liveAlerts = deriveTankAlerts(tanks);
+  if (error && tanks.length === 0 && alertsLog.length === 0) {\n    return (\n      <DashboardErrorState\n        title="Alerts unavailable"\n        description={error}\n        action={{ label: "Try again", onClick: () => void refreshTanks() }}\n      />\n    );\n  }\n\n  const liveAlerts = deriveTankAlerts(tanks);
   const allAlerts = [...liveAlerts, ...alertsLog];
   const openCount = liveAlerts.length;
 
