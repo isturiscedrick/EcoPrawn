@@ -1591,3 +1591,169 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
     transform: none !important;
   }
 }
+
+/* ---------- Phase 3: mobile tank monitoring and analytics ---------- */
+@media (max-width: 639px) {
+  /* Sensor gauges keep their ring, value and status together in a compact tile. */
+  .dashboard-shell .dashboard-sensor-gauge {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .15rem;
+    padding: .75rem .45rem;
+    border-radius: .9rem;
+  }
+  .dashboard-shell .dashboard-sensor-gauge > div:first-child {
+    min-height: 2.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: .15rem;
+    font-size: .58rem;
+    line-height: 1.2;
+    letter-spacing: .045em;
+  }
+  .dashboard-shell .dashboard-sensor-gauge-meter {
+    width: 3.35rem;
+    height: 3.35rem;
+    flex: 0 0 auto;
+  }
+  .dashboard-shell .dashboard-sensor-gauge-meter svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .dashboard-shell .dashboard-sensor-gauge > div:nth-of-type(2) {
+    font-size: clamp(.78rem, 3.8vw, .95rem);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+  .dashboard-shell .dashboard-sensor-gauge > div:nth-of-type(3) {
+    min-height: 1.3em;
+    font-size: .6rem;
+    line-height: 1.2;
+  }
+  .dashboard-shell .dashboard-sensor-gauge > p {
+    font-size: .58rem;
+    line-height: 1.25;
+  }
+
+  /* Tank rows stack biomass and the remove action below tank identity. */
+  .dashboard-shell .dashboard-tank-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: .65rem;
+    padding: .8rem;
+    border-radius: .9rem;
+  }
+  .dashboard-shell .dashboard-tank-identity {
+    min-width: 0;
+    flex: 1 1 100%;
+    gap: .65rem;
+  }
+  .dashboard-shell .dashboard-tank-identity > div {
+    min-width: 0;
+  }
+  .dashboard-shell .dashboard-tank-actions {
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 1.1rem;
+  }
+  .dashboard-shell .dashboard-tank-remove {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border: 1px solid var(--ep-line);
+    background: var(--ep-bg);
+    color: var(--ep-status-danger);
+  }
+
+  /* Alerts use a two-column layout; timestamps move below the message. */
+  .dashboard-shell .dashboard-alert-row {
+    display: grid;
+    grid-template-columns: 1.65rem minmax(0, 1fr);
+    align-items: start;
+    gap: .45rem .65rem;
+    padding: .75rem .25rem;
+  }
+  .dashboard-shell .dashboard-alert-row > div:first-child {
+    width: 1.65rem;
+    height: 1.65rem;
+    grid-row: 1 / span 2;
+  }
+  .dashboard-shell .dashboard-alert-row > div:nth-child(2) {
+    min-width: 0;
+  }
+  .dashboard-shell .dashboard-alert-row > div:nth-child(2) b {
+    font-size: .8rem;
+    line-height: 1.35;
+  }
+  .dashboard-shell .dashboard-alert-row > div:nth-child(2) span {
+    display: block;
+    font-size: .73rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+  .dashboard-shell .dashboard-alert-time {
+    grid-column: 2;
+    justify-self: start;
+    margin-left: 0;
+    white-space: normal;
+    font-size: .65rem;
+    line-height: 1.3;
+  }
+
+  /* Trend plots scale to the panel while keeping every reading keyboard- and touch-selectable. */
+  .dashboard-shell .dashboard-trend-chart {
+    min-width: 0;
+    padding: .75rem .55rem;
+  }
+  .dashboard-shell .dashboard-trend-svg {
+    width: 100%;
+    height: clamp(145px, 42vw, 190px);
+    min-height: 0;
+    overflow: visible;
+    touch-action: pan-y;
+  }
+  .dashboard-shell .dashboard-trend-point {
+    cursor: pointer;
+    pointer-events: all;
+    touch-action: manipulation;
+  }
+  .dashboard-shell .dashboard-trend-point:focus-visible {
+    outline: none;
+    stroke: var(--ep-accent);
+    stroke-width: 3;
+  }
+  .dashboard-shell .dashboard-trend-chart > div:first-child {
+    flex-wrap: wrap;
+    font-size: .78rem;
+  }
+  .dashboard-shell .dashboard-trend-chart > p {
+    font-size: .72rem;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 359px) {
+  .dashboard-shell .dashboard-sensor-gauge {
+    padding-inline: .3rem;
+  }
+  .dashboard-shell .dashboard-sensor-gauge-meter {
+    width: 3rem;
+    height: 3rem;
+  }
+  .dashboard-shell .dashboard-alert-row {
+    column-gap: .5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell .dashboard-sensor-gauge,
+  .dashboard-shell .dashboard-tank-row,
+  .dashboard-shell .dashboard-trend-point {
+    transition: none !important;
+  }
+}
