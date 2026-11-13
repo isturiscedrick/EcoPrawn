@@ -192,7 +192,7 @@ if (refIndex >= 0) {
     } finally { await client.$disconnect(); }
   }
   const rows = [];
-  for (const [name, queryCount] of [["dashboard", 7], ["settings", 2]]) {
+  for (const [name, queryCount] of [["dashboard", 8], ["settings", 2]]) {
     for (const concurrency of [1, 10]) {
       for (const [version, source] of [["before", baseline[name]], ["after", sources[name]]]) {
         let active = 0, calls = 0, peakConnections = 0;
