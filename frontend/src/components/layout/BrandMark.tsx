@@ -66,8 +66,8 @@ export function BrandMark({ size = 30, className = "", logoColor, logoTextColor,
       {showWordmark && (
         <span
           aria-hidden="true"
-          className="ep-logo-wordmark ep-font-display font-semibold leading-none tracking-tight"
-          style={{ fontSize: size * 0.8 }}
+          className="ep-logo-wordmark ep-font-display font-semibold leading-none tracking-normal"
+          style={{ fontSize: size * 0.8, letterSpacing: "0", paddingRight: size * 0.1, overflow: "visible" }}
         >
           EcoPrawn
         </span>
