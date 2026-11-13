@@ -7,6 +7,8 @@ import { BrandMark } from "@/components/layout/BrandMark";
 import { Icon } from "@/components/ui/Icon";
 import { Sidebar } from "../components/Sidebar";
 import { DASHBOARD_NAV_ITEMS } from "@/config/nav";
+import { useTanks } from "@/features/dashboard/context/TankContext";
+import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 
 interface SystemLayoutProps {
   children: ReactNode;
@@ -17,6 +19,8 @@ const focusRing =
 
 export function SystemLayout({ children }: SystemLayoutProps) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const { tanks } = useTanks();
+  const activeAlertCount = deriveTankAlerts(tanks).length;
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const wasMobileSidebarOpen = useRef(false);
@@ -158,7 +162,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
             </button>
             <Link
               to="/dashboard/alerts"
-              aria-label="Alerts"
+              aria-label={activeAlertCount > 0 ? `Alerts, ${activeAlertCount} active` : "Alerts"}
               aria-current={pathname === "/dashboard/alerts" ? "page" : undefined}
               title="Alerts"
               className={`relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing} ${pathname === "/dashboard/alerts" ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)]"}`}
