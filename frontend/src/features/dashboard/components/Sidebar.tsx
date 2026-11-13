@@ -46,6 +46,10 @@ export function Sidebar({
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const touchStartTime = useRef<number>(0);
+  const touchDrawerWidth = useRef<number>(0);
+  const touchGestureActive = useRef(false);
 
   const initials =
     profileName
@@ -277,14 +281,66 @@ export function Sidebar({
           data-state={mobileOpen ? "open" : "closed"}
           inert={!mobileOpen}
           onTouchStart={(e) => {
-            touchStartX.current = e.touches[0].clientX;
+            if (e.touches.length !== 1) return;
+            const touch = e.touches[0];
+            touchStartX.current = touch.clientX;
+            touchStartY.current = touch.clientY;
+            touchStartTime.current = Date.now();
+            touchDrawerWidth.current = drawerRef.current?.getBoundingClientRect().width ?? 0;
+            touchGestureActive.current = false;
+          }}
+          onTouchMove={(e) => {
+            const startX = touchStartX.current;
+            const startY = touchStartY.current;
+            if (startX === null || startY === null || e.touches.length !== 1) return;
+            const touch = e.touches[0];
+            const deltaX = touch.clientX - startX;
+            const deltaY = touch.clientY - startY;
+
+            // Ignore vertical scrolling and only engage after a clear horizontal intent.
+            if (!touchGestureActive.current) {
+              if (Math.abs(deltaY) > Math.abs(deltaX) || Math.abs(deltaX) < 8) return;
+              touchGestureActive.current = true;
+            }
+            if (deltaX >= 0) return;
+
+            const drawer = drawerRef.current;
+            if (!drawer) return;
+            drawer.style.transition = "none";
+            drawer.style.transform = `translate3d(${Math.max(deltaX, -touchDrawerWidth.current)}px, 0, 0)`;
           }}
           onTouchEnd={(e) => {
-            const start = touchStartX.current;
+            const startX = touchStartX.current;
+            const startY = touchStartY.current;
+            const wasDragging = touchGestureActive.current;
+            const drawer = drawerRef.current;
             touchStartX.current = null;
-            if (start !== null && e.changedTouches[0].clientX - start < -60) closeDrawer();
+            touchStartY.current = null;
+            touchGestureActive.current = false;
+
+            if (drawer) {
+              const endX = e.changedTouches[0]?.clientX ?? startX ?? 0;
+              const distance = Math.max(0, (startX ?? endX) - endX);
+              const elapsed = Math.max(1, Date.now() - touchStartTime.current);
+              const velocity = distance / elapsed;
+              const closeDistance = Math.max(48, touchDrawerWidth.current * 0.28);
+              drawer.style.transition = "";
+              drawer.style.transform = "";
+              if (wasDragging && (distance >= closeDistance || (distance >= 28 && velocity >= 0.5))) {
+                closeDrawer();
+              }
+            }
+            void startY;
           }}
-          onTouchCancel={() => { touchStartX.current = null; }}
+          onTouchCancel={() => {
+            touchStartX.current = null;
+            touchStartY.current = null;
+            touchGestureActive.current = false;
+            if (drawerRef.current) {
+              drawerRef.current.style.transition = "";
+              drawerRef.current.style.transform = "";
+            }
+          }}
           className={`ep-mobile-dashboard-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out motion-reduce:transition-none ${
             mobileOpen
               ? "translate-x-0 shadow-[8px_0_40px_-12px_rgba(8,30,34,0.45)]"
