@@ -49,7 +49,7 @@ export function TrendChart({ values = [], onPointClick, label = "Trend", unit = 
       </div>
       <svg
         viewBox="0 0 560 200"
-        className="h-[230px] w-full overflow-visible"
+        className="dashboard-trend-svg h-[230px] w-full overflow-visible"
         role="group"
         aria-label={`${label} chart. Select a point for details.`}
       >
@@ -80,6 +80,7 @@ export function TrendChart({ values = [], onPointClick, label = "Trend", unit = 
               cy={point.y}
               r="13"
               fill="transparent"
+              className="dashboard-trend-point"
               tabIndex={0}
               role="button"
               aria-label={`Reading ${index + 1}: ${values[index].toFixed(2)}${unit ? ` ${unit}` : ""}`}
