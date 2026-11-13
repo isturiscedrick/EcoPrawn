@@ -4,10 +4,6 @@ import type { Tank } from "@/features/dashboard/context/TankContext";
 import { THRESHOLDS, rangeStatus } from "@/features/dashboard/lib/thresholds";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 
-interface TankRowProps extends Tank {
-  onRemove?: (id: string) => void;
-}
-
 const REMOVE_ANIMATION_MS = 200;
 
 const readingDefinitions = [
@@ -58,8 +54,8 @@ export function TankRow(tank: Tank & { onRemove?: (id: string) => void }) {
         <div className="flex shrink-0 items-center gap-2">
           <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold ${
             status === "ok"
-              ? "bg-[var(--ep-status-success-bg)] text-[var(--ep-status-success)]"
-              : "bg-[var(--ep-status-warning-bg)] text-[var(--ep-status-warning)]"
+              ? "border border-[var(--ep-status-success)] text-[var(--ep-status-success)]"
+              : "border border-[var(--ep-status-warning)] text-[var(--ep-status-warning)]"
           }`}>
             {status === "ok" ? "Stable" : hasWaterReadings ? `${warningCount} readings out of range` : "No readings"}
           </span>
@@ -69,7 +65,7 @@ export function TankRow(tank: Tank & { onRemove?: (id: string) => void }) {
               onClick={() => setConfirmingRemove(true)}
               disabled={leaving}
               aria-label={`Remove ${name}`}
-              className="dashboard-tank-remove ep-focus-ring flex h-9 w-9 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-status-danger-bg)] hover:text-[var(--ep-status-danger)]"
+              className="dashboard-tank-remove ep-focus-ring flex h-9 w-9 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-line)] hover:text-[var(--ep-status-danger)]"
             >
               ✕
             </button>
@@ -82,7 +78,7 @@ export function TankRow(tank: Tank & { onRemove?: (id: string) => void }) {
           const value = tank[reading.key];
           const readingStatus = rangeStatus(value, reading.min, "max" in reading ? reading.max : undefined);
           return (
-            <div key={reading.key} className="min-w-0 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-bg-subtle)] px-3 py-2">
+            <div key={reading.key} className="min-w-0 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2">
               <div className="truncate text-[10px] font-medium text-[var(--ep-text-muted)]">{reading.label}</div>
               <div className={`ep-font-mono mt-1 text-sm font-semibold tabular-nums ${
                 hasWaterReadings
