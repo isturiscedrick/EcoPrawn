@@ -403,7 +403,7 @@ export function Dashboard() {
       {tankCount > 0 && (
         <Panel
           title="Tank Comparison"
-          icon="chart"
+          icon="activity"
           badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}
           onDetails={() =>
             showDetail("Tank comparison", "Compare current recorded values across tanks. Bars are scaled relative to the highest value in the selected metric.", [
