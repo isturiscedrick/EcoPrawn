@@ -90,14 +90,14 @@ export function Dashboard() {
       avgPh: readingTotals.ph / readingCount,
       avgTemp: readingTotals.temperature / readingCount,
       avgSalinity: readingTotals.salinity / readingCount,
-      avgFcr: totals.fcr / count,
+      avgFcr: totals.fcr / (tanks.length || 1),
       openAlertTanks: totals.warnings,
       dispensedToday: totals.dispensedToday,
       targetToday: totals.targetToday,
       totalPopulation: totals.population,
       totalAbnormal: totals.abnormal,
-      avgBodyLength: totals.bodyLength / count,
-      avgWeight: totals.weight / count,
+      avgBodyLength: totals.bodyLength / (tanks.length || 1),
+      avgWeight: totals.weight / (tanks.length || 1),
     };
   }, [tanks]);
   const trendsByTank = useMemo(() => {
