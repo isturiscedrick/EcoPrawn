@@ -26,6 +26,15 @@ export function AlertsView() {
 
   return (
     <>
+      {error && (
+        <div className="mb-4">
+          <DashboardErrorState
+            title="Some alert data may be out of date"
+            description={error}
+            action={{ label: "Retry", onClick: () => void refreshTanks() }}
+          />
+        </div>
+      )}
       <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--sand-dim)]">
         <div>
           <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
