@@ -154,6 +154,16 @@ export function SystemLayout({ children }: SystemLayoutProps) {
             >
               {darkMode ? <Icon name="moon" size={18} strokeWidth={1.8} /> : <Icon name="sun" size={18} strokeWidth={1.8} />}
             </button>
+            <Link
+              to="/dashboard/alerts"
+              aria-label="Alerts"
+              aria-current={pathname === "/dashboard/alerts" ? "page" : undefined}
+              title="Alerts"
+              className={`relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing} ${pathname === "/dashboard/alerts" ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)]"}`}
+              style={{ borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
+            >
+              <Icon name="bell" size={18} strokeWidth={1.8} />
+            </Link>
             <div ref={profileMenuRef} className="relative">
               <button
                 type="button"
@@ -216,10 +226,10 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         className="fixed inset-x-0 bottom-0 z-[70] grid grid-cols-5 border-t border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-surface)_94%,transparent)] px-1 pt-2 pb-[max(.5rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-24px_rgba(15,23,42,.42)] backdrop-blur-xl lg:hidden"
       >
         {DASHBOARD_NAV_ITEMS.filter((item) =>
-          ["overview", "tanks", "water", "alerts"].includes(item.view),
+          ["overview", "tanks", "vision", "feeding"].includes(item.view),
         ).map((item) => {
           const href = item.view === "overview" ? "/dashboard" : "/dashboard/" + item.view;
-          const label = item.view === "overview" ? "Home" : item.view === "water" ? "Water" : item.label;
+          const label = item.view === "overview" ? "Home" : item.view === "vision" ? "Vision" : item.label;
           const active = item.view === "overview"
             ? pathname === "/dashboard" || pathname === "/dashboard/overview"
             : pathname === href || pathname.startsWith(href + "/");
