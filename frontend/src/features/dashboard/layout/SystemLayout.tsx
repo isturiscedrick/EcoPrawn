@@ -101,36 +101,32 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           boxShadow: "none",
         }}
       >
-        <div className="mx-auto grid min-h-[66px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 sm:gap-4 sm:px-8 lg:px-12">
-          <div aria-hidden="true" className="h-10 w-10 justify-self-start" />
+        <div className="mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-8 lg:px-12">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            role="switch"
+            aria-checked={darkMode}
+            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
+            style={{
+              color: "var(--ep-primary)",
+              borderColor: "var(--ep-line)",
+              backgroundColor: "var(--ep-surface)",
+            }}
+          >
+            {darkMode ? <Icon name="moon" size={18} strokeWidth={1.8} /> : <Icon name="sun" size={18} strokeWidth={1.8} />}
+          </button>
 
           <Link
             to="/dashboard"
             aria-label="EcoPrawn home"
             activeOptions={{ exact: true }}
-            className={`flex shrink-0 items-center justify-self-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
+            className={`flex min-w-0 shrink-0 items-center justify-self-end rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
           >
-            <BrandMark size={36} />
+            <BrandMark size={30} showWordmark />
           </Link>
-
-          <div className="flex shrink-0 items-center justify-self-end gap-1.5 sm:gap-3">
-            <button
-              type="button"
-              onClick={toggleTheme}
-              role="switch"
-              aria-checked={darkMode}
-              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
-              style={{
-                color: "var(--ep-primary)",
-                borderColor: "var(--ep-line)",
-                backgroundColor: "var(--ep-surface)",
-              }}
-            >
-              {darkMode ? <Icon name="moon" size={18} strokeWidth={1.8} /> : <Icon name="sun" size={18} strokeWidth={1.8} />}
-            </button>
-          </div>
         </div>
       </header>
 
