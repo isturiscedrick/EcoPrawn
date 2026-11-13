@@ -1814,3 +1814,69 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
     transition: none !important;
   }
 }
+
+/* ---------- Phase 5: mobile table filters and feedback states ---------- */
+.dashboard-shell .dashboard-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ep-accent) var(--ep-line);
+}
+.dashboard-shell .dashboard-table-scroll:focus-visible {
+  outline: 2px solid var(--ep-accent);
+  outline-offset: 3px;
+  border-radius: .65rem;
+}
+.dashboard-shell .dashboard-table-scroll table {
+  min-width: 640px;
+}
+.dashboard-shell .dashboard-table-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--ep-surface);
+}
+.dashboard-shell .dashboard-state-message {
+  overflow-wrap: anywhere;
+}
+.dashboard-shell .dashboard-state-message h2 {
+  color: var(--ep-text, var(--ep-primary));
+}
+.dashboard-shell .dashboard-state-message button {
+  min-height: 44px;
+}
+@media (max-width: 639px) {
+  .dashboard-shell .dashboard-table-filters {
+    width: 100%;
+  }
+  .dashboard-shell .dashboard-table-filters button {
+    min-width: 0;
+    min-height: 44px;
+    padding-inline: .45rem;
+    white-space: nowrap;
+  }
+  .dashboard-shell .dashboard-table-scroll {
+    margin-inline: -.35rem;
+    padding-inline: .35rem;
+    border-radius: .65rem;
+  }
+  .dashboard-shell .dashboard-table-scroll table {
+    min-width: 650px;
+  }
+  .dashboard-shell .dashboard-table-scroll th,
+  .dashboard-shell .dashboard-table-scroll td {
+    padding-block: .8rem;
+  }
+  .dashboard-shell .dashboard-state-message {
+    padding: 1.25rem .9rem;
+    border-radius: 1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell .dashboard-state-message *,
+  .dashboard-shell .dashboard-table-filters button {
+    transition: none !important;
+  }
+}
