@@ -47,6 +47,8 @@ export function Dashboard() {
   const { showToast } = useToast();
 
   const tankCount = tanks.length;
+  // Keep a non-zero denominator available to all dashboard summary calculations.
+  const count = tanks.length || 1;
   const {
     tanksById, totalBiomass, avgDO, avgPh, avgTemp, avgSalinity, tanksWithWaterReadings,
     avgFcr, openAlertTanks, dispensedToday, targetToday, totalPopulation,
@@ -90,16 +92,16 @@ export function Dashboard() {
       avgPh: readingTotals.ph / readingCount,
       avgTemp: readingTotals.temperature / readingCount,
       avgSalinity: readingTotals.salinity / readingCount,
-      avgFcr: totals.fcr / (tanks.length || 1),
+      avgFcr: totals.fcr / count,
       openAlertTanks: totals.warnings,
       dispensedToday: totals.dispensedToday,
       targetToday: totals.targetToday,
       totalPopulation: totals.population,
       totalAbnormal: totals.abnormal,
-      avgBodyLength: totals.bodyLength / (tanks.length || 1),
-      avgWeight: totals.weight / (tanks.length || 1),
+      avgBodyLength: totals.bodyLength / count,
+      avgWeight: totals.weight / count,
     };
-  }, [tanks]);
+  }, [count, tanks]);
   const trendsByTank = useMemo(() => {
     const grouped = new Map<string, number[]>();
     for (const reading of waterTrend) {
