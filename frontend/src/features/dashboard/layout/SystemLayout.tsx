@@ -19,7 +19,7 @@ const focusRing =
 
 export function SystemLayout({ children }: SystemLayoutProps) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const { tanks } = useTanks();
+  const { tanks, isDbConnected, lastUpdatedAt, loading, error, refreshTanks } = useTanks();
   const activeAlertCount = deriveTankAlerts(tanks).length;
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -260,7 +260,37 @@ export function SystemLayout({ children }: SystemLayoutProps) {
 
       {/* Responsive dashboard content area. */}
       <main data-dashboard-route-content="" className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:px-5 sm:pt-5 lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
-        <div className="w-full">{children}</div>
+        <div className="w-full">
+          {!loading && !isDbConnected && error && (
+            <div role="status" className="mb-4 flex flex-col gap-3 rounded-xl border border-[var(--ep-status-danger)] bg-[var(--ep-surface)] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex min-w-0 items-start gap-2.5">
+                <span aria-hidden="true" className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[var(--ep-status-danger)]" />
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-[var(--ep-text)]">Connection interrupted</p>
+                  <p className="mt-0.5 text-xs leading-relaxed text-[var(--ep-text-muted)]">
+                    {lastUpdatedAt
+                      ? `Showing saved dashboard data. Last successful update: ${lastUpdatedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}.`
+                      : "Dashboard data could not be loaded. Check your connection and try again."}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => void refreshTanks()}
+                className="min-h-10 shrink-0 self-start rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] sm:self-center"
+              >
+                Retry connection
+              </button>
+            </div>
+          )}
+          {!loading && isDbConnected && lastUpdatedAt && (
+            <div className="mb-3 flex items-center justify-end gap-2 text-[11px] text-[var(--ep-text-muted)]" aria-label={`Dashboard data last updated at ${lastUpdatedAt.toLocaleTimeString()}`}>
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--ep-status-success)]" />
+              <span>Live data · Updated {lastUpdatedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+            </div>
+          )}
+          {children}
+        </div>
       </main>
 
       {/* Thumb-friendly dashboard navigation for phones and tablets. The More
