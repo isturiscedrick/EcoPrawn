@@ -35,6 +35,7 @@ export function Dashboard() {
     refreshTanks,
   } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
+  const [comparisonMetric, setComparisonMetric] = useState<"biomass" | "dissolvedOxygen" | "ph" | "temperature">("biomass");
   const [modalOpen, setModalOpen] = useState(false);
   const [thresholdModalOpen, setThresholdModalOpen] = useState(false);
   const [detail, setDetail] = useState<{
@@ -101,6 +102,14 @@ export function Dashboard() {
     return grouped;
   }, [waterTrend]);
   const selectedTank = selectedTankId ? tanksById.get(selectedTankId) : undefined;
+  const comparisonMetrics = [
+    { key: "biomass" as const, label: "Biomass", unit: "kg", value: (tank: Tank) => tank.biomass },
+    { key: "dissolvedOxygen" as const, label: "Dissolved O₂", unit: "mg/L", value: (tank: Tank) => tank.dissolvedOxygen },
+    { key: "ph" as const, label: "pH", unit: "pH", value: (tank: Tank) => tank.ph },
+    { key: "temperature" as const, label: "Temperature", unit: "°C", value: (tank: Tank) => tank.temperature },
+  ];
+  const activeComparison = comparisonMetrics.find((metric) => metric.key === comparisonMetric) ?? comparisonMetrics[0];
+  const comparisonMax = Math.max(1, ...tanks.map(activeComparison.value));
   const sensorValues = {
     dissolvedOxygen: selectedTank?.dissolvedOxygen ?? avgDO,
     ph: selectedTank?.ph ?? avgPh,
@@ -389,6 +398,68 @@ export function Dashboard() {
           </div>
         </Panel>
       </div>
+
+      {/* TANK COMPARISON */}
+      {tankCount > 0 && (
+        <Panel
+          title="Tank Comparison"
+          icon="chart"
+          badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}
+          onDetails={() =>
+            showDetail("Tank comparison", "Compare current recorded values across tanks. Bars are scaled relative to the highest value in the selected metric.", [
+              `Metric: ${activeComparison.label}`,
+              `Tanks compared: ${tankCount}`,
+              "Values are current tank records, not historical averages.",
+            ])
+          }
+        >
+          <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label="Choose tank comparison metric">
+            {comparisonMetrics.map((metric) => (
+              <button
+                key={metric.key}
+                type="button"
+                aria-pressed={comparisonMetric === metric.key}
+                onClick={() => setComparisonMetric(metric.key)}
+                className={comparisonMetric === metric.key
+                  ? "min-h-10 rounded-full border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-3 py-2 text-xs font-semibold text-white"
+                  : "min-h-10 rounded-full border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-2 text-xs font-semibold text-[var(--ep-text-muted)] hover:border-[var(--ep-accent)] hover:text-[var(--ep-accent)]"}
+              >
+                {metric.label}
+              </button>
+            ))}
+          </div>
+          <div className="space-y-4">
+            {tanks.map((tank) => {
+              const value = activeComparison.value(tank);
+              const width = Math.max(0, Math.min(100, (value / comparisonMax) * 100));
+              return (
+                <div key={tank.id} className="dashboard-tank-comparison-row min-w-0">
+                  <div className="mb-1.5 flex items-baseline justify-between gap-3">
+                    <span className="min-w-0 truncate text-sm font-semibold text-[var(--ep-text)]">{tank.name}</span>
+                    <span className="ep-font-mono shrink-0 text-sm font-semibold text-[var(--ep-text)]">
+                      {value.toFixed(comparisonMetric === "biomass" ? 1 : 2)} {activeComparison.unit}
+                    </span>
+                  </div>
+                  <div
+                    className="h-2.5 overflow-hidden rounded-full bg-[var(--ep-line)]"
+                    role="progressbar"
+                    aria-label={`${tank.name} ${activeComparison.label}`}
+                    aria-valuemin={0}
+                    aria-valuemax={comparisonMax}
+                    aria-valuenow={value}
+                    aria-valuetext={`${value.toFixed(2)} ${activeComparison.unit}`}
+                  >
+                    <div className="h-full rounded-full bg-[var(--ep-accent)] transition-[width] duration-300" style={{ width: String(width) + "%" }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-4 text-xs leading-relaxed text-[var(--ep-text-muted)]">
+            Bars show each tank relative to the highest recorded value for this metric. They are not target or health scores.
+          </p>
+        </Panel>
+      )}
 
       {/* TANK STATUS + FEED */}
       <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4 mb-4">
