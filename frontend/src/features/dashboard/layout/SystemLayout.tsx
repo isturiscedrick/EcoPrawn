@@ -42,6 +42,8 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
+  const profileTriggerRef = useRef<HTMLButtonElement>(null);
+  const profileMenuPanelRef = useRef<HTMLDivElement>(null);
   const profileInitials = profileName.trim().split(/\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? "").join("") || "FO";
 
   useLayoutEffect(() => {
@@ -83,7 +85,10 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       if (event.target instanceof Node && !profileMenuRef.current?.contains(event.target)) setProfileMenuOpen(false);
     };
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setProfileMenuOpen(false);
+      if (event.key === "Escape") {
+        setProfileMenuOpen(false);
+        profileTriggerRef.current?.focus({ preventScroll: true });
+      }
     };
     document.addEventListener("pointerdown", closeOnOutside);
     document.addEventListener("keydown", closeOnEscape);
@@ -91,6 +96,11 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       document.removeEventListener("pointerdown", closeOnOutside);
       document.removeEventListener("keydown", closeOnEscape);
     };
+  }, [profileMenuOpen]);
+
+  useEffect(() => {
+    if (!profileMenuOpen) return;
+    profileMenuPanelRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
   }, [profileMenuOpen]);
 
   useEffect(() => setProfileMenuOpen(false), [pathname]);
@@ -177,6 +187,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
             </Link>
             <div ref={profileMenuRef} className="relative">
               <button
+                ref={profileTriggerRef}
                 type="button"
                 onClick={() => setProfileMenuOpen((open) => !open)}
                 aria-label="Open profile menu"
@@ -187,7 +198,29 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                 {profileInitials}
               </button>
               {profileMenuOpen && (
-                <div role="menu" aria-label="Profile menu" className="absolute right-0 top-[calc(100%+10px)] z-[100] w-60 overflow-hidden rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-2 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.38)]">
+                <div
+                  ref={profileMenuPanelRef}
+                  role="menu"
+                  aria-label="Profile menu"
+                  onKeyDown={(event) => {
+                    if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+                    const items = Array.from(
+                      event.currentTarget.querySelectorAll<HTMLElement>('[role="menuitem"]'),
+                    );
+                    if (!items.length) return;
+                    event.preventDefault();
+                    const currentIndex = items.indexOf(document.activeElement as HTMLElement);
+                    const nextIndex = event.key === "Home"
+                      ? 0
+                      : event.key === "End"
+                        ? items.length - 1
+                        : event.key === "ArrowDown"
+                          ? (currentIndex + 1) % items.length
+                          : (currentIndex - 1 + items.length) % items.length;
+                    items[nextIndex].focus();
+                  }}
+                  className="absolute right-0 top-[calc(100%+10px)] z-[100] w-60 overflow-hidden rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-2 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.38)]"
+                >
                   <div className="border-b border-[var(--ep-line)] px-3 py-2.5">
                     <p className="truncate text-sm font-semibold">{profileName}</p>
                     <p className="mt-0.5 truncate text-[11px] font-medium tracking-wide text-[var(--ep-text-muted)]">{profileRole}</p>
