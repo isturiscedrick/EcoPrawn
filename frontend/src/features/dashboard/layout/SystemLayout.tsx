@@ -161,7 +161,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       {/* Responsive dashboard content area. */}
       <main data-dashboard-route-content="" className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:px-5 sm:pt-5 lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
         <div className="w-full">{children}</div>
-
       </main>
 
       {/* Thumb-friendly dashboard navigation for phones and tablets. The More
@@ -208,6 +207,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           </span>
           <span>More</span>
         </button>
-      </nav>   </div>
+      </nav>
+    </div>
   );
 }
