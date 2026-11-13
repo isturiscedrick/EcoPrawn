@@ -287,12 +287,12 @@ export function Sidebar({
             <Link
               to="/dashboard/profile"
               aria-label="Edit user profile"
-              className="flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-3 text-left transition-colors hover:bg-[var(--ep-tint)] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              className="flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-3 text-left transition-colors hover:bg-[var(--ep-tint)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
               activeOptions={{ exact: true }}
             >
               <div
                 className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold"
-                style={{ background: "var(--coral)" }}
+                style={{ background: "var(--ep-accent-tint)", color: "var(--ep-primary)" }}
                 aria-hidden="true"
               >
                 {initials}
