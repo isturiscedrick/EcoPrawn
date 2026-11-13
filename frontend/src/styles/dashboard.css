@@ -1810,7 +1810,7 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dashboard-shell .dashboard-tank-comparison-row [role="progressbar"] > div {
+  .dashboard-shell .dashboard-tank-comparison-row [role="img"] > div {
     transition: none !important;
   }
 }
