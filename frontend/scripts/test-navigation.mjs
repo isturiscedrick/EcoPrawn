@@ -6,7 +6,7 @@ import { setTimeout } from "node:timers/promises";
 import { productionApp } from "./test-server.mjs";
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE_PATH || "playwright");
-const data = { success: true, tanks: [], waterTrend: [], growthTrend: [], visionScanLog: [],
+const data = { success: true, tanks: [], tankActivity: [], waterTrend: [], growthTrend: [], visionScanLog: [],
   feedSchedule: [], bioflocMetrics: [], effluentLog: [], alertsLog: [], resolvedAlerts: 0 };
 let authenticated = true, sessionChecks = 0, unexpectedRequests = 0;
 const backend = createServer(async (request, response) => {
