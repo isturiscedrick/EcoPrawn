@@ -6,6 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { Icon } from "@/components/ui/Icon";
 import { Sidebar } from "../components/Sidebar";
+import { DASHBOARD_NAV_ITEMS } from "@/config/nav";
 
 interface SystemLayoutProps {
   children: ReactNode;
@@ -158,9 +159,57 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} darkMode={darkMode} onToggleTheme={toggleTheme} />
 
       {/* Responsive dashboard content area. */}
-      <main data-dashboard-route-content="" className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-16 pt-3 sm:px-5 sm:pt-5 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
+      <main data-dashboard-route-content="" className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-28 pt-3 sm:px-5 sm:pt-5 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
         <div className="w-full">{children}</div>
+
       </main>
+
+      {/* Thumb-friendly dashboard navigation for phones and tablets. The More
+          action reuses the existing accessible sidebar drawer for all modules. */}
+      <nav
+        aria-label="Quick dashboard navigation"
+        className="fixed inset-x-0 bottom-0 z-[70] grid grid-cols-5 border-t border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-surface)_94%,transparent)] px-1 pt-2 pb-[max(.5rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-24px_rgba(15,23,42,.42)] backdrop-blur-xl lg:hidden"
+      >
+        {[
+          { view: "overview", label: "Home", icon: "gauge", href: "/dashboard" },
+          { view: "tanks", label: "Tanks", icon: "layers", href: "/dashboard/tanks" },
+          { view: "water", label: "Water", icon: "waves", href: "/dashboard/water" },
+          { view: "alerts", label: "Alerts", icon: "zap", href: "/dashboard/alerts" },
+        ].map((item) => {
+          const active = item.view === "overview"
+            ? pathname === "/dashboard" || pathname === "/dashboard/overview"
+            : pathname === item.href || pathname.startsWith(item.href + "/");
+          return (
+            <Link
+              key={item.view}
+              to={item.href}
+              aria-label={item.label}
+              aria-current={active ? "page" : undefined}
+              activeOptions={{ exact: true }}
+              className={"flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (active ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
+            >
+              <span className={"flex h-7 w-9 items-center justify-center rounded-xl transition-colors " + (active ? "bg-[var(--ep-accent-tint)]" : "bg-transparent")}>
+                <Icon name={item.icon} size={19} strokeWidth={active ? 2.2 : 1.8} />
+              </span>
+              <span className="max-w-full truncate">{item.label}</span>
+            </Link>
+          );
+        })}
+        <button
+          type="button"
+          onClick={() => setMobileSidebarOpen(true)}
+          aria-label="More dashboard sections"
+          aria-haspopup="dialog"
+          aria-controls="dashboard-mobile-drawer"
+          aria-expanded={mobileSidebarOpen}
+          className={"flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (mobileSidebarOpen ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
+        >
+          <span className={"flex h-7 w-9 items-center justify-center rounded-xl " + (mobileSidebarOpen ? "bg-[var(--ep-accent-tint)]" : "bg-transparent")}>
+            <Icon name="menu" size={19} strokeWidth={1.8} />
+          </span>
+          <span>More</span>
+        </button>
+      </nav>
     </div>
   );
 }
