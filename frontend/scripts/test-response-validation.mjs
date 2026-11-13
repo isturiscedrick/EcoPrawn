@@ -7,6 +7,7 @@ const reading = {
 };
 const dashboard = {
   success: true,
+  tankActivity: [],
   tanks: [{
     id: "tank-1", name: "North", pl: "PL-1", biomass: 1, fcr: 1,
     targetToday: 1, dispensedToday: 0, telemetries: [{
