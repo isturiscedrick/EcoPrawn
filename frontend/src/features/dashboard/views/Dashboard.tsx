@@ -405,13 +405,7 @@ export function Dashboard() {
           title="Tank Comparison"
           icon="activity"
           badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}
-          onDetails={() =>
-            showDetail("Tank comparison", "Compare current recorded values across tanks. Bars are scaled relative to the highest value in the selected metric.", [
-              `Metric: ${activeComparison.label}`,
-              `Tanks compared: ${tankCount}`,
-              "Values are current tank records, not historical averages.",
-            ])
-          }
+
         >
           <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label="Choose tank comparison metric">
             {comparisonMetrics.map((metric) => (
@@ -442,12 +436,8 @@ export function Dashboard() {
                   </div>
                   <div
                     className="h-2.5 overflow-hidden rounded-full bg-[var(--ep-line)]"
-                    role="progressbar"
-                    aria-label={`${tank.name} ${activeComparison.label}`}
-                    aria-valuemin={0}
-                    aria-valuemax={comparisonMax}
-                    aria-valuenow={value}
-                    aria-valuetext={`${value.toFixed(2)} ${activeComparison.unit}`}
+                    role="img"
+                    aria-label={`${tank.name}: ${value.toFixed(2)} ${activeComparison.unit}, relative to the highest tank value`}
                   >
                     <div className="h-full rounded-full bg-[var(--ep-accent)] transition-[width] duration-300" style={{ width: String(width) + "%" }} />
                   </div>
