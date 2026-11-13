@@ -181,6 +181,7 @@ export function Dashboard() {
 
   return (
     <>
+      <div className="dashboard-overview">
       {/* PAGE HEADER */}
       <div className="mb-7 flex flex-wrap items-end justify-between gap-5 border-b border-[rgba(11,46,51,0.12)] pb-7">
         <div>
@@ -536,6 +537,7 @@ export function Dashboard() {
         open={thresholdModalOpen}
         onClose={() => setThresholdModalOpen(false)}
       />
+      </div>
     </>
   );
 }
