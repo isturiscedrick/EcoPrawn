@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { AlertItem } from "@/types";
 import type { Tank } from "@/features/dashboard/context/TankContext";
+import { THRESHOLDS, rangeStatus } from "@/features/dashboard/lib/thresholds";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 
 interface TankRowProps extends Tank {
@@ -9,9 +10,23 @@ interface TankRowProps extends Tank {
 
 const REMOVE_ANIMATION_MS = 200;
 
-export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProps) {
+const readingDefinitions = [
+  { key: "dissolvedOxygen", label: "Dissolved O₂", unit: "mg/L", min: THRESHOLDS.dissolvedOxygen.min },
+  { key: "ph", label: "pH", unit: "", min: THRESHOLDS.ph.min, max: THRESHOLDS.ph.max },
+  { key: "temperature", label: "Temperature", unit: "°C", min: THRESHOLDS.temperature.min, max: THRESHOLDS.temperature.max },
+  { key: "salinity", label: "Salinity", unit: "ppt", min: THRESHOLDS.salinity.min, max: THRESHOLDS.salinity.max },
+  { key: "waterLevel", label: "Water level", unit: "%", min: THRESHOLDS.waterLevel.min },
+] as const;
+
+export function TankRow(tank: Tank & { onRemove?: (id: string) => void }) {
+  const { id, name, pl, biomass, status, hasWaterReadings, onRemove } = tank;
   const [confirmingRemove, setConfirmingRemove] = useState(false);
   const [leaving, setLeaving] = useState(false);
+  const warningCount = hasWaterReadings
+    ? readingDefinitions.filter((reading) =>
+        rangeStatus(tank[reading.key], reading.min, "max" in reading ? reading.max : undefined) === "warn"
+      ).length
+    : 0;
 
   function handleConfirmRemove() {
     setConfirmingRemove(false);
@@ -21,41 +36,76 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
   }
 
   return (
-    <div
-      className={`dashboard-tank-row dashboard-hover flex items-center justify-between p-3.5 border border-[var(--sand-dim)] rounded-[10px] ${
+    <article
+      aria-label={`${name} tank overview`}
+      className={`dashboard-tank-row dashboard-hover min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 transition-colors ${
         leaving ? "ep-row-out" : "ep-row-in"
       }`}
     >
-      <div className="dashboard-tank-identity flex items-center gap-3">
-        <span
-          className={`w-[9px] h-[9px] rounded-full ${
-            status === "ok" ? "bg-[var(--ep-status-success)]" : "bg-[var(--ep-status-warning)]"
-          }`}
-        />
-        <div>
-          <div className="text-[13.5px] font-semibold text-[var(--water-deep)]">{name}</div>
-          <div className="ep-font-mono text-[11.5px] text-[rgba(11,35,32,0.5)]">
-            {pl} &middot; <span className={status === "ok" ? "dashboard-status-text-success" : "dashboard-status-text-warning"}>{status === "ok" ? "stable" : "DO watch"}</span>
+      <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-3">
+          <span
+            aria-hidden="true"
+            className={`h-2.5 w-2.5 shrink-0 rounded-full ${
+              status === "ok" ? "bg-[var(--ep-status-success)]" : "bg-[var(--ep-status-warning)]"
+            }`}
+          />
+          <div className="min-w-0">
+            <h3 className="break-words text-sm font-semibold text-[var(--ep-text)]">{name}</h3>
+            <p className="ep-font-mono mt-0.5 text-[11px] text-[var(--ep-text-muted)]">{pl}</p>
           </div>
+        </div>
+        <div className="flex shrink-0 items-center gap-2">
+          <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold ${
+            status === "ok"
+              ? "bg-[var(--ep-status-success-bg)] text-[var(--ep-status-success)]"
+              : "bg-[var(--ep-status-warning-bg)] text-[var(--ep-status-warning)]"
+          }`}>
+            {status === "ok" ? "Stable" : hasWaterReadings ? `${warningCount} readings out of range` : "No readings"}
+          </span>
+          {onRemove && (
+            <button
+              type="button"
+              onClick={() => setConfirmingRemove(true)}
+              disabled={leaving}
+              aria-label={`Remove ${name}`}
+              className="dashboard-tank-remove ep-focus-ring flex h-9 w-9 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-status-danger-bg)] hover:text-[var(--ep-status-danger)]"
+            >
+              ✕
+            </button>
+          )}
         </div>
       </div>
-      <div className="dashboard-tank-actions flex items-center gap-3">
-        <div className="text-right">
-          <div className="ep-font-mono text-[13.5px] font-semibold text-[var(--water-deep)]">
-            {biomass.toFixed(1)} kg
-          </div>
+
+      <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+        {readingDefinitions.map((reading) => {
+          const value = tank[reading.key];
+          const readingStatus = rangeStatus(value, reading.min, "max" in reading ? reading.max : undefined);
+          return (
+            <div key={reading.key} className="min-w-0 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-bg-subtle)] px-3 py-2">
+              <div className="truncate text-[10px] font-medium text-[var(--ep-text-muted)]">{reading.label}</div>
+              <div className={`ep-font-mono mt-1 text-sm font-semibold tabular-nums ${
+                hasWaterReadings
+                  ? readingStatus === "warn" ? "text-[var(--ep-status-warning)]" : "text-[var(--ep-text)]"
+                  : "text-[var(--ep-text-muted)]"
+              }`}>
+                {hasWaterReadings ? `${value.toFixed(1)}${reading.unit ? ` ${reading.unit}` : ""}` : "—"}
+              </div>
+              {hasWaterReadings && (
+                <div className={`mt-0.5 text-[9px] font-semibold ${
+                  readingStatus === "warn" ? "text-[var(--ep-status-warning)]" : "text-[var(--ep-status-success)]"
+                }`}>
+                  {readingStatus === "warn" ? "Needs attention" : "In range"}
+                </div>
+              )}
+            </div>
+          );
+        })}
+        <div className="min-w-0 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-bg-subtle)] px-3 py-2">
+          <div className="truncate text-[10px] font-medium text-[var(--ep-text-muted)]">Biomass</div>
+          <div className="ep-font-mono mt-1 text-sm font-semibold tabular-nums text-[var(--ep-text)]">{biomass.toFixed(1)} kg</div>
+          <div className="mt-0.5 text-[9px] font-semibold text-[var(--ep-text-muted)]">Current stock</div>
         </div>
-        {onRemove && (
-          <button
-            type="button"
-            onClick={() => setConfirmingRemove(true)}
-            disabled={leaving}
-            aria-label={`Remove ${name}`}
-            className="dashboard-tank-remove ep-focus-ring flex h-7 w-7 items-center justify-center rounded-md text-[rgba(11,35,32,0.35)] transition-colors hover:bg-[rgba(214,69,69,0.1)] hover:text-[var(--danger)]"
-          >
-            ✕
-          </button>
-        )}
       </div>
 
       {onRemove && (
@@ -69,7 +119,7 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
           onConfirm={handleConfirmRemove}
         />
       )}
-    </div>
+    </article>
   );
 }
 
