@@ -6,7 +6,17 @@ export interface DemoData {
   tankFormDefaults: Record<string, string>;
 }
 
+export interface TankActivityRecord {
+  id: string;
+  tankId: string | null;
+  tankName: string;
+  type: "created" | "updated" | "sensor_reading";
+  summary: string;
+  occurredAt: string;
+}
+
 export interface DashboardData {
+  tankActivity: TankActivityRecord[];
   waterTrend: { tankId: string; value: number }[];
   growthTrend: number[];
   visionScanLog: { id: string; time: string; tank: string; note: string }[];
