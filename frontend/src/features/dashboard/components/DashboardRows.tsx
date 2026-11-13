@@ -22,11 +22,11 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
 
   return (
     <div
-      className={`dashboard-hover flex items-center justify-between p-3.5 border border-[var(--sand-dim)] rounded-[10px] ${
+      className={`dashboard-tank-row dashboard-hover flex items-center justify-between p-3.5 border border-[var(--sand-dim)] rounded-[10px] ${
         leaving ? "ep-row-out" : "ep-row-in"
       }`}
     >
-      <div className="flex items-center gap-3">
+      <div className="dashboard-tank-identity flex items-center gap-3">
         <span
           className={`w-[9px] h-[9px] rounded-full ${
             status === "ok" ? "bg-[var(--ep-status-success)]" : "bg-[var(--ep-status-warning)]"
@@ -51,7 +51,7 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
             onClick={() => setConfirmingRemove(true)}
             disabled={leaving}
             aria-label={`Remove ${name}`}
-            className="ep-focus-ring flex h-7 w-7 items-center justify-center rounded-md text-[rgba(11,35,32,0.35)] transition-colors hover:bg-[rgba(214,69,69,0.1)] hover:text-[var(--danger)]"
+            className="dashboard-tank-remove ep-focus-ring flex h-7 w-7 items-center justify-center rounded-md text-[rgba(11,35,32,0.35)] transition-colors hover:bg-[rgba(214,69,69,0.1)] hover:text-[var(--danger)]"
           >
             ✕
           </button>
@@ -75,7 +75,7 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
 
 export function AlertRow({ icon, title, detail, time }: AlertItem) {
   return (
-    <div className="dashboard-hover flex gap-3 rounded-lg border-t border-[var(--sand-dim)] px-2 py-3 first:border-t-0 first:pt-3">
+    <div className="dashboard-alert-row dashboard-hover flex gap-3 rounded-lg border-t border-[var(--sand-dim)] px-2 py-3 first:border-t-0 first:pt-3">
       <div
         className={`w-[26px] h-[26px] rounded-[7px] flex items-center justify-center text-xs flex-shrink-0 ${
           icon === "warn"
