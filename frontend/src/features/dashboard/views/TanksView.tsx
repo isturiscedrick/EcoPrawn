@@ -5,12 +5,14 @@ import { TankRow } from "@/features/dashboard/components/DashboardRows";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
+import { EditTankModal } from "@/features/dashboard/components/EditTankModal";
 import { useToast } from "@/features/dashboard/components/Toast";
 
 export function TanksView() {
-  const { tanks, addTank, removeTank, loading, waterTrend, visionScanLog } = useTanks();
+  const { tanks, addTank, removeTank, updateTank, loading, waterTrend, visionScanLog } = useTanks();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
+  const [editingTankId, setEditingTankId] = useState<string | null>(null);
   const { showToast } = useToast();
 
   if (loading) return <DashboardViewSkeleton variant="tanks" />;
@@ -158,6 +160,7 @@ export function TanksView() {
                 key={t.id}
                 {...t}
                 onViewDetails={setSelectedTankId}
+                onEdit={setEditingTankId}
                 onRemove={async (id) => {
                   const removed = await removeTank(id);
                   if (removed) showToast("Tank removed.");
@@ -172,6 +175,12 @@ export function TanksView() {
           </div>
         )}
       </Panel>
+
+      <EditTankModal
+        tank={tanks.find((tank) => tank.id === editingTankId) ?? null}
+        onClose={() => setEditingTankId(null)}
+        onSave={updateTank}
+      />
 
       <AddTankModal
         open={modalOpen}
