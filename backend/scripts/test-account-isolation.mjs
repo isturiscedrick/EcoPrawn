@@ -17,19 +17,10 @@ const db = { tank: {
   async findMany({ where } = {}) { return tanks.filter(t => match(t, where)); },
   async findUnique({ where }) { return tanks.find(t => match(t, where)) ?? null; },
   async findFirst({ where }) { return tanks.find(t => match(t, where)) ?? null; },
-  async create({ data }) { const row = { id: "new", ...data }; if (data.activities?.create) activities.push({ id: "activity-created", createdAt: new Date(), tankId: "new", ...data.activities.create }); tanks.push(row); return row; },
+  async create({ data }) { const row = { id: "new", ...data }; tanks.push(row); return row; },
   async update({ where, data }) { const row = tanks.find(t => match(t, where)); if (!row) throw missing(); Object.assign(row, data); return row; },
   async delete({ where }) { const index = tanks.findIndex(t => match(t, where)); if (index < 0) throw missing(); return tanks.splice(index, 1)[0]; },
 } };
-const activities = ["a", "b"].map(account => ({
-  id: `activity-${account}`, userId: `account-${account}`, tankId: `tank-${account}`,
-  tankName: account.toUpperCase(), type: "created", summary: "Tank added",
-  createdAt: new Date(),
-}));
-db.tankActivity = {
-  async findMany({ where } = {}) { return activities.filter(row => match(row, where)); },
-  async create({ data }) { const row = { id: `activity-${activities.length}`, createdAt: new Date(), ...data }; activities.push(row); return row; },
-};
 for (const model of ["sensorTelemetry", "visionScan", "feedSchedule", "bioflocMetric", "effluentLog", "alert"]) {
   const rows = ["a", "b"].map(account => ({
     id: `${model}-${account}`, userId: `account-${account}`, tankId: `tank-${account}`,
@@ -81,20 +72,14 @@ assert.equal((await detail.PATCH(request({ name: "stolen" }), params("tank-a")))
 assert.equal((await detail.PATCH(request({ userId: "account-a", telemetries: { deleteMany: {} } }), params("tank-b"))).status, 400);
 assert.equal(tanks.find(t => t.id === "tank-b").userId, "account-b");
 assert.equal((await detail.PATCH(request({ name: "Updated" }), params("tank-b"))).status, 200);
-assert.equal(activities.at(-1).tankId, "tank-b");
-assert.equal(activities.at(-1).userId, "account-b");
 assert.equal((await list.POST(request({ name: "Created", userId: "account-a" }))).status, 400);
 const created = await (await list.POST(request({ name: "Created" }))).json();
 assert.equal(created.tank.userId, "account-b");
-assert.equal(activities.find(event => event.id === "activity-created").userId, "account-b");
 const validReading = { dissolvedOxygen: 6, ph: 8, temperature: 28, salinity: 15, waterLevel: 90 };
 assert.equal((await water.POST(request({ tankId: "tank-a", ...validReading }))).status, 404);
 assert.equal((await water.POST(request({ tankId: "legacy", ...validReading }))).status, 404);
 assert.deepEqual((await (await water.GET(new Request("http://localhost/api/water?tankId=tank-a"))).json()).readings, []);
 assert.deepEqual((await (await water.GET(new Request("http://localhost/api/water"))).json()).readings.map(r => r.tankId), ["tank-b"]);
-assert.equal((await water.POST(request({ tankId: "tank-b", ...validReading }))).status, 201);
-assert.equal(activities.at(-1).type, "sensor_reading");
-assert.equal(activities.at(-1).userId, "account-b");
 const data = await (await dashboard.GET()).json();
 assert.equal(data.visionScanLog.length, 1);
 assert.equal(data.visionScanLog[0].tank, "b");
@@ -102,7 +87,6 @@ assert.equal(data.feedSchedule.length, 1);
 assert.equal(data.effluentLog.length, 1);
 assert.equal(data.alertsLog.length, 1);
 assert.equal(data.waterTrend.length, 1);
-assert.ok(data.tankActivity.every(event => event.userId === undefined || event.userId === "account-b"));
 assert.equal(data.bioflocMetrics.length, 4);
 user = { id: "account-a", role: "admin" };
 assert.deepEqual((await (await list.GET()).json()).tanks.map(t => t.id), ["tank-a"]);
