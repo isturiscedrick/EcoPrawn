@@ -25,7 +25,7 @@ export function TanksView() {
   const selectedTankTrend = selectedTank ? waterTrend.filter((reading) => reading.tankId === selectedTank.id).slice(-8).reverse() : [];
   const selectedTankScan = selectedTank ? visionScanLog.find((scan) => scan.tank === selectedTank.name) : undefined;
   const selectedTankEvents = selectedTank ? [
-    ...tankActivity.filter((event) => event.tankId === selectedTank.id).map((event) => ({ id: event.id, title: event.type === "created" ? "Tank created" : event.type === "sensor_reading" ? "Water reading recorded" : "Tank updated", detail: event.summary, time: event.occurredAt, kind: event.type === "sensor_reading" ? "reading" as const : "activity" as const })),
+    ...tankActivity.filter((event) => event.tankId === selectedTank.id).map((event) => ({ id: event.id, title: event.type === "created" ? "Tank created" : "Tank updated", detail: event.summary, time: event.occurredAt, kind: event.type === "sensor_reading" ? "reading" as const : "activity" as const })),
     ...visionScanLog.filter((scan) => scan.tank === selectedTank.name).map((scan) => ({ id: scan.id, title: "Vision scan", detail: scan.note, time: scan.time, kind: "scan" as const })),
     ...alertsLog.filter((alert) => alert.detail.includes(`${selectedTank.name} —`)).map((alert, index) => ({ id: `alert-${selectedTank.id}-${index}`, title: alert.title, detail: alert.detail, time: alert.time, kind: "alert" as const })),
   ].sort((a, b) => (Date.parse(b.time) || 0) - (Date.parse(a.time) || 0)).slice(0, 12) : [];
@@ -166,7 +166,7 @@ export function TanksView() {
               <ol className="relative space-y-0 before:absolute before:bottom-3 before:left-[5px] before:top-3 before:w-px before:bg-[var(--ep-line)]">
                 {selectedTankEvents.map((event) => (
                   <li key={event.id} className="relative flex gap-3 pb-4 last:pb-0">
-                    <span className={`relative z-[1] mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full border-2 border-[var(--ep-surface)] ${event.kind === "alert" ? "bg-[var(--ep-status-warning)]" : event.kind === "scan" ? "bg-[var(--ep-primary)]" : event.kind === "reading" ? "bg-[var(--ep-status-info)]" : "bg-[var(--ep-status-success)]"}`} />
+                    <span className={`relative z-[1] mt-1.5 h-[11px] w-[11px] shrink-0 rounded-full border-2 border-[var(--ep-surface)] ${event.kind === "alert" ? "bg-[var(--ep-status-warning)]" : event.kind === "scan" ? "bg-[var(--ep-primary)]" : "bg-[var(--ep-status-success)]"}`} />
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                         <p className="text-xs font-semibold text-[var(--ep-text)]">{event.title}</p>
@@ -180,7 +180,7 @@ export function TanksView() {
             ) : (
               <p className="py-4 text-center text-xs text-[var(--ep-text-muted)]">No activity has been recorded for this tank yet.</p>
             )}
-            <p className="mt-3 border-t border-[var(--ep-line)] pt-3 text-[10px] text-[var(--ep-text-muted)]">Tank creation, edits, and sensor-reading events are stored in the database and remain available after refresh. Vision scans and alerts are shown from their existing records.</p>
+            <p className="mt-3 border-t border-[var(--ep-line)] pt-3 text-[10px] text-[var(--ep-text-muted)]">Tank creation and edit events are kept for this session. Vision scans and logged alerts come from the available dashboard records.</p>
           </section>
         </Panel>
       )}
