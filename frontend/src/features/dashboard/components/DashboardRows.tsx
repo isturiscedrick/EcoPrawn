@@ -89,7 +89,7 @@ export function AlertRow({ icon, title, detail, time }: AlertItem) {
         <b className="text-[13px] text-[var(--water-deep)] block mb-0.5">{title}</b>
         <span className="text-xs text-[rgba(11,35,32,0.55)]">{detail}</span>
       </div>
-      <div className="ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.4)] ml-auto whitespace-nowrap self-center">
+      <div className="dashboard-alert-time ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.4)] ml-auto whitespace-nowrap self-center">
         {time}
       </div>
     </div>
