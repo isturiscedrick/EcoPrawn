@@ -191,7 +191,7 @@ export function Dashboard() {
   return (
     <>
       {/* PAGE HEADER */}
-      <div className="mb-7 flex flex-wrap items-end justify-between gap-5 border-b border-[rgba(11,46,51,0.12)] pb-7">
+      <div className="dashboard-page-header mb-7 flex flex-wrap items-end justify-between gap-5 border-b border-[rgba(11,46,51,0.12)] pb-7">
         <div>
           <div className="mb-2 ep-font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mangrove-text)]">
             Facility Overview
