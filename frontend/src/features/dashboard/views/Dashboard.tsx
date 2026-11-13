@@ -162,8 +162,8 @@ export function Dashboard() {
   const visionMetrics = [
     { label: "Avg. Body Length", value: tankCount ? `${avgBodyLength.toFixed(1)} cm` : "—" },
     { label: "Avg. Weight", value: tankCount ? `${avgWeight.toFixed(1)} g` : "—" },
-    { label: "Population Est.", value: totalPopulation.toLocaleString() },
-    { label: "Abnormal Behavior", value: `${totalAbnormal} flagged` },
+    { label: "Population Est.", value: tankCount ? totalPopulation.toLocaleString() : "—" },
+    { label: "Abnormal Behavior", value: tankCount ? `${totalAbnormal} flagged` : "—" },
   ];
 
   // Latest scan time comes from the scan log in data/ecoprawn.ts, not a
@@ -223,8 +223,37 @@ export function Dashboard() {
         </div>
       </div>
 
+      {/* FIRST-TIME SETUP */}
+      {tankCount === 0 && (
+        <Panel title="Get your facility started" icon="layers" badge="Setup guide">
+          <p className="max-w-2xl text-sm leading-relaxed text-[var(--ep-text-muted)]">
+            Your dashboard is ready. Add your first tank to begin tracking water quality, biomass, feeding, and growth in one place.
+          </p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-3">
+            {[
+              { number: "01", title: "Add a tank", detail: "Enter the tank name and its starting measurements." },
+              { number: "02", title: "Connect sensors", detail: "Configure your monitoring hardware when ready." },
+              { number: "03", title: "Monitor progress", detail: "Review readings, alerts, feeding, and growth data." },
+            ].map((step) => (
+              <div key={step.number} className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
+                <span className="ep-font-mono text-xs font-semibold text-[var(--ep-accent)]">{step.number}</span>
+                <h3 className="mt-2 text-sm font-semibold text-[var(--ep-text)]">{step.title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-[var(--ep-text-muted)]">{step.detail}</p>
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--ep-accent)] px-5 text-sm font-semibold text-white transition-colors hover:bg-[var(--ep-accent-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
+          >
+            Add your first tank
+          </button>
+        </Panel>
+      )}
+
       {/* KPI ROW */}
-      <div className="dashboard-kpi-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
+      {tankCount > 0 && <div className="dashboard-kpi-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
         <KpiCard
           label="Dissolved O₂ (avg)"
           value={avgDO.toFixed(1)}
@@ -293,7 +322,7 @@ export function Dashboard() {
             ])
           }
         />
-      </div>
+      </div>}
 
       {/* SENSOR + ALERTS */}
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 mb-4">
@@ -392,7 +421,12 @@ export function Dashboard() {
           }
         >
           <div>
-            {recentAlerts.map((a) => (
+            {recentAlerts.length === 0 ? (
+              <div className="rounded-xl border border-dashed border-[var(--ep-line)] px-4 py-6 text-center">
+                <p className="text-sm font-medium text-[var(--ep-text)]">{tankCount === 0 ? "Alerts will appear here once monitoring begins." : "No recent alerts."}</p>
+                <p className="mt-1 text-xs text-[var(--ep-text-muted)]">{tankCount === 0 ? "Add a tank to start monitoring facility conditions." : "Your current tank readings have no recorded alert events."}</p>
+              </div>
+            ) : recentAlerts.map((a) => (
               <AlertRow key={`${a.title}-${a.detail}-${a.time}`} {...a} />
             ))}
           </div>
@@ -498,6 +532,7 @@ export function Dashboard() {
             ])
           }
         >
+          {tankCount > 0 ? <>
           <div className="ep-font-mono text-[26px] font-semibold text-[var(--water-deep)]">
             {dispensedToday.toFixed(1)}{" "}
             <span className="text-sm font-medium text-[rgba(11,35,32,0.5)]">
@@ -533,6 +568,12 @@ export function Dashboard() {
               </div>
             </div>
           </div>
+          </> : (
+            <div className="rounded-xl border border-dashed border-[var(--ep-line)] px-4 py-6 text-center">
+              <p className="text-sm font-medium text-[var(--ep-text)]">Feeding summaries are waiting for your first tank.</p>
+              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Add a tank to start recording daily feed targets and dispensed amounts.</p>
+            </div>
+          )}
         </Panel>
       </div>
 
@@ -566,7 +607,7 @@ export function Dashboard() {
           ))}
         </div>
         <div className="mt-4 rounded-xl border border-[rgba(232,98,58,0.22)] bg-[rgba(232,98,58,0.06)] p-4">
-          <div className="mb-1 text-sm font-semibold text-[var(--ep-primary)]">AI recommendation</div>
+          <div className="mb-1 text-sm font-semibold text-[var(--ep-primary)]">{tankCount ? "AI recommendation" : "Getting started"}</div>
           <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">
             {tankCount
               ? totalAbnormal > 0
