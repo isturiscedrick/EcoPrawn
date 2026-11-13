@@ -10,7 +10,17 @@ export function AlertsView() {
 
   if (loading) return <DashboardViewSkeleton variant="alerts" />;
 
-  if (error && tanks.length === 0 && alertsLog.length === 0) {\n    return (\n      <DashboardErrorState\n        title="Alerts unavailable"\n        description={error}\n        action={{ label: "Try again", onClick: () => void refreshTanks() }}\n      />\n    );\n  }\n\n  const liveAlerts = deriveTankAlerts(tanks);
+  if (error && tanks.length === 0 && alertsLog.length === 0) {
+    return (
+      <DashboardErrorState
+        title="Alerts unavailable"
+        description={error}
+        action={{ label: "Try again", onClick: () => void refreshTanks() }}
+      />
+    );
+  }
+
+  const liveAlerts = deriveTankAlerts(tanks);
   const allAlerts = [...liveAlerts, ...alertsLog];
   const openCount = liveAlerts.length;
 
@@ -59,9 +69,16 @@ export function AlertsView() {
       <div className="mb-5"><SmsSettings /></div>
       <Panel title="Alert & Event Log" badge={`${allAlerts.length} events`}>
         <div>
-          {allAlerts.map((a) => (
-            <AlertRow key={`${a.title}-${a.detail}-${a.time}`} {...a} />
-          ))}
+          {allAlerts.length > 0 ? (
+            allAlerts.map((a) => (
+              <AlertRow key={`${a.title}-${a.detail}-${a.time}`} {...a} />
+            ))
+          ) : (
+            <DashboardEmptyState
+              title="No alerts or events yet"
+              description="When tank readings move outside their target ranges or system events are recorded, they will appear here."
+            />
+          )}
         </div>
       </Panel>
     </>
