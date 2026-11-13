@@ -34,6 +34,11 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     }
   }, [mobileSidebarOpen]);
   const [darkMode, setDarkMode] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ep-dashboard-theme") === "dark");
+  const [profileName, setProfileName] = useState("Facility Operator");
+  const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+  const profileInitials = profileName.trim().split(/\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? "").join("") || "FO";
 
   useLayoutEffect(() => {
     const main = document.querySelector<HTMLElement>("[data-dashboard-route-content]");
@@ -60,6 +65,31 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     });
     return () => mm.revert();
   }, [pathname]);
+
+  useEffect(() => {
+    const savedName = window.localStorage.getItem("ep-profile-name");
+    const savedRole = window.localStorage.getItem("ep-profile-role");
+    if (savedName) setProfileName(savedName);
+    if (savedRole) setProfileRole(savedRole.toUpperCase());
+  }, []);
+
+  useEffect(() => {
+    if (!profileMenuOpen) return;
+    const closeOnOutside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !profileMenuRef.current?.contains(event.target)) setProfileMenuOpen(false);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setProfileMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOnOutside);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutside);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [profileMenuOpen]);
+
+  useEffect(() => setProfileMenuOpen(false), [pathname]);
 
   useEffect(() => {
     const syncTheme = () => setDarkMode(window.localStorage.getItem("ep-dashboard-theme") === "dark");
@@ -111,22 +141,63 @@ export function SystemLayout({ children }: SystemLayoutProps) {
             <BrandMark size={30} showWordmark />
           </Link>
 
-          <button
-            type="button"
-            onClick={toggleTheme}
-            role="switch"
-            aria-checked={darkMode}
-            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-            className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
-            style={{
-              color: "var(--ep-primary)",
-              borderColor: "var(--ep-line)",
-              backgroundColor: "var(--ep-surface)",
-            }}
-          >
-            {darkMode ? <Icon name="moon" size={18} strokeWidth={1.8} /> : <Icon name="sun" size={18} strokeWidth={1.8} />}
-          </button>
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              role="switch"
+              aria-checked={darkMode}
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
+              style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
+            >
+              {darkMode ? <Icon name="moon" size={18} strokeWidth={1.8} /> : <Icon name="sun" size={18} strokeWidth={1.8} />}
+            </button>
+            <div ref={profileMenuRef} className="relative">
+              <button
+                type="button"
+                onClick={() => setProfileMenuOpen((open) => !open)}
+                aria-label="Open profile menu"
+                aria-haspopup="menu"
+                aria-expanded={profileMenuOpen}
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ep-line)] bg-[var(--ep-accent-tint)] text-xs font-bold text-[var(--ep-primary)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${focusRing}`}
+              >
+                {profileInitials}
+              </button>
+              {profileMenuOpen && (
+                <div role="menu" aria-label="Profile menu" className="absolute right-0 top-[calc(100%+10px)] z-[100] w-60 overflow-hidden rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-2 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.38)]">
+                  <div className="border-b border-[var(--ep-line)] px-3 py-2.5">
+                    <p className="truncate text-sm font-semibold">{profileName}</p>
+                    <p className="mt-0.5 truncate text-[11px] font-medium tracking-wide text-[var(--ep-text-muted)]">{profileRole}</p>
+                  </div>
+                  <Link to="/dashboard/profile" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="mt-1 flex min-h-11 items-center gap-2.5 rounded-xl px-3 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
+                    <Icon name="user-round" size={17} />
+                    View profile
+                  </Link>
+                  <button
+                    type="button"
+                    role="menuitem"
+                    onClick={async () => {
+                      setProfileMenuOpen(false);
+                      if (!window.confirm("Are you sure you want to log out?")) return;
+                      try {
+                        const response = await fetch("/api/auth/logout", { method: "POST" });
+                        if (!response.ok) throw new Error("Logout failed");
+                        window.location.replace("/login");
+                      } catch {
+                        window.alert("Could not log out. Please try again.");
+                      }
+                    }}
+                    className="flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:hover:bg-red-950/30"
+                  >
+                    <Icon name="log-out" size={17} />
+                    Log out
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </header>
 
