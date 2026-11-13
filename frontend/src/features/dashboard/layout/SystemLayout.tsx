@@ -102,6 +102,15 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         }}
       >
         <div className="mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-8 lg:px-12">
+          <Link
+            to="/dashboard"
+            aria-label="EcoPrawn home"
+            activeOptions={{ exact: true }}
+            className={`flex min-w-0 shrink-0 items-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
+          >
+            <BrandMark size={30} showWordmark />
+          </Link>
+
           <button
             type="button"
             onClick={toggleTheme}
@@ -118,15 +127,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           >
             {darkMode ? <Icon name="moon" size={18} strokeWidth={1.8} /> : <Icon name="sun" size={18} strokeWidth={1.8} />}
           </button>
-
-          <Link
-            to="/dashboard"
-            aria-label="EcoPrawn home"
-            activeOptions={{ exact: true }}
-            className={`flex min-w-0 shrink-0 items-center justify-self-end rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
-          >
-            <BrandMark size={30} showWordmark />
-          </Link>
         </div>
       </header>
 
