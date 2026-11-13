@@ -1630,7 +1630,7 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
     line-height: 1.2;
     overflow-wrap: anywhere;
   }
-  .dashboard-shell .dashboard-sensor-gauge > div:nth-of-type(3) {
+  .dashboard-shell .dashboard-sensor-gauge > div:nth-of-type(4) {
     min-height: 1.3em;
     font-size: .6rem;
     line-height: 1.2;
