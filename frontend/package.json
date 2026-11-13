@@ -9,6 +9,7 @@
     "start": "bun --env-file=.env --env-file=.env.local .output/server/index.mjs",
     "typecheck": "bun --bun tsc --noEmit",
     "test:navigation": "bun --no-env-file scripts/test-navigation.mjs",
+    "test:mobile-layout": "bun --no-env-file scripts/test-mobile-layout.mjs",
     "test:auth-proxy": "bun --no-env-file scripts/test-auth-proxy.mjs",
     "test:tank-validation": "bun --no-env-file test ./scripts/test-tank-validation.mjs",
     "test:responses": "bun --no-env-file scripts/test-response-validation.mjs"
