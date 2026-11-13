@@ -87,7 +87,6 @@ export async function POST(request: Request) {
         targetToday: targetToday as number,
         fcr: fcr as number,
         dispensedToday: dispensedToday as number,
-        activities: { create: { userId: account.id, tankName: name, type: "created", summary: "Tank added to this facility" } },
         telemetries: {
           create: {
             dissolvedOxygen: dissolvedOxygen as number,
