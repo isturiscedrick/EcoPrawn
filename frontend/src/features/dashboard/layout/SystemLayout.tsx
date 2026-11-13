@@ -102,28 +102,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         }}
       >
         <div className="mx-auto grid min-h-[66px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 sm:gap-4 sm:px-8 lg:px-12">
-          <button
-            ref={mobileMenuButtonRef}
-            type="button"
-            onClick={() => setMobileSidebarOpen(true)}
-            aria-label="Open dashboard sidebar"
-            aria-controls="dashboard-mobile-drawer"
-            aria-haspopup="dialog"
-            aria-expanded={mobileSidebarOpen}
-            className={`flex h-10 w-10 items-center justify-center justify-self-start rounded-none border-0 bg-transparent shadow-none transition-colors hover:bg-transparent focus-visible:bg-transparent lg:hidden ${focusRing}`}
-            style={{ color: "var(--ep-primary)", backgroundColor: "transparent" }}
-          >
-            <svg
-              width="19"
-              height="19"
-              viewBox="0 0 20 20"
-              fill="none"
-              aria-hidden="true"
-              style={{ display: "block", transform: "none", rotate: "0deg", transformOrigin: "center" }}
-            >
-              <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-            </svg>
-          </button>
+          <div aria-hidden="true" className="h-10 w-10 justify-self-start" />
 
           <Link
             to="/dashboard"
@@ -194,6 +173,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           );
         })}
         <button
+          ref={mobileMenuButtonRef}
           type="button"
           onClick={() => setMobileSidebarOpen(true)}
           aria-label="More dashboard sections"
