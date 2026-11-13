@@ -298,10 +298,10 @@ export function Sidebar({
                 {initials}
               </div>
               <div className="min-w-0">
-                <div className="truncate text-[15px] font-semibold text-[var(--water-deep)]">
+                <div className="truncate text-[15px] font-semibold text-[var(--ep-text)]">
                   {profileName}
                 </div>
-                <div className="ep-font-mono truncate text-xs text-[rgba(11,46,51,0.62)]">
+                <div className="ep-font-mono truncate text-xs text-[var(--ep-text-muted)]">
                   {profileRole}
                 </div>
               </div>
