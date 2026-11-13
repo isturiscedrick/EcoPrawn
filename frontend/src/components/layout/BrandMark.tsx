@@ -47,7 +47,7 @@ export function BrandMark({ size = 30, className = "", logoColor, logoTextColor,
       {/* Shrimp only. Cropped to the shrimp's bounds, same as BrandIcon. */}
       <svg
         aria-hidden="true"
-        viewBox="70 4 411 357"
+        viewBox="60 0 430 362"
         style={{ height: size, width: "auto" }}
       >
         {SHAPES.filter((shape) => shape.kind === "shrimp").map((shape, i) => (
