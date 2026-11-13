@@ -48,7 +48,7 @@ export function Dashboard() {
 
   const tankCount = tanks.length;
   const {
-    tanksById, totalBiomass, avgDO, avgPh, avgTemp, avgSalinity,
+    tanksById, totalBiomass, avgDO, avgPh, avgTemp, avgSalinity, tanksWithWaterReadings,
     avgFcr, openAlertTanks, dispensedToday, targetToday, totalPopulation,
     totalAbnormal, avgBodyLength, avgWeight,
   } = useMemo(() => {
@@ -74,14 +74,22 @@ export function Dashboard() {
       totals.bodyLength += tank.bodyLength;
       totals.weight += tank.weight;
     }
-    const count = tanks.length || 1;
+    const tanksWithWaterReadings = tanks.filter((tank) => tank.hasWaterReadings);
+    const readingCount = tanksWithWaterReadings.length || 1;
+    const readingTotals = tanksWithWaterReadings.reduce((sum, tank) => ({
+      dissolvedOxygen: sum.dissolvedOxygen + tank.dissolvedOxygen,
+      ph: sum.ph + tank.ph,
+      temperature: sum.temperature + tank.temperature,
+      salinity: sum.salinity + tank.salinity,
+    }), { dissolvedOxygen: 0, ph: 0, temperature: 0, salinity: 0 });
     return {
       tanksById,
       totalBiomass: totals.biomass,
-      avgDO: totals.dissolvedOxygen / count,
-      avgPh: totals.ph / count,
-      avgTemp: totals.temperature / count,
-      avgSalinity: totals.salinity / count,
+      tanksWithWaterReadings: tanksWithWaterReadings.length,
+      avgDO: readingTotals.dissolvedOxygen / readingCount,
+      avgPh: readingTotals.ph / readingCount,
+      avgTemp: readingTotals.temperature / readingCount,
+      avgSalinity: readingTotals.salinity / readingCount,
       avgFcr: totals.fcr / count,
       openAlertTanks: totals.warnings,
       dispensedToday: totals.dispensedToday,
@@ -110,6 +118,7 @@ export function Dashboard() {
   ];
   const activeComparison = comparisonMetrics.find((metric) => metric.key === comparisonMetric) ?? comparisonMetrics[0];
   const comparisonMax = Math.max(1, ...tanks.map(activeComparison.value));
+  const hasSelectedWaterReadings = selectedTank ? selectedTank.hasWaterReadings : tanksWithWaterReadings > 0;
   const sensorValues = {
     dissolvedOxygen: selectedTank?.dissolvedOxygen ?? avgDO,
     ph: selectedTank?.ph ?? avgPh,
@@ -120,7 +129,7 @@ export function Dashboard() {
 
   // Statuses derived from the averaged readings, so KPI text, gauge color
   // and ring fill all come from the same numbers.
-  const doStatus = rangeStatus(avgDO, THRESHOLDS.dissolvedOxygen.min);
+  const doStatus = tanksWithWaterReadings > 0 ? rangeStatus(avgDO, THRESHOLDS.dissolvedOxygen.min) : "warn";
   const fcrStatus = avgFcr <= FCR_TARGET ? "ok" : "warn";
 
   // Live warnings for any tank currently out of range (same helper the
@@ -133,27 +142,31 @@ export function Dashboard() {
     ? [
         {
           label: "Dissolved O₂",
-          value: `${sensorValues.dissolvedOxygen.toFixed(1)} mg/L`,
-          pct: scalePct(sensorValues.dissolvedOxygen, GAUGE_SCALE.dissolvedOxygen),
-          status: rangeStatus(sensorValues.dissolvedOxygen, THRESHOLDS.dissolvedOxygen.min),
+          value: hasSelectedWaterReadings ? `${sensorValues.dissolvedOxygen.toFixed(1)} mg/L` : "No reading",
+          pct: hasSelectedWaterReadings ? scalePct(sensorValues.dissolvedOxygen, GAUGE_SCALE.dissolvedOxygen) : null,
+          status: hasSelectedWaterReadings ? rangeStatus(sensorValues.dissolvedOxygen, THRESHOLDS.dissolvedOxygen.min) : "warn",
+          statusLabel: hasSelectedWaterReadings ? undefined : "Unavailable",
         },
         {
           label: "pH",
-          value: sensorValues.ph.toFixed(1),
-          pct: scalePct(sensorValues.ph, GAUGE_SCALE.ph),
-          status: rangeStatus(sensorValues.ph, THRESHOLDS.ph.min, THRESHOLDS.ph.max),
+          value: hasSelectedWaterReadings ? sensorValues.ph.toFixed(1) : "No reading",
+          pct: hasSelectedWaterReadings ? scalePct(sensorValues.ph, GAUGE_SCALE.ph) : null,
+          status: hasSelectedWaterReadings ? rangeStatus(sensorValues.ph, THRESHOLDS.ph.min, THRESHOLDS.ph.max) : "warn",
+          statusLabel: hasSelectedWaterReadings ? undefined : "Unavailable",
         },
         {
           label: "Temperature",
-          value: `${sensorValues.temperature.toFixed(1)} °C`,
-          pct: scalePct(sensorValues.temperature, GAUGE_SCALE.temperature),
-          status: rangeStatus(sensorValues.temperature, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max),
+          value: hasSelectedWaterReadings ? `${sensorValues.temperature.toFixed(1)} °C` : "No reading",
+          pct: hasSelectedWaterReadings ? scalePct(sensorValues.temperature, GAUGE_SCALE.temperature) : null,
+          status: hasSelectedWaterReadings ? rangeStatus(sensorValues.temperature, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max) : "warn",
+          statusLabel: hasSelectedWaterReadings ? undefined : "Unavailable",
         },
         {
           label: "Salinity",
-          value: `${Math.round(sensorValues.salinity)} ppt`,
-          pct: scalePct(sensorValues.salinity, GAUGE_SCALE.salinity),
-          status: rangeStatus(sensorValues.salinity, THRESHOLDS.salinity.min, THRESHOLDS.salinity.max),
+          value: hasSelectedWaterReadings ? `${Math.round(sensorValues.salinity)} ppt` : "No reading",
+          pct: hasSelectedWaterReadings ? scalePct(sensorValues.salinity, GAUGE_SCALE.salinity) : null,
+          status: hasSelectedWaterReadings ? rangeStatus(sensorValues.salinity, THRESHOLDS.salinity.min, THRESHOLDS.salinity.max) : "warn",
+          statusLabel: hasSelectedWaterReadings ? undefined : "Unavailable",
         },
         waterLevelGauge(selectedTank ? [selectedTank] : tanks),
       ]
@@ -256,16 +269,16 @@ export function Dashboard() {
       {tankCount > 0 && <div className="dashboard-kpi-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
         <KpiCard
           label="Dissolved O₂ (avg)"
-          value={avgDO.toFixed(1)}
+          value={tanksWithWaterReadings ? avgDO.toFixed(1) : "—"}
           unit="mg/L"
           delta={
             tankCount === 0
               ? "No tanks yet"
-              : doStatus === "ok"
+              : !tanksWithWaterReadings ? "No sensor readings" : doStatus === "ok"
                 ? "▲ within target range"
                 : `Below target (≥ ${THRESHOLDS.dissolvedOxygen.min})`
           }
-          deltaTone={tankCount === 0 ? "ok" : doStatus}
+          deltaTone={tankCount === 0 ? "ok" : tanksWithWaterReadings === 0 ? "warn" : doStatus}
           onDetails={() =>
             showDetail("Dissolved oxygen", "Average oxygen level across the selected facility readings.", [
               `Current average: ${avgDO.toFixed(1)} mg/L`,
@@ -329,7 +342,7 @@ export function Dashboard() {
         <Panel
           title={`Live Sensor Array — ${selectedTank?.name ?? `${tankCount} Tank${tankCount !== 1 ? "s" : ""} (avg)`}`}
           icon="activity"
-          badge={usb.status === "connected" ? `USB · ${tanks.find(tank => tank.id === usb.tankId)?.name ?? "ESP32"}` : "Recorded readings"}
+          badge={usb.status === "connected" ? `USB · ${tanks.find(tank => tank.id === usb.tankId)?.name ?? "ESP32"}` : tanksWithWaterReadings ? "Recorded readings" : "No sensor data"}
           onDetails={() =>
             showDetail("Live sensor array", "Current water readings and dissolved oxygen trend for the selected tank or facility average.", [
               selectedTank ? `Selected tank: ${selectedTank.name}` : `Facility average across ${tankCount} tank${tankCount === 1 ? "" : "s"}`,
@@ -368,6 +381,7 @@ export function Dashboard() {
                   </button>
                 ))}
               </div>
+              {!hasSelectedWaterReadings && <p className="mb-3 rounded-lg border border-dashed border-[var(--ep-line)] px-3 py-2 text-xs text-[var(--ep-text-muted)]">No water-quality telemetry is available for this selection. Zero values are not assumed; gauges will update when readings arrive.</p>}
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
                 {sensorGauges.map((s) => (
                   <SensorGauge key={s.label} {...s} />
