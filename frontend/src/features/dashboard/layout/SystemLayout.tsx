@@ -124,11 +124,13 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     <div className="dashboard-shell min-h-screen bg-[var(--ep-bg)]">
       <header
         id="site-header"
-        className="ep-landing sticky top-0 z-40 border-b border-transparent bg-transparent shadow-none transition-all duration-300 backdrop-blur-none lg:hidden"
+        className={`ep-landing sticky top-0 z-40 border-b transition-all duration-300 lg:hidden ${scrolled ? "border-[var(--ep-line)] shadow-sm backdrop-blur-xl" : "border-transparent shadow-none backdrop-blur-none"}`}
         style={{
-          backgroundColor: "transparent",
-          borderColor: "transparent",
-          boxShadow: "none",
+          backgroundColor: scrolled
+            ? "color-mix(in srgb, var(--ep-surface) 92%, transparent)"
+            : "var(--ep-bg)",
+          borderColor: scrolled ? "var(--ep-line)" : "transparent",
+          boxShadow: scrolled ? "0 8px 24px -22px rgba(15, 23, 42, .45)" : "none",
         }}
       >
         <div className="mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-8 lg:px-12">
