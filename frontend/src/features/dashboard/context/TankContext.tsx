@@ -33,6 +33,15 @@ export interface Tank {
 }
 
 export type NewTankInput = Omit<Tank, "id" | "status" | "hardware" | "hasWaterReadings">;
+
+export interface TankActivity {
+  id: string;
+  tankId: string;
+  tankName: string;
+  type: "created" | "updated";
+  summary: string;
+  occurredAt: string;
+}
 const empty: DashboardData = {
   waterTrend: [],
   growthTrend: [],
@@ -109,6 +118,7 @@ function validPatch(patch: Partial<Tank>) {
 }
 interface TankContextValue extends DashboardData {
   tanks: Tank[];
+  tankActivity: TankActivity[];
   isDbConnected: boolean;
   lastUpdatedAt: Date | null;
   loading: boolean;
@@ -121,6 +131,7 @@ interface TankContextValue extends DashboardData {
 const TankContext = createContext<TankContextValue | null>(null);
 export function TankProvider({ children }: { children: ReactNode }) {
   const [tanks, setTanks] = useState<Tank[]>([]);
+  const [tankActivity, setTankActivity] = useState<TankActivity[]>([]);
   const [data, setData] = useState(empty);
   const [isDbConnected, setConnected] = useState(false);
   const [lastUpdatedAt, setLastUpdatedAt] = useState<Date | null>(null);
@@ -237,6 +248,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
       value={{
         ...data,
         tanks,
+        tankActivity,
         isDbConnected,
         lastUpdatedAt,
         loading,
@@ -279,6 +291,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
               const created = parseTankMutationResponse(payload);
               const mapped = mapTank(created);
               const scan = created.visionScans[0] as { id?: string; recordedAt?: string; notes?: string | null } | undefined;
+              setTankActivity((prev) => [{ id: `activity-${Date.now()}`, tankId: mapped.id, tankName: mapped.name, type: "created", summary: "Tank added to this facility", occurredAt: new Date().toISOString() }, ...prev].slice(0, 100));
               setTanks((prev) =>
                 prev.some((t) => t.id === tempId)
                   ? prev.map((t) => (t.id === tempId ? mapped : t))
@@ -350,6 +363,11 @@ export function TankProvider({ children }: { children: ReactNode }) {
                 const restored = previousTank;
                 setTanks((prev) => prev.map((t) => (t.id === id ? restored : t)));
               };
+            },
+            onSuccess: () => {
+              const changed = Object.keys(patch).map((key) => key.replace(/[A-Z]/g, (letter) => ` ${letter.toLowerCase()}`)).join(", ");
+              const currentName = tanks.find((tank) => tank.id === id)?.name ?? id;
+              setTankActivity((prev) => [{ id: `activity-${Date.now()}`, tankId: id, tankName: patch.name ?? currentName, type: "updated", summary: `Updated ${changed || "tank details"}`, occurredAt: new Date().toISOString() }, ...prev].slice(0, 100));
             },
           });
         },
