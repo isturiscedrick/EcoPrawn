@@ -20,6 +20,7 @@ export interface Tank {
   temperature: number;
   salinity: number;
   waterLevel: number;
+  hasWaterReadings: boolean;
   hardware?: NonNullable<ApiTank["hardwareTelemetries"]>[number];
   bodyLength: number; // cm
   weight: number; // g
@@ -31,7 +32,7 @@ export interface Tank {
   status: SensorStatus;
 }
 
-export type NewTankInput = Omit<Tank, "id" | "status" | "hardware">;
+export type NewTankInput = Omit<Tank, "id" | "status" | "hardware" | "hasWaterReadings">;
 const empty: DashboardData = {
   waterTrend: [],
   growthTrend: [],
@@ -77,6 +78,7 @@ function mapTank(t: ApiTank): Tank {
     temperature: water?.temperature ?? 0,
     salinity: water?.salinity ?? 0,
     waterLevel: water?.waterLevel ?? 0,
+    hasWaterReadings: Boolean(water),
     hardware: t.hardwareTelemetries?.[0],
     bodyLength: scan?.bodyLength ?? 0,
     weight: scan?.weight ?? 0,
@@ -244,6 +246,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
           const optimisticTank: Tank = {
             id: tempId,
             ...input,
+            hasWaterReadings: true,
             status: computeTankStatus(input),
           };
           return mutate("/api/tanks", "POST", input, {
