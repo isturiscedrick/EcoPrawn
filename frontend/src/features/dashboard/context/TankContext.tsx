@@ -110,6 +110,7 @@ function validPatch(patch: Partial<Tank>) {
 interface TankContextValue extends DashboardData {
   tanks: Tank[];
   isDbConnected: boolean;
+  lastUpdatedAt: Date | null;
   loading: boolean;
   error: string | null;
   addTank: (input: NewTankInput) => Promise<boolean>;
@@ -122,6 +123,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
   const [tanks, setTanks] = useState<Tank[]>([]);
   const [data, setData] = useState(empty);
   const [isDbConnected, setConnected] = useState(false);
+  const [lastUpdatedAt, setLastUpdatedAt] = useState<Date | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const refreshing = useRef(false);
@@ -152,6 +154,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
       setTanks(result.tanks.map(mapTank));
       setData(result);
       setConnected(true);
+      setLastUpdatedAt(new Date());
       setError(null);
     } catch (e) {
       if (request.signal.aborted || !mounted.current) return;
@@ -235,6 +238,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
         ...data,
         tanks,
         isDbConnected,
+        lastUpdatedAt,
         loading,
         error,
         refreshTanks: () => refreshTanks(true),
