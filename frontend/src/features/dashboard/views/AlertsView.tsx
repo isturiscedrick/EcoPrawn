@@ -35,22 +35,22 @@ export function AlertsView() {
           />
         </div>
       )}
-      <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--sand-dim)]">
+      <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--ep-line)]">
         <div>
-          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
+          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)] mb-2">
             Facility Monitoring
           </div>
-          <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
+          <h1 className="ep-font-display text-[28px] font-semibold text-[var(--ep-text)] leading-tight">
             Alerts
           </h1>
-          <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
+          <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
             Parameter warnings, automated actions &amp; system events
           </div>
         </div>
-        <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
+        <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--ep-text)] shadow-sm">
           <span
             className={`w-[7px] h-[7px] rounded-full ${
-              openCount === 0 ? "ep-pulse-dot bg-[var(--mangrove)]" : "bg-[var(--amber)]"
+              openCount === 0 ? "ep-pulse-dot bg-[var(--ep-primary)]" : "bg-[var(--ep-accent)]"
             }`}
           />
           {openCount === 0 ? "No open alerts" : `${openCount} open alert${openCount > 1 ? "s" : ""}`}
