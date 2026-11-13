@@ -25,7 +25,7 @@ function LogoutIcon() {
 }
 
 const drawerRowClass =
-  "flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-medium text-[rgba(11,46,51,0.68)] transition-colors duration-200 hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--water-deep)]";
+  "flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-medium text-[var(--ep-text-muted)] transition-colors duration-200 hover:bg-[var(--ep-tint)] hover:text-[var(--ep-text)]";
 
 export function Sidebar({
   mobileOpen = false,
@@ -268,7 +268,7 @@ export function Sidebar({
           {/* Drawer header */}
           <div className="relative flex shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-5 py-4">
             <div className="flex min-w-0 flex-col gap-1">
-              <BrandMark size={32} logoColor="#111827" logoTextColor="var(--ep-text)" />
+              <BrandMark size={32} logoColor="var(--ep-primary)" logoTextColor="var(--ep-text)" />
               <span className="ep-mobile-drawer-caption pl-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ep-text-muted)]">EcoPrawn Dashboard</span>
             </div>
             <button
