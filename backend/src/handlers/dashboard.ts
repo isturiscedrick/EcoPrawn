@@ -5,7 +5,7 @@ export async function GET() {
   const account = await accountAccess({ write: false, admin: false });
   if (account instanceof Response) return account;
   try {
-    const [tanks, scans, schedules, metrics, logs, events, readings] =
+    const [tanks, scans, schedules, metrics, logs, events, readings, tankActivity] =
       await Promise.all([
         prisma.tank.findMany({
           where: { userId: account.id },
@@ -40,11 +40,25 @@ export async function GET() {
           orderBy: { recordedAt: "desc" },
           take: 100,
         }),
+        prisma.tankActivity.findMany({
+          where: { userId: account.id },
+          orderBy: { createdAt: "desc" },
+          take: 100,
+          select: { id: true, tankId: true, tankName: true, type: true, summary: true, createdAt: true },
+        }),
       ]);
     const time = (date: Date) => date.toISOString();
     return Response.json({
       success: true,
       tanks,
+      tankActivity: tankActivity.map((activity) => ({
+        id: activity.id,
+        tankId: activity.tankId,
+        tankName: activity.tankName,
+        type: activity.type,
+        summary: activity.summary,
+        occurredAt: time(activity.createdAt),
+      })),
       waterTrend: [...readings]
         .reverse()
         .map((r) => ({ tankId: r.tankId, value: r.dissolvedOxygen })),
