@@ -6,6 +6,12 @@ import type { ReactNode, SVGProps } from "react";
  */
 const PATHS = {
   droplet: <path d="M12 2.7c3.5 4 6 7.2 6 10.3a6 6 0 0 1-12 0c0-3.1 2.5-6.3 6-10.3z" />,
+  bell: (
+    <>
+      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+      <path d="M10 21h4" />
+    </>
+  ),
   flask: (
     <>
       <path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2" />
