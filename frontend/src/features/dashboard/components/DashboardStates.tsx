@@ -198,19 +198,24 @@ function ProfileSkeleton() {
 }
 
 export function DashboardLoadingState({ label = "Loading dashboard data…" }: { label?: string }) {
-  return <DashboardSkeleton />;
+  return (
+    <div role="status" aria-live="polite" aria-label={label}>
+      <span className="sr-only">{label}</span>
+      <DashboardSkeleton />
+    </div>
+  );
 }
 
 export function DashboardErrorState({ title, description, action }: StateMessageProps) {
   return (
-    <div className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-8 text-center">
-      <p className="text-base font-semibold text-[var(--ep-primary)]">{title}</p>
+    <div role="alert" className="dashboard-state-message rounded-2xl border border-[var(--ep-status-danger)] bg-[var(--ep-surface)] p-6 text-center sm:p-8">
+      <h2 className="text-base font-semibold text-[var(--ep-primary)]">{title}</h2>
       {description && <p className="mx-auto mt-2 max-w-md text-sm text-[var(--ep-text-muted)]">{description}</p>}
       {action && (
         <button
           type="button"
           onClick={action.onClick}
-          className="mt-5 min-h-11 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--ep-accent-hover)]"
+          className="mt-5 min-h-11 min-w-28 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--ep-accent-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
         >
           {action.label}
         </button>
@@ -221,14 +226,14 @@ export function DashboardErrorState({ title, description, action }: StateMessage
 
 export function DashboardEmptyState({ title, description, action }: StateMessageProps) {
   return (
-    <div className="rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] p-8 text-center">
-      <p className="text-base font-semibold text-[var(--ep-primary)]">{title}</p>
+    <div role="status" className="dashboard-state-message rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center sm:p-8">
+      <h2 className="text-base font-semibold text-[var(--ep-primary)]">{title}</h2>
       {description && <p className="mx-auto mt-2 max-w-md text-sm text-[var(--ep-text-muted)]">{description}</p>}
       {action && (
         <button
           type="button"
           onClick={action.onClick}
-          className="mt-5 min-h-11 rounded-lg border border-[var(--ep-accent)] px-4 text-sm font-semibold text-[var(--ep-accent)] transition-colors hover:bg-[rgba(232,98,58,0.08)]"
+          className="mt-5 min-h-11 min-w-28 rounded-lg border border-[var(--ep-accent)] px-4 text-sm font-semibold text-[var(--ep-accent)] transition-colors hover:bg-[rgba(232,98,58,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
         >
           {action.label}
         </button>
