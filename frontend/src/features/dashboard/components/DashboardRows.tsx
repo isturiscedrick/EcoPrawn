@@ -14,8 +14,8 @@ const readingDefinitions = [
   { key: "waterLevel", label: "Water level", unit: "%", min: THRESHOLDS.waterLevel.min },
 ] as const;
 
-export function TankRow(tank: Tank & { onRemove?: (id: string) => void }) {
-  const { id, name, pl, biomass, status, hasWaterReadings, onRemove } = tank;
+export function TankRow(tank: Tank & { onRemove?: (id: string) => void; onViewDetails?: (id: string) => void }) {
+  const { id, name, pl, biomass, status, hasWaterReadings, onRemove, onViewDetails } = tank;
   const [confirmingRemove, setConfirmingRemove] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const warningCount = hasWaterReadings
@@ -51,7 +51,16 @@ export function TankRow(tank: Tank & { onRemove?: (id: string) => void }) {
             <p className="ep-font-mono mt-0.5 text-[11px] text-[var(--ep-text-muted)]">{pl}</p>
           </div>
         </div>
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
+          {onViewDetails && (
+            <button
+              type="button"
+              onClick={() => onViewDetails(id)}
+              className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-accent)] transition-colors hover:border-[var(--ep-accent)] hover:bg-[var(--ep-accent-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
+            >
+              View details
+            </button>
+          )}
           <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold ${
             status === "ok"
               ? "border border-[var(--ep-status-success)] text-[var(--ep-status-success)]"
