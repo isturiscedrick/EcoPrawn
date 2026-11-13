@@ -38,17 +38,6 @@ For the ESP32 USB test, open **Water Quality**, select a tank, and click **Conne
 
 Use `bun run build` and `bun run start` for production, `bun run typecheck` to check TypeScript, and `bun run db:studio` to browse the database. Deploy this service separately and set the frontend's `BACKEND_URL` before building the frontend. Keep database credentials in this backend only.
 
-## Persistent tank activity history
-
-`prisma/schema.prisma` includes the account-scoped `TankActivity` audit model. For an existing hosted database, apply the additive SQL migration in `prisma/tank-activity.sql` to the same private schema (`ecoprawn`) before deploying the updated backend. The migration enables RLS and revokes direct browser-role access; all reads and writes go through authenticated backend handlers. Then stop the backend and run:
-
-```bash
-bun run db:generate
-bun run typecheck
-```
-
-Tank creation, edits, and water-quality readings are written to the audit table in the same database transaction as the operation. The dashboard API returns the latest 100 account-owned events. Tank deletion preserves its audit entries with a tank-name snapshot and a null tank reference. Existing historical actions are not backfilled; only actions after this migration are recorded.
-
 ## Parameter validation
 
 Tank creation, tank updates, and water telemetry reject malformed JSON, non-object payloads, invalid field types, and invalid tank identifiers with HTTP 400 before writing data. Numeric API fields require JSON numbers; strings, booleans, null, and non-finite values are not converted to readings. Tank names and PL batches must be trimmed and contain 1 to 100 characters. Population must be a nonnegative 32-bit integer. Stock, growth, and feeding quantities must be finite and nonnegative.
