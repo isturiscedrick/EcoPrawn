@@ -147,17 +147,17 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           boxShadow: scrolled ? "0 8px 24px -22px rgba(15, 23, 42, .45)" : "none",
         }}
       >
-        <div className="mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-8 lg:px-12">
+        <div className="mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-2 px-3 sm:gap-4 sm:px-8 lg:px-12">
           <Link
             to="/dashboard"
             aria-label="EcoPrawn home"
             activeOptions={{ exact: true }}
             className={`flex min-w-0 shrink-0 items-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
           >
-            <BrandMark size={30} showWordmark />
+            <BrandMark size={26} showWordmark />
           </Link>
 
-          <div className="flex shrink-0 items-center gap-2">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <button
               type="button"
               onClick={toggleTheme}
