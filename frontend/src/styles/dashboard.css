@@ -1757,3 +1757,60 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
     transition: none !important;
   }
 }
+
+/* ---------- Phase 4: mobile analytics controls and tank comparison ---------- */
+@media (max-width: 639px) {
+  .dashboard-shell .dashboard-trend-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .55rem;
+  }
+  .dashboard-shell .dashboard-trend-toolbar [role="group"] {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .dashboard-shell .dashboard-trend-toolbar [role="group"] button {
+    min-width: 0;
+    min-height: 42px;
+    padding-inline: .4rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row {
+    padding-block: .15rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row > div:first-child {
+    gap: .5rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row > div:first-child > span:first-child {
+    font-size: .8rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row > div:first-child > span:last-child {
+    font-size: .76rem;
+  }
+  .dashboard-shell .dashboard-panel [aria-label="Choose tank comparison metric"] {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dashboard-shell .dashboard-panel [aria-label="Choose tank comparison metric"] button {
+    min-height: 44px;
+    padding-inline: .5rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row [role="progressbar"] {
+    height: .55rem;
+  }
+}
+
+@media (max-width: 359px) {
+  .dashboard-shell .dashboard-trend-toolbar [role="group"] button {
+    font-size: .68rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row > div:first-child > span:last-child {
+    font-size: .7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell .dashboard-tank-comparison-row [role="progressbar"] > div {
+    transition: none !important;
+  }
+}
