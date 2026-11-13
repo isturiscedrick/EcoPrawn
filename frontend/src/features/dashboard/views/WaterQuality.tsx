@@ -10,11 +10,13 @@ import { Esp32Connection } from "@/features/dashboard/components/Esp32Connection
 export function WaterQuality() {
   const { tanks, waterTrend, loading } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = useState<"all" | "ok" | "warn">("all");
 
   if (loading) return <DashboardViewSkeleton variant="water" />;
 
   const tankCount = tanks.length;
   const warnCount = tanks.filter((t) => t.status === "warn").length;
+  const filteredTanks = statusFilter === "all" ? tanks : tanks.filter((tank) => tank.status === statusFilter);
   const selectedTank = tanks.find((tank) => tank.id === selectedTankId) ?? tanks[0];
   const selectedTankIndex = tanks.findIndex((tank) => tank.id === selectedTank?.id);
 
@@ -225,8 +227,27 @@ export function WaterQuality() {
             </Panel>
           </div>
 
-          <Panel title="Tank Readings" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
-            <ScrollFadeContainer>
+          <Panel title="Tank Readings" badge={`${filteredTanks.length} of ${tankCount} tanks`}>
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <span className="text-xs font-medium text-[var(--ep-text-muted)]">Filter readings by status</span>
+              <div className="dashboard-table-filters grid grid-cols-3 gap-1 rounded-full border border-[var(--ep-line)] bg-[var(--ep-bg)] p-1" role="group" aria-label="Filter tank readings by status">
+                {([{ value: "all", label: "All" }, { value: "ok", label: "Nominal" }, { value: "warn", label: "Watch" }] as const).map((option) => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    aria-pressed={statusFilter === option.value}
+                    onClick={() => setStatusFilter(option.value)}
+                    className={statusFilter === option.value
+                      ? "min-h-10 rounded-full bg-[var(--ep-accent)] px-3 text-xs font-semibold text-white"
+                      : "min-h-10 rounded-full px-3 text-xs font-semibold text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="dashboard-table-scroll" role="region" aria-label="Tank readings table" tabIndex={0}>
+              <ScrollFadeContainer>
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
                   <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] border-b border-[var(--sand-dim)]">
@@ -240,7 +261,7 @@ export function WaterQuality() {
                   </tr>
                 </thead>
                 <tbody>
-                  {tanks.map((t) => (
+                  {filteredTanks.map((t) => (
                     <tr key={t.id} className="border-b border-[var(--sand-dim)] last:border-b-0">
                       <td className="py-3 pr-3 text-[13.5px] font-semibold text-[var(--water-deep)]">{t.name}</td>
                       <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">
@@ -268,9 +289,17 @@ export function WaterQuality() {
                       </td>
                     </tr>
                   ))}
+                  {filteredTanks.length === 0 && (
+                    <tr>
+                      <td colSpan={7} className="py-8 text-center text-sm text-[var(--ep-text-muted)]">
+                        No tanks match this status filter.
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
-            </ScrollFadeContainer>
+              </ScrollFadeContainer>
+            </div>
           </Panel>
         </>
       ) : (
