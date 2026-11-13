@@ -69,13 +69,24 @@ export async function POST(request: Request) {
 
     const data = { tankId, dissolvedOxygen: dissolvedOxygen as number, ph: ph as number, temperature: temperature as number, salinity: salinity as number, waterLevel: waterLevel as number };
     const warnings = waterWarnings(data);
-    const reading = warnings.length
-      ? await prisma.$transaction(async (tx) => {
-          const result = await tx.sensorTelemetry.create({ data });
-          await tx.alert.createMany({ data: warnings.map((detail) => ({ userId: account.id, tankId, icon: "warn", title: "Water Quality Alert", detail })) });
-          return result;
-        })
-      : await prisma.sensorTelemetry.create({ data });
+    const reading = await prisma.$transaction(async (tx) => {
+      const result = await tx.sensorTelemetry.create({ data });
+      if (warnings.length) {
+        await tx.alert.createMany({ data: warnings.map((detail) => ({ userId: account.id, tankId, icon: "warn", title: "Water Quality Alert", detail })) });
+      }
+      await tx.tankActivity.create({
+        data: {
+          userId: account.id,
+          tankId,
+          tankName: tank.name,
+          type: "sensor_reading",
+          summary: warnings.length
+            ? `Water reading recorded with ${warnings.length} warning(s)`
+            : "Water-quality reading recorded",
+        },
+      });
+      return result;
+    });
     let sms: { status: string } = { status: "no_warning" };
     if (warnings.length) {
       try {
