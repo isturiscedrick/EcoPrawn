@@ -39,7 +39,7 @@ export function TankRow({ id, name, pl, biomass, status, onRemove }: TankRowProp
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="dashboard-tank-actions flex items-center gap-3">
         <div className="text-right">
           <div className="ep-font-mono text-[13.5px] font-semibold text-[var(--water-deep)]">
             {biomass.toFixed(1)} kg
