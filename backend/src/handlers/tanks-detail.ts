@@ -89,29 +89,10 @@ export async function PATCH(
       if (!valid) return Response.json({ success: false, error: "Invalid tank field" }, { status: 400 });
     }
 
-    const updatedTank = await prisma.$transaction(async (tx) => {
-      const current = await tx.tank.findFirst({
-        where: { id, userId: account.id },
-        select: { id: true, name: true },
-      });
-      if (!current) return null;
-      const updated = await tx.tank.update({
-        where: { id, userId: account.id },
-        data: body,
-      });
-      const changed = Object.keys(body).map((key) => key.replace(/[A-Z]/g, (letter) => ` ${letter.toLowerCase()}`)).join(", ");
-      await tx.tankActivity.create({
-        data: {
-          userId: account.id,
-          tankId: id,
-          tankName: typeof body.name === "string" ? body.name : current.name,
-          type: "updated",
-          summary: `Updated ${changed || "tank details"}`,
-        },
-      });
-      return updated;
+    const updatedTank = await prisma.tank.update({
+      where: { id, userId: account.id },
+      data: body,
     });
-    if (!updatedTank) return Response.json({ success: false, error: "Tank not found" }, { status: 404 });
 
     return Response.json({ success: true, tank: updatedTank });
   } catch (error: unknown) {
