@@ -134,30 +134,60 @@ export function Sidebar({
     root.style.overscrollBehavior = "none";
     closeButtonRef.current?.focus({ preventScroll: true });
 
+    function getFocusableElements() {
+      const drawer = drawerRef.current;
+      if (!drawer) return [];
+      return Array.from(
+        drawer.querySelectorAll<HTMLElement>(
+          'a[href]:not([aria-disabled="true"]), button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) =>
+        !element.hasAttribute("hidden") &&
+        element.getAttribute("aria-hidden") !== "true" &&
+        element.getClientRects().length > 0,
+      );
+    }
+
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
+        e.preventDefault();
         closeDrawer();
         return;
       }
       if (e.key !== "Tab") return;
-      const focusable = drawerRef.current?.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled])',
-      );
-      if (!focusable || focusable.length === 0) return;
+
+      const focusable = getFocusableElements();
+      if (focusable.length === 0) {
+        e.preventDefault();
+        drawerRef.current?.focus();
+        return;
+      }
+
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
+      const activeElement = document.activeElement;
+      const focusIsInsideDrawer = !!activeElement && drawerRef.current?.contains(activeElement);
+
+      if (e.shiftKey && (!focusIsInsideDrawer || activeElement === first)) {
         e.preventDefault();
         last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
+      } else if (!e.shiftKey && (!focusIsInsideDrawer || activeElement === last)) {
         e.preventDefault();
         first.focus();
       }
     }
 
+    function keepFocusInsideDrawer(event: FocusEvent) {
+      if (event.target instanceof Node && !drawerRef.current?.contains(event.target)) {
+        closeButtonRef.current?.focus({ preventScroll: true });
+      }
+    }
+
     window.addEventListener("keydown", onKeyDown);
+    document.addEventListener("focusin", keepFocusInsideDrawer);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("focusin", keepFocusInsideDrawer);
       body.style.position = previous.position;
       body.style.top = previous.top;
       body.style.left = previous.left;
