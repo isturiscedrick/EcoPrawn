@@ -14,8 +14,8 @@ const readingDefinitions = [
   { key: "waterLevel", label: "Water level", unit: "%", min: THRESHOLDS.waterLevel.min },
 ] as const;
 
-export function TankRow(tank: Tank & { onRemove?: (id: string) => void; onViewDetails?: (id: string) => void }) {
-  const { id, name, pl, biomass, status, hasWaterReadings, onRemove, onViewDetails } = tank;
+export function TankRow(tank: Tank & { onRemove?: (id: string) => void; onViewDetails?: (id: string) => void; onEdit?: (id: string) => void }) {
+  const { id, name, pl, biomass, status, hasWaterReadings, onRemove, onViewDetails, onEdit } = tank;
   const [confirmingRemove, setConfirmingRemove] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const warningCount = hasWaterReadings
@@ -52,6 +52,9 @@ export function TankRow(tank: Tank & { onRemove?: (id: string) => void; onViewDe
           </div>
         </div>
         <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
+          {onEdit && (
+            <button type="button" onClick={() => onEdit(id)} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-text-muted)] transition-colors hover:border-[var(--ep-accent)] hover:bg-[var(--ep-accent-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">Edit</button>
+          )}
           {onViewDetails && (
             <button
               type="button"
