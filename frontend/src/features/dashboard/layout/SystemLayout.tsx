@@ -219,7 +219,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                           : (currentIndex - 1 + items.length) % items.length;
                     items[nextIndex].focus();
                   }}
-                  className="absolute right-0 top-[calc(100%+10px)] z-[100] w-60 overflow-hidden rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-2 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.38)]"
+                  className="absolute right-0 top-[calc(100%+10px)] z-[100] w-[min(15rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1.5rem)] max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-2 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.38)]"
                 >
                   <div className="border-b border-[var(--ep-line)] px-3 py-2.5">
                     <p className="truncate text-sm font-semibold">{profileName}</p>
