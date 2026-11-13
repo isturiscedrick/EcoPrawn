@@ -21,7 +21,6 @@ const fixtures = {
   effluentLog: [{ id: "log", recordedAt: date, event: "Routing", detail: "Wetland" }],
   alert: [{ icon: "warn", title: "Warning", detail: "Low oxygen", createdAt: date, resolved: true }],
   sensorTelemetry: [{ tankId: "tank-a", dissolvedOxygen: 6 }, { tankId: "tank-a", dissolvedOxygen: 5 }],
-  tankActivity: [],
   user: { smsPhone: "+639171234567", smsEnabled: true, lastSmsAt: null },
   smsDelivery: [{ id: "delivery", content: "Warning", status: "pending", error: null, createdAt: date }],
 };
@@ -77,7 +76,7 @@ const expectedDashboard = {
   tankActivity: [],
   resolvedAlerts: 1,
 };
-for (const [name, count] of [["dashboard", 8], ["settings", 2]]) {
+for (const [name, count] of [["dashboard", 7], ["settings", 2]]) {
   let release;
   const gate = new Promise(resolve => { release = resolve; });
   const queries = [];
