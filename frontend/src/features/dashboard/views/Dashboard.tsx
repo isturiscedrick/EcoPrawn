@@ -224,7 +224,7 @@ export function Dashboard() {
       </div>
 
       {/* KPI ROW */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
+      <div className="dashboard-kpi-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
         <KpiCard
           label="Dissolved O₂ (avg)"
           value={avgDO.toFixed(1)}
