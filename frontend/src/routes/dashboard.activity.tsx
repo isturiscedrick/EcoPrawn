@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
+import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 
@@ -24,6 +25,14 @@ function ActivityPage() {
         <div className="mb-2 ep-font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mangrove-text)]">Facility history</div>
         <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--water-deep)]">Activity Log</h1>
         <p className="mt-2 text-[15px] text-[rgba(11,35,32,0.68)]">Vision scans and effluent records, in chronological order.</p>
+      </div>
+      <div className="mb-5">
+        <Panel title="Activity composition" badge="recorded events">
+          <DonutChart items={[
+            { label: "Vision scans", value: visionScanLog.length, color: "#167C80" },
+            { label: "Effluent events", value: effluentLog.length, color: "#C18A27" },
+          ]} unit="events" emptyLabel="No activity has been recorded yet." />
+        </Panel>
       </div>
       <Panel title="Recent activity" badge={`${items.length} entries`} icon="clock">
         {!isDbConnected && error && (
