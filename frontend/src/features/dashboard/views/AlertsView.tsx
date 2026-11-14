@@ -17,7 +17,7 @@ const filterOptions: { value: AlertFilter; label: string }[] = [
 ];
 
 export function AlertsView() {
-  const { tanks, alertsLog, loading, error, refreshTanks } = useTanks();
+  const { tanks, alertsLog, resolvedAlerts, loading, error, refreshTanks } = useTanks();
   const [filter, setFilter] = useState<AlertFilter>("all");
   const [search, setSearch] = useState("");
 
@@ -95,14 +95,7 @@ export function AlertsView() {
           delta={openCount === 0 ? "No active warnings" : "Parameters out of range"}
           deltaTone={openCount === 0 ? "ok" : "warn"}
         />
-        <KpiCard label="Logged Events" value={String(alertsLog.length)} unit="events" delta="Recorded alert history" deltaTone="ok" />
-        <KpiCard
-          label="Alert History"
-          value={String(alertsLog.length)}
-          unit="recorded"
-          delta={`${liveAlerts.length} currently active`}
-          deltaTone="ok"
-        />
+        <KpiCard label="Resolved Alerts" value={String(resolvedAlerts)} unit="resolved" delta="Previously resolved events" deltaTone="ok" />
       </div>
 
       <div className="mb-5">
