@@ -65,7 +65,7 @@ export function GrowthHistoryChart({ data }: { data: GrowthHistoryPoint[] }) {
   const [tankId, setTankId] = useState("all");
   const [hovered, setHovered] = useState<number | null>(null);
   const filtered = useMemo(() => sinceRange(data, range).filter(point => tankId === "all" || point.tankId === tankId).sort((a,b) => Date.parse(a.recordedAt)-Date.parse(b.recordedAt)), [data, range, tankId]);
-  const tanks = useMemo(() => Array.from(new Map(data.map(p => [p.tankId, p.tankName])).entries()), [data]);
+  const tanks = useMemo(() => Array.from(new Map(data.map(p => [p.tankId, p.tankName] as const)).entries()), [data]);
   const value = (p: GrowthHistoryPoint) => p[metric];
   const unit = metric === "bodyLength" ? "cm" : metric === "weight" ? "g" : "shrimp";
   const label = metric === "bodyLength" ? "Body length" : metric === "weight" ? "Average weight" : "Population";
