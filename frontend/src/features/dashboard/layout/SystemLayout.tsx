@@ -178,7 +178,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
               className={`relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing} ${pathname === "/dashboard/alerts" ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)]"}`}
               style={{ borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
             >
-              <Icon name="bell" size={18} strokeWidth={1.8} />
+              <Icon name="bell-ring" size={18} strokeWidth={1.8} />
               {activeAlertCount > 0 && (
                 <span aria-hidden="true" className="absolute -right-1 -top-1 inline-flex min-h-[17px] min-w-[17px] items-center justify-center rounded-full border-2 border-[var(--ep-bg)] bg-[var(--ep-status-danger)] px-1 text-[9px] font-bold leading-none text-white">
                   {activeAlertCount > 9 ? "9+" : activeAlertCount}
