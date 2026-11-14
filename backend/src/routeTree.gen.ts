@@ -378,6 +378,7 @@ const ApiAuthGoogleRouteWithChildren = ApiAuthGoogleRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
+  ApiAlertsIdRoute: ApiAlertsIdRoute,
   ApiDashboardRoute: ApiDashboardRoute,
   ApiDemoRoute: ApiDemoRoute,
   ApiHardwareRoute: ApiHardwareRoute,
