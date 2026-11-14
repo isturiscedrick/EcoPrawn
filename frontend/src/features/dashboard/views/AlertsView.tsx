@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AlertRow } from "@/features/dashboard/components/DashboardRows";
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { SmsSettings } from "@/features/dashboard/components/SmsSettings";
@@ -95,6 +96,16 @@ export function AlertsView() {
           delta={`${liveAlerts.length} live · ${alertsLog.length} logged`}
           deltaTone="ok"
         />
+      </div>
+
+      <div className="mb-5">
+        <Panel title="Alert composition" badge="current event mix">
+          <DonutChart items={[
+            { label: "Live alerts", value: liveAlerts.length, color: "#D85A35" },
+            { label: "Warning events", value: warningEvents.length, color: "#C18A27" },
+            { label: "Information", value: infoEvents.length, color: "#167C80" },
+          ]} unit="events" emptyLabel="No alerts or events recorded." />
+        </Panel>
       </div>
 
       <div className="mb-5"><SmsSettings /></div>
