@@ -121,6 +121,10 @@ model Alert {
   title     String
   detail    String
   resolved  Boolean  @default(false)
+  resolvedAt DateTime?
+  resolutionNote String?
+  resolvedById String?
+  resolvedBy User? @relation("AlertResolvedBy", fields: [resolvedById], references: [id], onDelete: SetNull)
   createdAt DateTime @default(now())
   @@index([userId, createdAt])
   @@index([tankId])
@@ -148,6 +152,7 @@ model User {
   bioflocMetrics BioflocMetric[]
   effluentLogs EffluentLog[]
   alerts    Alert[]
+  resolvedAlerts Alert[] @relation("AlertResolvedBy")
   smsPhone  String?
   smsEnabled Boolean @default(false)
   lastSmsAt DateTime?
