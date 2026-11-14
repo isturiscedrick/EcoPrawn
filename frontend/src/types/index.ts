@@ -19,4 +19,8 @@ export interface AlertItem {
   title: string;
   detail: string;
   time: string;
+  id?: string;
+  resolved?: boolean;
+  resolvedAt?: string | null;
+  resolutionNote?: string | null;
 }
