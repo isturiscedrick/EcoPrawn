@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { DonutChart, FeedingProgressChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
@@ -7,13 +8,15 @@ import { downloadCsv } from "@/utils/downloadCsv";
 
 export function Feeding() {
   const { tanks, feedSchedule, loading } = useTanks();
+  const [scheduleFilter, setScheduleFilter] = useState<"all" | "upcoming" | "done">("all");
 
   if (loading) return <DashboardViewSkeleton variant="feeding" />;
   const tankCount = tanks.length;
 
   const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
   const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0);
-  const nextEntry = feedSchedule.find((f) => f.status === "upcoming");
+  const nextEntry = [...feedSchedule].filter((f) => f.status === "upcoming").sort((a, b) => a.time.localeCompare(b.time))[0];
+  const visibleSchedule = useMemo(() => [...feedSchedule].filter(item => scheduleFilter === "all" || item.status === scheduleFilter).sort((a, b) => a.time.localeCompare(b.time)), [feedSchedule, scheduleFilter]);
 
   return (
     <>
@@ -62,9 +65,12 @@ export function Feeding() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-4 mb-4">
-            <Panel title="Today's Feed Schedule" badge={`${feedSchedule.length} cycles`}>
+            <Panel title="Today's Feed Schedule" badge={`${visibleSchedule.length} of ${feedSchedule.length} cycles`}>
+              <div className="mb-3 flex flex-wrap gap-2" role="group" aria-label="Filter feeding schedule">
+                {(["all", "upcoming", "done"] as const).map(option => <button key={option} type="button" aria-pressed={scheduleFilter === option} onClick={() => setScheduleFilter(option)} className="min-h-9 rounded-full border border-[var(--ep-line)] px-3 text-xs font-semibold capitalize text-[var(--ep-text-muted)] hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-[var(--ep-primary)]">{option === "all" ? "All cycles" : option === "done" ? "Dispensed" : "Upcoming"}</button>)}
+              </div>
               <div className="flex flex-col gap-2.5">
-                {feedSchedule.map((f) => (
+                {visibleSchedule.map((f) => (
                   <div
                     key={f.id}
                     className="dashboard-hover flex items-center justify-between rounded-[10px] border border-[var(--sand-dim)] p-3"
