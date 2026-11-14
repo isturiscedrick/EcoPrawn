@@ -4,7 +4,7 @@ import { DashboardViewSkeleton } from "@/features/dashboard/components/Dashboard
 import { useTanks } from "@/features/dashboard/context/TankContext";
 
 function ActivityPage() {
-  const { loading, error, isDbConnected, refreshTanks, visionScanLog, effluentLog, alertsLog } = useTanks();
+  const { loading, error, isDbConnected, refreshTanks, visionScanLog, effluentLog } = useTanks();
   if (loading) return <DashboardViewSkeleton variant="activity" />;
 
   const items = [
@@ -16,10 +16,6 @@ function ActivityPage() {
       key: `effluent-${log.id}`, action: log.event, detail: log.detail,
       time: log.time, color: "bg-[var(--amber)]",
     })),
-    ...alertsLog.map((alert, index) => ({
-      key: `alert-${index}-${alert.time}`, action: alert.title, detail: alert.detail,
-      time: alert.time, color: alert.icon === "warn" ? "bg-[var(--coral)]" : "bg-[#4b8db8]",
-    })),
   ].sort((a, b) => Date.parse(b.time) - Date.parse(a.time));
 
   return (
@@ -27,7 +23,7 @@ function ActivityPage() {
       <div className="dashboard-page-header mb-7 border-b border-[rgba(11,46,51,0.12)] pb-7">
         <div className="mb-2 ep-font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mangrove-text)]">Facility history</div>
         <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--water-deep)]">Activity Log</h1>
-        <p className="mt-2 text-[15px] text-[rgba(11,35,32,0.68)]">Recent alerts, vision scans, and effluent records.</p>
+        <p className="mt-2 text-[15px] text-[rgba(11,35,32,0.68)]">Vision scans and effluent records, in chronological order.</p>
       </div>
       <Panel title="Recent activity" badge={`${items.length} entries`} icon="clock">
         {!isDbConnected && error && (
