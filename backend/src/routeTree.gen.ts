@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ApiAlertsIdRouteImport } from './routes/api.alerts.$id'
 import { Route as ApiDashboardRouteImport } from './routes/api.dashboard'
 import { Route as ApiDemoRouteImport } from './routes/api.demo'
 import { Route as ApiHardwareRouteImport } from './routes/api.hardware'
@@ -25,6 +26,11 @@ import { Route as ApiSmsWebhookRouteImport } from './routes/api.sms.webhook'
 import { Route as ApiTanksIdRouteImport } from './routes/api.tanks.$id'
 import { Route as ApiAuthGoogleCallbackRouteImport } from './routes/api.auth.google.callback'
 
+const ApiAlertsIdRoute = ApiAlertsIdRouteImport.update({
+  id: '/api/alerts/$id',
+  path: '/api/alerts/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiDashboardRoute = ApiDashboardRouteImport.update({
   id: '/api/dashboard',
   path: '/api/dashboard',
@@ -102,6 +108,7 @@ const ApiAuthGoogleCallbackRoute = ApiAuthGoogleCallbackRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/api/alerts/$id': typeof ApiAlertsIdRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/demo': typeof ApiDemoRoute
   '/api/hardware': typeof ApiHardwareRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/api/auth/google/callback': typeof ApiAuthGoogleCallbackRoute
 }
 export interface FileRoutesByTo {
+  '/api/alerts/$id': typeof ApiAlertsIdRoute
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/demo': typeof ApiDemoRoute
   '/api/hardware': typeof ApiHardwareRoute
@@ -136,6 +144,7 @@ export interface FileRoutesByTo {
   '/api/auth/google/callback': typeof ApiAuthGoogleCallbackRoute
 }
 export interface FileRoutesById {
+  '/api/alerts/$id': typeof ApiAlertsIdRoute
   __root__: typeof rootRouteImport
   '/api/dashboard': typeof ApiDashboardRoute
   '/api/demo': typeof ApiDemoRoute
@@ -156,6 +165,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/api/alerts/$id'
     | '/api/dashboard'
     | '/api/demo'
     | '/api/hardware'
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/api/auth/google/callback'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/api/alerts/$id'
     | '/api/dashboard'
     | '/api/demo'
     | '/api/hardware'
@@ -189,6 +200,7 @@ export interface FileRouteTypes {
     | '/api/tanks/$id'
     | '/api/auth/google/callback'
   id:
+    | '/api/alerts/$id'
     | '__root__'
     | '/api/dashboard'
     | '/api/demo'
@@ -208,6 +220,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  ApiAlertsIdRoute: typeof ApiAlertsIdRoute
   ApiDashboardRoute: typeof ApiDashboardRoute
   ApiDemoRoute: typeof ApiDemoRoute
   ApiHardwareRoute: typeof ApiHardwareRoute
@@ -225,6 +238,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/api/alerts/$id': {
+      id: '/api/alerts/$id'
+      path: '/api/alerts/$id'
+      fullPath: '/api/alerts/$id'
+      preLoaderRoute: typeof ApiAlertsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/dashboard': {
       id: '/api/dashboard'
       path: '/api/dashboard'
