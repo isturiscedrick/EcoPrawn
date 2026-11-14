@@ -1,4 +1,4 @@
-import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
@@ -12,7 +12,6 @@ export function Feeding() {
   const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
   const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0);
   const pct = targetToday > 0 ? Math.round((dispensedToday / targetToday) * 100) : 0;
-  const avgFcr = tankCount ? tanks.reduce((sum, t) => sum + t.fcr, 0) / tankCount : 0;
   const nextEntry = feedSchedule.find((f) => f.status === "upcoming");
 
   return (
@@ -37,25 +36,6 @@ export function Feeding() {
 
       {tankCount > 0 ? (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-            <KpiCard
-              label="Dispensed Today"
-              value={dispensedToday.toFixed(1)}
-              unit="kg"
-              delta={`of ${targetToday.toFixed(1)} kg target`}
-              deltaTone="ok"
-            />
-            <KpiCard label="Avg. Tank FCR" value={avgFcr.toFixed(2)} unit="FCR" delta="target ≤ 1.5" deltaTone="ok" />
-            <KpiCard
-              label="Next Dispense"
-              value={nextEntry?.time ?? "—"}
-              unit=""
-              delta={nextEntry ? `${nextEntry.amount} scheduled` : "Cycle complete"}
-              deltaTone="ok"
-            />
-            <KpiCard label="Completion" value={String(pct)} unit="%" delta="of today's target" deltaTone="ok" />
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-4 mb-4">
             <Panel title="Today's Feed Schedule" badge={`${feedSchedule.length} cycles`}>
               <div className="flex flex-col gap-2.5">
