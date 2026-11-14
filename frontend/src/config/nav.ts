@@ -19,7 +19,7 @@ export const DASHBOARD_NAV_ITEMS: DashboardNavItem[] = [
   { icon: "eye", label: "Vision & Growth", view: "vision" },
   { icon: "utensils", label: "Feeding", view: "feeding" },
   // { icon: "⇌", label: "Biofloc Loop", view: "biofloc" },
-  { icon: "zap", label: "Alerts", view: "alerts" },
+  { icon: "bell-ring", label: "Alerts", view: "alerts" },
   { icon: "clock", label: "Activity Log", view: "activity" },
 ];
 import type { IconName } from "@/components/ui/Icon";
