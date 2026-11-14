@@ -75,7 +75,7 @@ try {
   }));
   await cold.getByRole("status", { name: "Opening Water Quality" }).waitFor({ state: "detached" });
   assert.match(await cold.locator('aside [aria-current="page"]').innerText(), /Water Quality/);
-  for (const path of ["/", "/about", "/contact", "/login", "/dashboard", ...["activity", "alerts", "biofloc", "feeding", "profile", "tanks", "vision", "water"].map(p => "/dashboard/" + p)]) {
+  for (const path of ["/", "/about", "/contact", "/login", "/dashboard", ...["activity", "alerts", "analytics", "biofloc", "feeding", "profile", "tanks", "vision", "water"].map(p => "/dashboard/" + p)]) {
     const response = await fetch(origin + path);
     assert.equal(response.status, 200, `Direct load ${path}`);
     const html = await response.text();
