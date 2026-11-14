@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import { KpiCard, Panel } from "@/features/dashboard/components/DashboardPrimitives";
-import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
 
@@ -61,15 +60,6 @@ export function Dashboard() {
         <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks registered"} deltaTone="ok" />
         <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={attentionCount ? "Review water conditions" : "No tank warnings detected"} deltaTone={attentionCount ? "warn" : "ok"} />
       </section>
-
-      <div className="mb-5">
-        <Panel title="Biomass by tank" icon="chart-no-axes-combined" badge="current distribution">
-          <DonutChart items={tanks.map((tank, index) => ({
-            label: tank.name, value: tank.biomass,
-            color: ["#D85A35", "#167C80", "#6D67B2", "#C18A27", "#39865B", "#B34E83"][index % 6],
-          }))} unit="kg" emptyLabel="No biomass records available yet." />
-        </Panel>
-      </div>
 
       <div className="mb-5 grid grid-cols-1 gap-4 xl:grid-cols-[1.15fr_0.85fr]">
         <Panel title="Tank health" icon="activity" badge={tanks.length ? `${tanks.length} monitored` : "No tanks"}>
