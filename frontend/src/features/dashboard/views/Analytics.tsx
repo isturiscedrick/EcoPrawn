@@ -92,12 +92,12 @@ export function Analytics() {
         <Panel title="Biomass distribution" icon="chart-no-axes-combined" badge="kg by tank">
           <ComparisonBars items={biomassRanking} valueLabel="Biomass" unit="kg" />
         </Panel>
-        <Panel title="Population by tank" icon="users" badge="estimated shrimp">
+        <Panel title="Population by tank" icon="layers" badge="estimated shrimp">
           <ComparisonBars items={populationRanking} valueLabel="Population" unit="shrimp" color="var(--ep-primary)" />
         </Panel>
       </div>
 
-      <Panel title="Growth trend" icon="trending-up" badge={`${growthTrend.length} recorded points`}>
+      <Panel title="Growth trend" icon="activity" badge={`${growthTrend.length} recorded points`}>
         {growthTrend.length > 1 ? (
           <>
             <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
