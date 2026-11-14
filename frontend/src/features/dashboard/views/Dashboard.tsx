@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Icon } from "@/components/ui/Icon";
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
@@ -55,7 +56,7 @@ export function Dashboard() {
               className="group flex min-h-32 flex-col rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:bg-[var(--ep-accent-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
             >
               <span className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--ep-accent-tint)] text-[var(--ep-primary)]" aria-hidden="true">
-                {destination.icon === "layers" ? "▦" : destination.icon === "waves" ? "≋" : destination.icon === "utensils" ? "◒" : destination.icon === "chart-no-axes-combined" ? "⌁" : destination.icon === "bell-ring" ? "♧" : "◷"}
+                <Icon name={destination.icon} size={18} strokeWidth={1.8} />
               </span>
               <span className="text-sm font-semibold text-[var(--ep-text)]">{destination.title}</span>
               <span className="mt-1 text-xs leading-relaxed text-[var(--ep-text-muted)]">{destination.description}</span>
