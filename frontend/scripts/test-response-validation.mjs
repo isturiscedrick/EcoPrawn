@@ -15,7 +15,7 @@ const dashboard = {
     }], visionScans: [{ bodyLength: 1, weight: 1, population: 100, abnormalCount: 0 }],
     hardwareTelemetries: [reading],
   }],
-  waterTrend: [{ tankId: "tank-1", value: 6 }], growthTrend: [1], visionScanLog: [],
+  waterTrend: [{ tankId: "tank-1", value: 6 }], growthTrend: [1],\n  waterHistory: [{ tankId: "tank-1", recordedAt: "2026-11-01T00:00:00.000Z", dissolvedOxygen: 6, ph: 8, temperature: 28, salinity: 15, waterLevel: 95 }],\n  growthHistory: [{ tankId: "tank-1", tankName: "North", recordedAt: "2026-11-01T00:00:00.000Z", bodyLength: 1, weight: 1, population: 100, abnormalCount: 0 }],\n  visionScanLog: [],
   feedSchedule: [{ id: "feed-1", time: "08:00", amount: "1 kg", status: "upcoming" }],
   bioflocMetrics: [], effluentLog: [], alertsLog: [], resolvedAlerts: 0,
 };
@@ -33,7 +33,7 @@ invalidDashboard(value => { value.tanks[0].telemetries[0].ph = 15; });
 invalidDashboard(value => { value.tanks[0].telemetries[0].waterLevel = "95"; });
 invalidDashboard(value => { value.tanks[0].visionScans[0].population = 1.5; });
 invalidDashboard(value => { value.tanks[0].hardwareTelemetries[0].distanceCm = 500; });
-invalidDashboard(value => { value.growthTrend = [Infinity]; });
+invalidDashboard(value => { value.growthTrend = [Infinity]; });\ninvalidDashboard(value => { value.waterHistory[0].recordedAt = "not-a-date"; });\ninvalidDashboard(value => { value.growthHistory[0].population = -1; });
 invalidDashboard(value => { value.feedSchedule[0].status = "broken"; });
 invalidDashboard(value => { delete value.tanks; });
 
