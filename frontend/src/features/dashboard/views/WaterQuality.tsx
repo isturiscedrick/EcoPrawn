@@ -1,14 +1,13 @@
 import { useState, type KeyboardEvent } from "react";
-import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
-import { TrendChart } from "@/features/dashboard/components/TrendChart";
+import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
-import { THRESHOLDS, rangeStatus } from "@/features/dashboard/lib/thresholds";
+import { THRESHOLDS } from "@/features/dashboard/lib/thresholds";
 import { Esp32Connection } from "@/features/dashboard/components/Esp32Connection";
 
 export function WaterQuality() {
-  const { tanks, waterTrend, loading } = useTanks();
+  const { tanks, loading } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<"all" | "ok" | "warn">("all");
 
@@ -42,14 +41,6 @@ export function WaterQuality() {
     setSelectedTankId(tanks[nextIndex].id);
     event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>("[role='tab']")[nextIndex]?.focus();
   }
-
-  const avgDO = tankCount ? tanks.reduce((sum, t) => sum + t.dissolvedOxygen, 0) / tankCount : 0;
-  const avgPh = tankCount ? tanks.reduce((sum, t) => sum + t.ph, 0) / tankCount : 0;
-  const avgTemp = tankCount ? tanks.reduce((sum, t) => sum + t.temperature, 0) / tankCount : 0;
-
-  const doStatus = rangeStatus(avgDO, THRESHOLDS.dissolvedOxygen.min);
-  const phStatus = rangeStatus(avgPh, THRESHOLDS.ph.min, THRESHOLDS.ph.max);
-  const tempStatus = rangeStatus(avgTemp, THRESHOLDS.temperature.min, THRESHOLDS.temperature.max);
 
   const thresholds = selectedTank
     ? [
@@ -112,37 +103,6 @@ export function WaterQuality() {
 
       {tankCount > 0 ? (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-            <KpiCard
-              label="Dissolved O₂ (avg)"
-              value={avgDO.toFixed(1)}
-              unit="mg/L"
-              delta={doStatus === "ok" ? "▲ within target range" : `Below target (≥ ${THRESHOLDS.dissolvedOxygen.min})`}
-              deltaTone={doStatus}
-            />
-            <KpiCard
-              label="pH (avg)"
-              value={avgPh.toFixed(1)}
-              unit="pH"
-              delta={phStatus === "ok" ? "▲ within target range" : `Outside target (${THRESHOLDS.ph.min} – ${THRESHOLDS.ph.max})`}
-              deltaTone={phStatus}
-            />
-            <KpiCard
-              label="Temperature (avg)"
-              value={avgTemp.toFixed(1)}
-              unit="°C"
-              delta={tempStatus === "ok" ? "▲ within target range" : `Outside target (${THRESHOLDS.temperature.min} – ${THRESHOLDS.temperature.max} °C)`}
-              deltaTone={tempStatus}
-            />
-            <KpiCard
-              label="Tanks Status"
-              value={warnCount === 0 ? "OK" : "Watch"}
-              unit=""
-              delta={warnCount === 0 ? "No active warnings" : "Review flagged tanks"}
-              deltaTone={warnCount === 0 ? "ok" : "warn"}
-            />
-          </div>
-
           <div className="mb-4">
             <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
               Tank details
@@ -179,25 +139,8 @@ export function WaterQuality() {
             id="water-tank-details"
             role="tabpanel"
             aria-labelledby={`water-tank-tab-${selectedTankIndex}`}
-            className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4"
+            className="mb-4"
           >
-            <Panel title={`Recorded oxygen history · ${selectedTank.name}`} badge="Recorded readings">
-              <TrendChart
-                values={waterTrend.filter((reading) => reading.tankId === selectedTank.id).map((reading) => reading.value)}
-                label="Dissolved oxygen"
-                unit="mg/L"
-              />
-              <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
-                <span className="flex items-center gap-1.5">
-                  <span className="inline-block w-3 h-[2px] bg-[var(--ep-accent)]" /> DO (mg/L)
-                </span>
-                <span className="flex items-center gap-1.5 text-[var(--coral)]">
-                  <span className="inline-block w-3 h-[2px]" style={{ borderTop: "2px dashed var(--coral)" }} />
-                  Temp (°C, scaled)
-                </span>
-              </div>
-            </Panel>
-
             <Panel title="Parameter Thresholds" badge={selectedTank.name}>
               <div className="flex flex-col gap-2.5">
                 {thresholds.map((t) => (
