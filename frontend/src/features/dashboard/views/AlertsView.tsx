@@ -96,10 +96,10 @@ export function AlertsView() {
         />
         <KpiCard label="Logged Events" value={String(alertsLog.length)} unit="events" delta="Recorded alert history" deltaTone="ok" />
         <KpiCard
-          label="Events Logged"
-          value={String(allAlerts.length)}
-          unit="last 24h"
-          delta={`${liveAlerts.length} live · ${alertsLog.length} logged`}
+          label="Alert History"
+          value={String(alertsLog.length)}
+          unit="recorded"
+          delta={`${liveAlerts.length} currently active`}
           deltaTone="ok"
         />
       </div>
@@ -139,9 +139,11 @@ export function AlertsView() {
               );
             })}
           </div>
-          <span className="text-[11px] text-[var(--ep-text-muted)]">
-            Live readings update automatically
-          </span>
+          <label className="flex min-h-10 min-w-[220px] items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs text-[var(--ep-text-muted)]">
+            <Icon name="search" size={14} />
+            <span className="sr-only">Search alerts</span>
+            <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search alerts…" className="min-w-0 flex-1 bg-transparent text-[var(--ep-text)] outline-none placeholder:text-[var(--ep-text-muted)]" />
+          </label>
         </div>
 
         {visibleCount > 0 ? (
@@ -168,7 +170,7 @@ export function AlertsView() {
                   <h2 id="warning-events-heading" className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--ep-text)]">
                     Warning events
                   </h2>
-                  <span className="text-[11px] text-[var(--ep-text-muted)]">{visibleWarningEvents.length}</span>
+                  <span className="text-[11px] text-[var(--ep-text-muted)]">{searchedWarningEvents.length}</span>
                 </div>
                 {searchedWarningEvents.map((alert, index) => (
                   <AlertRow key={`warning-${alert.title}-${alert.detail}-${alert.time}-${index}`} {...alert} />
@@ -183,7 +185,7 @@ export function AlertsView() {
                   <h2 id="info-events-heading" className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--ep-text)]">
                     Informational events
                   </h2>
-                  <span className="text-[11px] text-[var(--ep-text-muted)]">{visibleInfoEvents.length}</span>
+                  <span className="text-[11px] text-[var(--ep-text-muted)]">{searchedInfoEvents.length}</span>
                 </div>
                 {searchedInfoEvents.map((alert, index) => (
                   <AlertRow key={`info-${alert.title}-${alert.detail}-${alert.time}-${index}`} {...alert} />
@@ -193,12 +195,8 @@ export function AlertsView() {
           </div>
         ) : (
           <DashboardEmptyState
-            title={filter === "warning" ? "No warning events" : "No informational events"}
-            description={
-              filter === "warning"
-                ? "There are no active parameter warnings or logged warning events."
-                : "Informational system events will appear here when they are recorded."
-            }
+            title={normalizedSearch ? "No matching alerts" : filter === "warning" ? "No warning events" : "No informational events"}
+            description={normalizedSearch ? "Try another search term or clear your search." : filter === "warning" ? "There are no active parameter warnings or logged warning events." : "Informational system events will appear here when they are recorded."}
           />
         )}
       </Panel>
