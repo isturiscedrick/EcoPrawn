@@ -110,7 +110,6 @@ export interface FileRoutesByFullPath {
   '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
-  '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -126,6 +125,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -143,6 +143,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -162,8 +163,6 @@ export interface FileRouteTypes {
     | '/dashboard/activity'
     | '/dashboard/alerts'
     | '/dashboard/analytics'
-    | '/dashboard/analytics'
-    | '/dashboard/analytics'
     | '/dashboard/biofloc'
     | '/dashboard/feeding'
     | '/dashboard/profile'
@@ -179,6 +178,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/dashboard/activity'
     | '/dashboard/alerts'
+    | '/dashboard/analytics'
     | '/dashboard/biofloc'
     | '/dashboard/feeding'
     | '/dashboard/profile'
