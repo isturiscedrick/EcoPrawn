@@ -300,10 +300,10 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         className="fixed inset-x-0 bottom-0 z-[70] grid grid-cols-5 border-t border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-surface)_94%,transparent)] px-1 pt-2 pb-[max(.5rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-24px_rgba(15,23,42,.42)] backdrop-blur-xl lg:hidden"
       >
         {DASHBOARD_NAV_ITEMS.filter((item) =>
-          ["overview", "tanks", "vision", "feeding"].includes(item.view),
+          ["overview", "tanks", "analytics", "feeding"].includes(item.view),
         ).map((item) => {
           const href = item.view === "overview" ? "/dashboard" : "/dashboard/" + item.view;
-          const label = item.view === "overview" ? "Dashboard" : item.view === "vision" ? "Vision" : item.label;
+          const label = item.view === "overview" ? "Dashboard" : item.label;
           const active = item.view === "overview"
             ? pathname === "/dashboard" || pathname === "/dashboard/overview"
             : pathname === href || pathname.startsWith(href + "/");
