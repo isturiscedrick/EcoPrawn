@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import { KpiCard, Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { useTanks } from "@/features/dashboard/context/TankContext";
@@ -11,6 +11,7 @@ const quickActions = [
 ] as const;
 
 export function Dashboard() {
+  const navigate = useNavigate();
   const { tanks, loading, error, isDbConnected, lastUpdatedAt, refreshTanks } = useTanks();
 
   if (loading) return <DashboardLoadingState />;
@@ -56,9 +57,9 @@ export function Dashboard() {
       </div>
 
       <section aria-label="Facility health summary" className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total facility inventory" deltaTone="ok" onDetails={() => { window.location.href = "/dashboard/tanks"; }} />
+        <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total facility inventory" deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
         <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks registered"} deltaTone="ok" onDetails={() => { window.location.href = "/dashboard/tanks"; }} />
-        <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={attentionCount ? "Review water conditions" : "No tank warnings detected"} deltaTone={attentionCount ? "warn" : "ok"} onDetails={() => { window.location.href = "/dashboard/water"; }} />
+        <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={attentionCount ? "Review water conditions" : "No tank warnings detected"} deltaTone={attentionCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
       </section>
 
       <div className="mb-5 grid grid-cols-1 gap-4 xl:grid-cols-[1.15fr_0.85fr]">
