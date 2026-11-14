@@ -10,6 +10,7 @@ import {
 import type { SensorStatus } from "@/types";
 import type { ApiTank, DashboardData } from "@/types/api";
 import { parseDashboardResponse, parseTankMutationResponse } from "../lib/validate-response";
+import { getThresholds, rangeStatus } from "../lib/thresholds";
 export interface Tank {
   id: string;
   name: string;
@@ -51,17 +52,15 @@ function computeTankStatus(water?: {
   salinity: number;
   waterLevel: number;
 }): SensorStatus {
-  return water &&
-    water.dissolvedOxygen >= 4.5 &&
-    water.ph >= 7.5 &&
-    water.ph <= 8.5 &&
-    water.temperature >= 26 &&
-    water.temperature <= 30 &&
-    water.salinity >= 10 &&
-    water.salinity <= 20 &&
-    water.waterLevel >= 90
-    ? "ok"
-    : "warn";
+  if (!water) return "warn";
+  const limits = getThresholds();
+  return [
+    rangeStatus(water.dissolvedOxygen, limits.dissolvedOxygen.min),
+    rangeStatus(water.ph, limits.ph.min, limits.ph.max),
+    rangeStatus(water.temperature, limits.temperature.min, limits.temperature.max),
+    rangeStatus(water.salinity, limits.salinity.min, limits.salinity.max),
+    rangeStatus(water.waterLevel, limits.waterLevel.min),
+  ].every(status => status === "ok") ? "ok" : "warn";
 }
 function mapTank(t: ApiTank): Tank {
   const water = t.telemetries[0];
