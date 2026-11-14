@@ -34,7 +34,7 @@ export async function GET() {
           take: 100,
         }),
         prisma.alert.findMany({
-          where: { userId: account.id }, orderBy: { createdAt: "desc" }, take: 100, include: { resolvedBy: { select: { name: true, email: true } } } }),
+          where: { userId: account.id }, orderBy: { createdAt: "desc" }, take: 100 }),
         prisma.sensorTelemetry.findMany({
           where: { tank: { userId: account.id } },
           orderBy: { recordedAt: "desc" },
@@ -114,15 +114,10 @@ export async function GET() {
         detail: l.detail,
       })),
       alertsLog: events.map((e) => ({
-        id: e.id,
         icon: e.icon === "warn" ? "warn" : "info",
         title: e.title,
         detail: e.detail,
         time: time(e.createdAt),
-        resolved: e.resolved,
-        resolvedAt: e.resolvedAt ? time(e.resolvedAt) : null,
-        resolutionNote: e.resolutionNote,
-        resolvedBy: e.resolvedBy?.name || e.resolvedBy?.email || null,
       })),
       resolvedAlerts: events.filter((e) => e.resolved).length,
     });
