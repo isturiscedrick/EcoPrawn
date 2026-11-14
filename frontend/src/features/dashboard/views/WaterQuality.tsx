@@ -12,7 +12,7 @@ export function WaterQuality() {
   const { tanks, waterHistory = [], loading } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<"all" | "ok" | "warn">("all");
-  const [thresholdSettings, setThresholdSettings] = useState<ThresholdSettings>(getThresholds);
+  const [thresholdSettings, setThresholdSettings] = useState<ThresholdSettings>(THRESHOLDS);
   const [editingThresholds, setEditingThresholds] = useState(false);
   const [thresholdMessage, setThresholdMessage] = useState("");
 
@@ -183,7 +183,7 @@ export function WaterQuality() {
                     ] as const).map(([key, label, bound, unit]) => (
                       <label key={label} className="block text-xs font-medium text-[var(--ep-text-muted)]">
                         {label} {unit && <span>({unit})</span>}
-                        <input type="number" step="0.1" value={thresholdSettings[key][bound]} onChange={event => {
+                        <input type="number" step="0.1" value={(thresholdSettings[key] as { min: number; max?: number })[bound]} onChange={event => {
                           const value = Number(event.target.value);
                           setThresholdSettings(current => ({ ...current, [key]: { ...current[key], [bound]: value } }));
                         }} className="mt-1 min-h-10 w-full rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-sm text-[var(--ep-text)] outline-none focus:border-[var(--ep-primary)]" />
