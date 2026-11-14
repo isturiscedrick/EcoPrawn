@@ -11,12 +11,14 @@ interface Check {
   max?: number;
 }
 
+// Keep the checks independent of module-level threshold constants.
+// Thresholds are read at runtime so saved user settings are respected.
 const CHECKS: Check[] = [
-  { label: "Dissolved O₂", unit: " mg/L", decimals: 1, read: (t) => t.dissolvedOxygen, min: THRESHOLDS.dissolvedOxygen.min },
-  { label: "pH", unit: "", decimals: 1, read: (t) => t.ph, min: THRESHOLDS.ph.min, max: THRESHOLDS.ph.max },
-  { label: "Temperature", unit: " °C", decimals: 1, read: (t) => t.temperature, min: THRESHOLDS.temperature.min, max: THRESHOLDS.temperature.max },
-  { label: "Salinity", unit: " ppt", decimals: 1, read: (t) => t.salinity, min: THRESHOLDS.salinity.min, max: THRESHOLDS.salinity.max },
-  { label: "Water level", unit: "%", decimals: 0, read: (t) => t.waterLevel, min: THRESHOLDS.waterLevel.min },
+  { label: "Dissolved O₂", unit: " mg/L", decimals: 1, read: (t) => t.dissolvedOxygen },
+  { label: "pH", unit: "", decimals: 1, read: (t) => t.ph },
+  { label: "Temperature", unit: " °C", decimals: 1, read: (t) => t.temperature },
+  { label: "Salinity", unit: " ppt", decimals: 1, read: (t) => t.salinity },
+  { label: "Water level", unit: "%", decimals: 0, read: (t) => t.waterLevel },
 ];
 
 function targetText(c: Check): string {
@@ -28,12 +30,17 @@ function targetText(c: Check): string {
 /** Builds a warning alert for every parameter currently out of range. */
 export function deriveTankAlerts(tanks: Tank[]): AlertItem[] {
   const alerts: AlertItem[] = [];
-
   const limits = getThresholds();
-  const checks = CHECKS.map(check => {
-    const config = check.label === "Dissolved O₂" ? limits.dissolvedOxygen : check.label === "pH" ? limits.ph : check.label === "Temperature" ? limits.temperature : check.label === "Salinity" ? limits.salinity : limits.waterLevel;
+  const checks = CHECKS.map((check) => {
+    const config =
+      check.label === "Dissolved O₂" ? limits.dissolvedOxygen :
+      check.label === "pH" ? limits.ph :
+      check.label === "Temperature" ? limits.temperature :
+      check.label === "Salinity" ? limits.salinity :
+      limits.waterLevel;
     return { ...check, min: config.min, max: "max" in config ? config.max : undefined };
   });
+
   for (const tank of tanks) {
     if (!tank.hasWaterReadings) continue;
     for (const c of checks) {
