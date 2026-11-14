@@ -12,11 +12,18 @@ export function TanksView() {
   const { tanks, addTank, removeTank, updateTank, loading } = useTanks();
   const [modalOpen, setModalOpen] = useState(false);
   const [editingTankId, setEditingTankId] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | "ok" | "warn">("all");
+  const [sortBy, setSortBy] = useState<"name" | "biomass" | "population">("name");
   const { showToast } = useToast();
 
   if (loading) return <DashboardViewSkeleton variant="tanks" />;
 
   const tankCount = tanks.length;
+  const visibleTanks = tanks
+    .filter((tank) => statusFilter === "all" || tank.status === statusFilter)
+    .filter((tank) => !search.trim() || `${tank.name} ${tank.pl}`.toLowerCase().includes(search.trim().toLowerCase()))
+    .sort((a, b) => sortBy === "biomass" ? b.biomass - a.biomass : sortBy === "population" ? b.population - a.population : a.name.localeCompare(b.name));
 
   return (
     <>
