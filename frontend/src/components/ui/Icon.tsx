@@ -41,6 +41,12 @@ const PATHS = {
       <path d="M3.34 19a10 10 0 1 1 17.32 0" />
     </>
   ),
+  "chart-no-axes-combined": (
+    <>
+      <path d="M3 3v18h18" />
+      <path d="m19 9-5 5-4-4-5 5" />
+    </>
+  ),
   activity: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
   cpu: (
     <>
