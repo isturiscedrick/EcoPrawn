@@ -3,6 +3,7 @@ import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { WaterHistoryChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
+import { downloadCsv } from "@/utils/downloadCsv";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { THRESHOLDS } from "@/features/dashboard/lib/thresholds";
 import { Esp32Connection } from "@/features/dashboard/components/Esp32Connection";
@@ -92,6 +93,15 @@ export function WaterQuality() {
             Dissolved oxygen, pH, temperature, salinity &amp; water level · {tankCount} tank{tankCount !== 1 ? "s" : ""}
           </div>
         </div>
+        <button type="button" onClick={() => {
+          const rows = [
+            ...tanks.map(tank => [tank.name, "Current", "", tank.dissolvedOxygen, tank.ph, tank.temperature, tank.salinity, tank.waterLevel]),
+            ...waterHistory.map(point => [tanks.find(tank => tank.id === point.tankId)?.name ?? point.tankId, "Historical", point.recordedAt, point.dissolvedOxygen, point.ph, point.temperature, point.salinity, point.waterLevel]),
+          ];
+          downloadCsv(`ecoprawn-water-quality-${new Date().toISOString().slice(0, 10)}.csv`, ["Tank", "Record type", "Recorded at", "Dissolved oxygen (mg/L)", "pH", "Temperature (°C)", "Salinity (ppt)", "Water level (%)"], rows);
+        }} className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">
+          <span aria-hidden="true">↓</span> Export readings
+        </button>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span
             className={`w-[7px] h-[7px] rounded-full ${
