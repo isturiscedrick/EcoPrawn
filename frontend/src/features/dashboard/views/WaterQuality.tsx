@@ -1,17 +1,30 @@
-import { useState, type KeyboardEvent } from "react";
+import { useEffect, useState, type KeyboardEvent } from "react";
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { WaterHistoryChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
-import { THRESHOLDS } from "@/features/dashboard/lib/thresholds";
+import { getThresholds, saveThresholds, THRESHOLDS, type ThresholdSettings } from "@/features/dashboard/lib/thresholds";
 import { Esp32Connection } from "@/features/dashboard/components/Esp32Connection";
 
 export function WaterQuality() {
   const { tanks, waterHistory = [], loading } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<"all" | "ok" | "warn">("all");
+  const [thresholdSettings, setThresholdSettings] = useState<ThresholdSettings>(getThresholds);
+  const [editingThresholds, setEditingThresholds] = useState(false);
+  const [thresholdMessage, setThresholdMessage] = useState("");
+
+  useEffect(() => {
+    const sync = () => setThresholdSettings(getThresholds());
+    window.addEventListener("ecoprawn:thresholds-updated", sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener("ecoprawn:thresholds-updated", sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
 
   if (loading) return <DashboardViewSkeleton variant="water" />;
 
@@ -48,33 +61,33 @@ export function WaterQuality() {
     ? [
         {
           label: "Dissolved O₂",
-          range: `≥ ${THRESHOLDS.dissolvedOxygen.min} mg/L`,
+          range: `≥ ${thresholdSettings.dissolvedOxygen.min} mg/L`,
           current: `${selectedTank.dissolvedOxygen.toFixed(1)} mg/L`,
-          status: selectedTank.dissolvedOxygen >= THRESHOLDS.dissolvedOxygen.min ? "ok" : "warn",
+          status: selectedTank.dissolvedOxygen >= thresholdSettings.dissolvedOxygen.min ? "ok" : "warn",
         },
         {
           label: "pH",
-          range: `${THRESHOLDS.ph.min} – ${THRESHOLDS.ph.max}`,
+          range: `${thresholdSettings.ph.min} – ${thresholdSettings.ph.max}`,
           current: selectedTank.ph.toFixed(1),
-          status: selectedTank.ph >= THRESHOLDS.ph.min && selectedTank.ph <= THRESHOLDS.ph.max ? "ok" : "warn",
+          status: selectedTank.ph >= thresholdSettings.ph.min && selectedTank.ph <= thresholdSettings.ph.max ? "ok" : "warn",
         },
         {
           label: "Temperature",
-          range: `${THRESHOLDS.temperature.min} – ${THRESHOLDS.temperature.max} °C`,
+          range: `${thresholdSettings.temperature.min} – ${thresholdSettings.temperature.max} °C`,
           current: `${selectedTank.temperature.toFixed(1)} °C`,
-          status: selectedTank.temperature >= THRESHOLDS.temperature.min && selectedTank.temperature <= THRESHOLDS.temperature.max ? "ok" : "warn",
+          status: selectedTank.temperature >= thresholdSettings.temperature.min && selectedTank.temperature <= thresholdSettings.temperature.max ? "ok" : "warn",
         },
         {
           label: "Salinity",
-          range: `${THRESHOLDS.salinity.min} – ${THRESHOLDS.salinity.max} ppt`,
+          range: `${thresholdSettings.salinity.min} – ${thresholdSettings.salinity.max} ppt`,
           current: `${selectedTank.salinity} ppt`,
-          status: selectedTank.salinity >= THRESHOLDS.salinity.min && selectedTank.salinity <= THRESHOLDS.salinity.max ? "ok" : "warn",
+          status: selectedTank.salinity >= thresholdSettings.salinity.min && selectedTank.salinity <= thresholdSettings.salinity.max ? "ok" : "warn",
         },
         {
           label: "Water Level",
-          range: `≥ ${THRESHOLDS.waterLevel.min}%`,
+          range: `≥ ${thresholdSettings.waterLevel.min}%`,
           current: `${selectedTank.waterLevel}%`,
-          status: selectedTank.waterLevel >= THRESHOLDS.waterLevel.min ? "ok" : "warn",
+          status: selectedTank.waterLevel >= thresholdSettings.waterLevel.min ? "ok" : "warn",
         },
       ]
     : [];
@@ -153,6 +166,49 @@ export function WaterQuality() {
             className="mb-4"
           >
             <Panel title="Parameter Thresholds" badge={selectedTank.name}>
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                <p className="text-xs text-[var(--ep-text-muted)]">Set local warning limits for all tanks on this device.</p>
+                <button type="button" onClick={() => { setEditingThresholds(value => !value); setThresholdMessage(""); }} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]">{editingThresholds ? "Close settings" : "Customize limits"}</button>
+              </div>
+              {editingThresholds && (
+                <div className="mb-4 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3">
+                  <p className="mb-3 text-xs font-semibold text-[var(--ep-text)]">Warning limits</p>
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {([
+                      ["dissolvedOxygen", "Dissolved oxygen minimum", "min", "mg/L"],
+                      ["ph", "pH minimum", "min", ""], ["ph", "pH maximum", "max", ""],
+                      ["temperature", "Temperature minimum", "min", "°C"], ["temperature", "Temperature maximum", "max", "°C"],
+                      ["salinity", "Salinity minimum", "min", "ppt"], ["salinity", "Salinity maximum", "max", "ppt"],
+                      ["waterLevel", "Water level minimum", "min", "%"],
+                    ] as const).map(([key, label, bound, unit]) => (
+                      <label key={label} className="block text-xs font-medium text-[var(--ep-text-muted)]">
+                        {label} {unit && <span>({unit})</span>}
+                        <input type="number" step="0.1" value={thresholdSettings[key][bound]} onChange={event => {
+                          const value = Number(event.target.value);
+                          setThresholdSettings(current => ({ ...current, [key]: { ...current[key], [bound]: value } }));
+                        }} className="mt-1 min-h-10 w-full rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-sm text-[var(--ep-text)] outline-none focus:border-[var(--ep-primary)]" />
+                      </label>
+                    ))}
+                  </div>
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <button type="button" onClick={() => {
+                      const s = thresholdSettings;
+                      const valid = Number.isFinite(s.dissolvedOxygen.min) && s.dissolvedOxygen.min >= 0 && s.dissolvedOxygen.min <= 20 &&
+                        s.ph.min >= 0 && s.ph.max <= 14 && s.ph.min < s.ph.max &&
+                        s.temperature.min >= -5 && s.temperature.max <= 60 && s.temperature.min < s.temperature.max &&
+                        s.salinity.min >= 0 && s.salinity.max <= 100 && s.salinity.min < s.salinity.max &&
+                        s.waterLevel.min >= 0 && s.waterLevel.min <= 100 &&
+                        [s.ph.min,s.ph.max,s.temperature.min,s.temperature.max,s.salinity.min,s.salinity.max,s.waterLevel.min].every(Number.isFinite);
+                      if (!valid) { setThresholdMessage("Check the values and ensure every minimum is below its maximum."); return; }
+                      saveThresholds(s);
+                      setThresholdMessage("Limits saved on this device.");
+                      setEditingThresholds(false);
+                    }} className="min-h-9 rounded-lg bg-[var(--ep-primary)] px-3 text-xs font-semibold text-white hover:opacity-90">Save limits</button>
+                    <button type="button" onClick={() => { setThresholdSettings(THRESHOLDS); setThresholdMessage("Default limits restored. Save to apply them."); }} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-text)] hover:bg-[var(--ep-tint)]">Restore defaults</button>
+                    {thresholdMessage && <span role="status" className="text-xs text-[var(--ep-text-muted)]">{thresholdMessage}</span>}
+                  </div>
+                </div>
+              )}
               <div className="flex flex-col gap-2.5">
                 {thresholds.map((t) => (
                   <div
