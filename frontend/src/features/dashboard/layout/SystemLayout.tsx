@@ -303,7 +303,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           ["overview", "tanks", "vision", "feeding"].includes(item.view),
         ).map((item) => {
           const href = item.view === "overview" ? "/dashboard" : "/dashboard/" + item.view;
-          const label = item.view === "overview" ? "Home" : item.view === "vision" ? "Vision" : item.label;
+          const label = item.view === "overview" ? "Dashboard" : item.view === "vision" ? "Vision" : item.label;
           const active = item.view === "overview"
             ? pathname === "/dashboard" || pathname === "/dashboard/overview"
             : pathname === href || pathname.startsWith(href + "/");
