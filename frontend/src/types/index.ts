@@ -23,4 +23,5 @@ export interface AlertItem {
   resolved?: boolean;
   resolvedAt?: string | null;
   resolutionNote?: string | null;
+  resolvedBy?: string | null;
 }
