@@ -17,6 +17,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as DashboardActivityRouteImport } from './routes/dashboard.activity'
 import { Route as DashboardAlertsRouteImport } from './routes/dashboard.alerts'
+import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
 import { Route as DashboardBioflocRouteImport } from './routes/dashboard.biofloc'
 import { Route as DashboardFeedingRouteImport } from './routes/dashboard.feeding'
 import { Route as DashboardProfileRouteImport } from './routes/dashboard.profile'
@@ -57,6 +58,11 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
 const DashboardActivityRoute = DashboardActivityRouteImport.update({
   id: '/activity',
   path: '/activity',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardAlertsRoute = DashboardAlertsRouteImport.update({
@@ -103,6 +109,8 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -153,6 +161,9 @@ export interface FileRouteTypes {
     | '/login'
     | '/dashboard/activity'
     | '/dashboard/alerts'
+    | '/dashboard/analytics'
+    | '/dashboard/analytics'
+    | '/dashboard/analytics'
     | '/dashboard/biofloc'
     | '/dashboard/feeding'
     | '/dashboard/profile'
@@ -252,6 +263,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardActivityRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/analytics': {
+      id: '/dashboard/analytics'
+      path: '/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardAnalyticsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/alerts': {
       id: '/dashboard/alerts'
       path: '/alerts'
@@ -307,6 +325,7 @@ declare module '@tanstack/react-router' {
 interface DashboardRouteChildren {
   DashboardActivityRoute: typeof DashboardActivityRoute
   DashboardAlertsRoute: typeof DashboardAlertsRoute
+  DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
   DashboardBioflocRoute: typeof DashboardBioflocRoute
   DashboardFeedingRoute: typeof DashboardFeedingRoute
   DashboardProfileRoute: typeof DashboardProfileRoute
@@ -319,6 +338,7 @@ interface DashboardRouteChildren {
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardActivityRoute: DashboardActivityRoute,
   DashboardAlertsRoute: DashboardAlertsRoute,
+  DashboardAnalyticsRoute: DashboardAnalyticsRoute,
   DashboardBioflocRoute: DashboardBioflocRoute,
   DashboardFeedingRoute: DashboardFeedingRoute,
   DashboardProfileRoute: DashboardProfileRoute,
