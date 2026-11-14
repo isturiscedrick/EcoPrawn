@@ -114,10 +114,14 @@ export async function GET() {
         detail: l.detail,
       })),
       alertsLog: events.map((e) => ({
+        id: e.id,
         icon: e.icon === "warn" ? "warn" : "info",
         title: e.title,
         detail: e.detail,
         time: time(e.createdAt),
+        resolved: e.resolved,
+        resolvedAt: e.resolvedAt ? time(e.resolvedAt) : null,
+        resolutionNote: e.resolutionNote,
       })),
       resolvedAlerts: events.filter((e) => e.resolved).length,
     });
