@@ -1,16 +1,7 @@
-import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
-function VisionLoading() {
-  return <DashboardViewSkeleton variant="vision" />;
-}
-
-import { createFileRoute } from "@tanstack/react-router";
-import { VisionGrowth } from "@/features/dashboard/views/VisionGrowth";
-
-function VisionPage() {
-  return <VisionGrowth />;
-}
 export const Route = createFileRoute("/dashboard/vision")({
-  pendingComponent: VisionLoading,
-  component: VisionPage,
+  beforeLoad: () => {
+    throw redirect({ to: "/dashboard/analytics" });
+  },
 });
