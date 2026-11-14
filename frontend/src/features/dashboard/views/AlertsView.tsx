@@ -4,6 +4,7 @@ import { AlertRow } from "@/features/dashboard/components/DashboardRows";
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
+import { downloadCsv } from "@/utils/downloadCsv";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { SmsSettings } from "@/features/dashboard/components/SmsSettings";
 import { DashboardViewSkeleton, DashboardErrorState, DashboardEmptyState } from "@/features/dashboard/components/DashboardStates";
@@ -77,6 +78,15 @@ export function AlertsView() {
             Parameter warnings, automated actions &amp; system events
           </div>
         </div>
+        <button type="button" onClick={() => {
+          const rows = [
+            ...liveAlerts.map(alert => ["Active warning", alert.title, alert.detail, alert.time]),
+            ...alertsLog.map(alert => [alert.icon === "warn" ? "Warning event" : "Information", alert.title, alert.detail, alert.time]),
+          ];
+          downloadCsv(`ecoprawn-alerts-${new Date().toISOString().slice(0, 10)}.csv`, ["Category", "Title", "Details", "Time"], rows);
+        }} className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">
+          <span aria-hidden="true">↓</span> Export alerts
+        </button>
         <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--ep-text)] shadow-sm">
           <span
             className={`w-[7px] h-[7px] rounded-full ${
