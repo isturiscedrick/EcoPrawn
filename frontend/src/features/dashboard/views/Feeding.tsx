@@ -12,7 +12,6 @@ export function Feeding() {
 
   const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
   const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0);
-  const pct = targetToday > 0 ? Math.round((dispensedToday / targetToday) * 100) : 0;
   const nextEntry = feedSchedule.find((f) => f.status === "upcoming");
 
   return (
@@ -86,12 +85,7 @@ export function Feeding() {
                   kg / {targetToday.toFixed(1)} kg target
                 </span>
               </div>
-              <div className="bg-[var(--sand-dim)] rounded-full h-2 overflow-hidden mt-3">
-                <div
-                  className="bg-gradient-to-r from-[var(--coral)] to-[var(--amber)] h-full rounded-full transition-all"
-                  style={{ width: `${Math.min(100, pct)}%` }}
-                />
-              </div>
+              <FeedingProgressChart tanks={tanks.map(t => ({ id: t.id, name: t.name, dispensedToday: t.dispensedToday, targetToday: t.targetToday }))} />
               <div className="mt-5 pt-4 border-t border-[var(--sand-dim)] text-[13px] text-[rgba(11,35,32,0.6)] leading-[1.6]">
                 Dispense volume is recalculated automatically from the latest
                 AI-estimated biomass, keeping feed conversion efficient as shrimp grow.
