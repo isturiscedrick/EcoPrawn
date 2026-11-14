@@ -18,6 +18,7 @@ const filterOptions: { value: AlertFilter; label: string }[] = [
 export function AlertsView() {
   const { tanks, alertsLog, loading, error, refreshTanks } = useTanks();
   const [filter, setFilter] = useState<AlertFilter>("all");
+  const [search, setSearch] = useState("");
 
   if (loading) return <DashboardViewSkeleton variant="alerts" />;
 
@@ -39,7 +40,12 @@ export function AlertsView() {
   const visibleLiveAlerts = filter === "info" ? [] : liveAlerts;
   const visibleWarningEvents = filter === "info" ? [] : warningEvents;
   const visibleInfoEvents = filter === "warning" ? [] : infoEvents;
-  const visibleCount = visibleLiveAlerts.length + visibleWarningEvents.length + visibleInfoEvents.length;
+  const normalizedSearch = search.trim().toLowerCase();
+  const matchesSearch = (alert: { title?: string; detail?: string; tank?: string }) => !normalizedSearch || `${alert.title ?? ""} ${alert.detail ?? ""} ${alert.tank ?? ""}`.toLowerCase().includes(normalizedSearch);
+  const searchedLiveAlerts = visibleLiveAlerts.filter(matchesSearch);
+  const searchedWarningEvents = visibleWarningEvents.filter(matchesSearch);
+  const searchedInfoEvents = visibleInfoEvents.filter(matchesSearch);
+  const visibleCount = searchedLiveAlerts.length + searchedWarningEvents.length + searchedInfoEvents.length;
 
   const filterButtonClass = (active: boolean) =>
     "min-h-10 rounded-full border px-3.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " +
@@ -88,7 +94,7 @@ export function AlertsView() {
           delta={openCount === 0 ? "No active warnings" : "Parameters out of range"}
           deltaTone={openCount === 0 ? "ok" : "warn"}
         />
-        <KpiCard label="Auto-Resolved Today" value="1" unit="event" delta="Aerator relay auto-triggered" deltaTone="ok" />
+        <KpiCard label="Logged Events" value={String(alertsLog.length)} unit="events" delta="Recorded alert history" deltaTone="ok" />
         <KpiCard
           label="Events Logged"
           value={String(allAlerts.length)}
@@ -140,22 +146,22 @@ export function AlertsView() {
 
         {visibleCount > 0 ? (
           <div className="space-y-5">
-            {visibleLiveAlerts.length > 0 && (
+            {searchedLiveAlerts.length > 0 && (
               <section aria-labelledby="active-alerts-heading">
                 <div className="mb-1 flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-[var(--ep-status-danger)]" />
                   <h2 id="active-alerts-heading" className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--ep-text)]">
                     Active parameter warnings
                   </h2>
-                  <span className="text-[11px] text-[var(--ep-text-muted)]">{visibleLiveAlerts.length}</span>
+                  <span className="text-[11px] text-[var(--ep-text-muted)]">{searchedLiveAlerts.length}</span>
                 </div>
-                {visibleLiveAlerts.map((alert, index) => (
+                {searchedLiveAlerts.map((alert, index) => (
                   <AlertRow key={`live-${alert.title}-${alert.detail}-${index}`} {...alert} />
                 ))}
               </section>
             )}
 
-            {visibleWarningEvents.length > 0 && (
+            {searchedWarningEvents.length > 0 && (
               <section aria-labelledby="warning-events-heading">
                 <div className="mb-1 flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-[var(--ep-status-warning)]" />
@@ -164,13 +170,13 @@ export function AlertsView() {
                   </h2>
                   <span className="text-[11px] text-[var(--ep-text-muted)]">{visibleWarningEvents.length}</span>
                 </div>
-                {visibleWarningEvents.map((alert, index) => (
+                {searchedWarningEvents.map((alert, index) => (
                   <AlertRow key={`warning-${alert.title}-${alert.detail}-${alert.time}-${index}`} {...alert} />
                 ))}
               </section>
             )}
 
-            {visibleInfoEvents.length > 0 && (
+            {searchedInfoEvents.length > 0 && (
               <section aria-labelledby="info-events-heading">
                 <div className="mb-1 flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-[var(--ep-primary)]" />
@@ -179,7 +185,7 @@ export function AlertsView() {
                   </h2>
                   <span className="text-[11px] text-[var(--ep-text-muted)]">{visibleInfoEvents.length}</span>
                 </div>
-                {visibleInfoEvents.map((alert, index) => (
+                {searchedInfoEvents.map((alert, index) => (
                   <AlertRow key={`info-${alert.title}-${alert.detail}-${alert.time}-${index}`} {...alert} />
                 ))}
               </section>
