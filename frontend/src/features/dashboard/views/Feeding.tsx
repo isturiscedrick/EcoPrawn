@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { DonutChart, FeedingProgressChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
@@ -16,7 +16,7 @@ export function Feeding() {
   const dispensedToday = tanks.reduce((sum, t) => sum + t.dispensedToday, 0);
   const targetToday = tanks.reduce((sum, t) => sum + t.targetToday, 0);
   const nextEntry = [...feedSchedule].filter((f) => f.status === "upcoming").sort((a, b) => a.time.localeCompare(b.time))[0];
-  const visibleSchedule = useMemo(() => [...feedSchedule].filter(item => scheduleFilter === "all" || item.status === scheduleFilter).sort((a, b) => a.time.localeCompare(b.time)), [feedSchedule, scheduleFilter]);
+  const visibleSchedule = [...feedSchedule].filter(item => scheduleFilter === "all" || item.status === scheduleFilter).sort((a, b) => a.time.localeCompare(b.time));
 
   return (
     <>
@@ -97,6 +97,11 @@ export function Feeding() {
                     </div>
                   </div>
                 ))}
+                {visibleSchedule.length === 0 && (
+                  <p className="rounded-xl border border-dashed border-[var(--ep-line)] px-4 py-7 text-center text-xs text-[var(--ep-text-muted)]">
+                    {feedSchedule.length === 0 ? "No feeding cycles are scheduled." : "No cycles match this filter."}
+                  </p>
+                )}
               </div>
             </Panel>
 
