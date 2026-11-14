@@ -22,6 +22,8 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const { tanks, isDbConnected, lastUpdatedAt, loading, error, refreshTanks } = useTanks();
   const activeAlertCount = deriveTankAlerts(tanks).length;
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const wasMobileSidebarOpen = useRef(false);
   const [scrolled, setScrolled] = useState(false);
@@ -106,6 +108,18 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   useEffect(() => setProfileMenuOpen(false), [pathname]);
 
   useEffect(() => {
+    const onShortcut = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setSearchOpen(true);
+      }
+      if (event.key === "Escape") setSearchOpen(false);
+    };
+    window.addEventListener("keydown", onShortcut);
+    return () => window.removeEventListener("keydown", onShortcut);
+  }, []);
+
+  useEffect(() => {
     const syncTheme = () => setDarkMode(window.localStorage.getItem("ep-dashboard-theme") === "dark");
     window.addEventListener("ecoprawn-theme-change", syncTheme);
     window.addEventListener("storage", syncTheme);
@@ -131,6 +145,14 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     setDarkMode(next);
     window.dispatchEvent(new Event("ecoprawn-theme-change"));
   };
+
+  const normalizedSearch = searchQuery.trim().toLowerCase();
+  const matchingPages = DASHBOARD_NAV_ITEMS.filter((item) =>
+    !normalizedSearch || item.label.toLowerCase().includes(normalizedSearch) || item.view.includes(normalizedSearch),
+  );
+  const matchingTanks = tanks.filter((tank) =>
+    normalizedSearch && `${tank.name} ${tank.pl}`.toLowerCase().includes(normalizedSearch),
+  );
 
   // Keep the mobile dashboard chrome visually light; only its controls float above content.
 
