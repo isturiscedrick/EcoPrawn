@@ -280,6 +280,31 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       {/* Persistent desktop navigation and mobile drawer. */}
       <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} darkMode={darkMode} onToggleTheme={toggleTheme} />
 
+      {searchOpen && (
+        <div className="fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/45 px-3 pt-[12vh] backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) setSearchOpen(false); }}>
+          <section role="dialog" aria-modal="true" aria-labelledby="dashboard-search-title" className="w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text)] shadow-2xl">
+            <div className="flex items-center gap-3 border-b border-[var(--ep-line)] px-4">
+              <Icon name="search" size={19} className="shrink-0 text-[var(--ep-text-muted)]" />
+              <input autoFocus value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search pages and tanks…" aria-label="Search dashboard" className="min-h-14 min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-[var(--ep-text-muted)]" />
+              <kbd className="rounded-md border border-[var(--ep-line)] px-2 py-1 text-[10px] text-[var(--ep-text-muted)]">ESC</kbd>
+            </div>
+            <div className="max-h-[55vh] overflow-y-auto p-3">
+              <h2 id="dashboard-search-title" className="px-2 pb-2 text-[10px] font-bold uppercase tracking-wider text-[var(--ep-text-muted)]">Pages</h2>
+              {matchingPages.length ? matchingPages.map((item) => (
+                <Link key={item.view} to={(item.view === "overview" ? "/dashboard" : `/dashboard/${item.view}`) as never} onClick={() => { setSearchOpen(false); setSearchQuery(""); }} className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-[var(--ep-primary)]">
+                  <Icon name={item.icon} size={17} className="text-[var(--ep-primary)]" />{item.label}<span className="ml-auto text-xs text-[var(--ep-text-muted)]">Open</span>
+                </Link>
+              )) : <p className="px-3 py-2 text-xs text-[var(--ep-text-muted)]">No matching pages.</p>}
+              {matchingTanks.length > 0 && <>
+                <h2 className="px-2 pb-2 pt-4 text-[10px] font-bold uppercase tracking-wider text-[var(--ep-text-muted)]">Tanks</h2>
+                {matchingTanks.slice(0, 8).map((tank) => <Link key={tank.id} to="/dashboard/tanks" onClick={() => { setSearchOpen(false); setSearchQuery(""); }} className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm transition-colors hover:bg-[var(--ep-tint)]"><Icon name="layers" size={17} className="text-[var(--ep-primary)]" /><span className="font-medium">{tank.name}</span><span className="ml-auto text-xs text-[var(--ep-text-muted)]">{tank.pl}</span></Link>)}
+              </>}
+            </div>
+            <div className="border-t border-[var(--ep-line)] px-4 py-2.5 text-[10px] text-[var(--ep-text-muted)]">Quick search · Ctrl K / ⌘ K</div>
+          </section>
+        </div>
+      )}
+
       {/* Responsive dashboard content area. */}
       <main data-dashboard-route-content="" className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:px-5 sm:pt-5 lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
         <div className="w-full">
