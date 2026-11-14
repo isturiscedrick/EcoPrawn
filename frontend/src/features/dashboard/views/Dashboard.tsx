@@ -49,7 +49,7 @@ export function Dashboard() {
             {isDbConnected ? "System connected" : "Connection unavailable"}
           </div>
           <button type="button" onClick={() => void refreshTanks()} className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 text-xs font-semibold text-[var(--ep-text)] transition-colors hover:border-[var(--ep-accent)] hover:bg-[var(--ep-accent-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
-            <Icon name="refresh-cw" size={14} />
+            <Icon name="repeat" size={14} />
             Refresh
           </button>
         </div>
@@ -108,7 +108,7 @@ export function Dashboard() {
                   <span className="block text-sm font-semibold text-[var(--ep-text)]">{action.title}</span>
                   <span className="mt-0.5 block text-xs text-[var(--ep-text-muted)]">{action.description}</span>
                 </span>
-                <Icon name="chevron-right" size={16} className="text-[var(--ep-text-muted)] transition-transform group-hover:translate-x-0.5" />
+                <Icon name="arrow-right" size={16} className="text-[var(--ep-text-muted)] transition-transform group-hover:translate-x-0.5" />
               </Link>
             ))}
           </div>
