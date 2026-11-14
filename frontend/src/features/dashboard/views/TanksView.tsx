@@ -62,10 +62,16 @@ export function TanksView() {
         </div>
       )}
 
-      <Panel title="Tank inventory" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
+      <Panel title="Tank inventory" badge={`${visibleTanks.length} of ${tankCount} tanks`}>
         {tankCount > 0 ? (
+          <>
+          <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-[1fr_auto_auto]">
+            <label className="flex min-h-10 items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 text-xs text-[var(--ep-text-muted)]"><span aria-hidden="true">⌕</span><span className="sr-only">Search tanks</span><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search tank or PL source…" className="min-w-0 flex-1 bg-transparent text-[var(--ep-text)] outline-none placeholder:text-[var(--ep-text-muted)]" /></label>
+            <select aria-label="Filter tanks by health" value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as typeof statusFilter)} className="min-h-10 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 text-xs font-semibold text-[var(--ep-text)]"><option value="all">All health states</option><option value="ok">Healthy</option><option value="warn">Needs attention</option></select>
+            <select aria-label="Sort tanks" value={sortBy} onChange={(event) => setSortBy(event.target.value as typeof sortBy)} className="min-h-10 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 text-xs font-semibold text-[var(--ep-text)]"><option value="name">Sort: Name</option><option value="biomass">Sort: Biomass</option><option value="population">Sort: Population</option></select>
+          </div>
           <div className="flex flex-col gap-2.5">
-            {tanks.map((t) => (
+            {visibleTanks.map((t) => (
               <TankRow
                 key={t.id}
                 {...t}
@@ -78,6 +84,9 @@ export function TanksView() {
               />
             ))}
           </div>
+          {visibleTanks.length === 0 && <p className="rounded-xl border border-dashed border-[var(--ep-line)] px-4 py-8 text-center text-xs text-[var(--ep-text-muted)]">No tanks match these filters. Try another search or reset the filters.</p>}
+          {(search || statusFilter !== "all" || sortBy !== "name") && <button type="button" onClick={() => { setSearch(""); setStatusFilter("all"); setSortBy("name"); }} className="mt-3 min-h-9 rounded-lg px-3 text-xs font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-accent-tint)]">Reset filters</button>}
+          </>
         ) : (
           <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
             No tanks yet — add one to get started.
