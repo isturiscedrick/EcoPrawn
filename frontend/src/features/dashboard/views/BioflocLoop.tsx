@@ -1,4 +1,5 @@
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 
@@ -45,6 +46,15 @@ export function BioflocLoop() {
             deltaTone={m.status}
           />
         ))}
+      </div>
+
+      <div className="mb-5">
+        <Panel title="Biofloc metric status" badge={`${bioflocMetrics.length} monitored metrics`}>
+          <DonutChart items={[
+            { label: "In range", value: bioflocMetrics.filter(metric => metric.status === "ok").length, color: "#39865B" },
+            { label: "Needs attention", value: bioflocMetrics.filter(metric => metric.status !== "ok").length, color: "#D85A35" },
+          ]} unit="metrics" emptyLabel="No biofloc metrics available." />
+        </Panel>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-4">
