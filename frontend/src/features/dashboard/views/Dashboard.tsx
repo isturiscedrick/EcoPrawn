@@ -56,9 +56,9 @@ export function Dashboard() {
       </div>
 
       <section aria-label="Facility health summary" className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total facility inventory" deltaTone="ok" />
-        <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks registered"} deltaTone="ok" />
-        <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={attentionCount ? "Review water conditions" : "No tank warnings detected"} deltaTone={attentionCount ? "warn" : "ok"} />
+        <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total facility inventory" deltaTone="ok" onDetails={() => { window.location.href = "/dashboard/tanks"; }} />
+        <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks registered"} deltaTone="ok" onDetails={() => { window.location.href = "/dashboard/tanks"; }} />
+        <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={attentionCount ? "Review water conditions" : "No tank warnings detected"} deltaTone={attentionCount ? "warn" : "ok"} onDetails={() => { window.location.href = "/dashboard/water"; }} />
       </section>
 
       <div className="mb-5 grid grid-cols-1 gap-4 xl:grid-cols-[1.15fr_0.85fr]">
