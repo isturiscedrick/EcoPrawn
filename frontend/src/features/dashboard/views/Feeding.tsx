@@ -3,6 +3,7 @@ import { DonutChart, FeedingProgressChart } from "@/features/dashboard/component
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
+import { downloadCsv } from "@/utils/downloadCsv";
 
 export function Feeding() {
   const { tanks, feedSchedule, loading } = useTanks();
@@ -28,6 +29,21 @@ export function Feeding() {
             Scheduled, biomass-adjusted dispensing · {tankCount} tank{tankCount !== 1 ? "s" : ""}
           </div>
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            const rows: (string | number)[][] = [
+              ...feedSchedule.map(item => ["Scheduled cycle", "", item.time, item.amount, item.status]),
+              ...tanks.map(tank => ["Tank allocation", tank.name, "Today", tank.dispensedToday, "kg dispensed"]),
+              ...tanks.map(tank => ["Tank target", tank.name, "Today", tank.targetToday, "kg target"]),
+              ...tanks.map(tank => ["Feed conversion", tank.name, "Today", tank.fcr, "FCR"]),
+            ];
+            downloadCsv(`ecoprawn-feeding-${new Date().toISOString().slice(0, 10)}.csv`, ["Record type", "Tank", "Time / period", "Amount / value", "Status / unit"], rows);
+          }}
+          className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]"
+        >
+          <span aria-hidden="true">↓</span> Export CSV
+        </button>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
           {nextEntry ? `Next dispense · ${nextEntry.time}` : "All cycles complete"}
