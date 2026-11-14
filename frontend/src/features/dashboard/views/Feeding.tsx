@@ -1,4 +1,5 @@
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
+import { DonutChart, FeedingProgressChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
@@ -36,6 +37,15 @@ export function Feeding() {
 
       {tankCount > 0 ? (
         <>
+          <div className="mb-4">
+            <Panel title="Feeding cycle completion" badge={`${feedSchedule.length} scheduled cycles`}>
+              <DonutChart items={[
+                { label: "Dispensed", value: feedSchedule.filter(f => f.status === "done").length, color: "#39865B" },
+                { label: "Upcoming", value: feedSchedule.filter(f => f.status === "upcoming").length, color: "#C18A27" },
+              ]} unit="cycles" emptyLabel="No feeding cycles are scheduled." />
+            </Panel>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-4 mb-4">
             <Panel title="Today's Feed Schedule" badge={`${feedSchedule.length} cycles`}>
               <div className="flex flex-col gap-2.5">
