@@ -195,6 +195,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/dashboard/activity'
     | '/dashboard/alerts'
+    | '/dashboard/analytics'
     | '/dashboard/biofloc'
     | '/dashboard/feeding'
     | '/dashboard/profile'
