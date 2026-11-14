@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
+import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { TankRow } from "@/features/dashboard/components/DashboardRows";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
@@ -39,6 +40,17 @@ export function TanksView() {
           + Add Tank
         </button>
       </div>
+
+      {tankCount > 0 && (
+        <div className="mb-5">
+          <Panel title="Inventory biomass distribution" badge="by tank">
+            <DonutChart items={tanks.map((tank, index) => ({
+              label: tank.name, value: tank.biomass,
+              color: ["#D85A35", "#167C80", "#6D67B2", "#C18A27", "#39865B", "#B34E83"][index % 6],
+            }))} unit="kg" emptyLabel="No biomass records available yet." />
+          </Panel>
+        </div>
+      )}
 
       <Panel title="Tank inventory" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
         {tankCount > 0 ? (
