@@ -17,6 +17,42 @@ const filterOptions: { value: AlertFilter; label: string }[] = [
   { value: "info", label: "Information" },
 ];
 
+function ResolveAlertAction({ alert, onResolved }: { alert: { id?: string }; onResolved: () => void }) {
+  const [note, setNote] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState("");
+  if (!alert.id) return null;
+  async function resolve() {
+    setBusy(true);
+    setMessage("");
+    try {
+      const response = await fetch("/api/alerts/" + encodeURIComponent(alert.id!), {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ resolutionNote: note }),
+      });
+      const payload = await response.json().catch(() => null);
+      if (!response.ok) throw new Error(payload?.error || "Unable to resolve alert.");
+      setMessage("Alert resolved.");
+      onResolved();
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Unable to resolve alert.");
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <div className="ml-8 mt-2 flex flex-wrap items-center gap-2">
+      <label className="min-w-[180px] flex-1">
+        <span className="sr-only">Resolution note</span>
+        <input value={note} maxLength={500} onChange={event => setNote(event.target.value)} placeholder="Add resolution note (optional)" className="min-h-9 w-full rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs text-[var(--ep-text)] outline-none focus:border-[var(--ep-primary)]" />
+      </label>
+      <button type="button" disabled={busy} onClick={() => void resolve()} className="min-h-9 rounded-lg bg-[var(--ep-primary)] px-3 text-xs font-semibold text-white disabled:opacity-50">{busy ? "Resolving…" : "Mark resolved"}</button>
+      {message && <span role="status" className="text-xs text-[var(--ep-text-muted)]">{message}</span>}
+    </div>
+  );
+}
+
 export function AlertsView() {
   const { tanks, alertsLog, resolvedAlerts, loading, error, refreshTanks } = useTanks();
   const [filter, setFilter] = useState<AlertFilter>("all");
@@ -35,19 +71,22 @@ export function AlertsView() {
   }
 
   const liveAlerts = deriveTankAlerts(tanks);
-  const warningEvents = alertsLog.filter((alert) => alert.icon === "warn");
+  const warningEvents = alertsLog.filter((alert) => alert.icon === "warn" && !alert.resolved);
+  const resolvedEvents = alertsLog.filter((alert) => alert.resolved);
   const infoEvents = alertsLog.filter((alert) => alert.icon === "info");
   const allAlerts = [...liveAlerts, ...alertsLog];
   const openCount = liveAlerts.length;
   const visibleLiveAlerts = filter === "info" ? [] : liveAlerts;
   const visibleWarningEvents = filter === "info" ? [] : warningEvents;
+  const visibleResolvedEvents = filter === "info" ? [] : resolvedEvents;
   const visibleInfoEvents = filter === "warning" ? [] : infoEvents;
   const normalizedSearch = search.trim().toLowerCase();
   const matchesSearch = (alert: { title?: string; detail?: string; tank?: string }) => !normalizedSearch || `${alert.title ?? ""} ${alert.detail ?? ""} ${alert.tank ?? ""}`.toLowerCase().includes(normalizedSearch);
   const searchedLiveAlerts = visibleLiveAlerts.filter(matchesSearch);
   const searchedWarningEvents = visibleWarningEvents.filter(matchesSearch);
+  const searchedResolvedEvents = visibleResolvedEvents.filter(matchesSearch);
   const searchedInfoEvents = visibleInfoEvents.filter(matchesSearch);
-  const visibleCount = searchedLiveAlerts.length + searchedWarningEvents.length + searchedInfoEvents.length;
+  const visibleCount = searchedLiveAlerts.length + searchedWarningEvents.length + searchedInfoEvents.length + searchedResolvedEvents.length;
 
   const filterButtonClass = (active: boolean) =>
     "min-h-10 rounded-full border px-3.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " +
@@ -81,9 +120,9 @@ export function AlertsView() {
         <button type="button" onClick={() => {
           const rows = [
             ...liveAlerts.map(alert => ["Active warning", alert.title, alert.detail, alert.time]),
-            ...alertsLog.map(alert => [alert.icon === "warn" ? "Warning event" : "Information", alert.title, alert.detail, alert.time]),
+            ...alertsLog.map(alert => [alert.resolved ? "Resolved alert" : alert.icon === "warn" ? "Warning event" : "Information", alert.title, alert.detail, alert.time, alert.resolvedAt ?? "", alert.resolutionNote ?? ""]),
           ];
-          downloadCsv(`ecoprawn-alerts-${new Date().toISOString().slice(0, 10)}.csv`, ["Category", "Title", "Details", "Time"], rows);
+          downloadCsv(`ecoprawn-alerts-${new Date().toISOString().slice(0, 10)}.csv`, ["Category", "Title", "Details", "Time", "Resolved at", "Resolution note"], rows);
         }} className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">
           <span aria-hidden="true">↓</span> Export alerts
         </button>
@@ -127,7 +166,7 @@ export function AlertsView() {
               const count = option.value === "all"
                 ? allAlerts.length
                 : option.value === "warning"
-                  ? liveAlerts.length + warningEvents.length
+                  ? liveAlerts.length + warningEvents.length + resolvedEvents.length
                   : infoEvents.length;
               return (
                 <button
@@ -177,7 +216,29 @@ export function AlertsView() {
                   <span className="text-[11px] text-[var(--ep-text-muted)]">{searchedWarningEvents.length}</span>
                 </div>
                 {searchedWarningEvents.map((alert, index) => (
-                  <AlertRow key={`warning-${alert.title}-${alert.detail}-${alert.time}-${index}`} {...alert} />
+                  <div key={alert.id ?? ("warning-" + alert.title + alert.detail + alert.time + index)}>
+                    <AlertRow {...alert} />
+                    <ResolveAlertAction alert={alert} onResolved={() => void refreshTanks()} />
+                  </div>
+                ))}
+              </section>
+            )}
+
+            {searchedResolvedEvents.length > 0 && (
+              <section aria-labelledby="resolved-alerts-heading">
+                <div className="mb-1 flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-[var(--ep-status-success)]" />
+                  <h2 id="resolved-alerts-heading" className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--ep-text)]">Resolved alerts</h2>
+                  <span className="text-[11px] text-[var(--ep-text-muted)]">{searchedResolvedEvents.length}</span>
+                </div>
+                {searchedResolvedEvents.map((alert, index) => (
+                  <div key={alert.id ?? ("resolved-" + index)} className="border-b border-[var(--ep-line)] py-2">
+                    <AlertRow {...alert} />
+                    <div className="ml-8 mt-1 text-[11px] text-[var(--ep-text-muted)]">
+                      {alert.resolvedAt ? "Resolved " + new Date(alert.resolvedAt).toLocaleString() : "Resolved"}
+                      {alert.resolutionNote ? " · " + alert.resolutionNote : ""}
+                    </div>
+                  </div>
                 ))}
               </section>
             )}
