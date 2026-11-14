@@ -43,11 +43,14 @@ export function TanksView() {
 
       {tankCount > 0 && (
         <div className="mb-5">
-          <Panel title="Inventory biomass distribution" badge="by tank">
-            <DonutChart items={tanks.map((tank, index) => ({
-              label: tank.name, value: tank.biomass,
+          <Panel title="Population by post-larvae source" badge="estimated population">
+            <DonutChart items={Array.from(tanks.reduce((groups, tank) => {
+              groups.set(tank.pl, (groups.get(tank.pl) ?? 0) + tank.population);
+              return groups;
+            }, new Map<string, number>())).map(([source, value], index) => ({
+              label: source, value,
               color: ["#D85A35", "#167C80", "#6D67B2", "#C18A27", "#39865B", "#B34E83"][index % 6],
-            }))} unit="kg" emptyLabel="No biomass records available yet." />
+            }))} unit="shrimp" emptyLabel="No population records available yet." />
           </Panel>
         </div>
       )}
