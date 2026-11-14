@@ -236,7 +236,7 @@ export function AlertsView() {
                     <AlertRow {...alert} />
                     <div className="ml-8 mt-1 text-[11px] text-[var(--ep-text-muted)]">
                       {alert.resolvedAt ? "Resolved " + new Date(alert.resolvedAt).toLocaleString() : "Resolved"}
-                      {alert.resolutionNote ? " · " + alert.resolutionNote : ""}
+                      {alert.resolvedBy ? " · by " + alert.resolvedBy : ""}{alert.resolutionNote ? " · " + alert.resolutionNote : ""}
                     </div>
                   </div>
                 ))}
