@@ -15,12 +15,12 @@ const sources = Object.fromEntries(await Promise.all(Object.entries(paths).map(a
 const date = new Date("2026-01-01T00:00:00Z");
 const fixtures = {
   tank: [{ id: "tank-a", name: "A", telemetries: [], visionScans: [] }],
-  visionScan: [{ id: "scan", recordedAt: date, bodyLength: 12, notes: null, tank: { name: "A" } }],
+  visionScan: [{ id: "scan", tankId: "tank-a", recordedAt: date, bodyLength: 12, weight: 1.5, population: 1200, abnormalCount: 2, notes: null, tank: { name: "A" } }],
   feedSchedule: [{ id: "feed", timeSlot: "06:00", amountKg: 1, status: "upcoming" }],
   bioflocMetric: { flocVolume: 10, cnRatio: 15, tss: 20, alkalinity: 100 },
   effluentLog: [{ id: "log", recordedAt: date, event: "Routing", detail: "Wetland" }],
   alert: [{ icon: "warn", title: "Warning", detail: "Low oxygen", createdAt: date, resolved: true }],
-  sensorTelemetry: [{ tankId: "tank-a", dissolvedOxygen: 6 }, { tankId: "tank-a", dissolvedOxygen: 5 }],
+  sensorTelemetry: [\n    { tankId: "tank-a", recordedAt: date, dissolvedOxygen: 6, ph: 8, temperature: 28, salinity: 15, waterLevel: 95 },\n    { tankId: "tank-a", recordedAt: new Date(date.getTime() + 1000), dissolvedOxygen: 5, ph: 7.9, temperature: 28.5, salinity: 15.5, waterLevel: 94 },\n  ],
   user: { smsPhone: "+639171234567", smsEnabled: true, lastSmsAt: null },
   smsDelivery: [{ id: "delivery", content: "Warning", status: "pending", error: null, createdAt: date }],
 };
