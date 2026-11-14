@@ -1,5 +1,6 @@
 import { useState, type KeyboardEvent } from "react";
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
+import { WaterHistoryChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
@@ -7,7 +8,7 @@ import { THRESHOLDS } from "@/features/dashboard/lib/thresholds";
 import { Esp32Connection } from "@/features/dashboard/components/Esp32Connection";
 
 export function WaterQuality() {
-  const { tanks, loading } = useTanks();
+  const { tanks, waterHistory = [], loading } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<"all" | "ok" | "warn">("all");
 
@@ -167,6 +168,12 @@ export function WaterQuality() {
                   </div>
                 ))}
               </div>
+            </Panel>
+          </div>
+
+          <div className="mb-4">
+            <Panel title="Historical water quality trends" badge={`${waterHistory.length} readings`}>
+              <WaterHistoryChart data={waterHistory} tanks={tanks.map(tank => ({ id: tank.id, name: tank.name }))} />
             </Panel>
           </div>
 
