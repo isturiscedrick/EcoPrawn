@@ -16,7 +16,6 @@ import {
   DashboardLoadingState,
 } from "@/features/dashboard/components/DashboardStates";
 
-const FCR_TARGET = 1.5;
 const MAX_RECENT_ALERTS = 5;
 
 export function Dashboard() {
@@ -43,7 +42,7 @@ export function Dashboard() {
   const tankCount = tanks.length;
   const {
     tanksById, avgDO, avgPh, avgTemp, avgSalinity, tanksWithWaterReadings,
-    openAlertTanks, dispensedToday, targetToday, avgFcr,
+    openAlertTanks,
   } = useMemo(() => {
     const tanksById = new Map(tanks.map((tank) => [tank.id, tank]));
     const tanksWithWaterReadings = tanks.filter((tank) => tank.hasWaterReadings);
@@ -62,9 +61,6 @@ export function Dashboard() {
       avgTemp: readingTotals.temperature / readingCount,
       avgSalinity: readingTotals.salinity / readingCount,
       openAlertTanks: tanks.filter((tank) => tank.status === "warn").length,
-      dispensedToday: tanks.reduce((sum, tank) => sum + tank.dispensedToday, 0),
-      targetToday: tanks.reduce((sum, tank) => sum + tank.targetToday, 0),
-      avgFcr: tanks.length ? tanks.reduce((sum, tank) => sum + tank.fcr, 0) / tanks.length : 0,
     };
   }, [tanks]);
   const selectedTank = selectedTankId ? tanksById.get(selectedTankId) : undefined;
@@ -75,12 +71,6 @@ export function Dashboard() {
     temperature: selectedTank?.temperature ?? avgTemp,
     salinity: selectedTank?.salinity ?? avgSalinity,
   };
-  const feedPct = targetToday > 0 ? Math.round((dispensedToday / targetToday) * 100) : 0;
-
-  // Statuses derived from the averaged readings, so KPI text, gauge color
-  // and ring fill all come from the same numbers.
-  const fcrStatus = avgFcr <= FCR_TARGET ? "ok" : "warn";
-
   // Live warnings for any tank currently out of range (same helper the
   // Alerts page uses), shown ahead of the static event log so the
   // "tanks need attention" header and this panel always agree.
@@ -287,7 +277,7 @@ export function Dashboard() {
       </div>
 
       {/* TANK STATUS + FEED */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4 mb-4">
+      <div className="mb-4">
         <Panel
           title="Tank Status"
           icon="layers"
@@ -320,63 +310,7 @@ export function Dashboard() {
           )}
         </Panel>
 
-        <Panel
-          title="Feed Dispensed Today"
-          icon="utensils"
-          badge="biomass-adjusted"
-          onDetails={() =>
-            showDetail("Feed dispensed today", "Daily feed progress compared with the current biomass-adjusted target.", [
-              `Dispensed: ${dispensedToday.toFixed(1)} kg`,
-              `Target: ${targetToday.toFixed(1)} kg`,
-              `Progress: ${feedPct}%`,
-              `Next dispense: 18:00`,
-            ])
-          }
-        >
-          {tankCount > 0 ? <>
-          <div className="ep-font-mono text-[26px] font-semibold text-[var(--water-deep)]">
-            {dispensedToday.toFixed(1)}{" "}
-            <span className="text-sm font-medium text-[rgba(11,35,32,0.5)]">
-              kg / {targetToday.toFixed(1)} kg target
-            </span>
-          </div>
-          <div className="bg-[var(--sand-dim)] rounded-full h-2 overflow-hidden mt-3">
-            <div
-              className="bg-gradient-to-r from-[var(--coral)] to-[var(--amber)] h-full rounded-full transition-all"
-              style={{ width: `${Math.min(100, feedPct)}%` }}
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-3 mt-5 pt-4 border-t border-[var(--sand-dim)]">
-            <div>
-              <div className="ep-font-mono text-[9.5px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] mb-1">
-                Next dispense
-              </div>
-              <div className="text-[14px] font-semibold text-[var(--water-deep)]">18:00</div>
-            </div>
-            <div>
-              <div className="ep-font-mono text-[9.5px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] mb-1">
-                Avg FCR this cycle
-              </div>
-              <div
-                className={`text-[14px] font-semibold ${
-                  fcrStatus === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
-                }`}
-              >
-                {avgFcr.toFixed(2)}{" "}
-                <span className="text-[11px] font-normal text-[rgba(11,35,32,0.5)]">
-                  (target ≤ {FCR_TARGET})
-                </span>
-              </div>
-            </div>
-          </div>
-          </> : (
-            <div className="rounded-xl border border-dashed border-[var(--ep-line)] px-4 py-6 text-center">
-              <p className="text-sm font-medium text-[var(--ep-text)]">Feeding summaries are waiting for your first tank.</p>
-              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Add a tank to start recording daily feed targets and dispensed amounts.</p>
-            </div>
-          )}
-        </Panel>
-      </div>
+     </div>
 
       <AddTankModal
         open={modalOpen}
