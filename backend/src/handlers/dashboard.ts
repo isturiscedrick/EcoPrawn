@@ -49,6 +49,24 @@ export async function GET() {
         .reverse()
         .map((r) => ({ tankId: r.tankId, value: r.dissolvedOxygen })),
       growthTrend: [...scans].reverse().map((s) => s.bodyLength),
+      waterHistory: [...readings].reverse().map((r) => ({
+        tankId: r.tankId,
+        recordedAt: time(r.recordedAt),
+        dissolvedOxygen: r.dissolvedOxygen,
+        ph: r.ph,
+        temperature: r.temperature,
+        salinity: r.salinity,
+        waterLevel: r.waterLevel,
+      })),
+      growthHistory: [...scans].reverse().map((s) => ({
+        tankId: s.tankId,
+        tankName: s.tank.name,
+        recordedAt: time(s.recordedAt),
+        bodyLength: s.bodyLength,
+        weight: s.weight,
+        population: s.population,
+        abnormalCount: s.abnormalCount,
+      })),
       visionScanLog: scans.map((s) => ({
         id: s.id,
         time: time(s.recordedAt),
