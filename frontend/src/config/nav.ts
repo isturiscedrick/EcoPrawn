@@ -4,7 +4,7 @@ export const LANDING_NAV_LINKS: [string, string][] = [
   ["Contact", "/contact"],
 ];
 
-export type DashboardView = "overview" | "tanks" | "water" | "vision" | "feeding" | "biofloc" | "alerts" | "activity";
+export type DashboardView = "overview" | "analytics" | "tanks" | "water" | "vision" | "feeding" | "biofloc" | "alerts" | "activity";
 
 export interface DashboardNavItem {
   icon: IconName;
@@ -14,9 +14,9 @@ export interface DashboardNavItem {
 
 export const DASHBOARD_NAV_ITEMS: DashboardNavItem[] = [
   { icon: "gauge", label: "Dashboard", view: "overview" },
+  { icon: "chart-no-axes-combined", label: "Analytics", view: "analytics" },
   { icon: "layers", label: "Tanks", view: "tanks" },
   { icon: "waves", label: "Water Quality", view: "water" },
-  { icon: "eye", label: "Vision & Growth", view: "vision" },
   { icon: "utensils", label: "Feeding", view: "feeding" },
   // { icon: "⇌", label: "Biofloc Loop", view: "biofloc" },
   { icon: "bell-ring", label: "Alerts", view: "alerts" },
