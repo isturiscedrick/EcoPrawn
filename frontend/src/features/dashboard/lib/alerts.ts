@@ -1,6 +1,6 @@
 import type { AlertItem } from "@/types";
 import type { Tank } from "@/features/dashboard/context/TankContext";
-import { THRESHOLDS } from "@/features/dashboard/lib/thresholds";
+import { getThresholds } from "@/features/dashboard/lib/thresholds";
 
 interface Check {
   label: string;
@@ -29,8 +29,14 @@ function targetText(c: Check): string {
 export function deriveTankAlerts(tanks: Tank[]): AlertItem[] {
   const alerts: AlertItem[] = [];
 
+  const limits = getThresholds();
+  const checks = CHECKS.map(check => {
+    const config = check.label === "Dissolved O₂" ? limits.dissolvedOxygen : check.label === "pH" ? limits.ph : check.label === "Temperature" ? limits.temperature : check.label === "Salinity" ? limits.salinity : limits.waterLevel;
+    return { ...check, min: config.min, max: "max" in config ? config.max : undefined };
+  });
   for (const tank of tanks) {
-    for (const c of CHECKS) {
+    if (!tank.hasWaterReadings) continue;
+    for (const c of checks) {
       const value = c.read(tank);
       const below = c.min !== undefined && value < c.min;
       const above = c.max !== undefined && value > c.max;
