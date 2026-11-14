@@ -6,7 +6,30 @@ export interface DemoData {
   tankFormDefaults: Record<string, string>;
 }
 
+export interface WaterHistoryPoint {
+  tankId: string;
+  recordedAt: string;
+  dissolvedOxygen: number;
+  ph: number;
+  temperature: number;
+  salinity: number;
+  waterLevel: number;
+}
+
+export interface GrowthHistoryPoint {
+  tankId: string;
+  tankName: string;
+  recordedAt: string;
+  bodyLength: number;
+  weight: number;
+  population: number;
+  abnormalCount: number;
+}
+
 export interface DashboardData {
+  /** Timestamped chart series; optional to remain compatible with older API responses. */
+  waterHistory?: WaterHistoryPoint[];
+  growthHistory?: GrowthHistoryPoint[];
   waterTrend: { tankId: string; value: number }[];
   growthTrend: number[];
   visionScanLog: { id: string; time: string; tank: string; note: string }[];
