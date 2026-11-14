@@ -78,7 +78,7 @@ export function parseDashboardResponse(value: unknown): DashboardData & { tanks:
     !list(value.feedSchedule, item => record(item) && text(item.id) && text(item.time) && text(item.amount) && (item.status === "done" || item.status === "upcoming")) ||
     !list(value.bioflocMetrics, item => record(item) && text(item.label) && text(item.value) && text(item.unit) && (item.status === "ok" || item.status === "warn")) ||
     !list(value.effluentLog, item => record(item) && text(item.id) && date(item.time) && text(item.event) && text(item.detail)) ||
-    !list(value.alertsLog, item => record(item) && (item.icon === "warn" || item.icon === "info") && text(item.title) && text(item.detail) && date(item.time)) ||
+    !list(value.alertsLog, item => record(item) && (item.icon === "warn" || item.icon === "info") && text(item.title) && text(item.detail) && date(item.time) && (item.id === undefined || tankId(item.id)) && (item.resolved === undefined || typeof item.resolved === "boolean") && (item.resolvedAt === undefined || item.resolvedAt === null || date(item.resolvedAt)) && (item.resolutionNote === undefined || item.resolutionNote === null || text(item.resolutionNote))) ||
     !count(value.resolvedAlerts)) {
     throw new Error("Invalid dashboard response");
   }
