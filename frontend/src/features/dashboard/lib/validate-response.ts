@@ -65,6 +65,15 @@ export function parseDashboardResponse(value: unknown): DashboardData & { tanks:
     !list(value.tanks, isTank) ||
     !list(value.waterTrend, item => record(item) && tankId(item.tankId) && number(item.value, 0, 100)) ||
     !list(value.growthTrend, item => number(item, 0)) ||
+    (value.waterHistory !== undefined && !list(value.waterHistory, item =>
+      record(item) && tankId(item.tankId) && date(item.recordedAt) &&
+      number(item.dissolvedOxygen, 0, 100) && number(item.ph, 0, 14) &&
+      number(item.temperature, -55, 125) && number(item.salinity, 0, 1000) &&
+      number(item.waterLevel, 0, 100))) ||
+    (value.growthHistory !== undefined && !list(value.growthHistory, item =>
+      record(item) && tankId(item.tankId) && text(item.tankName) && date(item.recordedAt) &&
+      number(item.bodyLength, 0) && number(item.weight, 0) &&
+      count(item.population) && count(item.abnormalCount))) ||
     !list(value.visionScanLog, item => record(item) && text(item.id) && date(item.time) && text(item.tank) && text(item.note)) ||
     !list(value.feedSchedule, item => record(item) && text(item.id) && text(item.time) && text(item.amount) && (item.status === "done" || item.status === "upcoming")) ||
     !list(value.bioflocMetrics, item => record(item) && text(item.label) && text(item.value) && text(item.unit) && (item.status === "ok" || item.status === "warn")) ||
