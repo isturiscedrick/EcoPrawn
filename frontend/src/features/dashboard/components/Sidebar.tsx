@@ -264,7 +264,7 @@ export function Sidebar({
         </div>
         <div className="shrink-0 border-b border-[var(--ep-line)] px-4 py-3">
           <Link to="/dashboard/profile" className="flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-3 text-left transition-colors hover:bg-[var(--ep-tint)]">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-[13px] font-semibold text-blue-800">{initials}</span>
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-800" aria-hidden="true"><Icon name="user-round" size={19} strokeWidth={1.9} /></span>
             <span className="min-w-0">
               <span className="block truncate text-sm font-semibold text-[var(--ep-text)]">{profileName}</span>
               <span className="block truncate text-[11px] text-[var(--ep-text-muted)]">{profileRole}</span>
@@ -407,7 +407,7 @@ export function Sidebar({
                 style={{ background: "var(--ep-accent-tint)", color: "var(--ep-primary)" }}
                 aria-hidden="true"
               >
-                {initials}
+                <Icon name="user-round" size={19} strokeWidth={1.9} />
               </div>
               <div className="min-w-0">
                 <div className="truncate text-[15px] font-semibold text-[var(--ep-text)]">
