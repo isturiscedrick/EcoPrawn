@@ -14,7 +14,7 @@ const quickActions = [
 
 export function Dashboard() {
   const navigate = useNavigate();
-  const { tanks, loading, error, isDbConnected, lastUpdatedAt, refreshTanks } = useTanks();
+  const { tanks, waterHistory = [], visionScanLog = [], loading, error, isDbConnected, lastUpdatedAt, refreshTanks } = useTanks();
   const [thresholdSettings, setThresholdSettings] = useState(getThresholds);
 
   useEffect(() => {
@@ -49,6 +49,25 @@ export function Dashboard() {
     if (a.hasWaterReadings !== b.hasWaterReadings) return a.hasWaterReadings ? -1 : 1;
     return a.name.localeCompare(b.name);
   });
+  const recentActivity = [
+    ...waterHistory.map((point) => ({
+      id: `water-${point.tankId}-${point.recordedAt}`,
+      kind: "Water reading" as const,
+      tankName: tanks.find((tank) => tank.id === point.tankId)?.name ?? "Unknown tank",
+      detail: `DO ${point.dissolvedOxygen.toFixed(1)} mg/L · pH ${point.ph.toFixed(1)} · ${point.temperature.toFixed(1)} °C`,
+      timestamp: new Date(point.recordedAt),
+    })),
+    ...visionScanLog.map((scan) => ({
+      id: `scan-${scan.id}`,
+      kind: "Vision scan" as const,
+      tankName: scan.tank,
+      detail: scan.note || "Scan recorded",
+      timestamp: new Date(scan.time),
+    })),
+  ]
+    .filter((activity) => Number.isFinite(activity.timestamp.getTime()))
+    .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
+    .slice(0, 5);
 
   return (
     <>
@@ -162,6 +181,37 @@ export function Dashboard() {
         )}
         {tanks.length > 6 && <p className="mt-2 text-right text-xs text-[var(--ep-text-muted)]">Showing 6 of {tanks.length} tanks, prioritized by status.</p>}
         {noReadingCount > 0 && <p className="mt-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-2 text-xs leading-relaxed text-[var(--ep-text-muted)]"><span className="font-semibold text-[var(--ep-text)]">{noReadingCount} {noReadingCount === 1 ? "tank has" : "tanks have"} no water readings.</span> These are counted as needing attention so missing data is not mistaken for healthy conditions.</p>}
+      </section>
+
+      <section className="mb-5" aria-labelledby="recent-activity-heading">
+        <Panel title="Recent facility activity" icon="clock" badge={recentActivity.length ? `Latest ${recentActivity.length}` : "No activity"}>
+          {recentActivity.length ? (
+            <ol className="divide-y divide-[var(--ep-line)]">
+              {recentActivity.map((activity) => (
+                <li key={activity.id} className="flex min-w-0 items-start gap-3 py-3 first:pt-0 last:pb-0">
+                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]">
+                    <Icon name={activity.kind === "Water reading" ? "waves" : "scan-eye"} size={15} />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+                      <p className="text-xs font-semibold text-[var(--ep-text)]">{activity.kind} · {activity.tankName}</p>
+                      <time dateTime={activity.timestamp.toISOString()} className="text-[10px] text-[var(--ep-text-muted)]">
+                        {activity.timestamp.toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}
+                      </time>
+                    </div>
+                    <p className="mt-1 break-words text-xs text-[var(--ep-text-muted)]">{activity.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <div className="rounded-xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-7 text-center">
+              <Icon name="clock" size={21} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
+              <p className="text-sm font-semibold text-[var(--ep-text)]">No recent activity yet</p>
+              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">New water readings and vision scans will appear here when recorded.</p>
+            </div>
+          )}
+        </Panel>
       </section>
 
       <div className="mb-5 grid grid-cols-1 gap-4 xl:grid-cols-[1.15fr_0.85fr]">
