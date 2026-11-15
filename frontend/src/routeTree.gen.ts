@@ -26,6 +26,7 @@ import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settin
 import { Route as DashboardTanksRouteImport } from './routes/dashboard.tanks'
 import { Route as DashboardVisionRouteImport } from './routes/dashboard.vision'
 import { Route as DashboardWaterRouteImport } from './routes/dashboard.water'
+import { Route as DashboardSettingsConfigurationRouteImport } from './routes/dashboard.settings.configuration'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -112,6 +113,12 @@ const DashboardWaterRoute = DashboardWaterRouteImport.update({
   path: '/water',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardSettingsConfigurationRoute =
+  DashboardSettingsConfigurationRouteImport.update({
+    id: '/configuration',
+    path: '/configuration',
+    getParentRoute: () => DashboardSettingsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -126,11 +133,12 @@ export interface FileRoutesByFullPath {
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/settings': typeof DashboardSettingsRouteWithChildren
   '/dashboard/tanks': typeof DashboardTanksRoute
   '/dashboard/vision': typeof DashboardVisionRoute
   '/dashboard/water': typeof DashboardWaterRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/settings/configuration': typeof DashboardSettingsConfigurationRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -144,11 +152,12 @@ export interface FileRoutesByTo {
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/settings': typeof DashboardSettingsRouteWithChildren
   '/dashboard/tanks': typeof DashboardTanksRoute
   '/dashboard/vision': typeof DashboardVisionRoute
   '/dashboard/water': typeof DashboardWaterRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/settings/configuration': typeof DashboardSettingsConfigurationRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -164,11 +173,12 @@ export interface FileRoutesById {
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/settings': typeof DashboardSettingsRouteWithChildren
   '/dashboard/tanks': typeof DashboardTanksRoute
   '/dashboard/vision': typeof DashboardVisionRoute
   '/dashboard/water': typeof DashboardWaterRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/settings/configuration': typeof DashboardSettingsConfigurationRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -190,6 +200,7 @@ export interface FileRouteTypes {
     | '/dashboard/vision'
     | '/dashboard/water'
     | '/dashboard/'
+    | '/dashboard/settings/configuration'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -208,6 +219,7 @@ export interface FileRouteTypes {
     | '/dashboard/vision'
     | '/dashboard/water'
     | '/dashboard'
+    | '/dashboard/settings/configuration'
   id:
     | '__root__'
     | '/'
@@ -227,6 +239,7 @@ export interface FileRouteTypes {
     | '/dashboard/vision'
     | '/dashboard/water'
     | '/dashboard/'
+    | '/dashboard/settings/configuration'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -358,8 +371,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardWaterRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/settings/configuration': {
+      id: '/dashboard/settings/configuration'
+      path: '/configuration'
+      fullPath: '/dashboard/settings/configuration'
+      preLoaderRoute: typeof DashboardSettingsConfigurationRouteImport
+      parentRoute: typeof DashboardSettingsRoute
+    }
   }
 }
+
+interface DashboardSettingsRouteChildren {
+  DashboardSettingsConfigurationRoute: typeof DashboardSettingsConfigurationRoute
+}
+
+const DashboardSettingsRouteChildren: DashboardSettingsRouteChildren = {
+  DashboardSettingsConfigurationRoute: DashboardSettingsConfigurationRoute,
+}
+
+const DashboardSettingsRouteWithChildren =
+  DashboardSettingsRoute._addFileChildren(DashboardSettingsRouteChildren)
 
 interface DashboardRouteChildren {
   DashboardAboutRoute: typeof DashboardAboutRoute
@@ -369,7 +400,7 @@ interface DashboardRouteChildren {
   DashboardBioflocRoute: typeof DashboardBioflocRoute
   DashboardFeedingRoute: typeof DashboardFeedingRoute
   DashboardProfileRoute: typeof DashboardProfileRoute
-  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRouteWithChildren
   DashboardTanksRoute: typeof DashboardTanksRoute
   DashboardVisionRoute: typeof DashboardVisionRoute
   DashboardWaterRoute: typeof DashboardWaterRoute
@@ -384,7 +415,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardBioflocRoute: DashboardBioflocRoute,
   DashboardFeedingRoute: DashboardFeedingRoute,
   DashboardProfileRoute: DashboardProfileRoute,
-  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardSettingsRoute: DashboardSettingsRouteWithChildren,
   DashboardTanksRoute: DashboardTanksRoute,
   DashboardVisionRoute: DashboardVisionRoute,
   DashboardWaterRoute: DashboardWaterRoute,
