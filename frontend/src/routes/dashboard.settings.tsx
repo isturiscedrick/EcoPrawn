@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Icon, IconChip } from "@/components/ui/Icon";
 
 function SettingsPage() {
@@ -50,6 +50,8 @@ function SettingsPage() {
       action: "About EcoPrawn",
     },
   ];
+
+  if (location.pathname === "/dashboard/settings/configuration") return <Outlet />;
 
   return (
     <div className="mx-auto w-full max-w-5xl space-y-7">
