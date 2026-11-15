@@ -8,9 +8,9 @@ import { getThresholds, rangeStatus } from "@/features/dashboard/lib/thresholds"
 import { DashboardDataStatus } from "@/features/dashboard/components/DashboardDataStatus";
 
 const quickActions = [
-  { to: "/dashboard/water", title: "Water quality", description: "Review live water parameters.", icon: "waves" },
-  { to: "/dashboard/feeding", title: "Feeding", description: "Manage feeding schedules.", icon: "utensils" },
-  { to: "/dashboard/alerts", title: "View alerts", description: "Check warnings that need attention.", icon: "bell-ring" },
+  { to: "/dashboard/water", title: "Water quality", description: "View water readings.", icon: "waves" },
+  { to: "/dashboard/feeding", title: "Feeding", description: "View feeding schedules.", icon: "utensils" },
+  { to: "/dashboard/alerts", title: "View alerts", description: "Review active alerts.", icon: "bell-ring" },
 ] as const;
 
 export function Dashboard() {
@@ -81,7 +81,7 @@ export function Dashboard() {
             Dashboard
           </h1>
           <p className="mt-2 block w-full text-sm text-[var(--ep-text-muted)]">
-            Your facility at a glance. Monitor tank health and jump into the operations that need you.
+            Monitor tank health and key activity.
           </p>
         </div>
       </header>
@@ -89,17 +89,17 @@ export function Dashboard() {
       <DashboardDataStatus />
 
       <section aria-label="Facility health summary" className="mb-5 grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-3 2xl:grid-cols-4">
-        <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total facility inventory" deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
-        <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks registered"} deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
-        <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={outOfRangeCount ? `${outOfRangeCount} with out-of-range readings` : attentionCount ? "Waiting for water readings" : "No tank warnings detected"} deltaTone={attentionCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
-        <KpiCard label="No water readings" value={String(noReadingCount)} unit="tanks" delta={noReadingCount ? "Data not available yet" : "All tanks have readings"} deltaTone={noReadingCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
+        <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total tanks" deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
+        <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks yet"} deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
+        <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={outOfRangeCount ? `${outOfRangeCount} with out-of-range readings` : attentionCount ? "Awaiting readings" : "No warnings"} deltaTone={attentionCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
+        <KpiCard label="No water readings" value={String(noReadingCount)} unit="tanks" delta={noReadingCount ? "Awaiting data" : "Readings available"} deltaTone={noReadingCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
       </section>
 
       <section aria-labelledby="tank-snapshot-heading" className="mb-5">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
           <div>
             <h2 id="tank-snapshot-heading" className="ep-font-display text-lg font-semibold text-[var(--ep-text)]">Tank snapshot</h2>
-            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">A quick look at the latest readings available for each tank.</p>
+            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Latest readings by tank.</p>
           </div>
           <Link to="/dashboard/tanks" className="inline-flex min-h-10 items-center gap-1 rounded-lg px-3 text-xs font-semibold text-[var(--ep-accent)] transition-colors hover:bg-[var(--ep-accent-tint)]">
             Manage tanks <Icon name="arrow-up-right" size={14} />
@@ -155,8 +155,8 @@ export function Dashboard() {
                     </div>
                   ) : (
                     <div className="border-t border-[var(--ep-line)] pt-3">
-                      <p className="text-xs font-medium text-[var(--ep-text-muted)]">No sensor readings available</p>
-                      <p className="mt-1 text-[11px] text-[var(--ep-text-muted)]">Parameter status will appear when data arrives.</p>
+                      <p className="text-xs font-medium text-[var(--ep-text-muted)]">No readings yet</p>
+                      <p className="mt-1 text-[11px] text-[var(--ep-text-muted)]">Status appears when data arrives.</p>
                     </div>
                   )}
                   <div className="mt-3 flex items-center justify-end gap-1 text-[11px] font-semibold text-[var(--ep-accent)]">View water quality <Icon name="arrow-right" size={12} /></div>
@@ -167,13 +167,13 @@ export function Dashboard() {
         ) : (
           <div className="rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center">
             <Icon name="layers" size={24} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
-            <p className="text-sm font-semibold text-[var(--ep-text)]">Your tanks will appear here</p>
-            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Register a tank to start monitoring its water conditions.</p>
+            <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks yet</p>
+            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Add a tank to monitor water quality.</p>
             <Link to="/dashboard/tanks" className="mt-3 inline-flex min-h-10 items-center rounded-lg bg-[var(--ep-accent)] px-4 text-xs font-semibold text-white">Add a tank</Link>
           </div>
         )}
-        {tanks.length > 6 && <p className="mt-2 text-right text-xs text-[var(--ep-text-muted)]">Showing 6 of {tanks.length} tanks, prioritized by status.</p>}
-        {noReadingCount > 0 && <p className="mt-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-2 text-xs leading-relaxed text-[var(--ep-text-muted)]"><span className="font-semibold text-[var(--ep-text)]">{noReadingCount} {noReadingCount === 1 ? "tank has" : "tanks have"} no water readings.</span> These are counted as needing attention so missing data is not mistaken for healthy conditions.</p>}
+        {tanks.length > 6 && <p className="mt-2 text-right text-xs text-[var(--ep-text-muted)]">Showing 6 of {tanks.length} tanks · highest priority first.</p>}
+        {noReadingCount > 0 && <p className="mt-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-2 text-xs leading-relaxed text-[var(--ep-text-muted)]"><span className="font-semibold text-[var(--ep-text)]">{noReadingCount} {noReadingCount === 1 ? "tank has" : "tanks have"} no water readings.</span> Missing readings count as needing attention.</p>}
       </section>
 
       <section className="mb-5" aria-label="Recent facility activity">
@@ -201,7 +201,7 @@ export function Dashboard() {
             <div className="rounded-xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-7 text-center">
               <Icon name="clock" size={21} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
               <p className="text-sm font-semibold text-[var(--ep-text)]">No recent activity yet</p>
-              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">New water readings and vision scans will appear here when recorded.</p>
+              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Water readings and vision scans will appear here.</p>
             </div>
           )}
         </Panel>
@@ -214,7 +214,7 @@ export function Dashboard() {
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div>
                   <div className="ep-font-display text-3xl font-semibold text-[var(--ep-text)]">{Math.round(healthyPercent)}%</div>
-                  <div className="text-xs text-[var(--ep-text-muted)]">of tanks currently healthy</div>
+                  <div className="text-xs text-[var(--ep-text-muted)]">of tanks healthy</div>
                 </div>
                 <div className="text-right text-xs text-[var(--ep-text-muted)]">
                   <div><span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-[var(--ep-status-success)]" />{healthyCount} healthy</div>
@@ -227,8 +227,8 @@ export function Dashboard() {
               </div>
               <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
                 <div>
-                  <div className="text-sm font-semibold text-[var(--ep-text)]">{attentionCount ? "Some tanks need a closer look" : "All monitored tanks look healthy"}</div>
-                  <div className="mt-1 text-xs text-[var(--ep-text-muted)]">{attentionCount ? "Open Water Quality to inspect individual readings and thresholds." : "Continue monitoring your facility from the Water Quality page."}</div>
+                  <div className="text-sm font-semibold text-[var(--ep-text)]">{attentionCount ? "Tanks need attention" : "All tanks healthy"}</div>
+                  <div className="mt-1 text-xs text-[var(--ep-text-muted)]">{attentionCount ? "Check readings and thresholds in Water Quality." : "Keep monitoring in Water Quality."}</div>
                 </div>
                 <Link to="/dashboard/water" className="inline-flex min-h-9 shrink-0 items-center gap-1 rounded-lg px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-accent-tint)]">
                   Inspect readings <Icon name="arrow-up-right" size={14} />
@@ -238,8 +238,8 @@ export function Dashboard() {
           ) : (
             <div className="rounded-xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-bg)] p-6 text-center">
               <Icon name="layers" size={24} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
-              <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks registered yet</p>
-              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Add your first tank to start monitoring facility health.</p>
+              <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks yet yet</p>
+              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Add a tank to monitor facility health.</p>
               <Link to="/dashboard/tanks" className="mt-3 inline-flex min-h-9 items-center rounded-lg bg-[var(--ep-accent)] px-4 text-xs font-semibold text-white">Set up tanks</Link>
             </div>
           )}
