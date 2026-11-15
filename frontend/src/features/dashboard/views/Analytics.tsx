@@ -41,7 +41,7 @@ export function Analytics() {
             Analytics
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-[var(--ep-text-muted)]">
-            Explore production performance, shrimp growth, sensor history, and feeding efficiency across your facility.
+            Track growth, water quality, biomass, and feeding.
           </p>
         </div>
         <button
@@ -118,7 +118,7 @@ export function Analytics() {
       </Panel>
 
       <p className="mt-4 text-xs text-[var(--ep-text-muted)]">
-        Charts use the latest available tank records and timestamped sensor and vision history. Historical points are shown as recorded; no missing values or dates are fabricated.
+        Charts use recorded tank, sensor, and vision data. Missing values are not estimated.
       </p>
     </>
   );
