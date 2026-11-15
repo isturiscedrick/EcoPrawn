@@ -58,8 +58,58 @@ export function Dashboard() {
 
       <section aria-label="Facility health summary" className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total facility inventory" deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
-        <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks registered"} deltaTone="ok" onDetails={() => { window.location.href = "/dashboard/tanks"; }} />
+        <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks registered"} deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
         <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={attentionCount ? "Review water conditions" : "No tank warnings detected"} deltaTone={attentionCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
+      </section>
+
+      <section aria-labelledby="tank-snapshot-heading" className="mb-5">
+        <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h2 id="tank-snapshot-heading" className="ep-font-display text-lg font-semibold text-[var(--ep-text)]">Tank snapshot</h2>
+            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">A quick look at the latest readings available for each tank.</p>
+          </div>
+          <Link to="/dashboard/tanks" className="inline-flex min-h-10 items-center gap-1 rounded-lg px-3 text-xs font-semibold text-[var(--ep-accent)] transition-colors hover:bg-[var(--ep-accent-tint)]">
+            Manage tanks <Icon name="arrow-up-right" size={14} />
+          </Link>
+        </div>
+        {tanks.length ? (
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 2xl:grid-cols-3">
+            {tanks.slice(0, 6).map((tank) => (
+              <Link key={tank.id} to="/dashboard/water" className="dashboard-tank-snapshot group min-w-0 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
+                <div className="mb-3 flex items-center justify-between gap-2">
+                  <div className="flex min-w-0 items-center gap-2">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]"><Icon name="layers" size={17} /></span>
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm font-semibold text-[var(--ep-text)]">{tank.name}</span>
+                      <span className="block truncate text-[11px] text-[var(--ep-text-muted)]">{tank.pl}</span>
+                    </span>
+                  </div>
+                  <span className={tank.status === "ok" ? "dashboard-status-badge dashboard-status-success" : "dashboard-status-badge dashboard-status-warning"}>
+                    {tank.status === "ok" ? "Healthy" : "Attention"}
+                  </span>
+                </div>
+                {tank.hasWaterReadings ? (
+                  <div className="grid grid-cols-3 gap-2 border-t border-[var(--ep-line)] pt-3">
+                    <div><div className="text-[10px] font-medium uppercase tracking-wide text-[var(--ep-text-muted)]">Temp</div><div className="mt-1 text-sm font-semibold tabular-nums text-[var(--ep-text)]">{tank.temperature.toFixed(1)}°</div></div>
+                    <div><div className="text-[10px] font-medium uppercase tracking-wide text-[var(--ep-text-muted)]">pH</div><div className="mt-1 text-sm font-semibold tabular-nums text-[var(--ep-text)]">{tank.ph.toFixed(1)}</div></div>
+                    <div><div className="text-[10px] font-medium uppercase tracking-wide text-[var(--ep-text-muted)]">O₂</div><div className="mt-1 text-sm font-semibold tabular-nums text-[var(--ep-text)]">{tank.dissolvedOxygen.toFixed(1)}</div></div>
+                  </div>
+                ) : (
+                  <div className="border-t border-[var(--ep-line)] pt-3 text-xs text-[var(--ep-text-muted)]">No water readings available yet.</div>
+                )}
+                <div className="mt-3 flex items-center justify-end gap-1 text-[11px] font-semibold text-[var(--ep-accent)]">View water quality <Icon name="arrow-right" size={12} /></div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center">
+            <Icon name="layers" size={24} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
+            <p className="text-sm font-semibold text-[var(--ep-text)]">Your tanks will appear here</p>
+            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Register a tank to start monitoring its water conditions.</p>
+            <Link to="/dashboard/tanks" className="mt-3 inline-flex min-h-10 items-center rounded-lg bg-[var(--ep-accent)] px-4 text-xs font-semibold text-white">Add a tank</Link>
+          </div>
+        )}
+        {tanks.length > 6 && <p className="mt-2 text-right text-xs text-[var(--ep-text-muted)]">Showing 6 of {tanks.length} tanks.</p>}
       </section>
 
       <div className="mb-5 grid grid-cols-1 gap-4 xl:grid-cols-[1.15fr_0.85fr]">
