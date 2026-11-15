@@ -282,7 +282,7 @@ html:not(.dark) .ep-business-landing #readings [data-reading] :is(p,span:not([da
   color: var(--ep-text-muted);
 }
 html:not(.dark) .ep-business-landing #readings [data-reading] > div[aria-hidden="true"].relative {
-  background-color: #dbe4f0;
+  background-color: #d9f0ef;
 }
 html:not(.dark) .ep-business-landing #readings [data-reading] [data-marker] span:last-child {
   border-color: #fff;
@@ -294,7 +294,7 @@ html:not(.dark) .ep-business-landing #readings [data-reading] [data-marker] span
    inherited deep-surface utility classes cannot reduce contrast. */
 .ep-business-landing #readings [data-readings-bg] {
   background-image:
-    radial-gradient(ellipse at 14% 12%, rgba(59,130,246,.13), transparent 42%),
+    radial-gradient(ellipse at 14% 12%, rgba(8,126,139,.13), transparent 42%),
     radial-gradient(ellipse at 88% 78%, rgba(69,197,179,.10), transparent 46%) !important;
 }
 .ep-business-landing #readings .max-w-\\[40rem\\] {
@@ -443,26 +443,26 @@ html:not(.dark) .ep-business-landing #readings .max-w-\\[40rem\\] p {
 .ep-business-landing .ep-readings-section .ep-reading-card > div:first-child > span {
   color: #066874 !important;
   border-color: #70d7c8 !important;
-  background: #eff6ff !important;
+  background: #e6f4f3 !important;
 }
 .ep-business-landing .ep-readings-section .ep-reading-card > div[aria-hidden="true"].relative {
-  background-color: #dbe4f0 !important;
+  background-color: #d9f0ef !important;
 }
 .ep-business-landing .ep-readings-section > div:last-child {
   color: #475569 !important;
 }
 .ep-business-landing .ep-readings-section [data-readings-bg] {
   background-image:
-    radial-gradient(ellipse at 14% 12%, rgba(59,130,246,.09), transparent 42%),
+    radial-gradient(ellipse at 14% 12%, rgba(8,126,139,.09), transparent 42%),
     radial-gradient(ellipse at 88% 78%, rgba(69,197,179,.07), transparent 46%) !important;
 }
 html.dark .ep-business-landing .ep-readings-section {
   color: #f8fafc !important;
-  background-color: #0b1220 !important;
+  background-color: #0b171b !important;
   background-image:
     radial-gradient(ellipse at 14% 12%, rgba(8,126,139,.24), transparent 42%),
     radial-gradient(ellipse at 88% 78%, rgba(69,197,179,.12), transparent 46%),
-    linear-gradient(145deg,#111c2f 0%,#0b1220 58%,#080e19 100%) !important;
+    linear-gradient(145deg,#111c2f 0%,#0b171b 58%,#081f25 100%) !important;
 }
 html.dark .ep-business-landing .ep-readings-section .ep-readings-kicker {
   color: #70d7c8 !important;
@@ -1665,43 +1665,43 @@ html.dark .ep-business-landing .ep-preview-tab[aria-pressed="false"] {
 .ep-about-page .ep-about-mission-panel {
   border-color: color-mix(in srgb, var(--ep-accent) 18%, var(--ep-line));
   background:
-    radial-gradient(ellipse at 88% 48%, rgba(37,99,235,.10), transparent 42%),
+    radial-gradient(ellipse at 88% 48%, rgba(8,126,139,.10), transparent 42%),
     linear-gradient(135deg, var(--ep-surface), color-mix(in srgb, var(--ep-tint) 56%, var(--ep-surface)));
   box-shadow: 0 34px 90px -64px rgba(15,23,42,.48), inset 0 1px 0 rgba(255,255,255,.58);
 }
 html.dark .ep-about-page .ep-about-mission-panel {
   background:
-    radial-gradient(ellipse at 88% 48%, rgba(37,99,235,.2), transparent 44%),
-    linear-gradient(135deg, #111c30, #0b1424 74%);
-  box-shadow: 0 34px 90px -58px rgba(0,0,0,.8), inset 0 1px 0 rgba(191,219,254,.07);
+    radial-gradient(ellipse at 88% 48%, rgba(69,197,179,.2), transparent 44%),
+    linear-gradient(135deg, #12383f, #0b2c34 74%);
+  box-shadow: 0 34px 90px -58px rgba(0,0,0,.8), inset 0 1px 0 rgba(112,215,200,.07);
 }
 .ep-about-page .ep-about-orbit-visual {
   filter: drop-shadow(0 24px 32px rgba(8,126,139,.12));
 }
 .ep-about-page .ep-about-orbit-a {
-  border-color: rgba(14,165,233,.28);
-  background: radial-gradient(ellipse, rgba(14,165,233,.045), transparent 68%);
+  border-color: rgba(8,126,139,.28);
+  background: radial-gradient(ellipse, rgba(8,126,139,.045), transparent 68%);
 }
 .ep-about-page .ep-about-orbit-b {
-  border-color: rgba(37,99,235,.34);
+  border-color: rgba(69,197,179,.34);
   border-style: solid;
 }
 .ep-about-page .ep-about-orbit-c {
   border-width: 2px;
-  border-color: rgba(56,189,248,.5);
+  border-color: rgba(69,197,179,.5);
 }
 .ep-about-page .ep-about-orbit-core {
   width: clamp(5rem, 7vw, 6.5rem);
   height: clamp(5rem, 7vw, 6.5rem);
   border-radius: 2rem;
   background: linear-gradient(145deg, #087e8b, #45c5b3 72%, #70d7c8);
-  box-shadow: 0 22px 58px -20px rgba(14,165,233,.65), inset 0 1px 0 rgba(255,255,255,.35);
+  box-shadow: 0 22px 58px -20px rgba(69,197,179,.65), inset 0 1px 0 rgba(255,255,255,.35);
 }
 .ep-about-page .ep-about-journey {
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(ellipse at 92% 8%, rgba(37,99,235,.10), transparent 34%),
+    radial-gradient(ellipse at 92% 8%, rgba(8,126,139,.10), transparent 34%),
     linear-gradient(180deg, var(--ep-tint), color-mix(in srgb, var(--ep-bg) 76%, var(--ep-tint)));
 }
 html.dark .ep-about-page .ep-about-journey {
@@ -1737,7 +1737,7 @@ html.dark .ep-about-page #scope {
 }
 html.dark .ep-contact-page .ep-contact-intro {
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(37,99,235,.16), transparent 40%),
+    radial-gradient(ellipse at 100% 0%, rgba(8,126,139,.16), transparent 40%),
     linear-gradient(180deg, #0a1220, #0e192b);
 }
 .ep-contact-page .ep-contact-intro-panel {
@@ -1749,17 +1749,17 @@ html.dark .ep-contact-page .ep-contact-intro {
 }
 html.dark .ep-contact-page .ep-contact-intro-panel {
   background:
-    radial-gradient(ellipse at 90% 50%, rgba(37,99,235,.22), transparent 40%),
-    linear-gradient(125deg, #111d31, #0b1424);
-  box-shadow: 0 30px 80px -52px rgba(0,0,0,.7), inset 0 1px 0 rgba(191,219,254,.07);
+    radial-gradient(ellipse at 90% 50%, rgba(69,197,179,.22), transparent 40%),
+    linear-gradient(125deg, #12383f, #0b2c34);
+  box-shadow: 0 30px 80px -52px rgba(0,0,0,.7), inset 0 1px 0 rgba(112,215,200,.07);
 }
 .ep-contact-page .ep-contact-signal {
   width: clamp(8rem, 14vw, 11rem);
   height: clamp(8rem, 14vw, 11rem);
 }
 .ep-contact-page .ep-contact-signal-ring-one {
-  border-color: rgba(14,165,233,.38);
-  box-shadow: 0 0 0 12px rgba(14,165,233,.035);
+  border-color: rgba(8,126,139,.38);
+  box-shadow: 0 0 0 12px rgba(8,126,139,.035);
 }
 .ep-contact-page .ep-contact-signal-ring-two {
   border-color: rgba(37,99,235,.42);
@@ -1767,13 +1767,13 @@ html.dark .ep-contact-page .ep-contact-intro-panel {
 }
 .ep-contact-page .ep-contact-signal-ring-three {
   border-width: 2px;
-  border-color: rgba(56,189,248,.6);
+  border-color: rgba(69,197,179,.6);
 }
 .ep-contact-page .ep-contact-signal-core {
   width: 1.2rem;
   height: 1.2rem;
   background: linear-gradient(135deg, #087e8b, #45c5b3);
-  box-shadow: 0 0 0 14px rgba(14,165,233,.12), 0 0 42px rgba(37,99,235,.5);
+  box-shadow: 0 0 0 14px rgba(8,126,139,.12), 0 0 42px rgba(69,197,179,.5);
 }
 .ep-contact-page [data-contact-details] {
   position: relative;
@@ -1795,16 +1795,16 @@ html.dark .ep-contact-page [data-contact-details] {
 }
 html.dark .ep-contact-page [data-contact-card] {
   border-color: rgba(148,163,184,.2);
-  background: rgba(17,29,48,.9);
+  background: rgba(16,35,40,.94);
 }
 .ep-contact-page [data-contact-form] > form {
   border-color: color-mix(in srgb, var(--ep-accent) 22%, var(--ep-line));
   box-shadow: 0 28px 74px -52px rgba(8,126,139,.3), inset 0 1px 0 rgba(255,255,255,.55);
 }
 html.dark .ep-contact-page [data-contact-form] > form {
-  background: linear-gradient(145deg, #111d31, #0b1424);
+  background: linear-gradient(145deg, #12383f, #0b2c34);
   border-color: rgba(69,197,179,.24);
-  box-shadow: 0 28px 74px -50px rgba(0,0,0,.8), inset 0 1px 0 rgba(191,219,254,.06);
+  box-shadow: 0 28px 74px -50px rgba(0,0,0,.8), inset 0 1px 0 rgba(112,215,200,.06);
 }
 @media (max-width: 639px) {
   .ep-about-page .ep-about-mission-panel,
@@ -1841,21 +1841,21 @@ html.dark .ep-contact-page [data-contact-form] > form {
 .ep-about-page .ep-about-orbit-a {
   width: 96%;
   border-width: 1.5px;
-  border-color: rgba(56,189,248,.36);
-  box-shadow: 0 0 0 13px rgba(59,130,246,.025), inset 0 0 34px rgba(59,130,246,.035);
+  border-color: rgba(69,197,179,.36);
+  box-shadow: 0 0 0 13px rgba(8,126,139,.025), inset 0 0 34px rgba(8,126,139,.035);
 }
 .ep-about-page .ep-about-orbit-b {
   width: 76%;
   border-width: 1.5px;
   border-color: rgba(37,99,235,.28);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.35), 0 0 30px rgba(37,99,235,.08);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.35), 0 0 30px rgba(8,126,139,.08);
 }
 .ep-about-page .ep-about-orbit-c {
   width: 53%;
   border-width: 2px;
-  border-color: rgba(14,165,233,.48);
-  background: radial-gradient(circle, rgba(59,130,246,.09), rgba(14,165,233,.025) 62%, transparent 72%);
-  box-shadow: 0 0 28px rgba(14,165,233,.13), inset 0 0 24px rgba(14,165,233,.06);
+  border-color: rgba(69,197,179,.48);
+  background: radial-gradient(circle, rgba(8,126,139,.09), rgba(8,126,139,.025) 62%, transparent 72%);
+  box-shadow: 0 0 28px rgba(8,126,139,.13), inset 0 0 24px rgba(8,126,139,.06);
 }
 .ep-about-page .ep-about-orbit-core {
   position: relative;
@@ -1945,22 +1945,22 @@ html.dark .ep-contact-page [data-contact-form] > form {
   border: 2px solid rgba(255,255,255,.95);
   border-radius: 50%;
   background: #45c5b3;
-  box-shadow: 0 0 0 4px rgba(56,189,248,.16), 0 0 18px rgba(14,165,233,.65);
+  box-shadow: 0 0 0 4px rgba(69,197,179,.16), 0 0 18px rgba(69,197,179,.65);
 }
 .ep-about-page .ep-about-orbit-node-one { top: 19%; left: 14%; }
 .ep-about-page .ep-about-orbit-node-two { top: 48%; left: 2%; }
 .ep-about-page .ep-about-orbit-node-three { right: 14%; bottom: 18%; }
 html.dark .ep-about-page .ep-about-orbit-a {
-  border-color: rgba(56,189,248,.48);
-  box-shadow: 0 0 0 13px rgba(59,130,246,.045), inset 0 0 34px rgba(59,130,246,.07);
+  border-color: rgba(69,197,179,.48);
+  box-shadow: 0 0 0 13px rgba(8,126,139,.045), inset 0 0 34px rgba(8,126,139,.07);
 }
 html.dark .ep-about-page .ep-about-orbit-b {
   border-color: rgba(69,197,179,.4);
-  box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 0 30px rgba(37,99,235,.14);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 0 30px rgba(69,197,179,.14);
 }
 html.dark .ep-about-page .ep-about-orbit-c {
   border-color: rgba(34,211,238,.55);
-  background: radial-gradient(circle, rgba(37,99,235,.16), rgba(14,165,233,.05) 62%, transparent 72%);
+  background: radial-gradient(circle, rgba(8,126,139,.16), rgba(14,165,233,.05) 62%, transparent 72%);
 }
 html.dark .ep-about-page .ep-about-orbit-tag {
   border-color: rgba(69,197,179,.35);
@@ -1997,8 +1997,8 @@ html.dark .ep-about-page .ep-about-orbit-tag > svg {
   .ep-about-page .ep-about-orbit-node-three { animation-delay: 2.2s; }
 }
 @keyframes ep-about-orbit-node-pulse {
-  0%, 100% { box-shadow: 0 0 0 3px rgba(56,189,248,.12), 0 0 12px rgba(14,165,233,.42); }
-  50% { box-shadow: 0 0 0 7px rgba(56,189,248,.2), 0 0 22px rgba(14,165,233,.72); }
+  0%, 100% { box-shadow: 0 0 0 3px rgba(69,197,179,.12), 0 0 12px rgba(69,197,179,.42); }
+  50% { box-shadow: 0 0 0 7px rgba(69,197,179,.2), 0 0 22px rgba(69,197,179,.72); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ep-about-page .ep-about-orbit-node { animation: none !important; }
