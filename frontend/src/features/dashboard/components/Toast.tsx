@@ -18,9 +18,13 @@ const ToastContext = createContext<ToastContextValue | null>(null);
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
+  const dismissToast = useCallback((id: number) => {
+    setToasts((current) => current.filter((toast) => toast.id !== id));
+  }, []);
+
   const showToast = useCallback((message: string, tone: ToastTone = "success") => {
     const id = Date.now() + Math.random();
-    setToasts((current) => [...current, { id, message, tone }]);
+    setToasts([{ id, message, tone }]);
     window.setTimeout(() => {
       setToasts((current) => current.filter((toast) => toast.id !== id));
     }, 4200);
@@ -29,32 +33,45 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className="pointer-events-none fixed inset-x-4 bottom-5 z-[200] flex flex-col items-end gap-3 sm:left-auto sm:w-[min(380px,calc(100vw-2rem))]">
-        {toasts.map((toast) => (
-          <div
-            key={toast.id}
+      {toasts.map((toast) => (
+        <div key={toast.id} className="fixed inset-0 z-[200] flex items-center justify-center bg-[rgba(8,30,34,0.38)] p-4 backdrop-blur-sm dark:bg-[rgba(0,0,0,0.58)]">
+          <section
             role={toast.tone === "error" ? "alert" : "status"}
-            className="pointer-events-auto flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-3 text-sm text-[var(--ep-primary)] shadow-[0_16px_40px_-18px_rgba(8,30,34,0.55)] dark:border-[rgba(255,255,255,0.12)] dark:bg-[#111827] dark:text-[#f8fafc] dark:shadow-[0_16px_40px_-18px_rgba(0,0,0,0.75)]"
+            aria-live={toast.tone === "error" ? "assertive" : "polite"}
+            aria-atomic="true"
+            className="ep-pop-in relative w-full max-w-[520px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center text-[var(--ep-primary)] shadow-[0_28px_90px_rgba(8,30,34,0.32)] sm:p-8 dark:border-[rgba(255,255,255,0.14)] dark:bg-[#102328] dark:text-[#e8f4f2]"
           >
-            <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
+            <button
+              type="button"
+              aria-label="Dismiss notification"
+              onClick={() => dismissToast(toast.id)}
+              className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)]"
+            >
+              <Icon name="x" size={18} />
+            </button>
+            <span className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full ${
               toast.tone === "error"
                 ? "bg-[rgba(179,38,30,0.12)] text-[var(--ep-danger)]"
                 : "bg-[rgba(30,122,70,0.12)] text-[var(--ep-ok)]"
             }`}>
-              <Icon name={toast.tone === "error" ? "x" : "check"} size={16} strokeWidth={2.2} />
+              <Icon name={toast.tone === "error" ? "alert-circle" : "check-circle-2"} size={28} strokeWidth={2} />
             </span>
-            <span className="flex-1 font-medium">{toast.message}</span>
+            <h2 className="mb-2 ep-font-display text-xl font-semibold">
+              {toast.tone === "error" ? "Something went wrong" : "Success"}
+            </h2>
+            <p className="mx-auto max-w-[38rem] text-sm leading-relaxed text-[var(--ep-text-muted)]">
+              {toast.message}
+            </p>
             <button
               type="button"
-              aria-label="Dismiss notification"
-              onClick={() => setToasts((current) => current.filter((item) => item.id !== toast.id))}
-              className="rounded-md p-1 text-[var(--ep-text-muted)] hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--ep-primary)] dark:text-[#cbd5e1] dark:hover:bg-[rgba(255,255,255,0.08)] dark:hover:text-[#f8fafc]"
+              onClick={() => dismissToast(toast.id)}
+              className="mt-6 min-h-11 min-w-28 rounded-lg bg-[var(--ep-accent)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--ep-accent-hover)]"
             >
-              <Icon name="x" size={14} />
+              Okay
             </button>
-          </div>
-        ))}
-      </div>
+          </section>
+        </div>
+      ))}
     </ToastContext.Provider>
   );
 }

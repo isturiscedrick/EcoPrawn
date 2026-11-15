@@ -42,13 +42,13 @@
   text-wrap: pretty;
 }
 html.dark .ep-business-landing #process [data-process-track] > li {
-  background: color-mix(in srgb,var(--ep-surface) 94%,#1d4ed8 6%);
+  background: color-mix(in srgb,var(--ep-surface) 94%,#087e8b 6%);
   box-shadow: 0 22px 54px -40px rgba(0,0,0,.72);
 }
 @media (hover:hover) and (prefers-reduced-motion:no-preference) {
   .ep-business-landing #process [data-process-track] > li:hover {
     border-color: color-mix(in srgb,var(--ep-accent) 58%,var(--ep-line));
-    box-shadow: 0 24px 54px -34px rgba(29,78,216,.28);
+    box-shadow: 0 24px 54px -34px rgba(8,126,139,.28);
   }
 }
 .ep-landing [data-band] {

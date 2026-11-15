@@ -6,7 +6,6 @@ import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { getThresholds, saveThresholds, THRESHOLDS, type ThresholdSettings } from "@/features/dashboard/lib/thresholds";
-
 export function WaterQuality() {
   const { tanks, waterHistory = [], loading } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
@@ -14,6 +13,17 @@ export function WaterQuality() {
   const [thresholdSettings, setThresholdSettings] = useState<ThresholdSettings>(THRESHOLDS);
   const [editingThresholds, setEditingThresholds] = useState(false);
   const [thresholdMessage, setThresholdMessage] = useState("");
+
+  useEffect(() => {
+    if (!tanks.length) return;
+    const storageKey = "ecoprawn.dashboard.selected-tank";
+    const requestedTankId = window.sessionStorage.getItem(storageKey);
+    if (!requestedTankId) return;
+    window.sessionStorage.removeItem(storageKey);
+    if (tanks.some((tank) => tank.id === requestedTankId)) {
+      setSelectedTankId(requestedTankId);
+    }
+  }, [tanks]);
 
   useEffect(() => {
     const sync = () => setThresholdSettings(getThresholds());
@@ -61,44 +71,44 @@ export function WaterQuality() {
         {
           label: "Dissolved O₂",
           range: `≥ ${thresholdSettings.dissolvedOxygen.min} mg/L`,
-          current: `${selectedTank.dissolvedOxygen.toFixed(1)} mg/L`,
-          status: selectedTank.dissolvedOxygen >= thresholdSettings.dissolvedOxygen.min ? "ok" : "warn",
+          current: selectedTank.hasWaterReadings ? `${selectedTank.dissolvedOxygen.toFixed(1)} mg/L` : "—",
+          status: !selectedTank.hasWaterReadings ? "unavailable" : selectedTank.dissolvedOxygen >= thresholdSettings.dissolvedOxygen.min ? "ok" : "warn",
         },
         {
           label: "pH",
           range: `${thresholdSettings.ph.min} – ${thresholdSettings.ph.max}`,
-          current: selectedTank.ph.toFixed(1),
-          status: selectedTank.ph >= thresholdSettings.ph.min && selectedTank.ph <= thresholdSettings.ph.max ? "ok" : "warn",
+          current: selectedTank.hasWaterReadings ? selectedTank.ph.toFixed(1) : "—",
+          status: !selectedTank.hasWaterReadings ? "unavailable" : selectedTank.ph >= thresholdSettings.ph.min && selectedTank.ph <= thresholdSettings.ph.max ? "ok" : "warn",
         },
         {
           label: "Temperature",
           range: `${thresholdSettings.temperature.min} – ${thresholdSettings.temperature.max} °C`,
-          current: `${selectedTank.temperature.toFixed(1)} °C`,
-          status: selectedTank.temperature >= thresholdSettings.temperature.min && selectedTank.temperature <= thresholdSettings.temperature.max ? "ok" : "warn",
+          current: selectedTank.hasWaterReadings ? `${selectedTank.temperature.toFixed(1)} °C` : "—",
+          status: !selectedTank.hasWaterReadings ? "unavailable" : selectedTank.temperature >= thresholdSettings.temperature.min && selectedTank.temperature <= thresholdSettings.temperature.max ? "ok" : "warn",
         },
         {
           label: "Salinity",
           range: `${thresholdSettings.salinity.min} – ${thresholdSettings.salinity.max} ppt`,
-          current: `${selectedTank.salinity} ppt`,
-          status: selectedTank.salinity >= thresholdSettings.salinity.min && selectedTank.salinity <= thresholdSettings.salinity.max ? "ok" : "warn",
+          current: selectedTank.hasWaterReadings ? `${selectedTank.salinity} ppt` : "—",
+          status: !selectedTank.hasWaterReadings ? "unavailable" : selectedTank.salinity >= thresholdSettings.salinity.min && selectedTank.salinity <= thresholdSettings.salinity.max ? "ok" : "warn",
         },
         {
           label: "Water Level",
           range: `≥ ${thresholdSettings.waterLevel.min}%`,
-          current: `${selectedTank.waterLevel}%`,
-          status: selectedTank.waterLevel >= thresholdSettings.waterLevel.min ? "ok" : "warn",
+          current: selectedTank.hasWaterReadings ? `${selectedTank.waterLevel}%` : "—",
+          status: !selectedTank.hasWaterReadings ? "unavailable" : selectedTank.waterLevel >= thresholdSettings.waterLevel.min ? "ok" : "warn",
         },
       ]
     : [];
 
   return (
-    <>
+    <div className="dashboard-water-quality-page">
       <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--sand-dim)]">
         <div>
           <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
             Sensor Network
           </div>
-          <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
+          <h1 className="ep-font-display text-[24px] font-semibold text-[var(--water-deep)] leading-tight sm:text-[28px]">
             Water Quality Monitoring
           </h1>
           <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
@@ -111,7 +121,7 @@ export function WaterQuality() {
             ...waterHistory.map(point => [tanks.find(tank => tank.id === point.tankId)?.name ?? point.tankId, "Historical", point.recordedAt, point.dissolvedOxygen, point.ph, point.temperature, point.salinity, point.waterLevel]),
           ];
           downloadCsv(`ecoprawn-water-quality-${new Date().toISOString().slice(0, 10)}.csv`, ["Tank", "Record type", "Recorded at", "Dissolved oxygen (mg/L)", "pH", "Temperature (°C)", "Salinity (ppt)", "Water level (%)"], rows);
-        }} className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">
+        }} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] sm:w-auto">
           <span aria-hidden="true">↓</span> Export readings
         </button>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
@@ -123,7 +133,6 @@ export function WaterQuality() {
           {warnCount === 0 ? "All parameters nominal" : `${warnCount} tank${warnCount !== 1 ? "s" : ""} out of range`}
         </div>
       </div>
-
       {tankCount > 0 ? (
         <>
           <div className="mb-4">
@@ -140,14 +149,15 @@ export function WaterQuality() {
                   aria-selected={selectedTankIndex === index}
                   aria-controls="water-tank-details"
                   tabIndex={selectedTankIndex === index ? 0 : -1}
-                  onClick={() => setSelectedTankId(tank.id)}
+                  onClick={() => { setSelectedTankId(tank.id); window.sessionStorage.setItem("ecoprawn.dashboard.selected-tank", tank.id); }}
                   onKeyDown={(event) => handleTankTabKeyDown(event, index)}
-                  className={`shrink-0 rounded-full border px-4 py-2 text-[12.5px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove)] ${
+                  className={`min-h-11 shrink-0 touch-manipulation rounded-full border px-4 py-2 text-[12.5px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove)] ${
                     selectedTankIndex === index
                       ? "border-[var(--mangrove)] bg-[var(--mangrove)] text-white"
                       : "border-[var(--sand-dim)] bg-white text-[var(--water-deep)] hover:border-[var(--mangrove)]"
                   }`}
                 >
+                  <span className={`mr-2 inline-block h-2 w-2 rounded-full align-middle ${!tank.hasWaterReadings ? "bg-slate-400" : tank.status === "ok" ? "bg-emerald-500" : "bg-amber-500"}`} aria-hidden="true" />
                   {tank.name}
                 </button>
               ))}
@@ -162,7 +172,7 @@ export function WaterQuality() {
           >
             <Panel title="Parameter Thresholds" badge={selectedTank.name}>
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-xs text-[var(--ep-text-muted)]">Set local warning limits for all tanks on this device.</p>
+                <p className="text-xs text-[var(--ep-text-muted)]">Set warning limits for all tanks.</p>
                 <button type="button" onClick={() => { setEditingThresholds(value => !value); setThresholdMessage(""); }} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]">{editingThresholds ? "Close settings" : "Customize limits"}</button>
               </div>
               {editingThresholds && (
@@ -204,6 +214,12 @@ export function WaterQuality() {
                   </div>
                 </div>
               )}
+              {!selectedTank.hasWaterReadings && <p role="status" className="mb-3 rounded-xl border border-slate-400/30 bg-slate-400/10 px-3 py-2 text-xs text-[var(--ep-text-muted)]">No readings yet. Status appears when data arrives.</p>}
+              <div className="mb-3 grid grid-cols-3 gap-2" aria-label="Parameter status summary">
+                <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3"><div className="text-[10px] text-[var(--ep-text-muted)]">In range</div><div className="mt-1 text-lg font-semibold tabular-nums text-emerald-600">{thresholds.filter(item => item.status === "ok").length}</div></div>
+                <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3"><div className="text-[10px] text-[var(--ep-text-muted)]">Watch</div><div className="mt-1 text-lg font-semibold tabular-nums text-amber-600">{thresholds.filter(item => item.status === "warn").length}</div></div>
+                <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3"><div className="text-[10px] text-[var(--ep-text-muted)]">No reading</div><div className="mt-1 text-lg font-semibold tabular-nums text-[var(--ep-text-muted)]">{thresholds.filter(item => item.status === "unavailable").length}</div></div>
+              </div>
               <div className="flex flex-col gap-2.5">
                 {thresholds.map((t) => (
                   <div
@@ -220,10 +236,10 @@ export function WaterQuality() {
                       </div>
                       <div
                         className={`text-[10px] font-semibold ${
-                          t.status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
+                          t.status === "ok" ? "text-emerald-600 dark:text-emerald-400" : t.status === "warn" ? "text-amber-600 dark:text-amber-400" : "text-[var(--ep-text-muted)]"
                         }`}
                       >
-                        {t.status === "ok" ? "In range" : "Watch"}
+                        {t.status === "ok" ? "In range" : t.status === "warn" ? "Watch" : "No reading"}
                       </div>
                     </div>
                   </div>
@@ -240,7 +256,7 @@ export function WaterQuality() {
 
           <Panel title="Tank Readings" badge={`${filteredTanks.length} of ${tankCount} tanks`}>
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-              <span className="text-xs font-medium text-[var(--ep-text-muted)]">Filter readings by status</span>
+              <span className="text-xs font-medium text-[var(--ep-text-muted)]">Filter by status</span>
               <div className="dashboard-table-filters grid grid-cols-3 gap-1 rounded-full border border-[var(--ep-line)] bg-[var(--ep-bg)] p-1" role="group" aria-label="Filter tank readings by status">
                 {([{ value: "all", label: "All" }, { value: "ok", label: "Nominal" }, { value: "warn", label: "Watch" }] as const).map((option) => (
                   <button
@@ -249,15 +265,15 @@ export function WaterQuality() {
                     aria-pressed={statusFilter === option.value}
                     onClick={() => setStatusFilter(option.value)}
                     className={statusFilter === option.value
-                      ? "min-h-10 rounded-full bg-[var(--ep-accent)] px-3 text-xs font-semibold text-white"
-                      : "min-h-10 rounded-full px-3 text-xs font-semibold text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}
+                      ? "min-h-11 touch-manipulation rounded-full bg-[var(--ep-accent)] px-3 text-xs font-semibold text-white"
+                      : "min-h-11 touch-manipulation rounded-full px-3 text-xs font-semibold text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}
                   >
                     {option.label}
                   </button>
                 ))}
               </div>
             </div>
-            <div className="dashboard-table-scroll" role="region" aria-label="Tank readings table" tabIndex={0}>
+            <div className="dashboard-table-scroll max-w-full overflow-x-auto overscroll-x-contain" role="region" aria-label="Tank readings table" tabIndex={0}>
               <ScrollFadeContainer>
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
@@ -276,26 +292,26 @@ export function WaterQuality() {
                     <tr key={t.id} className="border-b border-[var(--sand-dim)] last:border-b-0">
                       <td className="py-3 pr-3 text-[13.5px] font-semibold text-[var(--water-deep)]">{t.name}</td>
                       <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">
-                        {t.dissolvedOxygen.toFixed(1)}
+                        {t.hasWaterReadings ? t.dissolvedOxygen.toFixed(1) : "—"}
                       </td>
-                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.ph.toFixed(1)}</td>
+                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.hasWaterReadings ? t.ph.toFixed(1) : "—"}</td>
                       <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">
-                        {t.temperature.toFixed(1)}
+                        {t.hasWaterReadings ? t.temperature.toFixed(1) : "—"}
                       </td>
-                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.salinity}</td>
-                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.waterLevel}%</td>
+                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.hasWaterReadings ? t.salinity : "—"}</td>
+                      <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.hasWaterReadings ? `${t.waterLevel}%` : "—"}</td>
                       <td className="py-3">
                         <span
                           className={`inline-flex items-center gap-1.5 text-[11.5px] font-semibold ${
-                            t.status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
+                            !t.hasWaterReadings ? "text-[var(--ep-text-muted)]" : t.status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
                           }`}
                         >
                           <span
                             className={`w-[7px] h-[7px] rounded-full ${
-                              t.status === "ok" ? "bg-[var(--mangrove)]" : "bg-[var(--amber)]"
+                              !t.hasWaterReadings ? "bg-slate-400" : t.status === "ok" ? "bg-[var(--mangrove)]" : "bg-[var(--amber)]"
                             }`}
                           />
-                          {t.status === "ok" ? "Nominal" : "Watch"}
+                          {!t.hasWaterReadings ? "No readings" : t.status === "ok" ? "Nominal" : "Watch"}
                         </span>
                       </td>
                     </tr>
@@ -303,7 +319,7 @@ export function WaterQuality() {
                   {filteredTanks.length === 0 && (
                     <tr>
                       <td colSpan={7} className="py-8 text-center text-sm text-[var(--ep-text-muted)]">
-                        No tanks match this status filter.
+                        No tanks match this filter.
                       </td>
                     </tr>
                   )}
@@ -316,10 +332,10 @@ export function WaterQuality() {
       ) : (
         <Panel title="Tank Readings" badge="0 tanks">
           <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
-            No tanks yet — add one on the Tanks page to see water quality data.
+            No tanks yet. Add one on the Tanks page.
           </div>
         </Panel>
       )}
-    </>
+    </div>
   );
 }

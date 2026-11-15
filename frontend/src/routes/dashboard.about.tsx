@@ -6,12 +6,12 @@ const moduleIcons = ["droplet", "gauge", "eye", "utensils", "leaf"] as const;
 
 function DashboardAboutPage() {
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-8">
+    <div className="mx-auto w-full max-w-none space-y-8">
       <header className="border-b border-[var(--ep-line)] pb-6">
         <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-primary)]">Settings &amp; preferences</p>
         <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">System information</h1>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">
-          An overview of EcoPrawn, its connected modules, objectives, and system scope.
+          EcoPrawn modules, goals, and system scope.
         </p>
       </header>
 
@@ -21,7 +21,7 @@ function DashboardAboutPage() {
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.13em] text-[var(--ep-text-muted)]">Platform overview</p>
           <h2 className="text-xl font-semibold text-[var(--ep-text)]">EcoPrawn</h2>
           <p className="mt-3 text-sm leading-7 text-[var(--ep-text-muted)]">
-            An AIoT-enabled indoor shrimp farming platform that brings water monitoring, precision feeding, growth observation, and farm operations into a connected workflow. It helps facility operators understand tank conditions and coordinate day-to-day activities.
+            An AIoT platform for indoor shrimp farming, combining water monitoring, feeding, growth tracking, and farm operations.
           </p>
         </article>
         <article className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-sm sm:p-8">
@@ -33,7 +33,7 @@ function DashboardAboutPage() {
       <section>
         <div className="mb-4">
           <h2 className="text-lg font-semibold text-[var(--ep-text)]">System modules</h2>
-          <p className="mt-1 text-sm text-[var(--ep-text-muted)]">The main capabilities available across the platform.</p>
+          <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Core platform features.</p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {features.map((feature, index) => (
@@ -52,7 +52,7 @@ function DashboardAboutPage() {
       <section>
         <div className="mb-4">
           <h2 className="text-lg font-semibold text-[var(--ep-text)]">System objectives</h2>
-          <p className="mt-1 text-sm text-[var(--ep-text-muted)]">The intended outcomes that guide the platform.</p>
+          <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Platform goals.</p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {objectives.map((objective) => (

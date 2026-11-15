@@ -9,6 +9,7 @@ import { Sidebar } from "../components/Sidebar";
 import { DASHBOARD_NAV_ITEMS } from "@/config/nav";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 
 interface SystemLayoutProps {
   children: ReactNode;
@@ -19,9 +20,10 @@ const focusRing =
 
 export function SystemLayout({ children }: SystemLayoutProps) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const { tanks, isDbConnected, lastUpdatedAt, loading, error, refreshTanks } = useTanks();
+  const { tanks, isDbConnected, lastUpdatedAt, loading, refreshTanks, isRefreshing } = useTanks();
   const activeAlertCount = deriveTankAlerts(tanks).length;
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(() => window.localStorage.getItem("ep-sidebar-collapsed") === "true");
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -39,13 +41,15 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       wasMobileSidebarOpen.current = false;
     }
   }, [mobileSidebarOpen]);
-  const [darkMode, setDarkMode] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ep-dashboard-theme") === "dark");
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
+  const [logoutErrorOpen, setLogoutErrorOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const profileTriggerRef = useRef<HTMLButtonElement>(null);
   const profileMenuPanelRef = useRef<HTMLDivElement>(null);
+  const pullStartY = useRef<number | null>(null);
   const profileInitials = profileName.trim().split(/\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? "").join("") || "FO";
 
   useLayoutEffect(() => {
@@ -120,31 +124,11 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   }, []);
 
   useEffect(() => {
-    const syncTheme = () => setDarkMode(window.localStorage.getItem("ep-dashboard-theme") === "dark");
-    window.addEventListener("ecoprawn-theme-change", syncTheme);
-    window.addEventListener("storage", syncTheme);
-    return () => {
-      window.removeEventListener("ecoprawn-theme-change", syncTheme);
-      window.removeEventListener("storage", syncTheme);
-    };
-  }, []);
-
-  useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const toggleTheme = () => {
-    const next = !darkMode;
-    window.localStorage.setItem("ep-dashboard-theme", next ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", next);
-    document.documentElement.classList.add("theme-transitioning");
-    window.setTimeout(() => document.documentElement.classList.remove("theme-transitioning"), 480);
-    setDarkMode(next);
-    window.dispatchEvent(new Event("ecoprawn-theme-change"));
-  };
 
   const normalizedSearch = searchQuery.trim().toLowerCase();
   const matchingPages = DASHBOARD_NAV_ITEMS.filter((item) =>
@@ -157,7 +141,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   // Keep the mobile dashboard chrome visually light; only its controls float above content.
 
   return (
-    <div className="dashboard-shell min-h-screen bg-[var(--ep-bg)]">
+    <div className="dashboard-shell min-h-screen bg-[var(--ep-bg)]" style={{ "--dashboard-sidebar-width": desktopSidebarCollapsed ? "76px" : "260px" } as React.CSSProperties}>
       <header
         id="site-header"
         className={`ep-landing sticky top-0 z-40 border-b transition-all duration-300 lg:hidden ${scrolled ? "border-[var(--ep-line)] shadow-sm backdrop-blur-xl" : "border-transparent shadow-none backdrop-blur-none"}`}
@@ -180,18 +164,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           </Link>
 
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-            <button
-              type="button"
-              onClick={toggleTheme}
-              role="switch"
-              aria-checked={darkMode}
-              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
-              style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
-            >
-              {darkMode ? <Icon name="moon" size={18} strokeWidth={1.8} /> : <Icon name="sun" size={18} strokeWidth={1.8} />}
-            </button>
             <Link
               to="/dashboard/alerts"
               aria-label={activeAlertCount > 0 ? `Alerts, ${activeAlertCount} active` : "Alerts"}
@@ -241,31 +213,30 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                           : (currentIndex - 1 + items.length) % items.length;
                     items[nextIndex].focus();
                   }}
-                  className="absolute right-0 top-[calc(100%+10px)] z-[100] w-[min(15rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1.5rem)] max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-2 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.38)]"
+                  className="absolute right-0 top-[calc(100%+10px)] z-[100] w-[min(19rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1.5rem)] max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.28)]"
                 >
-                  <div className="border-b border-[var(--ep-line)] px-3 py-2.5">
+                  <div className="border-b border-[var(--ep-line)] px-3 pb-3 pt-2">
                     <p className="truncate text-sm font-semibold">{profileName}</p>
                     <p className="mt-0.5 truncate text-[11px] font-medium tracking-wide text-[var(--ep-text-muted)]">{profileRole}</p>
                   </div>
-                  <Link to="/dashboard/profile" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="mt-1 flex min-h-11 items-center gap-2.5 rounded-xl px-3 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
-                    <Icon name="user-round" size={17} />
-                    View profile
-                  </Link>
+                  <div className="mt-2 flex flex-col gap-1">
+                    <Link to="/dashboard/profile" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="flex min-h-11 min-w-0 items-center gap-2 whitespace-nowrap rounded-xl px-2.5 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:bg-[var(--ep-accent-tint)] focus-visible:ring-1 focus-visible:ring-[var(--ep-accent)]/50">
+                      <Icon name="user-round" size={17} className="shrink-0" />
+                      <span className="whitespace-nowrap">View profile</span>
+                    </Link>
+                    <Link to="/dashboard/settings" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="flex min-h-11 items-center gap-2 rounded-xl px-2.5 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
+                      <Icon name="settings" size={17} className="shrink-0" />
+                      <span className="whitespace-nowrap">Settings</span>
+                    </Link>
+                  </div>
                   <button
                     type="button"
                     role="menuitem"
-                    onClick={async () => {
+                    onClick={() => {
                       setProfileMenuOpen(false);
-                      if (!window.confirm("Are you sure you want to log out?")) return;
-                      try {
-                        const response = await fetch("/api/auth/logout", { method: "POST" });
-                        if (!response.ok) throw new Error("Logout failed");
-                        window.location.replace("/login");
-                      } catch {
-                        window.alert("Could not log out. Please try again.");
-                      }
+                      setLogoutConfirmOpen(true);
                     }}
-                    className="flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:hover:bg-red-950/30"
+                    className="mt-1 flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:bg-red-50 focus-visible:ring-1 focus-visible:ring-red-400/60 dark:hover:bg-red-950/30 dark:focus-visible:bg-red-950/30"
                   >
                     <Icon name="log-out" size={17} />
                     Log out
@@ -278,7 +249,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       </header>
 
       {/* Persistent desktop navigation and mobile drawer. */}
-      <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} darkMode={darkMode} onToggleTheme={toggleTheme} />
+      <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} collapsed={desktopSidebarCollapsed} onToggleCollapsed={() => setDesktopSidebarCollapsed((collapsed) => { const next = !collapsed; window.localStorage.setItem("ep-sidebar-collapsed", String(next)); return next; })} />
 
       {searchOpen && (
         <div className="fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/45 px-3 pt-[12vh] backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) setSearchOpen(false); }}>
@@ -305,33 +276,87 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         </div>
       )}
 
+      <ConfirmDialog
+        open={logoutConfirmOpen}
+        title="Log out of EcoPrawn?"
+        description="Are you sure you want to end your current session?"
+        confirmLabel="Log out"
+        tone="danger"
+        onCancel={() => setLogoutConfirmOpen(false)}
+        onConfirm={async () => {
+          setLogoutConfirmOpen(false);
+          try {
+            const response = await fetch("/api/auth/logout", { method: "POST" });
+            if (!response.ok) throw new Error("Logout failed");
+            window.location.replace("/login");
+          } catch {
+            setLogoutErrorOpen(true);
+          }
+        }}
+      />
+      <ConfirmDialog
+        open={logoutErrorOpen}
+        title="Unable to log out"
+        description="Logout could not be completed. Please try again."
+        confirmLabel="Okay"
+        showCancel={false}
+        onCancel={() => setLogoutErrorOpen(false)}
+        onConfirm={() => setLogoutErrorOpen(false)}
+      />
+
       {/* Responsive dashboard content area. */}
-      <main data-dashboard-route-content="" className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:px-5 sm:pt-5 lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
-        <div className="w-full">
-          {!loading && !isDbConnected && error && (
-            <div role="status" className="mb-4 flex flex-col gap-3 rounded-xl border border-[var(--ep-status-danger)] bg-[var(--ep-surface)] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex min-w-0 items-start gap-2.5">
-                <span aria-hidden="true" className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[var(--ep-status-danger)]" />
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold text-[var(--ep-text)]">Connection interrupted</p>
-                  <p className="mt-0.5 text-xs leading-relaxed text-[var(--ep-text-muted)]">
-                    {lastUpdatedAt
-                      ? `Showing saved dashboard data. Last successful update: ${lastUpdatedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}.`
-                      : "Dashboard data could not be loaded. Check your connection and try again."}
-                  </p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => void refreshTanks()}
-                className="min-h-10 shrink-0 self-start rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] sm:self-center"
-              >
-                Retry connection
-              </button>
+      <main
+        data-dashboard-route-content=""
+        onTouchStart={(event) => {
+          const scrollTop = document.scrollingElement?.scrollTop ?? window.scrollY;
+          if (
+            window.matchMedia("(min-width: 1024px)").matches ||
+            scrollTop > 0 ||
+            event.touches.length !== 1 ||
+            isRefreshing
+          ) {
+            pullStartY.current = null;
+            return;
+          }
+          pullStartY.current = event.touches[0]?.clientY ?? null;
+        }}
+        onTouchEnd={(event) => {
+          const startY = pullStartY.current;
+          pullStartY.current = null;
+          const endY = event.changedTouches[0]?.clientY;
+          const scrollTop = document.scrollingElement?.scrollTop ?? window.scrollY;
+          if (
+            startY !== null &&
+            endY !== undefined &&
+            endY - startY >= 80 &&
+            scrollTop <= 0 &&
+            !isRefreshing
+          ) {
+            void refreshTanks();
+          }
+        }}
+        onTouchCancel={() => {
+          pullStartY.current = null;
+        }}
+        className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:max-w-none lg:transition-[margin,width] lg:duration-300 lg:ease-in-out motion-reduce:lg:transition-none"
+      >
+        <div className="w-full min-w-0">
+          {isRefreshing && (
+            <div
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              className="mb-3 flex items-center justify-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2.5 text-xs font-medium text-[var(--ep-primary)] shadow-sm"
+            >
+              <Icon name="loader-circle" size={15} className="animate-spin" />
+              <span>Refreshing data…</span>
             </div>
           )}
           {!loading && isDbConnected && lastUpdatedAt && (
-            <div className="mb-3 flex items-center justify-end gap-2 text-[11px] text-[var(--ep-text-muted)]" aria-label={`Dashboard data last updated at ${lastUpdatedAt.toLocaleTimeString()}`}>
+            <div
+              className="mb-3 flex items-center justify-end gap-2 text-[11px] text-[var(--ep-text-muted)]"
+              aria-label={`Dashboard data last updated at ${lastUpdatedAt.toLocaleTimeString()}`}
+            >
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--ep-status-success)]" />
               <span>Live data · Updated {lastUpdatedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
             </div>
@@ -340,51 +365,37 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         </div>
       </main>
 
-      {/* Thumb-friendly dashboard navigation for phones and tablets. The More
-          action reuses the existing accessible sidebar drawer for all modules. */}
+      {/* Direct, thumb-friendly access to the five primary facility modules. */}
       <nav
         aria-label="Quick dashboard navigation"
         className="fixed inset-x-0 bottom-0 z-[70] grid grid-cols-5 border-t border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-surface)_94%,transparent)] px-1 pt-2 pb-[max(.5rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-24px_rgba(15,23,42,.42)] backdrop-blur-xl lg:hidden"
       >
-        {DASHBOARD_NAV_ITEMS.filter((item) =>
-          ["overview", "tanks", "analytics", "feeding"].includes(item.view),
-        ).map((item) => {
-          const href = item.view === "overview" ? "/dashboard" : "/dashboard/" + item.view;
-          const label = item.view === "overview" ? "Dashboard" : item.label;
-          const active = item.view === "overview"
-            ? pathname === "/dashboard" || pathname === "/dashboard/overview"
-            : pathname === href || pathname.startsWith(href + "/");
+        {([
+          { key: "home", label: "Home", href: "/dashboard", icon: "house" },
+          { key: "tanks", label: "Tanks", href: "/dashboard/tanks", icon: "layers" },
+          { key: "vision", label: "Vision", href: "/dashboard/analytics", icon: "camera" },
+          { key: "feeding", label: "Feeding", href: "/dashboard/feeding", icon: "utensils" },
+          { key: "water", label: "Water Quality", href: "/dashboard/water", icon: "waves" },
+        ] as const).map((item) => {
+          const active = pathname === item.href || pathname.startsWith(item.href + "/") ||
+            (item.key === "home" && pathname === "/dashboard/overview") ||
+            (item.key === "vision" && pathname === "/dashboard/vision");
           return (
             <Link
-              key={item.view}
-              to={href}
-              aria-label={label}
+              key={item.key}
+              to={item.href as never}
+              aria-label={item.label}
               aria-current={active ? "page" : undefined}
               activeOptions={{ exact: true }}
-              className={"flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (active ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
+              className={"flex min-h-14 min-w-0 touch-manipulation flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (active ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
             >
               <span className={"flex h-7 w-9 items-center justify-center rounded-xl transition-colors " + (active ? "bg-[var(--ep-accent-tint)]" : "bg-transparent")}>
                 <Icon name={item.icon} size={19} strokeWidth={active ? 2.2 : 1.8} />
               </span>
-              <span className="max-w-full truncate">{label}</span>
+              <span className={item.key === "water" ? "max-w-full truncate text-[9px]" : "max-w-full truncate"}>{item.label}</span>
             </Link>
           );
         })}
-        <button
-          ref={mobileMenuButtonRef}
-          type="button"
-          onClick={() => setMobileSidebarOpen(true)}
-          aria-label="More dashboard sections"
-          aria-haspopup="dialog"
-          aria-controls="dashboard-mobile-drawer"
-          aria-expanded={mobileSidebarOpen}
-          className={"flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (mobileSidebarOpen ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
-        >
-          <span className={"flex h-7 w-9 items-center justify-center rounded-xl " + (mobileSidebarOpen ? "bg-[var(--ep-accent-tint)]" : "bg-transparent")}>
-            <Icon name="menu" size={19} strokeWidth={1.8} />
-          </span>
-          <span>More</span>
-        </button>
       </nav>
     </div>
   );

@@ -5,7 +5,7 @@
 
 /* ---------- Dashboard Brand Palette Tokens ---------- */
 .dashboard-shell {
-  --ep-brand-primary: #1d4ed8;
+  --ep-brand-primary: #087e8b;
   --ep-brand-secondary: #1f2937;
   --ep-status-success: #15803d;
   --ep-status-success-bg: #dcfce7;
@@ -13,12 +13,12 @@
   --ep-status-warning-bg: #fef3c7;
   --ep-status-danger: #b91c1c;
   --ep-status-danger-bg: #fee2e2;
-  --ep-status-info: #1d4ed8;
-  --ep-status-info-bg: #dbeafe;
+  --ep-status-info: #087e8b;
+  --ep-status-info-bg: #d9f0ef;
   --ep-status-neutral: #475569;
   --ep-status-neutral-bg: #e2e8f0;
   --ep-accent: var(--ep-brand-primary);
-  --ep-accent-hover: #1e40af;
+  --ep-accent-hover: #066874;
   --coral: var(--ep-brand-primary);
   --coral-dim: var(--ep-accent-hover);
   --ep-secondary: var(--ep-brand-secondary);
@@ -29,20 +29,20 @@
 }
 
 html.dark .dashboard-shell {
-  --ep-brand-primary: #60a5fa;
-  --ep-brand-secondary: #93c5fd;
+  --ep-brand-primary: #45c5b3;
+  --ep-brand-secondary: #70d7c8;
   --ep-status-success: #86efac;
   --ep-status-success-bg: #123c2a;
   --ep-status-warning: #fcd34d;
   --ep-status-warning-bg: #49320d;
   --ep-status-danger: #fca5a5;
   --ep-status-danger-bg: #4a1d22;
-  --ep-status-info: #93c5fd;
-  --ep-status-info-bg: #172f50;
+  --ep-status-info: #70d7c8;
+  --ep-status-info-bg: #153a3e;
   --ep-status-neutral: #cbd5e1;
   --ep-status-neutral-bg: #263244;
   --ep-accent: var(--ep-brand-primary);
-  --ep-accent-hover: #93c5fd;
+  --ep-accent-hover: #70d7c8;
   --coral: var(--ep-brand-primary);
   --coral-dim: var(--ep-accent-hover);
   --ep-secondary: var(--ep-brand-secondary);
@@ -302,7 +302,7 @@ html.dark .dashboard-shell {
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 .dashboard-shell .dashboard-sensor-gauge svg {
-  filter: drop-shadow(0 5px 8px rgba(29,78,216,.10));
+  filter: drop-shadow(0 5px 8px rgba(8,126,139,.10));
 }
 .dashboard-shell .dashboard-trend-chart {
   border: 1px solid var(--ep-line);
@@ -318,7 +318,7 @@ html.dark .dashboard-shell {
 }
 .dashboard-shell .dashboard-trend-chart polyline {
   stroke: var(--ep-accent);
-  filter: drop-shadow(0 3px 4px rgba(29,78,216,.18));
+  filter: drop-shadow(0 3px 4px rgba(8,126,139,.18));
 }
 .dashboard-shell .dashboard-trend-chart circle[stroke="var(--coral)"] {
   stroke: var(--ep-accent);
@@ -338,7 +338,7 @@ html.dark .dashboard-shell {
 .dashboard-shell .dashboard-hover:hover {
   border-color: var(--ep-accent);
   background: color-mix(in srgb,var(--ep-surface) 94%,var(--ep-accent));
-  box-shadow: 0 14px 28px -22px rgba(29,78,216,.34);
+  box-shadow: 0 14px 28px -22px rgba(8,126,139,.34);
 }
 .dashboard-shell main > div > .mb-7.flex {
   border-color: var(--ep-line);
@@ -359,7 +359,7 @@ html.dark .dashboard-shell .dashboard-sensor-gauge {
 }
 html.dark .dashboard-shell .dashboard-trend-chart {
   background:
-    radial-gradient(ellipse at 90% 0%,rgba(96,165,250,.13),transparent 48%),
+    radial-gradient(ellipse at 90% 0%,rgba(69,197,179,.13),transparent 48%),
     var(--ep-tint);
 }
 @media (hover:hover) and (prefers-reduced-motion:no-preference) {
@@ -368,7 +368,7 @@ html.dark .dashboard-shell .dashboard-trend-chart {
   .dashboard-shell .dashboard-sensor-gauge:hover {
     transform: translateY(-3px);
     border-color: var(--ep-accent);
-    box-shadow: 0 24px 48px -32px rgba(29,78,216,.28);
+    box-shadow: 0 24px 48px -32px rgba(8,126,139,.28);
   }
 }
 @media (max-width: 767px) {
@@ -566,15 +566,22 @@ html.dark .dashboard-shell .dashboard-trend-chart {
 /* Desktop dashboard composition: persistent sidebar and a centered, readable workspace. */
 @media (min-width: 1024px) {
   .dashboard-shell main {
-    width: calc(100% - 260px);
+    width: calc(100% - var(--dashboard-sidebar-width, 260px));
     max-width: none;
-    margin-left: 260px;
+    margin-left: var(--dashboard-sidebar-width, 260px);
     margin-right: 0;
     padding: 1.75rem clamp(1.5rem, 2.4vw, 2.75rem) 5rem !important;
+    transition: margin-left 300ms ease, width 300ms ease;
   }
 
   .dashboard-shell aside#dashboard-sidebar {
     top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell main {
+    transition: none !important;
   }
 }
 
@@ -1881,6 +1888,25 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
   }
 }
 
+/* Dashboard overview title: keep its eyebrow, heading, and description stacked. */
+.dashboard-shell header.dashboard-page-header,
+.dashboard-shell header.dashboard-page-header > div,
+.dashboard-shell header.dashboard-page-header > div > :is(div, h1, p) {
+  display: block !important;
+  width: 100%;
+  min-width: 0;
+  float: none;
+  clear: both;
+}
+.dashboard-shell header.dashboard-page-header h1 {
+  margin: 0;
+  text-align: left;
+}
+.dashboard-shell header.dashboard-page-header p {
+  margin-top: .5rem;
+  text-align: left;
+}
+
 /* ---------- Phase 6: shared responsive dashboard page chrome ---------- */
 .dashboard-shell .dashboard-page-header {
   min-width: 0;
@@ -1895,10 +1921,10 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
 .dashboard-shell .dashboard-page-header :is(p, div) {
   min-width: 0;
 }
-.dashboard-shell .dashboard-page-header > :last-child {
+.dashboard-shell .dashboard-page-header > :last-child:not(:first-child) {
   max-width: 100%;
 }
-.dashboard-shell .dashboard-page-header > :last-child > :is(button, a) {
+.dashboard-shell .dashboard-page-header > :last-child:not(:first-child) > :is(button, a) {
   min-height: 44px;
 }
 .dashboard-shell .dashboard-page-header :is(button, a):focus-visible {
@@ -1916,14 +1942,14 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
   .dashboard-shell .dashboard-page-header > :first-child {
     width: 100%;
   }
-  .dashboard-shell .dashboard-page-header > :last-child {
+  .dashboard-shell .dashboard-page-header > :last-child:not(:first-child) {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: .55rem;
   }
-  .dashboard-shell .dashboard-page-header > :last-child > :is(button, a) {
+  .dashboard-shell .dashboard-page-header > :last-child:not(:first-child) > :is(button, a) {
     min-height: 44px;
   }
   .dashboard-shell .dashboard-page-header h1 {
@@ -1936,7 +1962,7 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
     white-space: normal;
     line-height: 1.35;
   }
-  .dashboard-shell .dashboard-page-header > :last-child > button {
+  .dashboard-shell .dashboard-page-header > :last-child:not(:first-child) > button {
     flex: 0 0 auto;
   }
   .dashboard-shell .dashboard-panel,
@@ -1976,7 +2002,7 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
     align-items: flex-start;
     gap: .9rem;
   }
-  .dashboard-shell .dashboard-page-header > :last-child {
+  .dashboard-shell .dashboard-page-header > :last-child:not(:first-child) {
     flex-wrap: wrap;
     justify-content: flex-start;
   }

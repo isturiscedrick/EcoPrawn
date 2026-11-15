@@ -56,7 +56,7 @@ export function AquacultureIllustration({
         <defs>
           <linearGradient id={`ep-illustration-gradient-${variant}`} x1="100" y1="30" x2="420" y2="250" gradientUnits="userSpaceOnUse">
             <stop stopColor="var(--ep-accent)" stopOpacity=".22" />
-            <stop offset="1" stopColor="#38BDF8" stopOpacity=".08" />
+            <stop offset="1" stopColor="var(--ep-brand-soft, #45c5b3)" stopOpacity=".12" />
           </linearGradient>
         </defs>
         <rect x="74" y="26" width="372" height="228" rx="30" fill={`url(#ep-illustration-gradient-${variant})`} />

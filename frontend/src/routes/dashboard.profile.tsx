@@ -21,7 +21,7 @@ function ProfilePage() {
           User Profile
         </h1>
         <p className="mt-2 text-[15px] text-[rgba(11,35,32,0.68)]">
-          Manage the identity shown in your EcoPrawn dashboard.
+          Update your profile details.
         </p>
       </div>
       <ProfileEditForm />

@@ -4,11 +4,10 @@ import { DashboardViewSkeleton } from "@/features/dashboard/components/Dashboard
 import { DonutChart, FeedingProgressChart, GrowthHistoryChart, WaterHistoryChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
-
 const TANK_COLORS = ["#D85A35", "#167C80", "#6D67B2", "#C18A27", "#39865B", "#B34E83"];
 
 export function Analytics() {
-  const { tanks, growthHistory = [], waterHistory = [], loading, lastUpdatedAt } = useTanks();
+  const { tanks, growthHistory = [], waterHistory = [], loading } = useTanks();
 
   const metrics = useMemo(() => ({
     totalBiomass: tanks.reduce((sum, tank) => sum + tank.biomass, 0),
@@ -36,11 +35,11 @@ export function Analytics() {
           <div className="ep-font-mono mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
             Production intelligence
           </div>
-          <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)]">
+          <h1 className="ep-font-display text-[26px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)] sm:text-[30px]">
             Analytics
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-[var(--ep-text-muted)]">
-            Explore production performance, shrimp growth, sensor history, and feeding efficiency across your facility.
+            Track growth, water quality, biomass, and feeding.
           </p>
         </div>
         <button
@@ -73,17 +72,12 @@ export function Analytics() {
             });
             downloadCsv(`ecoprawn-analytics-${new Date().toISOString().slice(0, 10)}.csv`, ["Record type", "Tank", "Recorded at", "Metric", "Value", "Unit"], rows);
           }}
-          className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]"
+          className="inline-flex min-h-11 w-full touch-manipulation items-center justify-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-sm font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] sm:w-auto"
         >
           <span aria-hidden="true">↓</span> Export CSV
         </button>
-        <div className="inline-flex items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-xs text-[var(--ep-text-muted)]">
-          <span className="h-2 w-2 rounded-full bg-[var(--ep-status-success)]" />
-          {lastUpdatedAt ? `Data updated ${lastUpdatedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : "Awaiting data"}
-        </div>
       </div>
-
-      <section aria-label="Facility analytics summary" className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section aria-label="Facility analytics summary" className="mb-5 grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
         <KpiCard label="Total biomass" value={metrics.totalBiomass.toFixed(1)} unit="kg" delta="Combined across all tanks" deltaTone="ok" />
         <KpiCard label="Estimated population" value={metrics.totalPopulation.toLocaleString()} unit="shrimp" delta="Current facility estimate" deltaTone="ok" />
         <KpiCard label="Average body length" value={tanks.length ? metrics.avgBodyLength.toFixed(1) : "—"} unit="cm" delta="Based on latest tank scans" deltaTone="ok" />
@@ -96,18 +90,18 @@ export function Analytics() {
         </Panel>
         <Panel title="Tank health distribution" icon="activity" badge={`${tanks.length} tanks monitored`}>
           <DonutChart items={healthDistribution} unit="tanks" emptyLabel="Add tanks to see health distribution." />
-          <p className="mt-2 text-center text-[11px] text-[var(--ep-text-muted)]">Health status follows the current water-quality thresholds.</p>
+          <p className="mt-2 text-center text-[11px] text-[var(--ep-text-muted)]">Based on current water limits.</p>
         </Panel>
       </div>
 
       <div className="mb-5">
-        <Panel title="Shrimp growth analysis" icon="chart-no-axes-combined" badge={`${growthHistory.length} timestamped scans`}>
+        <Panel title="Growth analysis" icon="chart-no-axes-combined" badge={`${growthHistory.length} scans`}>
           <GrowthHistoryChart data={growthHistory} />
         </Panel>
       </div>
 
       <div className="mb-5">
-        <Panel title="Water quality trends" icon="activity" badge={`${waterHistory.length} sensor readings`}>
+        <Panel title="Water quality trends" icon="activity" badge={`${waterHistory.length} readings`}>
           <WaterHistoryChart data={waterHistory} tanks={tanks.map(tank => ({ id: tank.id, name: tank.name }))} />
         </Panel>
       </div>
@@ -119,7 +113,7 @@ export function Analytics() {
       </Panel>
 
       <p className="mt-4 text-xs text-[var(--ep-text-muted)]">
-        Charts use the latest available tank records and timestamped sensor and vision history. Historical points are shown as recorded; no missing values or dates are fabricated.
+        Charts use recorded tank, sensor, and vision data. Missing values are not estimated.
       </p>
     </>
   );

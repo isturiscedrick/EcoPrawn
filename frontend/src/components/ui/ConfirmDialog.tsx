@@ -9,6 +9,7 @@ interface ConfirmDialogProps {
   tone?: "default" | "danger";
   onConfirm: () => void;
   onCancel: () => void;
+  showCancel?: boolean;
 }
 
 export function ConfirmDialog({
@@ -20,6 +21,7 @@ export function ConfirmDialog({
   tone = "default",
   onConfirm,
   onCancel,
+  showCancel = true,
 }: ConfirmDialogProps) {
   const titleId = useId();
   const descId = useId();
@@ -56,8 +58,8 @@ export function ConfirmDialog({
 
   const confirmClass =
     tone === "danger"
-      ? "bg-[var(--danger)] hover:bg-[#b93a3a]"
-      : "bg-[var(--coral)] hover:bg-[var(--coral-dim)]";
+      ? "bg-[var(--ep-status-danger)] hover:brightness-95"
+      : "bg-[var(--ep-accent)] hover:bg-[var(--ep-accent-hover)]";
 
   return (
     <div
@@ -73,33 +75,33 @@ export function ConfirmDialog({
         className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.72)]"
       />
 
-      <div className="ep-pop-in relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--sand-dim)] bg-[var(--sand)] p-6 shadow-[var(--shadow-overlay)] dark:border-[rgba(255,255,255,0.12)] dark:bg-[#111827] dark:shadow-[0_28px_90px_rgba(0,0,0,0.7)]">
+      <div className="ep-pop-in relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[var(--shadow-overlay)] dark:border-[rgba(255,255,255,0.12)] dark:bg-[#111827] dark:shadow-[0_28px_90px_rgba(0,0,0,0.7)]">
         <h2
           id={titleId}
-          className="ep-font-display mb-1.5 text-[18px] font-semibold text-[var(--water-deep)] dark:text-[#f8fafc]"
+          className="ep-font-display mb-1.5 text-[18px] font-semibold text-[var(--ep-text)]"
         >
           {title}
         </h2>
         <div
           id={descId}
-          className="mb-6 text-[13px] leading-[1.55] text-[rgba(11,35,32,0.6)] dark:text-[#cbd5e1]"
+          className="mb-6 text-[13px] leading-[1.55] text-[var(--ep-text-muted)]"
         >
           {description}
         </div>
         <div className="flex gap-3">
-          <button
+          {showCancel && <button
             ref={cancelRef}
             type="button"
             onClick={onCancel}
-            className="flex-1 rounded-lg border border-[var(--sand-dim)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--water-deep)] transition-colors hover:bg-[rgba(11,35,32,0.05)] dark:border-[rgba(255,255,255,0.18)] dark:text-[#f8fafc] dark:hover:bg-[rgba(255,255,255,0.08)]"
+            className="flex-1 rounded-lg border border-[var(--ep-line)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-text)] transition-colors hover:bg-[var(--ep-tint)]"
           >
             {cancelLabel}
-          </button>
+          </button>}
           <button
             ref={confirmRef}
             type="button"
             onClick={onConfirm}
-            className={`flex-1 rounded-lg px-4 py-2.5 text-[13.5px] font-semibold text-[var(--sand)] transition-colors ${confirmClass}`}
+            className={`${showCancel ? "flex-1" : "w-full"} rounded-lg px-4 py-2.5 text-[13.5px] font-semibold text-white transition-colors ${confirmClass}`}
           >
             {confirmLabel}
           </button>

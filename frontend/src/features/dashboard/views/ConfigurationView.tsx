@@ -18,7 +18,7 @@ export function ConfigurationView() {
   if (loading) return <DashboardViewSkeleton variant="tanks" />;
 
   return (
-    <div className="mx-auto w-full max-w-5xl space-y-6">
+    <div className="mx-auto w-full max-w-none space-y-6">
       <header className="border-b border-[var(--ep-line)] pb-6">
         <Link to="/dashboard/settings" className="mb-3 inline-flex items-center gap-2 text-xs font-semibold text-[var(--ep-primary)] hover:underline">
           <Icon name="arrow-left" size={14} /> Back to Settings
@@ -27,7 +27,7 @@ export function ConfigurationView() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Configuration</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Manage device connections and hardware settings for your facility.</p>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Manage ESP32 connections and settings.</p>
           </div>
           <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold ${status === "connected" ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300" : status === "connecting" ? "border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300" : "border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)]"}`}>
             <span className={`h-2 w-2 rounded-full ${status === "connected" ? "bg-emerald-500" : status === "connecting" ? "bg-amber-500" : "bg-[var(--ep-text-muted)]"}`} />
@@ -41,7 +41,7 @@ export function ConfigurationView() {
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-primary)]"><Icon name="cpu" size={21} /></span>
           <div>
             <h2 className="text-base font-semibold text-[var(--ep-text)]">ESP32 device connection</h2>
-            <p className="mt-1 text-sm leading-6 text-[var(--ep-text-muted)]">Connect the ESP32 over USB, assign it to a tank, and configure sensor calibration.</p>
+            <p className="mt-1 text-sm leading-6 text-[var(--ep-text-muted)]">Connect ESP32, assign a tank, and calibrate sensors.</p>
           </div>
         </div>
 
@@ -51,8 +51,8 @@ export function ConfigurationView() {
           <div className="rounded-xl border border-dashed border-[var(--ep-line)] px-5 py-10 text-center">
             <Icon name="layers" size={25} />
             <h3 className="mt-3 text-sm font-semibold text-[var(--ep-text)]">No tanks available</h3>
-            <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Add a tank before assigning an ESP32 device.</p>
-            <Link to="/dashboard/tanks" className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[var(--ep-primary)] px-4 py-2.5 text-sm font-semibold text-white"><Icon name="plus" size={15} /> Go to Tanks</Link>
+            <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Add a tank to assign this device.</p>
+            <Link to="/dashboard/tanks" className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[var(--ep-primary)] px-4 py-2.5 text-sm font-semibold text-white"><Icon name="plus" size={15} /> View tanks</Link>
           </div>
         ) : (
           <>

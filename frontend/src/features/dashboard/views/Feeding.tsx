@@ -49,7 +49,7 @@ export function Feeding() {
         </button>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
-          {nextEntry ? `Next dispense · ${nextEntry.time}` : "All cycles complete"}
+          {nextEntry ? `Next dispense · ${nextEntry.time}` : "All complete"}
         </div>
       </div>
 
@@ -60,14 +60,14 @@ export function Feeding() {
               <DonutChart items={[
                 { label: "Dispensed", value: feedSchedule.filter(f => f.status === "done").length, color: "#39865B" },
                 { label: "Upcoming", value: feedSchedule.filter(f => f.status === "upcoming").length, color: "#C18A27" },
-              ]} unit="cycles" emptyLabel="No feeding cycles are scheduled." />
+              ]} unit="cycles" emptyLabel="No cycles scheduled." />
             </Panel>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-4 mb-4">
-            <Panel title="Today's Feed Schedule" badge={`${visibleSchedule.length} of ${feedSchedule.length} cycles`}>
+            <Panel title="Today's schedule" badge={`${visibleSchedule.length} of ${feedSchedule.length} cycles`}>
               <div className="mb-3 flex flex-wrap gap-2" role="group" aria-label="Filter feeding schedule">
-                {(["all", "upcoming", "done"] as const).map(option => <button key={option} type="button" aria-pressed={scheduleFilter === option} onClick={() => setScheduleFilter(option)} className="min-h-9 rounded-full border border-[var(--ep-line)] px-3 text-xs font-semibold capitalize text-[var(--ep-text-muted)] hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-[var(--ep-primary)]">{option === "all" ? "All cycles" : option === "done" ? "Dispensed" : "Upcoming"}</button>)}
+                {(["all", "upcoming", "done"] as const).map(option => <button key={option} type="button" aria-pressed={scheduleFilter === option} onClick={() => setScheduleFilter(option)} className="min-h-9 rounded-full border border-[var(--ep-line)] px-3 text-xs font-semibold capitalize text-[var(--ep-text-muted)] hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-[var(--ep-primary)]">{option === "all" ? "All" : option === "done" ? "Dispensed" : "Upcoming"}</button>)}
               </div>
               <div className="flex flex-col gap-2.5">
                 {visibleSchedule.map((f) => (
@@ -99,7 +99,7 @@ export function Feeding() {
                 ))}
                 {visibleSchedule.length === 0 && (
                   <p className="rounded-xl border border-dashed border-[var(--ep-line)] px-4 py-7 text-center text-xs text-[var(--ep-text-muted)]">
-                    {feedSchedule.length === 0 ? "No feeding cycles are scheduled." : "No cycles match this filter."}
+                    {feedSchedule.length === 0 ? "No cycles scheduled." : "No cycles match this filter."}
                   </p>
                 )}
               </div>
@@ -154,7 +154,7 @@ export function Feeding() {
       ) : (
         <Panel title="Feed Allocation" badge="0 tanks">
           <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
-            No tanks yet — add one on the Tanks page to see feeding data.
+            No tanks yet. Add one to view feeding data.
           </div>
         </Panel>
       )}

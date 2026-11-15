@@ -106,9 +106,9 @@ export function HeroAquaticScene() {
           positions[i3 + 2] = -((i * 37) % 90) / 15;
           basePositions.set(positions.subarray(i3, i3 + 3), i3);
           const cool = (i % 4) / 3;
-          colors[i3] = 0.28 + cool * 0.12;
-          colors[i3 + 1] = 0.58 + cool * 0.22;
-          colors[i3 + 2] = 0.95 + cool * 0.05;
+          colors[i3] = 0.04 + cool * 0.10;
+          colors[i3 + 1] = 0.48 + cool * 0.22;
+          colors[i3 + 2] = 0.52 + cool * 0.20;
           phases[i] = seed * 0.01;
           speeds[i] = 0.18 + ((i * 13) % 9) * 0.018;
         }
