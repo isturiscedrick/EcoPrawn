@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEsp32 } from "@/features/dashboard/context/Esp32Context";
 import { Icon } from "@/components/ui/Icon";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
@@ -8,6 +9,7 @@ import { useTanks, type Tank, type NewTankInput } from "@/features/dashboard/con
 
 export function TanksView() {
   const { tanks, loading, error, addTank, updateTank, removeTank, isDbConnected, lastUpdatedAt } = useTanks();
+  const { status: esp32Status, tankId: connectedTankId } = useEsp32();
   const [adding, setAdding] = useState(false);
   const [editingTank, setEditingTank] = useState<Tank | null>(null);
   const [deletingTank, setDeletingTank] = useState<Tank | null>(null);
@@ -92,6 +94,7 @@ export function TanksView() {
                     <div className="min-w-0">
                       <h3 className="truncate text-base font-semibold text-[var(--ep-text)]">{tank.name}</h3>
                       <p className="mt-0.5 text-xs text-[var(--ep-text-muted)]">PL batch: {tank.pl}</p>
+                      <span className={`mt-1 inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-semibold ${esp32Status === "connected" && connectedTankId === tank.id ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300" : "bg-slate-500/10 text-[var(--ep-text-muted)]"}`}><span className={`h-1.5 w-1.5 rounded-full ${esp32Status === "connected" && connectedTankId === tank.id ? "bg-emerald-500" : "bg-slate-400"}`} />ESP32 {esp32Status === "connected" && connectedTankId === tank.id ? "Connected" : "Disconnected"}</span>
                     </div>
                   </div>
                   <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ${tank.status === "ok" ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300" : "bg-amber-500/10 text-amber-700 dark:text-amber-300"}`}>
