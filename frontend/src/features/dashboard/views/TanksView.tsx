@@ -15,6 +15,8 @@ export function TanksView() {
   const [deletingTank, setDeletingTank] = useState<Tank | null>(null);
   const [actionError, setActionError] = useState("");
   const [expandedTankId, setExpandedTankId] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | "healthy" | "attention">("all");
 
   async function handleAdd(input: NewTankInput) {
     setActionError("");
@@ -36,6 +38,13 @@ export function TanksView() {
     const removed = await removeTank(tank.id);
     if (!removed) setActionError(`Unable to delete ${tank.name}. Please try again.`);
   }
+
+  const normalizedSearch = searchTerm.trim().toLocaleLowerCase();
+  const filteredTanks = tanks.filter(tank => {
+    const matchesSearch = !normalizedSearch || tank.name.toLocaleLowerCase().includes(normalizedSearch) || tank.pl.toLocaleLowerCase().includes(normalizedSearch);
+    const matchesStatus = statusFilter === "all" || (statusFilter === "healthy" ? tank.status === "ok" : tank.status !== "ok");
+    return matchesSearch && matchesStatus;
+  });
 
   if (loading) return <DashboardViewSkeleton variant="tanks" />;
 
@@ -75,7 +84,22 @@ export function TanksView() {
             <h2 id="tank-list-heading" className="text-base font-semibold text-[var(--ep-text)]">All tanks</h2>
             <p className="mt-1 text-xs text-[var(--ep-text-muted)]">{isDbConnected ? "Facility data is synced." : "Unable to confirm the latest server connection."}{lastUpdatedAt ? ` Last updated ${lastUpdatedAt.toLocaleTimeString()}.` : ""}</p>
           </div>
-          <span className="rounded-full border border-[var(--ep-line)] px-3 py-1 text-xs font-medium text-[var(--ep-text-muted)]">{tanks.length} {tanks.length === 1 ? "tank" : "tanks"}</span>
+          <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+            <label className="relative block min-w-0 sm:w-56">
+              <span className="sr-only">Search tanks by name or PL batch</span>
+              <Icon name="search" size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--ep-text-muted)]" />
+              <input type="search" value={searchTerm} onChange={event => setSearchTerm(event.target.value)} placeholder="Search tanks or PL batch" className="min-h-10 w-full rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] py-2 pl-9 pr-3 text-xs text-[var(--ep-text)] outline-none transition placeholder:text-[var(--ep-text-muted)] focus:border-[var(--ep-primary)] focus:ring-2 focus:ring-[var(--ep-primary)]/15" />
+            </label>
+            <label className="block sm:w-40">
+              <span className="sr-only">Filter tanks by health status</span>
+              <select value={statusFilter} onChange={event => setStatusFilter(event.target.value as "all" | "healthy" | "attention")} className="min-h-10 w-full rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-xs font-medium text-[var(--ep-text)] outline-none transition focus:border-[var(--ep-primary)] focus:ring-2 focus:ring-[var(--ep-primary)]/15">
+                <option value="all">All statuses</option>
+                <option value="healthy">Healthy</option>
+                <option value="attention">Needs attention</option>
+              </select>
+            </label>
+            <span className="whitespace-nowrap rounded-full border border-[var(--ep-line)] px-3 py-2 text-xs font-medium text-[var(--ep-text-muted)]">{filteredTanks.length} of {tanks.length} shown</span>
+          </div>
         </div>
 
         {tanks.length === 0 ? (
@@ -85,9 +109,16 @@ export function TanksView() {
             <p className="mx-auto mt-1 max-w-sm text-sm leading-6 text-[var(--ep-text-muted)]">Create your first tank to start organizing facility records and monitoring its production details.</p>
             <button type="button" onClick={() => setAdding(true)} className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-lg bg-[var(--ep-primary)] px-4 text-sm font-semibold text-white hover:opacity-90"><Icon name="plus" size={16} /> Add your first tank</button>
           </div>
+        ) : filteredTanks.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] px-5 py-10 text-center">
+            <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--ep-tint)] text-[var(--ep-primary)]"><Icon name="search" size={20} /></div>
+            <h3 className="mt-3 text-sm font-semibold text-[var(--ep-text)]">No matching tanks</h3>
+            <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Try another tank name, PL batch, or health status.</p>
+            <button type="button" onClick={() => { setSearchTerm(""); setStatusFilter("all"); }} className="mt-4 inline-flex min-h-9 items-center rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition hover:bg-[var(--ep-tint)]">Clear filters</button>
+          </div>
         ) : (
           <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-            {tanks.map(tank => (
+            {filteredTanks.map(tank => (
               <article key={tank.id} className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 shadow-sm transition hover:shadow-md">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex min-w-0 items-center gap-3">
