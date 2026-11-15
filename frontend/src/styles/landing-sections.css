@@ -297,7 +297,7 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #45c5b3; box-
   position: absolute; left: clamp(20px,4vw,38px); top: 28px; z-index: 2; color: #fff;
 }
 .ep-business-landing .ep-showcase-water-label span {
-  display: block; margin-bottom: 12px; color: #bfdbfe; font-size: 10px; font-weight: 800; letter-spacing: .18em;
+  display: block; margin-bottom: 12px; color: #70d7c8; font-size: 10px; font-weight: 800; letter-spacing: .18em;
 }
 .ep-business-landing .ep-showcase-water-label strong {
   display: block; font-size: clamp(26px,3vw,40px); line-height: 1.04; letter-spacing: -.045em;
