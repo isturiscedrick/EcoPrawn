@@ -131,7 +131,7 @@ html.dark .dashboard-shell .bg-\[var\(--water-deep\)\] {
 
 html.dark .dashboard-shell .dashboard-nav-active {
   background-color: #1f2937;
-  border-color: rgba(242, 138, 104, 0.7);
+  border-color: rgba(69, 197, 179, 0.7);
   color: #f8fafc;
   box-shadow: 0 6px 16px -10px rgba(0, 0, 0, 0.8);
 }
