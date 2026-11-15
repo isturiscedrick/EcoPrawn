@@ -237,7 +237,7 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
 html.dark .ep-business-landing .ep-hero {
   background:
     radial-gradient(ellipse at 78% 48%, rgba(69,197,179,.16), transparent 40%),
-    linear-gradient(135deg, #090d16 0%, #111827 68%, #0b1220 100%);
+    linear-gradient(135deg, #0b171b 0%, #102328 68%, #153a3e 100%);
 }
 .ep-business-landing .ep-hero-layout {
   min-height: min(790px, calc(100svh - 76px));
