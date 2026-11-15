@@ -215,13 +215,13 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                     <p className="mt-0.5 truncate text-[11px] font-medium tracking-wide text-[var(--ep-text-muted)]">{profileRole}</p>
                   </div>
                   <div className="mt-1 grid grid-cols-2 gap-1">
-                    <Link to="/dashboard/profile" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="flex min-h-11 items-center gap-2 rounded-xl px-2.5 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
-                      <Icon name="user-round" size={17} />
-                      <span>View profile</span>
+                    <Link to="/dashboard/profile" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="flex min-h-11 min-w-0 items-center gap-2 whitespace-nowrap rounded-xl px-2.5 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
+                      <Icon name="user-round" size={17} className="shrink-0" />
+                      <span className="whitespace-nowrap">View profile</span>
                     </Link>
                     <Link to="/dashboard/settings" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="flex min-h-11 items-center gap-2 rounded-xl px-2.5 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
-                      <Icon name="settings" size={17} />
-                      <span>Settings</span>
+                      <Icon name="settings" size={17} className="shrink-0" />
+                      <span className="whitespace-nowrap">Settings</span>
                     </Link>
                   </div>
                   <button
