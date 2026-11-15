@@ -1051,3 +1051,79 @@ html.dark .ep-auth-modal input {
   background: var(--ep-page-surface) !important;
   color: var(--ep-page-text) !important;
 }
+
+
+/* Dark-mode last-mile correction for landing metric cards and authentication.
+   Keep every interactive accent on Ocean Teal and remove leftover navy/slate
+   surfaces that made these components look like the previous theme. */
+html.dark .ep-business-landing .ep-stats-panel,
+html.dark .ep-business-landing .ep-stats-panel > div {
+  border-color: #285158 !important;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(69,197,179,.14), transparent 58%),
+    #102328 !important;
+  color: #e8f4f2 !important;
+}
+html.dark .ep-business-landing .ep-stats-panel > div::before {
+  background: linear-gradient(180deg, #45c5b3, #70d7c8) !important;
+}
+html.dark .ep-business-landing .ep-stats-panel :is(strong,span,p) {
+  --ep-accent: #45c5b3;
+}
+html.dark .ep-auth-overlay [data-auth-backdrop] {
+  background: rgba(3,18,22,.78) !important;
+}
+html.dark .ep-auth-modal {
+  --ep-bg: #0b171b !important;
+  --ep-surface: #102328 !important;
+  --ep-tint: #153a3e !important;
+  --ep-line: #285158 !important;
+  --ep-accent: #45c5b3 !important;
+  --ep-accent-hover: #70d7c8 !important;
+  --ep-on-accent: #092b31 !important;
+  background: #102328 !important;
+  border-color: #285158 !important;
+  color: #e8f4f2 !important;
+}
+html.dark .ep-auth-modal :is(div:has(> form),[role="status"],[role="alert"]) {
+  background: #153a3e !important;
+  border-color: #285158 !important;
+  color: #e8f4f2 !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] {
+  background: #0b171b !important;
+  border-color: #285158 !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"],
+html.dark .ep-auth-modal button[type="submit"] {
+  background: #45c5b3 !important;
+  border-color: #45c5b3 !important;
+  color: #092b31 !important;
+}
+html.dark .ep-auth-modal :is(input,button:has(> svg[viewBox="0 0 48 48"])) {
+  background: #0b171b !important;
+  border-color: #285158 !important;
+  color: #e8f4f2 !important;
+}
+html.dark .ep-auth-modal :is(input,button:has(> svg[viewBox="0 0 48 48"])):focus,
+html.dark .ep-auth-modal :is(input,button:has(> svg[viewBox="0 0 48 48"])):hover {
+  border-color: #45c5b3 !important;
+}
+html.dark .ep-auth-modal :is(button,a,input):focus-visible {
+  outline: 2px solid #45c5b3 !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(69,197,179,.18) !important;
+}
+html.dark .ep-auth-modal button[aria-label="Close"]:hover,
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled),
+html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
+  background: #153a3e !important;
+  border-color: #45c5b3 !important;
+  color: #70d7c8 !important;
+}
+@media (max-width: 639px) {
+  html.dark .ep-auth-modal {
+    background: #102328 !important;
+    border-color: #285158 !important;
+  }
+}
