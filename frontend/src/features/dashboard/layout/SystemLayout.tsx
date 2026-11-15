@@ -39,7 +39,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       wasMobileSidebarOpen.current = false;
     }
   }, [mobileSidebarOpen]);
-  const [darkMode, setDarkMode] = useState(() => typeof window !== "undefined" && window.localStorage.getItem("ep-dashboard-theme") === "dark");
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -120,31 +119,11 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   }, []);
 
   useEffect(() => {
-    const syncTheme = () => setDarkMode(window.localStorage.getItem("ep-dashboard-theme") === "dark");
-    window.addEventListener("ecoprawn-theme-change", syncTheme);
-    window.addEventListener("storage", syncTheme);
-    return () => {
-      window.removeEventListener("ecoprawn-theme-change", syncTheme);
-      window.removeEventListener("storage", syncTheme);
-    };
-  }, []);
-
-  useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const toggleTheme = () => {
-    const next = !darkMode;
-    window.localStorage.setItem("ep-dashboard-theme", next ? "dark" : "light");
-    document.documentElement.classList.toggle("dark", next);
-    document.documentElement.classList.add("theme-transitioning");
-    window.setTimeout(() => document.documentElement.classList.remove("theme-transitioning"), 480);
-    setDarkMode(next);
-    window.dispatchEvent(new Event("ecoprawn-theme-change"));
-  };
 
   const normalizedSearch = searchQuery.trim().toLowerCase();
   const matchingPages = DASHBOARD_NAV_ITEMS.filter((item) =>
@@ -180,18 +159,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           </Link>
 
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-            <button
-              type="button"
-              onClick={toggleTheme}
-              role="switch"
-              aria-checked={darkMode}
-              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
-              style={{ color: "var(--ep-primary)", borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
-            >
-              {darkMode ? <Icon name="moon" size={18} strokeWidth={1.8} /> : <Icon name="sun" size={18} strokeWidth={1.8} />}
-            </button>
             <Link
               to="/dashboard/alerts"
               aria-label={activeAlertCount > 0 ? `Alerts, ${activeAlertCount} active` : "Alerts"}
@@ -278,7 +245,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       </header>
 
       {/* Persistent desktop navigation and mobile drawer. */}
-      <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} darkMode={darkMode} onToggleTheme={toggleTheme} />
+      <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} />
 
       {searchOpen && (
         <div className="fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/45 px-3 pt-[12vh] backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) setSearchOpen(false); }}>
