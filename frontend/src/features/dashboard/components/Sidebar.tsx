@@ -264,7 +264,7 @@ export function Sidebar({
         </div>
         <div className="shrink-0 border-b border-[var(--ep-line)] px-4 py-3">
           <Link to="/dashboard/profile" className="flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-3 text-left transition-colors hover:bg-[var(--ep-tint)]">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-[13px] font-semibold text-blue-800">{initials}</span>
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 text-blue-800" aria-hidden="true"><Icon name="user-round" size={19} strokeWidth={1.9} /></span>
             <span className="min-w-0">
               <span className="block truncate text-sm font-semibold text-[var(--ep-text)]">{profileName}</span>
               <span className="block truncate text-[11px] text-[var(--ep-text-muted)]">{profileRole}</span>
@@ -280,8 +280,8 @@ export function Sidebar({
           </nav>
         </div>
         <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-4">
-          <Link to="/dashboard/profile" aria-current={pathname === "/dashboard/profile" ? "page" : undefined} className={drawerRowClass}>
-            <span className="flex w-4 justify-center" aria-hidden="true"><Icon name="wrench" size={16} strokeWidth={1.8} /></span>
+          <Link to="/dashboard/settings" aria-current={pathname.startsWith("/dashboard/settings") ? "page" : undefined} className={drawerRowClass + (pathname.startsWith("/dashboard/settings") ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
+            <span className="flex w-5 shrink-0 items-center justify-center"><Icon name="settings" size={19} strokeWidth={1.8} /></span>
             Settings
           </Link>
           <button type="button" onClick={onLogoutClick} className="dashboard-logout-button flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-semibold transition-colors">
@@ -407,7 +407,7 @@ export function Sidebar({
                 style={{ background: "var(--ep-accent-tint)", color: "var(--ep-primary)" }}
                 aria-hidden="true"
               >
-                {initials}
+                <Icon name="user-round" size={19} strokeWidth={1.9} />
               </div>
               <div className="min-w-0">
                 <div className="truncate text-[15px] font-semibold text-[var(--ep-text)]">
@@ -439,19 +439,10 @@ export function Sidebar({
 
           {/* Account actions */}
           <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-surface)]/70 px-5 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-            <Link
-              to="/dashboard/profile"
-              aria-current={pathname === "/dashboard/profile" ? "page" : undefined}
-              className={`${drawerRowClass} ${
-                pathname === "/dashboard/profile" ? "dashboard-nav-active font-semibold" : ""
-              }`}
-              activeOptions={{ exact: true }}
-            >
-              <span className="flex w-4 justify-center" aria-hidden="true">
-                <Icon name="wrench" size={16} strokeWidth={1.8} />
-              </span>
-              Settings
-            </Link>
+          <Link to="/dashboard/settings" aria-current={pathname.startsWith("/dashboard/settings") ? "page" : undefined} className={drawerRowClass + (pathname.startsWith("/dashboard/settings") ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
+            <span className="flex w-4 justify-center"><Icon name="settings" size={16} /></span>
+            Settings
+          </Link>
             <button
               type="button"
               onClick={() => {

@@ -1,16 +1,19 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Icon } from "@/components/ui/Icon";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
+import { ProfileEditForm } from "@/features/dashboard/components/ProfileEditForm";
 
 function ProfileLoading() {
   return <DashboardViewSkeleton variant="profile" />;
 }
 
-import { createFileRoute } from "@tanstack/react-router";
-import { ProfileEditForm } from "@/features/dashboard/components/ProfileEditForm";
-
 function ProfilePage() {
   return (
     <>
       <div className="mb-7 border-b border-[rgba(11,46,51,0.12)] pb-7">
+        <Link to="/dashboard/settings" className="mb-3 inline-flex items-center gap-2 text-xs font-semibold text-[var(--ep-primary)] hover:underline">
+          <Icon name="arrow-left" size={14} /> Back to Settings
+        </Link>
         <div className="mb-2 ep-font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mangrove-text)]">
           Account settings
         </div>
