@@ -281,7 +281,7 @@ export function Sidebar({
         </div>
         <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-4">
           <Link to="/dashboard/settings" aria-current={pathname.startsWith("/dashboard/settings") ? "page" : undefined} className={drawerRowClass + (pathname.startsWith("/dashboard/settings") ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
-            <span className="flex w-4 justify-center"><Icon name="settings" size={16} /></span>
+            <span className="flex w-5 shrink-0 items-center justify-center"><Icon name="settings" size={19} strokeWidth={1.8} /></span>
             Settings
           </Link>
           <button type="button" onClick={onLogoutClick} className="dashboard-logout-button flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-semibold transition-colors">
