@@ -174,3 +174,71 @@ html.dark .ep-logo .ep-logo-text {
   fill: #ffffff !important;
   stroke: #ffffff !important;
 }
+
+
+/* Facility Operator dashboard refresh: aquatic teal with restrained semantic accents.
+   Scoped to the dashboard so public/marketing pages keep their existing palette. */
+.dashboard-shell {
+  --ep-brand-primary: #087e8b;
+  --ep-brand-secondary: #173b46;
+  --ep-primary: #173b46;
+  --ep-primary-soft: #245563;
+  --ep-secondary: #245563;
+  --ep-text: #173b46;
+  --ep-text-muted: #58717a;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #ffffff;
+  --ep-accent-tint: rgba(8, 126, 139, .11);
+  --ep-accent-tint-soft: rgba(8, 126, 139, .065);
+  --ep-secondary-tint: rgba(23, 59, 70, .07);
+  --ep-bg: #f3f8f8;
+  --ep-surface: #ffffff;
+  --ep-tint: #e9f5f3;
+  --ep-line: #d7e5e5;
+  --ep-status-success: #20a58f;
+  --ep-status-warning: #d99527;
+  --ep-status-danger: #d9534f;
+  background: #f3f8f8 !important;
+  color: #173b46;
+}
+html.dark .dashboard-shell {
+  --ep-brand-primary: #45c5b3;
+  --ep-brand-secondary: #d6eeeb;
+  --ep-primary: #e8f4f2;
+  --ep-primary-soft: #c9e2df;
+  --ep-secondary: #c9e2df;
+  --ep-text: #e8f4f2;
+  --ep-text-muted: #a7c2c1;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-accent-tint: rgba(69, 197, 179, .14);
+  --ep-accent-tint-soft: rgba(69, 197, 179, .08);
+  --ep-secondary-tint: rgba(214, 238, 235, .08);
+  --ep-bg: #0b1b20;
+  --ep-surface: #12282e;
+  --ep-tint: #1a353b;
+  --ep-line: #29464c;
+  --ep-status-success: #45c5b3;
+  --ep-status-warning: #f2b653;
+  --ep-status-danger: #f07872;
+  background: #0b1b20 !important;
+  color: #e8f4f2;
+}
+.dashboard-shell aside,
+html:not(.dark) .dashboard-shell aside { background: #ffffff !important; color: #173b46 !important; border-color: #d7e5e5 !important; }
+html.dark .dashboard-shell aside { background: #12282e !important; color: #e8f4f2 !important; border-color: #29464c !important; }
+.dashboard-shell .dashboard-nav-active,
+html:not(.dark) .dashboard-shell .dashboard-nav-active { background: #087e8b !important; border-color: #087e8b !important; color: #ffffff !important; }
+html.dark .dashboard-shell .dashboard-nav-active { background: #45c5b3 !important; border-color: #45c5b3 !important; color: #092b31 !important; }
+.dashboard-shell .dashboard-nav-active-dot { background: #087e8b !important; }
+html.dark .dashboard-shell .dashboard-nav-active-dot { background: #45c5b3 !important; }
+.dashboard-shell .dashboard-panel,
+.dashboard-shell .dashboard-kpi,
+.dashboard-shell .dashboard-tank-snapshot {
+  border-color: var(--ep-line);
+  box-shadow: 0 10px 28px -24px rgba(23, 59, 70, .45);
+}
+.dashboard-shell .dashboard-panel-icon { color: var(--ep-accent); background: var(--ep-accent-tint); }
+.dashboard-shell :is(button,a):focus-visible { outline-color: var(--ep-accent) !important; }
