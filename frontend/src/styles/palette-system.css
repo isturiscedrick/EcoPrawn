@@ -122,32 +122,12 @@ html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
 }
-/* Legacy Tailwind green/teal utility classes still present in marketing JSX. */
-:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="emerald-"],
-:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="green-"],
-:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="teal-"] {
-  --tw-text-opacity: 1;
-  --tw-bg-opacity: 1;
-  --tw-border-opacity: 1;
-  color: #066874 !important;
-  border-color: #087e8b !important;
-}
-:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-emerald-"],
-:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-green-"],
-:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-teal-"] {
-  background-color: #f1f5f9 !important;
-}
-html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="emerald-"],
-html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="green-"],
-html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="teal-"] {
-  color: #70d7c8 !important;
-  border-color: #45c5b3 !important;
-}
-html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-emerald-"],
-html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-green-"],
-html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-teal-"] {
-  background-color: #1f2937 !important;
-}
+/* Remap legacy teal utility classes to Ocean Teal. Preserve emerald/green
+   utilities for semantic success indicators. */
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="text-teal-"] { color: var(--ep-accent) !important; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="border-teal-"] { border-color: color-mix(in srgb,var(--ep-accent) 32%,transparent) !important; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-teal-"] { background-color: color-mix(in srgb,var(--ep-accent) 10%,var(--ep-surface)) !important; }
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-teal-"] { background-color: color-mix(in srgb,var(--ep-accent) 16%,var(--ep-surface)) !important; }
 
 /* Logo must be strictly monochrome on every page, including legacy footer rules. */
 html:not(.dark) .ep-logo,
@@ -704,3 +684,98 @@ html.dark .ecoprawn-root [class*="bg-orange-"],
 html.dark .ecoprawn-root [class*="bg-rose-"] { background-color: #153a3e !important; }
 html.dark .ecoprawn-root [class*="border-orange-"],
 html.dark .ecoprawn-root [class*="border-rose-"] { border-color: #23615f !important; }
+
+
+/* Ocean Teal final pass for public pages. These roots are .ep-landing,
+   .ep-about-page and .ep-contact-page (not .ecoprawn-root), so scope the
+   legacy utility cleanup to the actual rendered page roots. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-bg: #f8fbfb;
+  --ep-surface: #ffffff;
+  --ep-tint: #edf7f6;
+  --ep-line: #d5e7e5;
+  --ep-brand-soft: #45c5b3;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-bg: #0b171b;
+  --ep-surface: #102328;
+  --ep-tint: #153a3e;
+  --ep-line: #285158;
+  --ep-brand-soft: #70d7c8;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-blue-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-indigo-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-cyan-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-sky-"] { color: var(--ep-accent) !important; }
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="border-blue-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="border-indigo-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="border-cyan-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="border-sky-"] { border-color: color-mix(in srgb,var(--ep-accent) 34%,var(--ep-line)) !important; }
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-blue-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-indigo-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-cyan-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-sky-"] { background-color: color-mix(in srgb,var(--ep-accent) 9%,var(--ep-surface)) !important; }
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-blue-"],
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-indigo-"],
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-cyan-"],
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-sky-"] { background-color: color-mix(in srgb,var(--ep-accent) 15%,var(--ep-surface)) !important; }
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="from-blue-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="from-indigo-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="from-cyan-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="from-sky-"] { --tw-gradient-from: var(--ep-accent) var(--tw-gradient-from-position) !important; }
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="to-blue-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="to-indigo-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="to-cyan-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="to-sky-"] { --tw-gradient-to: var(--ep-brand-soft) var(--tw-gradient-to-position) !important; }
+
+/* Explicit section and card surfaces called out in the visual review. */
+.ep-business-landing .ep-illustration-strip {
+  background-image:
+    radial-gradient(ellipse at 82% 50%, color-mix(in srgb,var(--ep-accent) 10%,transparent),transparent 36%),
+    linear-gradient(105deg,color-mix(in srgb,var(--ep-tint) 92%,var(--ep-surface)),var(--ep-tint)) !important;
+}
+html.dark .ep-business-landing .ep-illustration-strip {
+  background-image:
+    radial-gradient(ellipse at 82% 50%,rgba(69,197,179,.13),transparent 36%),
+    linear-gradient(105deg,#153a3e,#0b2c34) !important;
+}
+.ep-business-landing .ep-hero-monitor-panel {
+  background:
+    radial-gradient(ellipse at 88% 0%,rgba(8,126,139,.20),transparent 48%),
+    radial-gradient(ellipse at 0% 100%,rgba(69,197,179,.14),transparent 48%),
+    linear-gradient(145deg,#123c43,#092b31) !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel {
+  background:
+    radial-gradient(ellipse at 88% 0%,rgba(8,126,139,.13),transparent 48%),
+    radial-gradient(ellipse at 0% 100%,rgba(69,197,179,.09),transparent 48%),
+    linear-gradient(145deg,#ffffff 0%,#f5fbfa 58%,#e6f4f3 100%) !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-100\/75 { color:#087e8b !important; }
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-100\/65 { color:#426b70 !important; }
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-teal-300\/10 { background-color:rgba(217,240,239,.8) !important; }
+.ep-about-page .ep-about-mission,
+.ep-about-page .ep-about-journey,
+.ep-about-page #scope,
+.ep-contact-page .ep-contact-intro,
+.ep-contact-page .ep-contact-details-section {
+  background-color:var(--ep-tint) !important;
+  background-image:radial-gradient(ellipse at 88% 18%,color-mix(in srgb,var(--ep-accent) 8%,transparent),transparent 48%);
+}
+.ep-about-page .ep-about-mission-panel,
+.ep-contact-page .ep-contact-intro-panel {
+  background:
+    radial-gradient(ellipse at 90% 12%,color-mix(in srgb,var(--ep-accent) 10%,transparent),transparent 48%),
+    var(--ep-surface) !important;
+}
+html.dark .ep-about-page .ep-about-mission-panel,
+html.dark .ep-contact-page .ep-contact-intro-panel {
+  background:
+    radial-gradient(ellipse at 90% 12%,color-mix(in srgb,var(--ep-accent) 15%,transparent),transparent 48%),
+    var(--ep-surface) !important;
+}
+.ep-about-page .ep-about-journey-card,
+.ep-contact-page [data-contact-card] {
+  border-color:var(--ep-line);
+  background-color:var(--ep-surface);
+}
