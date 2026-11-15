@@ -96,7 +96,7 @@ export function AlertsView() {
             Alerts
           </h1>
           <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
-            Parameter warnings, automated actions &amp; system events
+            Warnings and system events.
           </div>
         </div>
         <button
@@ -131,18 +131,18 @@ export function AlertsView() {
           label="Open Alerts"
           value={String(openCount)}
           unit="active"
-          delta={openCount === 0 ? "No active warnings" : "Parameters out of range"}
+          delta={openCount === 0 ? "No active warnings" : "Out-of-range readings"}
           deltaTone={openCount === 0 ? "ok" : "warn"}
         />
-        <KpiCard label="Resolved Alerts" value={String(resolvedAlerts)} unit="resolved" delta="Previously resolved events" deltaTone="ok" />
-        <KpiCard label="Needs review" value={String(needsReviewCount)} unit="active" delta={needsReviewCount === 0 ? "All active warnings reviewed" : "Still need attention"} deltaTone={needsReviewCount === 0 ? "ok" : "warn"} />
+        <KpiCard label="Resolved Alerts" value={String(resolvedAlerts)} unit="resolved" delta="Past events" deltaTone="ok" />
+        <KpiCard label="Needs review" value={String(needsReviewCount)} unit="active" delta={needsReviewCount === 0 ? "All warnings reviewed" : "Still need attention"} deltaTone={needsReviewCount === 0 ? "ok" : "warn"} />
       </div>
 
       <div className="mb-5">
         <Panel title="Tank attention overview" badge={`${affectedTanks.length} affected`}>
           {affectedTanks.length ? (
             <div className="space-y-2">
-              <p className="mb-3 text-xs text-[var(--ep-text-muted)]">Tanks are ordered by the number of parameters currently outside their configured ranges. This is a count-based overview, not a severity rating.</p>
+              <p className="mb-3 text-xs text-[var(--ep-text-muted)]">Ranked by out-of-range parameters, not severity.</p>
               {affectedTanks.map((group) => (
                 <div key={group.tankId} className="flex min-w-0 flex-wrap items-center justify-between gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-3">
                   <div className="min-w-0 flex-1">
@@ -159,7 +159,7 @@ export function AlertsView() {
           ) : (
             <div className="rounded-xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-6 text-center">
               <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks currently need attention</p>
-              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Active parameter warnings will be grouped here when readings fall outside configured ranges.</p>
+              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Warnings appear here when readings leave their limits.</p>
             </div>
           )}
         </Panel>
@@ -247,7 +247,7 @@ export function AlertsView() {
                     })} />;
                   })}
                 </div>
-                <p className="mt-2 text-[11px] text-[var(--ep-text-muted)]">Reviewing an alert does not resolve the underlying sensor condition. It remains active until the reading returns to range.</p>
+                <p className="mt-2 text-[11px] text-[var(--ep-text-muted)]">Reviewing does not clear an alert. It stays active until readings return to range.</p>
               </section>
             )}
 
@@ -284,7 +284,7 @@ export function AlertsView() {
         ) : (
           <DashboardEmptyState
             title={normalizedSearch ? "No matching alerts" : filter === "warning" ? "No warning events" : "No informational events"}
-            description={normalizedSearch ? "Try another search term or clear your search." : filter === "warning" ? "There are no active parameter warnings or logged warning events." : "Informational system events will appear here when they are recorded."}
+            description={normalizedSearch ? "Try another search term or clear your search." : filter === "warning" ? "No active or logged warnings." : "System updates will appear here."}
           />
         )}
       </Panel>
