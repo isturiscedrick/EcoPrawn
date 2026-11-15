@@ -230,7 +230,7 @@ html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-wordmark {
   color: #111827 !important; -webkit-text-fill-color: #111827 !important;
 }
 html.dark footer[data-site-footer] {
-  background: #090d16 !important; color: #f8fafc !important;
+  background: #0b171b !important; color: #f8fafc !important;
 }
 html.dark footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong, nav a, span) {
   color: #f8fafc !important;
@@ -285,7 +285,7 @@ html.dark .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
 html.dark .ep-mobile-site-drawer #mobile-nav-panel a:not([aria-current="page"]):hover {
   background: #1f2937 !important; color: #70d7c8 !important;
 }
-html.dark .ep-mobile-site-drawer > div:last-child { background: #090d16 !important; border-color: #334155 !important; }
+html.dark .ep-mobile-site-drawer > div:last-child { background: #0b171b !important; border-color: #334155 !important; }
 html.dark .ep-mobile-site-drawer > div:last-child a:first-child {
   background: #45c5b3 !important; color: #071426 !important;
 }
@@ -333,7 +333,7 @@ html.dark .ep-mobile-dashboard-drawer nav a > span { color:#e2e8f0 !important; }
 html.dark .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span { background:#45c5b3 !important; border-color:#45c5b3 !important; color:#071426 !important; }
 html.dark .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span { color:#071426 !important; }
 html.dark .ep-mobile-dashboard-drawer nav a:not([aria-current="page"]):hover > span { background:#1f2937 !important; color:#70d7c8 !important; }
-html.dark .ep-mobile-dashboard-drawer > div:last-child { background:#090d16 !important; border-color:#334155 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:last-child { background:#0b171b !important; border-color:#334155 !important; }
 html.dark .ep-mobile-dashboard-drawer > div:last-child a[aria-current="page"] { background:#45c5b3 !important; border-color:#45c5b3 !important; color:#071426 !important; }
 html.dark .ep-mobile-dashboard-drawer > div:last-child button { background:#111827 !important; border-color:#334155 !important; color:#f8fafc !important; }
 html.dark .ep-mobile-dashboard-drawer > div:last-child button:hover { background:#1f2937 !important; color:#70d7c8 !important; }
@@ -352,7 +352,7 @@ html.dark .ep-mobile-dashboard-drawer button[aria-label="Close navigation menu"]
   }
 
   html.dark #site-header {
-    background-color: var(--ep-bg, #090d16) !important;
+    background-color: var(--ep-bg, #0b171b) !important;
     border-bottom-color: var(--ep-line, #334155) !important;
     box-shadow: 0 6px 20px -18px rgba(0, 0, 0, 0.7) !important;
   }
