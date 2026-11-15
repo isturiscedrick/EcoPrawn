@@ -49,7 +49,7 @@ export function SidebarNavItem({
       >
         <span
           aria-hidden="true"
-          className="relative flex w-4 shrink-0 justify-center"
+          className="relative flex h-8 w-8 shrink-0 items-center justify-center"
         >
           <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${routeActive ? "bg-[var(--ep-accent-tint)] text-[var(--ep-primary)]" : ""}`}>
             <Icon name={item.icon} size={17} strokeWidth={routeActive ? 2 : 1.8} className={pending && collapsed ? "opacity-0" : ""} />
