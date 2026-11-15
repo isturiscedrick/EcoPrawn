@@ -346,19 +346,19 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         aria-label="Quick dashboard navigation"
         className="fixed inset-x-0 bottom-0 z-[70] grid grid-cols-5 border-t border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-surface)_94%,transparent)] px-1 pt-2 pb-[max(.5rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-24px_rgba(15,23,42,.42)] backdrop-blur-xl lg:hidden"
       >
-        {DASHBOARD_NAV_ITEMS.filter((item) =>
-          ["overview", "tanks", "analytics", "feeding"].includes(item.view),
-        ).map((item) => {
-          const href = item.view === "overview" ? "/dashboard" : "/dashboard/" + item.view;
-          const label = item.view === "overview" ? "Dashboard" : item.label;
-          const active = item.view === "overview"
-            ? pathname === "/dashboard" || pathname === "/dashboard/overview"
-            : pathname === href || pathname.startsWith(href + "/");
+        {([
+          { key: "home", label: "Home", href: "/dashboard", icon: "house" },
+          { key: "tanks", label: "Tanks", href: "/dashboard/tanks", icon: "layers" },
+          { key: "vision", label: "Vision", href: "/dashboard/vision", icon: "camera" },
+          { key: "feeding", label: "Feeding", href: "/dashboard/feeding", icon: "utensils" },
+        ] as const).map((item) => {
+          const active = pathname === item.href || pathname.startsWith(item.href + "/") ||
+            (item.key === "home" && pathname === "/dashboard/overview");
           return (
             <Link
-              key={item.view}
-              to={href}
-              aria-label={label}
+              key={item.key}
+              to={item.href as never}
+              aria-label={item.label}
               aria-current={active ? "page" : undefined}
               activeOptions={{ exact: true }}
               className={"flex min-h-14 min-w-0 touch-manipulation flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (active ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
@@ -366,7 +366,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
               <span className={"flex h-7 w-9 items-center justify-center rounded-xl transition-colors " + (active ? "bg-[var(--ep-accent-tint)]" : "bg-transparent")}>
                 <Icon name={item.icon} size={19} strokeWidth={active ? 2.2 : 1.8} />
               </span>
-              <span className="max-w-full truncate">{label}</span>
+              <span className="max-w-full truncate">{item.label}</span>
             </Link>
           );
         })}
