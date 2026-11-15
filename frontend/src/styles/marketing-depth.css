@@ -610,7 +610,7 @@ html:not(.dark) .ep-business-landing #readings.ep-readings-section .ep-reading-c
   background: none !important;
 }
 html.dark .ep-business-landing .ep-inside-platform {
-  background-color: #090d16 !important;
+  background-color: #0b171b !important;
   background-image: none !important;
 }
 html.dark .ep-business-landing .ep-inside-platform::before {
