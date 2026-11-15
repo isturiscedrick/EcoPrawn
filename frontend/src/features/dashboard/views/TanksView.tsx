@@ -6,8 +6,6 @@ import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
 import { EditTankModal } from "@/features/dashboard/components/EditTankModal";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { useTanks, type Tank, type NewTankInput } from "@/features/dashboard/context/TankContext";
-import { DashboardDataStatus } from "@/features/dashboard/components/DashboardDataStatus";
-
 export function TanksView() {
   const { tanks, loading, error, addTank, updateTank, removeTank } = useTanks();
   const { status: esp32Status, tankId: connectedTankId } = useEsp32();
@@ -61,9 +59,6 @@ export function TanksView() {
           <Icon name="plus" size={17} /> Add tank
         </button>
       </header>
-
-      <DashboardDataStatus />
-
       <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <div className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4">
           <p className="text-xs text-[var(--ep-text-muted)]">Total tanks</p>
