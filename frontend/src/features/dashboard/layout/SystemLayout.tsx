@@ -378,7 +378,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           aria-haspopup="dialog"
           aria-controls="dashboard-mobile-drawer"
           aria-expanded={mobileSidebarOpen}
-          className={"flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (mobileSidebarOpen ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
+          className={"flex min-h-14 min-w-0 touch-manipulation flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (mobileSidebarOpen ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
         >
           <span className={"flex h-7 w-9 items-center justify-center rounded-xl " + (mobileSidebarOpen ? "bg-[var(--ep-accent-tint)]" : "bg-transparent")}>
             <Icon name="menu" size={19} strokeWidth={1.8} />
