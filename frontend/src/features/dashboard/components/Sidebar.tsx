@@ -371,7 +371,7 @@ export function Sidebar({
               drawerRef.current.style.transform = "";
             }
           }}
-          className={`ep-mobile-dashboard-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out motion-reduce:transition-none ${
+          className={`ep-mobile-dashboard-drawer fixed inset-y-0 left-0 z-[90] flex w-[min(88vw,360px)] flex-col overflow-hidden rounded-r-[1.4rem] pt-[env(safe-area-inset-top)] border-r border-[var(--ep-line)] bg-[var(--ep-bg)] text-[var(--ep-text)] shadow-[12px_0_44px_-18px_rgba(8,30,34,0.38)] transition-transform duration-300 ease-out motion-reduce:transition-none ${
             mobileOpen
               ? "translate-x-0 shadow-[8px_0_40px_-12px_rgba(8,30,34,0.45)]"
               : "-translate-x-full shadow-none"
