@@ -208,7 +208,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                           : (currentIndex - 1 + items.length) % items.length;
                     items[nextIndex].focus();
                   }}
-                  className="absolute right-0 top-[calc(100%+10px)] z-[100] w-[min(15rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1.5rem)] max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-2 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.38)]"
+                  className="absolute right-0 top-[calc(100%+10px)] z-[100] w-[min(17rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1.5rem)] max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-2 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.38)]"
                 >
                   <div className="border-b border-[var(--ep-line)] px-3 py-2.5">
                     <p className="truncate text-sm font-semibold">{profileName}</p>
@@ -313,8 +313,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         </div>
       </main>
 
-      {/* Thumb-friendly dashboard navigation for phones and tablets. The More
-          action reuses the existing accessible sidebar drawer for all modules. */}
+      {/* Direct, thumb-friendly access to the five primary facility modules. */}
       <nav
         aria-label="Quick dashboard navigation"
         className="fixed inset-x-0 bottom-0 z-[70] grid grid-cols-5 border-t border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-surface)_94%,transparent)] px-1 pt-2 pb-[max(.5rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-24px_rgba(15,23,42,.42)] backdrop-blur-xl lg:hidden"
@@ -322,11 +321,13 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         {([
           { key: "home", label: "Home", href: "/dashboard", icon: "house" },
           { key: "tanks", label: "Tanks", href: "/dashboard/tanks", icon: "layers" },
-          { key: "vision", label: "Vision", href: "/dashboard/vision", icon: "camera" },
+          { key: "vision", label: "Vision", href: "/dashboard/analytics", icon: "camera" },
           { key: "feeding", label: "Feeding", href: "/dashboard/feeding", icon: "utensils" },
+          { key: "water", label: "Water Quality", href: "/dashboard/water", icon: "waves" },
         ] as const).map((item) => {
           const active = pathname === item.href || pathname.startsWith(item.href + "/") ||
-            (item.key === "home" && pathname === "/dashboard/overview");
+            (item.key === "home" && pathname === "/dashboard/overview") ||
+            (item.key === "vision" && pathname === "/dashboard/vision");
           return (
             <Link
               key={item.key}
@@ -343,21 +344,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
             </Link>
           );
         })}
-        <button
-          ref={mobileMenuButtonRef}
-          type="button"
-          onClick={() => setMobileSidebarOpen(true)}
-          aria-label="More dashboard sections"
-          aria-haspopup="dialog"
-          aria-controls="dashboard-mobile-drawer"
-          aria-expanded={mobileSidebarOpen}
-          className={"flex min-h-14 min-w-0 touch-manipulation flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (mobileSidebarOpen ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
-        >
-          <span className={"flex h-7 w-9 items-center justify-center rounded-xl " + (mobileSidebarOpen ? "bg-[var(--ep-accent-tint)]" : "bg-transparent")}>
-            <Icon name="menu" size={19} strokeWidth={1.8} />
-          </span>
-          <span>More</span>
-        </button>
       </nav>
     </div>
   );
