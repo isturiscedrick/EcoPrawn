@@ -105,7 +105,7 @@ export function Dashboard() {
               ];
               const warningCount = tank.hasWaterReadings ? readings.filter((reading) => reading.status === "warn").length : 0;
               return (
-                <Link key={tank.id} to="/dashboard/water" className="dashboard-tank-snapshot group min-w-0 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
+                <Link key={tank.id} to="/dashboard/water" onClick={() => window.sessionStorage.setItem("ecoprawn.dashboard.selected-tank", tank.id)} className="dashboard-tank-snapshot group min-w-0 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
                   <div className="mb-3 flex items-center justify-between gap-2">
                     <div className="flex min-w-0 items-center gap-2">
                       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]"><Icon name="layers" size={17} /></span>
