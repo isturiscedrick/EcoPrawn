@@ -42,6 +42,7 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
   }, [tank, saving, onClose]);
 
   if (!tank) return null;
+  const currentTank = tank;
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -56,7 +57,7 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
     }
     setSaving(true);
     setError(null);
-    const saved = await onSave(tank.id, {
+    const saved = await onSave(currentTank.id, {
       name: name.trim(),
       pl: pl.trim(),
       biomass: values[0],
