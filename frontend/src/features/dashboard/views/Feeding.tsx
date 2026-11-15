@@ -60,7 +60,7 @@ export function Feeding() {
               <DonutChart items={[
                 { label: "Dispensed", value: feedSchedule.filter(f => f.status === "done").length, color: "#39865B" },
                 { label: "Upcoming", value: feedSchedule.filter(f => f.status === "upcoming").length, color: "#C18A27" },
-              ]} unit="cycles" emptyLabel="No feeding cycles are scheduled." />
+              ]} unit="cycles" emptyLabel="No cycles scheduled." />
             </Panel>
           </div>
 
@@ -99,7 +99,7 @@ export function Feeding() {
                 ))}
                 {visibleSchedule.length === 0 && (
                   <p className="rounded-xl border border-dashed border-[var(--ep-line)] px-4 py-7 text-center text-xs text-[var(--ep-text-muted)]">
-                    {feedSchedule.length === 0 ? "No feeding cycles are scheduled." : "No cycles match this filter."}
+                    {feedSchedule.length === 0 ? "No cycles scheduled." : "No cycles match this filter."}
                   </p>
                 )}
               </div>
@@ -154,7 +154,7 @@ export function Feeding() {
       ) : (
         <Panel title="Feed Allocation" badge="0 tanks">
           <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
-            No tanks yet — add one on the Tanks page to see feeding data.
+            No tanks yet. Add one to view feeding data.
           </div>
         </Panel>
       )}
