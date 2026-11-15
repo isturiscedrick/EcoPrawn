@@ -435,3 +435,167 @@ html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) a:hover {
       box-shadow 220ms ease, transform 180ms ease;
   }
 }
+
+
+/* ==========================================================================
+   Final Ocean Teal coverage — every public and dashboard surface.
+   Brand accents only; preserve semantic success, warning and danger colors.
+   ========================================================================== */
+:root {
+  --ep-brand-primary: #087e8b;
+  --ep-brand-hover: #066874;
+  --ep-brand-soft: #45c5b3;
+  --ep-brand-glow: rgba(8,126,139,.24);
+  --ep-brand-wash: rgba(8,126,139,.09);
+}
+html.dark {
+  --ep-brand-primary: #45c5b3;
+  --ep-brand-hover: #70d7c8;
+  --ep-brand-soft: #70d7c8;
+  --ep-brand-glow: rgba(69,197,179,.24);
+  --ep-brand-wash: rgba(69,197,179,.11);
+}
+
+/* Ensure every page root and nested layout inherits the same brand tokens. */
+.ecoprawn-root,
+.dashboard-shell,
+.ep-landing,
+.ep-about-page,
+.ep-contact-page,
+#site-header,
+footer[data-site-footer] {
+  --ep-brand-primary: #087e8b;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #ffffff;
+  --ep-brand-glow: rgba(8,126,139,.24);
+  --ep-brand-wash: rgba(8,126,139,.09);
+}
+html.dark :is(.ecoprawn-root,.dashboard-shell,.ep-landing,.ep-about-page,.ep-contact-page,#site-header,footer[data-site-footer]) {
+  --ep-brand-primary: #45c5b3;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-brand-glow: rgba(69,197,179,.24);
+  --ep-brand-wash: rgba(69,197,179,.11);
+}
+
+/* Shared structure: header, footer, desktop sidebar, mobile drawer and bottom nav. */
+#site-header :is(a,button):focus-visible,
+footer[data-site-footer] :is(a,button):focus-visible,
+.dashboard-shell :is(aside,nav) :is(a,button):focus-visible {
+  outline: 2px solid var(--ep-accent) !important;
+  outline-offset: 3px;
+}
+#site-header :is(a,button):hover,
+footer[data-site-footer] nav a:hover,
+.dashboard-shell aside nav a:hover,
+.dashboard-shell [data-mobile-nav] a:hover {
+  border-color: var(--ep-accent);
+}
+.dashboard-shell aside nav a[aria-current="page"],
+.dashboard-shell aside nav a[aria-current="page"] > span,
+.dashboard-shell .dashboard-nav-active,
+.dashboard-shell .ep-mobile-dashboard-drawer nav a[aria-current="page"],
+.dashboard-shell .ep-mobile-dashboard-drawer > div:last-child a[aria-current="page"] {
+  background-color: var(--ep-accent) !important;
+  border-color: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important;
+}
+.dashboard-shell .dashboard-nav-active-dot,
+.dashboard-shell aside nav a[aria-current="page"] [data-active-indicator] {
+  background-color: var(--ep-accent) !important;
+}
+
+/* Cards, panels, tiles, feature blocks and interactive component surfaces. */
+.ecoprawn-root :is(.dashboard-hover,.dashboard-panel,.dashboard-kpi,.dashboard-tank-snapshot,[data-card],[data-feature-card]):hover {
+  border-color: color-mix(in srgb, var(--ep-accent) 58%, var(--ep-line, #d7e5e5)) !important;
+  box-shadow: 0 16px 36px -26px var(--ep-brand-glow), 0 0 0 1px color-mix(in srgb, var(--ep-accent) 9%, transparent);
+}
+.ecoprawn-root :is(button,a,[role="button"],[role="tab"]):focus-visible {
+  outline-color: var(--ep-accent) !important;
+}
+.ecoprawn-root :is(input,select,textarea):focus-visible {
+  border-color: var(--ep-accent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent) 18%, transparent) !important;
+}
+
+/* Hero sections, animated accents, progress fills, charts and decorative rings. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell) :is(
+  [data-hero-accent],[data-brand-accent],.ep-hero-accent,.ep-pulse-dot,.ep-probe-pulse,
+  .ep-about-orbit-c,.ep-contact-signal-ring-three
+) {
+  border-color: var(--ep-accent);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell) :is(
+  [data-hero-accent],[data-brand-accent],.ep-hero-accent
+) {
+  color: var(--ep-accent);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell) :is(
+  .ep-pulse-dot,.ep-probe-pulse
+) {
+  filter: drop-shadow(0 0 6px var(--ep-brand-glow));
+}
+
+/* Catch legacy blue/indigo utility classes used by JSX across all page sections.
+   Status success/warning/danger utilities are intentionally not targeted. */
+.ecoprawn-root [class*="text-blue-"],
+.ecoprawn-root [class*="text-indigo-"] {
+  color: var(--ep-accent) !important;
+}
+.ecoprawn-root [class*="border-blue-"],
+.ecoprawn-root [class*="border-indigo-"] {
+  border-color: color-mix(in srgb, var(--ep-accent) 68%, transparent) !important;
+}
+.ecoprawn-root [class*="ring-blue-"],
+.ecoprawn-root [class*="ring-indigo-"] {
+  --tw-ring-color: var(--ep-accent) !important;
+}
+.ecoprawn-root [class*="bg-blue-"],
+.ecoprawn-root [class*="bg-indigo-"] {
+  background-color: color-mix(in srgb, var(--ep-accent) 10%, var(--ep-surface, #ffffff)) !important;
+}
+.ecoprawn-root [class*="from-blue-"],
+.ecoprawn-root [class*="from-indigo-"] {
+  --tw-gradient-from: var(--ep-accent) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: color-mix(in srgb, var(--ep-accent) 0%, transparent) var(--tw-gradient-to-position) !important;
+}
+.ecoprawn-root [class*="to-blue-"],
+.ecoprawn-root [class*="to-indigo-"] {
+  --tw-gradient-to: var(--ep-brand-soft) var(--tw-gradient-to-position) !important;
+}
+.ecoprawn-root [class*="shadow-blue-"],
+.ecoprawn-root [class*="shadow-indigo-"] {
+  --tw-shadow-color: var(--ep-brand-glow) !important;
+}
+
+/* State variants: active/hover/focus styles use teal without recoloring neutral surfaces. */
+.ecoprawn-root [class*="hover\:text-blue-"]:hover,
+.ecoprawn-root [class*="hover\:text-indigo-"]:hover { color: var(--ep-accent) !important; }
+.ecoprawn-root [class*="hover\:border-blue-"]:hover,
+.ecoprawn-root [class*="hover\:border-indigo-"]:hover { border-color: var(--ep-accent) !important; }
+.ecoprawn-root [class*="hover\:bg-blue-"]:hover,
+.ecoprawn-root [class*="hover\:bg-indigo-"]:hover {
+  background-color: color-mix(in srgb, var(--ep-accent) 12%, var(--ep-surface, #ffffff)) !important;
+}
+.ecoprawn-root [class*="focus\:ring-blue-"]:focus,
+.ecoprawn-root [class*="focus\:ring-indigo-"]:focus { --tw-ring-color: var(--ep-accent) !important; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ecoprawn-root :is(a,button,[role="button"],[role="tab"],.dashboard-hover,[data-card],[data-feature-card]) {
+    transition-property: color,background-color,border-color,box-shadow,filter,transform;
+    transition-duration: 180ms;
+    transition-timing-function: ease;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ecoprawn-root *,
+  .ecoprawn-root *::before,
+  .ecoprawn-root *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
