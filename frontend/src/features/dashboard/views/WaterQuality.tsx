@@ -17,8 +17,11 @@ export function WaterQuality() {
 
   useEffect(() => {
     if (!tanks.length) return;
-    const requestedTankId = window.sessionStorage.getItem("ecoprawn.dashboard.selected-tank");
-    if (requestedTankId && tanks.some((tank) => tank.id === requestedTankId)) {
+    const storageKey = "ecoprawn.dashboard.selected-tank";
+    const requestedTankId = window.sessionStorage.getItem(storageKey);
+    if (!requestedTankId) return;
+    window.sessionStorage.removeItem(storageKey);
+    if (tanks.some((tank) => tank.id === requestedTankId)) {
       setSelectedTankId(requestedTankId);
     }
   }, [tanks]);
