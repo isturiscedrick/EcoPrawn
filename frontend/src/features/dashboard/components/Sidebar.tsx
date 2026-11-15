@@ -280,7 +280,7 @@ export function Sidebar({
           </nav>
         </div>
         <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-4">
-          <Link to="/dashboard/settings" aria-current={pathname === "/dashboard/settings" ? "page" : undefined} className={drawerRowClass + (pathname === "/dashboard/settings" ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
+          <Link to="/dashboard/settings" aria-current={pathname.startsWith("/dashboard/settings") ? "page" : undefined} className={drawerRowClass + (pathname.startsWith("/dashboard/settings") ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
             <span className="flex w-4 justify-center"><Icon name="settings" size={16} /></span>
             Settings
           </Link>
@@ -439,7 +439,7 @@ export function Sidebar({
 
           {/* Account actions */}
           <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-surface)]/70 px-5 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-          <Link to="/dashboard/settings" aria-current={pathname === "/dashboard/settings" ? "page" : undefined} className={drawerRowClass + (pathname === "/dashboard/settings" ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
+          <Link to="/dashboard/settings" aria-current={pathname.startsWith("/dashboard/settings") ? "page" : undefined} className={drawerRowClass + (pathname.startsWith("/dashboard/settings") ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
             <span className="flex w-4 justify-center"><Icon name="settings" size={16} /></span>
             Settings
           </Link>
