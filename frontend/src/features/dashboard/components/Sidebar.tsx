@@ -40,7 +40,6 @@ export function Sidebar({
   const activeView = segment as DashboardView;
 
   const [confirmingLogout, setConfirmingLogout] = useState(false);
-  const [settingsOpen, setSettingsOpen] = useState(pathname.startsWith("/dashboard/profile") || pathname.startsWith("/dashboard/tanks"));
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
 
@@ -281,16 +280,10 @@ export function Sidebar({
           </nav>
         </div>
         <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-4">
-          <button type="button" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)} className={drawerRowClass + (settingsOpen ? " dashboard-nav-active" : "")}>
+          <Link to="/dashboard/settings" aria-current={pathname === "/dashboard/settings" ? "page" : undefined} className={drawerRowClass + (pathname === "/dashboard/settings" ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
             <span className="flex w-4 justify-center"><Icon name="settings" size={16} /></span>
-            <span className="flex-1">Settings</span><Icon name={settingsOpen ? "chevron-up" : "chevron-down"} size={15} />
-          </button>
-          {settingsOpen && <nav aria-label="Settings" className="ml-3 flex flex-col gap-1 border-l border-[var(--ep-line)] pl-3">
-            <Link to="/dashboard/profile" className={drawerRowClass + (pathname === "/dashboard/profile" ? " dashboard-nav-active" : "")}><Icon name="user-round" size={16} />Account</Link>
-            <Link to="/dashboard/tanks" className={drawerRowClass + (pathname === "/dashboard/tanks" ? " dashboard-nav-active" : "")}><Icon name="fish" size={16} />Configuration</Link>
-            <button type="button" onClick={onToggleTheme} className={drawerRowClass}><Icon name={darkMode ? "moon" : "sun"} size={16} />Theme <span className="ml-auto text-xs">{darkMode ? "Dark" : "Light"}</span></button>
-            <Link to="/about" className={drawerRowClass}><Icon name="info" size={16} />About</Link>
-          </nav>}
+            Settings
+          </Link>
           <button type="button" onClick={onLogoutClick} className="dashboard-logout-button flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-semibold transition-colors">
             <span className="flex w-4 justify-center" aria-hidden="true"><LogoutIcon /></span>
             Log out
@@ -446,16 +439,10 @@ export function Sidebar({
 
           {/* Account actions */}
           <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-surface)]/70 px-5 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-          <button type="button" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((open) => !open)} className={drawerRowClass + (settingsOpen ? " dashboard-nav-active" : "")}>
+          <Link to="/dashboard/settings" aria-current={pathname === "/dashboard/settings" ? "page" : undefined} className={drawerRowClass + (pathname === "/dashboard/settings" ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
             <span className="flex w-4 justify-center"><Icon name="settings" size={16} /></span>
-            <span className="flex-1">Settings</span><Icon name={settingsOpen ? "chevron-up" : "chevron-down"} size={15} />
-          </button>
-          {settingsOpen && <nav aria-label="Settings" className="ml-3 flex flex-col gap-1 border-l border-[var(--ep-line)] pl-3">
-            <Link to="/dashboard/profile" className={drawerRowClass + (pathname === "/dashboard/profile" ? " dashboard-nav-active" : "")}><Icon name="user-round" size={16} />Account</Link>
-            <Link to="/dashboard/tanks" className={drawerRowClass + (pathname === "/dashboard/tanks" ? " dashboard-nav-active" : "")}><Icon name="fish" size={16} />Configuration</Link>
-            <button type="button" onClick={onToggleTheme} className={drawerRowClass}><Icon name={darkMode ? "moon" : "sun"} size={16} />Theme <span className="ml-auto text-xs">{darkMode ? "Dark" : "Light"}</span></button>
-            <Link to="/about" className={drawerRowClass}><Icon name="info" size={16} />About</Link>
-          </nav>}
+            Settings
+          </Link>
             <button
               type="button"
               onClick={() => {
