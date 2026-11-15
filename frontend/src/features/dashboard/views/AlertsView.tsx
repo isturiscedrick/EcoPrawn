@@ -21,6 +21,7 @@ export function AlertsView() {
   const { tanks, alertsLog, resolvedAlerts, loading, error, refreshTanks } = useTanks();
   const [filter, setFilter] = useState<AlertFilter>("all");
   const [search, setSearch] = useState("");
+  const [acknowledged, setAcknowledged] = useState<Set<string>>(() => new Set());
 
   if (loading) return <DashboardViewSkeleton variant="alerts" />;
 
@@ -47,6 +48,11 @@ export function AlertsView() {
   const searchedLiveAlerts = visibleLiveAlerts.filter(matchesSearch);
   const searchedWarningEvents = visibleWarningEvents.filter(matchesSearch);
   const searchedInfoEvents = visibleInfoEvents.filter(matchesSearch);
+  const alertIdentity = (alert: { title?: string; detail?: string }) => `${alert.title ?? ""}::${alert.detail ?? ""}`;
+  const reviewedCount = liveAlerts.filter(alert => acknowledged.has(alertIdentity(alert))).length;
+  const needsReviewCount = Math.max(0, liveAlerts.length - reviewedCount);
+  const pendingLiveAlerts = searchedLiveAlerts.filter(alert => !acknowledged.has(alertIdentity(alert)));
+  const reviewedLiveAlerts = searchedLiveAlerts.filter(alert => acknowledged.has(alertIdentity(alert)));
   const visibleCount = searchedLiveAlerts.length + searchedWarningEvents.length + searchedInfoEvents.length;
 
   const filterButtonClass = (active: boolean) =>
@@ -106,6 +112,7 @@ export function AlertsView() {
           deltaTone={openCount === 0 ? "ok" : "warn"}
         />
         <KpiCard label="Resolved Alerts" value={String(resolvedAlerts)} unit="resolved" delta="Previously resolved events" deltaTone="ok" />
+        <KpiCard label="Needs review" value={String(needsReviewCount)} unit="active" delta={needsReviewCount === 0 ? "All active warnings reviewed" : "Still need attention"} deltaTone={needsReviewCount === 0 ? "ok" : "warn"} />
       </div>
 
       <div className="mb-5">
@@ -152,18 +159,45 @@ export function AlertsView() {
 
         {visibleCount > 0 ? (
           <div className="space-y-5">
-            {searchedLiveAlerts.length > 0 && (
+            {pendingLiveAlerts.length > 0 && (
               <section aria-labelledby="active-alerts-heading">
-                <div className="mb-1 flex items-center gap-2">
+                <div className="mb-2 flex flex-wrap items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-[var(--ep-status-danger)]" />
                   <h2 id="active-alerts-heading" className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--ep-text)]">
-                    Active parameter warnings
+                    Needs review
                   </h2>
-                  <span className="text-[11px] text-[var(--ep-text-muted)]">{searchedLiveAlerts.length}</span>
+                  <span className="text-[11px] text-[var(--ep-text-muted)]">{pendingLiveAlerts.length}</span>
+                  <span className="text-[11px] text-[var(--ep-text-muted)]">Active sensor warnings</span>
                 </div>
-                {searchedLiveAlerts.map((alert, index) => (
-                  <AlertRow key={`live-${alert.title}-${alert.detail}-${index}`} {...alert} />
-                ))}
+                <div className="space-y-2">
+                  {pendingLiveAlerts.map((alert, index) => {
+                    const key = alertIdentity(alert);
+                    return <AlertRow key={`live-${key}-${index}`} {...alert} acknowledged={false} onAcknowledge={() => setAcknowledged(current => new Set(current).add(key))} />;
+                  })}
+                </div>
+              </section>
+            )}
+
+            {reviewedLiveAlerts.length > 0 && (
+              <section aria-labelledby="reviewed-alerts-heading">
+                <div className="mb-2 flex flex-wrap items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-[var(--ep-text-muted)]" />
+                  <h2 id="reviewed-alerts-heading" className="text-xs font-bold uppercase tracking-[0.1em] text-[var(--ep-text)]">
+                    Reviewed · still active
+                  </h2>
+                  <span className="text-[11px] text-[var(--ep-text-muted)]">{reviewedLiveAlerts.length}</span>
+                </div>
+                <div className="space-y-2">
+                  {reviewedLiveAlerts.map((alert, index) => {
+                    const key = alertIdentity(alert);
+                    return <AlertRow key={`reviewed-${key}-${index}`} {...alert} acknowledged onAcknowledge={() => setAcknowledged(current => {
+                      const next = new Set(current);
+                      next.delete(key);
+                      return next;
+                    })} />;
+                  })}
+                </div>
+                <p className="mt-2 text-[11px] text-[var(--ep-text-muted)]">Reviewing an alert does not resolve the underlying sensor condition. It remains active until the reading returns to range.</p>
               </section>
             )}
 
