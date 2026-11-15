@@ -9,7 +9,7 @@ import { useTanks, type Tank, type NewTankInput } from "@/features/dashboard/con
 import { DashboardDataStatus } from "@/features/dashboard/components/DashboardDataStatus";
 
 export function TanksView() {
-  const { tanks, loading, error, addTank, updateTank, removeTank, isDbConnected, lastUpdatedAt } = useTanks();
+  const { tanks, loading, error, addTank, updateTank, removeTank } = useTanks();
   const { status: esp32Status, tankId: connectedTankId } = useEsp32();
   const [adding, setAdding] = useState(false);
   const [editingTank, setEditingTank] = useState<Tank | null>(null);
@@ -85,7 +85,7 @@ export function TanksView() {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h2 id="tank-list-heading" className="text-base font-semibold text-[var(--ep-text)]">All tanks</h2>
-            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">{isDbConnected ? "Facility data is synced." : "Unable to confirm the latest server connection."}{lastUpdatedAt ? ` Last updated ${lastUpdatedAt.toLocaleTimeString()}.` : ""}</p>
+            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Search and filter your facility inventory.</p>
           </div>
           <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
             <label className="relative block min-w-0 sm:w-56">
