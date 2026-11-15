@@ -4,7 +4,7 @@ function ProfileLoading() {
   return <DashboardViewSkeleton variant="profile" />;
 }
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";\nimport { Icon } from "@/components/ui/Icon";
 import { ProfileEditForm } from "@/features/dashboard/components/ProfileEditForm";
 
 function ProfilePage() {
