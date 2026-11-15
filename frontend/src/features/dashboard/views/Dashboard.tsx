@@ -183,14 +183,14 @@ export function Dashboard() {
         {noReadingCount > 0 && <p className="mt-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-2 text-xs leading-relaxed text-[var(--ep-text-muted)]"><span className="font-semibold text-[var(--ep-text)]">{noReadingCount} {noReadingCount === 1 ? "tank has" : "tanks have"} no water readings.</span> These are counted as needing attention so missing data is not mistaken for healthy conditions.</p>}
       </section>
 
-      <section className="mb-5" aria-labelledby="recent-activity-heading">
+      <section className="mb-5" aria-label="Recent facility activity">
         <Panel title="Recent facility activity" icon="clock" badge={recentActivity.length ? `Latest ${recentActivity.length}` : "No activity"}>
           {recentActivity.length ? (
             <ol className="divide-y divide-[var(--ep-line)]">
               {recentActivity.map((activity) => (
                 <li key={activity.id} className="flex min-w-0 items-start gap-3 py-3 first:pt-0 last:pb-0">
                   <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]">
-                    <Icon name={activity.kind === "Water reading" ? "waves" : "scan-eye"} size={15} />
+                    <Icon name={activity.kind === "Water reading" ? "waves" : "camera"} size={15} />
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
