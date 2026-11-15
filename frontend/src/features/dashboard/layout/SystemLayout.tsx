@@ -208,14 +208,14 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                           : (currentIndex - 1 + items.length) % items.length;
                     items[nextIndex].focus();
                   }}
-                  className="absolute right-0 top-[calc(100%+10px)] z-[100] w-[min(17rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1.5rem)] max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-2 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.38)]"
+                  className="absolute right-0 top-[calc(100%+10px)] z-[100] w-[min(19rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1.5rem)] max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.28)]"
                 >
-                  <div className="border-b border-[var(--ep-line)] px-3 py-2.5">
+                  <div className="border-b border-[var(--ep-line)] px-3 pb-3 pt-2">
                     <p className="truncate text-sm font-semibold">{profileName}</p>
                     <p className="mt-0.5 truncate text-[11px] font-medium tracking-wide text-[var(--ep-text-muted)]">{profileRole}</p>
                   </div>
-                  <div className="mt-1 grid grid-cols-2 gap-1">
-                    <Link to="/dashboard/profile" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="flex min-h-11 min-w-0 items-center gap-2 whitespace-nowrap rounded-xl px-2.5 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
+                  <div className="mt-2 grid grid-cols-2 gap-1.5">
+                    <Link to="/dashboard/profile" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="flex min-h-11 min-w-0 items-center gap-2 whitespace-nowrap rounded-xl px-2.5 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:bg-[var(--ep-accent-tint)] focus-visible:ring-1 focus-visible:ring-[var(--ep-accent)]/50">
                       <Icon name="user-round" size={17} className="shrink-0" />
                       <span className="whitespace-nowrap">View profile</span>
                     </Link>
@@ -238,7 +238,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                         window.alert("Could not log out. Please try again.");
                       }
                     }}
-                    className="flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:hover:bg-red-950/30"
+                    className="mt-1 flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:bg-red-50 focus-visible:ring-1 focus-visible:ring-red-400/60 dark:hover:bg-red-950/30 dark:focus-visible:bg-red-950/30"
                   >
                     <Icon name="log-out" size={17} />
                     Log out
