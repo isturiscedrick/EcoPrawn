@@ -203,6 +203,24 @@ const PATHS = {
       <circle cx="10" cy="18" r="2" fill="currentColor" />
     </>
   ),
+  sprout: (
+    <>
+      <path d="M20 4c-8 0-14 3-14 10a6 6 0 0 0 6 6c7 0 10-6 8-16Z" />
+      <path d="M3 21c3-5 7-8 13-11" />
+    </>
+  ),
+  "check-circle": (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8 12 2.5 2.5L16 9" />
+    </>
+  ),
+  "minus-circle": (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8 12h8" />
+    </>
+  ),
   settings: (
     <>
       <path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" />
