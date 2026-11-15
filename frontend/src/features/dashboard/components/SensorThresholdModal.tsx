@@ -184,7 +184,7 @@ export function SensorThresholdModal({ open, onClose }: SensorThresholdModalProp
         role="dialog"
         aria-modal="true"
         aria-labelledby={`${uid}-title`}
-        className="relative z-10 max-h-[90vh] w-full max-w-[520px] overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-[var(--ep-primary)] shadow-[var(--shadow-overlay)] sm:p-8"
+        className="relative z-10 max-h-[90dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-[var(--ep-primary)] shadow-[var(--shadow-overlay)] sm:p-8"
       >
         <div className="mb-6">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)]">Sensor configuration</p>
