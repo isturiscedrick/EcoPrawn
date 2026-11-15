@@ -1279,7 +1279,7 @@ html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-primary {
   background:
     radial-gradient(ellipse at 88% 0%, rgba(8,126,139,.20), transparent 48%),
     radial-gradient(ellipse at 0% 100%, rgba(69,197,179,.12), transparent 48%),
-    linear-gradient(145deg, rgba(15,35,62,.96), rgba(5,17,34,.97));
+    linear-gradient(145deg, rgba(11,44,52,.97), rgba(5,32,39,.98));
   box-shadow: 0 30px 80px -38px rgba(2,8,23,.78), inset 0 1px 0 rgba(255,255,255,.08);
   backdrop-filter: blur(18px);
 }
@@ -1360,7 +1360,7 @@ html:not(.dark) .ep-business-landing .ep-hero-monitor-panel {
   background:
     radial-gradient(ellipse at 88% 0%, rgba(8,126,139,.14), transparent 48%),
     radial-gradient(ellipse at 0% 100%, rgba(69,197,179,.08), transparent 48%),
-    linear-gradient(145deg, #ffffff 0%, #f4f8ff 58%, #edf6ff 100%);
+    linear-gradient(145deg, #ffffff 0%, #f5fbfa 58%, #e6f4f3 100%);
   box-shadow: 0 28px 70px -42px rgba(8,126,139,.22), inset 0 1px 0 rgba(255,255,255,.95);
 }
 html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-white {
@@ -1383,7 +1383,7 @@ html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-white\/10 {
   background-color: rgba(148,163,184,.2) !important;
 }
 html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-teal-300\/10 {
-  background-color: rgba(219,234,254,.8) !important;
+  background-color: rgba(217,240,239,.8) !important;
 }
 html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .border-teal-300\/20 {
   border-color: rgba(69,197,179,.4) !important;
@@ -1409,7 +1409,7 @@ html.dark .ep-business-landing .ep-hero-monitor-panel {
   background:
     radial-gradient(ellipse at 88% 0%, rgba(8,126,139,.20), transparent 48%),
     radial-gradient(ellipse at 0% 100%, rgba(69,197,179,.12), transparent 48%),
-    linear-gradient(145deg, rgba(15,35,62,.96), rgba(5,17,34,.97));
+    linear-gradient(145deg, rgba(11,44,52,.97), rgba(5,32,39,.98));
 }
 html.dark .ep-business-landing .ep-hero-sensor-tile {
   border-color: rgba(255,255,255,.1);
@@ -1712,7 +1712,7 @@ html.dark .ep-business-landing .ep-aquatic-scene {
 }
 .ep-business-landing .ep-illustration-strip {
   background-image:
-    radial-gradient(ellipse at 82% 50%, rgba(56,189,248,.11), transparent 34%),
+    radial-gradient(ellipse at 82% 50%, rgba(8,126,139,.11), transparent 34%),
     linear-gradient(105deg, color-mix(in srgb, var(--ep-tint) 92%, var(--ep-surface)), var(--ep-tint));
 }
 .ep-business-landing .ep-stats-panel {
@@ -1822,7 +1822,7 @@ html.dark .ep-business-landing .ep-platform-ribbon-number {
 html.dark .ep-business-landing .ep-illustration-strip {
   background-image:
     radial-gradient(ellipse at 82% 50%, rgba(69,197,179,.13), transparent 34%),
-    linear-gradient(105deg, #101d32, #0b1424);
+    linear-gradient(105deg, #153a3e, #0b2c34);
 }
 @media (max-width: 1023px) {
   .ep-business-landing .ep-hero-monitor-panel {
