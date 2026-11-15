@@ -115,7 +115,7 @@ function GrowthTrendChart({ values }: { values: number[] }) {
           </g>
         ))}
       </svg>
-      <p className="text-sm text-[var(--ep-text-muted)]">Select any point to inspect that week.</p>
+      <p className="text-sm text-[var(--ep-text-muted)]">Select a point to view that week.</p>
     </div>
   );
 }
@@ -143,7 +143,7 @@ export function VisionGrowth() {
             Vision &amp; Growth Analytics
           </h1>
           <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
-            Camera-based growth tracking &amp; biomass estimation · {tankCount} tank{tankCount !== 1 ? "s" : ""}
+            Growth scans and biomass · {tankCount} tanks
           </div>
         </div>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
@@ -235,7 +235,7 @@ export function VisionGrowth() {
       ) : (
         <Panel title="Growth Snapshot" badge="0 tanks">
           <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
-            No tanks yet — add one on the Tanks page to see vision &amp; growth data.
+            No tanks yet. Add one to view growth data.
           </div>
         </Panel>
       )}
