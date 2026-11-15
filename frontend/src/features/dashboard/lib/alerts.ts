@@ -54,6 +54,7 @@ export function deriveTankAlerts(tanks: Tank[]): AlertItem[] {
         title: `${c.label} ${below ? "below" : "above"} target`,
         detail: `${tank.name} — ${c.label} at ${value.toFixed(c.decimals)}${c.unit} (target ${targetText(c)})`,
         time: "now",
+        tankId: tank.id,
       });
     }
   }
