@@ -306,7 +306,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       )}
 
       {/* Responsive dashboard content area. */}
-      <main data-dashboard-route-content="" className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:px-5 sm:pt-5 lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
+      <main data-dashboard-route-content="" className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
         <div className="w-full">
           {!loading && !isDbConnected && error && (
             <div role="status" className="mb-4 flex flex-col gap-3 rounded-xl border border-[var(--ep-status-danger)] bg-[var(--ep-surface)] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
@@ -361,7 +361,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
               aria-label={label}
               aria-current={active ? "page" : undefined}
               activeOptions={{ exact: true }}
-              className={"flex min-h-12 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (active ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
+              className={"flex min-h-14 min-w-0 touch-manipulation flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (active ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
             >
               <span className={"flex h-7 w-9 items-center justify-center rounded-xl transition-colors " + (active ? "bg-[var(--ep-accent-tint)]" : "bg-transparent")}>
                 <Icon name={item.icon} size={19} strokeWidth={active ? 2.2 : 1.8} />
