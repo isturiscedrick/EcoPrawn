@@ -492,7 +492,7 @@ html.dark .ep-business-landing .ep-readings-section .ep-reading-card :is(p,dd > 
 }
 html.dark .ep-business-landing .ep-readings-section .ep-reading-card > div:first-child > span {
   color: #dbeafe !important;
-  border-color: rgba(191,219,254,.34) !important;
+  border-color: rgba(112,215,200,.34) !important;
   background: rgba(255,255,255,.08) !important;
 }
 html.dark .ep-business-landing .ep-readings-section .ep-reading-card > div[aria-hidden="true"].relative {
@@ -674,7 +674,7 @@ html.dark .ep-business-landing #readings.ep-readings-section dl + div span {
     border-color: rgba(69,197,179,.62);
     background-color: color-mix(in srgb, var(--ep-surface) 90%, #45c5b3 10%);
     box-shadow:
-      inset 0 1px 0 rgba(191,219,254,.08),
+      inset 0 1px 0 rgba(112,215,200,.08),
       0 24px 54px -34px rgba(8,126,139,.42);
   }
 }
@@ -859,7 +859,7 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] > 
   }
   html.dark .ep-business-landing .ep-business-capabilities [data-business-card]:hover {
     background: color-mix(in srgb, var(--ep-surface) 90%, var(--ep-accent) 10%);
-    box-shadow: inset 0 1px 0 rgba(191,219,254,.08), 0 26px 56px -38px rgba(8,126,139,.46);
+    box-shadow: inset 0 1px 0 rgba(112,215,200,.08), 0 26px 56px -38px rgba(8,126,139,.46);
   }
 }
 @media (max-width: 639px) {
@@ -1659,7 +1659,7 @@ html.dark .ep-business-landing .ep-preview-tab[aria-pressed="false"] {
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(ellipse at 8% 50%, rgba(14,165,233,.075), transparent 38%),
+    radial-gradient(ellipse at 8% 50%, rgba(8,126,139,.075), transparent 38%),
     linear-gradient(180deg, var(--ep-bg), color-mix(in srgb, var(--ep-tint) 62%, var(--ep-bg)));
 }
 .ep-about-page .ep-about-mission-panel {
@@ -1706,7 +1706,7 @@ html.dark .ep-about-page .ep-about-mission-panel {
 }
 html.dark .ep-about-page .ep-about-journey {
   background:
-    radial-gradient(ellipse at 92% 8%, rgba(37,99,235,.18), transparent 36%),
+    radial-gradient(ellipse at 92% 8%, rgba(8,126,139,.18), transparent 36%),
     linear-gradient(180deg, #0e192b, #0a1220);
 }
 .ep-about-page .ep-about-journey-card {
@@ -1715,15 +1715,15 @@ html.dark .ep-about-page .ep-about-journey {
 }
 html.dark .ep-about-page .ep-about-journey-card {
   background-color: rgba(17,29,48,.88);
-  box-shadow: inset 0 1px 0 rgba(191,219,254,.05), 0 20px 50px -38px rgba(0,0,0,.7);
+  box-shadow: inset 0 1px 0 rgba(112,215,200,.05), 0 20px 50px -38px rgba(0,0,0,.7);
 }
 .ep-about-page #objectives,
 .ep-about-page #scope {
-  background-image: radial-gradient(ellipse at 0% 0%, rgba(14,165,233,.055), transparent 38%);
+  background-image: radial-gradient(ellipse at 0% 0%, rgba(8,126,139,.055), transparent 38%);
 }
 html.dark .ep-about-page #objectives,
 html.dark .ep-about-page #scope {
-  background-image: radial-gradient(ellipse at 0% 0%, rgba(37,99,235,.12), transparent 40%);
+  background-image: radial-gradient(ellipse at 0% 0%, rgba(8,126,139,.12), transparent 40%);
 }
 
 /* Contact: make the conversation banner and form feel like one designed
@@ -1732,7 +1732,7 @@ html.dark .ep-about-page #scope {
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(14,165,233,.07), transparent 38%),
+    radial-gradient(ellipse at 100% 0%, rgba(8,126,139,.07), transparent 38%),
     linear-gradient(180deg, var(--ep-bg), var(--ep-tint));
 }
 html.dark .ep-contact-page .ep-contact-intro {
@@ -1743,7 +1743,7 @@ html.dark .ep-contact-page .ep-contact-intro {
 .ep-contact-page .ep-contact-intro-panel {
   border-color: color-mix(in srgb, var(--ep-accent) 22%, var(--ep-line));
   background:
-    radial-gradient(ellipse at 90% 50%, rgba(14,165,233,.16), transparent 38%),
+    radial-gradient(ellipse at 90% 50%, rgba(8,126,139,.16), transparent 38%),
     linear-gradient(125deg, var(--ep-surface), color-mix(in srgb, var(--ep-tint) 74%, var(--ep-surface)));
   box-shadow: 0 30px 80px -54px rgba(8,126,139,.28), inset 0 1px 0 rgba(255,255,255,.6);
 }
@@ -1762,7 +1762,7 @@ html.dark .ep-contact-page .ep-contact-intro-panel {
   box-shadow: 0 0 0 12px rgba(8,126,139,.035);
 }
 .ep-contact-page .ep-contact-signal-ring-two {
-  border-color: rgba(37,99,235,.42);
+  border-color: rgba(8,126,139,.42);
   border-style: solid;
 }
 .ep-contact-page .ep-contact-signal-ring-three {
@@ -1781,12 +1781,12 @@ html.dark .ep-contact-page .ep-contact-intro-panel {
   border: 1px solid var(--ep-line);
   border-radius: 1.5rem;
   background:
-    radial-gradient(ellipse at 0% 0%, rgba(14,165,233,.07), transparent 45%),
+    radial-gradient(ellipse at 0% 0%, rgba(8,126,139,.07), transparent 45%),
     var(--ep-tint);
 }
 html.dark .ep-contact-page [data-contact-details] {
   background:
-    radial-gradient(ellipse at 0% 0%, rgba(37,99,235,.15), transparent 45%),
+    radial-gradient(ellipse at 0% 0%, rgba(8,126,139,.15), transparent 45%),
     #0e192b;
 }
 .ep-contact-page [data-contact-card] {
@@ -1832,7 +1832,7 @@ html.dark .ep-contact-page [data-contact-form] > form {
 .ep-about-page .ep-about-orbit-visual {
   width: min(100%, 440px);
   overflow: visible;
-  filter: drop-shadow(0 26px 34px rgba(37,99,235,.12));
+  filter: drop-shadow(0 26px 34px rgba(8,126,139,.12));
 }
 .ep-about-page .ep-about-orbit {
   border-style: solid;
@@ -1847,7 +1847,7 @@ html.dark .ep-contact-page [data-contact-form] > form {
 .ep-about-page .ep-about-orbit-b {
   width: 76%;
   border-width: 1.5px;
-  border-color: rgba(37,99,235,.28);
+  border-color: rgba(8,126,139,.28);
   box-shadow: 0 0 0 1px rgba(255,255,255,.35), 0 0 30px rgba(8,126,139,.08);
 }
 .ep-about-page .ep-about-orbit-c {
@@ -1867,7 +1867,7 @@ html.dark .ep-contact-page [data-contact-form] > form {
   align-items: center;
   justify-content: center;
   gap: .1rem;
-  border: 1px solid rgba(191,219,254,.72);
+  border: 1px solid rgba(112,215,200,.72);
   border-radius: 1.8rem;
   color: #fff;
   background:
@@ -1960,13 +1960,13 @@ html.dark .ep-about-page .ep-about-orbit-b {
 }
 html.dark .ep-about-page .ep-about-orbit-c {
   border-color: rgba(34,211,238,.55);
-  background: radial-gradient(circle, rgba(8,126,139,.16), rgba(14,165,233,.05) 62%, transparent 72%);
+  background: radial-gradient(circle, rgba(8,126,139,.16), rgba(8,126,139,.05) 62%, transparent 72%);
 }
 html.dark .ep-about-page .ep-about-orbit-tag {
   border-color: rgba(69,197,179,.35);
   color: #dbeafe;
   background: linear-gradient(145deg, rgba(20,39,67,.97), rgba(12,26,48,.96));
-  box-shadow: 0 16px 38px -24px rgba(0,0,0,.7), inset 0 1px 0 rgba(191,219,254,.1);
+  box-shadow: 0 16px 38px -24px rgba(0,0,0,.7), inset 0 1px 0 rgba(112,215,200,.1);
 }
 html.dark .ep-about-page .ep-about-orbit-tag small {
   color: #a9c2e4;
