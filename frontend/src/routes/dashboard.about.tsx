@@ -6,7 +6,7 @@ const moduleIcons = ["droplet", "gauge", "eye", "utensils", "leaf"] as const;
 
 function DashboardAboutPage() {
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-8">
+    <div className="mx-auto w-full max-w-none space-y-8">
       <header className="border-b border-[var(--ep-line)] pb-6">
         <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-primary)]">Settings &amp; preferences</p>
         <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">System information</h1>
