@@ -32,13 +32,13 @@ export function deriveTankAlerts(tanks: Tank[]): AlertItem[] {
   const alerts: AlertItem[] = [];
   const limits = getThresholds();
   const checks = CHECKS.map((check) => {
-    const config =
+    const config: { min: number; max?: number } =
       check.label === "Dissolved O₂" ? limits.dissolvedOxygen :
       check.label === "pH" ? limits.ph :
       check.label === "Temperature" ? limits.temperature :
       check.label === "Salinity" ? limits.salinity :
       limits.waterLevel;
-    return { ...check, min: config.min, max: "max" in config ? config.max : undefined };
+    return { ...check, min: config.min, max: config.max };
   });
 
   for (const tank of tanks) {
