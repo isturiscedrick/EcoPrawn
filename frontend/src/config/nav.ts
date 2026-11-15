@@ -14,7 +14,7 @@ export interface DashboardNavItem {
 
 export const DASHBOARD_NAV_ITEMS: DashboardNavItem[] = [
   { icon: "gauge", label: "Dashboard", view: "overview" },
-  { icon: "chart-no-axes-combined", label: "Analytics", view: "analytics" },
+  { icon: "camera", label: "Vision", view: "analytics" },
   { icon: "layers", label: "Tanks", view: "tanks" },
   { icon: "waves", label: "Water Quality", view: "water" },
   { icon: "utensils", label: "Feeding", view: "feeding" },
