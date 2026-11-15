@@ -233,6 +233,15 @@ export function TankProvider({ children }: { children: ReactNode }) {
       }
     }
   }
+  const refreshManually = useCallback(async () => {
+    if (isRefreshing) return;
+    setIsRefreshing(true);
+    try {
+      await refreshTanks(true);
+    } finally {
+      setIsRefreshing(false);
+    }
+  }, [isRefreshing, refreshTanks]);
   const reject = (message: string) => { setError(message); return Promise.resolve(false); };
   return (
     <TankContext.Provider
@@ -243,7 +252,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
         lastUpdatedAt,
         loading,
         error,
-        refreshTanks: () => refreshTanks(true),
+        refreshTanks: refreshManually,
         isRefreshing,
         addTank: (input) => {
           if (!validNewTank(input)) return reject("Enter valid tank measurements before saving.");
