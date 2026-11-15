@@ -7,7 +7,7 @@
 .ep-landing {
   color-scheme: light;
   /* 60% white/light neutral canvas, 30% black/charcoal structure,
-     10% blue accents for actions, links, and active states. */
+     10% Ocean Teal accents for actions, links, and active states. */
   --ep-bg: #f8fafc;
   --ep-surface: #ffffff;
   --ep-tint: #f1f5f9;
@@ -34,7 +34,7 @@
   --ep-status-danger: #b91c1c;
   --ep-status-danger-bg: #fee2e2;
   --ep-status-info: #087e8b;
-  --ep-status-info-bg: #dbeafe;
+  --ep-status-info-bg: #d9f0ef;
   --ep-status-neutral: #475569;
   --ep-status-neutral-bg: #e2e8f0;
   --ep-on-status: #ffffff;
@@ -46,18 +46,18 @@
 /* ---------- Dark theme tokens ---------- */
 html.dark .ep-landing {
   color-scheme: dark;
-  --ep-bg: #090d16;
-  --ep-surface: #111827;
-  --ep-tint: #1f2937;
-  --ep-line: #334155;
+  --ep-bg: #0b171b;
+  --ep-surface: #102328;
+  --ep-tint: #153a3e;
+  --ep-line: #285158;
   --ep-primary: #f8fafc;
   --ep-secondary: #e2e8f0;
   --ep-text: #f8fafc;
   --ep-text-muted: #cbd5e1;
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
-  --ep-on-accent: #071426;
-  --ep-deep: #050914;
+  --ep-on-accent: #092b31;
+  --ep-deep: #07191e;
   --ep-on-deep: #f8fafc;
   --ep-on-deep-muted: #cbd5e1;
   --ep-ok: #5fbf8a;
@@ -70,7 +70,7 @@ html.dark .ep-landing {
   --ep-status-danger: #fca5a5;
   --ep-status-danger-bg: #4a1d22;
   --ep-status-info: #70d7c8;
-  --ep-status-info-bg: #172f50;
+  --ep-status-info-bg: #153a3e;
   --ep-status-neutral: #cbd5e1;
   --ep-status-neutral-bg: #263244;
   --ep-on-status: #0b1417;
@@ -82,7 +82,7 @@ html:not(.dark) body.ecoprawn-root:has(.ep-landing) {
   background: #f8fafc;
 }
 html.dark body.ecoprawn-root:has(.ep-landing) {
-  background: #090d16;
+  background: #0b171b;
 }
 
 /* ---------- Smooth scrolling with sticky header offset ---------- */
