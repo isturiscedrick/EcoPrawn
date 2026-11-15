@@ -5,6 +5,7 @@ import { KpiCard, Panel } from "@/features/dashboard/components/DashboardPrimiti
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
 import { getThresholds, rangeStatus } from "@/features/dashboard/lib/thresholds";
+import { DashboardDataStatus } from "@/features/dashboard/components/DashboardDataStatus";
 
 const quickActions = [
   { to: "/dashboard/water", title: "Water quality", description: "Review live water parameters.", icon: "waves" },
@@ -84,16 +85,11 @@ export function Dashboard() {
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-xs font-semibold text-[var(--ep-text)]">
-            <span className={isDbConnected ? "h-2 w-2 rounded-full bg-[var(--ep-status-success)]" : "h-2 w-2 rounded-full bg-[var(--ep-status-warning)]"} />
-            {isDbConnected ? "System connected" : "Connection unavailable"}
-          </div>
-          <button type="button" onClick={() => void refreshTanks()} className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 text-xs font-semibold text-[var(--ep-text)] transition-colors hover:border-[var(--ep-accent)] hover:bg-[var(--ep-accent-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
-            <Icon name="repeat" size={14} />
-            Refresh
-          </button>
+
         </div>
       </div>
+
+      <DashboardDataStatus />
 
       <section aria-label="Facility health summary" className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-2 2xl:grid-cols-4">
         <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total facility inventory" deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
