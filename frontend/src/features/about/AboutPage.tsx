@@ -139,7 +139,7 @@ export function AboutPage() {
           style={{
             backgroundColor: "var(--ep-deep)",
             backgroundImage:
-              "radial-gradient(ellipse at 12% 8%, rgba(96,165,250,.10), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(0,0,0,.28), transparent 48%)",
+              "radial-gradient(ellipse at 12% 8%, rgba(69,197,179,.14), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(0,0,0,.28), transparent 48%)",
             backgroundRepeat: "no-repeat",
             backgroundSize: "100% 100%",
             backgroundPosition: "center",
