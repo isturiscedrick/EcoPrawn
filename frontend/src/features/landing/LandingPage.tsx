@@ -249,7 +249,7 @@ export function LandingPage() {
                     {[
                       { icon: "camera" as const, title: "Visual sampling", detail: "Review camera observations over time." },
                       { icon: "chart-no-axes-combined" as const, title: "Growth history", detail: "Follow recorded growth trends by tank." },
-                      { icon: "scale" as const, title: "Biomass insights", detail: "Use estimates to inform feeding decisions." },
+                      { icon: "gauge" as const, title: "Biomass insights", detail: "Use estimates to inform feeding decisions." },
                     ].map((item) => (
                       <div key={item.title} className="ep-hero-feature-tile">
                         <span><Icon name={item.icon} size={18} /></span>
@@ -261,8 +261,8 @@ export function LandingPage() {
                 ) : (
                   <div className="mt-4 grid gap-3 sm:grid-cols-3">
                     {[
-                      { icon: "wind" as const, title: "Aeration", detail: "Monitor connected aeration equipment." },
-                      { icon: "calendar-clock" as const, title: "Feeding", detail: "Coordinate feeding with farm observations." },
+                      { icon: "activity" as const, title: "Aeration", detail: "Monitor connected aeration equipment." },
+                      { icon: "clock" as const, title: "Feeding", detail: "Coordinate feeding with farm observations." },
                       { icon: "waves" as const, title: "Water care", detail: "Keep water treatment in the farm workflow." },
                     ].map((item) => (
                       <div key={item.title} className="ep-hero-feature-tile">
