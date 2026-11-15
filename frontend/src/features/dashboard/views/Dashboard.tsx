@@ -77,7 +77,7 @@ export function Dashboard() {
           <div className="ep-font-mono mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
             Facility overview
           </div>
-          <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)]">
+          <h1 className="ep-font-display text-[26px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)] sm:text-[30px]">
             Dashboard
           </h1>
           <p className="mt-2 text-sm text-[var(--ep-text-muted)]">
@@ -88,7 +88,7 @@ export function Dashboard() {
 
       <DashboardDataStatus />
 
-      <section aria-label="Facility health summary" className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-2 2xl:grid-cols-4">
+      <section aria-label="Facility health summary" className="mb-5 grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-3 2xl:grid-cols-4">
         <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total facility inventory" deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
         <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks registered"} deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
         <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={outOfRangeCount ? `${outOfRangeCount} with out-of-range readings` : attentionCount ? "Waiting for water readings" : "No tank warnings detected"} deltaTone={attentionCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
