@@ -6,8 +6,6 @@ import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { getThresholds, saveThresholds, THRESHOLDS, type ThresholdSettings } from "@/features/dashboard/lib/thresholds";
-import { DashboardDataStatus } from "@/features/dashboard/components/DashboardDataStatus";
-
 export function WaterQuality() {
   const { tanks, waterHistory = [], loading } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
@@ -135,9 +133,6 @@ export function WaterQuality() {
           {warnCount === 0 ? "All parameters nominal" : `${warnCount} tank${warnCount !== 1 ? "s" : ""} out of range`}
         </div>
       </div>
-
-      <DashboardDataStatus />
-
       {tankCount > 0 ? (
         <>
           <div className="mb-4">
