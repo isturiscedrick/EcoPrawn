@@ -20,7 +20,7 @@ const filterOptions: { value: AlertFilter; label: string }[] = [
 
 export function AlertsView() {
   const navigate = useNavigate();
-  const { tanks, alertsLog, resolvedAlerts, loading, error, refreshTanks } = useTanks();
+  const { tanks, alertsLog, resolvedAlerts, loading, error } = useTanks();
   const [filter, setFilter] = useState<AlertFilter>("all");
   const [search, setSearch] = useState("");
   const [acknowledged, setAcknowledged] = useState<Set<string>>(() => new Set());
@@ -32,7 +32,6 @@ export function AlertsView() {
       <DashboardErrorState
         title="Alerts unavailable"
         description={error}
-        action={{ label: "Try again", onClick: () => void refreshTanks() }}
       />
     );
   }
@@ -83,7 +82,6 @@ export function AlertsView() {
           <DashboardErrorState
             title="Some alert data may be out of date"
             description={error}
-            action={{ label: "Retry", onClick: () => void refreshTanks() }}
           />
         </div>
       )}
