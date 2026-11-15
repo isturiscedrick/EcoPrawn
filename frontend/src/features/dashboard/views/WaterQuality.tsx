@@ -156,7 +156,7 @@ export function WaterQuality() {
                   tabIndex={selectedTankIndex === index ? 0 : -1}
                   onClick={() => { setSelectedTankId(tank.id); window.sessionStorage.setItem("ecoprawn.dashboard.selected-tank", tank.id); }}
                   onKeyDown={(event) => handleTankTabKeyDown(event, index)}
-                  className={`shrink-0 rounded-full border px-4 py-2 text-[12.5px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove)] ${
+                  className={`min-h-11 shrink-0 touch-manipulation rounded-full border px-4 py-2 text-[12.5px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove)] ${
                     selectedTankIndex === index
                       ? "border-[var(--mangrove)] bg-[var(--mangrove)] text-white"
                       : "border-[var(--sand-dim)] bg-white text-[var(--water-deep)] hover:border-[var(--mangrove)]"
