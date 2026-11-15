@@ -375,7 +375,7 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
 }
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero]::before {
   border-color: rgba(69,197,179,.2);
-  box-shadow: 0 0 0 24px rgba(69,197,179,.045), 0 0 0 54px rgba(14,165,233,.03);
+  box-shadow: 0 0 0 24px rgba(69,197,179,.045), 0 0 0 54px rgba(69,197,179,.04);
 }
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero]::after {
   background: radial-gradient(ellipse, rgba(69,197,179,.18), transparent 68%);
@@ -1359,9 +1359,9 @@ html:not(.dark) .ep-business-landing .ep-hero-monitor-panel {
   border-color: rgba(148,163,184,.42);
   background:
     radial-gradient(ellipse at 88% 0%, rgba(8,126,139,.14), transparent 48%),
-    radial-gradient(ellipse at 0% 100%, rgba(6,182,212,.08), transparent 48%),
+    radial-gradient(ellipse at 0% 100%, rgba(69,197,179,.08), transparent 48%),
     linear-gradient(145deg, #ffffff 0%, #f4f8ff 58%, #edf6ff 100%);
-  box-shadow: 0 28px 70px -42px rgba(30,64,175,.28), inset 0 1px 0 rgba(255,255,255,.95);
+  box-shadow: 0 28px 70px -42px rgba(8,126,139,.22), inset 0 1px 0 rgba(255,255,255,.95);
 }
 html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-white {
   color: #0f172a !important;
@@ -1397,7 +1397,7 @@ html:not(.dark) .ep-business-landing .ep-hero-sensor-tile {
   box-shadow: 0 8px 20px -16px rgba(15,23,42,.22), inset 0 1px 0 rgba(255,255,255,.95);
 }
 html:not(.dark) .ep-business-landing .ep-hero-sensor-tile:hover {
-  border-color: rgba(59,130,246,.42);
+  border-color: rgba(8,126,139,.42);
   background-color: #fff !important;
 }
 html:not(.dark) .ep-business-landing .ep-hero-monitor-glow {
@@ -1528,7 +1528,7 @@ html.dark .ep-business-landing .ep-hero-sensor-tile {
 }
 html.dark .ep-business-landing .ep-aquatic-scene {
   background:
-    radial-gradient(ellipse at 76% 26%, rgba(59,130,246,.15), transparent 38%),
+    radial-gradient(ellipse at 76% 26%, rgba(8,126,139,.15), transparent 38%),
     radial-gradient(ellipse at 18% 78%, rgba(69,197,179,.10), transparent 42%);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1651,7 +1651,7 @@ html.dark .ep-business-landing .ep-aquatic-scene {
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(147,197,253,.78), rgba(255,255,255,.14) 42%, rgba(34,211,238,.42));
+  background: linear-gradient(135deg, rgba(112,215,200,.78), rgba(255,255,255,.14) 42%, rgba(69,197,179,.42));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -1751,8 +1751,8 @@ html.dark .ep-business-landing .ep-aquatic-scene {
   right: -64px;
   top: -64px;
   border-radius: 50%;
-  border: 1px solid rgba(147,197,253,.18);
-  box-shadow: 0 0 0 14px rgba(147,197,253,.035), 0 0 0 30px rgba(147,197,253,.025);
+  border: 1px solid rgba(112,215,200,.18);
+  box-shadow: 0 0 0 14px rgba(112,215,200,.045), 0 0 0 30px rgba(112,215,200,.035);
   pointer-events: none;
 }
 .ep-business-landing [data-business-card] {
@@ -1815,7 +1815,7 @@ html.dark .ep-business-landing .ep-stats-panel > div {
     #111c2d;
 }
 html.dark .ep-business-landing .ep-platform-ribbon-number {
-  background: linear-gradient(145deg, rgba(37,99,235,.22), rgba(15,23,42,.82));
+  background: linear-gradient(145deg, rgba(69,197,179,.18), rgba(7,35,40,.82));
   border-color: rgba(69,197,179,.32);
   color: #70d7c8;
 }
