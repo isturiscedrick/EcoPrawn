@@ -27,8 +27,15 @@ export function Dashboard() {
 
   const healthyCount = tanks.filter((tank) => tank.status === "ok").length;
   const attentionCount = tanks.length - healthyCount;
+  const noReadingCount = tanks.filter((tank) => !tank.hasWaterReadings).length;
+  const outOfRangeCount = attentionCount - noReadingCount;
   const healthyPercent = tanks.length ? (healthyCount / tanks.length) * 100 : 0;
   const attentionPercent = tanks.length ? (attentionCount / tanks.length) * 100 : 0;
+  const prioritizedTanks = [...tanks].sort((a, b) => {
+    if (a.status !== b.status) return a.status === "warn" ? -1 : 1;
+    if (a.hasWaterReadings !== b.hasWaterReadings) return a.hasWaterReadings ? -1 : 1;
+    return a.name.localeCompare(b.name);
+  });
 
   return (
     <>
@@ -56,10 +63,11 @@ export function Dashboard() {
         </div>
       </div>
 
-      <section aria-label="Facility health summary" className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <section aria-label="Facility health summary" className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-2 2xl:grid-cols-4">
         <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total facility inventory" deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
         <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks registered"} deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
-        <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={attentionCount ? "Review water conditions" : "No tank warnings detected"} deltaTone={attentionCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
+        <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={outOfRangeCount ? `${outOfRangeCount} with out-of-range readings` : attentionCount ? "Waiting for water readings" : "No tank warnings detected"} deltaTone={attentionCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
+        <KpiCard label="No water readings" value={String(noReadingCount)} unit="tanks" delta={noReadingCount ? "Data not available yet" : "All tanks have readings"} deltaTone={noReadingCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
       </section>
 
       <section aria-labelledby="tank-snapshot-heading" className="mb-5">
@@ -74,7 +82,7 @@ export function Dashboard() {
         </div>
         {tanks.length ? (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 2xl:grid-cols-3">
-            {tanks.slice(0, 6).map((tank) => (
+            {prioritizedTanks.slice(0, 6).map((tank) => (
               <Link key={tank.id} to="/dashboard/water" className="dashboard-tank-snapshot group min-w-0 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
                 <div className="mb-3 flex items-center justify-between gap-2">
                   <div className="flex min-w-0 items-center gap-2">
@@ -85,7 +93,7 @@ export function Dashboard() {
                     </span>
                   </div>
                   <span className={tank.status === "ok" ? "dashboard-status-badge dashboard-status-success" : "dashboard-status-badge dashboard-status-warning"}>
-                    {tank.status === "ok" ? "Healthy" : "Attention"}
+                    {!tank.hasWaterReadings ? "No readings" : tank.status === "ok" ? "Healthy" : "Attention"}
                   </span>
                 </div>
                 {tank.hasWaterReadings ? (
@@ -109,7 +117,8 @@ export function Dashboard() {
             <Link to="/dashboard/tanks" className="mt-3 inline-flex min-h-10 items-center rounded-lg bg-[var(--ep-accent)] px-4 text-xs font-semibold text-white">Add a tank</Link>
           </div>
         )}
-        {tanks.length > 6 && <p className="mt-2 text-right text-xs text-[var(--ep-text-muted)]">Showing 6 of {tanks.length} tanks.</p>}
+        {tanks.length > 6 && <p className="mt-2 text-right text-xs text-[var(--ep-text-muted)]">Showing 6 of {tanks.length} tanks, prioritized by status.</p>}
+        {noReadingCount > 0 && <p className="mt-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-2 text-xs leading-relaxed text-[var(--ep-text-muted)]"><span className="font-semibold text-[var(--ep-text)]">{noReadingCount} {noReadingCount === 1 ? "tank has" : "tanks have"} no water readings.</span> These are counted as needing attention so missing data is not mistaken for healthy conditions.</p>}
       </section>
 
       <div className="mb-5 grid grid-cols-1 gap-4 xl:grid-cols-[1.15fr_0.85fr]">
