@@ -43,7 +43,7 @@ export function DashboardDetailModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="dashboard-detail-title"
-        className="ep-pop-in relative z-10 w-full max-w-[480px] rounded-2xl border border-[var(--ep-line)] bg-white p-6 text-[var(--ep-primary)] shadow-[0_28px_90px_rgba(8,30,34,0.32)] sm:p-8"
+        className="ep-pop-in relative z-10 max-h-[90dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-white p-6 text-[var(--ep-primary)] shadow-[0_28px_90px_rgba(8,30,34,0.32)] sm:p-8"
       >
         <div className="mb-6 flex items-start justify-between gap-4">
           <div>
