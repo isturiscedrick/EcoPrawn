@@ -19,4 +19,6 @@ export interface AlertItem {
   title: string;
   detail: string;
   time: string;
+  /** Present on live tank alerts so operators can open the affected tank. */
+  tankId?: string;
 }
