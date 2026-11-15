@@ -268,3 +268,25 @@ html.dark .ep-auth-modal {
   --tw-ring-color: color-mix(in srgb, var(--ep-accent, #087e8b) 15%, transparent);
 }
 
+
+
+/* Dashboard chart and filter accents use Ocean Teal, not the former slate secondary. */
+.dashboard-shell polyline[stroke="var(--mangrove)"],
+.dashboard-shell .inline-block.h-\[2px\].bg-\[var\(--mangrove\)\],
+.dashboard-shell .bg-\[\#4b8db8\],
+.dashboard-shell .bg-\[var\(--mangrove\)\].text-white,
+.dashboard-shell summary.text-\[var\(--mangrove\)] {
+  color: var(--ep-accent);
+  stroke: var(--ep-accent);
+  background-color: var(--ep-accent);
+  border-color: var(--ep-accent);
+}
+html.dark .dashboard-shell .bg-\[var\(--mangrove\)\].text-white {
+  color: var(--ep-on-accent) !important;
+}
+.dashboard-shell .hover\:border-\[var\(--mangrove\)\]:hover {
+  border-color: var(--ep-accent) !important;
+}
+.dashboard-shell .to-\[var\(--amber\)\] {
+  --tw-gradient-to: var(--ep-accent) !important;
+}
