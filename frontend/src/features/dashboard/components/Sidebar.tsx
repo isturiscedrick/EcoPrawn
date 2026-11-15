@@ -246,9 +246,9 @@ export function Sidebar({
         className={`fixed bottom-0 left-0 top-0 z-30 hidden flex-col border-r border-[var(--ep-line)] bg-[var(--ep-surface)] transition-[width] duration-300 ease-in-out lg:flex ${collapsed ? "w-[76px]" : "w-[260px]"}`}
       >
         <div className={`flex min-h-[63px] shrink-0 items-center border-b border-[var(--ep-line)] py-3 ${collapsed ? "justify-center px-2" : "justify-between gap-3 px-5"}`}>
-          <Link to="/dashboard" aria-label="EcoPrawn dashboard" className="flex min-w-0 items-center">
-            <BrandMark size={32} showWordmark={!collapsed} />
-          </Link>
+          {!collapsed && <Link to="/dashboard" aria-label="EcoPrawn dashboard" className="flex min-w-0 items-center">
+            <BrandMark size={32} showWordmark />
+          </Link>}
           <button type="button" onClick={onToggleCollapsed} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} aria-pressed={collapsed} title={collapsed ? "Expand sidebar" : "Collapse sidebar"} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
             <Icon name="sidebar-toggle" size={19} />
           </button>
