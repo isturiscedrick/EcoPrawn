@@ -172,7 +172,7 @@ export function LandingPage() {
                   aria-haspopup="dialog"
                   title="Open dashboard sign in"
                   data-dashboard-entry=""
-                  className={`group relative z-10 inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3 text-sm font-semibold text-[var(--ep-on-accent)] shadow-[0_10px_28px_-12px_rgba(29,78,216,.58)] transition-[transform,background-color,box-shadow] duration-300 ease-out hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_16px_34px_-14px_rgba(29,78,216,.62)] active:scale-[.98] ${focusRing}`}
+                  className={`group relative z-10 inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3 text-sm font-semibold text-[var(--ep-on-accent)] shadow-[0_10px_28px_-12px_rgba(8,126,139,.58)] transition-[transform,background-color,box-shadow] duration-300 ease-out hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_16px_34px_-14px_rgba(8,126,139,.62)] active:scale-[.98] ${focusRing}`}
                 >
                   Open dashboard
                   <span aria-hidden="true" className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-current/25 bg-white/10 text-current transition-colors duration-200">
@@ -191,10 +191,10 @@ export function LandingPage() {
               <div className="relative z-10">
                 <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 pb-4">
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[.18em] text-blue-200/75">Water intelligence</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[.18em] text-teal-100/75">Water intelligence</p>
                     <h2 className="mt-1 text-lg font-semibold tracking-tight text-white sm:text-xl">Tank 1 · Sensor overview</h2>
                   </div>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-blue-300/20 bg-blue-300/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.12em] text-blue-100">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-teal-300/20 bg-teal-300/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.12em] text-teal-100">
                     <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.8)]" />
                     Sample data
                   </span>
@@ -205,23 +205,23 @@ export function LandingPage() {
                     const range = targetRangeFor(reading.label) ?? "Target range not set";
                     return (
                       <div key={reading.label} className="ep-hero-sensor-tile min-w-0 rounded-xl border border-white/10 bg-white/[.055] px-3 py-3">
-                        <div className="flex items-center gap-1.5 text-[10px] font-semibold text-blue-100/75">
+                        <div className="flex items-center gap-1.5 text-[10px] font-semibold text-teal-100/75">
                           <span aria-hidden="true" data-hero-sensor-dot="" className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
                           <span className="truncate">{reading.label}</span>
                         </div>
                         <p className="mt-2 whitespace-nowrap text-[clamp(18px,2vw,25px)] font-semibold leading-none tracking-tight text-white tabular-nums">
-                          {reading.value}<span className="ml-1 text-[10px] font-medium text-blue-100/65">{heroReadoutUnits[reading.label]}</span>
+                          {reading.value}<span className="ml-1 text-[10px] font-medium text-teal-100/65">{heroReadoutUnits[reading.label]}</span>
                         </p>
                         <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/10">
-                          <span data-hero-sensor-bar="" className="block h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-300" style={{ width: `${reading.pct}%` }} />
+                          <span data-hero-sensor-bar="" className="block h-full rounded-full bg-gradient-to-r from-teal-500 to-cyan-300" style={{ width: `${reading.pct}%` }} />
                         </div>
-                        <p className="mt-2 truncate text-[9px] leading-tight text-blue-100/65" title={range}>Target {range}</p>
+                        <p className="mt-2 truncate text-[9px] leading-tight text-teal-100/65" title={range}>Target {range}</p>
                       </div>
                     );
                   })}
                 </div>
 
-                <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-3 text-[10px] text-blue-100/65">
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-3 text-[10px] text-teal-100/65">
                   <span className="inline-flex items-center gap-2"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> 5 sensor indicators</span>
                   <span>Illustrative preview · Not live telemetry</span>
                 </div>
@@ -488,7 +488,7 @@ export function LandingPage() {
                 Bring key water-quality readings and operating context into one view, so your team can spot changes and make informed decisions.
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
-                <Link to="/dashboard" className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--ep-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] shadow-lg shadow-blue-600/15 transition-colors duration-200 hover:bg-[var(--ep-accent-hover)] ${focusRing}`}>
+                <Link to="/dashboard" className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--ep-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] shadow-lg shadow-teal-700/15 transition-colors duration-200 hover:bg-[var(--ep-accent-hover)] ${focusRing}`}>
                   Explore dashboard <Icon name="arrow-up-right" size={16} />
                 </Link>
                 <span className="text-xs text-[var(--ep-text-muted)]">Illustrative interface preview</span>
