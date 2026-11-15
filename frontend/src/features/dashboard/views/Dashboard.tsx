@@ -103,7 +103,10 @@ export function Dashboard() {
                 { label: "Salinity", unit: "ppt", value: tank.salinity, status: rangeStatus(tank.salinity, thresholdSettings.salinity.min, thresholdSettings.salinity.max) },
                 { label: "Water level", unit: "%", value: tank.waterLevel, status: rangeStatus(tank.waterLevel, thresholdSettings.waterLevel.min) },
               ];
-              const warningCount = tank.hasWaterReadings ? readings.filter((reading) => reading.status === "warn").length : 0;
+              const warningLabels = tank.hasWaterReadings
+                ? readings.filter((reading) => reading.status === "warn").map((reading) => reading.label)
+                : [];
+              const warningCount = warningLabels.length;
               return (
                 <Link key={tank.id} to="/dashboard/water" onClick={() => window.sessionStorage.setItem("ecoprawn.dashboard.selected-tank", tank.id)} className="dashboard-tank-snapshot group min-w-0 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
                   <div className="mb-3 flex items-center justify-between gap-2">
@@ -118,6 +121,11 @@ export function Dashboard() {
                       {!tank.hasWaterReadings ? "No readings" : warningCount ? `${warningCount} to check` : "Healthy"}
                     </span>
                   </div>
+                  {warningLabels.length > 0 && (
+                    <p className="mb-3 rounded-lg border border-[var(--ep-status-warning)]/25 bg-[var(--ep-status-warning)]/5 px-2.5 py-2 text-[11px] leading-relaxed text-[var(--ep-status-warning)]">
+                      <span className="font-semibold">Check:</span> {warningLabels.join(" · ")}
+                    </p>
+                  )}
                   {tank.hasWaterReadings ? (
                     <div className="grid grid-cols-2 gap-2 border-t border-[var(--ep-line)] pt-3 sm:grid-cols-3">
                       {readings.map((reading) => (
