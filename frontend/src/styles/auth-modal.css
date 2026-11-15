@@ -152,7 +152,7 @@
 .ep-auth-modal input:focus {
   border-color: #087e8b !important;
   background: #ffffff !important;
-  box-shadow: 0 0 0 4px rgba(217, 68, 22, 0.12);
+  box-shadow: 0 0 0 4px rgba(8, 126, 139, 0.12);
 }
 
 .ep-auth-modal input::placeholder {
@@ -166,14 +166,14 @@
   background: #087e8b !important;
   border-color: #087e8b !important;
   color: #ffffff !important;
-  box-shadow: 0 10px 24px -14px rgba(217, 68, 22, 0.9);
+  box-shadow: 0 10px 24px -14px rgba(8, 126, 139, 0.9);
   transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 
 .ep-auth-modal button[type="submit"]:not(:disabled):hover {
   transform: translateY(-2px);
   background: #066874 !important;
-  box-shadow: 0 14px 28px -14px rgba(217, 68, 22, 0.65);
+  box-shadow: 0 14px 28px -14px rgba(8, 126, 139, 0.65);
 }
 
 .ep-auth-modal button[type="submit"]:active {
