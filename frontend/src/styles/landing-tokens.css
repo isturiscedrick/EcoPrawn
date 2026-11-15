@@ -113,7 +113,7 @@ html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
 }
 html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
   color: #45c5b3 !important;
-  -webkit-text-fill-color: #60A5FA !important;
+  -webkit-text-fill-color: #45c5b3 !important;
 }
 
 /* About and Contact page hero headlines share the same two-tone brand treatment */
