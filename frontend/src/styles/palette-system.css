@@ -1127,3 +1127,65 @@ html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
     border-color: #285158 !important;
   }
 }
+
+
+/* Dashboard final Ocean Teal pass — remove residual legacy blue/slate accents. */
+.dashboard-shell {
+  --ep-brand-primary: #087e8b !important;
+  --ep-brand-secondary: #066874 !important;
+  --ep-primary: #173b46;
+  --ep-primary-soft: #245563;
+  --ep-secondary: #066874 !important;
+  --ep-accent: #087e8b !important;
+  --ep-accent-hover: #066874 !important;
+  --ep-on-accent: #ffffff !important;
+  --ep-accent-tint: rgba(8,126,139,.12) !important;
+  --ep-accent-tint-soft: rgba(8,126,139,.07) !important;
+  --ep-secondary-tint: rgba(8,126,139,.09) !important;
+}
+html.dark .dashboard-shell {
+  --ep-brand-primary: #45c5b3 !important;
+  --ep-brand-secondary: #70d7c8 !important;
+  --ep-primary: #e8f4f2;
+  --ep-primary-soft: #c9e2df;
+  --ep-secondary: #70d7c8 !important;
+  --ep-accent: #45c5b3 !important;
+  --ep-accent-hover: #70d7c8 !important;
+  --ep-on-accent: #092b31 !important;
+  --ep-accent-tint: rgba(69,197,179,.15) !important;
+  --ep-accent-tint-soft: rgba(69,197,179,.08) !important;
+  --ep-secondary-tint: rgba(69,197,179,.10) !important;
+}
+html.dark .dashboard-shell aside,
+html.dark .dashboard-shell aside#dashboard-sidebar {
+  background: #102328 !important;
+  border-color: #285158 !important;
+  color: #e8f4f2 !important;
+}
+html.dark .dashboard-shell aside .bg-\[var\(--ep-bg\)\] {
+  background-color: #0b171b !important;
+}
+.dashboard-shell :is([class*="text-blue-"],[class*="text-indigo-"],[class*="text-sky-"],[class*="text-cyan-"]) {
+  color: var(--ep-accent) !important;
+}
+.dashboard-shell :is([class*="border-blue-"],[class*="border-indigo-"],[class*="border-sky-"],[class*="border-cyan-"]) {
+  border-color: color-mix(in srgb,var(--ep-accent) 34%,var(--ep-line)) !important;
+}
+.dashboard-shell :is([class*="bg-blue-"],[class*="bg-indigo-"],[class*="bg-sky-"],[class*="bg-cyan-"]) {
+  background-color: color-mix(in srgb,var(--ep-accent) 10%,var(--ep-surface)) !important;
+}
+html.dark .dashboard-shell :is([class*="bg-blue-"],[class*="bg-indigo-"],[class*="bg-sky-"],[class*="bg-cyan-"]) {
+  background-color: color-mix(in srgb,var(--ep-accent) 16%,var(--ep-surface)) !important;
+}
+.dashboard-shell .bg-\[\#4b8db8\] {
+  background-color: var(--ep-accent) !important;
+}
+.dashboard-shell :is([class*="from-blue-"],[class*="from-indigo-"],[class*="from-sky-"],[class*="from-cyan-"]) {
+  --tw-gradient-from: color-mix(in srgb,var(--ep-accent) 18%,var(--ep-surface)) !important;
+}
+.dashboard-shell :is([class*="to-blue-"],[class*="to-indigo-"],[class*="to-sky-"],[class*="to-cyan-"]) {
+  --tw-gradient-to: var(--ep-tint) !important;
+}
+.dashboard-shell :is(button,a,[role="button"]):focus-visible {
+  outline-color: var(--ep-accent) !important;
+}
