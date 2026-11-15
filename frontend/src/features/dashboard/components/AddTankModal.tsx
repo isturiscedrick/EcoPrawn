@@ -164,7 +164,7 @@ export function AddTankModal({
         className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.72)]"
       />
 
-      <div className="ep-pop-in relative z-10 max-h-[90vh] w-full max-w-[520px] overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_28px_90px_rgba(8,30,34,0.28)] sm:p-7">
+      <div className="ep-pop-in relative z-10 max-h-[90dvh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 shadow-[0_28px_90px_rgba(8,30,34,0.28)] sm:p-8 lg:p-9">
         <div className="mb-7 flex items-start justify-between gap-5">
           <div>
             <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ep-accent)]">
