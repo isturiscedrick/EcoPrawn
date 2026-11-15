@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import { AlertRow } from "@/features/dashboard/components/DashboardRows";
 import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
@@ -18,6 +19,7 @@ const filterOptions: { value: AlertFilter; label: string }[] = [
 ];
 
 export function AlertsView() {
+  const navigate = useNavigate();
   const { tanks, alertsLog, resolvedAlerts, loading, error, refreshTanks } = useTanks();
   const [filter, setFilter] = useState<AlertFilter>("all");
   const [search, setSearch] = useState("");
@@ -49,6 +51,11 @@ export function AlertsView() {
   const searchedWarningEvents = visibleWarningEvents.filter(matchesSearch);
   const searchedInfoEvents = visibleInfoEvents.filter(matchesSearch);
   const alertIdentity = (alert: { title?: string; detail?: string }) => `${alert.title ?? ""}::${alert.detail ?? ""}`;
+  const openTank = (tankId?: string) => {
+    if (!tankId) return;
+    window.sessionStorage.setItem("ecoprawn.dashboard.selected-tank", tankId);
+    void navigate({ to: "/dashboard/water" });
+  };
   const reviewedCount = liveAlerts.filter(alert => acknowledged.has(alertIdentity(alert))).length;
   const needsReviewCount = Math.max(0, liveAlerts.length - reviewedCount);
   const pendingLiveAlerts = searchedLiveAlerts.filter(alert => !acknowledged.has(alertIdentity(alert)));
@@ -172,7 +179,7 @@ export function AlertsView() {
                 <div className="space-y-2">
                   {pendingLiveAlerts.map((alert, index) => {
                     const key = alertIdentity(alert);
-                    return <AlertRow key={`live-${key}-${index}`} {...alert} acknowledged={false} onAcknowledge={() => setAcknowledged(current => new Set(current).add(key))} />;
+                    return <AlertRow key={`live-${key}-${index}`} {...alert} acknowledged={false} onViewTank={() => openTank(alert.tankId)} onAcknowledge={() => setAcknowledged(current => new Set(current).add(key))} />;
                   })}
                 </div>
               </section>
@@ -190,7 +197,7 @@ export function AlertsView() {
                 <div className="space-y-2">
                   {reviewedLiveAlerts.map((alert, index) => {
                     const key = alertIdentity(alert);
-                    return <AlertRow key={`reviewed-${key}-${index}`} {...alert} acknowledged onAcknowledge={() => setAcknowledged(current => {
+                    return <AlertRow key={`reviewed-${key}-${index}`} {...alert} acknowledged onViewTank={() => openTank(alert.tankId)} onAcknowledge={() => setAcknowledged(current => {
                       const next = new Set(current);
                       next.delete(key);
                       return next;
