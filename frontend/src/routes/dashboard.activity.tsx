@@ -5,7 +5,7 @@ import { DashboardViewSkeleton } from "@/features/dashboard/components/Dashboard
 import { useTanks } from "@/features/dashboard/context/TankContext";
 
 function ActivityPage() {
-  const { loading, error, isDbConnected, refreshTanks, visionScanLog, effluentLog } = useTanks();
+  const { loading, error, isDbConnected, visionScanLog, effluentLog } = useTanks();
   if (loading) return <DashboardViewSkeleton variant="activity" />;
 
   const items = [
@@ -37,8 +37,7 @@ function ActivityPage() {
       <Panel title="Recent activity" badge={`${items.length} entries`} icon="clock">
         {!isDbConnected && error && (
           <div role="alert" className="mb-4 text-sm text-[var(--water-deep)]">
-            <p>Activity refresh failed. {items.length > 0 ? "Showing saved records." : "Try again."}</p>
-            <button type="button" onClick={() => void refreshTanks()} className="mt-2 font-semibold text-[var(--ep-accent)] underline">Retry</button>
+            <p>{items.length > 0 ? "Showing saved records. Pull down to refresh." : "Activity data is unavailable. Pull down to try again."}</p>
           </div>
         )}
         {items.length === 0 && isDbConnected ? (
