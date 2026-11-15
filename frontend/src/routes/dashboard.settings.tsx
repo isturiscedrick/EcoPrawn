@@ -39,7 +39,7 @@ function SettingsPage() {
       title: "Configuration",
       description: "Connect an ESP32 device, assign it to a tank, and view sensor readings.",
       icon: "cpu" as const,
-      to: "/dashboard/tanks" as const,
+      to: "/dashboard/settings/configuration" as const,
       action: "Manage device connection",
     },
     {
