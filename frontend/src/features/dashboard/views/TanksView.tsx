@@ -14,6 +14,7 @@ export function TanksView() {
   const [editingTank, setEditingTank] = useState<Tank | null>(null);
   const [deletingTank, setDeletingTank] = useState<Tank | null>(null);
   const [actionError, setActionError] = useState("");
+  const [expandedTankId, setExpandedTankId] = useState<string | null>(null);
 
   async function handleAdd(input: NewTankInput) {
     setActionError("");
@@ -107,9 +108,38 @@ export function TanksView() {
                   <div><p className="text-[11px] text-[var(--ep-text-muted)]">Temperature</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.hasWaterReadings ? `${tank.temperature.toFixed(1)} °C` : "—"}</p></div>
                   <div><p className="text-[11px] text-[var(--ep-text-muted)]">pH level</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.hasWaterReadings ? tank.ph.toFixed(1) : "—"}</p></div>
                 </div>
-                <div className="mt-5 flex justify-end gap-2 border-t border-[var(--ep-line)] pt-4">
+                {expandedTankId === tank.id && (
+                  <div id={`tank-details-${tank.id}`} className="mt-4 space-y-4 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4" aria-label={`${tank.name} details`}>
+                    <section>
+                      <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--ep-text-muted)]">Water parameters</h4>
+                      <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Dissolved oxygen</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.hasWaterReadings ? `${tank.dissolvedOxygen.toFixed(1)} mg/L` : "—"}</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Salinity</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.hasWaterReadings ? `${tank.salinity.toFixed(1)} ppt` : "—"}</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Water level</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.hasWaterReadings ? `${tank.waterLevel.toFixed(1)}%` : "—"}</p></div>
+                      </div>
+                    </section>
+                    <div className="border-t border-[var(--ep-line)]" />
+                    <section>
+                      <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--ep-text-muted)]">Growth and feeding</h4>
+                      <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Average body length</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.bodyLength > 0 ? `${tank.bodyLength.toFixed(1)} cm` : "—"}</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Average weight</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.weight > 0 ? `${tank.weight.toFixed(2)} g` : "—"}</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Abnormal count</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.abnormal.toLocaleString()}</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Feed conversion ratio</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.fcr.toFixed(2)}</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Feed target today</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.targetToday.toLocaleString()} kg</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Feed dispensed today</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.dispensedToday.toLocaleString()} kg</p></div>
+                      </div>
+                    </section>
+                  </div>
+                )}
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-2 border-t border-[var(--ep-line)] pt-4">
+                  <button type="button" aria-expanded={expandedTankId === tank.id} aria-controls={`tank-details-${tank.id}`} onClick={() => setExpandedTankId(current => current === tank.id ? null : tank.id)} className="inline-flex min-h-9 items-center gap-1.5 rounded-lg px-2 text-xs font-semibold text-[var(--ep-primary)] transition hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">
+                    {expandedTankId === tank.id ? "Hide details" : "View details"} <Icon name={expandedTankId === tank.id ? "chevron-up" : "chevron-down"} size={14} />
+                  </button>
+                  <div className="flex justify-end gap-2">
                   <button type="button" onClick={() => setEditingTank(tank)} className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-text)] transition hover:bg-[var(--ep-tint)]"><Icon name="pencil" size={14} /> Edit</button>
                   <button type="button" onClick={() => setDeletingTank(tank)} className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-red-500/25 px-3 text-xs font-semibold text-red-600 transition hover:bg-red-500/10"><Icon name="trash-2" size={14} /> Delete</button>
+                  </div>
                 </div>
               </article>
             ))}
