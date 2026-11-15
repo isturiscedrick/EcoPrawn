@@ -280,3 +280,158 @@ html.dark .dashboard-shell .dashboard-nav-active-dot { background: #45c5b3 !impo
     margin-bottom: 18px !important; padding-bottom: 18px !important;
   }
 }
+
+
+/* ==========================================================================
+   EcoPrawn brand unification — Ocean Teal (#087E8B)
+   Shared by every dashboard view, public page, and global interaction state.
+   ========================================================================== */
+:root {
+  --primary: #087e8b;
+  --primary-foreground: #ffffff;
+  --accent: #087e8b;
+  --accent-foreground: #ffffff;
+  --ring: #087e8b;
+  --sidebar-primary: #087e8b;
+  --sidebar-ring: #087e8b;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #ffffff;
+  --ep-brand-primary: #087e8b;
+  --mangrove: #087e8b;
+  --mangrove-light: #45c5b3;
+  --mangrove-text: #066874;
+  --coral: #087e8b;
+  --coral-dim: #066874;
+  --coral-strong: #066874;
+}
+html.dark {
+  --primary: #45c5b3;
+  --primary-foreground: #092b31;
+  --accent: #45c5b3;
+  --accent-foreground: #092b31;
+  --ring: #45c5b3;
+  --sidebar-primary: #45c5b3;
+  --sidebar-ring: #45c5b3;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-brand-primary: #45c5b3;
+  --mangrove: #45c5b3;
+  --mangrove-light: #70d7c8;
+  --mangrove-text: #70d7c8;
+  --coral: #45c5b3;
+  --coral-dim: #70d7c8;
+  --coral-strong: #70d7c8;
+}
+
+/* Dashboard pages share the same brand tokens and active navigation treatment. */
+.dashboard-shell {
+  --ep-brand-primary: #087e8b;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #ffffff;
+  --ep-accent-tint: rgba(8,126,139,.12);
+  --ep-accent-tint-soft: rgba(8,126,139,.07);
+  --ep-brand-glow: rgba(8,126,139,.22);
+}
+html.dark .dashboard-shell {
+  --ep-brand-primary: #45c5b3;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-accent-tint: rgba(69,197,179,.15);
+  --ep-accent-tint-soft: rgba(69,197,179,.08);
+  --ep-brand-glow: rgba(69,197,179,.2);
+}
+.dashboard-shell .dashboard-nav-active,
+html:not(.dark) .dashboard-shell .dashboard-nav-active {
+  background: #087e8b !important;
+  border-color: #087e8b !important;
+  color: #ffffff !important;
+}
+html.dark .dashboard-shell .dashboard-nav-active {
+  background: #45c5b3 !important;
+  border-color: #45c5b3 !important;
+  color: #092b31 !important;
+}
+.dashboard-shell .dashboard-nav-active-dot { background: #087e8b !important; }
+html.dark .dashboard-shell .dashboard-nav-active-dot { background: #45c5b3 !important; }
+.dashboard-shell :is(button,a,[role="button"]):focus-visible {
+  outline: 2px solid var(--ep-accent) !important;
+  outline-offset: 3px;
+}
+
+/* Landing, About, and Contact use Ocean Teal for links, calls to action and accents. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #ffffff;
+  --ep-zone: #087e8b;
+  --ep-marker: #45c5b3;
+  --ep-status-info: #087e8b;
+  --ep-status-info-bg: #d9f0ef;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-zone: #45c5b3;
+  --ep-marker: #70d7c8;
+  --ep-status-info: #70d7c8;
+  --ep-status-info-bg: #153a3e;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(a,button,[role="button"]):focus-visible {
+  outline: 2px solid #087e8b !important;
+  outline-offset: 3px;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) :is(a,button,[role="button"]):focus-visible {
+  outline-color: #45c5b3 !important;
+}
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary,
+.ep-about-page [data-page-hero-headline] > span:last-child,
+.ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #087e8b !important;
+  -webkit-text-fill-color: #087e8b !important;
+}
+html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary,
+html.dark .ep-about-page [data-page-hero-headline] > span:last-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #45c5b3 !important;
+  -webkit-text-fill-color: #45c5b3 !important;
+}
+footer[data-site-footer] nav a:hover,
+:is(.ep-landing,.ep-about-page,.ep-contact-page) a:hover {
+  color: #066874;
+}
+html.dark footer[data-site-footer] nav a:hover,
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) a:hover {
+  color: #70d7c8;
+}
+
+/* Shared hover, focus and motion accents. Respect reduced-motion preferences. */
+.ecoprawn-root :is(a,button,[role="button"]):not(:disabled):hover {
+  border-color: var(--ep-accent, #087e8b);
+}
+.ecoprawn-root :is(input,select,textarea):focus {
+  border-color: var(--ep-accent, #087e8b) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent, #087e8b) 18%, transparent) !important;
+}
+.dashboard-hover:hover {
+  border-color: var(--ep-accent, #087e8b);
+  background-color: color-mix(in srgb, var(--ep-surface) 92%, var(--ep-accent, #087e8b));
+  box-shadow: 0 12px 28px -18px var(--ep-brand-glow, rgba(8,126,139,.35));
+}
+.dashboard-hover:focus-within {
+  border-color: var(--ep-accent, #087e8b);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent, #087e8b) 16%, transparent);
+}
+.ep-pulse-dot, .ep-probe-pulse {
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--ep-accent, #087e8b) 65%, transparent));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ecoprawn-root :is(a,button,[role="button"]):not(:disabled) {
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease,
+      box-shadow 220ms ease, transform 180ms ease;
+  }
+}
