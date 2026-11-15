@@ -24,20 +24,20 @@ function ActivityPage() {
       <div className="dashboard-page-header mb-7 border-b border-[rgba(11,46,51,0.12)] pb-7">
         <div className="mb-2 ep-font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mangrove-text)]">Facility history</div>
         <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--water-deep)]">Activity Log</h1>
-        <p className="mt-2 text-[15px] text-[rgba(11,35,32,0.68)]">Vision scans and effluent records, in chronological order.</p>
+        <p className="mt-2 text-[15px] text-[rgba(11,35,32,0.68)]">Vision scans and effluent records.</p>
       </div>
       <div className="mb-5">
         <Panel title="Activity composition" badge="recorded events">
           <DonutChart items={[
             { label: "Vision scans", value: visionScanLog.length, color: "#167C80" },
             { label: "Effluent events", value: effluentLog.length, color: "#C18A27" },
-          ]} unit="events" emptyLabel="No activity has been recorded yet." />
+          ]} unit="events" emptyLabel="No activity yet." />
         </Panel>
       </div>
       <Panel title="Recent activity" badge={`${items.length} entries`} icon="clock">
         {!isDbConnected && error && (
           <div role="alert" className="mb-4 text-sm text-[var(--water-deep)]">
-            <p>Could not refresh activity. {items.length > 0 ? "Showing the last loaded records." : "Please try again."}</p>
+            <p>Activity refresh failed. {items.length > 0 ? "Showing saved records." : "Try again."}</p>
             <button type="button" onClick={() => void refreshTanks()} className="mt-2 font-semibold text-[var(--ep-accent)] underline">Retry</button>
           </div>
         )}
