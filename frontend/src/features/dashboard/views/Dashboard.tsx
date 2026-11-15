@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import { KpiCard, Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
+import { getThresholds, rangeStatus } from "@/features/dashboard/lib/thresholds";
 
 const quickActions = [
   { to: "/dashboard/water", title: "Water quality", description: "Review live water parameters.", icon: "waves" },
@@ -13,6 +15,17 @@ const quickActions = [
 export function Dashboard() {
   const navigate = useNavigate();
   const { tanks, loading, error, isDbConnected, lastUpdatedAt, refreshTanks } = useTanks();
+  const [thresholdSettings, setThresholdSettings] = useState(getThresholds);
+
+  useEffect(() => {
+    const syncThresholds = () => setThresholdSettings(getThresholds());
+    window.addEventListener("ecoprawn:thresholds-updated", syncThresholds);
+    window.addEventListener("storage", syncThresholds);
+    return () => {
+      window.removeEventListener("ecoprawn:thresholds-updated", syncThresholds);
+      window.removeEventListener("storage", syncThresholds);
+    };
+  }, []);
 
   if (loading) return <DashboardLoadingState />;
   if (error && tanks.length === 0) {
@@ -82,32 +95,54 @@ export function Dashboard() {
         </div>
         {tanks.length ? (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 2xl:grid-cols-3">
-            {prioritizedTanks.slice(0, 6).map((tank) => (
-              <Link key={tank.id} to="/dashboard/water" className="dashboard-tank-snapshot group min-w-0 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
-                <div className="mb-3 flex items-center justify-between gap-2">
-                  <div className="flex min-w-0 items-center gap-2">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]"><Icon name="layers" size={17} /></span>
-                    <span className="min-w-0">
-                      <span className="block truncate text-sm font-semibold text-[var(--ep-text)]">{tank.name}</span>
-                      <span className="block truncate text-[11px] text-[var(--ep-text-muted)]">{tank.pl}</span>
+            {prioritizedTanks.slice(0, 6).map((tank) => {
+              const readings = [
+                { label: "DO", unit: "mg/L", value: tank.dissolvedOxygen, status: rangeStatus(tank.dissolvedOxygen, thresholdSettings.dissolvedOxygen.min) },
+                { label: "pH", unit: "", value: tank.ph, status: rangeStatus(tank.ph, thresholdSettings.ph.min, thresholdSettings.ph.max) },
+                { label: "Temp", unit: "°C", value: tank.temperature, status: rangeStatus(tank.temperature, thresholdSettings.temperature.min, thresholdSettings.temperature.max) },
+                { label: "Salinity", unit: "ppt", value: tank.salinity, status: rangeStatus(tank.salinity, thresholdSettings.salinity.min, thresholdSettings.salinity.max) },
+                { label: "Water level", unit: "%", value: tank.waterLevel, status: rangeStatus(tank.waterLevel, thresholdSettings.waterLevel.min) },
+              ];
+              const warningCount = tank.hasWaterReadings ? readings.filter((reading) => reading.status === "warn").length : 0;
+              return (
+                <Link key={tank.id} to="/dashboard/water" className="dashboard-tank-snapshot group min-w-0 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
+                  <div className="mb-3 flex items-center justify-between gap-2">
+                    <div className="flex min-w-0 items-center gap-2">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]"><Icon name="layers" size={17} /></span>
+                      <span className="min-w-0">
+                        <span className="block truncate text-sm font-semibold text-[var(--ep-text)]">{tank.name}</span>
+                        <span className="block truncate text-[11px] text-[var(--ep-text-muted)]">{tank.pl}</span>
+                      </span>
+                    </div>
+                    <span className={!tank.hasWaterReadings ? "dashboard-status-badge" : warningCount ? "dashboard-status-badge dashboard-status-warning" : "dashboard-status-badge dashboard-status-success"}>
+                      {!tank.hasWaterReadings ? "No readings" : warningCount ? `${warningCount} to check` : "Healthy"}
                     </span>
                   </div>
-                  <span className={tank.status === "ok" ? "dashboard-status-badge dashboard-status-success" : "dashboard-status-badge dashboard-status-warning"}>
-                    {!tank.hasWaterReadings ? "No readings" : tank.status === "ok" ? "Healthy" : "Attention"}
-                  </span>
-                </div>
-                {tank.hasWaterReadings ? (
-                  <div className="grid grid-cols-3 gap-2 border-t border-[var(--ep-line)] pt-3">
-                    <div><div className="text-[10px] font-medium uppercase tracking-wide text-[var(--ep-text-muted)]">Temp</div><div className="mt-1 text-sm font-semibold tabular-nums text-[var(--ep-text)]">{tank.temperature.toFixed(1)}°</div></div>
-                    <div><div className="text-[10px] font-medium uppercase tracking-wide text-[var(--ep-text-muted)]">pH</div><div className="mt-1 text-sm font-semibold tabular-nums text-[var(--ep-text)]">{tank.ph.toFixed(1)}</div></div>
-                    <div><div className="text-[10px] font-medium uppercase tracking-wide text-[var(--ep-text-muted)]">O₂</div><div className="mt-1 text-sm font-semibold tabular-nums text-[var(--ep-text)]">{tank.dissolvedOxygen.toFixed(1)}</div></div>
-                  </div>
-                ) : (
-                  <div className="border-t border-[var(--ep-line)] pt-3 text-xs text-[var(--ep-text-muted)]">No water readings available yet.</div>
-                )}
-                <div className="mt-3 flex items-center justify-end gap-1 text-[11px] font-semibold text-[var(--ep-accent)]">View water quality <Icon name="arrow-right" size={12} /></div>
-              </Link>
-            ))}
+                  {tank.hasWaterReadings ? (
+                    <div className="grid grid-cols-2 gap-2 border-t border-[var(--ep-line)] pt-3 sm:grid-cols-3">
+                      {readings.map((reading) => (
+                        <div key={reading.label} className={`min-w-0 rounded-lg border p-2 ${reading.status === "warn" ? "border-[var(--ep-status-warning)]/35 bg-[var(--ep-status-warning)]/5" : "border-[var(--ep-line)] bg-[var(--ep-bg)]"}`}>
+                          <div className="flex items-center gap-1 text-[10px] font-medium uppercase tracking-wide text-[var(--ep-text-muted)]">
+                            {reading.label}
+                            {reading.status === "warn" && <span className="h-1.5 w-1.5 rounded-full bg-[var(--ep-status-warning)]" aria-label="Outside configured range" />}
+                          </div>
+                          <div className={`mt-1 text-sm font-semibold tabular-nums ${reading.status === "warn" ? "text-[var(--ep-status-warning)]" : "text-[var(--ep-text)]"}`}>
+                            {reading.value.toFixed(1)}{reading.unit ? ` ${reading.unit}` : ""}
+                          </div>
+                          <div className="mt-0.5 text-[9px] text-[var(--ep-text-muted)]">{reading.status === "warn" ? "Check range" : "In range"}</div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="border-t border-[var(--ep-line)] pt-3">
+                      <p className="text-xs font-medium text-[var(--ep-text-muted)]">No sensor readings available</p>
+                      <p className="mt-1 text-[11px] text-[var(--ep-text-muted)]">Parameter status will appear when data arrives.</p>
+                    </div>
+                  )}
+                  <div className="mt-3 flex items-center justify-end gap-1 text-[11px] font-semibold text-[var(--ep-accent)]">View water quality <Icon name="arrow-right" size={12} /></div>
+                </Link>
+              );
+            })}
           </div>
         ) : (
           <div className="rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center">
