@@ -166,6 +166,6 @@ html.dark header .ep-logo {
   --ep-logo-text: var(--ep-secondary, #ffffff) !important;
 }
 html.dark header .ep-logo .ep-logo-wordmark {
-  color: var(--ep-secondary, #93c5fd) !important;
-  -webkit-text-fill-color: var(--ep-secondary, #93c5fd) !important;
+  color: var(--ep-secondary, #70d7c8) !important;
+  -webkit-text-fill-color: var(--ep-secondary, #70d7c8) !important;
 }
