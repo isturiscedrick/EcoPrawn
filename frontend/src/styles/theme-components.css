@@ -12,8 +12,8 @@
   --ep-primary: #111827;
   --ep-primary-soft: #111827;
   --ep-text-muted: #475569;
-  --ep-accent: #1d4ed8;
-  --ep-accent-hover: #1e40af;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
   --ep-ok: #1e7a46;
   --ep-warn-text: #8f5a12;
   --ep-danger: #b3261e;
@@ -33,7 +33,7 @@ html:not(.dark) .dashboard-shell aside {
 }
 
 html:not(.dark) .dashboard-shell aside .ep-logo {
-  --ep-logo-color: #1d4ed8;
+  --ep-logo-color: #087e8b;
   --ep-logo-text: #111827;
 }
 
@@ -57,14 +57,14 @@ html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\] {
 
 html:not(.dark) .dashboard-shell .dashboard-nav-active {
   background-color: #ffffff;
-  border-color: var(--coral, #1d4ed8);
+  border-color: var(--coral, #087e8b);
   color: var(--ep-primary);
   border-width: 2px;
   box-shadow: 0 6px 16px -10px rgba(11, 46, 51, 0.45);
 }
 
 html:not(.dark) .dashboard-shell .dashboard-nav-active-dot {
-  background-color: var(--coral, #1d4ed8);
+  background-color: var(--coral, #087e8b);
 }
 
 /* ---------- Dashboard: Dark Mode Surfaces ---------- */
@@ -92,8 +92,8 @@ html.dark .dashboard-shell aside {
 }
 
 html.dark .dashboard-shell aside .ep-logo {
-  --ep-logo-color: #60a5fa;
-  --ep-logo-text: #93c5fd;
+  --ep-logo-color: #45c5b3;
+  --ep-logo-text: #70d7c8;
 }
 
 html.dark .dashboard-shell .text-\[var\(--water-deep\)\] {
@@ -137,7 +137,7 @@ html.dark .dashboard-shell .dashboard-nav-active {
 }
 
 html.dark .dashboard-shell .dashboard-nav-active-dot {
-  background-color: var(--coral, #60a5fa);
+  background-color: var(--coral, #45c5b3);
 }
 
 html.dark .dashboard-shell aside .hover\:text-\[var\(--water-deep\)\]:hover {
@@ -218,10 +218,10 @@ html.dark .dashboard-shell [style*="var(--coral)"] {
 }
 
 /* SVG Chart lines and gradient stops */
-.dashboard-shell polyline[stroke="#1d4ed8"] {
+.dashboard-shell polyline[stroke="#087e8b"] {
   stroke: var(--coral);
 }
-.dashboard-shell stop[stop-color="#1d4ed8"] {
+.dashboard-shell stop[stop-color="#087e8b"] {
   stop-color: var(--coral);
 }
 
@@ -265,6 +265,6 @@ html.dark .ep-auth-modal {
 }
 
 .ep-auth-modal .focus\:ring-\[rgba\(178\,63\,28\,0\.15\)\]:focus {
-  --tw-ring-color: color-mix(in srgb, var(--ep-accent, #1d4ed8) 15%, transparent);
+  --tw-ring-color: color-mix(in srgb, var(--ep-accent, #087e8b) 15%, transparent);
 }
 
