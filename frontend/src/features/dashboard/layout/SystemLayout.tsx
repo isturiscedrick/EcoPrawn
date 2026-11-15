@@ -338,8 +338,8 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         onTouchCancel={() => {
           pullStartY.current = null;
         }}
-        className={`mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:max-w-none ${desktopSidebarCollapsed ? "lg:ml-[76px] lg:w-[calc(100%-76px)]" : "lg:ml-[260px] lg:w-[calc(100%-260px)]"}`}>
-        <div className="w-full">
+        className={`mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:max-w-none lg:transition-[margin,width] lg:duration-300 lg:ease-in-out motion-reduce:lg:transition-none ${desktopSidebarCollapsed ? "lg:ml-[76px] lg:w-[calc(100%-76px)]" : "lg:ml-[260px] lg:w-[calc(100%-260px)]"}`}>
+        <div className="w-full min-w-0">
           {isRefreshing && (
             <div
               role="status"
