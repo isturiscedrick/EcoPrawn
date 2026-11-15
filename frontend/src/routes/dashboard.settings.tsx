@@ -3,6 +3,7 @@ import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-rout
 import { Icon, IconChip } from "@/components/ui/Icon";
 
 function SettingsPage() {
+  const location = useLocation();
   const [darkMode, setDarkMode] = useState(
     () => typeof window !== "undefined" && window.localStorage.getItem("ep-dashboard-theme") === "dark",
   );
