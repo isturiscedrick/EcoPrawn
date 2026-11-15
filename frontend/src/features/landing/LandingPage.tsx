@@ -8,7 +8,6 @@ import { CtaBand } from "@/components/CtaBand";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
-import { HeroAquaticScene } from "./HeroAquaticScene";
 import { AquacultureIllustration } from "@/components/illustrations/AquacultureIllustration";
 import { heroReadoutUnits } from "@/config/sensors";
 import {
@@ -152,7 +151,7 @@ export function LandingPage() {
                   Open dashboard <Icon name="arrow-up-right" size={16} />
                 </AuthLink>
                 <a href="#platform-signals" className={`inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-6 py-3 text-sm font-semibold text-[var(--ep-text)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:text-[var(--ep-accent)] sm:w-auto ${focusRing}`}>
-                  Explore platform <Icon name="arrow-down" size={15} />
+                  Explore platform <Icon name="arrow-right" size={15} />
                 </a>
               </div>
             </div>
@@ -186,7 +185,7 @@ export function LandingPage() {
 
                 <div className="ep-cloudnexus-dashboard-body">
                   <aside className="ep-cloudnexus-mini-sidebar hidden sm:flex" aria-label="Preview navigation">
-                    <span className="ep-cloudnexus-mini-active"><Icon name="layout-dashboard" size={15} /> Overview</span>
+                    <span className="ep-cloudnexus-mini-active"><Icon name="layers" size={15} /> Overview</span>
                     <span><Icon name="waves" size={15} /> Water quality</span>
                     <span><Icon name="chart-no-axes-combined" size={15} /> Growth vision</span>
                     <span><Icon name="activity" size={15} /> Systems</span>
