@@ -258,9 +258,6 @@ export function Dashboard() {
               </Link>
             ))}
           </div>
-          <div className="mt-4 border-t border-[var(--ep-line)] pt-3 text-xs text-[var(--ep-text-muted)]">
-            {lastUpdatedAt ? `Last updated ${lastUpdatedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : "Waiting for the first data refresh"}
-          </div>
         </Panel>
       </div>
     </>
