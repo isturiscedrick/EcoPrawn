@@ -315,6 +315,17 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         }}
         className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
         <div className="w-full">
+          {isRefreshing && (
+            <div
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              className="mb-3 flex items-center justify-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2.5 text-xs font-medium text-[var(--ep-primary)] shadow-sm"
+            >
+              <Icon name="loader-circle" size={15} className="animate-spin" />
+              <span>Refreshing data…</span>
+            </div>
+          )}
           {!loading && isDbConnected && lastUpdatedAt && (
             <div
               className="mb-3 flex items-center justify-end gap-2 text-[11px] text-[var(--ep-text-muted)]"
