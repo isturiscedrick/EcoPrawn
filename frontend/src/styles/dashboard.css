@@ -1895,10 +1895,10 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
 .dashboard-shell .dashboard-page-header :is(p, div) {
   min-width: 0;
 }
-.dashboard-shell .dashboard-page-header > :last-child {
+.dashboard-shell .dashboard-page-header > :last-child:not(:first-child) {
   max-width: 100%;
 }
-.dashboard-shell .dashboard-page-header > :last-child > :is(button, a) {
+.dashboard-shell .dashboard-page-header > :last-child:not(:first-child) > :is(button, a) {
   min-height: 44px;
 }
 .dashboard-shell .dashboard-page-header :is(button, a):focus-visible {
@@ -1916,14 +1916,14 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
   .dashboard-shell .dashboard-page-header > :first-child {
     width: 100%;
   }
-  .dashboard-shell .dashboard-page-header > :last-child {
+  .dashboard-shell .dashboard-page-header > :last-child:not(:first-child) {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: .55rem;
   }
-  .dashboard-shell .dashboard-page-header > :last-child > :is(button, a) {
+  .dashboard-shell .dashboard-page-header > :last-child:not(:first-child) > :is(button, a) {
     min-height: 44px;
   }
   .dashboard-shell .dashboard-page-header h1 {
@@ -1936,7 +1936,7 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
     white-space: normal;
     line-height: 1.35;
   }
-  .dashboard-shell .dashboard-page-header > :last-child > button {
+  .dashboard-shell .dashboard-page-header > :last-child:not(:first-child) > button {
     flex: 0 0 auto;
   }
   .dashboard-shell .dashboard-panel,
@@ -1976,7 +1976,7 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
     align-items: flex-start;
     gap: .9rem;
   }
-  .dashboard-shell .dashboard-page-header > :last-child {
+  .dashboard-shell .dashboard-page-header > :last-child:not(:first-child) {
     flex-wrap: wrap;
     justify-content: flex-start;
   }
