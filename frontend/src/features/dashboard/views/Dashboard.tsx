@@ -84,9 +84,6 @@ export function Dashboard() {
             Your facility at a glance. Monitor tank health and jump into the operations that need you.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
-
-        </div>
       </div>
 
       <DashboardDataStatus />
