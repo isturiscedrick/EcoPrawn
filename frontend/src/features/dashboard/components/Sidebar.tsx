@@ -10,6 +10,8 @@ import { SidebarNavItem } from "./SidebarNavItem";
 interface SidebarProps {
   mobileOpen?: boolean;
   onMobileClose?: () => void;
+  collapsed?: boolean;
+  onToggleCollapsed?: () => void;
 }
 
 function LogoutIcon() {
@@ -28,6 +30,8 @@ const drawerRowClass =
 export function Sidebar({
   mobileOpen = false,
   onMobileClose = () => {},
+  collapsed = false,
+  onToggleCollapsed = () => {},
 }: SidebarProps) {
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
@@ -239,39 +243,41 @@ export function Sidebar({
       {/* Persistent desktop sidebar; the drawer below remains mobile-only. */}
       <aside
         id="dashboard-sidebar"
-        className="fixed bottom-0 left-0 top-0 z-30 hidden w-[260px] flex-col border-r border-[var(--ep-line)] bg-[var(--ep-surface)] lg:flex"
+        className={`fixed bottom-0 left-0 top-0 z-30 hidden flex-col border-r border-[var(--ep-line)] bg-[var(--ep-surface)] transition-[width] duration-300 ease-in-out lg:flex ${collapsed ? "w-[76px]" : "w-[260px]"}`}
       >
-        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-[var(--ep-line)] px-5 py-4">
-          <div className="flex min-w-0 items-center gap-3">
-            <BrandMark size={32} />
-            <span className="truncate text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-text-muted)]">Dashboard</span>
-          </div>
+        <div className={`flex min-h-[63px] shrink-0 items-center border-b border-[var(--ep-line)] py-3 ${collapsed ? "justify-center px-2" : "justify-between gap-3 px-5"}`}>
+          <Link to="/dashboard" aria-label="EcoPrawn dashboard" className="flex min-w-0 items-center">
+            <BrandMark size={32} showWordmark={!collapsed} />
+          </Link>
+          <button type="button" onClick={onToggleCollapsed} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} aria-pressed={collapsed} title={collapsed ? "Expand sidebar" : "Collapse sidebar"} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
+            <Icon name="sidebar-toggle" size={19} />
+          </button>
         </div>
-        <div className="shrink-0 border-b border-[var(--ep-line)] px-4 py-3">
-          <Link to="/dashboard/profile" className="flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-3 text-left transition-colors hover:bg-[var(--ep-tint)]">
+        <div className={`shrink-0 border-b border-[var(--ep-line)] py-3 ${collapsed ? "px-2" : "px-4"}`}>
+          <Link to="/dashboard/profile" title={collapsed ? profileName : undefined} className={`flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] py-3 text-left transition-colors hover:bg-[var(--ep-tint)] ${collapsed ? "justify-center px-1" : "px-3"}`}>
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]" aria-hidden="true"><Icon name="user-round" size={19} strokeWidth={1.9} /></span>
-            <span className="min-w-0">
+            <span className={`min-w-0 ${collapsed ? "hidden" : ""}`}>
               <span className="block truncate text-sm font-semibold text-[var(--ep-text)]">{profileName}</span>
               <span className="block truncate text-[11px] text-[var(--ep-text-muted)]">{profileRole}</span>
             </span>
           </Link>
         </div>
-        <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
-          <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">Navigation</div>
+        <div className={`min-h-0 flex-1 overflow-y-auto py-4 ${collapsed ? "px-2" : "px-4"}`}>
+          {!collapsed && <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">Navigation</div>}
           <nav aria-label="Dashboard modules" className="flex flex-col items-stretch gap-1.5">
             {DASHBOARD_NAV_ITEMS.map((item) => (
-              <SidebarNavItem key={item.label} item={item} active={item.view === activeView} collapsed={false} />
+              <SidebarNavItem key={item.label} item={item} active={item.view === activeView} collapsed={collapsed} />
             ))}
           </nav>
         </div>
-        <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-4">
-          <Link to="/dashboard/settings" aria-current={pathname.startsWith("/dashboard/settings") ? "page" : undefined} className={drawerRowClass + (pathname.startsWith("/dashboard/settings") ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
+        <div className={`flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-bg)] py-4 ${collapsed ? "items-center px-2" : "px-4"}`}>
+          <Link to="/dashboard/settings" aria-current={pathname.startsWith("/dashboard/settings") ? "page" : undefined} title={collapsed ? "Settings" : undefined} className={drawerRowClass + (collapsed ? " !w-11 !justify-center !px-0" : "") + (pathname.startsWith("/dashboard/settings") ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
             <span className="flex w-5 shrink-0 items-center justify-center"><Icon name="settings" size={19} strokeWidth={1.8} /></span>
-            Settings
+            {!collapsed && "Settings"}
           </Link>
-          <button type="button" onClick={onLogoutClick} className="dashboard-logout-button flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-semibold transition-colors">
+          <button type="button" onClick={onLogoutClick} title={collapsed ? "Log out" : undefined} aria-label="Log out" className={`dashboard-logout-button flex min-h-11 items-center gap-2.5 rounded-lg py-2.5 text-left text-[14.5px] font-semibold transition-colors ${collapsed ? "w-11 justify-center px-0" : "w-full px-3"}`}>
             <span className="flex w-4 justify-center" aria-hidden="true"><LogoutIcon /></span>
-            Log out
+            {!collapsed && "Log out"}
           </button>
         </div>
       </aside>
