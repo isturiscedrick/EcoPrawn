@@ -14,7 +14,7 @@
   --ep-status-danger: #b91c1c;
   --ep-status-danger-bg: #fee2e2;
   --ep-status-info: #087e8b;
-  --ep-status-info-bg: #dbeafe;
+  --ep-status-info-bg: #d9f0ef;
   --ep-status-neutral: #475569;
   --ep-status-neutral-bg: #e2e8f0;
   --ep-accent: var(--ep-brand-primary);
@@ -38,7 +38,7 @@ html.dark .dashboard-shell {
   --ep-status-danger: #fca5a5;
   --ep-status-danger-bg: #4a1d22;
   --ep-status-info: #70d7c8;
-  --ep-status-info-bg: #172f50;
+  --ep-status-info-bg: #153a3e;
   --ep-status-neutral: #cbd5e1;
   --ep-status-neutral-bg: #263244;
   --ep-accent: var(--ep-brand-primary);
