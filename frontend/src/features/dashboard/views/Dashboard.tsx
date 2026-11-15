@@ -5,7 +5,6 @@ import { KpiCard, Panel } from "@/features/dashboard/components/DashboardPrimiti
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
 import { getThresholds, rangeStatus } from "@/features/dashboard/lib/thresholds";
-import { DashboardDataStatus } from "@/features/dashboard/components/DashboardDataStatus";
 
 const quickActions = [
   { to: "/dashboard/water", title: "Water quality", description: "View water readings.", icon: "waves" },
@@ -84,8 +83,6 @@ export function Dashboard() {
           </p>
         </div>
       </header>
-
-      <DashboardDataStatus />
 
       <section aria-label="Facility health summary" className="mb-5 grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-3 2xl:grid-cols-4">
         <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total tanks" deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
