@@ -8,7 +8,6 @@ import { CtaBand } from "@/components/CtaBand";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
-import { HeroAquaticScene } from "./HeroAquaticScene";
 import { AquacultureIllustration } from "@/components/illustrations/AquacultureIllustration";
 import { heroReadoutUnits } from "@/config/sensors";
 import {
@@ -123,115 +122,141 @@ export function LandingPage() {
       <SiteHeader tone="white" integrated />
 
       <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
-        {/* HERO */}
-        <section id="top" className="ep-hero ep-aquaculture-hero relative isolate overflow-hidden" aria-label="EcoPrawn smart aquaculture introduction">
-          <HeroAquaticScene />
-          <div
-            aria-hidden="true"
-            data-hero="grid"
-            className="pointer-events-none absolute inset-x-0 -top-[10%] -z-10 h-[120%] opacity-[0.16]"
-            style={{
-              backgroundImage:
-                "radial-gradient(var(--ep-secondary) 1px, transparent 1px)",
-              backgroundSize: "22px 22px",
-              WebkitMaskImage:
-                "radial-gradient(ellipse at 60% 40%, black 25%, transparent 72%)",
-              maskImage:
-                "radial-gradient(ellipse at 60% 40%, black 25%, transparent 72%)",
-            }}
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10 ep-hero-atmosphere"
-          />
-          {/* Centered editorial hero with a full-width farm landscape image. */}
-          <div className="ep-field-hero mx-auto grid w-full max-w-[1440px] gap-10 px-5 pt-16 sm:px-8 sm:pt-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(380px,.95fr)] lg:items-center lg:gap-12 lg:px-10 lg:pt-20">
-            <div data-hero="text" className="ep-field-hero-copy mx-auto flex max-w-[920px] flex-col items-center text-center lg:mx-0 lg:items-start lg:text-left">
-              <p className="mb-5 inline-flex min-h-9 items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.17em] text-[var(--ep-accent)] shadow-sm sm:text-[11px]">
-                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[var(--ep-accent)]" />
-                REAL-TIME AQUACULTURE
+        {/* HERO — centered product-first composition inspired by CloudNexus */}
+        <section id="top" className="ep-hero ep-aquaculture-hero ep-cloudnexus-hero relative isolate overflow-hidden" aria-label="EcoPrawn smart aquaculture introduction">
+          <div aria-hidden="true" className="ep-cloudnexus-orb ep-cloudnexus-orb-one" />
+          <div aria-hidden="true" className="ep-cloudnexus-orb ep-cloudnexus-orb-two" />
+          <div className="ep-cloudnexus-hero-inner mx-auto w-full px-5 pb-10 pt-14 sm:px-8 sm:pb-14 sm:pt-16 lg:px-10 lg:pt-20">
+            <div data-hero="text" className="mx-auto flex max-w-[900px] flex-col items-center text-center">
+              <p className="ep-cloudnexus-eyebrow mb-5 inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[10px] font-bold uppercase tracking-[.16em] sm:text-[11px]">
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[var(--ep-accent)] shadow-[0_0_0_4px_color-mix(in_srgb,var(--ep-accent)_12%,transparent)]" />
+                Smart aquaculture · Connected farm intelligence
               </p>
-              <h1
-                data-hero="headline"
-                aria-label="Smarter shrimp farming, always in range."
-                className="ep-font-display max-w-[900px] text-[clamp(40px,6.1vw,76px)] font-semibold leading-[1.02] tracking-[-0.065em]"
-              >
-                <span className="block ep-hero-headline-primary">Smarter Shrimp Farming</span>
-                <span className="block ep-hero-headline-secondary">Always in Range</span>
+              <h1 data-hero="headline" className="ep-font-display ep-cloudnexus-headline max-w-[900px] text-[clamp(38px,5.5vw,76px)] font-semibold leading-[1.02] tracking-[-0.065em]">
+                Smarter shrimp farming,
+                <span className="block">in <span className="ep-cloudnexus-highlight">one connected workspace.</span></span>
               </h1>
-              <p
-                data-hero="lead"
-                className="mx-auto mt-5 max-w-[620px] text-sm leading-[1.75] text-[var(--ep-text-muted)] sm:mt-6 sm:text-base"
-              >
-                Bringing water-quality monitoring, shrimp growth insights, and responsive farm operations together in one connected system.
+              <p data-hero="lead" className="mx-auto mt-5 max-w-[660px] text-sm leading-[1.8] text-[var(--ep-text-muted)] sm:mt-6 sm:text-base">
+                Monitor water quality, understand shrimp growth, and coordinate daily farm operations from one clear view. Make confident decisions with real-time farm insights.
               </p>
-              <div data-hero="cta" className="mt-6 flex justify-center sm:mt-7">
+              <div data-hero="cta" className="mt-7 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
                 <AuthLink
                   mode="signin"
-                  aria-label="Open dashboard sign in"
+                  aria-label="Open EcoPrawn dashboard sign in"
                   aria-haspopup="dialog"
-                  title="Open dashboard sign in"
+                  title="Open EcoPrawn dashboard sign in"
                   data-dashboard-entry=""
-                  className={`group relative z-10 inline-flex min-h-12 cursor-pointer items-center justify-center gap-3 rounded-full border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-7 py-3 text-sm font-semibold text-[var(--ep-on-accent)] shadow-[0_10px_28px_-12px_rgba(8,126,139,.58)] transition-[transform,background-color,box-shadow] duration-300 ease-out hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_16px_34px_-14px_rgba(8,126,139,.62)] active:scale-[.98] ${focusRing}`}
+                  className={`inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-3 text-sm font-semibold text-[var(--ep-on-accent)] shadow-[0_9px_24px_-12px_rgba(8,126,139,.55)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_14px_30px_-12px_rgba(8,126,139,.42)] active:translate-y-0 sm:w-auto ${focusRing}`}
                 >
-                  Open dashboard
-                  <span aria-hidden="true" className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-current/25 bg-white/10 text-current transition-colors duration-200">
-                    <Icon name="arrow-up-right" size={16} strokeWidth={2.2} className="block shrink-0" />
-                  </span>
+                  Open dashboard <Icon name="arrow-up-right" size={16} />
                 </AuthLink>
+                <a href="#platform-signals" className={`inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-6 py-3 text-sm font-semibold text-[var(--ep-text)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:text-[var(--ep-accent)] sm:w-auto ${focusRing}`}>
+                  Explore platform <Icon name="arrow-right" size={15} />
+                </a>
               </div>
             </div>
 
-            <aside
-              aria-label="Illustrative water monitoring panel"
-              data-hero="monitor-panel"
-              className="ep-hero-monitor-panel mx-auto w-full max-w-[560px] lg:mx-0 lg:max-w-none"
-            >
-              <div className="ep-hero-monitor-glow" aria-hidden="true" />
-              <div className="relative z-10">
-                <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 pb-4">
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[.18em] text-teal-100/75">Water intelligence</p>
-                    <h2 className="mt-1 text-lg font-semibold tracking-tight text-white sm:text-xl">Tank 1 · Sensor overview</h2>
+            <div className="ep-cloudnexus-preview-wrap mx-auto mt-10 w-full max-w-[1240px] sm:mt-12 lg:mt-14">
+              <div className="ep-cloudnexus-tabs" role="tablist" aria-label="EcoPrawn platform preview">
+                {([
+                  { id: "water", label: "Overview" },
+                  { id: "growth", label: "Growth insights" },
+                  { id: "systems", label: "Farm systems" },
+                ] as const).map((tab) => (
+                  <button key={tab.id} type="button" role="tab" aria-selected={previewTab === tab.id} className="ep-cloudnexus-tab" onClick={() => setPreviewTab(tab.id)}>
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="ep-cloudnexus-dashboard" data-hero="monitor-panel" aria-label="Illustrative EcoPrawn dashboard preview">
+                <div className="ep-cloudnexus-windowbar">
+                  <div className="flex items-center gap-2">
+                    <span className="grid h-7 w-7 place-items-center rounded-lg bg-[var(--ep-accent)] text-[var(--ep-on-accent)]"><Icon name="waves" size={15} /></span>
+                    <span className="text-xs font-bold tracking-tight text-[var(--ep-text)]">EcoPrawn</span>
+                    <span className="ml-2 hidden text-[10px] text-[var(--ep-text-muted)] sm:inline">/ Facility overview</span>
                   </div>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-teal-300/20 bg-teal-300/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.12em] text-teal-100">
-                    <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.8)]" />
-                    Sample data
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="hidden text-[10px] text-[var(--ep-text-muted)] sm:inline">Preview workspace</span>
+                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                    <span className="text-[10px] font-semibold text-[var(--ep-text-muted)]">Demo</span>
+                  </div>
                 </div>
 
-                <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-                  {heroReadouts.map((reading) => {
-                    const range = targetRangeFor(reading.label) ?? "Target range not set";
-                    return (
-                      <div key={reading.label} className="ep-hero-sensor-tile min-w-0 rounded-xl border border-white/10 bg-white/[.055] px-3 py-3">
-                        <div className="flex items-center gap-1.5 text-[10px] font-semibold text-teal-100/75">
-                          <span aria-hidden="true" data-hero-sensor-dot="" className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
-                          <span className="truncate">{reading.label}</span>
-                        </div>
-                        <p className="mt-2 whitespace-nowrap text-[clamp(18px,2vw,25px)] font-semibold leading-none tracking-tight text-white tabular-nums">
-                          {reading.value}<span className="ml-1 text-[10px] font-medium text-teal-100/65">{heroReadoutUnits[reading.label]}</span>
-                        </p>
-                        <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/10">
-                          <span data-hero-sensor-bar="" className="block h-full rounded-full bg-gradient-to-r from-teal-500 to-cyan-300" style={{ width: `${reading.pct}%` }} />
-                        </div>
-                        <p className="mt-2 truncate text-[9px] leading-tight text-teal-100/65" title={range}>Target {range}</p>
+                <div className="ep-cloudnexus-dashboard-body">
+                  <aside className="ep-cloudnexus-mini-sidebar hidden sm:flex" aria-label="Preview navigation">
+                    <span className="ep-cloudnexus-mini-active"><Icon name="layers" size={15} /> Overview</span>
+                    <span><Icon name="waves" size={15} /> Water quality</span>
+                    <span><Icon name="chart-no-axes-combined" size={15} /> Growth vision</span>
+                    <span><Icon name="activity" size={15} /> Systems</span>
+                    <div className="mt-auto rounded-lg bg-[var(--ep-tint)] p-2 text-[9px] leading-relaxed text-[var(--ep-text-muted)]">Connected farm monitoring</div>
+                  </aside>
+
+                  <div className="min-w-0 flex-1 p-3 sm:p-5 lg:p-6">
+                    <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
+                      <div>
+                        <p className="text-[9px] font-bold uppercase tracking-[.15em] text-[var(--ep-accent)]">Facility dashboard</p>
+                        <h2 className="mt-1 text-base font-semibold tracking-tight text-[var(--ep-text)] sm:text-xl">
+                          {previewTab === "water" ? "Water quality overview" : previewTab === "growth" ? "Growth & biomass insights" : "Farm systems overview"}
+                        </h2>
+                        <p className="mt-1 text-[10px] text-[var(--ep-text-muted)] sm:text-xs">A unified view of your aquaculture operation</p>
                       </div>
-                    );
-                  })}
-                </div>
+                      <span className="rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-2.5 py-1.5 text-[9px] font-semibold text-[var(--ep-text-muted)]">Illustrative sample</span>
+                    </div>
 
-                <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-3 text-[10px] text-teal-100/65">
-                  <span className="inline-flex items-center gap-2"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> 5 sensor indicators</span>
-                  <span>Illustrative preview · Not live telemetry</span>
+                    {previewTab === "water" ? (
+                      <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-3">
+                        {heroReadouts.map((reading) => {
+                          const range = targetRangeFor(reading.label) ?? "Target range not set";
+                          return (
+                            <div key={reading.label} className="ep-cloudnexus-metric min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 sm:p-4">
+                              <div className="flex items-center justify-between gap-1">
+                                <span className="truncate text-[10px] font-medium text-[var(--ep-text-muted)]">{reading.label}</span>
+                                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+                              </div>
+                              <p className="mt-3 whitespace-nowrap text-xl font-semibold tracking-tight text-[var(--ep-text)] tabular-nums sm:text-2xl">{reading.value}<span className="ml-1 text-[10px] font-medium text-[var(--ep-text-muted)]">{heroReadoutUnits[reading.label]}</span></p>
+                              <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[var(--ep-line)]"><span className="block h-full rounded-full bg-[var(--ep-accent)]" style={{ width: `${reading.pct}%` }} /></div>
+                              <p className="mt-2 truncate text-[9px] text-[var(--ep-text-muted)]" title={range}>Target {range}</p>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : previewTab === "growth" ? (
+                      <div className="grid gap-3 sm:grid-cols-3">
+                        {[
+                          { icon: "camera" as const, title: "Visual sampling", detail: "Review camera observations over time." },
+                          { icon: "chart-no-axes-combined" as const, title: "Growth history", detail: "Follow recorded growth trends by tank." },
+                          { icon: "gauge" as const, title: "Biomass insights", detail: "Use estimates to inform feeding decisions." },
+                        ].map((item) => <div key={item.title} className="ep-cloudnexus-feature"><span><Icon name={item.icon} size={18} /></span><strong>{item.title}</strong><p>{item.detail}</p></div>)}
+                      </div>
+                    ) : (
+                      <div className="grid gap-3 sm:grid-cols-3">
+                        {[
+                          { icon: "activity" as const, title: "Aeration", detail: "Monitor connected aeration equipment." },
+                          { icon: "clock" as const, title: "Feeding", detail: "Coordinate feeding with farm observations." },
+                          { icon: "waves" as const, title: "Water care", detail: "Keep water treatment in the farm workflow." },
+                        ].map((item) => <div key={item.title} className="ep-cloudnexus-feature"><span><Icon name={item.icon} size={18} /></span><strong>{item.title}</strong><p>{item.detail}</p></div>)}
+                      </div>
+                    )}
+
+                    <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                      {[
+                        { label: "Water parameters", value: String(heroReadouts.length) },
+                        { label: "Aeration", value: "Automated" },
+                        { label: "Growth vision", value: "Enabled" },
+                        { label: "Monitoring", value: "24 / 7" },
+                      ].map((item) => <div key={item.label} className="rounded-lg border border-[var(--ep-line)] px-3 py-2"><p className="text-[9px] text-[var(--ep-text-muted)]">{item.label}</p><p className="mt-1 text-xs font-semibold text-[var(--ep-text)]">{item.value}</p></div>)}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </aside>
+              <p className="mt-3 text-center text-[10px] text-[var(--ep-text-muted)]">Illustrative product preview · Sample values, not live telemetry</p>
+            </div>
           </div>
         </section>
 
         {/* PLATFORM SIGNALS */}
-        <section aria-label="Connected EcoPrawn capabilities" className="ep-platform-ribbon border-y border-[var(--ep-line)] bg-[var(--ep-surface)] px-5 py-5 sm:px-8">
+        <section id="platform-signals" aria-label="Connected EcoPrawn capabilities" className="ep-platform-ribbon border-y border-[var(--ep-line)] bg-[var(--ep-surface)] px-5 py-5 sm:px-8">
           <div className="mx-auto grid max-w-[1180px] grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-0">
             {[
               { number: "01", label: "Monitor", detail: "Water conditions" },

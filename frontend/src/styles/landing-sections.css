@@ -54,6 +54,110 @@ html.dark .ep-business-landing .ep-hero {
 .ep-business-landing .ep-hero-copy {
   text-wrap: pretty;
 }
+
+/* Product-first CloudNexus-inspired hero: the interface preview is the visual anchor. */
+.ep-business-landing .ep-field-hero {
+  min-height: min(790px, calc(100svh - 76px));
+}
+.ep-business-landing .ep-field-hero-copy {
+  max-width: 38rem;
+}
+.ep-business-landing .ep-field-hero-copy h1 {
+  max-width: 11ch;
+  text-wrap: balance;
+}
+.ep-business-landing .ep-hero-monitor-panel {
+  border-radius: 1.55rem;
+  box-shadow: 0 34px 90px -46px rgba(8,126,139,.34), 0 8px 24px -18px rgba(15,23,42,.2);
+}
+.ep-business-landing .ep-hero-preview-tabs {
+  display: flex;
+  gap: .35rem;
+  margin-top: 1rem;
+  padding: .35rem;
+  overflow-x: auto;
+  border: 1px solid rgba(148,163,184,.2);
+  border-radius: .9rem;
+  background: rgba(8,30,34,.06);
+  scrollbar-width: none;
+}
+.ep-business-landing .ep-hero-preview-tabs::-webkit-scrollbar { display: none; }
+.ep-business-landing .ep-hero-preview-tab {
+  min-height: 2.55rem;
+  flex: 1 0 auto;
+  padding: .6rem .9rem;
+  border: 1px solid transparent;
+  border-radius: .65rem;
+  color: var(--ep-text-muted);
+  font-size: .75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color .18s ease, background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.ep-business-landing .ep-hero-preview-tab[aria-pressed="true"] {
+  border-color: color-mix(in srgb,var(--ep-accent) 24%,var(--ep-line));
+  background: var(--ep-surface);
+  color: var(--ep-accent);
+  box-shadow: 0 5px 16px -12px rgba(8,126,139,.55);
+}
+.ep-business-landing .ep-hero-preview-tab:focus-visible {
+  outline: 2px solid var(--ep-accent);
+  outline-offset: 2px;
+}
+.ep-business-landing .ep-hero-feature-tile {
+  display: flex;
+  min-height: 172px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .8rem;
+  padding: 1.1rem;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: .95rem;
+  background: rgba(255,255,255,.055);
+}
+.ep-business-landing .ep-hero-feature-tile > span {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border: 1px solid rgba(112,215,200,.28);
+  border-radius: .75rem;
+  background: rgba(69,197,179,.12);
+  color: #70d7c8;
+}
+.ep-business-landing .ep-hero-feature-tile strong {
+  color: #fff;
+  font-size: .9rem;
+}
+.ep-business-landing .ep-hero-feature-tile p {
+  color: rgba(226,244,241,.72);
+  font-size: .75rem;
+  line-height: 1.55;
+}
+html:not(.dark) .ep-business-landing .ep-hero-feature-tile {
+  border-color: rgba(148,163,184,.28);
+  background: rgba(255,255,255,.78);
+}
+html:not(.dark) .ep-business-landing .ep-hero-feature-tile strong { color: #173b46; }
+html:not(.dark) .ep-business-landing .ep-hero-feature-tile p { color: #58717a; }
+html:not(.dark) .ep-business-landing .ep-hero-feature-tile > span {
+  border-color: rgba(8,126,139,.2);
+  background: rgba(8,126,139,.08);
+  color: #087e8b;
+}
+@media (max-width: 1023px) {
+  .ep-business-landing .ep-field-hero { min-height: 0; }
+  .ep-business-landing .ep-field-hero-copy { max-width: 42rem; }
+  .ep-business-landing .ep-field-hero-copy h1 { max-width: 14ch; }
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-hero-preview-tabs { gap: .2rem; padding: .25rem; }
+  .ep-business-landing .ep-hero-preview-tab { min-height: 2.7rem; padding-inline: .7rem; font-size: .7rem; }
+  .ep-business-landing .ep-hero-feature-tile { min-height: 150px; padding: .85rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-hero-preview-tab { transition: none; }
+}
 .ep-business-landing .ep-hero-headline-primary {
   color: var(--ep-text);
 }
@@ -352,4 +456,154 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #45c5b3; box-
 @media (prefers-reduced-motion: reduce) {
   .ep-business-landing .ep-showcase-frame,
   .ep-business-landing .ep-showcase-water-orbit { animation: none !important; }
+}
+
+
+/* CloudNexus-inspired centered hero composition, recolored for EcoPrawn. */
+.ep-business-landing .ep-cloudnexus-hero {
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb,var(--ep-accent) 7%,transparent) 0%, transparent 48%),
+    var(--ep-bg);
+}
+.ep-business-landing .ep-cloudnexus-orb {
+  position:absolute;
+  z-index:-1;
+  width:26rem;
+  height:26rem;
+  border-radius:50%;
+  filter:blur(90px);
+  opacity:.11;
+  pointer-events:none;
+}
+.ep-business-landing .ep-cloudnexus-orb-one { top:22%; left:-16rem; background:var(--ep-accent); }
+.ep-business-landing .ep-cloudnexus-orb-two { top:28%; right:-17rem; background:var(--ep-secondary); }
+.ep-business-landing .ep-cloudnexus-hero-inner { position:relative; }
+.ep-business-landing .ep-cloudnexus-eyebrow {
+  border:1px solid color-mix(in srgb,var(--ep-accent) 22%,var(--ep-line));
+  background:color-mix(in srgb,var(--ep-accent) 7%,var(--ep-surface));
+  color:var(--ep-accent);
+}
+.ep-business-landing .ep-cloudnexus-headline { color:var(--ep-text); text-wrap:balance; }
+.ep-business-landing .ep-cloudnexus-highlight {
+  color:var(--ep-accent);
+}
+.ep-business-landing .ep-cloudnexus-preview-wrap { position:relative; }
+.ep-business-landing .ep-cloudnexus-tabs {
+  display:flex;
+  justify-content:center;
+  gap:.45rem;
+  width:max-content;
+  max-width:100%;
+  margin:0 auto 1.1rem;
+  padding:.35rem;
+  overflow-x:auto;
+  border:1px solid var(--ep-line);
+  border-radius:999px;
+  background:var(--ep-surface);
+  box-shadow:0 8px 26px -22px rgba(15,40,45,.28);
+  scrollbar-width:none;
+}
+.ep-business-landing .ep-cloudnexus-tabs::-webkit-scrollbar { display:none; }
+.ep-business-landing .ep-cloudnexus-tab {
+  min-height:2.5rem;
+  flex:0 0 auto;
+  padding:.6rem 1.05rem;
+  border:1px solid transparent;
+  border-radius:999px;
+  color:var(--ep-text-muted);
+  font-size:.72rem;
+  font-weight:700;
+  white-space:nowrap;
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.ep-business-landing .ep-cloudnexus-tab[aria-selected="true"] {
+  border-color:color-mix(in srgb,var(--ep-accent) 18%,transparent);
+  background:var(--ep-accent);
+  color:var(--ep-on-accent);
+  box-shadow:0 5px 14px -9px color-mix(in srgb,var(--ep-accent) 75%,transparent);
+}
+.ep-business-landing .ep-cloudnexus-tab:focus-visible {
+  outline:2px solid var(--ep-accent);
+  outline-offset:3px;
+}
+.ep-business-landing .ep-cloudnexus-dashboard {
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--ep-line) 82%,var(--ep-accent));
+  border-radius:1.2rem;
+  background:var(--ep-surface);
+  box-shadow:0 32px 90px -48px rgba(8,54,61,.38),0 10px 28px -20px rgba(8,54,61,.2);
+}
+.ep-business-landing .ep-cloudnexus-windowbar {
+  display:flex;
+  min-height:3.6rem;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:.7rem 1rem;
+  border-bottom:1px solid var(--ep-line);
+  background:var(--ep-card);
+}
+.ep-business-landing .ep-cloudnexus-dashboard-body {
+  display:flex;
+  min-height:300px;
+  background:var(--ep-card);
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar {
+  width:190px;
+  flex:0 0 190px;
+  flex-direction:column;
+  gap:.35rem;
+  padding:1rem .7rem;
+  border-right:1px solid var(--ep-line);
+  background:var(--ep-surface);
+  color:var(--ep-text-muted);
+  font-size:.68rem;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > span {
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  padding:.65rem .6rem;
+  border-radius:.55rem;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active {
+  background:color-mix(in srgb,var(--ep-accent) 10%,var(--ep-card));
+  color:var(--ep-accent);
+  font-weight:700;
+}
+.ep-business-landing .ep-cloudnexus-metric {
+  box-shadow:0 5px 16px -15px rgba(15,40,45,.35);
+}
+.ep-business-landing .ep-cloudnexus-feature {
+  display:flex;
+  min-height:150px;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:.7rem;
+  padding:1.1rem;
+  border:1px solid var(--ep-line);
+  border-radius:.9rem;
+  background:var(--ep-surface);
+}
+.ep-business-landing .ep-cloudnexus-feature > span {
+  display:grid;
+  width:2.35rem;
+  height:2.35rem;
+  place-items:center;
+  border-radius:.7rem;
+  background:color-mix(in srgb,var(--ep-accent) 10%,var(--ep-card));
+  color:var(--ep-accent);
+}
+.ep-business-landing .ep-cloudnexus-feature strong { color:var(--ep-text); font-size:.86rem; }
+.ep-business-landing .ep-cloudnexus-feature p { color:var(--ep-text-muted); font-size:.72rem; line-height:1.55; }
+@media (max-width:639px) {
+  .ep-business-landing .ep-cloudnexus-hero-inner { padding-top:2.75rem; }
+  .ep-business-landing .ep-cloudnexus-tabs { width:100%; justify-content:flex-start; border-radius:.9rem; }
+  .ep-business-landing .ep-cloudnexus-tab { flex:1 0 auto; padding-inline:.8rem; }
+  .ep-business-landing .ep-cloudnexus-dashboard { border-radius:.9rem; }
+  .ep-business-landing .ep-cloudnexus-dashboard-body { min-height:0; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .ep-business-landing .ep-cloudnexus-tab { transition:none; }
 }
