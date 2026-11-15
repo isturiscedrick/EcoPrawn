@@ -19,7 +19,7 @@ const focusRing =
 
 export function SystemLayout({ children }: SystemLayoutProps) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const { tanks, isDbConnected, lastUpdatedAt, loading, refreshTanks } = useTanks();
+  const { tanks, isDbConnected, lastUpdatedAt, loading, refreshTanks, isRefreshing } = useTanks();
   const activeAlertCount = deriveTankAlerts(tanks).length;
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -283,14 +283,35 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       <main
         data-dashboard-route-content=""
         onTouchStart={(event) => {
-          if (window.matchMedia("(min-width: 1024px)").matches || window.scrollY > 0) return;
+          const scrollTop = document.scrollingElement?.scrollTop ?? window.scrollY;
+          if (
+            window.matchMedia("(min-width: 1024px)").matches ||
+            scrollTop > 0 ||
+            event.touches.length !== 1 ||
+            isRefreshing
+          ) {
+            pullStartY.current = null;
+            return;
+          }
           pullStartY.current = event.touches[0]?.clientY ?? null;
         }}
         onTouchEnd={(event) => {
           const startY = pullStartY.current;
           pullStartY.current = null;
           const endY = event.changedTouches[0]?.clientY;
-          if (startY !== null && endY !== undefined && endY - startY >= 90 && window.scrollY <= 0) void refreshTanks();
+          const scrollTop = document.scrollingElement?.scrollTop ?? window.scrollY;
+          if (
+            startY !== null &&
+            endY !== undefined &&
+            endY - startY >= 80 &&
+            scrollTop <= 0 &&
+            !isRefreshing
+          ) {
+            void refreshTanks();
+          }
+        }}
+        onTouchCancel={() => {
+          pullStartY.current = null;
         }}
         className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
         <div className="w-full">
