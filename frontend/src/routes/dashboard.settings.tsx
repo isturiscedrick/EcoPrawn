@@ -55,7 +55,7 @@ function SettingsPage() {
   if (location.pathname === "/dashboard/settings/configuration") return <Outlet />;
 
   return (
-    <div className="mx-auto w-full max-w-5xl space-y-7">
+    <div className="mx-auto w-full max-w-none space-y-7">
       <header className="border-b border-[var(--ep-line)] pb-6">
         <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-accent)]">Preferences & account</div>
         <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Settings</h1>
