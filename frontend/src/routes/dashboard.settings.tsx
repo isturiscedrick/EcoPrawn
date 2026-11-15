@@ -46,7 +46,7 @@ function SettingsPage() {
       title: "About",
       description: "Learn more about EcoPrawn and the platform.",
       icon: "file-text" as const,
-      to: "/about" as const,
+      to: "/dashboard/about" as const,
       action: "About EcoPrawn",
     },
   ];
