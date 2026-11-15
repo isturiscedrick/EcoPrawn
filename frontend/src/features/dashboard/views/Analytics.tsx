@@ -95,18 +95,18 @@ export function Analytics() {
         </Panel>
         <Panel title="Tank health distribution" icon="activity" badge={`${tanks.length} tanks monitored`}>
           <DonutChart items={healthDistribution} unit="tanks" emptyLabel="Add tanks to see health distribution." />
-          <p className="mt-2 text-center text-[11px] text-[var(--ep-text-muted)]">Health status follows the current water-quality thresholds.</p>
+          <p className="mt-2 text-center text-[11px] text-[var(--ep-text-muted)]">Based on current water limits.</p>
         </Panel>
       </div>
 
       <div className="mb-5">
-        <Panel title="Shrimp growth analysis" icon="chart-no-axes-combined" badge={`${growthHistory.length} timestamped scans`}>
+        <Panel title="Growth analysis" icon="chart-no-axes-combined" badge={`${growthHistory.length} scans`}>
           <GrowthHistoryChart data={growthHistory} />
         </Panel>
       </div>
 
       <div className="mb-5">
-        <Panel title="Water quality trends" icon="activity" badge={`${waterHistory.length} sensor readings`}>
+        <Panel title="Water quality trends" icon="activity" badge={`${waterHistory.length} readings`}>
           <WaterHistoryChart data={waterHistory} tanks={tanks.map(tank => ({ id: tank.id, name: tank.name }))} />
         </Panel>
       </div>
