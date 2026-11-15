@@ -15,12 +15,14 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardAboutRouteImport } from './routes/dashboard.about'
 import { Route as DashboardActivityRouteImport } from './routes/dashboard.activity'
 import { Route as DashboardAlertsRouteImport } from './routes/dashboard.alerts'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
 import { Route as DashboardBioflocRouteImport } from './routes/dashboard.biofloc'
 import { Route as DashboardFeedingRouteImport } from './routes/dashboard.feeding'
 import { Route as DashboardProfileRouteImport } from './routes/dashboard.profile'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as DashboardTanksRouteImport } from './routes/dashboard.tanks'
 import { Route as DashboardVisionRouteImport } from './routes/dashboard.vision'
 import { Route as DashboardWaterRouteImport } from './routes/dashboard.water'
@@ -55,19 +57,24 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardAboutRoute = DashboardAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardActivityRoute = DashboardActivityRouteImport.update({
   id: '/activity',
   path: '/activity',
   getParentRoute: () => DashboardRoute,
 } as any)
-const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
-  id: '/analytics',
-  path: '/analytics',
-  getParentRoute: () => DashboardRoute,
-} as any)
 const DashboardAlertsRoute = DashboardAlertsRouteImport.update({
   id: '/alerts',
   path: '/alerts',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardBioflocRoute = DashboardBioflocRouteImport.update({
@@ -83,6 +90,11 @@ const DashboardFeedingRoute = DashboardFeedingRouteImport.update({
 const DashboardProfileRoute = DashboardProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardTanksRoute = DashboardTanksRouteImport.update({
@@ -107,12 +119,14 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
+  '/dashboard/about': typeof DashboardAboutRoute
   '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/tanks': typeof DashboardTanksRoute
   '/dashboard/vision': typeof DashboardVisionRoute
   '/dashboard/water': typeof DashboardWaterRoute
@@ -123,12 +137,14 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/login': typeof LoginRoute
+  '/dashboard/about': typeof DashboardAboutRoute
   '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/tanks': typeof DashboardTanksRoute
   '/dashboard/vision': typeof DashboardVisionRoute
   '/dashboard/water': typeof DashboardWaterRoute
@@ -141,12 +157,14 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/login': typeof LoginRoute
+  '/dashboard/about': typeof DashboardAboutRoute
   '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/tanks': typeof DashboardTanksRoute
   '/dashboard/vision': typeof DashboardVisionRoute
   '/dashboard/water': typeof DashboardWaterRoute
@@ -160,12 +178,14 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/login'
+    | '/dashboard/about'
     | '/dashboard/activity'
     | '/dashboard/alerts'
     | '/dashboard/analytics'
     | '/dashboard/biofloc'
     | '/dashboard/feeding'
     | '/dashboard/profile'
+    | '/dashboard/settings'
     | '/dashboard/tanks'
     | '/dashboard/vision'
     | '/dashboard/water'
@@ -176,12 +196,14 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/login'
+    | '/dashboard/about'
     | '/dashboard/activity'
     | '/dashboard/alerts'
     | '/dashboard/analytics'
     | '/dashboard/biofloc'
     | '/dashboard/feeding'
     | '/dashboard/profile'
+    | '/dashboard/settings'
     | '/dashboard/tanks'
     | '/dashboard/vision'
     | '/dashboard/water'
@@ -193,12 +215,14 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/login'
+    | '/dashboard/about'
     | '/dashboard/activity'
     | '/dashboard/alerts'
     | '/dashboard/analytics'
     | '/dashboard/biofloc'
     | '/dashboard/feeding'
     | '/dashboard/profile'
+    | '/dashboard/settings'
     | '/dashboard/tanks'
     | '/dashboard/vision'
     | '/dashboard/water'
@@ -257,6 +281,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/about': {
+      id: '/dashboard/about'
+      path: '/about'
+      fullPath: '/dashboard/about'
+      preLoaderRoute: typeof DashboardAboutRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/activity': {
       id: '/dashboard/activity'
       path: '/activity'
@@ -264,18 +295,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardActivityRouteImport
       parentRoute: typeof DashboardRoute
     }
-    '/dashboard/analytics': {
-      id: '/dashboard/analytics'
-      path: '/analytics'
-      fullPath: '/dashboard/analytics'
-      preLoaderRoute: typeof DashboardAnalyticsRouteImport
-      parentRoute: typeof DashboardRoute
-    }
     '/dashboard/alerts': {
       id: '/dashboard/alerts'
       path: '/alerts'
       fullPath: '/dashboard/alerts'
       preLoaderRoute: typeof DashboardAlertsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/analytics': {
+      id: '/dashboard/analytics'
+      path: '/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardAnalyticsRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/biofloc': {
@@ -297,6 +328,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/dashboard/profile'
       preLoaderRoute: typeof DashboardProfileRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/tanks': {
@@ -324,12 +362,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface DashboardRouteChildren {
+  DashboardAboutRoute: typeof DashboardAboutRoute
   DashboardActivityRoute: typeof DashboardActivityRoute
   DashboardAlertsRoute: typeof DashboardAlertsRoute
   DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
   DashboardBioflocRoute: typeof DashboardBioflocRoute
   DashboardFeedingRoute: typeof DashboardFeedingRoute
   DashboardProfileRoute: typeof DashboardProfileRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardTanksRoute: typeof DashboardTanksRoute
   DashboardVisionRoute: typeof DashboardVisionRoute
   DashboardWaterRoute: typeof DashboardWaterRoute
@@ -337,12 +377,14 @@ interface DashboardRouteChildren {
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAboutRoute: DashboardAboutRoute,
   DashboardActivityRoute: DashboardActivityRoute,
   DashboardAlertsRoute: DashboardAlertsRoute,
   DashboardAnalyticsRoute: DashboardAnalyticsRoute,
   DashboardBioflocRoute: DashboardBioflocRoute,
   DashboardFeedingRoute: DashboardFeedingRoute,
   DashboardProfileRoute: DashboardProfileRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardTanksRoute: DashboardTanksRoute,
   DashboardVisionRoute: DashboardVisionRoute,
   DashboardWaterRoute: DashboardWaterRoute,
