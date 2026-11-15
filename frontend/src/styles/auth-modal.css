@@ -648,3 +648,80 @@ html.dark .ep-auth-modal input:focus-visible { outline-color: #60a5fa !important
     height: 0 !important;
   }
 }
+
+
+/* Ocean Teal authentication theme — keep modal controls aligned with the app. */
+.ep-auth-modal {
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #ffffff;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"],
+.ep-auth-modal button[type="submit"] {
+  background: #087e8b !important;
+  border-color: #087e8b !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px -14px rgba(8,126,139,.7) !important;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled),
+.ep-auth-modal button[aria-label="Close"]:hover,
+.ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
+  border-color: #087e8b !important;
+  background: rgba(8,126,139,.08) !important;
+  color: #066874 !important;
+}
+.ep-auth-modal input:focus {
+  border-color: #087e8b !important;
+  box-shadow: 0 0 0 4px rgba(8,126,139,.14) !important;
+}
+.ep-auth-modal :is(button,a,input):focus-visible {
+  outline: 2px solid #087e8b !important;
+  outline-offset: 2px;
+}
+.ep-auth-modal button[type="submit"]:not(:disabled):hover {
+  background: #066874 !important;
+  border-color: #066874 !important;
+  box-shadow: 0 14px 28px -14px rgba(8,126,139,.58) !important;
+  transform: translateY(-2px);
+}
+html.dark .ep-auth-modal {
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"],
+html.dark .ep-auth-modal button[type="submit"] {
+  background: #45c5b3 !important;
+  border-color: #45c5b3 !important;
+  color: #092b31 !important;
+  box-shadow: 0 10px 24px -14px rgba(69,197,179,.58) !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled),
+html.dark .ep-auth-modal button[aria-label="Close"]:hover,
+html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
+  border-color: #45c5b3 !important;
+  background: rgba(69,197,179,.12) !important;
+  color: #70d7c8 !important;
+}
+html.dark .ep-auth-modal input:focus {
+  border-color: #45c5b3 !important;
+  box-shadow: 0 0 0 4px rgba(69,197,179,.16) !important;
+}
+html.dark .ep-auth-modal :is(button,a,input):focus-visible {
+  outline-color: #45c5b3 !important;
+}
+html.dark .ep-auth-modal button[type="submit"]:not(:disabled):hover {
+  background: #70d7c8 !important;
+  border-color: #70d7c8 !important;
+  color: #092b31 !important;
+}
+.ep-auth-modal :is(button,a) {
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease,
+    box-shadow 220ms ease, transform 180ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-auth-modal *, .ep-auth-modal *::before, .ep-auth-modal *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
