@@ -6,7 +6,6 @@ import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { getThresholds, saveThresholds, THRESHOLDS, type ThresholdSettings } from "@/features/dashboard/lib/thresholds";
-import { Esp32Connection } from "@/features/dashboard/components/Esp32Connection";
 
 export function WaterQuality() {
   const { tanks, waterHistory = [], loading } = useTanks();
@@ -153,10 +152,6 @@ export function WaterQuality() {
                 </button>
               ))}
             </div>
-          </div>
-
-          <div className="mb-4">
-            <Esp32Connection key={selectedTank.id} tankId={selectedTank.id} tankName={selectedTank.name} />
           </div>
 
           <div
