@@ -42,7 +42,7 @@ function RangeControl({ value, onChange }: { value: Range; onChange: (value: Ran
   return <div className="-mx-1 overflow-x-auto overscroll-x-contain px-1 pb-1" role="group" aria-label="Chart date range"><div className="flex w-max min-w-full flex-nowrap gap-1 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-1">
     {RANGE_OPTIONS.map(option => <button key={option.value} type="button" aria-pressed={value === option.value} onClick={() => onChange(option.value)}
       className={`min-h-11 shrink-0 whitespace-nowrap rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)] ${value === option.value ? "bg-[var(--ep-accent)] text-white shadow-sm" : "text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}`}>{option.label}</button>)}
-  </div>;
+  </div></div>;
 }
 function sinceRange<T extends { recordedAt: string }>(items: T[], range: Range) {
   if (range === "all" || !items.length) return items;
@@ -121,8 +121,8 @@ export function WaterHistoryChart({ data, tanks }: { data: WaterHistoryPoint[]; 
   return <div className="space-y-4">
     <div className="flex min-w-0 flex-col gap-3">
       <div className="flex min-w-0 flex-wrap gap-2">
-        <select aria-label="Water quality parameter" value={metric} onChange={e=>{setMetric(e.target.value as keyof typeof WATER_METRICS);setHovered(null);}} className="min-h-10 min-w-0 max-w-full flex-1 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)] sm:flex-none">{Object.entries(WATER_METRICS).map(([key,item])=><option key={key} value={key}>{item.label} ({item.unit})</option>)}</select>
-        <select aria-label="Filter water quality by tank" value={tankId} onChange={e=>{setTankId(e.target.value);setHovered(null);}} className="min-h-10 min-w-0 max-w-full flex-1 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)] sm:max-w-44 sm:flex-none"><option value="all">All tanks</option>{tanks.map(t=><option key={t.id} value={t.id}>{t.name}</option>)}</select>
+        <select aria-label="Water quality parameter" value={metric} onChange={e=>{setMetric(e.target.value as keyof typeof WATER_METRICS);setHovered(null);}} className="min-h-11 min-w-0 max-w-full flex-1 touch-manipulation rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-sm font-semibold text-[var(--ep-text)] sm:flex-none">{Object.entries(WATER_METRICS).map(([key,item])=><option key={key} value={key}>{item.label} ({item.unit})</option>)}</select>
+        <select aria-label="Filter water quality by tank" value={tankId} onChange={e=>{setTankId(e.target.value);setHovered(null);}} className="min-h-11 min-w-0 max-w-full flex-1 touch-manipulation rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-sm font-semibold text-[var(--ep-text)] sm:max-w-44 sm:flex-none"><option value="all">All tanks</option>{tanks.map(t=><option key={t.id} value={t.id}>{t.name}</option>)}</select>
       </div>
       <RangeControl value={range} onChange={value=>{setRange(value);setHovered(null);}}/>
     </div>
