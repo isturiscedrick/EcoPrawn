@@ -239,6 +239,39 @@ const PATHS = {
       <path d="m12 19-7-7 7-7" />
     </>
   ),
+  search: (
+    <>
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-4-4" />
+    </>
+  ),
+  "log-out": (
+    <>
+      <path d="M10 17l5-5-5-5" />
+      <path d="M15 12H3" />
+      <path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6" />
+    </>
+  ),
+  house: (
+    <>
+      <path d="m3 10 9-7 9 7" />
+      <path d="M5 9v12h14V9M9 21v-7h6v7" />
+    </>
+  ),
+  "chevron-up": <path d="m18 15-6-6-6 6" />,
+  "chevron-down": <path d="m6 9 6 6 6-6" />,
+  pencil: (
+    <>
+      <path d="m16 4 4 4" />
+      <path d="M4 20l4-.8L19 8a2.1 2.1 0 0 0-3-3L5 16l-1 4Z" />
+    </>
+  ),
+  "trash-2": (
+    <>
+      <path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6" />
+      <path d="M10 11v5m4-5v5" />
+    </>
+  ),
   "sidebar-toggle": (
     <>
       <rect x="3" y="4" width="18" height="16" rx="2" />
