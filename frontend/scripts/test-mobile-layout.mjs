@@ -67,34 +67,33 @@ try {
     assert.equal(shell.documentWidth, width, `Horizontal page overflow at ${width}px: ${JSON.stringify(shell)}`);
     assert.ok(shell.brandRight !== null && shell.controlsLeft !== null, "Mobile header brand and controls must render");
     assert.ok(shell.brandRight <= shell.controlsLeft, `Header brand overlaps controls at ${width}px: ${JSON.stringify(shell)}`);
-    assert.equal(shell.bottomNavCount, 5, "Bottom navigation must contain Home, Tanks, Vision, Feeding, and More");
-    assert.deepEqual(shell.bottomNavLabels, ["Home", "Tanks", "Vision", "Feeding", "More"], "Bottom navigation labels must match the mobile information architecture");
-    assert.deepEqual(shell.bottomNavDestinations, ["/dashboard", "/dashboard/tanks", "/dashboard/vision", "/dashboard/feeding"], "Bottom navigation links must open their matching modules");
+    assert.equal(shell.bottomNavCount, 5, "Bottom navigation must contain five primary modules");
+    assert.deepEqual(shell.bottomNavLabels, ["Home", "Tanks", "Vision", "Feeding", "Water Quality"], "Bottom navigation labels must match the mobile information architecture");
+    assert.deepEqual(shell.bottomNavDestinations, ["/dashboard", "/dashboard/tanks", "/dashboard/analytics", "/dashboard/feeding", "/dashboard/water"], "Bottom navigation links must open their matching modules");
     for (const item of shell.bottomNavItems) {
       assert.ok(item.width > 0 && item.left >= 0 && item.right <= width + 1, `Bottom navigation item clips at ${width}px`);
     }
     await page.getByRole("link", { name: "Alerts" }).waitFor({ state: "visible" });
     await page.getByRole("button", { name: "Open profile menu" }).waitFor({ state: "visible" });
 
-    await page.getByRole("button", { name: "More dashboard sections" }).click();
-    const drawer = page.getByRole("dialog", { name: "Dashboard menu" });
-    await drawer.waitFor({ state: "visible" });
-    const drawerMetrics = await drawer.evaluate((element) => {
-      const rect = element.getBoundingClientRect();
-      return { left: rect.left, width: rect.width, bodyPosition: document.body.style.position, bodyTop: document.body.style.top };
-    });
-    assert.ok(Math.abs(drawerMetrics.left) <= 1, `Drawer must align to the left edge at ${width}px`);
-    assert.ok(drawerMetrics.width <= width, `Drawer exceeds viewport width at ${width}px`);
-    assert.equal(drawerMetrics.bodyPosition, "fixed", "Opening the drawer must lock background scrolling");
-    assert.ok(drawerMetrics.bodyTop.endsWith("px"), "Scroll lock must preserve the previous scroll offset");
-
+    assert.equal(await page.getByRole("button", { name: "More dashboard sections" }).count(), 0,
+      "The More drawer shortcut must not appear in mobile bottom navigation");
+    await page.getByRole("button", { name: "Open profile menu" }).click();
+    const profileMenu = page.getByRole("menu", { name: "Profile menu" });
+    await profileMenu.getByRole("menuitem", { name: "View profile" }).waitFor({ state: "visible" });
+    await profileMenu.getByRole("menuitem", { name: "Settings" }).waitFor({ state: "visible" });
+    const profileActionMetrics = await profileMenu.locator('[role="menuitem"]').evaluateAll((items) =>
+      items.slice(0, 2).map((item) => {
+        const rect = item.getBoundingClientRect();
+        return { width: rect.width, right: rect.right, text: item.textContent?.trim() };
+      }),
+    );
+    assert.ok(profileActionMetrics.every((item) => item.width > 90 && item.right <= width + 1),
+      `Profile actions must fit side by side at ${width}px: ${JSON.stringify(profileActionMetrics)}`);
     await page.keyboard.press("Escape");
-    await drawer.waitFor({ state: "hidden" });
-    assert.equal(await page.evaluate(() => document.activeElement?.getAttribute("aria-label")), "More dashboard sections",
-      "Closing the drawer with Escape must restore focus to More");
     assert.deepEqual(pageErrors, [], `Browser errors at ${width}px`);
     results.push({ width, horizontalOverflow: false, bottomNavigationItems: shell.bottomNavCount,
-      drawerWidth: Math.round(drawerMetrics.width), backgroundScrollLocked: true, pageErrors: pageErrors.length });
+      profileActionsSideBySide: true, pageErrors: pageErrors.length });
     await page.close();
   }
 
