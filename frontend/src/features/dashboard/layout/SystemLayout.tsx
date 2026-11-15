@@ -214,7 +214,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                     <p className="truncate text-sm font-semibold">{profileName}</p>
                     <p className="mt-0.5 truncate text-[11px] font-medium tracking-wide text-[var(--ep-text-muted)]">{profileRole}</p>
                   </div>
-                  <div className="mt-2 grid grid-cols-2 gap-1.5">
+                  <div className="mt-2 flex flex-col gap-1">
                     <Link to="/dashboard/profile" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="flex min-h-11 min-w-0 items-center gap-2 whitespace-nowrap rounded-xl px-2.5 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:bg-[var(--ep-accent-tint)] focus-visible:ring-1 focus-visible:ring-[var(--ep-accent)]/50">
                       <Icon name="user-round" size={17} className="shrink-0" />
                       <span className="whitespace-nowrap">View profile</span>
