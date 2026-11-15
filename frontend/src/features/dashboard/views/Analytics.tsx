@@ -4,8 +4,6 @@ import { DashboardViewSkeleton } from "@/features/dashboard/components/Dashboard
 import { DonutChart, FeedingProgressChart, GrowthHistoryChart, WaterHistoryChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
-import { DashboardDataStatus } from "@/features/dashboard/components/DashboardDataStatus";
-
 const TANK_COLORS = ["#D85A35", "#167C80", "#6D67B2", "#C18A27", "#39865B", "#B34E83"];
 
 export function Analytics() {
@@ -79,9 +77,6 @@ export function Analytics() {
           <span aria-hidden="true">↓</span> Export CSV
         </button>
       </div>
-
-      <DashboardDataStatus />
-
       <section aria-label="Facility analytics summary" className="mb-5 grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
         <KpiCard label="Total biomass" value={metrics.totalBiomass.toFixed(1)} unit="kg" delta="Combined across all tanks" deltaTone="ok" />
         <KpiCard label="Estimated population" value={metrics.totalPopulation.toLocaleString()} unit="shrimp" delta="Current facility estimate" deltaTone="ok" />
