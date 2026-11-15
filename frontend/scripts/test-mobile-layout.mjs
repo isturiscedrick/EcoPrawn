@@ -60,12 +60,16 @@ try {
         controlsLeft: controls?.left ?? null,
         bottomNavCount: items.length,
         bottomNavItems: items,
+        bottomNavLabels: bottomNav ? Array.from(bottomNav.querySelectorAll("a,button")).map(item => item.textContent?.trim()) : [],
+        bottomNavDestinations: bottomNav ? Array.from(bottomNav.querySelectorAll("a")).map(item => new URL(item.href).pathname) : [],
       };
     });
     assert.equal(shell.documentWidth, width, `Horizontal page overflow at ${width}px: ${JSON.stringify(shell)}`);
     assert.ok(shell.brandRight !== null && shell.controlsLeft !== null, "Mobile header brand and controls must render");
     assert.ok(shell.brandRight <= shell.controlsLeft, `Header brand overlaps controls at ${width}px: ${JSON.stringify(shell)}`);
     assert.equal(shell.bottomNavCount, 5, "Bottom navigation must contain Home, Tanks, Vision, Feeding, and More");
+    assert.deepEqual(shell.bottomNavLabels, ["Home", "Tanks", "Vision", "Feeding", "More"], "Bottom navigation labels must match the mobile information architecture");
+    assert.deepEqual(shell.bottomNavDestinations, ["/dashboard", "/dashboard/tanks", "/dashboard/vision", "/dashboard/feeding"], "Bottom navigation links must open their matching modules");
     for (const item of shell.bottomNavItems) {
       assert.ok(item.width > 0 && item.left >= 0 && item.right <= width + 1, `Bottom navigation item clips at ${width}px`);
     }
