@@ -54,8 +54,8 @@ export function TankRow(tank: Tank & { onRemove?: (id: string) => void; onEdit?:
 }
 
 export function AlertRow({
-  icon, title, detail, time, acknowledged = false, onAcknowledge,
-}: AlertItem & { acknowledged?: boolean; onAcknowledge?: () => void }) {
+  icon, title, detail, time, acknowledged = false, onAcknowledge, onViewTank,
+}: AlertItem & { acknowledged?: boolean; onAcknowledge?: () => void; onViewTank?: () => void }) {
   return (
     <article className="dashboard-alert-row dashboard-hover flex flex-wrap items-start gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-3">
       <div
@@ -81,6 +81,10 @@ export function AlertRow({
         <p className="mt-1 text-xs leading-relaxed text-[var(--ep-text-muted)]">{detail}</p>
         <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
           <span className="ep-font-mono text-[10.5px] text-[var(--ep-text-muted)]">{time}</span>
+          <div className="flex flex-wrap items-center gap-2">
+          {onViewTank && (
+            <button type="button" onClick={onViewTank} className="min-h-8 rounded-lg border border-[var(--ep-line)] px-2.5 text-[11px] font-semibold text-[var(--ep-primary)] transition hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">View tank</button>
+          )}
           {onAcknowledge && (
             <button
               type="button"
@@ -89,6 +93,7 @@ export function AlertRow({
               className="min-h-8 rounded-lg border border-[var(--ep-line)] px-2.5 text-[11px] font-semibold text-[var(--ep-primary)] transition hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]"
             >{acknowledged ? "Undo review" : "Mark reviewed"}</button>
           )}
+          </div>
         </div>
       </div>
     </article>
