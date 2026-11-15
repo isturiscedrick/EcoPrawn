@@ -15,7 +15,7 @@ const quickActions = [
 
 export function Dashboard() {
   const navigate = useNavigate();
-  const { tanks, waterHistory = [], visionScanLog = [], loading, error, refreshTanks } = useTanks();
+  const { tanks, waterHistory = [], visionScanLog = [], loading, error } = useTanks();
   const [thresholdSettings, setThresholdSettings] = useState(getThresholds);
 
   useEffect(() => {
@@ -34,7 +34,6 @@ export function Dashboard() {
       <DashboardErrorState
         title="Dashboard data unavailable"
         description={error}
-        action={{ label: "Try again", onClick: () => void refreshTanks() }}
       />
     );
   }
