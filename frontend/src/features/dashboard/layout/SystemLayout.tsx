@@ -9,6 +9,7 @@ import { Sidebar } from "../components/Sidebar";
 import { DASHBOARD_NAV_ITEMS } from "@/config/nav";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 
 interface SystemLayoutProps {
   children: ReactNode;
@@ -42,6 +43,8 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
+  const [logoutErrorOpen, setLogoutErrorOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const profileTriggerRef = useRef<HTMLButtonElement>(null);
   const profileMenuPanelRef = useRef<HTMLDivElement>(null);
@@ -228,16 +231,9 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                   <button
                     type="button"
                     role="menuitem"
-                    onClick={async () => {
+                    onClick={() => {
                       setProfileMenuOpen(false);
-                      if (!window.confirm("Are you sure you want to log out?")) return;
-                      try {
-                        const response = await fetch("/api/auth/logout", { method: "POST" });
-                        if (!response.ok) throw new Error("Logout failed");
-                        window.location.replace("/login");
-                      } catch {
-                        window.alert("Could not log out. Please try again.");
-                      }
+                      setLogoutConfirmOpen(true);
                     }}
                     className="mt-1 flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:bg-red-50 focus-visible:ring-1 focus-visible:ring-red-400/60 dark:hover:bg-red-950/30 dark:focus-visible:bg-red-950/30"
                   >
@@ -278,6 +274,34 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           </section>
         </div>
       )}
+
+      <ConfirmDialog
+        open={logoutConfirmOpen}
+        title="Log out of EcoPrawn?"
+        description="Are you sure you want to end your current session?"
+        confirmLabel="Log out"
+        tone="danger"
+        onCancel={() => setLogoutConfirmOpen(false)}
+        onConfirm={async () => {
+          setLogoutConfirmOpen(false);
+          try {
+            const response = await fetch("/api/auth/logout", { method: "POST" });
+            if (!response.ok) throw new Error("Logout failed");
+            window.location.replace("/login");
+          } catch {
+            setLogoutErrorOpen(true);
+          }
+        }}
+      />
+      <ConfirmDialog
+        open={logoutErrorOpen}
+        title="Unable to log out"
+        description="Logout could not be completed. Please try again."
+        confirmLabel="Okay"
+        showCancel={false}
+        onCancel={() => setLogoutErrorOpen(false)}
+        onConfirm={() => setLogoutErrorOpen(false)}
+      />
 
       {/* Responsive dashboard content area. */}
       <main
