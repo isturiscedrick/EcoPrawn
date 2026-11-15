@@ -1,6 +1,6 @@
 /* ==========================================================================
    EcoPrawn Unified Palette
-   60% neutral canvas, 30% black/charcoal structure, 10% blue accents.
+   60% neutral canvas, 30% deep ocean structure, 10% Ocean Teal accents.
    Loaded last so legacy page-specific declarations cannot reintroduce old
    brand colors. Semantic success, warning, and error indicators are retained.
    ========================================================================== */
@@ -15,7 +15,7 @@
   --border: #dbe2ea; --input: #dbe2ea; --ring: #087e8b;
   --sidebar: #ffffff; --sidebar-foreground: #111827;
   --sidebar-primary: #087e8b; --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #eff6ff; --sidebar-accent-foreground: #066874;
+  --sidebar-accent: #e6f4f3; --sidebar-accent-foreground: #066874;
   --sidebar-border: #dbe2ea; --sidebar-ring: #087e8b;
   --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
   --ep-line: #dbe2ea; --ep-primary: #111827; --ep-primary-soft: #1f2937;
@@ -204,7 +204,7 @@ html.dark .ep-logo .ep-logo-text {
 }
 html.dark .dashboard-shell {
   --ep-brand-primary: #45c5b3;
-  --ep-brand-secondary: #d6eeeb;
+  --ep-brand-secondary: #d9f0ef;
   --ep-primary: #e8f4f2;
   --ep-primary-soft: #c9e2df;
   --ep-secondary: #c9e2df;
@@ -599,3 +599,108 @@ footer[data-site-footer] nav a:hover,
     scroll-behavior: auto !important;
   }
 }
+
+
+/* ==========================================================================
+   Final legacy-brand shade normalization.
+   Keep every former orange/blue/green primary shade on the Ocean Teal scale.
+   Semantic success, warning, and danger states remain untouched.
+   ========================================================================== */
+:root {
+  --brand-50: #e6f4f3;
+  --brand-100: #d9f0ef;
+  --brand-200: #b8e3df;
+  --brand-300: #8bd5cc;
+  --brand-400: #45c5b3;
+  --brand-500: #087e8b;
+  --brand-600: #066874;
+  --brand-700: #05545e;
+  --brand-800: #173b46;
+  --brand-900: #0b2c34;
+  --primary-50: var(--brand-50);
+  --primary-100: var(--brand-100);
+  --primary-200: var(--brand-200);
+  --primary-300: var(--brand-300);
+  --primary-400: var(--brand-400);
+  --primary-500: var(--brand-500);
+  --primary-600: var(--brand-600);
+  --primary-700: var(--brand-700);
+  --primary-800: var(--brand-800);
+  --primary-900: var(--brand-900);
+}
+html.dark {
+  --brand-50: #153a3e;
+  --brand-100: #19474a;
+  --brand-200: #23615f;
+  --brand-300: #398e84;
+  --brand-400: #70d7c8;
+  --brand-500: #45c5b3;
+  --brand-600: #39aa9b;
+  --brand-700: #2d887f;
+  --brand-800: #1a5553;
+  --brand-900: #103b40;
+  --primary-50: var(--brand-50);
+  --primary-100: var(--brand-100);
+  --primary-200: var(--brand-200);
+  --primary-300: var(--brand-300);
+  --primary-400: var(--brand-400);
+  --primary-500: var(--brand-500);
+  --primary-600: var(--brand-600);
+  --primary-700: var(--brand-700);
+  --primary-800: var(--brand-800);
+  --primary-900: var(--brand-900);
+}
+
+/* Catch remaining Tailwind brand utilities in every EcoPrawn surface. */
+.ecoprawn-root [class*="blue-"],
+.ecoprawn-root [class*="indigo-"],
+.ecoprawn-root [class*="cyan-"],
+.ecoprawn-root [class*="sky-"] {
+  --tw-ring-color: #087e8b !important;
+}
+.ecoprawn-root [class*="text-blue-"],
+.ecoprawn-root [class*="text-indigo-"],
+.ecoprawn-root [class*="text-cyan-"],
+.ecoprawn-root [class*="text-sky-"] { color: #066874 !important; }
+.ecoprawn-root [class*="bg-blue-"],
+.ecoprawn-root [class*="bg-indigo-"],
+.ecoprawn-root [class*="bg-cyan-"],
+.ecoprawn-root [class*="bg-sky-"] { background-color: #e6f4f3 !important; }
+.ecoprawn-root [class*="border-blue-"],
+.ecoprawn-root [class*="border-indigo-"],
+.ecoprawn-root [class*="border-cyan-"],
+.ecoprawn-root [class*="border-sky-"] { border-color: #b8e3df !important; }
+.ecoprawn-root [class*="from-blue-"],
+.ecoprawn-root [class*="from-indigo-"],
+.ecoprawn-root [class*="from-cyan-"],
+.ecoprawn-root [class*="from-sky-"] { --tw-gradient-from: #087e8b var(--tw-gradient-from-position) !important; }
+.ecoprawn-root [class*="to-blue-"],
+.ecoprawn-root [class*="to-indigo-"],
+.ecoprawn-root [class*="to-cyan-"],
+.ecoprawn-root [class*="to-sky-"] { --tw-gradient-to: #45c5b3 var(--tw-gradient-to-position) !important; }
+html.dark .ecoprawn-root [class*="text-blue-"],
+html.dark .ecoprawn-root [class*="text-indigo-"],
+html.dark .ecoprawn-root [class*="text-cyan-"],
+html.dark .ecoprawn-root [class*="text-sky-"] { color: #70d7c8 !important; }
+html.dark .ecoprawn-root [class*="bg-blue-"],
+html.dark .ecoprawn-root [class*="bg-indigo-"],
+html.dark .ecoprawn-root [class*="bg-cyan-"],
+html.dark .ecoprawn-root [class*="bg-sky-"] { background-color: #153a3e !important; }
+html.dark .ecoprawn-root [class*="border-blue-"],
+html.dark .ecoprawn-root [class*="border-indigo-"],
+html.dark .ecoprawn-root [class*="border-cyan-"],
+html.dark .ecoprawn-root [class*="border-sky-"] { border-color: #23615f !important; }
+
+/* Former orange/coral primary accents are now Ocean Teal as well. */
+.ecoprawn-root [class*="text-orange-"],
+.ecoprawn-root [class*="text-rose-"] { color: #087e8b !important; }
+.ecoprawn-root [class*="bg-orange-"],
+.ecoprawn-root [class*="bg-rose-"] { background-color: #e6f4f3 !important; }
+.ecoprawn-root [class*="border-orange-"],
+.ecoprawn-root [class*="border-rose-"] { border-color: #b8e3df !important; }
+html.dark .ecoprawn-root [class*="text-orange-"],
+html.dark .ecoprawn-root [class*="text-rose-"] { color: #70d7c8 !important; }
+html.dark .ecoprawn-root [class*="bg-orange-"],
+html.dark .ecoprawn-root [class*="bg-rose-"] { background-color: #153a3e !important; }
+html.dark .ecoprawn-root [class*="border-orange-"],
+html.dark .ecoprawn-root [class*="border-rose-"] { border-color: #23615f !important; }
