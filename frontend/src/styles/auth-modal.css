@@ -725,3 +725,101 @@ html.dark .ep-auth-modal button[type="submit"]:not(:disabled):hover {
     animation-duration: .01ms !important;
   }
 }
+
+
+/* FINAL DARK THEME OVERRIDE
+   AuthModalProvider loads this stylesheet with the dialog component, after the
+   shared theme layer. Scope directly to the actual dialog and LoginForm DOM so
+   Tailwind's bg-white/text utilities and older auth rules cannot win. */
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel,
+html.dark .ep-auth-overlay [role="dialog"].ep-auth-modal {
+  --ep-bg: #0b171b !important;
+  --ep-surface: #102328 !important;
+  --ep-tint: #153a3e !important;
+  --ep-line: #285158 !important;
+  --ep-primary: #e8f4f2 !important;
+  --ep-secondary: #e8f4f2 !important;
+  --ep-text: #e8f4f2 !important;
+  --ep-text-muted: #a7c2c1 !important;
+  --ep-accent: #45c5b3 !important;
+  --ep-accent-hover: #70d7c8 !important;
+  --ep-on-accent: #092b31 !important;
+  background: #102328 !important;
+  border-color: #285158 !important;
+  color: #e8f4f2 !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel .ep-auth-brand {
+  border-color: #285158 !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel .ep-auth-brand .ep-logo {
+  --ep-logo-color: #45c5b3 !important;
+  --ep-logo-text: #e8f4f2 !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel :is(h1,h2,h3,h4,p,label,small,span) {
+  color: #e8f4f2 !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel :is(h1 + p, small, [data-muted]) {
+  color: #a7c2c1 !important;
+}
+/* LoginForm's white wrapper, segmented tabs, alerts and Google button. */
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel div:has(> form),
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel [role="group"][aria-label="Account access"],
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel [role="status"],
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel [role="alert"] {
+  background: #153a3e !important;
+  border-color: #285158 !important;
+  color: #e8f4f2 !important;
+  box-shadow: none !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel [role="group"][aria-label="Account access"] button[aria-pressed="false"] {
+  background: #102328 !important;
+  color: #c5dcda !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel [role="group"][aria-label="Account access"] button[aria-pressed="true"],
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel button[type="submit"] {
+  background: #45c5b3 !important;
+  border-color: #45c5b3 !important;
+  color: #092b31 !important;
+  box-shadow: 0 8px 22px -12px rgba(69,197,179,.55) !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel button[type="submit"]:hover:not(:disabled),
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled) {
+  background: #70d7c8 !important;
+  border-color: #70d7c8 !important;
+  color: #092b31 !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel input {
+  background: #0b171b !important;
+  border-color: #285158 !important;
+  color: #e8f4f2 !important;
+  caret-color: #45c5b3 !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel input::placeholder {
+  color: #8eafad !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel input:focus {
+  border-color: #45c5b3 !important;
+  box-shadow: 0 0 0 3px rgba(69,197,179,.18) !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel button[aria-label="Close"] {
+  color: #c5dcda !important;
+  border-color: #285158 !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel button[aria-label="Close"]:hover {
+  background: #153a3e !important;
+  color: #70d7c8 !important;
+  border-color: #45c5b3 !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel button:has(> svg[viewBox="0 0 48 48"]) {
+  background: #0b171b !important;
+  border-color: #285158 !important;
+  color: #e8f4f2 !important;
+}
+html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel :is(button,a,input):focus-visible {
+  outline: 2px solid #45c5b3 !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(69,197,179,.18) !important;
+}
+html.dark .ep-auth-overlay [data-auth-backdrop] {
+  background: rgba(3,18,22,.82) !important;
+}
