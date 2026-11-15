@@ -31,7 +31,7 @@
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   background:
     radial-gradient(ellipse at 78% 28%,rgba(69,197,179,.14),transparent 40%),
-    linear-gradient(135deg,#090d16,#111827 68%,#0b1220);
+    linear-gradient(135deg,#0b171b,#102328 68%,#153a3e);
 }
 :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
   max-width: 1320px;
@@ -341,11 +341,11 @@ html.dark .ep-contact-page [data-contact-details] {
   background-size: 22px 22px,22px 22px,auto;
 }
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
-  background-color: #0b1220;
+  background-color: #0b171b;
   background-image:
     radial-gradient(circle at 8% 42%,rgba(69,197,179,.17) 1px,transparent 1.5px),
     radial-gradient(circle at 91% 66%,rgba(69,197,179,.17) 1px,transparent 1.5px),
-    linear-gradient(180deg,#111827,#0b1220);
+    linear-gradient(180deg,#102328,#0b171b);
   background-size: 22px 22px,22px 22px,auto;
 }
 :is(.ep-about-page,.ep-contact-page) [data-page-hero]::before,
