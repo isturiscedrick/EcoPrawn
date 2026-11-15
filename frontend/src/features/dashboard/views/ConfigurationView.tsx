@@ -18,7 +18,7 @@ export function ConfigurationView() {
   if (loading) return <DashboardViewSkeleton variant="tanks" />;
 
   return (
-    <div className="mx-auto w-full max-w-5xl space-y-6">
+    <div className="mx-auto w-full max-w-none space-y-6">
       <header className="border-b border-[var(--ep-line)] pb-6">
         <Link to="/dashboard/settings" className="mb-3 inline-flex items-center gap-2 text-xs font-semibold text-[var(--ep-primary)] hover:underline">
           <Icon name="arrow-left" size={14} /> Back to Settings
