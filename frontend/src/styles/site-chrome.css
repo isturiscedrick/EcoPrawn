@@ -313,7 +313,7 @@ html.dark .ep-mobile-site-drawer button[aria-label="Close"] {
 .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span { background:#087e8b !important; border-color:#087e8b !important; color:#fff !important; box-shadow:0 8px 20px -12px rgba(8,126,139,.65) !important; }
 .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span { color:#fff !important; }
 .ep-mobile-dashboard-drawer nav a:not([aria-current="page"]):hover > span { background:#f1f5f9 !important; color:#066874 !important; }
-.ep-mobile-dashboard-drawer nav a:focus-visible { outline:2px solid #2563eb; outline-offset:2px; }
+.ep-mobile-dashboard-drawer nav a:focus-visible { outline:2px solid #087e8b; outline-offset:2px; }
 .ep-mobile-dashboard-drawer > div:last-child { background:#f8fafc !important; border-color:#dbe2ea !important; }
 .ep-mobile-dashboard-drawer > div:last-child a[aria-current="page"] { background:#087e8b !important; border-color:#087e8b !important; color:#fff !important; }
 .ep-mobile-dashboard-drawer > div:last-child button { border:1px solid #dbe2ea !important; border-radius:.75rem !important; background:#fff !important; color:#111827 !important; }
@@ -328,7 +328,7 @@ html.dark .ep-mobile-dashboard-drawer .ep-font-mono { color:#cbd5e1 !important; 
 html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a { background:#1f2937 !important; border-color:#334155 !important; }
 html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:first-child { color:#f8fafc !important; }
 html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:last-child { color:#cbd5e1 !important; }
-html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:first-child { background:rgba(69,197,179,.15) !important; color:#bfdbfe !important; }
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:first-child { background:rgba(69,197,179,.15) !important; color:#70d7c8 !important; }
 html.dark .ep-mobile-dashboard-drawer nav a > span { color:#e2e8f0 !important; }
 html.dark .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span { background:#45c5b3 !important; border-color:#45c5b3 !important; color:#071426 !important; }
 html.dark .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span { color:#071426 !important; }
