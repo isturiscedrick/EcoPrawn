@@ -53,25 +53,44 @@ export function TankRow(tank: Tank & { onRemove?: (id: string) => void; onEdit?:
   );
 }
 
-export function AlertRow({ icon, title, detail, time }: AlertItem) {
+export function AlertRow({
+  icon, title, detail, time, acknowledged = false, onAcknowledge,
+}: AlertItem & { acknowledged?: boolean; onAcknowledge?: () => void }) {
   return (
-    <div className="dashboard-alert-row dashboard-hover flex gap-3 rounded-lg border-t border-[var(--sand-dim)] px-2 py-3 first:border-t-0 first:pt-3">
+    <article className="dashboard-alert-row dashboard-hover flex flex-wrap items-start gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-3">
       <div
-        className={`w-[26px] h-[26px] rounded-[7px] flex items-center justify-center text-xs flex-shrink-0 ${
+        aria-hidden="true"
+        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-bold ${
           icon === "warn"
-            ? "dashboard-status-warning"
-            : "dashboard-status-success"
+            ? "bg-[var(--ep-status-warning)]/10 text-[var(--ep-status-warning)]"
+            : "bg-[var(--ep-accent-tint)] text-[var(--ep-primary)]"
         }`}
       >
-        {icon === "warn" ? "!" : "✓"}
+        {icon === "warn" ? "!" : "i"}
       </div>
-      <div className="min-w-0">
-        <b className="text-[13px] text-[var(--water-deep)] block mb-0.5">{title}</b>
-        <span className="text-xs text-[rgba(11,35,32,0.55)]">{detail}</span>
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <b className="block text-[13px] font-semibold text-[var(--ep-text)]">{title}</b>
+          <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+            icon === "warn"
+              ? "bg-[var(--ep-status-warning)]/10 text-[var(--ep-status-warning)]"
+              : "bg-[var(--ep-accent-tint)] text-[var(--ep-primary)]"
+          }`}>{icon === "warn" ? "Warning" : "Information"}</span>
+          {acknowledged && <span className="rounded-full bg-[var(--ep-bg)] px-2 py-0.5 text-[10px] font-semibold text-[var(--ep-text-muted)]">Reviewed</span>}
+        </div>
+        <p className="mt-1 text-xs leading-relaxed text-[var(--ep-text-muted)]">{detail}</p>
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+          <span className="ep-font-mono text-[10.5px] text-[var(--ep-text-muted)]">{time}</span>
+          {onAcknowledge && (
+            <button
+              type="button"
+              onClick={onAcknowledge}
+              aria-pressed={acknowledged}
+              className="min-h-8 rounded-lg border border-[var(--ep-line)] px-2.5 text-[11px] font-semibold text-[var(--ep-primary)] transition hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]"
+            >{acknowledged ? "Undo review" : "Mark reviewed"}</button>
+          )}
+        </div>
       </div>
-      <div className="dashboard-alert-time ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.4)] ml-auto whitespace-nowrap self-center">
-        {time}
-      </div>
-    </div>
+    </article>
   );
 }
