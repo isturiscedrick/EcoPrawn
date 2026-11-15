@@ -19,7 +19,7 @@ const focusRing =
 
 export function SystemLayout({ children }: SystemLayoutProps) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const { tanks, isDbConnected, lastUpdatedAt, loading, error, refreshTanks, isRefreshing } = useTanks();
+  const { tanks, refreshTanks } = useTanks();
   const activeAlertCount = deriveTankAlerts(tanks).length;
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -294,32 +294,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         }}
         className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
         <div className="w-full">
-          {isRefreshing && (
-            <div role="status" aria-live="polite" className="mb-3 flex items-center justify-center gap-2 text-xs font-medium text-[var(--ep-primary)]">
-              <Icon name="loader-circle" size={14} className="animate-spin" /> Refreshing data…
-            </div>
-          )}
-          {!loading && !isDbConnected && error && (
-            <div role="status" className="mb-4 flex flex-col gap-3 rounded-xl border border-[var(--ep-status-danger)] bg-[var(--ep-surface)] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex min-w-0 items-start gap-2.5">
-                <span aria-hidden="true" className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[var(--ep-status-danger)]" />
-                <div className="min-w-0">
-                  <p className="text-sm font-semibold text-[var(--ep-text)]">Connection interrupted</p>
-                  <p className="mt-0.5 text-xs leading-relaxed text-[var(--ep-text-muted)]">
-                    {lastUpdatedAt
-                      ? `Showing saved dashboard data. Last successful update: ${lastUpdatedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}.`
-                      : "Dashboard data could not be loaded. Check your connection and try again."}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-          {!loading && isDbConnected && lastUpdatedAt && (
-            <div className="mb-3 flex items-center justify-end gap-2 text-[11px] text-[var(--ep-text-muted)]" aria-label={`Dashboard data last updated at ${lastUpdatedAt.toLocaleTimeString()}`}>
-              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--ep-status-success)]" />
-              <span>Live data · Updated {lastUpdatedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
-            </div>
-          )}
           {children}
         </div>
       </main>
