@@ -117,6 +117,7 @@ interface TankContextValue extends DashboardData {
   removeTank: (id: string) => Promise<boolean>;
   updateTank: (id: string, patch: Partial<Tank>) => Promise<boolean>;
   refreshTanks: () => Promise<void>;
+  isRefreshing: boolean;
 }
 const TankContext = createContext<TankContextValue | null>(null);
 export function TankProvider({ children }: { children: ReactNode }) {
@@ -125,6 +126,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
   const [isDbConnected, setConnected] = useState(false);
   const [lastUpdatedAt, setLastUpdatedAt] = useState<Date | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const refreshing = useRef(false);
   const pendingMutations = useRef(0);
@@ -242,6 +244,7 @@ export function TankProvider({ children }: { children: ReactNode }) {
         loading,
         error,
         refreshTanks: () => refreshTanks(true),
+        isRefreshing,
         addTank: (input) => {
           if (!validNewTank(input)) return reject("Enter valid tank measurements before saving.");
           const tempId = `temp-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
