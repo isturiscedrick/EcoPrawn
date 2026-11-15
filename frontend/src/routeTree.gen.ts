@@ -22,6 +22,7 @@ import { Route as DashboardBioflocRouteImport } from './routes/dashboard.biofloc
 import { Route as DashboardFeedingRouteImport } from './routes/dashboard.feeding'
 import { Route as DashboardProfileRouteImport } from './routes/dashboard.profile'
 import { Route as DashboardTanksRouteImport } from './routes/dashboard.tanks'
+import { Route as DashboardSettingsConfigurationRouteImport } from './routes/dashboard.settings.configuration'
 import { Route as DashboardVisionRouteImport } from './routes/dashboard.vision'
 import { Route as DashboardWaterRouteImport } from './routes/dashboard.water'
 
@@ -90,6 +91,11 @@ const DashboardTanksRoute = DashboardTanksRouteImport.update({
   path: '/tanks',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardSettingsConfigurationRoute = DashboardSettingsConfigurationRouteImport.update({
+  id: '/settings/configuration',
+  path: '/settings/configuration',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardVisionRoute = DashboardVisionRouteImport.update({
   id: '/vision',
   path: '/vision',
@@ -114,6 +120,9 @@ export interface FileRoutesByFullPath {
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/tanks': typeof DashboardTanksRoute
+  '/dashboard/settings/configuration': typeof DashboardSettingsConfigurationRoute
+  '/dashboard/settings/configuration': typeof DashboardSettingsConfigurationRoute
+  '/dashboard/settings/configuration': typeof DashboardSettingsConfigurationRoute
   '/dashboard/vision': typeof DashboardVisionRoute
   '/dashboard/water': typeof DashboardWaterRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -167,6 +176,9 @@ export interface FileRouteTypes {
     | '/dashboard/feeding'
     | '/dashboard/profile'
     | '/dashboard/tanks'
+    | '/dashboard/settings/configuration'
+    | '/dashboard/settings/configuration'
+    | '/dashboard/settings/configuration'
     | '/dashboard/vision'
     | '/dashboard/water'
     | '/dashboard/'
@@ -299,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardProfileRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/settings/configuration': {
+      id: '/dashboard/settings/configuration'
+      path: '/settings/configuration'
+      fullPath: '/dashboard/settings/configuration'
+      preLoaderRoute: typeof DashboardSettingsConfigurationRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/tanks': {
       id: '/dashboard/tanks'
       path: '/tanks'
@@ -331,6 +350,7 @@ interface DashboardRouteChildren {
   DashboardFeedingRoute: typeof DashboardFeedingRoute
   DashboardProfileRoute: typeof DashboardProfileRoute
   DashboardTanksRoute: typeof DashboardTanksRoute
+  DashboardSettingsConfigurationRoute: typeof DashboardSettingsConfigurationRoute
   DashboardVisionRoute: typeof DashboardVisionRoute
   DashboardWaterRoute: typeof DashboardWaterRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
@@ -344,6 +364,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardFeedingRoute: DashboardFeedingRoute,
   DashboardProfileRoute: DashboardProfileRoute,
   DashboardTanksRoute: DashboardTanksRoute,
+  DashboardSettingsConfigurationRoute: DashboardSettingsConfigurationRoute,
   DashboardVisionRoute: DashboardVisionRoute,
   DashboardWaterRoute: DashboardWaterRoute,
   DashboardIndexRoute: DashboardIndexRoute,
