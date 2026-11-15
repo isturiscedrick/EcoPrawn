@@ -177,7 +177,7 @@ export function WaterQuality() {
           >
             <Panel title="Parameter Thresholds" badge={selectedTank.name}>
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-xs text-[var(--ep-text-muted)]">Set local warning limits for all tanks on this device.</p>
+                <p className="text-xs text-[var(--ep-text-muted)]">Set warning limits for all tanks.</p>
                 <button type="button" onClick={() => { setEditingThresholds(value => !value); setThresholdMessage(""); }} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]">{editingThresholds ? "Close settings" : "Customize limits"}</button>
               </div>
               {editingThresholds && (
@@ -219,7 +219,7 @@ export function WaterQuality() {
                   </div>
                 </div>
               )}
-              {!selectedTank.hasWaterReadings && <p role="status" className="mb-3 rounded-xl border border-slate-400/30 bg-slate-400/10 px-3 py-2 text-xs text-[var(--ep-text-muted)]">No sensor readings are available for this tank yet. Threshold status will appear when readings arrive.</p>}
+              {!selectedTank.hasWaterReadings && <p role="status" className="mb-3 rounded-xl border border-slate-400/30 bg-slate-400/10 px-3 py-2 text-xs text-[var(--ep-text-muted)]">No readings yet. Status appears when data arrives.</p>}
               <div className="mb-3 grid grid-cols-3 gap-2" aria-label="Parameter status summary">
                 <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3"><div className="text-[10px] text-[var(--ep-text-muted)]">In range</div><div className="mt-1 text-lg font-semibold tabular-nums text-emerald-600">{thresholds.filter(item => item.status === "ok").length}</div></div>
                 <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3"><div className="text-[10px] text-[var(--ep-text-muted)]">Watch</div><div className="mt-1 text-lg font-semibold tabular-nums text-amber-600">{thresholds.filter(item => item.status === "warn").length}</div></div>
@@ -261,7 +261,7 @@ export function WaterQuality() {
 
           <Panel title="Tank Readings" badge={`${filteredTanks.length} of ${tankCount} tanks`}>
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-              <span className="text-xs font-medium text-[var(--ep-text-muted)]">Filter readings by status</span>
+              <span className="text-xs font-medium text-[var(--ep-text-muted)]">Filter by status</span>
               <div className="dashboard-table-filters grid grid-cols-3 gap-1 rounded-full border border-[var(--ep-line)] bg-[var(--ep-bg)] p-1" role="group" aria-label="Filter tank readings by status">
                 {([{ value: "all", label: "All" }, { value: "ok", label: "Nominal" }, { value: "warn", label: "Watch" }] as const).map((option) => (
                   <button
@@ -324,7 +324,7 @@ export function WaterQuality() {
                   {filteredTanks.length === 0 && (
                     <tr>
                       <td colSpan={7} className="py-8 text-center text-sm text-[var(--ep-text-muted)]">
-                        No tanks match this status filter.
+                        No tanks match this filter.
                       </td>
                     </tr>
                   )}
@@ -337,7 +337,7 @@ export function WaterQuality() {
       ) : (
         <Panel title="Tank Readings" badge="0 tanks">
           <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
-            No tanks yet — add one on the Tanks page to see water quality data.
+            No tanks yet. Add one on the Tanks page.
           </div>
         </Panel>
       )}
