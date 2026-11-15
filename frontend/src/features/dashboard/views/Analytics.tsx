@@ -4,11 +4,12 @@ import { DashboardViewSkeleton } from "@/features/dashboard/components/Dashboard
 import { DonutChart, FeedingProgressChart, GrowthHistoryChart, WaterHistoryChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
+import { DashboardDataStatus } from "@/features/dashboard/components/DashboardDataStatus";
 
 const TANK_COLORS = ["#D85A35", "#167C80", "#6D67B2", "#C18A27", "#39865B", "#B34E83"];
 
 export function Analytics() {
-  const { tanks, growthHistory = [], waterHistory = [], loading, lastUpdatedAt } = useTanks();
+  const { tanks, growthHistory = [], waterHistory = [], loading } = useTanks();
 
   const metrics = useMemo(() => ({
     totalBiomass: tanks.reduce((sum, tank) => sum + tank.biomass, 0),
@@ -77,11 +78,9 @@ export function Analytics() {
         >
           <span aria-hidden="true">↓</span> Export CSV
         </button>
-        <div className="inline-flex items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-xs text-[var(--ep-text-muted)]">
-          <span className="h-2 w-2 rounded-full bg-[var(--ep-status-success)]" />
-          {lastUpdatedAt ? `Data updated ${lastUpdatedAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}` : "Awaiting data"}
-        </div>
       </div>
+
+      <DashboardDataStatus />
 
       <section aria-label="Facility analytics summary" className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <KpiCard label="Total biomass" value={metrics.totalBiomass.toFixed(1)} unit="kg" delta="Combined across all tanks" deltaTone="ok" />
