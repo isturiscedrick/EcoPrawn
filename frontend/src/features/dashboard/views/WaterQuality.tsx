@@ -110,7 +110,7 @@ export function WaterQuality() {
           <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
             Sensor Network
           </div>
-          <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
+          <h1 className="ep-font-display text-[24px] font-semibold text-[var(--water-deep)] leading-tight sm:text-[28px]">
             Water Quality Monitoring
           </h1>
           <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
@@ -123,7 +123,7 @@ export function WaterQuality() {
             ...waterHistory.map(point => [tanks.find(tank => tank.id === point.tankId)?.name ?? point.tankId, "Historical", point.recordedAt, point.dissolvedOxygen, point.ph, point.temperature, point.salinity, point.waterLevel]),
           ];
           downloadCsv(`ecoprawn-water-quality-${new Date().toISOString().slice(0, 10)}.csv`, ["Tank", "Record type", "Recorded at", "Dissolved oxygen (mg/L)", "pH", "Temperature (°C)", "Salinity (ppt)", "Water level (%)"], rows);
-        }} className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">
+        }} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] sm:w-auto">
           <span aria-hidden="true">↓</span> Export readings
         </button>
         <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
@@ -270,15 +270,15 @@ export function WaterQuality() {
                     aria-pressed={statusFilter === option.value}
                     onClick={() => setStatusFilter(option.value)}
                     className={statusFilter === option.value
-                      ? "min-h-10 rounded-full bg-[var(--ep-accent)] px-3 text-xs font-semibold text-white"
-                      : "min-h-10 rounded-full px-3 text-xs font-semibold text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}
+                      ? "min-h-11 touch-manipulation rounded-full bg-[var(--ep-accent)] px-3 text-xs font-semibold text-white"
+                      : "min-h-11 touch-manipulation rounded-full px-3 text-xs font-semibold text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}
                   >
                     {option.label}
                   </button>
                 ))}
               </div>
             </div>
-            <div className="dashboard-table-scroll" role="region" aria-label="Tank readings table" tabIndex={0}>
+            <div className="dashboard-table-scroll max-w-full overflow-x-auto overscroll-x-contain" role="region" aria-label="Tank readings table" tabIndex={0}>
               <ScrollFadeContainer>
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
