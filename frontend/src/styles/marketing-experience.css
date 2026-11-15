@@ -1366,11 +1366,11 @@ html:not(.dark) .ep-business-landing .ep-hero-monitor-panel {
 html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-white {
   color: #0f172a !important;
 }
-html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-blue-200\/75,
-html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-blue-100\/75 {
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-200\/75,
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-100\/75 {
   color: #526783 !important;
 }
-html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-blue-100\/65 {
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-100\/65 {
   color: #64748b !important;
 }
 html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .border-white\/10 {
@@ -1382,13 +1382,13 @@ html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-white\/\[\.055\]
 html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-white\/10 {
   background-color: rgba(148,163,184,.2) !important;
 }
-html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-blue-300\/10 {
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-teal-300\/10 {
   background-color: rgba(219,234,254,.8) !important;
 }
-html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .border-blue-300\/20 {
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .border-teal-300\/20 {
   border-color: rgba(69,197,179,.4) !important;
 }
-html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-blue-100 {
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-100 {
   color: #087e8b !important;
 }
 html:not(.dark) .ep-business-landing .ep-hero-sensor-tile {
@@ -1543,14 +1543,14 @@ html.dark .ep-business-landing .ep-aquatic-scene {
 .ep-page-illustration { width: min(100%, 18rem); flex: 0 0 auto; color: var(--ep-accent); }
 .ep-page-illustration svg { display: block; width: 100%; height: auto; overflow: visible; }
 .ep-illustration-orbit { stroke: color-mix(in srgb,var(--ep-accent) 32%,transparent); stroke-width: 1.25; stroke-dasharray: 5 9; transform-origin: 260px 140px; animation: ep-illustration-orbit 28s linear infinite; }
-.ep-illustration-orbit--inner { stroke: color-mix(in srgb,#38bdf8 36%,transparent); stroke-dasharray: 2 8; animation-direction: reverse; animation-duration: 22s; }
+.ep-illustration-orbit--inner { stroke: color-mix(in srgb,#45c5b3 36%,transparent); stroke-dasharray: 2 8; animation-direction: reverse; animation-duration: 22s; }
 .ep-illustration-wave,.ep-illustration-connector,.ep-illustration-envelope,.ep-illustration-detail,.ep-illustration-sensor { stroke: var(--ep-accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 .ep-illustration-wave { opacity: .7; stroke-width: 4; stroke-dasharray: 12 10; animation: ep-illustration-dash 8s linear infinite; }
 .ep-illustration-creature,.ep-illustration-core,.ep-illustration-card { fill: color-mix(in srgb,var(--ep-accent) 13%,var(--ep-surface)); stroke: var(--ep-accent); stroke-width: 2.5; }
 .ep-illustration-eye { fill: var(--ep-accent); }
 .ep-illustration-node { fill: var(--ep-surface); stroke: var(--ep-accent); stroke-width: 2.5; }
-.ep-illustration-node--alt { fill: color-mix(in srgb,#38bdf8 18%,var(--ep-surface)); }
-.ep-illustration-bubbles { fill: #38bdf8; opacity: .72; animation: ep-illustration-bubbles 4.5s ease-in-out infinite alternate; }
+.ep-illustration-node--alt { fill: color-mix(in srgb,#45c5b3 18%,var(--ep-surface)); }
+.ep-illustration-bubbles { fill: #45c5b3; opacity: .72; animation: ep-illustration-bubbles 4.5s ease-in-out infinite alternate; }
 .ep-illustration-art { transform-origin: center; animation: ep-illustration-float 5.5s ease-in-out infinite; }
 .ep-page-illustration--landing { width: min(38vw, 15rem); }
 .ep-about-workflow-illustration { margin: -1.25rem auto 1.5rem; width: min(100%, 25rem); }
@@ -1628,7 +1628,7 @@ html.dark .ep-business-landing .ep-aquatic-scene {
   bottom: -.12em;
   height: .075em;
   border-radius: 999px;
-  background: linear-gradient(90deg, transparent, currentColor 18%, #38bdf8 78%, transparent);
+  background: linear-gradient(90deg, transparent, currentColor 18%, #45c5b3 78%, transparent);
   opacity: .72;
   transform-origin: left center;
   animation: ep-landing-underline 1.1s cubic-bezier(.2,.8,.2,1) both;
@@ -1734,7 +1734,7 @@ html.dark .ep-business-landing .ep-aquatic-scene {
   position: absolute;
   inset: 0 auto 0 0;
   width: 3px;
-  background: linear-gradient(180deg, var(--ep-accent), #38bdf8);
+  background: linear-gradient(180deg, var(--ep-accent), #45c5b3);
   opacity: .75;
 }
 .ep-business-landing #readings [data-reading] {
@@ -1767,7 +1767,7 @@ html.dark .ep-business-landing .ep-aquatic-scene {
   position: absolute;
   inset: 0 0 auto;
   height: 3px;
-  background: linear-gradient(90deg, var(--ep-accent), #38bdf8, transparent 88%);
+  background: linear-gradient(90deg, var(--ep-accent), #45c5b3, transparent 88%);
   opacity: .75;
 }
 .ep-business-landing [data-business-card] > span:first-child {
@@ -1817,7 +1817,7 @@ html.dark .ep-business-landing .ep-stats-panel > div {
 html.dark .ep-business-landing .ep-platform-ribbon-number {
   background: linear-gradient(145deg, rgba(37,99,235,.22), rgba(15,23,42,.82));
   border-color: rgba(69,197,179,.32);
-  color: #bfdbfe;
+  color: #70d7c8;
 }
 html.dark .ep-business-landing .ep-illustration-strip {
   background-image:
