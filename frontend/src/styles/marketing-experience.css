@@ -277,7 +277,7 @@ html.dark .ep-contact-page [data-contact-details] {
   border-radius: 1.75rem;
   background:
     radial-gradient(ellipse at 90% 10%,rgba(69,197,179,.2),transparent 36%),
-    linear-gradient(120deg,#111827,#172b49 70%,#123d70);
+    linear-gradient(120deg,#073f46 0%,#087e8b 58%,#0b6871 100%);
   box-shadow: 0 28px 70px -46px rgba(15,23,42,.55);
 }
 :is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band]::after {
@@ -287,9 +287,9 @@ html.dark .ep-contact-page [data-contact-details] {
   bottom: -8rem;
   width: 22rem;
   aspect-ratio: 1;
-  border: 1px solid rgba(191,219,254,.22);
+  border: 1px solid rgba(112,215,200,.28);
   border-radius: 50%;
-  box-shadow: 0 0 0 26px rgba(191,219,254,.035),0 0 0 58px rgba(191,219,254,.025);
+  box-shadow: 0 0 0 26px rgba(112,215,200,.06),0 0 0 58px rgba(112,215,200,.035);
   pointer-events: none;
 }
 :is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] > * {
@@ -361,8 +361,8 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   height: clamp(12rem, 22vw, 22rem);
   top: -35%;
   right: -8%;
-  border: 1px solid rgba(37,99,235,.12);
-  box-shadow: 0 0 0 24px rgba(37,99,235,.025), 0 0 0 54px rgba(14,165,233,.025);
+  border: 1px solid rgba(8,126,139,.18);
+  box-shadow: 0 0 0 24px rgba(8,126,139,.035), 0 0 0 54px rgba(69,197,179,.035);
   transform: rotate(-16deg);
 }
 :is(.ep-about-page,.ep-contact-page) [data-page-hero]::after {
@@ -370,15 +370,15 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   height: clamp(9rem, 18vw, 18rem);
   left: -10%;
   bottom: -48%;
-  background: radial-gradient(ellipse, rgba(14,165,233,.10), transparent 68%);
+  background: radial-gradient(ellipse, rgba(69,197,179,.12), transparent 68%);
   filter: blur(10px);
 }
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero]::before {
   border-color: rgba(69,197,179,.2);
-  box-shadow: 0 0 0 24px rgba(59,130,246,.035), 0 0 0 54px rgba(14,165,233,.03);
+  box-shadow: 0 0 0 24px rgba(69,197,179,.045), 0 0 0 54px rgba(14,165,233,.03);
 }
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero]::after {
-  background: radial-gradient(ellipse, rgba(37,99,235,.2), transparent 68%);
+  background: radial-gradient(ellipse, rgba(69,197,179,.18), transparent 68%);
 }
 :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
   position: relative;
