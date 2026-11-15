@@ -145,7 +145,7 @@ export function LandingPage() {
             className="pointer-events-none absolute inset-0 -z-10 ep-hero-atmosphere"
           />
           {/* Centered editorial hero with a full-width farm landscape image. */}
-          <div className="ep-field-hero mx-auto grid w-full max-w-[1440px] gap-10 px-5 pt-16 sm:px-8 sm:pt-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(380px,.95fr)] lg:items-center lg:gap-12 lg:px-10 lg:pt-20">
+          <div className="ep-field-hero mx-auto grid w-full max-w-[1500px] gap-10 px-5 pt-14 pb-16 sm:px-8 sm:pt-16 sm:pb-20 lg:grid-cols-[minmax(0,.78fr)_minmax(0,1.22fr)] lg:items-center lg:gap-12 lg:px-10 lg:pt-16 lg:pb-20">
             <div data-hero="text" className="ep-field-hero-copy mx-auto flex max-w-[920px] flex-col items-center text-center lg:mx-0 lg:items-start lg:text-left">
               <p className="mb-5 inline-flex min-h-9 items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.17em] text-[var(--ep-accent)] shadow-sm sm:text-[11px]">
                 <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[var(--ep-accent)]" />
@@ -156,14 +156,14 @@ export function LandingPage() {
                 aria-label="Smarter shrimp farming, always in range."
                 className="ep-font-display max-w-[900px] text-[clamp(40px,6.1vw,76px)] font-semibold leading-[1.02] tracking-[-0.065em]"
               >
-                <span className="block ep-hero-headline-primary">Smarter Shrimp Farming</span>
-                <span className="block ep-hero-headline-secondary">Always in Range</span>
+                <span className="block ep-hero-headline-primary">Run your farm</span>
+                <span className="block ep-hero-headline-secondary">with clarity.</span>
               </h1>
               <p
                 data-hero="lead"
                 className="mx-auto mt-5 max-w-[620px] text-sm leading-[1.75] text-[var(--ep-text-muted)] sm:mt-6 sm:text-base"
               >
-                Bringing water-quality monitoring, shrimp growth insights, and responsive farm operations together in one connected system.
+                One connected workspace for water quality, shrimp growth, and daily farm operations. See what is happening across your tanks and make informed decisions with confidence.
               </p>
               <div data-hero="cta" className="mt-6 flex justify-center sm:mt-7">
                 <AuthLink
@@ -183,47 +183,100 @@ export function LandingPage() {
             </div>
 
             <aside
-              aria-label="Illustrative water monitoring panel"
+              aria-label="Interactive EcoPrawn platform preview"
               data-hero="monitor-panel"
-              className="ep-hero-monitor-panel mx-auto w-full max-w-[560px] lg:mx-0 lg:max-w-none"
+              className="ep-hero-monitor-panel mx-auto w-full max-w-[720px] lg:mx-0 lg:max-w-none"
             >
               <div className="ep-hero-monitor-glow" aria-hidden="true" />
               <div className="relative z-10">
-                <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 pb-4">
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[.18em] text-teal-100/75">Water intelligence</p>
-                    <h2 className="mt-1 text-lg font-semibold tracking-tight text-white sm:text-xl">Tank 1 · Sensor overview</h2>
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--ep-accent)] text-[var(--ep-on-accent)]">
+                      <Icon name="activity" size={20} />
+                    </span>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[.18em] text-teal-100/75">EcoPrawn platform</p>
+                      <h2 className="mt-1 text-lg font-semibold tracking-tight text-white sm:text-xl">Farm overview</h2>
+                    </div>
                   </div>
                   <span className="inline-flex items-center gap-2 rounded-full border border-teal-300/20 bg-teal-300/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.12em] text-teal-100">
                     <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.8)]" />
-                    Sample data
+                    Sample preview
                   </span>
                 </div>
 
-                <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-                  {heroReadouts.map((reading) => {
-                    const range = targetRangeFor(reading.label) ?? "Target range not set";
-                    return (
-                      <div key={reading.label} className="ep-hero-sensor-tile min-w-0 rounded-xl border border-white/10 bg-white/[.055] px-3 py-3">
-                        <div className="flex items-center gap-1.5 text-[10px] font-semibold text-teal-100/75">
-                          <span aria-hidden="true" data-hero-sensor-dot="" className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
-                          <span className="truncate">{reading.label}</span>
-                        </div>
-                        <p className="mt-2 whitespace-nowrap text-[clamp(18px,2vw,25px)] font-semibold leading-none tracking-tight text-white tabular-nums">
-                          {reading.value}<span className="ml-1 text-[10px] font-medium text-teal-100/65">{heroReadoutUnits[reading.label]}</span>
-                        </p>
-                        <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/10">
-                          <span data-hero-sensor-bar="" className="block h-full rounded-full bg-gradient-to-r from-teal-500 to-cyan-300" style={{ width: `${reading.pct}%` }} />
-                        </div>
-                        <p className="mt-2 truncate text-[9px] leading-tight text-teal-100/65" title={range}>Target {range}</p>
-                      </div>
-                    );
-                  })}
+                <div className="ep-hero-preview-tabs" role="group" aria-label="Choose a platform preview">
+                  {([
+                    { id: "water", label: "Overview" },
+                    { id: "growth", label: "Growth" },
+                    { id: "systems", label: "Farm systems" },
+                  ] as const).map((tab) => (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      className="ep-hero-preview-tab"
+                      aria-pressed={previewTab === tab.id}
+                      onClick={() => setPreviewTab(tab.id)}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
                 </div>
 
+                {previewTab === "water" ? (
+                  <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+                    {heroReadouts.map((reading) => {
+                      const range = targetRangeFor(reading.label) ?? "Target range not set";
+                      return (
+                        <div key={reading.label} className="ep-hero-sensor-tile min-w-0 rounded-xl border border-white/10 bg-white/[.055] px-3 py-3">
+                          <div className="flex items-center gap-1.5 text-[10px] font-semibold text-teal-100/75">
+                            <span aria-hidden="true" data-hero-sensor-dot="" className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+                            <span className="truncate">{reading.label}</span>
+                          </div>
+                          <p className="mt-2 whitespace-nowrap text-[clamp(18px,2vw,25px)] font-semibold leading-none tracking-tight text-white tabular-nums">
+                            {reading.value}<span className="ml-1 text-[10px] font-medium text-teal-100/65">{heroReadoutUnits[reading.label]}</span>
+                          </p>
+                          <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/10">
+                            <span data-hero-sensor-bar="" className="block h-full rounded-full bg-gradient-to-r from-teal-500 to-cyan-300" style={{ width: `${reading.pct}%` }} />
+                          </div>
+                          <p className="mt-2 truncate text-[9px] leading-tight text-teal-100/65" title={range}>Target {range}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : previewTab === "growth" ? (
+                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                    {[
+                      { icon: "camera" as const, title: "Visual sampling", detail: "Review camera observations over time." },
+                      { icon: "chart-no-axes-combined" as const, title: "Growth history", detail: "Follow recorded growth trends by tank." },
+                      { icon: "scale" as const, title: "Biomass insights", detail: "Use estimates to inform feeding decisions." },
+                    ].map((item) => (
+                      <div key={item.title} className="ep-hero-feature-tile">
+                        <span><Icon name={item.icon} size={18} /></span>
+                        <strong>{item.title}</strong>
+                        <p>{item.detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                    {[
+                      { icon: "wind" as const, title: "Aeration", detail: "Monitor connected aeration equipment." },
+                      { icon: "calendar-clock" as const, title: "Feeding", detail: "Coordinate feeding with farm observations." },
+                      { icon: "waves" as const, title: "Water care", detail: "Keep water treatment in the farm workflow." },
+                    ].map((item) => (
+                      <div key={item.title} className="ep-hero-feature-tile">
+                        <span><Icon name={item.icon} size={18} /></span>
+                        <strong>{item.title}</strong>
+                        <p>{item.detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-3 text-[10px] text-teal-100/65">
-                  <span className="inline-flex items-center gap-2"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> 5 sensor indicators</span>
-                  <span>Illustrative preview · Not live telemetry</span>
+                  <span className="inline-flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> Product interface preview</span>
+                  <span>Illustrative sample · Not live telemetry</span>
                 </div>
               </div>
             </aside>
