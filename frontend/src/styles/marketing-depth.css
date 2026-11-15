@@ -442,7 +442,7 @@ html:not(.dark) .ep-business-landing #readings .max-w-\\[40rem\\] p {
 }
 .ep-business-landing .ep-readings-section .ep-reading-card > div:first-child > span {
   color: #066874 !important;
-  border-color: #bfdbfe !important;
+  border-color: #70d7c8 !important;
   background: #eff6ff !important;
 }
 .ep-business-landing .ep-readings-section .ep-reading-card > div[aria-hidden="true"].relative {
@@ -655,7 +655,7 @@ html.dark .ep-business-landing #readings.ep-readings-section dl + div span {
 
 /* About > What's running: theme-aware card hover treatment.
    Keep the resting card on the shared surface token, then use a restrained
-   blue-tinted surface and border on hover/focus in both themes. */
+   teal-tinted surface and border on hover/focus in both themes. */
 .ep-about-page #systems article {
   transition:
     transform .28s cubic-bezier(.2,.8,.2,1),
@@ -672,7 +672,7 @@ html.dark .ep-business-landing #readings.ep-readings-section dl + div span {
   }
   html.dark .ep-about-page #systems article:hover {
     border-color: rgba(69,197,179,.62);
-    background-color: color-mix(in srgb, var(--ep-surface) 90%, #3b82f6 10%);
+    background-color: color-mix(in srgb, var(--ep-surface) 90%, #45c5b3 10%);
     box-shadow:
       inset 0 1px 0 rgba(191,219,254,.08),
       0 24px 54px -34px rgba(8,126,139,.42);
@@ -686,7 +686,7 @@ html.dark .ep-business-landing #readings.ep-readings-section dl + div span {
 }
 html.dark .ep-about-page #systems article:hover h3,
 html.dark .ep-about-page #systems article:focus-within h3 {
-  color: #bfdbfe !important;
+  color: #70d7c8 !important;
 }
 html:not(.dark) .ep-about-page #systems article:hover h3,
 html:not(.dark) .ep-about-page #systems article:focus-within h3 {
@@ -848,7 +848,7 @@ html.dark .ep-business-landing .ep-business-capabilities [data-business-card] {
 }
 html.dark .ep-business-landing .ep-business-capabilities [data-business-card] > span:first-child {
   background: color-mix(in srgb, var(--ep-surface) 68%, var(--ep-accent) 32%);
-  color: #bfdbfe;
+  color: #70d7c8;
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .ep-business-landing .ep-business-capabilities [data-business-card]:hover {
@@ -1312,7 +1312,7 @@ html.dark .ep-business-landing #dashboard-preview .ep-dashboard-preview-window {
 :is(.ep-landing,.ep-about-page,.ep-contact-page) :is(
   a, button, input, select, textarea, summary, [role="button"], [role="switch"]
 ):focus-visible {
-  outline: 3px solid var(--ep-accent, #2563eb);
+  outline: 3px solid var(--ep-accent, #087e8b);
   outline-offset: 3px;
   scroll-margin-block: 6rem;
 }
@@ -1694,7 +1694,7 @@ html.dark .ep-about-page .ep-about-mission-panel {
   width: clamp(5rem, 7vw, 6.5rem);
   height: clamp(5rem, 7vw, 6.5rem);
   border-radius: 2rem;
-  background: linear-gradient(145deg, #087e8b, #0ea5e9 72%, #67e8f9);
+  background: linear-gradient(145deg, #087e8b, #45c5b3 72%, #70d7c8);
   box-shadow: 0 22px 58px -20px rgba(14,165,233,.65), inset 0 1px 0 rgba(255,255,255,.35);
 }
 .ep-about-page .ep-about-journey {
@@ -1772,7 +1772,7 @@ html.dark .ep-contact-page .ep-contact-intro-panel {
 .ep-contact-page .ep-contact-signal-core {
   width: 1.2rem;
   height: 1.2rem;
-  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  background: linear-gradient(135deg, #087e8b, #45c5b3);
   box-shadow: 0 0 0 14px rgba(14,165,233,.12), 0 0 42px rgba(37,99,235,.5);
 }
 .ep-contact-page [data-contact-details] {
@@ -1872,7 +1872,7 @@ html.dark .ep-contact-page [data-contact-form] > form {
   color: #fff;
   background:
     radial-gradient(circle at 78% 14%, rgba(103,232,249,.5), transparent 34%),
-    linear-gradient(145deg, #087e8b 5%, #0284c7 65%, #06b6d4);
+    linear-gradient(145deg, #087e8b 5%, #066874 65%, #45c5b3);
   box-shadow: 0 24px 58px -18px rgba(8,126,139,.68), inset 0 1px 0 rgba(255,255,255,.48), inset 0 -12px 24px rgba(8,47,73,.16);
 }
 .ep-about-page .ep-about-orbit-core svg:first-child {
@@ -1891,7 +1891,7 @@ html.dark .ep-contact-page [data-contact-form] > form {
   padding: .7rem .9rem;
   border: 1px solid rgba(147,197,253,.52);
   border-radius: 1rem;
-  color: #1e3a8a;
+  color: #066874;
   background: linear-gradient(145deg, rgba(255,255,255,.97), rgba(239,246,255,.94));
   box-shadow: 0 14px 34px -22px rgba(30,64,175,.4), inset 0 1px 0 #fff;
   letter-spacing: 0;
@@ -1899,7 +1899,7 @@ html.dark .ep-contact-page [data-contact-form] > form {
 }
 .ep-about-page .ep-about-orbit-tag > svg {
   flex: 0 0 auto;
-  color: #2563eb;
+  color: #087e8b;
 }
 .ep-about-page .ep-about-orbit-tag > span {
   display: flex;
@@ -1944,7 +1944,7 @@ html.dark .ep-contact-page [data-contact-form] > form {
   height: .72rem;
   border: 2px solid rgba(255,255,255,.95);
   border-radius: 50%;
-  background: #38bdf8;
+  background: #45c5b3;
   box-shadow: 0 0 0 4px rgba(56,189,248,.16), 0 0 18px rgba(14,165,233,.65);
 }
 .ep-about-page .ep-about-orbit-node-one { top: 19%; left: 14%; }
