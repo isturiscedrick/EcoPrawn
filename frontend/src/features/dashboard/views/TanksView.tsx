@@ -57,7 +57,7 @@ export function TanksView() {
           <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Tanks</h1>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Add, view, and maintain your facility tanks and their production details.</p>
         </div>
-        <button type="button" onClick={() => setAdding(true)} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[var(--ep-primary)] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2">
+        <button type="button" onClick={() => setAdding(true)} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[var(--ep-primary)] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 sm:w-auto">
           <Icon name="plus" size={17} /> Add tank
         </button>
       </header>
@@ -91,11 +91,11 @@ export function TanksView() {
             <label className="relative block min-w-0 sm:w-56">
               <span className="sr-only">Search tanks by name or PL batch</span>
               <Icon name="search" size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--ep-text-muted)]" />
-              <input type="search" value={searchTerm} onChange={event => setSearchTerm(event.target.value)} placeholder="Search tanks or PL batch" className="min-h-10 w-full rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] py-2 pl-9 pr-3 text-xs text-[var(--ep-text)] outline-none transition placeholder:text-[var(--ep-text-muted)] focus:border-[var(--ep-primary)] focus:ring-2 focus:ring-[var(--ep-primary)]/15" />
+              <input type="search" value={searchTerm} onChange={event => setSearchTerm(event.target.value)} placeholder="Search tanks or PL batch" className="min-h-11 w-full touch-manipulation rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] py-2 pl-9 pr-3 text-sm text-[var(--ep-text)] outline-none transition placeholder:text-[var(--ep-text-muted)] focus:border-[var(--ep-primary)] focus:ring-2 focus:ring-[var(--ep-primary)]/15" />
             </label>
             <label className="block sm:w-40">
               <span className="sr-only">Filter tanks by health status</span>
-              <select value={statusFilter} onChange={event => setStatusFilter(event.target.value as "all" | "healthy" | "attention")} className="min-h-10 w-full rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-xs font-medium text-[var(--ep-text)] outline-none transition focus:border-[var(--ep-primary)] focus:ring-2 focus:ring-[var(--ep-primary)]/15">
+              <select value={statusFilter} onChange={event => setStatusFilter(event.target.value as "all" | "healthy" | "attention")} className="min-h-11 w-full touch-manipulation rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-sm font-medium text-[var(--ep-text)] outline-none transition focus:border-[var(--ep-primary)] focus:ring-2 focus:ring-[var(--ep-primary)]/15">
                 <option value="all">All statuses</option>
                 <option value="healthy">Healthy</option>
                 <option value="attention">Needs attention</option>
@@ -166,13 +166,13 @@ export function TanksView() {
                     </section>
                   </div>
                 )}
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-2 border-t border-[var(--ep-line)] pt-4">
+                <div className="mt-5 flex flex-col items-stretch justify-between gap-2 border-t border-[var(--ep-line)] pt-4 sm:flex-row sm:items-center">
                   <button type="button" aria-expanded={expandedTankId === tank.id} aria-controls={`tank-details-${tank.id}`} onClick={() => setExpandedTankId(current => current === tank.id ? null : tank.id)} className="inline-flex min-h-9 items-center gap-1.5 rounded-lg px-2 text-xs font-semibold text-[var(--ep-primary)] transition hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">
                     {expandedTankId === tank.id ? "Hide details" : "View details"} <Icon name={expandedTankId === tank.id ? "chevron-up" : "chevron-down"} size={14} />
                   </button>
-                  <div className="flex justify-end gap-2">
-                  <button type="button" onClick={() => setEditingTank(tank)} className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-text)] transition hover:bg-[var(--ep-tint)]"><Icon name="pencil" size={14} /> Edit</button>
-                  <button type="button" onClick={() => setDeletingTank(tank)} className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-red-500/25 px-3 text-xs font-semibold text-red-600 transition hover:bg-red-500/10"><Icon name="trash-2" size={14} /> Delete</button>
+                  <div className="grid grid-cols-2 gap-2 sm:flex sm:justify-end">
+                  <button type="button" onClick={() => setEditingTank(tank)} className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-text)] transition hover:bg-[var(--ep-tint)]"><Icon name="pencil" size={14} /> Edit</button>
+                  <button type="button" onClick={() => setDeletingTank(tank)} className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-red-500/25 px-3 text-xs font-semibold text-red-600 transition hover:bg-red-500/10"><Icon name="trash-2" size={14} /> Delete</button>
                   </div>
                 </div>
               </article>
