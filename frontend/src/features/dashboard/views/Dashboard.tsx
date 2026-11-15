@@ -72,19 +72,19 @@ export function Dashboard() {
 
   return (
     <>
-      <div className="dashboard-page-header mb-7 flex flex-wrap items-end justify-between gap-4 border-b border-[var(--ep-line)] pb-6">
-        <div>
-          <div className="ep-font-mono mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
+      <header className="dashboard-page-header mb-7 block w-full border-b border-[var(--ep-line)] pb-6">
+        <div className="block w-full min-w-0">
+          <div className="ep-font-mono mb-2 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
             Facility overview
           </div>
-          <h1 className="ep-font-display text-[26px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)] sm:text-[30px]">
+          <h1 className="ep-font-display block w-full text-[26px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)] sm:text-[30px]">
             Dashboard
           </h1>
-          <p className="mt-2 text-sm text-[var(--ep-text-muted)]">
+          <p className="mt-2 block w-full text-sm text-[var(--ep-text-muted)]">
             Your facility at a glance. Monitor tank health and jump into the operations that need you.
           </p>
         </div>
-      </div>
+      </header>
 
       <DashboardDataStatus />
 
