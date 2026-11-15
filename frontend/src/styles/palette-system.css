@@ -242,3 +242,41 @@ html.dark .dashboard-shell .dashboard-nav-active-dot { background: #45c5b3 !impo
 }
 .dashboard-shell .dashboard-panel-icon { color: var(--ep-accent); background: var(--ep-accent-tint); }
 .dashboard-shell :is(button,a):focus-visible { outline-color: var(--ep-accent) !important; }
+
+
+/* Water Quality: make tank selection, threshold controls and readings easier to scan. */
+.dashboard-water-quality-page .dashboard-page-header,
+.dashboard-alerts-page .dashboard-page-header { border-color: var(--ep-line) !important; }
+.dashboard-water-quality-page [role="tablist"] { scrollbar-width: thin; scrollbar-color: var(--ep-accent-tint) transparent; }
+.dashboard-water-quality-page [role="tab"] {
+  min-height: 42px; border-radius: 12px !important; border-color: var(--ep-line) !important;
+  background: var(--ep-surface) !important; color: var(--ep-text-muted) !important;
+}
+.dashboard-water-quality-page [role="tab"][aria-selected="true"] {
+  border-color: var(--ep-accent) !important; background: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important; box-shadow: 0 5px 14px -10px var(--ep-accent);
+}
+.dashboard-water-quality-page .dashboard-sensor-gauge,
+.dashboard-water-quality-page .dashboard-hover { border-color: var(--ep-line); background: var(--ep-surface); }
+.dashboard-water-quality-page table thead tr { color: var(--ep-text-muted) !important; border-color: var(--ep-line) !important; }
+.dashboard-water-quality-page table tbody tr { transition: background-color .16s ease; }
+.dashboard-water-quality-page table tbody tr:hover { background: var(--ep-accent-tint-soft); }
+.dashboard-water-quality-page table td { color: var(--ep-text); border-color: var(--ep-line); }
+.dashboard-water-quality-page input[type="number"] { min-height: 42px; }
+.dashboard-water-quality-page button, .dashboard-alerts-page button,
+.dashboard-water-quality-page a, .dashboard-alerts-page a { -webkit-tap-highlight-color: transparent; }
+.dashboard-water-quality-page :is(button,a):focus-visible,
+.dashboard-alerts-page :is(button,a,input):focus-visible {
+  outline: 2px solid var(--ep-accent) !important; outline-offset: 2px;
+}
+.dashboard-alerts-page .dashboard-kpi { border-top: 3px solid var(--ep-accent); }
+.dashboard-alerts-page section[aria-labelledby="active-alerts-heading"] { border-left: 3px solid var(--ep-status-danger); padding-left: 14px; }
+.dashboard-alerts-page section[aria-labelledby="warning-events-heading"] { border-left: 3px solid var(--ep-status-warning); padding-left: 14px; }
+.dashboard-alerts-page section[aria-labelledby="info-events-heading"] { border-left: 3px solid var(--ep-accent); padding-left: 14px; }
+.dashboard-alerts-page label:focus-within { border-color: var(--ep-accent); box-shadow: 0 0 0 3px var(--ep-accent-tint); }
+@media (max-width: 640px) {
+  .dashboard-water-quality-page .dashboard-panel, .dashboard-alerts-page .dashboard-panel { padding: 16px !important; }
+  .dashboard-water-quality-page .dashboard-page-header, .dashboard-alerts-page .dashboard-page-header {
+    margin-bottom: 18px !important; padding-bottom: 18px !important;
+  }
+}
