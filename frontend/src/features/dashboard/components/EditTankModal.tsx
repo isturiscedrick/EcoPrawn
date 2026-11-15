@@ -82,7 +82,7 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-5" role="presentation">
       <button type="button" aria-label="Close edit tank dialog" onClick={onClose} disabled={saving} className="absolute inset-0 bg-black/55 backdrop-blur-sm" />
-      <section role="dialog" aria-modal="true" aria-labelledby={`${uid}-title`} className="relative z-10 max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 shadow-2xl sm:p-7">
+      <section role="dialog" aria-modal="true" aria-labelledby={`${uid}-title`} className="relative z-10 max-h-[90dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 shadow-2xl sm:p-8">
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--ep-accent)]">Tank configuration</p>
