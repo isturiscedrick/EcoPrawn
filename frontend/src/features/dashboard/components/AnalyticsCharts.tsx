@@ -17,14 +17,14 @@ export function DonutChart({ items, unit, emptyLabel = "No data available" }: {
     return `${item.color} ${start}% ${cursor}%`;
   });
   if (!total) return <div className="flex min-h-48 items-center justify-center rounded-xl border border-dashed border-[var(--ep-line)] text-sm text-[var(--ep-text-muted)]">{emptyLabel}</div>;
-  return <div className="flex flex-wrap items-center justify-center gap-7 py-2">
-    <div className="relative h-44 w-44 shrink-0 rounded-full" role="img" aria-label={items.map(item => `${item.label}: ${number(item.value)} ${unit}`).join(", ")} style={{ background: `conic-gradient(${segments.join(", ")})` }}>
+  return <div className="flex flex-col items-center justify-center gap-5 py-2 sm:flex-row sm:gap-7">
+    <div className="relative h-40 w-40 shrink-0 rounded-full sm:h-44 sm:w-44" role="img" aria-label={items.map(item => `${item.label}: ${number(item.value)} ${unit}`).join(", ")} style={{ background: `conic-gradient(${segments.join(", ")})` }}>
       <div className="absolute inset-[18px] flex flex-col items-center justify-center rounded-full bg-[var(--ep-surface)]">
         <strong className="ep-font-display text-2xl text-[var(--ep-text)]">{number(total, 0)}</strong>
         <span className="text-xs text-[var(--ep-text-muted)]">{unit} total</span>
       </div>
     </div>
-    <div className="min-w-[150px] flex-1 space-y-3">
+    <div className="w-full min-w-0 flex-1 space-y-3 sm:min-w-[150px]">
       {items.map(item => <div key={item.label} className="flex items-center justify-between gap-3 text-sm">
         <span className="flex min-w-0 items-center gap-2 text-[var(--ep-text-muted)]"><i className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: item.color }} /><span className="truncate">{item.label}</span></span>
         <strong className="ep-font-mono shrink-0 text-xs text-[var(--ep-text)]">{number(item.value)} <span className="font-normal text-[var(--ep-text-muted)]">{unit}</span></strong>
@@ -39,9 +39,9 @@ const RANGE_OPTIONS: { value: Range; label: string }[] = [
   { value: "90", label: "90 days" }, { value: "all", label: "All history" },
 ];
 function RangeControl({ value, onChange }: { value: Range; onChange: (value: Range) => void }) {
-  return <div className="flex flex-wrap gap-1 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-1" role="group" aria-label="Chart date range">
+  return <div className="-mx-1 overflow-x-auto overscroll-x-contain px-1 pb-1" role="group" aria-label="Chart date range"><div className="flex w-max min-w-full flex-nowrap gap-1 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-1">
     {RANGE_OPTIONS.map(option => <button key={option.value} type="button" aria-pressed={value === option.value} onClick={() => onChange(option.value)}
-      className={`min-h-9 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)] ${value === option.value ? "bg-[var(--ep-accent)] text-white shadow-sm" : "text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}`}>{option.label}</button>)}
+      className={`min-h-11 shrink-0 whitespace-nowrap rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)] ${value === option.value ? "bg-[var(--ep-accent)] text-white shadow-sm" : "text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}`}>{option.label}</button>)}
   </div>;
 }
 function sinceRange<T extends { recordedAt: string }>(items: T[], range: Range) {
@@ -77,8 +77,8 @@ export function GrowthHistoryChart({ data }: { data: GrowthHistoryPoint[] }) {
   return <div className="space-y-4">
     <div className="flex min-w-0 flex-col gap-3">
       <div className="flex min-w-0 flex-wrap items-center gap-2">
-        <select aria-label="Growth metric" value={metric} onChange={e => {setMetric(e.target.value as typeof metric);setHovered(null);}} className="min-h-10 min-w-0 max-w-full flex-1 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)] sm:flex-none"><option value="bodyLength">Body length (cm)</option><option value="weight">Average weight (g)</option><option value="population">Population</option></select>
-        <select aria-label="Filter growth by tank" value={tankId} onChange={e => {setTankId(e.target.value);setHovered(null);}} className="min-h-10 min-w-0 max-w-full flex-1 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)] sm:max-w-44 sm:flex-none"><option value="all">All tanks</option>{tanks.map(([id,name]) => <option key={id} value={id}>{name}</option>)}</select>
+        <select aria-label="Growth metric" value={metric} onChange={e => {setMetric(e.target.value as typeof metric);setHovered(null);}} className="min-h-11 min-w-0 max-w-full flex-1 touch-manipulation rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-sm font-semibold text-[var(--ep-text)] sm:flex-none"><option value="bodyLength">Body length (cm)</option><option value="weight">Average weight (g)</option><option value="population">Population</option></select>
+        <select aria-label="Filter growth by tank" value={tankId} onChange={e => {setTankId(e.target.value);setHovered(null);}} className="min-h-11 min-w-0 max-w-full flex-1 touch-manipulation rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-sm font-semibold text-[var(--ep-text)] sm:max-w-44 sm:flex-none"><option value="all">All tanks</option>{tanks.map(([id,name]) => <option key={id} value={id}>{name}</option>)}</select>
       </div>
       <RangeControl value={range} onChange={value => {setRange(value);setHovered(null);}} />
     </div>
@@ -92,7 +92,7 @@ export function GrowthHistoryChart({ data }: { data: GrowthHistoryPoint[] }) {
       <defs><linearGradient id="ep-growth-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--ep-accent)" stopOpacity=".28"/><stop offset="100%" stopColor="var(--ep-accent)" stopOpacity="0"/></linearGradient></defs>
       {[max, (max+min)/2, min].map((v,i) => <text key={i} x="0" y={44+i*80} fill="var(--ep-text-muted)" fontSize="11">{number(v)}</text>)}
       <polygon points={area} fill="url(#ep-growth-area)"/><polyline points={line} fill="none" stroke="var(--ep-accent)" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
-      {coords.map((p,i) => <g key={filtered[i].tankId+filtered[i].recordedAt} onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} onFocus={() => setHovered(i)}><circle cx={p.x} cy={p.y} r="12" fill="transparent" tabIndex={0} role="button" aria-label={`${filtered[i].tankName}: ${number(value(filtered[i]))} ${unit}, ${fullDate(filtered[i].recordedAt)}`}/><circle cx={p.x} cy={p.y} r={hovered===i?7:4.5} fill="var(--ep-surface)" stroke="var(--ep-accent)" strokeWidth="3" pointerEvents="none"/></g>)}
+      {coords.map((p,i) => <g key={filtered[i].tankId+filtered[i].recordedAt} onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} onFocus={() => setHovered(i)} onClick={() => setHovered(i)}><circle cx={p.x} cy={p.y} r="12" fill="transparent" tabIndex={0} role="button" aria-label={`${filtered[i].tankName}: ${number(value(filtered[i]))} ${unit}, ${fullDate(filtered[i].recordedAt)}`}/><circle cx={p.x} cy={p.y} r={hovered===i?7:4.5} fill="var(--ep-surface)" stroke="var(--ep-accent)" strokeWidth="3" pointerEvents="none"/></g>)}
       {coords.filter((_,i)=>i===0||i===coords.length-1).map((p,i)=><text key={i} x={p.x} y="240" textAnchor={i?"end":"start"} fill="var(--ep-text-muted)" fontSize="11">{shortDate(filtered[i?filtered.length-1:0].recordedAt)}</text>)}
     </ChartFrame> : <div className="rounded-xl border border-dashed border-[var(--ep-line)] py-12 text-center text-sm text-[var(--ep-text-muted)]">Not enough scan history for this range. Record more vision scans to build a trend.</div>}
     {hovered !== null && filtered[hovered] && <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3 text-xs"><strong className="text-[var(--ep-text)]">{filtered[hovered].tankName}</strong><span className="ml-2 text-[var(--ep-text-muted)]">{fullDate(filtered[hovered].recordedAt)}</span><div className="mt-1 font-semibold text-[var(--ep-accent)]">{number(value(filtered[hovered]))} {unit}</div></div>}
@@ -135,7 +135,7 @@ export function WaterHistoryChart({ data, tanks }: { data: WaterHistoryPoint[]; 
       <div className="flex flex-wrap gap-x-4 gap-y-2">{grouped.map(g=><span key={g.tank.id} className="inline-flex items-center gap-2 text-xs text-[var(--ep-text-muted)]"><i className="h-2.5 w-2.5 rounded-full" style={{background:PALETTE[g.index%PALETTE.length]}}/>{g.tank.name}</span>)}</div>
       <ChartFrame labels={[`${config.label} readings by tank`,...filtered.map(p=>`${tanks.find(t=>t.id===p.tankId)?.name}: ${p[metric]} ${config.unit} at ${fullDate(p.recordedAt)}`)]}>
         {[max,(max+min)/2,min].map((v,i)=><text key={i} x="0" y={44+i*80} fill="var(--ep-text-muted)" fontSize="11">{number(v)}</text>)}
-        {grouped.map(g=>{const pts=g.points.map(p=>({p,x:54+((Date.parse(p.recordedAt)-Date.parse(filtered[0].recordedAt))/Math.max(1,Date.parse(filtered[filtered.length-1].recordedAt)-Date.parse(filtered[0].recordedAt)))*646,y:205-((p[metric]-min)/span)*165}));return <g key={g.tank.id}><polyline points={pts.map(v=>`${v.x},${v.y}`).join(" ")} fill="none" stroke={PALETTE[g.index%PALETTE.length]} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>{pts.map(({p,x,y})=><circle key={p.recordedAt+p.tankId} cx={x} cy={y} r={hovered===p?7:4.5} fill="var(--ep-surface)" stroke={PALETTE[g.index%PALETTE.length]} strokeWidth="2.5" tabIndex={0} role="button" aria-label={`${g.tank.name}: ${number(p[metric])} ${config.unit}, ${fullDate(p.recordedAt)}`} onMouseEnter={()=>setHovered(p)} onMouseLeave={()=>setHovered(null)} onFocus={()=>setHovered(p)}/>)}</g>})}
+        {grouped.map(g=>{const pts=g.points.map(p=>({p,x:54+((Date.parse(p.recordedAt)-Date.parse(filtered[0].recordedAt))/Math.max(1,Date.parse(filtered[filtered.length-1].recordedAt)-Date.parse(filtered[0].recordedAt)))*646,y:205-((p[metric]-min)/span)*165}));return <g key={g.tank.id}><polyline points={pts.map(v=>`${v.x},${v.y}`).join(" ")} fill="none" stroke={PALETTE[g.index%PALETTE.length]} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>{pts.map(({p,x,y})=><circle key={p.recordedAt+p.tankId} cx={x} cy={y} r={hovered===p?7:4.5} fill="var(--ep-surface)" stroke={PALETTE[g.index%PALETTE.length]} strokeWidth="2.5" tabIndex={0} role="button" aria-label={`${g.tank.name}: ${number(p[metric])} ${config.unit}, ${fullDate(p.recordedAt)}`} onMouseEnter={()=>setHovered(p)} onMouseLeave={()=>setHovered(null)} onFocus={()=>setHovered(p)} onClick={()=>setHovered(p)}/>)}</g>})}
         <text x="54" y="240" fill="var(--ep-text-muted)" fontSize="11">{shortDate(filtered[0].recordedAt)}</text><text x="700" y="240" textAnchor="end" fill="var(--ep-text-muted)" fontSize="11">{shortDate(filtered[filtered.length-1].recordedAt)}</text>
       </ChartFrame>
       {hovered&&<div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3 text-xs"><strong className="text-[var(--ep-text)]">{tanks.find(t=>t.id===hovered.tankId)?.name}</strong><span className="ml-2 text-[var(--ep-text-muted)]">{fullDate(hovered.recordedAt)}</span><div className="mt-1 font-semibold" style={{color:config.color}}>{number(hovered[metric])} {config.unit}</div></div>}
