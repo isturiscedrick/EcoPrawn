@@ -52,7 +52,7 @@ function sinceRange<T extends { recordedAt: string }>(items: T[], range: Range) 
 
 function ChartFrame({ children, labels }: { children: React.ReactNode; labels: string[] }) {
   return <div className="min-w-0">
-    <svg viewBox="0 0 720 270" className="h-[260px] w-full overflow-visible" role="img" aria-label={labels.join("; ")}>
+    <svg viewBox="0 0 720 270" className="h-[clamp(190px,38vw,260px)] w-full overflow-visible" role="img" aria-label={labels.join("; ")}>
       {[40, 95, 150, 205].map(y => <line key={y} x1="54" x2="700" y1={y} y2={y} stroke="var(--ep-line)" strokeDasharray="4 6" />)}
       {children}
     </svg>
@@ -75,14 +75,19 @@ export function GrowthHistoryChart({ data }: { data: GrowthHistoryPoint[] }) {
   const area = coords.length ? `54,205 ${line} ${coords[coords.length-1].x},205` : "";
   const latest = filtered.at(-1);
   return <div className="space-y-4">
-    <div className="flex flex-wrap items-center justify-between gap-3">
-      <div className="flex flex-wrap gap-2">
-        <select aria-label="Growth metric" value={metric} onChange={e => setMetric(e.target.value as typeof metric)} className="min-h-10 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)]"><option value="bodyLength">Body length (cm)</option><option value="weight">Average weight (g)</option><option value="population">Population</option></select>
-        <select aria-label="Filter growth by tank" value={tankId} onChange={e => setTankId(e.target.value)} className="min-h-10 max-w-44 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)]"><option value="all">All tanks</option>{tanks.map(([id,name]) => <option key={id} value={id}>{name}</option>)}</select>
+    <div className="flex min-w-0 flex-col gap-3">
+      <div className="flex min-w-0 flex-wrap items-center gap-2">
+        <select aria-label="Growth metric" value={metric} onChange={e => {setMetric(e.target.value as typeof metric);setHovered(null);}} className="min-h-10 min-w-0 max-w-full flex-1 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)] sm:flex-none"><option value="bodyLength">Body length (cm)</option><option value="weight">Average weight (g)</option><option value="population">Population</option></select>
+        <select aria-label="Filter growth by tank" value={tankId} onChange={e => {setTankId(e.target.value);setHovered(null);}} className="min-h-10 min-w-0 max-w-full flex-1 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)] sm:max-w-44 sm:flex-none"><option value="all">All tanks</option>{tanks.map(([id,name]) => <option key={id} value={id}>{name}</option>)}</select>
       </div>
-      <RangeControl value={range} onChange={setRange} />
+      <RangeControl value={range} onChange={value => {setRange(value);setHovered(null);}} />
     </div>
-    <div className="flex flex-wrap items-end justify-between gap-3"><div><div className="ep-font-display text-2xl font-semibold text-[var(--ep-text)]">{latest ? number(value(latest)) : "—"} <span className="text-sm font-medium text-[var(--ep-text-muted)]">{unit}</span></div><p className="text-xs text-[var(--ep-text-muted)]">Latest recorded {label.toLowerCase()}</p></div><span className="rounded-full bg-[var(--ep-accent-tint)] px-3 py-1.5 text-xs font-semibold text-[var(--ep-primary)]">{filtered.length} scans in range</span></div>
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="col-span-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3 sm:col-span-1"><div className="ep-font-display text-xl font-semibold text-[var(--ep-text)]">{latest ? number(value(latest)) : "—"} <span className="text-xs font-medium text-[var(--ep-text-muted)]">{unit}</span></div><p className="mt-1 text-[10px] text-[var(--ep-text-muted)]">Latest {label.toLowerCase()}</p></div>
+      <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3"><div className="ep-font-display text-lg font-semibold text-[var(--ep-text)]">{filtered.length ? number(Math.min(...filtered.map(value))) : "—"} <span className="text-xs font-medium text-[var(--ep-text-muted)]">{unit}</span></div><p className="mt-1 text-[10px] text-[var(--ep-text-muted)]">Lowest in range</p></div>
+      <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3"><div className="ep-font-display text-lg font-semibold text-[var(--ep-text)]">{filtered.length ? number(Math.max(...filtered.map(value))) : "—"} <span className="text-xs font-medium text-[var(--ep-text-muted)]">{unit}</span></div><p className="mt-1 text-[10px] text-[var(--ep-text-muted)]">Highest in range</p></div>
+      <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3"><div className="ep-font-display text-lg font-semibold text-[var(--ep-text)]">{filtered.length.toLocaleString()}</div><p className="mt-1 text-[10px] text-[var(--ep-text-muted)]">Scans in range</p></div>
+    </div>
     {filtered.length > 1 ? <ChartFrame labels={[`${label} history chart`, ...filtered.map(p => `${p.tankName}, ${fullDate(p.recordedAt)}: ${number(value(p))} ${unit}`)]}>
       <defs><linearGradient id="ep-growth-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--ep-accent)" stopOpacity=".28"/><stop offset="100%" stopColor="var(--ep-accent)" stopOpacity="0"/></linearGradient></defs>
       {[max, (max+min)/2, min].map((v,i) => <text key={i} x="0" y={44+i*80} fill="var(--ep-text-muted)" fontSize="11">{number(v)}</text>)}
@@ -114,11 +119,17 @@ export function WaterHistoryChart({ data, tanks }: { data: WaterHistoryPoint[]; 
   const values = filtered.map(p=>p[metric]);
   const min = Math.min(...values), max = Math.max(...values), span=max-min||1;
   return <div className="space-y-4">
-    <div className="flex flex-wrap items-center justify-between gap-3">
-      <div className="flex flex-wrap gap-2">
-        <select aria-label="Water quality parameter" value={metric} onChange={e=>{setMetric(e.target.value as keyof typeof WATER_METRICS);setHovered(null);}} className="min-h-10 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)]">{Object.entries(WATER_METRICS).map(([key,item])=><option key={key} value={key}>{item.label} ({item.unit})</option>)}</select>
-        <select aria-label="Filter water quality by tank" value={tankId} onChange={e=>setTankId(e.target.value)} className="min-h-10 max-w-44 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)]"><option value="all">All tanks</option>{tanks.map(t=><option key={t.id} value={t.id}>{t.name}</option>)}</select>
-      </div><RangeControl value={range} onChange={setRange}/>
+    <div className="flex min-w-0 flex-col gap-3">
+      <div className="flex min-w-0 flex-wrap gap-2">
+        <select aria-label="Water quality parameter" value={metric} onChange={e=>{setMetric(e.target.value as keyof typeof WATER_METRICS);setHovered(null);}} className="min-h-10 min-w-0 max-w-full flex-1 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)] sm:flex-none">{Object.entries(WATER_METRICS).map(([key,item])=><option key={key} value={key}>{item.label} ({item.unit})</option>)}</select>
+        <select aria-label="Filter water quality by tank" value={tankId} onChange={e=>{setTankId(e.target.value);setHovered(null);}} className="min-h-10 min-w-0 max-w-full flex-1 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-text)] sm:max-w-44 sm:flex-none"><option value="all">All tanks</option>{tanks.map(t=><option key={t.id} value={t.id}>{t.name}</option>)}</select>
+      </div>
+      <RangeControl value={range} onChange={value=>{setRange(value);setHovered(null);}}/>
+    </div>
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+      <div className="col-span-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3 sm:col-span-1"><div className="ep-font-display text-xl font-semibold text-[var(--ep-text)]">{values.length ? number(values[values.length-1]) : "—"} <span className="text-xs font-medium text-[var(--ep-text-muted)]">{config.unit}</span></div><p className="mt-1 text-[10px] text-[var(--ep-text-muted)]">Latest recorded {config.label.toLowerCase()}</p></div>
+      <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3"><div className="ep-font-display text-lg font-semibold text-[var(--ep-text)]">{values.length ? number(Math.min(...values)) : "—"} <span className="text-xs font-medium text-[var(--ep-text-muted)]">{config.unit}</span></div><p className="mt-1 text-[10px] text-[var(--ep-text-muted)]">Lowest in range</p></div>
+      <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3"><div className="ep-font-display text-lg font-semibold text-[var(--ep-text)]">{values.length ? number(Math.max(...values)) : "—"} <span className="text-xs font-medium text-[var(--ep-text-muted)]">{config.unit}</span></div><p className="mt-1 text-[10px] text-[var(--ep-text-muted)]">Highest in range</p></div>
     </div>
     {filtered.length>1 ? <>
       <div className="flex flex-wrap gap-x-4 gap-y-2">{grouped.map(g=><span key={g.tank.id} className="inline-flex items-center gap-2 text-xs text-[var(--ep-text-muted)]"><i className="h-2.5 w-2.5 rounded-full" style={{background:PALETTE[g.index%PALETTE.length]}}/>{g.tank.name}</span>)}</div>
