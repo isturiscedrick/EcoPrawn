@@ -26,7 +26,7 @@ export function TanksView() {
         <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-primary)]">Device management</div>
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Tank Configuration</h1>
+            <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Configuration</h1>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Connect your ESP32 over USB, assign it to a tank, and monitor incoming temperature and water-distance readings.</p>
           </div>
           <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold ${status === "connected" ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300" : status === "connecting" ? "border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300" : "border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)]"}`}>
