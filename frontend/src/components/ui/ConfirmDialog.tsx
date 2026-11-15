@@ -9,6 +9,7 @@ interface ConfirmDialogProps {
   tone?: "default" | "danger";
   onConfirm: () => void;
   onCancel: () => void;
+  showCancel?: boolean;
 }
 
 export function ConfirmDialog({
@@ -20,6 +21,7 @@ export function ConfirmDialog({
   tone = "default",
   onConfirm,
   onCancel,
+  showCancel = true,
 }: ConfirmDialogProps) {
   const titleId = useId();
   const descId = useId();
@@ -87,19 +89,19 @@ export function ConfirmDialog({
           {description}
         </div>
         <div className="flex gap-3">
-          <button
+          {showCancel && <button
             ref={cancelRef}
             type="button"
             onClick={onCancel}
             className="flex-1 rounded-lg border border-[var(--sand-dim)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--water-deep)] transition-colors hover:bg-[rgba(11,35,32,0.05)] dark:border-[rgba(255,255,255,0.18)] dark:text-[#f8fafc] dark:hover:bg-[rgba(255,255,255,0.08)]"
           >
             {cancelLabel}
-          </button>
+          </button>}
           <button
             ref={confirmRef}
             type="button"
             onClick={onConfirm}
-            className={`flex-1 rounded-lg px-4 py-2.5 text-[13.5px] font-semibold text-[var(--sand)] transition-colors ${confirmClass}`}
+            className={`${showCancel ? "flex-1" : "w-full"} rounded-lg px-4 py-2.5 text-[13.5px] font-semibold text-[var(--sand)] transition-colors ${confirmClass}`}
           >
             {confirmLabel}
           </button>
