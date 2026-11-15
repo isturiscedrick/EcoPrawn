@@ -1881,6 +1881,25 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
   }
 }
 
+/* Dashboard overview title: keep its eyebrow, heading, and description stacked. */
+.dashboard-shell header.dashboard-page-header,
+.dashboard-shell header.dashboard-page-header > div,
+.dashboard-shell header.dashboard-page-header > div > :is(div, h1, p) {
+  display: block !important;
+  width: 100%;
+  min-width: 0;
+  float: none;
+  clear: both;
+}
+.dashboard-shell header.dashboard-page-header h1 {
+  margin: 0;
+  text-align: left;
+}
+.dashboard-shell header.dashboard-page-header p {
+  margin-top: .5rem;
+  text-align: left;
+}
+
 /* ---------- Phase 6: shared responsive dashboard page chrome ---------- */
 .dashboard-shell .dashboard-page-header {
   min-width: 0;
