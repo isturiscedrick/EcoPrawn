@@ -294,7 +294,7 @@ export function LandingPage() {
             className="pointer-events-none absolute inset-0 -z-10"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse at 12% 8%, rgba(96,165,250,.10), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(0,0,0,.28), transparent 48%)",
+                "radial-gradient(ellipse at 12% 8%, rgba(69,197,179,.10), transparent 42%), radial-gradient(ellipse at 88% 76%, rgba(0,0,0,.28), transparent 48%)",
             }}
           />
 
