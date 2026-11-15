@@ -48,7 +48,7 @@ export function TanksView() {
   if (loading) return <DashboardViewSkeleton variant="tanks" />;
 
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-6">
+    <div className="mx-auto w-full max-w-none space-y-6">
       <header className="flex flex-col gap-4 border-b border-[var(--ep-line)] pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-primary)]">Facility management</p>
