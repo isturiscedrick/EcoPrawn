@@ -7,7 +7,7 @@ const moduleIcons = ["droplet", "gauge", "eye", "utensils", "leaf"] as const;
 function DashboardAboutPage() {
   return (
     <div className="mx-auto w-full max-w-6xl space-y-8">
-      <header className="border-b border-[var(--ep-line)] pb-6">\n        <Link to="/dashboard/settings" className="mb-3 inline-flex items-center gap-2 text-xs font-semibold text-[var(--ep-primary)] hover:underline"><Icon name="arrow-left" size={14} /> Back to Settings</Link>
+      <header className="border-b border-[var(--ep-line)] pb-6">
         <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-primary)]">Settings &amp; preferences</p>
         <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">System information</h1>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">
