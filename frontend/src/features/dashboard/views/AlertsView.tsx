@@ -56,7 +56,7 @@ export function AlertsView() {
       : "border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]");
 
   return (
-    <>
+    <div className="dashboard-alerts-page">
       {error && (
         <div className="mb-4">
           <DashboardErrorState
@@ -204,6 +204,6 @@ export function AlertsView() {
           />
         )}
       </Panel>
-    </>
+    </div>
   );
 }
