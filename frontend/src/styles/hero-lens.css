@@ -260,11 +260,11 @@ html:not(.dark) .ep-landing #top .ep-lens-rings circle {
   stroke: currentColor;
 }
 html:not(.dark) .ep-landing #top .ep-lens-arcs {
-  color: #60a5fa !important;
+  color: #45c5b3 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-shrimp .ep-logo {
-  --ep-logo-color: #60a5fa !important;
-  --ep-logo-text: #60a5fa !important;
+  --ep-logo-color: #45c5b3 !important;
+  --ep-logo-text: #45c5b3 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-speck {
   background: #EAF7F2 !important;
@@ -277,7 +277,7 @@ html:not(.dark) .ep-landing #top .ep-lens-iris {
   background: #123F49 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-ping {
-  border-color: #60a5fa !important;
+  border-color: #45c5b3 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-scan {
   background: linear-gradient(90deg, transparent, #D9EFEB, transparent) !important;
@@ -325,16 +325,16 @@ html.dark .ep-landing figure[aria-label^="A shrimp"] > div > div {
 }
 html.dark .ep-landing .ep-lens-rings,
 html.dark .ep-landing .ep-lens-ticks {
-  color: #93c5fd !important;
+  color: #70d7c8 !important;
 }
 html.dark .ep-landing .ep-lens-arcs {
-  color: #60a5fa !important;
+  color: #45c5b3 !important;
 }
 html.dark .ep-landing .ep-lens-ping {
-  border-color: #60a5fa !important;
+  border-color: #45c5b3 !important;
 }
 html.dark .ep-landing .ep-lens-scan {
-  background: linear-gradient(90deg, transparent, #93c5fd, transparent) !important;
+  background: linear-gradient(90deg, transparent, #70d7c8, transparent) !important;
   box-shadow: 0 0 16px rgba(139, 213, 166, 0.72) !important;
 }
 html.dark .ep-landing .ep-lens-iris {
@@ -346,15 +346,15 @@ html.dark .ep-landing .ep-lens-caption {
   color: #EAF4EF !important;
 }
 html.dark .ep-landing .ep-lens-readout .ep-lens-dot {
-  background-color: #93c5fd !important;
+  background-color: #70d7c8 !important;
 }
 html.dark .ep-landing .ep-lens-speck {
   background: #DDF8E7 !important;
 }
 html.dark .ep-landing .ep-lens-flash {
-  background: #60a5fa !important;
+  background: #45c5b3 !important;
 }
 html.dark .ep-landing .ep-lens-shrimp .ep-logo {
-  --ep-logo-color: #60a5fa !important;
-  --ep-logo-text: #93c5fd !important;
+  --ep-logo-color: #45c5b3 !important;
+  --ep-logo-text: #70d7c8 !important;
 }
