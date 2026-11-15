@@ -167,7 +167,7 @@ html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-shrimp {
 
 /* ---------- Site Footer: Dark Theme Surfaces & Contrast ---------- */
 html.dark footer[data-site-footer] {
-  background: linear-gradient(155deg, #172326 0%, #101718 58%, #0b1214 100%) !important;
+  background: linear-gradient(155deg, #102328 0%, #0b171b 58%, #07191e 100%) !important;
   color: #ffffff !important;
 }
 
@@ -201,7 +201,7 @@ html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .ep-hero-visual:hover .ep-hero-console {
     transform: translateY(-5px) rotateX(1deg);
-    box-shadow: 0 36px 100px -38px rgba(38, 75, 112, 0.48);
+    box-shadow: 0 36px 100px -38px rgba(8, 126, 139, 0.28);
   }
 }
 
@@ -308,7 +308,7 @@ html.dark .ep-mobile-site-drawer button[aria-label="Close"] {
 .ep-mobile-dashboard-drawer > div:nth-child(2) a { background:#fff !important; border-color:#dbe2ea !important; }
 .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:first-child { color:#111827 !important; }
 .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:last-child { color:#475569 !important; }
-.ep-mobile-dashboard-drawer > div:nth-child(2) a > div:first-child { background:#dbeafe !important; color:#066874 !important; }
+.ep-mobile-dashboard-drawer > div:nth-child(2) a > div:first-child { background:rgba(8,126,139,.14) !important; color:#066874 !important; }
 .ep-mobile-dashboard-drawer nav a > span { color:#1f2937 !important; }
 .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span { background:#087e8b !important; border-color:#087e8b !important; color:#fff !important; box-shadow:0 8px 20px -12px rgba(8,126,139,.65) !important; }
 .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span { color:#fff !important; }
