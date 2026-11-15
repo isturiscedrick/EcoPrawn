@@ -141,7 +141,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   // Keep the mobile dashboard chrome visually light; only its controls float above content.
 
   return (
-    <div className="dashboard-shell min-h-screen bg-[var(--ep-bg)]">
+    <div className="dashboard-shell min-h-screen bg-[var(--ep-bg)]" style={{ "--dashboard-sidebar-width": desktopSidebarCollapsed ? "76px" : "260px" } as React.CSSProperties}>
       <header
         id="site-header"
         className={`ep-landing sticky top-0 z-40 border-b transition-all duration-300 lg:hidden ${scrolled ? "border-[var(--ep-line)] shadow-sm backdrop-blur-xl" : "border-transparent shadow-none backdrop-blur-none"}`}
@@ -338,7 +338,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         onTouchCancel={() => {
           pullStartY.current = null;
         }}
-        className={`mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:max-w-none lg:transition-[margin,width] lg:duration-300 lg:ease-in-out motion-reduce:lg:transition-none ${desktopSidebarCollapsed ? "lg:ml-[76px] lg:w-[calc(100%-76px)]" : "lg:ml-[260px] lg:w-[calc(100%-260px)]"}`}>
+        className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:max-w-none lg:transition-[margin,width] lg:duration-300 lg:ease-in-out motion-reduce:lg:transition-none"
         <div className="w-full min-w-0">
           {isRefreshing && (
             <div
