@@ -316,12 +316,12 @@ html:not(.dark) .ep-landing #top .ep-lens-caption {
 html.dark .ep-landing figure[aria-label^="A shrimp"] > div {
   background: linear-gradient(145deg, #26383A 0%, #142629 52%, #0A171A 100%) !important;
   box-shadow: 0 42px 78px -32px rgba(0, 0, 0, 0.82),
-    inset 0 2px 0 rgba(139, 213, 166, 0.18),
-    0 0 36px rgba(139, 213, 166, 0.08) !important;
+    inset 0 2px 0 rgba(69, 197, 179, 0.18),
+    0 0 36px rgba(69, 197, 179, 0.08) !important;
 }
 html.dark .ep-landing figure[aria-label^="A shrimp"] > div > div {
   background: radial-gradient(circle at 50% 44%, #244044 0%, #142B2F 48%, #091619 100%) !important;
-  --tw-ring-color: rgba(139, 213, 166, 0.34) !important;
+  --tw-ring-color: rgba(69, 197, 179, 0.34) !important;
 }
 html.dark .ep-landing .ep-lens-rings,
 html.dark .ep-landing .ep-lens-ticks {
@@ -335,7 +335,7 @@ html.dark .ep-landing .ep-lens-ping {
 }
 html.dark .ep-landing .ep-lens-scan {
   background: linear-gradient(90deg, transparent, #70d7c8, transparent) !important;
-  box-shadow: 0 0 16px rgba(139, 213, 166, 0.72) !important;
+  box-shadow: 0 0 16px rgba(69, 197, 179, 0.72) !important;
 }
 html.dark .ep-landing .ep-lens-iris {
   background: #071417 !important;
