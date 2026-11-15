@@ -340,7 +340,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
               <span className={"flex h-7 w-9 items-center justify-center rounded-xl transition-colors " + (active ? "bg-[var(--ep-accent-tint)]" : "bg-transparent")}>
                 <Icon name={item.icon} size={19} strokeWidth={active ? 2.2 : 1.8} />
               </span>
-              <span className="max-w-full truncate">{item.label}</span>
+              <span className={item.key === "water" ? "max-w-full truncate text-[9px]" : "max-w-full truncate"}>{item.label}</span>
             </Link>
           );
         })}
