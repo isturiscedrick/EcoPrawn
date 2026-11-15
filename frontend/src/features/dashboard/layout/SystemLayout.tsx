@@ -19,7 +19,7 @@ const focusRing =
 
 export function SystemLayout({ children }: SystemLayoutProps) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const { tanks, isDbConnected, lastUpdatedAt, loading, error, refreshTanks } = useTanks();
+  const { tanks, isDbConnected, lastUpdatedAt, loading, error, refreshTanks, isRefreshing } = useTanks();
   const activeAlertCount = deriveTankAlerts(tanks).length;
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -45,6 +45,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const profileTriggerRef = useRef<HTMLButtonElement>(null);
   const profileMenuPanelRef = useRef<HTMLDivElement>(null);
+  const pullStartY = useRef<number | null>(null);
   const profileInitials = profileName.trim().split(/\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? "").join("") || "FO";
 
   useLayoutEffect(() => {
@@ -279,8 +280,25 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       )}
 
       {/* Responsive dashboard content area. */}
-      <main data-dashboard-route-content="" className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
+      <main
+        data-dashboard-route-content=""
+        onTouchStart={(event) => {
+          if (window.matchMedia("(min-width: 1024px)").matches || window.scrollY > 0) return;
+          pullStartY.current = event.touches[0]?.clientY ?? null;
+        }}
+        onTouchEnd={(event) => {
+          const startY = pullStartY.current;
+          pullStartY.current = null;
+          const endY = event.changedTouches[0]?.clientY;
+          if (startY !== null && endY !== undefined && endY - startY >= 90 && window.scrollY <= 0) void refreshTanks();
+        }}
+        className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:ml-[260px] lg:w-[calc(100%-260px)] lg:max-w-none">
         <div className="w-full">
+          {isRefreshing && (
+            <div role="status" aria-live="polite" className="mb-3 flex items-center justify-center gap-2 text-xs font-medium text-[var(--ep-primary)]">
+              <Icon name="loader-circle" size={14} className="animate-spin" /> Refreshing data…
+            </div>
+          )}
           {!loading && !isDbConnected && error && (
             <div role="status" className="mb-4 flex flex-col gap-3 rounded-xl border border-[var(--ep-status-danger)] bg-[var(--ep-surface)] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex min-w-0 items-start gap-2.5">
@@ -294,13 +312,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                   </p>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={() => void refreshTanks()}
-                className="min-h-10 shrink-0 self-start rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] sm:self-center"
-              >
-                Retry connection
-              </button>
             </div>
           )}
           {!loading && isDbConnected && lastUpdatedAt && (
