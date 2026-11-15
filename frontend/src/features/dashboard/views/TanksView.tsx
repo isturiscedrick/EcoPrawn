@@ -55,7 +55,7 @@ export function TanksView() {
         <div>
           <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-primary)]">Facility management</p>
           <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Tanks</h1>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Add, view, and maintain your facility tanks and their production details.</p>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Manage tanks and production details.</p>
         </div>
         <button type="button" onClick={() => setAdding(true)} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[var(--ep-primary)] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 sm:w-auto">
           <Icon name="plus" size={17} /> Add tank
@@ -85,7 +85,7 @@ export function TanksView() {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h2 id="tank-list-heading" className="text-base font-semibold text-[var(--ep-text)]">All tanks</h2>
-            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Search and filter your facility inventory.</p>
+            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Search and filter tanks.</p>
           </div>
           <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
             <label className="relative block min-w-0 sm:w-56">
@@ -109,14 +109,14 @@ export function TanksView() {
           <div className="rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] px-5 py-14 text-center">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--ep-tint)] text-[var(--ep-primary)]"><Icon name="layers" size={22} /></div>
             <h3 className="mt-4 text-sm font-semibold text-[var(--ep-text)]">No tanks yet</h3>
-            <p className="mx-auto mt-1 max-w-sm text-sm leading-6 text-[var(--ep-text-muted)]">Create your first tank to start organizing facility records and monitoring its production details.</p>
-            <button type="button" onClick={() => setAdding(true)} className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-lg bg-[var(--ep-primary)] px-4 text-sm font-semibold text-white hover:opacity-90"><Icon name="plus" size={16} /> Add your first tank</button>
+            <p className="mx-auto mt-1 max-w-sm text-sm leading-6 text-[var(--ep-text-muted)]">Add a tank to track production and water quality.</p>
+            <button type="button" onClick={() => setAdding(true)} className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-lg bg-[var(--ep-primary)] px-4 text-sm font-semibold text-white hover:opacity-90"><Icon name="plus" size={16} /> Add tank</button>
           </div>
         ) : filteredTanks.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] px-5 py-10 text-center">
             <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--ep-tint)] text-[var(--ep-primary)]"><Icon name="search" size={20} /></div>
             <h3 className="mt-3 text-sm font-semibold text-[var(--ep-text)]">No matching tanks</h3>
-            <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Try another tank name, PL batch, or health status.</p>
+            <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Try another name, batch, or status.</p>
             <button type="button" onClick={() => { setSearchTerm(""); setStatusFilter("all"); }} className="mt-4 inline-flex min-h-9 items-center rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition hover:bg-[var(--ep-tint)]">Clear filters</button>
           </div>
         ) : (
@@ -156,12 +156,12 @@ export function TanksView() {
                     <section>
                       <h4 className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--ep-text-muted)]">Growth and feeding</h4>
                       <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Average body length</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.bodyLength > 0 ? `${tank.bodyLength.toFixed(1)} cm` : "—"}</p></div>
-                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Average weight</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.weight > 0 ? `${tank.weight.toFixed(2)} g` : "—"}</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Avg. body length</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.bodyLength > 0 ? `${tank.bodyLength.toFixed(1)} cm` : "—"}</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Avg. weight</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.weight > 0 ? `${tank.weight.toFixed(2)} g` : "—"}</p></div>
                         <div><p className="text-[11px] text-[var(--ep-text-muted)]">Abnormal count</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.abnormal.toLocaleString()}</p></div>
-                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Feed conversion ratio</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.fcr.toFixed(2)}</p></div>
-                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Feed target today</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.targetToday.toLocaleString()} kg</p></div>
-                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Feed dispensed today</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.dispensedToday.toLocaleString()} kg</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Feed conversion</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.fcr.toFixed(2)}</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Today's feed target</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.targetToday.toLocaleString()} kg</p></div>
+                        <div><p className="text-[11px] text-[var(--ep-text-muted)]">Today's feed dispensed</p><p className="mt-1 text-sm font-semibold text-[var(--ep-text)]">{tank.dispensedToday.toLocaleString()} kg</p></div>
                       </div>
                     </section>
                   </div>
