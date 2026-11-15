@@ -31,21 +31,21 @@ function SettingsPage() {
   const settings = [
     {
       title: "Account",
-      description: "Update your facility operator profile and account details.",
+      description: "Edit your profile.",
       icon: "user-round" as const,
       to: "/dashboard/profile" as const,
       action: "Manage account",
     },
     {
       title: "Configuration",
-      description: "Connect an ESP32 device, assign it to a tank, and view sensor readings.",
+      description: "Connect ESP32 and assign a tank.",
       icon: "cpu" as const,
       to: "/dashboard/settings/configuration" as const,
-      action: "Manage device connection",
+      action: "Device settings",
     },
     {
       title: "About",
-      description: "Learn more about EcoPrawn and the platform.",
+      description: "System information.",
       icon: "file-text" as const,
       to: "/dashboard/about" as const,
       action: "About EcoPrawn",
@@ -59,13 +59,13 @@ function SettingsPage() {
       <header className="border-b border-[var(--ep-line)] pb-6">
         <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-primary)]">Preferences & account</div>
         <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Settings</h1>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Manage your account, ESP32 tank connection, appearance, and EcoPrawn information from one place.</p>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Manage your account, device, theme, and system info.</p>
       </header>
 
       <section aria-labelledby="settings-navigation-title">
         <div className="mb-3">
           <h2 id="settings-navigation-title" className="text-sm font-semibold text-[var(--ep-text)]">Settings & preferences</h2>
-          <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Choose an area to manage.</p>
+          <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Choose a setting.</p>
         </div>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           {settings.map((item) => (
@@ -82,7 +82,7 @@ function SettingsPage() {
             <IconChip name={darkMode ? "moon" : "sun"} tone="brand" size={20} />
             <div className="min-w-0 flex-1">
               <h3 className="text-base font-semibold text-[var(--ep-text)]">Theme</h3>
-              <p className="mt-1 text-sm leading-6 text-[var(--ep-text-muted)]">Choose the appearance that is most comfortable for your workspace.</p>
+              <p className="mt-1 text-sm leading-6 text-[var(--ep-text-muted)]">Choose light or dark mode.</p>
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <span className="text-xs font-medium text-[var(--ep-text-muted)]">Currently {darkMode ? "Dark" : "Light"} mode</span>
                 <button type="button" onClick={toggleTheme} aria-pressed={darkMode} className="inline-flex min-h-9 items-center gap-2 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
