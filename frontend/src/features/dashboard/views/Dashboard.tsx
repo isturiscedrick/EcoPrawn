@@ -15,7 +15,7 @@ const quickActions = [
 
 export function Dashboard() {
   const navigate = useNavigate();
-  const { tanks, waterHistory = [], visionScanLog = [], loading, error, isDbConnected, lastUpdatedAt, refreshTanks } = useTanks();
+  const { tanks, waterHistory = [], visionScanLog = [], loading, error } = useTanks();
   const [thresholdSettings, setThresholdSettings] = useState(getThresholds);
 
   useEffect(() => {
