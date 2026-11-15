@@ -42,6 +42,14 @@ export function AlertsView() {
   const infoEvents = alertsLog.filter((alert) => alert.icon === "info");
   const allAlerts = [...liveAlerts, ...alertsLog];
   const openCount = liveAlerts.length;
+  const tankAttention = liveAlerts.reduce((groups, alert) => {
+    if (!alert.tankId) return groups;
+    const existing = groups.get(alert.tankId);
+    if (existing) existing.alerts.push(alert);
+    else groups.set(alert.tankId, { tankId: alert.tankId, tankName: tanks.find(tank => tank.id === alert.tankId)?.name ?? "Tank", alerts: [alert] });
+    return groups;
+  }, new Map<string, { tankId: string; tankName: string; alerts: typeof liveAlerts }>());
+  const affectedTanks = [...tankAttention.values()].sort((a, b) => b.alerts.length - a.alerts.length || a.tankName.localeCompare(b.tankName));
   const visibleLiveAlerts = filter === "info" ? [] : liveAlerts;
   const visibleWarningEvents = filter === "info" ? [] : warningEvents;
   const visibleInfoEvents = filter === "warning" ? [] : infoEvents;
@@ -120,6 +128,33 @@ export function AlertsView() {
         />
         <KpiCard label="Resolved Alerts" value={String(resolvedAlerts)} unit="resolved" delta="Previously resolved events" deltaTone="ok" />
         <KpiCard label="Needs review" value={String(needsReviewCount)} unit="active" delta={needsReviewCount === 0 ? "All active warnings reviewed" : "Still need attention"} deltaTone={needsReviewCount === 0 ? "ok" : "warn"} />
+      </div>
+
+      <div className="mb-5">
+        <Panel title="Tank attention overview" badge={`${affectedTanks.length} affected`}>
+          {affectedTanks.length ? (
+            <div className="space-y-2">
+              <p className="mb-3 text-xs text-[var(--ep-text-muted)]">Tanks are ordered by the number of parameters currently outside their configured ranges. This is a count-based overview, not a severity rating.</p>
+              {affectedTanks.map((group) => (
+                <div key={group.tankId} className="flex min-w-0 flex-wrap items-center justify-between gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-sm font-semibold text-[var(--ep-text)]">{group.tankName}</span>
+                      <span className="rounded-full bg-[var(--ep-status-warning)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--ep-status-warning)]">{group.alerts.length} parameter warning{group.alerts.length === 1 ? "" : "s"}</span>
+                    </div>
+                    <p className="mt-1 break-words text-xs text-[var(--ep-text-muted)]">{group.alerts.map(alert => alert.title).join(" · ")}</p>
+                  </div>
+                  <button type="button" onClick={() => openTank(group.tankId)} className="inline-flex min-h-9 shrink-0 items-center gap-1 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">Inspect tank <Icon name="arrow-right" size={13} /></button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-6 text-center">
+              <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks currently need attention</p>
+              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Active parameter warnings will be grouped here when readings fall outside configured ranges.</p>
+            </div>
+          )}
+        </Panel>
       </div>
 
       <div className="mb-5">
