@@ -703,6 +703,23 @@ html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
   --ep-line: #285158;
   --ep-brand-soft: #70d7c8;
 }
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-primary: #f8fafc;
+  --ep-secondary: #e2f5f2;
+  --ep-text: #f8fafc;
+  --ep-text-muted: #bfd5d2;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-deep: #07191e;
+  --ep-on-deep: #f8fafc;
+  --ep-on-deep-muted: #bfd5d2;
+  --ep-zone: #45c5b3;
+  --ep-marker: #70d7c8;
+  --ep-status-info: #70d7c8;
+  --ep-status-info-bg: #153a3e;
+}
+
 :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-blue-"],
 :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-indigo-"],
 :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-cyan-"],
