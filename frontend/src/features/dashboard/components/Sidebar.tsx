@@ -290,7 +290,7 @@ export function Sidebar({
             <Link to="/dashboard/tanks" className={drawerRowClass + (pathname === "/dashboard/tanks" ? " dashboard-nav-active" : "")}><Icon name="fish" size={16} />Tank configuration</Link>
             <button type="button" onClick={onToggleTheme} className={drawerRowClass}><Icon name={darkMode ? "moon" : "sun"} size={16} />Theme <span className="ml-auto text-xs">{darkMode ? "Dark" : "Light"}</span></button>
             <Link to="/about" className={drawerRowClass}><Icon name="info" size={16} />About</Link>
-          </nav>
+          </nav>}
           <button type="button" onClick={onLogoutClick} className="dashboard-logout-button flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-semibold transition-colors">
             <span className="flex w-4 justify-center" aria-hidden="true"><LogoutIcon /></span>
             Log out
@@ -455,7 +455,7 @@ export function Sidebar({
             <Link to="/dashboard/tanks" className={drawerRowClass + (pathname === "/dashboard/tanks" ? " dashboard-nav-active" : "")}><Icon name="fish" size={16} />Tank configuration</Link>
             <button type="button" onClick={onToggleTheme} className={drawerRowClass}><Icon name={darkMode ? "moon" : "sun"} size={16} />Theme <span className="ml-auto text-xs">{darkMode ? "Dark" : "Light"}</span></button>
             <Link to="/about" className={drawerRowClass}><Icon name="info" size={16} />About</Link>
-          </nav>
+          </nav>}
             <button
               type="button"
               onClick={() => {
