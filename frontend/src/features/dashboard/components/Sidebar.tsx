@@ -287,7 +287,7 @@ export function Sidebar({
           </button>
           {settingsOpen && <nav aria-label="Settings" className="ml-3 flex flex-col gap-1 border-l border-[var(--ep-line)] pl-3">
             <Link to="/dashboard/profile" className={drawerRowClass + (pathname === "/dashboard/profile" ? " dashboard-nav-active" : "")}><Icon name="user-round" size={16} />Account</Link>
-            <Link to="/dashboard/tanks" className={drawerRowClass + (pathname === "/dashboard/tanks" ? " dashboard-nav-active" : "")}><Icon name="fish" size={16} />Tank configuration</Link>
+            <Link to="/dashboard/tanks" className={drawerRowClass + (pathname === "/dashboard/tanks" ? " dashboard-nav-active" : "")}><Icon name="fish" size={16} />Configuration</Link>
             <button type="button" onClick={onToggleTheme} className={drawerRowClass}><Icon name={darkMode ? "moon" : "sun"} size={16} />Theme <span className="ml-auto text-xs">{darkMode ? "Dark" : "Light"}</span></button>
             <Link to="/about" className={drawerRowClass}><Icon name="info" size={16} />About</Link>
           </nav>}
@@ -452,7 +452,7 @@ export function Sidebar({
           </button>
           {settingsOpen && <nav aria-label="Settings" className="ml-3 flex flex-col gap-1 border-l border-[var(--ep-line)] pl-3">
             <Link to="/dashboard/profile" className={drawerRowClass + (pathname === "/dashboard/profile" ? " dashboard-nav-active" : "")}><Icon name="user-round" size={16} />Account</Link>
-            <Link to="/dashboard/tanks" className={drawerRowClass + (pathname === "/dashboard/tanks" ? " dashboard-nav-active" : "")}><Icon name="fish" size={16} />Tank configuration</Link>
+            <Link to="/dashboard/tanks" className={drawerRowClass + (pathname === "/dashboard/tanks" ? " dashboard-nav-active" : "")}><Icon name="fish" size={16} />Configuration</Link>
             <button type="button" onClick={onToggleTheme} className={drawerRowClass}><Icon name={darkMode ? "moon" : "sun"} size={16} />Theme <span className="ml-auto text-xs">{darkMode ? "Dark" : "Light"}</span></button>
             <Link to="/about" className={drawerRowClass}><Icon name="info" size={16} />About</Link>
           </nav>}
