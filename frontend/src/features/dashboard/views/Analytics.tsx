@@ -37,7 +37,7 @@ export function Analytics() {
           <div className="ep-font-mono mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
             Production intelligence
           </div>
-          <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)]">
+          <h1 className="ep-font-display text-[26px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)] sm:text-[30px]">
             Analytics
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-[var(--ep-text-muted)]">
@@ -74,7 +74,7 @@ export function Analytics() {
             });
             downloadCsv(`ecoprawn-analytics-${new Date().toISOString().slice(0, 10)}.csv`, ["Record type", "Tank", "Recorded at", "Metric", "Value", "Unit"], rows);
           }}
-          className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]"
+          className="inline-flex min-h-11 w-full touch-manipulation items-center justify-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-2 text-sm font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] sm:w-auto"
         >
           <span aria-hidden="true">↓</span> Export CSV
         </button>
@@ -82,7 +82,7 @@ export function Analytics() {
 
       <DashboardDataStatus />
 
-      <section aria-label="Facility analytics summary" className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section aria-label="Facility analytics summary" className="mb-5 grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
         <KpiCard label="Total biomass" value={metrics.totalBiomass.toFixed(1)} unit="kg" delta="Combined across all tanks" deltaTone="ok" />
         <KpiCard label="Estimated population" value={metrics.totalPopulation.toLocaleString()} unit="shrimp" delta="Current facility estimate" deltaTone="ok" />
         <KpiCard label="Average body length" value={tanks.length ? metrics.avgBodyLength.toFixed(1) : "—"} unit="cm" delta="Based on latest tank scans" deltaTone="ok" />
