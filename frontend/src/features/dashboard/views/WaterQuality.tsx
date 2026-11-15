@@ -16,6 +16,14 @@ export function WaterQuality() {
   const [thresholdMessage, setThresholdMessage] = useState("");
 
   useEffect(() => {
+    if (!tanks.length) return;
+    const requestedTankId = window.sessionStorage.getItem("ecoprawn.dashboard.selected-tank");
+    if (requestedTankId && tanks.some((tank) => tank.id === requestedTankId)) {
+      setSelectedTankId(requestedTankId);
+    }
+  }, [tanks]);
+
+  useEffect(() => {
     const sync = () => setThresholdSettings(getThresholds());
     window.addEventListener("ecoprawn:thresholds-updated", sync);
     window.addEventListener("storage", sync);
@@ -140,7 +148,7 @@ export function WaterQuality() {
                   aria-selected={selectedTankIndex === index}
                   aria-controls="water-tank-details"
                   tabIndex={selectedTankIndex === index ? 0 : -1}
-                  onClick={() => setSelectedTankId(tank.id)}
+                  onClick={() => { setSelectedTankId(tank.id); window.sessionStorage.setItem("ecoprawn.dashboard.selected-tank", tank.id); }}
                   onKeyDown={(event) => handleTankTabKeyDown(event, index)}
                   className={`shrink-0 rounded-full border px-4 py-2 text-[12.5px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove)] ${
                     selectedTankIndex === index
