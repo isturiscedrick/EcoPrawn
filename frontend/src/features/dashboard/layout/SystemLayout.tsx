@@ -339,6 +339,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           pullStartY.current = null;
         }}
         className="mx-auto min-w-0 w-full max-w-[560px] px-3 pb-24 pt-3 sm:max-w-[720px] sm:px-5 sm:pt-5 md:max-w-[900px] lg:pb-16 lg:mx-0 lg:max-w-none lg:transition-[margin,width] lg:duration-300 lg:ease-in-out motion-reduce:lg:transition-none"
+      >
         <div className="w-full min-w-0">
           {isRefreshing && (
             <div
