@@ -2533,3 +2533,119 @@ html.dark .ep-mobile-dashboard-drawer > div:last-child button {
     stroke: currentColor !important;
   }
 }
+
+
+/* Final light-mode polish: keep the selected label transparent and style only
+   the full navigation row. Earlier palette passes styled nested spans too
+   broadly, which created the extra rectangle visible behind "Dashboard". */
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a > span > span:nth-child(2),
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a > span > span:nth-child(2) {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span {
+  background: #e8f4f4 !important;
+  background-color: #e8f4f4 !important;
+  border: 1px solid #c8e2e3 !important;
+  border-left: 3px solid #087e8b !important;
+  border-radius: 12px !important;
+  color: #075b65 !important;
+  box-shadow: 0 4px 14px -11px rgba(8,126,139,.5) !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span > span:first-child {
+  background: #d7eeee !important;
+  background-color: #d7eeee !important;
+  color: #087e8b !important;
+  border-radius: 10px !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]) > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]) > span {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  color: #355761 !important;
+  box-shadow: none !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]):hover > span {
+  background: #f1f7f8 !important;
+  border-color: #e0ebed !important;
+  color: #075b65 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]) > span > span:first-child,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]) > span > span:first-child {
+  background: #f0f5f6 !important;
+  color: #587780 !important;
+  border-radius: 10px !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:first-child {
+  background: #ffffff !important;
+  border-bottom-color: #e3ecee !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) {
+  background: #ffffff !important;
+  border-bottom-color: #e3ecee !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child {
+  background: #f6f9fa !important;
+  border-top-color: #e3ecee !important;
+}
+
+/* Light public header: crisp white navigation capsule and a clear Ocean Teal
+   current-page state. Keep the page's floating header behavior intact. */
+@media (min-width: 1024px) {
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] {
+    background: rgba(255,255,255,.96) !important;
+    background-color: rgba(255,255,255,.96) !important;
+    border: 1px solid #d7e4e7 !important;
+    border-radius: 999px !important;
+    padding: 5px !important;
+    gap: 4px !important;
+    box-shadow: 0 10px 28px -22px rgba(18,58,68,.42), inset 0 1px 0 rgba(255,255,255,.9) !important;
+  }
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a {
+    min-height: 42px !important;
+    padding: 0 18px !important;
+    border: 1px solid transparent !important;
+    border-radius: 999px !important;
+    color: #31535c !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transition: background-color .18s ease, color .18s ease, transform .18s ease !important;
+  }
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a:hover:not([aria-current="page"]) {
+    background: #edf6f6 !important;
+    color: #075b65 !important;
+  }
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] {
+    background: #087e8b !important;
+    border-color: #087e8b !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(8,126,139,.18) !important;
+  }
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] :is(span,svg) {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    stroke: currentColor !important;
+  }
+  html:not(.dark) #site-header .ep-cta-primary {
+    min-width: 42px;
+    min-height: 42px;
+    border: 1px solid #087e8b !important;
+    border-radius: 999px !important;
+    background: #087e8b !important;
+    color: #ffffff !important;
+    box-shadow: 0 5px 14px -8px rgba(8,126,139,.65) !important;
+  }
+  html:not(.dark) #site-header .ep-cta-primary svg {
+    color: #ffffff !important;
+    stroke: currentColor !important;
+  }
+}
