@@ -1350,3 +1350,29 @@ html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) 
   background: var(--ep-secondary-accent-hover) !important;
   border-color: var(--ep-secondary-accent-hover) !important;
 }
+
+
+/* Plain-white light-mode hero sections across Landing, About and Contact.
+   Remove atmospheric gradients/grid only from the hero canvas; keep all
+   foreground content, cards, illustrations and brand accents intact. */
+html:not(.dark) .ep-business-landing .ep-hero,
+html:not(.dark) .ep-business-landing .ep-cloudnexus-hero {
+  background: #ffffff !important;
+  background-image: none !important;
+}
+html:not(.dark) .ep-business-landing #top.ep-hero > [data-hero="grid"],
+html:not(.dark) .ep-business-landing #top.ep-hero > .ep-hero-atmosphere,
+html:not(.dark) .ep-business-landing #top.ep-hero > [aria-hidden="true"] {
+  background: none !important;
+  background-image: none !important;
+  opacity: 0 !important;
+}
+html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  background: #ffffff !important;
+  background-image: none !important;
+}
+html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > [aria-hidden="true"] {
+  background: none !important;
+  background-image: none !important;
+  opacity: 0 !important;
+}
