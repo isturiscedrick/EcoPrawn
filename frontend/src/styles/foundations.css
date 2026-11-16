@@ -63,12 +63,12 @@
   --border: #dbe2ea;
   --input: oklch(0.922 0 0);
   --ring: #087e8b;
-  /* Brand-aware chart palette: Ocean Teal, Coral Sand, and deep-ocean neutrals. */
+  /* Single-brand chart palette: Ocean Teal with neutral supporting series. */
   --chart-1: #087e8b;
-  --chart-2: #d99a75;
+  --chart-2: #173b46;
   --chart-3: #173b46;
   --chart-4: #45c5b3;
-  --chart-5: #e9bfa0;
+  --chart-5: #94a3b8;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: #087e8b;
@@ -81,15 +81,10 @@
   /* EcoPrawn theme tokens */
   --water-deep: #111827;
   --water-mid: #1f2937;
-  --mangrove: #087e8b;
-  --mangrove-light: #45c5b3;
-  --mangrove-text: #066874;
-  /* Legacy compatibility aliases: these names now resolve to Ocean Teal. */
-  --coral: #087e8b;
-  --coral-dim: #066874;
-  --coral-strong: #066874;
-  --sand: #ffffff;
-  --sand-dim: #dbe2ea;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-surface: #ffffff;
+  --ep-line: #dbe2ea;
   --amber: #e8a23a;
   --amber-text: #8f5a12;
   --danger: #d64545;
@@ -131,7 +126,7 @@
   --ring: oklch(0.556 0 0);
   /* Dark chart colors retain brand identity without sacrificing separation. */
   --chart-1: #45c5b3;
-  --chart-2: #e9bfa0;
+  --chart-2: #94a3b8;
   --chart-3: #d9f0ef;
   --chart-4: #70d7c8;
   --chart-5: #cbd5e1;
@@ -227,8 +222,8 @@
 }
 
 .ecoprawn-root ::selection {
-  background: var(--coral);
-  color: var(--sand);
+  background: var(--ep-accent);
+  color: var(--ep-surface);
 }
 
 /* ---------- Shell and Dialog Fonts ---------- */
@@ -262,13 +257,13 @@
 
 .dashboard-hover:hover {
   transform: translateY(-2px);
-  border-color: var(--coral);
-  background-color: color-mix(in srgb, var(--ep-surface) 92%, var(--coral));
+  border-color: var(--ep-accent);
+  background-color: color-mix(in srgb, var(--ep-surface) 92%, var(--ep-accent));
   box-shadow: 0 10px 24px -18px rgba(8, 30, 34, 0.55);
 }
 
 .dashboard-hover:focus-within {
-  border-color: var(--coral);
+  border-color: var(--ep-accent);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent) 18%, transparent);
 }
 
