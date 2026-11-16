@@ -2717,3 +2717,53 @@ html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child {
   background: none !important;
   box-shadow: none !important;
 }
+
+
+/* Landing-page dashboard preview sidebar: use only the current Ocean Teal
+   brand and neutral surfaces in both themes, not legacy brand shades. */
+.ep-business-landing .ep-cloudnexus-dashboard-body {
+  background: #f5f8f9 !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar {
+  background: #ffffff !important;
+  border-right: 1px solid #e1eaec !important;
+  color: #58717a !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > span {
+  color: #355761 !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active {
+  background: #e8f4f4 !important;
+  border-color: #c8e2e3 !important;
+  box-shadow: inset 3px 0 0 #087e8b !important;
+  color: #075b65 !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active svg {
+  color: #087e8b !important;
+  stroke: currentColor !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-dashboard-body {
+  background: #10272c !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar {
+  background: #122d33 !important;
+  border-right-color: #29474d !important;
+  color: #a9c0c4 !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar > span {
+  color: #d5e4e6 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active {
+  background: rgba(69,197,179,.14) !important;
+  border-color: rgba(69,197,179,.24) !important;
+  box-shadow: inset 3px 0 0 #45c5b3 !important;
+  color: #70d7c8 !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active svg {
+  color: #70d7c8 !important;
+  stroke: currentColor !important;
+}
