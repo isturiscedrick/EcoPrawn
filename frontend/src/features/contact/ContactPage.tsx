@@ -34,7 +34,7 @@ export function ContactPage() {
               <span> us.</span>
             </>
           }
-          lead="Questions about EcoPrawn? Send us a message."
+          lead="Project questions and collaboration."
         />
 
         <section className="ep-contact-intro px-4 pb-4 pt-12 sm:px-8 sm:pb-6 sm:pt-16 lg:pb-8">
@@ -42,10 +42,10 @@ export function ContactPage() {
             <div>
               <p className="text-xs font-bold uppercase tracking-[.16em] text-[var(--ep-accent)]">Start a conversation</p>
               <h2 className="ep-font-display mt-3 max-w-[18ch] text-[clamp(1.75rem,3.8vw,2.75rem)] font-semibold leading-[1.08] tracking-[-.045em] text-[var(--ep-text)]">
-                Tell us what you want to understand better.
+                What would you like to discuss?
               </h2>
               <p className="mt-3 max-w-[42rem] text-sm leading-relaxed text-[var(--ep-text-muted)] sm:text-base">
-                Ask about the platform or project. Team details are below.
+                Use the form to reach the project team.
               </p>
             </div>
             <div className="ep-contact-visuals" aria-hidden="true">
@@ -65,8 +65,8 @@ export function ContactPage() {
           <div className="mx-auto max-w-[1200px]">
             <div className="mb-8 max-w-[36rem] sm:mb-10">
               <p className="text-xs font-bold uppercase tracking-[.16em] text-[var(--ep-accent)]">Contact details</p>
-              <h2 className="ep-font-display mt-2 text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Find the right starting point.</h2>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">Send a message or view the project details.</p>
+              <h2 className="ep-font-display mt-2 text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Project team</h2>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]"></p>
             </div>
             <div className="grid grid-cols-1 items-stretch gap-5 sm:gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
               <Reveal>
