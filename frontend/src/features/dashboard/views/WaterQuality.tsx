@@ -170,10 +170,9 @@ export function WaterQuality() {
             aria-labelledby={`water-tank-tab-${selectedTankIndex}`}
             className="mb-4"
           >
-            <Panel title="Parameter Thresholds" badge={selectedTank.name}>
+            <Panel title="Parameter Thresholds" badge="All tanks">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-xs text-[var(--ep-text-muted)]">Applies to all tanks.</p>
-                <button type="button" onClick={() => { setEditingThresholds(value => !value); setThresholdMessage(""); }} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]">{editingThresholds ? "Close settings" : "Customize limits"}</button>
+                  <button type="button" onClick={() => { setEditingThresholds(value => !value); setThresholdMessage(""); }} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]">{editingThresholds ? "Close settings" : "Customize limits"}</button>
               </div>
               {editingThresholds && (
                 <div className="mb-4 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3">
@@ -214,7 +213,7 @@ export function WaterQuality() {
                   </div>
                 </div>
               )}
-              {!selectedTank.hasWaterReadings && <p role="status" className="mb-3 rounded-xl border border-slate-400/30 bg-slate-400/10 px-3 py-2 text-xs text-[var(--ep-text-muted)]">No readings yet. Status appears when data arrives.</p>}
+              {!selectedTank.hasWaterReadings && <p role="status" className="mb-3 rounded-xl border border-slate-400/30 bg-slate-400/10 px-3 py-2 text-xs text-[var(--ep-text-muted)]">Waiting for sensor data; range status is unavailable.</p>}
               <div className="mb-3 grid grid-cols-3 gap-2" aria-label="Parameter status summary">
                 <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-3"><div className="text-[10px] text-[var(--ep-text-muted)]">In range</div><div className="mt-1 text-lg font-semibold tabular-nums text-emerald-600">{thresholds.filter(item => item.status === "ok").length}</div></div>
                 <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-3"><div className="text-[10px] text-[var(--ep-text-muted)]">Watch</div><div className="mt-1 text-lg font-semibold tabular-nums text-amber-600">{thresholds.filter(item => item.status === "warn").length}</div></div>
