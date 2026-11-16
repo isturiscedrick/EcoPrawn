@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { KpiGrid, Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
@@ -154,7 +154,7 @@ export function VisionGrowth() {
 
       {tankCount > 0 ? (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+          <KpiGrid label="Growth summary">
             <KpiCard label="Avg. Body Length" value={avgBodyLength.toFixed(1)} unit="cm" delta="▲ 0.2 cm vs last week" deltaTone="ok" />
             <KpiCard label="Avg. Weight" value={avgWeight.toFixed(1)} unit="g" delta="▲ 1.4 g vs last week" deltaTone="ok" />
             <KpiCard
@@ -171,7 +171,7 @@ export function VisionGrowth() {
               delta={abnormalTotal === 0 ? "No anomalies detected" : "Under observation"}
               deltaTone={abnormalTotal === 0 ? "ok" : "warn"}
             />
-          </div>
+          </KpiGrid>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
             <Panel title="Growth Trend — Avg. Body Length" badge="7-week view">
