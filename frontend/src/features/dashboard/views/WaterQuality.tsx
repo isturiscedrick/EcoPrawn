@@ -111,7 +111,7 @@ export function WaterQuality() {
           <h1 className="ep-font-display text-[24px] font-semibold text-[var(--water-deep)] leading-tight sm:text-[28px]">
             Water Quality Monitoring
           </h1>
-          <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
+          <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
             Dissolved oxygen, pH, temperature, salinity &amp; water level · {tankCount} tank{tankCount !== 1 ? "s" : ""}
           </div>
         </div>
@@ -124,7 +124,7 @@ export function WaterQuality() {
         }} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] sm:w-auto">
           <span aria-hidden="true">↓</span> Export readings
         </button>
-        <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
+        <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span
             className={`w-[7px] h-[7px] rounded-full ${
               warnCount === 0 ? "ep-pulse-dot bg-[var(--mangrove)]" : "bg-[var(--amber)]"
@@ -154,7 +154,7 @@ export function WaterQuality() {
                   className={`min-h-11 shrink-0 touch-manipulation rounded-full border px-4 py-2 text-[12.5px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove)] ${
                     selectedTankIndex === index
                       ? "border-[var(--mangrove)] bg-[var(--mangrove)] text-white"
-                      : "border-[var(--sand-dim)] bg-white text-[var(--water-deep)] hover:border-[var(--mangrove)]"
+                      : "border-[var(--sand-dim)] bg-[var(--ep-surface)] text-[var(--water-deep)] hover:border-[var(--mangrove)]"
                   }`}
                 >
                   <span className={`mr-2 inline-block h-2 w-2 rounded-full align-middle ${!tank.hasWaterReadings ? "bg-slate-400" : tank.status === "ok" ? "bg-emerald-500" : "bg-amber-500"}`} aria-hidden="true" />
@@ -228,7 +228,7 @@ export function WaterQuality() {
                   >
                     <div>
                       <div className="text-[13px] font-semibold text-[var(--water-deep)]">{t.label}</div>
-                      <div className="ep-font-mono text-[11px] text-[rgba(11,35,32,0.5)]">{t.range}</div>
+                      <div className="ep-font-mono text-[11px] text-[var(--ep-text-muted)]">{t.range}</div>
                     </div>
                     <div className="text-right">
                       <div className="ep-font-mono text-[12.5px] font-semibold text-[var(--water-deep)]">
@@ -277,7 +277,7 @@ export function WaterQuality() {
               <ScrollFadeContainer>
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
-                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] border-b border-[var(--sand-dim)]">
+                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--sand-dim)]">
                     <th className="py-2.5 pr-3 font-semibold">Tank</th>
                     <th className="py-2.5 pr-3 font-semibold">DO (mg/L)</th>
                     <th className="py-2.5 pr-3 font-semibold">pH</th>
@@ -331,7 +331,7 @@ export function WaterQuality() {
         </>
       ) : (
         <Panel title="Tank Readings" badge="0 tanks">
-          <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
+          <div className="py-10 text-center text-[13px] text-[var(--ep-text-muted)]">
             No tanks yet. Add one on the Tanks page.
           </div>
         </Panel>
