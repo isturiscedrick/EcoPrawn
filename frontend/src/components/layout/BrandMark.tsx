@@ -9,14 +9,6 @@ interface BrandMarkProps {
   showWordmark?: boolean;
 }
 
-/**
- * Vector trace of the EcoPrawn logo (viewBox 1086 x 362).
- *
- * Each shape draws its own outline, then the solid fill fades in over it
- * (see brand-mark.css). Shapes are listed in drawing order: the shrimp head,
- * antenna, body and eye, then the wordmark letters left to right. "delay" and
- * "dur" are seconds; edit them here to retime the animation.
- */
 import { SHAPES } from "./BrandMarkPaths";
 export { SHAPES } from "./BrandMarkPaths";
 
