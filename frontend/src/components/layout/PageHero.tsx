@@ -8,7 +8,7 @@ interface PageHeroProps {
 
 const GRID_STYLE = {
   backgroundImage:
-    "radial-gradient(ellipse at 22% 58%, rgba(14,165,233,.12), transparent 42%), radial-gradient(ellipse at 78% 24%, rgba(37,99,235,.12), transparent 46%), linear-gradient(120deg, transparent 25%, rgba(14,165,233,.035) 50%, transparent 75%)",
+    "radial-gradient(ellipse at 22% 58%, color-mix(in srgb, var(--ep-accent) 12%, transparent), transparent 42%), radial-gradient(ellipse at 78% 24%, color-mix(in srgb, var(--ep-secondary-accent) 10%, transparent), transparent 46%), linear-gradient(120deg, transparent 25%, color-mix(in srgb, var(--ep-accent) 3.5%, transparent) 50%, transparent 75%)",
   backgroundSize: "auto, auto, 100% 100%",
   WebkitMaskImage: "radial-gradient(ellipse at 50% 48%, black 24%, transparent 82%)",
   maskImage: "radial-gradient(ellipse at 50% 48%, black 24%, transparent 82%)",
