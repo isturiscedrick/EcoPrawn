@@ -4,7 +4,7 @@ import { DashboardViewSkeleton } from "@/features/dashboard/components/Dashboard
 import { DonutChart, FeedingProgressChart, GrowthHistoryChart, WaterHistoryChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
-const TANK_COLORS = ["#D85A35", "#167C80", "#6D67B2", "#C18A27", "#39865B", "#B34E83"];
+const TANK_COLORS = ["var(--ep-accent)", "var(--ep-brand-secondary)", "var(--ep-status-success)", "var(--ep-status-warning)", "#6D67B2", "#3680B9"];
 
 export function Analytics() {
   const { tanks, growthHistory = [], waterHistory = [], loading } = useTanks();
@@ -23,7 +23,7 @@ export function Analytics() {
 
   const healthDistribution = useMemo(() => [
     { label: "Healthy", value: tanks.filter(tank => tank.status === "ok").length, color: "#39865B" },
-    { label: "Needs attention", value: tanks.filter(tank => tank.status === "warn").length, color: "#D85A35" },
+    { label: "Needs attention", value: tanks.filter(tank => tank.status === "warn").length, color: "var(--ep-status-warning)" },
   ], [tanks]);
 
   if (loading) return <DashboardViewSkeleton variant="vision" />;
