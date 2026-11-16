@@ -507,7 +507,7 @@ export function LandingPage() {
                 id="dashboard-preview-title"
                 className="ep-font-display text-[clamp(30px,4vw,48px)] font-semibold leading-[1.08] tracking-tight text-[var(--ep-text)]"
               >
-                Tank insights, at a glance.
+                A closer look at your farm.
               </h2>
               <p className="mt-4 text-base leading-relaxed text-[var(--ep-text-muted)] sm:text-lg">
                 See key readings and spot changes across every tank.
