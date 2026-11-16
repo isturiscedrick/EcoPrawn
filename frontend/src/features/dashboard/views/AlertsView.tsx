@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import { AlertRow } from "@/features/dashboard/components/DashboardRows";
-import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { KpiGrid, Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
@@ -116,7 +116,7 @@ export function AlertsView() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+      <KpiGrid label="Alert summary">
         <KpiCard
           label="Open Alerts"
           value={String(openCount)}
@@ -126,7 +126,7 @@ export function AlertsView() {
         />
         <KpiCard label="Resolved Alerts" value={String(resolvedAlerts)} unit="resolved" delta="Past events" deltaTone="ok" />
         <KpiCard label="Needs review" value={String(needsReviewCount)} unit="active" delta={needsReviewCount === 0 ? "All warnings reviewed" : "Still need attention"} deltaTone={needsReviewCount === 0 ? "ok" : "warn"} />
-      </div>
+      </KpiGrid>
 
       <div className="mb-5">
         <Panel title="Tank attention overview" badge={`${affectedTanks.length} affected`}>
