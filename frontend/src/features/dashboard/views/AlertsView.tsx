@@ -166,9 +166,9 @@ export function AlertsView() {
       <div className="mb-5">
         <Panel title="Alert composition" badge="current event mix">
           <DonutChart items={[
-            { label: "Live alerts", value: liveAlerts.length, color: "#D85A35" },
-            { label: "Warning events", value: warningEvents.length, color: "#C18A27" },
-            { label: "Information", value: infoEvents.length, color: "#167C80" },
+            { label: "Live alerts", value: liveAlerts.length, color: "var(--ep-status-danger)" },
+            { label: "Warning events", value: warningEvents.length, color: "var(--ep-status-warning)" },
+            { label: "Information", value: infoEvents.length, color: "var(--ep-status-info)" },
           ]} unit="events" emptyLabel="No alerts or events recorded." />
         </Panel>
       </div>
