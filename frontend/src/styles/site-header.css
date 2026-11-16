@@ -321,3 +321,28 @@
     display: none !important;
   }
 }
+
+
+/* Match the landing hamburger glyph's rendered box to the dashboard Icon.
+   The older header rule above forced all header SVGs to 18px even though
+   the shared menu icon is authored at 19px. */
+@media (max-width: 1023px) {
+  #site-header .ep-mobile-menu-toggle > svg {
+    display: block !important;
+    width: 19px !important;
+    height: 19px !important;
+    flex: 0 0 19px !important;
+    stroke-width: 1.7 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+  .dashboard-shell .ep-dashboard-mobile-menu-toggle > svg {
+    display: block !important;
+    width: 19px !important;
+    height: 19px !important;
+    flex: 0 0 19px !important;
+    stroke-width: 1.7 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+}
