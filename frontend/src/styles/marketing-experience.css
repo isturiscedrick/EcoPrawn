@@ -737,7 +737,7 @@ html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="lead"] {
 html.dark .ep-business-landing .ep-aquaculture-hero {
   background-color: #070d18 !important;
   background-image:
-    radial-gradient(ellipse at 50% 28%, rgba(8,126,139,.28), transparent 55%),
+    radial-gradient(ellipse at 50% 28%, color-mix(in srgb, var(--ep-accent) 18%, transparent), transparent 55%),
     radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 58%),
     radial-gradient(circle, rgba(112,215,200,.13) .8px, transparent 1.2px),
     linear-gradient(180deg, #123b42 0%, #0b252b 58%, #07191e 100%) !important;
@@ -792,7 +792,7 @@ html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   background-color: #070d18 !important;
   background-image:
-    radial-gradient(ellipse at 50% 28%, rgba(8,126,139,.28), transparent 55%),
+    radial-gradient(ellipse at 50% 28%, color-mix(in srgb, var(--ep-accent) 18%, transparent), transparent 55%),
     radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 58%),
     radial-gradient(circle, rgba(112,215,200,.13) .8px, transparent 1.2px),
     linear-gradient(180deg, #123b42 0%, #0b252b 58%, #07191e 100%) !important;
@@ -1455,7 +1455,7 @@ html.dark .ep-business-landing .ep-hero-sensor-tile {
   position: absolute;
   inset: 8% 4% 0;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 42%, rgba(8,126,139,.12), transparent 68%);
+  background: radial-gradient(ellipse at 50% 42%, color-mix(in srgb, var(--ep-accent) 10%, transparent), transparent 68%);
   filter: blur(28px);
   opacity: .75;
   pointer-events: none;
