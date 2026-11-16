@@ -34,7 +34,7 @@ export function PageHero({ kicker, title, lead }: PageHeroProps) {
           {kicker}
         </p>
 
-        <h1 data-page-hero-headline="" className="ep-font-display mx-auto w-full max-w-[1000px] text-balance text-[clamp(2.35rem,10vw,4.75rem)] sm:text-[clamp(40px,5.2vw,76px)] font-bold leading-[1.04] tracking-[-0.05em] text-[var(--ep-text)] [&_[data-page-hero-accent]]:text-[var(--ep-accent)]">
+        <h1 data-page-hero-headline="" className="ep-font-display mx-auto w-full max-w-[1000px] text-balance text-[clamp(2.35rem,10vw,4.75rem)] sm:text-[clamp(40px,5.2vw,76px)] font-bold leading-[1.04] tracking-[-0.05em] text-[var(--ep-text)]">
           {title}
         </h1>
 
