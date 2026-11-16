@@ -21,7 +21,7 @@ interface AddTankModalProps {
 }
 
 const inputClass =
-  "min-h-11 w-full rounded-lg border border-[var(--sand-dim)] bg-[var(--ep-bg)] px-3 text-[14px] font-medium text-[var(--water-deep)] outline-none transition-[border-color,box-shadow] placeholder:text-[var(--ep-text-muted)] focus:border-[var(--ep-accent)] focus:shadow-[0_0_0_3px_var(--ep-accent-tint)]";
+  "min-h-11 w-full rounded-lg border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 text-[14px] font-medium text-[var(--water-deep)] outline-none transition-[border-color,box-shadow] placeholder:text-[var(--ep-text-muted)] focus:border-[var(--ep-accent)] focus:shadow-[0_0_0_3px_var(--ep-accent-tint)]";
 
 const labelClass =
   "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--ep-text-muted)]";
@@ -189,7 +189,7 @@ export function AddTankModal({
         </div>
 
         <form onSubmit={handleSubmit} onInput={() => setFormError(null)} className="flex flex-col gap-4">
-          {formError && <p role="alert" className="text-[13px] text-[var(--coral)]">{formError}</p>}
+          {formError && <p role="alert" className="text-[13px] text-[var(--ep-accent)]">{formError}</p>}
           <div className={`${sectionLabelClass} flex items-center gap-1.5`}>
             <Icon name="package" size={12} strokeWidth={2} />
             Identity
