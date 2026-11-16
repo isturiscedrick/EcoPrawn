@@ -37,7 +37,7 @@ export function ContactPage() {
           lead="Questions about EcoPrawn? Send us a message."
         />
 
-        <section className="ep-contact-intro px-4 pb-2 pt-12 sm:px-8 sm:pt-16">
+        <section className="ep-contact-intro px-4 pb-4 pt-12 sm:px-8 sm:pb-6 sm:pt-16 lg:pb-8">
           <div className="ep-contact-intro-panel mx-auto grid w-full max-w-[1200px] gap-6 rounded-[1.75rem] border border-[var(--ep-line)] bg-[var(--ep-tint)] p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center lg:p-10">
             <div>
               <p className="text-xs font-bold uppercase tracking-[.16em] text-[var(--ep-accent)]">Start a conversation</p>
