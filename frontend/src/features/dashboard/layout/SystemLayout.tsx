@@ -17,6 +17,9 @@ interface SystemLayoutProps {
   children: ReactNode;
 }
 
+const focusRing =
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
+
 export function SystemLayout({ children }: SystemLayoutProps) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const { tanks, isDbConnected, lastUpdatedAt, loading, refreshTanks, isRefreshing } = useTanks();
