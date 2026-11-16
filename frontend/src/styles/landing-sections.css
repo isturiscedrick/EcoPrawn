@@ -500,8 +500,8 @@ html.dark .ep-business-landing #top.ep-cloudnexus-hero {
 .ep-business-landing .ep-cloudnexus-headline { color:var(--ep-text); text-wrap:balance; }
 html:not(.dark) .ep-business-landing .ep-cloudnexus-headline { color:#0b2c34; }
 /* Gradient highlight. Falls back to solid teal where background-clip:text is unsupported. */
-.ep-business-landing .ep-cloudnexus-highlight {
-  color:var(--ep-accent);
+html:not(.dark) .ep-business-landing .ep-cloudnexus-highlight {
+  color:#087E8B;
   background-image:linear-gradient(100deg,#087E8B 0%,#45C5B3 100%);
   -webkit-background-clip:text;
   background-clip:text;
