@@ -6,7 +6,7 @@
 /* ---------- Dashboard Brand Palette Tokens ---------- */
 .dashboard-shell {
   --ep-brand-primary: #087e8b;
-  --ep-brand-secondary: #087e8b;
+  --ep-accent: #087e8b;
   --ep-status-success: #15803d;
   --ep-status-success-bg: #dcfce7;
   --ep-status-warning: #b45309;
@@ -21,16 +21,15 @@
   --ep-accent-hover: #066874;
   --ep-accent: var(--ep-brand-primary);
   --ep-accent-hover: var(--ep-accent-hover);
-  --ep-secondary: var(--ep-brand-secondary);
   --ep-accent-tint: color-mix(in srgb, var(--ep-brand-primary) 12%, transparent);
   --ep-accent-tint-soft: color-mix(in srgb, var(--ep-brand-primary) 8%, transparent);
-  --ep-secondary-tint: rgba(8,126,139,.12);
+  --ep-accent-tint: rgba(8,126,139,.12);
   overflow-x: clip;
 }
 
 html.dark .dashboard-shell {
   --ep-brand-primary: #45c5b3;
-  --ep-brand-secondary: #45c5b3;
+  --ep-accent: #45c5b3;
   --ep-status-success: #86efac;
   --ep-status-success-bg: #123c2a;
   --ep-status-warning: #fcd34d;
@@ -45,10 +44,10 @@ html.dark .dashboard-shell {
   --ep-accent-hover: #70d7c8;
   --ep-accent: var(--ep-brand-primary);
   --ep-accent-hover: var(--ep-accent-hover);
-  --ep-secondary: var(--ep-brand-secondary);
-  --ep-brand-secondary-hover: #70d7c8;
-  --ep-secondary-accent-hover: #70d7c8;
-  --ep-secondary-tint: rgba(69,197,179,.16);
+  --ep-secondary: var(--ep-accent);
+  --ep-accent-hover: #70d7c8;
+  --ep-accent-hover: #70d7c8;
+  --ep-accent-tint: rgba(69,197,179,.16);
 }
 
 .dashboard-shell .dashboard-nav-active-dot {
@@ -56,12 +55,12 @@ html.dark .dashboard-shell {
 }
 
 .dashboard-shell .ep-font-mono.uppercase[class*="tracking-[0.14em]"] {
-  color: var(--ep-brand-secondary);
+  color: var(--ep-accent);
 }
 
 .dashboard-shell input[type="checkbox"],
 .dashboard-shell input[type="radio"] {
-  accent-color: var(--ep-brand-secondary);
+  accent-color: var(--ep-accent);
 }
 
 /* ---------- Sidebar Navigation ---------- */
