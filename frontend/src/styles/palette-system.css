@@ -156,11 +156,12 @@ html.dark .ep-logo .ep-logo-text {
 }
 
 
-/* Facility Operator dashboard refresh: aquatic teal with restrained semantic accents.
-   Scoped to the dashboard so public/marketing pages keep their existing palette. */
+/* Dashboard surfaces follow the same 60/30/10 system as public pages:
+   neutral canvas/cards, deep-ocean structure, and restrained brand accents. */
 .dashboard-shell {
   --ep-brand-primary: #087e8b;
-  --ep-brand-secondary: #173b46;
+  --ep-brand-secondary: #d99a75;
+  --ep-brand-secondary-hover: #c7835d;
   --ep-primary: #173b46;
   --ep-primary-soft: #245563;
   --ep-secondary: #245563;
@@ -171,20 +172,21 @@ html.dark .ep-logo .ep-logo-text {
   --ep-on-accent: #ffffff;
   --ep-accent-tint: rgba(8, 126, 139, .11);
   --ep-accent-tint-soft: rgba(8, 126, 139, .065);
-  --ep-secondary-tint: rgba(23, 59, 70, .07);
-  --ep-bg: #f3f8f8;
+  --ep-secondary-tint: rgba(217, 154, 117, .12);
+  --ep-bg: #f8fafc;
   --ep-surface: #ffffff;
-  --ep-tint: #e9f5f3;
-  --ep-line: #d7e5e5;
-  --ep-status-success: #20a58f;
-  --ep-status-warning: #d99527;
-  --ep-status-danger: #d9534f;
-  background: #f3f8f8 !important;
+  --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea;
+  --ep-status-success: #15803d;
+  --ep-status-warning: #b45309;
+  --ep-status-danger: #b91c1c;
+  background: #f8fafc !important;
   color: #173b46;
 }
 html.dark .dashboard-shell {
   --ep-brand-primary: #45c5b3;
-  --ep-brand-secondary: #d9f0ef;
+  --ep-brand-secondary: #e9bfa0;
+  --ep-brand-secondary-hover: #f5d5bc;
   --ep-primary: #e8f4f2;
   --ep-primary-soft: #c9e2df;
   --ep-secondary: #c9e2df;
@@ -195,20 +197,20 @@ html.dark .dashboard-shell {
   --ep-on-accent: #092b31;
   --ep-accent-tint: rgba(69, 197, 179, .14);
   --ep-accent-tint-soft: rgba(69, 197, 179, .08);
-  --ep-secondary-tint: rgba(214, 238, 235, .08);
-  --ep-bg: #0b1b20;
-  --ep-surface: #12282e;
-  --ep-tint: #1a353b;
-  --ep-line: #29464c;
-  --ep-status-success: #45c5b3;
-  --ep-status-warning: #f2b653;
-  --ep-status-danger: #f07872;
-  background: #0b1b20 !important;
+  --ep-secondary-tint: rgba(233, 191, 160, .14);
+  --ep-bg: #0b171b;
+  --ep-surface: #102328;
+  --ep-tint: #153a3e;
+  --ep-line: #285158;
+  --ep-status-success: #86efac;
+  --ep-status-warning: #fcd34d;
+  --ep-status-danger: #fca5a5;
+  background: #0b171b !important;
   color: #e8f4f2;
 }
 .dashboard-shell aside,
-html:not(.dark) .dashboard-shell aside { background: #ffffff !important; color: #173b46 !important; border-color: #d7e5e5 !important; }
-html.dark .dashboard-shell aside { background: #12282e !important; color: #e8f4f2 !important; border-color: #29464c !important; }
+html:not(.dark) .dashboard-shell aside { background: #ffffff !important; color: #173b46 !important; border-color: #dbe2ea !important; }
+html.dark .dashboard-shell aside { background: #102328 !important; color: #e8f4f2 !important; border-color: #285158 !important; }
 .dashboard-shell .dashboard-nav-active,
 html:not(.dark) .dashboard-shell .dashboard-nav-active { background: #087e8b !important; border-color: #087e8b !important; color: #ffffff !important; }
 html.dark .dashboard-shell .dashboard-nav-active { background: #45c5b3 !important; border-color: #45c5b3 !important; color: #092b31 !important; }
