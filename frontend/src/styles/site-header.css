@@ -191,3 +191,29 @@
   height: 18px !important;
   flex: 0 0 18px !important;
 }
+
+
+/* Give the action buttons their full text labels on wider desktop layouts.
+   Compact/tablet widths keep the three controls circular and icon-only. */
+@media (min-width: 1280px) {
+  #site-header > div > div:last-child .ep-cta-control.ep-cta-secondary,
+  #site-header > div > div:last-child .ep-cta-control.ep-cta-primary {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 44px !important;
+    max-width: none !important;
+    padding: 0 18px !important;
+    gap: 8px !important;
+    border-radius: 9999px !important;
+  }
+  #site-header > div > div:last-child .ep-cta-control.ep-cta-secondary > span,
+  #site-header > div > div:last-child .ep-cta-control.ep-cta-primary > span {
+    display: inline !important;
+  }
+  #site-header > div > div:last-child .ep-cta-control.ep-cta-secondary svg {
+    display: none !important;
+  }
+  #site-header > div > div:last-child .ep-cta-control.ep-cta-primary svg {
+    display: block !important;
+  }
+}
