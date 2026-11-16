@@ -30,14 +30,13 @@ export function ConfirmDialog({
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
-  // Keep the latest onCancel without re-running the open/focus effect
-  // every time the parent re-renders.
+  // Keep the latest callback without restarting the focus-management effect.
   const onCancelRef = useRef(onCancel);
   useEffect(() => {
     onCancelRef.current = onCancel;
   });
 
-  // Focus the safe choice, close on Escape, lock body scroll while open.
+  // Keep keyboard focus inside the dialog and restore it to the opener on close.
   useEffect(() => {
     if (!open) return;
 
@@ -46,51 +45,78 @@ export function ConfirmDialog({
       : null;
     (tone === "danger" && showCancel ? cancelRef : confirmRef).current?.focus();
 
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") {
-        e.preventDefault();
+    function getFocusableElements() {
+      return Array.from(
+        dialogRef.current?.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      );
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        event.preventDefault();
         onCancelRef.current();
         return;
       }
 
-      if (e.key !== "Tab") return;
-      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      );
-      if (!focusable?.length) {
-        e.preventDefault();
+      if (event.key !== "Tab") return;
+
+      const focusable = getFocusableElements();
+      if (!focusable.length) {
+        event.preventDefault();
         dialogRef.current?.focus();
         return;
       }
 
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
+      const focusIsOutside = !dialogRef.current?.contains(document.activeElement);
+
+      if (focusIsOutside) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
         last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
         first.focus();
       }
     }
-    window.addEventListener("keydown", onKeyDown);
-    const original = document.body.style.overflow;
+
+    function onFocusIn(event: FocusEvent) {
+      if (event.target instanceof Node && !dialogRef.current?.contains(event.target)) {
+        (tone === "danger" && showCancel ? cancelRef : confirmRef).current?.focus();
+      }
+    }
+
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("focusin", onFocusIn);
 
     return () => {
-      window.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = original;
-      previouslyFocusedRef.current?.focus();
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("focusin", onFocusIn);
+      document.body.style.overflow = originalOverflow;
+
+      const previouslyFocused = previouslyFocusedRef.current;
       previouslyFocusedRef.current = null;
+      if (previouslyFocused?.isConnected) {
+        previouslyFocused.focus({ preventScroll: true });
+      }
     };
-  }, [open, tone]);
+  }, [open, tone, showCancel]);
 
   if (!open) return null;
 
   const confirmClass =
     tone === "danger"
-      ? "bg-[var(--ep-status-danger)] hover:brightness-95"
-      : "bg-[var(--ep-accent)] hover:bg-[var(--ep-accent-hover)]";
+      ? "bg-[var(--ep-status-danger)] hover:brightness-95 focus-visible:ring-[var(--ep-status-danger)]"
+      : "bg-[var(--ep-accent)] hover:bg-[var(--ep-accent-hover)] focus-visible:ring-[var(--ep-primary)]";
+
+  const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-surface)]";
 
   return (
     <div
@@ -124,19 +150,21 @@ export function ConfirmDialog({
           {description}
         </div>
         <div className="flex gap-3">
-          {showCancel && <button
-            ref={cancelRef}
-            type="button"
-            onClick={onCancel}
-            className="flex-1 rounded-lg border border-[var(--ep-line)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-text)] transition-colors hover:bg-[var(--ep-tint)]"
-          >
-            {cancelLabel}
-          </button>}
+          {showCancel && (
+            <button
+              ref={cancelRef}
+              type="button"
+              onClick={onCancel}
+              className={`flex-1 rounded-lg border border-[var(--ep-line)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-text)] transition-colors hover:bg-[var(--ep-tint)] ${focusRing} focus-visible:ring-[var(--ep-primary)]`}
+            >
+              {cancelLabel}
+            </button>
+          )}
           <button
             ref={confirmRef}
             type="button"
             onClick={onConfirm}
-            className={`${showCancel ? "flex-1" : "w-full"} rounded-lg px-4 py-2.5 text-[13.5px] font-semibold text-white transition-colors ${confirmClass}`}
+            className={`${showCancel ? "flex-1" : "w-full"} rounded-lg px-4 py-2.5 text-[13.5px] font-semibold text-white transition-colors ${confirmClass} ${focusRing}`}
           >
             {confirmLabel}
           </button>
