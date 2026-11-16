@@ -1,0 +1,963 @@
+/* Dashboard sidebar — light-mode active navigation and surface hierarchy.
+   Keep the 60/30/10 balance: neutral structure first, Ocean Teal as a restrained
+   selected-state accent rather than a full-width solid block. */
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer {
+  background: #ffffff !important;
+  color: #173b46 !important;
+  border-color: #d7e2e7 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:first-child,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) {
+  border-color: #d7e2e7 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer > div:nth-child(2) a {
+  background: #ffffff !important;
+  border-color: #d7e2e7 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer > div:last-child {
+  background: #f3f7f8 !important;
+  border-color: #d7e2e7 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"],
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] > span,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar .dashboard-nav-active,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a[aria-current="page"],
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer .dashboard-nav-active,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child a[aria-current="page"] {
+  background: color-mix(in srgb, #087e8b 10%, #ffffff) !important;
+  background-color: color-mix(in srgb, #087e8b 10%, #ffffff) !important;
+  border-color: color-mix(in srgb, #087e8b 34%, #d7e2e7) !important;
+  color: #075b65 !important;
+  box-shadow: inset 3px 0 0 #087e8b, 0 2px 8px rgba(14, 75, 83, .045) !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] *,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar .dashboard-nav-active *,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a[aria-current="page"] *,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer .dashboard-nav-active *,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child a[aria-current="page"] * {
+  color: #075b65 !important;
+  -webkit-text-fill-color: #075b65 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] > span > span,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar .dashboard-nav-active > span > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer .dashboard-nav-active > span > span {
+  background: rgba(8, 126, 139, .12) !important;
+  color: #087e8b !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a:not([aria-current="page"]):hover,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a:not([aria-current="page"]):hover,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child a:not([aria-current="page"]):hover {
+  background: rgba(8, 126, 139, .055) !important;
+  color: #075b65 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a:not([aria-current="page"]):hover *,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a:not([aria-current="page"]):hover * {
+  color: #075b65 !important;
+}
+
+
+/* Refined public header in dark mode: make the whole chrome read as one
+   intentional dark surface instead of leaving the nav/actions on light pills. */
+html.dark #site-header {
+  background: rgba(13, 35, 40, .94) !important;
+  background-color: #102328 !important;
+  border-bottom: 1px solid #285158 !important;
+  box-shadow: 0 8px 24px -20px rgba(0,0,0,.8) !important;
+}
+html.dark #site-header nav[aria-label="Primary navigation"] {
+  background: #142d33 !important;
+  border: 1px solid #285158 !important;
+  box-shadow: 0 8px 22px -18px rgba(0,0,0,.85) !important;
+}
+html.dark #site-header nav[aria-label="Primary navigation"] a {
+  color: #e8f4f2 !important;
+  -webkit-text-fill-color: #e8f4f2 !important;
+}
+html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"],
+html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"]:hover {
+  background: #45c5b3 !important;
+  color: #092b31 !important;
+  -webkit-text-fill-color: #092b31 !important;
+  box-shadow: 0 4px 12px rgba(69,197,179,.18) !important;
+}
+html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] :is(span,svg) {
+  color: #092b31 !important;
+  -webkit-text-fill-color: #092b31 !important;
+  stroke: currentColor !important;
+}
+html.dark #site-header button[role="switch"],
+html.dark #site-header .ep-cta-secondary {
+  background: #142d33 !important;
+  border-color: #36565c !important;
+  color: #f8fafc !important;
+}
+html.dark #site-header button[role="switch"] svg,
+html.dark #site-header .ep-cta-secondary svg {
+  color: #f8fafc !important;
+  stroke: currentColor !important;
+}
+html.dark #site-header .ep-cta-primary {
+  background: #45c5b3 !important;
+  border-color: #45c5b3 !important;
+  color: #092b31 !important;
+}
+html.dark #site-header .ep-cta-primary svg {
+  color: #092b31 !important;
+  stroke: currentColor !important;
+}
+
+/* Dashboard sidebar refinement: clear grouping, softer profile tile and
+   compact navigation rhythm. The selected item is a tinted row, not a solid
+   teal slab. Use the exact nested link/span structure rendered by Sidebar. */
+.dashboard-shell aside#dashboard-sidebar > div:first-child {
+  min-height: 68px;
+  background: var(--ep-sidebar-bg, var(--ep-surface));
+}
+.dashboard-shell aside#dashboard-sidebar > div:nth-child(2) {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
+  min-height: 66px;
+  border-radius: 14px !important;
+  background: color-mix(in srgb, var(--ep-accent) 3%, var(--ep-surface)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 5px 16px -14px rgba(23,59,70,.35);
+}
+.dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a > span:first-child {
+  width: 42px;
+  height: 42px;
+  border: 1px solid color-mix(in srgb, var(--ep-accent) 16%, var(--ep-line));
+  background: color-mix(in srgb, var(--ep-accent) 10%, var(--ep-surface)) !important;
+}
+.dashboard-shell aside#dashboard-sidebar > div:nth-child(3) {
+  padding-top: 1.1rem;
+}
+.dashboard-shell aside#dashboard-sidebar nav {
+  gap: .35rem;
+}
+.dashboard-shell aside#dashboard-sidebar nav > a {
+  border-radius: 12px;
+}
+.dashboard-shell aside#dashboard-sidebar nav > a > span {
+  min-height: 46px;
+  border-radius: 12px !important;
+  padding-inline: .8rem;
+}
+.dashboard-shell aside#dashboard-sidebar > div:last-child {
+  gap: .35rem;
+  padding-top: .85rem;
+  padding-bottom: 1rem;
+  background: color-mix(in srgb, var(--ep-sidebar-bg, var(--ep-bg)) 88%, var(--ep-accent)) !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] > span,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] > span.dashboard-nav-active,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a > span.dashboard-nav-active {
+  background: color-mix(in srgb, #087e8b 9%, #ffffff) !important;
+  background-color: color-mix(in srgb, #087e8b 9%, #ffffff) !important;
+  border: 1px solid color-mix(in srgb, #087e8b 26%, #d7e2e7) !important;
+  border-left: 3px solid #087e8b !important;
+  color: #075b65 !important;
+  box-shadow: 0 3px 10px -8px rgba(8,126,139,.42) !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] > span *,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a > span.dashboard-nav-active * {
+  color: #075b65 !important;
+  -webkit-text-fill-color: #075b65 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] > span > span > span,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a > span.dashboard-nav-active > span > span {
+  background: rgba(8,126,139,.12) !important;
+  color: #087e8b !important;
+}
+html.dark .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] > span,
+html.dark .dashboard-shell aside#dashboard-sidebar nav a > span.dashboard-nav-active {
+  background: color-mix(in srgb, #45c5b3 14%, #102328) !important;
+  background-color: color-mix(in srgb, #45c5b3 14%, #102328) !important;
+  border: 1px solid rgba(69,197,179,.34) !important;
+  border-left: 3px solid #45c5b3 !important;
+  color: #e8f4f2 !important;
+}
+html.dark .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] > span *,
+html.dark .dashboard-shell aside#dashboard-sidebar nav a > span.dashboard-nav-active * {
+  color: #e8f4f2 !important;
+  -webkit-text-fill-color: #e8f4f2 !important;
+}
+.dashboard-shell aside#dashboard-sidebar > div:last-child a,
+.dashboard-shell aside#dashboard-sidebar > div:last-child button {
+  border-radius: 11px;
+}
+.dashboard-shell aside#dashboard-sidebar > div:last-child a:not([aria-current="page"]):hover,
+.dashboard-shell aside#dashboard-sidebar > div:last-child button:hover {
+  background: color-mix(in srgb, var(--ep-accent) 8%, var(--ep-sidebar-bg, var(--ep-bg))) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell aside#dashboard-sidebar :is(a,button) {
+    transition: none !important;
+  }
+}
+
+
+/* Follow-up: target the actual rendered nav item wrappers and mobile drawer.
+   SidebarNavItem renders Link > span > icon-wrap + label + status dot. */
+.ep-mobile-dashboard-drawer {
+  background: #fbfdfd !important;
+  color: #173b46 !important;
+  border-color: #d6e2e6 !important;
+  box-shadow: 18px 0 48px -24px rgba(15, 55, 65, .32) !important;
+}
+.ep-mobile-dashboard-drawer > div:first-child {
+  min-height: 72px;
+  background: #ffffff !important;
+  border-bottom-color: #dce7ea !important;
+}
+.ep-mobile-dashboard-drawer > div:first-child .ep-mobile-drawer-caption {
+  color: #66818a !important;
+}
+.ep-mobile-dashboard-drawer > div:nth-child(2) {
+  padding: 1.15rem 1rem 1rem !important;
+  background: #fbfdfd !important;
+}
+.ep-mobile-dashboard-drawer > div:nth-child(2) > div:first-child {
+  padding: 0 .65rem .75rem !important;
+  color: #66818a !important;
+  letter-spacing: .14em !important;
+}
+.ep-mobile-dashboard-drawer nav {
+  gap: .45rem !important;
+}
+.ep-mobile-dashboard-drawer nav > a {
+  border-radius: 13px !important;
+  color: #355761 !important;
+}
+.ep-mobile-dashboard-drawer nav > a > span {
+  min-height: 49px !important;
+  padding: .55rem .85rem !important;
+  border: 1px solid transparent !important;
+  border-radius: 13px !important;
+  background: transparent !important;
+  color: #355761 !important;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease !important;
+}
+.ep-mobile-dashboard-drawer nav > a > span > span:first-child {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 10px !important;
+  background: #edf5f6 !important;
+  color: #52727a !important;
+}
+.ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span {
+  background: #e8f4f4 !important;
+  border-color: #c7e1e2 !important;
+  border-left: 3px solid #087e8b !important;
+  color: #075b65 !important;
+  box-shadow: 0 4px 12px -10px rgba(8,126,139,.55) !important;
+}
+.ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span > span:first-child {
+  background: #d7eeee !important;
+  color: #087e8b !important;
+}
+.ep-mobile-dashboard-drawer nav > a[aria-current="page"] .dashboard-nav-active-dot {
+  background: #087e8b !important;
+}
+.ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]):hover > span {
+  background: #f0f6f7 !important;
+  border-color: #e0ebed !important;
+  color: #075b65 !important;
+  transform: translateX(2px);
+}
+.ep-mobile-dashboard-drawer > div:last-child {
+  gap: .5rem !important;
+  padding: 1rem 1.1rem max(1.25rem, env(safe-area-inset-bottom)) !important;
+  background: #f2f7f8 !important;
+  border-top-color: #dce7ea !important;
+}
+.ep-mobile-dashboard-drawer > div:last-child a,
+.ep-mobile-dashboard-drawer > div:last-child button {
+  min-height: 46px !important;
+  border-radius: 12px !important;
+}
+.ep-mobile-dashboard-drawer > div:last-child a:not([aria-current="page"]) {
+  background: #ffffff !important;
+  border: 1px solid #dce7ea !important;
+  color: #355761 !important;
+}
+.ep-mobile-dashboard-drawer > div:last-child button {
+  border: 1px solid #f0d8d8 !important;
+  background: #fffafa !important;
+  color: #b42332 !important;
+}
+.ep-mobile-dashboard-drawer > div:last-child button:hover {
+  background: #fff0f0 !important;
+  border-color: #e9b9bd !important;
+}
+html.dark .ep-mobile-dashboard-drawer {
+  background: #102328 !important;
+  color: #e8f4f2 !important;
+  border-color: #294c53 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:first-child {
+  background: #132a30 !important;
+  border-bottom-color: #294c53 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:first-child .ep-mobile-drawer-caption,
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) > div:first-child {
+  color: #a8c0c2 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) {
+  background: #102328 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a {
+  color: #d5e5e4 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a > span {
+  color: #d5e5e4 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a > span > span:first-child {
+  background: #1a373e !important;
+  color: #a8c9c8 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span {
+  background: rgba(69,197,179,.13) !important;
+  border-color: rgba(69,197,179,.32) !important;
+  border-left: 3px solid #45c5b3 !important;
+  color: #effcf9 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span > span:first-child {
+  background: rgba(69,197,179,.18) !important;
+  color: #70d7c8 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a[aria-current="page"] .dashboard-nav-active-dot {
+  background: #45c5b3 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]):hover > span {
+  background: #173239 !important;
+  border-color: #294c53 !important;
+  color: #70d7c8 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:last-child {
+  background: #0c1d22 !important;
+  border-top-color: #294c53 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:last-child a:not([aria-current="page"]) {
+  background: #142d33 !important;
+  border-color: #31535a !important;
+  color: #e8f4f2 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:last-child button {
+  background: rgba(180,35,50,.10) !important;
+  border-color: rgba(239,120,130,.24) !important;
+  color: #ff9da5 !important;
+}
+
+/* Final light-mode polish: keep the selected label transparent and style only
+   the full navigation row. Earlier palette passes styled nested spans too
+   broadly, which created the extra rectangle visible behind "Dashboard". */
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a > span > span:nth-child(2),
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a > span > span:nth-child(2) {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span {
+  background: #e8f4f4 !important;
+  background-color: #e8f4f4 !important;
+  border: 1px solid #c8e2e3 !important;
+  border-left: 3px solid #087e8b !important;
+  border-radius: 12px !important;
+  color: #075b65 !important;
+  box-shadow: 0 4px 14px -11px rgba(8,126,139,.5) !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span > span:first-child {
+  background: #d7eeee !important;
+  background-color: #d7eeee !important;
+  color: #087e8b !important;
+  border-radius: 10px !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]) > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]) > span {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  color: #355761 !important;
+  box-shadow: none !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]):hover > span {
+  background: #f1f7f8 !important;
+  border-color: #e0ebed !important;
+  color: #075b65 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]) > span > span:first-child,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]) > span > span:first-child {
+  background: #f0f5f6 !important;
+  color: #587780 !important;
+  border-radius: 10px !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:first-child {
+  background: #ffffff !important;
+  border-bottom-color: #e3ecee !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) {
+  background: #ffffff !important;
+  border-bottom-color: #e3ecee !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child {
+  background: #f6f9fa !important;
+  border-top-color: #e3ecee !important;
+}
+
+/* Light public header: crisp white navigation capsule and a clear Ocean Teal
+   current-page state. Keep the page's floating header behavior intact. */
+@media (min-width: 1024px) {
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] {
+    background: rgba(255,255,255,.96) !important;
+    background-color: rgba(255,255,255,.96) !important;
+    border: 1px solid #d7e4e7 !important;
+    border-radius: 999px !important;
+    padding: 5px !important;
+    gap: 4px !important;
+    box-shadow: 0 10px 28px -22px rgba(18,58,68,.42), inset 0 1px 0 rgba(255,255,255,.9) !important;
+  }
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a {
+    min-height: 42px !important;
+    padding: 0 18px !important;
+    border: 1px solid transparent !important;
+    border-radius: 999px !important;
+    color: #31535c !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transition: background-color .18s ease, color .18s ease, transform .18s ease !important;
+  }
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a:hover:not([aria-current="page"]) {
+    background: #edf6f6 !important;
+    color: #075b65 !important;
+  }
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] {
+    background: #087e8b !important;
+    border-color: #087e8b !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(8,126,139,.18) !important;
+  }
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] :is(span,svg) {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    stroke: currentColor !important;
+  }
+  html:not(.dark) #site-header .ep-cta-primary {
+    min-width: 42px;
+    min-height: 42px;
+    border: 1px solid #087e8b !important;
+    border-radius: 999px !important;
+    background: #087e8b !important;
+    color: #ffffff !important;
+    box-shadow: 0 5px 14px -8px rgba(8,126,139,.65) !important;
+  }
+  html:not(.dark) #site-header .ep-cta-primary svg {
+    color: #ffffff !important;
+    stroke: currentColor !important;
+  }
+}
+
+
+/* Theme-aware active navigation icon contrast:
+   light theme uses a deep teal pill (light icon); dark theme uses a bright
+   teal pill (dark icon). */
+@media (min-width: 1024px) {
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg,
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg * {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg,
+  html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg * {
+    color: #092b31 !important;
+    stroke: #092b31 !important;
+    -webkit-text-fill-color: #092b31 !important;
+  }
+}
+
+
+/* Definitive removal of the legacy hero underline.
+   This is intentionally in the final-loaded palette stylesheet so older
+   marketing-experience rules cannot bring the warm/legacy accent line back. */
+.ep-business-landing .ep-field-hero-copy .ep-hero-headline-secondary::after,
+.ep-business-landing .ep-cloudnexus-hero-inner .ep-hero-headline-secondary::after,
+.ep-business-landing [data-hero="headline"] .ep-hero-headline-secondary::after,
+.ep-landing [data-hero="headline"] .ep-hero-headline-secondary::after,
+.ep-about-page [data-page-hero-headline] .ep-hero-headline-secondary::after,
+.ep-contact-page [data-page-hero-headline] .ep-hero-headline-secondary::after {
+  content: none !important;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  animation: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Remove the old warm-colored dash appended to the landing hero eyebrow.
+   This is the short line at the RIGHT end of the "Smart aquaculture" pill,
+   not an underline beneath the headline. */
+.ep-business-landing .ep-cloudnexus-eyebrow::after,
+.ep-business-landing #top [data-hero-kicker]::after,
+.ep-landing #top [data-hero-kicker]::after,
+.ep-about-page [data-page-kicker]::after,
+.ep-contact-page [data-page-kicker]::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Landing-page dashboard preview sidebar: use only the current Ocean Teal
+   brand and neutral surfaces in both themes, not legacy brand shades. */
+.ep-business-landing .ep-cloudnexus-dashboard-body {
+  background: #f5f8f9 !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar {
+  background: #ffffff !important;
+  border-right: 1px solid #e1eaec !important;
+  color: #58717a !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > span {
+  color: #355761 !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active {
+  background: #e8f4f4 !important;
+  border-color: #c8e2e3 !important;
+  box-shadow: inset 3px 0 0 #087e8b !important;
+  color: #075b65 !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active svg {
+  color: #087e8b !important;
+  stroke: currentColor !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-dashboard-body {
+  background: #10272c !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar {
+  background: #122d33 !important;
+  border-right-color: #29474d !important;
+  color: #a9c0c4 !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar > span {
+  color: #d5e4e6 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active {
+  background: rgba(69,197,179,.14) !important;
+  border-color: rgba(69,197,179,.24) !important;
+  box-shadow: inset 3px 0 0 #45c5b3 !important;
+  color: #70d7c8 !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active svg {
+  color: #70d7c8 !important;
+  stroke: currentColor !important;
+}
+
+
+/* Final public mobile drawer palette. The earlier site-chrome rules hard-coded
+   a generic navy/bright-teal treatment; replace it with EcoPrawn's Ocean Teal
+   surfaces and a restrained active state. */
+html:not(.dark) .ep-mobile-site-drawer {
+  background: #ffffff !important;
+  color: #163b43 !important;
+  border-color: #d7e5e7 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:first-child {
+  background: #ffffff !important;
+  border-bottom-color: #dce8ea !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-logo {
+  --ep-logo-color: #087e8b !important;
+  --ep-logo-text: #123b43 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-logo-shrimp {
+  fill: #087e8b !important;
+  stroke: #087e8b !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-logo-wordmark {
+  color: #123b43 !important;
+  -webkit-text-fill-color: #123b43 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-mobile-drawer-caption,
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel + * {
+  color: #587780 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel a {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #294f58 !important;
+  box-shadow: none !important;
+}
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
+  background: #e8f4f4 !important;
+  border-color: #c8e2e3 !important;
+  color: #075b65 !important;
+  box-shadow: inset 3px 0 0 #087e8b !important;
+}
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] svg {
+  color: #087e8b !important;
+  stroke: currentColor !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:last-child {
+  background: #f5f9fa !important;
+  border-top-color: #dce8ea !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:last-child a:first-child {
+  background: #087e8b !important;
+  border: 1px solid #087e8b !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px -14px rgba(8,126,139,.7) !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:last-child a:last-child {
+  background: #ffffff !important;
+  border: 1px solid #cbdde0 !important;
+  color: #075b65 !important;
+}
+html.dark .ep-mobile-site-drawer {
+  background: #10272c !important;
+  color: #e8f3f4 !important;
+  border-color: #29474d !important;
+  box-shadow: 16px 0 48px -22px rgba(0,0,0,.72) !important;
+}
+html.dark .ep-mobile-site-drawer > div:first-child {
+  background: #122d33 !important;
+  border-bottom-color: #29474d !important;
+}
+html.dark .ep-mobile-site-drawer .ep-logo {
+  --ep-logo-color: #f4fbfb !important;
+  --ep-logo-text: #f4fbfb !important;
+}
+html.dark .ep-mobile-site-drawer .ep-logo-shrimp {
+  fill: #f4fbfb !important;
+  stroke: #f4fbfb !important;
+}
+html.dark .ep-mobile-site-drawer .ep-logo-wordmark {
+  color: #f4fbfb !important;
+  -webkit-text-fill-color: #f4fbfb !important;
+}
+html.dark .ep-mobile-site-drawer .ep-mobile-drawer-caption,
+html.dark .ep-mobile-site-drawer > div:nth-child(2) > div:first-child {
+  color: #a9c4c8 !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel {
+  background: transparent !important;
+  color: #dcebed !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #dcebed !important;
+  box-shadow: none !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
+  background: rgba(69,197,179,.14) !important;
+  border-color: rgba(69,197,179,.28) !important;
+  color: #70d7c8 !important;
+  box-shadow: inset 3px 0 0 #45c5b3 !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] svg {
+  color: #70d7c8 !important;
+  stroke: currentColor !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child {
+  background: #122d33 !important;
+  border-top-color: #29474d !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child a:first-child {
+  background: #45c5b3 !important;
+  border: 1px solid #45c5b3 !important;
+  color: #092b31 !important;
+  box-shadow: 0 8px 22px -14px rgba(69,197,179,.55) !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child a:last-child {
+  background: #17383f !important;
+  border: 1px solid #35575e !important;
+  color: #e8f3f4 !important;
+}
+
+/* Mobile header: the right-hand cluster contains the theme switch and
+   desktop auth links. Hide the links by element type so legacy utility
+   classes cannot make them overlap the centered wordmark. */
+@media (max-width: 1023px) {
+  #site-header > div {
+    display: grid !important;
+    grid-template-columns: 40px minmax(0, 1fr) 40px !important;
+    column-gap: 8px !important;
+    align-items: center !important;
+  }
+  #site-header > div > button[aria-controls="mobile-nav-panel"] {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+  }
+  #site-header > div > a[aria-label="EcoPrawn home"] {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+  #site-header > div > div:last-child {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    justify-self: end !important;
+    justify-content: flex-end !important;
+    overflow: visible !important;
+  }
+  #site-header > div > div:last-child > a,
+  #site-header > div > div:last-child .ep-cta-control {
+    display: none !important;
+  }
+  #site-header > div > div:last-child > button[role="switch"] {
+    display: inline-flex !important;
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+  }
+}
+@media (max-width: 380px) {
+  #site-header > div {
+    grid-template-columns: 36px minmax(0, 1fr) 36px !important;
+    column-gap: 6px !important;
+  }
+  #site-header > div > button[aria-controls="mobile-nav-panel"],
+  #site-header > div > div:last-child > button[role="switch"] {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+  }
+}
+
+
+/* Refined mobile hamburger control: clearer visual weight, larger touch
+   target, and a quiet Ocean Teal surface that adapts to both themes. */
+@media (max-width: 639px) {
+  #site-header .ep-mobile-menu-toggle {
+    box-sizing: border-box !important;
+    width: 46px !important;
+    min-width: 46px !important;
+    max-width: 46px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid #c9e1e3 !important;
+    border-radius: 50% !important;
+    background: linear-gradient(145deg,#ffffff 0%,#edf7f7 100%) !important;
+    color: #087e8b !important;
+    box-shadow: 0 3px 10px rgba(12,75,83,.09), inset 0 1px 0 rgba(255,255,255,.95) !important;
+    transition: background .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #site-header .ep-mobile-menu-toggle svg {
+    width: 21px !important;
+    height: 21px !important;
+    flex: 0 0 21px !important;
+  }
+  #site-header .ep-mobile-menu-toggle svg path {
+    stroke: currentColor !important;
+    stroke-width: 2.1 !important;
+    stroke-linecap: round !important;
+  }
+  #site-header .ep-mobile-menu-toggle:active {
+    transform: scale(.94) !important;
+    box-shadow: 0 1px 4px rgba(12,75,83,.12) !important;
+  }
+  #site-header .ep-mobile-menu-toggle:focus-visible {
+    outline: 3px solid rgba(8,126,139,.24) !important;
+    outline-offset: 3px !important;
+  }
+}
+@media (max-width: 639px) and (prefers-reduced-motion: reduce) {
+  #site-header .ep-mobile-menu-toggle {
+    transition: none !important;
+  }
+}
+html.dark #site-header .ep-mobile-menu-toggle {
+  border-color: #35575e !important;
+  background: linear-gradient(145deg,#17383f 0%,#122d33 100%) !important;
+  color: #70d7c8 !important;
+  box-shadow: 0 3px 12px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+html.dark #site-header .ep-mobile-menu-toggle:focus-visible {
+  outline-color: rgba(69,197,179,.3) !important;
+}
+
+
+/* Mobile footer account links: simple stacked text actions, no button fills. */
+@media (max-width: 639px) {
+  footer[data-site-footer] .ep-footer-account nav {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: .7rem !important;
+    margin-top: .85rem !important;
+  }
+  footer[data-site-footer] .ep-footer-account nav a {
+    display: inline-flex !important;
+    width: auto !important;
+    min-height: 0 !important;
+    justify-content: flex-start !important;
+    padding: .15rem 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--ep-primary) !important;
+    text-align: left !important;
+    text-decoration: none;
+  }
+  footer[data-site-footer] .ep-footer-account nav a:hover {
+    background: transparent !important;
+    color: var(--ep-accent) !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+/* Keep the circular mobile menu control visually lightweight: transparent
+   center, no filled surface or drop shadow in either color scheme. */
+@media (max-width: 639px) {
+  #site-header .ep-mobile-menu-toggle {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    color: var(--ep-primary) !important;
+  }
+  #site-header .ep-mobile-menu-toggle:hover,
+  #site-header .ep-mobile-menu-toggle:active {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  #site-header .ep-mobile-menu-toggle:focus-visible {
+    background: transparent !important;
+    outline: 2px solid var(--ep-accent) !important;
+    outline-offset: 3px !important;
+  }
+}
+html.dark #site-header .ep-mobile-menu-toggle {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  color: #70d7c8 !important;
+}
+
+
+/* Transparent hamburger buttons across both public landing and dashboard
+   mobile headers. Keep the circular hit area and visible focus ring only. */
+@media (max-width: 1023px) {
+  #site-header .ep-mobile-menu-toggle,
+  .dashboard-shell .ep-dashboard-mobile-menu-toggle {
+    background: transparent !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+  }
+  #site-header .ep-mobile-menu-toggle:hover,
+  #site-header .ep-mobile-menu-toggle:active,
+  .dashboard-shell .ep-dashboard-mobile-menu-toggle:hover,
+  .dashboard-shell .ep-dashboard-mobile-menu-toggle:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+  #site-header .ep-mobile-menu-toggle:focus-visible,
+  .dashboard-shell .ep-dashboard-mobile-menu-toggle:focus-visible {
+    outline: 2px solid var(--ep-accent) !important;
+    outline-offset: 3px !important;
+  }
+}
+html.dark #site-header .ep-mobile-menu-toggle,
+html.dark .dashboard-shell .ep-dashboard-mobile-menu-toggle {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+
+/* Dashboard mobile header: keep Alerts visible beside the profile avatar.
+   The shared public-header rule hides direct links and reserves space for a
+   hamburger; the authenticated dashboard has neither of those controls. */
+@media (max-width: 1023px) {
+  .dashboard-shell #site-header > div {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    column-gap: 10px !important;
+    align-items: center !important;
+  }
+  .dashboard-shell #site-header > div > a[aria-label="EcoPrawn home"] {
+    grid-column: 1 !important;
+    justify-self: start !important;
+    width: max-content !important;
+    max-width: 100% !important;
+  }
+  .dashboard-shell #site-header > div > div:last-child {
+    grid-column: 2 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    overflow: visible !important;
+  }
+  .dashboard-shell #site-header > div > div:last-child > a[href="/dashboard/alerts"] {
+    display: inline-flex !important;
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .dashboard-shell #site-header > div > div:last-child > div:has(> button[aria-label="Open profile menu"]) {
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+  }
+}
