@@ -224,7 +224,7 @@ html.dark .ep-contact-page main > section {
 html.dark .ep-contact-page [data-contact-details] {
   background:
     radial-gradient(ellipse at 0 0,rgba(69,197,179,.14),transparent 58%),
-    #111827;
+    var(--ep-surface);
 }
 .ep-contact-page [data-contact-details]::before {
   content: "ECOPRAWN / CONNECT";
@@ -483,7 +483,7 @@ html.dark .ep-about-page #systems {
 html.dark .ep-contact-page [data-contact-details] {
   background:
     radial-gradient(circle at 90% 8%,rgba(69,197,179,.15),transparent 34%),
-    #111827;
+    var(--ep-surface);
 }
 .ep-contact-page [data-contact-details]::after {
   content: "We'd love to hear what you're working on.";
