@@ -1433,3 +1433,76 @@ html.dark .ep-auth-modal button[aria-label="Close"]:hover {
   background: rgba(233,191,160,.12) !important;
   color: #F5D5BC !important;
 }
+
+/* 60 / 30 / 10 color distribution for Landing, About, Contact and Auth.
+   60% neutral = page/dialog canvas and content surfaces.
+   30% deep ocean = typography, navigation, footer and structural framing.
+   10% accents = Ocean Teal for primary actions + Coral Sand for secondary
+   highlights. This is a visual hierarchy, not a literal pixel calculation. */
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
+  --ep-color-neutral-60: #F8FAFC;
+  --ep-color-ocean-30: #173B46;
+  --ep-color-teal-10: #087E8B;
+  --ep-color-coral-10: #D99A75;
+  --ep-page-bg: var(--ep-color-neutral-60);
+  --ep-page-surface: #FFFFFF;
+  --ep-structure: var(--ep-color-ocean-30);
+}
+html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
+  --ep-color-neutral-60: #0B171B;
+  --ep-color-ocean-30: #102B31;
+  --ep-color-teal-10: #45C5B3;
+  --ep-color-coral-10: #E9BFA0;
+  --ep-page-bg: var(--ep-color-neutral-60);
+  --ep-page-surface: #102328;
+  --ep-structure: var(--ep-color-ocean-30);
+}
+
+/* Keep large content surfaces neutral; reserve deep ocean for structure and
+   keep teal/coral fills limited to compact controls, markers and highlights. */
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) :is(
+  .ep-cloudnexus-feature,.ep-cloudnexus-dashboard,.ep-about-journey-card,
+  [data-contact-card],[data-contact-form]
+) {
+  background-color: var(--ep-page-surface);
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
+:is([class*="bg-teal-"],[class*="bg-cyan-"]) {
+  background-color: color-mix(in srgb,var(--ep-color-teal-10) 9%,var(--ep-page-surface)) !important;
+}
+html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
+:is([class*="bg-teal-"],[class*="bg-cyan-"]) {
+  background-color: color-mix(in srgb,var(--ep-color-teal-10) 14%,var(--ep-page-surface)) !important;
+}
+
+/* Auth modal: neutral dialog/input surfaces dominate; ocean is used for
+   text and structure; teal/coral stay on compact interactive accents. */
+.ep-auth-modal {
+  background-color: var(--ep-page-surface) !important;
+  color: var(--ep-text) !important;
+}
+.ep-auth-modal :is(input,[role="group"][aria-label="Account access"]) {
+  background-color: var(--ep-page-bg) !important;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"],
+.ep-auth-modal button[type="submit"] {
+  background-color: var(--ep-accent) !important;
+  border-color: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"] {
+  background-color: var(--ep-page-bg) !important;
+}
+html.dark .ep-auth-modal {
+  background-color: #102328 !important;
+  color: #E8F4F2 !important;
+}
+html.dark .ep-auth-modal :is(input,[role="group"][aria-label="Account access"]) {
+  background-color: #0B171B !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"],
+html.dark .ep-auth-modal button[type="submit"] {
+  background-color: #45C5B3 !important;
+  border-color: #45C5B3 !important;
+  color: #071426 !important;
+}
