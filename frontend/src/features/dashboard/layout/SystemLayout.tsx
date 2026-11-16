@@ -9,8 +9,9 @@ import { DASHBOARD_NAV_ITEMS } from "@/config/nav";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
-import { DASHBOARD_QUICK_LINKS, getProfileInitials } from "./system-layout-utils";
+import { DASHBOARD_QUICK_LINKS } from "./system-layout-utils";
 import { DashboardCommandSearch } from "./DashboardCommandSearch";
+import { DashboardProfileMenu } from "./DashboardProfileMenu";
 
 interface SystemLayoutProps {
   children: ReactNode;
@@ -50,14 +51,9 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const [scrolled, setScrolled] = useState(false);
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
-  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
   const [logoutErrorOpen, setLogoutErrorOpen] = useState(false);
-  const profileMenuRef = useRef<HTMLDivElement>(null);
-  const profileTriggerRef = useRef<HTMLButtonElement>(null);
-  const profileMenuPanelRef = useRef<HTMLDivElement>(null);
   const pullStartY = useRef<number | null>(null);
-  const profileInitials = getProfileInitials(profileName);
 
   useLayoutEffect(() => {
     const main = document.querySelector<HTMLElement>("[data-dashboard-route-content]");
@@ -91,32 +87,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     if (savedName) setProfileName(savedName);
     if (savedRole) setProfileRole(savedRole.toUpperCase());
   }, []);
-
-  useEffect(() => {
-    if (!profileMenuOpen) return;
-    const closeOnOutside = (event: PointerEvent) => {
-      if (event.target instanceof Node && !profileMenuRef.current?.contains(event.target)) setProfileMenuOpen(false);
-    };
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setProfileMenuOpen(false);
-        profileTriggerRef.current?.focus({ preventScroll: true });
-      }
-    };
-    document.addEventListener("pointerdown", closeOnOutside);
-    document.addEventListener("keydown", closeOnEscape);
-    return () => {
-      document.removeEventListener("pointerdown", closeOnOutside);
-      document.removeEventListener("keydown", closeOnEscape);
-    };
-  }, [profileMenuOpen]);
-
-  useEffect(() => {
-    if (!profileMenuOpen) return;
-    profileMenuPanelRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus();
-  }, [profileMenuOpen]);
-
-  useEffect(() => setProfileMenuOpen(false), [pathname]);
 
   useEffect(() => {
     const onShortcut = (event: KeyboardEvent) => {
@@ -236,71 +206,12 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                 </span>
               )}
             </Link>
-            <div ref={profileMenuRef} className="relative">
-              <button
-                ref={profileTriggerRef}
-                type="button"
-                onClick={() => setProfileMenuOpen((open) => !open)}
-                aria-label="Open profile menu"
-                aria-haspopup="menu"
-                aria-expanded={profileMenuOpen}
-                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ep-line)] bg-[var(--ep-accent-tint)] text-xs font-bold text-[var(--ep-primary)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${focusRing}`}
-              >
-                {profileInitials}
-              </button>
-              {profileMenuOpen && (
-                <div
-                  ref={profileMenuPanelRef}
-                  role="menu"
-                  aria-label="Profile menu"
-                  onKeyDown={(event) => {
-                    if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
-                    const items = Array.from(
-                      event.currentTarget.querySelectorAll<HTMLElement>('[role="menuitem"]'),
-                    );
-                    if (!items.length) return;
-                    event.preventDefault();
-                    const currentIndex = items.indexOf(document.activeElement as HTMLElement);
-                    const nextIndex = event.key === "Home"
-                      ? 0
-                      : event.key === "End"
-                        ? items.length - 1
-                        : event.key === "ArrowDown"
-                          ? (currentIndex + 1) % items.length
-                          : (currentIndex - 1 + items.length) % items.length;
-                    items[nextIndex].focus();
-                  }}
-                  className="absolute right-0 top-[calc(100%+10px)] z-[100] w-[min(19rem,calc(100vw-1.5rem))] max-w-[calc(100vw-1.5rem)] max-h-[calc(100dvh-5.5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 text-[var(--ep-text)] shadow-[0_18px_48px_-18px_rgba(15,23,42,.28)]"
-                >
-                  <div className="border-b border-[var(--ep-line)] px-3 pb-3 pt-2">
-                    <p className="truncate text-sm font-semibold">{profileName}</p>
-                    <p className="mt-0.5 truncate text-[11px] font-medium tracking-wide text-[var(--ep-text-muted)]">{profileRole}</p>
-                  </div>
-                  <div className="mt-2 flex flex-col gap-1">
-                    <Link to="/dashboard/profile" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="flex min-h-11 min-w-0 items-center gap-2 whitespace-nowrap rounded-xl px-2.5 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:bg-[var(--ep-accent-tint)] focus-visible:ring-1 focus-visible:ring-[var(--ep-accent)]/50">
-                      <Icon name="user-round" size={17} className="shrink-0" />
-                      <span className="whitespace-nowrap">View profile</span>
-                    </Link>
-                    <Link to="/dashboard/settings" role="menuitem" onClick={() => setProfileMenuOpen(false)} className="flex min-h-11 items-center gap-2 rounded-xl px-2.5 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
-                      <Icon name="settings" size={17} className="shrink-0" />
-                      <span className="whitespace-nowrap">Settings</span>
-                    </Link>
-                  </div>
-                  <button
-                    type="button"
-                    role="menuitem"
-                    onClick={() => {
-                      setProfileMenuOpen(false);
-                      setLogoutConfirmOpen(true);
-                    }}
-                    className="mt-1 flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:bg-red-50 focus-visible:ring-1 focus-visible:ring-red-400/60 dark:hover:bg-red-950/30 dark:focus-visible:bg-red-950/30"
-                  >
-                    <Icon name="log-out" size={17} />
-                    Log out
-                  </button>
-                </div>
-              )}
-            </div>
+            <DashboardProfileMenu
+              pathname={pathname}
+              profileName={profileName}
+              profileRole={profileRole}
+              onRequestLogout={() => setLogoutConfirmOpen(true)}
+            />
           </div>
         </div>
       </header>
