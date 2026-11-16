@@ -68,7 +68,7 @@ html.dark .dashboard-shell .dashboard-nav-active { background: #45c5b3 !importan
   --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
   --ep-line: #dbe2ea; --ep-primary: #111827; --ep-secondary: #1f2937;
   --ep-text: #111827; --ep-text-muted: #475569; --ep-accent: #087e8b;
-  --ep-accent-hover: #066874; --ep-on-accent: #071426;
+  --ep-accent-hover: #066874; --ep-on-accent: #ffffff;
 }
 html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
   --ep-bg: #0b171b; --ep-surface: #102328; --ep-tint: #153a3e;
@@ -677,8 +677,6 @@ html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
   --ep-secondary: #e2f5f2;
   --ep-text: #f8fafc;
   --ep-text-muted: #a7c2c1;
-  --ep-accent: #45c5b3;
-  --ep-accent-hover: #70d7c8;
   --ep-on-accent: #092b31;
   --ep-deep: #07191e;
   --ep-on-deep: #f8fafc;
@@ -1226,8 +1224,7 @@ html.dark .dashboard-shell {
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) {
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
-
-  --ep-on-accent: #071426;
+  --ep-on-accent: #ffffff;
   --ep-accent-tint: rgba(8,126,139,.12);
   --ep-accent-tint-soft: rgba(8,126,139,.065);
 }
@@ -1342,16 +1339,14 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > [aria-hi
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
   --ep-accent: #087E8B;
   --ep-accent-hover: #066874;
-
-  --ep-on-accent: #173B46;
+  --ep-on-accent: #ffffff;
   --ep-accent-tint: rgba(8,126,139,.12);
   --ep-accent-tint-soft: rgba(8,126,139,.065);
 }
 html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
   --ep-accent: #45C5B3;
   --ep-accent-hover: #70D7C8;
-
-  --ep-on-accent: #173B46;
+  --ep-on-accent: #071426;
   --ep-accent-tint: rgba(69,197,179,.14);
   --ep-accent-tint-soft: rgba(69,197,179,.075);
 }
