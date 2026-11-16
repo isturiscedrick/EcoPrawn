@@ -5,7 +5,7 @@
  */
 import { waterQualityThresholds } from "@/content/landing-preview";
 
-const ZONES: Record<
+export const ZONES: Record<
   string,
   { min: number; max: number; lo: number; hi: number }
 > = {
@@ -16,9 +16,9 @@ const ZONES: Record<
   "Water Level": { min: 0, max: 100, lo: 90, hi: 100 },
 };
 
-const pct = (v: number, min: number, max: number) =>
+export const pct = (v: number, min: number, max: number) =>
   Math.max(0, Math.min(100, ((v - min) / (max - min)) * 100));
 
-function targetRangeFor(label: string): string | undefined {
+export function targetRangeFor(label: string): string | undefined {
   return waterQualityThresholds.find((t) => t.label === label)?.range;
 }
