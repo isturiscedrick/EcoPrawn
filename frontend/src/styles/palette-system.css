@@ -2113,3 +2113,44 @@ html.dark .ep-mobile-site-drawer :is(.text-muted-foreground,[data-muted],.ep-tex
   color: #e2e8f0 !important;
   -webkit-text-fill-color: #e2e8f0;
 }
+
+
+/* Explicit header/footer foreground override (kept last to beat component styles). */
+html.dark #site-header :is(a,button,span,p,strong,small,label),
+html.dark footer[data-site-footer] :is(a,button,span,p,strong,small,label,h1,h2,h3,h4,li),
+html.dark .ep-mobile-site-drawer :is(a,button,span,p,strong,small,label,h1,h2,h3,h4,li) {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+html.dark #site-header :is(svg,path,circle,line,polyline),
+html.dark footer[data-site-footer] :is(svg,path,circle,line,polyline),
+html.dark .ep-mobile-site-drawer :is(svg,path,circle,line,polyline) {
+  color: #fff !important;
+  stroke: #fff !important;
+}
+html.dark #site-header .ep-logo,
+html.dark footer[data-site-footer] .ep-logo,
+html.dark .ep-mobile-site-drawer .ep-logo {
+  --ep-logo-color: #fff !important;
+  --ep-logo-text: #fff !important;
+}
+html.dark #site-header .ep-logo .ep-logo-shrimp,
+html.dark footer[data-site-footer] .ep-logo .ep-logo-shrimp,
+html.dark .ep-mobile-site-drawer .ep-logo .ep-logo-shrimp {
+  fill: #fff !important;
+  stroke: #fff !important;
+}
+html.dark #site-header .ep-logo .ep-logo-wordmark,
+html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark,
+html.dark .ep-mobile-site-drawer .ep-logo .ep-logo-wordmark {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+html.dark #site-header .ep-cta-primary,
+html.dark #site-header .ep-cta-primary :is(span,svg,path),
+html.dark .ep-mobile-site-drawer .ep-cta-primary,
+html.dark .ep-mobile-site-drawer .ep-cta-primary :is(span,svg,path) {
+  color: #092b31 !important;
+  -webkit-text-fill-color: #092b31 !important;
+  stroke: currentColor !important;
+}
