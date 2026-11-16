@@ -4,7 +4,8 @@
 
 @import "./foundations.css";
 @import "./theme-components.css";
-@import "./dashboard-core.css";
+@import "./dashboard-foundations.css";
+@import "./dashboard-monitoring-core.css";
 @import "./dashboard-mobile-navigation.css";
 @import "./dashboard-mobile-modules.css";
 @import "./dashboard-responsive-foundations.css";
