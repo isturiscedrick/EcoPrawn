@@ -18,5 +18,7 @@
 @import "./marketing-depth-landing-foundations.css";
 @import "./marketing-depth-landing-responsive.css";
 @import "./marketing-depth-landing-finish.css";
-@import "./marketing-depth-pages.css";
+@import "./marketing-depth-accessibility.css";
+@import "./marketing-depth-page-layouts.css";
+@import "./marketing-depth-about-contact.css";
 @import "./mobile-first.css";
