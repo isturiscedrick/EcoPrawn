@@ -823,3 +823,75 @@ html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel :is(button,a,input):focu
 html.dark .ep-auth-overlay [data-auth-backdrop] {
   background: rgba(3,18,22,.82) !important;
 }
+
+
+/* Auth modal 60/30/10 finish:
+   neutral dialog and fields (60%), deep-ocean structure (30%), restrained
+   Coral Sand details (10%). Ocean Teal remains the primary submit/selected
+   action color for clear interaction hierarchy. */
+.ep-auth-modal {
+  --ep-brand-secondary: #d99a75;
+  --ep-brand-secondary-hover: #c7835d;
+  --ep-secondary-accent: #d99a75;
+  --ep-secondary-accent-hover: #c7835d;
+  --ep-secondary-tint: rgba(217,154,117,.12);
+  --ep-secondary-tint-soft: rgba(217,154,117,.065);
+}
+.ep-auth-modal::before {
+  background: #d99a75 !important;
+}
+.ep-auth-modal .ep-auth-brand {
+  border-color: rgba(217,154,117,.38) !important;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] {
+  border-color: rgba(217,154,117,.24);
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled),
+.ep-auth-modal button[aria-label="Close"]:hover {
+  border-color: #d99a75 !important;
+  background: rgba(217,154,117,.10) !important;
+  color: #9b603e !important;
+}
+.ep-auth-modal :is(.ep-auth-eyebrow,[data-auth-accent]) {
+  color: #c7835d !important;
+}
+html.dark .ep-auth-modal {
+  --ep-brand-secondary: #e9bfa0;
+  --ep-brand-secondary-hover: #f5d5bc;
+  --ep-secondary-accent: #e9bfa0;
+  --ep-secondary-accent-hover: #f5d5bc;
+  --ep-secondary-tint: rgba(233,191,160,.14);
+  --ep-secondary-tint-soft: rgba(233,191,160,.075);
+}
+html.dark .ep-auth-modal::before {
+  background: #e9bfa0 !important;
+}
+html.dark .ep-auth-modal .ep-auth-brand {
+  border-color: rgba(233,191,160,.32) !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] {
+  border-color: rgba(233,191,160,.22) !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled),
+html.dark .ep-auth-modal button[aria-label="Close"]:hover {
+  border-color: #e9bfa0 !important;
+  background: rgba(233,191,160,.12) !important;
+  color: #f5d5bc !important;
+}
+html.dark .ep-auth-modal :is(.ep-auth-eyebrow,[data-auth-accent]) {
+  color: #e9bfa0 !important;
+}
+
+/* Keep the selected tab and submit button as Ocean Teal primary actions. */
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"],
+.ep-auth-modal button[type="submit"] {
+  background: #087e8b !important;
+  border-color: #087e8b !important;
+  color: #ffffff !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"],
+html.dark .ep-auth-modal button[type="submit"] {
+  background: #45c5b3 !important;
+  border-color: #45c5b3 !important;
+  color: #092b31 !important;
+}
