@@ -215,7 +215,7 @@ export function DashboardErrorState({ title, description, action }: StateMessage
         <button
           type="button"
           onClick={action.onClick}
-          className="mt-5 min-h-11 min-w-28 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--ep-accent-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
+          className="mt-5 min-h-11 min-w-28 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-[var(--ep-on-accent)] transition-colors hover:bg-[var(--ep-accent-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
         >
           {action.label}
         </button>
@@ -233,7 +233,7 @@ export function DashboardEmptyState({ title, description, action }: StateMessage
         <button
           type="button"
           onClick={action.onClick}
-          className="mt-5 min-h-11 min-w-28 rounded-lg border border-[var(--ep-accent)] px-4 text-sm font-semibold text-[var(--ep-accent)] transition-colors hover:bg-[rgba(232,98,58,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
+          className="mt-5 min-h-11 min-w-28 rounded-lg border border-[var(--ep-accent)] px-4 text-sm font-semibold text-[var(--ep-accent)] transition-colors hover:bg-[var(--ep-accent-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
         >
           {action.label}
         </button>
