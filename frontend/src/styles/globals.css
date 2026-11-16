@@ -15,7 +15,9 @@
 @import "./dashboard-responsive-finish.css";
 @import "./landing-global.css";
 @import "./responsive-overrides.css";
-@import "./palette-foundation.css";
+@import "./palette-brand-utilities.css";
+@import "./palette-dashboard-brand.css";
+@import "./palette-shared-brand-states.css";
 @import "./palette-surfaces.css";
 @import "./palette-marketing.css";
 @import "./palette-public-chrome.css";
