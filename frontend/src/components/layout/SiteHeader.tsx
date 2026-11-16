@@ -210,16 +210,7 @@ export function SiteHeader({
               className={`ep-mobile-menu-toggle flex h-10 w-10 items-center justify-center justify-self-start rounded-full border-0 bg-transparent shadow-none transition-colors duration-200 hover:bg-transparent focus-visible:bg-transparent lg:hidden ${focusRing}`}
               style={{ color: "var(--ep-primary)", backgroundColor: "transparent", borderColor: "transparent", boxShadow: "none" }}
             >
-              <svg
-                width="19"
-                height="19"
-                viewBox="0 0 20 20"
-                fill="none"
-                aria-hidden="true"
-                style={{ display: "block", transform: "none", rotate: "0deg", transformOrigin: "center" }}
-              >
-                <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              </svg>
+              <Icon name="menu" size={19} />
             </button>
           )}
 
