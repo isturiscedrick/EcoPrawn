@@ -1,0 +1,557 @@
+/* Centered agricultural-style landing hero inspired by the supplied reference. */
+.ep-business-landing .ep-hero {
+  min-height: 0;
+  overflow: hidden;
+  background-color: var(--ep-bg);
+  background-image:
+    radial-gradient(circle,rgba(8,126,139,.10) .8px,transparent 1.2px),
+    linear-gradient(180deg,var(--ep-surface),var(--ep-bg));
+  background-size: 22px 22px,auto;
+  background-position: center top;
+}
+html.dark .ep-business-landing .ep-hero {
+  background-color: var(--ep-bg);
+  background-image:
+    radial-gradient(circle,rgba(69,197,179,.16) .8px,transparent 1.2px),
+    linear-gradient(180deg,#111827,var(--ep-bg));
+  background-size: 22px 22px,auto;
+}
+.ep-business-landing .ep-hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 5%,rgba(8,126,139,.045),transparent 48%),
+    linear-gradient(180deg,transparent 72%,var(--ep-bg));
+}
+.ep-business-landing .ep-field-hero {
+  position: relative;
+  z-index: 1;
+}
+.ep-business-landing .ep-field-hero-copy h1 {
+  max-width: 920px;
+  text-wrap: balance;
+}
+.ep-business-landing .ep-field-hero-copy .ep-hero-headline-primary {
+  color: var(--ep-text);
+}
+.ep-business-landing .ep-field-hero-copy .ep-hero-headline-secondary {
+  color: var(--ep-accent);
+}
+.ep-business-landing .ep-field-landscape {
+  height: clamp(230px,34vw,430px);
+  border: 1px solid rgba(148,163,184,.24);
+  border-radius: 1.1rem 1.1rem 0 0;
+  background: #d9f0ef;
+  box-shadow: 0 26px 70px -42px rgba(15,23,42,.38);
+}
+.ep-business-landing .ep-field-landscape img {
+  display: block;
+  min-height: 100%;
+  object-position: center 58%;
+  transform: scale(1.005);
+}
+.ep-business-landing .ep-field-landscape-shade {
+  position: absolute;
+  inset: 35% 0 0;
+  background: linear-gradient(180deg,transparent,rgba(4,18,34,.48));
+  pointer-events: none;
+}
+.ep-business-landing .ep-field-landscape figcaption {
+  z-index: 1;
+}
+html.dark .ep-business-landing .ep-field-landscape {
+  border-color: rgba(148,163,184,.32);
+  box-shadow: 0 28px 76px -42px rgba(0,0,0,.7);
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-field-hero {
+    padding-top: 3.25rem;
+  }
+  .ep-business-landing .ep-field-hero-copy h1 {
+    font-size: clamp(2.45rem,10vw,3.5rem);
+    line-height: 1.02;
+  }
+  .ep-business-landing .ep-field-landscape {
+    height: clamp(220px,62vw,320px);
+    margin-top: 1.75rem;
+    border-radius: .9rem .9rem 0 0;
+  }
+  .ep-business-landing .ep-field-landscape img {
+    object-position: center;
+  }
+}
+
+
+/* Full-bleed original gradient treatment. No third-party photography is used. */
+.ep-business-landing .ep-aquaculture-hero {
+  min-height: clamp(640px,76vw,820px);
+  display: flex;
+  align-items: center;
+  background-color: #071a2b;
+  background-image:
+    radial-gradient(ellipse at 50% 42%,rgba(8,126,139,.30),transparent 48%),
+    linear-gradient(180deg,rgba(5,16,29,.40),rgba(5,18,32,.88));
+  background-size: cover;
+  background-position: center 54%;
+  background-repeat: no-repeat;
+}
+.ep-business-landing .ep-aquaculture-hero .ep-hero-atmosphere {
+  background:
+    linear-gradient(90deg,rgba(4,16,29,.20),transparent 55%,rgba(4,16,29,.12)),
+    linear-gradient(180deg,rgba(4,16,29,.12),transparent 34%,rgba(4,16,29,.22));
+}
+.ep-business-landing .ep-aquaculture-hero [data-hero="grid"] {
+  opacity: .10;
+  mix-blend-mode: screen;
+}
+.ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+  width: 100%;
+  padding-top: clamp(5.5rem,9vw,8rem);
+  padding-bottom: clamp(5rem,8vw,7rem);
+}
+.ep-business-landing .ep-aquaculture-hero .ep-field-hero-copy {
+  max-width: 980px;
+}
+.ep-business-landing .ep-aquaculture-hero .ep-field-hero-copy > p:first-child {
+  border-color: rgba(255,255,255,.36);
+  background: rgba(8,24,42,.48);
+  color: #d9f0ef;
+  box-shadow: 0 12px 32px -18px rgba(0,0,0,.55);
+  backdrop-filter: blur(12px);
+}
+.ep-business-landing .ep-aquaculture-hero .ep-hero-headline-primary {
+  color: #fff;
+  text-shadow: 0 3px 24px rgba(0,0,0,.20);
+}
+.ep-business-landing .ep-aquaculture-hero .ep-hero-headline-secondary {
+  color: #70d7c8;
+  text-shadow: 0 3px 24px rgba(0,0,0,.22);
+}
+.ep-business-landing .ep-aquaculture-hero [data-hero="lead"] {
+  color: rgba(255,255,255,.88);
+  text-shadow: 0 2px 16px rgba(0,0,0,.3);
+}
+.ep-business-landing .ep-aquaculture-hero [data-hero="cta"] {
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+}
+html.dark .ep-business-landing .ep-aquaculture-hero {
+  background-image:
+    radial-gradient(ellipse at 50% 42%,rgba(8,126,139,.22),transparent 48%),
+    linear-gradient(180deg,rgba(3,10,20,.50),rgba(3,10,20,.92));
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-aquaculture-hero {
+    min-height: 640px;
+    background-position: 52% center;
+  }
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-top: 5.5rem;
+    padding-bottom: 4.5rem;
+  }
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero-copy h1 {
+    font-size: clamp(2.5rem,10vw,3.7rem);
+    line-height: 1.02;
+  }
+}
+
+
+/* Hero contrast correction: explicit light-mode foregrounds on the light canvas.
+   The dark theme keeps its separate high-contrast white-on-navy treatment. */
+html:not(.dark) .ep-business-landing .ep-aquaculture-hero {
+  color: #111827;
+  background-color: #f8fafc;
+  background-image:
+    radial-gradient(ellipse at 50% 36%,rgba(8,126,139,.14),transparent 48%),
+    radial-gradient(circle,rgba(8,126,139,.10) .8px,transparent 1.2px),
+    linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%);
+  background-size: auto,22px 22px,auto;
+  background-position: center,center top,center;
+}
+html:not(.dark) .ep-business-landing .ep-aquaculture-hero .ep-hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 12%,rgba(255,255,255,.72),transparent 58%),
+    linear-gradient(180deg,rgba(255,255,255,.12),rgba(226,232,240,.18));
+}
+html:not(.dark) .ep-business-landing .ep-aquaculture-hero [data-hero="grid"] {
+  opacity: .24;
+  mix-blend-mode: multiply;
+}
+html:not(.dark) .ep-business-landing .ep-aquaculture-hero .ep-field-hero-copy > p:first-child {
+  color: #066874;
+  background: rgba(255,255,255,.94);
+  border-color: #dbe3ef;
+  box-shadow: 0 8px 24px -16px rgba(15,23,42,.24);
+}
+html:not(.dark) .ep-business-landing .ep-aquaculture-hero .ep-hero-headline-primary {
+  color: #111827;
+  text-shadow: none;
+}
+html:not(.dark) .ep-business-landing .ep-aquaculture-hero .ep-hero-headline-secondary {
+  color: #087e8b;
+  text-shadow: none;
+}
+html:not(.dark) .ep-business-landing .ep-aquaculture-hero [data-hero="lead"] {
+  color: #475569;
+  text-shadow: none;
+}
+html.dark .ep-business-landing .ep-aquaculture-hero .ep-hero-headline-primary {
+  color: #f8fafc;
+}
+html.dark .ep-business-landing .ep-aquaculture-hero .ep-hero-headline-secondary {
+  color: #70d7c8;
+}
+html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="lead"] {
+  color: rgba(248,250,252,.90);
+}
+
+
+/* Final hero theme correction: keep the dark canvas unmistakably dark and
+   make the dashboard CTA icon independently visible in both themes. */
+.ep-business-landing .ep-aquaculture-hero {
+  isolation: isolate;
+  background-color: #f8fafc;
+  background-image:
+    radial-gradient(ellipse at 50% 34%, rgba(8,126,139,.10), transparent 52%),
+    radial-gradient(circle, rgba(8,126,139,.11) .8px, transparent 1.2px),
+    linear-gradient(180deg, #ffffff 0%, #eff8f7 100%);
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-size: auto, 22px 22px, auto;
+}
+html.dark .ep-business-landing .ep-aquaculture-hero {
+  background-color: #070d18 !important;
+  background-image:
+    radial-gradient(ellipse at 50% 28%, color-mix(in srgb, var(--ep-accent) 18%, transparent), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 58%),
+    radial-gradient(circle, rgba(112,215,200,.13) .8px, transparent 1.2px),
+    linear-gradient(180deg, #123b42 0%, #0b252b 58%, #07191e 100%) !important;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-size: auto, auto, 22px 22px, auto;
+  color: #f8fafc;
+}
+html.dark .ep-business-landing .ep-aquaculture-hero .ep-hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 18%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 58%),
+    linear-gradient(180deg, rgba(7,13,24,.08), rgba(7,13,24,.24));
+}
+html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="grid"] {
+  opacity: .18 !important;
+  mix-blend-mode: screen;
+}
+.ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
+  color: inherit;
+}
+.ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  stroke: currentColor;
+}
+html:not(.dark) .ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
+  color: #ffffff;
+  background-color: rgba(7,20,38,.18);
+}
+html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="cta"] a > span {
+  color: #071426;
+  background-color: rgba(255,255,255,.42);
+  border-color: rgba(7,20,38,.22);
+}
+
+
+/* Match the About and Contact hero canvases to the Landing aquaculture hero.
+   Keep the subtle grid texture, but use the exact same
+   light/dark background layers so all three page heroes feel continuous. */
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  isolation: isolate;
+  background-color: #f8fafc;
+  background-image:
+    radial-gradient(ellipse at 50% 34%, rgba(8,126,139,.10), transparent 52%),
+    radial-gradient(circle, rgba(8,126,139,.11) .8px, transparent 1.2px),
+    linear-gradient(180deg, #ffffff 0%, #eff8f7 100%);
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-size: auto, 22px 22px, auto;
+  background-position: center, center top, center;
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  background-color: #070d18 !important;
+  background-image:
+    radial-gradient(ellipse at 50% 28%, color-mix(in srgb, var(--ep-accent) 18%, transparent), transparent 55%),
+    radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 58%),
+    radial-gradient(circle, rgba(112,215,200,.13) .8px, transparent 1.2px),
+    linear-gradient(180deg, #123b42 0%, #0b252b 58%, #07191e 100%) !important;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-size: auto, auto, 22px 22px, auto;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] > .ep-hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 12%,rgba(255,255,255,.72),transparent 58%),
+    linear-gradient(180deg,rgba(255,255,255,.12),rgba(226,232,240,.18));
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] > .ep-hero-atmosphere {
+  background:
+    radial-gradient(ellipse at 50% 18%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 58%),
+    linear-gradient(180deg, rgba(7,13,24,.08), rgba(7,13,24,.24));
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-child(1) {
+  opacity: .18;
+  mix-blend-mode: screen;
+}
+html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-child(1) {
+  opacity: .24;
+  mix-blend-mode: multiply;
+}
+
+
+/* ==========================================================================
+   Phase 1 polish: shared public-page rhythm, responsive surfaces and focus.
+   Kept token-driven so light/dark mode stay in sync with the brand palette.
+   ========================================================================== */
+
+/* Keep page sections aligned to one editorial content width. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) main > section > :is(div,article) {
+  min-width: 0;
+}
+:is(.ep-about-page,.ep-contact-page) main {
+  overflow: clip;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(h1,h2,h3) {
+  color: var(--ep-text);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(a,button,input,textarea,select):focus-visible {
+  outline: 2px solid var(--ep-accent);
+  outline-offset: 3px;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* About and Contact share one fixed hero height so their page headers
+   align consistently even when their headline text wraps differently. */
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  height: clamp(360px, 42vw, 540px);
+  min-height: clamp(360px, 42vw, 540px);
+  box-sizing: border-box;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
+  width: min(100%, 1440px);
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] {
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 1.02;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-lead] {
+  line-height: 1.75;
+}
+
+/* Public page content keeps consistent side gutters at every breakpoint. */
+:is(.ep-about-page,.ep-contact-page) main > section:not([data-page-hero]) {
+  padding-inline: clamp(1rem, 3.2vw, 2.5rem);
+}
+.ep-about-page #objectives,
+.ep-about-page #scope {
+  padding-block: clamp(3.75rem, 7vw, 6rem);
+}
+.ep-about-page #systems {
+  padding-block: clamp(3.75rem, 7vw, 6rem);
+}
+.ep-about-page #systems article,
+.ep-about-page #objectives article,
+.ep-about-page #scope article {
+  height: 100%;
+}
+.ep-contact-page main > section {
+  padding-block: clamp(3.5rem, 6vw, 5.5rem);
+}
+.ep-contact-page [data-contact-details],
+.ep-contact-page [data-contact-form] > form {
+  height: 100%;
+}
+
+/* The header and footer remain neutral; blue is reserved for interaction. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) #site-header {
+  border-color: color-mix(in srgb, var(--ep-line) 72%, transparent);
+  transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] {
+  background: var(--ep-surface) !important;
+  color: var(--ep-text) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) {
+  color: var(--ep-text) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] nav a:hover {
+  color: var(--ep-accent) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] .ep-footer-bottom {
+  border-top: 1px solid var(--ep-line);
+}
+
+/* Avoid hover-only movement on touch devices and honor reduced motion. */
+@media (hover: none) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) :is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article) {
+    transform: none !important;
+  }
+}
+@media (max-width: 767px) {
+  :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+    height: auto;
+    min-height: 0;
+  }
+  :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
+    min-height: 310px;
+    padding-top: 5.5rem;
+    padding-bottom: 3.25rem;
+  }
+  :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] {
+    font-size: clamp(2.35rem, 10vw, 3.75rem);
+  }
+  .ep-contact-page main > section > div > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-contact-page [data-contact-details],
+  .ep-contact-page [data-contact-form] > form {
+    border-radius: 1.2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) #site-header {
+    transition: none;
+  }
+}
+
+
+/* ==========================================================================
+   Landing page Phase 1: hero, section rhythm, cards and mobile safeguards.
+   Original CSS-only decoration; no third-party imagery or business claims.
+   ========================================================================== */
+.ep-business-landing {
+  min-width: 0;
+  overflow-x: clip;
+}
+.ep-business-landing .ep-aquaculture-hero {
+  min-height: clamp(590px, 68vw, 760px);
+  scroll-margin-top: 5rem;
+}
+.ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+  padding-top: clamp(4.75rem, 7vw, 6.5rem);
+  padding-bottom: clamp(4.5rem, 6vw, 5.75rem);
+}
+.ep-business-landing .ep-field-hero-copy h1 {
+  max-width: 16ch;
+  font-size: clamp(2.75rem, 6.4vw, 5.25rem);
+  line-height: 1.02;
+  letter-spacing: -.06em;
+  text-wrap: balance;
+}
+.ep-business-landing .ep-field-hero-copy [data-hero="lead"] {
+  max-width: 42rem;
+  font-size: clamp(.98rem, 1.35vw, 1.125rem);
+  line-height: 1.8;
+}
+.ep-business-landing .ep-field-hero-copy [data-hero="cta"] {
+  margin-top: 2rem;
+}
+.ep-business-landing .ep-field-hero-copy [data-hero="cta"] a {
+  min-height: 3.25rem;
+  padding-inline: 1.5rem;
+  box-shadow: 0 14px 34px -18px rgba(8,126,139,.72);
+}
+.ep-business-landing .ep-stats-panel {
+  position: relative;
+  z-index: 2;
+  margin-top: -1px;
+}
+.ep-business-landing #readings,
+.ep-business-landing #capabilities,
+.ep-business-landing #process {
+  scroll-margin-top: 5rem;
+}
+.ep-business-landing #readings [data-reading] {
+  min-width: 0;
+  box-shadow: 0 18px 42px -32px rgba(0,0,0,.38);
+  transition: transform .22s ease, border-color .22s ease, background-color .22s ease, box-shadow .22s ease;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .ep-business-landing #readings [data-reading]:hover,
+  .ep-business-landing [data-business-card]:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--ep-accent) 58%, var(--ep-line));
+    box-shadow: 0 22px 48px -30px rgba(8,126,139,.28);
+  }
+}
+.ep-business-landing [data-business-card] {
+  min-width: 0;
+  height: 100%;
+  box-shadow: 0 16px 42px -34px rgba(15,23,42,.30);
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+.ep-business-landing [data-business-card] h3 {
+  text-wrap: balance;
+}
+.ep-business-landing #process [data-reveal] {
+  max-width: 46rem;
+}
+.ep-business-landing :is(#readings,#capabilities,#process) h2 {
+  text-wrap: balance;
+}
+.ep-business-landing :is(#readings,#capabilities,#process) p {
+  text-wrap: pretty;
+}
+.ep-business-landing a:focus-visible,
+.ep-business-landing button:focus-visible {
+  outline-offset: 4px;
+}
+@media (max-width: 767px) {
+  .ep-business-landing .ep-aquaculture-hero {
+    min-height: auto;
+  }
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-top: 5.25rem;
+    padding-bottom: 4rem;
+  }
+  .ep-business-landing .ep-field-hero-copy h1 {
+    max-width: 13ch;
+    font-size: clamp(2.55rem, 9.4vw, 4.25rem);
+    line-height: 1.04;
+    letter-spacing: -.055em;
+  }
+  .ep-business-landing .ep-field-hero-copy [data-hero="lead"] {
+    max-width: 34rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .ep-business-landing .ep-stats-panel {
+    margin-inline: auto;
+  }
+  .ep-business-landing #readings > div,
+  .ep-business-landing #capabilities > div,
+  .ep-business-landing #process > div {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+@media (max-width: 420px) {
+  .ep-business-landing .ep-aquaculture-hero .ep-field-hero {
+    padding-inline: 1.125rem;
+  }
+  .ep-business-landing .ep-field-hero-copy h1 {
+    font-size: clamp(2.35rem, 10.2vw, 2.9rem);
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    padding: .875rem;
+  }
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    font-size: 1.2rem;
+    overflow-wrap: anywhere;
+  }
+  .ep-business-landing #readings [data-reading] {
+    padding: 1.125rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing :is([data-reading],[data-business-card]) {
+    transition: none !important;
+  }
+}
+
+
