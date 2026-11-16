@@ -263,8 +263,7 @@ export function WaterQuality() {
                 ))}
               </div>
             </div>
-            <div className="dashboard-table-scroll max-w-full overflow-x-auto overscroll-x-contain" role="region" aria-label="Tank readings table" tabIndex={0}>
-              <ScrollFadeContainer>
+            <ScrollFadeContainer ariaLabel="Tank readings table" className="dashboard-table-scroll">
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
                   <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--sand-dim)]">
@@ -315,8 +314,7 @@ export function WaterQuality() {
                   )}
                 </tbody>
               </table>
-              </ScrollFadeContainer>
-            </div>
+            </ScrollFadeContainer>
           </Panel>
         </>
       ) : (
