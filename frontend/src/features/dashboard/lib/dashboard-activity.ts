@@ -14,11 +14,13 @@ export function buildRecentDashboardActivity(
   waterHistory: WaterHistoryPoint[],
   visionScanLog: DashboardData["visionScanLog"],
 ): RecentDashboardActivity[] {
+  const tankNames = new Map(tanks.map((tank) => [tank.id, tank.name]));
+
   return [
     ...waterHistory.map((point) => ({
       id: `water-${point.tankId}-${point.recordedAt}`,
       kind: "Water reading" as const,
-      tankName: tanks.find((tank) => tank.id === point.tankId)?.name ?? "Unknown tank",
+      tankName: tankNames.get(point.tankId) ?? "Unknown tank",
       detail: `DO ${point.dissolvedOxygen.toFixed(1)} mg/L · pH ${point.ph.toFixed(1)} · ${point.temperature.toFixed(1)} °C`,
       timestamp: new Date(point.recordedAt),
     })),
