@@ -1,0 +1,521 @@
+/* ==========================================================================
+   EcoPrawn Unified Palette
+   60% neutral canvas, 30% deep ocean structure, 10% Ocean Teal accents.
+   Loaded last so legacy page-specific declarations cannot reintroduce old
+   brand colors. Semantic success, warning, and error indicators are retained.
+   ========================================================================== */
+:root {
+  --background: #f8fafc; --foreground: #111827;
+  --card: #ffffff; --card-foreground: #111827;
+  --popover: #ffffff; --popover-foreground: #111827;
+  --primary: #087e8b; --primary-foreground: #ffffff;
+  --secondary: #f1f5f9; --secondary-foreground: #1f2937;
+  --muted: #f1f5f9; --muted-foreground: #475569;
+  --accent: #087e8b; --accent-foreground: #ffffff;
+  --border: #dbe2ea; --input: #dbe2ea; --ring: #087e8b;
+  --sidebar: #ffffff; --sidebar-foreground: #111827;
+  --sidebar-primary: #087e8b; --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e6f4f3; --sidebar-accent-foreground: #066874;
+  --sidebar-border: #dbe2ea; --sidebar-ring: #087e8b;
+  --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea; --ep-primary: #111827; --ep-primary-soft: #1f2937;
+  --ep-secondary: #1f2937; --ep-text-muted: #475569;
+  --ep-accent: #087e8b; --ep-accent-hover: #066874; --ep-on-accent: #ffffff;
+  --water-deep: #111827; --water-mid: #1f2937; --ink: #111827;
+}
+html.dark {
+  --background: #0b171b; --foreground: #e8f4f2;
+  --card: #102328; --card-foreground: #e8f4f2;
+  --popover: #102328; --popover-foreground: #e8f4f2;
+  --primary: #45c5b3; --primary-foreground: #071426;
+  --secondary: #153a3e; --secondary-foreground: #e8f4f2;
+  --muted: #153a3e; --muted-foreground: #a7c2c1;
+  --accent: #45c5b3; --accent-foreground: #071426;
+  --border: #285158; --input: #285158; --ring: #45c5b3;
+  --sidebar: #102b31; --sidebar-foreground: #e8f4f2;
+  --sidebar-primary: #45c5b3; --sidebar-primary-foreground: #071426;
+  --sidebar-accent: #153a3e; --sidebar-accent-foreground: #70d7c8;
+  --sidebar-border: #285158; --sidebar-ring: #45c5b3;
+  --ep-bg: #0b171b; --ep-surface: #102328; --ep-tint: #153a3e;
+  --ep-line: #285158; --ep-primary: #e8f4f2; --ep-primary-soft: #c9e2df;
+  --ep-secondary: #c9e2df; --ep-text-muted: #a7c2c1;
+  --ep-accent: #45c5b3; --ep-accent-hover: #70d7c8; --ep-on-accent: #071426;
+  --water-deep: #f8fafc; --water-mid: #e2e8f0; --ink: #e8f4f2;
+}
+html:not(.dark) body.ecoprawn-root { background: #f8fafc; color: #111827; }
+html.dark body.ecoprawn-root { background: #0b171b; color: #e8f4f2; }
+.ep-landing, .ep-about-page, .ep-contact-page {
+  --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea; --ep-primary: #111827; --ep-secondary: #1f2937;
+  --ep-text: #111827; --ep-text-muted: #475569; --ep-accent: #087e8b;
+  --ep-accent-hover: #066874; --ep-on-accent: #ffffff;
+}
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-bg: #0b171b; --ep-surface: #102328; --ep-tint: #153a3e;
+  --ep-line: #334155; --ep-primary: #f8fafc; --ep-secondary: #e2e8f0;
+  --ep-text: #f8fafc; --ep-text-muted: #cbd5e1; --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8; --ep-on-accent: #071426;
+}
+:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a)[class*="bg-"] { --tw-ring-color: #087e8b; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a):focus-visible { outline-color: #087e8b !important; }
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a):focus-visible { outline-color: #45c5b3 !important; }
+.ep-logo { --ep-logo-color: #111827 !important; --ep-logo-text: #111827 !important; }
+.ep-logo .ep-logo-shrimp { fill: #111827 !important; stroke: #111827 !important; }
+.ep-logo .ep-logo-wordmark { color: #111827 !important; -webkit-text-fill-color: #111827 !important; }
+html.dark .ep-logo { --ep-logo-color: #f8fafc !important; --ep-logo-text: #f8fafc !important; }
+html.dark .ep-logo .ep-logo-shrimp { fill: #f8fafc !important; stroke: #f8fafc !important; }
+html.dark .ep-logo .ep-logo-wordmark { color: #f8fafc !important; -webkit-text-fill-color: #f8fafc !important; }
+footer[data-site-footer] { background: #f8fafc !important; color: #111827 !important; }
+html.dark footer[data-site-footer] { background: #07191e !important; color: #e8f4f2 !important; }
+footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) { color: #111827 !important; }
+html.dark footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) { color: #f8fafc !important; }
+footer[data-site-footer] nav a:hover { color: #087e8b !important; }
+html.dark footer[data-site-footer] nav a:hover { color: #45c5b3 !important; }
+
+
+/* Final marketing-page cleanup: neutralize legacy green/teal utility colors. */
+:is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-deep: #111827;
+  --ep-on-deep: #ffffff;
+  --ep-on-deep-muted: #cbd5e1;
+  --ep-primary: #111827;
+  --ep-secondary: #1f2937;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+}
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-deep: #0b171b;
+  --ep-on-deep: #f8fafc;
+  --ep-on-deep-muted: #cbd5e1;
+  --ep-primary: #f8fafc;
+  --ep-secondary: #e2e8f0;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+}
+/* Remap legacy teal utility classes to Ocean Teal. Preserve emerald/green
+   utilities for semantic success indicators. */
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="text-teal-"] { color: var(--ep-accent) !important; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="border-teal-"] { border-color: color-mix(in srgb,var(--ep-accent) 32%,transparent) !important; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-teal-"] { background-color: color-mix(in srgb,var(--ep-accent) 10%,var(--ep-surface)) !important; }
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-teal-"] { background-color: color-mix(in srgb,var(--ep-accent) 16%,var(--ep-surface)) !important; }
+
+/* Logo must be strictly monochrome on every page, including legacy footer rules. */
+html:not(.dark) .ep-logo,
+html:not(.dark) .ep-logo .ep-logo-wordmark {
+  --ep-logo-color: #111827 !important;
+  --ep-logo-text: #111827 !important;
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+html:not(.dark) .ep-logo .ep-logo-shrimp,
+html:not(.dark) .ep-logo .ep-logo-text {
+  fill: #111827 !important;
+  stroke: #111827 !important;
+}
+html.dark .ep-logo,
+html.dark .ep-logo .ep-logo-wordmark {
+  --ep-logo-color: #ffffff !important;
+  --ep-logo-text: #ffffff !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .ep-logo .ep-logo-shrimp,
+html.dark .ep-logo .ep-logo-text {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+
+/* Dashboard surfaces follow the same 60/30/10 system as public pages:
+   neutral canvas/cards, deep-ocean structure, and restrained brand accents. */
+.dashboard-shell {
+  --ep-brand-primary: #087e8b;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-primary: #173b46;
+  --ep-primary-soft: #245563;
+  --ep-secondary: #245563;
+  --ep-text: #173b46;
+  --ep-text-muted: #58717a;
+  --ep-on-accent: #ffffff;
+  --ep-accent-tint: rgba(8, 126, 139, .11);
+  --ep-accent-tint-soft: rgba(8, 126, 139, .065);
+  --ep-bg: #f8fafc;
+  --ep-surface: #ffffff;
+  --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea;
+  --ep-status-success: #15803d;
+  --ep-status-warning: #b45309;
+  --ep-status-danger: #b91c1c;
+  background: #f8fafc !important;
+  color: #173b46;
+}
+html.dark .dashboard-shell {
+  --ep-brand-primary: #45c5b3;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-primary: #e8f4f2;
+  --ep-primary-soft: #c9e2df;
+  --ep-secondary: #c9e2df;
+  --ep-text: #e8f4f2;
+  --ep-text-muted: #a7c2c1;
+  --ep-on-accent: #092b31;
+  --ep-accent-tint: rgba(69, 197, 179, .14);
+  --ep-accent-tint-soft: rgba(69, 197, 179, .08);
+  --ep-bg: #0b171b;
+  --ep-surface: #102328;
+  --ep-tint: #153a3e;
+  --ep-line: #285158;
+  --ep-status-success: #86efac;
+  --ep-status-warning: #fcd34d;
+  --ep-status-danger: #fca5a5;
+  background: #0b171b !important;
+  color: #e8f4f2;
+}
+.dashboard-shell aside,
+html:not(.dark) .dashboard-shell aside { background: #ffffff !important; color: #173b46 !important; border-color: #dbe2ea !important; }
+html.dark .dashboard-shell aside { background: #102328 !important; color: #e8f4f2 !important; border-color: #285158 !important; }
+.dashboard-shell .dashboard-nav-active,
+html:not(.dark) .dashboard-shell .dashboard-nav-active { background: #087e8b !important; border-color: #087e8b !important; color: #ffffff !important; }
+html.dark .dashboard-shell .dashboard-nav-active { background: #45c5b3 !important; border-color: #45c5b3 !important; color: #092b31 !important; }
+.dashboard-shell .dashboard-panel,
+.dashboard-shell .dashboard-kpi,
+.dashboard-shell .dashboard-tank-snapshot {
+  border-color: var(--ep-line);
+  box-shadow: 0 10px 28px -24px rgba(23, 59, 70, .45);
+}
+.dashboard-shell .dashboard-panel-icon { color: var(--ep-accent); background: var(--ep-accent-tint); }
+.dashboard-shell :is(button,a):focus-visible { outline-color: var(--ep-accent) !important; }
+
+
+/* Water Quality: make tank selection, threshold controls and readings easier to scan. */
+.dashboard-water-quality-page .dashboard-page-header,
+.dashboard-alerts-page .dashboard-page-header { border-color: var(--ep-line) !important; }
+.dashboard-water-quality-page [role="tablist"] { scrollbar-width: thin; scrollbar-color: var(--ep-accent-tint) transparent; }
+.dashboard-water-quality-page [role="tab"] {
+  min-height: 42px; border-radius: 12px !important; border-color: var(--ep-line) !important;
+  background: var(--ep-surface) !important; color: var(--ep-text-muted) !important;
+}
+.dashboard-water-quality-page [role="tab"][aria-selected="true"] {
+  border-color: var(--ep-accent) !important; background: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important; box-shadow: 0 5px 14px -10px var(--ep-accent);
+}
+.dashboard-water-quality-page .dashboard-sensor-gauge,
+.dashboard-water-quality-page .dashboard-hover { border-color: var(--ep-line); background: var(--ep-surface); }
+.dashboard-water-quality-page table thead tr { color: var(--ep-text-muted) !important; border-color: var(--ep-line) !important; }
+.dashboard-water-quality-page table tbody tr { transition: background-color .16s ease; }
+.dashboard-water-quality-page table tbody tr:hover { background: var(--ep-accent-tint-soft); }
+.dashboard-water-quality-page table td { color: var(--ep-text); border-color: var(--ep-line); }
+.dashboard-water-quality-page input[type="number"] { min-height: 42px; }
+.dashboard-water-quality-page button, .dashboard-alerts-page button,
+.dashboard-water-quality-page a, .dashboard-alerts-page a { -webkit-tap-highlight-color: transparent; }
+.dashboard-water-quality-page :is(button,a):focus-visible,
+.dashboard-alerts-page :is(button,a,input):focus-visible {
+  outline: 2px solid var(--ep-accent) !important; outline-offset: 2px;
+}
+.dashboard-alerts-page .dashboard-kpi { border-top: 3px solid var(--ep-accent); }
+.dashboard-alerts-page section[aria-labelledby="active-alerts-heading"] { border-left: 3px solid var(--ep-status-danger); padding-left: 14px; }
+.dashboard-alerts-page section[aria-labelledby="warning-events-heading"] { border-left: 3px solid var(--ep-status-warning); padding-left: 14px; }
+.dashboard-alerts-page section[aria-labelledby="info-events-heading"] { border-left: 3px solid var(--ep-accent); padding-left: 14px; }
+.dashboard-alerts-page label:focus-within { border-color: var(--ep-accent); box-shadow: 0 0 0 3px var(--ep-accent-tint); }
+@media (max-width: 640px) {
+  .dashboard-water-quality-page .dashboard-panel, .dashboard-alerts-page .dashboard-panel { padding: 16px !important; }
+  .dashboard-water-quality-page .dashboard-page-header, .dashboard-alerts-page .dashboard-page-header {
+    margin-bottom: 18px !important; padding-bottom: 18px !important;
+  }
+}
+
+
+/* ==========================================================================
+   EcoPrawn brand unification — Ocean Teal (#087E8B)
+   Shared by every dashboard view, public page, and global interaction state.
+   ========================================================================== */
+:root {
+  --primary: #087e8b;
+  --primary-foreground: #ffffff;
+  --accent: #087e8b;
+  --accent-foreground: #ffffff;
+  --ring: #087e8b;
+  --sidebar-primary: #087e8b;
+  --sidebar-ring: #087e8b;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #071426;
+  --ep-brand-primary: #087e8b;
+}
+html.dark {
+  --primary: #45c5b3;
+  --primary-foreground: #092b31;
+  --accent: #45c5b3;
+  --accent-foreground: #092b31;
+  --ring: #45c5b3;
+  --sidebar-primary: #45c5b3;
+  --sidebar-ring: #45c5b3;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-brand-primary: #45c5b3;
+}
+
+/* Dashboard pages share the same brand tokens and active navigation treatment. */
+.dashboard-shell {
+  --ep-brand-primary: #087e8b;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #ffffff;
+  --ep-accent-tint: rgba(8,126,139,.12);
+  --ep-accent-tint-soft: rgba(8,126,139,.07);
+  --ep-brand-glow: rgba(8,126,139,.22);
+}
+html.dark .dashboard-shell {
+  --ep-brand-primary: #45c5b3;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-accent-tint: rgba(69,197,179,.15);
+  --ep-accent-tint-soft: rgba(69,197,179,.08);
+  --ep-brand-glow: rgba(69,197,179,.2);
+}.dashboard-shell :is(button,a,[role="button"]):focus-visible {
+  outline: 2px solid var(--ep-accent) !important;
+  outline-offset: 3px;
+}
+
+/* Landing, About, and Contact use Ocean Teal for links, calls to action and accents. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #071426;
+  --ep-zone: #087e8b;
+  --ep-marker: #45c5b3;
+  --ep-status-info: #087e8b;
+  --ep-status-info-bg: #d9f0ef;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-zone: #45c5b3;
+  --ep-marker: #70d7c8;
+  --ep-status-info: #70d7c8;
+  --ep-status-info-bg: #153a3e;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(a,button,[role="button"]):focus-visible {
+  outline: 2px solid #087e8b !important;
+  outline-offset: 3px;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) :is(a,button,[role="button"]):focus-visible {
+  outline-color: #45c5b3 !important;
+}
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary,
+.ep-about-page [data-page-hero-headline] > span:last-child,
+.ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #087e8b !important;
+  -webkit-text-fill-color: #087e8b !important;
+}
+html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary,
+html.dark .ep-about-page [data-page-hero-headline] > span:last-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #45c5b3 !important;
+  -webkit-text-fill-color: #45c5b3 !important;
+}
+footer[data-site-footer] nav a:hover,
+:is(.ep-landing,.ep-about-page,.ep-contact-page) a:hover {
+  color: #066874;
+}
+html.dark footer[data-site-footer] nav a:hover,
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) a:hover {
+  color: #70d7c8;
+}
+
+/* Shared hover, focus and motion accents. Respect reduced-motion preferences. */
+.ecoprawn-root :is(a,button,[role="button"]):not(:disabled):hover {
+  border-color: var(--ep-accent, #087e8b);
+}
+.ecoprawn-root :is(input,select,textarea):focus {
+  border-color: var(--ep-accent, #087e8b) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent, #087e8b) 18%, transparent) !important;
+}
+.dashboard-hover:hover {
+  border-color: var(--ep-accent, #087e8b);
+  background-color: color-mix(in srgb, var(--ep-surface) 92%, var(--ep-accent, #087e8b));
+  box-shadow: 0 12px 28px -18px var(--ep-brand-glow, rgba(8,126,139,.35));
+}
+.dashboard-hover:focus-within {
+  border-color: var(--ep-accent, #087e8b);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent, #087e8b) 16%, transparent);
+}
+.ep-pulse-dot, .ep-probe-pulse {
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--ep-accent, #087e8b) 65%, transparent));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ecoprawn-root :is(a,button,[role="button"]):not(:disabled) {
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease,
+      box-shadow 220ms ease, transform 180ms ease;
+  }
+}
+
+
+/* ==========================================================================
+   Final Ocean Teal coverage — every public and dashboard surface.
+   Brand accents only; preserve semantic success, warning and danger colors.
+   ========================================================================== */
+:root {
+  --ep-brand-primary: #087e8b;
+  --ep-brand-hover: #066874;
+  --ep-brand-soft: #45c5b3;
+  --ep-brand-glow: rgba(8,126,139,.24);
+  --ep-brand-wash: rgba(8,126,139,.09);
+}
+html.dark {
+  --ep-brand-primary: #45c5b3;
+  --ep-brand-hover: #70d7c8;
+  --ep-brand-soft: #70d7c8;
+  --ep-brand-glow: rgba(69,197,179,.24);
+  --ep-brand-wash: rgba(69,197,179,.11);
+}
+
+/* Ensure every page root and nested layout inherits the same brand tokens. */
+.ecoprawn-root,
+.dashboard-shell,
+.ep-landing,
+.ep-about-page,
+.ep-contact-page,
+#site-header,
+footer[data-site-footer] {
+  --ep-brand-primary: #087e8b;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #071426;
+  --ep-brand-glow: rgba(8,126,139,.24);
+  --ep-brand-wash: rgba(8,126,139,.09);
+}
+html.dark :is(.ecoprawn-root,.dashboard-shell,.ep-landing,.ep-about-page,.ep-contact-page,#site-header,footer[data-site-footer]) {
+  --ep-brand-primary: #45c5b3;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-brand-glow: rgba(69,197,179,.24);
+  --ep-brand-wash: rgba(69,197,179,.11);
+}
+
+/* Shared structure: header, footer, desktop sidebar, mobile drawer and bottom nav. */
+#site-header :is(a,button):focus-visible,
+footer[data-site-footer] :is(a,button):focus-visible,
+.dashboard-shell :is(aside,nav) :is(a,button):focus-visible {
+  outline: 2px solid var(--ep-accent) !important;
+  outline-offset: 3px;
+}
+#site-header :is(a,button):hover,
+footer[data-site-footer] nav a:hover,
+.dashboard-shell aside nav a:hover,
+.dashboard-shell [data-mobile-nav] a:hover {
+  border-color: var(--ep-accent);
+}
+.dashboard-shell aside nav a[aria-current="page"],
+.dashboard-shell aside nav a[aria-current="page"] > span,
+.dashboard-shell .dashboard-nav-active,
+.dashboard-shell .ep-mobile-dashboard-drawer nav a[aria-current="page"],
+.dashboard-shell .ep-mobile-dashboard-drawer > div:last-child a[aria-current="page"] {
+  background-color: var(--ep-accent) !important;
+  border-color: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important;
+}
+.dashboard-shell .dashboard-nav-active-dot,
+.dashboard-shell aside nav a[aria-current="page"] [data-active-indicator] {
+  background-color: var(--ep-accent) !important;
+}
+
+/* Cards, panels, tiles, feature blocks and interactive component surfaces. */
+.ecoprawn-root :is(.dashboard-hover,.dashboard-panel,.dashboard-kpi,.dashboard-tank-snapshot,[data-card],[data-feature-card]):hover {
+  border-color: color-mix(in srgb, var(--ep-accent) 58%, var(--ep-line, #d7e5e5)) !important;
+  box-shadow: 0 16px 36px -26px var(--ep-brand-glow), 0 0 0 1px color-mix(in srgb, var(--ep-accent) 9%, transparent);
+}
+.ecoprawn-root :is(button,a,[role="button"],[role="tab"]):focus-visible {
+  outline-color: var(--ep-accent) !important;
+}
+.ecoprawn-root :is(input,select,textarea):focus-visible {
+  border-color: var(--ep-accent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent) 18%, transparent) !important;
+}
+
+/* Hero sections, animated accents, progress fills, charts and decorative rings. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell) :is(
+  [data-hero-accent],[data-brand-accent],.ep-hero-accent,.ep-pulse-dot,.ep-probe-pulse,
+  .ep-about-orbit-c,.ep-contact-signal-ring-three
+) {
+  border-color: var(--ep-accent);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell) :is(
+  [data-hero-accent],[data-brand-accent],.ep-hero-accent
+) {
+  color: var(--ep-accent);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell) :is(
+  .ep-pulse-dot,.ep-probe-pulse
+) {
+  filter: drop-shadow(0 0 6px var(--ep-brand-glow));
+}
+
+/* Catch legacy blue/indigo utility classes used by JSX across all page sections.
+   Status success/warning/danger utilities are intentionally not targeted. */
+.ecoprawn-root [class*="text-blue-"],
+.ecoprawn-root [class*="text-indigo-"] {
+  color: var(--ep-accent) !important;
+}
+.ecoprawn-root [class*="border-blue-"],
+.ecoprawn-root [class*="border-indigo-"] {
+  border-color: color-mix(in srgb, var(--ep-accent) 68%, transparent) !important;
+}
+.ecoprawn-root [class*="ring-blue-"],
+.ecoprawn-root [class*="ring-indigo-"] {
+  --tw-ring-color: var(--ep-accent) !important;
+}
+.ecoprawn-root [class*="bg-blue-"],
+.ecoprawn-root [class*="bg-indigo-"] {
+  background-color: color-mix(in srgb, var(--ep-accent) 10%, var(--ep-surface, #ffffff)) !important;
+}
+.ecoprawn-root [class*="from-blue-"],
+.ecoprawn-root [class*="from-indigo-"] {
+  --tw-gradient-from: var(--ep-accent) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: color-mix(in srgb, var(--ep-accent) 0%, transparent) var(--tw-gradient-to-position) !important;
+}
+.ecoprawn-root [class*="to-blue-"],
+.ecoprawn-root [class*="to-indigo-"] {
+  --tw-gradient-to: var(--ep-brand-soft) var(--tw-gradient-to-position) !important;
+}
+.ecoprawn-root [class*="shadow-blue-"],
+.ecoprawn-root [class*="shadow-indigo-"] {
+  --tw-shadow-color: var(--ep-brand-glow) !important;
+}
+
+/* State variants: active/hover/focus styles use teal without recoloring neutral surfaces. */
+.ecoprawn-root [class*="hover\:text-blue-"]:hover,
+.ecoprawn-root [class*="hover\:text-indigo-"]:hover { color: var(--ep-accent) !important; }
+.ecoprawn-root [class*="hover\:border-blue-"]:hover,
+.ecoprawn-root [class*="hover\:border-indigo-"]:hover { border-color: var(--ep-accent) !important; }
+.ecoprawn-root [class*="hover\:bg-blue-"]:hover,
+.ecoprawn-root [class*="hover\:bg-indigo-"]:hover {
+  background-color: color-mix(in srgb, var(--ep-accent) 12%, var(--ep-surface, #ffffff)) !important;
+}
+.ecoprawn-root [class*="focus\:ring-blue-"]:focus,
+.ecoprawn-root [class*="focus\:ring-indigo-"]:focus { --tw-ring-color: var(--ep-accent) !important; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ecoprawn-root :is(a,button,[role="button"],[role="tab"],.dashboard-hover,[data-card],[data-feature-card]) {
+    transition-property: color,background-color,border-color,box-shadow,filter,transform;
+    transition-duration: 180ms;
+    transition-timing-function: ease;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ecoprawn-root *,
+  .ecoprawn-root *::before,
+  .ecoprawn-root *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
