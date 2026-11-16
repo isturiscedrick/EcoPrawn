@@ -2083,3 +2083,45 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
     animation: none !important;
   }
 }
+
+
+/* ---------- Shared dashboard card and typography finish ---------- */
+.dashboard-shell {
+  --ep-card-radius: 1.1rem;
+  --ep-card-shadow: 0 14px 34px -28px color-mix(in srgb,var(--ep-primary) 32%,transparent);
+}
+.dashboard-shell .dashboard-panel,
+.dashboard-shell .dashboard-kpi,
+.dashboard-shell .dashboard-sensor-gauge,
+.dashboard-shell .dashboard-trend-chart {
+  border: 1px solid var(--ep-line);
+  border-radius: var(--ep-card-radius);
+}
+.dashboard-shell .dashboard-panel,
+.dashboard-shell .dashboard-kpi {
+  box-shadow: var(--ep-card-shadow);
+}
+.dashboard-shell .dashboard-panel h3,
+.dashboard-shell .dashboard-kpi :is(h3,p,span) {
+  line-height: 1.4;
+}
+.dashboard-shell .dashboard-kpi > div:first-child > div:first-child,
+.dashboard-shell .dashboard-panel :is(.text-xs,.text-\[10px\],.text-\[11px\]) {
+  color: var(--ep-text-muted);
+}
+.dashboard-shell .dashboard-sensor-gauge,
+.dashboard-shell .dashboard-trend-chart {
+  background-color: var(--ep-tint);
+}
+html.dark .dashboard-shell .dashboard-panel,
+html.dark .dashboard-shell .dashboard-kpi {
+  box-shadow: 0 16px 38px -30px rgba(0,0,0,.62);
+}
+@media (max-width: 767px) {
+  .dashboard-shell .dashboard-panel,
+  .dashboard-shell .dashboard-kpi,
+  .dashboard-shell .dashboard-sensor-gauge,
+  .dashboard-shell .dashboard-trend-chart {
+    border-radius: 1rem;
+  }
+}
