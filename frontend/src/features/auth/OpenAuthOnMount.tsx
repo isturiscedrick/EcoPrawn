@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAuthModal } from "./AuthModalProvider";
+import { useAuthModal } from "./useAuthModal";
 
 /** Opens the sign-in / sign-up modal as soon as the page mounts. */
 export function OpenAuthOnMount() {
