@@ -264,7 +264,7 @@ export function SiteHeader({
                 <span aria-hidden="true">←</span> Back to home
               </Link>
             ) : (
-              <>
+              <div className="hidden items-center gap-1.5 xl:gap-3 lg:flex" aria-label="Desktop account actions">
                 <AuthLink
                   aria-label="Log in"
                   title="Log in"
@@ -287,7 +287,7 @@ export function SiteHeader({
                   <span className="hidden whitespace-nowrap xl:inline">Get started</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
                 </AuthLink>
-              </>
+              </div>
             )}
 
 
