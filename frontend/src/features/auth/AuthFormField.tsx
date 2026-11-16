@@ -27,7 +27,7 @@ interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 // Label + icon + input + message. The message uses one id for both the hint
 // and the error so aria-describedby always points at whatever is showing.
-function Field({
+export function Field({
   id,
   label,
   icon,
@@ -80,7 +80,7 @@ function Field({
   );
 }
 
-function StrengthMeter({ password }: { password: string }) {
+export function StrengthMeter({ password }: { password: string }) {
   const s = passwordStrength(password);
   return (
     <div className="mt-2.5" aria-live="polite">
