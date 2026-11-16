@@ -108,7 +108,7 @@ function GrowthTrendChart({ values }: { values: number[] }) {
               cy={point.y}
               r={selectedIndex === index ? 8 : 6}
               fill="var(--ep-surface)"
-              stroke="var(--coral)"
+              stroke="var(--ep-accent)"
               strokeWidth={selectedIndex === index ? 4 : 3}
               pointerEvents="none"
             />
@@ -134,9 +134,9 @@ export function VisionGrowth() {
 
   return (
     <>
-      <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--sand-dim)]">
+      <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--ep-line)]">
         <div>
-          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
+          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)] mb-2">
             AI &amp; Computer Vision
           </div>
           <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
@@ -147,7 +147,7 @@ export function VisionGrowth() {
           </div>
         </div>
         <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
-          <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
+          <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--ep-accent)]" />
           Last scan · {lastScan}
         </div>
       </div>
@@ -182,7 +182,7 @@ export function VisionGrowth() {
             <Panel title="Recent Vision Scans" badge={`${visionScanLog.length} events`}>
               <div className="flex flex-col">
                 {visionScanLog.length ? visionScanLog.map((s, i) => (
-                  <div key={s.id} className={`dashboard-hover rounded-lg px-2 py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
+                  <div key={s.id} className={`dashboard-hover rounded-lg px-2 py-3 ${i !== 0 ? "border-t border-[var(--ep-line)]" : "pt-0"}`}>
                     <div className="ep-font-mono text-[10.5px] text-[var(--ep-text-muted)] mb-1">
                       {s.time} · {s.tank}
                     </div>
@@ -197,7 +197,7 @@ export function VisionGrowth() {
             <ScrollFadeContainer ariaLabel="Growth snapshot table">
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
-                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--sand-dim)]">
+                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--ep-line)]">
                     <th className="py-2.5 pr-3 font-semibold">Tank</th>
                     <th className="py-2.5 pr-3 font-semibold">Body Length</th>
                     <th className="py-2.5 pr-3 font-semibold">Weight</th>
@@ -207,7 +207,7 @@ export function VisionGrowth() {
                 </thead>
                 <tbody>
                   {tanks.map((t) => (
-                    <tr key={t.id} className="border-b border-[var(--sand-dim)] last:border-b-0">
+                    <tr key={t.id} className="border-b border-[var(--ep-line)] last:border-b-0">
                       <td className="py-3 pr-3 text-[13.5px] font-semibold text-[var(--water-deep)]">{t.name}</td>
                       <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.bodyLength.toFixed(1)} cm</td>
                       <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.weight.toFixed(1)} g</td>
@@ -215,7 +215,7 @@ export function VisionGrowth() {
                       <td className="py-3">
                         <span
                           className={`text-[11.5px] font-semibold ${
-                            t.abnormal === 0 ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
+                            t.abnormal === 0 ? "text-[var(--ep-accent)]" : "text-[var(--amber-text)]"
                           }`}
                         >
                           {t.abnormal === 0 ? "None" : `${t.abnormal} flagged`}
