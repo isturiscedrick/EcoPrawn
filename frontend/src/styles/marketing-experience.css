@@ -210,22 +210,8 @@ html.dark .ep-contact-page main > section {
 .ep-contact-page main > section > div {
   max-width: 1320px;
 }
-.ep-contact-page [data-contact-details] {
-  position: relative;
-  align-self: stretch;
-  justify-content: center;
-  padding: clamp(1rem,2vw,1.75rem);
-  border: 1px solid var(--ep-line);
-  border-radius: 1.5rem;
-  background:
-    radial-gradient(ellipse at 0 0,rgba(8,126,139,.10),transparent 58%),
-    var(--ep-tint);
-}
-html.dark .ep-contact-page [data-contact-details] {
-  background:
-    radial-gradient(ellipse at 0 0,rgba(69,197,179,.14),transparent 58%),
-    var(--ep-surface);
-}
+/* Contact details panel base styles are consolidated in the refinement
+   block below so light/dark surfaces and spacing have one source of truth. */
 .ep-contact-page [data-contact-details]::before {
   content: "ECOPRAWN / CONNECT";
   display: block;
@@ -473,8 +459,13 @@ html.dark .ep-about-page #systems {
 /* Contact: make the details rail read as a designed information panel, not
    three unrelated boxes. The form remains the main action. */
 .ep-contact-page [data-contact-details] {
+  position: relative;
+  align-self: stretch;
+  justify-content: center;
   gap: .85rem;
   padding: clamp(1.25rem,2.6vw,2rem);
+  border: 1px solid var(--ep-line);
+  border-radius: 1.5rem;
   background:
     radial-gradient(circle at 90% 8%,rgba(8,126,139,.10),transparent 34%),
     var(--ep-surface);
