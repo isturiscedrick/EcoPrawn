@@ -153,7 +153,7 @@ export function WaterQuality() {
                   onKeyDown={(event) => handleTankTabKeyDown(event, index)}
                   className={`min-h-11 shrink-0 touch-manipulation rounded-full border px-4 py-2 text-[12.5px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove)] ${
                     selectedTankIndex === index
-                      ? "border-[var(--mangrove)] bg-[var(--mangrove)] text-white"
+                      ? "border-[var(--ep-accent)] bg-[var(--ep-accent)] text-[var(--ep-on-accent)]"
                       : "border-[var(--sand-dim)] bg-[var(--ep-surface)] text-[var(--water-deep)] hover:border-[var(--mangrove)]"
                   }`}
                 >
@@ -208,7 +208,7 @@ export function WaterQuality() {
                       saveThresholds(s);
                       setThresholdMessage("Limits saved on this device.");
                       setEditingThresholds(false);
-                    }} className="min-h-9 rounded-lg bg-[var(--ep-primary)] px-3 text-xs font-semibold text-white hover:opacity-90">Save limits</button>
+                    }} className="min-h-9 rounded-lg bg-[var(--ep-accent)] px-3 text-xs font-semibold text-[var(--ep-on-accent)] hover:opacity-90">Save limits</button>
                     <button type="button" onClick={() => { setThresholdSettings(THRESHOLDS); setThresholdMessage("Default limits restored. Save to apply them."); }} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-text)] hover:bg-[var(--ep-tint)]">Restore defaults</button>
                     {thresholdMessage && <span role="status" className="text-xs text-[var(--ep-text-muted)]">{thresholdMessage}</span>}
                   </div>
@@ -265,7 +265,7 @@ export function WaterQuality() {
                     aria-pressed={statusFilter === option.value}
                     onClick={() => setStatusFilter(option.value)}
                     className={statusFilter === option.value
-                      ? "min-h-11 touch-manipulation rounded-full bg-[var(--ep-accent)] px-3 text-xs font-semibold text-white"
+                      ? "min-h-11 touch-manipulation rounded-full bg-[var(--ep-accent)] px-3 text-xs font-semibold text-[var(--ep-on-accent)]"
                       : "min-h-11 touch-manipulation rounded-full px-3 text-xs font-semibold text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}
                   >
                     {option.label}
