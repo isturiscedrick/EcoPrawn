@@ -34,7 +34,7 @@ This directory is the single source of truth for frontend CSS. Keep styles modul
 ## Ownership and cascade rules
 
 1. Import `globals.css` from the TanStack root route.
-2. Treat `palette-system.css` as the authority for shared Ocean Teal and Soft Coral Sand tokens in light and dark themes. Feature styles may consume tokens but should not redefine the shared brand palette.
+2. Treat `palette-foundation.css` as the authority for shared Ocean Teal and Soft Coral Sand tokens in light and dark themes; keep later palette modules in the documented cascade order. Feature styles may consume tokens but should not redefine the shared brand palette.
 3. Keep dashboard selectors scoped under `.dashboard-shell`.
 4. Keep public-page selectors scoped under `.ep-landing`, `.ep-about-page`, or `.ep-contact-page`, except for intentionally shared public chrome.
 5. Edit the owning selector instead of appending a later corrective override. If a compatibility override is temporarily unavoidable, document why it exists and the rule it supersedes.
