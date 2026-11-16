@@ -94,9 +94,9 @@ export function WaterQuality() {
 
   return (
     <div className="dashboard-water-quality-page">
-      <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--sand-dim)]">
+      <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--ep-line)]">
         <div>
-          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
+          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)] mb-2">
             Sensor Network
           </div>
           <h1 className="ep-font-display text-[24px] font-semibold text-[var(--water-deep)] leading-tight sm:text-[28px]">
@@ -115,10 +115,10 @@ export function WaterQuality() {
         }} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] sm:w-auto">
           <span aria-hidden="true">↓</span> Export readings
         </button>
-        <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
+        <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span
             className={`w-[7px] h-[7px] rounded-full ${
-              warnCount === 0 ? "ep-pulse-dot bg-[var(--mangrove)]" : "bg-[var(--amber)]"
+              warnCount === 0 ? "ep-pulse-dot bg-[var(--ep-accent)]" : "bg-[var(--amber)]"
             }`}
           />
           {warnCount === 0 ? "All parameters nominal" : `${warnCount} tank${warnCount !== 1 ? "s" : ""} out of range`}
@@ -127,7 +127,7 @@ export function WaterQuality() {
       {tankCount > 0 ? (
         <>
           <div className="mb-4">
-            <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
+            <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)] mb-2">
               Tank details
             </div>
             <div role="tablist" aria-label="Water quality by tank" className="flex gap-2 overflow-x-auto pb-1">
@@ -142,10 +142,10 @@ export function WaterQuality() {
                   tabIndex={selectedTankIndex === index ? 0 : -1}
                   onClick={() => { setSelectedTankId(tank.id); window.sessionStorage.setItem("ecoprawn.dashboard.selected-tank", tank.id); }}
                   onKeyDown={(event) => handleTankTabKeyDown(event, index)}
-                  className={`min-h-11 shrink-0 touch-manipulation rounded-full border px-4 py-2 text-[12.5px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove)] ${
+                  className={`min-h-11 shrink-0 touch-manipulation rounded-full border px-4 py-2 text-[12.5px] font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)] ${
                     selectedTankIndex === index
                       ? "border-[var(--ep-accent)] bg-[var(--ep-accent)] text-[var(--ep-on-accent)]"
-                      : "border-[var(--sand-dim)] bg-[var(--ep-surface)] text-[var(--water-deep)] hover:border-[var(--mangrove)]"
+                      : "border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--water-deep)] hover:border-[var(--ep-accent)]"
                   }`}
                 >
                   <span className={`mr-2 inline-block h-2 w-2 rounded-full align-middle ${!tank.hasWaterReadings ? "bg-slate-400" : tank.status === "ok" ? "bg-emerald-500" : "bg-amber-500"}`} aria-hidden="true" />
@@ -214,7 +214,7 @@ export function WaterQuality() {
                 {thresholds.map((t) => (
                   <div
                     key={t.label}
-                    className="dashboard-hover flex items-center justify-between rounded-[10px] border border-[var(--sand-dim)] p-3"
+                    className="dashboard-hover flex items-center justify-between rounded-[10px] border border-[var(--ep-line)] p-3"
                   >
                     <div>
                       <div className="text-[13px] font-semibold text-[var(--water-deep)]">{t.label}</div>
@@ -266,7 +266,7 @@ export function WaterQuality() {
             <ScrollFadeContainer ariaLabel="Tank readings table" className="dashboard-table-scroll">
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
-                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--sand-dim)]">
+                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--ep-line)]">
                     <th className="py-2.5 pr-3 font-semibold">Tank</th>
                     <th className="py-2.5 pr-3 font-semibold">DO (mg/L)</th>
                     <th className="py-2.5 pr-3 font-semibold">pH</th>
@@ -278,7 +278,7 @@ export function WaterQuality() {
                 </thead>
                 <tbody>
                   {filteredTanks.map((t) => (
-                    <tr key={t.id} className="border-b border-[var(--sand-dim)] last:border-b-0">
+                    <tr key={t.id} className="border-b border-[var(--ep-line)] last:border-b-0">
                       <td className="py-3 pr-3 text-[13.5px] font-semibold text-[var(--water-deep)]">{t.name}</td>
                       <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">
                         {t.hasWaterReadings ? t.dissolvedOxygen.toFixed(1) : "—"}
@@ -292,12 +292,12 @@ export function WaterQuality() {
                       <td className="py-3">
                         <span
                           className={`inline-flex items-center gap-1.5 text-[11.5px] font-semibold ${
-                            !t.hasWaterReadings ? "text-[var(--ep-text-muted)]" : t.status === "ok" ? "text-[var(--mangrove)]" : "text-[var(--amber-text)]"
+                            !t.hasWaterReadings ? "text-[var(--ep-text-muted)]" : t.status === "ok" ? "text-[var(--ep-status-success)]" : "text-[var(--amber-text)]"
                           }`}
                         >
                           <span
                             className={`w-[7px] h-[7px] rounded-full ${
-                              !t.hasWaterReadings ? "bg-slate-400" : t.status === "ok" ? "bg-[var(--mangrove)]" : "bg-[var(--amber)]"
+                              !t.hasWaterReadings ? "bg-slate-400" : t.status === "ok" ? "bg-[var(--ep-status-success)]" : "bg-[var(--amber)]"
                             }`}
                           />
                           {!t.hasWaterReadings ? "No readings" : t.status === "ok" ? "Nominal" : "Watch"}
