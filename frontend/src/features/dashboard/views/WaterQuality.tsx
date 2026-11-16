@@ -4,7 +4,7 @@ import { WaterHistoryChart } from "@/features/dashboard/components/AnalyticsChar
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
-import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
+import { DashboardInlineEmptyState, DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { saveThresholds, THRESHOLDS } from "@/features/dashboard/lib/thresholds";
 import { useThresholdSettings } from "@/features/dashboard/hooks/useThresholdSettings";
 export function WaterQuality() {
@@ -319,9 +319,7 @@ export function WaterQuality() {
         </>
       ) : (
         <Panel title="Tank Readings" badge="0 tanks">
-          <div className="py-10 text-center text-[13px] text-[var(--ep-text-muted)]">
-            No tanks yet. Add one on the Tanks page.
-          </div>
+          <DashboardInlineEmptyState message="No tanks yet. Add one on the Tanks page." />
         </Panel>
       )}
     </div>
