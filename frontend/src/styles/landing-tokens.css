@@ -38,7 +38,6 @@
   --ep-status-neutral: #475569;
   --ep-status-neutral-bg: #e2e8f0;
   --ep-on-status: #ffffff;
-  --coral: var(--ep-accent);
   background-color: var(--ep-bg);
   color: var(--ep-text);
 }
@@ -97,8 +96,8 @@ html:has(.ep-landing) {
   }
 }
 
-/* ---------- Brand Two-Tone Hero Headlines ---------- */
-/* Landing hero headline: deep teal primary + terracotta secondary */
+/* ---------- Hero Headlines ---------- */
+/* Landing uses a restrained Ocean Teal highlight; About and Contact stay monochrome. */
 .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
   color: #111827 !important;
   -webkit-text-fill-color: #111827 !important;
@@ -116,22 +115,16 @@ html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary 
   -webkit-text-fill-color: #45c5b3 !important;
 }
 
-/* About and Contact page hero headlines share the same two-tone brand treatment */
+/* About and Contact hero headlines remain monochrome for clear contrast. */
 .ep-about-page [data-page-hero-headline] > span:first-child {
   color: #111827 !important;
   -webkit-text-fill-color: #111827 !important;
 }
-.ep-about-page [data-page-hero-headline] > span:last-child {
-  color: #087e8b !important;
-  -webkit-text-fill-color: #087e8b !important;
-}
-.ep-contact-page [data-page-hero-headline] > span:first-child {
+.ep-about-page [data-page-hero-headline] > span:last-child,
+.ep-contact-page [data-page-hero-headline] > span:first-child,
+.ep-contact-page [data-page-hero-headline] > span:last-child {
   color: #111827 !important;
   -webkit-text-fill-color: #111827 !important;
-}
-.ep-contact-page [data-page-hero-headline] > span:last-child {
-  color: #087e8b !important;
-  -webkit-text-fill-color: #087e8b !important;
 }
 html.dark .ep-about-page [data-page-hero-headline] > span:first-child,
 html.dark .ep-contact-page [data-page-hero-headline] > span:first-child {
@@ -139,9 +132,10 @@ html.dark .ep-contact-page [data-page-hero-headline] > span:first-child {
   -webkit-text-fill-color: #f8fafc !important;
 }
 html.dark .ep-about-page [data-page-hero-headline] > span:last-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:first-child,
 html.dark .ep-contact-page [data-page-hero-headline] > span:last-child {
-  color: #45c5b3 !important;
-  -webkit-text-fill-color: #45c5b3 !important;
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
 }
 
 
