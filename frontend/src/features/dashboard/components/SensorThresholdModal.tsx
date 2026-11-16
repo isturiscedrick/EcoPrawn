@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { useToast } from "@/features/dashboard/components/Toast";
-import { DashboardModalShell } from "./DashboardPrimitives";
+import { DashboardFormField, DashboardModalShell } from "./DashboardPrimitives";
 
 interface SensorThresholdModalProps {
   open: boolean;
@@ -195,13 +195,12 @@ export function SensorThresholdModal({ open, onClose }: SensorThresholdModalProp
               const error = touched[field.key] || submitted ? errors[field.key] : undefined;
               const errorId = `${uid}-${field.key}-error`;
               return (
-                <div key={field.key}>
-                  <label htmlFor={`${uid}-${field.key}`} className="text-sm font-semibold">
-                    <span className="mb-1.5 block">
-                      {field.label}
-                      {field.unit ? ` (${field.unit})` : ""}
-                    </span>
-                  </label>
+                <DashboardFormField
+                  key={field.key}
+                  id={`${uid}-${field.key}`}
+                  label={`${field.label}${field.unit ? ` (${field.unit})` : ""}`}
+                  labelClassName="mb-1.5 block text-sm font-semibold"
+                >
                   <input
                     id={`${uid}-${field.key}`}
                     name={field.key}
@@ -226,7 +225,7 @@ export function SensorThresholdModal({ open, onClose }: SensorThresholdModalProp
                       <span>{error}</span>
                     </p>
                   )}
-                </div>
+                </DashboardFormField>
               );
             })}
           </div>
