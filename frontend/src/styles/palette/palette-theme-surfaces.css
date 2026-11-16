@@ -1,0 +1,270 @@
+/* ==========================================================================
+   Final surface unification — every page, header, footer and navigation rail.
+   Keep page backgrounds, structural surfaces and Ocean Teal accents consistent
+   in both themes. Semantic status/data colors remain untouched.
+   ========================================================================== */
+:root {
+  --ep-page-bg: #f3f8f8;
+  --ep-page-surface: #ffffff;
+  --ep-page-surface-raised: #ffffff;
+  --ep-page-tint: #e9f5f3;
+  --ep-page-border: #d7e5e5;
+  --ep-page-text: #173b46;
+  --ep-page-muted: #58717a;
+  --ep-header-bg: rgba(255,255,255,.94);
+  --ep-sidebar-bg: #f6f8f9;
+  --ep-sidebar-surface: #ffffff;
+  --ep-sidebar-subtle: #eef2f3;
+  --ep-footer-bg: #e9f5f3;
+  --ep-footer-text: #173b46;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #071426;
+  color-scheme: light;
+}
+html.dark {
+  --background: #0b171b;
+  --card: #102328;
+  --popover: #102328;
+  --secondary: #153a3e;
+  --muted: #153a3e;
+  --border: #285158;
+  --input: #285158;
+  --sidebar: #102b31;
+  --sidebar-foreground: #e8f4f2;
+  --sidebar-accent: #153a3e;
+  --sidebar-accent-foreground: #70d7c8;
+  --sidebar-border: #285158;
+  --ep-bg: #0b171b;
+  --ep-surface: #102328;
+  --ep-tint: #153a3e;
+  --ep-line: #285158;
+  --ep-page-bg: #0b171b;
+  --ep-page-surface: #102328;
+  --ep-page-surface-raised: #153a3e;
+  --ep-page-tint: #153a3e;
+  --ep-page-border: #285158;
+  --ep-page-text: #e8f4f2;
+  --ep-page-muted: #a7c2c1;
+  --ep-header-bg: rgba(16,35,40,.94);
+  --ep-sidebar-bg: #101e23;
+  --ep-sidebar-surface: #14272d;
+  --ep-sidebar-subtle: #192e34;
+  --ep-footer-bg: #07191e;
+  --ep-footer-text: #e8f4f2;
+  --accent: #45c5b3;
+  --ring: #45c5b3;
+  --sidebar-primary: #45c5b3;
+  --sidebar-ring: #45c5b3;
+  color-scheme: dark;
+}
+
+/* Document and route canvases: applies to dashboard, public pages and settings. */
+html, body, body.ecoprawn-root, #root {
+  min-height: 100%;
+  background-color: var(--ep-page-bg) !important;
+  color: var(--ep-page-text);
+}
+body.ecoprawn-root,
+.ecoprawn-root,
+.dashboard-shell,
+.ep-landing,
+.ep-about-page,
+.ep-contact-page {
+  background-color: var(--ep-page-bg) !important;
+  color: var(--ep-page-text);
+}
+html.dark body,
+html.dark body.ecoprawn-root,
+html.dark #root,
+html.dark .ecoprawn-root,
+html.dark .dashboard-shell,
+html.dark .ep-landing,
+html.dark .ep-about-page,
+html.dark .ep-contact-page {
+  background-color: var(--ep-page-bg) !important;
+  color: var(--ep-page-text);
+}
+
+/* Main content areas inherit the page canvas; cards and panels use raised surfaces. */
+.dashboard-shell main,
+.dashboard-shell main > div,
+.dashboard-shell [data-page-root],
+.ep-landing main,
+.ep-about-page main,
+.ep-contact-page main {
+  background-color: transparent;
+}
+.dashboard-shell :is(.dashboard-panel,.dashboard-kpi,.dashboard-tank-snapshot,.dashboard-hover),
+.dashboard-shell main :is(.rounded-xl.border,.rounded-2xl.border),
+.ep-landing :is([data-surface],.ep-content-card),
+.ep-about-page :is([data-surface],.ep-content-card),
+.ep-contact-page :is([data-surface],.ep-content-card) {
+  border-color: var(--ep-page-border);
+}
+html.dark .dashboard-shell :is(.dashboard-panel,.dashboard-kpi,.dashboard-tank-snapshot,.dashboard-hover),
+html.dark .dashboard-shell main :is(.rounded-xl.border,.rounded-2xl.border) {
+  background-color: var(--ep-page-surface) !important;
+  border-color: var(--ep-page-border) !important;
+}
+
+/* Public and authenticated headers share the same tinted, translucent surface. */
+#site-header {
+  background: var(--ep-header-bg) !important;
+  border-bottom: 1px solid var(--ep-page-border) !important;
+  color: var(--ep-page-text) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(135%);
+  backdrop-filter: blur(16px) saturate(135%);
+  box-shadow: 0 8px 26px -22px rgba(23,59,70,.5);
+}
+html.dark #site-header {
+  background: var(--ep-header-bg) !important;
+  border-bottom-color: var(--ep-page-border) !important;
+  color: var(--ep-page-text) !important;
+  box-shadow: 0 8px 26px -22px rgba(0,0,0,.8);
+}
+#site-header :is(a,button,[role="button"]) { color: inherit; }
+#site-header :is(a,button,[role="button"]):hover { color: var(--ep-accent) !important; }
+
+/* Desktop sidebar and both mobile drawers use coordinated ocean surfaces. */
+.dashboard-shell aside,
+.dashboard-shell aside#dashboard-sidebar {
+  background: var(--ep-sidebar-bg) !important;
+  color: var(--ep-page-text) !important;
+  border-color: var(--ep-page-border) !important;
+}
+.dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
+  background: var(--ep-sidebar-surface) !important;
+}
+.dashboard-shell aside#dashboard-sidebar > div:last-child {
+  background: var(--ep-sidebar-subtle) !important;
+}
+.dashboard-shell aside nav a:not(.dashboard-nav-active):hover {
+  background: color-mix(in srgb,var(--ep-accent) 8%,var(--ep-sidebar-bg)) !important;
+  color: var(--ep-accent-hover) !important;
+}
+html.dark .dashboard-shell aside nav a:not(.dashboard-nav-active):hover {
+  background: color-mix(in srgb,var(--ep-accent) 12%,var(--ep-sidebar-bg)) !important;
+  color: #70d7c8 !important;
+}
+.ep-mobile-dashboard-drawer,
+.ep-mobile-site-drawer {
+  background: var(--ep-sidebar-bg) !important;
+  color: var(--ep-page-text) !important;
+  border-color: var(--ep-page-border) !important;
+}
+.ep-mobile-dashboard-drawer > div:last-child,
+.ep-mobile-site-drawer > div:last-child {
+  background: var(--ep-sidebar-subtle) !important;
+  border-color: var(--ep-page-border) !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:last-child,
+html.dark .ep-mobile-site-drawer > div:last-child {
+  background: var(--ep-sidebar-subtle) !important;
+  border-color: var(--ep-page-border) !important;
+}
+.ep-mobile-dashboard-drawer nav a[aria-current="page"] > span {
+  background: color-mix(in srgb,var(--ep-accent) 11%,var(--ep-sidebar-bg)) !important;
+  border: 1px solid color-mix(in srgb,var(--ep-accent) 30%,transparent) !important;
+  color: var(--ep-page-text) !important;
+}
+.ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span {
+  color: var(--ep-accent) !important;
+}
+.ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
+  background: var(--ep-accent) !important;
+  border-color: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important;
+}
+
+/* Footer is a deliberate deep-ocean anchor in both themes. */
+footer[data-site-footer] {
+  background: var(--ep-footer-bg) !important;
+  color: var(--ep-footer-text) !important;
+  border-top: 1px solid var(--ep-page-border);
+}
+footer[data-site-footer] nav a:hover {
+  color: var(--ep-accent) !important;
+}
+html.dark footer[data-site-footer] {
+  background: var(--ep-footer-bg) !important;
+  color: var(--ep-footer-text) !important;
+  border-top-color: var(--ep-page-border) !important;
+}
+html.dark footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) {
+  color: var(--ep-footer-text) !important;
+}
+html.dark footer[data-site-footer] nav a:hover {
+  color: #70d7c8 !important;
+}
+
+/* Preserve visible text contrast on tinted surfaces and selected navigation. */
+.dashboard-shell aside :is(p,span,a,button),
+.ep-mobile-dashboard-drawer :is(p,span,a,button),
+.ep-mobile-site-drawer :is(p,span,a,button) {
+  color: inherit;
+}
+.dashboard-shell .dashboard-nav-active,
+.dashboard-shell .dashboard-nav-active:hover {
+  background: color-mix(in srgb,var(--ep-accent) 11%,var(--ep-sidebar-bg)) !important;
+  border-color: color-mix(in srgb,var(--ep-accent) 34%,var(--ep-page-border)) !important;
+  color: var(--ep-page-text) !important;
+}
+.dashboard-shell .dashboard-nav-active > span > span {
+  background: color-mix(in srgb,var(--ep-accent) 12%,transparent) !important;
+  color: var(--ep-accent) !important;
+}
+.dashboard-shell .dashboard-nav-active .dashboard-nav-active-dot {
+  background: var(--ep-accent) !important;
+}
+html.dark .dashboard-shell .dashboard-nav-active,
+html.dark .dashboard-shell .dashboard-nav-active:hover {
+  background: color-mix(in srgb,var(--ep-accent) 16%,var(--ep-sidebar-bg)) !important;
+  border-color: color-mix(in srgb,var(--ep-accent) 42%,var(--ep-page-border)) !important;
+  color: var(--ep-page-text) !important;
+}
+
+
+/* Last-mile polish: map remaining legacy utility accents to the same Ocean Teal system. */
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell) {
+  --tw-ring-color: var(--ep-accent);
+  --tw-gradient-from: color-mix(in srgb,var(--ep-accent) 16%,var(--ep-page-surface));
+  --tw-gradient-to: var(--ep-page-bg);
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is([class*="text-blue-"],[class*="text-indigo-"],[class*="text-sky-"],[class*="text-cyan-"]) {
+  color: var(--ep-accent) !important;
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is([class*="border-blue-"],[class*="border-indigo-"],[class*="border-sky-"],[class*="border-cyan-"]) {
+  border-color: color-mix(in srgb,var(--ep-accent) 34%,transparent) !important;
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is([class*="bg-blue-"],[class*="bg-indigo-"],[class*="bg-sky-"],[class*="bg-cyan-"]) {
+  background-color: color-mix(in srgb,var(--ep-accent) 10%,var(--ep-page-surface)) !important;
+}
+html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is([class*="bg-blue-"],[class*="bg-indigo-"],[class*="bg-sky-"],[class*="bg-cyan-"]) {
+  background-color: color-mix(in srgb,var(--ep-accent) 16%,var(--ep-page-surface)) !important;
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is([class*="from-blue-"],[class*="from-indigo-"],[class*="from-sky-"],[class*="from-cyan-"]) {
+  --tw-gradient-from: color-mix(in srgb,var(--ep-accent) 18%,var(--ep-page-surface)) !important;
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is([class*="to-blue-"],[class*="to-indigo-"],[class*="to-sky-"],[class*="to-cyan-"]) {
+  --tw-gradient-to: var(--ep-page-bg) !important;
+}
+.ep-auth-modal :is(input,button,[role="button"]):focus-visible {
+  outline-color: var(--ep-accent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb,var(--ep-accent) 20%,transparent) !important;
+}
+html.dark .ep-auth-modal :is(input,button,[role="button"]) {
+  border-color: var(--ep-page-border);
+}
+html.dark .ep-auth-modal input {
+  background: var(--ep-page-surface) !important;
+  color: var(--ep-page-text) !important;
+}
+
+
