@@ -1376,3 +1376,60 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > [aria-hi
   background-image: none !important;
   opacity: 0 !important;
 }
+
+/* Coral Sand secondary accents — explicitly applied across all public pages
+   and the authentication dialog in both themes. Ocean Teal remains primary. */
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
+  --ep-brand-secondary: #D99A75;
+  --ep-brand-secondary-hover: #C7835D;
+  --ep-secondary-accent: #D99A75;
+  --ep-secondary-accent-hover: #C7835D;
+  --ep-secondary-on-accent: #173B46;
+  --ep-secondary-tint: rgba(217,154,117,.12);
+  --ep-secondary-tint-soft: rgba(217,154,117,.065);
+}
+html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
+  --ep-brand-secondary: #E9BFA0;
+  --ep-brand-secondary-hover: #F5D5BC;
+  --ep-secondary-accent: #E9BFA0;
+  --ep-secondary-accent-hover: #F5D5BC;
+  --ep-secondary-on-accent: #173B46;
+  --ep-secondary-tint: rgba(233,191,160,.14);
+  --ep-secondary-tint-soft: rgba(233,191,160,.075);
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal)
+:is(.ep-secondary-accent,[data-secondary-accent]) {
+  color: var(--ep-secondary-accent) !important;
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal)
+:is(.ep-secondary-tint,[data-secondary-tint]) {
+  background-color: var(--ep-secondary-tint) !important;
+  border-color: color-mix(in srgb,var(--ep-secondary-accent) 32%,transparent) !important;
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal)
+:is(.ep-secondary-action,[data-brand-color="secondary"]) {
+  background-color: var(--ep-secondary-accent) !important;
+  border-color: var(--ep-secondary-accent) !important;
+  color: var(--ep-secondary-on-accent) !important;
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal)
+:is(.ep-secondary-action,[data-brand-color="secondary"]):is(:hover,:focus-visible) {
+  background-color: var(--ep-secondary-accent-hover) !important;
+  border-color: var(--ep-secondary-accent-hover) !important;
+  color: var(--ep-secondary-on-accent) !important;
+}
+.ep-auth-modal :is(.ep-auth-eyebrow,[data-auth-accent]) {
+  color: var(--ep-secondary-accent) !important;
+}
+.ep-auth-modal .ep-auth-brand {
+  border-color: color-mix(in srgb,var(--ep-secondary-accent) 38%,transparent) !important;
+}
+html.dark .ep-auth-modal :is(.ep-auth-eyebrow,[data-auth-accent]) {
+  color: #E9BFA0 !important;
+  -webkit-text-fill-color: #E9BFA0 !important;
+}
+html.dark .ep-auth-modal button[aria-label="Close"]:hover {
+  border-color: #E9BFA0 !important;
+  background: rgba(233,191,160,.12) !important;
+  color: #F5D5BC !important;
+}
