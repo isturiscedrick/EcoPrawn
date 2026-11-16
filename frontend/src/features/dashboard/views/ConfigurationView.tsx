@@ -27,7 +27,7 @@ export function ConfigurationView() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Configuration</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Connect and assign ESP32 devices.</p>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">ESP32 device setup.</p>
           </div>
           <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold ${status === "connected" ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300" : status === "connecting" ? "border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300" : "border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)]"}`}>
             <span className={`h-2 w-2 rounded-full ${status === "connected" ? "bg-emerald-500" : status === "connecting" ? "bg-amber-500" : "bg-[var(--ep-text-muted)]"}`} />
@@ -41,7 +41,7 @@ export function ConfigurationView() {
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-primary)]"><Icon name="cpu" size={21} /></span>
           <div>
             <h2 className="text-base font-semibold text-[var(--ep-text)]">ESP32 device connection</h2>
-            <p className="mt-1 text-sm leading-6 text-[var(--ep-text-muted)]">Connect ESP32, assign a tank, and calibrate sensors.</p>
+            <p className="mt-1 text-sm leading-6 text-[var(--ep-text-muted)]">Assign a tank and calibrate its sensors.</p>
           </div>
         </div>
 
