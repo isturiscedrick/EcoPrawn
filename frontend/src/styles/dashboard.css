@@ -30,7 +30,7 @@
 
 html.dark .dashboard-shell {
   --ep-brand-primary: #45c5b3;
-  --ep-brand-secondary: #70d7c8;
+  --ep-brand-secondary: #e9bfa0;
   --ep-status-success: #86efac;
   --ep-status-success-bg: #123c2a;
   --ep-status-warning: #fcd34d;
@@ -46,6 +46,7 @@ html.dark .dashboard-shell {
   --coral: var(--ep-brand-primary);
   --coral-dim: var(--ep-accent-hover);
   --ep-secondary: var(--ep-brand-secondary);
+  --ep-secondary-tint: rgba(233,191,160,.16);
 }
 
 .dashboard-shell .dashboard-nav-active-dot {
