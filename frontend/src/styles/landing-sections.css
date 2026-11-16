@@ -502,7 +502,7 @@ html:not(.dark) .ep-business-landing .ep-cloudnexus-headline { color:#0b2c34; }
 /* Gradient highlight. Falls back to solid teal where background-clip:text is unsupported. */
 .ep-business-landing .ep-cloudnexus-highlight {
   color:var(--ep-accent);
-  background-image:linear-gradient(100deg,var(--ep-accent-hover) 0%,var(--ep-accent) 100%);
+  background-image:linear-gradient(100deg,#066874 0%,#087E8B 100%);
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
