@@ -72,8 +72,6 @@ html.dark .dashboard-shell aside { background: #111827 !important; color: #f8faf
 .dashboard-shell .dashboard-nav-active,
 html:not(.dark) .dashboard-shell .dashboard-nav-active { background: #087e8b !important; border-color: #087e8b !important; color: #ffffff !important; }
 html.dark .dashboard-shell .dashboard-nav-active { background: #45c5b3 !important; border-color: #45c5b3 !important; color: #071426 !important; }
-.dashboard-shell .dashboard-nav-active-dot { background: #087e8b !important; }
-html.dark .dashboard-shell .dashboard-nav-active-dot { background: #45c5b3 !important; }
 .ep-landing, .ep-about-page, .ep-contact-page {
   --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
   --ep-line: #dbe2ea; --ep-primary: #111827; --ep-secondary: #1f2937;
@@ -214,8 +212,6 @@ html.dark .dashboard-shell aside { background: #102328 !important; color: #e8f4f
 .dashboard-shell .dashboard-nav-active,
 html:not(.dark) .dashboard-shell .dashboard-nav-active { background: #087e8b !important; border-color: #087e8b !important; color: #ffffff !important; }
 html.dark .dashboard-shell .dashboard-nav-active { background: #45c5b3 !important; border-color: #45c5b3 !important; color: #092b31 !important; }
-.dashboard-shell .dashboard-nav-active-dot { background: #087e8b !important; }
-html.dark .dashboard-shell .dashboard-nav-active-dot { background: #45c5b3 !important; }
 .dashboard-shell .dashboard-panel,
 .dashboard-shell .dashboard-kpi,
 .dashboard-shell .dashboard-tank-snapshot {
@@ -337,8 +333,6 @@ html.dark .dashboard-shell .dashboard-nav-active {
   border-color: #45c5b3 !important;
   color: #092b31 !important;
 }
-.dashboard-shell .dashboard-nav-active-dot { background: #087e8b !important; }
-html.dark .dashboard-shell .dashboard-nav-active-dot { background: #45c5b3 !important; }
 .dashboard-shell :is(button,a,[role="button"]):focus-visible {
   outline: 2px solid var(--ep-accent) !important;
   outline-offset: 3px;
