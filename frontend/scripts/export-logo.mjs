@@ -3,13 +3,13 @@ import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
-const src = readFileSync(join(root, "src/components/layout/BrandMark.tsx"), "utf8");
+const src = readFileSync(join(root, "src/components/layout/BrandMarkPaths.ts"), "utf8");
 
 // Pull every { kind: "...", d: "..." } entry out of SHAPES.
 const shapes = [...src.matchAll(/kind:\s*"(shrimp|text)",\s*d:\s*"([^"]+)"/g)].map(
   (m) => ({ kind: m[1], d: m[2] })
 );
-if (!shapes.length) throw new Error("No shapes found in BrandMark.tsx");
+if (!shapes.length) throw new Error("No shapes found in BrandMarkPaths.ts");
 
 const COLORS = { shrimp: "#087e8b", text: "#111827" };
 const path = (s) => `<path fill="${COLORS[s.kind]}" fill-rule="evenodd" d="${s.d}"/>`;
