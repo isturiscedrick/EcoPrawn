@@ -4,7 +4,14 @@
 
 @import "./foundations.css";
 @import "./theme-components.css";
-@import "./dashboard.css";
+@import "./dashboard-core.css";
+@import "./dashboard-mobile-navigation.css";
+@import "./dashboard-mobile-modules.css";
+@import "./dashboard-responsive-polish.css";
 @import "./landing-global.css";
 @import "./responsive-overrides.css";
-@import "./palette-system.css";
+@import "./palette-foundation.css";
+@import "./palette-surfaces.css";
+@import "./palette-marketing.css";
+@import "./palette-public-chrome.css";
+@import "./palette-dashboard-navigation.css";
