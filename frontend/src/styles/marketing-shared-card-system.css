@@ -1,0 +1,81 @@
+/* ---------- Shared public-page card and reading system ---------- */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-public-card-radius: 1.2rem;
+  --ep-public-card-shadow: 0 16px 38px -30px color-mix(in srgb,var(--ep-primary) 28%,transparent);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective) {
+  border-color: var(--ep-line);
+  border-radius: var(--ep-public-card-radius);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective) {
+  box-shadow: var(--ep-public-card-shadow);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) p {
+  line-height: 1.7;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is([data-eyebrow],[data-kicker]) {
+  font-size: .72rem;
+  line-height: 1.4;
+  letter-spacing: .14em;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective) {
+  box-shadow: 0 18px 40px -32px rgba(0,0,0,.62);
+}
+@media (max-width: 767px) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page)
+  :is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective) {
+    border-radius: 1rem;
+  }
+}
+
+/* Final About/Contact hero alignment.
+   The inner content must occupy the full fixed-height hero before flex
+   centering can position the kicker, headline and lead as one stack. */
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] > .relative.z-10 {
+  box-sizing: border-box;
+  width: min(100%, 1440px);
+  height: 100%;
+  min-height: 100%;
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* About uses a deliberate two-line desktop headline. Give Contact's
+   single-line title the same line-box height so all three text elements
+   retain matching vertical positions without breaking "Contact us.". */
+@media (min-width: 768px) {
+  .ep-contact-page [data-page-hero-headline] {
+    line-height: 2.02;
+  }
+}
+
+@media (max-width: 767px) {
+  :is(.ep-about-page,.ep-contact-page) [data-page-hero] > .relative.z-10 {
+    height: auto;
+    min-height: 310px;
+    padding-top: 4.75rem;
+    padding-bottom: 4.75rem;
+  }
+  .ep-contact-page [data-page-hero-headline] {
+    line-height: .99;
+  }
+}
+
+
+/* Remove the legacy decorative underline from public hero headings.
+   Hero emphasis is now carried by the Ocean Teal typography gradient only. */
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
+:is(.ep-field-hero-copy,.ep-cloudnexus-hero-inner,[data-page-hero])
+.ep-hero-headline-secondary::after,
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
+[data-hero="headline"] .ep-hero-headline-secondary::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
