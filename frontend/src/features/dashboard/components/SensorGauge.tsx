@@ -9,7 +9,7 @@ export function SensorGauge({ label, value, pct, status, statusLabel, note }: Se
   const color = status === "ok" ? "var(--ep-status-success)" : "var(--ep-status-warning)";
 
   return (
-    <div className="dashboard-sensor-gauge border border-[var(--sand-dim)] rounded-[10px] p-3.5 text-center">
+    <div className="dashboard-sensor-gauge border border-[var(--ep-line)] rounded-[10px] p-3.5 text-center">
       <div className="ep-font-mono mb-2 text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)]">
         {label}
       </div>
