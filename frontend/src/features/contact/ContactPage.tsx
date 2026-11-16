@@ -8,7 +8,7 @@ import { ContactForm } from "./ContactForm";
 import { ContactMotion } from "@/components/motion/ContactMotion";
 import { AquacultureIllustration } from "@/components/illustrations/AquacultureIllustration";
 
-const SECTION_PAD = "px-4 py-16 sm:px-8 sm:py-24";
+const SECTION_PAD = "px-4 py-16 sm:px-8 sm:py-20 lg:py-24";
 
 // Details taken from the site footer. Add an email / phone here when you
 // have one you want to publish.
