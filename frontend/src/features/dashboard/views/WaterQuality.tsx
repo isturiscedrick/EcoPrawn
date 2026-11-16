@@ -5,12 +5,13 @@ import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
-import { getThresholds, saveThresholds, THRESHOLDS, type ThresholdSettings } from "@/features/dashboard/lib/thresholds";
+import { saveThresholds, THRESHOLDS } from "@/features/dashboard/lib/thresholds";
+import { useThresholdSettings } from "@/features/dashboard/hooks/useThresholdSettings";
 export function WaterQuality() {
   const { tanks, waterHistory = [], loading } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<"all" | "ok" | "warn">("all");
-  const [thresholdSettings, setThresholdSettings] = useState<ThresholdSettings>(THRESHOLDS);
+  const [thresholdSettings, setThresholdSettings] = useThresholdSettings();
   const [editingThresholds, setEditingThresholds] = useState(false);
   const [thresholdMessage, setThresholdMessage] = useState("");
 
@@ -24,16 +25,6 @@ export function WaterQuality() {
       setSelectedTankId(requestedTankId);
     }
   }, [tanks]);
-
-  useEffect(() => {
-    const sync = () => setThresholdSettings(getThresholds());
-    window.addEventListener("ecoprawn:thresholds-updated", sync);
-    window.addEventListener("storage", sync);
-    return () => {
-      window.removeEventListener("ecoprawn:thresholds-updated", sync);
-      window.removeEventListener("storage", sync);
-    };
-  }, []);
 
   if (loading) return <DashboardViewSkeleton variant="water" />;
 
