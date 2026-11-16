@@ -54,7 +54,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 ? "bg-[rgba(179,38,30,0.12)] text-[var(--ep-danger)]"
                 : "bg-[rgba(30,122,70,0.12)] text-[var(--ep-ok)]"
             }`}>
-              <Icon name={toast.tone === "error" ? "alert-circle" : "check-circle-2"} size={28} strokeWidth={2} />
+              <Icon name={toast.tone === "error" ? "alert-circle" : "check-circle"} size={28} strokeWidth={2} />
             </span>
             <h2 className="mb-2 ep-font-display text-xl font-semibold">
               {toast.tone === "error" ? "Something went wrong" : "Success"}
