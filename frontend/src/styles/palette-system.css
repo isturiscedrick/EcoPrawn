@@ -2485,29 +2485,6 @@ html.dark .ep-mobile-dashboard-drawer > div:last-child button {
   color: #ff9da5 !important;
 }
 
-/* Public header desktop nav: refine light mode as well as dark mode. */
-@media (min-width: 1024px) {
-  html:not(.dark) #site-header nav[aria-label="Primary navigation"] {
-    background: rgba(255,255,255,.94) !important;
-    border: 1px solid #dce6e9 !important;
-    box-shadow: 0 7px 22px -18px rgba(15,55,65,.38) !important;
-  }
-  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a {
-    color: #244b55 !important;
-  }
-  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] {
-    background: #e5f3f3 !important;
-    border: 1px solid #c4e2e3 !important;
-    color: #075b65 !important;
-    box-shadow: inset 0 -2px 0 #087e8b !important;
-  }
-  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] :is(span,svg) {
-    color: #075b65 !important;
-    stroke: currentColor !important;
-  }
-}
-
-
 /* Final light-mode polish: keep the selected label transparent and style only
    the full navigation row. Earlier palette passes styled nested spans too
    broadly, which created the extra rectangle visible behind "Dashboard". */
@@ -2620,17 +2597,6 @@ html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child {
   html:not(.dark) #site-header .ep-cta-primary svg {
     color: #ffffff !important;
     stroke: currentColor !important;
-  }
-}
-
-
-/* Keep the active light-mode header icon dark like its label on the teal pill. */
-@media (min-width: 1024px) {
-  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg,
-  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg * {
-    color: #092b31 !important;
-    stroke: #092b31 !important;
-    -webkit-text-fill-color: #092b31 !important;
   }
 }
 
