@@ -1,7 +1,6 @@
 import {
   createContext,
   useCallback,
-  useContext,
   useEffect,
   useRef,
   useState,
@@ -17,23 +16,8 @@ import { LoginForm, type AuthMode } from "./LoginForm";
 import { AuthModalMotion, playAuthExit } from "./AuthModalMotion";
 import "@/styles/auth-modal.css";
 
-interface AuthModalValue {
-  /** Opens the modal on the Sign in tab (default) or the Sign up tab. */
-  open: (mode?: AuthMode) => void;
-  close: () => void;
-}
-
-const AuthModalContext = createContext<AuthModalValue | null>(null);
-
-export function useAuthModal() {
-  const value = useContext(AuthModalContext);
-
-  if (!value) {
-    throw new Error("useAuthModal requires AuthModalProvider");
-  }
-
-  return value;
-}
+import { AuthModalContext } from "./AuthModalContext";
+import { useAuthModal } from "./useAuthModal";
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
