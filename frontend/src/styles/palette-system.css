@@ -1596,7 +1596,7 @@ html.dark footer[data-site-footer] {
 ) {
   color: #087E8B !important;
   -webkit-text-fill-color: #087E8B !important;
-  text-shadow: 0 10px 34px rgba(217,154,117,.18) !important;
+  text-shadow: 0 10px 34px rgba(8,126,139,.18) !important;
 }
 :is(.ep-business-landing,.ep-landing) #top :is(
   .ep-hero-headline-secondary::after,
@@ -1697,8 +1697,7 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline]::after 
   background-color: var(--ep-accent-tint) !important;
   border-color: color-mix(in srgb,var(--ep-accent) 30%,transparent) !important;
 }
-:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) #top :is(.ep-hero-headline-secondary,[data-hero="headline"] > span:last-child),
-:is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] :is([data-page-hero-accent],span:last-child) {
+:is(.ep-business-landing,.ep-landing) #top :is(.ep-hero-headline-secondary,[data-hero="headline"] > span:last-child) {
   color: var(--ep-accent) !important;
   -webkit-text-fill-color: var(--ep-accent) !important;
   text-shadow: 0 10px 34px color-mix(in srgb,var(--ep-accent) 16%,transparent) !important;
