@@ -938,9 +938,6 @@ footer[data-site-footer] {
   color: var(--ep-footer-text) !important;
   border-top: 1px solid var(--ep-page-border);
 }
-footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) {
-  color: var(--ep-footer-text) !important;
-}
 footer[data-site-footer] nav a:hover {
   color: var(--ep-accent) !important;
 }
