@@ -909,3 +909,86 @@
     transition: none !important;
   }
 }
+
+
+/* Step 11 — shared public-page visual rhythm.
+   Keep Landing, About and Contact on one typography, card and action system
+   without changing their page-specific layouts or the Ocean Teal palette. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-public-radius-sm: .85rem;
+  --ep-public-radius-card: 1.2rem;
+  --ep-public-radius-panel: 1.5rem;
+  --ep-public-section-space: clamp(3.75rem, 7vw, 6.5rem);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) main > section:not(:first-child) {
+  scroll-margin-top: 6rem;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) main :is(h2,h3) {
+  text-wrap: balance;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) main h2 {
+  line-height: 1.12;
+  letter-spacing: -.04em;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) main h3 {
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) main p {
+  line-height: 1.72;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is([data-eyebrow],[data-kicker],[data-page-kicker]) {
+  font-size: .7rem;
+  font-weight: 750;
+  line-height: 1.45;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective,.ep-about-journey-card) {
+  border: 1px solid var(--ep-line);
+  border-radius: var(--ep-public-radius-card);
+  box-shadow: 0 16px 38px -30px color-mix(in srgb,var(--ep-primary) 28%,transparent);
+  transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(.ep-cta-control,[data-contact-form] button[type="submit"]) {
+  min-height: 2.85rem;
+  border-radius: 999px;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(.ep-cta-control,[data-contact-form] button[type="submit"]):focus-visible {
+  outline: 3px solid color-mix(in srgb,var(--ep-accent) 38%,transparent);
+  outline-offset: 3px;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective,.ep-about-journey-card) {
+  box-shadow: 0 18px 40px -32px rgba(0,0,0,.62);
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page)
+  :is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective,.ep-about-journey-card):hover {
+    border-color: color-mix(in srgb,var(--ep-accent) 34%,var(--ep-line));
+  }
+}
+@media (max-width: 639px) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) {
+    --ep-public-radius-card: 1rem;
+    --ep-public-radius-panel: 1.2rem;
+  }
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) main p {
+    line-height: 1.68;
+  }
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) :is(.ep-cta-control,[data-contact-form] button[type="submit"]) {
+    min-height: 2.9rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) :is(.ep-cta-control,[data-contact-form] button[type="submit"]) {
+    transition: none !important;
+  }
+}
