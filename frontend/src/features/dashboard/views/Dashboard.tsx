@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import { KpiCard, Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
-import { getThresholds, rangeStatus } from "@/features/dashboard/lib/thresholds";
+import { rangeStatus } from "@/features/dashboard/lib/thresholds";
+import { useThresholdSettings } from "@/features/dashboard/hooks/useThresholdSettings";
 
 const quickActions = [
   { to: "/dashboard/water", title: "Water quality", description: "View water readings.", icon: "waves" },
@@ -15,17 +15,7 @@ const quickActions = [
 export function Dashboard() {
   const navigate = useNavigate();
   const { tanks, waterHistory = [], visionScanLog = [], loading, error } = useTanks();
-  const [thresholdSettings, setThresholdSettings] = useState(getThresholds);
-
-  useEffect(() => {
-    const syncThresholds = () => setThresholdSettings(getThresholds());
-    window.addEventListener("ecoprawn:thresholds-updated", syncThresholds);
-    window.addEventListener("storage", syncThresholds);
-    return () => {
-      window.removeEventListener("ecoprawn:thresholds-updated", syncThresholds);
-      window.removeEventListener("storage", syncThresholds);
-    };
-  }, []);
+  const [thresholdSettings] = useThresholdSettings();
 
   if (loading) return <DashboardLoadingState />;
   if (error && tanks.length === 0) {
