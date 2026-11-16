@@ -23,13 +23,13 @@ export function Feeding() {
       <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--sand-dim)]">
         <div>
           <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
-            Automated Smart Feeding
+            Feeding schedule
           </div>
           <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
             Feeding
           </h1>
           <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
-            Scheduled, biomass-adjusted dispensing · {tankCount} tank{tankCount !== 1 ? "s" : ""}
+            Biomass-adjusted · {tankCount} tank{tankCount !== 1 ? "s" : ""}
           </div>
         </div>
         <button
@@ -114,8 +114,7 @@ export function Feeding() {
               </div>
               <FeedingProgressChart tanks={tanks.map(t => ({ id: t.id, name: t.name, dispensedToday: t.dispensedToday, targetToday: t.targetToday }))} />
               <div className="mt-5 pt-4 border-t border-[var(--sand-dim)] text-[13px] text-[var(--ep-text-muted)] leading-[1.6]">
-                Dispense volume is recalculated automatically from the latest
-                AI-estimated biomass, keeping feed conversion efficient as shrimp grow.
+                Feed targets update with the latest biomass estimate.
               </div>
             </Panel>
           </div>
