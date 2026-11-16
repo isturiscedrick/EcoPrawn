@@ -9,7 +9,7 @@ This directory is the single source of truth for frontend CSS. Files are grouped
 - `foundations/` — Tailwind theme bridge, semantic tokens, typography, accessibility defaults, and shared theme components.
 - `dashboard/` — dashboard shell, monitoring components, desktop/mobile layouts, and responsive module styles.
 - `palette/` — shared brand utilities, light/dark surfaces, dashboard palette, marketing palette, and public/dashboard chrome palette layers.
-- `marketing/` — landing, About, Contact, hero, shared cards, illustrations, page layouts, and marketing responsive styles.
+- `marketing/` — landing, About, Contact, HeroLens, shared cards, illustrations, page layouts, and marketing responsive styles.
 - `components/` — component-owned styles for the authentication modal, SiteHeader, BrandMark, and logo intro.
 - `utilities/` — cross-page responsive and overflow safeguards.
 
