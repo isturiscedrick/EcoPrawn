@@ -5,6 +5,7 @@ import { TankSnapshotCard } from "@/features/dashboard/components/TankSnapshotCa
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
 import { useThresholdSettings } from "@/features/dashboard/hooks/useThresholdSettings";
+import { buildRecentDashboardActivity } from "@/features/dashboard/lib/dashboard-activity";
 
 const quickActions = [
   { to: "/dashboard/water", title: "Water quality", description: "View water readings.", icon: "waves" },
@@ -38,25 +39,7 @@ export function Dashboard() {
     if (a.hasWaterReadings !== b.hasWaterReadings) return a.hasWaterReadings ? -1 : 1;
     return a.name.localeCompare(b.name);
   });
-  const recentActivity = [
-    ...waterHistory.map((point) => ({
-      id: `water-${point.tankId}-${point.recordedAt}`,
-      kind: "Water reading" as const,
-      tankName: tanks.find((tank) => tank.id === point.tankId)?.name ?? "Unknown tank",
-      detail: `DO ${point.dissolvedOxygen.toFixed(1)} mg/L · pH ${point.ph.toFixed(1)} · ${point.temperature.toFixed(1)} °C`,
-      timestamp: new Date(point.recordedAt),
-    })),
-    ...visionScanLog.map((scan) => ({
-      id: `scan-${scan.id}`,
-      kind: "Vision scan" as const,
-      tankName: scan.tank,
-      detail: scan.note || "Scan recorded",
-      timestamp: new Date(scan.time),
-    })),
-  ]
-    .filter((activity) => Number.isFinite(activity.timestamp.getTime()))
-    .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
-    .slice(0, 5);
+  const recentActivity = buildRecentDashboardActivity(tanks, waterHistory, visionScanLog);
 
   return (
     <>
