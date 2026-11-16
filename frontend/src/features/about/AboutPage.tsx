@@ -36,7 +36,7 @@ export function AboutPage() {
             <>
               <span data-page-hero-accent="">One platform.</span>
               <br className="hidden sm:block" />
-              <span>Six connected systems.</span>
+              <span>Five connected systems.</span>
             </>
           }
           lead="Connected tools for smarter, more efficient shrimp farming."
