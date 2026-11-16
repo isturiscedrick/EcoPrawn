@@ -183,7 +183,7 @@ html.dark .dashboard-shell :is(.bg-\[var\(--ep-accent\)\], .bg-\[var\(--ep-accen
   color: var(--ep-secondary);
 }
 html:not(.dark) .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(--ep-accent-hover\)\] {
-  background-color: var(--ep-secondary-tint);
+  background-color: var(--ep-accent-tint);
 }
 
 /* Charts: DO trend lines and swatches */
@@ -239,7 +239,7 @@ html.dark .dashboard-shell [style*="var(--ep-accent)"] {
 
 /* Alert rows & summary status */
 .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.14\)\] {
-  background-color: var(--ep-secondary-tint);
+  background-color: var(--ep-accent-tint);
   color: var(--ep-secondary);
 }
 .dashboard-shell summary.text-\[var\(--ep-accent\)\] {
