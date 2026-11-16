@@ -158,3 +158,36 @@
     transition: none !important;
   }
 }
+
+
+/* Desktop header actions: keep theme, login, and get-started controls as
+   consistently sized icon-only circles in both themes and at every width. */
+#site-header > div > div:last-child :is(button[role="switch"], .ep-cta-control.ep-cta-secondary, .ep-cta-control.ep-cta-primary) {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  flex: 0 0 44px !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  border-radius: 50% !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+}
+#site-header > div > div:last-child .ep-cta-control.ep-cta-secondary > span,
+#site-header > div > div:last-child .ep-cta-control.ep-cta-primary > span {
+  display: none !important;
+}
+#site-header > div > div:last-child .ep-cta-control.ep-cta-secondary svg,
+#site-header > div > div:last-child .ep-cta-control.ep-cta-primary svg,
+#site-header > div > div:last-child button[role="switch"] svg {
+  display: block !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+}
