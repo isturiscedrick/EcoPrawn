@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useId } from "react";
+import { DashboardModalShell } from "./DashboardPrimitives";
 
 interface DashboardDetailModalProps {
   open: boolean;
@@ -15,6 +16,7 @@ export function DashboardDetailModal({
   details,
   onClose,
 }: DashboardDetailModalProps) {
+  const uid = useId();
   useEffect(() => {
     if (!open) return;
     const originalOverflow = document.body.style.overflow;
@@ -32,25 +34,18 @@ export function DashboardDetailModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center p-5">
-      <button
-        type="button"
-        aria-label="Close details"
-        onClick={onClose}
-        className="absolute inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.76)]"
-      />
-      <section
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="dashboard-detail-title"
-        className="ep-pop-in relative z-10 max-h-[90dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-white p-6 text-[var(--ep-primary)] shadow-[0_28px_90px_rgba(8,30,34,0.32)] sm:p-8"
-      >
+    <DashboardModalShell
+      titleId={`${uid}-title`}
+      onClose={onClose}
+      backdropLabel="Close details"
+      panelClassName="ep-pop-in p-6 sm:p-8"
+    >
         <div className="mb-6 flex items-start justify-between gap-4">
           <div>
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)]">
               Dashboard detail
             </p>
-            <h2 id="dashboard-detail-title" className="ep-font-display text-2xl font-semibold">
+            <h2 id={`${uid}-title`} className="ep-font-display text-2xl font-semibold">
               {title}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">
@@ -74,7 +69,6 @@ export function DashboardDetailModal({
             </li>
           ))}
         </ul>
-      </section>
-    </div>
+    </DashboardModalShell>
   );
 }
