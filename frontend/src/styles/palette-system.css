@@ -1234,3 +1234,23 @@ html.dark {
   background-color: var(--ep-secondary-tint) !important;
   border-color: color-mix(in srgb,var(--ep-secondary-accent) 30%,transparent) !important;
 }
+
+
+/* Dashboard scope has higher-priority legacy declarations, so pin its
+   secondary brand tokens here as well. */
+.dashboard-shell {
+  --ep-brand-secondary: #d99a75 !important;
+  --ep-brand-secondary-hover: #c7835d !important;
+  --ep-secondary-accent: #d99a75 !important;
+  --ep-secondary-accent-hover: #c7835d !important;
+  --ep-secondary-tint: rgba(217,154,117,.14) !important;
+  --ep-secondary-tint-soft: rgba(217,154,117,.08) !important;
+}
+html.dark .dashboard-shell {
+  --ep-brand-secondary: #e9bfa0 !important;
+  --ep-brand-secondary-hover: #f5d5bc !important;
+  --ep-secondary-accent: #e9bfa0 !important;
+  --ep-secondary-accent-hover: #f5d5bc !important;
+  --ep-secondary-tint: rgba(233,191,160,.16) !important;
+  --ep-secondary-tint-soft: rgba(233,191,160,.09) !important;
+}
