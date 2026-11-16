@@ -4,7 +4,6 @@ import { KpiCard, KpiGrid, Panel } from "@/features/dashboard/components/Dashboa
 import { TankSnapshotCard } from "@/features/dashboard/components/TankSnapshotCard";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
-import { rangeStatus } from "@/features/dashboard/lib/thresholds";
 import { useThresholdSettings } from "@/features/dashboard/hooks/useThresholdSettings";
 
 const quickActions = [
