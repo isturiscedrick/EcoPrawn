@@ -502,7 +502,7 @@ html:not(.dark) .ep-business-landing .ep-cloudnexus-headline { color:#0b2c34; }
 /* Gradient highlight. Falls back to solid teal where background-clip:text is unsupported. */
 .ep-business-landing .ep-cloudnexus-highlight {
   color:var(--ep-accent);
-  background-image:linear-gradient(100deg,#066874 0%,#087E8B 100%);
+  background-image:linear-gradient(100deg,#087E8B 0%,#45C5B3 100%);
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -560,7 +560,7 @@ html.dark .ep-business-landing .ep-cloudnexus-highlight {
 }
 .ep-business-landing .ep-cloudnexus-tab[aria-selected="true"] {
   border-color:color-mix(in srgb,#ffffff 22%,transparent);
-  background:linear-gradient(135deg,#066874 0%,#087e8b 50%,#2bb3a3 100%);
+  background:linear-gradient(135deg,#087E8B 0%,#45C5B3 100%);
   color:#ffffff;
   box-shadow:0 8px 18px -10px color-mix(in srgb,var(--ep-accent) 80%,transparent);
 }
