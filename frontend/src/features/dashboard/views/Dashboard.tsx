@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
-import { KpiCard, Panel } from "@/features/dashboard/components/DashboardPrimitives";
+import { KpiCard, KpiGrid, Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
 import { rangeStatus } from "@/features/dashboard/lib/thresholds";
@@ -74,12 +74,12 @@ export function Dashboard() {
         </div>
       </header>
 
-      <section aria-label="Facility health summary" className="mb-5 grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-3 2xl:grid-cols-4">
+      <KpiGrid label="Facility health summary">
         <KpiCard label="Registered tanks" value={String(tanks.length)} unit="tanks" delta="Total tanks" deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
         <KpiCard label="Healthy tanks" value={String(healthyCount)} unit="tanks" delta={tanks.length ? `${Math.round(healthyPercent)}% of facility` : "No tanks yet"} deltaTone="ok" onDetails={() => { void navigate({ to: "/dashboard/tanks" }); }} />
         <KpiCard label="Need attention" value={String(attentionCount)} unit="tanks" delta={outOfRangeCount ? `${outOfRangeCount} with out-of-range readings` : attentionCount ? "Awaiting readings" : "No warnings"} deltaTone={attentionCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
         <KpiCard label="No water readings" value={String(noReadingCount)} unit="tanks" delta={noReadingCount ? "Awaiting data" : "Readings available"} deltaTone={noReadingCount ? "warn" : "ok"} onDetails={() => { void navigate({ to: "/dashboard/water" }); }} />
-      </section>
+      </KpiGrid>
 
       <section aria-labelledby="tank-snapshot-heading" className="mb-5">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
