@@ -3013,3 +3013,63 @@ html.dark #site-header .ep-mobile-menu-toggle {
 html.dark #site-header .ep-mobile-menu-toggle:focus-visible {
   outline-color: rgba(69,197,179,.3) !important;
 }
+
+
+/* Mobile footer account links: simple stacked text actions, no button fills. */
+@media (max-width: 639px) {
+  footer[data-site-footer] .ep-footer-account nav {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: .7rem !important;
+    margin-top: .85rem !important;
+  }
+  footer[data-site-footer] .ep-footer-account nav a {
+    display: inline-flex !important;
+    width: auto !important;
+    min-height: 0 !important;
+    justify-content: flex-start !important;
+    padding: .15rem 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--ep-primary) !important;
+    text-align: left !important;
+    text-decoration: none;
+  }
+  footer[data-site-footer] .ep-footer-account nav a:hover {
+    background: transparent !important;
+    color: var(--ep-accent) !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+/* Keep the circular mobile menu control visually lightweight: transparent
+   center, no filled surface or drop shadow in either color scheme. */
+@media (max-width: 639px) {
+  #site-header .ep-mobile-menu-toggle {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    color: var(--ep-primary) !important;
+  }
+  #site-header .ep-mobile-menu-toggle:hover,
+  #site-header .ep-mobile-menu-toggle:active {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  #site-header .ep-mobile-menu-toggle:focus-visible {
+    background: transparent !important;
+    outline: 2px solid var(--ep-accent) !important;
+    outline-offset: 3px !important;
+  }
+}
+html.dark #site-header .ep-mobile-menu-toggle {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  color: #70d7c8 !important;
+}
