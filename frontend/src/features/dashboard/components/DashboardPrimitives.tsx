@@ -118,6 +118,7 @@ interface DashboardModalShellProps {
   backdropClassName?: string;
   backdropLabel?: string;
   backdropTabIndex?: number;
+  backdropDisabled?: boolean;
 }
 
 /** Shared dashboard modal frame; each dialog keeps its own content and behavior. */
@@ -131,12 +132,14 @@ export function DashboardModalShell({
   backdropClassName = "bg-[rgba(8,30,34,0.65)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.76)]",
   backdropLabel = "Close dialog",
   backdropTabIndex,
+  backdropDisabled = false,
 }: DashboardModalShellProps) {
   return (
     <div className={`fixed inset-0 ${layerClassName} flex items-center justify-center p-4 sm:p-5`} role="presentation">
       <button
         type="button"
         tabIndex={backdropTabIndex}
+        disabled={backdropDisabled}
         aria-label={backdropLabel}
         onClick={onClose}
         className={`absolute inset-0 ${backdropClassName}`}
