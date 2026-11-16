@@ -74,21 +74,21 @@ const icons = {
 /* ---------- Styles (same visual language as the landing and contact pages) ---------- */
 
 const focusRing =
-  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
 
 const inputBase =
-  "w-full rounded-xl border bg-white py-3 pl-11 pr-4 text-[15px] text-[var(--ep-primary)] outline-none transition-all duration-200 placeholder:text-[var(--ep-text-muted)] placeholder:opacity-60";
+  "w-full rounded-xl border bg-[var(--ep-bg)] py-3 pl-11 pr-4 text-[15px] text-[var(--ep-text)] outline-none transition-all duration-200 placeholder:text-[var(--ep-text-muted)] placeholder:opacity-70";
 
 const inputOk =
-  "border-[var(--ep-line)] hover:border-[var(--ep-accent)] focus:border-[var(--ep-accent)] focus:ring-4 focus:ring-[rgba(178,63,28,0.15)]";
+  "border-[var(--ep-line)] hover:border-[var(--ep-accent)] focus:border-[var(--ep-accent)] focus:ring-4 focus:ring-[color-mix(in_srgb,var(--ep-accent)_18%,transparent)]";
 
 const inputBad =
   "border-[var(--ep-danger)] focus:border-[var(--ep-danger)] focus:ring-4 focus:ring-[rgba(179,38,30,0.15)]";
 
-const labelClass = "mb-1.5 block text-sm font-semibold text-[var(--ep-primary)]";
+const labelClass = "mb-1.5 block text-sm font-semibold text-[var(--ep-text)]";
 
 const outlineButton =
-  "w-full rounded-xl border border-[var(--ep-primary)] bg-white px-4 py-2.5 text-[14px] font-semibold text-[var(--ep-primary)] transition-colors duration-200 hover:bg-[rgba(11,46,51,0.04)] disabled:opacity-50 " +
+  "w-full rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2.5 text-[14px] font-semibold text-[var(--ep-text)] transition-colors duration-200 hover:bg-[color-mix(in_srgb,var(--ep-accent)_8%,var(--ep-surface))] disabled:opacity-50 " +
   focusRing;
 
 /* ---------- Small pieces ---------- */
@@ -126,7 +126,7 @@ function Field({
   return (
     <div className={wrapperClassName}>
       <div className="mb-1.5 flex items-center justify-between gap-3">
-        <label htmlFor={id} className="block text-sm font-semibold text-[var(--ep-primary)]">
+        <label htmlFor={id} className="block text-sm font-semibold text-[var(--ep-text)]">
           {label}
         </label>
         {labelAside}
@@ -418,7 +418,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
 
   return (
     <div className="w-full max-w-[420px]">
-      <h1 className="ep-font-display text-[32px] font-semibold leading-[1.1] tracking-tight text-[var(--ep-primary)]">
+      <h1 className="ep-font-display text-[32px] font-semibold leading-[1.1] tracking-tight text-[var(--ep-text)]">
         {step === "signup"
           ? "Create your account"
           : step === "verify"
@@ -439,12 +439,12 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
           : "Sign in with your username or mobile number and password."}
       </p>
 
-      <div className="mt-8 flex flex-col gap-5 rounded-2xl border-2 border-[var(--ep-primary)] bg-white p-6 shadow-[8px_8px_0_0_var(--ep-accent)] sm:p-7">
+      <div className="mt-8 flex flex-col gap-5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[8px_8px_0_0_var(--ep-accent)] sm:p-7">
         {(step === "signin" || step === "signup") && (
           <div
             role="group"
             aria-label="Account access"
-            className="grid grid-cols-2 gap-1 rounded-xl border border-[var(--ep-line)] bg-white p-1"
+            className="grid grid-cols-2 gap-1 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-1"
           >
             {(["signin", "signup"] as const).map((mode) => (
               <button
@@ -461,7 +461,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
                 className={`rounded-lg py-2 text-[14px] font-semibold transition-colors duration-200 ${focusRing} ${
                   step === mode
                     ? "bg-[var(--ep-primary)] text-[var(--ep-bg)]"
-                    : "text-[var(--ep-primary)] hover:bg-white"
+                    : "text-[var(--ep-text)] hover:bg-[var(--ep-surface)]"
                 }`}
               >
                 {mode === "signin" ? "Sign in" : "Sign up"}
@@ -473,7 +473,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
         {error && (
           <div
             role="alert"
-            className="flex items-start gap-2.5 rounded-xl border-2 border-[var(--ep-danger)] bg-white p-3 text-[14px] font-medium leading-[1.5] text-[var(--ep-danger)]"
+            className="flex items-start gap-2.5 rounded-xl border-2 border-[var(--ep-danger)] bg-[var(--ep-surface)] p-3 text-[14px] font-medium leading-[1.5] text-[var(--ep-danger)]"
           >
             <svg
               width="18"
@@ -498,7 +498,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
         {notice && (
           <div
             role="status"
-            className="flex items-start gap-2.5 rounded-xl border-2 border-[var(--ep-ok)] bg-white p-3 text-[14px] font-medium leading-[1.5] text-[var(--ep-ok)]"
+            className="flex items-start gap-2.5 rounded-xl border-2 border-[var(--ep-ok)] bg-[var(--ep-surface)] p-3 text-[14px] font-medium leading-[1.5] text-[var(--ep-ok)]"
           >
             <svg
               width="18"
@@ -545,7 +545,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
                       <div
                         className={`mt-1.5 text-[13px] font-semibold ${
                           signupPage === i + 1
-                            ? "text-[var(--ep-primary)]"
+                            ? "text-[var(--ep-text)]"
                             : "text-[var(--ep-text-muted)]"
                         }`}
                       >
@@ -667,7 +667,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
                     onClick={() => setShowPassword((v) => !v)}
                     aria-label={showPassword ? "Hide password" : "Show password"}
                     aria-pressed={showPassword}
-                    className="absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[rgba(11,46,51,0.04)] hover:text-[var(--ep-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
+                    className="absolute right-1.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[color-mix(in_srgb,var(--ep-accent)_8%,var(--ep-surface))] hover:text-[var(--ep-text)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
                     style={{ minHeight: 0 }}
                   >
                     {showPassword ? (
@@ -713,7 +713,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
             <button
               type="submit"
               disabled={pending || !canSubmit}
-              className={`group mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-3.5 text-[15px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_10px_24px_-12px_rgba(11,46,51,0.6)] active:translate-y-0 disabled:pointer-events-none disabled:opacity-50 ${focusRing}`}
+              className={`group mt-1 inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-6 py-3.5 text-[15px] font-semibold text-[var(--ep-on-accent)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)] hover:shadow-[0_10px_24px_-12px_rgba(11,46,51,0.6)] active:translate-y-0 disabled:pointer-events-none disabled:opacity-50 ${focusRing}`}
             >
               {pending && (
                 <span
@@ -744,7 +744,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
                   touched.current.delete("password");
                   setSignupPage(1);
                 }}
-                className="self-center rounded text-[14px] font-semibold text-[var(--ep-primary)] underline underline-offset-4 transition-colors hover:text-[var(--ep-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
+                className="self-center rounded text-[14px] font-semibold text-[var(--ep-text)] underline underline-offset-4 transition-colors hover:text-[var(--ep-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
               >
                 Back
               </button>
@@ -774,7 +774,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
                 setError("");
                 setNotice("");
               }}
-              className="self-center rounded text-[14px] font-semibold text-[var(--ep-primary)] underline underline-offset-4 transition-colors hover:text-[var(--ep-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
+              className="self-center rounded text-[14px] font-semibold text-[var(--ep-text)] underline underline-offset-4 transition-colors hover:text-[var(--ep-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
             >
               Back to sign in
             </button>
@@ -797,7 +797,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
                 setGooglePending(true);
                 window.location.assign("/api/auth/google");
               }}
-              className={`inline-flex w-full items-center justify-center gap-3 rounded-xl border border-[var(--ep-primary)] bg-white px-6 py-3 text-[15px] font-semibold text-[var(--ep-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[rgba(11,46,51,0.04)] active:translate-y-0 disabled:cursor-wait disabled:opacity-60 ${focusRing}`}
+              className={`inline-flex w-full items-center justify-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-6 py-3 text-[15px] font-semibold text-[var(--ep-text)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color-mix(in_srgb,var(--ep-accent)_8%,var(--ep-surface))] active:translate-y-0 disabled:cursor-wait disabled:opacity-60 ${focusRing}`}
             >
               <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5Z" />
