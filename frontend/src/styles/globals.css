@@ -7,7 +7,12 @@
 @import "./dashboard-core.css";
 @import "./dashboard-mobile-navigation.css";
 @import "./dashboard-mobile-modules.css";
-@import "./dashboard-responsive-polish.css";
+@import "./dashboard-responsive-foundations.css";
+@import "./dashboard-responsive-overview.css";
+@import "./dashboard-responsive-monitoring.css";
+@import "./dashboard-responsive-controls.css";
+@import "./dashboard-responsive-page-chrome.css";
+@import "./dashboard-responsive-finish.css";
 @import "./landing-global.css";
 @import "./responsive-overrides.css";
 @import "./palette-foundation.css";
