@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import type { GrowthHistoryPoint, WaterHistoryPoint } from "@/types/api";
 
-const PALETTE = ["#D85A35", "#167C80", "#6D67B2", "#C18A27", "#39865B", "#B34E83"];
+const PALETTE = ["var(--ep-accent)", "var(--ep-brand-secondary)", "var(--ep-status-success)", "var(--ep-status-warning)", "#6D67B2", "#3680B9"];
 const number = (value: number, digits = 1) => value.toLocaleString(undefined, { maximumFractionDigits: digits });
 const shortDate = (value: string) => new Date(value).toLocaleDateString(undefined, { month: "short", day: "numeric" });
 const fullDate = (value: string) => new Date(value).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
@@ -24,10 +24,10 @@ export function DonutChart({ items, unit, emptyLabel = "No data available" }: {
         <span className="text-xs text-[var(--ep-text-muted)]">{unit} total</span>
       </div>
     </div>
-    <div className="w-full min-w-0 flex-1 space-y-3 sm:min-w-[150px]">
-      {items.map(item => <div key={item.label} className="flex items-center justify-between gap-3 text-sm">
-        <span className="flex min-w-0 items-center gap-2 text-[var(--ep-text-muted)]"><i className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: item.color }} /><span className="truncate">{item.label}</span></span>
-        <strong className="ep-font-mono shrink-0 text-xs text-[var(--ep-text)]">{number(item.value)} <span className="font-normal text-[var(--ep-text-muted)]">{unit}</span></strong>
+    <div className="w-full min-w-0 flex-1 space-y-3 sm:min-w-[150px]" aria-label="Chart breakdown">
+      {items.filter(item => item.value > 0).map(item => <div key={item.label} className="flex items-center justify-between gap-3 text-sm">
+        <span className="flex min-w-0 items-center gap-2 text-[var(--ep-text-muted)]"><i aria-hidden="true" className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: item.color }} /><span className="truncate">{item.label}</span></span>
+        <strong className="ep-font-mono shrink-0 text-xs text-[var(--ep-text)]">{number(item.value)} <span className="font-normal text-[var(--ep-text-muted)]">{unit}</span><span className="ml-1.5 font-medium text-[var(--ep-text-muted)]">{(item.value / total * 100).toFixed(1)}%</span></strong>
       </div>)}
     </div>
   </div>;
@@ -95,7 +95,7 @@ export function GrowthHistoryChart({ data }: { data: GrowthHistoryPoint[] }) {
       {coords.map((p,i) => <g key={filtered[i].tankId+filtered[i].recordedAt} onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} onFocus={() => setHovered(i)} onClick={() => setHovered(i)}><circle cx={p.x} cy={p.y} r="12" fill="transparent" tabIndex={0} role="button" aria-label={`${filtered[i].tankName}: ${number(value(filtered[i]))} ${unit}, ${fullDate(filtered[i].recordedAt)}`}/><circle cx={p.x} cy={p.y} r={hovered===i?7:4.5} fill="var(--ep-surface)" stroke="var(--ep-accent)" strokeWidth="3" pointerEvents="none"/></g>)}
       {coords.filter((_,i)=>i===0||i===coords.length-1).map((p,i)=><text key={i} x={p.x} y="240" textAnchor={i?"end":"start"} fill="var(--ep-text-muted)" fontSize="11">{shortDate(filtered[i?filtered.length-1:0].recordedAt)}</text>)}
     </ChartFrame> : <div className="rounded-xl border border-dashed border-[var(--ep-line)] py-12 text-center text-sm text-[var(--ep-text-muted)]">Not enough scan history for this range. Record more vision scans to build a trend.</div>}
-    {hovered !== null && filtered[hovered] && <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-3 text-xs"><strong className="text-[var(--ep-text)]">{filtered[hovered].tankName}</strong><span className="ml-2 text-[var(--ep-text-muted)]">{fullDate(filtered[hovered].recordedAt)}</span><div className="mt-1 font-semibold text-[var(--ep-accent)]">{number(value(filtered[hovered]))} {unit}</div></div>}
+    {hovered !== null && filtered[hovered] && <div role="status" aria-live="polite" className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-tint)] p-3 text-xs"><strong className="text-[var(--ep-text)]">{filtered[hovered].tankName}</strong><span className="ml-2 text-[var(--ep-text-muted)]">{fullDate(filtered[hovered].recordedAt)}</span><div className="mt-1 font-semibold text-[var(--ep-accent)]">{number(value(filtered[hovered]))} {unit}</div></div>}
     <p className="text-[11px] text-[var(--ep-text-muted)]">Each point represents an actual vision scan. No missing readings or dates are interpolated.</p>
   </div>;
 }
@@ -103,7 +103,7 @@ export function GrowthHistoryChart({ data }: { data: GrowthHistoryPoint[] }) {
 const WATER_METRICS = {
   dissolvedOxygen: { label: "Dissolved oxygen", unit: "mg/L", color: "#168C83" },
   ph: { label: "pH", unit: "pH", color: "#8066B8" },
-  temperature: { label: "Temperature", unit: "°C", color: "#D85A35" },
+  temperature: { label: "Temperature", unit: "°C", color: "var(--ep-status-warning)" },
   salinity: { label: "Salinity", unit: "ppt", color: "#3680B9" },
   waterLevel: { label: "Water level", unit: "%", color: "#C18A27" },
 } as const;
