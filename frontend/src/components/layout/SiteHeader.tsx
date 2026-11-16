@@ -207,8 +207,8 @@ export function SiteHeader({
               aria-haspopup="dialog"
               aria-controls="mobile-nav-panel"
               aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-              className={`ep-mobile-menu-toggle flex h-10 w-10 items-center justify-center justify-self-start rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--ep-tint)] focus-visible:bg-[var(--ep-surface)] lg:hidden ${focusRing}`}
-              style={{ color: "var(--ep-primary)", backgroundColor: "transparent" }}
+              className={`ep-mobile-menu-toggle flex h-10 w-10 items-center justify-center justify-self-start rounded-full border-0 bg-transparent shadow-none transition-colors duration-200 hover:bg-transparent focus-visible:bg-transparent lg:hidden ${focusRing}`}
+              style={{ color: "var(--ep-primary)", backgroundColor: "transparent", borderColor: "transparent", boxShadow: "none" }}
             >
               <svg
                 width="19"
