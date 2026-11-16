@@ -2649,3 +2649,14 @@ html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child {
     stroke: currentColor !important;
   }
 }
+
+
+/* Keep the active light-mode header icon dark like its label on the teal pill. */
+@media (min-width: 1024px) {
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg,
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg * {
+    color: #092b31 !important;
+    stroke: #092b31 !important;
+    -webkit-text-fill-color: #092b31 !important;
+  }
+}
