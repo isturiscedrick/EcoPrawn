@@ -1,67 +1,33 @@
-# Frontend Stylesheet Ownership & Architecture
+# Frontend Stylesheet Architecture
 
-This directory is the single source of truth for frontend CSS. Keep styles modular, preserve the established import order, and avoid adding corrective override blocks at the end of large files.
+This directory is the single source of truth for frontend CSS. Files are grouped by responsibility; the entry points at this level coordinate imports only.
 
-## Stylesheet map
+## Folder structure
 
-- `globals.css` — global entry point imported by `src/routes/__root.tsx`.
-- `foundations.css` — Tailwind theme bridge, semantic fallbacks, typography, shared chart defaults, and keyframes.
-- `theme-components.css` — shared theme compatibility, surfaces, charts, and active-state components.
-- `dashboard-foundations.css` — dashboard palette tokens, shell, sidebar, and responsive foundations.
-- `dashboard-monitoring-core.css` — shared monitoring components, charts, motion, and accessibility rules.
-- `dashboard-desktop-and-mobile-layout.css` — desktop workspace and core mobile dashboard composition.
-- `dashboard-mobile-module-layouts.css` — responsive layouts for individual dashboard modules.
-- `dashboard-mobile-modules.css` — responsive layouts for dashboard modules, filters, and tables.
-- `dashboard-responsive-foundations.css` — shared mobile spacing, overflow, and status treatments.
-- `dashboard-responsive-overview.css` — compact dashboard overview and KPI layouts.
-- `dashboard-responsive-monitoring.css` — tank, sensor, alert, and trend-chart layouts.
-- `dashboard-responsive-controls.css` — filters, tables, and feedback controls.
-- `dashboard-responsive-page-chrome.css` — shared responsive page headers and navigation-adjacent layouts.
-- `dashboard-responsive-finish.css` — final responsive card, typography, and consistency refinements.
-- `palette-brand-utilities.css` — shared brand utilities and legacy utility-color mappings.
-- `palette-dashboard-brand.css` — dashboard brand tokens and active navigation treatment.
-- `palette-shared-brand-states.css` — shared hover, focus, and interaction brand states.
-- `palette-surface-foundations.css` — light/dark base surfaces and public-page card mappings.
-- `palette-theme-surfaces.css` — page canvases, headers, drawers, footers, and shared theme surfaces.
-- `palette-surface-final-overrides.css` — final dark-mode and dashboard surface corrections.
-- `palette-marketing-foundations.css` and `palette-marketing-composition.css` — public marketing and authentication palette hierarchy.
-- `palette-public-depth.css` and `palette-public-contrast.css` — public hero depth, card contrast, and header/footer text contrast.
-- `palette-dashboard-sidebar-foundations.css` and `palette-dashboard-sidebar-final-states.css` — dashboard sidebar and selected-navigation palette refinements.
-- `palette-public-header.css` — desktop public header and navigation palette.
-- `palette-mobile-public-chrome.css` — mobile public header, drawer, and footer palette.
-- `palette-dashboard-mobile-header.css` — dashboard mobile header and alerts/avatar palette.
-- `landing-global.css` — public-page stylesheet entry point.
-  - `landing-tokens.css` — public-page tokens and headline treatments.
-  - `hero-lens.css` — HeroLens depth, optics, and container-query behavior.
-  - `landing-sections.css` — public hero, section bands, capabilities, and process layouts.
-  - `site-chrome.css` — shared header/footer and public chrome.
-  - `marketing-page-foundations.css` and `marketing-page-responsive-finish.css` — shared editorial foundations, responsive polish, and page-level refinements.
-  - `marketing-hero-layouts.css` and `marketing-public-page-layouts.css` — landing, About, and Contact hero and content layouts.
-  - `marketing-landing-interactions.css` — landing hero, CTA, and motion interactions.
-  - `marketing-public-illustrations.css` — shared public-page illustrations and supporting visuals.
-  - `marketing-shared-card-system.css` — shared card surfaces and About/Contact hero alignment.
-  - `marketing-depth-foundation-core.css`, `marketing-depth-target-ranges.css`, and `marketing-depth-platform-and-about.css` — shared depth foundations, target-range visuals, and platform/About refinements.
-  - `marketing-depth-landing-foundations.css`, `marketing-depth-landing-responsive.css`, and `marketing-depth-landing-finish.css` — landing visual hierarchy, responsive composition, and final polish.
-  - `marketing-depth-accessibility.css`, `marketing-depth-page-layouts.css`, and `marketing-depth-about-contact.css` — accessibility refinements, public-page layouts, and About/Contact visual treatments.
-  - `mobile-first.css` — cross-page mobile-first responsive treatments.
-- `site-header.css` — SiteHeader responsive layout.
-- `brand-mark.css` — BrandMark and wordmark treatments.
-- `logo-intro.css` — loading-screen intro animation.
-- `auth-modal.css` — authentication dialog, mobile sheet, form controls, and theme states.
-- `responsive-overrides.css` — cross-page viewport and overflow safeguards.
-- `marketing-overrides.css` — deprecated compatibility entry; do not add new rules.
+- `globals.css` — global entry point imported by `src/routes/__root.tsx`. Its import order is intentional.
+- `landing-global.css` — public-page entry point for landing, About, Contact, and shared marketing styles.
+- `foundations/` — Tailwind theme bridge, semantic tokens, typography, accessibility defaults, and shared theme components.
+- `dashboard/` — dashboard shell, monitoring components, desktop/mobile layouts, and responsive module styles.
+- `palette/` — shared brand utilities, light/dark surfaces, dashboard palette, marketing palette, and public/dashboard chrome palette layers.
+- `marketing/` — landing, About, Contact, hero, shared cards, illustrations, page layouts, and marketing responsive styles.
+- `components/` — component-owned styles for the authentication modal, SiteHeader, BrandMark, and logo intro.
+- `utilities/` — cross-page responsive and overflow safeguards.
 
-## Ownership and cascade rules
+## Import ownership
 
-1. Import `globals.css` from the TanStack root route.
-2. Treat the palette foundation modules as the authority for shared Ocean Teal and Soft Coral Sand tokens in light and dark themes; keep later palette modules in the documented cascade order. Feature styles may consume tokens but should not redefine the shared brand palette.
-3. Keep dashboard selectors scoped under `.dashboard-shell`.
-4. Keep public-page selectors scoped under `.ep-landing`, `.ep-about-page`, or `.ep-contact-page`, except for intentionally shared public chrome.
-5. Edit the owning selector instead of appending a later corrective override. If a compatibility override is temporarily unavoidable, document why it exists and the rule it supersedes.
-6. Preserve semantic status colors (success, warning, danger, and info); they are not brand accents.
-7. Prefer one reduced-motion rule per component stylesheet and consolidate duplicate declarations into the owning rule.
-8. Split stylesheets by responsibility when making larger refactors. The 400-line target is a maintainability guideline, not a reason to split tightly coupled rules without checking import order and selector dependencies.
+1. Import only `globals.css` from the TanStack root route.
+2. Keep the original order of imports in `globals.css` and `landing-global.css`; cascade order is part of the design.
+3. Keep shared Ocean Teal and Soft Coral Sand tokens in the palette foundation layers. Feature styles may consume tokens but should not redefine the shared brand palette.
+4. Keep dashboard selectors scoped under `.dashboard-shell`.
+5. Keep public-page selectors scoped under `.ep-landing`, `.ep-about-page`, or `.ep-contact-page`, except intentionally shared public chrome.
+6. Component styles should be imported by the component that owns them, using the `@/styles/components/` path.
+7. Edit the owning selector instead of appending corrective overrides. If a compatibility override is temporarily unavoidable, document why it exists and which rule it supersedes.
+8. Preserve semantic status colors (success, warning, danger, and info); they are not brand accents.
+9. Consolidate duplicate declarations only after checking specificity, source order, and media-query scope.
 
-## Current cleanup priorities
+## Maintenance notes
 
-The large dashboard core, dashboard responsive, and palette stylesheets have been split into smaller feature-focused files. Each split preserves the original rule order and import position. The split preserves each original file's rule order and keeps the original import positions, so the cascade remains unchanged. Future cleanup should consolidate duplicate selectors only after checking specificity, source order, and media-query scope; do not delete repeated declarations based on matching property values alone.
+- Keep stylesheet files focused on one responsibility.
+- The 400-line target is a maintainability guideline, not a reason to split tightly coupled rules without checking selector dependencies and import order.
+- Do not create new files in this root unless they are stylesheet entry points or architecture documentation.
+- `marketing-overrides.css` is deprecated; do not add new rules to it.
