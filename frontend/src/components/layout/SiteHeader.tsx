@@ -248,7 +248,7 @@ export function SiteHeader({
                 aria-checked={darkMode}
                 aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
                 title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-                className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
+                className={`inline-flex h-10 w-10 items-center justify-center rounded-lg border transition-all duration-200 hover:-translate-y-0.5 ${focusRing}`}
                 style={{
                   color: "var(--ep-primary)",
                   borderColor: "var(--ep-line)",
@@ -260,7 +260,7 @@ export function SiteHeader({
             )}
 
             {isAuth ? (
-              <Link to="/" className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition-all hover:-translate-y-0.5 ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>
+              <Link to="/" className={`inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-semibold transition-all hover:-translate-y-0.5 ${focusRing}`} style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)" }}>
                 <span aria-hidden="true">←</span> Back to home
               </Link>
             ) : (
@@ -268,7 +268,7 @@ export function SiteHeader({
                 <AuthLink
                   aria-label="Log in"
                   title="Log in"
-                  className={`ep-cta-control ep-cta-secondary hidden h-10 w-10 items-center justify-center whitespace-nowrap rounded-full border text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
+                  className={`ep-cta-control ep-cta-secondary hidden h-10 w-10 items-center justify-center whitespace-nowrap rounded-lg border text-xs font-semibold transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
                   style={{ borderColor: "var(--ep-line)", color: "var(--ep-primary)", backgroundColor: "var(--ep-surface)" }}
                 >
                   <svg className="xl:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -281,7 +281,7 @@ export function SiteHeader({
                   mode="signup"
                   aria-label="Get started"
                   title="Get started"
-                  className={`ep-cta-control ep-cta-primary hidden h-10 w-10 items-center justify-center gap-2 whitespace-nowrap rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
+                  className={`ep-cta-control ep-cta-primary hidden h-10 w-10 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
                   style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-on-accent)" }}
                 >
                   <span className="hidden whitespace-nowrap xl:inline">Get started</span>
