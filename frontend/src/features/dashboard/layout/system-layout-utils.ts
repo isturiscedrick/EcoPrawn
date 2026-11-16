@@ -12,5 +12,12 @@ export const DASHBOARD_QUICK_LINKS = [
 ] as const;
 
 export function getProfileInitials(name: string): string {
-  return name.trim().split(/\\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? "").join("") || "FO";
+  const initials = name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+
+  return initials || "FO";
 }
