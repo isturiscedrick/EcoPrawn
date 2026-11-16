@@ -44,10 +44,8 @@ export function SiteHeader({
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.localStorage.getItem("ep-dashboard-theme") === "dark";
-  });
+  // Start from a stable server/client value; sync the saved preference after mount.
+  const [darkMode, setDarkMode] = useState(false);
 
   // Explicit closes (backdrop, X, swipe, Escape) hand focus back to the menu button.
   const closeDrawer = useCallback(() => {
