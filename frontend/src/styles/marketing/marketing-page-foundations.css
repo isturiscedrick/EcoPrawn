@@ -1,0 +1,294 @@
+/* ==========================================================================
+   EcoPrawn Marketing Experience
+   Shared editorial system for Landing, About and Contact.
+   Scoped to public marketing pages; no dashboard or auth behavior changes.
+   ========================================================================== */
+
+:is(.ep-landing,.ep-about-page,.ep-contact-page) main {
+  isolation: isolate;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) main > section {
+  scroll-margin-top: 6rem;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [data-reveal] {
+  will-change: transform, opacity;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(h1,h2,h3) {
+  text-wrap: balance;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) p {
+  text-wrap: pretty;
+}
+
+/* Editorial page headers: consistent with the landing hero, but quieter. */
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 78% 28%,rgba(8,126,139,.10),transparent 38%),
+    linear-gradient(135deg,var(--ep-bg),var(--ep-surface) 64%,var(--ep-tint));
+  border-bottom: 1px solid var(--ep-line);
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  background:
+    radial-gradient(ellipse at 78% 28%,rgba(69,197,179,.14),transparent 40%),
+    linear-gradient(135deg,#0b171b,#102328 68%,#153a3e);
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
+  max-width: 1320px;
+  min-height: clamp(330px,38vw,470px);
+  justify-content: center;
+  padding-top: clamp(5.5rem,9vw,8rem);
+  padding-bottom: clamp(3.5rem,6vw,5.5rem);
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] {
+  max-width: 15ch;
+  letter-spacing: -.065em;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-lead] {
+  max-width: 38rem;
+  font-size: clamp(1rem,1.5vw,1.2rem);
+}
+
+/* Landing page rhythm and visual hierarchy. */
+.ep-business-landing #readings > div,
+.ep-business-landing #capabilities > div,
+.ep-business-landing #process > div {
+  padding-top: clamp(4rem,7vw,6.5rem);
+  padding-bottom: clamp(4rem,7vw,6.5rem);
+}
+.ep-business-landing .ep-stats-panel {
+  transform: translateY(-1px);
+}
+.ep-business-landing .ep-stats-panel > div {
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 1rem;
+  transition: transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+@media (hover:hover) {
+  .ep-business-landing .ep-stats-panel > div:hover {
+    transform: translateY(-3px);
+    border-color: var(--ep-accent);
+    box-shadow: 0 16px 30px -24px rgba(8,126,139,.35);
+  }
+}
+.ep-business-landing #readings [data-reading] {
+  min-height: 220px;
+  border-radius: 1.15rem;
+  background: linear-gradient(155deg,rgba(255,255,255,.105),rgba(255,255,255,.035));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12),0 20px 42px -34px rgba(0,0,0,.55);
+  transition: transform .25s ease,border-color .25s ease,background .25s ease;
+}
+@media (hover:hover) {
+  .ep-business-landing #readings [data-reading]:hover {
+    transform: translateY(-4px);
+    border-color: rgba(69,197,179,.75);
+  }
+}
+.ep-business-landing .ep-business-capabilities [data-business-card] {
+  position: relative;
+  overflow: hidden;
+  min-height: 290px;
+  border-radius: 1.35rem;
+  padding: clamp(1.4rem,2.2vw,2rem);
+}
+.ep-business-landing .ep-business-capabilities [data-business-card]::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  right: -72px;
+  bottom: -82px;
+  border: 1px solid rgba(8,126,139,.14);
+  border-radius: 50%;
+  box-shadow: 0 0 0 18px rgba(8,126,139,.035),0 0 0 38px rgba(8,126,139,.025);
+  pointer-events: none;
+}
+html.dark .ep-business-landing .ep-business-capabilities [data-business-card]::after {
+  border-color: rgba(69,197,179,.22);
+  box-shadow: 0 0 0 18px rgba(69,197,179,.05),0 0 0 38px rgba(69,197,179,.025);
+}
+.ep-business-landing #process [data-process-track] > li {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: var(--ep-surface);
+  box-shadow: 0 18px 45px -38px rgba(15,23,42,.32);
+  transition: transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+@media (hover:hover) {
+  .ep-business-landing #process [data-process-track] > li:hover {
+    transform: translateY(-5px);
+    border-color: var(--ep-accent);
+    box-shadow: 0 24px 48px -34px rgba(8,126,139,.25);
+  }
+}
+.ep-business-landing #process [data-process-track] > li > div:first-of-type > span:first-child {
+  font-size: .72rem;
+  letter-spacing: .16em;
+}
+
+/* About page: structured section navigation, objective cards and system modules. */
+.ep-about-page #objectives,
+.ep-about-page #scope {
+  background:
+    radial-gradient(ellipse at 8% 10%,rgba(8,126,139,.045),transparent 36%),
+    var(--ep-bg);
+}
+html.dark .ep-about-page #objectives,
+html.dark .ep-about-page #scope {
+  background:
+    radial-gradient(ellipse at 8% 10%,rgba(69,197,179,.07),transparent 36%),
+    var(--ep-bg);
+}
+.ep-about-page .ep-about-objective {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: linear-gradient(125deg,var(--ep-surface),var(--ep-tint));
+  box-shadow: 0 24px 60px -46px rgba(15,23,42,.32);
+}
+.ep-about-page .ep-about-objective::after {
+  content: "";
+  position: absolute;
+  right: -3.5rem;
+  top: -4.5rem;
+  width: 13rem;
+  aspect-ratio: 1;
+  border: 1px solid rgba(8,126,139,.18);
+  border-radius: 50%;
+  box-shadow: 0 0 0 22px rgba(8,126,139,.035),0 0 0 48px rgba(8,126,139,.025);
+  pointer-events: none;
+}
+.ep-about-page #objectives article,
+.ep-about-page #scope article {
+  border-radius: 1.25rem;
+  transition: transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+@media (hover:hover) {
+  .ep-about-page #objectives article:hover,
+  .ep-about-page #scope article:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 42px -30px rgba(15,23,42,.28);
+  }
+}
+.ep-about-page #systems {
+  background-image:
+    radial-gradient(circle at 90% 12%,rgba(69,197,179,.16),transparent 28%),
+    radial-gradient(circle at 8% 90%,rgba(8,126,139,.12),transparent 32%);
+}
+.ep-about-page #systems article {
+  min-height: 250px;
+  border-radius: 1.25rem;
+  backdrop-filter: blur(10px);
+  transition: transform .25s ease,border-color .25s ease,background .25s ease;
+}
+@media (hover:hover) {
+  .ep-about-page #systems article:hover {
+    transform: translateY(-4px);
+    border-color: rgba(69,197,179,.8);
+    background: rgba(255,255,255,.10);
+  }
+}
+.ep-about-page #scope article {
+  box-shadow: 0 18px 45px -38px rgba(15,23,42,.3);
+}
+
+/* Contact page: split information rail and focused message panel. */
+.ep-contact-page main > section {
+  background:
+    radial-gradient(ellipse at 5% 18%,rgba(8,126,139,.045),transparent 34%),
+    var(--ep-bg);
+}
+html.dark .ep-contact-page main > section {
+  background:
+    radial-gradient(ellipse at 5% 18%,rgba(69,197,179,.07),transparent 34%),
+    var(--ep-bg);
+}
+.ep-contact-page main > section > div {
+  max-width: 1320px;
+}
+/* Contact details panel base styles are consolidated in the refinement
+   block below so light/dark surfaces and spacing have one source of truth. */
+.ep-contact-page [data-contact-details]::before {
+  content: "ECOPRAWN / CONNECT";
+  display: block;
+  margin: 0 0 .5rem .25rem;
+  color: var(--ep-accent);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .17em;
+}
+.ep-contact-page [data-contact-card] {
+  min-height: 106px;
+  align-items: center;
+  border-radius: 1rem;
+  background: var(--ep-surface);
+  box-shadow: 0 14px 30px -26px rgba(15,23,42,.32);
+}
+.ep-contact-page [data-contact-form] > form,
+.ep-contact-page [data-contact-form] > [role="status"] {
+  border-radius: 1.5rem;
+  padding: clamp(1.35rem,3vw,2.5rem);
+  box-shadow: 0 26px 70px -48px rgba(15,23,42,.42);
+}
+.ep-contact-page [data-contact-form] form > div:first-child {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--ep-line);
+}
+.ep-contact-page [data-contact-form] form h2 {
+  font-size: clamp(1.5rem,2.4vw,2rem);
+  letter-spacing: -.04em;
+}
+.ep-contact-page [data-contact-form] input,
+.ep-contact-page [data-contact-form] textarea {
+  border-radius: .85rem;
+  min-height: 3.1rem;
+}
+.ep-contact-page [data-contact-form] textarea {
+  min-height: 9rem;
+}
+.ep-contact-page [data-contact-form] button[type="submit"] {
+  min-width: 12rem;
+  box-shadow: 0 12px 24px -14px rgba(8,126,139,.65);
+}
+
+/* Shared final call-to-action and footer transitions. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(69,197,179,.24);
+  border-radius: 1.75rem;
+  background:
+    radial-gradient(ellipse at 90% 10%,rgba(69,197,179,.2),transparent 36%),
+    linear-gradient(120deg,#073f46 0%,#087e8b 58%,#0b6871 100%);
+  box-shadow: 0 28px 70px -46px rgba(15,23,42,.55);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band]::after {
+  content: "";
+  position: absolute;
+  right: -4rem;
+  bottom: -8rem;
+  width: 22rem;
+  aspect-ratio: 1;
+  border: 1px solid rgba(112,215,200,.28);
+  border-radius: 50%;
+  box-shadow: 0 0 0 26px rgba(112,215,200,.06),0 0 0 58px rgba(112,215,200,.035);
+  pointer-events: none;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] > * {
+  position: relative;
+  z-index: 1;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] {
+  border-top: 1px solid var(--ep-line);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] a {
+  transition: color .2s ease,opacity .2s ease;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) footer[data-site-footer] a:hover {
+  opacity: .76;
+}
+
