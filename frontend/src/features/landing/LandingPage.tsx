@@ -189,7 +189,7 @@ export function LandingPage() {
                     <span><Icon name="waves" size={15} /> Water quality</span>
                     <span><Icon name="chart-no-axes-combined" size={15} /> Growth vision</span>
                     <span><Icon name="activity" size={15} /> Systems</span>
-                    <div className="mt-auto rounded-lg bg-[var(--ep-tint)] p-2 text-[9px] leading-relaxed text-[var(--ep-text-muted)]">Connected farm monitoring</div>
+                    <div className="mt-auto rounded-lg bg-[var(--ep-tint)] p-2 text-[9px] leading-relaxed text-[var(--ep-text-muted)]">Farm overview</div>
                   </aside>
 
                   <div className="min-w-0 flex-1 p-3 sm:p-5 lg:p-6">
@@ -199,7 +199,7 @@ export function LandingPage() {
                         <h2 className="mt-1 text-base font-semibold tracking-tight text-[var(--ep-text)] sm:text-xl">
                           {previewTab === "water" ? "Water quality overview" : previewTab === "growth" ? "Growth & biomass insights" : "Farm systems overview"}
                         </h2>
-                        <p className="mt-1 text-[10px] text-[var(--ep-text-muted)] sm:text-xs">Your farm at a glance</p>
+                        <p className="mt-1 text-[10px] text-[var(--ep-text-muted)] sm:text-xs">Facility snapshot</p>
                       </div>
                       <span className="rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-2.5 py-1.5 text-[9px] font-semibold text-[var(--ep-text-muted)]">Illustrative sample</span>
                     </div>
@@ -279,7 +279,7 @@ export function LandingPage() {
           <div className="mx-auto flex max-w-[1180px] flex-col items-center gap-3 sm:flex-row sm:justify-between">
             <div className="max-w-[34rem] text-center sm:text-left">
               <p className="text-[10px] font-bold uppercase tracking-[.18em] text-[var(--ep-accent)]">Connected aquaculture</p>
-              <p className="mt-1 text-sm font-medium text-[var(--ep-text-muted)] sm:text-base">A clearer view of water conditions, growth, and farm operations.</p>
+              <p className="mt-1 text-sm font-medium text-[var(--ep-text-muted)] sm:text-base">Water, growth, and farm operations—shown together.</p>
             </div>
             <AquacultureIllustration variant="landing" />
           </div>
@@ -448,11 +448,11 @@ export function LandingPage() {
                   One connected platform
                 </div>
                 <h2 id="capabilities-title" className="ep-font-display max-w-[560px] text-[clamp(30px,4vw,48px)] font-semibold leading-[1.08] tracking-tight">
-                  The essential parts of farm operations, working together.
+                  Three capabilities for everyday farm operations.
                 </h2>
               </div>
               <p className="max-w-[560px] text-base leading-relaxed text-[var(--ep-text-muted)] lg:justify-self-end lg:text-lg">
-                EcoPrawn brings water monitoring, feeding, visual growth tracking, and effluent management into one operational workflow—so teams can understand what is happening and respond with better context.
+                Monitor water, review growth, and coordinate farm actions from one workspace.
               </p>
             </div>
 
@@ -507,16 +507,16 @@ export function LandingPage() {
                 id="dashboard-preview-title"
                 className="ep-font-display text-[clamp(30px,4vw,48px)] font-semibold leading-[1.08] tracking-tight text-[var(--ep-text)]"
               >
-                A closer look at your farm.
+                Explore the dashboard.
               </h2>
               <p className="mt-4 text-base leading-relaxed text-[var(--ep-text-muted)] sm:text-lg">
-                See key readings and spot changes across every tank.
+                Preview water readings, growth observations, and connected systems.
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 <Link to="/dashboard" className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--ep-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] shadow-lg shadow-teal-700/15 transition-colors duration-200 hover:bg-[var(--ep-accent-hover)] ${focusRing}`}>
                   Explore dashboard <Icon name="arrow-up-right" size={16} />
                 </Link>
-                <span className="text-xs text-[var(--ep-text-muted)]">Illustrative interface preview</span>
+                <span className="text-xs text-[var(--ep-text-muted)]">Interactive preview</span>
               </div>
             </div>
 
@@ -526,7 +526,7 @@ export function LandingPage() {
                   <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--ep-accent)] text-white"><Icon name="activity" size={19} /></span>
                   <div>
                     <p className="text-sm font-bold text-[var(--ep-text)]">Farm overview</p>
-                    <p className="text-xs text-[var(--ep-text-muted)]">Tank 1 · Monitoring snapshot</p>
+                    <p className="text-xs text-[var(--ep-text-muted)]">Tank 1 · Sample data</p>
                   </div>
                 </div>
                 <span className="inline-flex items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-tint)] px-3 py-1.5 text-xs font-semibold text-[var(--ep-text-muted)]">
@@ -610,10 +610,10 @@ export function LandingPage() {
                                       </div>
                                       <div className="flex items-center gap-3 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3">
                                         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="eye" size={16} /></span>
-                                        <span className="min-w-0"><span className="block text-xs font-semibold text-[var(--ep-text)]">Growth insights</span><span className="mt-0.5 block text-[10px] text-[var(--ep-text-muted)]">Visual growth and biomass context</span></span>
+                                        <span className="min-w-0"><span className="block text-xs font-semibold text-[var(--ep-text)]">Growth insights</span><span className="mt-0.5 block text-[10px] text-[var(--ep-text-muted)]">Growth and biomass</span></span>
                                       </div>
                                     </div>
-                                    <p className="mt-4 border-t border-[var(--ep-line)] pt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Concept preview only. Values and visual patterns are illustrative, not live farm data.</p>
+                                    <p className="mt-4 border-t border-[var(--ep-line)] pt-3 text-[10px] leading-relaxed text-[var(--ep-text-muted)]">Sample values only · Not live farm data.</p>
                                   </div>
                                 </div>
                   </>
@@ -622,21 +622,21 @@ export function LandingPage() {
                     <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-5">
                       <span className="mb-4 grid h-10 w-10 place-items-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="eye" size={20} /></span>
                       <p className="text-sm font-semibold text-[var(--ep-text)]">Camera-based observation</p>
-                      <p className="mt-2 text-xs leading-relaxed text-[var(--ep-text-muted)]">A visual approach to observing shrimp growth without routine handling.</p>
+                      <p className="mt-2 text-xs leading-relaxed text-[var(--ep-text-muted)]">Review camera-based growth observations.</p>
                     </div>
                     <div className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-5">
                       <span className="mb-4 grid h-10 w-10 place-items-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name="camera" size={20} /></span>
                       <p className="text-sm font-semibold text-[var(--ep-text)]">Growth and biomass context</p>
-                      <p className="mt-2 text-xs leading-relaxed text-[var(--ep-text-muted)]">Visual insights can help teams understand growth patterns and inform feeding decisions.</p>
+                      <p className="mt-2 text-xs leading-relaxed text-[var(--ep-text-muted)]">Use growth estimates to inform feeding.</p>
                     </div>
-                    <p className="sm:col-span-2 rounded-lg border border-dashed border-[var(--ep-line)] px-4 py-3 text-xs leading-relaxed text-[var(--ep-text-muted)]">Concept view only. No live camera feed, measured biomass, or real growth history is displayed.</p>
+                    <p className="sm:col-span-2 rounded-lg border border-dashed border-[var(--ep-line)] px-4 py-3 text-xs leading-relaxed text-[var(--ep-text-muted)]">Concept only · No live camera feed or measured biomass.</p>
                   </div>
                 ) : (
                   <div className="grid gap-3 p-4 sm:grid-cols-3 sm:p-5">
                     {[
-                      { icon: "activity" as const, title: "Aeration", detail: "Aerator response based on operating conditions." },
-                      { icon: "zap" as const, title: "Feeding", detail: "Feeding workflow informed by biomass context." },
-                      { icon: "leaf" as const, title: "Effluent", detail: "Treated wastewater routing to mangrove and wetland." },
+                      { icon: "activity" as const, title: "Aeration", detail: "Aeration based on operating conditions." },
+                      { icon: "zap" as const, title: "Feeding", detail: "Feeding informed by biomass estimates." },
+                      { icon: "leaf" as const, title: "Effluent", detail: "Treated wastewater routed to mangrove and wetland." },
                     ].map((item) => (
                       <div key={item.title} className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-4">
                         <span className="mb-4 grid h-10 w-10 place-items-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-accent)]"><Icon name={item.icon} size={19} /></span>
@@ -644,7 +644,7 @@ export function LandingPage() {
                         <p className="mt-2 text-xs leading-relaxed text-[var(--ep-text-muted)]">{item.detail}</p>
                       </div>
                     ))}
-                    <p className="sm:col-span-3 rounded-lg border border-dashed border-[var(--ep-line)] px-4 py-3 text-xs leading-relaxed text-[var(--ep-text-muted)]">Concept view only. This preview does not control equipment or report live system status.</p>
+                    <p className="sm:col-span-3 rounded-lg border border-dashed border-[var(--ep-line)] px-4 py-3 text-xs leading-relaxed text-[var(--ep-text-muted)]">Concept only · No equipment control or live status.</p>
                   </div>
                 )}
               </div>
