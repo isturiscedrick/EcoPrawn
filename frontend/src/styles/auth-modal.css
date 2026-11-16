@@ -734,7 +734,7 @@ html.dark .ep-auth-modal button[type="submit"] {
   color: #092b31 !important;
 }
 
-/* Ensure the Coral Sand secondary accent survives the modal's high-specificity
+/* Ensure the Ocean Teal accent survives the modal's high-specificity
    dark-mode text reset. Primary submit/selected controls remain Ocean Teal. */
 html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel :is(.ep-auth-eyebrow,[data-auth-accent]) {
   color: #45c5b3 !important;
