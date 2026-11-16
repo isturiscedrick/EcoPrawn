@@ -11,6 +11,7 @@ import type { NewTankInput } from "@/features/dashboard/context/TankContext";
 import { validateNewTank } from "@/features/dashboard/validateNewTank";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { DashboardFormField } from "./DashboardPrimitives";
 
 interface AddTankModalProps {
   open: boolean;
@@ -44,13 +45,9 @@ function Field({
   ...inputProps
 }: FieldProps & { ref?: React.Ref<HTMLInputElement> }) {
   return (
-    <div>
-      <label htmlFor={id} className={`${labelClass} flex items-center gap-1.5`}>
-        {icon && <Icon name={icon} size={11} strokeWidth={2} className="text-[var(--ep-accent)]" />}
-        {label}
-      </label>
+    <DashboardFormField id={id} label={label} icon={icon} labelClassName={labelClass}>
       <input id={id} ref={ref} className={inputClass} {...inputProps} />
-    </div>
+    </DashboardFormField>
   );
 }
 
