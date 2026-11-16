@@ -209,7 +209,7 @@ html.dark .dashboard-shell .bg-\[var\(--ep-accent\)\].text-white {
   border-color: var(--ep-secondary);
 }
 
-/* Operator avatar on coral fill */
+/* Operator avatar on Ocean Teal fill */
 .dashboard-shell [style*="var(--ep-accent)"] {
   color: #ffffff;
 }
