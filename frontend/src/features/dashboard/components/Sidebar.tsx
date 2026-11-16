@@ -502,10 +502,6 @@ export function Sidebar({
           onCancel={onCancelLogout}
           onConfirm={onConfirmLogout}
         />
-      )}tton>
-            </div>
-          </div>
-        </div>
       )}
     </>
   );
