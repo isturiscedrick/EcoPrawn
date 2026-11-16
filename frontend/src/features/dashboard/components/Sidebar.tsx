@@ -45,6 +45,9 @@ export function Sidebar({
 
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const logoutDialogRef = useRef<HTMLDivElement>(null);
+  const logoutCancelRef = useRef<HTMLButtonElement>(null);
+  const logoutOpenerRef = useRef<HTMLElement | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const touchStartTime = useRef<number>(0);
@@ -203,6 +206,9 @@ export function Sidebar({
   const [loggingOut, setLoggingOut] = useState(false);
 
   function onLogoutClick() {
+    logoutOpenerRef.current = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
     setLogoutError("");
     setConfirmingLogout(true);
   }
@@ -221,22 +227,78 @@ export function Sidebar({
   }
 
   function onCancelLogout() {
+    if (loggingOut) return;
     setConfirmingLogout(false);
   }
 
   useEffect(() => {
     if (!confirmingLogout) return;
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setConfirmingLogout(false);
-    }
-    window.addEventListener("keydown", onKeyDown);
-    const original = document.body.style.overflow;
+
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    logoutCancelRef.current?.focus({ preventScroll: true });
+
+    function getFocusableElements() {
+      const dialog = logoutDialogRef.current;
+      if (!dialog) return [];
+      return Array.from(dialog.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+      )).filter((element) =>
+        !element.hasAttribute("hidden") &&
+        element.getAttribute("aria-hidden") !== "true" &&
+        element.getClientRects().length > 0,
+      );
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        if (!loggingOut) {
+          event.preventDefault();
+          setConfirmingLogout(false);
+        }
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = getFocusableElements();
+      if (focusable.length === 0) {
+        event.preventDefault();
+        logoutDialogRef.current?.focus({ preventScroll: true });
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      const insideDialog = !!active && logoutDialogRef.current?.contains(active);
+      if (event.shiftKey && (!insideDialog || active === first)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (!insideDialog || active === last)) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    function keepFocusInsideDialog(event: FocusEvent) {
+      if (event.target instanceof Node && !logoutDialogRef.current?.contains(event.target)) {
+        logoutCancelRef.current?.focus({ preventScroll: true });
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    document.addEventListener("focusin", keepFocusInsideDialog);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = original;
+      document.removeEventListener("focusin", keepFocusInsideDialog);
+      document.body.style.overflow = originalOverflow;
+      const opener = logoutOpenerRef.current;
+      const openerIsUnavailable = !opener?.isConnected ||
+        !!opener?.closest('[inert], [aria-hidden="true"]');
+      if (!openerIsUnavailable) opener?.focus({ preventScroll: true });
+      logoutOpenerRef.current = null;
     };
-  }, [confirmingLogout]);
+  }, [confirmingLogout, loggingOut]);
 
   return (
     <>
@@ -457,6 +519,7 @@ export function Sidebar({
           role="dialog"
           aria-modal="true"
           aria-labelledby="logout-modal-title"
+          aria-describedby="logout-modal-description"
           className="fixed inset-0 z-[100] flex items-center justify-center p-5"
         >
           <div
@@ -464,14 +527,14 @@ export function Sidebar({
             onClick={onCancelLogout}
             className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.76)]"
           />
-          <div className="ep-pop-in relative z-10 w-full max-w-[360px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-[var(--ep-text)] shadow-[var(--shadow-overlay)]">
+          <div ref={logoutDialogRef} tabIndex={-1} className="ep-pop-in relative z-10 w-full max-w-[360px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-[var(--ep-text)] shadow-[var(--shadow-overlay)]">
             <h2
               id="logout-modal-title"
               className="ep-font-display mb-1.5 text-[18px] font-semibold text-[var(--ep-text)]"
             >
               Log out of EcoPrawn?
             </h2>
-            <p className="mb-6 text-[13px] leading-[1.55] text-[var(--ep-text-muted)]">
+            <p id="logout-modal-description" className="mb-6 text-[13px] leading-[1.55] text-[var(--ep-text-muted)]">
               You&apos;ll need to sign in again to access the facility
               dashboard.
             </p>
@@ -482,8 +545,10 @@ export function Sidebar({
             )}
             <div className="flex gap-3">
               <button
+                ref={logoutCancelRef}
                 type="button"
                 onClick={onCancelLogout}
+                disabled={loggingOut}
                 className="ep-dashboard-action flex-1 rounded-lg border border-[var(--ep-line)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-text)] transition-colors duration-200 hover:bg-[var(--ep-tint)]"
               >
                 Cancel
