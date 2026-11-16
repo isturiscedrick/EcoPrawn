@@ -58,6 +58,15 @@ try {
         documentWidth: document.documentElement.scrollWidth,
         brandRight: brand?.right ?? null,
         controlsLeft: controls?.left ?? null,
+        alertsRect: (() => {
+          const rect = document.querySelector('#site-header a[href="/dashboard/alerts"]')?.getBoundingClientRect();
+          return rect ? { left: rect.left, right: rect.right, width: rect.width } : null;
+        })(),
+        avatarRect: (() => {
+          const rect = document.querySelector('#site-header button[aria-label="Open profile menu"]')?.getBoundingClientRect();
+          return rect ? { left: rect.left, right: rect.right, width: rect.width } : null;
+        })(),
+        mobileMenuCount: document.querySelectorAll('#site-header [aria-controls="mobile-nav-panel"]').length,
         bottomNavCount: items.length,
         bottomNavItems: items,
         bottomNavLabels: bottomNav ? Array.from(bottomNav.querySelectorAll("a,button")).map(item => item.textContent?.trim()) : [],
@@ -73,8 +82,16 @@ try {
     for (const item of shell.bottomNavItems) {
       assert.ok(item.width > 0 && item.left >= 0 && item.right <= width + 1, `Bottom navigation item clips at ${width}px`);
     }
-    await page.getByRole("link", { name: "Alerts" }).waitFor({ state: "visible" });
-    await page.getByRole("button", { name: "Open profile menu" }).waitFor({ state: "visible" });
+    const alertsLink = page.getByRole("link", { name: "Alerts" });
+    const profileButton = page.getByRole("button", { name: "Open profile menu" });
+    await alertsLink.waitFor({ state: "visible" });
+    await profileButton.waitFor({ state: "visible" });
+    assert.ok(shell.alertsRect && shell.avatarRect, "Alerts and avatar controls must render in the mobile header");
+    assert.ok(shell.alertsRect.width >= 40 && shell.avatarRect.width >= 40,
+      `Alerts and avatar must retain thumb-friendly hit targets at ${width}px: ${JSON.stringify(shell)}`);
+    assert.ok(shell.alertsRect.right <= shell.avatarRect.left,
+      `Alerts must sit immediately to the left of the avatar at ${width}px: ${JSON.stringify(shell)}`);
+    assert.equal(shell.mobileMenuCount, 0, "The dashboard mobile header must not render a hamburger menu");
 
     assert.equal(await page.getByRole("button", { name: "More dashboard sections" }).count(), 0,
       "The More drawer shortcut must not appear in mobile bottom navigation");
@@ -93,6 +110,7 @@ try {
     await page.keyboard.press("Escape");
     assert.deepEqual(pageErrors, [], `Browser errors at ${width}px`);
     results.push({ width, horizontalOverflow: false, bottomNavigationItems: shell.bottomNavCount,
+      alertsLeftOfAvatar: true, dashboardMenuHidden: true,
       profileActionsSideBySide: true, pageErrors: pageErrors.length });
     await page.close();
   }
