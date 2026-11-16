@@ -10,8 +10,6 @@ interface BrandMarkProps {
   showWordmark?: boolean;
 }
 
-export { SHAPES } from "./BrandMarkPaths";
-
 export function BrandMark({ size = 30, className = "", logoColor, logoTextColor, showWordmark = true }: BrandMarkProps) {
   return (
     <span
