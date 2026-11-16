@@ -1,0 +1,288 @@
+/* ==========================================================================
+   Public experience depth pass
+   Add dimensionality through layered light, tactile surfaces and restrained
+   motion. Neutral surfaces stay dominant; Ocean Teal is the interaction
+   accent and Soft Coral Sand is limited to tiny decorative glints.
+   ========================================================================== */
+:root {
+  --ep-public-warm: #d99a75;
+  --ep-public-shadow: 0 24px 58px -42px rgba(13, 47, 54, .34);
+}
+html.dark {
+  --ep-public-warm: #e9bfa0;
+  --ep-public-shadow: 0 28px 64px -42px rgba(0, 0, 0, .62);
+}
+
+/* Landing hero: soft depth behind the content and a floating product preview. */
+.ep-business-landing .ep-cloudnexus-hero {
+  background:
+    radial-gradient(ellipse at 12% 16%, color-mix(in srgb,var(--ep-accent) 7%,transparent), transparent 34%),
+    radial-gradient(ellipse at 88% 42%, color-mix(in srgb,var(--ep-accent) 12%,transparent), transparent 38%),
+    linear-gradient(145deg,var(--ep-bg) 0%,var(--ep-surface) 56%,var(--ep-tint) 100%) !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-hero {
+  background:
+    radial-gradient(ellipse at 12% 16%, color-mix(in srgb,var(--ep-accent) 9%,transparent), transparent 34%),
+    radial-gradient(ellipse at 88% 42%, color-mix(in srgb,var(--ep-accent) 14%,transparent), transparent 40%),
+    linear-gradient(145deg,#0b171b 0%,#102328 58%,#102b31 100%) !important;
+}
+.ep-business-landing .ep-cloudnexus-eyebrow::after {
+  content: "";
+  width: 22px;
+  height: 2px;
+  margin-left: 3px;
+  border-radius: 2px;
+  background: var(--ep-public-warm);
+  opacity: .85;
+}
+.ep-business-landing .ep-cloudnexus-preview-wrap {
+  position: relative;
+  isolation: isolate;
+}
+.ep-business-landing .ep-cloudnexus-preview-wrap::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 9% 5% -5%;
+  border-radius: 2.5rem;
+  background: color-mix(in srgb,var(--ep-accent) 15%,transparent);
+  filter: blur(42px);
+  opacity: .42;
+  pointer-events: none;
+}
+.ep-business-landing .ep-cloudnexus-dashboard {
+  border: 1px solid color-mix(in srgb,var(--ep-accent) 22%,var(--ep-line));
+  border-radius: 1.45rem;
+  background: var(--ep-surface);
+  box-shadow: 0 42px 90px -52px rgba(8,42,49,.48), 0 14px 34px -24px color-mix(in srgb,var(--ep-accent) 30%,transparent), inset 0 1px 0 rgba(255,255,255,.72);
+}
+html.dark .ep-business-landing .ep-cloudnexus-dashboard {
+  box-shadow: 0 46px 100px -54px rgba(0,0,0,.78), 0 14px 38px -24px color-mix(in srgb,var(--ep-accent) 24%,transparent), inset 0 1px 0 rgba(255,255,255,.07);
+}
+.ep-business-landing .ep-cloudnexus-windowbar {
+  background: linear-gradient(100deg,var(--ep-surface),color-mix(in srgb,var(--ep-accent) 5%,var(--ep-surface)));
+  border-bottom: 1px solid color-mix(in srgb,var(--ep-accent) 16%,var(--ep-line));
+}
+.ep-business-landing .ep-cloudnexus-metric {
+  box-shadow: 0 12px 26px -24px rgba(8,42,49,.42), inset 0 1px 0 rgba(255,255,255,.65);
+  transition: transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+html.dark .ep-business-landing .ep-cloudnexus-metric {
+  box-shadow: 0 14px 28px -24px rgba(0,0,0,.72), inset 0 1px 0 rgba(255,255,255,.045);
+}
+.ep-business-landing .ep-platform-ribbon {
+  background: linear-gradient(100deg,var(--ep-surface),color-mix(in srgb,var(--ep-accent) 4%,var(--ep-surface)),var(--ep-surface)) !important;
+}
+.ep-business-landing .ep-illustration-strip {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 84% 50%,color-mix(in srgb,var(--ep-accent) 12%,transparent),transparent 34%),
+    linear-gradient(105deg,var(--ep-tint),var(--ep-surface)) !important;
+}
+html.dark .ep-business-landing .ep-illustration-strip {
+  background:
+    radial-gradient(ellipse at 84% 50%,color-mix(in srgb,var(--ep-accent) 14%,transparent),transparent 34%),
+    linear-gradient(105deg,#153a3e,#102328) !important;
+}
+
+/* Public page heroes: add a subtle editorial frame without changing headline colors. */
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  box-shadow: inset 0 -1px 0 color-mix(in srgb,var(--ep-accent) 12%,var(--ep-line));
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-hero]::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: clamp(190px,26vw,340px);
+  aspect-ratio: 1;
+  right: max(-7vw,-72px);
+  bottom: -54%;
+  border: 1px solid color-mix(in srgb,var(--ep-accent) 18%,transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 20px color-mix(in srgb,var(--ep-accent) 3%,transparent),0 0 0 48px color-mix(in srgb,var(--ep-accent) 2%,transparent);
+  pointer-events: none;
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-kicker] {
+  box-shadow: 0 10px 28px -22px var(--ep-accent);
+}
+:is(.ep-about-page,.ep-contact-page) [data-page-kicker]::after {
+  content: "";
+  width: 16px;
+  height: 2px;
+  margin-left: 2px;
+  border-radius: 2px;
+  background: var(--ep-public-warm);
+}
+
+/* About: richer mission panel, layered module cards and a clearer journey. */
+.ep-about-page .ep-about-mission-panel {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 94% 10%,color-mix(in srgb,var(--ep-accent) 13%,transparent),transparent 36%),
+    linear-gradient(125deg,var(--ep-surface) 0%,color-mix(in srgb,var(--ep-accent) 5%,var(--ep-surface)) 100%) !important;
+  box-shadow: var(--ep-public-shadow),inset 0 1px 0 rgba(255,255,255,.72);
+}
+.ep-about-page .ep-about-mission-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg,var(--ep-accent) 0%,color-mix(in srgb,var(--ep-public-warm) 70%,var(--ep-accent)) 48%,transparent 88%);
+  opacity: .8;
+}
+html.dark .ep-about-page .ep-about-mission-panel {
+  background:
+    radial-gradient(ellipse at 94% 10%,color-mix(in srgb,var(--ep-accent) 16%,transparent),transparent 38%),
+    linear-gradient(125deg,#102328 0%,#142f35 100%) !important;
+  box-shadow: var(--ep-public-shadow),inset 0 1px 0 rgba(255,255,255,.055);
+}
+.ep-about-page .ep-about-orbit-visual {
+  filter: drop-shadow(0 24px 30px color-mix(in srgb,var(--ep-accent) 15%,transparent));
+}
+.ep-about-page #objectives article,
+.ep-about-page #scope article,
+.ep-about-page .ep-about-journey-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 100% 0%,color-mix(in srgb,var(--ep-accent) 6%,transparent),transparent 48%),
+    var(--ep-surface);
+  box-shadow: var(--ep-public-shadow),inset 0 1px 0 rgba(255,255,255,.68);
+}
+.ep-about-page #objectives article::before,
+.ep-about-page #scope article::before,
+.ep-about-page .ep-about-journey-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: linear-gradient(90deg,color-mix(in srgb,var(--ep-accent) 72%,transparent),transparent 76%);
+  opacity: .72;
+}
+html.dark .ep-about-page #objectives article,
+html.dark .ep-about-page #scope article,
+html.dark .ep-about-page .ep-about-journey-card {
+  background:
+    radial-gradient(ellipse at 100% 0%,color-mix(in srgb,var(--ep-accent) 9%,transparent),transparent 48%),
+    #102328;
+  box-shadow: var(--ep-public-shadow),inset 0 1px 0 rgba(255,255,255,.045);
+}
+.ep-about-page #systems article {
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.095),rgba(255,255,255,.035)),
+    color-mix(in srgb,var(--ep-deep) 92%,var(--ep-accent)) !important;
+  box-shadow: 0 24px 52px -38px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.12);
+}
+.ep-about-page #systems article > div:first-child > span {
+  background: color-mix(in srgb,var(--ep-accent) 11%,transparent);
+  box-shadow: 0 8px 22px -16px var(--ep-accent);
+}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .ep-about-page #objectives article:hover,
+  .ep-about-page #scope article:hover,
+  .ep-about-page .ep-about-journey-card:hover {
+    transform: translateY(-5px);
+    border-color: color-mix(in srgb,var(--ep-accent) 48%,var(--ep-line));
+    box-shadow: 0 28px 56px -36px color-mix(in srgb,var(--ep-accent) 28%,transparent);
+  }
+  .ep-business-landing .ep-cloudnexus-metric:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb,var(--ep-accent) 44%,var(--ep-line));
+    box-shadow: 0 18px 32px -24px color-mix(in srgb,var(--ep-accent) 24%,transparent);
+  }
+}
+
+/* Contact: separate the intro, information rail and form into tactile layers. */
+.ep-contact-page .ep-contact-intro-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 94% 18%,color-mix(in srgb,var(--ep-accent) 15%,transparent),transparent 34%),
+    linear-gradient(115deg,var(--ep-tint),color-mix(in srgb,var(--ep-surface) 80%,var(--ep-accent))) !important;
+  box-shadow: var(--ep-public-shadow),inset 0 1px 0 rgba(255,255,255,.7);
+}
+.ep-contact-page .ep-contact-intro-panel::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 15rem;
+  aspect-ratio: 1;
+  left: -7rem;
+  bottom: -11rem;
+  border: 1px solid color-mix(in srgb,var(--ep-accent) 20%,transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 22px color-mix(in srgb,var(--ep-accent) 4%,transparent),0 0 0 48px color-mix(in srgb,var(--ep-accent) 3%,transparent);
+}
+html.dark .ep-contact-page .ep-contact-intro-panel {
+  background:
+    radial-gradient(ellipse at 94% 18%,color-mix(in srgb,var(--ep-accent) 17%,transparent),transparent 36%),
+    linear-gradient(115deg,#153a3e,#102328) !important;
+  box-shadow: var(--ep-public-shadow),inset 0 1px 0 rgba(255,255,255,.055);
+}
+.ep-contact-page [data-contact-card],
+.ep-contact-page [data-contact-form] > form,
+.ep-contact-page [data-contact-form] > div[role="status"] {
+  box-shadow: var(--ep-public-shadow),inset 0 1px 0 rgba(255,255,255,.66);
+}
+.ep-contact-page [data-contact-card] {
+  background:
+    linear-gradient(120deg,color-mix(in srgb,var(--ep-accent) 4%,var(--ep-surface)),var(--ep-surface)) !important;
+}
+.ep-contact-page [data-contact-form] > form {
+  position: relative;
+  border-color: color-mix(in srgb,var(--ep-accent) 22%,var(--ep-line));
+  background:
+    radial-gradient(ellipse at 100% 0%,color-mix(in srgb,var(--ep-accent) 7%,transparent),transparent 42%),
+    var(--ep-surface) !important;
+}
+.ep-contact-page [data-contact-form] > form::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  border-radius: inherit;
+  background: linear-gradient(90deg,var(--ep-accent),color-mix(in srgb,var(--ep-public-warm) 64%,var(--ep-accent)),transparent 92%);
+  opacity: .72;
+  pointer-events: none;
+}
+html.dark .ep-contact-page [data-contact-card],
+html.dark .ep-contact-page [data-contact-form] > form,
+html.dark .ep-contact-page [data-contact-form] > div[role="status"] {
+  box-shadow: var(--ep-public-shadow),inset 0 1px 0 rgba(255,255,255,.045);
+}
+html.dark .ep-contact-page [data-contact-card] {
+  background:
+    linear-gradient(120deg,color-mix(in srgb,var(--ep-accent) 8%,#102328),#102328) !important;
+}
+html.dark .ep-contact-page [data-contact-form] > form {
+  background:
+    radial-gradient(ellipse at 100% 0%,color-mix(in srgb,var(--ep-accent) 10%,transparent),transparent 44%),
+    #102328 !important;
+}
+@media (prefers-reduced-motion:reduce) {
+  .ep-business-landing .ep-cloudnexus-metric,
+  .ep-about-page #objectives article,
+  .ep-about-page #scope article,
+  .ep-about-page .ep-about-journey-card {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* The neutral phrases stay monochrome; only the explicitly marked
+   second phrase receives the Ocean Teal gradient in both themes. */
+html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] > [data-page-hero-accent],
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] > [data-page-hero-accent] {
+  background-image: linear-gradient(100deg,#087E8B 0%,#45C5B3 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] > [data-page-hero-accent] {
+  background-image: linear-gradient(100deg,#45C5B3 0%,#70D7C8 100%) !important;
+}
+
