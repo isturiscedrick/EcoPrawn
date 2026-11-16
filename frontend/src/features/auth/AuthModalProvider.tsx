@@ -6,7 +6,6 @@ import {
   useRef,
   useState,
   type ComponentProps,
-  type CSSProperties,
   type MouseEvent,
   type ReactNode,
 } from "react";
@@ -35,14 +34,6 @@ export function useAuthModal() {
 
   return value;
 }
-
-// Map legacy LoginForm styles to the unified theme tokens.
-const SCOPE = {
-  "--ep-accent": "var(--ep-accent)",
-  "--ep-accent-hover": "var(--ep-accent-hover)",
-  "--ep-line": "var(--ep-line)",
-  "--ep-accent": "var(--ep-accent-hover)",
-} as CSSProperties;
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -141,7 +132,6 @@ function AuthDialog({
         aria-modal="true"
         aria-label="Sign in or create an account"
         tabIndex={-1}
-        style={SCOPE}
         className="ep-landing ep-auth-modal ep-auth-panel relative z-10 mx-auto my-auto w-full max-w-[560px] max-h-[calc(100dvh-24px)] overflow-y-auto rounded-[26px] border border-[var(--ep-line)] px-5 py-6 shadow-[0_28px_90px_rgba(8,30,34,0.32)] outline-none sm:max-h-[calc(100dvh-48px)] sm:px-9 sm:py-8"
       >
         {/* Logo and close button */}
