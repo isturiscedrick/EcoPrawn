@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { Link } from "@tanstack/react-router";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
@@ -12,6 +12,7 @@ import { AquacultureIllustration } from "@/components/illustrations/AquacultureI
 import { heroReadoutUnits } from "@/config/sensors";
 import { heroReadouts } from "@/content/landing-preview";
 import { pct, targetRangeFor, ZONES } from "./landing-preview-utils";
+import { STEPS } from "./landing-content";
 
 const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
@@ -22,47 +23,9 @@ const buttonMotion =
 const eyebrow =
   "mb-4 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.14em]";
 
-const STEPS: { step: string; title: string; body: string; icon: IconName }[] = [
-  {
-    step: "01",
-    title: "Sense",
-    icon: "activity",
-    body: "Five sensors stream water readings around the clock.",
-  },
-  {
-    step: "02",
-    title: "Analyze",
-    icon: "eye",
-    body: "Cameras estimate shrimp growth and biomass without handling.",
-  },
-  {
-    step: "03",
-    title: "Act",
-    icon: "zap",
-    body: "Aerators start automatically. Feed follows biomass.",
-  },
-  {
-    step: "04",
-    title: "Return",
-    icon: "leaf",
-    body: "Treated wastewater is routed to mangrove and wetland.",
-  },
-];
 
-// Gauge scale and target zone per reading, used only to draw the range bars.
-// Same numbers as the dashboard thresholds.
-// Splits a line into words, each in a clipping wrapper so GSAP can slide it up.
-function Words({ text }: { text: string }) {
-  return text.split(" ").map((word, i) => (
-    <Fragment key={`${word}-${i}`}>
-      <span className="inline-block align-baseline overflow-visible">
-        <span data-hero="word" className="inline-block">
-          {word}
-        </span>
-      </span>{" "}
-    </Fragment>
-  ));
-}
+
+
 
 export function LandingPage() {
   const [previewTab, setPreviewTab] = useState<"water" | "growth" | "systems">("water");
