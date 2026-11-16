@@ -19,12 +19,9 @@
   --ep-status-neutral-bg: #e2e8f0;
   --ep-accent: var(--ep-brand-primary);
   --ep-accent-hover: #066874;
-  --coral: var(--ep-brand-primary);
-  --coral-dim: var(--ep-accent-hover);
+  --ep-accent: var(--ep-brand-primary);
+  --ep-accent-hover: var(--ep-accent-hover);
   --ep-secondary: var(--ep-brand-secondary);
-  --ep-brand-secondary-hover: #066874;
-  --ep-secondary-accent: #087e8b;
-  --ep-secondary-accent-hover: #066874;
   --ep-accent-tint: color-mix(in srgb, var(--ep-brand-primary) 12%, transparent);
   --ep-accent-tint-soft: color-mix(in srgb, var(--ep-brand-primary) 8%, transparent);
   --ep-secondary-tint: rgba(8,126,139,.12);
@@ -46,11 +43,10 @@ html.dark .dashboard-shell {
   --ep-status-neutral-bg: #263244;
   --ep-accent: var(--ep-brand-primary);
   --ep-accent-hover: #70d7c8;
-  --coral: var(--ep-brand-primary);
-  --coral-dim: var(--ep-accent-hover);
+  --ep-accent: var(--ep-brand-primary);
+  --ep-accent-hover: var(--ep-accent-hover);
   --ep-secondary: var(--ep-brand-secondary);
   --ep-brand-secondary-hover: #70d7c8;
-  --ep-secondary-accent: #45c5b3;
   --ep-secondary-accent-hover: #70d7c8;
   --ep-secondary-tint: rgba(69,197,179,.16);
 }
@@ -327,7 +323,7 @@ html.dark .dashboard-shell {
   stroke: var(--ep-accent);
   filter: drop-shadow(0 3px 4px rgba(8,126,139,.18));
 }
-.dashboard-shell .dashboard-trend-chart circle[stroke="var(--coral)"] {
+.dashboard-shell .dashboard-trend-chart circle[stroke="var(--ep-accent)"] {
   stroke: var(--ep-accent);
 }
 .dashboard-shell .dashboard-trend-chart circle[fill="var(--ep-surface)"] {
