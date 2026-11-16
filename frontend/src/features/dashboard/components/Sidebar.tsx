@@ -6,7 +6,6 @@ import { BrandMark } from "@/components/layout/BrandMark";
 import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
 import { Icon } from "@/components/ui/Icon";
 import { SidebarNavItem } from "./SidebarNavItem";
-import { getProfileInitials } from "../layout/system-layout-utils";
 
 interface SidebarProps {
   mobileOpen?: boolean;
@@ -55,8 +54,6 @@ export function Sidebar({
   const touchStartTime = useRef<number>(0);
   const touchDrawerWidth = useRef<number>(0);
   const touchGestureActive = useRef(false);
-
-  const initials = getProfileInitials(profileName);
 
   const closeDrawer = useCallback(() => {
     onMobileClose();
