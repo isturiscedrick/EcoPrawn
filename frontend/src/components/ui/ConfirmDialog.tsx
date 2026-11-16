@@ -56,7 +56,7 @@ export function ConfirmDialog({
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
-        onCancelRef.current();
+        if (showCancel) onCancelRef.current();
         return;
       }
 
@@ -128,7 +128,7 @@ export function ConfirmDialog({
     >
       <div
         aria-hidden="true"
-        onClick={onCancel}
+        onClick={showCancel ? onCancel : undefined}
         className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.72)]"
       />
 
