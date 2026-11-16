@@ -29,7 +29,10 @@ This directory is the single source of truth for frontend CSS. Keep styles modul
   - `hero-lens.css` — HeroLens depth, optics, and container-query behavior.
   - `landing-sections.css` — public hero, section bands, capabilities, and process layouts.
   - `site-chrome.css` — shared header/footer and public chrome.
-  - `marketing-experience-foundations.css`, `marketing-experience-layout.css`, and `marketing-experience-interactions.css` — shared editorial foundations, page layouts, and interaction treatments.
+  - `marketing-experience-foundations.css` and `marketing-experience-layout.css` — shared editorial foundations and page layouts.
+  - `marketing-landing-interactions.css` — landing hero, CTA, and motion interactions.
+  - `marketing-public-illustrations.css` — shared public-page illustrations and supporting visuals.
+  - `marketing-shared-card-system.css` — shared card surfaces and About/Contact hero alignment.
   - `marketing-depth-foundations.css`, `marketing-depth-landing.css`, and `marketing-depth-pages.css` — original marketing visuals grouped by shared foundations, landing-page sections, and About/Contact refinements.
   - `mobile-first.css` — cross-page mobile-first responsive treatments.
 - `site-header.css` — SiteHeader responsive layout.
