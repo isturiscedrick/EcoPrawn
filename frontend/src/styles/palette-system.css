@@ -2154,3 +2154,66 @@ html.dark .ep-mobile-site-drawer .ep-cta-primary :is(span,svg,path) {
   -webkit-text-fill-color: #092b31 !important;
   stroke: currentColor !important;
 }
+
+
+/* Dashboard sidebar — light-mode active navigation and surface hierarchy.
+   Keep the 60/30/10 balance: neutral structure first, Ocean Teal as a restrained
+   selected-state accent rather than a full-width solid block. */
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer {
+  background: #ffffff !important;
+  color: #173b46 !important;
+  border-color: #d7e2e7 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:first-child,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) {
+  border-color: #d7e2e7 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer > div:nth-child(2) a {
+  background: #ffffff !important;
+  border-color: #d7e2e7 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer > div:last-child {
+  background: #f3f7f8 !important;
+  border-color: #d7e2e7 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"],
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] > span,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar .dashboard-nav-active,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a[aria-current="page"],
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer .dashboard-nav-active,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child a[aria-current="page"] {
+  background: color-mix(in srgb, #087e8b 10%, #ffffff) !important;
+  background-color: color-mix(in srgb, #087e8b 10%, #ffffff) !important;
+  border-color: color-mix(in srgb, #087e8b 34%, #d7e2e7) !important;
+  color: #075b65 !important;
+  box-shadow: inset 3px 0 0 #087e8b, 0 2px 8px rgba(14, 75, 83, .045) !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] *,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar .dashboard-nav-active *,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a[aria-current="page"] *,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer .dashboard-nav-active *,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child a[aria-current="page"] * {
+  color: #075b65 !important;
+  -webkit-text-fill-color: #075b65 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a[aria-current="page"] > span > span,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar .dashboard-nav-active > span > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer .dashboard-nav-active > span > span {
+  background: rgba(8, 126, 139, .12) !important;
+  color: #087e8b !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a:not([aria-current="page"]):hover,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a:not([aria-current="page"]):hover,
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child a:not([aria-current="page"]):hover {
+  background: rgba(8, 126, 139, .055) !important;
+  color: #075b65 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav a:not([aria-current="page"]):hover *,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav a:not([aria-current="page"]):hover * {
+  color: #075b65 !important;
+}
