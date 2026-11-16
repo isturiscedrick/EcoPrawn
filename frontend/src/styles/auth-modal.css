@@ -672,12 +672,12 @@ html.dark .ep-auth-overlay [data-auth-backdrop] {
    Coral Sand details (10%). Ocean Teal remains the primary submit/selected
    action color for clear interaction hierarchy. */
 .ep-auth-modal {
-  --ep-brand-secondary: #087e8b;
-  --ep-brand-secondary-hover: #066874;
-  --ep-secondary-accent: #087e8b;
-  --ep-secondary-accent-hover: #066874;
-  --ep-secondary-tint: rgba(8,126,139,.12);
-  --ep-secondary-tint-soft: rgba(8,126,139,.065);
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-accent-tint: rgba(8,126,139,.12);
+  --ep-accent-tint-soft: rgba(8,126,139,.065);
 }
 .ep-auth-modal::before {
   background: #087e8b !important;
@@ -698,12 +698,12 @@ html.dark .ep-auth-overlay [data-auth-backdrop] {
   color: #066874 !important;
 }
 html.dark .ep-auth-modal {
-  --ep-brand-secondary: #45c5b3;
-  --ep-brand-secondary-hover: #70d7c8;
-  --ep-secondary-accent: #45c5b3;
-  --ep-secondary-accent-hover: #70d7c8;
-  --ep-secondary-tint: rgba(69,197,179,.14);
-  --ep-secondary-tint-soft: rgba(69,197,179,.075);
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-accent-tint: rgba(69,197,179,.14);
+  --ep-accent-tint-soft: rgba(69,197,179,.075);
 }
 html.dark .ep-auth-modal::before {
   background: #45c5b3 !important;
