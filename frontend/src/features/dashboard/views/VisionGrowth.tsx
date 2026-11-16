@@ -10,7 +10,7 @@ function GrowthTrendChart({ values }: { values: number[] }) {
   if (values.length < 2) {
     return (
       <p className="py-6 text-sm text-[var(--ep-text-muted)]">
-        Not enough scans to display a trend.
+        Add at least two scans to view a trend.
       </p>
     );
   }
@@ -115,7 +115,7 @@ function GrowthTrendChart({ values }: { values: number[] }) {
           </g>
         ))}
       </svg>
-      <p className="text-sm text-[var(--ep-text-muted)]">Select a point to view that week.</p>
+      <p className="text-sm text-[var(--ep-text-muted)]">Select a week for details.</p>
     </div>
   );
 }
@@ -143,7 +143,7 @@ export function VisionGrowth() {
             Vision &amp; Growth Analytics
           </h1>
           <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
-            Growth scans and biomass · {tankCount} tanks
+            {tankCount} tanks · latest scan: {lastScan}
           </div>
         </div>
         <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
@@ -176,11 +176,7 @@ export function VisionGrowth() {
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
             <Panel title="Growth Trend — Avg. Body Length" badge="7-week view">
               <GrowthTrendChart values={growthTrend} />
-              <div className="flex gap-5 mt-2.5 text-[11.5px] text-[var(--ep-text-muted)] ep-font-mono">
-                <span className="flex items-center gap-1.5">
-                  <span className="inline-block w-3 h-[2px] bg-[var(--coral)]" /> Body length (cm)
-                </span>
-              </div>
+              
             </Panel>
 
             <Panel title="Recent Vision Scans" badge={`${visionScanLog.length} events`}>
