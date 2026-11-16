@@ -1,0 +1,165 @@
+/* ==========================================================================
+   EcoPrawn Public Tokens & Brand Headlines
+   Canonical color tokens and typography for Landing, About, and Contact pages.
+   ========================================================================== */
+
+/* ---------- Light theme tokens ---------- */
+.ep-landing {
+  color-scheme: light;
+  /* 60% white/light neutral canvas, 30% black/charcoal structure,
+     10% Ocean Teal accents for actions, links, and active states. */
+  --ep-bg: #f8fafc;
+  --ep-surface: #ffffff;
+  --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea;
+  --ep-primary: #111827;
+  --ep-secondary: #1f2937;
+  --ep-text: #111827;
+  --ep-text-muted: #475569;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #ffffff;
+  --ep-deep: #111827;
+  --ep-on-deep: #ffffff;
+  --ep-on-deep-muted: #cbd5e1;
+  --ep-zone: #087e8b;
+  --ep-marker: #45c5b3;
+  --ep-ok: #1e7a46;
+  --ep-warn-text: #8f5a12;
+  --ep-danger: #b3261e;
+  --ep-status-success: #15803d;
+  --ep-status-success-bg: #dcfce7;
+  --ep-status-warning: #b45309;
+  --ep-status-warning-bg: #fef3c7;
+  --ep-status-danger: #b91c1c;
+  --ep-status-danger-bg: #fee2e2;
+  --ep-status-info: #087e8b;
+  --ep-status-info-bg: #d9f0ef;
+  --ep-status-neutral: #475569;
+  --ep-status-neutral-bg: #e2e8f0;
+  --ep-on-status: #ffffff;
+  background-color: var(--ep-bg);
+  color: var(--ep-text);
+}
+
+/* ---------- Dark theme tokens ---------- */
+html.dark .ep-landing {
+  color-scheme: dark;
+  --ep-bg: #0b171b;
+  --ep-surface: #102328;
+  --ep-tint: #153a3e;
+  --ep-line: #285158;
+  --ep-primary: #f8fafc;
+  --ep-secondary: #e2e8f0;
+  --ep-text: #f8fafc;
+  --ep-text-muted: #cbd5e1;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-deep: #07191e;
+  --ep-on-deep: #f8fafc;
+  --ep-on-deep-muted: #cbd5e1;
+  --ep-ok: #5fbf8a;
+  --ep-warn-text: #e8a23a;
+  --ep-danger: #ff8a80;
+  --ep-status-success: #86efac;
+  --ep-status-success-bg: #123c2a;
+  --ep-status-warning: #fcd34d;
+  --ep-status-warning-bg: #49320d;
+  --ep-status-danger: #fca5a5;
+  --ep-status-danger-bg: #4a1d22;
+  --ep-status-info: #70d7c8;
+  --ep-status-info-bg: #153a3e;
+  --ep-status-neutral: #cbd5e1;
+  --ep-status-neutral-bg: #263244;
+  --ep-on-status: #0b1417;
+}
+
+/* ---------- Overscroll & document background ---------- */
+html:not(.dark) body.ecoprawn-root:has(.ep-landing) {
+  background: #f8fafc;
+}
+html.dark body.ecoprawn-root:has(.ep-landing) {
+  background: #0b171b;
+}
+
+/* ---------- Smooth scrolling with sticky header offset ---------- */
+html:has(.ep-landing) {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.ep-landing) {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- Hero Headlines ---------- */
+/* Landing uses a restrained Ocean Teal highlight; About and Contact stay monochrome. */
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
+  color: #087e8b !important;
+  -webkit-text-fill-color: #087e8b !important;
+}
+html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-primary {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #F8FAFC !important;
+}
+html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary {
+  color: #45c5b3 !important;
+  -webkit-text-fill-color: #45c5b3 !important;
+}
+
+/* About and Contact hero headlines remain monochrome for clear contrast. */
+.ep-about-page [data-page-hero-headline] > span:first-child {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+.ep-about-page [data-page-hero-headline] > span:last-child,
+.ep-contact-page [data-page-hero-headline] > span:first-child,
+.ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+html.dark .ep-about-page [data-page-hero-headline] > span:first-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:first-child {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+}
+html.dark .ep-about-page [data-page-hero-headline] > span:last-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:first-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+}
+
+
+/* Landing header logo: monochrome in light mode, white in dark mode. */
+.ep-business-landing header .ep-logo {
+  --ep-logo-color: #111827 !important;
+  --ep-logo-text: #111827 !important;
+}
+.ep-business-landing header .ep-logo .ep-logo-shrimp {
+  fill: #111827 !important;
+  stroke: #111827 !important;
+}
+.ep-business-landing header .ep-logo .ep-logo-wordmark {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+html.dark .ep-business-landing header .ep-logo {
+  --ep-logo-color: #f8fafc !important;
+  --ep-logo-text: #f8fafc !important;
+}
+html.dark .ep-business-landing header .ep-logo .ep-logo-shrimp {
+  fill: #f8fafc !important;
+  stroke: #f8fafc !important;
+}
+html.dark .ep-business-landing header .ep-logo .ep-logo-wordmark {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+}
