@@ -39,7 +39,7 @@ export function AboutPage() {
               <span>Five connected systems.</span>
             </>
           }
-          lead="Connected tools for smarter, more efficient shrimp farming."
+          lead="How the project modules fit together."
         />
 
         <SectionNav />
@@ -55,10 +55,10 @@ export function AboutPage() {
                 Better visibility for every stage of shrimp farming.
               </h2>
               <p className="mt-5 max-w-[38rem] text-base leading-relaxed text-[var(--ep-text-muted)] sm:text-lg">
-                EcoPrawn connects water monitoring, growth insights, and farm operations.
+                Sensor readings, growth observations, and farm controls in one system.
               </p>
               <a href="#systems" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--ep-accent)] transition-transform hover:translate-x-1">
-                Explore the connected systems <Icon name="arrow-right" size={17} />
+                View the system modules <Icon name="arrow-right" size={17} />
               </a>
             </div>
             <div aria-hidden="true" className="ep-about-orbit-visual">
@@ -160,7 +160,7 @@ export function AboutPage() {
                 </h2>
 
                 <p className="mt-3 max-w-[36rem] text-lg leading-relaxed text-[var(--ep-on-deep-muted)]">
-                  Five tools. One connected workflow.
+                  What each module contributes.
                 </p>
               </div>
             </Reveal>
@@ -212,19 +212,19 @@ export function AboutPage() {
               <div className="mb-10 max-w-[42rem]">
                 <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
                   <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
-                  A connected workflow
+                  Operational flow
                 </div>
-                <h2 id="ep-about-journey-title" className={heading}>From water conditions to informed action.</h2>
-                <p className={lead}>See how each system supports the production cycle.</p>
+                <h2 id="ep-about-journey-title" className={heading}>How the modules work together.</h2>
+                <p className={lead}>Four stages, from observation to management.</p>
               </div>
             </Reveal>
             <AquacultureIllustration variant="about" className="ep-about-workflow-illustration" />
             <ol className="ep-about-journey-grid grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { step: "01", title: "Observe", body: "Collect water-quality readings and monitor changing conditions.", icon: "activity" as const },
-                { step: "02", title: "Interpret", body: "Bring readings and growth observations into one operational view.", icon: "eye" as const },
-                { step: "03", title: "Coordinate", body: "Use operating context to guide aeration and feeding workflows.", icon: "sliders-horizontal" as const },
-                { step: "04", title: "Manage", body: "Include biofloc and effluent routing in the production picture.", icon: "leaf" as const },
+                { step: "01", title: "Observe", body: "Capture water-quality readings.", icon: "activity" as const },
+                { step: "02", title: "Interpret", body: "Review readings alongside growth observations.", icon: "eye" as const },
+                { step: "03", title: "Coordinate", body: "Guide aeration and feeding decisions.", icon: "sliders-horizontal" as const },
+                { step: "04", title: "Manage", body: "Manage biofloc treatment and effluent routing.", icon: "leaf" as const },
               ].map((item) => (
                 <li key={item.step} className="ep-about-journey-card rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 sm:p-6">
                   <div className="mb-8 flex items-center justify-between">
