@@ -152,7 +152,7 @@ export function Dashboard() {
                   ) : (
                     <div className="border-t border-[var(--ep-line)] pt-3">
                       <p className="text-xs font-medium text-[var(--ep-text-muted)]">No readings yet</p>
-                      <p className="mt-1 text-[11px] text-[var(--ep-text-muted)]">Waiting for readings.</p>
+                      
                     </div>
                   )}
                   <div className="mt-3 flex items-center justify-end gap-1 text-[11px] font-semibold text-[var(--ep-accent)]">View water quality <Icon name="arrow-right" size={12} /></div>
@@ -234,8 +234,8 @@ export function Dashboard() {
           ) : (
             <div className="rounded-xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-bg)] p-6 text-center">
               <Icon name="layers" size={24} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
-              <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks yet</p>
-              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Add a tank to monitor facility health.</p>
+              <p className="text-sm font-semibold text-[var(--ep-text)]">Facility health unavailable</p>
+              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Add a tank to view its status.</p>
               <Link to="/dashboard/tanks" className="mt-3 inline-flex min-h-9 items-center rounded-lg bg-[var(--ep-accent)] px-4 text-xs font-semibold text-white">Set up tanks</Link>
             </div>
           )}
