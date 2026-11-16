@@ -1,6 +1,6 @@
 import { useEffect, useId, useState, type FormEvent } from "react";
 import type { Tank } from "@/features/dashboard/context/TankContext";
-import { DashboardModalShell } from "./DashboardPrimitives";
+import { DashboardFormField, DashboardModalShell } from "./DashboardPrimitives";
 
 interface EditTankModalProps {
   tank: Tank | null;
@@ -99,10 +99,9 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
         </div>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {fields.map((field) => (
-            <label key={field.id} htmlFor={`${uid}-${field.id}`} className="min-w-0 text-xs font-semibold text-[var(--ep-text-muted)]">
-              {field.label}
+            <DashboardFormField key={field.id} id={`${uid}-${field.id}`} label={field.label}>
               <input id={`${uid}-${field.id}`} className={`${fieldClass} mt-1.5`} type={field.type} inputMode={field.type === "number" ? "decimal" : undefined} min={field.type === "number" ? "0" : undefined} maxLength={field.type === "text" ? 100 : undefined} step={field.type === "number" ? "any" : undefined} value={field.value} onChange={(event) => field.change(event.target.value)} required />
-            </label>
+            </DashboardFormField>
           ))}
           {error && <p role="alert" className="sm:col-span-2 text-sm text-[var(--ep-status-danger)]">{error}</p>}
           <div className="mt-2 flex gap-3 sm:col-span-2">
