@@ -237,8 +237,29 @@ export function Sidebar({
   useEffect(() => {
     if (!confirmingLogout) return;
 
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const body = document.body;
+    const root = document.documentElement;
+    const scrollY = window.scrollY;
+    const previous = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
+      overscrollBehavior: root.style.overscrollBehavior,
+    };
+
+    // Use the same fixed-body lock as the mobile drawer. Overflow alone is
+    // unreliable on mobile browsers and can allow the page behind the dialog
+    // to scroll while the confirmation is open.
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    root.style.overscrollBehavior = "none";
     logoutCancelRef.current?.focus({ preventScroll: true });
 
     function getFocusableElements() {
@@ -294,7 +315,14 @@ export function Sidebar({
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("focusin", keepFocusInsideDialog);
-      document.body.style.overflow = originalOverflow;
+      body.style.position = previous.position;
+      body.style.top = previous.top;
+      body.style.left = previous.left;
+      body.style.right = previous.right;
+      body.style.width = previous.width;
+      body.style.overflow = previous.overflow;
+      root.style.overscrollBehavior = previous.overscrollBehavior;
+      window.scrollTo(0, scrollY);
       const opener = logoutOpenerRef.current;
       const openerIsUnavailable = !opener?.isConnected ||
         !!opener?.closest('[inert], [aria-hidden="true"]');
