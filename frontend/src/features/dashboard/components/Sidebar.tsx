@@ -48,6 +48,7 @@ export function Sidebar({
   const logoutDialogRef = useRef<HTMLDivElement>(null);
   const logoutCancelRef = useRef<HTMLButtonElement>(null);
   const logoutOpenerRef = useRef<HTMLElement | null>(null);
+  const loggingOutRef = useRef(false);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const touchStartTime = useRef<number>(0);
@@ -214,6 +215,7 @@ export function Sidebar({
   }
 
   async function onConfirmLogout() {
+    loggingOutRef.current = true;
     setLoggingOut(true);
     setLogoutError("");
     try {
@@ -222,6 +224,7 @@ export function Sidebar({
       window.location.replace("/login");
     } catch {
       setLogoutError("Could not log out. Please try again.");
+      loggingOutRef.current = false;
       setLoggingOut(false);
     }
   }
@@ -252,7 +255,7 @@ export function Sidebar({
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        if (!loggingOut) {
+        if (!loggingOutRef.current) {
           event.preventDefault();
           setConfirmingLogout(false);
         }
@@ -298,7 +301,7 @@ export function Sidebar({
       if (!openerIsUnavailable) opener?.focus({ preventScroll: true });
       logoutOpenerRef.current = null;
     };
-  }, [confirmingLogout, loggingOut]);
+  }, [confirmingLogout]);
 
   return (
     <>
