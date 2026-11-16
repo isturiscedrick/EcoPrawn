@@ -1888,3 +1888,37 @@ html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page)
     border-radius: 1rem;
   }
 }
+
+/* Final About/Contact hero alignment.
+   The inner content must occupy the full fixed-height hero before flex
+   centering can position the kicker, headline and lead as one stack. */
+:is(.ep-about-page,.ep-contact-page) [data-page-hero] > .relative.z-10 {
+  box-sizing: border-box;
+  width: min(100%, 1440px);
+  height: 100%;
+  min-height: 100%;
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* About uses a deliberate two-line desktop headline. Give Contact's
+   single-line title the same line-box height so all three text elements
+   retain matching vertical positions without breaking "Contact us.". */
+@media (min-width: 768px) {
+  .ep-contact-page [data-page-hero-headline] {
+    line-height: 2.02;
+  }
+}
+
+@media (max-width: 767px) {
+  :is(.ep-about-page,.ep-contact-page) [data-page-hero] > .relative.z-10 {
+    height: auto;
+    min-height: 310px;
+    padding-top: 4.75rem;
+    padding-bottom: 4.75rem;
+  }
+  .ep-contact-page [data-page-hero-headline] {
+    line-height: .99;
+  }
+}
