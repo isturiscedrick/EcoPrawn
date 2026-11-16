@@ -127,7 +127,7 @@ export function LandingPage() {
               </p>
               <h1 data-hero="headline" className="ep-font-display ep-cloudnexus-headline max-w-[900px] text-[clamp(38px,5.5vw,76px)] font-semibold leading-[1.02] tracking-[-0.065em]">
                 Smarter shrimp farming,
-                <span className="block">in <span className="ep-cloudnexus-highlight">one connected workspace.</span></span>
+                <span className="block ep-cloudnexus-highlight">always in range.</span>
               </h1>
               <p data-hero="lead" className="mx-auto mt-5 max-w-[660px] text-sm leading-[1.8] text-[var(--ep-text-muted)] sm:mt-6 sm:text-base">
                 Track water quality, growth, and daily farm operations in one workspace.
