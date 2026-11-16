@@ -27,7 +27,8 @@
 @import "./palette-marketing-composition.css";
 @import "./palette-public-depth.css";
 @import "./palette-public-contrast.css";
-@import "./palette-dashboard-sidebar.css";
+@import "./palette-dashboard-sidebar-foundations.css";
+@import "./palette-dashboard-sidebar-final-states.css";
 @import "./palette-public-header.css";
 @import "./palette-mobile-public-chrome.css";
 @import "./palette-dashboard-mobile-header.css";
