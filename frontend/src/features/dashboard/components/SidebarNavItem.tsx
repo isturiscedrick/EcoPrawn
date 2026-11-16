@@ -73,7 +73,7 @@ export function SidebarNavItem({
           </span>
         ) : routeActive ? (
           <span
-            className={`dashboard-nav-active-dot ml-auto hidden h-1.5 w-1.5 rounded-full bg-[var(--coral)] lg:block ${collapsed ? "lg:hidden" : ""}`}
+            className={`dashboard-nav-active-dot ml-auto hidden h-1.5 w-1.5 rounded-full bg-[var(--ep-accent)] lg:block ${collapsed ? "lg:hidden" : ""}`}
           />
         ) : null}
       </span>
