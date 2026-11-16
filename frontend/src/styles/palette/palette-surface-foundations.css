@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Final legacy-brand shade normalization.
+   Keep every former orange/blue/green primary shade on the Ocean Teal scale.
+   Semantic success, warning, and danger states remain untouched.
+   ========================================================================== */
+:root {
+  --brand-50: #e6f4f3;
+  --brand-100: #d9f0ef;
+  --brand-200: #b8e3df;
+  --brand-300: #8bd5cc;
+  --brand-400: #45c5b3;
+  --brand-500: #087e8b;
+  --brand-600: #066874;
+  --brand-700: #05545e;
+  --brand-800: #173b46;
+  --brand-900: #0b2c34;
+  --primary-50: var(--brand-50);
+  --primary-100: var(--brand-100);
+  --primary-200: var(--brand-200);
+  --primary-300: var(--brand-300);
+  --primary-400: var(--brand-400);
+  --primary-500: var(--brand-500);
+  --primary-600: var(--brand-600);
+  --primary-700: var(--brand-700);
+  --primary-800: var(--brand-800);
+  --primary-900: var(--brand-900);
+}
+html.dark {
+  --brand-50: #153a3e;
+  --brand-100: #19474a;
+  --brand-200: #23615f;
+  --brand-300: #398e84;
+  --brand-400: #70d7c8;
+  --brand-500: #45c5b3;
+  --brand-600: #39aa9b;
+  --brand-700: #2d887f;
+  --brand-800: #1a5553;
+  --brand-900: #103b40;
+  --primary-50: var(--brand-50);
+  --primary-100: var(--brand-100);
+  --primary-200: var(--brand-200);
+  --primary-300: var(--brand-300);
+  --primary-400: var(--brand-400);
+  --primary-500: var(--brand-500);
+  --primary-600: var(--brand-600);
+  --primary-700: var(--brand-700);
+  --primary-800: var(--brand-800);
+  --primary-900: var(--brand-900);
+}
+
+/* Catch remaining Tailwind brand utilities in every EcoPrawn surface. */
+.ecoprawn-root [class*="blue-"],
+.ecoprawn-root [class*="indigo-"],
+.ecoprawn-root [class*="cyan-"],
+.ecoprawn-root [class*="sky-"] {
+  --tw-ring-color: #087e8b !important;
+}
+.ecoprawn-root [class*="text-blue-"],
+.ecoprawn-root [class*="text-indigo-"],
+.ecoprawn-root [class*="text-cyan-"],
+.ecoprawn-root [class*="text-sky-"] { color: #066874 !important; }
+.ecoprawn-root [class*="bg-blue-"],
+.ecoprawn-root [class*="bg-indigo-"],
+.ecoprawn-root [class*="bg-cyan-"],
+.ecoprawn-root [class*="bg-sky-"] { background-color: #e6f4f3 !important; }
+.ecoprawn-root [class*="border-blue-"],
+.ecoprawn-root [class*="border-indigo-"],
+.ecoprawn-root [class*="border-cyan-"],
+.ecoprawn-root [class*="border-sky-"] { border-color: #b8e3df !important; }
+.ecoprawn-root [class*="from-blue-"],
+.ecoprawn-root [class*="from-indigo-"],
+.ecoprawn-root [class*="from-cyan-"],
+.ecoprawn-root [class*="from-sky-"] { --tw-gradient-from: #087e8b var(--tw-gradient-from-position) !important; }
+.ecoprawn-root [class*="to-blue-"],
+.ecoprawn-root [class*="to-indigo-"],
+.ecoprawn-root [class*="to-cyan-"],
+.ecoprawn-root [class*="to-sky-"] { --tw-gradient-to: #45c5b3 var(--tw-gradient-to-position) !important; }
+html.dark .ecoprawn-root [class*="text-blue-"],
+html.dark .ecoprawn-root [class*="text-indigo-"],
+html.dark .ecoprawn-root [class*="text-cyan-"],
+html.dark .ecoprawn-root [class*="text-sky-"] { color: #70d7c8 !important; }
+html.dark .ecoprawn-root [class*="bg-blue-"],
+html.dark .ecoprawn-root [class*="bg-indigo-"],
+html.dark .ecoprawn-root [class*="bg-cyan-"],
+html.dark .ecoprawn-root [class*="bg-sky-"] { background-color: #153a3e !important; }
+html.dark .ecoprawn-root [class*="border-blue-"],
+html.dark .ecoprawn-root [class*="border-indigo-"],
+html.dark .ecoprawn-root [class*="border-cyan-"],
+html.dark .ecoprawn-root [class*="border-sky-"] { border-color: #23615f !important; }
+
+/* Former orange/coral primary accents are now Ocean Teal as well. */
+.ecoprawn-root [class*="text-orange-"],
+.ecoprawn-root [class*="text-rose-"] { color: #087e8b !important; }
+.ecoprawn-root [class*="bg-orange-"],
+.ecoprawn-root [class*="bg-rose-"] { background-color: #e6f4f3 !important; }
+.ecoprawn-root [class*="border-orange-"],
+.ecoprawn-root [class*="border-rose-"] { border-color: #b8e3df !important; }
+html.dark .ecoprawn-root [class*="text-orange-"],
+html.dark .ecoprawn-root [class*="text-rose-"] { color: #70d7c8 !important; }
+html.dark .ecoprawn-root [class*="bg-orange-"],
+html.dark .ecoprawn-root [class*="bg-rose-"] { background-color: #153a3e !important; }
+html.dark .ecoprawn-root [class*="border-orange-"],
+html.dark .ecoprawn-root [class*="border-rose-"] { border-color: #23615f !important; }
+
+
+/* Public-page surface tokens share the same neutral/ocean system as the
+   dashboard. Keep the canvas and borders neutral; teal is reserved for accents. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-bg: #f8fafc;
+  --ep-surface: #ffffff;
+  --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea;
+  --ep-brand-soft: #45c5b3;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-bg: #0b171b;
+  --ep-surface: #102328;
+  --ep-tint: #153a3e;
+  --ep-line: #285158;
+  --ep-brand-soft: #70d7c8;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-primary: #f8fafc;
+  --ep-secondary: #e2f5f2;
+  --ep-text: #f8fafc;
+  --ep-text-muted: #a7c2c1;
+  --ep-on-accent: #092b31;
+  --ep-deep: #07191e;
+  --ep-on-deep: #f8fafc;
+  --ep-on-deep-muted: #bfd5d2;
+  --ep-zone: #45c5b3;
+  --ep-marker: #70d7c8;
+  --ep-status-info: #70d7c8;
+  --ep-status-info-bg: #153a3e;
+}
+
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-blue-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-indigo-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-cyan-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="text-sky-"] { color: var(--ep-accent) !important; }
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="border-blue-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="border-indigo-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="border-cyan-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="border-sky-"] { border-color: color-mix(in srgb,var(--ep-accent) 34%,var(--ep-line)) !important; }
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-blue-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-indigo-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-cyan-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-sky-"] { background-color: color-mix(in srgb,var(--ep-accent) 9%,var(--ep-surface)) !important; }
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-blue-"],
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-indigo-"],
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-cyan-"],
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="bg-sky-"] { background-color: color-mix(in srgb,var(--ep-accent) 15%,var(--ep-surface)) !important; }
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="from-blue-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="from-indigo-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="from-cyan-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="from-sky-"] { --tw-gradient-from: var(--ep-accent) var(--tw-gradient-from-position) !important; }
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="to-blue-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="to-indigo-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="to-cyan-"],
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [class*="to-sky-"] { --tw-gradient-to: var(--ep-brand-soft) var(--tw-gradient-to-position) !important; }
+
+/* Explicit section and card surfaces called out in the visual review. */
+.ep-business-landing .ep-illustration-strip {
+  background-image:
+    radial-gradient(ellipse at 82% 50%, color-mix(in srgb,var(--ep-accent) 10%,transparent),transparent 36%),
+    linear-gradient(105deg,color-mix(in srgb,var(--ep-tint) 92%,var(--ep-surface)),var(--ep-tint)) !important;
+}
+html.dark .ep-business-landing .ep-illustration-strip {
+  background-image:
+    radial-gradient(ellipse at 82% 50%,rgba(69,197,179,.13),transparent 36%),
+    linear-gradient(105deg,#153a3e,#0b2c34) !important;
+}
+.ep-business-landing .ep-hero-monitor-panel {
+  background:
+    radial-gradient(ellipse at 88% 0%,rgba(8,126,139,.20),transparent 48%),
+    radial-gradient(ellipse at 0% 100%,rgba(69,197,179,.14),transparent 48%),
+    linear-gradient(145deg,#123c43,#092b31) !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel {
+  background:
+    radial-gradient(ellipse at 88% 0%,rgba(8,126,139,.13),transparent 48%),
+    radial-gradient(ellipse at 0% 100%,rgba(69,197,179,.09),transparent 48%),
+    linear-gradient(145deg,#ffffff 0%,#f5fbfa 58%,#e6f4f3 100%) !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-100\/75 { color:#087e8b !important; }
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-100\/65 { color:#426b70 !important; }
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-teal-300\/10 { background-color:rgba(217,240,239,.8) !important; }
+.ep-about-page .ep-about-mission,
+.ep-about-page .ep-about-journey,
+.ep-about-page #scope,
+.ep-contact-page .ep-contact-intro,
+.ep-contact-page .ep-contact-details-section {
+  background-color:var(--ep-tint) !important;
+  background-image:radial-gradient(ellipse at 88% 18%,color-mix(in srgb,var(--ep-accent) 8%,transparent),transparent 48%);
+}
+.ep-about-page .ep-about-mission-panel,
+.ep-contact-page .ep-contact-intro-panel {
+  background:
+    radial-gradient(ellipse at 90% 12%,color-mix(in srgb,var(--ep-accent) 10%,transparent),transparent 48%),
+    var(--ep-surface) !important;
+}
+html.dark .ep-about-page .ep-about-mission-panel,
+html.dark .ep-contact-page .ep-contact-intro-panel {
+  background:
+    radial-gradient(ellipse at 90% 12%,color-mix(in srgb,var(--ep-accent) 15%,transparent),transparent 48%),
+    var(--ep-surface) !important;
+}
+.ep-about-page .ep-about-journey-card,
+.ep-contact-page [data-contact-card] {
+  border-color:var(--ep-line);
+  background-color:var(--ep-surface);
+}
+
+
