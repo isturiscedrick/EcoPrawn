@@ -33,6 +33,8 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     }
   }, []);
 
+  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
+  const [logoutErrorOpen, setLogoutErrorOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchDialogRef = useRef<HTMLElement>(null);
@@ -208,7 +210,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
               pathname={pathname}
               profileName={profileName}
               profileRole={profileRole}
-              onRequestLogout={() => window.dispatchEvent(new Event("ep:request-logout"))}
+              onRequestLogout={() => setLogoutConfirmOpen(true)}
             />
           </div>
         </div>
@@ -228,7 +230,22 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         onClose={closeSearch}
       />
 
-      <DashboardLogoutDialogs />
+      <DashboardLogoutDialogs
+        confirmOpen={logoutConfirmOpen}
+        errorOpen={logoutErrorOpen}
+        onCancel={() => setLogoutConfirmOpen(false)}
+        onConfirm={async () => {
+          setLogoutConfirmOpen(false);
+          try {
+            const response = await fetch("/api/auth/logout", { method: "POST" });
+            if (!response.ok) throw new Error("Logout failed");
+            window.location.replace("/login");
+          } catch {
+            setLogoutErrorOpen(true);
+          }
+        }}
+        onErrorDismiss={() => setLogoutErrorOpen(false)}
+      />
 
       {/* Responsive dashboard content area. */}
       <main
