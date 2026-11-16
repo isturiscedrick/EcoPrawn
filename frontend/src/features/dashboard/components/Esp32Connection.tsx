@@ -50,7 +50,7 @@ export function Esp32Connection({ tankId, tankName }: { tankId: string; tankName
       <div className="flex flex-wrap items-center gap-3 mb-4">
         <button type="button" onClick={status === "connected" ? disconnect : () => void connect()}
           disabled={supported !== true || status === "connecting"}
-          className="rounded-lg bg-[var(--mangrove)] px-4 py-2 text-sm font-semibold text-white disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--mangrove)]">
+          className="rounded-lg bg-[var(--ep-accent)] px-4 py-2 text-sm font-semibold text-[var(--ep-on-accent)] disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]">
           {status === "connected" ? "Disconnect ESP32" : status === "connecting" ? "Connecting…" : "Connect ESP32"}
         </button>
         <span role="status" className="text-xs text-[var(--ep-text-muted)]">{saved > 0 ? `${saved} reading${saved === 1 ? "" : "s"} saved this session` : status === "connected" ? "Waiting for a sensor reading…" : "115200 baud"}</span>
