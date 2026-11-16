@@ -209,6 +209,19 @@ const PATHS = {
       <path d="M3 21c3-5 7-8 13-11" />
     </>
   ),
+  "alert-circle": (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 8v5" />
+      <path d="M12 16.5h.01" />
+    </>
+  ),
+  "loader-circle": (
+    <>
+      <path d="M12 2a10 10 0 1 0 10 10" />
+      <path d="M12 2v4" />
+    </>
+  ),
   "check-circle": (
     <>
       <circle cx="12" cy="12" r="9" />
