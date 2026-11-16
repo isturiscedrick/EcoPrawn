@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from "react";
 interface ScrollFadeContainerProps {
   children: React.ReactNode;
   className?: string;
+  ariaLabel?: string;
 }
 
-export function ScrollFadeContainer({ children, className = "" }: ScrollFadeContainerProps) {
+export function ScrollFadeContainer({ children, className = "", ariaLabel }: ScrollFadeContainerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(false);
@@ -33,7 +34,7 @@ export function ScrollFadeContainer({ children, className = "" }: ScrollFadeCont
     <div className="relative">
       <div
         aria-hidden="true"
-        className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-white to-transparent transition-opacity duration-200 ${
+        className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[var(--ep-surface)] to-transparent transition-opacity duration-200 ${
           showLeft ? "opacity-100" : "opacity-0"
         }`}
       />
@@ -43,7 +44,10 @@ export function ScrollFadeContainer({ children, className = "" }: ScrollFadeCont
           showRight ? "opacity-100" : "opacity-0"
         }`}
       />
-      <div ref={ref} className={`overflow-x-auto ${className}`}>
+      <div ref={ref} role={ariaLabel ? "region" : undefined}
+        aria-label={ariaLabel}
+        tabIndex={ariaLabel ? 0 : undefined}
+        className={`max-w-full overflow-x-auto overscroll-x-contain focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] ${className}`}>
         {children}
       </div>
     </div>
