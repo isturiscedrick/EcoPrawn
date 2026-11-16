@@ -309,11 +309,11 @@ export function Icon({ name, size = 18, strokeWidth = 1.7, ...rest }: IconProps)
 }
 
 const TONES = {
-  coral: "bg-[rgba(232,98,58,0.1)] text-[var(--coral)]",
+  coral: "bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]",
   brand: "bg-[color-mix(in_srgb,var(--ep-secondary)_12%,transparent)] text-[var(--ep-secondary)]",
   mangrove: "bg-[rgba(60,122,92,0.1)] text-[var(--mangrove)]",
   amber: "bg-[rgba(181,139,57,0.12)] text-[var(--amber-text)]",
-  dark: "bg-[rgba(255,255,255,0.08)] text-[var(--coral)]",
+  dark: "bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]",
 } as const;
 
 interface IconChipProps {
