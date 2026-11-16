@@ -500,14 +500,17 @@ html.dark .ep-business-landing #top.ep-cloudnexus-hero {
 .ep-business-landing .ep-cloudnexus-headline { color:var(--ep-text); text-wrap:balance; }
 html:not(.dark) .ep-business-landing .ep-cloudnexus-headline { color:#0b2c34; }
 /* Gradient highlight. Falls back to solid teal where background-clip:text is unsupported. */
-html:not(.dark) .ep-business-landing .ep-cloudnexus-highlight {
-  color:#087E8B;
-  background-image:linear-gradient(100deg,#087E8B 0%,#45C5B3 100%);
+.ep-business-landing .ep-cloudnexus-highlight {
+  color:var(--ep-accent);
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
   -webkit-box-decoration-break:clone;
   box-decoration-break:clone;
+}
+html:not(.dark) .ep-business-landing .ep-cloudnexus-highlight {
+  color:#087E8B;
+  background-image:linear-gradient(100deg,#087E8B 0%,#45C5B3 100%);
 }
 html.dark .ep-business-landing .ep-cloudnexus-highlight {
   background-image:linear-gradient(100deg,var(--ep-accent) 0%,color-mix(in srgb,var(--ep-accent) 78%,white) 100%);
