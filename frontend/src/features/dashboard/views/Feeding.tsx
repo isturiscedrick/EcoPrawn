@@ -3,7 +3,7 @@ import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { DonutChart, FeedingProgressChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
-import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
+import { DashboardInlineEmptyState, DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { downloadCsv } from "@/utils/downloadCsv";
 
 export function Feeding() {
@@ -152,9 +152,7 @@ export function Feeding() {
         </>
       ) : (
         <Panel title="Feed Allocation" badge="0 tanks">
-          <div className="py-10 text-center text-[13px] text-[var(--ep-text-muted)]">
-            No tanks yet. Add one to view feeding data.
-          </div>
+          <DashboardInlineEmptyState message="No tanks yet. Add one to view feeding data." />
         </Panel>
       )}
     </>
