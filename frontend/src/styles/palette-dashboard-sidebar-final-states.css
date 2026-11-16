@@ -1,0 +1,214 @@
+/* Follow-up: target the actual rendered nav item wrappers and mobile drawer.
+   SidebarNavItem renders Link > span > icon-wrap + label + status dot. */
+.ep-mobile-dashboard-drawer {
+  background: #fbfdfd !important;
+  color: #173b46 !important;
+  border-color: #d6e2e6 !important;
+  box-shadow: 18px 0 48px -24px rgba(15, 55, 65, .32) !important;
+}
+.ep-mobile-dashboard-drawer > div:first-child {
+  min-height: 72px;
+  background: #ffffff !important;
+  border-bottom-color: #dce7ea !important;
+}
+.ep-mobile-dashboard-drawer > div:first-child .ep-mobile-drawer-caption {
+  color: #66818a !important;
+}
+.ep-mobile-dashboard-drawer > div:nth-child(2) {
+  padding: 1.15rem 1rem 1rem !important;
+  background: #fbfdfd !important;
+}
+.ep-mobile-dashboard-drawer > div:nth-child(2) > div:first-child {
+  padding: 0 .65rem .75rem !important;
+  color: #66818a !important;
+  letter-spacing: .14em !important;
+}
+.ep-mobile-dashboard-drawer nav {
+  gap: .45rem !important;
+}
+.ep-mobile-dashboard-drawer nav > a {
+  border-radius: 13px !important;
+  color: #355761 !important;
+}
+.ep-mobile-dashboard-drawer nav > a > span {
+  min-height: 49px !important;
+  padding: .55rem .85rem !important;
+  border: 1px solid transparent !important;
+  border-radius: 13px !important;
+  background: transparent !important;
+  color: #355761 !important;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease !important;
+}
+.ep-mobile-dashboard-drawer nav > a > span > span:first-child {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 10px !important;
+  background: #edf5f6 !important;
+  color: #52727a !important;
+}
+.ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span {
+  background: #e8f4f4 !important;
+  border-color: #c7e1e2 !important;
+  border-left: 3px solid #087e8b !important;
+  color: #075b65 !important;
+  box-shadow: 0 4px 12px -10px rgba(8,126,139,.55) !important;
+}
+.ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span > span:first-child {
+  background: #d7eeee !important;
+  color: #087e8b !important;
+}
+.ep-mobile-dashboard-drawer nav > a[aria-current="page"] .dashboard-nav-active-dot {
+  background: #087e8b !important;
+}
+.ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]):hover > span {
+  background: #f0f6f7 !important;
+  border-color: #e0ebed !important;
+  color: #075b65 !important;
+  transform: translateX(2px);
+}
+.ep-mobile-dashboard-drawer > div:last-child {
+  gap: .5rem !important;
+  padding: 1rem 1.1rem max(1.25rem, env(safe-area-inset-bottom)) !important;
+  background: #f2f7f8 !important;
+  border-top-color: #dce7ea !important;
+}
+.ep-mobile-dashboard-drawer > div:last-child a,
+.ep-mobile-dashboard-drawer > div:last-child button {
+  min-height: 46px !important;
+  border-radius: 12px !important;
+}
+.ep-mobile-dashboard-drawer > div:last-child a:not([aria-current="page"]) {
+  background: #ffffff !important;
+  border: 1px solid #dce7ea !important;
+  color: #355761 !important;
+}
+.ep-mobile-dashboard-drawer > div:last-child button {
+  border: 1px solid #f0d8d8 !important;
+  background: #fffafa !important;
+  color: #b42332 !important;
+}
+.ep-mobile-dashboard-drawer > div:last-child button:hover {
+  background: #fff0f0 !important;
+  border-color: #e9b9bd !important;
+}
+html.dark .ep-mobile-dashboard-drawer {
+  background: #102328 !important;
+  color: #e8f4f2 !important;
+  border-color: #294c53 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:first-child {
+  background: #132a30 !important;
+  border-bottom-color: #294c53 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:first-child .ep-mobile-drawer-caption,
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) > div:first-child {
+  color: #a8c0c2 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) {
+  background: #102328 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a {
+  color: #d5e5e4 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a > span {
+  color: #d5e5e4 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a > span > span:first-child {
+  background: #1a373e !important;
+  color: #a8c9c8 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span {
+  background: rgba(69,197,179,.13) !important;
+  border-color: rgba(69,197,179,.32) !important;
+  border-left: 3px solid #45c5b3 !important;
+  color: #effcf9 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span > span:first-child {
+  background: rgba(69,197,179,.18) !important;
+  color: #70d7c8 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a[aria-current="page"] .dashboard-nav-active-dot {
+  background: #45c5b3 !important;
+}
+html.dark .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]):hover > span {
+  background: #173239 !important;
+  border-color: #294c53 !important;
+  color: #70d7c8 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:last-child {
+  background: #0c1d22 !important;
+  border-top-color: #294c53 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:last-child a:not([aria-current="page"]) {
+  background: #142d33 !important;
+  border-color: #31535a !important;
+  color: #e8f4f2 !important;
+}
+html.dark .ep-mobile-dashboard-drawer > div:last-child button {
+  background: rgba(180,35,50,.10) !important;
+  border-color: rgba(239,120,130,.24) !important;
+  color: #ff9da5 !important;
+}
+
+/* Final light-mode polish: keep the selected label transparent and style only
+   the full navigation row. Earlier palette passes styled nested spans too
+   broadly, which created the extra rectangle visible behind "Dashboard". */
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a > span > span:nth-child(2),
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a > span > span:nth-child(2) {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span {
+  background: #e8f4f4 !important;
+  background-color: #e8f4f4 !important;
+  border: 1px solid #c8e2e3 !important;
+  border-left: 3px solid #087e8b !important;
+  border-radius: 12px !important;
+  color: #075b65 !important;
+  box-shadow: 0 4px 14px -11px rgba(8,126,139,.5) !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a[aria-current="page"] > span > span:first-child {
+  background: #d7eeee !important;
+  background-color: #d7eeee !important;
+  color: #087e8b !important;
+  border-radius: 10px !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]) > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]) > span {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  color: #355761 !important;
+  box-shadow: none !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]):hover > span {
+  background: #f1f7f8 !important;
+  border-color: #e0ebed !important;
+  color: #075b65 !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]) > span > span:first-child,
+html:not(.dark) .dashboard-shell .ep-mobile-dashboard-drawer nav > a:not([aria-current="page"]) > span > span:first-child {
+  background: #f0f5f6 !important;
+  color: #587780 !important;
+  border-radius: 10px !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:first-child {
+  background: #ffffff !important;
+  border-bottom-color: #e3ecee !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) {
+  background: #ffffff !important;
+  border-bottom-color: #e3ecee !important;
+}
+html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child {
+  background: #f6f9fa !important;
+  border-top-color: #e3ecee !important;
+}
+
