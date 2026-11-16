@@ -34,9 +34,9 @@ export function AboutPage() {
           kicker="How it works"
           title={
             <>
-              <span data-page-hero-accent="">One platform.</span>
+              <span>One platform.</span>
               <br className="hidden sm:block" />
-              <span>Five connected systems.</span>
+              <span data-page-hero-accent="">Five connected systems.</span>
             </>
           }
           lead="How the project modules fit together."
