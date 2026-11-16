@@ -1862,3 +1862,37 @@ html.dark .ep-business-landing .ep-illustration-strip {
     transform: none !important;
   }
 }
+
+
+/* ---------- Shared public-page card and reading system ---------- */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-public-card-radius: 1.2rem;
+  --ep-public-card-shadow: 0 16px 38px -30px color-mix(in srgb,var(--ep-primary) 28%,transparent);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective) {
+  border-color: var(--ep-line);
+  border-radius: var(--ep-public-card-radius);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective) {
+  box-shadow: var(--ep-public-card-shadow);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) p {
+  line-height: 1.7;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is([data-eyebrow],[data-kicker]) {
+  font-size: .72rem;
+  line-height: 1.4;
+  letter-spacing: .14em;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective) {
+  box-shadow: 0 18px 40px -32px rgba(0,0,0,.62);
+}
+@media (max-width: 767px) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page)
+  :is([data-business-card],[data-contact-card],#objectives article,#systems article,#scope article,[data-process-track] > li,.ep-about-objective) {
+    border-radius: 1rem;
+  }
+}
