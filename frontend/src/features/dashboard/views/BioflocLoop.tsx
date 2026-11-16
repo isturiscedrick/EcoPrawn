@@ -1,4 +1,4 @@
-import { Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { KpiGrid, Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
@@ -32,7 +32,7 @@ export function BioflocLoop() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+      <KpiGrid label="Biofloc metric summary">
         {bioflocMetrics.map((m) => (
           <KpiCard
             key={m.label}
@@ -43,7 +43,7 @@ export function BioflocLoop() {
             deltaTone={m.status}
           />
         ))}
-      </div>
+      </KpiGrid>
 
       <div className="mb-5">
         <Panel title="Biofloc metric status" badge={`${bioflocMetrics.length} monitored metrics`}>
