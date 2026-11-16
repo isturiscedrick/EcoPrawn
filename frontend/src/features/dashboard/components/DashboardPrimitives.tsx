@@ -156,3 +156,30 @@ export function DashboardModalShell({
     </div>
   );
 }
+
+interface DashboardFormFieldProps {
+  id: string;
+  label: string;
+  children: React.ReactNode;
+  icon?: IconName;
+  labelClassName?: string;
+}
+
+/** Consistent accessible label wrapper for dashboard form controls. */
+export function DashboardFormField({
+  id,
+  label,
+  children,
+  icon,
+  labelClassName = "mb-1.5 block text-xs font-semibold text-[var(--ep-text-muted)]",
+}: DashboardFormFieldProps) {
+  return (
+    <div className="min-w-0">
+      <label htmlFor={id} className={`${labelClassName} flex items-center gap-1.5`}>
+        {icon && <Icon name={icon} size={11} strokeWidth={2} className="text-[var(--ep-accent)]" />}
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}
