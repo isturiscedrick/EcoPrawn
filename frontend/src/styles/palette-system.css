@@ -682,14 +682,13 @@ html.dark .ecoprawn-root [class*="border-orange-"],
 html.dark .ecoprawn-root [class*="border-rose-"] { border-color: #23615f !important; }
 
 
-/* Ocean Teal final pass for public pages. These roots are .ep-landing,
-   .ep-about-page and .ep-contact-page (not .ecoprawn-root), so scope the
-   legacy utility cleanup to the actual rendered page roots. */
+/* Public-page surface tokens share the same neutral/ocean system as the
+   dashboard. Keep the canvas and borders neutral; teal is reserved for accents. */
 :is(.ep-landing,.ep-about-page,.ep-contact-page) {
-  --ep-bg: #f8fbfb;
+  --ep-bg: #f8fafc;
   --ep-surface: #ffffff;
-  --ep-tint: #edf7f6;
-  --ep-line: #d5e7e5;
+  --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea;
   --ep-brand-soft: #45c5b3;
 }
 html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
@@ -703,7 +702,7 @@ html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
   --ep-primary: #f8fafc;
   --ep-secondary: #e2f5f2;
   --ep-text: #f8fafc;
-  --ep-text-muted: #bfd5d2;
+  --ep-text-muted: #a7c2c1;
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
   --ep-on-accent: #092b31;
