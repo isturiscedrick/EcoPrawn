@@ -51,13 +51,6 @@ const STEPS: { step: string; title: string; body: string; icon: IconName }[] = [
   },
 ];
 
-const STATS = [
-  { label: "Parameters tracked", value: String(heroReadouts.length) },
-  { label: "Aeration", value: "Automatic" },
-  { label: "Growth vision", value: "No handling" },
-  { label: "Monitoring", value: "24/7" },
-];
-
 // Gauge scale and target zone per reading, used only to draw the range bars.
 // Same numbers as the dashboard thresholds.
 const ZONES: Record<
@@ -283,31 +276,7 @@ export function LandingPage() {
             </div>
             <AquacultureIllustration variant="landing" />
           </div>
-        </section>
-
-        {/* AT A GLANCE */}
-        <section
-          aria-label="EcoPrawn at a glance"
-          className="border-y border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-8 sm:px-8"
-        >
-          <div className="ep-stats-panel mx-auto grid max-w-[1440px] grid-cols-2 gap-2.5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 shadow-[0_18px_45px_-30px_rgba(15,23,42,.18)] sm:grid-cols-4 sm:gap-3 sm:rounded-3xl sm:p-4">
-            {STATS.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-4 text-left"
-              >
-                <span className="block text-[clamp(20px,2.5vw,28px)] font-bold leading-none tracking-tight text-[var(--ep-primary)]">
-                  {stat.value}
-                </span>
-                <span className="mt-2 block text-xs font-medium leading-snug text-[var(--ep-text-muted)]">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* WATER QUALITY: deep-water band, light text in both themes */}
+        </section>        {/* WATER QUALITY: deep-water band, light text in both themes */}
         <section
           id="readings"
           aria-labelledby="readings-title"
