@@ -17,17 +17,17 @@ export function BioflocLoop() {
 
   return (
     <>
-      <div className="flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--sand-dim)]">
+      <div className="flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--ep-line)]">
         <div>
-          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--mangrove)] mb-2">
+          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)] mb-2">
             Biofloc &amp; effluent
           </div>
           <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
             Biofloc Loop
           </h1>
         </div>
-        <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
-          <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
+        <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
+          <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--ep-accent)]" />
           Loop active
         </div>
       </div>
@@ -58,8 +58,8 @@ export function BioflocLoop() {
         <Panel title="Treatment Loop" badge="continuous">
           <div className="flex flex-col gap-3">
             {loopSteps.map((s) => (
-              <div key={s.step} className="dashboard-hover flex gap-3 rounded-[10px] border border-[var(--sand-dim)] p-3">
-                <span className="ep-font-mono text-[11px] font-semibold text-[var(--coral)] pt-0.5">
+              <div key={s.step} className="dashboard-hover flex gap-3 rounded-[10px] border border-[var(--ep-line)] p-3">
+                <span className="ep-font-mono text-[11px] font-semibold text-[var(--ep-accent)] pt-0.5">
                   {s.step}
                 </span>
                 <div>
@@ -74,7 +74,7 @@ export function BioflocLoop() {
         <Panel title="Effluent Routing Log" badge={`${effluentLog.length} events`}>
           <div className="flex flex-col">
             {effluentLog.map((e, i) => (
-              <div key={e.id} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
+              <div key={e.id} className={`py-3 ${i !== 0 ? "border-t border-[var(--ep-line)]" : "pt-0"}`}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[13px] font-semibold text-[var(--water-deep)]">{e.event}</span>
                   <span className="ep-font-mono text-[10.5px] text-[var(--ep-text-muted)] whitespace-nowrap">
