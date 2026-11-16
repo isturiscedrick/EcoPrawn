@@ -669,11 +669,9 @@ html.dark .ep-auth-overlay [data-auth-backdrop] {
 
 /* Auth modal 60/30/10 finish:
    neutral dialog and fields (60%), deep-ocean structure (30%), restrained
-   Coral Sand details (10%). Ocean Teal remains the primary submit/selected
+   Ocean Teal details (10%). Ocean Teal remains the primary submit/selected
    action color for clear interaction hierarchy. */
 .ep-auth-modal {
-  --ep-accent: #087e8b;
-  --ep-accent-hover: #066874;
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
   --ep-accent-tint: rgba(8,126,139,.12);
@@ -698,8 +696,6 @@ html.dark .ep-auth-overlay [data-auth-backdrop] {
   color: #066874 !important;
 }
 html.dark .ep-auth-modal {
-  --ep-accent: #45c5b3;
-  --ep-accent-hover: #70d7c8;
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
   --ep-accent-tint: rgba(69,197,179,.14);
