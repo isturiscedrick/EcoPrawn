@@ -49,7 +49,6 @@ html.dark body.ecoprawn-root { background: #0b171b; color: #e8f4f2; }
   --ep-accent: #087e8b; --ep-accent-hover: #066874;
   --ep-secondary: #1f2937;
   --ep-accent-tint: rgba(8,126,139,.12); --ep-accent-tint-soft: rgba(8,126,139,.08);
-  --ep-accent-tint: rgba(23,59,70,.08);
   background: #f8fafc !important; color: #111827;
 }
 html.dark .dashboard-shell {
@@ -57,7 +56,6 @@ html.dark .dashboard-shell {
   --ep-accent: #45c5b3; --ep-accent-hover: #70d7c8;
   --ep-secondary: #e2e8f0;
   --ep-accent-tint: rgba(69,197,179,.14); --ep-accent-tint-soft: rgba(69,197,179,.08);
-  --ep-accent-tint: rgba(148,163,184,.08);
   background: #0b171b !important; color: #e8f4f2;
 }
 .dashboard-shell aside,
@@ -159,9 +157,7 @@ html.dark .ep-logo .ep-logo-text {
   --ep-secondary: #245563;
   --ep-text: #173b46;
   --ep-text-muted: #58717a;
-  --ep-accent: #087e8b;
-  --ep-accent-hover: #066874;
-  --ep-on-accent: #071426;
+  --ep-on-accent: #ffffff;
   --ep-accent-tint: rgba(8, 126, 139, .11);
   --ep-accent-tint-soft: rgba(8, 126, 139, .065);
   --ep-bg: #f8fafc;
@@ -183,8 +179,6 @@ html.dark .dashboard-shell {
   --ep-secondary: #c9e2df;
   --ep-text: #e8f4f2;
   --ep-text-muted: #a7c2c1;
-  --ep-accent: #45c5b3;
-  --ep-accent-hover: #70d7c8;
   --ep-on-accent: #092b31;
   --ep-accent-tint: rgba(69, 197, 179, .14);
   --ep-accent-tint-soft: rgba(69, 197, 179, .08);
@@ -1170,16 +1164,14 @@ html.dark .dashboard-shell :is([class*="bg-blue-"],[class*="bg-indigo-"],[class*
 :root {
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
-
-  --ep-on-accent: #071426;
+  --ep-on-accent: #ffffff;
   --ep-accent-tint: rgba(8,126,139,.14);
   --ep-accent-tint-soft: rgba(8,126,139,.08);
 }
 html.dark {
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
-
-  --ep-on-accent: #ffffff;
+  --ep-on-accent: #071426;
   --ep-accent-tint: rgba(69,197,179,.16);
   --ep-accent-tint-soft: rgba(69,197,179,.09);
 }
@@ -1408,7 +1400,6 @@ html.dark .ep-auth-modal button[aria-label="Close"]:hover {
   --ep-color-neutral-60: #F8FAFC;
   --ep-color-ocean-30: #173B46;
   --ep-color-teal-10: #087E8B;
-  --ep-color-teal-10: #087E8B;
   --ep-page-bg: var(--ep-color-neutral-60);
   --ep-page-surface: #FFFFFF;
   --ep-structure: var(--ep-color-ocean-30);
@@ -1416,7 +1407,6 @@ html.dark .ep-auth-modal button[aria-label="Close"]:hover {
 html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
   --ep-color-neutral-60: #0B171B;
   --ep-color-ocean-30: #102B31;
-  --ep-color-teal-10: #45C5B3;
   --ep-color-teal-10: #45C5B3;
   --ep-page-bg: var(--ep-color-neutral-60);
   --ep-page-surface: #102328;
