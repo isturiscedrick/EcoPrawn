@@ -107,3 +107,49 @@ export function KpiCard({ label, value, unit, delta, deltaTone, onDetails }: Kpi
     </section>
   );
 }
+
+interface DashboardModalShellProps {
+  titleId: string;
+  onClose: () => void;
+  children: React.ReactNode;
+  dialogRef?: React.Ref<HTMLElement>;
+  layerClassName?: string;
+  panelClassName?: string;
+  backdropClassName?: string;
+  backdropLabel?: string;
+  backdropTabIndex?: number;
+}
+
+/** Shared dashboard modal frame; each dialog keeps its own content and behavior. */
+export function DashboardModalShell({
+  titleId,
+  onClose,
+  children,
+  dialogRef,
+  layerClassName = "z-[110]",
+  panelClassName = "p-5 sm:p-8",
+  backdropClassName = "bg-[rgba(8,30,34,0.65)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.76)]",
+  backdropLabel = "Close dialog",
+  backdropTabIndex,
+}: DashboardModalShellProps) {
+  return (
+    <div className={`fixed inset-0 ${layerClassName} flex items-center justify-center p-4 sm:p-5`} role="presentation">
+      <button
+        type="button"
+        tabIndex={backdropTabIndex}
+        aria-label={backdropLabel}
+        onClick={onClose}
+        className={`absolute inset-0 ${backdropClassName}`}
+      />
+      <section
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        className={`relative z-10 max-h-[90dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-primary)] shadow-[var(--shadow-overlay)] ${panelClassName}`}
+      >
+        {children}
+      </section>
+    </div>
+  );
+}
