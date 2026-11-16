@@ -459,36 +459,76 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #45c5b3; box-
 }
 
 
-/* CloudNexus-inspired centered hero composition, recolored for EcoPrawn. */
+/* CloudNexus-inspired centered hero composition, recolored for EcoPrawn.
+   Palette: deep ocean ink (#0b2c34), Ocean Teal (#087e8b), aqua (#45c5b3 / #70d7c8),
+   and a pale aqua mist for surfaces. */
 .ep-business-landing .ep-cloudnexus-hero {
   isolation: isolate;
   background:
     radial-gradient(ellipse at 50% 0%, color-mix(in srgb,var(--ep-accent) 7%,transparent) 0%, transparent 48%),
     var(--ep-bg);
 }
+/* Layered aqua-mist wash with a faint dot grid. The id keeps this above the
+   earlier .ep-aquaculture-hero light-theme rules; dark mode keeps its own background. */
+html:not(.dark) .ep-business-landing #top.ep-cloudnexus-hero {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% -8%, rgba(69,197,179,.24), transparent 62%),
+    radial-gradient(ellipse 45% 40% at 92% 38%, rgba(8,126,139,.14), transparent 70%),
+    radial-gradient(ellipse 40% 36% at 6% 62%, rgba(112,215,200,.20), transparent 70%),
+    radial-gradient(circle, rgba(8,126,139,.10) .8px, transparent 1.2px) center top / 24px 24px,
+    linear-gradient(180deg,#f2fbf9 0%,#ffffff 46%,#ecf7f5 100%);
+}
 .ep-business-landing .ep-cloudnexus-orb {
   position:absolute;
   z-index:-1;
-  width:26rem;
-  height:26rem;
+  width:30rem;
+  height:30rem;
   border-radius:50%;
   filter:blur(90px);
-  opacity:.11;
+  opacity:.2;
   pointer-events:none;
 }
-.ep-business-landing .ep-cloudnexus-orb-one { top:22%; left:-16rem; background:var(--ep-accent); }
-.ep-business-landing .ep-cloudnexus-orb-two { top:28%; right:-17rem; background:var(--ep-secondary); }
+.ep-business-landing .ep-cloudnexus-orb-one { top:20%; left:-16rem; background:#45c5b3; }
+.ep-business-landing .ep-cloudnexus-orb-two { top:26%; right:-17rem; background:#087e8b; }
+html.dark .ep-business-landing .ep-cloudnexus-orb { opacity:.16; }
 .ep-business-landing .ep-cloudnexus-hero-inner { position:relative; }
 .ep-business-landing .ep-cloudnexus-eyebrow {
-  border:1px solid color-mix(in srgb,var(--ep-accent) 22%,var(--ep-line));
-  background:color-mix(in srgb,var(--ep-accent) 7%,var(--ep-surface));
-  color:var(--ep-accent);
+  border:1px solid color-mix(in srgb,var(--ep-accent) 30%,transparent);
+  background:linear-gradient(100deg,
+    color-mix(in srgb,var(--ep-accent) 13%,var(--ep-surface)),
+    color-mix(in srgb,#45c5b3 11%,var(--ep-surface)));
+  color:var(--ep-accent-hover);
+  box-shadow:0 10px 26px -18px color-mix(in srgb,var(--ep-accent) 70%,transparent);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
 }
 .ep-business-landing .ep-cloudnexus-headline { color:var(--ep-text); text-wrap:balance; }
+html:not(.dark) .ep-business-landing .ep-cloudnexus-headline { color:#0b2c34; }
+/* Gradient highlight. Falls back to solid teal where background-clip:text is unsupported. */
 .ep-business-landing .ep-cloudnexus-highlight {
   color:var(--ep-accent);
+  background-image:linear-gradient(100deg,#066874 0%,#087e8b 38%,#2bb3a3 72%,#45c5b3 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+}
+html.dark .ep-business-landing .ep-cloudnexus-highlight {
+  background-image:linear-gradient(100deg,#45c5b3 0%,#70d7c8 55%,#b6f2e8 100%);
 }
 .ep-business-landing .ep-cloudnexus-preview-wrap { position:relative; }
+/* Soft teal glow behind the dashboard so it lifts off the page. */
+.ep-business-landing .ep-cloudnexus-preview-wrap::before {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:8% -4% -6%;
+  border-radius:2rem;
+  background:radial-gradient(ellipse at 50% 40%, color-mix(in srgb,var(--ep-accent) 20%,transparent), transparent 70%);
+  filter:blur(36px);
+  pointer-events:none;
+}
 .ep-business-landing .ep-cloudnexus-tabs {
   display:flex;
   justify-content:center;
@@ -498,10 +538,12 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #45c5b3; box-
   margin:0 auto 1.1rem;
   padding:.35rem;
   overflow-x:auto;
-  border:1px solid var(--ep-line);
+  border:1px solid color-mix(in srgb,var(--ep-accent) 20%,var(--ep-line));
   border-radius:999px;
-  background:var(--ep-surface);
-  box-shadow:0 8px 26px -22px rgba(15,40,45,.28);
+  background:color-mix(in srgb,var(--ep-surface) 80%,transparent);
+  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
+  box-shadow:0 12px 30px -22px color-mix(in srgb,var(--ep-accent) 55%,transparent);
   scrollbar-width:none;
 }
 .ep-business-landing .ep-cloudnexus-tabs::-webkit-scrollbar { display:none; }
@@ -517,22 +559,44 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #45c5b3; box-
   white-space:nowrap;
   transition:background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease;
 }
+.ep-business-landing .ep-cloudnexus-tab:not([aria-selected="true"]):hover {
+  background:color-mix(in srgb,var(--ep-accent) 9%,transparent);
+  color:var(--ep-accent-hover);
+}
 .ep-business-landing .ep-cloudnexus-tab[aria-selected="true"] {
-  border-color:color-mix(in srgb,var(--ep-accent) 18%,transparent);
-  background:var(--ep-accent);
-  color:var(--ep-on-accent);
-  box-shadow:0 5px 14px -9px color-mix(in srgb,var(--ep-accent) 75%,transparent);
+  border-color:color-mix(in srgb,#ffffff 22%,transparent);
+  background:linear-gradient(135deg,#066874 0%,#087e8b 50%,#2bb3a3 100%);
+  color:#ffffff;
+  box-shadow:0 8px 18px -10px color-mix(in srgb,var(--ep-accent) 80%,transparent);
+}
+html.dark .ep-business-landing .ep-cloudnexus-tab[aria-selected="true"] {
+  background:linear-gradient(135deg,#45c5b3 0%,#70d7c8 100%);
+  color:#092b31;
 }
 .ep-business-landing .ep-cloudnexus-tab:focus-visible {
   outline:2px solid var(--ep-accent);
   outline-offset:3px;
 }
 .ep-business-landing .ep-cloudnexus-dashboard {
+  position:relative;
   overflow:hidden;
-  border:1px solid color-mix(in srgb,var(--ep-line) 82%,var(--ep-accent));
+  border:1px solid color-mix(in srgb,var(--ep-accent) 22%,var(--ep-line));
   border-radius:1.2rem;
   background:var(--ep-surface);
-  box-shadow:0 32px 90px -48px rgba(8,54,61,.38),0 10px 28px -20px rgba(8,54,61,.2);
+  box-shadow:
+    0 36px 90px -46px color-mix(in srgb,var(--ep-accent) 48%,rgba(8,54,61,.5)),
+    0 12px 30px -20px rgba(8,54,61,.22);
+}
+/* Thin gradient edge along the top of the window. */
+.ep-business-landing .ep-cloudnexus-dashboard::before {
+  content:"";
+  position:absolute;
+  z-index:2;
+  inset:0 0 auto;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#45c5b3 30%,#087e8b 70%,transparent);
+  opacity:.85;
+  pointer-events:none;
 }
 .ep-business-landing .ep-cloudnexus-windowbar {
   display:flex;
@@ -542,12 +606,14 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #45c5b3; box-
   gap:1rem;
   padding:.7rem 1rem;
   border-bottom:1px solid var(--ep-line);
-  background:var(--ep-card);
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--ep-accent) 6%,var(--ep-surface)),
+    var(--ep-surface));
 }
 .ep-business-landing .ep-cloudnexus-dashboard-body {
   display:flex;
   min-height:300px;
-  background:var(--ep-card);
+  background:color-mix(in srgb,var(--ep-accent) 3%,var(--ep-surface));
 }
 .ep-business-landing .ep-cloudnexus-mini-sidebar {
   width:190px;
@@ -568,12 +634,33 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #45c5b3; box-
   border-radius:.55rem;
 }
 .ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active {
-  background:color-mix(in srgb,var(--ep-accent) 10%,var(--ep-card));
-  color:var(--ep-accent);
+  background:linear-gradient(100deg,
+    color-mix(in srgb,var(--ep-accent) 16%,var(--ep-surface)),
+    color-mix(in srgb,var(--ep-accent) 5%,var(--ep-surface)));
+  box-shadow:inset 3px 0 0 var(--ep-accent);
+  color:var(--ep-accent-hover);
   font-weight:700;
 }
 .ep-business-landing .ep-cloudnexus-metric {
-  box-shadow:0 5px 16px -15px rgba(15,40,45,.35);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 8px 22px -18px color-mix(in srgb,var(--ep-accent) 45%,rgba(15,40,45,.4));
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.ep-business-landing .ep-cloudnexus-metric::before {
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:2px;
+  background:linear-gradient(90deg,#087e8b,#45c5b3,transparent 90%);
+  opacity:.8;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .ep-business-landing .ep-cloudnexus-metric:hover {
+    transform:translateY(-3px);
+    border-color:color-mix(in srgb,var(--ep-accent) 50%,var(--ep-line));
+    box-shadow:0 18px 34px -22px color-mix(in srgb,var(--ep-accent) 55%,transparent);
+  }
 }
 .ep-business-landing .ep-cloudnexus-feature {
   display:flex;
@@ -585,6 +672,7 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #45c5b3; box-
   border:1px solid var(--ep-line);
   border-radius:.9rem;
   background:var(--ep-surface);
+  box-shadow:0 8px 22px -18px color-mix(in srgb,var(--ep-accent) 40%,rgba(15,40,45,.35));
 }
 .ep-business-landing .ep-cloudnexus-feature > span {
   display:grid;
@@ -592,7 +680,9 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #45c5b3; box-
   height:2.35rem;
   place-items:center;
   border-radius:.7rem;
-  background:color-mix(in srgb,var(--ep-accent) 10%,var(--ep-card));
+  background:linear-gradient(145deg,
+    color-mix(in srgb,var(--ep-accent) 18%,var(--ep-surface)),
+    color-mix(in srgb,#45c5b3 12%,var(--ep-surface)));
   color:var(--ep-accent);
 }
 .ep-business-landing .ep-cloudnexus-feature strong { color:var(--ep-text); font-size:.86rem; }
@@ -605,5 +695,6 @@ html.dark .ep-business-landing .ep-showcase-live-dot { background: #45c5b3; box-
   .ep-business-landing .ep-cloudnexus-dashboard-body { min-height:0; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .ep-business-landing .ep-cloudnexus-tab { transition:none; }
+  .ep-business-landing .ep-cloudnexus-tab,
+  .ep-business-landing .ep-cloudnexus-metric { transition:none; }
 }
