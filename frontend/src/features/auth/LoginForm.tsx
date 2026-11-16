@@ -74,7 +74,7 @@ const icons = {
 /* ---------- Styles (same visual language as the landing and contact pages) ---------- */
 
 const focusRing =
-  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
 
 const inputBase =
   "w-full rounded-xl border bg-[var(--ep-bg)] py-3 pl-11 pr-4 text-[15px] text-[var(--ep-text)] outline-none transition-all duration-200 placeholder:text-[var(--ep-text-muted)] placeholder:opacity-70";
@@ -439,7 +439,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
           : "Sign in with your username or mobile number and password."}
       </p>
 
-      <div className="mt-8 flex flex-col gap-5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[8px_8px_0_0_var(--ep-accent)] sm:p-7">
+      <div className="mt-8 flex flex-col gap-5 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[0_18px_45px_-28px_color-mix(in_srgb,var(--ep-accent)_35%,transparent)] sm:p-7">
         {(step === "signin" || step === "signup") && (
           <div
             role="group"
