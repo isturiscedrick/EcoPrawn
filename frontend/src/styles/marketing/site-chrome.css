@@ -4,7 +4,7 @@
    and interactive hero preview depth.
    ========================================================================== */
 
-@import "./site-header.css";
+@import "../components/site-header.css";
 
 /* ---------- Site Header Theme Safeguards ---------- */
 html:not(.dark) #site-header :is(button, a)[style*="background-color: var(--ep-surface)"],
