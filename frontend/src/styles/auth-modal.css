@@ -794,7 +794,7 @@ html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel button[aria-label="Close
   width: 76px;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg,#087e8b,#d99a75);
+  background: linear-gradient(90deg,#087e8b,#45c5b3);
 }
 .ep-auth-modal div:has(> form) {
   position: relative;
@@ -841,7 +841,7 @@ html.dark .ep-auth-modal .ep-auth-brand {
   border-bottom-color: rgba(69,197,179,.24) !important;
 }
 html.dark .ep-auth-modal .ep-auth-brand::after {
-  background: linear-gradient(90deg,#45c5b3,#e9bfa0);
+  background: linear-gradient(90deg,#45c5b3,#70d7c8);
 }
 html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel div:has(> form) {
   background:
