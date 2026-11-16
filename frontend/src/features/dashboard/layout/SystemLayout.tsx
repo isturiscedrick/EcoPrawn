@@ -22,7 +22,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const { tanks, isDbConnected, lastUpdatedAt, loading, refreshTanks, isRefreshing } = useTanks();
   const activeAlertCount = deriveTankAlerts(tanks).length;
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false);
   useEffect(() => {
     try {
@@ -47,21 +46,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     if (!restoreFocus) searchReturnFocusRef.current = null;
     setSearchOpen(false);
   }, []);
-  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
-  const wasMobileSidebarOpen = useRef(false);
   const [scrolled, setScrolled] = useState(false);
-  const closeMobileSidebar = useCallback(() => setMobileSidebarOpen(false), []);
-
-  useEffect(() => {
-    if (mobileSidebarOpen) {
-      wasMobileSidebarOpen.current = true;
-      return;
-    }
-    if (wasMobileSidebarOpen.current) {
-      mobileMenuButtonRef.current?.focus({ preventScroll: true });
-      wasMobileSidebarOpen.current = false;
-    }
-  }, [mobileSidebarOpen]);
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -224,17 +209,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       >
         <div className="mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-2 px-3 sm:gap-4 sm:px-8 lg:px-12">
           <div className="flex min-w-0 items-center gap-2">
-            <button
-              ref={mobileMenuButtonRef}
-              type="button"
-              onClick={() => setMobileSidebarOpen(true)}
-              aria-label="Open dashboard navigation"
-              aria-controls="dashboard-mobile-drawer"
-              aria-expanded={mobileSidebarOpen}
-              className={`ep-dashboard-mobile-menu-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-transparent bg-transparent text-[var(--ep-text-muted)] shadow-none transition-colors hover:bg-transparent hover:text-[var(--ep-primary)] lg:hidden ${focusRing}`}
-            >
-              <Icon name="menu" size={19} />
-            </button>
             <Link
               to="/dashboard"
               aria-label="EcoPrawn home"
@@ -331,7 +305,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       </header>
 
       {/* Persistent desktop navigation and mobile drawer. */}
-      <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} collapsed={desktopSidebarCollapsed} onToggleCollapsed={() => setDesktopSidebarCollapsed((collapsed) => { const next = !collapsed; try { window.localStorage.setItem("ep-sidebar-collapsed", String(next)); } catch { /* Keep the in-memory preference for this session. */ } return next; })} />
+      <Sidebar collapsed={desktopSidebarCollapsed} onToggleCollapsed={() => setDesktopSidebarCollapsed((collapsed) => { const next = !collapsed; try { window.localStorage.setItem("ep-sidebar-collapsed", String(next)); } catch { /* Keep the in-memory preference for this session. */ } return next; })} />
 
       {searchOpen && (
         <div className="fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/45 px-3 pt-[12vh] backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) closeSearch(); }}>
