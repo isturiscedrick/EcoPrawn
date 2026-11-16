@@ -21,16 +21,16 @@ function ActivityPage() {
 
   return (
     <>
-      <div className="dashboard-page-header mb-7 border-b border-[rgba(11,46,51,0.12)] pb-7">
+      <div className="dashboard-page-header mb-7 border-b border-[var(--ep-line)] pb-7">
         <div className="mb-2 ep-font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--mangrove-text)]">Facility history</div>
         <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--water-deep)]">Activity Log</h1>
-        <p className="mt-2 text-[15px] text-[rgba(11,35,32,0.68)]">Vision scans and effluent records.</p>
+        <p className="mt-2 text-[15px] text-[var(--ep-text-muted)]">Vision scans and effluent records.</p>
       </div>
       <div className="mb-5">
         <Panel title="Activity composition" badge="recorded events">
           <DonutChart items={[
-            { label: "Vision scans", value: visionScanLog.length, color: "#167C80" },
-            { label: "Effluent events", value: effluentLog.length, color: "#C18A27" },
+            { label: "Vision scans", value: visionScanLog.length, color: "var(--ep-status-info)" },
+            { label: "Effluent events", value: effluentLog.length, color: "var(--ep-status-warning)" },
           ]} unit="events" emptyLabel="No activity yet." />
         </Panel>
       </div>
@@ -41,7 +41,7 @@ function ActivityPage() {
           </div>
         )}
         {items.length === 0 && isDbConnected ? (
-          <p className="text-sm text-[rgba(11,35,32,0.68)]">No activity recorded yet.</p>
+          <p className="text-sm text-[var(--ep-text-muted)]">No activity recorded yet.</p>
         ) : (
           <div className="divide-y divide-[var(--sand-dim)]">
             {items.map((item) => (
@@ -49,9 +49,9 @@ function ActivityPage() {
                 <span className={`mt-1.5 h-3 w-3 shrink-0 rounded-full ${item.color}`} aria-hidden="true" />
                 <div className="min-w-0 flex-1">
                   <div className="text-base font-semibold text-[var(--water-deep)]">{item.action}</div>
-                  <div className="mt-1 text-sm text-[rgba(11,35,32,0.68)]">{item.detail}</div>
+                  <div className="mt-1 text-sm text-[var(--ep-text-muted)]">{item.detail}</div>
                 </div>
-                <time dateTime={item.time} className="shrink-0 text-sm text-[rgba(11,35,32,0.55)]">{new Date(item.time).toLocaleString()}</time>
+                <time dateTime={item.time} className="shrink-0 text-sm text-[var(--ep-text-muted)]">{new Date(item.time).toLocaleString()}</time>
               </div>
             ))}
           </div>
