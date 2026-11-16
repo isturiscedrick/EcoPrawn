@@ -269,7 +269,7 @@
 
 .dashboard-hover:focus-within {
   border-color: var(--coral);
-  box-shadow: 0 0 0 3px rgba(178, 63, 28, 0.14);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent) 18%, transparent);
 }
 
 /* ---------- Motion Keyframes ---------- */
