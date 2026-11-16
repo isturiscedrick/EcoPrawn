@@ -1,26 +1,26 @@
 /* ==========================================================================
    EcoPrawn Public & Marketing Global Stylesheet
    Entry point for landing, about, contact, and shared public UI.
-   Consolidated into modular stylesheets to eliminate redundant cascade passes.
+   Import order preserves the existing cascade.
    ========================================================================== */
 
-@import "./landing-tokens.css";
-@import "./landing-sections.css";
-@import "./site-chrome.css";
-@import "./marketing-page-foundations.css";
-@import "./marketing-page-responsive-finish.css";
-@import "./marketing-hero-layouts.css";
-@import "./marketing-public-page-layouts.css";
-@import "./marketing-landing-interactions.css";
-@import "./marketing-public-illustrations.css";
-@import "./marketing-shared-card-system.css";
-@import "./marketing-depth-foundation-core.css";
-@import "./marketing-depth-target-ranges.css";
-@import "./marketing-depth-platform-and-about.css";
-@import "./marketing-depth-landing-foundations.css";
-@import "./marketing-depth-landing-responsive.css";
-@import "./marketing-depth-landing-finish.css";
-@import "./marketing-depth-accessibility.css";
-@import "./marketing-depth-page-layouts.css";
-@import "./marketing-depth-about-contact.css";
-@import "./mobile-first.css";
+@import "./marketing/landing-tokens.css";
+@import "./marketing/landing-sections.css";
+@import "./marketing/site-chrome.css";
+@import "./marketing/marketing-page-foundations.css";
+@import "./marketing/marketing-page-responsive-finish.css";
+@import "./marketing/marketing-hero-layouts.css";
+@import "./marketing/marketing-public-page-layouts.css";
+@import "./marketing/marketing-landing-interactions.css";
+@import "./marketing/marketing-public-illustrations.css";
+@import "./marketing/marketing-shared-card-system.css";
+@import "./marketing/marketing-depth-foundation-core.css";
+@import "./marketing/marketing-depth-target-ranges.css";
+@import "./marketing/marketing-depth-platform-and-about.css";
+@import "./marketing/marketing-depth-landing-foundations.css";
+@import "./marketing/marketing-depth-landing-responsive.css";
+@import "./marketing/marketing-depth-landing-finish.css";
+@import "./marketing/marketing-depth-accessibility.css";
+@import "./marketing/marketing-depth-page-layouts.css";
+@import "./marketing/marketing-depth-about-contact.css";
+@import "./marketing/mobile-first.css";
