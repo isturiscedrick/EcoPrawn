@@ -109,10 +109,10 @@ export function WaterQuality() {
             Sensor Network
           </div>
           <h1 className="ep-font-display text-[24px] font-semibold text-[var(--water-deep)] leading-tight sm:text-[28px]">
-            Water Quality Monitoring
+            Water Quality
           </h1>
           <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
-            Dissolved oxygen, pH, temperature, salinity &amp; water level · {tankCount} tank{tankCount !== 1 ? "s" : ""}
+            5 parameters · {tankCount} tank{tankCount !== 1 ? "s" : ""}
           </div>
         </div>
         <button type="button" onClick={() => {
@@ -172,7 +172,7 @@ export function WaterQuality() {
           >
             <Panel title="Parameter Thresholds" badge={selectedTank.name}>
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-xs text-[var(--ep-text-muted)]">Set warning limits for all tanks.</p>
+                <p className="text-xs text-[var(--ep-text-muted)]">Applies to all tanks.</p>
                 <button type="button" onClick={() => { setEditingThresholds(value => !value); setThresholdMessage(""); }} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]">{editingThresholds ? "Close settings" : "Customize limits"}</button>
               </div>
               {editingThresholds && (
