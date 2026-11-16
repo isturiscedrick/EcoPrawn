@@ -1189,3 +1189,48 @@ html.dark .dashboard-shell :is([class*="bg-blue-"],[class*="bg-indigo-"],[class*
 .dashboard-shell :is(button,a,[role="button"]):focus-visible {
   outline-color: var(--ep-accent) !important;
 }
+
+
+/* Secondary brand color — warm coral sand.
+   Keep this separate from the neutral UI surface token --secondary. */
+:root {
+  --ep-brand-secondary: #d99a75;
+  --ep-brand-secondary-hover: #c7835d;
+  --ep-secondary-accent: #d99a75;
+  --ep-secondary-accent-hover: #c7835d;
+  --ep-secondary-on-accent: #17252b;
+  --ep-secondary-tint: rgba(217,154,117,.14);
+  --ep-secondary-tint-soft: rgba(217,154,117,.08);
+}
+html.dark {
+  --ep-brand-secondary: #e9bfa0;
+  --ep-brand-secondary-hover: #f5d5bc;
+  --ep-secondary-accent: #e9bfa0;
+  --ep-secondary-accent-hover: #f5d5bc;
+  --ep-secondary-on-accent: #17252b;
+  --ep-secondary-tint: rgba(233,191,160,.16);
+  --ep-secondary-tint-soft: rgba(233,191,160,.09);
+}
+
+/* Explicit secondary-brand treatments; primary actions remain Ocean Teal. */
+:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is(.ep-secondary-action,[data-brand-color="secondary"]) {
+  background-color: var(--ep-secondary-accent) !important;
+  border-color: var(--ep-secondary-accent) !important;
+  color: var(--ep-secondary-on-accent) !important;
+}
+:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is(.ep-secondary-action,[data-brand-color="secondary"]):is(:hover,:focus-visible) {
+  background-color: var(--ep-secondary-accent-hover) !important;
+  border-color: var(--ep-secondary-accent-hover) !important;
+  color: var(--ep-secondary-on-accent) !important;
+}
+:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is(.ep-secondary-accent,[data-secondary-accent]) {
+  color: var(--ep-secondary-accent) !important;
+}
+:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is(.ep-secondary-tint,[data-secondary-tint]) {
+  background-color: var(--ep-secondary-tint) !important;
+  border-color: color-mix(in srgb,var(--ep-secondary-accent) 30%,transparent) !important;
+}
