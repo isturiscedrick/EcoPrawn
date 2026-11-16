@@ -2036,10 +2036,7 @@ html.dark .dashboard-shell .dashboard-logout-confirm:hover:not(:disabled) {
 .dashboard-shell .dashboard-kpi :is(h3, p, span) {
   overflow-wrap: anywhere;
 }
-.dashboard-shell .dashboard-panel-icon {
-  background: var(--ep-accent-tint);
-  color: var(--ep-accent);
-}
+
 @media (max-width: 639px) and (min-width: 380px) {
   .dashboard-shell .dashboard-kpi-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
