@@ -60,7 +60,7 @@ export function Feeding() {
               <DonutChart items={[
                 { label: "Dispensed", value: feedSchedule.filter(f => f.status === "done").length, color: "var(--ep-status-success)" },
                 { label: "Upcoming", value: feedSchedule.filter(f => f.status === "upcoming").length, color: "var(--ep-status-warning)" },
-              ]} unit="cycles" emptyLabel="No cycles scheduled." />
+              ]} unit="cycles" emptyLabel="No data" />
             </Panel>
           </div>
 
