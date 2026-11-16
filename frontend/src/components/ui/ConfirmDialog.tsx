@@ -135,7 +135,7 @@ export function ConfirmDialog({
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="ep-pop-in relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[var(--shadow-overlay)] outline-none dark:border-[rgba(255,255,255,0.12)] dark:bg-[#111827] dark:shadow-[0_28px_90px_rgba(0,0,0,0.7)]"
+        className="ep-pop-in relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[var(--shadow-overlay)] outline-none dark:shadow-[0_28px_90px_rgba(0,0,0,0.7)]"
       >
         <h2
           id={titleId}
