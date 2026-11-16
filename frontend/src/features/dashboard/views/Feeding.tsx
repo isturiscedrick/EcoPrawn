@@ -28,7 +28,7 @@ export function Feeding() {
           <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
             Feeding
           </h1>
-          <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
+          <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
             Scheduled, biomass-adjusted dispensing · {tankCount} tank{tankCount !== 1 ? "s" : ""}
           </div>
         </div>
@@ -47,7 +47,7 @@ export function Feeding() {
         >
           <span aria-hidden="true">↓</span> Export CSV
         </button>
-        <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
+        <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
           {nextEntry ? `Next dispense · ${nextEntry.time}` : "All complete"}
         </div>
@@ -58,8 +58,8 @@ export function Feeding() {
           <div className="mb-4">
             <Panel title="Feeding cycle completion" badge={`${feedSchedule.length} scheduled cycles`}>
               <DonutChart items={[
-                { label: "Dispensed", value: feedSchedule.filter(f => f.status === "done").length, color: "#39865B" },
-                { label: "Upcoming", value: feedSchedule.filter(f => f.status === "upcoming").length, color: "#C18A27" },
+                { label: "Dispensed", value: feedSchedule.filter(f => f.status === "done").length, color: "var(--ep-status-success)" },
+                { label: "Upcoming", value: feedSchedule.filter(f => f.status === "upcoming").length, color: "var(--ep-status-warning)" },
               ]} unit="cycles" emptyLabel="No cycles scheduled." />
             </Panel>
           </div>
@@ -108,12 +108,12 @@ export function Feeding() {
             <Panel title="Feed Progress" badge="biomass-adjusted">
               <div className="ep-font-mono text-[26px] font-semibold text-[var(--water-deep)]">
                 {dispensedToday.toFixed(1)}{" "}
-                <span className="text-sm font-medium text-[rgba(11,35,32,0.5)]">
+                <span className="text-sm font-medium text-[var(--ep-text-muted)]">
                   kg / {targetToday.toFixed(1)} kg target
                 </span>
               </div>
               <FeedingProgressChart tanks={tanks.map(t => ({ id: t.id, name: t.name, dispensedToday: t.dispensedToday, targetToday: t.targetToday }))} />
-              <div className="mt-5 pt-4 border-t border-[var(--sand-dim)] text-[13px] text-[rgba(11,35,32,0.6)] leading-[1.6]">
+              <div className="mt-5 pt-4 border-t border-[var(--sand-dim)] text-[13px] text-[var(--ep-text-muted)] leading-[1.6]">
                 Dispense volume is recalculated automatically from the latest
                 AI-estimated biomass, keeping feed conversion efficient as shrimp grow.
               </div>
@@ -124,7 +124,7 @@ export function Feeding() {
             <ScrollFadeContainer>
               <table className="w-full text-left border-collapse min-w-[560px]">
                 <thead>
-                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] border-b border-[var(--sand-dim)]">
+                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--sand-dim)]">
                     <th className="py-2.5 pr-3 font-semibold">Tank</th>
                     <th className="py-2.5 pr-3 font-semibold">Dispensed Today</th>
                     <th className="py-2.5 pr-3 font-semibold">Target Today</th>
@@ -153,7 +153,7 @@ export function Feeding() {
         </>
       ) : (
         <Panel title="Feed Allocation" badge="0 tanks">
-          <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
+          <div className="py-10 text-center text-[13px] text-[var(--ep-text-muted)]">
             No tanks yet. Add one to view feeding data.
           </div>
         </Panel>
