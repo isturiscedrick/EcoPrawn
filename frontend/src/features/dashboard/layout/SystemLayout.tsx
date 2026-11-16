@@ -223,14 +223,27 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         }}
       >
         <div className="mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-2 px-3 sm:gap-4 sm:px-8 lg:px-12">
-          <Link
-            to="/dashboard"
-            aria-label="EcoPrawn home"
-            activeOptions={{ exact: true }}
-            className={`flex min-w-0 shrink-0 items-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
-          >
-            <BrandMark size={26} showWordmark />
-          </Link>
+          <div className="flex min-w-0 items-center gap-2">
+            <button
+              ref={mobileMenuButtonRef}
+              type="button"
+              onClick={() => setMobileSidebarOpen(true)}
+              aria-label="Open dashboard navigation"
+              aria-controls="dashboard-mobile-drawer"
+              aria-expanded={mobileSidebarOpen}
+              className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] lg:hidden ${focusRing}`}
+            >
+              <Icon name="menu" size={19} />
+            </button>
+            <Link
+              to="/dashboard"
+              aria-label="EcoPrawn home"
+              activeOptions={{ exact: true }}
+              className={`flex min-w-0 shrink-0 items-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
+            >
+              <BrandMark size={26} showWordmark />
+            </Link>
+          </div>
 
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <Link
