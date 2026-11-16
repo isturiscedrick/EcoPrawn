@@ -1,5 +1,3 @@
-import { authErrors, messageFor, passwordStrength, SIGNUP_STEPS } from "./auth-form-utils";
-
 import {
   useCallback,
   useEffect,
@@ -11,6 +9,7 @@ import {
   type InputHTMLAttributes,
   type ReactNode,
 } from "react";
+import { authErrors, messageFor, passwordStrength, SIGNUP_STEPS } from "./auth-form-utils";
 
 /* ---------- Icons ---------- */
 
