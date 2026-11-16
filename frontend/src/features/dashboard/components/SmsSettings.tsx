@@ -87,13 +87,13 @@ export function SmsSettings() {
       {dirty && <p className="text-sm">Save changes before sending a test. Test messages use the same five-minute sending limit.</p>}
       {retrySeconds > 0 && <p className="text-sm">The five-minute limit applies to every send attempt, including requests rejected by the provider.</p>}
     </form>}
-    {feedback && <p role={failed ? "alert" : "status"} className={`text-sm mt-4 ${failed ? "text-[var(--ep-accent)]" : "text-[var(--ep-accent)]"}`}>{feedback}</p>}
+    {feedback && <p role={failed ? "alert" : "status"} className={`text-sm mt-4 ${failed ? "text-[var(--ep-status-danger)]" : "text-[var(--ep-status-success)]"}`}>{feedback}</p>}
     {settings && <div className="mt-5 border-t border-[var(--ep-line)] pt-4">
       <h4 className="text-sm font-semibold mb-2">Recent messages</h4>
       {!settings.deliveries.length && <p className="text-sm">No SMS messages yet. Save your number and enable alerts to get started.</p>}
       <ul className="divide-y divide-[var(--ep-line)]">{settings.deliveries.map((delivery) => <li key={delivery.id} className="py-3 text-sm break-words">
         <div className="flex flex-wrap justify-between gap-2 mb-1"><time dateTime={delivery.createdAt}>{new Date(delivery.createdAt).toLocaleString()}</time><span className="font-semibold">{delivery.status}</span></div>
-        <p>{delivery.content}</p>{delivery.error && <p className="text-[var(--ep-accent)] mt-1">{delivery.error}</p>}
+        <p>{delivery.content}</p>{delivery.error && <p className="text-[var(--ep-status-danger)] mt-1">{delivery.error}</p>}
       </li>)}</ul>
     </div>}
   </Panel>;
