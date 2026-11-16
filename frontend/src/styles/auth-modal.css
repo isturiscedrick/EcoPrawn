@@ -469,7 +469,7 @@ html.dark .ep-auth-modal input:focus-visible {
 
 
 /* Obsolete white/blue palette pass removed. The base rules above and the
-   Ocean Teal + Coral Sand rules below now own modal colors. */
+   Ocean Teal rules below own modal colors. */
 
 /* Desktop modal: keep long forms scrollable without showing a scrollbar.
    The overlay itself never scrolls; only the dialog panel can scroll if needed. */
