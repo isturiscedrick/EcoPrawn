@@ -10,10 +10,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { LandingMotion } from "@/components/motion/LandingMotion";
 import { AquacultureIllustration } from "@/components/illustrations/AquacultureIllustration";
 import { heroReadoutUnits } from "@/config/sensors";
-import {
-  heroReadouts,
-  waterQualityThresholds,
-} from "@/content/landing-preview";
+import { heroReadouts } from "@/content/landing-preview";
+import { pct, targetRangeFor, ZONES } from "./landing-preview-utils";
 
 const focusRing =
   "focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]";
@@ -53,24 +51,6 @@ const STEPS: { step: string; title: string; body: string; icon: IconName }[] = [
 
 // Gauge scale and target zone per reading, used only to draw the range bars.
 // Same numbers as the dashboard thresholds.
-const ZONES: Record<
-  string,
-  { min: number; max: number; lo: number; hi: number }
-> = {
-  "Dissolved O₂": { min: 0, max: 8, lo: 4.5, hi: 8 },
-  pH: { min: 6, max: 10, lo: 7.5, hi: 8.5 },
-  Temperature: { min: 20, max: 36, lo: 26, hi: 30 },
-  Salinity: { min: 0, max: 30, lo: 10, hi: 20 },
-  "Water Level": { min: 0, max: 100, lo: 90, hi: 100 },
-};
-
-const pct = (v: number, min: number, max: number) =>
-  Math.max(0, Math.min(100, ((v - min) / (max - min)) * 100));
-
-function targetRangeFor(label: string): string | undefined {
-  return waterQualityThresholds.find((t) => t.label === label)?.range;
-}
-
 // Splits a line into words, each in a clipping wrapper so GSAP can slide it up.
 function Words({ text }: { text: string }) {
   return text.split(" ").map((word, i) => (
