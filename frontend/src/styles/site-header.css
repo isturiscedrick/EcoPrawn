@@ -217,3 +217,79 @@
     display: block !important;
   }
 }
+
+
+/* Mobile public header: reserve a real column for the centered brand and
+   prevent desktop account actions from being forced visible by desktop rules. */
+@media (max-width: 1023px) {
+  #site-header > div {
+    display: grid !important;
+    grid-template-columns: 40px minmax(0, 1fr) 40px !important;
+    align-items: center !important;
+    column-gap: clamp(8px, 2.5vw, 14px) !important;
+    min-height: 66px !important;
+    padding-left: max(12px, env(safe-area-inset-left)) !important;
+    padding-right: max(12px, env(safe-area-inset-right)) !important;
+  }
+  #site-header > div > button[aria-controls="mobile-nav-panel"] {
+    display: inline-flex !important;
+    grid-column: 1;
+    grid-row: 1;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    border: 1px solid var(--ep-line) !important;
+    border-radius: 50% !important;
+    background: var(--ep-surface) !important;
+    color: var(--ep-primary) !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  #site-header > div > a[aria-label="EcoPrawn home"] {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+  #site-header > div > div:last-child {
+    grid-column: 3;
+    grid-row: 1;
+    display: flex !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    justify-self: end !important;
+    justify-content: flex-end !important;
+    gap: 0 !important;
+  }
+  #site-header > div > div:last-child .ep-cta-control {
+    display: none !important;
+  }
+  #site-header > div > div:last-child button[role="switch"] {
+    display: inline-flex !important;
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+  }
+}
+@media (max-width: 360px) {
+  #site-header > div {
+    grid-template-columns: 36px minmax(0, 1fr) 36px !important;
+    column-gap: 6px !important;
+  }
+  #site-header > div > button[aria-controls="mobile-nav-panel"],
+  #site-header > div > div:last-child button[role="switch"] {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+  }
+}
