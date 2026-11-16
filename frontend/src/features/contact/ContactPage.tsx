@@ -31,8 +31,7 @@ export function ContactPage() {
           title={
             <>
               <span data-page-hero-accent="">Contact</span>
-              <br className="hidden sm:block" />
-              <span>us.</span>
+              <span>{" "}us.</span>
             </>
           }
           lead="Project questions and collaboration."
