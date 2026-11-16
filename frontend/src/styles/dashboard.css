@@ -6,7 +6,6 @@
 /* ---------- Dashboard Brand Palette Tokens ---------- */
 .dashboard-shell {
   --ep-brand-primary: #087e8b;
-  --ep-accent: #087e8b;
   --ep-status-success: #15803d;
   --ep-status-success-bg: #dcfce7;
   --ep-status-warning: #b45309;
@@ -19,17 +18,13 @@
   --ep-status-neutral-bg: #e2e8f0;
   --ep-accent: var(--ep-brand-primary);
   --ep-accent-hover: #066874;
-  --ep-accent: var(--ep-brand-primary);
-  --ep-accent-hover: var(--ep-accent-hover);
-  --ep-accent-tint: color-mix(in srgb, var(--ep-brand-primary) 12%, transparent);
-  --ep-accent-tint-soft: color-mix(in srgb, var(--ep-brand-primary) 8%, transparent);
   --ep-accent-tint: rgba(8,126,139,.12);
+  --ep-accent-tint-soft: rgba(8,126,139,.08);
   overflow-x: clip;
 }
 
 html.dark .dashboard-shell {
   --ep-brand-primary: #45c5b3;
-  --ep-accent: #45c5b3;
   --ep-status-success: #86efac;
   --ep-status-success-bg: #123c2a;
   --ep-status-warning: #fcd34d;
@@ -42,12 +37,8 @@ html.dark .dashboard-shell {
   --ep-status-neutral-bg: #263244;
   --ep-accent: var(--ep-brand-primary);
   --ep-accent-hover: #70d7c8;
-  --ep-accent: var(--ep-brand-primary);
-  --ep-accent-hover: var(--ep-accent-hover);
-  --ep-secondary: var(--ep-accent);
-  --ep-accent-hover: #70d7c8;
-  --ep-accent-hover: #70d7c8;
-  --ep-accent-tint: rgba(69,197,179,.16);
+  --ep-accent-tint: rgba(69,197,179,.14);
+  --ep-accent-tint-soft: rgba(69,197,179,.08);
 }
 
 .dashboard-shell .dashboard-nav-active-dot {
