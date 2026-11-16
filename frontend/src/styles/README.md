@@ -7,7 +7,8 @@ This directory is the single source of truth and storage location for all CSS in
 ```text
 src/styles/
 ├── globals.css              # Global root entry point (imported by src/routes/__root.tsx)
-├── foundations.css          # Tailwind v4 theme bridge, base tokens, typography, keyframes, touch targets
+├── foundations.css          # Tailwind v4 theme bridge, semantic fallbacks, chart palette, typography, keyframes
+├── palette-system.css       # Canonical final brand tokens and light/dark palette mapping
 ├── theme-components.css     # Theme compatibility rules, surfaces, charts, active item indicators
 ├── dashboard.css            # Dashboard shell brand palette tokens, monitoring layout, mobile drawer
 ├── landing-global.css       # Public marketing stylesheet index, importing:
@@ -26,6 +27,7 @@ src/styles/
 ## Rules for Future Maintenance
 
 - Import `globals.css` from the TanStack root route (`src/routes/__root.tsx`).
+- Treat `palette-system.css` as the final authority for shared brand colors and light/dark semantic token mappings. `foundations.css` provides accessible fallback values and the shared chart palette; avoid redefining brand tokens in feature stylesheets.
 - Keep all CSS files inside `src/styles/`; do not scatter `.css` files into component or feature directories.
 - Keep dashboard selectors scoped under `.dashboard-shell`.
 - Keep public-page selectors scoped under `.ep-landing`, `.ep-about-page`, or `.ep-contact-page`.
