@@ -34,6 +34,19 @@ export function SystemLayout({ children }: SystemLayoutProps) {
 
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const searchDialogRef = useRef<HTMLElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchReturnFocusRef = useRef<HTMLElement | null>(null);
+  const openSearch = useCallback(() => {
+    searchReturnFocusRef.current = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+    setSearchOpen(true);
+  }, []);
+  const closeSearch = useCallback((restoreFocus = true) => {
+    if (!restoreFocus) searchReturnFocusRef.current = null;
+    setSearchOpen(false);
+  }, []);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const wasMobileSidebarOpen = useRef(false);
   const [scrolled, setScrolled] = useState(false);
@@ -123,13 +136,61 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     const onShortcut = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
-        setSearchOpen(true);
+        openSearch();
       }
-      if (event.key === "Escape") setSearchOpen(false);
     };
     window.addEventListener("keydown", onShortcut);
     return () => window.removeEventListener("keydown", onShortcut);
-  }, []);
+  }, [openSearch]);
+
+  useEffect(() => {
+    if (!searchOpen) {
+      const previous = searchReturnFocusRef.current;
+      searchReturnFocusRef.current = null;
+      if (previous?.isConnected) previous.focus({ preventScroll: true });
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    searchInputRef.current?.focus({ preventScroll: true });
+
+    const onDialogKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeSearch();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = Array.from(
+        searchDialogRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      ).filter((element) => element.getAttribute("aria-hidden") !== "true");
+      if (!focusable.length) {
+        event.preventDefault();
+        searchDialogRef.current?.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !searchDialogRef.current?.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || !searchDialogRef.current?.contains(document.activeElement))) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onDialogKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onDialogKeyDown);
+    };
+  }, [searchOpen, closeSearch]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -260,17 +321,17 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} collapsed={desktopSidebarCollapsed} onToggleCollapsed={() => setDesktopSidebarCollapsed((collapsed) => { const next = !collapsed; try { window.localStorage.setItem("ep-sidebar-collapsed", String(next)); } catch { /* Keep the in-memory preference for this session. */ } return next; })} />
 
       {searchOpen && (
-        <div className="fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/45 px-3 pt-[12vh] backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) setSearchOpen(false); }}>
-          <section role="dialog" aria-modal="true" aria-labelledby="dashboard-search-title" className="w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text)] shadow-2xl">
+        <div className="fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/45 px-3 pt-[12vh] backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) closeSearch(); }}>
+          <section ref={searchDialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="dashboard-search-title" className="w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text)] shadow-2xl">
             <div className="flex items-center gap-3 border-b border-[var(--ep-line)] px-4">
               <Icon name="search" size={19} className="shrink-0 text-[var(--ep-text-muted)]" />
-              <input autoFocus value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search pages and tanks…" aria-label="Search dashboard" className="min-h-14 min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-[var(--ep-text-muted)]" />
+              <input ref={searchInputRef} value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search pages and tanks…" aria-label="Search dashboard" className="min-h-14 min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-[var(--ep-text-muted)]" />
               <kbd className="rounded-md border border-[var(--ep-line)] px-2 py-1 text-[10px] text-[var(--ep-text-muted)]">ESC</kbd>
             </div>
             <div className="max-h-[55vh] overflow-y-auto p-3">
               <h2 id="dashboard-search-title" className="px-2 pb-2 text-[10px] font-bold uppercase tracking-wider text-[var(--ep-text-muted)]">Pages</h2>
               {matchingPages.length ? matchingPages.map((item) => (
-                <Link key={item.view} to={(item.view === "overview" ? "/dashboard" : `/dashboard/${item.view}`) as never} onClick={() => { setSearchOpen(false); setSearchQuery(""); }} className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-[var(--ep-primary)]">
+                <Link key={item.view} to={(item.view === "overview" ? "/dashboard" : `/dashboard/${item.view}`) as never} onClick={() => { closeSearch(false); setSearchQuery(""); }} className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-[var(--ep-primary)]">
                   <Icon name={item.icon} size={17} className="text-[var(--ep-primary)]" />{item.label}<span className="ml-auto text-xs text-[var(--ep-text-muted)]">Open</span>
                 </Link>
               )) : <p className="px-3 py-2 text-xs text-[var(--ep-text-muted)]">No matching pages.</p>}
