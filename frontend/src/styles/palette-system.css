@@ -2679,3 +2679,23 @@ html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child {
     -webkit-text-fill-color: #092b31 !important;
   }
 }
+
+
+/* Definitive removal of the legacy hero underline.
+   This is intentionally in the final-loaded palette stylesheet so older
+   marketing-experience rules cannot bring the warm/legacy accent line back. */
+.ep-business-landing .ep-field-hero-copy .ep-hero-headline-secondary::after,
+.ep-business-landing .ep-cloudnexus-hero-inner .ep-hero-headline-secondary::after,
+.ep-business-landing [data-hero="headline"] .ep-hero-headline-secondary::after,
+.ep-landing [data-hero="headline"] .ep-hero-headline-secondary::after,
+.ep-about-page [data-page-hero-headline] .ep-hero-headline-secondary::after,
+.ep-contact-page [data-page-hero-headline] .ep-hero-headline-secondary::after {
+  content: none !important;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  animation: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
