@@ -137,7 +137,7 @@ export function LandingPage() {
                 <span className="block">in <span className="ep-cloudnexus-highlight">one connected workspace.</span></span>
               </h1>
               <p data-hero="lead" className="mx-auto mt-5 max-w-[660px] text-sm leading-[1.8] text-[var(--ep-text-muted)] sm:mt-6 sm:text-base">
-                Monitor water quality, understand shrimp growth, and coordinate daily farm operations from one clear view. Make confident decisions with real-time farm insights.
+                Track water quality, growth, and daily farm operations in one workspace.
               </p>
               <div data-hero="cta" className="mt-7 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
                 <AuthLink
@@ -199,7 +199,7 @@ export function LandingPage() {
                         <h2 className="mt-1 text-base font-semibold tracking-tight text-[var(--ep-text)] sm:text-xl">
                           {previewTab === "water" ? "Water quality overview" : previewTab === "growth" ? "Growth & biomass insights" : "Farm systems overview"}
                         </h2>
-                        <p className="mt-1 text-[10px] text-[var(--ep-text-muted)] sm:text-xs">A unified view of your aquaculture operation</p>
+                        <p className="mt-1 text-[10px] text-[var(--ep-text-muted)] sm:text-xs">Your farm at a glance</p>
                       </div>
                       <span className="rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-2.5 py-1.5 text-[9px] font-semibold text-[var(--ep-text-muted)]">Illustrative sample</span>
                     </div>
@@ -482,7 +482,7 @@ export function LandingPage() {
             <div className="mt-7 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-5 sm:px-7">
               <div>
                 <p className="font-semibold text-[var(--ep-text)]">A more complete view of the production cycle</p>
-                <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Includes biofloc and effluent routing for responsible water management.</p>
+                <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Biofloc treatment and effluent routing complete the loop.</p>
               </div>
               <Link to="/about" className={`inline-flex min-h-10 items-center gap-2 rounded-lg border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 py-2 text-sm font-semibold text-[var(--ep-text)] hover:border-[var(--ep-accent)] hover:text-[var(--ep-accent)] ${focusRing}`}>
                 View platform details <Icon name="arrow-right" size={16} />
@@ -507,10 +507,10 @@ export function LandingPage() {
                 id="dashboard-preview-title"
                 className="ep-font-display text-[clamp(30px,4vw,48px)] font-semibold leading-[1.08] tracking-tight text-[var(--ep-text)]"
               >
-                A clearer picture of every tank.
+                Tank insights, at a glance.
               </h2>
               <p className="mt-4 text-base leading-relaxed text-[var(--ep-text-muted)] sm:text-lg">
-                Bring key water-quality readings and operating context into one view, so your team can spot changes and make informed decisions.
+                See key readings and spot changes across every tank.
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 <Link to="/dashboard" className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-[var(--ep-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] shadow-lg shadow-teal-700/15 transition-colors duration-200 hover:bg-[var(--ep-accent-hover)] ${focusRing}`}>
@@ -668,7 +668,7 @@ export function LandingPage() {
                 id="process-title"
                 className="ep-font-display text-[clamp(28px,3.6vw,42px)] font-semibold leading-[1.12] tracking-tight"
               >
-                From sensor to mangrove.
+                From sensing to sustainability.
               </h2>
             </div>
 
