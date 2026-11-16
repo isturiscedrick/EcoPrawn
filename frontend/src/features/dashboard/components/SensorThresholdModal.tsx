@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { useToast } from "@/features/dashboard/components/Toast";
+import { DashboardModalShell } from "./DashboardPrimitives";
 
 interface SensorThresholdModalProps {
   open: boolean;
@@ -171,21 +172,15 @@ export function SensorThresholdModal({ open, onClose }: SensorThresholdModalProp
   }
 
   return (
-    <div className="fixed inset-0 z-[120] flex items-center justify-center p-5">
-      <button
-        type="button"
-        tabIndex={-1}
-        aria-label="Close sensor settings"
-        onClick={onClose}
-        className="absolute inset-0 bg-[rgba(8,30,34,0.65)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.76)]"
-      />
-      <section
-        ref={dialogRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={`${uid}-title`}
-        className="relative z-10 max-h-[90dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-[var(--ep-primary)] shadow-[var(--shadow-overlay)] sm:p-8"
-      >
+    <DashboardModalShell
+      titleId={`${uid}-title`}
+      onClose={onClose}
+      dialogRef={dialogRef}
+      layerClassName="z-[120]"
+      panelClassName="p-6 sm:p-8"
+      backdropLabel="Close sensor settings"
+      backdropTabIndex={-1}
+    >
         <div className="mb-6">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)]">Sensor configuration</p>
           <h2 id={`${uid}-title`} className="ep-font-display text-2xl font-semibold">Configure safe ranges</h2>
@@ -261,7 +256,6 @@ export function SensorThresholdModal({ open, onClose }: SensorThresholdModalProp
             </div>
           </div>
         </form>
-      </section>
-    </div>
+    </DashboardModalShell>
   );
 }
