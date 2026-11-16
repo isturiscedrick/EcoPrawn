@@ -159,7 +159,7 @@ function AuthDialog({
             type="button"
             onClick={requestClose}
             aria-label="Close"
-            className="absolute right-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-xl text-[var(--ep-text-muted)] transition-colors duration-200 hover:bg-[rgba(11,46,51,0.04)] hover:text-[var(--ep-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
+            className="absolute right-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-xl text-[var(--ep-text-muted)] transition-colors duration-200 hover:bg-[color-mix(in_srgb,var(--ep-accent)_8%,var(--ep-surface))] hover:text-[var(--ep-text)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
           >
             <Icon name="x" size={20} strokeWidth={2} />
           </button>
