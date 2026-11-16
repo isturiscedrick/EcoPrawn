@@ -231,7 +231,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
               aria-label="Open dashboard navigation"
               aria-controls="dashboard-mobile-drawer"
               aria-expanded={mobileSidebarOpen}
-              className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] lg:hidden ${focusRing}`}
+              className={`ep-dashboard-mobile-menu-toggle inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-transparent bg-transparent text-[var(--ep-text-muted)] shadow-none transition-colors hover:bg-transparent hover:text-[var(--ep-primary)] lg:hidden ${focusRing}`}
             >
               <Icon name="menu" size={19} />
             </button>
