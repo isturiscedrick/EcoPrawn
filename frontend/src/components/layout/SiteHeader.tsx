@@ -282,7 +282,7 @@ export function SiteHeader({
                   aria-label="Get started"
                   title="Get started"
                   className={`ep-cta-control ep-cta-primary hidden h-10 w-10 items-center justify-center gap-2 whitespace-nowrap rounded-full px-0 text-xs font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 lg:inline-flex xl:w-auto xl:px-5 ${focusRing}`}
-                  style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-bg)" }}
+                  style={{ backgroundColor: "var(--ep-accent)", color: "var(--ep-on-accent)" }}
                 >
                   <span className="hidden whitespace-nowrap xl:inline">Get started</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
