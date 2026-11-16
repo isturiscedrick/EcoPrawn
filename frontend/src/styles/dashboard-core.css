@@ -1,0 +1,558 @@
+/* ==========================================================================
+   Dashboard Stylesheet
+   Brand palette tokens, responsive safeguards, mobile drawer & navigation.
+   ========================================================================== */
+
+/* ---------- Dashboard Brand Palette Tokens ---------- */
+.dashboard-shell {
+  --ep-brand-primary: #087e8b;
+  --ep-status-success: #15803d;
+  --ep-status-success-bg: #dcfce7;
+  --ep-status-warning: #b45309;
+  --ep-status-warning-bg: #fef3c7;
+  --ep-status-danger: #b91c1c;
+  --ep-status-danger-bg: #fee2e2;
+  --ep-status-info: #087e8b;
+  --ep-status-info-bg: #d9f0ef;
+  --ep-status-neutral: #475569;
+  --ep-status-neutral-bg: #e2e8f0;
+  --ep-accent: var(--ep-brand-primary);
+  --ep-accent-hover: #066874;
+  --ep-accent-tint: rgba(8,126,139,.12);
+  --ep-accent-tint-soft: rgba(8,126,139,.08);
+  overflow-x: clip;
+}
+
+html.dark .dashboard-shell {
+  --ep-brand-primary: #45c5b3;
+  --ep-status-success: #86efac;
+  --ep-status-success-bg: #123c2a;
+  --ep-status-warning: #fcd34d;
+  --ep-status-warning-bg: #49320d;
+  --ep-status-danger: #fca5a5;
+  --ep-status-danger-bg: #4a1d22;
+  --ep-status-info: #70d7c8;
+  --ep-status-info-bg: #153a3e;
+  --ep-status-neutral: #cbd5e1;
+  --ep-status-neutral-bg: #263244;
+  --ep-accent: var(--ep-brand-primary);
+  --ep-accent-hover: #70d7c8;
+  --ep-accent-tint: rgba(69,197,179,.14);
+  --ep-accent-tint-soft: rgba(69,197,179,.08);
+}
+
+.dashboard-shell .dashboard-nav-active-dot {
+  background-color: var(--ep-brand-primary);
+}
+
+.dashboard-shell .ep-font-mono.uppercase[class*="tracking-[0.14em]"] {
+  color: var(--ep-accent);
+}
+
+.dashboard-shell input[type="checkbox"],
+.dashboard-shell input[type="radio"] {
+  accent-color: var(--ep-accent);
+}
+
+/* ---------- Sidebar Navigation ---------- */
+.dashboard-shell aside#dashboard-sidebar {
+  overscroll-behavior: contain;
+}
+.dashboard-shell aside#dashboard-sidebar nav a {
+  width: 100%;
+}
+.dashboard-shell aside#dashboard-sidebar nav a > span {
+  width: 100%;
+}
+.dashboard-shell aside#dashboard-sidebar nav a > span > span:last-child {
+  white-space: normal;
+}
+
+@media (min-width: 768px) {
+  .dashboard-shell aside#dashboard-sidebar {
+    transform: none !important;
+  }
+}
+
+/* ---------- Dashboard Responsive Safeguards & Controls ---------- */
+.dashboard-shell,
+.dashboard-shell main,
+.dashboard-shell main > div,
+.dashboard-shell main section,
+.dashboard-shell main article {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main :is(h1, h2, h3, h4, p, span, dd, dt, label, button, a) {
+  overflow-wrap: anywhere;
+}
+
+.dashboard-shell main :is(input, textarea, select) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-shell main svg {
+  max-width: 100%;
+}
+
+.dashboard-shell main :is(.grid, .flex) > * {
+  min-width: 0;
+}
+
+.dashboard-shell [role="tablist"] {
+  max-width: 100%;
+  scrollbar-width: thin;
+  overscroll-behavior-inline: contain;
+}
+
+.dashboard-shell [role="tablist"] > [role="tab"] {
+  flex: 0 0 auto;
+  min-height: 42px;
+  white-space: nowrap;
+}
+
+.dashboard-shell main table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dashboard-shell main :is(.overflow-x-auto, [data-scroll-container]) {
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dashboard-shell main :is(button, a) {
+  touch-action: manipulation;
+}
+
+/* ---------- Viewport Breakpoints ---------- */
+@media (min-width: 0px) {
+  .dashboard-shell main {
+    width: 100%;
+    min-width: 0;
+    padding: 1rem 0.75rem 5rem !important;
+  }
+
+  .dashboard-shell main > div {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dashboard-shell main .grid {
+    min-width: 0;
+  }
+
+  .dashboard-shell main :is(h1) {
+    font-size: clamp(1.45rem, 6vw, 1.8rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  .dashboard-shell main :is(h2) {
+    font-size: clamp(1.15rem, 4.5vw, 1.45rem);
+    line-height: 1.25;
+  }
+
+  .dashboard-shell main .ep-font-display[class*="text-[28px]"] {
+    font-size: clamp(1.35rem, 7vw, 1.75rem);
+  }
+
+  .dashboard-shell main :is(.rounded-2xl.border, [class*="rounded-2xl"]) {
+    min-width: 0;
+  }
+
+  .dashboard-shell main :is(.flex.items-center.justify-between) {
+    flex-wrap: wrap;
+  }
+
+  .dashboard-shell main :is(.flex.justify-between) {
+    align-items: flex-start;
+  }
+
+  .dashboard-shell main :is(button, a) {
+    max-width: 100%;
+  }
+
+  .dashboard-shell main :is(input, select, textarea) {
+    font-size: 16px;
+  }
+
+  .dashboard-shell main table {
+    min-width: 620px;
+  }
+
+  .dashboard-shell main :is(.overflow-x-auto, [data-scroll-container]) {
+    overflow-x: auto;
+  }
+
+  .dashboard-shell main svg[viewBox="0 0 560 200"] {
+    height: auto;
+    min-height: 150px;
+  }
+}
+
+/* Grid column counts are owned by responsive utility classes. Keep this stylesheet from forcing desktop grids into a single column. */
+
+@media (max-width: 380px) {
+  .dashboard-shell main {
+    padding-inline: 0.625rem !important;
+  }
+  .dashboard-shell main .grid.grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .dashboard-shell main {
+    padding-inline: clamp(1.25rem, 2.5vw, 2rem);
+  }
+  .dashboard-shell main :is(.grid) {
+    gap: clamp(0.75rem, 1.5vw, 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell *,
+  .dashboard-shell *::before,
+  .dashboard-shell *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ---------- Dashboard Monitoring Experience ---------- */
+.dashboard-shell main > div > .relative.mb-5 {
+  min-height: 4rem;
+  border-color: var(--ep-line);
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--ep-accent-tint), transparent 58%),
+    var(--ep-surface);
+  box-shadow: 0 12px 32px -26px rgba(15,23,42,.32);
+  backdrop-filter: blur(14px);
+}
+.dashboard-shell .dashboard-panel,
+.dashboard-shell .dashboard-kpi {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--ep-line);
+  background: var(--ep-surface);
+  box-shadow: 0 18px 44px -34px rgba(15,23,42,.30);
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease, background-color .22s ease;
+}
+.dashboard-shell .dashboard-panel::before,
+.dashboard-shell .dashboard-kpi::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ep-accent), transparent);
+  opacity: .48;
+  pointer-events: none;
+}
+.dashboard-shell .dashboard-panel-icon {
+  background: var(--ep-accent-tint);
+  color: var(--ep-accent);
+}
+.dashboard-shell .dashboard-panel h3 {
+  color: var(--ep-text, var(--water-deep));
+  letter-spacing: -.025em;
+}
+.dashboard-shell .dashboard-kpi {
+  min-height: 142px;
+  padding: 1.2rem 1.3rem;
+}
+.dashboard-shell .dashboard-kpi > div:nth-child(2) {
+  font-size: clamp(1.65rem, 2.2vw, 2rem);
+  letter-spacing: -.045em;
+  line-height: 1.15;
+  color: var(--ep-text, var(--water-deep));
+}
+.dashboard-shell .dashboard-kpi > div:first-child > div:first-child {
+  letter-spacing: .09em;
+  color: var(--ep-text-muted);
+}
+.dashboard-shell .dashboard-kpi > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 1.5rem;
+  font-size: .78rem;
+  line-height: 1.35;
+}
+.dashboard-shell .dashboard-sensor-gauge {
+  min-width: 0;
+  border-color: var(--ep-line);
+  border-radius: 1rem;
+  background: linear-gradient(155deg,var(--ep-surface),var(--ep-tint));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.dashboard-shell .dashboard-sensor-gauge svg {
+  filter: drop-shadow(0 5px 8px rgba(8,126,139,.10));
+}
+.dashboard-shell .dashboard-trend-chart {
+  border: 1px solid var(--ep-line);
+  border-radius: 1rem;
+  padding: 1rem;
+  background:
+    radial-gradient(ellipse at 90% 0%,var(--ep-accent-tint),transparent 48%),
+    var(--ep-tint);
+}
+.dashboard-shell .dashboard-trend-chart svg {
+  display: block;
+  overflow: visible;
+}
+.dashboard-shell .dashboard-trend-chart polyline {
+  stroke: var(--ep-accent);
+  filter: drop-shadow(0 3px 4px rgba(8,126,139,.18));
+}
+.dashboard-shell .dashboard-trend-chart circle[stroke="var(--ep-accent)"] {
+  stroke: var(--ep-accent);
+}
+.dashboard-shell .dashboard-trend-chart circle[fill="var(--ep-surface)"] {
+  fill: var(--ep-surface);
+}
+.dashboard-shell .dashboard-trend-chart [role="button"]:focus-visible {
+  outline: none;
+  stroke: var(--ep-accent);
+  stroke-width: 2;
+}
+.dashboard-shell .dashboard-hover {
+  border-color: var(--ep-line);
+  background: var(--ep-surface);
+}
+.dashboard-shell .dashboard-hover:hover {
+  border-color: var(--ep-accent);
+  background: color-mix(in srgb,var(--ep-surface) 94%,var(--ep-accent));
+  box-shadow: 0 14px 28px -22px rgba(8,126,139,.34);
+}
+.dashboard-shell main > div > .mb-7.flex {
+  border-color: var(--ep-line);
+}
+.dashboard-shell main > div > .mb-7.flex h1 {
+  letter-spacing: -.045em;
+}
+.dashboard-shell main :is(button,a):focus-visible {
+  outline: 2px solid var(--ep-accent);
+  outline-offset: 3px;
+}
+html.dark .dashboard-shell .dashboard-panel,
+html.dark .dashboard-shell .dashboard-kpi {
+  box-shadow: 0 20px 48px -32px rgba(0,0,0,.72);
+}
+html.dark .dashboard-shell .dashboard-sensor-gauge {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+}
+html.dark .dashboard-shell .dashboard-trend-chart {
+  background:
+    radial-gradient(ellipse at 90% 0%,rgba(69,197,179,.13),transparent 48%),
+    var(--ep-tint);
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .dashboard-shell .dashboard-panel:hover,
+  .dashboard-shell .dashboard-kpi:hover,
+  .dashboard-shell .dashboard-sensor-gauge:hover {
+    transform: translateY(-3px);
+    border-color: var(--ep-accent);
+    box-shadow: 0 24px 48px -32px rgba(8,126,139,.28);
+  }
+}
+@media (max-width: 767px) {
+  .dashboard-shell .dashboard-panel {
+    padding: 1rem;
+    border-radius: 1.1rem;
+  }
+  .dashboard-shell .dashboard-panel > div:first-child {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .dashboard-shell .dashboard-panel h3 {
+    font-size: 1rem;
+  }
+  .dashboard-shell .dashboard-kpi {
+    min-height: 126px;
+    padding: 1rem;
+  }
+  .dashboard-shell .dashboard-sensor-gauge {
+    padding: .8rem .5rem;
+  }
+  .dashboard-shell .dashboard-trend-chart {
+    padding: .75rem;
+  }
+}
+
+
+/* ---------- Motion & interaction polish ---------- */
+@keyframes ep-dashboard-enter {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes ep-dashboard-soft-glow {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ep-accent) 0%, transparent); }
+  50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--ep-accent) 9%, transparent); }
+}
+@keyframes ep-dashboard-draw-line {
+  to { stroke-dashoffset: 0; }
+}
+.dashboard-shell main > div > .mb-7.flex {
+  animation: ep-dashboard-enter .55s cubic-bezier(.2,.75,.25,1) both;
+}
+.dashboard-shell .dashboard-kpi,
+.dashboard-shell .dashboard-panel {
+  animation: ep-dashboard-enter .58s cubic-bezier(.2,.75,.25,1) both;
+}
+.dashboard-shell main > div > .grid > .dashboard-kpi:nth-child(1) { animation-delay: 70ms; }
+.dashboard-shell main > div > .grid > .dashboard-kpi:nth-child(2) { animation-delay: 130ms; }
+.dashboard-shell main > div > .grid > .dashboard-kpi:nth-child(3) { animation-delay: 190ms; }
+.dashboard-shell main > div > .grid > .dashboard-kpi:nth-child(4) { animation-delay: 250ms; }
+.dashboard-shell main > div > .grid > .dashboard-panel:nth-child(1) { animation-delay: 110ms; }
+.dashboard-shell main > div > .grid > .dashboard-panel:nth-child(2) { animation-delay: 180ms; }
+.dashboard-shell .dashboard-sensor-gauge {
+  animation: ep-dashboard-enter .48s cubic-bezier(.2,.75,.25,1) both;
+}
+.dashboard-shell .dashboard-sensor-gauge:nth-child(1) { animation-delay: 90ms; }
+.dashboard-shell .dashboard-sensor-gauge:nth-child(2) { animation-delay: 140ms; }
+.dashboard-shell .dashboard-sensor-gauge:nth-child(3) { animation-delay: 190ms; }
+.dashboard-shell .dashboard-sensor-gauge:nth-child(4) { animation-delay: 240ms; }
+.dashboard-shell .dashboard-sensor-gauge:nth-child(5) { animation-delay: 290ms; }
+.dashboard-shell .dashboard-trend-chart polyline {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: ep-dashboard-draw-line 1.15s .2s ease-out forwards;
+}
+.dashboard-shell .dashboard-trend-chart circle[role="button"] {
+  transition: r .18s ease, opacity .18s ease;
+}
+.dashboard-shell .dashboard-trend-chart circle[role="button"]:hover,
+.dashboard-shell .dashboard-trend-chart circle[role="button"]:focus-visible { r: 7; }
+.dashboard-shell .ep-pulse-dot {
+  animation: ep-dashboard-soft-glow 2.4s ease-in-out infinite;
+}
+.dashboard-shell .dashboard-panel button,
+.dashboard-shell .dashboard-kpi button,
+.dashboard-shell .dashboard-sensor-gauge { -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell main > div > .mb-7.flex,
+  .dashboard-shell .dashboard-kpi,
+  .dashboard-shell .dashboard-panel,
+  .dashboard-shell .dashboard-sensor-gauge,
+  .dashboard-shell .dashboard-trend-chart polyline,
+  .dashboard-shell .ep-pulse-dot { animation: none !important; }
+  .dashboard-shell .dashboard-trend-chart polyline {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+  .dashboard-shell .dashboard-trend-chart circle[role="button"] { transition: none; }
+}
+
+
+/* ---------- Responsive, accessibility & rendering safeguards ---------- */
+/* Keep chart interaction targets visible to keyboard users. */
+.dashboard-shell .dashboard-trend-chart circle[role="button"] {
+  cursor: pointer;
+  outline: none;
+}
+.dashboard-shell .dashboard-trend-chart circle[role="button"]:focus-visible + circle {
+  stroke: var(--ep-accent);
+  stroke-width: 4;
+}
+.dashboard-shell :is(button, a, input, select, textarea) {
+  scroll-margin-block: 1rem;
+}
+.dashboard-shell :is(button, a):focus-visible {
+  border-radius: .65rem;
+  outline: 3px solid color-mix(in srgb, var(--ep-accent) 72%, white);
+  outline-offset: 3px;
+}
+.dashboard-shell .dashboard-panel,
+.dashboard-shell .dashboard-kpi,
+.dashboard-shell .dashboard-sensor-gauge,
+.dashboard-shell .dashboard-trend-chart {
+  min-width: 0;
+}
+.dashboard-shell .dashboard-trend-chart {
+  contain: layout style;
+}
+.dashboard-shell .dashboard-trend-chart svg {
+  width: 100%;
+  height: auto;
+  min-height: 10rem;
+  aspect-ratio: 2.8 / 1;
+}
+.dashboard-shell .dashboard-trend-chart circle[role="button"] {
+  vector-effect: non-scaling-stroke;
+}
+.dashboard-shell .dashboard-kpi button,
+.dashboard-shell .dashboard-panel button {
+  min-height: 44px;
+  min-width: 44px;
+}
+.dashboard-shell [aria-pressed="true"] {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ep-accent) 24%, transparent);
+}
+@media (max-width: 767px) {
+  .dashboard-shell main > div > .mb-7.flex {
+    align-items: flex-start;
+    gap: 1rem;
+    padding-bottom: 1.1rem;
+  }
+  .dashboard-shell main > div > .mb-7.flex > div:last-child {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .dashboard-shell .dashboard-trend-chart svg {
+    min-height: 9rem;
+    aspect-ratio: 2 / 1;
+  }
+  .dashboard-shell .dashboard-panel :is(button, a) {
+    min-height: 44px;
+  }
+}
+@media (max-width: 390px) {
+  .dashboard-shell .dashboard-kpi {
+    min-height: 0;
+  }
+  .dashboard-shell .dashboard-kpi > div:nth-child(2) {
+    font-size: 1.5rem;
+  }
+  .dashboard-shell .dashboard-trend-chart {
+    padding: .65rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dashboard-shell .dashboard-kpi {
+    min-height: 132px;
+  }
+  .dashboard-shell .dashboard-sensor-gauge {
+    padding-inline: .5rem;
+  }
+}
+@media print {
+  .dashboard-shell aside,
+  .dashboard-shell main > div > .relative.mb-5,
+  .dashboard-shell main button {
+    display: none !important;
+  }
+  .dashboard-shell,
+  .dashboard-shell main,
+  .dashboard-shell .dashboard-panel,
+  .dashboard-shell .dashboard-kpi {
+    color: #111 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+  .dashboard-shell .dashboard-panel,
+  .dashboard-shell .dashboard-kpi {
+    break-inside: avoid;
+    border: 1px solid #bbb !important;
+  }
+}
+
+
