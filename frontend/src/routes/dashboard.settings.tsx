@@ -4,12 +4,12 @@ import { Icon, IconChip } from "@/components/ui/Icon";
 
 function SettingsPage() {
   const location = useLocation();
-  const [darkMode, setDarkMode] = useState(
-    () => typeof window !== "undefined" && window.localStorage.getItem("ep-dashboard-theme") === "dark",
-  );
+  // Start from a stable server/client value; sync the saved preference after mount.
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     const syncTheme = () => setDarkMode(window.localStorage.getItem("ep-dashboard-theme") === "dark");
+    syncTheme();
     window.addEventListener("ecoprawn-theme-change", syncTheme);
     window.addEventListener("storage", syncTheme);
     return () => {
