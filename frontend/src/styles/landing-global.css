@@ -12,7 +12,9 @@
 @import "./marketing-landing-interactions.css";
 @import "./marketing-public-illustrations.css";
 @import "./marketing-shared-card-system.css";
-@import "./marketing-depth-foundations.css";
+@import "./marketing-depth-foundation-core.css";
+@import "./marketing-depth-target-ranges.css";
+@import "./marketing-depth-platform-and-about.css";
 @import "./marketing-depth-landing.css";
 @import "./marketing-depth-pages.css";
 @import "./mobile-first.css";
