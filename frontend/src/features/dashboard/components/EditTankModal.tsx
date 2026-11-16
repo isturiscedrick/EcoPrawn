@@ -85,6 +85,7 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
       titleId={`${uid}-title`}
       onClose={onClose}
       backdropLabel="Close edit tank dialog"
+      backdropDisabled={saving}
       backdropClassName="bg-black/55 backdrop-blur-sm"
       panelClassName="p-5 shadow-2xl sm:p-8"
     >
