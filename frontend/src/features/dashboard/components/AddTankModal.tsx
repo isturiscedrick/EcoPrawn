@@ -20,7 +20,7 @@ interface AddTankModalProps {
 }
 
 const inputClass =
-  "min-h-11 w-full rounded-lg border border-[var(--sand-dim)] bg-[var(--ep-bg)] px-3 text-[14px] font-medium text-[var(--water-deep)] outline-none transition-[border-color,box-shadow] placeholder:text-[rgba(11,35,32,0.42)] focus:border-[var(--ep-accent)] focus:shadow-[0_0_0_3px_rgba(178,63,28,0.12)]";
+  "min-h-11 w-full rounded-lg border border-[var(--sand-dim)] bg-[var(--ep-bg)] px-3 text-[14px] font-medium text-[var(--water-deep)] outline-none transition-[border-color,box-shadow] placeholder:text-[var(--ep-text-muted)] focus:border-[var(--ep-accent)] focus:shadow-[0_0_0_3px_var(--ep-accent-tint)]";
 
 const labelClass =
   "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--ep-text-muted)]";
