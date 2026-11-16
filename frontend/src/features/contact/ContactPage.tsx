@@ -63,7 +63,7 @@ export function ContactPage() {
 
         <section className={`ep-contact-details-section ${SECTION_PAD}`}>
           <div className="mx-auto max-w-[1200px]">
-            <div className="mb-5 max-w-[32rem]">
+            <div className="mb-8 max-w-[36rem] sm:mb-10">
               <p className="text-xs font-bold uppercase tracking-[.16em] text-[var(--ep-accent)]">Contact details</p>
               <h2 className="ep-font-display mt-2 text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Find the right starting point.</h2>
               <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">Use the form to send your message, and refer to the project details here.</p>
