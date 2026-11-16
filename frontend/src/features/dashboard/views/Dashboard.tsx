@@ -79,7 +79,7 @@ export function Dashboard() {
             Dashboard
           </h1>
           <p className="mt-2 block w-full text-sm text-[var(--ep-text-muted)]">
-            Tank health and recent activity.
+            Facility status and recent activity.
           </p>
         </div>
       </header>
@@ -95,7 +95,7 @@ export function Dashboard() {
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
           <div>
             <h2 id="tank-snapshot-heading" className="ep-font-display text-lg font-semibold text-[var(--ep-text)]">Tank snapshot</h2>
-            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Current readings.</p>
+            
           </div>
           <Link to="/dashboard/tanks" className="inline-flex min-h-10 items-center gap-1 rounded-lg px-3 text-xs font-semibold text-[var(--ep-accent)] transition-colors hover:bg-[var(--ep-accent-tint)]">
             Manage tanks <Icon name="arrow-up-right" size={14} />
