@@ -10,7 +10,7 @@ export function SensorGauge({ label, value, pct, status, statusLabel, note }: Se
 
   return (
     <div className="dashboard-sensor-gauge border border-[var(--sand-dim)] rounded-[10px] p-3.5 text-center">
-      <div className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.5)] mb-2">
+      <div className="ep-font-mono mb-2 text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)]">
         {label}
       </div>
       <div
@@ -48,7 +48,7 @@ export function SensorGauge({ label, value, pct, status, statusLabel, note }: Se
       >
         {statusLabel ?? (status === "ok" ? "Nominal" : "Watch")}
       </div>
-      {note ? <p className="mt-1 text-[10px] text-[rgba(11,35,32,0.6)]">{note}</p> : null}
+      {note ? <p className="mt-1 text-[10px] text-[var(--ep-text-muted)]">{note}</p> : null}
     </div>
   );
 }
