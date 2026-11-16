@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { SHAPES } from "./BrandMark";
+import { SHAPES } from "./BrandMarkPaths";
 
 interface BrandIconProps {
   className?: string;
