@@ -94,7 +94,7 @@ export function AlertsView() {
             Alerts
           </h1>
           <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
-            Warnings and system events.
+            Active warnings and event history.
           </div>
         </div>
         <button
@@ -140,7 +140,7 @@ export function AlertsView() {
         <Panel title="Tank attention overview" badge={`${affectedTanks.length} affected`}>
           {affectedTanks.length ? (
             <div className="space-y-2">
-              <p className="mb-3 text-xs text-[var(--ep-text-muted)]">Ranked by out-of-range parameters, not severity.</p>
+              <p className="mb-3 text-xs text-[var(--ep-text-muted)]">Grouped by tank and warning count.</p>
               {affectedTanks.map((group) => (
                 <div key={group.tankId} className="flex min-w-0 flex-wrap items-center justify-between gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-3">
                   <div className="min-w-0 flex-1">
@@ -157,7 +157,7 @@ export function AlertsView() {
           ) : (
             <div className="rounded-xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-6 text-center">
               <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks currently need attention</p>
-              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Warnings appear here when readings leave their limits.</p>
+              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Alerts appear when readings leave their limits.</p>
             </div>
           )}
         </Panel>
