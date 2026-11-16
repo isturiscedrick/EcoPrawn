@@ -49,6 +49,9 @@ html.dark .dashboard-shell {
   --coral: var(--ep-brand-primary);
   --coral-dim: var(--ep-accent-hover);
   --ep-secondary: var(--ep-brand-secondary);
+  --ep-brand-secondary-hover: #f5d5bc;
+  --ep-secondary-accent: #e9bfa0;
+  --ep-secondary-accent-hover: #f5d5bc;
   --ep-secondary-tint: rgba(233,191,160,.16);
 }
 
