@@ -275,7 +275,7 @@ html.dark .ep-auth-modal {
 .dashboard-shell .inline-block.h-\[2px\].bg-\[var\(--mangrove\)\],
 .dashboard-shell .bg-\[\#4b8db8\],
 .dashboard-shell .bg-\[var\(--mangrove\)\].text-white,
-.dashboard-shell summary.text-\[var\(--mangrove\)] {
+.dashboard-shell summary.text-\[var\(--mangrove\)\] {
   color: var(--ep-accent);
   stroke: var(--ep-accent);
   background-color: var(--ep-accent);
