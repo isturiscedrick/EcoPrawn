@@ -323,14 +323,14 @@ export function AddTankModal({
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border-2 border-[var(--ep-primary)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-primary)] hover:text-white"
+              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border-2 border-[var(--ep-primary)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-accent)] hover:text-[var(--ep-on-accent)]"
             >
               <Icon name="x" size={14} strokeWidth={2} />
               Cancel
             </button>
             <button
               type="submit"
-              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-4 py-2.5 text-[13.5px] font-semibold text-white transition-colors hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)]"
+              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-on-accent)] transition-colors hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)]"
             >
               <Icon name="check" size={14} strokeWidth={2.2} />
               Add Tank
