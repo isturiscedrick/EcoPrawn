@@ -43,6 +43,20 @@ export function Panel({ title, badge, onDetails, icon = "layers", children }: Pa
   );
 }
 
+interface KpiGridProps {
+  label: string;
+  children: React.ReactNode;
+}
+
+/** Responsive, content-aware grid shared by dashboard KPI summaries. */
+export function KpiGrid({ label, children }: KpiGridProps) {
+  return (
+    <section aria-label={label} className="mb-5 grid min-w-0 grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))] gap-3">
+      {children}
+    </section>
+  );
+}
+
 interface KpiCardProps {
   label: string;
   value: string;
