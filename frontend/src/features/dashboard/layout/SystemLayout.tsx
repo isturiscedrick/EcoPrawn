@@ -23,7 +23,15 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const { tanks, isDbConnected, lastUpdatedAt, loading, refreshTanks, isRefreshing } = useTanks();
   const activeAlertCount = deriveTankAlerts(tanks).length;
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(() => window.localStorage.getItem("ep-sidebar-collapsed") === "true");
+  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false);
+  useEffect(() => {
+    try {
+      setDesktopSidebarCollapsed(window.localStorage.getItem("ep-sidebar-collapsed") === "true");
+    } catch {
+      // Keep the expanded sidebar when browser storage is unavailable.
+    }
+  }, []);
+
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
@@ -249,7 +257,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       </header>
 
       {/* Persistent desktop navigation and mobile drawer. */}
-      <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} collapsed={desktopSidebarCollapsed} onToggleCollapsed={() => setDesktopSidebarCollapsed((collapsed) => { const next = !collapsed; window.localStorage.setItem("ep-sidebar-collapsed", String(next)); return next; })} />
+      <Sidebar mobileOpen={mobileSidebarOpen} onMobileClose={closeMobileSidebar} collapsed={desktopSidebarCollapsed} onToggleCollapsed={() => setDesktopSidebarCollapsed((collapsed) => { const next = !collapsed; try { window.localStorage.setItem("ep-sidebar-collapsed", String(next)); } catch { /* Keep the in-memory preference for this session. */ } return next; })} />
 
       {searchOpen && (
         <div className="fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/45 px-3 pt-[12vh] backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) setSearchOpen(false); }}>
