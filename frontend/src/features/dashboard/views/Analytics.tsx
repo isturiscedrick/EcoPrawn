@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { KpiCard, Panel } from "@/features/dashboard/components/DashboardPrimitives";
+import { KpiCard, KpiGrid, Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { DonutChart, FeedingProgressChart, GrowthHistoryChart, WaterHistoryChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
@@ -77,12 +77,12 @@ export function Analytics() {
           <span aria-hidden="true">↓</span> Export CSV
         </button>
       </div>
-      <section aria-label="Facility analytics summary" className="mb-5 grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
+      <KpiGrid label="Facility analytics summary">
         <KpiCard label="Total biomass" value={metrics.totalBiomass.toFixed(1)} unit="kg" delta="All tanks" deltaTone="ok" />
         <KpiCard label="Estimated population" value={metrics.totalPopulation.toLocaleString()} unit="shrimp" delta="Facility total" deltaTone="ok" />
         <KpiCard label="Average body length" value={tanks.length ? metrics.avgBodyLength.toFixed(1) : "—"} unit="cm" delta="Latest scans" deltaTone="ok" />
         <KpiCard label="Average shrimp weight" value={tanks.length ? metrics.avgWeight.toFixed(1) : "—"} unit="g" delta={`${metrics.abnormal.toLocaleString()} abnormal behavior flags`} deltaTone={metrics.abnormal ? "warn" : "ok"} />
-      </section>
+      </KpiGrid>
 
       <div className="mb-5 grid grid-cols-1 gap-4 xl:grid-cols-2">
         <Panel title="Biomass distribution" icon="chart-no-axes-combined" badge="share by tank">
