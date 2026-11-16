@@ -2,7 +2,7 @@ import { useState } from "react";
 import { KpiGrid, Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
-import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
+import { DashboardInlineEmptyState, DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 
 function GrowthTrendChart({ values }: { values: number[] }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -230,9 +230,7 @@ export function VisionGrowth() {
         </>
       ) : (
         <Panel title="Growth Snapshot" badge="0 tanks">
-          <div className="py-10 text-center text-[13px] text-[var(--ep-text-muted)]">
-            No tanks yet. Add one to view growth data.
-          </div>
+          <DashboardInlineEmptyState message="No tanks yet. Add one to view growth data." />
         </Panel>
       )}
     </>
