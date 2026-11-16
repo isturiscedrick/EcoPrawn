@@ -27,6 +27,8 @@ export function ConfirmDialog({
   const descId = useId();
   const cancelRef = useRef<HTMLButtonElement>(null);
   const confirmRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   // Keep the latest onCancel without re-running the open/focus effect
   // every time the parent re-renders.
@@ -39,10 +41,37 @@ export function ConfirmDialog({
   useEffect(() => {
     if (!open) return;
 
-    (tone === "danger" ? cancelRef : confirmRef).current?.focus();
+    previouslyFocusedRef.current = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+    (tone === "danger" && showCancel ? cancelRef : confirmRef).current?.focus();
 
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") onCancelRef.current();
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onCancelRef.current();
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable?.length) {
+        e.preventDefault();
+        dialogRef.current?.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
     window.addEventListener("keydown", onKeyDown);
     const original = document.body.style.overflow;
@@ -51,6 +80,8 @@ export function ConfirmDialog({
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = original;
+      previouslyFocusedRef.current?.focus();
+      previouslyFocusedRef.current = null;
     };
   }, [open, tone]);
 
@@ -75,7 +106,11 @@ export function ConfirmDialog({
         className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.72)]"
       />
 
-      <div className="ep-pop-in relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[var(--shadow-overlay)] dark:border-[rgba(255,255,255,0.12)] dark:bg-[#111827] dark:shadow-[0_28px_90px_rgba(0,0,0,0.7)]">
+      <div
+        ref={dialogRef}
+        tabIndex={-1}
+        className="ep-pop-in relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[var(--shadow-overlay)] outline-none dark:border-[rgba(255,255,255,0.12)] dark:bg-[#111827] dark:shadow-[0_28px_90px_rgba(0,0,0,0.7)]"
+      >
         <h2
           id={titleId}
           className="ep-font-display mb-1.5 text-[18px] font-semibold text-[var(--ep-text)]"
