@@ -295,19 +295,7 @@ html.dark .dashboard-shell {
   --ep-accent-tint: rgba(69,197,179,.15);
   --ep-accent-tint-soft: rgba(69,197,179,.08);
   --ep-brand-glow: rgba(69,197,179,.2);
-}
-.dashboard-shell .dashboard-nav-active,
-html:not(.dark) .dashboard-shell .dashboard-nav-active {
-  background: #087e8b !important;
-  border-color: #087e8b !important;
-  color: #ffffff !important;
-}
-html.dark .dashboard-shell .dashboard-nav-active {
-  background: #45c5b3 !important;
-  border-color: #45c5b3 !important;
-  color: #092b31 !important;
-}
-.dashboard-shell :is(button,a,[role="button"]):focus-visible {
+}.dashboard-shell :is(button,a,[role="button"]):focus-visible {
   outline: 2px solid var(--ep-accent) !important;
   outline-offset: 3px;
 }
