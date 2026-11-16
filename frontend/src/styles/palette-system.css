@@ -1926,11 +1926,14 @@ html.dark .ep-contact-page [data-contact-form] > form {
   }
 }
 
-/* Contact hero: center the kicker, headline and supporting line in the
-   available hero space without changing the shared About hero layout. */
+/* Contact hero: center its content within the hero section itself,
+   independently of the full page and the shared About hero layout. */
+.ep-contact-page [data-page-hero] {
+  min-height: clamp(30rem, 62svh, 42rem);
+}
 .ep-contact-page [data-page-hero] > .relative.z-10 {
-  min-height: clamp(30rem, calc(100svh - 5rem), 44rem);
+  min-height: inherit;
   justify-content: center;
-  padding-top: clamp(2rem, 5vh, 4rem);
-  padding-bottom: clamp(2rem, 5vh, 4rem);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
