@@ -6,6 +6,7 @@ import { BrandMark } from "@/components/layout/BrandMark";
 import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
 import { Icon } from "@/components/ui/Icon";
 import { SidebarNavItem } from "./SidebarNavItem";
+import { getProfileInitials } from "../layout/system-layout-utils";
 
 interface SidebarProps {
   mobileOpen?: boolean;
@@ -55,13 +56,7 @@ export function Sidebar({
   const touchDrawerWidth = useRef<number>(0);
   const touchGestureActive = useRef(false);
 
-  const initials =
-    profileName
-      .trim()
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase() ?? "")
-      .join("") || "FO";
+  const initials = getProfileInitials(profileName);
 
   const closeDrawer = useCallback(() => {
     onMobileClose();
@@ -425,7 +420,6 @@ export function Sidebar({
           }}
           onTouchEnd={(e) => {
             const startX = touchStartX.current;
-            const startY = touchStartY.current;
             const wasDragging = touchGestureActive.current;
             const drawer = drawerRef.current;
             touchStartX.current = null;
@@ -444,7 +438,6 @@ export function Sidebar({
                 closeDrawer();
               }
             }
-            void startY;
           }}
           onTouchCancel={() => {
             touchStartX.current = null;
