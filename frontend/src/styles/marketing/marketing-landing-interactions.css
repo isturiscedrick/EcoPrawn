@@ -1,0 +1,456 @@
+/* Landing Phase 2: editorial dashboard preview with responsive sample-data cards. */
+.ep-business-landing .ep-dashboard-preview {
+  position: relative;
+  isolation: isolate;
+}
+.ep-business-landing .ep-dashboard-preview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 88% 18%,rgba(8,126,139,.08),transparent 34%),
+    radial-gradient(ellipse at 12% 90%,rgba(8,126,139,.045),transparent 36%);
+}
+html.dark .ep-business-landing .ep-dashboard-preview::before {
+  background:
+    radial-gradient(ellipse at 88% 18%,rgba(69,197,179,.12),transparent 34%),
+    radial-gradient(ellipse at 12% 90%,rgba(69,197,179,.06),transparent 36%);
+}
+.ep-business-landing .ep-dashboard-preview-window {
+  min-width: 0;
+  transform: translateZ(0);
+}
+.ep-business-landing .ep-dashboard-preview-window > div {
+  min-width: 0;
+}
+.ep-business-landing .ep-preview-chart {
+  align-items: end;
+  border-bottom: 1px solid var(--ep-line);
+  background: repeating-linear-gradient(to bottom,transparent 0,transparent 27px,var(--ep-line) 28px);
+}
+.ep-business-landing .ep-preview-chart > span {
+  flex: 1 1 0;
+  min-width: 3px;
+  border-radius: .35rem .35rem 0 0;
+  background: linear-gradient(180deg,var(--ep-accent),rgba(8,126,139,.24));
+  transform-origin: bottom;
+  transition: opacity .2s ease, transform .2s ease;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  .ep-business-landing .ep-dashboard-preview-window:hover .ep-preview-chart > span {
+    opacity: .88;
+  }
+  .ep-business-landing .ep-dashboard-preview-window:hover .ep-preview-chart > span:nth-child(3n) {
+    transform: scaleY(1.06);
+  }
+}
+html.dark .ep-business-landing .ep-preview-chart > span {
+  background: linear-gradient(180deg,#45c5b3,rgba(69,197,179,.24));
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-dashboard-preview-window {
+    border-radius: 1.1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-preview-chart > span {
+    transition: none;
+  }
+}
+
+
+/* Landing contrast correction: the deep readings band uses its own
+   foreground tokens instead of inheriting the page's dark-on-light text. */
+.ep-business-landing #readings {
+  color: var(--ep-on-deep);
+  background-color: var(--ep-deep);
+}
+.ep-business-landing #readings :is(h1,h2,h3,h4,dt,dd,strong,b,label) {
+  color: var(--ep-on-deep);
+}
+.ep-business-landing #readings :is(p,small,figcaption,li,.text-\[var\(--ep-text-muted\)\]) {
+  color: var(--ep-on-deep-muted);
+}
+.ep-business-landing #readings [data-reading] {
+  color: var(--ep-on-deep);
+  border-color: rgba(203,213,225,.24);
+}
+.ep-business-landing #readings [data-reading] :is(dt,dd) {
+  color: var(--ep-on-deep);
+}
+.ep-business-landing #readings [data-reading] :is(p,span:not([data-countto])) {
+  color: var(--ep-on-deep-muted);
+}
+.ep-business-landing #readings [data-reading] [data-countto] {
+  color: var(--ep-on-deep);
+}
+.ep-business-landing #readings [data-reading] [data-marker] span:last-child {
+  color: var(--ep-on-deep);
+}
+.ep-business-landing #readings [data-reading] [data-zone],
+.ep-business-landing #readings [data-reading] [data-marker] {
+  color: inherit;
+}
+
+/* Explicit foregrounds for capability and process cards prevent inherited
+   theme or animation styles from making copy disappear on card surfaces. */
+.ep-business-landing #capabilities [data-business-card],
+.ep-business-landing #process [data-step] {
+  color: var(--ep-text);
+}
+.ep-business-landing #capabilities [data-business-card] :is(h3,p),
+.ep-business-landing #process [data-step] :is(h3,p) {
+  color: inherit;
+}
+.ep-business-landing #capabilities [data-business-card] p:not(.text-\[var\(--ep-accent\)\]),
+.ep-business-landing #process [data-step] > p {
+  color: var(--ep-text-muted);
+}
+
+
+/* CTA band heading contrast: global marketing heading rules must not
+   override the light foreground on this deep-blue surface. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] {
+  color: var(--ep-on-deep, #f8fafc);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] h2 {
+  color: var(--ep-on-deep, #f8fafc) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) [data-band] p {
+  color: var(--ep-on-deep-muted, #cbd5e1);
+}
+
+
+/* Shared CTA interaction language: consistent across public pages and account entry points. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition:
+    transform .22s cubic-bezier(.2,.75,.25,1),
+    box-shadow .22s ease,
+    background-color .22s ease,
+    border-color .22s ease,
+    color .22s ease;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(112deg,transparent 18%,rgba(255,255,255,.24) 48%,transparent 76%);
+  transform: translateX(-115%);
+  transition: transform .65s cubic-bezier(.2,.75,.25,1),opacity .2s ease;
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control:hover {
+    transform: translateY(-2px);
+  }
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control:hover::before {
+    opacity: 1;
+    transform: translateX(115%);
+  }
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control:active {
+  transform: translateY(0) scale(.985);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control:focus-visible {
+  outline: 3px solid color-mix(in srgb,var(--ep-accent) 68%,white);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px color-mix(in srgb,var(--ep-accent) 18%,transparent);
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-primary {
+  box-shadow: 0 10px 24px -14px color-mix(in srgb,var(--ep-accent) 78%,transparent);
+}
+@media (hover:hover) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-primary:hover {
+    box-shadow: 0 16px 30px -14px color-mix(in srgb,var(--ep-accent) 70%,transparent);
+  }
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-primary {
+  box-shadow: 0 12px 28px -14px rgba(69,197,179,.62);
+}
+@media (prefers-reduced-motion:reduce) {
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control,
+  :is(.ep-landing,.ep-about-page,.ep-contact-page) .ep-cta-control::before {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* ---------- Aquaculture hero monitoring panel and water-inspired section flow ---------- */
+.ep-business-landing .ep-hero-monitor-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(1rem, 2.2vw, 1.5rem);
+  border: 1px solid rgba(112,215,200,.24);
+  border-radius: 1.35rem;
+  background:
+    radial-gradient(ellipse at 88% 0%, rgba(8,126,139,.20), transparent 48%),
+    radial-gradient(ellipse at 0% 100%, rgba(69,197,179,.12), transparent 48%),
+    linear-gradient(145deg, rgba(11,44,52,.97), rgba(5,32,39,.98));
+  box-shadow: 0 30px 80px -38px rgba(2,8,23,.78), inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(18px);
+}
+.ep-business-landing .ep-hero-monitor-glow {
+  position: absolute;
+  z-index: -1;
+  width: 17rem;
+  height: 17rem;
+  top: -10rem;
+  right: -5rem;
+  border-radius: 50%;
+  background: rgba(8,126,139,.24);
+  filter: blur(42px);
+  pointer-events: none;
+}
+.ep-business-landing .ep-hero-sensor-tile {
+  min-height: 104px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+  transition: transform .22s ease, border-color .22s ease, background-color .22s ease;
+}
+.ep-business-landing .ep-hero-sensor-tile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(112,215,200,.35);
+  background-color: rgba(255,255,255,.085);
+}
+.ep-business-landing .ep-platform-ribbon {
+  position: relative;
+  isolation: isolate;
+  background-image:
+    radial-gradient(ellipse at 12% 0%, rgba(8,126,139,.10), transparent 42%),
+    linear-gradient(110deg, rgba(217,240,239,.32), transparent 48%, rgba(69,197,179,.07));
+}
+.ep-business-landing .ep-business-capabilities {
+  background-image:
+    radial-gradient(ellipse at 100% 10%, rgba(8,126,139,.10), transparent 38%),
+    radial-gradient(ellipse at 0% 90%, rgba(69,197,179,.06), transparent 34%);
+}
+html.dark .ep-business-landing .ep-platform-ribbon {
+  background-image:
+    radial-gradient(ellipse at 12% 0%, rgba(69,197,179,.16), transparent 42%),
+    linear-gradient(110deg, rgba(69,197,179,.10), transparent 48%, rgba(69,197,179,.08));
+}
+html.dark .ep-business-landing .ep-business-capabilities {
+  background-image:
+    radial-gradient(ellipse at 100% 10%, rgba(69,197,179,.16), transparent 38%),
+    radial-gradient(ellipse at 0% 90%, rgba(69,197,179,.09), transparent 34%);
+}
+@media (max-width: 1023px) {
+  .ep-business-landing .ep-hero-monitor-panel {
+    margin-top: .25rem;
+  }
+}
+@media (max-width: 639px) {
+  .ep-business-landing .ep-hero-monitor-panel {
+    padding: .9rem;
+    border-radius: 1rem;
+  }
+  .ep-business-landing .ep-hero-sensor-tile {
+    min-height: 98px;
+    padding: .65rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-hero-sensor-tile {
+    transition: none;
+  }
+  .ep-business-landing .ep-hero-sensor-tile:hover {
+    transform: none;
+  }
+}
+
+
+/* Hero monitoring dashboard follows the active site theme.
+   Light mode uses a bright instrument-panel surface; dark mode retains
+   the deep navy glass treatment. */
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel {
+  border-color: rgba(148,163,184,.42);
+  background:
+    radial-gradient(ellipse at 88% 0%, rgba(8,126,139,.14), transparent 48%),
+    radial-gradient(ellipse at 0% 100%, rgba(69,197,179,.08), transparent 48%),
+    linear-gradient(145deg, #ffffff 0%, #f5fbfa 58%, #e6f4f3 100%);
+  box-shadow: 0 28px 70px -42px rgba(8,126,139,.22), inset 0 1px 0 rgba(255,255,255,.95);
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-white {
+  color: #0f172a !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-200\/75,
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-100\/75 {
+  color: #526783 !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-100\/65 {
+  color: #64748b !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .border-white\/10 {
+  border-color: rgba(148,163,184,.25) !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-white\/\[\.055\] {
+  background-color: rgba(255,255,255,.82) !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-white\/10 {
+  background-color: rgba(148,163,184,.2) !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .bg-teal-300\/10 {
+  background-color: rgba(217,240,239,.8) !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .border-teal-300\/20 {
+  border-color: rgba(69,197,179,.4) !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-panel .text-teal-100 {
+  color: #087e8b !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-sensor-tile {
+  border-color: rgba(148,163,184,.3);
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 8px 20px -16px rgba(15,23,42,.22), inset 0 1px 0 rgba(255,255,255,.95);
+}
+html:not(.dark) .ep-business-landing .ep-hero-sensor-tile:hover {
+  border-color: rgba(8,126,139,.42);
+  background-color: #fff !important;
+}
+html:not(.dark) .ep-business-landing .ep-hero-monitor-glow {
+  background: rgba(69,197,179,.16);
+  opacity: .65;
+}
+html.dark .ep-business-landing .ep-hero-monitor-panel {
+  border-color: rgba(112,215,200,.24);
+  background:
+    radial-gradient(ellipse at 88% 0%, rgba(8,126,139,.20), transparent 48%),
+    radial-gradient(ellipse at 0% 100%, rgba(69,197,179,.12), transparent 48%),
+    linear-gradient(145deg, rgba(11,44,52,.97), rgba(5,32,39,.98));
+}
+html.dark .ep-business-landing .ep-hero-sensor-tile {
+  border-color: rgba(255,255,255,.1);
+  background-color: rgba(255,255,255,.055);
+}
+
+
+/* Landing motion polish: depth is limited to the hero console and cards. */
+.ep-business-landing [data-hero="monitor-panel"] {
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform;
+}
+.ep-business-landing .ep-hero-sensor-tile { backface-visibility: hidden; }
+.ep-business-landing [data-hero-sensor-bar] {
+  transform: scaleX(1);
+  transform-origin: left center;
+  will-change: transform;
+}
+.ep-business-landing [data-hero-sensor-dot],
+.ep-business-landing .ep-hero-monitor-glow,
+.ep-business-landing .ep-hero-speck { will-change: transform, opacity; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .ep-business-landing [data-hero="monitor-panel"] {
+    transition: box-shadow .35s ease, border-color .35s ease;
+  }
+  .ep-business-landing [data-hero="monitor-panel"]:hover {
+    border-color: color-mix(in srgb, var(--ep-accent) 48%, var(--ep-line));
+    box-shadow: 0 34px 90px -42px rgba(8,126,139,.34), inset 0 1px 0 rgba(255,255,255,.18);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing :is([data-hero="monitor-panel"],[data-hero-sensor-bar],[data-hero-sensor-dot],.ep-hero-monitor-glow,.ep-hero-speck) {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
+
+
+/* Phase 3 — cinematic landing-page depth. Decorative layers only: the hero
+   content and page geometry remain stable while the background drifts subtly. */
+.ep-business-landing .ep-hero-atmosphere,
+.ep-business-landing [data-hero="grid"],
+.ep-business-landing [data-readings-bg] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+.ep-business-landing .ep-hero-atmosphere {
+  transform-origin: 50% 35%;
+}
+.ep-business-landing .ep-hero-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 8% 4% 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 42%, color-mix(in srgb, var(--ep-accent) 10%, transparent), transparent 68%);
+  filter: blur(28px);
+  opacity: .75;
+  pointer-events: none;
+}
+.ep-business-landing #dashboard-preview .ep-preview-tab-panel {
+  transform-origin: 50% 0;
+  will-change: opacity, transform;
+}
+@media (max-width: 1023px) {
+  .ep-business-landing .ep-hero-atmosphere,
+  .ep-business-landing [data-hero="grid"],
+  .ep-business-landing [data-readings-bg] {
+    will-change: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-hero-atmosphere,
+  .ep-business-landing [data-hero="grid"],
+  .ep-business-landing [data-readings-bg],
+  .ep-business-landing #dashboard-preview .ep-preview-tab-panel {
+    will-change: auto !important;
+    transform: none !important;
+  }
+}
+
+
+/* Phase 5 — lightweight Three.js water-particle atmosphere.
+   The canvas is decorative only; content remains above it and fully interactive. */
+.ep-business-landing .ep-aquatic-scene {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 76% 26%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 38%),
+    radial-gradient(ellipse at 18% 78%, color-mix(in srgb, var(--ep-accent) 6%, transparent), transparent 42%);
+}
+.ep-business-landing .ep-aquatic-scene-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: .72;
+}
+.ep-business-landing .ep-field-hero {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 767px), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-aquatic-scene-canvas {
+    display: none;
+  }
+  .ep-business-landing .ep-aquatic-scene {
+    background:
+      radial-gradient(ellipse at 78% 24%, rgba(8,126,139,.10), transparent 42%),
+      radial-gradient(ellipse at 18% 78%, color-mix(in srgb, var(--ep-accent) 5%, transparent), transparent 44%);
+  }
+}
+html.dark .ep-business-landing .ep-aquatic-scene {
+  background:
+    radial-gradient(ellipse at 76% 26%, color-mix(in srgb, var(--ep-accent) 10%, transparent), transparent 38%),
+    radial-gradient(ellipse at 18% 78%, color-mix(in srgb, var(--ep-accent) 7%, transparent), transparent 42%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-business-landing .ep-aquatic-scene-canvas {
+    display: none !important;
+  }
+}
+
+
