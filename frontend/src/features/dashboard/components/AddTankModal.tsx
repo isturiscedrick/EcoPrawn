@@ -60,7 +60,7 @@ export function AddTankModal({
   onSubmit,
   existingCount,
 }: AddTankModalProps) {
-  const { tankFormDefaults: defaults } = useDemoData();
+  const { tankFormDefaults: defaults } = useDemoData(open);
   const uid = useId();
   const firstFieldRef = useRef<HTMLInputElement>(null);
 
