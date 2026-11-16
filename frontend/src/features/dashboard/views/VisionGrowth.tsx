@@ -194,7 +194,7 @@ export function VisionGrowth() {
           </div>
 
           <Panel title="Growth Snapshot" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
-            <ScrollFadeContainer>
+            <ScrollFadeContainer ariaLabel="Growth snapshot table">
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
                   <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--sand-dim)]">
