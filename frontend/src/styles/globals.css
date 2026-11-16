@@ -21,7 +21,8 @@
 @import "./palette-surface-foundations.css";
 @import "./palette-theme-surfaces.css";
 @import "./palette-surface-final-overrides.css";
-@import "./palette-marketing.css";
+@import "./palette-marketing-foundations.css";
+@import "./palette-marketing-composition.css";
 @import "./palette-public-chrome.css";
 @import "./palette-dashboard-sidebar.css";
 @import "./palette-public-header.css";
