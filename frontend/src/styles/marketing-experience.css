@@ -738,7 +738,7 @@ html.dark .ep-business-landing .ep-aquaculture-hero {
   background-color: #070d18 !important;
   background-image:
     radial-gradient(ellipse at 50% 28%, rgba(8,126,139,.28), transparent 55%),
-    radial-gradient(ellipse at 50% 100%, rgba(69,197,179,.16), transparent 58%),
+    radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 58%),
     radial-gradient(circle, rgba(112,215,200,.13) .8px, transparent 1.2px),
     linear-gradient(180deg, #123b42 0%, #0b252b 58%, #07191e 100%) !important;
   background-repeat: no-repeat, no-repeat, repeat, no-repeat;
@@ -747,7 +747,7 @@ html.dark .ep-business-landing .ep-aquaculture-hero {
 }
 html.dark .ep-business-landing .ep-aquaculture-hero .ep-hero-atmosphere {
   background:
-    radial-gradient(ellipse at 50% 18%, rgba(69,197,179,.16), transparent 58%),
+    radial-gradient(ellipse at 50% 18%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 58%),
     linear-gradient(180deg, rgba(7,13,24,.08), rgba(7,13,24,.24));
 }
 html.dark .ep-business-landing .ep-aquaculture-hero [data-hero="grid"] {
@@ -793,7 +793,7 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
   background-color: #070d18 !important;
   background-image:
     radial-gradient(ellipse at 50% 28%, rgba(8,126,139,.28), transparent 55%),
-    radial-gradient(ellipse at 50% 100%, rgba(69,197,179,.16), transparent 58%),
+    radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 58%),
     radial-gradient(circle, rgba(112,215,200,.13) .8px, transparent 1.2px),
     linear-gradient(180deg, #123b42 0%, #0b252b 58%, #07191e 100%) !important;
   background-repeat: no-repeat, no-repeat, repeat, no-repeat;
@@ -806,7 +806,7 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
 }
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] > .ep-hero-atmosphere {
   background:
-    radial-gradient(ellipse at 50% 18%, rgba(69,197,179,.16), transparent 58%),
+    radial-gradient(ellipse at 50% 18%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 58%),
     linear-gradient(180deg, rgba(7,13,24,.08), rgba(7,13,24,.24));
 }
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-child(1) {
@@ -1491,8 +1491,8 @@ html.dark .ep-business-landing .ep-hero-sensor-tile {
   overflow: hidden;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 76% 26%, rgba(8,126,139,.12), transparent 38%),
-    radial-gradient(ellipse at 18% 78%, rgba(69,197,179,.08), transparent 42%);
+    radial-gradient(ellipse at 76% 26%, color-mix(in srgb, var(--ep-accent) 8%, transparent), transparent 38%),
+    radial-gradient(ellipse at 18% 78%, color-mix(in srgb, var(--ep-accent) 6%, transparent), transparent 42%);
 }
 .ep-business-landing .ep-aquatic-scene-canvas {
   display: block;
@@ -1511,13 +1511,13 @@ html.dark .ep-business-landing .ep-hero-sensor-tile {
   .ep-business-landing .ep-aquatic-scene {
     background:
       radial-gradient(ellipse at 78% 24%, rgba(8,126,139,.10), transparent 42%),
-      radial-gradient(ellipse at 18% 78%, rgba(69,197,179,.06), transparent 44%);
+      radial-gradient(ellipse at 18% 78%, color-mix(in srgb, var(--ep-accent) 5%, transparent), transparent 44%);
   }
 }
 html.dark .ep-business-landing .ep-aquatic-scene {
   background:
-    radial-gradient(ellipse at 76% 26%, rgba(8,126,139,.15), transparent 38%),
-    radial-gradient(ellipse at 18% 78%, rgba(69,197,179,.10), transparent 42%);
+    radial-gradient(ellipse at 76% 26%, color-mix(in srgb, var(--ep-accent) 10%, transparent), transparent 38%),
+    radial-gradient(ellipse at 18% 78%, color-mix(in srgb, var(--ep-accent) 7%, transparent), transparent 42%);
 }
 @media (prefers-reduced-motion: reduce) {
   .ep-business-landing .ep-aquatic-scene-canvas {
@@ -1584,7 +1584,7 @@ html.dark .ep-business-landing .ep-aquatic-scene {
   border-radius: 50%;
   pointer-events: none;
   background:
-    radial-gradient(circle at 48% 48%, rgba(69,197,179,.16), rgba(69,197,179,.08) 34%, transparent 68%);
+    radial-gradient(circle at 48% 48%, color-mix(in srgb, var(--ep-accent) 16%, transparent), color-mix(in srgb, var(--ep-accent) 8%, transparent) 34%, transparent 68%);
   filter: blur(10px);
   animation: ep-landing-aura 12s ease-in-out infinite alternate;
 }
