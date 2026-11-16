@@ -44,25 +44,6 @@ html.dark {
 }
 html:not(.dark) body.ecoprawn-root { background: #f8fafc; color: #111827; }
 html.dark body.ecoprawn-root { background: #0b171b; color: #e8f4f2; }
-  --ep-brand-primary: #087e8b;
-  --ep-accent: #087e8b; --ep-accent-hover: #066874;
-  --ep-secondary: #1f2937;
-  --ep-accent-tint: rgba(8,126,139,.12); --ep-accent-tint-soft: rgba(8,126,139,.08);
-  background: #f8fafc !important; color: #111827;
-}
-html.dark .dashboard-shell {
-  --ep-brand-primary: #45c5b3;
-  --ep-accent: #45c5b3; --ep-accent-hover: #70d7c8;
-  --ep-secondary: #e2e8f0;
-  --ep-accent-tint: rgba(69,197,179,.14); --ep-accent-tint-soft: rgba(69,197,179,.08);
-  background: #0b171b !important; color: #e8f4f2;
-}
-.dashboard-shell aside,
-html:not(.dark) .dashboard-shell aside { background: #ffffff !important; color: #111827 !important; border-color: #dbe2ea !important; }
-html.dark .dashboard-shell aside { background: #111827 !important; color: #f8fafc !important; border-color: #334155 !important; }
-.dashboard-shell .dashboard-nav-active,
-html:not(.dark) .dashboard-shell .dashboard-nav-active { background: #087e8b !important; border-color: #087e8b !important; color: #ffffff !important; }
-html.dark .dashboard-shell .dashboard-nav-active { background: #45c5b3 !important; border-color: #45c5b3 !important; color: #071426 !important; }
 .ep-landing, .ep-about-page, .ep-contact-page {
   --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
   --ep-line: #dbe2ea; --ep-primary: #111827; --ep-secondary: #1f2937;
