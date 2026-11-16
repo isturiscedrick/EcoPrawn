@@ -53,7 +53,7 @@ export function TanksView() {
         <div>
           <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-primary)]">Facility management</p>
           <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Tanks</h1>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Tank details and production metrics.</p>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Tank records and production status.</p>
         </div>
         <button type="button" onClick={() => setAdding(true)} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[var(--ep-primary)] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 sm:w-auto">
           <Icon name="plus" size={17} /> Add tank
@@ -80,7 +80,7 @@ export function TanksView() {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h2 id="tank-list-heading" className="text-base font-semibold text-[var(--ep-text)]">All tanks</h2>
-            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Find a tank by name, batch, or status.</p>
+            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Search by name, batch, or status.</p>
           </div>
           <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
             <label className="relative block min-w-0 sm:w-56">
