@@ -433,9 +433,6 @@ html.dark .ep-about-page #systems {
 .ep-about-page #systems article > div:last-child > div > span:first-child {
   color: var(--ep-accent);
 }
-.ep-about-page #systems .text-\[var\(--ep-on-deep-muted\)\] {
-  color: var(--ep-text-muted);
-}
 .ep-about-page #systems .text-\[var\(--ep-on-deep\)\] {
   color: var(--ep-text);
 }
