@@ -6,7 +6,7 @@
 /* ---------- Dashboard Brand Palette Tokens ---------- */
 .dashboard-shell {
   --ep-brand-primary: #087e8b;
-  --ep-brand-secondary: #1f2937;
+  --ep-brand-secondary: #d99a75;
   --ep-status-success: #15803d;
   --ep-status-success-bg: #dcfce7;
   --ep-status-warning: #b45309;
@@ -22,9 +22,12 @@
   --coral: var(--ep-brand-primary);
   --coral-dim: var(--ep-accent-hover);
   --ep-secondary: var(--ep-brand-secondary);
+  --ep-brand-secondary-hover: #c7835d;
+  --ep-secondary-accent: #d99a75;
+  --ep-secondary-accent-hover: #c7835d;
   --ep-accent-tint: color-mix(in srgb, var(--ep-brand-primary) 12%, transparent);
   --ep-accent-tint-soft: color-mix(in srgb, var(--ep-brand-primary) 8%, transparent);
-  --ep-secondary-tint: color-mix(in srgb, var(--ep-brand-secondary) 12%, transparent);
+  --ep-secondary-tint: rgba(217,154,117,.12);
   overflow-x: clip;
 }
 
