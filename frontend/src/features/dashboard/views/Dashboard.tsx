@@ -2,6 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import { KpiCard, KpiGrid, Panel } from "@/features/dashboard/components/DashboardPrimitives";
 import { TankSnapshotCard } from "@/features/dashboard/components/TankSnapshotCard";
+import { RecentActivityPanel } from "@/features/dashboard/components/RecentActivityPanel";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
 import { useThresholdSettings } from "@/features/dashboard/hooks/useThresholdSettings";
@@ -92,36 +93,7 @@ export function Dashboard() {
         {noReadingCount > 0 && <p className="mt-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-2 text-xs leading-relaxed text-[var(--ep-text-muted)]"><span className="font-semibold text-[var(--ep-text)]">{noReadingCount} {noReadingCount === 1 ? "tank has" : "tanks have"} no water readings.</span> Missing readings count as needing attention.</p>}
       </section>
 
-      <section className="mb-5" aria-label="Recent facility activity">
-        <Panel title="Recent facility activity" icon="clock" badge={recentActivity.length ? `Latest ${recentActivity.length}` : "No activity"}>
-          {recentActivity.length ? (
-            <ol className="divide-y divide-[var(--ep-line)]">
-              {recentActivity.map((activity) => (
-                <li key={activity.id} className="flex min-w-0 items-start gap-3 py-3 first:pt-0 last:pb-0">
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]">
-                    <Icon name={activity.kind === "Water reading" ? "waves" : "camera"} size={15} />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-                      <p className="text-xs font-semibold text-[var(--ep-text)]">{activity.kind} · {activity.tankName}</p>
-                      <time dateTime={activity.timestamp.toISOString()} className="text-[10px] text-[var(--ep-text-muted)]">
-                        {activity.timestamp.toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}
-                      </time>
-                    </div>
-                    <p className="mt-1 break-words text-xs text-[var(--ep-text-muted)]">{activity.detail}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          ) : (
-            <div className="rounded-xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-7 text-center">
-              <Icon name="clock" size={21} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
-              <p className="text-sm font-semibold text-[var(--ep-text)]">No recent activity yet</p>
-              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">New readings and scans appear here.</p>
-            </div>
-          )}
-        </Panel>
-      </section>
+      <RecentActivityPanel activities={recentActivity} />
 
       <div className="mb-5 grid grid-cols-1 gap-4 xl:grid-cols-[1.15fr_0.85fr]">
         <Panel title="Tank health" icon="activity" badge={tanks.length ? `${tanks.length} monitored` : "No tanks"}>
