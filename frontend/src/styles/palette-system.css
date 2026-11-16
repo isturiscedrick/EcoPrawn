@@ -1926,3 +1926,12 @@ html.dark .ep-contact-page [data-contact-form] > form {
   }
 }
 
+/* Dark mode: keep the About "One platform." and Contact "Contact" hero
+   phrases white instead of applying the teal gradient accent. */
+html.dark .ep-about-page [data-page-hero-headline] [data-page-hero-accent],
+html.dark .ep-contact-page [data-page-hero-headline] [data-page-hero-accent] {
+  color: #FFFFFF !important;
+  background-image: none !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  text-shadow: none !important;
+}
