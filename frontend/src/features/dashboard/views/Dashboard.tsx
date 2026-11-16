@@ -79,7 +79,7 @@ export function Dashboard() {
             Dashboard
           </h1>
           <p className="mt-2 block w-full text-sm text-[var(--ep-text-muted)]">
-            Monitor tank health and key activity.
+            Tank health and recent activity.
           </p>
         </div>
       </header>
@@ -95,7 +95,7 @@ export function Dashboard() {
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
           <div>
             <h2 id="tank-snapshot-heading" className="ep-font-display text-lg font-semibold text-[var(--ep-text)]">Tank snapshot</h2>
-            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Latest readings by tank.</p>
+            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Current readings.</p>
           </div>
           <Link to="/dashboard/tanks" className="inline-flex min-h-10 items-center gap-1 rounded-lg px-3 text-xs font-semibold text-[var(--ep-accent)] transition-colors hover:bg-[var(--ep-accent-tint)]">
             Manage tanks <Icon name="arrow-up-right" size={14} />
@@ -152,7 +152,7 @@ export function Dashboard() {
                   ) : (
                     <div className="border-t border-[var(--ep-line)] pt-3">
                       <p className="text-xs font-medium text-[var(--ep-text-muted)]">No readings yet</p>
-                      <p className="mt-1 text-[11px] text-[var(--ep-text-muted)]">Status appears when data arrives.</p>
+                      <p className="mt-1 text-[11px] text-[var(--ep-text-muted)]">Waiting for readings.</p>
                     </div>
                   )}
                   <div className="mt-3 flex items-center justify-end gap-1 text-[11px] font-semibold text-[var(--ep-accent)]">View water quality <Icon name="arrow-right" size={12} /></div>
@@ -164,11 +164,11 @@ export function Dashboard() {
           <div className="rounded-2xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center">
             <Icon name="layers" size={24} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
             <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks yet</p>
-            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Add a tank to monitor water quality.</p>
+            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Create your first tank.</p>
             <Link to="/dashboard/tanks" className="mt-3 inline-flex min-h-10 items-center rounded-lg bg-[var(--ep-accent)] px-4 text-xs font-semibold text-white">Add a tank</Link>
           </div>
         )}
-        {tanks.length > 6 && <p className="mt-2 text-right text-xs text-[var(--ep-text-muted)]">Showing 6 of {tanks.length} tanks · highest priority first.</p>}
+        {tanks.length > 6 && <p className="mt-2 text-right text-xs text-[var(--ep-text-muted)]">Showing 6 of {tanks.length} · priority order.</p>}
         {noReadingCount > 0 && <p className="mt-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-2 text-xs leading-relaxed text-[var(--ep-text-muted)]"><span className="font-semibold text-[var(--ep-text)]">{noReadingCount} {noReadingCount === 1 ? "tank has" : "tanks have"} no water readings.</span> Missing readings count as needing attention.</p>}
       </section>
 
@@ -197,7 +197,7 @@ export function Dashboard() {
             <div className="rounded-xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-7 text-center">
               <Icon name="clock" size={21} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
               <p className="text-sm font-semibold text-[var(--ep-text)]">No recent activity yet</p>
-              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Water readings and vision scans will appear here.</p>
+              <p className="mt-1 text-xs text-[var(--ep-text-muted)]">New readings and scans appear here.</p>
             </div>
           )}
         </Panel>
@@ -234,7 +234,7 @@ export function Dashboard() {
           ) : (
             <div className="rounded-xl border border-dashed border-[var(--ep-line)] bg-[var(--ep-bg)] p-6 text-center">
               <Icon name="layers" size={24} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
-              <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks yet yet</p>
+              <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks yet</p>
               <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Add a tank to monitor facility health.</p>
               <Link to="/dashboard/tanks" className="mt-3 inline-flex min-h-9 items-center rounded-lg bg-[var(--ep-accent)] px-4 text-xs font-semibold text-white">Set up tanks</Link>
             </div>
