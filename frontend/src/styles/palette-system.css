@@ -2767,3 +2767,191 @@ html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini
   color: #70d7c8 !important;
   stroke: currentColor !important;
 }
+
+
+/* Final public mobile drawer palette. The earlier site-chrome rules hard-coded
+   a generic navy/bright-teal treatment; replace it with EcoPrawn's Ocean Teal
+   surfaces and a restrained active state. */
+html:not(.dark) .ep-mobile-site-drawer {
+  background: #ffffff !important;
+  color: #163b43 !important;
+  border-color: #d7e5e7 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:first-child {
+  background: #ffffff !important;
+  border-bottom-color: #dce8ea !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-logo {
+  --ep-logo-color: #087e8b !important;
+  --ep-logo-text: #123b43 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-logo-shrimp {
+  fill: #087e8b !important;
+  stroke: #087e8b !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-logo-wordmark {
+  color: #123b43 !important;
+  -webkit-text-fill-color: #123b43 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-mobile-drawer-caption,
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel + * {
+  color: #587780 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel a {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #294f58 !important;
+  box-shadow: none !important;
+}
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
+  background: #e8f4f4 !important;
+  border-color: #c8e2e3 !important;
+  color: #075b65 !important;
+  box-shadow: inset 3px 0 0 #087e8b !important;
+}
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] svg {
+  color: #087e8b !important;
+  stroke: currentColor !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:last-child {
+  background: #f5f9fa !important;
+  border-top-color: #dce8ea !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:last-child a:first-child {
+  background: #087e8b !important;
+  border: 1px solid #087e8b !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px -14px rgba(8,126,139,.7) !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:last-child a:last-child {
+  background: #ffffff !important;
+  border: 1px solid #cbdde0 !important;
+  color: #075b65 !important;
+}
+html.dark .ep-mobile-site-drawer {
+  background: #10272c !important;
+  color: #e8f3f4 !important;
+  border-color: #29474d !important;
+  box-shadow: 16px 0 48px -22px rgba(0,0,0,.72) !important;
+}
+html.dark .ep-mobile-site-drawer > div:first-child {
+  background: #122d33 !important;
+  border-bottom-color: #29474d !important;
+}
+html.dark .ep-mobile-site-drawer .ep-logo {
+  --ep-logo-color: #f4fbfb !important;
+  --ep-logo-text: #f4fbfb !important;
+}
+html.dark .ep-mobile-site-drawer .ep-logo-shrimp {
+  fill: #f4fbfb !important;
+  stroke: #f4fbfb !important;
+}
+html.dark .ep-mobile-site-drawer .ep-logo-wordmark {
+  color: #f4fbfb !important;
+  -webkit-text-fill-color: #f4fbfb !important;
+}
+html.dark .ep-mobile-site-drawer .ep-mobile-drawer-caption,
+html.dark .ep-mobile-site-drawer > div:nth-child(2) > div:first-child {
+  color: #a9c4c8 !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel {
+  background: transparent !important;
+  color: #dcebed !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #dcebed !important;
+  box-shadow: none !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
+  background: rgba(69,197,179,.14) !important;
+  border-color: rgba(69,197,179,.28) !important;
+  color: #70d7c8 !important;
+  box-shadow: inset 3px 0 0 #45c5b3 !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] svg {
+  color: #70d7c8 !important;
+  stroke: currentColor !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child {
+  background: #122d33 !important;
+  border-top-color: #29474d !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child a:first-child {
+  background: #45c5b3 !important;
+  border: 1px solid #45c5b3 !important;
+  color: #092b31 !important;
+  box-shadow: 0 8px 22px -14px rgba(69,197,179,.55) !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child a:last-child {
+  background: #17383f !important;
+  border: 1px solid #35575e !important;
+  color: #e8f3f4 !important;
+}
+
+/* Mobile header: the right-hand cluster contains the theme switch and
+   desktop auth links. Hide the links by element type so legacy utility
+   classes cannot make them overlap the centered wordmark. */
+@media (max-width: 1023px) {
+  #site-header > div {
+    display: grid !important;
+    grid-template-columns: 40px minmax(0, 1fr) 40px !important;
+    column-gap: 8px !important;
+    align-items: center !important;
+  }
+  #site-header > div > button[aria-controls="mobile-nav-panel"] {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+  }
+  #site-header > div > a[aria-label="EcoPrawn home"] {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+  #site-header > div > div:last-child {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    justify-self: end !important;
+    justify-content: flex-end !important;
+    overflow: visible !important;
+  }
+  #site-header > div > div:last-child > a,
+  #site-header > div > div:last-child .ep-cta-control {
+    display: none !important;
+  }
+  #site-header > div > div:last-child > button[role="switch"] {
+    display: inline-flex !important;
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+  }
+}
+@media (max-width: 380px) {
+  #site-header > div {
+    grid-template-columns: 36px minmax(0, 1fr) 36px !important;
+    column-gap: 6px !important;
+  }
+  #site-header > div > button[aria-controls="mobile-nav-panel"],
+  #site-header > div > div:last-child > button[role="switch"] {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+  }
+}
