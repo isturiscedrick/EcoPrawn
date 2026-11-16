@@ -1,33 +1,28 @@
 export const objectives = [
   {
     num: "01",
-    title: "Hardware & Software Integration",
-    body: "Every sensor, actuator, and control board runs on a unified hardware and software stack purpose-built for the EcoPrawn facility.",
+    title: "Integrated Facility Controls",
+    body: "Connect sensors, equipment, and software in one operating system.",
   },
   {
     num: "02",
-    title: "Critical Water Quality Parameters",
-    body: "Dissolved oxygen, pH, temperature, salinity, and water level are tracked continuously as the core indicators of tank health.",
+    title: "Water Quality Oversight",
+    body: "Track five core parameters against configured ranges.",
   },
   {
     num: "03",
-    title: "IoT Water Quality Monitoring",
-    body: "A deployed sensor network collects and transmits real-time water quality data, giving operators continuous, remote visibility into the tank.",
+    title: "Precision Feeding",
+    body: "Align feeding schedules with available biomass.",
   },
   {
     num: "04",
-    title: "Automated Smart Feeding",
-    body: "Feed is dispensed on schedule and adjusted automatically for available biomass, minimizing waste and manual intervention.",
+    title: "Non-invasive Growth Assessment",
+    body: "Estimate shrimp growth and biomass from camera observations.",
   },
   {
     num: "05",
-    title: "Computer Vision Growth Monitoring",
-    body: "Shrimp growth is tracked, biomass is estimated, and abnormal behavior is flagged visually — without nets or handling that stress the animals.",
-  },
-  {
-    num: "06",
-    title: "Unified Operational Platform",
-    body: "The water quality monitoring system, smart feeding mechanism, computer vision module, and web dashboard now operate together as one integrated aquaculture platform.",
+    title: "Coordinated Production Management",
+    body: "Bring monitoring, feeding, and water treatment into one workflow.",
   },
 ];
 
@@ -71,11 +66,11 @@ export const features = [
 ];
 
 export const inScope = [
-  { title: "Hardware Setup", body: "Indoor tank, circular water recirculation pump, aerator, automated feeder, and a central gateway hub, installed and operating as a single system." },
-  { title: "Sensor Network", body: "Water quality sensors for dissolved oxygen, pH, temperature, salinity, and water level, transmitting telemetry to an on-site server and cloud database." },
-  { title: "AI & Computer Vision System", body: "Machine learning models for visual shrimp growth assessment, biomass density estimation, and parameter-triggered device control, such as automatically activating aerators when dissolved oxygen falls below the defined threshold." },
-  { title: "Biofloc and Effluent Management", body: "A biofloc-based water management process integrated with a discharge plumbing system for controlled routing of bio-rich wastewater to designated mangrove or wetland vegetation." },
-  { title: "Effluent Routing", body: "Discharge plumbing that diverts bio-rich wastewater to surrounding mangrove and wetland vegetation." },
+  { title: "Hardware Setup", body: "Indoor tank, recirculation pump, aerator, feeder, and gateway hub." },
+  { title: "Sensor Network", body: "Five sensors send water readings to the on-site server and cloud database." },
+  { title: "AI & Computer Vision System", body: "Camera-based growth and biomass estimates, plus threshold-triggered device control." },
+  { title: "Biofloc and Effluent Management", body: "Biofloc treatment with controlled wastewater discharge." },
+  { title: "Effluent Routing", body: "Routes treated wastewater to designated mangrove and wetland areas." },
 ];
 
 export const outOfScope = [
