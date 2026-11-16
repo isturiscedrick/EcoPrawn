@@ -1925,3 +1925,12 @@ html.dark .ep-contact-page [data-contact-form] > form {
     transform: none !important;
   }
 }
+
+/* Contact hero: center the kicker, headline and supporting line in the
+   available hero space without changing the shared About hero layout. */
+.ep-contact-page [data-page-hero] > .relative.z-10 {
+  min-height: clamp(30rem, calc(100svh - 5rem), 44rem);
+  justify-content: center;
+  padding-top: clamp(2rem, 5vh, 4rem);
+  padding-bottom: clamp(2rem, 5vh, 4rem);
+}
