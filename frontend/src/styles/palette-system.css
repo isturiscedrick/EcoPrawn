@@ -1926,28 +1926,16 @@ html.dark .ep-contact-page [data-contact-form] > form {
   }
 }
 
-/* Dark mode: keep the About "One platform." and Contact "Contact" hero
-   phrases white instead of applying the teal gradient accent. */
-html.dark .ep-about-page [data-page-hero-headline] [data-page-hero-accent],
-html.dark .ep-contact-page [data-page-hero-headline] [data-page-hero-accent] {
-  color: #FFFFFF !important;
-  background-image: none !important;
-  -webkit-text-fill-color: #FFFFFF !important;
+/* The neutral phrases stay monochrome; only the explicitly marked
+   second phrase receives the Ocean Teal gradient in both themes. */
+html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] > [data-page-hero-accent],
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] > [data-page-hero-accent] {
+  background-image: linear-gradient(100deg,#087E8B 0%,#45C5B3 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
   text-shadow: none !important;
 }
-
-
-/* Highest-specificity dark hero override.
-   The shared Ocean Teal accent rules are intentionally retained for light
-   mode; in dark mode these two title phrases must render as solid white. */
-html.dark body.ecoprawn-root .ep-about-page h1[data-page-hero-headline] > span[data-page-hero-accent],
-html.dark body.ecoprawn-root .ep-contact-page h1[data-page-hero-headline] > span[data-page-hero-accent] {
-  color: #FFFFFF !important;
-  background: none !important;
-  background-image: none !important;
-  -webkit-background-clip: border-box !important;
-  background-clip: border-box !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  text-shadow: none !important;
-  filter: none !important;
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] > [data-page-hero-accent] {
+  background-image: linear-gradient(100deg,#45C5B3 0%,#70D7C8 100%) !important;
 }
