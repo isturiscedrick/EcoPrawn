@@ -41,7 +41,7 @@ const RANGE_OPTIONS: { value: Range; label: string }[] = [
 function RangeControl({ value, onChange }: { value: Range; onChange: (value: Range) => void }) {
   return <div className="-mx-1 overflow-x-auto overscroll-x-contain px-1 pb-1" role="group" aria-label="Chart date range"><div className="flex w-max min-w-full flex-nowrap gap-1 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] p-1">
     {RANGE_OPTIONS.map(option => <button key={option.value} type="button" aria-pressed={value === option.value} onClick={() => onChange(option.value)}
-      className={`min-h-11 shrink-0 whitespace-nowrap rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)] ${value === option.value ? "bg-[var(--ep-accent)] text-white shadow-sm" : "text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}`}>{option.label}</button>)}
+      className={`min-h-11 shrink-0 whitespace-nowrap rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)] ${value === option.value ? "bg-[var(--ep-accent)] text-[var(--ep-on-accent)] shadow-sm" : "text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}`}>{option.label}</button>)}
   </div></div>;
 }
 function sinceRange<T extends { recordedAt: string }>(items: T[], range: Range) {
@@ -105,7 +105,7 @@ const WATER_METRICS = {
   ph: { label: "pH", unit: "pH", color: "#8066B8" },
   temperature: { label: "Temperature", unit: "°C", color: "var(--ep-status-warning)" },
   salinity: { label: "Salinity", unit: "ppt", color: "#3680B9" },
-  waterLevel: { label: "Water level", unit: "%", color: "#C18A27" },
+  waterLevel: { label: "Water level", unit: "%", color: "var(--ep-brand-secondary)" },
 } as const;
 
 export function WaterHistoryChart({ data, tanks }: { data: WaterHistoryPoint[]; tanks: {id:string;name:string}[] }) {
