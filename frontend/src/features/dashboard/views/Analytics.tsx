@@ -22,7 +22,7 @@ export function Analytics() {
   })), [tanks]);
 
   const healthDistribution = useMemo(() => [
-    { label: "Healthy", value: tanks.filter(tank => tank.status === "ok").length, color: "#39865B" },
+    { label: "Healthy", value: tanks.filter(tank => tank.status === "ok").length, color: "var(--ep-status-success)" },
     { label: "Needs attention", value: tanks.filter(tank => tank.status === "warn").length, color: "var(--ep-status-warning)" },
   ], [tanks]);
 
