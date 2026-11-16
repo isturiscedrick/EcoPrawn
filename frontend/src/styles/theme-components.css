@@ -148,7 +148,7 @@ html.dark .dashboard-shell :is(.text-\[var\(--ep-accent\)\], .text-\[var\(--ep-a
   color: var(--ep-secondary);
 }
 
-/* Coral fills text color in dark mode */
+/* Ocean Teal fills use a contrasting foreground in dark mode */
 html.dark .dashboard-shell :is(.bg-\[var\(--ep-accent\)\], .bg-\[var\(--ep-accent\)\]) {
   color: #071426;
 }
