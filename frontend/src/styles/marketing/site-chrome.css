@@ -1,0 +1,549 @@
+/* ==========================================================================
+   EcoPrawn Site Chrome (Header & Footer)
+   Header contrast safeguards, footer container queries and theme surfaces,
+   and interactive hero preview depth.
+   ========================================================================== */
+
+@import "./site-header.css";
+
+/* ---------- Site Header Theme Safeguards ---------- */
+html:not(.dark) #site-header :is(button, a)[style*="background-color: var(--ep-surface)"],
+html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
+  color: #000000 !important;
+}
+
+/* ---------- Desktop public-page headers: transparent at rest, blurred on scroll ----------
+   Apply the same floating-header treatment to Landing, About, and Contact.
+   Mobile/tablet and dashboard headers retain their own solid surfaces. */
+@media (min-width: 1024px) {
+  html:has(.ep-business-landing) #site-header,
+  html:has(.ep-about-page) #site-header,
+  html:has(.ep-contact-page) #site-header {
+    background-color: transparent !important;
+    border-bottom-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  html:has(.ep-business-landing) #site-header[data-scrolled="true"],
+  html:has(.ep-about-page) #site-header[data-scrolled="true"],
+  html:has(.ep-contact-page) #site-header[data-scrolled="true"] {
+    -webkit-backdrop-filter: blur(16px) saturate(140%) !important;
+    backdrop-filter: blur(16px) saturate(140%) !important;
+  }
+}
+
+/* ---------- Site Footer: Container Query & Layout ---------- */
+footer[data-site-footer] {
+  position: relative;
+  width: 100%;
+}
+
+footer[data-site-footer] .ep-footer-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  container: ep-footer / inline-size;
+}
+
+footer[data-site-footer] .ep-footer-grid,
+footer[data-site-footer] .ep-footer-grid > * {
+  min-width: 0;
+}
+
+footer[data-site-footer] .ep-footer-grid h2 {
+  white-space: nowrap;
+}
+
+footer[data-site-footer] .ep-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+}
+
+footer[data-site-footer] .ep-footer-bottom p {
+  margin: 0;
+}
+
+@container ep-footer (max-width: 760px) {
+  footer[data-site-footer] .ep-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.5rem 1.25rem !important;
+  }
+  footer[data-site-footer] .ep-footer-brand {
+    grid-column: 1 / -1 !important;
+  }
+  footer[data-site-footer] .ep-footer-explore,
+  footer[data-site-footer] .ep-footer-account {
+    grid-column: span 1 !important;
+  }
+  footer[data-site-footer] .ep-footer-grid h2 {
+    white-space: normal !important;
+  }
+  footer[data-site-footer] .ep-footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+}
+
+@container ep-footer (max-width: 420px) {
+  footer[data-site-footer] .ep-footer-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.25rem !important;
+  }
+  footer[data-site-footer] .ep-footer-brand,
+  footer[data-site-footer] .ep-footer-explore,
+  footer[data-site-footer] .ep-footer-account {
+    grid-column: 1 / -1 !important;
+  }
+  footer[data-site-footer] .ep-footer-bottom {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Footer columns are content groups, not cards. Ensure no pseudo-card surfaces appear */
+footer[data-site-footer] .ep-footer-grid > .ep-footer-brand,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-explore,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-account {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+footer[data-site-footer] .ep-footer-grid > .ep-footer-brand::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-brand::after,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-explore::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-explore::after,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-account::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-account::after {
+  content: none !important;
+}
+
+/* ---------- Footer theme surfaces, text and brand mark ---------- */
+html:not(.dark) footer[data-site-footer] {
+  background: #f8fafc !important;
+  color: #111827 !important;
+}
+html:not(.dark) footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong, nav a, span) {
+  color: #111827 !important;
+}
+html:not(.dark) footer[data-site-footer] nav a:hover { color: #087e8b !important; }
+html:not(.dark) footer[data-site-footer] .ep-logo {
+  --ep-logo-color: #111827 !important;
+  --ep-logo-text: #111827 !important;
+}
+html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-shrimp {
+  fill: #111827 !important;
+  stroke: #111827 !important;
+}
+html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-wordmark {
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+html.dark footer[data-site-footer] {
+  background: #0b171b !important;
+  color: #f8fafc !important;
+}
+html.dark footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong, nav a, span) {
+  color: #f8fafc !important;
+}
+html.dark footer[data-site-footer] nav a:hover { color: #45c5b3 !important; }
+html.dark footer[data-site-footer] .ep-logo {
+  --ep-logo-color: #f8fafc !important;
+  --ep-logo-text: #f8fafc !important;
+}
+html.dark footer[data-site-footer] .ep-logo .ep-logo-shrimp {
+  fill: #f8fafc !important;
+  stroke: #f8fafc !important;
+}
+html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+}
+
+/* ---------- Interactive Hero Console Depth ---------- */
+.ep-hero-console {
+  transition: transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1), box-shadow 700ms ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .ep-hero-visual:hover .ep-hero-console {
+    transform: translateY(-5px) rotateX(1deg);
+    box-shadow: 0 36px 100px -38px rgba(8, 126, 139, 0.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ep-hero-console {
+    transition: none;
+  }
+}
+
+
+/* Mobile site drawer: neutral surfaces, blue active state, monochrome logo. */
+.ep-mobile-site-drawer { background: #ffffff !important; color: #111827 !important; border-color: #dbe2ea !important; }
+.ep-mobile-site-drawer .ep-logo {
+  --ep-logo-color: #111827 !important; --ep-logo-text: #111827 !important;
+}
+.ep-mobile-site-drawer .ep-logo-shrimp { fill: #111827 !important; stroke: #111827 !important; }
+.ep-mobile-site-drawer .ep-logo-wordmark { color: #111827 !important; -webkit-text-fill-color: #111827 !important; }
+.ep-mobile-site-drawer .ep-mobile-drawer-caption { color: #475569 !important; }
+.ep-mobile-site-drawer #mobile-nav-panel a { color: #1f2937 !important; }
+.ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
+  background: #087e8b !important; border-color: #087e8b !important; color: #ffffff !important;
+}
+.ep-mobile-site-drawer #mobile-nav-panel a:not([aria-current="page"]):hover {
+  background: #f1f5f9 !important; color: #066874 !important;
+}
+.ep-mobile-site-drawer > div:last-child { background: #f8fafc !important; border-color: #dbe2ea !important; }
+.ep-mobile-site-drawer > div:last-child a:first-child {
+  background: #087e8b !important; color: #ffffff !important;
+}
+.ep-mobile-site-drawer > div:last-child a:last-child {
+  background: #ffffff !important; border-color: #dbe2ea !important; color: #111827 !important;
+}
+.ep-mobile-site-drawer button[aria-label="Close"] {
+  background: #ffffff !important; border-color: #dbe2ea !important; color: #475569 !important;
+}
+html.dark .ep-mobile-site-drawer { background: #111827 !important; color: #f8fafc !important; border-color: #334155 !important; }
+html.dark .ep-mobile-site-drawer .ep-logo {
+  --ep-logo-color: #f8fafc !important; --ep-logo-text: #f8fafc !important;
+}
+html.dark .ep-mobile-site-drawer .ep-logo-shrimp { fill: #f8fafc !important; stroke: #f8fafc !important; }
+html.dark .ep-mobile-site-drawer .ep-logo-wordmark { color: #f8fafc !important; -webkit-text-fill-color: #f8fafc !important; }
+html.dark .ep-mobile-site-drawer .ep-mobile-drawer-caption { color: #cbd5e1 !important; }
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a { color: #e2e8f0 !important; }
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
+  background: #45c5b3 !important; border-color: #45c5b3 !important; color: #071426 !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a:not([aria-current="page"]):hover {
+  background: #1f2937 !important; color: #70d7c8 !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child { background: #0b171b !important; border-color: #334155 !important; }
+html.dark .ep-mobile-site-drawer > div:last-child a:first-child {
+  background: #45c5b3 !important; color: #071426 !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child a:last-child {
+  background: #111827 !important; border-color: #334155 !important; color: #f8fafc !important;
+}
+html.dark .ep-mobile-site-drawer button[aria-label="Close"] {
+  background: #111827 !important; border-color: #334155 !important; color: #cbd5e1 !important;
+}
+
+
+/* Dashboard mobile drawer mirrors the public site's mobile navigation shell.
+   Scoped to the mobile drawer so desktop dashboard navigation is unaffected. */
+.ep-mobile-dashboard-drawer { background:#fff !important; color:#111827 !important; border-color:#dbe2ea !important; }
+.ep-mobile-dashboard-drawer .ep-logo { --ep-logo-color:#111827 !important; --ep-logo-text:#111827 !important; }
+.ep-mobile-dashboard-drawer .ep-logo-shrimp { fill:#111827 !important; stroke:#111827 !important; }
+.ep-mobile-dashboard-drawer .ep-logo-wordmark { color:#111827 !important; -webkit-text-fill-color:#111827 !important; }
+.ep-mobile-dashboard-drawer .ep-mobile-drawer-caption,
+.ep-mobile-dashboard-drawer .ep-font-mono { color:#475569 !important; }
+.ep-mobile-dashboard-drawer > div:nth-child(2) a { background:#fff !important; border-color:#dbe2ea !important; }
+.ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:first-child { color:#111827 !important; }
+.ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:last-child { color:#475569 !important; }
+.ep-mobile-dashboard-drawer > div:nth-child(2) a > div:first-child { background:rgba(8,126,139,.14) !important; color:#066874 !important; }
+.ep-mobile-dashboard-drawer nav a > span { color:#1f2937 !important; }
+.ep-mobile-dashboard-drawer nav a[aria-current="page"] > span { background:#087e8b !important; border-color:#087e8b !important; color:#fff !important; box-shadow:0 8px 20px -12px rgba(8,126,139,.65) !important; }
+.ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span { color:#fff !important; }
+.ep-mobile-dashboard-drawer nav a:not([aria-current="page"]):hover > span { background:#f1f5f9 !important; color:#066874 !important; }
+.ep-mobile-dashboard-drawer nav a:focus-visible { outline:2px solid #087e8b; outline-offset:2px; }
+.ep-mobile-dashboard-drawer > div:last-child { background:#f8fafc !important; border-color:#dbe2ea !important; }
+.ep-mobile-dashboard-drawer > div:last-child a[aria-current="page"] { background:#087e8b !important; border-color:#087e8b !important; color:#fff !important; }
+.ep-mobile-dashboard-drawer > div:last-child button { border:1px solid #dbe2ea !important; border-radius:.75rem !important; background:#fff !important; color:#111827 !important; }
+.ep-mobile-dashboard-drawer > div:last-child button:hover { background:#f1f5f9 !important; color:#066874 !important; }
+.ep-mobile-dashboard-drawer button[aria-label="Close navigation menu"] { background:#fff !important; border-color:#dbe2ea !important; color:#475569 !important; }
+html.dark .ep-mobile-dashboard-drawer { background:#111827 !important; color:#f8fafc !important; border-color:#334155 !important; }
+html.dark .ep-mobile-dashboard-drawer .ep-logo { --ep-logo-color:#f8fafc !important; --ep-logo-text:#f8fafc !important; }
+html.dark .ep-mobile-dashboard-drawer .ep-logo-shrimp { fill:#f8fafc !important; stroke:#f8fafc !important; }
+html.dark .ep-mobile-dashboard-drawer .ep-logo-wordmark { color:#f8fafc !important; -webkit-text-fill-color:#f8fafc !important; }
+html.dark .ep-mobile-dashboard-drawer .ep-mobile-drawer-caption,
+html.dark .ep-mobile-dashboard-drawer .ep-font-mono { color:#cbd5e1 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a { background:#1f2937 !important; border-color:#334155 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:first-child { color:#f8fafc !important; }
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:last-child > div:last-child { color:#cbd5e1 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:nth-child(2) a > div:first-child { background:rgba(69,197,179,.15) !important; color:#70d7c8 !important; }
+html.dark .ep-mobile-dashboard-drawer nav a > span { color:#e2e8f0 !important; }
+html.dark .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span { background:#45c5b3 !important; border-color:#45c5b3 !important; color:#071426 !important; }
+html.dark .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span { color:#071426 !important; }
+html.dark .ep-mobile-dashboard-drawer nav a:not([aria-current="page"]):hover > span { background:#1f2937 !important; color:#70d7c8 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:last-child { background:#0b171b !important; border-color:#334155 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:last-child a[aria-current="page"] { background:#45c5b3 !important; border-color:#45c5b3 !important; color:#071426 !important; }
+html.dark .ep-mobile-dashboard-drawer > div:last-child button { background:#111827 !important; border-color:#334155 !important; color:#f8fafc !important; }
+html.dark .ep-mobile-dashboard-drawer > div:last-child button:hover { background:#1f2937 !important; color:#70d7c8 !important; }
+html.dark .ep-mobile-dashboard-drawer button[aria-label="Close navigation menu"] { background:#111827 !important; border-color:#334155 !important; color:#cbd5e1 !important; }
+
+
+/* Mobile header surface: keep the public navigation visibly grounded on small screens. */
+@media (max-width: 1023px) {
+  #site-header {
+    background-color: var(--ep-bg, #ffffff) !important;
+    background-image: none !important;
+    border-bottom: 1px solid var(--ep-line, #dbe2ea) !important;
+    box-shadow: 0 6px 20px -18px rgba(15, 23, 42, 0.42) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  html.dark #site-header {
+    background-color: var(--ep-bg, #0b171b) !important;
+    border-bottom-color: var(--ep-line, #334155) !important;
+    box-shadow: 0 6px 20px -18px rgba(0, 0, 0, 0.7) !important;
+  }
+}
+
+
+/* ---------- Desktop public header: calm glass surface after scrolling ---------- */
+@media (min-width: 1024px) {
+  html:has(.ep-business-landing) #site-header,
+  html:has(.ep-about-page) #site-header,
+  html:has(.ep-contact-page) #site-header {
+    transition:
+      background-color 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      backdrop-filter 220ms ease,
+      -webkit-backdrop-filter 220ms ease;
+  }
+
+  html:not(.dark):is(:has(.ep-business-landing), :has(.ep-about-page), :has(.ep-contact-page))
+    #site-header[data-scrolled="true"] {
+    background-color: color-mix(in srgb, #f8fafc 90%, transparent) !important;
+    border-bottom-color: rgba(8, 126, 139, 0.14) !important;
+    box-shadow: 0 10px 30px -24px rgba(23, 59, 70, 0.42) !important;
+  }
+
+  html.dark:is(:has(.ep-business-landing), :has(.ep-about-page), :has(.ep-contact-page))
+    #site-header[data-scrolled="true"] {
+    background-color: color-mix(in srgb, #102b31 91%, transparent) !important;
+    border-bottom-color: rgba(69, 197, 179, 0.18) !important;
+    box-shadow: 0 12px 32px -24px rgba(0, 0, 0, 0.72) !important;
+  }
+
+  #site-header nav[aria-label="Primary navigation"] {
+    gap: 0.2rem;
+    padding: 0.3rem;
+    border-color: color-mix(in srgb, var(--ep-line) 78%, transparent);
+    box-shadow: 0 8px 24px -22px rgba(23, 59, 70, 0.5);
+  }
+
+  #site-header nav[aria-label="Primary navigation"] a {
+    min-height: 2.55rem;
+    padding-inline: 1.1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* ---------- Footer desktop grid refinements ---------- */
+footer[data-site-footer] .ep-footer-inner {
+  max-width: 1280px;
+}
+
+footer[data-site-footer] .ep-footer-grid {
+  align-items: start;
+}
+
+footer[data-site-footer] .ep-footer-grid h2 {
+  margin-top: 0.2rem;
+}
+
+footer[data-site-footer] .ep-footer-platform {
+  min-width: 0;
+}
+
+footer[data-site-footer] .ep-footer-platform li {
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+footer[data-site-footer] .ep-footer-platform li::before {
+  position: absolute;
+  top: 0.58em;
+  left: 0;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 999px;
+  background: var(--ep-accent);
+  content: "";
+}
+
+footer[data-site-footer] .ep-footer-bottom {
+  gap: 0.75rem 2rem;
+}
+
+@container ep-footer (max-width: 760px) {
+  footer[data-site-footer] .ep-footer-platform {
+    grid-column: span 1 !important;
+  }
+}
+
+@container ep-footer (max-width: 420px) {
+  footer[data-site-footer] .ep-footer-platform {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @media (min-width: 1024px) {
+    html:has(.ep-business-landing) #site-header,
+    html:has(.ep-about-page) #site-header,
+    html:has(.ep-contact-page) #site-header {
+      transition: none !important;
+    }
+  }
+}
+
+
+/* Desktop header actions remain circular at every available width. */
+@media (min-width: 1024px) {
+  #site-header .ep-cta-control,
+  #site-header button[role="switch"],
+  #site-header a[href="/"] + nav a {
+    border-radius: 9999px !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #site-header .ep-cta-control {
+    flex: 0 0 2.5rem;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding-inline: 0 !important;
+    aspect-ratio: 1 / 1;
+    border-radius: 9999px !important;
+  }
+
+  #site-header button[role="switch"] {
+    flex: 0 0 2.5rem;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 9999px !important;
+  }
+}
+
+
+/* Keep the Platform footer column consistent with the other content columns.
+   It is a plain footer group, not a raised card. */
+footer[data-site-footer] .ep-footer-grid > .ep-footer-platform {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  backdrop-filter: none !important;
+}
+footer[data-site-footer] .ep-footer-grid > .ep-footer-platform::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-platform::after {
+  content: none !important;
+  display: none !important;
+}
+
+
+/* Mobile footer layout: stack the brand first, keep Explore and Platform as
+   balanced columns, then give account actions a full-width final section. */
+@media (max-width: 639px) {
+  footer[data-site-footer] {
+    padding: 2.25rem 1.1rem 1.5rem !important;
+  }
+  footer[data-site-footer] .ep-footer-inner {
+    width: 100%;
+  }
+  footer[data-site-footer] .ep-footer-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: 1.25rem !important;
+    row-gap: 1.8rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  footer[data-site-footer] .ep-footer-brand {
+    grid-column: 1 / -1 !important;
+    padding-bottom: 1.25rem !important;
+    border-bottom: 1px solid var(--ep-line) !important;
+  }
+  footer[data-site-footer] .ep-footer-brand p {
+    max-width: 22rem !important;
+    margin-top: .75rem !important;
+    font-size: .82rem !important;
+    line-height: 1.55 !important;
+  }
+  footer[data-site-footer] .ep-footer-explore,
+  footer[data-site-footer] .ep-footer-platform {
+    grid-column: span 1 !important;
+    min-width: 0 !important;
+  }
+  footer[data-site-footer] .ep-footer-grid h2 {
+    margin-bottom: .25rem !important;
+    font-size: .68rem !important;
+    letter-spacing: .14em !important;
+  }
+  footer[data-site-footer] .ep-footer-explore nav {
+    gap: .1rem !important;
+  }
+  footer[data-site-footer] .ep-footer-platform ul {
+    gap: .55rem !important;
+    font-size: .8rem !important;
+    line-height: 1.4 !important;
+  }
+  footer[data-site-footer] .ep-footer-account {
+    grid-column: 1 / -1 !important;
+    padding-top: 1.25rem !important;
+    border-top: 1px solid var(--ep-line) !important;
+  }
+  footer[data-site-footer] .ep-footer-account > p {
+    max-width: 100% !important;
+    margin-top: .55rem !important;
+  }
+  footer[data-site-footer] .ep-footer-account nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: .6rem !important;
+    margin-top: .8rem !important;
+  }
+  footer[data-site-footer] .ep-footer-account nav a {
+    justify-content: center !important;
+    min-height: 42px !important;
+    padding: .55rem .65rem !important;
+    border: 1px solid var(--ep-line) !important;
+    border-radius: 999px !important;
+    background: color-mix(in srgb, var(--ep-accent) 7%, var(--ep-surface)) !important;
+    color: var(--ep-primary) !important;
+    font-size: .78rem !important;
+    font-weight: 650 !important;
+    text-align: center !important;
+  }
+  footer[data-site-footer] .ep-footer-bottom {
+    align-items: center !important;
+    gap: .55rem !important;
+    padding-top: 1.1rem !important;
+    text-align: center !important;
+    font-size: .68rem !important;
+    line-height: 1.5 !important;
+  }
+  footer[data-site-footer] .ep-footer-bottom p {
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+}
+@media (max-width: 360px) {
+  footer[data-site-footer] .ep-footer-grid {
+    column-gap: .9rem !important;
+  }
+  footer[data-site-footer] .ep-footer-platform li {
+    padding-left: .7rem !important;
+  }
+  footer[data-site-footer] .ep-footer-account nav {
+    grid-template-columns: 1fr !important;
+  }
+}
