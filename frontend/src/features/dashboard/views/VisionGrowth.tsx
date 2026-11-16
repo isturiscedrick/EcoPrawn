@@ -9,7 +9,7 @@ function GrowthTrendChart({ values }: { values: number[] }) {
 
   if (values.length < 2) {
     return (
-      <p className="py-6 text-sm text-[rgba(11,35,32,0.6)]">
+      <p className="py-6 text-sm text-[var(--ep-text-muted)]">
         Not enough scans to display a trend.
       </p>
     );
@@ -42,7 +42,7 @@ function GrowthTrendChart({ values }: { values: number[] }) {
       <div className="flex items-center justify-between gap-3 text-sm font-medium text-[var(--ep-text-muted)]">
         <span>Average body length (cm)</span>
         {selectedIndex !== null && (
-          <span className="rounded-full bg-[rgba(232,98,58,0.12)] px-3 py-1 font-semibold text-[var(--ep-accent)]">
+          <span className="rounded-full bg-[var(--ep-accent-tint)] px-3 py-1 font-semibold text-[var(--ep-accent)]">
             {values[selectedIndex].toFixed(1)} cm
           </span>
         )}
@@ -50,8 +50,8 @@ function GrowthTrendChart({ values }: { values: number[] }) {
       <svg viewBox={`0 0 ${w} ${h}`} width="100%" height="250" role="group" aria-label="Interactive growth trend chart">
         <defs>
           <linearGradient id="ep-growth-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#087e8b" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#087e8b" stopOpacity="0" />
+            <stop offset="0%" stopColor="var(--ep-accent)" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="var(--ep-accent)" stopOpacity="0" />
           </linearGradient>
         </defs>
         {[0, 0.33, 0.66, 1].map((position) => {
@@ -78,7 +78,7 @@ function GrowthTrendChart({ values }: { values: number[] }) {
         <polyline
           points={points}
           fill="none"
-          stroke="#087e8b"
+          stroke="var(--ep-accent)"
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -142,7 +142,7 @@ export function VisionGrowth() {
           <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
             Vision &amp; Growth Analytics
           </h1>
-          <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
+          <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
             Growth scans and biomass · {tankCount} tanks
           </div>
         </div>
@@ -176,7 +176,7 @@ export function VisionGrowth() {
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
             <Panel title="Growth Trend — Avg. Body Length" badge="7-week view">
               <GrowthTrendChart values={growthTrend} />
-              <div className="flex gap-5 mt-2.5 text-[11.5px] text-[rgba(11,35,32,0.55)] ep-font-mono">
+              <div className="flex gap-5 mt-2.5 text-[11.5px] text-[var(--ep-text-muted)] ep-font-mono">
                 <span className="flex items-center gap-1.5">
                   <span className="inline-block w-3 h-[2px] bg-[var(--coral)]" /> Body length (cm)
                 </span>
@@ -187,7 +187,7 @@ export function VisionGrowth() {
               <div className="flex flex-col">
                 {visionScanLog.map((s, i) => (
                   <div key={s.id} className={`dashboard-hover rounded-lg px-2 py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
-                    <div className="ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.45)] mb-1">
+                    <div className="ep-font-mono text-[10.5px] text-[var(--ep-text-muted)] mb-1">
                       {s.time} · {s.tank}
                     </div>
                     <div className="text-[13px] text-[var(--water-deep)]">{s.note}</div>
@@ -201,7 +201,7 @@ export function VisionGrowth() {
             <ScrollFadeContainer>
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
-                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[rgba(11,35,32,0.45)] border-b border-[var(--sand-dim)]">
+                  <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--sand-dim)]">
                     <th className="py-2.5 pr-3 font-semibold">Tank</th>
                     <th className="py-2.5 pr-3 font-semibold">Body Length</th>
                     <th className="py-2.5 pr-3 font-semibold">Weight</th>
@@ -234,7 +234,7 @@ export function VisionGrowth() {
         </>
       ) : (
         <Panel title="Growth Snapshot" badge="0 tanks">
-          <div className="py-10 text-center text-[13px] text-[rgba(11,35,32,0.5)]">
+          <div className="py-10 text-center text-[13px] text-[var(--ep-text-muted)]">
             No tanks yet. Add one to view growth data.
           </div>
         </Panel>
