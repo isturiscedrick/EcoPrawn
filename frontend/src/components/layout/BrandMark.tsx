@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { SHAPES } from "./BrandMarkPaths";
 import "@/styles/brand-mark.css";
 
 interface BrandMarkProps {
@@ -9,9 +10,7 @@ interface BrandMarkProps {
   showWordmark?: boolean;
 }
 
-import { SHAPES } from "./BrandMarkPaths";
 export { SHAPES } from "./BrandMarkPaths";
-
 
 export function BrandMark({ size = 30, className = "", logoColor, logoTextColor, showWordmark = true }: BrandMarkProps) {
   return (
