@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { SHAPES } from "./BrandMarkPaths";
-import "@/styles/brand-mark.css";
+import "@/styles/components/brand-mark.css";
 
 interface BrandMarkProps {
   size?: number;
