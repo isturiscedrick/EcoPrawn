@@ -1587,3 +1587,60 @@ html.dark footer[data-site-footer] {
   background: var(--ep-footer-structure) !important;
   border-top-color: rgba(69,197,179,.28) !important;
 }
+
+
+/* Coral Sand secondary brand treatment for every public hero section.
+   Keep primary headline text neutral and reserve Coral Sand for the emphasized
+   phrase, kicker details and small decorative hero accents. */
+:is(.ep-business-landing,.ep-landing) #top :is(
+  .ep-hero-headline-secondary,
+  [data-hero="headline"] > span:last-child
+),
+:is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] :is(
+  [data-page-hero-accent], span:last-child
+) {
+  color: #D99A75 !important;
+  -webkit-text-fill-color: #D99A75 !important;
+  text-shadow: 0 10px 34px rgba(217,154,117,.18) !important;
+}
+:is(.ep-business-landing,.ep-landing) #top :is(
+  .ep-hero-headline-secondary::after,
+  [data-hero="headline"] > span:last-child::after
+) {
+  background-color: #D99A75 !important;
+  border-color: #D99A75 !important;
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
+:is(#top,[data-page-hero]) :is([data-page-kicker],[data-hero-kicker]) {
+  border-color: color-mix(in srgb,#D99A75 42%,var(--ep-line)) !important;
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
+:is(#top,[data-page-hero]) :is([data-page-kicker] .ep-pulse-dot,[data-hero-kicker] .ep-pulse-dot) {
+  background-color: #D99A75 !important;
+}
+html.dark :is(.ep-business-landing,.ep-landing) #top :is(
+  .ep-hero-headline-secondary,
+  [data-hero="headline"] > span:last-child
+),
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] :is(
+  [data-page-hero-accent], span:last-child
+) {
+  color: #E9BFA0 !important;
+  -webkit-text-fill-color: #E9BFA0 !important;
+  text-shadow: 0 10px 34px rgba(233,191,160,.16) !important;
+}
+html.dark :is(.ep-business-landing,.ep-landing) #top :is(
+  .ep-hero-headline-secondary::after,
+  [data-hero="headline"] > span:last-child::after
+) {
+  background-color: #E9BFA0 !important;
+  border-color: #E9BFA0 !important;
+}
+html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
+:is(#top,[data-page-hero]) :is([data-page-kicker],[data-hero-kicker]) {
+  border-color: color-mix(in srgb,#E9BFA0 48%,var(--ep-line)) !important;
+}
+html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
+:is(#top,[data-page-hero]) :is([data-page-kicker] .ep-pulse-dot,[data-hero-kicker] .ep-pulse-dot) {
+  background-color: #E9BFA0 !important;
+}
