@@ -35,11 +35,14 @@ This directory is the single source of truth for frontend CSS. Keep styles modul
   - `hero-lens.css` — HeroLens depth, optics, and container-query behavior.
   - `landing-sections.css` — public hero, section bands, capabilities, and process layouts.
   - `site-chrome.css` — shared header/footer and public chrome.
-  - `marketing-experience-foundations.css` and `marketing-experience-layout.css` — shared editorial foundations and page layouts.
+  - `marketing-page-foundations.css` and `marketing-page-responsive-finish.css` — shared editorial foundations, responsive polish, and page-level refinements.
+  - `marketing-hero-layouts.css` and `marketing-public-page-layouts.css` — landing, About, and Contact hero and content layouts.
   - `marketing-landing-interactions.css` — landing hero, CTA, and motion interactions.
   - `marketing-public-illustrations.css` — shared public-page illustrations and supporting visuals.
   - `marketing-shared-card-system.css` — shared card surfaces and About/Contact hero alignment.
-  - `marketing-depth-foundations.css`, `marketing-depth-landing.css`, and `marketing-depth-pages.css` — original marketing visuals grouped by shared foundations, landing-page sections, and About/Contact refinements.
+  - `marketing-depth-foundation-core.css`, `marketing-depth-target-ranges.css`, and `marketing-depth-platform-and-about.css` — shared depth foundations, target-range visuals, and platform/About refinements.
+  - `marketing-depth-landing-foundations.css`, `marketing-depth-landing-responsive.css`, and `marketing-depth-landing-finish.css` — landing visual hierarchy, responsive composition, and final polish.
+  - `marketing-depth-accessibility.css`, `marketing-depth-page-layouts.css`, and `marketing-depth-about-contact.css` — accessibility refinements, public-page layouts, and About/Contact visual treatments.
   - `mobile-first.css` — cross-page mobile-first responsive treatments.
 - `site-header.css` — SiteHeader responsive layout.
 - `brand-mark.css` — BrandMark and wordmark treatments.
