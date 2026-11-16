@@ -215,7 +215,7 @@ export function VisionGrowth() {
                       <td className="py-3">
                         <span
                           className={`text-[11.5px] font-semibold ${
-                            t.abnormal === 0 ? "text-[var(--ep-accent)]" : "text-[var(--amber-text)]"
+                            t.abnormal === 0 ? "text-[var(--ep-status-success)]" : "text-[var(--amber-text)]"
                           }`}
                         >
                           {t.abnormal === 0 ? "None" : `${t.abnormal} flagged`}
