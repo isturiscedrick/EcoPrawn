@@ -9,7 +9,7 @@ import { SectionNav } from "./SectionNav";
 import { AquacultureIllustration } from "@/components/illustrations/AquacultureIllustration";
 import { objectives, features, inScope, outOfScope } from "@/content/site";
 
-const SECTION_PAD = "px-4 py-16 sm:px-8 sm:py-24";
+const SECTION_PAD = "px-4 py-16 sm:px-8 sm:py-20 lg:py-24";
 const SECTION_HEADER_MARGIN = "mb-10 sm:mb-14";
 
 // Same eyebrow / heading scale as the landing sections.
