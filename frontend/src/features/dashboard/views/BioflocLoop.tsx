@@ -25,11 +25,11 @@ export function BioflocLoop() {
           <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
             Biofloc Loop
           </h1>
-          <div className="text-[13px] text-[rgba(11,35,32,0.55)] mt-1.5">
+          <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
             Biological water treatment &amp; controlled discharge routing
           </div>
         </div>
-        <div className="inline-flex items-center gap-2 bg-white border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
+        <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
           Loop active
         </div>
@@ -51,8 +51,8 @@ export function BioflocLoop() {
       <div className="mb-5">
         <Panel title="Biofloc metric status" badge={`${bioflocMetrics.length} monitored metrics`}>
           <DonutChart items={[
-            { label: "In range", value: bioflocMetrics.filter(metric => metric.status === "ok").length, color: "#39865B" },
-            { label: "Needs attention", value: bioflocMetrics.filter(metric => metric.status !== "ok").length, color: "#D85A35" },
+            { label: "In range", value: bioflocMetrics.filter(metric => metric.status === "ok").length, color: "var(--ep-status-success)" },
+            { label: "Needs attention", value: bioflocMetrics.filter(metric => metric.status !== "ok").length, color: "var(--ep-status-warning)" },
           ]} unit="metrics" emptyLabel="No biofloc metrics available." />
         </Panel>
       </div>
@@ -67,7 +67,7 @@ export function BioflocLoop() {
                 </span>
                 <div>
                   <div className="text-[13px] font-semibold text-[var(--water-deep)] mb-0.5">{s.title}</div>
-                  <div className="text-[12.5px] leading-[1.55] text-[rgba(11,35,32,0.6)]">{s.body}</div>
+                  <div className="text-[12.5px] leading-[1.55] text-[var(--ep-text-muted)]">{s.body}</div>
                 </div>
               </div>
             ))}
@@ -80,11 +80,11 @@ export function BioflocLoop() {
               <div key={e.id} className={`py-3 ${i !== 0 ? "border-t border-[var(--sand-dim)]" : "pt-0"}`}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[13px] font-semibold text-[var(--water-deep)]">{e.event}</span>
-                  <span className="ep-font-mono text-[10.5px] text-[rgba(11,35,32,0.45)] whitespace-nowrap">
+                  <span className="ep-font-mono text-[10.5px] text-[var(--ep-text-muted)] whitespace-nowrap">
                     {e.time}
                   </span>
                 </div>
-                <div className="text-[12.5px] text-[rgba(11,35,32,0.6)]">{e.detail}</div>
+                <div className="text-[12.5px] text-[var(--ep-text-muted)]">{e.detail}</div>
               </div>
             ))}
           </div>
