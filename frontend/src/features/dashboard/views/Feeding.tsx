@@ -120,7 +120,7 @@ export function Feeding() {
           </div>
 
           <Panel title="Feed Allocation" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
-            <ScrollFadeContainer>
+            <ScrollFadeContainer ariaLabel="Feed allocation table">
               <table className="w-full text-left border-collapse min-w-[560px]">
                 <thead>
                   <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--sand-dim)]">
