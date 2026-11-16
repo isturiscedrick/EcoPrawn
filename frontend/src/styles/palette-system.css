@@ -44,7 +44,6 @@ html.dark {
 }
 html:not(.dark) body.ecoprawn-root { background: #f8fafc; color: #111827; }
 html.dark body.ecoprawn-root { background: #0b171b; color: #e8f4f2; }
-.dashboard-shell {
   --ep-brand-primary: #087e8b;
   --ep-accent: #087e8b; --ep-accent-hover: #066874;
   --ep-secondary: #1f2937;
