@@ -6,7 +6,8 @@
 @import "./theme-components.css";
 @import "./dashboard-foundations.css";
 @import "./dashboard-monitoring-core.css";
-@import "./dashboard-mobile-navigation.css";
+@import "./dashboard-desktop-and-mobile-layout.css";
+@import "./dashboard-mobile-module-layouts.css";
 @import "./dashboard-mobile-modules.css";
 @import "./dashboard-responsive-foundations.css";
 @import "./dashboard-responsive-overview.css";
