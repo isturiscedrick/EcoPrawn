@@ -9,6 +9,7 @@ import { DASHBOARD_NAV_ITEMS } from "@/config/nav";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
+import { DASHBOARD_QUICK_LINKS, getProfileInitials } from "./system-layout-utils";
 
 interface SystemLayoutProps {
   children: ReactNode;
@@ -55,7 +56,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const profileTriggerRef = useRef<HTMLButtonElement>(null);
   const profileMenuPanelRef = useRef<HTMLDivElement>(null);
   const pullStartY = useRef<number | null>(null);
-  const profileInitials = profileName.trim().split(/\s+/).slice(0, 2).map((part) => part[0]?.toUpperCase() ?? "").join("") || "FO";
+  const profileInitials = getProfileInitials(profileName);
 
   useLayoutEffect(() => {
     const main = document.querySelector<HTMLElement>("[data-dashboard-route-content]");
@@ -425,13 +426,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         aria-label="Quick dashboard navigation"
         className="fixed inset-x-0 bottom-0 z-[70] grid grid-cols-5 border-t border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-surface)_94%,transparent)] px-1 pt-2 pb-[max(.5rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-24px_rgba(15,23,42,.42)] backdrop-blur-xl lg:hidden"
       >
-        {([
-          { key: "home", label: "Home", href: "/dashboard", icon: "house" },
-          { key: "tanks", label: "Tanks", href: "/dashboard/tanks", icon: "layers" },
-          { key: "vision", label: "Vision", href: "/dashboard/analytics", icon: "camera" },
-          { key: "feeding", label: "Feeding", href: "/dashboard/feeding", icon: "utensils" },
-          { key: "water", label: "Water Quality", href: "/dashboard/water", icon: "waves" },
-        ] as const).map((item) => {
+        {DASHBOARD_QUICK_LINKS.map((item) => {
           const active = pathname === item.href || pathname.startsWith(item.href + "/") ||
             (item.key === "home" && pathname === "/dashboard/overview") ||
             (item.key === "vision" && pathname === "/dashboard/vision");
