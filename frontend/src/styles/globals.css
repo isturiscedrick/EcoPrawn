@@ -14,4 +14,7 @@
 @import "./palette-surfaces.css";
 @import "./palette-marketing.css";
 @import "./palette-public-chrome.css";
-@import "./palette-dashboard-navigation.css";
+@import "./palette-dashboard-sidebar.css";
+@import "./palette-public-header.css";
+@import "./palette-mobile-public-chrome.css";
+@import "./palette-dashboard-mobile-header.css";
