@@ -2955,3 +2955,61 @@ html.dark .ep-mobile-site-drawer > div:last-child a:last-child {
     min-height: 36px !important;
   }
 }
+
+
+/* Refined mobile hamburger control: clearer visual weight, larger touch
+   target, and a quiet Ocean Teal surface that adapts to both themes. */
+@media (max-width: 639px) {
+  #site-header .ep-mobile-menu-toggle {
+    box-sizing: border-box !important;
+    width: 46px !important;
+    min-width: 46px !important;
+    max-width: 46px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid #c9e1e3 !important;
+    border-radius: 50% !important;
+    background: linear-gradient(145deg,#ffffff 0%,#edf7f7 100%) !important;
+    color: #087e8b !important;
+    box-shadow: 0 3px 10px rgba(12,75,83,.09), inset 0 1px 0 rgba(255,255,255,.95) !important;
+    transition: background .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #site-header .ep-mobile-menu-toggle svg {
+    width: 21px !important;
+    height: 21px !important;
+    flex: 0 0 21px !important;
+  }
+  #site-header .ep-mobile-menu-toggle svg path {
+    stroke: currentColor !important;
+    stroke-width: 2.1 !important;
+    stroke-linecap: round !important;
+  }
+  #site-header .ep-mobile-menu-toggle:active {
+    transform: scale(.94) !important;
+    box-shadow: 0 1px 4px rgba(12,75,83,.12) !important;
+  }
+  #site-header .ep-mobile-menu-toggle:focus-visible {
+    outline: 3px solid rgba(8,126,139,.24) !important;
+    outline-offset: 3px !important;
+  }
+}
+@media (max-width: 639px) and (prefers-reduced-motion: reduce) {
+  #site-header .ep-mobile-menu-toggle {
+    transition: none !important;
+  }
+}
+html.dark #site-header .ep-mobile-menu-toggle {
+  border-color: #35575e !important;
+  background: linear-gradient(145deg,#17383f 0%,#122d33 100%) !important;
+  color: #70d7c8 !important;
+  box-shadow: 0 3px 12px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+html.dark #site-header .ep-mobile-menu-toggle:focus-visible {
+  outline-color: rgba(69,197,179,.3) !important;
+}
