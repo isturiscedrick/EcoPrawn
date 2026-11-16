@@ -347,7 +347,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                 <Link key={item.view} to={(item.view === "overview" ? "/dashboard" : `/dashboard/${item.view}`) as never} onClick={() => { closeSearch(false); setSearchQuery(""); }} className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-[var(--ep-primary)]">
                   <Icon name={item.icon} size={17} className="text-[var(--ep-primary)]" />{item.label}<span className="ml-auto text-xs text-[var(--ep-text-muted)]">Open</span>
                 </Link>
-              )) : <p className="px-3 py-2 text-xs text-[var(--ep-text-muted)]">No matching pages.</p>}
+              )) : matchingTanks.length === 0 ? <p className="px-3 py-3 text-xs text-[var(--ep-text-muted)]">No results for “{searchQuery}”.</p> : null}
               {matchingTanks.length > 0 && <>
                 <h2 className="px-2 pb-2 pt-4 text-[10px] font-bold uppercase tracking-wider text-[var(--ep-text-muted)]">Tanks</h2>
                 {matchingTanks.slice(0, 8).map((tank) => <Link key={tank.id} to="/dashboard/tanks" onClick={() => { setSearchOpen(false); setSearchQuery(""); }} className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm transition-colors hover:bg-[var(--ep-tint)]"><Icon name="layers" size={17} className="text-[var(--ep-primary)]" /><span className="font-medium">{tank.name}</span><span className="ml-auto text-xs text-[var(--ep-text-muted)]">{tank.pl}</span></Link>)}
