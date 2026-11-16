@@ -779,7 +779,9 @@ html.dark .ep-contact-page .ep-contact-intro-panel {
   --ep-page-text: #173b46;
   --ep-page-muted: #58717a;
   --ep-header-bg: rgba(255,255,255,.94);
-  --ep-sidebar-bg: #e9f5f3;
+  --ep-sidebar-bg: #f6f8f9;
+  --ep-sidebar-surface: #ffffff;
+  --ep-sidebar-subtle: #eef2f3;
   --ep-footer-bg: #e9f5f3;
   --ep-footer-text: #173b46;
   --ep-accent: #087e8b;
@@ -812,7 +814,9 @@ html.dark {
   --ep-page-text: #e8f4f2;
   --ep-page-muted: #a7c2c1;
   --ep-header-bg: rgba(16,35,40,.94);
-  --ep-sidebar-bg: #102b31;
+  --ep-sidebar-bg: #101e23;
+  --ep-sidebar-surface: #14272d;
+  --ep-sidebar-subtle: #192e34;
   --ep-footer-bg: #07191e;
   --ep-footer-text: #e8f4f2;
   --accent: #45c5b3;
@@ -896,12 +900,18 @@ html.dark #site-header {
   color: var(--ep-page-text) !important;
   border-color: var(--ep-page-border) !important;
 }
+.dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
+  background: var(--ep-sidebar-surface) !important;
+}
+.dashboard-shell aside#dashboard-sidebar > div:last-child {
+  background: var(--ep-sidebar-subtle) !important;
+}
 .dashboard-shell aside nav a:not(.dashboard-nav-active):hover {
-  background: color-mix(in srgb,var(--ep-accent) 10%,var(--ep-sidebar-bg)) !important;
+  background: color-mix(in srgb,var(--ep-accent) 8%,var(--ep-sidebar-bg)) !important;
   color: var(--ep-accent-hover) !important;
 }
 html.dark .dashboard-shell aside nav a:not(.dashboard-nav-active):hover {
-  background: #153a3e !important;
+  background: color-mix(in srgb,var(--ep-accent) 12%,var(--ep-sidebar-bg)) !important;
   color: #70d7c8 !important;
 }
 .ep-mobile-dashboard-drawer,
@@ -912,22 +922,23 @@ html.dark .dashboard-shell aside nav a:not(.dashboard-nav-active):hover {
 }
 .ep-mobile-dashboard-drawer > div:last-child,
 .ep-mobile-site-drawer > div:last-child {
-  background: var(--ep-page-tint) !important;
+  background: var(--ep-sidebar-subtle) !important;
   border-color: var(--ep-page-border) !important;
 }
 html.dark .ep-mobile-dashboard-drawer > div:last-child,
 html.dark .ep-mobile-site-drawer > div:last-child {
-  background: #07191e !important;
+  background: var(--ep-sidebar-subtle) !important;
   border-color: var(--ep-page-border) !important;
 }
-.ep-mobile-dashboard-drawer nav a[aria-current="page"] > span,
-.ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
-  background: var(--ep-accent) !important;
-  border-color: var(--ep-accent) !important;
-  color: var(--ep-on-accent) !important;
+.ep-mobile-dashboard-drawer nav a[aria-current="page"] > span {
+  background: color-mix(in srgb,var(--ep-accent) 11%,var(--ep-sidebar-bg)) !important;
+  border: 1px solid color-mix(in srgb,var(--ep-accent) 30%,transparent) !important;
+  color: var(--ep-page-text) !important;
 }
-html.dark .ep-mobile-dashboard-drawer nav a[aria-current="page"] > span,
-html.dark .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
+.ep-mobile-dashboard-drawer nav a[aria-current="page"] > span > span {
+  color: var(--ep-accent) !important;
+}
+.ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
   background: var(--ep-accent) !important;
   border-color: var(--ep-accent) !important;
   color: var(--ep-on-accent) !important;
@@ -965,15 +976,22 @@ html.dark footer[data-site-footer] nav a:hover {
 }
 .dashboard-shell .dashboard-nav-active,
 .dashboard-shell .dashboard-nav-active:hover {
+  background: color-mix(in srgb,var(--ep-accent) 11%,var(--ep-sidebar-bg)) !important;
+  border-color: color-mix(in srgb,var(--ep-accent) 34%,var(--ep-page-border)) !important;
+  color: var(--ep-page-text) !important;
+}
+.dashboard-shell .dashboard-nav-active > span > span {
+  background: color-mix(in srgb,var(--ep-accent) 12%,transparent) !important;
+  color: var(--ep-accent) !important;
+}
+.dashboard-shell .dashboard-nav-active .dashboard-nav-active-dot {
   background: var(--ep-accent) !important;
-  border-color: var(--ep-accent) !important;
-  color: var(--ep-on-accent) !important;
 }
 html.dark .dashboard-shell .dashboard-nav-active,
 html.dark .dashboard-shell .dashboard-nav-active:hover {
-  background: #45c5b3 !important;
-  border-color: #45c5b3 !important;
-  color: #092b31 !important;
+  background: color-mix(in srgb,var(--ep-accent) 16%,var(--ep-sidebar-bg)) !important;
+  border-color: color-mix(in srgb,var(--ep-accent) 42%,var(--ep-page-border)) !important;
+  color: var(--ep-page-text) !important;
 }
 
 
