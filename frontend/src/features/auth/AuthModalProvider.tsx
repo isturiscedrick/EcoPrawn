@@ -36,12 +36,12 @@ export function useAuthModal() {
   return value;
 }
 
-// Preserve existing LoginForm theme token mappings.
+// Map legacy LoginForm styles to the unified theme tokens.
 const SCOPE = {
-  "--coral": "var(--ep-accent)",
-  "--coral-dim": "var(--ep-accent-hover)",
-  "--sand-dim": "var(--ep-line)",
-  "--mangrove": "var(--mangrove-text)",
+  "--ep-accent": "var(--ep-accent)",
+  "--ep-accent-hover": "var(--ep-accent-hover)",
+  "--ep-line": "var(--ep-line)",
+  "--ep-accent": "var(--ep-accent-hover)",
 } as CSSProperties;
 
 const FOCUSABLE =
