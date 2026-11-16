@@ -2660,3 +2660,22 @@ html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child {
     -webkit-text-fill-color: #092b31 !important;
   }
 }
+
+
+/* Theme-aware active navigation icon contrast:
+   light theme uses a deep teal pill (light icon); dark theme uses a bright
+   teal pill (dark icon). */
+@media (min-width: 1024px) {
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg,
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg * {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg,
+  html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg * {
+    color: #092b31 !important;
+    stroke: #092b31 !important;
+    -webkit-text-fill-color: #092b31 !important;
+  }
+}
