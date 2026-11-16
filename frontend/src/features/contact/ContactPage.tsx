@@ -30,8 +30,8 @@ export function ContactPage() {
           kicker="Get in touch"
           title={
             <>
-              <span data-page-hero-accent="">Contact</span>
-              <span>{" "}us.</span>
+              <span>Contact</span>
+              <span data-page-hero-accent="">{" "}us.</span>
             </>
           }
           lead="Project questions and collaboration."
