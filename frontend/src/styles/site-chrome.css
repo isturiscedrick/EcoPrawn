@@ -432,3 +432,22 @@ footer[data-site-footer] .ep-footer-bottom {
     border-radius: 9999px !important;
   }
 }
+
+
+/* Keep the Platform footer column consistent with the other content columns.
+   It is a plain footer group, not a raised card. */
+footer[data-site-footer] .ep-footer-grid > .ep-footer-platform {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  backdrop-filter: none !important;
+}
+footer[data-site-footer] .ep-footer-grid > .ep-footer-platform::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-platform::after {
+  content: none !important;
+  display: none !important;
+}
