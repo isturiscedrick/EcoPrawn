@@ -143,7 +143,7 @@ export function VisionGrowth() {
             Vision &amp; Growth Analytics
           </h1>
           <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
-            {tankCount} tanks · latest scan: {lastScan}
+            Growth scans · {tankCount} tanks
           </div>
         </div>
         <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
