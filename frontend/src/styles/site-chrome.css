@@ -468,7 +468,7 @@ footer[data-site-footer] .ep-footer-bottom {
   #site-header .ep-cta-control,
   #site-header button[role="switch"],
   #site-header a[href="/"] + nav a {
-    border-radius: 0.7rem !important;
+    border-radius: 9999px !important;
   }
 }
 
@@ -480,7 +480,7 @@ footer[data-site-footer] .ep-footer-bottom {
     height: 2.5rem;
     padding-inline: 0 !important;
     aspect-ratio: 1 / 1;
-    border-radius: 0.65rem !important;
+    border-radius: 9999px !important;
   }
 
   #site-header button[role="switch"] {
