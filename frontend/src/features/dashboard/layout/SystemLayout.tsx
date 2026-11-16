@@ -8,10 +8,10 @@ import { Sidebar } from "../components/Sidebar";
 import { DASHBOARD_NAV_ITEMS } from "@/config/nav";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
-import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { DASHBOARD_QUICK_LINKS } from "./system-layout-utils";
 import { DashboardCommandSearch } from "./DashboardCommandSearch";
 import { DashboardProfileMenu } from "./DashboardProfileMenu";
+import { DashboardLogoutDialogs } from "./DashboardLogoutDialogs";
 
 interface SystemLayoutProps {
   children: ReactNode;
@@ -51,8 +51,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const [scrolled, setScrolled] = useState(false);
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
-  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
-  const [logoutErrorOpen, setLogoutErrorOpen] = useState(false);
   const pullStartY = useRef<number | null>(null);
 
   useLayoutEffect(() => {
@@ -210,7 +208,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
               pathname={pathname}
               profileName={profileName}
               profileRole={profileRole}
-              onRequestLogout={() => setLogoutConfirmOpen(true)}
+              onRequestLogout={() => window.dispatchEvent(new Event("ep:request-logout"))}
             />
           </div>
         </div>
@@ -230,33 +228,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         onClose={closeSearch}
       />
 
-      <ConfirmDialog
-        open={logoutConfirmOpen}
-        title="Log out of EcoPrawn?"
-        description="Are you sure you want to end your current session?"
-        confirmLabel="Log out"
-        tone="danger"
-        onCancel={() => setLogoutConfirmOpen(false)}
-        onConfirm={async () => {
-          setLogoutConfirmOpen(false);
-          try {
-            const response = await fetch("/api/auth/logout", { method: "POST" });
-            if (!response.ok) throw new Error("Logout failed");
-            window.location.replace("/login");
-          } catch {
-            setLogoutErrorOpen(true);
-          }
-        }}
-      />
-      <ConfirmDialog
-        open={logoutErrorOpen}
-        title="Unable to log out"
-        description="Logout could not be completed. Please try again."
-        confirmLabel="Okay"
-        showCancel={false}
-        onCancel={() => setLogoutErrorOpen(false)}
-        onConfirm={() => setLogoutErrorOpen(false)}
-      />
+      <DashboardLogoutDialogs />
 
       {/* Responsive dashboard content area. */}
       <main
