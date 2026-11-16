@@ -843,9 +843,12 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-
   overflow-wrap: anywhere;
 }
 
-/* Shared hero sizing: the public pages use the same comfortable title rhythm. */
+/* About and Contact share one fixed hero height so their page headers
+   align consistently even when their headline text wraps differently. */
 :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+  height: clamp(360px, 42vw, 540px);
   min-height: clamp(360px, 42vw, 540px);
+  box-sizing: border-box;
 }
 :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
   width: min(100%, 1440px);
@@ -910,6 +913,7 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:nth-
 }
 @media (max-width: 767px) {
   :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
+    height: auto;
     min-height: 0;
   }
   :is(.ep-about-page,.ep-contact-page) [data-page-hero] > div:last-child {
