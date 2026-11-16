@@ -416,8 +416,8 @@ html.dark .ep-about-page #systems {
     radial-gradient(ellipse at 90% 8%,rgba(69,197,179,.13),transparent 32%),
     radial-gradient(ellipse at 8% 92%,rgba(69,197,179,.07),transparent 34%) !important;
 }
-.ep-about-page #systems .text-\\[var\\(--ep-on-deep-muted\\)\\],
-.ep-about-page #systems .text-\\[var\\(--ep-on-deep\\)\\] {
+.ep-about-page #systems .text-\[var\(--ep-on-deep-muted\)\],
+.ep-about-page #systems .text-\[var\(--ep-on-deep\)\] {
   color: var(--ep-text-muted);
 }
 .ep-about-page #systems article {
@@ -447,26 +447,26 @@ html.dark .ep-about-page #systems {
 .ep-about-page #systems article > div:last-child > div > span:first-child {
   color: var(--ep-accent);
 }
-.ep-about-page #systems .text-\\[var\\(--ep-on-deep-muted\\)\\] {
+.ep-about-page #systems .text-\[var\(--ep-on-deep-muted\)\] {
   color: var(--ep-text-muted);
 }
-.ep-about-page #systems .text-\\[var\\(--ep-on-deep\\)\\] {
+.ep-about-page #systems .text-\[var\(--ep-on-deep\)\] {
   color: var(--ep-text);
 }
 .ep-about-page #systems .ep-font-display {
   color: var(--ep-text);
 }
-.ep-about-page #systems .text-\\[var\\(--ep-marker\\)\\] {
+.ep-about-page #systems .text-\[var\(--ep-marker\)\] {
   color: var(--ep-accent);
 }
-.ep-about-page #systems .border-white\\/20,
-.ep-about-page #systems .border-white\\/15 {
+.ep-about-page #systems .border-white\/20,
+.ep-about-page #systems .border-white\/15 {
   border-color: var(--ep-line);
 }
-.ep-about-page #systems .bg-white\\/\\[0\\.06\\] {
+.ep-about-page #systems .bg-white\/\[0\.06\] {
   background: var(--ep-surface);
 }
-.ep-about-page #systems .text-\\[var\\(--ep-on-deep-muted\\)\\] {
+.ep-about-page #systems .text-\[var\(--ep-on-deep-muted\)\] {
   color: var(--ep-text-muted);
 }
 
@@ -1154,7 +1154,7 @@ html.dark .ep-business-landing .ep-preview-chart > span {
 .ep-business-landing #readings :is(h1,h2,h3,h4,dt,dd,strong,b,label) {
   color: var(--ep-on-deep);
 }
-.ep-business-landing #readings :is(p,small,figcaption,li,.text-\\[var\\(--ep-text-muted\\)\\]) {
+.ep-business-landing #readings :is(p,small,figcaption,li,.text-\[var\(--ep-text-muted\)\]) {
   color: var(--ep-on-deep-muted);
 }
 .ep-business-landing #readings [data-reading] {
@@ -1188,7 +1188,7 @@ html.dark .ep-business-landing .ep-preview-chart > span {
 .ep-business-landing #process [data-step] :is(h3,p) {
   color: inherit;
 }
-.ep-business-landing #capabilities [data-business-card] p:not(.text-\\[var\\(--ep-accent\\)\\]),
+.ep-business-landing #capabilities [data-business-card] p:not(.text-\[var\(--ep-accent\)\]),
 .ep-business-landing #process [data-step] > p {
   color: var(--ep-text-muted);
 }
