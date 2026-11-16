@@ -27,7 +27,7 @@ export function ConfigurationView() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Configuration</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Manage ESP32 connections and settings.</p>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Connect and assign ESP32 devices.</p>
           </div>
           <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold ${status === "connected" ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300" : status === "connecting" ? "border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300" : "border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)]"}`}>
             <span className={`h-2 w-2 rounded-full ${status === "connected" ? "bg-emerald-500" : status === "connecting" ? "bg-amber-500" : "bg-[var(--ep-text-muted)]"}`} />
