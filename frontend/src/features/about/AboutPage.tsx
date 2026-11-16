@@ -55,7 +55,7 @@ export function AboutPage() {
                 Better visibility for every stage of shrimp farming.
               </h2>
               <p className="mt-5 max-w-[38rem] text-base leading-relaxed text-[var(--ep-text-muted)] sm:text-lg">
-                EcoPrawn brings water monitoring, growth observation, and farm operations into a connected workflow—helping teams see conditions more clearly and respond with context.
+                EcoPrawn connects water monitoring, growth insights, and farm operations.
               </p>
               <a href="#systems" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--ep-accent)] transition-transform hover:translate-x-1">
                 Explore the connected systems <Icon name="arrow-right" size={17} />
@@ -160,7 +160,7 @@ export function AboutPage() {
                 </h2>
 
                 <p className="mt-3 max-w-[36rem] text-lg leading-relaxed text-[var(--ep-on-deep-muted)]">
-                  Integrated tools built for everyday farm operations.
+                  Five tools. One connected workflow.
                 </p>
               </div>
             </Reveal>
@@ -215,7 +215,7 @@ export function AboutPage() {
                   A connected workflow
                 </div>
                 <h2 id="ep-about-journey-title" className={heading}>From water conditions to informed action.</h2>
-                <p className={lead}>Each part contributes to a clearer picture of what is happening across the farm.</p>
+                <p className={lead}>See how each system supports the production cycle.</p>
               </div>
             </Reveal>
             <AquacultureIllustration variant="about" className="ep-about-workflow-illustration" />
