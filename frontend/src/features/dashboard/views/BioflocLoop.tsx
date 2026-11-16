@@ -25,9 +25,6 @@ export function BioflocLoop() {
           <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
             Biofloc Loop
           </h1>
-          <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
-            Biofloc treatment and effluent routing
-          </div>
         </div>
         <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--sand-dim)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--mangrove)]" />
