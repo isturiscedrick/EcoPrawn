@@ -672,56 +672,56 @@ html.dark .ep-auth-overlay [data-auth-backdrop] {
    Coral Sand details (10%). Ocean Teal remains the primary submit/selected
    action color for clear interaction hierarchy. */
 .ep-auth-modal {
-  --ep-brand-secondary: #d99a75;
-  --ep-brand-secondary-hover: #c7835d;
-  --ep-secondary-accent: #d99a75;
-  --ep-secondary-accent-hover: #c7835d;
-  --ep-secondary-tint: rgba(217,154,117,.12);
-  --ep-secondary-tint-soft: rgba(217,154,117,.065);
+  --ep-brand-secondary: #087e8b;
+  --ep-brand-secondary-hover: #066874;
+  --ep-secondary-accent: #087e8b;
+  --ep-secondary-accent-hover: #066874;
+  --ep-secondary-tint: rgba(8,126,139,.12);
+  --ep-secondary-tint-soft: rgba(8,126,139,.065);
 }
 .ep-auth-modal::before {
-  background: #d99a75 !important;
+  background: #087e8b !important;
 }
 .ep-auth-modal .ep-auth-brand {
-  border-color: rgba(217,154,117,.38) !important;
+  border-color: rgba(8,126,139,.38) !important;
 }
 .ep-auth-modal [role="group"][aria-label="Account access"] {
-  border-color: rgba(217,154,117,.24);
+  border-color: rgba(8,126,139,.24);
 }
 .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled),
 .ep-auth-modal button[aria-label="Close"]:hover {
-  border-color: #d99a75 !important;
-  background: rgba(217,154,117,.10) !important;
-  color: #9b603e !important;
+  border-color: #087e8b !important;
+  background: rgba(8,126,139,.10) !important;
+  color: #066874 !important;
 }
 .ep-auth-modal :is(.ep-auth-eyebrow,[data-auth-accent]) {
-  color: #c7835d !important;
+  color: #066874 !important;
 }
 html.dark .ep-auth-modal {
-  --ep-brand-secondary: #e9bfa0;
-  --ep-brand-secondary-hover: #f5d5bc;
-  --ep-secondary-accent: #e9bfa0;
-  --ep-secondary-accent-hover: #f5d5bc;
-  --ep-secondary-tint: rgba(233,191,160,.14);
-  --ep-secondary-tint-soft: rgba(233,191,160,.075);
+  --ep-brand-secondary: #45c5b3;
+  --ep-brand-secondary-hover: #70d7c8;
+  --ep-secondary-accent: #45c5b3;
+  --ep-secondary-accent-hover: #70d7c8;
+  --ep-secondary-tint: rgba(69,197,179,.14);
+  --ep-secondary-tint-soft: rgba(69,197,179,.075);
 }
 html.dark .ep-auth-modal::before {
-  background: #e9bfa0 !important;
+  background: #45c5b3 !important;
 }
 html.dark .ep-auth-modal .ep-auth-brand {
-  border-color: rgba(233,191,160,.32) !important;
+  border-color: rgba(69,197,179,.32) !important;
 }
 html.dark .ep-auth-modal [role="group"][aria-label="Account access"] {
-  border-color: rgba(233,191,160,.22) !important;
+  border-color: rgba(69,197,179,.22) !important;
 }
 html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"]:hover:not(:disabled),
 html.dark .ep-auth-modal button[aria-label="Close"]:hover {
-  border-color: #e9bfa0 !important;
-  background: rgba(233,191,160,.12) !important;
-  color: #f5d5bc !important;
+  border-color: #45c5b3 !important;
+  background: rgba(69,197,179,.12) !important;
+  color: #70d7c8 !important;
 }
 html.dark .ep-auth-modal :is(.ep-auth-eyebrow,[data-auth-accent]) {
-  color: #e9bfa0 !important;
+  color: #45c5b3 !important;
 }
 
 /* Keep the selected tab and submit button as Ocean Teal primary actions. */
@@ -741,14 +741,14 @@ html.dark .ep-auth-modal button[type="submit"] {
 /* Ensure the Coral Sand secondary accent survives the modal's high-specificity
    dark-mode text reset. Primary submit/selected controls remain Ocean Teal. */
 html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel :is(.ep-auth-eyebrow,[data-auth-accent]) {
-  color: #e9bfa0 !important;
-  -webkit-text-fill-color: #e9bfa0 !important;
+  color: #45c5b3 !important;
+  -webkit-text-fill-color: #45c5b3 !important;
 }
 html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel .ep-auth-brand {
-  border-color: rgba(233,191,160,.38) !important;
+  border-color: rgba(69,197,179,.38) !important;
 }
 html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel button[aria-label="Close"]:hover {
-  background: rgba(233,191,160,.12) !important;
-  border-color: #e9bfa0 !important;
-  color: #f5d5bc !important;
+  background: rgba(69,197,179,.12) !important;
+  border-color: #45c5b3 !important;
+  color: #70d7c8 !important;
 }
