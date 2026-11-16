@@ -1,5 +1,6 @@
 import { useEffect, useId, useState, type FormEvent } from "react";
 import type { Tank } from "@/features/dashboard/context/TankContext";
+import { DashboardModalShell } from "./DashboardPrimitives";
 
 interface EditTankModalProps {
   tank: Tank | null;
@@ -80,9 +81,13 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
   ] as const;
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-5" role="presentation">
-      <button type="button" aria-label="Close edit tank dialog" onClick={onClose} disabled={saving} className="absolute inset-0 bg-black/55 backdrop-blur-sm" />
-      <section role="dialog" aria-modal="true" aria-labelledby={`${uid}-title`} className="relative z-10 max-h-[90dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 shadow-2xl sm:p-8">
+    <DashboardModalShell
+      titleId={`${uid}-title`}
+      onClose={onClose}
+      backdropLabel="Close edit tank dialog"
+      backdropClassName="bg-black/55 backdrop-blur-sm"
+      panelClassName="p-5 shadow-2xl sm:p-8"
+    >
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--ep-accent)]">Tank configuration</p>
@@ -104,7 +109,6 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
             <button type="submit" disabled={saving} className="min-h-11 flex-1 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-white hover:bg-[var(--ep-accent-hover)] disabled:cursor-wait disabled:opacity-60">{saving ? "Saving…" : "Save changes"}</button>
           </div>
         </form>
-      </section>
-    </div>
+    </DashboardModalShell>
   );
 }
