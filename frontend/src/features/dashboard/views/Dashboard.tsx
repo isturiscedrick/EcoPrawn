@@ -1,5 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
-import { Icon } from "@/components/ui/Icon";
+import { useNavigate } from "@tanstack/react-router";
 import { KpiCard, KpiGrid } from "@/features/dashboard/components/DashboardPrimitives";
 import { TankSnapshotSection } from "@/features/dashboard/components/TankSnapshotSection";
 import { RecentActivityPanel } from "@/features/dashboard/components/RecentActivityPanel";
@@ -10,7 +9,6 @@ import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard
 import { useThresholdSettings } from "@/features/dashboard/hooks/useThresholdSettings";
 import { buildRecentDashboardActivity } from "@/features/dashboard/lib/dashboard-activity";
 import { buildDashboardSummary } from "@/features/dashboard/lib/dashboard-summary";
-
 
 export function Dashboard() {
   const navigate = useNavigate();
@@ -78,7 +76,6 @@ export function Dashboard() {
           healthyPercent={healthyPercent}
           attentionPercent={attentionPercent}
         />
-
 
         <QuickActionsPanel />
       </div>
