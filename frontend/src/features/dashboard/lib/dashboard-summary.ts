@@ -11,9 +11,15 @@ export interface DashboardSummary {
 }
 
 export function buildDashboardSummary(tanks: Tank[]): DashboardSummary {
-  const healthyCount = tanks.filter((tank) => tank.status === "ok").length;
+  let healthyCount = 0;
+  let noReadingCount = 0;
+
+  for (const tank of tanks) {
+    if (tank.status === "ok") healthyCount += 1;
+    if (!tank.hasWaterReadings) noReadingCount += 1;
+  }
+
   const attentionCount = tanks.length - healthyCount;
-  const noReadingCount = tanks.filter((tank) => !tank.hasWaterReadings).length;
 
   return {
     healthyCount,
