@@ -1,9 +1,0 @@
-/* ==========================================================================
-   Marketing Overrides (Migrated / Deprecated)
-   Compatibility overrides for legacy public-page class hooks (.marketing-shell,
-   .ep-landing-hero, and older footer gradients) have been migrated into
-   the canonical public stylesheets:
-   - SiteFooter & SiteHeader contrast -> ./site-chrome.css
-   - HeroLens contrast & tokens       -> ./hero-lens.css & ./landing-tokens.css
-   - Section backgrounds              -> ./landing-sections.css
-   ========================================================================== */
