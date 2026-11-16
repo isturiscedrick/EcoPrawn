@@ -1,0 +1,228 @@
+/* ==========================================================================
+   EcoPrawn Unified Palette
+   60% neutral canvas, 30% deep ocean structure, 10% Ocean Teal accents.
+   Loaded last so legacy page-specific declarations cannot reintroduce old
+   brand colors. Semantic success, warning, and error indicators are retained.
+   ========================================================================== */
+:root {
+  --background: #f8fafc; --foreground: #111827;
+  --card: #ffffff; --card-foreground: #111827;
+  --popover: #ffffff; --popover-foreground: #111827;
+  --primary: #087e8b; --primary-foreground: #ffffff;
+  --secondary: #f1f5f9; --secondary-foreground: #1f2937;
+  --muted: #f1f5f9; --muted-foreground: #475569;
+  --accent: #087e8b; --accent-foreground: #ffffff;
+  --border: #dbe2ea; --input: #dbe2ea; --ring: #087e8b;
+  --sidebar: #ffffff; --sidebar-foreground: #111827;
+  --sidebar-primary: #087e8b; --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e6f4f3; --sidebar-accent-foreground: #066874;
+  --sidebar-border: #dbe2ea; --sidebar-ring: #087e8b;
+  --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea; --ep-primary: #111827; --ep-primary-soft: #1f2937;
+  --ep-secondary: #1f2937; --ep-text-muted: #475569;
+  --ep-accent: #087e8b; --ep-accent-hover: #066874; --ep-on-accent: #ffffff;
+  --water-deep: #111827; --water-mid: #1f2937; --ink: #111827;
+}
+html.dark {
+  --background: #0b171b; --foreground: #e8f4f2;
+  --card: #102328; --card-foreground: #e8f4f2;
+  --popover: #102328; --popover-foreground: #e8f4f2;
+  --primary: #45c5b3; --primary-foreground: #071426;
+  --secondary: #153a3e; --secondary-foreground: #e8f4f2;
+  --muted: #153a3e; --muted-foreground: #a7c2c1;
+  --accent: #45c5b3; --accent-foreground: #071426;
+  --border: #285158; --input: #285158; --ring: #45c5b3;
+  --sidebar: #102b31; --sidebar-foreground: #e8f4f2;
+  --sidebar-primary: #45c5b3; --sidebar-primary-foreground: #071426;
+  --sidebar-accent: #153a3e; --sidebar-accent-foreground: #70d7c8;
+  --sidebar-border: #285158; --sidebar-ring: #45c5b3;
+  --ep-bg: #0b171b; --ep-surface: #102328; --ep-tint: #153a3e;
+  --ep-line: #285158; --ep-primary: #e8f4f2; --ep-primary-soft: #c9e2df;
+  --ep-secondary: #c9e2df; --ep-text-muted: #a7c2c1;
+  --ep-accent: #45c5b3; --ep-accent-hover: #70d7c8; --ep-on-accent: #071426;
+  --water-deep: #f8fafc; --water-mid: #e2e8f0; --ink: #e8f4f2;
+}
+html:not(.dark) body.ecoprawn-root { background: #f8fafc; color: #111827; }
+html.dark body.ecoprawn-root { background: #0b171b; color: #e8f4f2; }
+.ep-landing, .ep-about-page, .ep-contact-page {
+  --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea; --ep-primary: #111827; --ep-secondary: #1f2937;
+  --ep-text: #111827; --ep-text-muted: #475569; --ep-accent: #087e8b;
+  --ep-accent-hover: #066874; --ep-on-accent: #ffffff;
+}
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-bg: #0b171b; --ep-surface: #102328; --ep-tint: #153a3e;
+  --ep-line: #334155; --ep-primary: #f8fafc; --ep-secondary: #e2e8f0;
+  --ep-text: #f8fafc; --ep-text-muted: #cbd5e1; --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8; --ep-on-accent: #071426;
+}
+:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a)[class*="bg-"] { --tw-ring-color: #087e8b; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a):focus-visible { outline-color: #087e8b !important; }
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button,a):focus-visible { outline-color: #45c5b3 !important; }
+.ep-logo { --ep-logo-color: #111827 !important; --ep-logo-text: #111827 !important; }
+.ep-logo .ep-logo-shrimp { fill: #111827 !important; stroke: #111827 !important; }
+.ep-logo .ep-logo-wordmark { color: #111827 !important; -webkit-text-fill-color: #111827 !important; }
+html.dark .ep-logo { --ep-logo-color: #f8fafc !important; --ep-logo-text: #f8fafc !important; }
+html.dark .ep-logo .ep-logo-shrimp { fill: #f8fafc !important; stroke: #f8fafc !important; }
+html.dark .ep-logo .ep-logo-wordmark { color: #f8fafc !important; -webkit-text-fill-color: #f8fafc !important; }
+footer[data-site-footer] { background: #f8fafc !important; color: #111827 !important; }
+html.dark footer[data-site-footer] { background: #07191e !important; color: #e8f4f2 !important; }
+footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) { color: #111827 !important; }
+html.dark footer[data-site-footer] :is(p,h2,h3,h4,li,small,address,strong,nav a,span) { color: #f8fafc !important; }
+footer[data-site-footer] nav a:hover { color: #087e8b !important; }
+html.dark footer[data-site-footer] nav a:hover { color: #45c5b3 !important; }
+
+
+/* Final marketing-page cleanup: neutralize legacy green/teal utility colors. */
+:is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-deep: #111827;
+  --ep-on-deep: #ffffff;
+  --ep-on-deep-muted: #cbd5e1;
+  --ep-primary: #111827;
+  --ep-secondary: #1f2937;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+}
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-deep: #0b171b;
+  --ep-on-deep: #f8fafc;
+  --ep-on-deep-muted: #cbd5e1;
+  --ep-primary: #f8fafc;
+  --ep-secondary: #e2e8f0;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+}
+/* Remap legacy teal utility classes to Ocean Teal. Preserve emerald/green
+   utilities for semantic success indicators. */
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="text-teal-"] { color: var(--ep-accent) !important; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="border-teal-"] { border-color: color-mix(in srgb,var(--ep-accent) 32%,transparent) !important; }
+:is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-teal-"] { background-color: color-mix(in srgb,var(--ep-accent) 10%,var(--ep-surface)) !important; }
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) [class*="bg-teal-"] { background-color: color-mix(in srgb,var(--ep-accent) 16%,var(--ep-surface)) !important; }
+
+/* Logo must be strictly monochrome on every page, including legacy footer rules. */
+html:not(.dark) .ep-logo,
+html:not(.dark) .ep-logo .ep-logo-wordmark {
+  --ep-logo-color: #111827 !important;
+  --ep-logo-text: #111827 !important;
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+}
+html:not(.dark) .ep-logo .ep-logo-shrimp,
+html:not(.dark) .ep-logo .ep-logo-text {
+  fill: #111827 !important;
+  stroke: #111827 !important;
+}
+html.dark .ep-logo,
+html.dark .ep-logo .ep-logo-wordmark {
+  --ep-logo-color: #ffffff !important;
+  --ep-logo-text: #ffffff !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html.dark .ep-logo .ep-logo-shrimp,
+html.dark .ep-logo .ep-logo-text {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+
+/* Dashboard surfaces follow the same 60/30/10 system as public pages:
+   neutral canvas/cards, deep-ocean structure, and restrained brand accents. */
+.dashboard-shell {
+  --ep-brand-primary: #087e8b;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-primary: #173b46;
+  --ep-primary-soft: #245563;
+  --ep-secondary: #245563;
+  --ep-text: #173b46;
+  --ep-text-muted: #58717a;
+  --ep-on-accent: #ffffff;
+  --ep-accent-tint: rgba(8, 126, 139, .11);
+  --ep-accent-tint-soft: rgba(8, 126, 139, .065);
+  --ep-bg: #f8fafc;
+  --ep-surface: #ffffff;
+  --ep-tint: #f1f5f9;
+  --ep-line: #dbe2ea;
+  --ep-status-success: #15803d;
+  --ep-status-warning: #b45309;
+  --ep-status-danger: #b91c1c;
+  background: #f8fafc !important;
+  color: #173b46;
+}
+html.dark .dashboard-shell {
+  --ep-brand-primary: #45c5b3;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-primary: #e8f4f2;
+  --ep-primary-soft: #c9e2df;
+  --ep-secondary: #c9e2df;
+  --ep-text: #e8f4f2;
+  --ep-text-muted: #a7c2c1;
+  --ep-on-accent: #092b31;
+  --ep-accent-tint: rgba(69, 197, 179, .14);
+  --ep-accent-tint-soft: rgba(69, 197, 179, .08);
+  --ep-bg: #0b171b;
+  --ep-surface: #102328;
+  --ep-tint: #153a3e;
+  --ep-line: #285158;
+  --ep-status-success: #86efac;
+  --ep-status-warning: #fcd34d;
+  --ep-status-danger: #fca5a5;
+  background: #0b171b !important;
+  color: #e8f4f2;
+}
+.dashboard-shell aside,
+html:not(.dark) .dashboard-shell aside { background: #ffffff !important; color: #173b46 !important; border-color: #dbe2ea !important; }
+html.dark .dashboard-shell aside { background: #102328 !important; color: #e8f4f2 !important; border-color: #285158 !important; }
+.dashboard-shell .dashboard-nav-active,
+html:not(.dark) .dashboard-shell .dashboard-nav-active { background: #087e8b !important; border-color: #087e8b !important; color: #ffffff !important; }
+html.dark .dashboard-shell .dashboard-nav-active { background: #45c5b3 !important; border-color: #45c5b3 !important; color: #092b31 !important; }
+.dashboard-shell .dashboard-panel,
+.dashboard-shell .dashboard-kpi,
+.dashboard-shell .dashboard-tank-snapshot {
+  border-color: var(--ep-line);
+  box-shadow: 0 10px 28px -24px rgba(23, 59, 70, .45);
+}
+.dashboard-shell .dashboard-panel-icon { color: var(--ep-accent); background: var(--ep-accent-tint); }
+.dashboard-shell :is(button,a):focus-visible { outline-color: var(--ep-accent) !important; }
+
+
+/* Water Quality: make tank selection, threshold controls and readings easier to scan. */
+.dashboard-water-quality-page .dashboard-page-header,
+.dashboard-alerts-page .dashboard-page-header { border-color: var(--ep-line) !important; }
+.dashboard-water-quality-page [role="tablist"] { scrollbar-width: thin; scrollbar-color: var(--ep-accent-tint) transparent; }
+.dashboard-water-quality-page [role="tab"] {
+  min-height: 42px; border-radius: 12px !important; border-color: var(--ep-line) !important;
+  background: var(--ep-surface) !important; color: var(--ep-text-muted) !important;
+}
+.dashboard-water-quality-page [role="tab"][aria-selected="true"] {
+  border-color: var(--ep-accent) !important; background: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important; box-shadow: 0 5px 14px -10px var(--ep-accent);
+}
+.dashboard-water-quality-page .dashboard-sensor-gauge,
+.dashboard-water-quality-page .dashboard-hover { border-color: var(--ep-line); background: var(--ep-surface); }
+.dashboard-water-quality-page table thead tr { color: var(--ep-text-muted) !important; border-color: var(--ep-line) !important; }
+.dashboard-water-quality-page table tbody tr { transition: background-color .16s ease; }
+.dashboard-water-quality-page table tbody tr:hover { background: var(--ep-accent-tint-soft); }
+.dashboard-water-quality-page table td { color: var(--ep-text); border-color: var(--ep-line); }
+.dashboard-water-quality-page input[type="number"] { min-height: 42px; }
+.dashboard-water-quality-page button, .dashboard-alerts-page button,
+.dashboard-water-quality-page a, .dashboard-alerts-page a { -webkit-tap-highlight-color: transparent; }
+.dashboard-water-quality-page :is(button,a):focus-visible,
+.dashboard-alerts-page :is(button,a,input):focus-visible {
+  outline: 2px solid var(--ep-accent) !important; outline-offset: 2px;
+}
+.dashboard-alerts-page .dashboard-kpi { border-top: 3px solid var(--ep-accent); }
+.dashboard-alerts-page section[aria-labelledby="active-alerts-heading"] { border-left: 3px solid var(--ep-status-danger); padding-left: 14px; }
+.dashboard-alerts-page section[aria-labelledby="warning-events-heading"] { border-left: 3px solid var(--ep-status-warning); padding-left: 14px; }
+.dashboard-alerts-page section[aria-labelledby="info-events-heading"] { border-left: 3px solid var(--ep-accent); padding-left: 14px; }
+.dashboard-alerts-page label:focus-within { border-color: var(--ep-accent); box-shadow: 0 0 0 3px var(--ep-accent-tint); }
+@media (max-width: 640px) {
+  .dashboard-water-quality-page .dashboard-panel, .dashboard-alerts-page .dashboard-panel { padding: 16px !important; }
+  .dashboard-water-quality-page .dashboard-page-header, .dashboard-alerts-page .dashboard-page-header {
+    margin-bottom: 18px !important; padding-bottom: 18px !important;
+  }
+}
+
+
