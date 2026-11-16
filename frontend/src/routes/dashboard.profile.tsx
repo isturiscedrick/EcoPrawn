@@ -10,7 +10,7 @@ function ProfileLoading() {
 function ProfilePage() {
   return (
     <>
-      <div className="mb-7 border-b border-[rgba(11,46,51,0.12)] pb-7">
+      <div className="mb-7 border-b border-[var(--ep-line)] pb-7">
         <Link to="/dashboard/settings" className="mb-3 inline-flex items-center gap-2 text-xs font-semibold text-[var(--ep-primary)] hover:underline">
           <Icon name="arrow-left" size={14} /> Back to Settings
         </Link>
@@ -20,7 +20,7 @@ function ProfilePage() {
         <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--water-deep)]">
           User Profile
         </h1>
-        <p className="mt-2 text-[15px] text-[rgba(11,35,32,0.68)]">
+        <p className="mt-2 text-[15px] text-[var(--ep-text-muted)]">
           Update your profile details.
         </p>
       </div>
