@@ -120,4 +120,4 @@ The dashboard combines database-backed tanks with demo data and optional ESP32 U
 
 ## Design tokens
 
-Theme colors and shared tokens (`--water-deep`, `--mangrove`, `--coral`, `--sand`, shadows, radii) are defined in `frontend/src/styles/globals.css`. Use these variables rather than hardcoding colors.
+Theme colors and shared tokens (`--ep-accent`, `--ep-accent-hover`, `--ep-surface`, `--ep-line`, semantic status colors, shadows, and radii) are defined in `frontend/src/styles/`. Use these variables rather than hardcoding colors.
