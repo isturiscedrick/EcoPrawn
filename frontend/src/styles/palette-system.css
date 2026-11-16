@@ -1570,7 +1570,7 @@ html.dark footer[data-site-footer] {
 }
 html.dark :is(.ep-business-landing,.ep-landing) #top :is(
   .ep-hero-headline-secondary,
-  [data-hero="headline"] > span:last-child
+  [data-hero="headline"] > span:last-child:not(.ep-cloudnexus-highlight)
 ),
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] :is(
   [data-page-hero-accent], span:last-child
