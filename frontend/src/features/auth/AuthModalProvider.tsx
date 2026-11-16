@@ -13,7 +13,7 @@ import { Icon } from "@/components/ui/Icon";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { LoginForm, type AuthMode } from "./LoginForm";
 import { AuthModalMotion, playAuthExit } from "./AuthModalMotion";
-import "@/styles/auth-modal.css";
+import "@/styles/components/auth-modal.css";
 
 import { AuthModalContext } from "./AuthModalContext";
 import { useAuthModal } from "./useAuthModal";
