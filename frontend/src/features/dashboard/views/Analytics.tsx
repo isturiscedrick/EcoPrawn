@@ -39,7 +39,7 @@ export function Analytics() {
             Analytics
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-[var(--ep-text-muted)]">
-            Growth, water quality, biomass, and feeding trends.
+            Production trends across tanks.
           </p>
         </div>
         <button
