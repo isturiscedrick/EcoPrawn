@@ -38,7 +38,7 @@ html:not(.dark) .dashboard-shell aside .ep-logo {
 }
 
 html:not(.dark) .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.12\)\],
-html:not(.dark) .dashboard-shell .border-\[var\(--sand-dim\)\] {
+html:not(.dark) .dashboard-shell .border-\[var\(--ep-line\)\] {
   border-color: #cbd5e1;
 }
 
@@ -57,14 +57,14 @@ html:not(.dark) .dashboard-shell .text-\[rgba\(11\,35\,32\,0\.5\)\] {
 
 html:not(.dark) .dashboard-shell .dashboard-nav-active {
   background-color: #ffffff;
-  border-color: var(--coral, #087e8b);
+  border-color: var(--ep-accent, #087e8b);
   color: var(--ep-primary);
   border-width: 2px;
   box-shadow: 0 6px 16px -10px rgba(11, 46, 51, 0.45);
 }
 
 html:not(.dark) .dashboard-shell .dashboard-nav-active-dot {
-  background-color: var(--coral, #087e8b);
+  background-color: var(--ep-accent, #087e8b);
 }
 
 /* ---------- Dashboard: Dark Mode Surfaces ---------- */
@@ -115,7 +115,7 @@ html.dark .dashboard-shell .text-\[rgba\(11\,46\,51\,0\.72\)\] {
   color: #cbd5e1;
 }
 
-html.dark .dashboard-shell .border-\[var\(--sand-dim\)\],
+html.dark .dashboard-shell .border-\[var\(--ep-line\)\],
 html.dark .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.12\)\],
 html.dark .dashboard-shell .border-\[rgba\(11\,46\,51\,0\.1\)\] {
   border-color: rgba(255, 255, 255, 0.12);
@@ -137,19 +137,19 @@ html.dark .dashboard-shell .dashboard-nav-active {
 }
 
 html.dark .dashboard-shell .dashboard-nav-active-dot {
-  background-color: var(--coral, #45c5b3);
+  background-color: var(--ep-accent, #45c5b3);
 }
 
 html.dark .dashboard-shell aside .hover\:text-\[var\(--water-deep\)\]:hover {
   color: #f8fafc;
 }
 
-html.dark .dashboard-shell :is(.text-\[var\(--mangrove\)\], .text-\[var\(--mangrove-text\)\]) {
+html.dark .dashboard-shell :is(.text-\[var\(--ep-accent\)\], .text-\[var\(--ep-accent-hover\)\]) {
   color: var(--ep-secondary);
 }
 
 /* Coral fills text color in dark mode */
-html.dark .dashboard-shell :is(.bg-\[var\(--coral\)\], .bg-\[var\(--ep-accent\)\]) {
+html.dark .dashboard-shell :is(.bg-\[var\(--ep-accent\)\], .bg-\[var\(--ep-accent\)\]) {
   color: #071426;
 }
 
@@ -179,18 +179,18 @@ html.dark .dashboard-shell :is(.bg-\[var\(--coral\)\], .bg-\[var\(--ep-accent\)\
 }
 
 /* Panel status badges */
-.dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(--mangrove-text\)\] {
+.dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(--ep-accent-hover\)\] {
   color: var(--ep-secondary);
 }
-html:not(.dark) .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(--mangrove-text\)\] {
+html:not(.dark) .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(--ep-accent-hover\)\] {
   background-color: var(--ep-secondary-tint);
 }
 
 /* Charts: DO trend lines and swatches */
-.dashboard-shell polyline[stroke="var(--mangrove)"] {
+.dashboard-shell polyline[stroke="var(--ep-accent)"] {
   stroke: var(--ep-secondary);
 }
-.dashboard-shell .inline-block.h-\[2px\].bg-\[var\(--mangrove\)\] {
+.dashboard-shell .inline-block.h-\[2px\].bg-\[var\(--ep-accent\)\] {
   background-color: var(--ep-secondary);
 }
 .dashboard-shell .bg-\[\#4b8db8\] {
@@ -198,31 +198,31 @@ html:not(.dark) .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(-
 }
 
 /* Selected pills & active buttons */
-.dashboard-shell .bg-\[var\(--mangrove\)\].text-white {
+.dashboard-shell .bg-\[var\(--ep-accent\)\].text-white {
   background-color: var(--ep-secondary);
   border-color: var(--ep-secondary);
 }
-html.dark .dashboard-shell .bg-\[var\(--mangrove\)\].text-white {
+html.dark .dashboard-shell .bg-\[var\(--ep-accent\)\].text-white {
   color: #071426;
 }
-.dashboard-shell .hover\:border-\[var\(--mangrove\)\]:hover {
+.dashboard-shell .hover\:border-\[var\(--ep-accent\)\]:hover {
   border-color: var(--ep-secondary);
 }
 
 /* Operator avatar on coral fill */
-.dashboard-shell [style*="var(--coral)"] {
+.dashboard-shell [style*="var(--ep-accent)"] {
   color: #ffffff;
 }
-html.dark .dashboard-shell [style*="var(--coral)"] {
+html.dark .dashboard-shell [style*="var(--ep-accent)"] {
   color: #071426;
 }
 
 /* SVG Chart lines and gradient stops */
 .dashboard-shell polyline[stroke="#087e8b"] {
-  stroke: var(--coral);
+  stroke: var(--ep-accent);
 }
 .dashboard-shell stop[stop-color="#087e8b"] {
-  stop-color: var(--coral);
+  stop-color: var(--ep-accent);
 }
 
 /* Form inputs focus glow */
@@ -231,8 +231,8 @@ html.dark .dashboard-shell [style*="var(--coral)"] {
 }
 
 .dashboard-shell :is(
-  .focus-visible\:outline-\[var\(--mangrove\)\],
-  .focus-visible\:outline-\[var\(--mangrove-light\)\]
+  .focus-visible\:outline-\[var\(--ep-accent\)\],
+  .focus-visible\:outline-\[var\(--ep-accent-hover\)\]
 ):focus-visible {
   outline-color: var(--ep-secondary);
 }
@@ -242,7 +242,7 @@ html.dark .dashboard-shell [style*="var(--coral)"] {
   background-color: var(--ep-secondary-tint);
   color: var(--ep-secondary);
 }
-.dashboard-shell summary.text-\[var\(--mangrove\)\] {
+.dashboard-shell summary.text-\[var\(--ep-accent\)\] {
   color: var(--ep-secondary);
 }
 .dashboard-shell .to-\[var\(--amber\)\] {
@@ -271,20 +271,20 @@ html.dark .ep-auth-modal {
 
 
 /* Dashboard chart and filter accents use Ocean Teal, not the former slate secondary. */
-.dashboard-shell polyline[stroke="var(--mangrove)"],
-.dashboard-shell .inline-block.h-\[2px\].bg-\[var\(--mangrove\)\],
+.dashboard-shell polyline[stroke="var(--ep-accent)"],
+.dashboard-shell .inline-block.h-\[2px\].bg-\[var\(--ep-accent\)\],
 .dashboard-shell .bg-\[\#4b8db8\],
-.dashboard-shell .bg-\[var\(--mangrove\)\].text-white,
-.dashboard-shell summary.text-\[var\(--mangrove\)\] {
+.dashboard-shell .bg-\[var\(--ep-accent\)\].text-white,
+.dashboard-shell summary.text-\[var\(--ep-accent\)\] {
   color: var(--ep-accent);
   stroke: var(--ep-accent);
   background-color: var(--ep-accent);
   border-color: var(--ep-accent);
 }
-html.dark .dashboard-shell .bg-\[var\(--mangrove\)\].text-white {
+html.dark .dashboard-shell .bg-\[var\(--ep-accent\)\].text-white {
   color: var(--ep-on-accent) !important;
 }
-.dashboard-shell .hover\:border-\[var\(--mangrove\)\]:hover {
+.dashboard-shell .hover\:border-\[var\(--ep-accent\)\]:hover {
   border-color: var(--ep-accent) !important;
 }
 .dashboard-shell .to-\[var\(--amber\)\] {
