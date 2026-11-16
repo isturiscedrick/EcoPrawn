@@ -459,3 +459,36 @@ footer[data-site-footer] .ep-footer-bottom {
     }
   }
 }
+
+
+/* Desktop header actions stay softly rectangular at every available width.
+   In the compact desktop range, icon-only CTAs keep a square footprint instead
+   of collapsing into pill/oval shapes. */
+@media (min-width: 1024px) {
+  #site-header .ep-cta-control,
+  #site-header button[role="switch"],
+  #site-header a[href="/"] + nav a {
+    border-radius: 0.7rem !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #site-header .ep-cta-control {
+    flex: 0 0 2.5rem;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding-inline: 0 !important;
+    aspect-ratio: 1 / 1;
+    border-radius: 0.65rem !important;
+  }
+
+  #site-header button[role="switch"] {
+    flex: 0 0 2.5rem;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 0.65rem !important;
+  }
+}
