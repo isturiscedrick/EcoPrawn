@@ -70,7 +70,7 @@ html.dark .dashboard-shell .dashboard-nav-active { background: #45c5b3 !importan
   --ep-bg: #f8fafc; --ep-surface: #ffffff; --ep-tint: #f1f5f9;
   --ep-line: #dbe2ea; --ep-primary: #111827; --ep-secondary: #1f2937;
   --ep-text: #111827; --ep-text-muted: #475569; --ep-accent: #087e8b;
-  --ep-accent-hover: #066874; --ep-on-accent: #ffffff;
+  --ep-accent-hover: #066874; --ep-on-accent: #071426;
 }
 html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
   --ep-bg: #0b171b; --ep-surface: #102328; --ep-tint: #153a3e;
@@ -161,10 +161,9 @@ html.dark .ep-logo .ep-logo-text {
   --ep-text-muted: #58717a;
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
-  --ep-on-accent: #ffffff;
+  --ep-on-accent: #071426;
   --ep-accent-tint: rgba(8, 126, 139, .11);
   --ep-accent-tint-soft: rgba(8, 126, 139, .065);
-  --ep-accent-tint: rgba(217, 154, 117, .12);
   --ep-bg: #f8fafc;
   --ep-surface: #ffffff;
   --ep-tint: #f1f5f9;
@@ -189,7 +188,6 @@ html.dark .dashboard-shell {
   --ep-on-accent: #092b31;
   --ep-accent-tint: rgba(69, 197, 179, .14);
   --ep-accent-tint-soft: rgba(69, 197, 179, .08);
-  --ep-accent-tint: rgba(233, 191, 160, .14);
   --ep-bg: #0b171b;
   --ep-surface: #102328;
   --ep-tint: #153a3e;
@@ -268,7 +266,7 @@ html.dark .dashboard-shell .dashboard-nav-active { background: #45c5b3 !importan
   --sidebar-ring: #087e8b;
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
-  --ep-on-accent: #ffffff;
+  --ep-on-accent: #071426;
   --ep-brand-primary: #087e8b;
 }
 html.dark {
@@ -324,7 +322,7 @@ html.dark .dashboard-shell .dashboard-nav-active {
 :is(.ep-landing,.ep-about-page,.ep-contact-page) {
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
-  --ep-on-accent: #ffffff;
+  --ep-on-accent: #071426;
   --ep-zone: #087e8b;
   --ep-marker: #45c5b3;
   --ep-status-info: #087e8b;
@@ -425,7 +423,7 @@ footer[data-site-footer] {
   --ep-brand-primary: #087e8b;
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
-  --ep-on-accent: #ffffff;
+  --ep-on-accent: #071426;
   --ep-brand-glow: rgba(8,126,139,.24);
   --ep-brand-wash: rgba(8,126,139,.09);
 }
@@ -794,7 +792,7 @@ html.dark .ep-contact-page .ep-contact-intro-panel {
   --ep-footer-text: #173b46;
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
-  --ep-on-accent: #ffffff;
+  --ep-on-accent: #071426;
   color-scheme: light;
 }
 html.dark {
@@ -1168,28 +1166,25 @@ html.dark .dashboard-shell :is([class*="bg-blue-"],[class*="bg-indigo-"],[class*
 }
 
 
-/* Secondary brand color — Ocean Teal.
-   Keep this separate from the neutral UI surface token --secondary. */
+/* Ocean Teal accent tokens. Neutral surfaces remain separate from brand color. */
 :root {
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
-  --ep-accent: #087e8b;
-  --ep-accent-hover: #066874;
-  --ep-on-accent: #17252b;
+
+  --ep-on-accent: #071426;
   --ep-accent-tint: rgba(8,126,139,.14);
   --ep-accent-tint-soft: rgba(8,126,139,.08);
 }
 html.dark {
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
-  --ep-accent: #45c5b3;
-  --ep-accent-hover: #70d7c8;
-  --ep-on-accent: #17252b;
+
+  --ep-on-accent: #ffffff;
   --ep-accent-tint: rgba(69,197,179,.16);
   --ep-accent-tint-soft: rgba(69,197,179,.09);
 }
 
-/* Explicit secondary-brand treatments; primary actions remain Ocean Teal. */
+/* Legacy secondary-action selectors now inherit the single Ocean Teal brand. */
 :is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
 :is(.ep-secondary-action,[data-brand-color="secondary"]) {
   background-color: var(--ep-accent) !important;
@@ -1213,8 +1208,7 @@ html.dark {
 }
 
 
-/* Dashboard scope has higher-priority legacy declarations, so pin its
-   secondary brand tokens here as well. */
+/* Dashboard accent values are pinned for consistent light and dark rendering. */
 .dashboard-shell {
   --ep-accent: #087e8b !important;
   --ep-accent-hover: #066874 !important;
@@ -1235,23 +1229,21 @@ html.dark .dashboard-shell {
 
 /* Marketing pages: 60/30/10 balance.
    60% neutral canvas/cards, 30% deep-ocean structure, 10% restrained
-   Ocean Teal + Ocean Teal accents. Coral is decorative/supporting, never
+   Ocean Teal accents. Teal is decorative/supporting, never
    used as the dominant page or card background. */
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) {
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
-  --ep-accent: #087e8b;
-  --ep-accent-hover: #066874;
-  --ep-on-accent: #173b46;
+
+  --ep-on-accent: #071426;
   --ep-accent-tint: rgba(8,126,139,.12);
   --ep-accent-tint-soft: rgba(8,126,139,.065);
 }
 html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) {
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
-  --ep-accent: #45c5b3;
-  --ep-accent-hover: #70d7c8;
-  --ep-on-accent: #173b46;
+
+  --ep-on-accent: #071426;
   --ep-accent-tint: rgba(69,197,179,.14);
   --ep-accent-tint-soft: rgba(69,197,179,.075);
 }
@@ -1354,13 +1346,11 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > [aria-hi
   opacity: 0 !important;
 }
 
-/* Ocean Teal secondary accents — explicitly applied across all public pages
-   and the authentication dialog in both themes. Ocean Teal remains primary. */
+/* Ocean Teal accents across public pages and the authentication dialog. */
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
   --ep-accent: #087E8B;
   --ep-accent-hover: #066874;
-  --ep-accent: #087E8B;
-  --ep-accent-hover: #066874;
+
   --ep-on-accent: #173B46;
   --ep-accent-tint: rgba(8,126,139,.12);
   --ep-accent-tint-soft: rgba(8,126,139,.065);
@@ -1368,8 +1358,7 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > [aria-hi
 html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
   --ep-accent: #45C5B3;
   --ep-accent-hover: #70D7C8;
-  --ep-accent: #45C5B3;
-  --ep-accent-hover: #70D7C8;
+
   --ep-on-accent: #173B46;
   --ep-accent-tint: rgba(69,197,179,.14);
   --ep-accent-tint-soft: rgba(69,197,179,.075);
@@ -1414,8 +1403,7 @@ html.dark .ep-auth-modal button[aria-label="Close"]:hover {
 /* 60 / 30 / 10 color distribution for Landing, About, Contact and Auth.
    60% neutral = page/dialog canvas and content surfaces.
    30% deep ocean = typography, navigation, footer and structural framing.
-   10% accents = Ocean Teal for primary actions + Ocean Teal for secondary
-   highlights. This is a visual hierarchy, not a literal pixel calculation. */
+   10% accents = Ocean Teal for actions and highlights. This is a visual hierarchy, not a literal pixel calculation. */
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
   --ep-color-neutral-60: #F8FAFC;
   --ep-color-ocean-30: #173B46;
