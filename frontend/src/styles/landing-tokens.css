@@ -73,7 +73,6 @@ html.dark .ep-landing {
   --ep-status-neutral: #cbd5e1;
   --ep-status-neutral-bg: #263244;
   --ep-on-status: #0b1417;
-  --coral: var(--ep-accent);
 }
 
 /* ---------- Overscroll & document background ---------- */
