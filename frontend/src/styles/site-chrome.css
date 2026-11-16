@@ -35,16 +35,6 @@ html:not(.dark) #site-header :is(button, a)[style*="backgroundColor"] {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  @media (min-width: 1024px) {
-    html:has(.ep-business-landing) #site-header,
-    html:has(.ep-about-page) #site-header,
-    html:has(.ep-contact-page) #site-header {
-      transition: none;
-    }
-  }
-}
-
 /* ---------- Site Footer: Container Query & Layout ---------- */
 footer[data-site-footer] {
   position: relative;
@@ -137,60 +127,46 @@ footer[data-site-footer] .ep-footer-grid > .ep-footer-account::after {
   content: none !important;
 }
 
-/* ---------- Site Footer: Light Theme Surfaces & Contrast ---------- */
+/* ---------- Footer theme surfaces, text and brand mark ---------- */
 html:not(.dark) footer[data-site-footer] {
-  background: linear-gradient(155deg, #ffffff 0%, #f8fafc 58%, #f1f5f9 100%) !important;
+  background: #f8fafc !important;
   color: #111827 !important;
 }
-
-html:not(.dark) footer[data-site-footer] :is(p, h2, nav a, small, span, li, address, strong) {
+html:not(.dark) footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong, nav a, span) {
   color: #111827 !important;
 }
-
-html:not(.dark) footer[data-site-footer] nav a:hover {
-  color: #087e8b !important;
-}
-
+html:not(.dark) footer[data-site-footer] nav a:hover { color: #087e8b !important; }
 html:not(.dark) footer[data-site-footer] .ep-logo {
-  --ep-logo-color: #087e8b !important;
+  --ep-logo-color: #111827 !important;
   --ep-logo-text: #111827 !important;
 }
-
+html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-shrimp {
+  fill: #111827 !important;
+  stroke: #111827 !important;
+}
 html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-wordmark {
   color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
 }
-
-html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-shrimp {
-  fill: #087e8b !important;
-  stroke: #087e8b !important;
-}
-
-/* ---------- Site Footer: Dark Theme Surfaces & Contrast ---------- */
 html.dark footer[data-site-footer] {
-  background: linear-gradient(155deg, #102328 0%, #0b171b 58%, #07191e 100%) !important;
-  color: #ffffff !important;
+  background: #0b171b !important;
+  color: #f8fafc !important;
 }
-
 html.dark footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong, nav a, span) {
-  color: #ffffff !important;
+  color: #f8fafc !important;
 }
-
-html.dark footer[data-site-footer] nav a:hover {
-  color: #70d7c8 !important;
-}
-
+html.dark footer[data-site-footer] nav a:hover { color: #45c5b3 !important; }
 html.dark footer[data-site-footer] .ep-logo {
-  --ep-logo-color: #087e8b !important;
-  --ep-logo-text: #70d7c8 !important;
+  --ep-logo-color: #f8fafc !important;
+  --ep-logo-text: #f8fafc !important;
 }
-
 html.dark footer[data-site-footer] .ep-logo .ep-logo-shrimp {
-  fill: #087e8b !important;
-  stroke: #087e8b !important;
+  fill: #f8fafc !important;
+  stroke: #f8fafc !important;
 }
-
 html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
-  color: #70d7c8 !important;
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
 }
 
 /* ---------- Interactive Hero Console Depth ---------- */
@@ -211,40 +187,6 @@ html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
   }
 }
 
-
-/* ---------- Black / white / blue footer and mobile drawer brand ---------- */
-html:not(.dark) footer[data-site-footer] {
-  background: #f8fafc !important; color: #111827 !important;
-}
-html:not(.dark) footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong, nav a, span) {
-  color: #111827 !important;
-}
-html:not(.dark) footer[data-site-footer] nav a:hover { color: #087e8b !important; }
-html:not(.dark) footer[data-site-footer] .ep-logo {
-  --ep-logo-color: #111827 !important; --ep-logo-text: #111827 !important;
-}
-html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-shrimp {
-  fill: #111827 !important; stroke: #111827 !important;
-}
-html:not(.dark) footer[data-site-footer] .ep-logo .ep-logo-wordmark {
-  color: #111827 !important; -webkit-text-fill-color: #111827 !important;
-}
-html.dark footer[data-site-footer] {
-  background: #0b171b !important; color: #f8fafc !important;
-}
-html.dark footer[data-site-footer] :is(p, h2, h3, h4, li, small, address, strong, nav a, span) {
-  color: #f8fafc !important;
-}
-html.dark footer[data-site-footer] nav a:hover { color: #45c5b3 !important; }
-html.dark footer[data-site-footer] .ep-logo {
-  --ep-logo-color: #f8fafc !important; --ep-logo-text: #f8fafc !important;
-}
-html.dark footer[data-site-footer] .ep-logo .ep-logo-shrimp {
-  fill: #f8fafc !important; stroke: #f8fafc !important;
-}
-html.dark footer[data-site-footer] .ep-logo .ep-logo-wordmark {
-  color: #f8fafc !important; -webkit-text-fill-color: #f8fafc !important;
-}
 
 /* Mobile site drawer: neutral surfaces, blue active state, monochrome logo. */
 .ep-mobile-site-drawer { background: #ffffff !important; color: #111827 !important; border-color: #dbe2ea !important; }
@@ -461,9 +403,7 @@ footer[data-site-footer] .ep-footer-bottom {
 }
 
 
-/* Desktop header actions stay softly rectangular at every available width.
-   In the compact desktop range, icon-only CTAs keep a square footprint instead
-   of collapsing into pill/oval shapes. */
+/* Desktop header actions remain circular at every available width. */
 @media (min-width: 1024px) {
   #site-header .ep-cta-control,
   #site-header button[role="switch"],
@@ -489,6 +429,6 @@ footer[data-site-footer] .ep-footer-bottom {
     min-width: 2.5rem;
     height: 2.5rem;
     aspect-ratio: 1 / 1;
-    border-radius: 0.65rem !important;
+    border-radius: 9999px !important;
   }
 }
