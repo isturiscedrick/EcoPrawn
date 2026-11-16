@@ -1595,11 +1595,10 @@ html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
   background-color: #45C5B3 !important;
 }
 
-/* About and Contact hero headlines stay monochrome like the Home hero.
-   Ocean Teal remains limited to the kicker and small decorative details so
-   the secondary accent does not color the entire headline. */
+/* About and Contact hero headlines use the same restrained treatment as
+   Home: neutral primary text with a two-tone Ocean Teal gradient accent. */
 html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline],
-html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] *,
+html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] > :not([data-page-hero-accent]),
 html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline]::before,
 html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline]::after {
   color: #111827 !important;
@@ -1608,12 +1607,28 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline]::
   text-shadow: none !important;
 }
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline],
-html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] *,
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] > :not([data-page-hero-accent]),
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline]::before,
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline]::after {
   color: #FFFFFF !important;
   -webkit-text-fill-color: #FFFFFF !important;
   background-image: none !important;
+  text-shadow: none !important;
+}
+html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] [data-page-hero-accent] {
+  color: #087E8B !important;
+  background-image: linear-gradient(100deg,#087E8B 0%,#45C5B3 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+}
+html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] [data-page-hero-accent] {
+  color: #45C5B3 !important;
+  background-image: linear-gradient(100deg,#45C5B3 0%,#70D7C8 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
   text-shadow: none !important;
 }
 
