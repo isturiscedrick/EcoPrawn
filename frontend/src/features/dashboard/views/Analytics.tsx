@@ -39,7 +39,7 @@ export function Analytics() {
             Analytics
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-[var(--ep-text-muted)]">
-            Track growth, water quality, biomass, and feeding.
+            Growth, water quality, biomass, and feeding trends.
           </p>
         </div>
         <button
@@ -78,9 +78,9 @@ export function Analytics() {
         </button>
       </div>
       <section aria-label="Facility analytics summary" className="mb-5 grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
-        <KpiCard label="Total biomass" value={metrics.totalBiomass.toFixed(1)} unit="kg" delta="Combined across all tanks" deltaTone="ok" />
-        <KpiCard label="Estimated population" value={metrics.totalPopulation.toLocaleString()} unit="shrimp" delta="Current facility estimate" deltaTone="ok" />
-        <KpiCard label="Average body length" value={tanks.length ? metrics.avgBodyLength.toFixed(1) : "—"} unit="cm" delta="Based on latest tank scans" deltaTone="ok" />
+        <KpiCard label="Total biomass" value={metrics.totalBiomass.toFixed(1)} unit="kg" delta="All tanks" deltaTone="ok" />
+        <KpiCard label="Estimated population" value={metrics.totalPopulation.toLocaleString()} unit="shrimp" delta="Facility total" deltaTone="ok" />
+        <KpiCard label="Average body length" value={tanks.length ? metrics.avgBodyLength.toFixed(1) : "—"} unit="cm" delta="Latest scans" deltaTone="ok" />
         <KpiCard label="Average shrimp weight" value={tanks.length ? metrics.avgWeight.toFixed(1) : "—"} unit="g" delta={`${metrics.abnormal.toLocaleString()} abnormal behavior flags`} deltaTone={metrics.abnormal ? "warn" : "ok"} />
       </section>
 
@@ -90,7 +90,7 @@ export function Analytics() {
         </Panel>
         <Panel title="Tank health distribution" icon="activity" badge={`${tanks.length} tanks monitored`}>
           <DonutChart items={healthDistribution} unit="tanks" emptyLabel="Add tanks to see health distribution." />
-          <p className="mt-2 text-center text-[11px] text-[var(--ep-text-muted)]">Based on current water limits.</p>
+          <p className="mt-2 text-center text-[11px] text-[var(--ep-text-muted)]">Using current limits.</p>
         </Panel>
       </div>
 
@@ -113,7 +113,7 @@ export function Analytics() {
       </Panel>
 
       <p className="mt-4 text-xs text-[var(--ep-text-muted)]">
-        Charts use recorded tank, sensor, and vision data. Missing values are not estimated.
+        Charts show recorded data only; missing values are not estimated.
       </p>
     </>
   );
