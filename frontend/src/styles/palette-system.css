@@ -1117,27 +1117,23 @@ html.dark .ep-auth-modal button:has(> svg[viewBox="0 0 48 48"]):hover {
 /* Dashboard final Ocean Teal pass — remove residual legacy blue/slate accents. */
 .dashboard-shell {
   --ep-brand-primary: #087e8b !important;
-  --ep-accent: #066874 !important;
   --ep-primary: #173b46;
   --ep-primary-soft: #245563;
   --ep-secondary: #066874 !important;
   --ep-accent: #087e8b !important;
   --ep-accent-hover: #066874 !important;
   --ep-on-accent: #ffffff !important;
-  --ep-accent-tint: rgba(8,126,139,.12) !important;
   --ep-accent-tint-soft: rgba(8,126,139,.07) !important;
   --ep-accent-tint: rgba(8,126,139,.09) !important;
 }
 html.dark .dashboard-shell {
   --ep-brand-primary: #45c5b3 !important;
-  --ep-accent: #70d7c8 !important;
   --ep-primary: #e8f4f2;
   --ep-primary-soft: #c9e2df;
   --ep-secondary: #70d7c8 !important;
   --ep-accent: #45c5b3 !important;
   --ep-accent-hover: #70d7c8 !important;
   --ep-on-accent: #092b31 !important;
-  --ep-accent-tint: rgba(69,197,179,.15) !important;
   --ep-accent-tint-soft: rgba(69,197,179,.08) !important;
   --ep-accent-tint: rgba(69,197,179,.10) !important;
 }
@@ -1220,14 +1216,10 @@ html.dark {
 .dashboard-shell {
   --ep-accent: #087e8b !important;
   --ep-accent-hover: #066874 !important;
-  --ep-accent: #087e8b !important;
-  --ep-accent-hover: #066874 !important;
   --ep-accent-tint: rgba(8,126,139,.14) !important;
   --ep-accent-tint-soft: rgba(8,126,139,.08) !important;
 }
 html.dark .dashboard-shell {
-  --ep-accent: #45c5b3 !important;
-  --ep-accent-hover: #70d7c8 !important;
   --ep-accent: #45c5b3 !important;
   --ep-accent-hover: #70d7c8 !important;
   --ep-accent-tint: rgba(69,197,179,.16) !important;
@@ -1485,7 +1477,6 @@ html.dark .ep-auth-modal button[type="submit"] {
   --ep-chrome-text: #173B46;
   --ep-chrome-muted: #58717A;
   --ep-chrome-accent: #087E8B;
-  --ep-chrome-accent: #087E8B;
   color: var(--ep-chrome-text);
   border-color: color-mix(in srgb,var(--ep-chrome-structure) 14%,transparent);
 }
@@ -1509,7 +1500,6 @@ html.dark #site-header {
   --ep-chrome-text: #E8F4F2;
   --ep-chrome-muted: #A7C2C1;
   --ep-chrome-accent: #45C5B3;
-  --ep-chrome-accent: #45C5B3;
   color: var(--ep-chrome-text);
   border-color: rgba(232,244,242,.12);
 }
@@ -1526,7 +1516,6 @@ footer[data-site-footer] {
   --ep-footer-structure: #173B46;
   --ep-footer-text: #F8FAFC;
   --ep-footer-muted: #D6E4E7;
-  --ep-footer-accent: #45C5B3;
   --ep-footer-accent: #087E8B;
   background: var(--ep-footer-structure) !important;
   color: var(--ep-footer-text) !important;
@@ -1550,7 +1539,6 @@ html.dark footer[data-site-footer] {
   --ep-footer-structure: #102B31;
   --ep-footer-text: #E8F4F2;
   --ep-footer-muted: #B7CECC;
-  --ep-footer-accent: #45C5B3;
   --ep-footer-accent: #45C5B3;
   background: var(--ep-footer-structure) !important;
   border-top-color: rgba(69,197,179,.28) !important;
