@@ -293,3 +293,31 @@
     min-height: 36px !important;
   }
 }
+
+
+/* Definitive public landing mobile menu override.
+   Keep this after the older mobile header layout rules above: they were
+   re-applying a surface fill and border to the hamburger button. */
+@media (max-width: 1023px) {
+  #site-header > div > button.ep-mobile-menu-toggle[aria-controls="mobile-nav-panel"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    outline-offset: 3px;
+  }
+  #site-header > div > button.ep-mobile-menu-toggle[aria-controls="mobile-nav-panel"]:hover,
+  #site-header > div > button.ep-mobile-menu-toggle[aria-controls="mobile-nav-panel"]:active,
+  #site-header > div > button.ep-mobile-menu-toggle[aria-controls="mobile-nav-panel"]:focus {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+  #site-header > div > button.ep-mobile-menu-toggle[aria-controls="mobile-nav-panel"]::before,
+  #site-header > div > button.ep-mobile-menu-toggle[aria-controls="mobile-nav-panel"]::after {
+    content: none !important;
+    display: none !important;
+  }
+}
