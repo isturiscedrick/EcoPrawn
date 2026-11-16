@@ -158,8 +158,8 @@ html.dark .ep-logo .ep-logo-text {
    neutral canvas/cards, deep-ocean structure, and restrained brand accents. */
 .dashboard-shell {
   --ep-brand-primary: #087e8b;
-  --ep-brand-secondary: #d99a75;
-  --ep-brand-secondary-hover: #c7835d;
+  --ep-brand-secondary: #087e8b;
+  --ep-brand-secondary-hover: #066874;
   --ep-primary: #173b46;
   --ep-primary-soft: #245563;
   --ep-secondary: #245563;
@@ -183,8 +183,8 @@ html.dark .ep-logo .ep-logo-text {
 }
 html.dark .dashboard-shell {
   --ep-brand-primary: #45c5b3;
-  --ep-brand-secondary: #e9bfa0;
-  --ep-brand-secondary-hover: #f5d5bc;
+  --ep-brand-secondary: #45c5b3;
+  --ep-brand-secondary-hover: #70d7c8;
   --ep-primary: #e8f4f2;
   --ep-primary-soft: #c9e2df;
   --ep-secondary: #c9e2df;
@@ -1186,25 +1186,25 @@ html.dark .dashboard-shell :is([class*="bg-blue-"],[class*="bg-indigo-"],[class*
 }
 
 
-/* Secondary brand color — warm coral sand.
+/* Secondary brand color — Ocean Teal.
    Keep this separate from the neutral UI surface token --secondary. */
 :root {
-  --ep-brand-secondary: #d99a75;
-  --ep-brand-secondary-hover: #c7835d;
-  --ep-secondary-accent: #d99a75;
-  --ep-secondary-accent-hover: #c7835d;
+  --ep-brand-secondary: #087e8b;
+  --ep-brand-secondary-hover: #066874;
+  --ep-secondary-accent: #087e8b;
+  --ep-secondary-accent-hover: #066874;
   --ep-secondary-on-accent: #17252b;
-  --ep-secondary-tint: rgba(217,154,117,.14);
-  --ep-secondary-tint-soft: rgba(217,154,117,.08);
+  --ep-secondary-tint: rgba(8,126,139,.14);
+  --ep-secondary-tint-soft: rgba(8,126,139,.08);
 }
 html.dark {
-  --ep-brand-secondary: #e9bfa0;
-  --ep-brand-secondary-hover: #f5d5bc;
-  --ep-secondary-accent: #e9bfa0;
-  --ep-secondary-accent-hover: #f5d5bc;
+  --ep-brand-secondary: #45c5b3;
+  --ep-brand-secondary-hover: #70d7c8;
+  --ep-secondary-accent: #45c5b3;
+  --ep-secondary-accent-hover: #70d7c8;
   --ep-secondary-on-accent: #17252b;
-  --ep-secondary-tint: rgba(233,191,160,.16);
-  --ep-secondary-tint-soft: rgba(233,191,160,.09);
+  --ep-secondary-tint: rgba(69,197,179,.16);
+  --ep-secondary-tint-soft: rgba(69,197,179,.09);
 }
 
 /* Explicit secondary-brand treatments; primary actions remain Ocean Teal. */
@@ -1234,47 +1234,47 @@ html.dark {
 /* Dashboard scope has higher-priority legacy declarations, so pin its
    secondary brand tokens here as well. */
 .dashboard-shell {
-  --ep-brand-secondary: #d99a75 !important;
-  --ep-brand-secondary-hover: #c7835d !important;
-  --ep-secondary-accent: #d99a75 !important;
-  --ep-secondary-accent-hover: #c7835d !important;
-  --ep-secondary-tint: rgba(217,154,117,.14) !important;
-  --ep-secondary-tint-soft: rgba(217,154,117,.08) !important;
+  --ep-brand-secondary: #087e8b !important;
+  --ep-brand-secondary-hover: #066874 !important;
+  --ep-secondary-accent: #087e8b !important;
+  --ep-secondary-accent-hover: #066874 !important;
+  --ep-secondary-tint: rgba(8,126,139,.14) !important;
+  --ep-secondary-tint-soft: rgba(8,126,139,.08) !important;
 }
 html.dark .dashboard-shell {
-  --ep-brand-secondary: #e9bfa0 !important;
-  --ep-brand-secondary-hover: #f5d5bc !important;
-  --ep-secondary-accent: #e9bfa0 !important;
-  --ep-secondary-accent-hover: #f5d5bc !important;
-  --ep-secondary-tint: rgba(233,191,160,.16) !important;
-  --ep-secondary-tint-soft: rgba(233,191,160,.09) !important;
+  --ep-brand-secondary: #45c5b3 !important;
+  --ep-brand-secondary-hover: #70d7c8 !important;
+  --ep-secondary-accent: #45c5b3 !important;
+  --ep-secondary-accent-hover: #70d7c8 !important;
+  --ep-secondary-tint: rgba(69,197,179,.16) !important;
+  --ep-secondary-tint-soft: rgba(69,197,179,.09) !important;
 }
 
 
 /* Marketing pages: 60/30/10 balance.
    60% neutral canvas/cards, 30% deep-ocean structure, 10% restrained
-   Ocean Teal + Coral Sand accents. Coral is decorative/supporting, never
+   Ocean Teal + Ocean Teal accents. Coral is decorative/supporting, never
    used as the dominant page or card background. */
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) {
-  --ep-brand-secondary: #d99a75;
-  --ep-brand-secondary-hover: #c7835d;
-  --ep-secondary-accent: #d99a75;
-  --ep-secondary-accent-hover: #c7835d;
+  --ep-brand-secondary: #087e8b;
+  --ep-brand-secondary-hover: #066874;
+  --ep-secondary-accent: #087e8b;
+  --ep-secondary-accent-hover: #066874;
   --ep-secondary-on-accent: #173b46;
-  --ep-secondary-tint: rgba(217,154,117,.12);
-  --ep-secondary-tint-soft: rgba(217,154,117,.065);
+  --ep-secondary-tint: rgba(8,126,139,.12);
+  --ep-secondary-tint-soft: rgba(8,126,139,.065);
 }
 html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) {
-  --ep-brand-secondary: #e9bfa0;
-  --ep-brand-secondary-hover: #f5d5bc;
-  --ep-secondary-accent: #e9bfa0;
-  --ep-secondary-accent-hover: #f5d5bc;
+  --ep-brand-secondary: #45c5b3;
+  --ep-brand-secondary-hover: #70d7c8;
+  --ep-secondary-accent: #45c5b3;
+  --ep-secondary-accent-hover: #70d7c8;
   --ep-secondary-on-accent: #173b46;
-  --ep-secondary-tint: rgba(233,191,160,.14);
-  --ep-secondary-tint-soft: rgba(233,191,160,.075);
+  --ep-secondary-tint: rgba(69,197,179,.14);
+  --ep-secondary-tint-soft: rgba(69,197,179,.075);
 }
 
-/* Landing: keep hero/dashboard surfaces neutral and use Coral Sand only for
+/* Landing: keep hero/dashboard surfaces neutral and use Ocean Teal only for
    small eyebrow, feature and decorative highlights. */
 .ep-business-landing .ep-cloudnexus-eyebrow {
   border-color: color-mix(in srgb,var(--ep-secondary-accent) 42%,var(--ep-line));
@@ -1298,7 +1298,7 @@ html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) 
   border-top: 2px solid color-mix(in srgb,var(--ep-secondary-accent) 58%,var(--ep-page-border));
 }
 
-/* About: Coral Sand is a measured detail in the mission/ journey cards and
+/* About: Ocean Teal is a measured detail in the mission/ journey cards and
    orbit illustration; the section and card surfaces remain neutral/ocean. */
 .ep-about-page .ep-about-journey-card {
   border-top: 2px solid color-mix(in srgb,var(--ep-secondary-accent) 58%,var(--ep-page-border));
@@ -1315,7 +1315,7 @@ html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) 
   border-color: color-mix(in srgb,var(--ep-secondary-accent) 28%,var(--ep-page-border));
 }
 
-/* Contact: retain the deep-ocean form/structure and use Coral Sand for
+/* Contact: retain the deep-ocean form/structure and use Ocean Teal for
    small signal rings, card markers and form framing only. */
 .ep-contact-page .ep-contact-signal-ring-two,
 .ep-contact-page .ep-contact-signal-ring-three {
@@ -1372,25 +1372,25 @@ html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > [aria-hi
   opacity: 0 !important;
 }
 
-/* Coral Sand secondary accents — explicitly applied across all public pages
+/* Ocean Teal secondary accents — explicitly applied across all public pages
    and the authentication dialog in both themes. Ocean Teal remains primary. */
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
-  --ep-brand-secondary: #D99A75;
-  --ep-brand-secondary-hover: #C7835D;
-  --ep-secondary-accent: #D99A75;
-  --ep-secondary-accent-hover: #C7835D;
+  --ep-brand-secondary: #087E8B;
+  --ep-brand-secondary-hover: #066874;
+  --ep-secondary-accent: #087E8B;
+  --ep-secondary-accent-hover: #066874;
   --ep-secondary-on-accent: #173B46;
-  --ep-secondary-tint: rgba(217,154,117,.12);
-  --ep-secondary-tint-soft: rgba(217,154,117,.065);
+  --ep-secondary-tint: rgba(8,126,139,.12);
+  --ep-secondary-tint-soft: rgba(8,126,139,.065);
 }
 html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
-  --ep-brand-secondary: #E9BFA0;
-  --ep-brand-secondary-hover: #F5D5BC;
-  --ep-secondary-accent: #E9BFA0;
-  --ep-secondary-accent-hover: #F5D5BC;
+  --ep-brand-secondary: #45C5B3;
+  --ep-brand-secondary-hover: #70D7C8;
+  --ep-secondary-accent: #45C5B3;
+  --ep-secondary-accent-hover: #70D7C8;
   --ep-secondary-on-accent: #173B46;
-  --ep-secondary-tint: rgba(233,191,160,.14);
-  --ep-secondary-tint-soft: rgba(233,191,160,.075);
+  --ep-secondary-tint: rgba(69,197,179,.14);
+  --ep-secondary-tint-soft: rgba(69,197,179,.075);
 }
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal)
 :is(.ep-secondary-accent,[data-secondary-accent]) {
@@ -1420,25 +1420,25 @@ html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.
   border-color: color-mix(in srgb,var(--ep-secondary-accent) 38%,transparent) !important;
 }
 html.dark .ep-auth-modal :is(.ep-auth-eyebrow,[data-auth-accent]) {
-  color: #E9BFA0 !important;
-  -webkit-text-fill-color: #E9BFA0 !important;
+  color: #45C5B3 !important;
+  -webkit-text-fill-color: #45C5B3 !important;
 }
 html.dark .ep-auth-modal button[aria-label="Close"]:hover {
-  border-color: #E9BFA0 !important;
-  background: rgba(233,191,160,.12) !important;
-  color: #F5D5BC !important;
+  border-color: #45C5B3 !important;
+  background: rgba(69,197,179,.12) !important;
+  color: #70D7C8 !important;
 }
 
 /* 60 / 30 / 10 color distribution for Landing, About, Contact and Auth.
    60% neutral = page/dialog canvas and content surfaces.
    30% deep ocean = typography, navigation, footer and structural framing.
-   10% accents = Ocean Teal for primary actions + Coral Sand for secondary
+   10% accents = Ocean Teal for primary actions + Ocean Teal for secondary
    highlights. This is a visual hierarchy, not a literal pixel calculation. */
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
   --ep-color-neutral-60: #F8FAFC;
   --ep-color-ocean-30: #173B46;
   --ep-color-teal-10: #087E8B;
-  --ep-color-coral-10: #D99A75;
+  --ep-color-coral-10: #087E8B;
   --ep-page-bg: var(--ep-color-neutral-60);
   --ep-page-surface: #FFFFFF;
   --ep-structure: var(--ep-color-ocean-30);
@@ -1447,14 +1447,14 @@ html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.
   --ep-color-neutral-60: #0B171B;
   --ep-color-ocean-30: #102B31;
   --ep-color-teal-10: #45C5B3;
-  --ep-color-coral-10: #E9BFA0;
+  --ep-color-coral-10: #45C5B3;
   --ep-page-bg: var(--ep-color-neutral-60);
   --ep-page-surface: #102328;
   --ep-structure: var(--ep-color-ocean-30);
 }
 
 /* Keep large content surfaces neutral; reserve deep ocean for structure and
-   keep teal/coral fills limited to compact controls, markers and highlights. */
+   keep teal fills limited to compact controls, markers and highlights. */
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) :is(
   .ep-cloudnexus-feature,.ep-cloudnexus-dashboard,.ep-about-journey-card,
   [data-contact-card],[data-contact-form]
@@ -1471,7 +1471,7 @@ html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
 }
 
 /* Auth modal: neutral dialog/input surfaces dominate; ocean is used for
-   text and structure; teal/coral stay on compact interactive accents. */
+   text and structure; teal stay on compact interactive accents. */
 .ep-auth-modal {
   background-color: var(--ep-page-surface) !important;
   color: var(--ep-text) !important;
@@ -1505,14 +1505,14 @@ html.dark .ep-auth-modal button[type="submit"] {
 
 /* Site chrome follows the same 60/30/10 hierarchy as the public pages.
    Header stays neutral/floating; footer is the deep-ocean structural anchor.
-   Teal is reserved for primary controls and Coral Sand for small highlights. */
+   Teal is reserved for primary controls and Ocean Teal for small highlights. */
 #site-header {
   --ep-chrome-neutral: #F8FAFC;
   --ep-chrome-structure: #173B46;
   --ep-chrome-text: #173B46;
   --ep-chrome-muted: #58717A;
   --ep-chrome-accent: #087E8B;
-  --ep-chrome-secondary: #D99A75;
+  --ep-chrome-secondary: #087E8B;
   color: var(--ep-chrome-text);
   border-color: color-mix(in srgb,var(--ep-chrome-structure) 14%,transparent);
 }
@@ -1536,7 +1536,7 @@ html.dark #site-header {
   --ep-chrome-text: #E8F4F2;
   --ep-chrome-muted: #A7C2C1;
   --ep-chrome-accent: #45C5B3;
-  --ep-chrome-secondary: #E9BFA0;
+  --ep-chrome-secondary: #45C5B3;
   color: var(--ep-chrome-text);
   border-color: rgba(232,244,242,.12);
 }
@@ -1554,7 +1554,7 @@ footer[data-site-footer] {
   --ep-footer-text: #F8FAFC;
   --ep-footer-muted: #D6E4E7;
   --ep-footer-accent: #45C5B3;
-  --ep-footer-secondary: #D99A75;
+  --ep-footer-secondary: #087E8B;
   background: var(--ep-footer-structure) !important;
   color: var(--ep-footer-text) !important;
   border-top: 1px solid color-mix(in srgb,var(--ep-footer-accent) 28%,transparent) !important;
@@ -1578,14 +1578,14 @@ html.dark footer[data-site-footer] {
   --ep-footer-text: #E8F4F2;
   --ep-footer-muted: #B7CECC;
   --ep-footer-accent: #45C5B3;
-  --ep-footer-secondary: #E9BFA0;
+  --ep-footer-secondary: #45C5B3;
   background: var(--ep-footer-structure) !important;
   border-top-color: rgba(69,197,179,.28) !important;
 }
 
 
-/* Coral Sand secondary brand treatment for every public hero section.
-   Keep primary headline text neutral and reserve Coral Sand for the emphasized
+/* Ocean Teal secondary brand treatment for every public hero section.
+   Keep primary headline text neutral and reserve Ocean Teal for the emphasized
    phrase, kicker details and small decorative hero accents. */
 :is(.ep-business-landing,.ep-landing) #top :is(
   .ep-hero-headline-secondary,
@@ -1594,24 +1594,24 @@ html.dark footer[data-site-footer] {
 :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] :is(
   [data-page-hero-accent], span:last-child
 ) {
-  color: #D99A75 !important;
-  -webkit-text-fill-color: #D99A75 !important;
+  color: #087E8B !important;
+  -webkit-text-fill-color: #087E8B !important;
   text-shadow: 0 10px 34px rgba(217,154,117,.18) !important;
 }
 :is(.ep-business-landing,.ep-landing) #top :is(
   .ep-hero-headline-secondary::after,
   [data-hero="headline"] > span:last-child::after
 ) {
-  background-color: #D99A75 !important;
-  border-color: #D99A75 !important;
+  background-color: #087E8B !important;
+  border-color: #087E8B !important;
 }
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
 :is(#top,[data-page-hero]) :is([data-page-kicker],[data-hero-kicker]) {
-  border-color: color-mix(in srgb,#D99A75 42%,var(--ep-line)) !important;
+  border-color: color-mix(in srgb,#087E8B 42%,var(--ep-line)) !important;
 }
 :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
 :is(#top,[data-page-hero]) :is([data-page-kicker] .ep-pulse-dot,[data-hero-kicker] .ep-pulse-dot) {
-  background-color: #D99A75 !important;
+  background-color: #087E8B !important;
 }
 html.dark :is(.ep-business-landing,.ep-landing) #top :is(
   .ep-hero-headline-secondary,
@@ -1620,28 +1620,28 @@ html.dark :is(.ep-business-landing,.ep-landing) #top :is(
 html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] :is(
   [data-page-hero-accent], span:last-child
 ) {
-  color: #E9BFA0 !important;
-  -webkit-text-fill-color: #E9BFA0 !important;
-  text-shadow: 0 10px 34px rgba(233,191,160,.16) !important;
+  color: #45C5B3 !important;
+  -webkit-text-fill-color: #45C5B3 !important;
+  text-shadow: 0 10px 34px rgba(69,197,179,.16) !important;
 }
 html.dark :is(.ep-business-landing,.ep-landing) #top :is(
   .ep-hero-headline-secondary::after,
   [data-hero="headline"] > span:last-child::after
 ) {
-  background-color: #E9BFA0 !important;
-  border-color: #E9BFA0 !important;
+  background-color: #45C5B3 !important;
+  border-color: #45C5B3 !important;
 }
 html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
 :is(#top,[data-page-hero]) :is([data-page-kicker],[data-hero-kicker]) {
-  border-color: color-mix(in srgb,#E9BFA0 48%,var(--ep-line)) !important;
+  border-color: color-mix(in srgb,#45C5B3 48%,var(--ep-line)) !important;
 }
 html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
 :is(#top,[data-page-hero]) :is([data-page-kicker] .ep-pulse-dot,[data-hero-kicker] .ep-pulse-dot) {
-  background-color: #E9BFA0 !important;
+  background-color: #45C5B3 !important;
 }
 
 /* About and Contact hero headlines stay monochrome like the Home hero.
-   Coral Sand remains limited to the kicker and small decorative details so
+   Ocean Teal remains limited to the kicker and small decorative details so
    the secondary accent does not color the entire headline. */
 html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline],
 html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] *,
@@ -1661,3 +1661,49 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline]::after 
   background-image: none !important;
   text-shadow: none !important;
 }
+
+
+/* Single-brand rule: Ocean Teal is the only brand accent in both themes.
+   Neutral secondary surfaces/text and semantic status colors remain distinct. */
+:root,
+:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.ep-business-landing,.dashboard-shell,.ep-auth-modal) {
+  --ep-brand-secondary: var(--ep-accent) !important;
+  --ep-brand-secondary-hover: var(--ep-accent-hover) !important;
+  --ep-secondary-accent: var(--ep-accent) !important;
+  --ep-secondary-accent-hover: var(--ep-accent-hover) !important;
+  --ep-secondary-tint: var(--ep-accent-tint) !important;
+  --ep-secondary-tint-soft: var(--ep-accent-tint-soft) !important;
+  --ep-secondary-on-accent: var(--ep-on-accent) !important;
+  --ep-chrome-secondary: var(--ep-chrome-accent, var(--ep-accent)) !important;
+  --ep-footer-secondary: var(--ep-footer-accent, var(--ep-accent)) !important;
+  --ep-color-coral-10: var(--ep-color-teal-10, var(--ep-accent)) !important;
+}
+:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.ep-business-landing,.dashboard-shell,.ep-auth-modal)
+:is(.ep-secondary-action,[data-brand-color="secondary"]) {
+  background-color: var(--ep-accent) !important;
+  border-color: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important;
+}
+:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.ep-business-landing,.dashboard-shell,.ep-auth-modal)
+:is(.ep-secondary-action,[data-brand-color="secondary"]):is(:hover,:focus-visible) {
+  background-color: var(--ep-accent-hover) !important;
+  border-color: var(--ep-accent-hover) !important;
+  color: var(--ep-on-accent) !important;
+}
+:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.ep-business-landing,.dashboard-shell,.ep-auth-modal)
+:is(.ep-secondary-accent,[data-secondary-accent]) { color: var(--ep-accent) !important; }
+:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.ep-business-landing,.dashboard-shell,.ep-auth-modal)
+:is(.ep-secondary-tint,[data-secondary-tint]) {
+  background-color: var(--ep-accent-tint) !important;
+  border-color: color-mix(in srgb,var(--ep-accent) 30%,transparent) !important;
+}
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) #top :is(.ep-hero-headline-secondary,[data-hero="headline"] > span:last-child),
+:is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] :is([data-page-hero-accent],span:last-child) {
+  color: var(--ep-accent) !important;
+  -webkit-text-fill-color: var(--ep-accent) !important;
+  text-shadow: 0 10px 34px color-mix(in srgb,var(--ep-accent) 16%,transparent) !important;
+}
+.ep-auth-modal::before { background: var(--ep-accent) !important; }
+.ep-auth-modal :is(.ep-auth-eyebrow,[data-auth-accent]) { color: var(--ep-accent) !important; -webkit-text-fill-color: var(--ep-accent) !important; }
+.ep-auth-modal .ep-auth-brand { border-color: color-mix(in srgb,var(--ep-accent) 38%,transparent) !important; }
+.ep-auth-modal button[aria-label="Close"]:hover { border-color: var(--ep-accent) !important; background: var(--ep-accent-tint) !important; color: var(--ep-accent-hover) !important; }
