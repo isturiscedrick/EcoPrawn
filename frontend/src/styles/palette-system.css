@@ -2699,3 +2699,21 @@ html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child {
   background-image: none !important;
   box-shadow: none !important;
 }
+
+
+/* Remove the old warm-colored dash appended to the landing hero eyebrow.
+   This is the short line at the RIGHT end of the "Smart aquaculture" pill,
+   not an underline beneath the headline. */
+.ep-business-landing .ep-cloudnexus-eyebrow::after,
+.ep-business-landing #top [data-hero-kicker]::after,
+.ep-landing #top [data-hero-kicker]::after,
+.ep-about-page [data-page-kicker]::after,
+.ep-contact-page [data-page-kicker]::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
