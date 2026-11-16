@@ -1922,3 +1922,18 @@ html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page)
     line-height: .99;
   }
 }
+
+
+/* Remove the legacy decorative underline from public hero headings.
+   Hero emphasis is now carried by the Ocean Teal typography gradient only. */
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
+:is(.ep-field-hero-copy,.ep-cloudnexus-hero-inner,[data-page-hero])
+.ep-hero-headline-secondary::after,
+:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
+[data-hero="headline"] .ep-hero-headline-secondary::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
