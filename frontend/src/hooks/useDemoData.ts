@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import type { DemoData } from "@/types/api";
 
@@ -7,9 +6,13 @@ const empty: DemoData = {
   feedSchedule: [],
   tankFormDefaults: {},
 };
-export function useDemoData() {
+
+export function useDemoData(enabled = true) {
   const [data, setData] = useState<DemoData>(empty);
+
   useEffect(() => {
+    if (!enabled) return;
+
     const controller = new AbortController();
     fetch("/api/demo", { signal: controller.signal })
       .then((res) => {
@@ -18,7 +21,9 @@ export function useDemoData() {
       })
       .then(setData)
       .catch(() => {});
+
     return () => controller.abort();
-  }, []);
+  }, [enabled]);
+
   return data;
 }
