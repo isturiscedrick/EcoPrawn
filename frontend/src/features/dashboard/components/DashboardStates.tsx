@@ -241,3 +241,11 @@ export function DashboardEmptyState({ title, description, action }: StateMessage
     </div>
   );
 }
+
+export function DashboardInlineEmptyState({ message }: { message: string }) {
+  return (
+    <p role="status" className="py-10 text-center text-[13px] text-[var(--ep-text-muted)]">
+      {message}
+    </p>
+  );
+}
