@@ -7,14 +7,23 @@ This directory is the single source of truth for frontend CSS. Keep styles modul
 - `globals.css` — global entry point imported by `src/routes/__root.tsx`.
 - `foundations.css` — Tailwind theme bridge, semantic fallbacks, typography, shared chart defaults, and keyframes.
 - `theme-components.css` — shared theme compatibility, surfaces, charts, and active-state components.
-- `dashboard.css` — dashboard shell tokens, monitoring layouts, and responsive dashboard rules.
-- `palette-system.css` — canonical shared brand tokens and light/dark semantic palette mapping.
+- `dashboard-core.css` — dashboard tokens, shell, monitoring foundations, and shared interactions.
+- `dashboard-mobile-navigation.css` — dashboard mobile navigation and drawer behavior.
+- `dashboard-mobile-modules.css` — responsive layouts for dashboard modules, filters, and tables.
+- `dashboard-responsive-polish.css` — cross-module mobile consistency, accessibility, and final dashboard refinements.
+- `palette-foundation.css` — canonical Ocean Teal tokens and light/dark semantic palette foundations.
+- `palette-surfaces.css` — shared page, card, panel, and dashboard surface mappings.
+- `palette-marketing.css` — marketing and authentication palette treatments.
+- `palette-public-chrome.css` — public hero, header, footer, and shared chrome theme refinements.
+- `palette-dashboard-navigation.css` — dashboard sidebar, navigation, and mobile header palette refinements.
 - `landing-global.css` — public-page stylesheet entry point.
   - `landing-tokens.css` — public-page tokens and headline treatments.
   - `hero-lens.css` — HeroLens depth, optics, and container-query behavior.
   - `landing-sections.css` — public hero, section bands, capabilities, and process layouts.
   - `site-chrome.css` — shared header/footer and public chrome.
-  - `marketing-experience.css`, `marketing-depth.css`, and `mobile-first.css` — existing public experience, depth, and responsive treatments; migrate rules into their owning modules before removing these files.
+  - `marketing-experience-foundations.css`, `marketing-experience-layout.css`, and `marketing-experience-interactions.css` — shared editorial foundations, page layouts, and interaction treatments.
+  - `marketing-depth-foundations.css`, `marketing-depth-landing.css`, and `marketing-depth-pages.css` — original marketing visuals grouped by shared foundations, landing-page sections, and About/Contact refinements.
+  - `mobile-first.css` — cross-page mobile-first responsive treatments.
 - `site-header.css` — SiteHeader responsive layout.
 - `brand-mark.css` — BrandMark and wordmark treatments.
 - `logo-intro.css` — loading-screen intro animation.
@@ -35,4 +44,4 @@ This directory is the single source of truth for frontend CSS. Keep styles modul
 
 ## Current cleanup priorities
 
-The public and dashboard stylesheets contain legacy layered rules and exceed the preferred module size. Refactor incrementally: identify the winning declaration, move rules into their owning module, compare light/dark behavior, then remove the superseded rule. Avoid bulk deletion based only on repeated property values because selector specificity, source order, and media-query scope can change the result.
+Large stylesheets have been split into smaller, ordered modules by responsibility. The split preserves each original file's rule order and keeps the original import positions, so the cascade remains unchanged. Future cleanup should consolidate duplicate selectors only after checking specificity, source order, and media-query scope; do not delete repeated declarations based on matching property values alone.
