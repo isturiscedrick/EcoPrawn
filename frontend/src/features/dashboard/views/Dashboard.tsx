@@ -9,6 +9,7 @@ import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
 import { useThresholdSettings } from "@/features/dashboard/hooks/useThresholdSettings";
 import { buildRecentDashboardActivity } from "@/features/dashboard/lib/dashboard-activity";
+import { buildDashboardSummary } from "@/features/dashboard/lib/dashboard-summary";
 
 
 export function Dashboard() {
@@ -26,17 +27,15 @@ export function Dashboard() {
     );
   }
 
-  const healthyCount = tanks.filter((tank) => tank.status === "ok").length;
-  const attentionCount = tanks.length - healthyCount;
-  const noReadingCount = tanks.filter((tank) => !tank.hasWaterReadings).length;
-  const outOfRangeCount = attentionCount - noReadingCount;
-  const healthyPercent = tanks.length ? (healthyCount / tanks.length) * 100 : 0;
-  const attentionPercent = tanks.length ? (attentionCount / tanks.length) * 100 : 0;
-  const prioritizedTanks = [...tanks].sort((a, b) => {
-    if (a.status !== b.status) return a.status === "warn" ? -1 : 1;
-    if (a.hasWaterReadings !== b.hasWaterReadings) return a.hasWaterReadings ? -1 : 1;
-    return a.name.localeCompare(b.name);
-  });
+  const {
+    healthyCount,
+    attentionCount,
+    noReadingCount,
+    outOfRangeCount,
+    healthyPercent,
+    attentionPercent,
+    prioritizedTanks,
+  } = buildDashboardSummary(tanks);
   const recentActivity = buildRecentDashboardActivity(tanks, waterHistory, visionScanLog);
 
   return (
