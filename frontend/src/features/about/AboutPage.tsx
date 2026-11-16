@@ -154,9 +154,9 @@ export function AboutPage() {
                 </div>
 
                 <h2 className={heading}>
-                  Five systems,
+                  Five modules,
                   <br className="hidden sm:block" />
-                  one tank.
+                  one production cycle.
                 </h2>
 
                 <p className="mt-3 max-w-[36rem] text-lg leading-relaxed text-[var(--ep-on-deep-muted)]">
