@@ -3073,3 +3073,37 @@ html.dark #site-header .ep-mobile-menu-toggle {
   border-color: transparent !important;
   color: #70d7c8 !important;
 }
+
+
+/* Transparent hamburger buttons across both public landing and dashboard
+   mobile headers. Keep the circular hit area and visible focus ring only. */
+@media (max-width: 1023px) {
+  #site-header .ep-mobile-menu-toggle,
+  .dashboard-shell .ep-dashboard-mobile-menu-toggle {
+    background: transparent !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+  }
+  #site-header .ep-mobile-menu-toggle:hover,
+  #site-header .ep-mobile-menu-toggle:active,
+  .dashboard-shell .ep-dashboard-mobile-menu-toggle:hover,
+  .dashboard-shell .ep-dashboard-mobile-menu-toggle:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+  #site-header .ep-mobile-menu-toggle:focus-visible,
+  .dashboard-shell .ep-dashboard-mobile-menu-toggle:focus-visible {
+    outline: 2px solid var(--ep-accent) !important;
+    outline-offset: 3px !important;
+  }
+}
+html.dark #site-header .ep-mobile-menu-toggle,
+html.dark .dashboard-shell .ep-dashboard-mobile-menu-toggle {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
