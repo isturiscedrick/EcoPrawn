@@ -769,3 +769,95 @@ html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a {
     background: #1a4145 !important;
   }
 }
+
+
+/* IMPORTANT: desktop sidebar is a sibling of .dashboard-shell.
+   Target the actual aside directly so dark-mode parity rules really apply. */
+@media (min-width: 1024px) {
+  html.dark aside#dashboard-sidebar {
+    background: linear-gradient(180deg, #102b30 0%, #10272c 52%, #0b2024 100%) !important;
+    border-right: 1px solid #294d53 !important;
+    box-shadow: 10px 0 28px -23px rgba(0,0,0,.72) !important;
+  }
+  html.dark aside#dashboard-sidebar > div:first-child {
+    min-height: 86px !important; padding-inline: 16px !important;
+    background: linear-gradient(180deg, #153238, #112b30) !important;
+    border-bottom: 1px solid #294d53 !important;
+  }
+  html.dark aside#dashboard-sidebar > div:first-child button {
+    width: 36px !important; height: 44px !important;
+    border: 1px solid #3b6268 !important; border-radius: 11px !important;
+    background: linear-gradient(145deg, #1a3c42, #143239) !important; color: #d4e8e5 !important;
+  }
+  html.dark aside#dashboard-sidebar > div:nth-child(2) {
+    padding: 18px 16px !important; background: #10272c !important;
+    border-bottom: 1px solid #294d53 !important;
+  }
+  html.dark aside#dashboard-sidebar > div:nth-child(2) a {
+    min-height: 70px !important; padding: 10px 14px !important; gap: 12px !important;
+    border: 1px solid #31565d !important; border-radius: 15px !important;
+    background: linear-gradient(145deg, #17373d, #142f35) !important; color: #e1efed !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 4px 12px -9px rgba(0,0,0,.7) !important;
+  }
+  html.dark aside#dashboard-sidebar > div:nth-child(2) a > span:first-child {
+    width: 42px !important; height: 42px !important; border-radius: 50% !important;
+    border: 1px solid rgba(112,215,200,.23) !important; background: #1c4a4b !important; color: #8bd8cc !important;
+  }
+  html.dark aside#dashboard-sidebar > div:nth-child(3) {
+    padding: 18px 16px 20px !important; background: transparent !important;
+  }
+  html.dark aside#dashboard-sidebar > div:nth-child(3) > div:first-child {
+    padding: 0 12px 14px !important; color: #88a9ac !important;
+    font-size: 10px !important; letter-spacing: .14em !important;
+  }
+  html.dark aside#dashboard-sidebar nav { gap: 8px !important; }
+  html.dark aside#dashboard-sidebar nav > a > span {
+    min-height: 49px !important; padding: 7px 12px !important; gap: 10px !important;
+    border: 1px solid transparent !important; border-radius: 12px !important;
+    background: transparent !important; color: #bfd1d0 !important; box-shadow: none !important;
+  }
+  html.dark aside#dashboard-sidebar nav > a > span > span:first-child {
+    width: 34px !important; height: 34px !important;
+    border: 1px solid rgba(112,160,163,.12) !important; border-radius: 10px !important;
+    background: #18383e !important; color: #9bb8b9 !important;
+  }
+  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] > span,
+  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active {
+    min-height: 58px !important; background: #215652 !important;
+    background-image: linear-gradient(105deg, #245b57 0%, #1e514e 100%) !important;
+    border: 1px solid #397a73 !important; border-left: 3px solid #45c5b3 !important;
+    border-radius: 12px !important; color: #c8f4ee !important;
+    -webkit-text-fill-color: #c8f4ee !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.045), 0 4px 12px -9px rgba(0,0,0,.45) !important;
+  }
+  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child,
+  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:first-child {
+    width: 34px !important; height: 34px !important;
+    border: 1px solid rgba(112,215,200,.22) !important; border-radius: 10px !important;
+    background: #1b4949 !important; color: #c5f1eb !important; -webkit-text-fill-color: #c5f1eb !important;
+  }
+  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:nth-child(2),
+  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:nth-child(2) {
+    color: #c8f4ee !important; -webkit-text-fill-color: #c8f4ee !important;
+  }
+  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] .dashboard-nav-active-dot,
+  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active .dashboard-nav-active-dot { background: #70d7c8 !important; }
+  html.dark aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span {
+    background: rgba(69,197,179,.075) !important; border-color: rgba(112,215,200,.16) !important; color: #d7e9e6 !important;
+  }
+  html.dark aside#dashboard-sidebar > div:last-child {
+    min-height: 132px !important; padding: 16px !important; gap: 7px !important;
+    background: linear-gradient(180deg, #10272c, #0d2227) !important; border-top: 1px solid #294d53 !important;
+  }
+  html.dark aside#dashboard-sidebar > div:last-child a,
+  html.dark aside#dashboard-sidebar > div:last-child button {
+    min-height: 44px !important; padding: 9px 13px !important; gap: 10px !important;
+    border: 1px solid #31565d !important; border-radius: 11px !important;
+    background: linear-gradient(145deg, #17373d, #142f35) !important; color: #c9dcda !important; box-shadow: none !important;
+  }
+  html.dark aside#dashboard-sidebar > div:last-child a:hover,
+  html.dark aside#dashboard-sidebar > div:last-child button:hover,
+  html.dark aside#dashboard-sidebar > div:first-child button:hover {
+    border-color: #477b7e !important; background: #1a4145 !important;
+  }
+}
