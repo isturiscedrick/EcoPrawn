@@ -543,3 +543,47 @@ html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a {
     box-shadow: none !important;
   }
 }
+
+
+/* Final targeted override: SidebarNavItem puts dashboard-nav-active on the
+   INNER row span. Override that exact class in dark mode so the active item
+   cannot inherit the bright solid accent utility background. */
+@media (min-width: 1024px) {
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active,
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span {
+    background: linear-gradient(105deg, rgba(69,197,179,.15), rgba(69,197,179,.065)) !important;
+    background-color: rgba(69,197,179,.12) !important;
+    border: 1px solid rgba(112,215,200,.28) !important;
+    border-left: 3px solid #45c5b3 !important;
+    border-radius: 12px !important;
+    color: #d8eeea !important;
+    box-shadow: 0 3px 11px -9px rgba(69,197,179,.3), inset 0 1px 0 rgba(255,255,255,.04) !important;
+    -webkit-text-fill-color: #d8eeea !important;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:first-child,
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child {
+    background: #1b3a40 !important;
+    background-color: #1b3a40 !important;
+    border: 1px solid rgba(112,215,200,.16) !important;
+    border-radius: 10px !important;
+    color: #8bd8cc !important;
+    -webkit-text-fill-color: #8bd8cc !important;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,.035) !important;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:nth-child(2),
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:nth-child(2) {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    color: #d8eeea !important;
+    -webkit-text-fill-color: #d8eeea !important;
+    box-shadow: none !important;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active .dashboard-nav-active-dot,
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] .dashboard-nav-active-dot {
+    background: #70d7c8 !important;
+  }
+}
