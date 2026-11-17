@@ -356,3 +356,124 @@ html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a {
   border-color: #294c53;
 }
 
+
+
+/* Desktop dark-mode depth pass: match the light sidebar's layered surfaces,
+   with restrained seafoam highlights and clear control hover/focus states. */
+@media (min-width: 1024px) {
+  html.dark .dashboard-shell aside#dashboard-sidebar {
+    background:
+      radial-gradient(ellipse at 0% 0%, rgba(69,197,179,.12), transparent 44%),
+      linear-gradient(180deg, #172f35 0%, #102328 58%, #0b1b20 100%) !important;
+    border-right-color: #31545b !important;
+    box-shadow: 12px 0 38px -25px rgba(0,0,0,.78), inset -1px 0 0 rgba(255,255,255,.035);
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child {
+    background: linear-gradient(135deg, rgba(69,197,179,.14), rgba(19,42,48,.97) 72%) !important;
+    border-bottom-color: #31545b !important;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child a {
+    filter: drop-shadow(0 2px 5px rgba(69,197,179,.13));
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child button {
+    color: #c8e4e1;
+    background: linear-gradient(145deg, rgba(34,67,73,.92), rgba(20,45,51,.92)) !important;
+    border: 1px solid #3a6268 !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.055), 0 3px 9px rgba(0,0,0,.22);
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
+    background: linear-gradient(145deg, #1b3940, #142b31) !important;
+    border-color: #355a61 !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.045), 0 6px 16px -13px rgba(0,0,0,.78) !important;
+    color: #e4f2ef !important;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a > span:first-child {
+    background: linear-gradient(145deg, rgba(69,197,179,.25), rgba(69,197,179,.11)) !important;
+    color: #8ce1d3 !important;
+    border: 1px solid rgba(112,215,200,.18);
+    box-shadow: inset 0 1px 2px rgba(255,255,255,.055), 0 2px 7px rgba(0,0,0,.16);
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(3) > div:first-child {
+    color: #91b2b4 !important;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span {
+    color: #c5d9d8 !important;
+    border-color: transparent !important;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span > span:first-child {
+    background: linear-gradient(145deg, #1c3a41, #173138) !important;
+    color: #a6c9c7 !important;
+    border: 1px solid rgba(124,171,171,.12);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,.035);
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span {
+    background: linear-gradient(105deg, rgba(69,197,179,.21), rgba(69,197,179,.075)) !important;
+    border-color: rgba(112,215,200,.34) !important;
+    border-left: 3px solid #45c5b3 !important;
+    color: #effcf9 !important;
+    box-shadow: 0 6px 17px -12px rgba(69,197,179,.45), inset 0 1px 0 rgba(255,255,255,.06) !important;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child {
+    background: linear-gradient(145deg, rgba(69,197,179,.29), rgba(69,197,179,.13)) !important;
+    color: #8ce1d3 !important;
+    border-color: rgba(112,215,200,.24) !important;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span {
+    background: linear-gradient(105deg, rgba(69,197,179,.105), rgba(69,197,179,.035)) !important;
+    border-color: rgba(112,215,200,.17) !important;
+    color: #8ce1d3 !important;
+    transform: translateX(2px);
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child {
+    background: linear-gradient(180deg, #11272d, #0b1b20) !important;
+    border-top-color: #31545b !important;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a,
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child button:not([data-variant="danger"]) {
+    background: linear-gradient(145deg, rgba(29,59,66,.82), rgba(18,41,47,.88)) !important;
+    border: 1px solid #355860 !important;
+    color: #d8eae7 !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 3px 9px rgba(0,0,0,.16);
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child button {
+    background: linear-gradient(145deg, rgba(105,35,44,.24), rgba(75,26,35,.2));
+    border: 1px solid rgba(239,120,130,.25);
+    color: #ff9da5;
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child button:hover,
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a:hover,
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child button:hover {
+    background-color: rgba(69,197,179,.14) !important;
+    border-color: rgba(112,215,200,.42) !important;
+    box-shadow: 0 6px 15px -10px rgba(0,0,0,.7), 0 0 0 1px rgba(69,197,179,.06);
+    transform: translateY(-1px);
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a:hover {
+    background: linear-gradient(145deg, #20434a, #17343a) !important;
+    border-color: #47747a !important;
+    box-shadow: 0 8px 18px -12px rgba(0,0,0,.75), 0 0 0 1px rgba(69,197,179,.08) !important;
+    transform: translateY(-1px);
+  }
+
+  html.dark .dashboard-shell aside#dashboard-sidebar :focus-visible {
+    outline: 2px solid #70d7c8;
+    outline-offset: 3px;
+  }
+}
