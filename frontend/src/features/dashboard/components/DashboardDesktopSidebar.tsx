@@ -31,16 +31,16 @@ export function DashboardDesktopSidebar({
       id="dashboard-sidebar"
       className={`fixed bottom-0 left-0 top-0 z-30 hidden flex-col border-r border-[var(--ep-line)] bg-[var(--ep-surface)] transition-[width] duration-300 ease-in-out lg:flex ${collapsed ? "w-[76px]" : "w-[260px]"}`}
     >
-      <div className={`flex min-h-[68px] shrink-0 items-center border-b border-[var(--ep-line)] py-3 ${collapsed ? "justify-center gap-1 px-1" : "justify-between gap-3 px-5"}`}>
+      <div className={`flex shrink-0 items-center border-b border-[var(--ep-line)] py-3 ${collapsed ? "min-h-[88px] flex-col justify-center gap-2 px-2" : "min-h-[68px] justify-between gap-3 px-5"}`}>
         <Link
           to="/dashboard"
           aria-label="EcoPrawn dashboard"
           title={collapsed ? "EcoPrawn dashboard" : undefined}
-          className={`flex min-w-0 items-center rounded-lg transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] ${collapsed ? "shrink-0" : ""}`}
+          className={`flex min-w-0 items-center rounded-lg transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] ${collapsed ? "shrink-0" : ""}`}
         >
           <BrandMark size={collapsed ? 28 : 32} showWordmark={!collapsed} />
         </Link>
-        <button type="button" onClick={onToggleCollapsed} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} aria-pressed={collapsed} title={collapsed ? "Expand sidebar" : "Collapse sidebar"} className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]">
+        <button type="button" onClick={onToggleCollapsed} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} aria-pressed={collapsed} title={collapsed ? "Expand sidebar" : "Collapse sidebar"} className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-transparent text-[var(--ep-text-muted)] transition-all duration-200 hover:border-[var(--ep-line)] hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] ${collapsed ? "mt-0" : ""}`}>
           <Icon name="sidebar-toggle" size={18} />
         </button>
       </div>
