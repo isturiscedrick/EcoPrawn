@@ -358,506 +358,102 @@ html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a {
 
 
 
-/* Desktop dark-mode depth pass: match the light sidebar's layered surfaces,
-   with restrained seafoam highlights and clear control hover/focus states. */
+
+
+/* Dark desktop sidebar color treatment.
+   Keep the component's original geometry and spacing; only adjust colors,
+   borders and shadows. The desktop aside is not inside .dashboard-shell. */
 @media (min-width: 1024px) {
-  html.dark .dashboard-shell aside#dashboard-sidebar {
-    background:
-      radial-gradient(ellipse at 0% 0%, rgba(69,197,179,.12), transparent 44%),
-      linear-gradient(180deg, #172f35 0%, #102328 58%, #0b1b20 100%) !important;
-    border-right-color: #31545b !important;
-    box-shadow: 12px 0 38px -25px rgba(0,0,0,.78), inset -1px 0 0 rgba(255,255,255,.035);
+  html.dark aside#dashboard-sidebar {
+    background: linear-gradient(180deg, #102b30 0%, #10272c 58%, #0d2227 100%) !important;
+    border-right-color: #294d53 !important;
+    box-shadow: 10px 0 28px -24px rgba(0,0,0,.72) !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child {
-    background: linear-gradient(135deg, rgba(69,197,179,.14), rgba(19,42,48,.97) 72%) !important;
-    border-bottom-color: #31545b !important;
+  html.dark aside#dashboard-sidebar > div:first-child,
+  html.dark aside#dashboard-sidebar > div:nth-child(2) {
+    background-color: rgba(18, 45, 51, .72) !important;
+    border-color: #294d53 !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child a {
-    filter: drop-shadow(0 2px 5px rgba(69,197,179,.13));
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child button {
-    color: #c8e4e1;
-    background: linear-gradient(145deg, rgba(34,67,73,.92), rgba(20,45,51,.92)) !important;
-    border: 1px solid #3a6268 !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.055), 0 3px 9px rgba(0,0,0,.22);
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
-    background: linear-gradient(145deg, #1b3940, #142b31) !important;
-    border-color: #355a61 !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.045), 0 6px 16px -13px rgba(0,0,0,.78) !important;
-    color: #e4f2ef !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a > span:first-child {
-    background: linear-gradient(145deg, rgba(69,197,179,.25), rgba(69,197,179,.11)) !important;
-    color: #8ce1d3 !important;
-    border: 1px solid rgba(112,215,200,.18);
-    box-shadow: inset 0 1px 2px rgba(255,255,255,.055), 0 2px 7px rgba(0,0,0,.16);
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(3) > div:first-child {
-    color: #91b2b4 !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span {
-    color: #c5d9d8 !important;
-    border-color: transparent !important;
-    transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span > span:first-child {
-    background: linear-gradient(145deg, #1c3a41, #173138) !important;
-    color: #a6c9c7 !important;
-    border: 1px solid rgba(124,171,171,.12);
-    box-shadow: inset 0 1px 1px rgba(255,255,255,.035);
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span {
-    background: linear-gradient(105deg, rgba(69,197,179,.21), rgba(69,197,179,.075)) !important;
-    border-color: rgba(112,215,200,.34) !important;
-    border-left: 3px solid #45c5b3 !important;
-    color: #effcf9 !important;
-    box-shadow: 0 6px 17px -12px rgba(69,197,179,.45), inset 0 1px 0 rgba(255,255,255,.06) !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child {
-    background: linear-gradient(145deg, rgba(69,197,179,.29), rgba(69,197,179,.13)) !important;
-    color: #8ce1d3 !important;
-    border-color: rgba(112,215,200,.24) !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span {
-    background: linear-gradient(105deg, rgba(69,197,179,.105), rgba(69,197,179,.035)) !important;
-    border-color: rgba(112,215,200,.17) !important;
-    color: #8ce1d3 !important;
-    transform: translateX(2px);
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child {
-    background: linear-gradient(180deg, #11272d, #0b1b20) !important;
-    border-top-color: #31545b !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a,
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child button:not([data-variant="danger"]) {
-    background: linear-gradient(145deg, rgba(29,59,66,.82), rgba(18,41,47,.88)) !important;
-    border: 1px solid #355860 !important;
-    color: #d8eae7 !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 3px 9px rgba(0,0,0,.16);
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child button {
-    background: linear-gradient(145deg, rgba(105,35,44,.24), rgba(75,26,35,.2));
-    border: 1px solid rgba(239,120,130,.25);
-    color: #ff9da5;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child button:hover,
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a:hover,
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child button:hover {
-    background-color: rgba(69,197,179,.14) !important;
-    border-color: rgba(112,215,200,.42) !important;
-    box-shadow: 0 6px 15px -10px rgba(0,0,0,.7), 0 0 0 1px rgba(69,197,179,.06);
-    transform: translateY(-1px);
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a:hover {
-    background: linear-gradient(145deg, #20434a, #17343a) !important;
-    border-color: #47747a !important;
-    box-shadow: 0 8px 18px -12px rgba(0,0,0,.75), 0 0 0 1px rgba(69,197,179,.08) !important;
-    transform: translateY(-1px);
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar :focus-visible {
-    outline: 2px solid #70d7c8;
-    outline-offset: 3px;
-  }
-}
-
-
-/* Dark desktop sidebar parity: mirror the light theme's restrained selected
-   row, outlined profile card, and quiet icon tiles instead of a solid accent fill. */
-@media (min-width: 1024px) {
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
-    background: linear-gradient(145deg, #152e34, #12272d) !important;
-    border-color: #315158 !important;
-    box-shadow: 0 3px 10px -8px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.035) !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a > span:first-child {
-    background: #1d4146 !important;
-    border: 1px solid rgba(112,215,200,.2) !important;
-    color: #8ccfc5 !important;
-    box-shadow: inset 0 1px 2px rgba(255,255,255,.045) !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active,
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span,
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span.dashboard-nav-active {
-    background: linear-gradient(105deg, rgba(69,197,179,.16), rgba(69,197,179,.075)) !important;
-    background-color: rgba(69,197,179,.12) !important;
-    border: 1px solid rgba(112,215,200,.3) !important;
-    border-left: 3px solid #45c5b3 !important;
-    border-radius: 12px !important;
-    color: #d9efeb !important;
-    box-shadow: 0 4px 12px -10px rgba(69,197,179,.32), inset 0 1px 0 rgba(255,255,255,.045) !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child {
-    background: #1d4146 !important;
-    border: 1px solid rgba(112,215,200,.2) !important;
-    border-radius: 10px !important;
-    color: #83d6c9 !important;
-    box-shadow: inset 0 1px 2px rgba(255,255,255,.045) !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] .dashboard-nav-active-dot {
-    background: #70d7c8 !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span {
-    background: rgba(69,197,179,.075) !important;
-    border-color: rgba(112,215,200,.16) !important;
-    color: #d9efeb !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]) > span > span:first-child {
-    background: #19373d !important;
-    border-color: rgba(124,171,171,.12) !important;
-    color: #9bbdbb !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child {
-    background: linear-gradient(180deg, #11272d, #0e2227) !important;
-    border-top-color: #294950 !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a {
-    background: rgba(24,51,58,.38) !important;
-    border-color: #315158 !important;
-    color: #d1e3e0 !important;
-    box-shadow: none !important;
-  }
-}
-
-
-/* Final targeted override: SidebarNavItem puts dashboard-nav-active on the
-   INNER row span. Override that exact class in dark mode so the active item
-   cannot inherit the bright solid accent utility background. */
-@media (min-width: 1024px) {
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active,
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span {
-    background: linear-gradient(105deg, rgba(69,197,179,.15), rgba(69,197,179,.065)) !important;
-    background-color: rgba(69,197,179,.12) !important;
-    border: 1px solid rgba(112,215,200,.28) !important;
-    border-left: 3px solid #45c5b3 !important;
-    border-radius: 12px !important;
-    color: #d8eeea !important;
-    box-shadow: 0 3px 11px -9px rgba(69,197,179,.3), inset 0 1px 0 rgba(255,255,255,.04) !important;
-    -webkit-text-fill-color: #d8eeea !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:first-child,
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child {
-    background: #1b3a40 !important;
-    background-color: #1b3a40 !important;
-    border: 1px solid rgba(112,215,200,.16) !important;
-    border-radius: 10px !important;
-    color: #8bd8cc !important;
-    -webkit-text-fill-color: #8bd8cc !important;
-    box-shadow: inset 0 1px 2px rgba(255,255,255,.035) !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:nth-child(2),
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:nth-child(2) {
-    background: transparent !important;
-    background-color: transparent !important;
-    border: 0 !important;
-    color: #d8eeea !important;
-    -webkit-text-fill-color: #d8eeea !important;
-    box-shadow: none !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active .dashboard-nav-active-dot,
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] .dashboard-nav-active-dot {
-    background: #70d7c8 !important;
-  }
-}
-
-
-/* Screenshot-matched dark desktop sidebar finish.
-   This is intentionally a cohesive deep-ocean treatment with a distinct
-   teal selected row, compact icon tiles, outlined profile and footer actions. */
-@media (min-width: 1024px) {
-  html.dark .dashboard-shell aside#dashboard-sidebar {
-    width: 260px;
-    background: linear-gradient(180deg, #102b30 0%, #10272c 52%, #0b2024 100%) !important;
-    border-right: 1px solid #294d53 !important;
-    box-shadow: 10px 0 28px -23px rgba(0,0,0,.72) !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child {
-    min-height: 86px;
-    padding: 0 16px !important;
-    background: linear-gradient(180deg, #153238 0%, #112b30 100%) !important;
-    border-bottom: 1px solid #294d53 !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child a {
-    filter: none !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child button {
-    width: 36px;
-    height: 44px;
-    border: 1px solid #3b6268 !important;
-    border-radius: 11px !important;
-    background: linear-gradient(145deg, #1a3c42, #143239) !important;
-    color: #d4e8e5 !important;
-    box-shadow: 0 3px 9px rgba(0,0,0,.16) !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) {
-    padding: 18px 16px !important;
-    background: #10272c !important;
-    border-bottom: 1px solid #294d53 !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
-    min-height: 70px;
-    padding: 10px 14px !important;
-    gap: 12px !important;
-    border: 1px solid #31565d !important;
-    border-radius: 15px !important;
-    background: linear-gradient(145deg, #17373d, #142f35) !important;
+  html.dark aside#dashboard-sidebar > div:nth-child(2) a {
+    background: #142f35 !important;
+    border-color: #31565d !important;
     color: #e1efed !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 4px 12px -9px rgba(0,0,0,.7) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.035) !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a > span:first-child {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 1px solid rgba(112,215,200,.23) !important;
-    background: #1c4a4b !important;
+  html.dark aside#dashboard-sidebar > div:nth-child(2) a > span:first-child {
+    background: #1c4549 !important;
+    border: 1px solid rgba(112,215,200,.2) !important;
     color: #8bd8cc !important;
-    box-shadow: inset 0 1px 2px rgba(255,255,255,.045) !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a > span:last-child span:first-child {
-    color: #e0efec !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a > span:last-child span:last-child {
-    color: #b5ccca !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(3) {
-    padding: 18px 16px 20px !important;
+  html.dark aside#dashboard-sidebar > div:nth-child(3) {
     background: transparent !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(3) > div:first-child {
-    padding: 0 12px 14px !important;
+  html.dark aside#dashboard-sidebar > div:nth-child(3) > div:first-child {
     color: #88a9ac !important;
-    font-size: 10px !important;
-    letter-spacing: .14em !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar nav {
-    gap: 8px !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span {
-    min-height: 49px !important;
-    padding: 7px 12px !important;
-    gap: 10px !important;
-    border: 1px solid transparent !important;
-    border-radius: 12px !important;
+  html.dark aside#dashboard-sidebar nav > a > span {
     background: transparent !important;
+    border-color: transparent !important;
     color: #bfd1d0 !important;
     box-shadow: none !important;
-    transition: background .18s ease, border-color .18s ease, color .18s ease !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span > span:first-child {
-    width: 34px !important;
-    height: 34px !important;
-    border: 1px solid rgba(112,160,163,.12) !important;
-    border-radius: 10px !important;
+  html.dark aside#dashboard-sidebar nav > a > span > span:first-child {
     background: #18383e !important;
     color: #9bb8b9 !important;
-    box-shadow: inset 0 1px 1px rgba(255,255,255,.025) !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span,
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active {
-    min-height: 58px !important;
-    background: #215652 !important;
-    background-image: linear-gradient(105deg, #245b57 0%, #1e514e 100%) !important;
-    border: 1px solid #397a73 !important;
+  /* Actual active class is on the inner row span, not the Link element. */
+  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active,
+  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] > span {
+    background: #214f4c !important;
+    background-color: #214f4c !important;
+    border: 1px solid #39736d !important;
     border-left: 3px solid #45c5b3 !important;
-    border-radius: 12px !important;
-    color: #c8f4ee !important;
-    -webkit-text-fill-color: #c8f4ee !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.045), 0 4px 12px -9px rgba(0,0,0,.45) !important;
+    color: #d8efeb !important;
+    -webkit-text-fill-color: #d8efeb !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.045) !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child,
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:first-child {
-    width: 34px !important;
-    height: 34px !important;
-    border: 1px solid rgba(112,215,200,.22) !important;
-    border-radius: 10px !important;
-    background: #1b4949 !important;
-    color: #c5f1eb !important;
-    -webkit-text-fill-color: #c5f1eb !important;
-    box-shadow: inset 0 1px 2px rgba(255,255,255,.045) !important;
+  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:first-child,
+  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child {
+    background: #1a4143 !important;
+    color: #a6e4db !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:nth-child(2),
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:nth-child(2) {
-    color: #c8f4ee !important;
-    -webkit-text-fill-color: #c8f4ee !important;
+  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:nth-child(2),
+  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:nth-child(2) {
+    background: transparent !important;
+    color: #d8efeb !important;
+    -webkit-text-fill-color: #d8efeb !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] .dashboard-nav-active-dot,
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a > span.dashboard-nav-active .dashboard-nav-active-dot {
-    width: 7px !important;
-    height: 7px !important;
+  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active .dashboard-nav-active-dot,
+  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] .dashboard-nav-active-dot {
     background: #70d7c8 !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span {
+  html.dark aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span {
     background: rgba(69,197,179,.075) !important;
     border-color: rgba(112,215,200,.16) !important;
     color: #d7e9e6 !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child {
-    min-height: 132px;
-    padding: 16px !important;
-    gap: 7px !important;
-    background: linear-gradient(180deg, #10272c, #0d2227) !important;
-    border-top: 1px solid #294d53 !important;
+  html.dark aside#dashboard-sidebar > div:last-child {
+    background: #0d2227 !important;
+    border-top-color: #294d53 !important;
   }
 
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a,
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child button {
-    min-height: 44px !important;
-    padding: 9px 13px !important;
-    gap: 10px !important;
-    border: 1px solid #31565d !important;
-    border-radius: 11px !important;
-    background: linear-gradient(145deg, #17373d, #142f35) !important;
+  html.dark aside#dashboard-sidebar > div:last-child a {
+    background: #142f35 !important;
+    border-color: #31565d !important;
     color: #c9dcda !important;
     box-shadow: none !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child button {
-    color: #c9dcda !important;
-  }
-
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a:hover,
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child button:hover,
-  html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child button:hover {
-    border-color: #477b7e !important;
-    background: #1a4145 !important;
-  }
-}
-
-
-/* IMPORTANT: desktop sidebar is a sibling of .dashboard-shell.
-   Target the actual aside directly so dark-mode parity rules really apply. */
-@media (min-width: 1024px) {
-  html.dark aside#dashboard-sidebar {
-    background: linear-gradient(180deg, #102b30 0%, #10272c 52%, #0b2024 100%) !important;
-    border-right: 1px solid #294d53 !important;
-    box-shadow: 10px 0 28px -23px rgba(0,0,0,.72) !important;
-  }
-  html.dark aside#dashboard-sidebar > div:first-child {
-    min-height: 86px !important; padding-inline: 16px !important;
-    background: linear-gradient(180deg, #153238, #112b30) !important;
-    border-bottom: 1px solid #294d53 !important;
-  }
-  html.dark aside#dashboard-sidebar > div:first-child button {
-    width: 36px !important; height: 44px !important;
-    border: 1px solid #3b6268 !important; border-radius: 11px !important;
-    background: linear-gradient(145deg, #1a3c42, #143239) !important; color: #d4e8e5 !important;
-  }
-  html.dark aside#dashboard-sidebar > div:nth-child(2) {
-    padding: 18px 16px !important; background: #10272c !important;
-    border-bottom: 1px solid #294d53 !important;
-  }
-  html.dark aside#dashboard-sidebar > div:nth-child(2) a {
-    min-height: 70px !important; padding: 10px 14px !important; gap: 12px !important;
-    border: 1px solid #31565d !important; border-radius: 15px !important;
-    background: linear-gradient(145deg, #17373d, #142f35) !important; color: #e1efed !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 4px 12px -9px rgba(0,0,0,.7) !important;
-  }
-  html.dark aside#dashboard-sidebar > div:nth-child(2) a > span:first-child {
-    width: 42px !important; height: 42px !important; border-radius: 50% !important;
-    border: 1px solid rgba(112,215,200,.23) !important; background: #1c4a4b !important; color: #8bd8cc !important;
-  }
-  html.dark aside#dashboard-sidebar > div:nth-child(3) {
-    padding: 18px 16px 20px !important; background: transparent !important;
-  }
-  html.dark aside#dashboard-sidebar > div:nth-child(3) > div:first-child {
-    padding: 0 12px 14px !important; color: #88a9ac !important;
-    font-size: 10px !important; letter-spacing: .14em !important;
-  }
-  html.dark aside#dashboard-sidebar nav { gap: 8px !important; }
-  html.dark aside#dashboard-sidebar nav > a > span {
-    min-height: 49px !important; padding: 7px 12px !important; gap: 10px !important;
-    border: 1px solid transparent !important; border-radius: 12px !important;
-    background: transparent !important; color: #bfd1d0 !important; box-shadow: none !important;
-  }
-  html.dark aside#dashboard-sidebar nav > a > span > span:first-child {
-    width: 34px !important; height: 34px !important;
-    border: 1px solid rgba(112,160,163,.12) !important; border-radius: 10px !important;
-    background: #18383e !important; color: #9bb8b9 !important;
-  }
-  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] > span,
-  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active {
-    min-height: 58px !important; background: #215652 !important;
-    background-image: linear-gradient(105deg, #245b57 0%, #1e514e 100%) !important;
-    border: 1px solid #397a73 !important; border-left: 3px solid #45c5b3 !important;
-    border-radius: 12px !important; color: #c8f4ee !important;
-    -webkit-text-fill-color: #c8f4ee !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.045), 0 4px 12px -9px rgba(0,0,0,.45) !important;
-  }
-  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child,
-  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:first-child {
-    width: 34px !important; height: 34px !important;
-    border: 1px solid rgba(112,215,200,.22) !important; border-radius: 10px !important;
-    background: #1b4949 !important; color: #c5f1eb !important; -webkit-text-fill-color: #c5f1eb !important;
-  }
-  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:nth-child(2),
-  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active > span:nth-child(2) {
-    color: #c8f4ee !important; -webkit-text-fill-color: #c8f4ee !important;
-  }
-  html.dark aside#dashboard-sidebar nav > a[aria-current="page"] .dashboard-nav-active-dot,
-  html.dark aside#dashboard-sidebar nav > a > span.dashboard-nav-active .dashboard-nav-active-dot { background: #70d7c8 !important; }
-  html.dark aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span {
-    background: rgba(69,197,179,.075) !important; border-color: rgba(112,215,200,.16) !important; color: #d7e9e6 !important;
-  }
-  html.dark aside#dashboard-sidebar > div:last-child {
-    min-height: 132px !important; padding: 16px !important; gap: 7px !important;
-    background: linear-gradient(180deg, #10272c, #0d2227) !important; border-top: 1px solid #294d53 !important;
-  }
-  html.dark aside#dashboard-sidebar > div:last-child a,
-  html.dark aside#dashboard-sidebar > div:last-child button {
-    min-height: 44px !important; padding: 9px 13px !important; gap: 10px !important;
-    border: 1px solid #31565d !important; border-radius: 11px !important;
-    background: linear-gradient(145deg, #17373d, #142f35) !important; color: #c9dcda !important; box-shadow: none !important;
-  }
-  html.dark aside#dashboard-sidebar > div:last-child a:hover,
-  html.dark aside#dashboard-sidebar > div:last-child button:hover,
-  html.dark aside#dashboard-sidebar > div:first-child button:hover {
-    border-color: #477b7e !important; background: #1a4145 !important;
   }
 }
