@@ -212,3 +212,147 @@ html:not(.dark) .dashboard-shell aside#dashboard-sidebar > div:last-child {
   border-top-color: #e3ecee !important;
 }
 
+/* Desktop sidebar depth pass: layered surfaces and tactile controls.
+   Kept desktop-only so the mobile drawer retains its existing treatment. */
+@media (min-width: 1024px) {
+  .dashboard-shell aside#dashboard-sidebar {
+    background:
+      radial-gradient(ellipse at 0% 0%, rgba(8,126,139,.055), transparent 42%),
+      linear-gradient(180deg, #ffffff 0%, #f8fbfc 58%, #f3f8f9 100%) !important;
+    border-right-color: #dce8eb !important;
+    box-shadow: 12px 0 34px -26px rgba(16, 58, 68, .34), inset -1px 0 0 rgba(255,255,255,.8);
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:first-child {
+    background: linear-gradient(135deg, rgba(8,126,139,.075), rgba(255,255,255,.96) 68%) !important;
+    border-bottom-color: #dce8eb !important;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:first-child a {
+    filter: drop-shadow(0 2px 3px rgba(8,126,139,.08));
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:first-child button {
+    background: rgba(255,255,255,.68);
+    border-color: #e4edef;
+    box-shadow: 0 2px 7px rgba(23,59,70,.045);
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
+    background: linear-gradient(145deg, #ffffff, #f0f7f8) !important;
+    border-color: #dce9eb !important;
+    box-shadow: 0 5px 14px -12px rgba(8,70,80,.5), inset 0 1px 0 rgba(255,255,255,.95) !important;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a > span:first-child {
+    background: linear-gradient(145deg, #e4f4f3, #d5eceb) !important;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,.9), 0 2px 5px rgba(8,126,139,.08);
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:nth-child(3) > div:first-child {
+    color: #66838a;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar nav > a > span {
+    border: 1px solid transparent;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span {
+    background: linear-gradient(105deg, #e1f2f1, #f3f9f9) !important;
+    border-color: #c9e2e3 !important;
+    box-shadow: 0 5px 13px -10px rgba(8,126,139,.55), inset 0 1px 0 rgba(255,255,255,.9) !important;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child {
+    background: linear-gradient(145deg, #d0ebea, #e8f6f5) !important;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,.9);
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:last-child {
+    background: linear-gradient(180deg, #f5f9fa, #edf4f5) !important;
+    border-top-color: #dce8eb !important;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:last-child a {
+    background: rgba(255,255,255,.58);
+    border: 1px solid #e2ecee;
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .dashboard-shell aside#dashboard-sidebar > div:first-child button,
+  .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a,
+  .dashboard-shell aside#dashboard-sidebar > div:last-child a,
+  .dashboard-shell aside#dashboard-sidebar > div:last-child button {
+    transition: transform .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:first-child button:hover,
+  .dashboard-shell aside#dashboard-sidebar > div:last-child a:hover,
+  .dashboard-shell aside#dashboard-sidebar > div:last-child button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px -9px rgba(8,70,80,.38);
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px -13px rgba(8,70,80,.42) !important;
+  }
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar {
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(69,197,179,.10), transparent 44%),
+    linear-gradient(180deg, #142c32 0%, #102328 58%, #0c1e23 100%) !important;
+  border-right-color: #2b5057 !important;
+  box-shadow: 12px 0 38px -26px rgba(0,0,0,.72), inset -1px 0 0 rgba(255,255,255,.025);
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child {
+  background: linear-gradient(135deg, rgba(69,197,179,.11), rgba(19,42,48,.96) 72%) !important;
+  border-bottom-color: #294c53 !important;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child button {
+  background: rgba(20,45,51,.72);
+  border-color: #31535a;
+  box-shadow: 0 2px 8px rgba(0,0,0,.18);
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
+  background: linear-gradient(145deg, #19363d, #132a30) !important;
+  border-color: #31535a !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 6px 16px -13px rgba(0,0,0,.7) !important;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a > span:first-child {
+  background: linear-gradient(145deg, rgba(69,197,179,.22), rgba(69,197,179,.10)) !important;
+  border-color: rgba(69,197,179,.22);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,.04);
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(3) > div:first-child {
+  color: #8eafb1;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span {
+  background: linear-gradient(105deg, rgba(69,197,179,.19), rgba(69,197,179,.075)) !important;
+  border-color: rgba(69,197,179,.32) !important;
+  box-shadow: 0 6px 16px -12px rgba(69,197,179,.38), inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar nav > a[aria-current="page"] > span > span:first-child {
+  background: linear-gradient(145deg, rgba(69,197,179,.25), rgba(69,197,179,.12)) !important;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,.06);
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child {
+  background: linear-gradient(180deg, #102328, #0b1b20) !important;
+  border-top-color: #294c53 !important;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child a {
+  background: rgba(24,51,58,.55);
+  border-color: #294c53;
+}
+
