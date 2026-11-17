@@ -201,4 +201,160 @@ html.dark .dashboard-shell aside#dashboard-sidebar nav a > span.dashboard-nav-ac
   }
 }
 
+/* Desktop dashboard sidebar — clearer hierarchy and a more deliberate,
+   compact navigation rhythm. Scoped to desktop so the mobile drawer is untouched. */
+@media (min-width: 1024px) {
+  .dashboard-shell aside#dashboard-sidebar {
+    background: #ffffff !important;
+    border-right-color: #e1eaed !important;
+    box-shadow: 10px 0 30px -28px rgba(18, 56, 66, .42);
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:first-child {
+    min-height: 68px;
+    padding-inline: .85rem;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:first-child a {
+    min-height: 36px;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:first-child button {
+    border: 1px solid transparent;
+    border-radius: 10px;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:first-child button:hover {
+    border-color: #dce9eb;
+    background: #f1f7f8 !important;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) {
+    padding: 1rem .85rem;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
+    min-height: 64px;
+    border-radius: 14px !important;
+    background: #f8fbfb !important;
+    border-color: #e5eef0 !important;
+    box-shadow: none;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a:hover {
+    background: #f1f7f8 !important;
+    border-color: #d9e8ea !important;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:nth-child(3) {
+    padding: 1rem .85rem;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:nth-child(3) > div:first-child {
+    padding-inline: .7rem;
+    padding-bottom: .7rem;
+    font-size: 10px;
+    letter-spacing: .14em;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar nav {
+    gap: .35rem;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar nav > a > span {
+    min-height: 46px;
+    padding-inline: .7rem;
+    border-radius: 11px !important;
+    font-size: 13.5px;
+    letter-spacing: .005em;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar nav > a > span > span:first-child {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span {
+    transform: translateX(2px);
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:last-child {
+    padding: .85rem .85rem 1rem;
+    gap: .4rem;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar > div:last-child a,
+  .dashboard-shell aside#dashboard-sidebar > div:last-child button {
+    min-height: 43px;
+    border-radius: 11px;
+    font-size: 13px;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar .dashboard-logout-button {
+    border: 1px solid transparent;
+    color: #b42332 !important;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar .dashboard-logout-button:hover {
+    border-color: #f2d6d9 !important;
+    background: #fff1f2 !important;
+    color: #9f1d2b !important;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar a:focus-visible,
+  .dashboard-shell aside#dashboard-sidebar button:focus-visible {
+    outline: 2px solid #087e8b;
+    outline-offset: 2px;
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .dashboard-shell aside#dashboard-sidebar nav > a > span {
+    transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease;
+  }
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar {
+  background: #102328 !important;
+  border-right-color: #294c53 !important;
+  box-shadow: 10px 0 34px -28px rgba(0, 0, 0, .78);
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:first-child button:hover {
+  border-color: #31535a;
+  background: #173239 !important;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a {
+  background: #132a30 !important;
+  border-color: #294c53 !important;
+  box-shadow: none;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a:hover {
+  background: #173239 !important;
+  border-color: #365e65 !important;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar nav > a:not([aria-current="page"]):hover > span {
+  background: #173239 !important;
+  border-color: #294c53 !important;
+  color: #70d7c8 !important;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child {
+  background: #0c1d22 !important;
+  border-top-color: #294c53 !important;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar .dashboard-logout-button {
+  color: #ff9da5 !important;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar .dashboard-logout-button:hover {
+  border-color: rgba(239, 120, 130, .24) !important;
+  background: rgba(180, 35, 50, .12) !important;
+  color: #ffb0b6 !important;
+}
 
