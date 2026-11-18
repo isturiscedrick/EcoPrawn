@@ -64,7 +64,7 @@ export function Dashboard() {
         <KpiCard label="Tanks shown" value={String(metrics.count)} unit="tanks" delta="Current table results" deltaTone="ok" />
         <KpiCard label="Total biomass" value={metrics.biomass.toFixed(1)} unit="kg" delta="Visible tanks" deltaTone="ok" />
         <KpiCard label="Average dissolved oxygen" value={metricValue(metrics.avgDo)} unit="mg/L" delta="Tanks with readings" deltaTone="ok" />
-        <KpiCard label="Average pH" value={metricValue(metrics.avgPh)} delta="Tanks with readings" deltaTone="ok" />
+        <KpiCard label="Average pH" value={metricValue(metrics.avgPh)} unit="" delta="Tanks with readings" deltaTone="ok" />
         <KpiCard label="Average temperature" value={metricValue(metrics.avgTemp)} unit="°C" delta="Tanks with readings" deltaTone="ok" />
         <KpiCard label="Average salinity" value={metricValue(metrics.avgSalinity)} unit="ppt" delta="Tanks with readings" deltaTone="ok" />
         <KpiCard label="Average water level" value={metricValue(metrics.avgWaterLevel)} unit="%" delta="Tanks with readings" deltaTone="ok" />
