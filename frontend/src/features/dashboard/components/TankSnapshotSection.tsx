@@ -1,15 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import type { Tank } from "@/features/dashboard/context/TankContext";
-
-type StatusFilter = "all" | "healthy" | "attention" | "no-readings";
+import type { DashboardStatusFilter } from "@/features/dashboard/lib/dashboard-metrics";
 
 interface TankSnapshotSectionProps {
   tanks: Tank[];
   search: string;
-  statusFilter: StatusFilter;
+  statusFilter: DashboardStatusFilter;
   onSearchChange: (value: string) => void;
-  onStatusFilterChange: (value: StatusFilter) => void;
+  onStatusFilterChange: (value: DashboardStatusFilter) => void;
 }
 
 const value = (number: number, unit = "") => Number.isFinite(number) ? `${number.toFixed(1)}${unit ? ` ${unit}` : ""}` : "—";
@@ -46,7 +45,7 @@ export function TankSnapshotSection({
         </label>
         <label className="flex items-center gap-2 text-xs font-semibold text-[var(--ep-text-muted)]">
           <span>Status</span>
-          <select value={statusFilter} onChange={event => onStatusFilterChange(event.target.value as StatusFilter)} className="min-h-10 min-w-36 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 text-sm text-[var(--ep-text)] outline-none focus:border-[var(--ep-primary)]">
+          <select value={statusFilter} onChange={event => onStatusFilterChange(event.target.value as DashboardStatusFilter)} className="min-h-10 min-w-36 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 text-sm text-[var(--ep-text)] outline-none focus:border-[var(--ep-primary)]">
             <option value="all">All statuses</option>
             <option value="healthy">Healthy</option>
             <option value="attention">Needs attention</option>
