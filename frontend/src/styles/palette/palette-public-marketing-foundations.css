@@ -313,3 +313,26 @@ html.dark :is(.ep-about-page,.ep-contact-page) [data-page-hero-headline] [data-p
   -webkit-text-fill-color: transparent !important;
   text-shadow: none !important;
 }
+
+/* Public secondary actions and accents share the same brand behavior. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is(.ep-secondary-action,[data-brand-color="secondary"]) {
+  background-color: var(--ep-accent) !important;
+  border-color: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is(.ep-secondary-action,[data-brand-color="secondary"]):is(:hover,:focus-visible) {
+  background-color: var(--ep-accent-hover) !important;
+  border-color: var(--ep-accent-hover) !important;
+  color: var(--ep-on-accent) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is(.ep-secondary-accent,[data-secondary-accent]) {
+  color: var(--ep-accent) !important;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page)
+:is(.ep-secondary-tint,[data-secondary-tint]) {
+  background-color: var(--ep-accent-tint) !important;
+  border-color: color-mix(in srgb,var(--ep-accent) 30%,transparent) !important;
+}
