@@ -1,3 +1,4 @@
+import "@/styles/dashboard-global.css";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import gsap from "gsap";
 import { Link, useRouterState } from "@tanstack/react-router";
