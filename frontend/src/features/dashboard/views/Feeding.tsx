@@ -20,18 +20,8 @@ export function Feeding() {
 
   return (
     <>
-      <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--ep-line)]">
-        <div>
-          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)] mb-2">
-            Feeding schedule
-          </div>
-          <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
-            Feeding
-          </h1>
-          <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
-            Biomass-adjusted · {tankCount} tank{tankCount !== 1 ? "s" : ""}
-          </div>
-        </div>
+      <div className="mb-4 flex flex-wrap items-center justify-end gap-3">
+        
         <button
           type="button"
           onClick={() => {
