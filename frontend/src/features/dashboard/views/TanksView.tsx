@@ -6,6 +6,7 @@ import { AddTankModal } from "@/features/dashboard/components/AddTankModal";
 import { EditTankModal } from "@/features/dashboard/components/EditTankModal";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { useTanks, type Tank, type NewTankInput } from "@/features/dashboard/context/TankContext";
+import { recordAuditEvent } from "@/features/dashboard/lib/audit-log";
 export function TanksView() {
   const { tanks, loading, error, addTank, updateTank, removeTank } = useTanks();
   const { status: esp32Status, tankId: connectedTankId } = useEsp32();
@@ -35,6 +36,7 @@ export function TanksView() {
     setDeletingTank(null);
     setActionError("");
     const removed = await removeTank(tank.id);
+    if (removed) recordAuditEvent({ entity: "Tank", action: "Deleted tank", target: tank.name, details: `Removed tank record for PL batch ${tank.pl}.` });
     if (!removed) setActionError(`Unable to delete ${tank.name}. Please try again.`);
   }
 
