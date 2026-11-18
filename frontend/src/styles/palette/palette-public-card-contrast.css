@@ -1,0 +1,82 @@
+/* Public dark-surface contrast rules. */
+html.dark :is(
+  .ep-business-landing [data-business-card],
+  .ep-business-landing .ep-cloudnexus-metric,
+  .ep-business-landing .ep-cloudnexus-feature,
+  .ep-business-landing .ep-cloudnexus-dashboard,
+  .ep-business-landing .ep-stats-panel > div,
+  .ep-about-page .ep-about-mission-panel,
+  .ep-about-page #objectives article,
+  .ep-about-page #scope article,
+  .ep-about-page #systems article,
+  .ep-about-page .ep-about-journey-card,
+  .ep-contact-page .ep-contact-intro-panel,
+  .ep-contact-page [data-contact-card],
+  .ep-contact-page [data-contact-form] > form,
+  .ep-contact-page [data-contact-form] > div[role="status"]
+) {
+  color: #ffffff;
+}
+
+html.dark :is(
+  .ep-business-landing [data-business-card],
+  .ep-business-landing .ep-cloudnexus-metric,
+  .ep-business-landing .ep-cloudnexus-feature,
+  .ep-business-landing .ep-cloudnexus-dashboard,
+  .ep-business-landing .ep-stats-panel > div,
+  .ep-about-page .ep-about-mission-panel,
+  .ep-about-page #objectives article,
+  .ep-about-page #scope article,
+  .ep-about-page #systems article,
+  .ep-about-page .ep-about-journey-card,
+  .ep-contact-page .ep-contact-intro-panel,
+  .ep-contact-page [data-contact-card],
+  .ep-contact-page [data-contact-form] > form,
+  .ep-contact-page [data-contact-form] > div[role="status"]
+) :is(h1,h2,h3,h4,h5,h6,p,span,label,small,strong,em,li,dt,dd,a:not([data-tone="accent"])) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff;
+}
+
+html.dark :is(
+  .ep-business-landing [data-business-card],
+  .ep-business-landing .ep-cloudnexus-metric,
+  .ep-business-landing .ep-cloudnexus-feature,
+  .ep-business-landing .ep-cloudnexus-dashboard,
+  .ep-business-landing .ep-stats-panel > div,
+  .ep-about-page .ep-about-mission-panel,
+  .ep-about-page #objectives article,
+  .ep-about-page #scope article,
+  .ep-about-page #systems article,
+  .ep-about-page .ep-about-journey-card,
+  .ep-contact-page .ep-contact-intro-panel,
+  .ep-contact-page [data-contact-card],
+  .ep-contact-page [data-contact-form] > form,
+  .ep-contact-page [data-contact-form] > div[role="status"]
+) :is(svg.lucide,svg[data-lucide],.lucide-icon,button > svg,a > svg) {
+  color: #ffffff !important;
+  stroke: currentColor;
+}
+
+/* Preserve readable muted hierarchy without returning to low-contrast gray. */
+html.dark :is(
+  .ep-business-landing [data-business-card],
+  .ep-business-landing .ep-cloudnexus-metric,
+  .ep-business-landing .ep-cloudnexus-feature,
+  .ep-about-page .ep-about-mission-panel,
+  .ep-about-page #objectives article,
+  .ep-about-page #scope article,
+  .ep-about-page .ep-about-journey-card,
+  .ep-contact-page [data-contact-card],
+  .ep-contact-page [data-contact-form] > form
+) :is(.text-muted-foreground,[data-muted],.ep-text-muted) {
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0;
+}
+
+/* Bright Ocean Teal controls keep dark foreground text for public pages. */
+html.dark :is(.ep-business-landing,.ep-about-page,.ep-contact-page)
+:is(button,[role="button"],a)[class*="bg-ep-accent"] {
+  color: #092b31 !important;
+  -webkit-text-fill-color: #092b31 !important;
+}
