@@ -3,11 +3,10 @@ import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard
 import { KpiCard, KpiGrid } from "@/features/dashboard/components/DashboardPrimitives";
 import { RecentActivityPanel } from "@/features/dashboard/components/RecentActivityPanel";
 import { TankSnapshotSection } from "@/features/dashboard/components/TankSnapshotSection";
-import { useTanks } from "@/features/dashboard/context/TankContext";
+import { useTanks, type Tank } from "@/features/dashboard/context/TankContext";
 import { buildRecentDashboardActivity } from "@/features/dashboard/lib/dashboard-activity";
 
 type StatusFilter = "all" | "healthy" | "attention" | "no-readings";
-type Tank = ReturnType<typeof useTanks>["tanks"][number];
 
 function formatMetric(value: number | null, unit = "") {
   if (value === null) return "—";
