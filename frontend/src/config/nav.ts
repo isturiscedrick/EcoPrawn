@@ -4,7 +4,7 @@ export const LANDING_NAV_LINKS: [string, string][] = [
   ["Contact", "/contact"],
 ];
 
-export type DashboardView = "overview" | "analytics" | "vision" | "tanks" | "water" | "vision" | "feeding" | "biofloc" | "alerts" | "activity";
+export type DashboardView = "overview" | "analytics" | "tanks" | "water" | "vision" | "feeding" | "biofloc" | "alerts" | "activity";
 
 export interface DashboardNavItem {
   icon: IconName;
