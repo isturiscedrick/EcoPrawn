@@ -24,3 +24,8 @@
 @import "./marketing/marketing-depth-page-layouts.css";
 @import "./marketing/marketing-depth-about-contact.css";
 @import "./marketing/mobile-first.css";
+
+/* Public-only palette layers moved out of the root stylesheet. Keep these last
+   so their final theme/header refinements retain their intended precedence. */
+@import "./palette/palette-public-depth.css";
+@import "./palette/palette-public-header.css";
