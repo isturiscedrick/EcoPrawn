@@ -122,7 +122,19 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
             <button type="submit" disabled={saving} className="min-h-11 flex-1 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-white hover:bg-[var(--ep-accent-hover)] disabled:cursor-wait disabled:opacity-60">{saving ? "Saving…" : "Save changes"}</button>
           </div>
         </form>
-        {modal}
+        {pendingChanges && (
+          <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm" role="presentation">
+            <section role="alertdialog" aria-modal="true" aria-labelledby={`${uid}-confirm-title`} aria-describedby={`${uid}-confirm-description`} className="w-full max-w-md rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 shadow-2xl">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ep-accent-tint)] text-[var(--ep-primary)]">✓</div>
+              <h3 id={`${uid}-confirm-title`} className="text-lg font-semibold text-[var(--ep-text)]">Save tank changes?</h3>
+              <p id={`${uid}-confirm-description`} className="mt-2 text-sm leading-6 text-[var(--ep-text-muted)]">Are you sure you want to save the updated details for <strong className="text-[var(--ep-text)]">{pendingChanges.name}</strong>? This will update the tank record.</p>
+              <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+                <button type="button" disabled={saving} onClick={() => setPendingChanges(null)} className="min-h-10 rounded-xl border border-[var(--ep-line)] px-4 text-sm font-semibold text-[var(--ep-text-muted)] hover:bg-[var(--ep-bg-subtle)] disabled:opacity-50">Review changes</button>
+                <button type="button" disabled={saving} onClick={() => void confirmSave()} className="min-h-10 rounded-xl bg-[var(--ep-primary)] px-4 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50">{saving ? "Saving…" : "Yes, save changes"}</button>
+              </div>
+            </section>
+          </div>
+        )}
     </DashboardModalShell>
   );
 }
