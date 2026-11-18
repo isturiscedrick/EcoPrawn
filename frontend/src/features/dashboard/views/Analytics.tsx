@@ -72,6 +72,11 @@ export function Analytics() {
           <span aria-hidden="true">↓</span> Export CSV
         </button>
       </div>
+      <nav aria-label="Analytics sections" className="mb-5 flex flex-wrap gap-2">
+        <a href="#analytics-vision" className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 text-xs font-semibold text-[var(--ep-text)] transition-colors hover:border-[var(--ep-accent)] hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">01 · Vision &amp; Growth</a>
+        <a href="#analytics-water" className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 text-xs font-semibold text-[var(--ep-text)] transition-colors hover:border-[var(--ep-accent)] hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">02 · Water Quality</a>
+        <a href="#analytics-feeding" className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 text-xs font-semibold text-[var(--ep-text)] transition-colors hover:border-[var(--ep-accent)] hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">03 · Feeding</a>
+      </nav>
       <KpiGrid label="Facility analytics summary">
         <KpiCard label="Total biomass" value={metrics.totalBiomass.toFixed(1)} unit="kg" delta="All tanks" deltaTone="ok" />
         <KpiCard label="Estimated population" value={metrics.totalPopulation.toLocaleString()} unit="shrimp" delta="Facility total" deltaTone="ok" />
@@ -79,29 +84,50 @@ export function Analytics() {
         <KpiCard label="Average shrimp weight" value={tanks.length ? metrics.avgWeight.toFixed(1) : "—"} unit="g" delta={`${metrics.abnormal.toLocaleString()} abnormal behavior flags`} deltaTone={metrics.abnormal ? "warn" : "ok"} />
       </KpiGrid>
 
-      <div className="mb-5">
+      <section id="analytics-vision" aria-labelledby="analytics-vision-heading" className="mb-6 scroll-mt-6">
+        <div className="mb-3">
+          <p className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">01 · Vision</p>
+          <h2 id="analytics-vision-heading" className="ep-font-display mt-1 text-xl font-semibold text-[var(--ep-text)]">Growth &amp; production</h2>
+          <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Computer-vision scan metrics, shrimp growth, and biomass across tanks.</p>
+        </div>
+        <div className="mb-5">
         <Panel title="Biomass distribution" icon="chart-no-axes-combined" badge="share by tank">
           <DonutChart items={biomassDistribution} unit="kg" emptyLabel="No biomass records available yet." />
         </Panel>
       </div>
 
-      <div className="mb-5">
+        <div className="mb-5">
         <Panel title="Growth analysis" icon="chart-no-axes-combined" badge={`${growthHistory.length} scans`}>
           <GrowthHistoryChart data={growthHistory} />
         </Panel>
-      </div>
+        </div>
+      </section>
 
-      <div className="mb-5">
+      <section id="analytics-water" aria-labelledby="analytics-water-heading" className="mb-6 scroll-mt-6">
+        <div className="mb-3">
+          <p className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">02 · Water Quality</p>
+          <h2 id="analytics-water-heading" className="ep-font-display mt-1 text-xl font-semibold text-[var(--ep-text)]">Water quality trends</h2>
+          <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Track recorded sensor parameters and changes over time.</p>
+        </div>
+        <div className="mb-5">
         <Panel title="Water quality trends" icon="activity" badge={`${waterHistory.length} readings`}>
           <WaterHistoryChart data={waterHistory} tanks={tanks.map(tank => ({ id: tank.id, name: tank.name }))} />
         </Panel>
-      </div>
+        </div>
+      </section>
 
+      <section id="analytics-feeding" aria-labelledby="analytics-feeding-heading" className="mb-6 scroll-mt-6">
+        <div className="mb-3">
+          <p className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">03 · Feeding</p>
+          <h2 id="analytics-feeding-heading" className="ep-font-display mt-1 text-xl font-semibold text-[var(--ep-text)]">Feeding performance</h2>
+          <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Compare feed dispensed with each tank’s daily target.</p>
+        </div>
       <Panel title="Feeding progress by tank" icon="layers" badge="today's target">
         <FeedingProgressChart tanks={tanks.map(tank => ({
           id: tank.id, name: tank.name, dispensedToday: tank.dispensedToday, targetToday: tank.targetToday,
         }))} />
       </Panel>
+      </section>
 
       <p className="mt-4 text-xs text-[var(--ep-text-muted)]">
         Charts show recorded data only; missing values are not estimated.
