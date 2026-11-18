@@ -46,8 +46,8 @@ export function Feeding() {
       {tankCount > 0 ? (
         <>
           <div className="mb-4">
-            <Panel title="Feeding cycle completion" badge={`${feedSchedule.length} scheduled cycles`}>
-              <DonutChart items={[
+            <Panel title="Feeding schedule progress" badge={`${feedSchedule.length} scheduled cycles`}>
+              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">This chart counts how many planned feeding cycles have already been dispensed and how many are still upcoming.</p>\n              <DonutChart items={[
                 { label: "Dispensed", value: feedSchedule.filter(f => f.status === "done").length, color: "var(--ep-status-success)" },
                 { label: "Upcoming", value: feedSchedule.filter(f => f.status === "upcoming").length, color: "var(--ep-status-warning)" },
               ]} unit="cycles" emptyLabel="No data" />
@@ -56,7 +56,7 @@ export function Feeding() {
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-4 mb-4">
             <Panel title="Today's schedule" badge={`${visibleSchedule.length} of ${feedSchedule.length} cycles`}>
-              <div className="mb-3 flex flex-wrap gap-2" role="group" aria-label="Filter feeding schedule">
+              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">Review feeding times and filter the list to see all cycles, completed cycles, or cycles still to come.</p>\n              <div className="mb-3 flex flex-wrap gap-2" role="group" aria-label="Filter feeding schedule">
                 {(["all", "upcoming", "done"] as const).map(option => <button key={option} type="button" aria-pressed={scheduleFilter === option} onClick={() => setScheduleFilter(option)} className="min-h-9 rounded-full border border-[var(--ep-line)] px-3 text-xs font-semibold capitalize text-[var(--ep-text-muted)] hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-[var(--ep-primary)]">{option === "all" ? "All" : option === "done" ? "Dispensed" : "Upcoming"}</button>)}
               </div>
               <div className="flex flex-col gap-2.5">
@@ -95,29 +95,29 @@ export function Feeding() {
               </div>
             </Panel>
 
-            <Panel title="Feed Progress" badge="biomass-adjusted">
+            <Panel title="Feed used vs. target" badge="Target based on biomass">
               <div className="ep-font-mono text-[26px] font-semibold text-[var(--water-deep)]">
                 {dispensedToday.toFixed(1)}{" "}
                 <span className="text-sm font-medium text-[var(--ep-text-muted)]">
                   kg / {targetToday.toFixed(1)} kg target
                 </span>
               </div>
-              <FeedingProgressChart tanks={tanks.map(t => ({ id: t.id, name: t.name, dispensedToday: t.dispensedToday, targetToday: t.targetToday }))} />
+              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">The total below compares feed already dispensed today with the planned amount. The bars show the same comparison for each tank.</p>\n              <FeedingProgressChart tanks={tanks.map(t => ({ id: t.id, name: t.name, dispensedToday: t.dispensedToday, targetToday: t.targetToday }))} />
               <div className="mt-5 pt-4 border-t border-[var(--ep-line)] text-[13px] text-[var(--ep-text-muted)] leading-[1.6]">
                 Feed targets update with the latest biomass estimate.
               </div>
             </Panel>
           </div>
 
-          <Panel title="Feed Allocation" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
-            <ScrollFadeContainer ariaLabel="Feed allocation table">
+          <Panel title="Feed use by tank" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
+            <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">See how much feed each tank has received today, its planned amount, and its feed conversion ratio (feed used compared with shrimp weight gained).</p>\n            <ScrollFadeContainer ariaLabel="Feed allocation table">
               <table className="w-full text-left border-collapse min-w-[560px]">
                 <thead>
                   <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--ep-line)]">
                     <th className="py-2.5 pr-3 font-semibold">Tank</th>
                     <th className="py-2.5 pr-3 font-semibold">Dispensed Today</th>
                     <th className="py-2.5 pr-3 font-semibold">Target Today</th>
-                    <th className="py-2.5 font-semibold">FCR</th>
+                    <th className="py-2.5 font-semibold">Feed conversion ratio</th>
                   </tr>
                 </thead>
                 <tbody>
