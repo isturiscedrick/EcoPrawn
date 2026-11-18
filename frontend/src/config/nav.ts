@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/ui/Icon";
+
 export const LANDING_NAV_LINKS: [string, string][] = [
   ["Home", "/"],
   ["About", "/about"],
