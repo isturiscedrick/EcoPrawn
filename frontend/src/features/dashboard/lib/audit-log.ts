@@ -18,6 +18,7 @@ export function recordAuditEvent(event: Omit<AuditLogEntry, "id" | "actor" | "ti
     const existing = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || "[]") as AuditLogEntry[];
     const entry: AuditLogEntry = { ...event, id: `audit-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, actor, time: new Date().toISOString() };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify([entry, ...existing].slice(0, 500)));
+    window.dispatchEvent(new Event("ecoprawn:audit-updated"));
   } catch {
     // Activity history is best-effort when browser storage is unavailable.
   }
