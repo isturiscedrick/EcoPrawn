@@ -29,3 +29,51 @@
    so their final theme/header refinements retain their intended precedence. */
 @import "./palette/palette-public-depth.css";
 @import "./palette/palette-public-header.css";
+
+/* Public brand rules extracted from the dashboard palette. */
+/* Landing, About, and Contact use Ocean Teal for links, calls to action and accents. */
+:is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #071426;
+  --ep-zone: #087e8b;
+  --ep-marker: #45c5b3;
+  --ep-status-info: #087e8b;
+  --ep-status-info-bg: #d9f0ef;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) {
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-zone: #45c5b3;
+  --ep-marker: #70d7c8;
+  --ep-status-info: #70d7c8;
+  --ep-status-info-bg: #153a3e;
+}
+:is(.ep-landing,.ep-about-page,.ep-contact-page) :is(a,button,[role="button"]):focus-visible {
+  outline: 2px solid #087e8b !important;
+  outline-offset: 3px;
+}
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) :is(a,button,[role="button"]):focus-visible {
+  outline-color: #45c5b3 !important;
+}
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary,
+.ep-about-page [data-page-hero-headline] > span:last-child,
+.ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #087e8b !important;
+  -webkit-text-fill-color: #087e8b !important;
+}
+html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary,
+html.dark .ep-about-page [data-page-hero-headline] > span:last-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #45c5b3 !important;
+  -webkit-text-fill-color: #45c5b3 !important;
+}
+footer[data-site-footer] nav a:hover,
+:is(.ep-landing,.ep-about-page,.ep-contact-page) a:hover {
+  color: #066874;
+}
+html.dark footer[data-site-footer] nav a:hover,
+html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) a:hover {
+  color: #70d7c8;
+}
