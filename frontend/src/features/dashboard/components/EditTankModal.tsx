@@ -20,6 +20,7 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
   const [fcr, setFcr] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [pendingChanges, setPendingChanges] = useState<Pick<Tank, "name" | "pl" | "biomass" | "targetToday" | "dispensedToday" | "fcr"> | null>(null);
 
   useEffect(() => {
     if (!tank) return;
@@ -31,6 +32,7 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
     setFcr(String(tank.fcr));
     setError(null);
     setSaving(false);
+    setPendingChanges(null);
   }, [tank]);
 
   useEffect(() => {
@@ -56,9 +58,8 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
       setError("Enter valid non-negative numbers. FCR must be 1,000 or less.");
       return;
     }
-    setSaving(true);
     setError(null);
-    const saved = await onSave(currentTank.id, {
+    setPendingChanges({
       name: name.trim(),
       pl: pl.trim(),
       biomass: values[0],
@@ -66,9 +67,21 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
       dispensedToday: values[2],
       fcr: values[3],
     });
+  }
+
+  async function confirmSave() {
+    if (!pendingChanges || saving) return;
+    setSaving(true);
+    setError(null);
+    const saved = await onSave(currentTank.id, pendingChanges);
     setSaving(false);
-    if (saved) onClose();
-    else setError("Could not save changes. Check your connection and try again.");
+    if (saved) {
+      setPendingChanges(null);
+      onClose();
+    } else {
+      setPendingChanges(null);
+      setError("Could not save changes. Check your connection and try again.");
+    }
   }
 
   const fields = [
@@ -109,6 +122,7 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
             <button type="submit" disabled={saving} className="min-h-11 flex-1 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-white hover:bg-[var(--ep-accent-hover)] disabled:cursor-wait disabled:opacity-60">{saving ? "Saving…" : "Save changes"}</button>
           </div>
         </form>
+        {modal}
     </DashboardModalShell>
   );
 }
