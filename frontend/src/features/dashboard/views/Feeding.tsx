@@ -47,7 +47,8 @@ export function Feeding() {
         <>
           <div className="mb-4">
             <Panel title="Feeding schedule progress" badge={`${feedSchedule.length} scheduled cycles`}>
-              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">This chart counts how many planned feeding cycles have already been dispensed and how many are still upcoming.</p>\n              <DonutChart items={[
+              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">This chart counts how many planned feeding cycles have already been dispensed and how many are still upcoming.</p>
+              <DonutChart items={[
                 { label: "Dispensed", value: feedSchedule.filter(f => f.status === "done").length, color: "var(--ep-status-success)" },
                 { label: "Upcoming", value: feedSchedule.filter(f => f.status === "upcoming").length, color: "var(--ep-status-warning)" },
               ]} unit="cycles" emptyLabel="No data" />
@@ -56,7 +57,8 @@ export function Feeding() {
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-4 mb-4">
             <Panel title="Today's schedule" badge={`${visibleSchedule.length} of ${feedSchedule.length} cycles`}>
-              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">Review feeding times and filter the list to see all cycles, completed cycles, or cycles still to come.</p>\n              <div className="mb-3 flex flex-wrap gap-2" role="group" aria-label="Filter feeding schedule">
+              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">Review feeding times and filter the list to see all cycles, completed cycles, or cycles still to come.</p>
+              <div className="mb-3 flex flex-wrap gap-2" role="group" aria-label="Filter feeding schedule">
                 {(["all", "upcoming", "done"] as const).map(option => <button key={option} type="button" aria-pressed={scheduleFilter === option} onClick={() => setScheduleFilter(option)} className="min-h-9 rounded-full border border-[var(--ep-line)] px-3 text-xs font-semibold capitalize text-[var(--ep-text-muted)] hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-[var(--ep-primary)]">{option === "all" ? "All" : option === "done" ? "Dispensed" : "Upcoming"}</button>)}
               </div>
               <div className="flex flex-col gap-2.5">
@@ -102,7 +104,8 @@ export function Feeding() {
                   kg / {targetToday.toFixed(1)} kg target
                 </span>
               </div>
-              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">The total below compares feed already dispensed today with the planned amount. The bars show the same comparison for each tank.</p>\n              <FeedingProgressChart tanks={tanks.map(t => ({ id: t.id, name: t.name, dispensedToday: t.dispensedToday, targetToday: t.targetToday }))} />
+              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">The total below compares feed already dispensed today with the planned amount. The bars show the same comparison for each tank.</p>
+              <FeedingProgressChart tanks={tanks.map(t => ({ id: t.id, name: t.name, dispensedToday: t.dispensedToday, targetToday: t.targetToday }))} />
               <div className="mt-5 pt-4 border-t border-[var(--ep-line)] text-[13px] text-[var(--ep-text-muted)] leading-[1.6]">
                 Feed targets update with the latest biomass estimate.
               </div>
@@ -110,7 +113,8 @@ export function Feeding() {
           </div>
 
           <Panel title="Feed use by tank" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
-            <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">See how much feed each tank has received today, its planned amount, and its feed conversion ratio (feed used compared with shrimp weight gained).</p>\n            <ScrollFadeContainer ariaLabel="Feed allocation table">
+            <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">See how much feed each tank has received today, its planned amount, and its feed conversion ratio (feed used compared with shrimp weight gained).</p>
+            <ScrollFadeContainer ariaLabel="Feed allocation table">
               <table className="w-full text-left border-collapse min-w-[560px]">
                 <thead>
                   <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--ep-line)]">
