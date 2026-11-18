@@ -10,6 +10,7 @@ import {
 import type { DashboardData } from "@/types/api";
 import { parseDashboardResponse, parseTankMutationResponse } from "../lib/validate-response";
 import {
+  computeTankStatus,
   isValidNewTank,
   isValidTankId,
   isValidTankPatch,
