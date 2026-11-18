@@ -127,3 +127,18 @@ html.dark :is(.ep-landing,.ep-about-page,.ep-contact-page) a:hover {
 }
 
 
+
+
+/* Dashboard accent values are pinned for consistent light and dark rendering. */
+.dashboard-shell {
+  --ep-accent: #087e8b !important;
+  --ep-accent-hover: #066874 !important;
+  --ep-accent-tint: rgba(8,126,139,.14) !important;
+  --ep-accent-tint-soft: rgba(8,126,139,.08) !important;
+}
+html.dark .dashboard-shell {
+  --ep-accent: #45c5b3 !important;
+  --ep-accent-hover: #70d7c8 !important;
+  --ep-accent-tint: rgba(69,197,179,.16) !important;
+  --ep-accent-tint-soft: rgba(69,197,179,.09) !important;
+}
