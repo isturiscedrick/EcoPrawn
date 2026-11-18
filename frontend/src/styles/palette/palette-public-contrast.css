@@ -4,10 +4,6 @@
    Teal controls retain their intentional high-contrast foreground colors.
    ========================================================================== */
 html.dark :is(
-  .dashboard-shell .dashboard-panel,
-  .dashboard-shell .dashboard-kpi,
-  .dashboard-shell .dashboard-sensor-gauge,
-  .dashboard-shell .dashboard-trend-chart,
   .ep-business-landing [data-business-card],
   .ep-business-landing .ep-cloudnexus-metric,
   .ep-business-landing .ep-cloudnexus-feature,
@@ -31,10 +27,6 @@ html.dark :is(
 /* Headings, body copy, labels and metadata in dark cards use a consistent
    white foreground instead of inheriting low-contrast dark-theme utilities. */
 html.dark :is(
-  .dashboard-shell .dashboard-panel,
-  .dashboard-shell .dashboard-kpi,
-  .dashboard-shell .dashboard-sensor-gauge,
-  .dashboard-shell .dashboard-trend-chart,
   .ep-business-landing [data-business-card],
   .ep-business-landing .ep-cloudnexus-metric,
   .ep-business-landing .ep-cloudnexus-feature,
@@ -59,10 +51,6 @@ html.dark :is(
 /* Keep icon strokes visible on dark card surfaces, including icons whose
    original utility class supplied a muted foreground color. */
 html.dark :is(
-  .dashboard-shell .dashboard-panel,
-  .dashboard-shell .dashboard-kpi,
-  .dashboard-shell .dashboard-sensor-gauge,
-  .dashboard-shell .dashboard-trend-chart,
   .ep-business-landing [data-business-card],
   .ep-business-landing .ep-cloudnexus-metric,
   .ep-business-landing .ep-cloudnexus-feature,
@@ -86,10 +74,6 @@ html.dark :is(
 
 /* Preserve readable muted hierarchy without returning to low-contrast gray. */
 html.dark :is(
-  .dashboard-shell .dashboard-panel,
-  .dashboard-shell .dashboard-kpi,
-  .dashboard-shell .dashboard-sensor-gauge,
-  .dashboard-shell .dashboard-trend-chart,
   .ep-business-landing [data-business-card],
   .ep-business-landing .ep-cloudnexus-metric,
   .ep-business-landing .ep-cloudnexus-feature,
@@ -106,7 +90,6 @@ html.dark :is(
 
 /* Bright Ocean Teal controls keep dark foreground text for contrast. */
 html.dark :is(
-  .dashboard-shell,
   .ep-business-landing,
   .ep-about-page,
   .ep-contact-page,
