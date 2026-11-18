@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { recordAuditEvent } from "@/features/dashboard/lib/audit-log";
 
 export function ProfileEditForm() {
   const [name, setName] = useState("Facility Operator");
@@ -16,6 +17,7 @@ export function ProfileEditForm() {
     if (!trimmedName || !trimmedRole) return;
     window.localStorage.setItem("ep-profile-name", trimmedName);
     window.localStorage.setItem("ep-profile-role", trimmedRole);
+    recordAuditEvent({ entity: "User", action: "Updated profile", target: trimmedName, details: `Updated display name and role to ${trimmedRole}.` });
     setName(trimmedName);
     setRole(trimmedRole);
     setSaved(true);
