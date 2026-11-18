@@ -1,21 +1,21 @@
 /* Legacy secondary-action selectors now inherit the single Ocean Teal brand. */
-:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is(.ecoprawn-root,.dashboard-shell)
 :is(.ep-secondary-action,[data-brand-color="secondary"]) {
   background-color: var(--ep-accent) !important;
   border-color: var(--ep-accent) !important;
   color: var(--ep-on-accent) !important;
 }
-:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is(.ecoprawn-root,.dashboard-shell)
 :is(.ep-secondary-action,[data-brand-color="secondary"]):is(:hover,:focus-visible) {
   background-color: var(--ep-accent-hover) !important;
   border-color: var(--ep-accent-hover) !important;
   color: var(--ep-on-accent) !important;
 }
-:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is(.ecoprawn-root,.dashboard-shell)
 :is(.ep-secondary-accent,[data-secondary-accent]) {
   color: var(--ep-accent) !important;
 }
-:is(.ecoprawn-root,.ep-landing,.ep-about-page,.ep-contact-page,.dashboard-shell)
+:is(.ecoprawn-root,.dashboard-shell)
 :is(.ep-secondary-tint,[data-secondary-tint]) {
   background-color: var(--ep-accent-tint) !important;
   border-color: color-mix(in srgb,var(--ep-accent) 30%,transparent) !important;
