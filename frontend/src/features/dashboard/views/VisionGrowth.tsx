@@ -134,18 +134,8 @@ export function VisionGrowth() {
 
   return (
     <>
-      <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--ep-line)]">
-        <div>
-          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)] mb-2">
-            AI &amp; Computer Vision
-          </div>
-          <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
-            Vision &amp; Growth Analytics
-          </h1>
-          <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
-            Growth scans · {tankCount} tanks
-          </div>
-        </div>
+      <div className="mb-4 flex flex-wrap items-center justify-end gap-3">
+        
         <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--ep-accent)]" />
           Last scan · {lastScan}
