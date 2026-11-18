@@ -267,7 +267,7 @@ export function LoginForm({ initialMode = "signin" }: { initialMode?: AuthMode }
     : "Sign in";
 
   return (
-    <div className="w-full max-w-[420px]">
+    <div className="mx-auto w-full max-w-[420px]">
       <h1 className="ep-font-display text-center text-[32px] font-semibold leading-[1.1] tracking-tight text-[var(--ep-text)]">
         {step === "signup"
           ? "Create your account"
