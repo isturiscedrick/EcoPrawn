@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { MOTION_ALLOWED_QUERY } from "@/components/motion/motionRuntime";
+import { MOTION_ALLOWED_QUERY } from "@/components/motion/motionPolicy";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
