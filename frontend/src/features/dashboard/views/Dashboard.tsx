@@ -89,6 +89,7 @@ export function Dashboard() {
         <KpiCard
           label="Average pH"
           value={formatDashboardMetric(metrics.avgPh)}
+          unit="pH"
           delta="Tanks with readings"
           deltaTone="ok"
         />
