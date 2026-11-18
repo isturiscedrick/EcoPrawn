@@ -149,7 +149,8 @@ export function WaterQuality() {
             className="mb-4"
           >
             <Panel title="Water quality limits" badge="All tanks">
-              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">These limits define the acceptable range for each water measurement. Readings outside a limit are flagged so you can investigate.</p>\n              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">These limits define the acceptable range for each water measurement. Readings outside a limit are flagged so you can investigate.</p>
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                   <button type="button" onClick={() => { setEditingThresholds(value => !value); setThresholdMessage(""); }} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]">{editingThresholds ? "Close settings" : "Customize limits"}</button>
               </div>
               {editingThresholds && (
@@ -227,7 +228,8 @@ export function WaterQuality() {
 
           <div className="mb-4">
             <Panel title="Water quality over time" badge={`${waterHistory.length} readings`}>
-              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">Choose a tank and measurement to follow its recorded values over time. Use this to spot changes, not as a forecast.</p>\n              <WaterHistoryChart data={waterHistory} tanks={tanks.map(tank => ({ id: tank.id, name: tank.name }))} />
+              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">Choose a tank and measurement to follow its recorded values over time. Use this to spot changes, not as a forecast.</p>
+              <WaterHistoryChart data={waterHistory} tanks={tanks.map(tank => ({ id: tank.id, name: tank.name }))} />
             </Panel>
           </div>
 
