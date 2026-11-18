@@ -6,26 +6,11 @@
 @import "./foundations/foundations.css";
 @import "./foundations/theme-components.css";
 
-/* Dashboard styles: keep the original cascade order. */
-@import "./dashboard/dashboard-foundations.css";
-@import "./dashboard/dashboard-monitoring-core.css";
-@import "./dashboard/dashboard-desktop-and-mobile-layout.css";
-@import "./dashboard/dashboard-mobile-module-layouts.css";
-@import "./dashboard/dashboard-mobile-modules.css";
-@import "./dashboard/dashboard-responsive-foundations.css";
-@import "./dashboard/dashboard-responsive-overview.css";
-@import "./dashboard/dashboard-responsive-monitoring.css";
-@import "./dashboard/dashboard-responsive-controls.css";
-@import "./dashboard/dashboard-responsive-page-chrome.css";
-@import "./dashboard/dashboard-responsive-finish.css";
-
 /* Public pages and shared responsive safeguards. */
-@import "./landing-global.css";
 @import "./utilities/responsive-overrides.css";
 
 /* Palette layers: ordering is intentional and must remain stable. */
 @import "./palette/palette-brand-utilities.css";
-@import "./palette/palette-dashboard-brand.css";
 @import "./palette/palette-shared-brand-states.css";
 @import "./palette/palette-surface-foundations.css";
 @import "./palette/palette-theme-surfaces.css";
@@ -34,8 +19,5 @@
 @import "./palette/palette-marketing-composition.css";
 @import "./palette/palette-public-depth.css";
 @import "./palette/palette-public-contrast.css";
-@import "./palette/palette-dashboard-sidebar-foundations.css";
-@import "./palette/palette-dashboard-sidebar-final-states.css";
 @import "./palette/palette-public-header.css";
 @import "./palette/palette-mobile-public-chrome.css";
-@import "./palette/palette-dashboard-mobile-header.css";
