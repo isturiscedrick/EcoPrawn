@@ -5,21 +5,12 @@ import { RecentActivityPanel } from "@/features/dashboard/components/RecentActiv
 import { TankSnapshotSection } from "@/features/dashboard/components/TankSnapshotSection";
 import { useTanks, type Tank } from "@/features/dashboard/context/TankContext";
 import { buildRecentDashboardActivity } from "@/features/dashboard/lib/dashboard-activity";
-
-type StatusFilter = "all" | "healthy" | "attention" | "no-readings";
-
-function formatMetric(value: number | null, unit = "") {
-  if (value === null) return "—";
-  return unit ? `${value.toFixed(1)} ${unit}` : value.toFixed(1);
-}
-
-function getAverage(
-  tanks: Tank[],
-  select: (tank: Tank) => number,
-): number | null {
-  if (tanks.length === 0) return null;
-  return tanks.reduce((sum, tank) => sum + select(tank), 0) / tanks.length;
-}
+import {
+  filterDashboardTanks,
+  formatDashboardMetric,
+  getDashboardMetrics,
+  type DashboardStatusFilter,
+} from "@/features/dashboard/lib/dashboard-metrics";
 
 export function Dashboard() {
   const {
@@ -30,44 +21,18 @@ export function Dashboard() {
     error,
   } = useTanks();
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+  const [statusFilter, setStatusFilter] =
+    useState<DashboardStatusFilter>("all");
 
-  const visibleTanks = useMemo(() => {
-    const query = search.trim().toLocaleLowerCase();
+  const visibleTanks = useMemo(
+    () => filterDashboardTanks(tanks, search, statusFilter),
+    [tanks, search, statusFilter],
+  );
 
-    return tanks.filter((tank) => {
-      const matchesSearch =
-        !query ||
-        tank.name.toLocaleLowerCase().includes(query) ||
-        tank.pl.toLocaleLowerCase().includes(query);
-
-      const matchesStatus =
-        statusFilter === "all" ||
-        (statusFilter === "no-readings"
-          ? !tank.hasWaterReadings
-          : statusFilter === "healthy"
-            ? tank.hasWaterReadings && tank.status === "ok"
-            : tank.hasWaterReadings && tank.status !== "ok");
-
-      return matchesSearch && matchesStatus;
-    });
-  }, [tanks, search, statusFilter]);
-
-  const metrics = useMemo(() => {
-    const tanksWithReadings = visibleTanks.filter(
-      (tank) => tank.hasWaterReadings,
-    );
-
-    return {
-      count: visibleTanks.length,
-      biomass: visibleTanks.reduce((sum, tank) => sum + tank.biomass, 0),
-      avgDo: getAverage(tanksWithReadings, (tank) => tank.dissolvedOxygen),
-      avgPh: getAverage(tanksWithReadings, (tank) => tank.ph),
-      avgTemp: getAverage(tanksWithReadings, (tank) => tank.temperature),
-      avgSalinity: getAverage(tanksWithReadings, (tank) => tank.salinity),
-      avgWaterLevel: getAverage(tanksWithReadings, (tank) => tank.waterLevel),
-    };
-  }, [visibleTanks]);
+  const metrics = useMemo(
+    () => getDashboardMetrics(visibleTanks),
+    [visibleTanks],
+  );
 
   const recentActivity = useMemo(
     () => buildRecentDashboardActivity(tanks, waterHistory, visionScanLog),
@@ -116,34 +81,34 @@ export function Dashboard() {
         />
         <KpiCard
           label="Average dissolved oxygen"
-          value={formatMetric(metrics.avgDo)}
+          value={formatDashboardMetric(metrics.avgDo)}
           unit="mg/L"
           delta="Tanks with readings"
           deltaTone="ok"
         />
         <KpiCard
           label="Average pH"
-          value={formatMetric(metrics.avgPh)}
+          value={formatDashboardMetric(metrics.avgPh)}
           delta="Tanks with readings"
           deltaTone="ok"
         />
         <KpiCard
           label="Average temperature"
-          value={formatMetric(metrics.avgTemp)}
+          value={formatDashboardMetric(metrics.avgTemp)}
           unit="°C"
           delta="Tanks with readings"
           deltaTone="ok"
         />
         <KpiCard
           label="Average salinity"
-          value={formatMetric(metrics.avgSalinity)}
+          value={formatDashboardMetric(metrics.avgSalinity)}
           unit="ppt"
           delta="Tanks with readings"
           deltaTone="ok"
         />
         <KpiCard
           label="Average water level"
-          value={formatMetric(metrics.avgWaterLevel)}
+          value={formatDashboardMetric(metrics.avgWaterLevel)}
           unit="%"
           delta="Tanks with readings"
           deltaTone="ok"
