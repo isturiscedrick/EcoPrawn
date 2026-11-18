@@ -164,12 +164,12 @@ export function VisionGrowth() {
           </KpiGrid>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
-            <Panel title="Growth Trend — Avg. Body Length" badge="7-week view">
-              <GrowthTrendChart values={growthTrend} />
+            <Panel title="Average shrimp length over time" badge="7-week view">
+              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">Each point is an average body-length measurement from a recorded scan. Use the chart to see whether measured shrimp length is increasing or decreasing.</p>\n              <GrowthTrendChart values={growthTrend} />
               
             </Panel>
 
-            <Panel title="Recent Vision Scans" badge={`${visionScanLog.length} events`}>
+            <Panel title="Latest camera scans" badge={`${visionScanLog.length} events`}>
               <div className="flex flex-col">
                 {visionScanLog.length ? visionScanLog.map((s, i) => (
                   <div key={s.id} className={`dashboard-hover rounded-lg px-2 py-3 ${i !== 0 ? "border-t border-[var(--ep-line)]" : "pt-0"}`}>
@@ -183,16 +183,16 @@ export function VisionGrowth() {
             </Panel>
           </div>
 
-          <Panel title="Growth Snapshot" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
-            <ScrollFadeContainer ariaLabel="Growth snapshot table">
+          <Panel title="Latest shrimp measurements by tank" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
+            <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">These are the latest available shrimp measurements for each tank. “Population estimate” is the estimated number of shrimp, not a manual count.</p>\n            <ScrollFadeContainer ariaLabel="Growth snapshot table">
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
                   <tr className="ep-font-mono text-[10px] uppercase tracking-wide text-[var(--ep-text-muted)] border-b border-[var(--ep-line)]">
                     <th className="py-2.5 pr-3 font-semibold">Tank</th>
-                    <th className="py-2.5 pr-3 font-semibold">Body Length</th>
-                    <th className="py-2.5 pr-3 font-semibold">Weight</th>
-                    <th className="py-2.5 pr-3 font-semibold">Population Est.</th>
-                    <th className="py-2.5 font-semibold">Abnormal</th>
+                    <th className="py-2.5 pr-3 font-semibold">Average length</th>
+                    <th className="py-2.5 pr-3 font-semibold">Average weight</th>
+                    <th className="py-2.5 pr-3 font-semibold">Estimated population</th>
+                    <th className="py-2.5 font-semibold">Abnormal shrimp</th>
                   </tr>
                 </thead>
                 <tbody>
