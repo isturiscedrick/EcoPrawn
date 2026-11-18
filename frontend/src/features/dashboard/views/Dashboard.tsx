@@ -3,7 +3,7 @@ import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard
 import { KpiCard, KpiGrid } from "@/features/dashboard/components/DashboardPrimitives";
 import { RecentActivityPanel } from "@/features/dashboard/components/RecentActivityPanel";
 import { TankSnapshotSection } from "@/features/dashboard/components/TankSnapshotSection";
-import { useTanks, type Tank } from "@/features/dashboard/context/TankContext";
+import { useTanks } from "@/features/dashboard/context/TankContext";
 import { buildRecentDashboardActivity } from "@/features/dashboard/lib/dashboard-activity";
 import {
   filterDashboardTanks,
