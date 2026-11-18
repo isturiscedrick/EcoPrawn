@@ -165,7 +165,6 @@ export function VisionGrowth() {
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 mb-4">
             <Panel title="Average shrimp length over time" badge="7-week view">
-              <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">Each point is an average body-length measurement from a recorded scan. Use the chart to see whether measured shrimp length is increasing or decreasing.</p>
               <GrowthTrendChart values={growthTrend} />
               
             </Panel>
@@ -185,7 +184,6 @@ export function VisionGrowth() {
           </div>
 
           <Panel title="Latest shrimp measurements by tank" badge={`${tankCount} tank${tankCount !== 1 ? "s" : ""}`}>
-            <p className="mb-3 text-xs leading-5 text-[var(--ep-text-muted)]">These are the latest available shrimp measurements for each tank. “Population estimate” is the estimated number of shrimp, not a manual count.</p>
             <ScrollFadeContainer ariaLabel="Growth snapshot table">
               <table className="w-full text-left border-collapse min-w-[640px]">
                 <thead>
