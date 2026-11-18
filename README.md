@@ -35,7 +35,6 @@ Out of scope: offshore farming, hatchery/breeding, off-grid energy independence,
 - [TanStack Start](https://tanstack.com/start/latest) and TanStack Router with React 19
 - TypeScript 5
 - Tailwind CSS 4 (`@tailwindcss/vite`), `tw-animate-css`
-- `clsx` + `tailwind-merge` (via `cn()` in `src/utils/cn.ts`)
 - Fonts: Fraunces, Inter, IBM Plex Mono (Google Fonts)
 
 ## Getting started
@@ -90,7 +89,7 @@ frontend/
     config/             navigation config
     data/               static mock data
     types/              shared TypeScript types
-    utils/              thresholds, alert derivation, cn()
+    utils/              shared frontend utilities
 ```
 
 ## How the dashboard works
