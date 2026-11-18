@@ -878,3 +878,14 @@ html.dark .ep-auth-modal button[aria-label="Close"] {
     width: 54px;
   }
 }
+
+
+/* Desktop authentication dialog: constrain the panel itself, not only its form.
+   The mobile bottom-sheet rules above intentionally keep their full-width layout. */
+@media (min-width: 640px) {
+  .ep-auth-overlay .ep-auth-modal.ep-auth-panel {
+    width: min(100%, 560px) !important;
+    max-width: 560px !important;
+    margin-inline: auto !important;
+  }
+}
