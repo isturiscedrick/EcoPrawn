@@ -1,0 +1,44 @@
+/* Dashboard-only dark-surface contrast rules. Kept out of the public stylesheet. */
+html.dark .dashboard-shell :is(
+  .dashboard-panel,
+  .dashboard-kpi,
+  .dashboard-sensor-gauge,
+  .dashboard-trend-chart
+) {
+  color: #ffffff;
+}
+
+html.dark .dashboard-shell :is(
+  .dashboard-panel,
+  .dashboard-kpi,
+  .dashboard-sensor-gauge,
+  .dashboard-trend-chart
+) :is(h1,h2,h3,h4,h5,h6,p,span,label,small,strong,em,li,dt,dd,a:not([data-tone="accent"])) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff;
+}
+
+html.dark .dashboard-shell :is(
+  .dashboard-panel,
+  .dashboard-kpi,
+  .dashboard-sensor-gauge,
+  .dashboard-trend-chart
+) :is(svg.lucide,svg[data-lucide],.lucide-icon,button > svg,a > svg) {
+  color: #ffffff !important;
+  stroke: currentColor;
+}
+
+html.dark .dashboard-shell :is(
+  .dashboard-panel,
+  .dashboard-kpi,
+  .dashboard-sensor-gauge,
+  .dashboard-trend-chart
+) :is(.text-muted-foreground,[data-muted],.ep-text-muted) {
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0;
+}
+
+html.dark .dashboard-shell :is(button,[role="button"],a)[class*="bg-ep-accent"] {
+  color: #092b31 !important;
+  -webkit-text-fill-color: #092b31 !important;
+}
