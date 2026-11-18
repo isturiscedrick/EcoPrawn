@@ -5,6 +5,27 @@ import type { ReactNode, SVGProps } from "react";
  * page needs no icon dependency. Add a new icon by adding one entry here.
  */
 const PATHS = {
+  "layout-grid": (
+    <>
+      <rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1" />
+      <rect x="14" y="3.5" width="6.5" height="6.5" rx="1" />
+      <rect x="3.5" y="14" width="6.5" height="6.5" rx="1" />
+      <rect x="14" y="14" width="6.5" height="6.5" rx="1" />
+    </>
+  ),
+  "chart-bars-trend": (
+    <>
+      <path d="M3 20V15M8 20V12M13 20V9M18 20V5" />
+      <path d="m3 12 5-4 4 2 8-7" />
+      <path d="M16 3h4v4" />
+    </>
+  ),
+  "tank-stack": (
+    <>
+      <path d="M4 8.5 6.5 5h11L20 8.5v2H4z" />
+      <path d="M3 13h18M4 16.5h16M5 20h14" />
+    </>
+  ),
   droplet: <path d="M12 2.7c3.5 4 6 7.2 6 10.3a6 6 0 0 1-12 0c0-3.1 2.5-6.3 6-10.3z" />,
   bell: (
     <>
