@@ -22,156 +22,34 @@
 }
 
 
-/* Marketing pages: 60/30/10 balance.
-   60% neutral canvas/cards, 30% deep-ocean structure, 10% restrained
-   Ocean Teal accents. Teal is decorative/supporting, never
-   used as the dominant page or card background. */
-:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) {
-  --ep-accent: #087e8b;
-  --ep-accent-hover: #066874;
-  --ep-on-accent: #ffffff;
-  --ep-accent-tint: rgba(8,126,139,.12);
-  --ep-accent-tint-soft: rgba(8,126,139,.065);
-}
-html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page) {
-  --ep-accent: #45c5b3;
-  --ep-accent-hover: #70d7c8;
-
-  --ep-on-accent: #071426;
-  --ep-accent-tint: rgba(69,197,179,.14);
-  --ep-accent-tint-soft: rgba(69,197,179,.075);
-}
-
-/* Landing: keep hero/dashboard surfaces neutral and use Ocean Teal only for
-   small eyebrow, feature and decorative highlights. */
-.ep-business-landing .ep-cloudnexus-eyebrow {
-  border-color: color-mix(in srgb,var(--ep-accent) 42%,var(--ep-line));
-  background: var(--ep-accent-tint-soft);
-  color: var(--ep-accent);
-}
-.ep-business-landing .ep-cloudnexus-highlight,
-.ep-business-landing .ep-showcase-caption [data-secondary-accent] {
-  color: var(--ep-accent) !important;
-}
-.ep-business-landing .ep-cloudnexus-feature > span,
-.ep-business-landing .ep-cloudnexus-mini-active::before {
-  background: var(--ep-accent-tint) !important;
-  color: var(--ep-accent) !important;
-}
-.ep-business-landing .ep-cloudnexus-feature,
-.ep-business-landing .ep-cloudnexus-dashboard {
-  background-color: var(--ep-page-surface) !important;
-}
-.ep-business-landing .ep-cloudnexus-feature {
-  border-top: 2px solid color-mix(in srgb,var(--ep-accent) 58%,var(--ep-page-border));
-}
-
-/* About: Ocean Teal is a measured detail in the mission/ journey cards and
-   orbit illustration; the section and card surfaces remain neutral/ocean. */
-.ep-about-page .ep-about-journey-card {
-  border-top: 2px solid color-mix(in srgb,var(--ep-accent) 58%,var(--ep-page-border));
-}
-.ep-about-page .ep-about-orbit-node,
-.ep-about-page .ep-about-orbit-tag > svg {
-  color: var(--ep-accent) !important;
-}
-.ep-about-page .ep-about-orbit-node {
-  background: var(--ep-accent) !important;
-  box-shadow: 0 0 0 5px var(--ep-accent-tint);
-}
-.ep-about-page .ep-about-orbit-tag {
-  border-color: color-mix(in srgb,var(--ep-accent) 28%,var(--ep-page-border));
-}
-
-/* Contact: retain the deep-ocean form/structure and use Ocean Teal for
-   small signal rings, card markers and form framing only. */
-.ep-contact-page .ep-contact-signal-ring-two,
-.ep-contact-page .ep-contact-signal-ring-three {
-  border-color: color-mix(in srgb,var(--ep-accent) 72%,transparent) !important;
-}
-.ep-contact-page .ep-contact-signal-core {
-  background: var(--ep-accent) !important;
-  box-shadow: 0 0 0 12px var(--ep-accent-tint), 0 0 34px var(--ep-accent-tint) !important;
-}
-.ep-contact-page [data-contact-card] {
-  border-top: 2px solid color-mix(in srgb,var(--ep-accent) 55%,var(--ep-page-border));
-}
-.ep-contact-page [data-contact-form] > form {
-  border-top: 3px solid var(--ep-accent);
-}
-
-/* Explicitly tagged secondary actions use the requested hover pair. Main CTAs
-   and selected controls remain Ocean Teal to preserve hierarchy. */
-:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
-.ep-secondary-action {
-  background: var(--ep-accent) !important;
-  border-color: var(--ep-accent) !important;
-  color: var(--ep-on-accent) !important;
-}
-:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page)
-.ep-secondary-action:hover {
-  background: var(--ep-accent-hover) !important;
-  border-color: var(--ep-accent-hover) !important;
-}
-
-
-/* Plain-white light-mode hero sections across Landing, About and Contact.
-   Remove atmospheric gradients/grid only from the hero canvas; keep all
-   foreground content, cards, illustrations and brand accents intact. */
-html:not(.dark) .ep-business-landing .ep-hero,
-html:not(.dark) .ep-business-landing .ep-cloudnexus-hero {
-  background: #ffffff !important;
-  background-image: none !important;
-}
-html:not(.dark) .ep-business-landing #top.ep-hero > [data-hero="grid"],
-html:not(.dark) .ep-business-landing #top.ep-hero > .ep-hero-atmosphere,
-html:not(.dark) .ep-business-landing #top.ep-hero > [aria-hidden="true"] {
-  background: none !important;
-  background-image: none !important;
-  opacity: 0 !important;
-}
-html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] {
-  background: #ffffff !important;
-  background-image: none !important;
-}
-html:not(.dark) :is(.ep-about-page,.ep-contact-page) [data-page-hero] > [aria-hidden="true"] {
-  background: none !important;
-  background-image: none !important;
-  opacity: 0 !important;
-}
-
-/* Ocean Teal accents across public pages and the authentication dialog. */
-:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
+/* Authentication dialog accent tokens remain global because its provider lives at the app root. */
+.ep-auth-modal {
   --ep-accent: #087E8B;
   --ep-accent-hover: #066874;
   --ep-on-accent: #ffffff;
   --ep-accent-tint: rgba(8,126,139,.12);
   --ep-accent-tint-soft: rgba(8,126,139,.065);
 }
-html.dark :is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal) {
+html.dark .ep-auth-modal {
   --ep-accent: #45C5B3;
   --ep-accent-hover: #70D7C8;
   --ep-on-accent: #071426;
   --ep-accent-tint: rgba(69,197,179,.14);
   --ep-accent-tint-soft: rgba(69,197,179,.075);
 }
-:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal)
-:is(.ep-secondary-accent,[data-secondary-accent]) {
+.ep-auth-modal :is(.ep-secondary-accent,[data-secondary-accent]) {
   color: var(--ep-accent) !important;
 }
-:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal)
-:is(.ep-secondary-tint,[data-secondary-tint]) {
+.ep-auth-modal :is(.ep-secondary-tint,[data-secondary-tint]) {
   background-color: var(--ep-accent-tint) !important;
   border-color: color-mix(in srgb,var(--ep-accent) 32%,transparent) !important;
 }
-:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal)
-:is(.ep-secondary-action,[data-brand-color="secondary"]) {
+.ep-auth-modal :is(.ep-secondary-action,[data-brand-color="secondary"]) {
   background-color: var(--ep-accent) !important;
   border-color: var(--ep-accent) !important;
   color: var(--ep-on-accent) !important;
 }
-:is(.ep-business-landing,.ep-landing,.ep-about-page,.ep-contact-page,.ep-auth-modal)
-:is(.ep-secondary-action,[data-brand-color="secondary"]):is(:hover,:focus-visible) {
+.ep-auth-modal :is(.ep-secondary-action,[data-brand-color="secondary"]):is(:hover,:focus-visible) {
   background-color: var(--ep-accent-hover) !important;
   border-color: var(--ep-accent-hover) !important;
   color: var(--ep-on-accent) !important;
