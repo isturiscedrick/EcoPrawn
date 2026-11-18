@@ -29,7 +29,7 @@ export type NewTankInput = Omit<
   "id" | "status" | "hardware" | "hasWaterReadings"
 >;
 
-function computeTankStatus(water?: {
+export function computeTankStatus(water?: {
   dissolvedOxygen: number;
   ph: number;
   temperature: number;
