@@ -233,7 +233,7 @@ export function WaterQuality() {
 
         </>
       ) : (
-        <Panel title="Tank Readings" badge="0 tanks">
+        <Panel title="Water Quality" badge="0 tanks">
           <DashboardInlineEmptyState message="No tanks yet. Add one on the Tanks page." />
         </Panel>
       )}
