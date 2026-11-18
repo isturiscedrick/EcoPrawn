@@ -14,6 +14,15 @@ interface TankSnapshotSectionProps {
 
 const value = (number: number, unit = "") => Number.isFinite(number) ? `${number.toFixed(1)}${unit ? ` ${unit}` : ""}` : "—";
 
+// Treat recent ESP32 telemetry as a heartbeat. A stale or missing reading is offline.
+const ESP32_OFFLINE_AFTER_MS = 30_000;
+function getEsp32Connection(tank: Tank) {
+  const recordedAt = tank.hardware?.recordedAt;
+  const timestamp = recordedAt ? Date.parse(recordedAt) : Number.NaN;
+  const connected = Number.isFinite(timestamp) && Date.now() - timestamp <= ESP32_OFFLINE_AFTER_MS && Date.now() >= timestamp;
+  return { connected, recordedAt: Number.isFinite(timestamp) ? new Date(timestamp) : null };
+}
+
 export function TankSnapshotSection({
   tanks, search, statusFilter, onSearchChange, onStatusFilterChange,
 }: TankSnapshotSectionProps) {
@@ -51,7 +60,7 @@ export function TankSnapshotSection({
           <table className="w-full min-w-[920px] border-collapse text-left text-sm">
             <thead className="bg-[var(--ep-bg)] text-[10px] font-semibold uppercase tracking-[.1em] text-[var(--ep-text-muted)]">
               <tr>
-                <th className="px-4 py-3">Tank</th><th className="px-3 py-3">Status</th>
+                <th className="px-4 py-3">Tank</th><th className="px-3 py-3">Status</th><th className="px-3 py-3">ESP32 connection</th>
                 <th className="px-3 py-3">DO</th><th className="px-3 py-3">pH</th>
                 <th className="px-3 py-3">Temperature</th><th className="px-3 py-3">Salinity</th>
                 <th className="px-3 py-3">Water level</th><th className="px-4 py-3 text-right">Total biomass</th>
@@ -61,6 +70,7 @@ export function TankSnapshotSection({
               {tanks.map(tank => {
                 const status = !tank.hasWaterReadings ? "No readings" : tank.status === "ok" ? "Healthy" : "Needs attention";
                 const statusClass = !tank.hasWaterReadings ? "bg-slate-500/10 text-[var(--ep-text-muted)]" : tank.status === "ok" ? "bg-[var(--ep-status-success)]/10 text-[var(--ep-status-success)]" : "bg-[var(--ep-status-warning)]/10 text-[var(--ep-status-warning)]";
+                const esp32 = getEsp32Connection(tank);
                 return (
                   <tr key={tank.id} className="transition-colors hover:bg-[var(--ep-tint)]/50">
                     <td className="px-4 py-3">
@@ -68,6 +78,16 @@ export function TankSnapshotSection({
                       <div className="mt-0.5 text-[11px] text-[var(--ep-text-muted)]">{tank.pl}</div>
                     </td>
                     <td className="px-3 py-3"><span className={`inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold ${statusClass}`}>{status}</span></td>
+                    <td className="px-3 py-3">
+                      <span
+                        className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full px-2.5 py-1 text-[10px] font-semibold ${esp32.connected ? "bg-[var(--ep-status-success)]/10 text-[var(--ep-status-success)]" : "bg-slate-500/10 text-[var(--ep-text-muted)]"}`}
+                        title={esp32.recordedAt ? `Last ESP32 reading: ${esp32.recordedAt.toLocaleString()}` : "No ESP32 readings have been received"}
+                        aria-label={esp32.connected ? "ESP32 connected; recent telemetry received" : "ESP32 disconnected; no recent telemetry"}
+                      >
+                        <span className={`h-1.5 w-1.5 rounded-full ${esp32.connected ? "bg-[var(--ep-status-success)]" : "bg-slate-400"}`} aria-hidden="true" />
+                        {esp32.connected ? "Connected" : "Disconnected"}
+                      </span>
+                    </td>
                     <td className="px-3 py-3 tabular-nums text-[var(--ep-text)]">{tank.hasWaterReadings ? value(tank.dissolvedOxygen, "mg/L") : "—"}</td>
                     <td className="px-3 py-3 tabular-nums text-[var(--ep-text)]">{tank.hasWaterReadings ? value(tank.ph) : "—"}</td>
                     <td className="px-3 py-3 tabular-nums text-[var(--ep-text)]">{tank.hasWaterReadings ? value(tank.temperature, "°C") : "—"}</td>
