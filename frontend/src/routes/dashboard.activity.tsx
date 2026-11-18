@@ -1,57 +1,92 @@
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
-import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { useTanks } from "@/features/dashboard/context/TankContext";
+import { readAuditEvents, type AuditLogEntry } from "@/features/dashboard/lib/audit-log";
+
+type ActivityItem = {
+  key: string;
+  entity: "User" | "Tank" | "System";
+  action: string;
+  target: string;
+  detail: string;
+  time: string;
+};
 
 function ActivityPage() {
   const { loading, error, isDbConnected, visionScanLog, effluentLog } = useTanks();
-  if (loading) return <DashboardViewSkeleton variant="activity" />;
+  const [auditEvents, setAuditEvents] = useState<AuditLogEntry[]>([]);
+  const [filter, setFilter] = useState<"all" | "User" | "Tank" | "System">("all");
 
-  const items = [
-    ...visionScanLog.map((scan) => ({
-      key: `scan-${scan.id}`, action: "Vision scan recorded", detail: `${scan.tank}: ${scan.note}`,
-      time: scan.time, color: "bg-[var(--ep-accent)]",
+  useEffect(() => {
+    const refresh = () => setAuditEvents(readAuditEvents());
+    refresh();
+    window.addEventListener("storage", refresh);
+    window.addEventListener("ecoprawn:audit-updated", refresh);
+    return () => {
+      window.removeEventListener("storage", refresh);
+      window.removeEventListener("ecoprawn:audit-updated", refresh);
+    };
+  }, []);
+
+  const items = useMemo<ActivityItem[]>(() => [
+    ...auditEvents.map(event => ({
+      key: event.id, entity: event.entity, action: event.action,
+      target: event.target, detail: `${event.actor} · ${event.details}`, time: event.time,
     })),
-    ...effluentLog.map((log) => ({
-      key: `effluent-${log.id}`, action: log.event, detail: log.detail,
-      time: log.time, color: "bg-[var(--amber)]",
+    ...visionScanLog.map(scan => ({
+      key: `scan-${scan.id}`, entity: "System" as const, action: "Vision scan recorded",
+      target: scan.tank, detail: scan.note, time: scan.time,
     })),
-  ].sort((a, b) => Date.parse(b.time) - Date.parse(a.time));
+    ...effluentLog.map(log => ({
+      key: `effluent-${log.id}`, entity: "System" as const, action: log.event,
+      target: "Effluent monitoring", detail: log.detail, time: log.time,
+    })),
+  ].sort((a, b) => Date.parse(b.time) - Date.parse(a.time)), [auditEvents, visionScanLog, effluentLog]);
+
+  const visibleItems = filter === "all" ? items : items.filter(item => item.entity === filter);
+
+  if (loading) return <DashboardViewSkeleton variant="activity" />;
 
   return (
     <>
       <div className="dashboard-page-header mb-7 border-b border-[var(--ep-line)] pb-7">
         <div className="mb-2 ep-font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent-hover)]">Facility history</div>
-        <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--water-deep)]">Activity Log</h1>
-        <p className="mt-2 text-[15px] text-[var(--ep-text-muted)]">Vision scans and effluent records.</p>
+        <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)]">Activity Log</h1>
+        <p className="mt-2 text-[15px] text-[var(--ep-text-muted)]">Detailed user actions, tank changes, and monitoring events.</p>
       </div>
-      <div className="mb-5">
-        <Panel title="Activity composition" badge="recorded events">
-          <DonutChart items={[
-            { label: "Vision scans", value: visionScanLog.length, color: "var(--ep-status-info)" },
-            { label: "Effluent events", value: effluentLog.length, color: "var(--ep-status-warning)" },
-          ]} unit="events" emptyLabel="No activity yet." />
-        </Panel>
-      </div>
-      <Panel title="Recent activity" badge={`${items.length} entries`} icon="clock">
+
+      <Panel title="Activity history" badge={`${visibleItems.length} entries`} icon="clock">
         {!isDbConnected && error && (
-          <div role="alert" className="mb-4 text-sm text-[var(--water-deep)]">
-            <p>{items.length > 0 ? "Showing saved records. Pull down to refresh." : "Activity data is unavailable. Pull down to try again."}</p>
+          <div role="status" className="mb-4 text-sm text-[var(--ep-text-muted)]">
+            {items.length > 0 ? "Showing available saved activity. Server monitoring records may be unavailable." : "Server activity data is unavailable."}
           </div>
         )}
-        {items.length === 0 && isDbConnected ? (
-          <p className="text-sm text-[var(--ep-text-muted)]">No activity recorded yet.</p>
+        <div className="mb-5 flex flex-wrap gap-2" role="group" aria-label="Filter activity by entity">
+          {(["all", "User", "Tank", "System"] as const).map(value => (
+            <button key={value} type="button" onClick={() => setFilter(value)} className={`min-h-9 rounded-full border px-3.5 text-xs font-semibold transition-colors ${filter === value ? "border-[var(--ep-primary)] bg-[var(--ep-accent-tint)] text-[var(--ep-primary)]" : "border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]"}`}>
+              {value === "all" ? "All activity" : value}
+            </button>
+          ))}
+        </div>
+
+        {visibleItems.length === 0 ? (
+          <div className="rounded-xl border border-dashed border-[var(--ep-line)] px-5 py-12 text-center">
+            <p className="text-sm font-semibold text-[var(--ep-text)]">No activity recorded yet</p>
+            <p className="mt-1 text-xs text-[var(--ep-text-muted)]">User and tank actions will appear here as they happen.</p>
+          </div>
         ) : (
           <div className="divide-y divide-[var(--ep-line)]">
-            {items.map((item) => (
-              <div key={item.key} className="flex items-start gap-4 py-4 first:pt-0 last:pb-0">
-                <span className={`mt-1.5 h-3 w-3 shrink-0 rounded-full ${item.color}`} aria-hidden="true" />
+            {visibleItems.map(item => (
+              <div key={item.key} className="flex flex-col gap-2 py-4 first:pt-0 sm:flex-row sm:items-start sm:gap-4">
+                <span className={`inline-flex w-fit shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide ${item.entity === "User" ? "bg-sky-500/10 text-sky-600 dark:text-sky-300" : item.entity === "Tank" ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-300" : "bg-[var(--ep-tint)] text-[var(--ep-text-muted)]"}`}>{item.entity}</span>
                 <div className="min-w-0 flex-1">
-                  <div className="text-base font-semibold text-[var(--water-deep)]">{item.action}</div>
-                  <div className="mt-1 text-sm text-[var(--ep-text-muted)]">{item.detail}</div>
+                  <div className="text-sm font-semibold text-[var(--ep-text)]">{item.action}</div>
+                  <div className="mt-0.5 text-xs font-medium text-[var(--ep-text-muted)]">{item.target}</div>
+                  <div className="mt-1 break-words text-sm text-[var(--ep-text-muted)]">{item.detail}</div>
                 </div>
-                <time dateTime={item.time} className="shrink-0 text-sm text-[var(--ep-text-muted)]">{new Date(item.time).toLocaleString()}</time>
+                <time dateTime={item.time} className="shrink-0 text-xs text-[var(--ep-text-muted)]">{new Date(item.time).toLocaleString()}</time>
               </div>
             ))}
           </div>
