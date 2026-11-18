@@ -21,11 +21,6 @@ export function Analytics() {
     label: tank.name, value: tank.biomass, color: TANK_COLORS[index % TANK_COLORS.length],
   })), [tanks]);
 
-  const healthDistribution = useMemo(() => [
-    { label: "Healthy", value: tanks.filter(tank => tank.status === "ok").length, color: "var(--ep-status-success)" },
-    { label: "Needs attention", value: tanks.filter(tank => tank.status === "warn").length, color: "var(--ep-status-warning)" },
-  ], [tanks]);
-
   if (loading) return <DashboardViewSkeleton variant="vision" />;
 
   return (
@@ -84,13 +79,9 @@ export function Analytics() {
         <KpiCard label="Average shrimp weight" value={tanks.length ? metrics.avgWeight.toFixed(1) : "—"} unit="g" delta={`${metrics.abnormal.toLocaleString()} abnormal behavior flags`} deltaTone={metrics.abnormal ? "warn" : "ok"} />
       </KpiGrid>
 
-      <div className="mb-5 grid grid-cols-1 gap-4 xl:grid-cols-2">
+      <div className="mb-5">
         <Panel title="Biomass distribution" icon="chart-no-axes-combined" badge="share by tank">
           <DonutChart items={biomassDistribution} unit="kg" emptyLabel="No biomass records available yet." />
-        </Panel>
-        <Panel title="Tank health distribution" icon="activity" badge={`${tanks.length} tanks monitored`}>
-          <DonutChart items={healthDistribution} unit="tanks" emptyLabel="Add tanks to see health distribution." />
-          <p className="mt-2 text-center text-[11px] text-[var(--ep-text-muted)]">Using current limits.</p>
         </Panel>
       </div>
 
