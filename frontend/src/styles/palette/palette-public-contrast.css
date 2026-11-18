@@ -1,100 +1,24 @@
-/* ==========================================================================
-   Dark-surface contrast pass
-   Text and interface icons inside dark cards stay white for clear reading.
-   Teal controls retain their intentional high-contrast foreground colors.
-   ========================================================================== */
+/* Authentication dialog dark-surface contrast remains global for the root provider. */
 html.dark :is(
-  .ep-business-landing [data-business-card],
-  .ep-business-landing .ep-cloudnexus-metric,
-  .ep-business-landing .ep-cloudnexus-feature,
-  .ep-business-landing .ep-cloudnexus-dashboard,
-  .ep-business-landing .ep-stats-panel > div,
-  .ep-about-page .ep-about-mission-panel,
-  .ep-about-page #objectives article,
-  .ep-about-page #scope article,
-  .ep-about-page #systems article,
-  .ep-about-page .ep-about-journey-card,
-  .ep-contact-page .ep-contact-intro-panel,
-  .ep-contact-page [data-contact-card],
-  .ep-contact-page [data-contact-form] > form,
-  .ep-contact-page [data-contact-form] > div[role="status"],
   .ep-auth-overlay .ep-auth-modal.ep-auth-panel,
   .ep-auth-overlay [role="dialog"].ep-auth-modal
 ) {
   color: #ffffff;
 }
-
-/* Headings, body copy, labels and metadata in dark cards use a consistent
-   white foreground instead of inheriting low-contrast dark-theme utilities. */
 html.dark :is(
-  .ep-business-landing [data-business-card],
-  .ep-business-landing .ep-cloudnexus-metric,
-  .ep-business-landing .ep-cloudnexus-feature,
-  .ep-business-landing .ep-cloudnexus-dashboard,
-  .ep-business-landing .ep-stats-panel > div,
-  .ep-about-page .ep-about-mission-panel,
-  .ep-about-page #objectives article,
-  .ep-about-page #scope article,
-  .ep-about-page #systems article,
-  .ep-about-page .ep-about-journey-card,
-  .ep-contact-page .ep-contact-intro-panel,
-  .ep-contact-page [data-contact-card],
-  .ep-contact-page [data-contact-form] > form,
-  .ep-contact-page [data-contact-form] > div[role="status"],
   .ep-auth-overlay .ep-auth-modal.ep-auth-panel,
   .ep-auth-overlay [role="dialog"].ep-auth-modal
 ) :is(h1,h2,h3,h4,h5,h6,p,span,label,small,strong,em,li,dt,dd,a:not([data-tone="accent"])) {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff;
 }
-
-/* Keep icon strokes visible on dark card surfaces, including icons whose
-   original utility class supplied a muted foreground color. */
 html.dark :is(
-  .ep-business-landing [data-business-card],
-  .ep-business-landing .ep-cloudnexus-metric,
-  .ep-business-landing .ep-cloudnexus-feature,
-  .ep-business-landing .ep-cloudnexus-dashboard,
-  .ep-business-landing .ep-stats-panel > div,
-  .ep-about-page .ep-about-mission-panel,
-  .ep-about-page #objectives article,
-  .ep-about-page #scope article,
-  .ep-about-page #systems article,
-  .ep-about-page .ep-about-journey-card,
-  .ep-contact-page .ep-contact-intro-panel,
-  .ep-contact-page [data-contact-card],
-  .ep-contact-page [data-contact-form] > form,
-  .ep-contact-page [data-contact-form] > div[role="status"],
   .ep-auth-overlay .ep-auth-modal.ep-auth-panel,
   .ep-auth-overlay [role="dialog"].ep-auth-modal
 ) :is(svg.lucide,svg[data-lucide],.lucide-icon,button > svg,a > svg) {
   color: #ffffff !important;
   stroke: currentColor;
 }
-
-/* Preserve readable muted hierarchy without returning to low-contrast gray. */
-html.dark :is(
-  .ep-business-landing [data-business-card],
-  .ep-business-landing .ep-cloudnexus-metric,
-  .ep-business-landing .ep-cloudnexus-feature,
-  .ep-about-page .ep-about-mission-panel,
-  .ep-about-page #objectives article,
-  .ep-about-page #scope article,
-  .ep-about-page .ep-about-journey-card,
-  .ep-contact-page [data-contact-card],
-  .ep-contact-page [data-contact-form] > form
-) :is(.text-muted-foreground,[data-muted],.ep-text-muted) {
-  color: #e2e8f0 !important;
-  -webkit-text-fill-color: #e2e8f0;
-}
-
-/* Bright Ocean Teal controls keep dark foreground text for contrast. */
-html.dark :is(
-  .ep-business-landing,
-  .ep-about-page,
-  .ep-contact-page,
-  .ep-auth-overlay
-) :is(button,[role="button"],a)[class*="bg-ep-accent"],
 html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel :is(
   button[type="submit"],
   [role="group"][aria-label="Account access"] button[aria-pressed="true"]
@@ -102,7 +26,6 @@ html.dark .ep-auth-overlay .ep-auth-modal.ep-auth-panel :is(
   color: #092b31 !important;
   -webkit-text-fill-color: #092b31 !important;
 }
-
 
 /* Header and footer dark-surface contrast.
    Keep navigation, footer copy and utility icons white; teal primary actions
