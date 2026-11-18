@@ -82,7 +82,7 @@ export function TankSnapshotSection({
         </div>
       ) : (
         <div className="px-5 py-12 text-center">
-          <Icon name="search-x" size={25} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
+          <Icon name="search" size={25} className="mx-auto mb-2 text-[var(--ep-text-muted)]" />
           <p className="text-sm font-semibold text-[var(--ep-text)]">No tanks match these filters</p>
           <p className="mt-1 text-xs text-[var(--ep-text-muted)]">Try another search term or status.</p>
         </div>
