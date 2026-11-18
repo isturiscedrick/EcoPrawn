@@ -1,16 +1,10 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { MOTION_ALLOWED_QUERY, MOTION_REDUCED_QUERY, MOTION_FINE_POINTER_QUERY } from "./motionPolicy";
+export { MOTION_ALLOWED_QUERY, MOTION_REDUCED_QUERY, MOTION_FINE_POINTER_QUERY } from "./motionPolicy";
 
-/**
- * Shared motion policy for the public EcoPrawn experience.
- * GSAP owns page/scroll choreography; Anime.js owns short-lived accents;
- * native scrolling remains the source of truth for browser navigation.
- */
-export const MOTION_ALLOWED_QUERY = "(prefers-reduced-motion: no-preference)";
-export const MOTION_REDUCED_QUERY = "(prefers-reduced-motion: reduce)";
-export const MOTION_FINE_POINTER_QUERY =
-  "(hover: hover) and (pointer: fine) and (min-width: 768px)";
+/** Shared public-page animation runtime. */
 
 /** Keep Anime.js instances reversible so route changes never leave stale motion behind. */
 export function trackAnime<T extends { revert: () => unknown }>(
