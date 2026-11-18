@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { Esp32Connection } from "@/features/dashboard/components/Esp32Connection";
+import { SmsSettings } from "@/features/dashboard/components/SmsSettings";
 import { useEsp32 } from "@/features/dashboard/context/Esp32Context";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 
@@ -63,6 +64,14 @@ export function ConfigurationView() {
             {selectedTank && <div className="border-t border-[var(--ep-line)] pt-5"><Esp32Connection key={selectedTank.id} tankId={selectedTank.id} tankName={selectedTank.name} /></div>}
           </>
         )}
+      </section>
+
+      <section className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 shadow-sm sm:p-6">
+        <div className="mb-4 flex items-start gap-3">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-primary)]"><Icon name="bell-ring" size={20} /></span>
+          <div><h2 className="text-base font-semibold text-[var(--ep-text)]">Notification settings</h2><p className="mt-1 text-sm text-[var(--ep-text-muted)]">Configure SMS notifications for water-quality alerts.</p></div>
+        </div>
+        <SmsSettings />
       </section>
     </div>
   );
