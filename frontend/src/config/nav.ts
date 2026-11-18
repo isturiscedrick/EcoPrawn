@@ -13,9 +13,9 @@ export interface DashboardNavItem {
 }
 
 export const DASHBOARD_NAV_ITEMS: DashboardNavItem[] = [
-  { icon: "gauge", label: "Dashboard", view: "overview" },
-  { icon: "chart-no-axes-combined", label: "Analytics", view: "analytics" },
-  { icon: "layers", label: "Tanks", view: "tanks" },
+  { icon: "layout-grid", label: "Dashboard", view: "overview" },
+  { icon: "chart-bars-trend", label: "Analytics", view: "analytics" },
+  { icon: "tank-stack", label: "Tanks", view: "tanks" },
   { icon: "bell-ring", label: "Alerts", view: "alerts" },
   { icon: "clock", label: "Activity Log", view: "activity" },
 ];
