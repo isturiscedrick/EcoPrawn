@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import gsap from "gsap";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { MOTION_ALLOWED_QUERY } from "@/components/motion/motionRuntime";
+import { MOTION_ALLOWED_QUERY } from "@/components/motion/motionPolicy";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { Icon } from "@/components/ui/Icon";
 import { Sidebar } from "../components/Sidebar";
