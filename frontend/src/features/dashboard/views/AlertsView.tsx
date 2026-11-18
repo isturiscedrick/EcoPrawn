@@ -7,7 +7,6 @@ import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
-import { SmsSettings } from "@/features/dashboard/components/SmsSettings";
 import { DashboardViewSkeleton, DashboardErrorState, DashboardEmptyState } from "@/features/dashboard/components/DashboardStates";
 
 type AlertFilter = "all" | "warning" | "info";
@@ -165,7 +164,6 @@ export function AlertsView() {
         </Panel>
       </div>
 
-      <div className="mb-5"><SmsSettings /></div>
       <Panel title="Alert & Event Log" badge={`${visibleCount} shown`}>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2" role="group" aria-label="Filter alerts">
