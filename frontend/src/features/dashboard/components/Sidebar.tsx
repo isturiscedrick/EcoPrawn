@@ -9,6 +9,7 @@ import { SidebarNavItem } from "./SidebarNavItem";
 import { DashboardDesktopSidebar } from "./DashboardDesktopSidebar";
 import { LogoutIcon, drawerRowClass } from "./SidebarPrimitives";
 import { DashboardLogoutDialog } from "./DashboardLogoutDialog";
+import { recordAuditEvent } from "@/features/dashboard/lib/audit-log";
 
 interface SidebarProps {
   mobileOpen?: boolean;
@@ -203,6 +204,7 @@ export function Sidebar({
     try {
       const response = await fetch("/api/auth/logout", { method: "POST" });
       if (!response.ok) throw new Error("Logout failed");
+      recordAuditEvent({ entity: "User", action: "Signed out", target: profileName, details: "User ended the current session." });
       window.location.replace("/login");
     } catch {
       setLogoutError("Could not log out. Please try again.");
