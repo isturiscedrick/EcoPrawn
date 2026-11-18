@@ -79,7 +79,7 @@ const validId = (value: string) =>
   value.length > 0 &&
   value.length <= 128 &&
   value.trim() === value &&
-  !/\\s/.test(value);
+  !/\s/.test(value);
 
 const validNumber = (
   value: unknown,
