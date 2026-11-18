@@ -21,11 +21,14 @@ export function TanksView() {
   async function handleAdd(input: NewTankInput) {
     setActionError("");
     const saved = await addTank(input);
+    if (saved) recordAuditEvent({ entity: "Tank", action: "Created tank", target: input.name, details: `Created tank record for PL batch ${input.pl}.` });
     if (!saved) setActionError("Unable to add this tank. Please check the details and try again.");
   }
 
   async function handleEdit(id: string, patch: Pick<Tank, "name" | "pl" | "biomass" | "targetToday" | "dispensedToday" | "fcr">) {
+    const tankName = tanks.find(tank => tank.id === id)?.name ?? id;
     const saved = await updateTank(id, patch);
+    if (saved) recordAuditEvent({ entity: "Tank", action: "Updated tank", target: patch.name ?? tankName, details: `Updated tank details: ${Object.keys(patch).join(", ")}.` });
     if (!saved) setActionError("Unable to update this tank. Please try again.");
     return saved;
   }
