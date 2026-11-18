@@ -1,7 +1,6 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { VisionGrowth } from "@/features/dashboard/views/VisionGrowth";
 
 export const Route = createFileRoute("/dashboard/vision")({
-  beforeLoad: () => {
-    throw redirect({ to: "/dashboard/analytics" });
-  },
+  component: VisionGrowth,
 });
