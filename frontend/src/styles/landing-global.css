@@ -1,3 +1,5 @@
+@import "./utilities/public-responsive-overrides.css";
+
 /* ==========================================================================
    EcoPrawn Public & Marketing Global Stylesheet
    Entry point for landing, about, contact, and shared public UI.
