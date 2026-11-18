@@ -50,7 +50,7 @@ function TanksAnalytics() {
           {tanks.length > 0 && <p className="mt-2 text-center text-xs text-[var(--ep-text-muted)]">{((healthyCount / tanks.length) * 100).toFixed(1)}% healthy</p>}
         </Panel>
 
-        <Panel title="Biomass by tank" badge="Current estimate" icon="chart-no-axes-column">
+        <Panel title="Biomass by tank" badge="Current estimate" icon="chart-no-axes-combined">
           {tanks.length ? (
             <div className="space-y-4">
               {[...tanks].sort((a, b) => b.biomass - a.biomass).map(tank => (
