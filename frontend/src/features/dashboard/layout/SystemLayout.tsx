@@ -26,6 +26,8 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const { tanks, isDbConnected, lastUpdatedAt, loading, refreshTanks, isRefreshing } = useTanks();
   const activeAlertCount = deriveTankAlerts(tanks).length;
   const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const closeMobileNav = useCallback(() => setMobileNavOpen(false), []);
   useEffect(() => {
     try {
       setDesktopSidebarCollapsed(window.localStorage.getItem("ep-sidebar-collapsed") === "true");
@@ -197,15 +199,25 @@ export function SystemLayout({ children }: SystemLayoutProps) {
           boxShadow: scrolled ? "0 8px 24px -22px rgba(15, 23, 42, .45)" : "none",
         }}
       >
-        <div className="mx-auto flex min-h-[66px] max-w-[1440px] items-center justify-between gap-2 px-3 sm:gap-4 sm:px-8 lg:px-12">
-          <div className="flex min-w-0 items-center gap-2">
+        <div className="mx-auto flex min-h-[64px] max-w-[1440px] items-center justify-between gap-2 px-3 sm:gap-4 sm:px-8 lg:px-12">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={() => setMobileNavOpen(true)}
+              aria-label="Open dashboard navigation"
+              aria-controls="dashboard-mobile-drawer"
+              aria-expanded={mobileNavOpen}
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-primary)] shadow-sm transition-colors hover:bg-[var(--ep-tint)] ${focusRing}`}
+            >
+              <Icon name="menu" size={19} strokeWidth={2} />
+            </button>
             <Link
               to="/dashboard"
               aria-label="EcoPrawn home"
               activeOptions={{ exact: true }}
               className={`flex min-w-0 shrink-0 items-center rounded-xl transition-transform duration-200 hover:scale-[1.025] active:scale-[.99] ${focusRing}`}
             >
-              <BrandMark size={26} showWordmark />
+              <BrandMark size={28} showWordmark />
             </Link>
           </div>
 
@@ -215,8 +227,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
               aria-label={activeAlertCount > 0 ? `Alerts, ${activeAlertCount} active` : "Alerts"}
               aria-current={pathname === "/dashboard/alerts" ? "page" : undefined}
               title="Alerts"
-              className={`relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 ${focusRing} ${pathname === "/dashboard/alerts" ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)]"}`}
-              style={{ borderColor: "var(--ep-line)", backgroundColor: "var(--ep-surface)" }}
+              className={`relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-colors duration-200 ${focusRing} ${pathname === "/dashboard/alerts" ? "border-[var(--ep-accent)] bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]" : "border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] hover:bg-[var(--ep-tint)] hover:text-[var(--ep-text)]"}`}
             >
               <Icon name="bell-ring" size={18} strokeWidth={1.8} />
               {activeAlertCount > 0 && (
@@ -238,6 +249,8 @@ export function SystemLayout({ children }: SystemLayoutProps) {
 
       {/* Persistent desktop navigation and mobile drawer. */}
       <Sidebar
+        mobileOpen={mobileNavOpen}
+        onMobileClose={closeMobileNav}
         collapsed={desktopSidebarCollapsed}
         alertCount={activeAlertCount}
         tankCount={tanks.length}
@@ -338,7 +351,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       {/* Direct, thumb-friendly access to the five primary facility modules. */}
       <nav
         aria-label="Quick dashboard navigation"
-        className="fixed inset-x-0 bottom-0 z-[70] grid grid-cols-5 border-t border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-surface)_94%,transparent)] px-1 pt-2 pb-[max(.5rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-24px_rgba(15,23,42,.42)] backdrop-blur-xl lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-[70] grid grid-cols-5 gap-1 border-t border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-surface)_98%,transparent)] px-2 pt-1.5 pb-[max(.4rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-24px_rgba(15,23,42,.42)] backdrop-blur-xl lg:hidden"
       >
         {DASHBOARD_QUICK_LINKS.map((item) => {
           const active = pathname === item.href || pathname.startsWith(item.href + "/") ||
@@ -350,13 +363,16 @@ export function SystemLayout({ children }: SystemLayoutProps) {
               to={item.href as never}
               aria-label={item.label}
               aria-current={active ? "page" : undefined}
+              data-active={active ? "true" : undefined}
               activeOptions={{ exact: true }}
-              className={"flex min-h-14 min-w-0 touch-manipulation flex-col items-center justify-center gap-1 rounded-xl px-1 py-1 text-[10px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] " + (active ? "text-[var(--ep-primary)]" : "text-[var(--ep-text-muted)] hover:text-[var(--ep-text)]")}
+              className={"flex min-h-14 min-w-0 touch-manipulation flex-col items-center justify-center gap-1 rounded-2xl border border-transparent px-0.5 py-1 text-[10px] leading-tight transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-inset " + (active ? "border-[var(--ep-accent)]/20 bg-[var(--ep-accent-tint)] font-bold text-[var(--ep-primary)]" : "font-semibold text-[var(--ep-text-muted)] hover:bg-[var(--ep-tint)] hover:text-[var(--ep-text)]")}
             >
-              <span className={"flex h-7 w-9 items-center justify-center rounded-xl transition-colors " + (active ? "bg-[var(--ep-accent-tint)]" : "bg-transparent")}>
+              <span className={"flex h-8 w-10 items-center justify-center rounded-xl transition-colors " + (active ? "bg-[var(--ep-accent)] text-[var(--ep-on-accent)] shadow-sm" : "bg-transparent text-current")}>
                 <Icon name={item.icon} size={19} strokeWidth={active ? 2.2 : 1.8} />
               </span>
-              <span className={item.key === "water" ? "max-w-full truncate text-[9px]" : "max-w-full truncate"}>{item.label}</span>
+              <span className="max-w-full truncate">
+                {item.key === "water" ? "Water" : item.label}
+              </span>
             </Link>
           );
         })}

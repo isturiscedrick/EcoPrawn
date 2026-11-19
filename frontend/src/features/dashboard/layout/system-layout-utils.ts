@@ -7,8 +7,8 @@ export const DASHBOARD_QUICK_LINKS = [
   { key: "home", label: "Home", href: "/dashboard", icon: "house" },
   { key: "tanks", label: "Tanks", href: "/dashboard/tanks", icon: "layers" },
   { key: "vision", label: "Vision", href: "/dashboard/vision", icon: "camera" },
-  { key: "feeding", label: "Feeding", href: "/dashboard/feeding", icon: "utensils" },
   { key: "water", label: "Water Quality", href: "/dashboard/water", icon: "waves" },
+  { key: "feeding", label: "Feeding", href: "/dashboard/feeding", icon: "utensils" },
 ] as const;
 
 export function getProfileInitials(name: string): string {

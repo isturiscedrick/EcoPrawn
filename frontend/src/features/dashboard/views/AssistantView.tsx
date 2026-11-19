@@ -229,18 +229,25 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
   };
 
   return (
-    <div className="dashboard-assistant-page max-w-5xl mx-auto space-y-6">
+    <div
+      data-assistant-page
+      className="dashboard-assistant-page mx-auto max-w-5xl space-y-6"
+    >
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-5 border-b border-[var(--ep-line)]">
+      <div
+        data-assistant-header
+        className="flex flex-col gap-4 border-b border-[var(--ep-line)] pb-5 sm:flex-row sm:items-center sm:justify-between"
+      >
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="flex h-6 items-center gap-1.5 rounded-full bg-[var(--ep-accent-tint)] px-2.5 text-[11px] font-semibold text-[var(--ep-primary)] border border-[var(--ep-accent)]/30">
+            <span data-assistant-brand className="flex h-6 items-center gap-1.5 rounded-full bg-[var(--ep-accent-tint)] px-2.5 text-[11px] font-semibold text-[var(--ep-primary)] border border-[var(--ep-accent)]/30">
               <Icon name="sparkles" size={13} className="text-[var(--ep-accent)] animate-pulse" />
               EcoPrawn Intelligence
             </span>
             <span className="flex items-center gap-1.5 text-[11px] font-medium text-[var(--ep-text-muted)]">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-ping inline-block" />
-              Active Telemetry Linked
+              <span className="hidden sm:inline">Active Telemetry Linked</span>
+              <span className="sm:hidden">Online</span>
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--ep-text)]">
@@ -252,13 +259,13 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
         </div>
 
         {/* Telemetry Stat Badges */}
-        <div className="flex items-center gap-2 self-start sm:self-center">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-xs">
+        <div data-assistant-stats className="flex items-center gap-2 self-start sm:self-center">
+          <div data-assistant-metric className="flex items-center gap-2 px-3 py-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-xs">
             <Icon name="tank-stack" size={15} className="text-[var(--ep-primary)]" />
             <span className="font-semibold text-[var(--ep-text)]">{tanks.length}</span>
             <span className="text-[var(--ep-text-muted)]">Tanks</span>
           </div>
-          <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-xs">
+          <div data-assistant-metric className="flex items-center gap-2 px-3 py-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-xs">
             <Icon name="bell-ring" size={15} className={activeAlertCount > 0 ? "text-amber-500" : "text-emerald-500"} />
             <span className="font-semibold text-[var(--ep-text)]">{activeAlertCount}</span>
             <span className="text-[var(--ep-text-muted)]">Alerts</span>
@@ -276,8 +283,8 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
       </div>
 
       {/* Suggested Quick Inquiries */}
-      <div className="space-y-2">
-        <div className="text-[11px] font-semibold uppercase tracking-wider text-[var(--ep-text-muted)]">
+      <div data-assistant-suggestions className="space-y-2">
+        <div data-assistant-suggestions-title className="text-[11px] font-semibold uppercase tracking-wider text-[var(--ep-text-muted)]">
           Suggested Diagnostics
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
@@ -286,7 +293,8 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
               key={item.label}
               type="button"
               onClick={() => handleSend(item.query)}
-              className="flex items-start gap-2.5 p-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-left hover:border-[var(--ep-accent)]/50 hover:bg-[var(--ep-accent-tint)]/40 transition-all duration-200 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
+              data-assistant-suggestion
+              className="flex min-w-0 items-start gap-2.5 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 text-left transition-all duration-200 group hover:border-[var(--ep-accent)]/50 hover:bg-[var(--ep-accent-tint)]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
             >
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[var(--ep-tint)] text-[var(--ep-primary)] group-hover:scale-105 transition-transform">
                 <Icon name={item.icon} size={15} />
@@ -295,7 +303,7 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
                 <div className="text-xs font-semibold text-[var(--ep-text)] group-hover:text-[var(--ep-primary)] transition-colors">
                   {item.label}
                 </div>
-                <div className="text-[11px] text-[var(--ep-text-muted)] line-clamp-1">
+                <div data-assistant-suggestion-copy className="text-[11px] text-[var(--ep-text-muted)] line-clamp-1">
                   {item.query}
                 </div>
               </div>
@@ -305,9 +313,9 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
       </div>
 
       {/* Main Chat Feed */}
-      <div className="flex flex-col rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] shadow-sm overflow-hidden min-h-[460px]">
+      <div data-assistant-chat className="flex min-h-[460px] flex-col overflow-hidden rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] shadow-sm">
         {/* Messages Container */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
+        <div data-assistant-messages className="flex-1 space-y-5 overflow-y-auto p-4 sm:p-6">
           {messages.map((msg) => (
             <div
               key={msg.id}
@@ -389,7 +397,7 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
         </div>
 
         {/* Input Bar */}
-        <div className="p-3 sm:p-4 border-t border-[var(--ep-line)] bg-[var(--ep-surface)]">
+        <div data-assistant-composer className="border-t border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 sm:p-4">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -402,7 +410,7 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
                 type="text"
                 value={inputQuery}
                 onChange={(e) => setInputQuery(e.target.value)}
-                placeholder="Ask about water chemistry, biofloc ratios, feeding cycles, or alerts…"
+                placeholder="Message your aquaculture assistant…"
                 aria-label="Ask EcoPrawn AI Assistant"
                 className="w-full min-h-12 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-4 py-2.5 text-sm text-[var(--ep-text)] placeholder:text-[var(--ep-text-muted)] focus:outline-none focus:border-[var(--ep-primary)] focus:ring-2 focus:ring-[var(--ep-primary)]/20 transition-all"
               />
@@ -410,13 +418,14 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
             <button
               type="submit"
               disabled={!inputQuery.trim() || isGenerating}
+              aria-label="Send message"
               className="flex min-h-12 px-5 items-center justify-center gap-2 rounded-xl bg-[var(--ep-primary)] text-white text-sm font-semibold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
             >
-              <span>Ask</span>
+              <span data-assistant-send-label>Ask</span>
               <Icon name="arrow-up" size={16} strokeWidth={2.2} />
             </button>
           </form>
-          <div className="flex items-center justify-between text-[11px] text-[var(--ep-text-muted)] px-1 pt-2">
+          <div data-assistant-composer-hint className="flex items-center justify-between px-1 pt-2 text-[11px] text-[var(--ep-text-muted)]">
             <span>Powered by EcoPrawn Biofloc & Sensory Intelligence Model</span>
             <span>Enter to send</span>
           </div>

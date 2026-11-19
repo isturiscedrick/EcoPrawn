@@ -2,6 +2,10 @@
    The shared public-header rule hides direct links and reserves space for a
    hamburger; the authenticated dashboard has neither of those controls. */
 @media (max-width: 1023px) {
+  .dashboard-shell main {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom)) !important;
+  }
+
   .dashboard-shell #site-header > div {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) auto !important;

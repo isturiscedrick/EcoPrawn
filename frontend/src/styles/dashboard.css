@@ -10,6 +10,7 @@
 @import "./dashboard/responsive-controls.css";
 @import "./dashboard/responsive-page-chrome.css";
 @import "./dashboard/responsive-cards.css";
+@import "./dashboard/assistant-mobile.css";
 
 /* Dashboard palette overrides remain last, matching their original cascade role. */
 @import "./palette/dashboard-brand.css";

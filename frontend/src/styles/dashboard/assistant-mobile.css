@@ -1,0 +1,224 @@
+/* Full-height assistant chat on phones; desktop keeps its existing layout. */
+@media (max-width: 639px) {
+  .dashboard-shell main:has([data-assistant-page]) {
+    display: flex;
+    box-sizing: border-box;
+    height: calc(100dvh - 64px);
+    min-height: 0;
+    overflow: hidden;
+    padding-top: 0.5rem !important;
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  .dashboard-shell main:has([data-assistant-page]) > div {
+    display: flex;
+    width: 100%;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .dashboard-shell [data-assistant-page] {
+    display: flex;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.65rem;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  .dashboard-shell [data-assistant-header] {
+    min-height: 2.7rem;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .dashboard-shell [data-assistant-header] > div:first-child {
+    min-width: 0;
+  }
+
+  .dashboard-shell [data-assistant-header] [data-assistant-brand],
+  .dashboard-shell [data-assistant-header] p,
+  .dashboard-shell [data-assistant-metric] {
+    display: none;
+  }
+
+  .dashboard-shell [data-assistant-header] h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .dashboard-shell [data-assistant-header] > div:nth-child(2) {
+    align-items: center;
+    align-self: auto;
+    gap: 0;
+  }
+
+  .dashboard-shell [data-assistant-header] > div:nth-child(2) button {
+    width: 2.6rem;
+    height: 2.6rem;
+    flex: 0 0 2.6rem;
+    border-radius: 0.85rem;
+  }
+
+  .dashboard-shell [data-assistant-suggestions] {
+    display: flex;
+    min-width: 0;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+  }
+
+  .dashboard-shell [data-assistant-suggestions-title] {
+    flex: 0 0 auto;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .dashboard-shell [data-assistant-suggestions] > .grid {
+    display: flex;
+    min-width: 0;
+    gap: 0.4rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.15rem 0.1rem 0.35rem;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dashboard-shell [data-assistant-suggestions] > .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dashboard-shell [data-assistant-suggestion] {
+    min-height: 2.35rem;
+    max-width: 12rem;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.65rem 0.35rem 0.4rem;
+    border-radius: 999px;
+  }
+
+  .dashboard-shell [data-assistant-suggestion] > span {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 999px;
+  }
+
+  .dashboard-shell [data-assistant-suggestion] > div > div:first-child {
+    overflow: hidden;
+    font-size: 0.65rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .dashboard-shell [data-assistant-suggestion-copy] {
+    display: none;
+  }
+
+  .dashboard-shell [data-assistant-chat] {
+    min-height: 0;
+    flex: 1;
+    border-radius: 1rem;
+  }
+
+  .dashboard-shell [data-assistant-messages] {
+    min-height: 0;
+    overscroll-behavior-y: contain;
+    padding: 0.85rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dashboard-shell [data-assistant-messages] > div.flex {
+    width: 100%;
+    max-width: 100%;
+    gap: 0.55rem;
+  }
+
+  .dashboard-shell [data-assistant-messages] > div.flex > div:first-child {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 0.65rem;
+  }
+
+  .dashboard-shell [data-assistant-messages] > div.flex > div:nth-child(2) {
+    min-width: 0;
+    max-width: calc(100% - 2.35rem);
+  }
+
+  .dashboard-shell [data-assistant-messages] > div.flex > div:nth-child(2) > div:first-child {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.84rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  .dashboard-shell [data-assistant-messages] > div.flex > div:nth-child(2) > div:nth-child(2) {
+    gap: 0.4rem;
+  }
+
+  .dashboard-shell [data-assistant-messages] a {
+    min-height: 2.5rem;
+    padding-inline: 0.65rem;
+    font-size: 0.7rem;
+  }
+
+  .dashboard-shell [data-assistant-composer] {
+    flex: 0 0 auto;
+    padding: 0.65rem;
+  }
+
+  .dashboard-shell [data-assistant-composer] form {
+    gap: 0.5rem;
+  }
+
+  .dashboard-shell [data-assistant-composer] input {
+    min-height: 3rem;
+    padding: 0.7rem 0.8rem;
+    font-size: 16px;
+  }
+
+  .dashboard-shell [data-assistant-composer] button[type="submit"] {
+    width: 3rem;
+    min-height: 3rem;
+    flex: 0 0 3rem;
+    padding-inline: 0;
+    border-radius: 0.85rem;
+  }
+
+  .dashboard-shell [data-assistant-send-label],
+  .dashboard-shell [data-assistant-composer-hint] {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .dashboard-shell [data-assistant-suggestions-title] {
+    display: none;
+  }
+
+  .dashboard-shell [data-assistant-suggestion] {
+    max-width: 10.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell [data-assistant-messages] {
+    scroll-behavior: auto;
+  }
+}
