@@ -73,18 +73,6 @@ export function AboutPage() {
                 <Icon name="droplet" size={42} strokeWidth={1.6} />
                 <Icon name="waves" size={34} strokeWidth={1.7} />
               </span>
-              <span className="ep-about-orbit-tag ep-about-orbit-tag-top">
-                <Icon name="droplet" size={17} />
-                <span><b>WATER</b><small>Quality &amp; clarity</small></span>
-              </span>
-              <span className="ep-about-orbit-tag ep-about-orbit-tag-right">
-                <Icon name="activity" size={17} />
-                <span><b>INSIGHT</b><small>Readings &amp; trends</small></span>
-              </span>
-              <span className="ep-about-orbit-tag ep-about-orbit-tag-bottom">
-                <Icon name="zap" size={17} />
-                <span><b>ACTION</b><small>Farm workflows</small></span>
-              </span>
             </div>
           </div>
         </section>

@@ -422,3 +422,49 @@ html.dark
   > [data-page-hero-accent] {
   background-image: linear-gradient(100deg, #45c5b3 0%, #70d7c8 100%) !important;
 }
+
+/* Mission graphic: add a soft focal glow and clearer hierarchy to its labels. */
+.ep-about-page .ep-about-orbit-visual::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 62%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--ep-accent) 19%, transparent),
+    transparent 72%
+  );
+  filter: blur(12px);
+  pointer-events: none;
+}
+.ep-about-page .ep-about-orbit-c {
+  border-color: color-mix(in srgb, var(--ep-accent) 62%, white);
+  box-shadow:
+    0 0 28px color-mix(in srgb, var(--ep-accent) 18%, transparent),
+    inset 0 0 24px color-mix(in srgb, var(--ep-accent) 9%, transparent);
+}
+.ep-about-page .ep-about-orbit-core {
+  animation: ep-about-core-glow 4.2s ease-in-out infinite;
+}
+@keyframes ep-about-core-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 24px 58px -18px rgba(8, 126, 139, 0.58),
+      inset 0 1px 0 rgba(255, 255, 255, 0.48),
+      inset 0 -12px 24px rgba(8, 47, 73, 0.16);
+  }
+  50% {
+    box-shadow:
+      0 24px 64px -14px rgba(69, 197, 179, 0.72),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      inset 0 -12px 24px rgba(8, 47, 73, 0.12);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ep-about-page .ep-about-orbit-core {
+    animation: none !important;
+  }
+}

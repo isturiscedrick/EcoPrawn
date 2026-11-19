@@ -265,63 +265,6 @@ html.dark .ep-contact-page [data-contact-form] > form {
   margin-top: -0.3rem;
   opacity: 0.92;
 }
-.ep-about-page .ep-about-orbit-tag {
-  display: inline-flex;
-  min-width: 9.5rem;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.65rem;
-  padding: 0.7rem 0.9rem;
-  border: 1px solid rgba(147, 197, 253, 0.52);
-  border-radius: 1rem;
-  color: #066874;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(239, 246, 255, 0.94));
-  box-shadow:
-    0 14px 34px -22px rgba(30, 64, 175, 0.4),
-    inset 0 1px 0 #fff;
-  letter-spacing: 0;
-  backdrop-filter: blur(14px);
-}
-.ep-about-page .ep-about-orbit-tag > svg {
-  flex: 0 0 auto;
-  color: #087e8b;
-}
-.ep-about-page .ep-about-orbit-tag > span {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  gap: 0.12rem;
-  text-align: left;
-}
-.ep-about-page .ep-about-orbit-tag b {
-  font-size: 0.64rem;
-  font-weight: 850;
-  letter-spacing: 0.13em;
-  line-height: 1.15;
-}
-.ep-about-page .ep-about-orbit-tag small {
-  color: #526783;
-  font-size: 0.62rem;
-  font-weight: 550;
-  letter-spacing: 0;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-.ep-about-page .ep-about-orbit-tag-top {
-  top: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.ep-about-page .ep-about-orbit-tag-right {
-  top: 50%;
-  right: -2%;
-  transform: translateY(-50%);
-}
-.ep-about-page .ep-about-orbit-tag-bottom {
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-}
 .ep-about-page .ep-about-orbit-node {
   position: absolute;
   z-index: 2;
@@ -367,38 +310,9 @@ html.dark .ep-about-page .ep-about-orbit-c {
     transparent 72%
   );
 }
-html.dark .ep-about-page .ep-about-orbit-tag {
-  border-color: rgba(69, 197, 179, 0.35);
-  color: #e2f5f2;
-  background: linear-gradient(145deg, rgba(16, 35, 40, 0.98), rgba(11, 23, 27, 0.96));
-  box-shadow:
-    0 16px 38px -24px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(112, 215, 200, 0.1);
-}
-html.dark .ep-about-page .ep-about-orbit-tag small {
-  color: #b7d6d1;
-}
-html.dark .ep-about-page .ep-about-orbit-tag > svg {
-  color: #70d7c8;
-}
 @media (max-width: 639px) {
   .ep-about-page .ep-about-orbit-visual {
     width: min(100%, 340px);
-  }
-  .ep-about-page .ep-about-orbit-tag {
-    min-width: 8.8rem;
-    gap: 0.5rem;
-    padding: 0.58rem 0.72rem;
-    border-radius: 0.85rem;
-  }
-  .ep-about-page .ep-about-orbit-tag b {
-    font-size: 0.58rem;
-  }
-  .ep-about-page .ep-about-orbit-tag small {
-    font-size: 0.56rem;
-  }
-  .ep-about-page .ep-about-orbit-tag-right {
-    right: -1%;
   }
   .ep-about-page .ep-about-orbit-node {
     width: 0.58rem;

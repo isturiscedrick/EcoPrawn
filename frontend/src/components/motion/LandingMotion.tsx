@@ -23,7 +23,6 @@ export function LandingMotion() {
     registerMotionPlugins();
     const mm = gsap.matchMedia();
     let cancelled = false;
-    let previewTabCleanup: (() => void) | undefined;
     // Google Fonts (Lexend/Inter) swap in after first paint and reflow the
     // text, which shifts every scroll trigger's start position. Re-measure
     // once they are ready.
@@ -293,6 +292,40 @@ export function LandingMotion() {
         });
       });
 
+      // Bring the illustrative dashboard into view in a few readable beats.
+      const dashboardPreview = homeRoot?.querySelector<HTMLElement>(
+        "[data-dashboard-showcase]"
+      );
+      if (dashboardPreview) {
+        const previewGroups = [
+          { selector: ".ep-cloudnexus-windowbar", y: 12, stagger: 0 },
+          { selector: "[data-showcase-nav-item]", y: 10, stagger: 0.035 },
+          { selector: "[data-showcase-metric]", y: 18, stagger: 0.07 },
+          { selector: "[data-showcase-row]", y: 8, stagger: 0.045 },
+          { selector: "[data-showcase-activity]", y: 10, stagger: 0.06 },
+        ];
+        const previewTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: dashboardPreview,
+            start: "top 82%",
+            once: true,
+          },
+        });
+
+        previewGroups.forEach(({ selector, y, stagger }, index) => {
+          const items = dashboardPreview.querySelectorAll<HTMLElement>(selector);
+          if (!items.length) return;
+          previewTimeline.from(items, {
+            y,
+            autoAlpha: 0,
+            duration: 0.48,
+            stagger,
+            ease: "power3.out",
+            clearProps: "all",
+          }, index === 0 ? 0 : ">-=0.14");
+        });
+      }
+
       // Process cards are driven by the horizontal pinned timeline on
       // desktop. Do not attach vertical ScrollTriggers to the same cards:
       // those triggers fire at the wrong time while the track is translated.
@@ -327,7 +360,10 @@ export function LandingMotion() {
       // Anime.js handles icon personality across all Home sections.
       // Each icon animates once as it enters view; hover listeners below can
       // then provide a separate, short response.
-      const homeIcons = homeRoot?.querySelectorAll<HTMLElement>("#capabilities [data-business-card] > span:first-child svg, #dashboard-preview-window svg");
+      const homeIcons = homeRoot?.querySelectorAll<HTMLElement>(
+        "#capabilities [data-business-card] > span:first-child svg, " +
+        "[data-dashboard-showcase] [data-showcase-icon]"
+      );
       let homeIconObserver: IntersectionObserver | undefined;
       if (homeIcons?.length) {
         homeIconObserver = new IntersectionObserver((entries) => {
@@ -367,6 +403,47 @@ export function LandingMotion() {
         homeAccents.forEach((accent) => homeAccentObserver?.observe(accent));
       }
 
+      // Count the sample metrics once they enter view. Preserve their exact
+      // original values when motion is reverted or React remounts the page.
+      const previewValues = dashboardPreview?.querySelectorAll<HTMLElement>(
+        "[data-showcase-value]"
+      );
+      const previewCounterRestores: Array<() => void> = [];
+      let previewCounterObserver: IntersectionObserver | undefined;
+      if (previewValues?.length) {
+        previewCounterObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const value = entry.target as HTMLElement;
+            const node = value.firstChild;
+            previewCounterObserver?.unobserve(value);
+            if (!node || node.nodeType !== Node.TEXT_NODE) return;
+
+            const original = node.nodeValue ?? "";
+            const target = Number.parseFloat(original);
+            if (!Number.isFinite(target)) return;
+            const decimals = (original.trim().split(".")[1] ?? "").length;
+            const counter = { value: 0 };
+            node.nodeValue = counter.value.toFixed(decimals);
+            previewCounterRestores.push(() => {
+              node.nodeValue = original;
+            });
+            microAnimations.push(animate(counter, {
+              value: target,
+              duration: 1050,
+              ease: "out(3)",
+              onUpdate: () => {
+                node.nodeValue = counter.value.toFixed(decimals);
+              },
+              onComplete: () => {
+                node.nodeValue = original;
+              },
+            }));
+          });
+        }, { threshold: 0.55 });
+        previewValues.forEach((value) => previewCounterObserver?.observe(value));
+      }
+
       const cleanupSharedHover = homeRoot ? bindPublicHoverMotion(homeRoot) : () => {};
 
       return () => {
@@ -376,6 +453,8 @@ export function LandingMotion() {
         homeIconObserver?.disconnect();
         homeAccentObserver?.disconnect();
         capabilityDetailObserver?.disconnect();
+        previewCounterObserver?.disconnect();
+        previewCounterRestores.forEach((restore) => restore());
       };
     });
 
@@ -418,182 +497,13 @@ export function LandingMotion() {
       }
     );
 
-    // Dashboard preview tabs retain their React state and accessibility.
-    // Animate the panel once when the selected tab changes; the observer is
-    // disconnected with this effect so route changes cannot leave stale work.
-    const previewPanel = document.querySelector<HTMLElement>(
-      "#dashboard-preview .ep-preview-tab-panel"
-    );
-    const tabList = previewPanel?.previousElementSibling;
-    if (previewPanel && tabList && window.matchMedia(MOTION_ALLOWED_QUERY).matches) {
-      let previousTab = tabList.querySelector<HTMLElement>('[aria-pressed="true"]')?.textContent?.trim();
-      const tabObserver = new MutationObserver(() => {
-        const selected = tabList.querySelector<HTMLElement>('[aria-pressed="true"]');
-        const nextTab = selected?.textContent?.trim();
-        if (!nextTab || nextTab === previousTab) return;
-        previousTab = nextTab;
-        const content = Array.from(previewPanel.children) as HTMLElement[];
-        if (content.length) gsap.fromTo(content,
-          { y: 12, autoAlpha: 0 },
-          {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.46,
-            stagger: 0.055,
-            ease: "power3.out",
-            clearProps: "transform,opacity,visibility",
-            overwrite: "auto",
-          }
-        );
-      });
-      tabObserver.observe(tabList, {
-        subtree: true,
-        attributes: true,
-        attributeFilter: ["aria-pressed"],
-      });
-      previewTabCleanup = () => {
-        tabObserver.disconnect();
-        gsap.killTweensOf(Array.from(previewPanel.children));
-      };
-    }
-
     // PROCESS: the four stages remain in a natural, responsive grid.
 
     // HERO DEPTH: keep the lens figure free of competing transforms.
     // Its internal rings and glare are scroll-linked inside HeroLens.
 
-    // MORE SCROLL EFFECTS
-    mm.add(MOTION_ALLOWED_QUERY, () => {
-      // Keep hero copy and all section surfaces stationary relative to their
-      // own layout while scrolling. Only one-time entrance reveals remain.
-
-      // The readings heading already has a single masked reveal above.
-      // Avoid a second GSAP tween on the same heading/paragraph transforms.
-
-      // Dashboard preview: animate the real heading, sample KPI tiles and CSS chart bars.
-      const dashboardPreview = document.querySelector<HTMLElement>("#dashboard-preview");
-      const previewHeading = dashboardPreview?.querySelector<HTMLElement>("#dashboard-preview-title");
-      const previewLead = previewHeading?.nextElementSibling as HTMLElement | null;
-      if (previewHeading) {
-        gsap.from([previewHeading, ...(previewLead ? [previewLead] : [])], {
-          y: 22,
-          autoAlpha: 0,
-          duration: 0.68,
-          stagger: 0.1,
-          ease: "power3.out",
-          clearProps: "all",
-          scrollTrigger: {
-            trigger: previewHeading,
-            start: "top 84%",
-            once: true,
-          },
-        });
-      }
-
-      const previewReadings = dashboardPreview?.querySelectorAll<HTMLElement>(
-        "[data-preview-reading]"
-      );
-      if (previewReadings?.length) {
-        gsap.from(previewReadings, {
-          y: 18,
-          autoAlpha: 0,
-          duration: 0.52,
-          stagger: 0.09,
-          ease: "power3.out",
-          clearProps: "all",
-          scrollTrigger: {
-            trigger: previewReadings[0],
-            start: "top 88%",
-            once: true,
-          },
-        });
-      }
-
-      const previewBars = dashboardPreview?.querySelectorAll<HTMLElement>(
-        ".ep-preview-chart > span"
-      );
-      if (previewBars?.length) {
-        gsap.from(previewBars, {
-          scaleY: 0,
-          transformOrigin: "bottom",
-          duration: 0.7,
-          stagger: 0.045,
-          ease: "power3.out",
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: ".ep-preview-chart",
-            start: "top 88%",
-            once: true,
-          },
-        });
-      }
-
-      // Anime.js counts the illustrative dashboard values up only when the
-      // KPI row enters view. Keep the unit spans untouched and restore the
-      // exact original text on cleanup (including React Strict Mode reruns).
-      const previewCounterNodes = dashboardPreview?.querySelectorAll<HTMLElement>(
-        "[data-preview-reading] > p.mt-2"
-      );
-      const previewCounterAnimations: Array<{ revert: () => unknown }> = [];
-      const previewCounterRestores: Array<() => void> = [];
-      let previewCounterObserver: IntersectionObserver | undefined;
-
-      if (previewCounterNodes?.length) {
-        previewCounterObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            const valueElement = entry.target as HTMLElement;
-            const valueNode = valueElement.firstChild;
-            if (!valueNode || valueNode.nodeType !== Node.TEXT_NODE) {
-              previewCounterObserver?.unobserve(valueElement);
-              return;
-            }
-
-            const original = valueNode.nodeValue ?? "";
-            const target = Number.parseFloat(original);
-            if (!Number.isFinite(target)) {
-              previewCounterObserver?.unobserve(valueElement);
-              return;
-            }
-
-            const decimals = (original.trim().split(".")[1] ?? "").length;
-            const counter = { value: 0 };
-            valueNode.nodeValue = counter.value.toFixed(decimals);
-            previewCounterRestores.push(() => {
-              valueNode.nodeValue = original;
-            });
-
-            previewCounterAnimations.push(animate(counter, {
-              value: target,
-              duration: 1050,
-              ease: "out(3)",
-              onUpdate: () => {
-                valueNode.nodeValue = counter.value.toFixed(decimals);
-              },
-              onComplete: () => {
-                valueNode.nodeValue = original;
-              },
-            }));
-            previewCounterObserver?.unobserve(valueElement);
-          });
-        }, { threshold: 0.55 });
-
-        previewCounterNodes.forEach((node) => previewCounterObserver?.observe(node));
-      }
-
-      // Anime.js owns these number counters; GSAP continues to own the
-      // dashboard's entrance, card reveals, and chart-bar choreography.
-      return () => {
-        previewCounterObserver?.disconnect();
-        previewCounterAnimations.forEach((animation) => animation.revert());
-        previewCounterRestores.forEach((restore) => restore());
-      };
-    });
-
-
     return () => {
       cancelled = true;
-      previewTabCleanup?.();
       mm.revert();
     };
   }, []);

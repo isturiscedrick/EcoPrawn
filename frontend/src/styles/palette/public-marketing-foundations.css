@@ -48,18 +48,13 @@ html.dark :is(.ep-business-landing, .ep-landing, .ep-about-page, .ep-contact-pag
 .ep-about-page .ep-about-journey-card {
   border-top: 2px solid color-mix(in srgb, var(--ep-accent) 58%, var(--ep-page-border));
 }
-.ep-about-page .ep-about-orbit-node,
-.ep-about-page .ep-about-orbit-tag > svg {
+.ep-about-page .ep-about-orbit-node {
   color: var(--ep-accent) !important;
 }
 .ep-about-page .ep-about-orbit-node {
   background: var(--ep-accent) !important;
   box-shadow: 0 0 0 5px var(--ep-accent-tint);
 }
-.ep-about-page .ep-about-orbit-tag {
-  border-color: color-mix(in srgb, var(--ep-accent) 28%, var(--ep-page-border));
-}
-
 /* Contact: retain the deep-ocean form/structure and use Ocean Teal for
    small signal rings, card markers and form framing only. */
 .ep-contact-page .ep-contact-signal-ring-two,

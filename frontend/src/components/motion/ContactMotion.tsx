@@ -110,6 +110,66 @@ export function ContactMotion() {
           if (rings.length) tl.from(rings, { scale: .65, autoAlpha: 0, stagger: .1, duration: .62 }, "-=.42");
         }
 
+        // Draw the envelope folds into place and settle the contact nodes
+        // after the card appears.
+        const illustration = root.querySelector<HTMLElement>(
+          '[data-page-illustration="contact"]'
+        );
+        if (illustration) {
+          const card = illustration.querySelector<SVGRectElement>(
+            ".ep-illustration-card"
+          );
+          const folds = Array.from(
+            illustration.querySelectorAll<SVGPathElement>(".ep-illustration-envelope")
+          );
+          const nodes = illustration.querySelectorAll<SVGCircleElement>(
+            ".ep-illustration-node"
+          );
+          const tl = gsap.timeline({
+            scrollTrigger: { trigger: illustration, start: "top 84%", once: true },
+            defaults: { ease: "power3.out" },
+          });
+
+          if (card) tl.from(card, {
+            y: 16,
+            scale: .92,
+            autoAlpha: 0,
+            transformOrigin: "50% 50%",
+            duration: .62,
+          });
+          folds.forEach((path) => {
+            const length = path.getTotalLength();
+            gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+            tl.to(path, { strokeDashoffset: 0, duration: .66 }, "-=.28");
+          });
+          if (nodes.length) tl.from(nodes, {
+            scale: .45,
+            autoAlpha: 0,
+            transformOrigin: "50% 50%",
+            stagger: .12,
+            duration: .48,
+            ease: "back.out(1.7)",
+          }, "-=.3");
+
+          const details = illustration.querySelectorAll<SVGPathElement>(
+            ".ep-illustration-detail"
+          );
+          const detailObserver = new IntersectionObserver((entries) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            animeRuns.push(animate(details, {
+              opacity: [.35, 1, .72],
+              delay: stagger(110, { start: 260 }),
+              duration: 700,
+              ease: "out(3)",
+            }));
+            detailObserver.disconnect();
+          }, { threshold: .55 });
+          if (details.length) {
+            detailObserver.observe(illustration);
+            cleanups.push(() => detailObserver.disconnect());
+          }
+        }
+
         // Contact details stay in their natural document position. Cards still
         // reveal once as they enter view, without continuous scroll-linked drift.
         const details = root.querySelector<HTMLElement>("[data-contact-details]");

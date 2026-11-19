@@ -102,16 +102,16 @@ function MetricCard({ metric }: { metric: (typeof metrics)[number] }) {
     : "bg-emerald-500";
 
   return (
-    <article className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 shadow-sm sm:p-4">
+    <article data-showcase-metric className="min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 shadow-sm sm:p-4">
       <div className="flex min-w-0 items-center gap-2">
         <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[var(--ep-tint)] text-[var(--ep-accent)]">
-          <Icon name={metric.icon} size={16} />
+          <Icon data-showcase-icon name={metric.icon} size={16} />
         </span>
         <span className="min-w-0 truncate text-[9px] font-semibold uppercase tracking-wide text-[var(--ep-text-muted)] sm:text-[10px]">
           {metric.label}
         </span>
       </div>
-      <p className="mt-3 truncate text-xl font-semibold tracking-tight text-[var(--ep-text)] tabular-nums sm:text-2xl">
+      <p data-showcase-value className="mt-3 truncate text-xl font-semibold tracking-tight text-[var(--ep-text)] tabular-nums sm:text-2xl">
         {metric.value}
         <span className="ml-1 text-[10px] font-medium text-[var(--ep-text-muted)]">
           {metric.unit}
@@ -128,6 +128,7 @@ function MetricCard({ metric }: { metric: (typeof metrics)[number] }) {
 export function DashboardShowcasePreview() {
   return (
     <div
+      data-dashboard-showcase
       className="ep-cloudnexus-dashboard overflow-hidden"
       data-hero="monitor-panel"
       aria-label="EcoPrawn dashboard preview with example data"
@@ -135,7 +136,7 @@ export function DashboardShowcasePreview() {
       <div className="ep-cloudnexus-windowbar">
         <div className="flex items-center gap-2">
           <span className="grid h-7 w-7 place-items-center rounded-lg bg-[var(--ep-accent)] text-[var(--ep-on-accent)]">
-            <Icon name="waves" size={15} />
+              <Icon data-showcase-icon name="waves" size={15} />
           </span>
           <span className="text-xs font-bold tracking-tight text-[var(--ep-text)]">EcoPrawn</span>
           <span className="ml-2 hidden text-[10px] text-[var(--ep-text-muted)] sm:inline">
@@ -153,11 +154,12 @@ export function DashboardShowcasePreview() {
           {navigation.map((item, index) => (
             <div
               key={item.label}
+              data-showcase-nav-item
               className={`flex min-h-9 items-center gap-2 rounded-lg px-2 text-[10px] font-medium ${
                 index === 0 ? "ep-cloudnexus-mini-active" : ""
               }`}
             >
-              <Icon name={item.icon} size={14} />
+              <Icon data-showcase-icon name={item.icon} size={14} />
               <span className="truncate">{item.label}</span>
             </div>
           ))}
@@ -219,7 +221,7 @@ export function DashboardShowcasePreview() {
                 </thead>
                 <tbody className="divide-y divide-[var(--ep-line)] text-[var(--ep-text)]">
                   {tanks.map((tank) => (
-                    <tr key={tank.name}>
+                    <tr key={tank.name} data-showcase-row>
                       <td className="px-3 py-2 font-semibold">
                         {tank.name}
                         <span className="ml-1.5 font-normal text-[var(--ep-text-muted)]">{tank.batch}</span>
@@ -255,9 +257,9 @@ export function DashboardShowcasePreview() {
             </div>
             <ol className="grid gap-2 sm:grid-cols-2">
               {activities.map((activity) => (
-                <li key={activity.title} className="flex min-w-0 items-start gap-2">
+                <li key={activity.title} data-showcase-activity className="flex min-w-0 items-start gap-2">
                   <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-[var(--ep-tint)] text-[var(--ep-accent)]">
-                    <Icon name={activity.icon} size={13} />
+                    <Icon data-showcase-icon name={activity.icon} size={13} />
                   </span>
                   <div className="min-w-0">
                     <p className="truncate text-[9px] font-semibold text-[var(--ep-text)] sm:text-[10px]">

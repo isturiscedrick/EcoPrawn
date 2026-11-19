@@ -92,34 +92,6 @@ html.dark .ep-about-mission-panel::before {
   color: white;
   box-shadow: 0 18px 55px -20px rgba(8, 126, 139, 0.7);
 }
-.ep-about-orbit-tag {
-  position: absolute;
-  z-index: 2;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--ep-line);
-  border-radius: 999px;
-  background: var(--ep-surface);
-  color: var(--ep-text-muted);
-  box-shadow: 0 12px 30px -22px rgba(15, 23, 42, 0.45);
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-}
-.ep-about-orbit-tag-top {
-  top: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.ep-about-orbit-tag-right {
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.ep-about-orbit-tag-bottom {
-  bottom: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-}
 .ep-about-journey {
   background: var(--ep-tint);
 }
@@ -224,10 +196,6 @@ html.dark .ep-contact-page [data-contact-form] > form {
 @media (max-width: 639px) {
   .ep-about-orbit-visual {
     width: min(100%, 290px);
-  }
-  .ep-about-orbit-tag {
-    font-size: 0.55rem;
-    padding: 0.4rem 0.6rem;
   }
   .ep-contact-signal {
     width: 6rem;

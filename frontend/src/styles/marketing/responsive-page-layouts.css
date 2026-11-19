@@ -155,6 +155,167 @@
   }
 }
 
+/* CloudNexus landing: tune the current hero and dashboard showcase for phones. */
+@media (max-width: 639px) {
+  .ep-business-landing #top.ep-cloudnexus-hero {
+    scroll-margin-top: 4.25rem;
+  }
+  .ep-business-landing .ep-cloudnexus-hero-inner {
+    padding: 2rem 1rem 2.5rem;
+  }
+  .ep-business-landing .ep-cloudnexus-eyebrow {
+    width: fit-content;
+    max-width: min(100%, 16rem);
+    box-sizing: border-box;
+    align-self: center;
+    margin-bottom: 0.85rem;
+    padding: 0.4rem 0.65rem;
+    font-size: 0.48rem;
+    line-height: 1.35;
+    letter-spacing: 0.1em;
+    gap: 0.4rem;
+  }
+  .ep-business-landing .ep-cloudnexus-headline {
+    max-width: 13ch;
+    font-size: clamp(2.15rem, 10vw, 3.4rem);
+    line-height: 1.12;
+    letter-spacing: -0.055em;
+  }
+  .ep-business-landing .ep-cloudnexus-highlight {
+    line-height: 1.18;
+    padding-bottom: 0.08em;
+  }
+  .ep-business-landing #top [data-hero="lead"] {
+    max-width: 34ch;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .ep-business-landing #top [data-hero="cta"] {
+    width: min(100%, 23rem);
+    margin-top: 1.25rem;
+    gap: 0.65rem;
+  }
+  .ep-business-landing #top [data-hero="cta"] > * {
+    width: 100%;
+    min-height: 3rem;
+    justify-content: center;
+  }
+  .ep-business-landing .ep-cloudnexus-preview-wrap {
+    margin-top: 2rem;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard {
+    border-radius: 1rem;
+  }
+  .ep-business-landing .ep-cloudnexus-windowbar {
+    min-height: 3.1rem;
+    gap: 0.5rem;
+    padding: 0.55rem 0.7rem;
+  }
+  .ep-business-landing .ep-cloudnexus-windowbar > span {
+    flex-shrink: 0;
+    padding-inline: 0.55rem;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body {
+    min-height: 0;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main {
+    padding: 0.75rem;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main > div:first-child {
+    margin-bottom: 0.65rem;
+    padding-bottom: 0.65rem;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main h2 {
+    font-size: 1rem;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main section {
+    gap: 0.5rem;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main article {
+    padding: 0.65rem;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main article > p:first-of-type {
+    margin-top: 0.65rem;
+    font-size: 1.15rem;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main section.overflow-hidden {
+    margin-top: 0.75rem;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main section.overflow-hidden > div:first-child {
+    padding: 0.65rem 0.75rem;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: color-mix(in srgb, var(--ep-accent) 42%, transparent) transparent;
+    scrollbar-width: thin;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main .overflow-x-auto::-webkit-scrollbar {
+    height: 4px;
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main .overflow-x-auto::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ep-accent) 42%, transparent);
+  }
+  .ep-business-landing .ep-cloudnexus-dashboard-body main section:last-child {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .ep-business-landing #readings,
+  .ep-business-landing #capabilities,
+  .ep-business-landing #process {
+    scroll-margin-top: 4.25rem;
+  }
+  .ep-business-landing .ep-business-capabilities,
+  .ep-business-landing #process {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .ep-business-landing :is(#readings, #capabilities, #process) h2 {
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+    line-height: 1.12;
+  }
+  .ep-business-landing .ep-business-capabilities [data-reveal],
+  .ep-business-landing #process [data-reveal] {
+    margin-bottom: 1.5rem;
+  }
+  .ep-business-landing .ep-business-capabilities [data-business-card] {
+    border-radius: 1.15rem;
+  }
+  .ep-business-landing #process [data-process-track] > li {
+    padding-bottom: 0.35rem;
+  }
+  .ep-business-landing .ep-process-disclosure > summary {
+    min-height: 3rem;
+  }
+  .ep-business-landing .ep-process-disclosure-body {
+    padding-bottom: 0.4rem;
+  }
+  .ep-business-landing [data-band] > div:last-child {
+    width: 100%;
+  }
+  .ep-business-landing [data-band] .ep-cta-control {
+    width: 100%;
+    min-height: 3rem;
+  }
+  .ep-business-landing .ep-readings-section dl {
+    margin-top: 1.5rem;
+  }
+  .ep-business-landing .ep-readings-section .ep-reading-card {
+    min-height: 0;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 639px) {
+  .ep-business-landing .ep-readings-section dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ep-business-landing .ep-readings-section dl > .ep-reading-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
 /* Step 10 — public-page mobile finish.
    These refinements use the verified landing, about, and contact markup and
    leave the desktop composition unchanged. */

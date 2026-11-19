@@ -104,6 +104,65 @@ export function AboutMotion() {
           if (rings.length) tl.from(rings, { scale: .72, autoAlpha: 0, stagger: .1, duration: .72 }, "-=.5");
         }
 
+        // Draw the workflow illustration's connections, then bring its
+        // system nodes online in sequence.
+        const illustration = root.querySelector<HTMLElement>(
+          '[data-page-illustration="about"]'
+        );
+        if (illustration) {
+          const connectors = Array.from(
+            illustration.querySelectorAll<SVGPathElement>(".ep-illustration-connector")
+          );
+          const nodes = illustration.querySelectorAll<SVGCircleElement>(
+            ".ep-illustration-node"
+          );
+          const core = illustration.querySelector<SVGCircleElement>(
+            ".ep-illustration-core"
+          );
+          const tl = gsap.timeline({
+            scrollTrigger: { trigger: illustration, start: "top 84%", once: true },
+            defaults: { ease: "power3.out" },
+          });
+
+          if (core) tl.from(core, {
+            scale: .72,
+            autoAlpha: 0,
+            transformOrigin: "50% 50%",
+            duration: .62,
+          });
+          connectors.forEach((path) => {
+            const length = path.getTotalLength();
+            gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+            tl.to(path, { strokeDashoffset: 0, duration: .72 }, "-=.3");
+          });
+          if (nodes.length) tl.from(nodes, {
+            scale: .45,
+            autoAlpha: 0,
+            transformOrigin: "50% 50%",
+            stagger: .12,
+            duration: .5,
+            ease: "back.out(1.7)",
+          }, "-=.32");
+
+          const details = illustration.querySelectorAll<SVGPathElement>(
+            ".ep-illustration-detail"
+          );
+          const detailObserver = new IntersectionObserver((entries) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            animeRuns.push(animate(details, {
+              opacity: [.35, 1, .72],
+              delay: stagger(120, { start: 280 }),
+              duration: 720,
+              ease: "out(3)",
+            }));
+            detailObserver.disconnect();
+          }, { threshold: .55 });
+          if (details.length) {
+            detailObserver.observe(illustration);
+            cleanups.push(() => detailObserver.disconnect());
+          }
+        }
+
         // Workflow cards enter in sequence. Their CSS hover state remains
         // independent of the entrance transform.
         const journeyCards = root.querySelectorAll<HTMLElement>(".ep-about-journey-card");
@@ -135,9 +194,9 @@ export function AboutMotion() {
 
         // Anime.js gives every About section a small, readable accent sequence.
         // Only icons, index markers and chevrons animate; cards stay visible.
-        const sectionAccents = root.querySelectorAll<HTMLElement>(
+        const sectionAccents = Array.from(root.querySelectorAll<HTMLElement>(
           "main section svg, #scope article > div:last-child > div > div > span:first-child, #systems article > div:last-child > div > span:first-child"
-        );
+        )).filter((target) => !target.closest("[data-page-illustration]"));
         let sectionAccentObserver: IntersectionObserver | undefined;
         if (sectionAccents.length) {
           sectionAccentObserver = new IntersectionObserver((entries) => {
