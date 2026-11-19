@@ -10,6 +10,7 @@ import { DashboardDesktopSidebar } from "./DashboardDesktopSidebar";
 import { LogoutIcon, drawerRowClass } from "./SidebarPrimitives";
 import { DashboardLogoutDialog } from "./DashboardLogoutDialog";
 import { recordAuditEvent } from "@/features/dashboard/lib/audit-log";
+import { ProfileAvatar } from "./ProfileAvatar";
 
 interface SidebarProps {
   mobileOpen?: boolean;
@@ -18,6 +19,7 @@ interface SidebarProps {
   alertCount?: number;
   tankCount?: number;
   isDbConnected?: boolean;
+  profileImage?: string | null;
   onToggleCollapsed?: () => void;
 }
 
@@ -28,6 +30,7 @@ export function Sidebar({
   alertCount = 0,
   tankCount = 0,
   isDbConnected = true,
+  profileImage,
   onToggleCollapsed = () => {},
 }: SidebarProps) {
   const pathname = useRouterState({
@@ -61,6 +64,16 @@ export function Sidebar({
     const savedRole = window.localStorage.getItem("ep-profile-role");
     if (savedName) setProfileName(savedName);
     if (savedRole) setProfileRole(savedRole.toUpperCase());
+    const syncProfile = () => {
+      setProfileName(window.localStorage.getItem("ep-profile-name") ?? "Facility Operator");
+      setProfileRole((window.localStorage.getItem("ep-profile-role") ?? "FACILITY OPERATOR").toUpperCase());
+    };
+    window.addEventListener("ecoprawn:profile-updated", syncProfile);
+    window.addEventListener("storage", syncProfile);
+    return () => {
+      window.removeEventListener("ecoprawn:profile-updated", syncProfile);
+      window.removeEventListener("storage", syncProfile);
+    };
   }, []);
 
   // Any route change closes the drawer.
@@ -329,6 +342,7 @@ export function Sidebar({
         activeView={activeView}
         profileName={profileName}
         profileRole={profileRole}
+        profileImage={profileImage}
         alertCount={alertCount}
         tankCount={tankCount}
         isDbConnected={isDbConnected}
@@ -451,7 +465,7 @@ export function Sidebar({
                 style={{ background: "var(--ep-accent-tint)", color: "var(--ep-primary)" }}
                 aria-hidden="true"
               >
-                <Icon name="user-round" size={19} strokeWidth={1.9} />
+                <ProfileAvatar name={profileName} image={profileImage} />
                 <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 ring-2 ring-[var(--ep-surface)]" />

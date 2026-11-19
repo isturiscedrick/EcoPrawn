@@ -1,52 +1,165 @@
-/* Dashboard-only dark-surface contrast rules. Kept out of the public stylesheet. */
-html.dark
-  .dashboard-shell
-  :is(.dashboard-panel, .dashboard-kpi, .dashboard-sensor-gauge, .dashboard-trend-chart) {
-  color: #ffffff;
+/* Dashboard text and icons follow the same accessible light/dark palette. */
+.dashboard-shell {
+  --ep-text: var(--ep-page-text);
+  --ep-text-muted: var(--ep-page-muted);
+  --ep-primary: var(--ep-page-text);
 }
 
-html.dark
-  .dashboard-shell
-  :is(.dashboard-panel, .dashboard-kpi, .dashboard-sensor-gauge, .dashboard-trend-chart)
-  :is(
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    span,
-    label,
-    small,
-    strong,
-    em,
-    li,
-    dt,
-    dd,
-    a:not([data-tone="accent"])
-  ) {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff;
+.dashboard-shell :is(.dashboard-panel, .dashboard-kpi, .dashboard-sensor-gauge, .dashboard-trend-chart) {
+  color: var(--ep-text);
 }
 
-html.dark
-  .dashboard-shell
-  :is(.dashboard-panel, .dashboard-kpi, .dashboard-sensor-gauge, .dashboard-trend-chart)
-  :is(svg.lucide, svg[data-lucide], .lucide-icon, button > svg, a > svg) {
-  color: #ffffff !important;
-  stroke: currentColor;
+.dashboard-shell :is(.dashboard-panel, .dashboard-kpi, .dashboard-sensor-gauge, .dashboard-trend-chart) svg[aria-hidden="true"] {
+  color: inherit;
 }
 
-html.dark
-  .dashboard-shell
-  :is(.dashboard-panel, .dashboard-kpi, .dashboard-sensor-gauge, .dashboard-trend-chart)
-  :is(.text-muted-foreground, [data-muted], .ep-text-muted) {
-  color: #e2e8f0 !important;
-  -webkit-text-fill-color: #e2e8f0;
+.dashboard-shell :is(button, a, [role="button"]):focus-visible {
+  outline-color: var(--ep-accent);
 }
 
-html.dark .dashboard-shell :is(button, [role="button"], a)[class*="bg-ep-accent"] {
-  color: #092b31 !important;
-  -webkit-text-fill-color: #092b31 !important;
+/* Keep icons legible when the sidebar is reduced to its icon rail. */
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] {
+  width: 88px;
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:first-child {
+  min-height: 72px;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0;
+  padding: 0.5rem;
+  background: transparent !important;
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:first-child button,
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:first-child button:hover {
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html body .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  padding: 0.65rem 0.35rem;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+html body .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:nth-child(2) a,
+html body .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:nth-child(2) a:hover {
+  border: 0 !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding-inline: 0 !important;
+}
+
+html body .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a,
+html body .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a:hover,
+html.dark body .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a,
+html.dark body .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a:hover {
+  border: 0 !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav {
+  display: flex;
+  width: 48px !important;
+  margin-inline: auto !important;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a {
+  display: flex;
+  width: 48px !important;
+  flex: 0 0 48px;
+  min-height: 48px;
+  align-self: center;
+  margin-inline: auto !important;
+  align-items: center;
+  justify-content: center;
+  transform: none !important;
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a > span {
+  width: 46px !important;
+  flex: 0 0 46px;
+  min-height: 46px;
+  margin-inline: auto !important;
+  justify-content: center;
+  padding: 0;
+  border-radius: 13px;
+  transform: none !important;
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a > span > span:first-child {
+  position: relative;
+  left: 0;
+  margin-inline: auto;
+  transform: none;
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] .dashboard-nav-active-dot {
+  display: none !important;
+}
+
+html body .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:nth-child(3) {
+  padding-inline: 8px !important;
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a > span > span:first-child {
+  background: color-mix(in srgb, var(--ep-accent) 9%, var(--ep-sidebar-bg));
+  color: var(--ep-page-muted);
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a:hover > span > span:first-child,
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a:focus-visible > span > span:first-child {
+  color: var(--ep-accent);
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a[aria-current="page"] > span {
+  background: color-mix(in srgb, var(--ep-accent) 13%, var(--ep-sidebar-bg));
+  border-color: color-mix(in srgb, var(--ep-accent) 36%, var(--ep-page-border));
+  color: var(--ep-page-text);
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:last-child {
+  align-items: center;
+  padding-inline: 0.45rem;
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:last-child :is(a, button) {
+  width: 46px;
+  justify-content: center;
+  padding-inline: 0;
+}
+
+.dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:last-child a {
+  width: 46px !important;
+  height: 46px;
+  min-height: 46px;
+  flex: 0 0 46px;
+  justify-content: center;
+  padding: 0;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a > span > span:first-child {
+  background: color-mix(in srgb, var(--ep-accent) 13%, var(--ep-sidebar-bg));
+  color: #b8d2d0;
+}
+
+html.dark .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a[aria-current="page"] > span {
+  background: color-mix(in srgb, var(--ep-accent) 19%, var(--ep-sidebar-bg));
+  border-color: color-mix(in srgb, var(--ep-accent) 42%, var(--ep-page-border));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a > span {
+    transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease,
+      transform 160ms ease, box-shadow 160ms ease;
+  }
 }

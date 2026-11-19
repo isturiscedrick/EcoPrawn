@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { Icon, IconChip } from "@/components/ui/Icon";
+import { DashboardPageHeader } from "@/features/dashboard/components/DashboardPageHeader";
 
 function SettingsPage() {
   const location = useLocation();
@@ -55,12 +56,12 @@ function SettingsPage() {
   if (location.pathname === "/dashboard/settings/configuration") return <Outlet />;
 
   return (
-    <div className="mx-auto w-full max-w-none space-y-7">
-      <header className="border-b border-[var(--ep-line)] pb-6">
-        <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-accent)]">Preferences & account</div>
-        <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Settings</h1>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Manage your account, device, theme, and system info.</p>
-      </header>
+    <div className="mx-auto w-full max-w-none">
+      <DashboardPageHeader
+        eyebrow="Preferences & account"
+        title="Settings"
+        description="Account, device, and display preferences."
+      />
 
       <section aria-labelledby="settings-navigation-title">
         <div className="mb-3">

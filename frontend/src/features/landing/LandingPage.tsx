@@ -1,5 +1,5 @@
 import "@/styles/marketing.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { Link } from "@tanstack/react-router";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
@@ -12,6 +12,7 @@ import { LandingMotion } from "@/components/motion/LandingMotion";
 import { AquacultureIllustration } from "@/components/illustrations/AquacultureIllustration";
 import { heroReadoutUnits } from "@/config/sensors";
 import { heroReadouts } from "@/content/landing-preview";
+import { DashboardShowcasePreview } from "./DashboardShowcasePreview";
 import { pct, targetRangeFor, ZONES } from "./landing-preview-utils";
 import { STEPS } from "./landing-content";
 
@@ -24,12 +25,62 @@ const buttonMotion =
 const eyebrow =
   "mb-4 flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.14em]";
 
+const platformCapabilities: {
+  icon: IconName;
+  category: string;
+  title: string;
+  description: string;
+  detail: string;
+}[] = [
+  {
+    icon: "waves",
+    category: "01 / Monitor",
+    title: "Water quality",
+    description: "View five sensor readings, compare them with configured thresholds, and review water history.",
+    detail: "DO · pH · temperature · salinity · level",
+  },
+  {
+    icon: "camera",
+    category: "02 / Understand",
+    title: "Growth vision",
+    description: "Follow recorded shrimp scans, body measurements, biomass and population estimates, and growth trends.",
+    detail: "Camera-based growth records",
+  },
+  {
+    icon: "utensils",
+    category: "03 / Plan",
+    title: "Feeding operations",
+    description: "Review daily feeding cycles and compare feed dispensed with each tank’s target.",
+    detail: "Schedule · allocation · feed use",
+  },
+  {
+    icon: "tank-stack",
+    category: "04 / Manage",
+    title: "Tank operations",
+    description: "Manage tank records, stocking data, water status, and connected ESP32 equipment.",
+    detail: "Tank-level facility overview",
+  },
+  {
+    icon: "bell-ring",
+    category: "05 / Respond",
+    title: "Alerts and analytics",
+    description: "Review threshold alerts and compare water, growth, and feeding trends across the farm.",
+    detail: "Events · trends · history",
+  },
+  {
+    icon: "leaf",
+    category: "06 / Treat",
+    title: "Biofloc and effluent",
+    description: "Track treatment metrics and review effluent routing activity.",
+    detail: "Treatment · discharge",
+  },
+];
+
 
 
 
 
 export function LandingPage() {
-  const [previewTab, setPreviewTab] = useState<"water" | "growth" | "systems">("water");
   const processDetailsRef = useRef<HTMLOListElement>(null);
 
   useEffect(() => {
@@ -94,100 +145,10 @@ export function LandingPage() {
             </div>
 
             <div className="ep-cloudnexus-preview-wrap mx-auto mt-10 w-full max-w-[1240px] sm:mt-12 lg:mt-14">
-              <div className="ep-cloudnexus-tabs" role="tablist" aria-label="EcoPrawn platform preview">
-                {([
-                  { id: "water", label: "Overview" },
-                  { id: "growth", label: "Growth insights" },
-                  { id: "systems", label: "Farm systems" },
-                ] as const).map((tab) => (
-                  <button key={tab.id} type="button" role="tab" aria-selected={previewTab === tab.id} className="ep-cloudnexus-tab" onClick={() => setPreviewTab(tab.id)}>
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="ep-cloudnexus-dashboard" data-hero="monitor-panel" aria-label="Illustrative EcoPrawn dashboard preview">
-                <div className="ep-cloudnexus-windowbar">
-                  <div className="flex items-center gap-2">
-                    <span className="grid h-7 w-7 place-items-center rounded-lg bg-[var(--ep-accent)] text-[var(--ep-on-accent)]"><Icon name="waves" size={15} /></span>
-                    <span className="text-xs font-bold tracking-tight text-[var(--ep-text)]">EcoPrawn</span>
-                    <span className="ml-2 hidden text-[10px] text-[var(--ep-text-muted)] sm:inline">/ Facility overview</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="hidden text-[10px] text-[var(--ep-text-muted)] sm:inline">Preview workspace</span>
-                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                    <span className="text-[10px] font-semibold text-[var(--ep-text-muted)]">Demo</span>
-                  </div>
-                </div>
-
-                <div className="ep-cloudnexus-dashboard-body">
-                  <aside className="ep-cloudnexus-mini-sidebar hidden sm:flex" aria-label="Preview navigation">
-                    <span className="ep-cloudnexus-mini-active"><Icon name="layers" size={15} /> Overview</span>
-                    <span><Icon name="waves" size={15} /> Water quality</span>
-                    <span><Icon name="chart-no-axes-combined" size={15} /> Growth vision</span>
-                    <span><Icon name="activity" size={15} /> Systems</span>
-                    <div className="mt-auto rounded-lg bg-[var(--ep-tint)] p-2 text-[9px] leading-relaxed text-[var(--ep-text-muted)]">Farm overview</div>
-                  </aside>
-
-                  <div className="min-w-0 flex-1 p-3 sm:p-5 lg:p-6">
-                    <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
-                      <div>
-                        <p className="text-[9px] font-bold uppercase tracking-[.15em] text-[var(--ep-accent)]">Facility dashboard</p>
-                        <h2 className="mt-1 text-base font-semibold tracking-tight text-[var(--ep-text)] sm:text-xl">
-                          {previewTab === "water" ? "Water quality overview" : previewTab === "growth" ? "Growth & biomass insights" : "Farm systems overview"}
-                        </h2>
-                        <p className="mt-1 text-[10px] text-[var(--ep-text-muted)] sm:text-xs">Facility snapshot</p>
-                      </div>
-                      <span className="rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] px-2.5 py-1.5 text-[9px] font-semibold text-[var(--ep-text-muted)]">Illustrative sample</span>
-                    </div>
-
-                    {previewTab === "water" ? (
-                      <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-3">
-                        {heroReadouts.map((reading) => {
-                          const range = targetRangeFor(reading.label) ?? "Target range not set";
-                          return (
-                            <div key={reading.label} className="ep-cloudnexus-metric min-w-0 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-3 sm:p-4">
-                              <div className="flex items-center justify-between gap-1">
-                                <span className="truncate text-[10px] font-medium text-[var(--ep-text-muted)]">{reading.label}</span>
-                                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
-                              </div>
-                              <p className="mt-3 whitespace-nowrap text-xl font-semibold tracking-tight text-[var(--ep-text)] tabular-nums sm:text-2xl">{reading.value}<span className="ml-1 text-[10px] font-medium text-[var(--ep-text-muted)]">{heroReadoutUnits[reading.label]}</span></p>
-                              <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[var(--ep-line)]"><span className="block h-full rounded-full bg-[var(--ep-accent)]" style={{ width: `${reading.pct}%` }} /></div>
-                              <p className="mt-2 truncate text-[9px] text-[var(--ep-text-muted)]" title={range}>Target {range}</p>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ) : previewTab === "growth" ? (
-                      <div className="grid gap-3 sm:grid-cols-3">
-                        {[
-                          { icon: "camera" as const, title: "Visual sampling", detail: "Review camera observations over time." },
-                          { icon: "chart-no-axes-combined" as const, title: "Growth history", detail: "Follow recorded growth trends by tank." },
-                          { icon: "gauge" as const, title: "Biomass insights", detail: "Use estimates to inform feeding decisions." },
-                        ].map((item) => <div key={item.title} className="ep-cloudnexus-feature"><span><Icon name={item.icon} size={18} /></span><strong>{item.title}</strong><p>{item.detail}</p></div>)}
-                      </div>
-                    ) : (
-                      <div className="grid gap-3 sm:grid-cols-3">
-                        {[
-                          { icon: "activity" as const, title: "Aeration", detail: "Monitor connected aeration equipment." },
-                          { icon: "clock" as const, title: "Feeding", detail: "Coordinate feeding with farm observations." },
-                          { icon: "waves" as const, title: "Water care", detail: "Keep water treatment in the farm workflow." },
-                        ].map((item) => <div key={item.title} className="ep-cloudnexus-feature"><span><Icon name={item.icon} size={18} /></span><strong>{item.title}</strong><p>{item.detail}</p></div>)}
-                      </div>
-                    )}
-
-                    <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-                      {[
-                        { label: "Water parameters", value: String(heroReadouts.length) },
-                        { label: "Aeration", value: "Automated" },
-                        { label: "Growth vision", value: "Enabled" },
-                        { label: "Monitoring", value: "24 / 7" },
-                      ].map((item) => <div key={item.label} className="rounded-lg border border-[var(--ep-line)] px-3 py-2"><p className="text-[9px] text-[var(--ep-text-muted)]">{item.label}</p><p className="mt-1 text-xs font-semibold text-[var(--ep-text)]">{item.value}</p></div>)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p className="mt-3 text-center text-[10px] text-[var(--ep-text-muted)]">Illustrative product preview · Sample values, not live telemetry</p>
+              <DashboardShowcasePreview />
+              <p className="mt-3 text-center text-[10px] text-[var(--ep-text-muted)]">
+                Dashboard preview · All figures and activity shown are example data
+              </p>
             </div>
           </div>
         </section>
@@ -358,39 +319,43 @@ export function LandingPage() {
               <div>
                 <div className={`${eyebrow} text-[var(--ep-text-muted)]`}>
                   <span aria-hidden="true" className="h-2 w-2 bg-[var(--ep-accent)]" />
-                  One connected platform
+                  What the system can do
                 </div>
                 <h2 id="capabilities-title" className="ep-font-display max-w-[560px] text-[clamp(30px,4vw,48px)] font-semibold leading-[1.08] tracking-tight">
-                  Three capabilities for everyday farm operations.
+                  Run daily farm operations from one connected system.
                 </h2>
               </div>
               <p className="max-w-[560px] text-base leading-relaxed text-[var(--ep-text-muted)] lg:justify-self-end lg:text-lg">
-                Monitor water, review growth, and coordinate farm actions from one workspace.
+                Monitor conditions, manage tanks and feeding, and review the signals that guide your next action.
               </p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <article data-business-card="" className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6">
-                <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="activity" size={24} /></span>
-                <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">01 / Monitor</p>
-                <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Water quality intelligence</h3>
-                <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Track dissolved oxygen, pH, temperature, salinity, and water level against operating thresholds.</p>
-                <div data-capability-detail="" className="mt-7 flex items-center justify-between gap-3 border-t border-[var(--ep-line)] pt-4"><span className="text-xs font-semibold text-[var(--ep-text)]">5 water parameters</span><span aria-hidden="true" className="flex items-end gap-1"><i className="h-3 w-1.5 rounded-full bg-[var(--ep-accent)]/45" /><i className="h-5 w-1.5 rounded-full bg-[var(--ep-accent)]/70" /><i className="h-4 w-1.5 rounded-full bg-[var(--ep-accent)]" /><i className="h-6 w-1.5 rounded-full bg-[var(--ep-accent)]/70" /><i className="h-3 w-1.5 rounded-full bg-[var(--ep-accent)]/45" /></span></div>
-              </article>
-              <article data-business-card="" className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6">
-                <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="eye" size={24} /></span>
-                <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">02 / Understand</p>
-                <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Growth and biomass insights</h3>
-                <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Use camera-based observation to follow shrimp growth and biomass without routine handling.</p>
-                <div data-capability-detail="" className="mt-7 flex items-center justify-between gap-3 border-t border-[var(--ep-line)] pt-4"><span className="text-xs font-semibold text-[var(--ep-text)]">Camera-based observation</span><span aria-hidden="true" className="grid h-7 w-7 place-items-center rounded-full border border-[var(--ep-accent)]/30 text-[var(--ep-accent)]"><Icon name="camera" size={15} /></span></div>
-              </article>
-              <article data-business-card="" className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 md:col-span-2 lg:col-span-1">
-                <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]"><Icon name="zap" size={24} /></span>
-                <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">03 / Respond</p>
-                <h3 className="ep-font-display mb-3 text-2xl font-semibold text-[var(--ep-text)]">Automated farm actions</h3>
-                <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">Connect readings to aeration control and biomass-informed feeding for a more coordinated workflow.</p>
-                <div data-capability-detail="" className="mt-7 flex items-center justify-between gap-3 border-t border-[var(--ep-line)] pt-4"><span className="text-xs font-semibold text-[var(--ep-text)]">Aeration + feeding workflow</span><span aria-hidden="true" className="grid h-7 w-7 place-items-center rounded-full border border-[var(--ep-accent)]/30 text-[var(--ep-accent)]"><Icon name="repeat" size={15} /></span></div>
-              </article>
+              {platformCapabilities.map((capability) => (
+                <article
+                  key={capability.title}
+                  data-business-card=""
+                  className="flex min-h-[290px] flex-col rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6"
+                >
+                  <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--ep-tint)] text-[var(--ep-secondary)]">
+                    <Icon name={capability.icon} size={23} />
+                  </span>
+                  <p className="mb-2 text-xs font-bold uppercase tracking-[.14em] text-[var(--ep-accent)]">
+                    {capability.category}
+                  </p>
+                  <h3 className="ep-font-display mb-3 text-xl font-semibold text-[var(--ep-text)]">
+                    {capability.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-[var(--ep-text-muted)]">
+                    {capability.description}
+                  </p>
+                  <div data-capability-detail="" className="mt-auto flex items-center gap-3 border-t border-[var(--ep-line)] pt-4">
+                    <span className="text-xs font-semibold text-[var(--ep-text)]">
+                      {capability.detail}
+                    </span>
+                  </div>
+                </article>
+              ))}
             </div>
             <div className="mt-7 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-tint)] px-5 py-5 sm:px-7">
               <div>

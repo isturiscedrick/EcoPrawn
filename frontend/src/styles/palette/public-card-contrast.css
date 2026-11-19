@@ -1,11 +1,50 @@
-/* Public dark-surface contrast rules. */
+/* Landing uses one matched text/surface palette in both themes. */
+.ep-business-landing {
+  color-scheme: light;
+  --ep-bg: #f3f8f8;
+  --ep-surface: #ffffff;
+  --ep-tint: #e9f5f3;
+  --ep-line: #d7e5e5;
+  --ep-primary: #173b46;
+  --ep-secondary: #173b46;
+  --ep-text: #173b46;
+  --ep-text-muted: #58717a;
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #ffffff;
+}
+
+html.dark .ep-business-landing {
+  color-scheme: dark;
+  --ep-bg: #0b171b;
+  --ep-surface: #102328;
+  --ep-tint: #153a3e;
+  --ep-line: #285158;
+  --ep-primary: #e8f4f2;
+  --ep-secondary: #e8f4f2;
+  --ep-text: #e8f4f2;
+  --ep-text-muted: #a7c2c1;
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+}
+
+/* Dark public cards inherit theme-aware text and icon colors. Avoid forcing
+   every child white, which erases muted-copy and accent-icon contrast. */
 html.dark
   :is(
     .ep-business-landing [data-business-card],
     .ep-business-landing .ep-cloudnexus-metric,
     .ep-business-landing .ep-cloudnexus-feature,
     .ep-business-landing .ep-cloudnexus-dashboard,
-    .ep-business-landing .ep-stats-panel > div,
+    .ep-business-landing .ep-stats-panel > div
+  ) {
+  color: var(--ep-text);
+}
+
+/* Preserve the established dark treatment on the other public pages. */
+html.dark
+  :is(
     .ep-about-page .ep-about-mission-panel,
     .ep-about-page #objectives article,
     .ep-about-page #scope article,
@@ -21,11 +60,6 @@ html.dark
 
 html.dark
   :is(
-    .ep-business-landing [data-business-card],
-    .ep-business-landing .ep-cloudnexus-metric,
-    .ep-business-landing .ep-cloudnexus-feature,
-    .ep-business-landing .ep-cloudnexus-dashboard,
-    .ep-business-landing .ep-stats-panel > div,
     .ep-about-page .ep-about-mission-panel,
     .ep-about-page #objectives article,
     .ep-about-page #scope article,
@@ -37,22 +71,8 @@ html.dark
     .ep-contact-page [data-contact-form] > div[role="status"]
   )
   :is(
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    span,
-    label,
-    small,
-    strong,
-    em,
-    li,
-    dt,
-    dd,
-    a:not([data-tone="accent"])
+    h1, h2, h3, h4, h5, h6, p, span, label, small, strong, em,
+    li, dt, dd, a:not([data-tone="accent"])
   ) {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff;
@@ -60,11 +80,6 @@ html.dark
 
 html.dark
   :is(
-    .ep-business-landing [data-business-card],
-    .ep-business-landing .ep-cloudnexus-metric,
-    .ep-business-landing .ep-cloudnexus-feature,
-    .ep-business-landing .ep-cloudnexus-dashboard,
-    .ep-business-landing .ep-stats-panel > div,
     .ep-about-page .ep-about-mission-panel,
     .ep-about-page #objectives article,
     .ep-about-page #scope article,
@@ -80,12 +95,8 @@ html.dark
   stroke: currentColor;
 }
 
-/* Preserve readable muted hierarchy without returning to low-contrast gray. */
 html.dark
   :is(
-    .ep-business-landing [data-business-card],
-    .ep-business-landing .ep-cloudnexus-metric,
-    .ep-business-landing .ep-cloudnexus-feature,
     .ep-about-page .ep-about-mission-panel,
     .ep-about-page #objectives article,
     .ep-about-page #scope article,
@@ -98,10 +109,58 @@ html.dark
   -webkit-text-fill-color: #e2e8f0;
 }
 
-/* Bright Ocean Teal controls keep dark foreground text for public pages. */
+/* Bright Ocean Teal controls keep dark foreground text on the filled accent. */
 html.dark
   :is(.ep-business-landing, .ep-about-page, .ep-contact-page)
   :is(button, [role="button"], a)[class*="bg-ep-accent"] {
   color: #092b31 !important;
   -webkit-text-fill-color: #092b31 !important;
+}
+
+/* Light mode uses the same white card surface as the rest of the About page. */
+html:not(.dark) .ep-about-page #systems article {
+  border-color: var(--ep-line) !important;
+  background: #ffffff !important;
+  color: var(--ep-text) !important;
+  box-shadow: 0 18px 42px -34px rgba(15, 23, 42, 0.28) !important;
+}
+html:not(.dark) .ep-about-page #systems article h3,
+html:not(.dark) .ep-about-page #systems article b {
+  color: var(--ep-text) !important;
+  -webkit-text-fill-color: var(--ep-text) !important;
+}
+html:not(.dark) .ep-about-page #systems article > div:first-child > div > div:first-child,
+html:not(.dark) .ep-about-page #systems article > div:last-child > div > span {
+  color: var(--ep-text-muted) !important;
+  -webkit-text-fill-color: var(--ep-text-muted) !important;
+}
+html:not(.dark) .ep-about-page #systems article > div:last-child > div > span:first-child {
+  color: var(--ep-accent) !important;
+  -webkit-text-fill-color: var(--ep-accent) !important;
+}
+
+/* Keep the deep surface and light text in dark mode. */
+html.dark .ep-about-page #systems article h3,
+html.dark .ep-about-page #systems article b {
+  color: var(--ep-on-deep) !important;
+  -webkit-text-fill-color: var(--ep-on-deep) !important;
+}
+html.dark .ep-about-page #systems article > div:first-child > div > div:first-child,
+html.dark .ep-about-page #systems article > div:last-child > div > span {
+  color: var(--ep-on-deep-muted) !important;
+  -webkit-text-fill-color: var(--ep-on-deep-muted) !important;
+}
+html.dark .ep-about-page #systems article > div:last-child > div > span:first-child {
+  color: var(--ep-marker) !important;
+  -webkit-text-fill-color: var(--ep-marker) !important;
+}
+html.dark .ep-about-page #systems article:hover h3,
+html.dark .ep-about-page #systems article:focus-within h3 {
+  color: #70d7c8 !important;
+  -webkit-text-fill-color: #70d7c8 !important;
+}
+html:not(.dark) .ep-about-page #systems article:hover h3,
+html:not(.dark) .ep-about-page #systems article:focus-within h3 {
+  color: #70d7c8 !important;
+  -webkit-text-fill-color: #70d7c8 !important;
 }

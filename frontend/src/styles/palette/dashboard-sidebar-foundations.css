@@ -97,14 +97,17 @@ html.dark #site-header nav[aria-label="Primary navigation"] a {
 html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"],
 html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"]:hover {
   background: #45c5b3 !important;
+  border-color: #45c5b3 !important;
   color: #092b31 !important;
   -webkit-text-fill-color: #092b31 !important;
-  box-shadow: 0 4px 12px rgba(69, 197, 179, 0.18) !important;
+  box-shadow: 0 4px 12px rgba(69, 197, 179, 0.24) !important;
 }
 html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] :is(span, svg) {
   color: #092b31 !important;
   -webkit-text-fill-color: #092b31 !important;
-  stroke: currentColor !important;
+  stroke: #092b31 !important;
+  stroke-width: 2 !important;
+  filter: none;
 }
 html.dark #site-header button[role="switch"],
 html.dark #site-header .ep-cta-secondary {

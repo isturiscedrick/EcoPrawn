@@ -14,7 +14,7 @@ html.dark :is(.ep-business-landing, .ep-landing, .ep-about-page, .ep-contact-pag
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
 
-  --ep-on-accent: #071426;
+  --ep-on-accent: #092b31;
   --ep-accent-tint: rgba(69, 197, 179, 0.14);
   --ep-accent-tint-soft: rgba(69, 197, 179, 0.075);
 }
@@ -128,7 +128,7 @@ html:not(.dark) :is(.ep-about-page, .ep-contact-page) [data-page-hero] > [aria-h
 html.dark :is(.ep-business-landing, .ep-landing, .ep-about-page, .ep-contact-page) {
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
-  --ep-on-accent: #071426;
+  --ep-on-accent: #092b31;
   --ep-accent-tint: rgba(69, 197, 179, 0.14);
   --ep-accent-tint-soft: rgba(69, 197, 179, 0.075);
 }

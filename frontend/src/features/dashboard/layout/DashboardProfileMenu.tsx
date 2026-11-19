@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
-import { getProfileInitials } from "./system-layout-utils";
+import { ProfileAvatar } from "../components/ProfileAvatar";
 
 interface DashboardProfileMenuProps {
   pathname: string;
   profileName: string;
   profileRole: string;
+  profileImage?: string | null;
   onRequestLogout: () => void;
 }
 
@@ -14,13 +15,13 @@ export function DashboardProfileMenu({
   pathname,
   profileName,
   profileRole,
+  profileImage,
   onRequestLogout,
 }: DashboardProfileMenuProps) {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const initials = getProfileInitials(profileName);
 
   useEffect(() => {
     if (!open) return;
@@ -59,7 +60,7 @@ export function DashboardProfileMenu({
         aria-expanded={open}
         className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ep-line)] bg-[var(--ep-accent-tint)] text-xs font-bold text-[var(--ep-primary)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]"
       >
-        {initials}
+        <ProfileAvatar name={profileName} image={profileImage} size="sm" className="border-0" />
       </button>
       {open && (
         <div

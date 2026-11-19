@@ -5,6 +5,7 @@ import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
 import { Icon } from "@/components/ui/Icon";
 import { SidebarNavItem } from "./SidebarNavItem";
 import { LogoutIcon, drawerRowClass, SidebarTooltip } from "./SidebarPrimitives";
+import { ProfileAvatar } from "./ProfileAvatar";
 
 interface DashboardDesktopSidebarProps {
   collapsed: boolean;
@@ -12,6 +13,7 @@ interface DashboardDesktopSidebarProps {
   activeView: DashboardView;
   profileName: string;
   profileRole: string;
+  profileImage?: string | null;
   alertCount?: number;
   tankCount?: number;
   isDbConnected?: boolean;
@@ -26,6 +28,7 @@ export function DashboardDesktopSidebar({
   activeView,
   profileName,
   profileRole,
+  profileImage,
   alertCount = 0,
   tankCount = 0,
   isDbConnected = true,
@@ -67,51 +70,66 @@ export function DashboardDesktopSidebar({
   return (
     <aside
       id="dashboard-sidebar"
+      data-collapsed={collapsed}
       className={`fixed bottom-0 left-0 top-0 z-30 hidden flex-col border-r border-[var(--ep-line)] bg-[var(--ep-surface)] transition-[width] duration-300 ease-in-out lg:flex ${
-        collapsed ? "w-[76px]" : "w-[268px]"
+        collapsed ? "w-[88px]" : "w-[268px]"
       }`}
     >
       {/* 1. HEADER */}
       <div
         className={`flex shrink-0 items-center border-b border-[var(--ep-line)] py-3 ${
           collapsed
-            ? "min-h-[72px] flex-col justify-center gap-2 px-2"
+            ? "min-h-[72px] justify-center px-2"
             : "min-h-[72px] justify-between gap-3 px-5"
         }`}
       >
-        <Link
-          to="/dashboard"
-          aria-label="EcoPrawn dashboard"
-          className={`group flex min-w-0 items-center gap-2 rounded-xl transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] ${
-            collapsed ? "shrink-0" : ""
-          }`}
-        >
-          <BrandMark size={collapsed ? 28 : 32} showWordmark={!collapsed} />
-          {!collapsed && (
-            <span className="rounded-md border border-[var(--ep-accent)]/30 bg-[var(--ep-accent-tint)]/60 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[var(--ep-primary)]">
-              AI OS
+        {collapsed ? (
+          <button
+            ref={toggleBtnRef}
+            type="button"
+            onClick={onToggleCollapsed}
+            onMouseEnter={() => setHoveredToggle(true)}
+            onMouseLeave={() => setHoveredToggle(false)}
+            onFocus={() => setHoveredToggle(true)}
+            onBlur={() => setHoveredToggle(false)}
+            aria-label="Expand sidebar (Ctrl+B)"
+            aria-pressed="true"
+            className="group relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
+          >
+            <span className="transition-opacity duration-150 group-hover:opacity-0 group-focus-visible:opacity-0">
+              <BrandMark size={30} showWordmark={false} />
             </span>
-          )}
-        </Link>
-
-        <button
-          ref={toggleBtnRef}
-          type="button"
-          onClick={onToggleCollapsed}
-          onMouseEnter={() => setHoveredToggle(true)}
-          onMouseLeave={() => setHoveredToggle(false)}
-          onFocus={() => setHoveredToggle(true)}
-          onBlur={() => setHoveredToggle(false)}
-          aria-label={collapsed ? "Expand sidebar (Ctrl+B)" : "Collapse sidebar (Ctrl+B)"}
-          aria-pressed={collapsed}
-          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-transparent text-[var(--ep-text-muted)] transition-all duration-200 hover:border-[var(--ep-line)] hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]`}
-        >
-          <Icon
-            name="sidebar-toggle"
-            size={18}
-            className={`transition-transform duration-200 ${collapsed ? "rotate-180" : ""}`}
-          />
-        </button>
+            <Icon
+              name="sidebar-toggle"
+              size={20}
+              className="absolute rotate-180 opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+            />
+          </button>
+        ) : (
+          <>
+            <Link
+              to="/dashboard"
+              aria-label="EcoPrawn dashboard"
+              className="group flex min-w-0 items-center gap-2 rounded-xl transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
+            >
+              <BrandMark size={32} showWordmark />
+            </Link>
+            <button
+              ref={toggleBtnRef}
+              type="button"
+              onClick={onToggleCollapsed}
+              onMouseEnter={() => setHoveredToggle(true)}
+              onMouseLeave={() => setHoveredToggle(false)}
+              onFocus={() => setHoveredToggle(true)}
+              onBlur={() => setHoveredToggle(false)}
+              aria-label="Collapse sidebar (Ctrl+B)"
+              aria-pressed="false"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-transparent text-[var(--ep-text-muted)] transition-all duration-200 hover:border-[var(--ep-line)] hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
+            >
+              <Icon name="sidebar-toggle" size={18} />
+            </button>
+          </>
+        )}
 
         {collapsed && hoveredToggle && (
           <SidebarTooltip targetRef={toggleBtnRef}>
@@ -137,8 +155,8 @@ export function DashboardDesktopSidebar({
           }`}
         >
           {/* Avatar with Live Status Pulse */}
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--ep-accent-tint)] text-[var(--ep-accent)] shadow-2xs">
-            <Icon name="user-round" size={19} strokeWidth={1.9} />
+          <div className="relative shrink-0">
+            <ProfileAvatar name={profileName} image={profileImage} />
             <span
               title="Telemetry Connected"
               className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3"

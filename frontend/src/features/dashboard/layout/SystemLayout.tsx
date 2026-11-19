@@ -54,6 +54,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   const [scrolled, setScrolled] = useState(false);
   const [profileName, setProfileName] = useState("Facility Operator");
   const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
+  const [profileImage, setProfileImage] = useState<string | null>(null);
   const pullStartY = useRef<number | null>(null);
 
   useLayoutEffect(() => {
@@ -85,8 +86,21 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   useEffect(() => {
     const savedName = window.localStorage.getItem("ep-profile-name");
     const savedRole = window.localStorage.getItem("ep-profile-role");
+    const savedImage = window.localStorage.getItem("ep-profile-image");
     if (savedName) setProfileName(savedName);
     if (savedRole) setProfileRole(savedRole.toUpperCase());
+    setProfileImage(savedImage);
+    const syncProfile = () => {
+      setProfileName(window.localStorage.getItem("ep-profile-name") ?? "Facility Operator");
+      setProfileRole((window.localStorage.getItem("ep-profile-role") ?? "FACILITY OPERATOR").toUpperCase());
+      setProfileImage(window.localStorage.getItem("ep-profile-image"));
+    };
+    window.addEventListener("ecoprawn:profile-updated", syncProfile);
+    window.addEventListener("storage", syncProfile);
+    return () => {
+      window.removeEventListener("ecoprawn:profile-updated", syncProfile);
+      window.removeEventListener("storage", syncProfile);
+    };
   }, []);
 
   useEffect(() => {
@@ -171,7 +185,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   // Keep the mobile dashboard chrome visually light; only its controls float above content.
 
   return (
-    <div className="dashboard-shell min-h-screen bg-[var(--ep-bg)]" style={{ "--dashboard-sidebar-width": desktopSidebarCollapsed ? "76px" : "260px" } as React.CSSProperties}>
+    <div className="dashboard-shell min-h-screen bg-[var(--ep-bg)]" style={{ "--dashboard-sidebar-width": desktopSidebarCollapsed ? "88px" : "260px" } as React.CSSProperties}>
       <header
         id="site-header"
         className={`ep-landing sticky top-0 z-40 border-b transition-all duration-300 lg:hidden ${scrolled ? "border-[var(--ep-line)] shadow-sm backdrop-blur-xl" : "border-transparent shadow-none backdrop-blur-none"}`}
@@ -215,6 +229,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
               pathname={pathname}
               profileName={profileName}
               profileRole={profileRole}
+              profileImage={profileImage}
               onRequestLogout={() => setLogoutConfirmOpen(true)}
             />
           </div>
@@ -227,6 +242,7 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         alertCount={activeAlertCount}
         tankCount={tanks.length}
         isDbConnected={isDbConnected}
+        profileImage={profileImage}
         onToggleCollapsed={() => setDesktopSidebarCollapsed((collapsed) => { const next = !collapsed; try { window.localStorage.setItem("ep-sidebar-collapsed", String(next)); } catch { /* Keep the in-memory preference for this session. */ } return next; })}
       />
 

@@ -41,7 +41,7 @@
 :is(.ep-landing, .ep-about-page, .ep-contact-page) {
   --ep-accent: #087e8b;
   --ep-accent-hover: #066874;
-  --ep-on-accent: #071426;
+  --ep-on-accent: #ffffff;
   --ep-zone: #087e8b;
   --ep-marker: #45c5b3;
   --ep-status-info: #087e8b;

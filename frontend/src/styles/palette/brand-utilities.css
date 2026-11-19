@@ -81,7 +81,7 @@ html.dark {
   --ep-text-muted: #a7c2c1;
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
-  --ep-on-accent: #071426;
+  --ep-on-accent: #092b31;
   --water-deep: #f8fafc;
   --water-mid: #e2e8f0;
   --ink: #e8f4f2;
@@ -120,7 +120,7 @@ html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
   --ep-text-muted: #cbd5e1;
   --ep-accent: #45c5b3;
   --ep-accent-hover: #70d7c8;
-  --ep-on-accent: #071426;
+  --ep-on-accent: #092b31;
 }
 :is(.ep-landing, .ep-about-page, .ep-contact-page) :is(button, a)[class*="bg-"] {
   --tw-ring-color: #087e8b;
