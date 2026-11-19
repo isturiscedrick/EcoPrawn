@@ -1,0 +1,288 @@
+/* Light public header: crisp white navigation capsule and a clear Ocean Teal
+   current-page state. Keep the page's floating header behavior intact. */
+@media (min-width: 1024px) {
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] {
+    background: rgba(255, 255, 255, 0.96) !important;
+    background-color: rgba(255, 255, 255, 0.96) !important;
+    border: 1px solid #d7e4e7 !important;
+    border-radius: 999px !important;
+    padding: 5px !important;
+    gap: 4px !important;
+    box-shadow:
+      0 10px 28px -22px rgba(18, 58, 68, 0.42),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  }
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a {
+    min-height: 42px !important;
+    padding: 0 18px !important;
+    border: 1px solid transparent !important;
+    border-radius: 999px !important;
+    color: #31535c !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transition:
+      background-color 0.18s ease,
+      color 0.18s ease,
+      transform 0.18s ease !important;
+  }
+  html:not(.dark)
+    #site-header
+    nav[aria-label="Primary navigation"]
+    a:hover:not([aria-current="page"]) {
+    background: #edf6f6 !important;
+    color: #075b65 !important;
+  }
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] {
+    background: #087e8b !important;
+    border-color: #087e8b !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(8, 126, 139, 0.18) !important;
+  }
+  html:not(.dark)
+    #site-header
+    nav[aria-label="Primary navigation"]
+    a[aria-current="page"]
+    :is(span, svg) {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    stroke: currentColor !important;
+  }
+  html:not(.dark) #site-header .ep-cta-primary {
+    min-width: 42px;
+    min-height: 42px;
+    border: 1px solid #087e8b !important;
+    border-radius: 999px !important;
+    background: #087e8b !important;
+    color: #ffffff !important;
+    box-shadow: 0 5px 14px -8px rgba(8, 126, 139, 0.65) !important;
+  }
+  html:not(.dark) #site-header .ep-cta-primary svg {
+    color: #ffffff !important;
+    stroke: currentColor !important;
+  }
+}
+
+/* Theme-aware active navigation icon contrast:
+   light theme uses a deep teal pill (light icon); dark theme uses a bright
+   teal pill (dark icon). */
+@media (min-width: 1024px) {
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg,
+  html:not(.dark) #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg * {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg,
+  html.dark #site-header nav[aria-label="Primary navigation"] a[aria-current="page"] svg * {
+    color: #092b31 !important;
+    stroke: #092b31 !important;
+    -webkit-text-fill-color: #092b31 !important;
+  }
+}
+
+/* Definitive removal of the legacy hero underline.
+   This is intentionally in the final-loaded palette stylesheet so older
+   marketing-experience rules cannot bring the warm/legacy accent line back. */
+.ep-business-landing .ep-field-hero-copy .ep-hero-headline-secondary::after,
+.ep-business-landing .ep-cloudnexus-hero-inner .ep-hero-headline-secondary::after,
+.ep-business-landing [data-hero="headline"] .ep-hero-headline-secondary::after,
+.ep-landing [data-hero="headline"] .ep-hero-headline-secondary::after,
+.ep-about-page [data-page-hero-headline] .ep-hero-headline-secondary::after,
+.ep-contact-page [data-page-hero-headline] .ep-hero-headline-secondary::after {
+  content: none !important;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  animation: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove the old warm-colored dash appended to the landing hero eyebrow.
+   This is the short line at the RIGHT end of the "Smart aquaculture" pill,
+   not an underline beneath the headline. */
+.ep-business-landing .ep-cloudnexus-eyebrow::after,
+.ep-business-landing #top [data-hero-kicker]::after,
+.ep-landing #top [data-hero-kicker]::after,
+.ep-about-page [data-page-kicker]::after,
+.ep-contact-page [data-page-kicker]::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Landing-page dashboard preview sidebar: use only the current Ocean Teal
+   brand and neutral surfaces in both themes, not legacy brand shades. */
+.ep-business-landing .ep-cloudnexus-dashboard-body {
+  background: #f5f8f9 !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar {
+  background: #ffffff !important;
+  border-right: 1px solid #e1eaec !important;
+  color: #58717a !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > span {
+  color: #355761 !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active {
+  background: #e8f4f4 !important;
+  border-color: #c8e2e3 !important;
+  box-shadow: inset 3px 0 0 #087e8b !important;
+  color: #075b65 !important;
+}
+.ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active svg {
+  color: #087e8b !important;
+  stroke: currentColor !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-dashboard-body {
+  background: #10272c !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar {
+  background: #122d33 !important;
+  border-right-color: #29474d !important;
+  color: #a9c0c4 !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar > span {
+  color: #d5e4e6 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active {
+  background: rgba(69, 197, 179, 0.14) !important;
+  border-color: rgba(69, 197, 179, 0.24) !important;
+  box-shadow: inset 3px 0 0 #45c5b3 !important;
+  color: #70d7c8 !important;
+}
+html.dark .ep-business-landing .ep-cloudnexus-mini-sidebar > .ep-cloudnexus-mini-active svg {
+  color: #70d7c8 !important;
+  stroke: currentColor !important;
+}
+
+/* Final public mobile drawer palette. The earlier site-chrome rules hard-coded
+   a generic navy/bright-teal treatment; replace it with EcoPrawn's Ocean Teal
+   surfaces and a restrained active state. */
+html:not(.dark) .ep-mobile-site-drawer {
+  background: #ffffff !important;
+  color: #163b43 !important;
+  border-color: #d7e5e7 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:first-child {
+  background: #ffffff !important;
+  border-bottom-color: #dce8ea !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-logo {
+  --ep-logo-color: #087e8b !important;
+  --ep-logo-text: #123b43 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-logo-shrimp {
+  fill: #087e8b !important;
+  stroke: #087e8b !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-logo-wordmark {
+  color: #123b43 !important;
+  -webkit-text-fill-color: #123b43 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer .ep-mobile-drawer-caption,
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel + * {
+  color: #587780 !important;
+}
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel a {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #294f58 !important;
+  box-shadow: none !important;
+}
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
+  background: #e8f4f4 !important;
+  border-color: #c8e2e3 !important;
+  color: #075b65 !important;
+  box-shadow: inset 3px 0 0 #087e8b !important;
+}
+html:not(.dark) .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] svg {
+  color: #087e8b !important;
+  stroke: currentColor !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:last-child {
+  background: #f5f9fa !important;
+  border-top-color: #dce8ea !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:last-child a:first-child {
+  background: #087e8b !important;
+  border: 1px solid #087e8b !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px -14px rgba(8, 126, 139, 0.7) !important;
+}
+html:not(.dark) .ep-mobile-site-drawer > div:last-child a:last-child {
+  background: #ffffff !important;
+  border: 1px solid #cbdde0 !important;
+  color: #075b65 !important;
+}
+html.dark .ep-mobile-site-drawer {
+  background: #10272c !important;
+  color: #e8f3f4 !important;
+  border-color: #29474d !important;
+  box-shadow: 16px 0 48px -22px rgba(0, 0, 0, 0.72) !important;
+}
+html.dark .ep-mobile-site-drawer > div:first-child {
+  background: #122d33 !important;
+  border-bottom-color: #29474d !important;
+}
+html.dark .ep-mobile-site-drawer .ep-logo {
+  --ep-logo-color: #f4fbfb !important;
+  --ep-logo-text: #f4fbfb !important;
+}
+html.dark .ep-mobile-site-drawer .ep-logo-shrimp {
+  fill: #f4fbfb !important;
+  stroke: #f4fbfb !important;
+}
+html.dark .ep-mobile-site-drawer .ep-logo-wordmark {
+  color: #f4fbfb !important;
+  -webkit-text-fill-color: #f4fbfb !important;
+}
+html.dark .ep-mobile-site-drawer .ep-mobile-drawer-caption,
+html.dark .ep-mobile-site-drawer > div:nth-child(2) > div:first-child {
+  color: #a9c4c8 !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel {
+  background: transparent !important;
+  color: #dcebed !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #dcebed !important;
+  box-shadow: none !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] {
+  background: rgba(69, 197, 179, 0.14) !important;
+  border-color: rgba(69, 197, 179, 0.28) !important;
+  color: #70d7c8 !important;
+  box-shadow: inset 3px 0 0 #45c5b3 !important;
+}
+html.dark .ep-mobile-site-drawer #mobile-nav-panel a[aria-current="page"] svg {
+  color: #70d7c8 !important;
+  stroke: currentColor !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child {
+  background: #122d33 !important;
+  border-top-color: #29474d !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child a:first-child {
+  background: #45c5b3 !important;
+  border: 1px solid #45c5b3 !important;
+  color: #092b31 !important;
+  box-shadow: 0 8px 22px -14px rgba(69, 197, 179, 0.55) !important;
+}
+html.dark .ep-mobile-site-drawer > div:last-child a:last-child {
+  background: #17383f !important;
+  border: 1px solid #35575e !important;
+  color: #e8f3f4 !important;
+}

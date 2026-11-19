@@ -1,0 +1,122 @@
+/* ---------- Phase 4: mobile analytics controls and tank comparison ---------- */
+@media (max-width: 639px) {
+  .dashboard-shell .dashboard-trend-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .dashboard-shell .dashboard-trend-toolbar [role="group"] {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .dashboard-shell .dashboard-trend-toolbar [role="group"] button {
+    min-width: 0;
+    min-height: 42px;
+    padding-inline: 0.4rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row {
+    padding-block: 0.15rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row > div:first-child {
+    gap: 0.5rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row > div:first-child > span:first-child {
+    font-size: 0.8rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row > div:first-child > span:last-child {
+    font-size: 0.76rem;
+  }
+  .dashboard-shell .dashboard-panel [aria-label="Choose tank comparison metric"] {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .dashboard-shell .dashboard-panel [aria-label="Choose tank comparison metric"] button {
+    min-height: 44px;
+    padding-inline: 0.5rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row [role="progressbar"] {
+    height: 0.55rem;
+  }
+}
+
+@media (max-width: 359px) {
+  .dashboard-shell .dashboard-trend-toolbar [role="group"] button {
+    font-size: 0.68rem;
+  }
+  .dashboard-shell .dashboard-tank-comparison-row > div:first-child > span:last-child {
+    font-size: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell .dashboard-tank-comparison-row [role="img"] > div {
+    transition: none !important;
+  }
+}
+
+/* ---------- Phase 5: mobile table filters and feedback states ---------- */
+.dashboard-shell .dashboard-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ep-accent) var(--ep-line);
+}
+.dashboard-shell .dashboard-table-scroll:focus-visible {
+  outline: 2px solid var(--ep-accent);
+  outline-offset: 3px;
+  border-radius: 0.65rem;
+}
+.dashboard-shell .dashboard-table-scroll table {
+  min-width: 640px;
+}
+.dashboard-shell .dashboard-table-scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--ep-surface);
+}
+.dashboard-shell .dashboard-state-message {
+  overflow-wrap: anywhere;
+}
+.dashboard-shell .dashboard-state-message h2 {
+  color: var(--ep-text, var(--ep-primary));
+}
+.dashboard-shell .dashboard-state-message button {
+  min-height: 44px;
+}
+@media (max-width: 639px) {
+  .dashboard-shell .dashboard-table-filters {
+    width: 100%;
+  }
+  .dashboard-shell .dashboard-table-filters button {
+    min-width: 0;
+    min-height: 44px;
+    padding-inline: 0.45rem;
+    white-space: nowrap;
+  }
+  .dashboard-shell .dashboard-table-scroll {
+    margin-inline: -0.35rem;
+    padding-inline: 0.35rem;
+    border-radius: 0.65rem;
+  }
+  .dashboard-shell .dashboard-table-scroll table {
+    min-width: 650px;
+  }
+  .dashboard-shell .dashboard-table-scroll th,
+  .dashboard-shell .dashboard-table-scroll td {
+    padding-block: 0.8rem;
+  }
+  .dashboard-shell .dashboard-state-message {
+    padding: 1.25rem 0.9rem;
+    border-radius: 1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell .dashboard-state-message *,
+  .dashboard-shell .dashboard-table-filters button {
+    transition: none !important;
+  }
+}

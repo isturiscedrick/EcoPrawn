@@ -1,0 +1,87 @@
+@import "./utilities/public-responsive.css";
+
+/* ==========================================================================
+   EcoPrawn Public & Marketing Global Stylesheet
+   Entry point for landing, about, contact, and shared public UI.
+   Import order preserves the existing cascade.
+   ========================================================================== */
+
+@import "./marketing/tokens.css";
+@import "./marketing/landing-sections.css";
+@import "./marketing/chrome.css";
+@import "./marketing/page-foundations.css";
+@import "./marketing/page-responsive-refinements.css";
+@import "./marketing/hero-layouts.css";
+@import "./marketing/public-page-rhythm.css";
+@import "./marketing/landing-interactions.css";
+@import "./marketing/illustrations.css";
+@import "./marketing/card-system.css";
+@import "./marketing/editorial-rhythm.css";
+@import "./marketing/target-ranges.css";
+@import "./marketing/platform-about.css";
+@import "./marketing/landing-components.css";
+@import "./marketing/landing-responsive.css";
+@import "./marketing/landing-surfaces.css";
+@import "./marketing/accessibility.css";
+@import "./marketing/landing-density.css";
+@import "./marketing/about-contact.css";
+@import "./marketing/responsive.css";
+
+@import "./palette/public-marketing-foundations.css";
+@import "./palette/public-marketing-composition.css";
+
+/* Public-only palette layers moved out of the root stylesheet. Keep these last
+   so their final theme/header refinements retain their intended precedence. */
+@import "./palette/public-depth.css";
+@import "./palette/public-card-contrast.css";
+@import "./palette/public-header.css";
+
+/* Public brand rules extracted from the dashboard palette. */
+/* Landing, About, and Contact use Ocean Teal for links, calls to action and accents. */
+:is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #071426;
+  --ep-zone: #087e8b;
+  --ep-marker: #45c5b3;
+  --ep-status-info: #087e8b;
+  --ep-status-info-bg: #d9f0ef;
+}
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) {
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #092b31;
+  --ep-zone: #45c5b3;
+  --ep-marker: #70d7c8;
+  --ep-status-info: #70d7c8;
+  --ep-status-info-bg: #153a3e;
+}
+:is(.ep-landing, .ep-about-page, .ep-contact-page) :is(a, button, [role="button"]):focus-visible {
+  outline: 2px solid #087e8b !important;
+  outline-offset: 3px;
+}
+html.dark
+  :is(.ep-landing, .ep-about-page, .ep-contact-page)
+  :is(a, button, [role="button"]):focus-visible {
+  outline-color: #45c5b3 !important;
+}
+.ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary,
+.ep-about-page [data-page-hero-headline] > span:last-child,
+.ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #087e8b !important;
+  -webkit-text-fill-color: #087e8b !important;
+}
+html.dark .ep-landing #top [data-hero="headline"] > .ep-hero-headline-secondary,
+html.dark .ep-about-page [data-page-hero-headline] > span:last-child,
+html.dark .ep-contact-page [data-page-hero-headline] > span:last-child {
+  color: #45c5b3 !important;
+  -webkit-text-fill-color: #45c5b3 !important;
+}
+footer[data-site-footer] nav a:hover,
+:is(.ep-landing, .ep-about-page, .ep-contact-page) a:hover {
+  color: #066874;
+}
+html.dark footer[data-site-footer] nav a:hover,
+html.dark :is(.ep-landing, .ep-about-page, .ep-contact-page) a:hover {
+  color: #70d7c8;
+}

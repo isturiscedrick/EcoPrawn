@@ -1,0 +1,263 @@
+/* Mobile header surface: keep the public navigation visibly grounded on small screens. */
+@media (max-width: 1023px) {
+  #site-header {
+    background-color: var(--ep-bg, #ffffff) !important;
+    background-image: none !important;
+    border-bottom: 1px solid var(--ep-line, #dbe2ea) !important;
+    box-shadow: 0 6px 20px -18px rgba(15, 23, 42, 0.42) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  html.dark #site-header {
+    background-color: var(--ep-bg, #0b171b) !important;
+    border-bottom-color: var(--ep-line, #334155) !important;
+    box-shadow: 0 6px 20px -18px rgba(0, 0, 0, 0.7) !important;
+  }
+}
+
+/* ---------- Desktop public header: calm glass surface after scrolling ---------- */
+@media (min-width: 1024px) {
+  html:has(.ep-business-landing) #site-header,
+  html:has(.ep-about-page) #site-header,
+  html:has(.ep-contact-page) #site-header {
+    transition:
+      background-color 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      backdrop-filter 220ms ease,
+      -webkit-backdrop-filter 220ms ease;
+  }
+
+  html:not(.dark):is(:has(.ep-business-landing), :has(.ep-about-page), :has(.ep-contact-page))
+    #site-header[data-scrolled="true"] {
+    background-color: color-mix(in srgb, #f8fafc 90%, transparent) !important;
+    border-bottom-color: rgba(8, 126, 139, 0.14) !important;
+    box-shadow: 0 10px 30px -24px rgba(23, 59, 70, 0.42) !important;
+  }
+
+  html.dark:is(:has(.ep-business-landing), :has(.ep-about-page), :has(.ep-contact-page))
+    #site-header[data-scrolled="true"] {
+    background-color: color-mix(in srgb, #102b31 91%, transparent) !important;
+    border-bottom-color: rgba(69, 197, 179, 0.18) !important;
+    box-shadow: 0 12px 32px -24px rgba(0, 0, 0, 0.72) !important;
+  }
+
+  #site-header nav[aria-label="Primary navigation"] {
+    gap: 0.2rem;
+    padding: 0.3rem;
+    border-color: color-mix(in srgb, var(--ep-line) 78%, transparent);
+    box-shadow: 0 8px 24px -22px rgba(23, 59, 70, 0.5);
+  }
+
+  #site-header nav[aria-label="Primary navigation"] a {
+    min-height: 2.55rem;
+    padding-inline: 1.1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* ---------- Footer desktop grid refinements ---------- */
+footer[data-site-footer] .ep-footer-inner {
+  max-width: 1280px;
+}
+
+footer[data-site-footer] .ep-footer-grid {
+  align-items: start;
+}
+
+footer[data-site-footer] .ep-footer-grid h2 {
+  margin-top: 0.2rem;
+}
+
+footer[data-site-footer] .ep-footer-platform {
+  min-width: 0;
+}
+
+footer[data-site-footer] .ep-footer-platform li {
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+footer[data-site-footer] .ep-footer-platform li::before {
+  position: absolute;
+  top: 0.58em;
+  left: 0;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 999px;
+  background: var(--ep-accent);
+  content: "";
+}
+
+footer[data-site-footer] .ep-footer-bottom {
+  gap: 0.75rem 2rem;
+}
+
+@container ep-footer (max-width: 760px) {
+  footer[data-site-footer] .ep-footer-platform {
+    grid-column: span 1 !important;
+  }
+}
+
+@container ep-footer (max-width: 420px) {
+  footer[data-site-footer] .ep-footer-platform {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @media (min-width: 1024px) {
+    html:has(.ep-business-landing) #site-header,
+    html:has(.ep-about-page) #site-header,
+    html:has(.ep-contact-page) #site-header {
+      transition: none !important;
+    }
+  }
+}
+
+/* Desktop header actions remain circular at every available width. */
+@media (min-width: 1024px) {
+  #site-header .ep-cta-control,
+  #site-header button[role="switch"],
+  #site-header a[href="/"] + nav a {
+    border-radius: 9999px !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  #site-header .ep-cta-control {
+    flex: 0 0 2.5rem;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding-inline: 0 !important;
+    aspect-ratio: 1 / 1;
+    border-radius: 9999px !important;
+  }
+
+  #site-header button[role="switch"] {
+    flex: 0 0 2.5rem;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 9999px !important;
+  }
+}
+
+/* Keep the Platform footer column consistent with the other content columns.
+   It is a plain footer group, not a raised card. */
+footer[data-site-footer] .ep-footer-grid > .ep-footer-platform {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  backdrop-filter: none !important;
+}
+footer[data-site-footer] .ep-footer-grid > .ep-footer-platform::before,
+footer[data-site-footer] .ep-footer-grid > .ep-footer-platform::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Mobile footer layout: stack the brand first, keep Explore and Platform as
+   balanced columns, then give account actions a full-width final section. */
+@media (max-width: 639px) {
+  footer[data-site-footer] {
+    padding: 2.25rem 1.1rem 1.5rem !important;
+  }
+  footer[data-site-footer] .ep-footer-inner {
+    width: 100%;
+  }
+  footer[data-site-footer] .ep-footer-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: 1.25rem !important;
+    row-gap: 1.8rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  footer[data-site-footer] .ep-footer-brand {
+    grid-column: 1 / -1 !important;
+    padding-bottom: 1.25rem !important;
+    border-bottom: 1px solid var(--ep-line) !important;
+  }
+  footer[data-site-footer] .ep-footer-brand p {
+    max-width: 22rem !important;
+    margin-top: 0.75rem !important;
+    font-size: 0.82rem !important;
+    line-height: 1.55 !important;
+  }
+  footer[data-site-footer] .ep-footer-explore,
+  footer[data-site-footer] .ep-footer-platform {
+    grid-column: span 1 !important;
+    min-width: 0 !important;
+  }
+  footer[data-site-footer] .ep-footer-grid h2 {
+    margin-bottom: 0.25rem !important;
+    font-size: 0.68rem !important;
+    letter-spacing: 0.14em !important;
+  }
+  footer[data-site-footer] .ep-footer-explore nav {
+    gap: 0.1rem !important;
+  }
+  footer[data-site-footer] .ep-footer-platform ul {
+    gap: 0.55rem !important;
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
+  footer[data-site-footer] .ep-footer-account {
+    grid-column: 1 / -1 !important;
+    padding-top: 1.25rem !important;
+    border-top: 1px solid var(--ep-line) !important;
+  }
+  footer[data-site-footer] .ep-footer-account > p {
+    max-width: 100% !important;
+    margin-top: 0.55rem !important;
+  }
+  footer[data-site-footer] .ep-footer-account nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.6rem !important;
+    margin-top: 0.8rem !important;
+  }
+  footer[data-site-footer] .ep-footer-account nav a {
+    justify-content: center !important;
+    min-height: 42px !important;
+    padding: 0.55rem 0.65rem !important;
+    border: 1px solid var(--ep-line) !important;
+    border-radius: 999px !important;
+    background: color-mix(in srgb, var(--ep-accent) 7%, var(--ep-surface)) !important;
+    color: var(--ep-primary) !important;
+    font-size: 0.78rem !important;
+    font-weight: 650 !important;
+    text-align: center !important;
+  }
+  footer[data-site-footer] .ep-footer-bottom {
+    align-items: center !important;
+    gap: 0.55rem !important;
+    padding-top: 1.1rem !important;
+    text-align: center !important;
+    font-size: 0.68rem !important;
+    line-height: 1.5 !important;
+  }
+  footer[data-site-footer] .ep-footer-bottom p {
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+}
+@media (max-width: 360px) {
+  footer[data-site-footer] .ep-footer-grid {
+    column-gap: 0.9rem !important;
+  }
+  footer[data-site-footer] .ep-footer-platform li {
+    padding-left: 0.7rem !important;
+  }
+  footer[data-site-footer] .ep-footer-account nav {
+    grid-template-columns: 1fr !important;
+  }
+}

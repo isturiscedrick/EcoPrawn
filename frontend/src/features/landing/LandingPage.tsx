@@ -1,4 +1,4 @@
-import "@/styles/landing-global.css";
+import "@/styles/marketing.css";
 import { useEffect, useRef, useState } from "react";
 import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { Link } from "@tanstack/react-router";

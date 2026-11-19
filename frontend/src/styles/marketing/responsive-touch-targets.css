@@ -1,0 +1,267 @@
+/* Phase 2 — make the page sections feel intentionally designed for touch. */
+@media (max-width: 639px) {
+  /* Landing page: compress the three-stage ribbon into a single glanceable row. */
+  .ep-business-landing .ep-platform-ribbon {
+    padding: 0.8rem 0.75rem;
+  }
+  .ep-business-landing .ep-platform-ribbon > div {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.25rem;
+  }
+  .ep-business-landing .ep-platform-ribbon-item {
+    min-width: 0;
+    align-items: flex-start;
+    gap: 0.45rem;
+    padding: 0.55rem 0.35rem;
+  }
+  .ep-business-landing .ep-platform-ribbon-number {
+    flex: 0 0 auto;
+    font-size: 9px;
+  }
+  .ep-business-landing .ep-platform-ribbon-item strong {
+    font-size: 11px;
+    line-height: 1.25;
+  }
+  .ep-business-landing .ep-platform-ribbon-item span span {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+  .ep-business-landing .ep-illustration-strip {
+    min-height: 0;
+    padding: 0.85rem 1rem;
+  }
+  .ep-business-landing .ep-illustration-strip > div {
+    gap: 0.15rem;
+  }
+  .ep-business-landing .ep-illustration-strip > div > div:first-child {
+    max-width: 24rem;
+  }
+  .ep-business-landing .ep-illustration-strip > div > :last-child {
+    width: min(100%, 15rem);
+    max-height: 7rem;
+  }
+  .ep-business-landing .ep-stats-panel {
+    gap: 0.5rem;
+    padding: 0.6rem;
+    border-radius: 1.15rem;
+  }
+  .ep-business-landing .ep-stats-panel > div {
+    min-width: 0;
+    padding: 0.8rem 0.7rem;
+    border-radius: 0.8rem;
+  }
+  .ep-business-landing .ep-stats-panel > div > span:first-child {
+    overflow-wrap: anywhere;
+    font-size: clamp(1rem, 5.4vw, 1.45rem);
+  }
+  .ep-business-landing .ep-stats-panel > div > span:last-child {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  /* About section navigation: thumb-scrollable pills, with space below sticky header. */
+  .ep-about-page nav[aria-label="On this page"] {
+    top: 64px;
+  }
+  .ep-about-page nav[aria-label="On this page"] > div {
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    scroll-padding-inline: 1rem;
+    scroll-snap-type: x proximity;
+  }
+  .ep-about-page nav[aria-label="On this page"] a {
+    min-height: 42px;
+    padding-inline: 1rem;
+    scroll-snap-align: start;
+    font-size: 12px;
+  }
+  .ep-about-page #mission {
+    padding-block: 2.5rem;
+  }
+  .ep-about-page #mission .ep-about-mission-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.15rem;
+    border-radius: 1.2rem;
+  }
+  .ep-about-page #objectives,
+  .ep-about-page #systems,
+  .ep-about-page #scope {
+    scroll-margin-top: 7.5rem;
+  }
+  .ep-about-page #objectives .ep-about-content-frame,
+  .ep-about-page #systems .ep-about-content-frame,
+  .ep-about-page #scope .ep-about-content-frame {
+    padding-inline: 1rem;
+  }
+  .ep-about-page #objectives .ep-about-objective {
+    padding: 1.15rem;
+    border-radius: 1.1rem;
+  }
+  .ep-about-page #objectives .ep-about-objective p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .ep-about-page #systems article {
+    padding: 1.05rem;
+  }
+  .ep-about-page .ep-about-journey {
+    padding-inline: 1rem;
+  }
+  .ep-about-page .ep-about-journey > div {
+    min-width: 0;
+  }
+  .ep-about-page .ep-about-workflow-illustration {
+    max-width: 100%;
+    margin-block: 0.5rem 1rem;
+  }
+  .ep-about-page #scope article {
+    padding: 1.15rem;
+    border-radius: 1.1rem;
+  }
+  .ep-about-page #scope article > div:first-child {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .ep-about-page #scope article > div:first-child h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Contact: make the form and its inputs comfortable without adding needless height. */
+  .ep-contact-page main > section:last-child {
+    padding-inline: 1rem;
+  }
+  .ep-contact-page main > section:last-child > div {
+    min-width: 0;
+  }
+  .ep-contact-page main > section:last-child > div > div:first-child {
+    margin-bottom: 1.1rem;
+  }
+  .ep-contact-page [data-contact-details] {
+    margin-bottom: 0.25rem;
+  }
+  .ep-contact-page [data-contact-card] {
+    min-height: 0;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem;
+  }
+  .ep-contact-page [data-contact-card] dd {
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+  .ep-contact-page [data-contact-form] form {
+    gap: 1rem;
+    padding: 1.1rem;
+  }
+  .ep-contact-page [data-contact-form] form h2 {
+    font-size: 1.35rem;
+  }
+  .ep-contact-page [data-contact-form] form button {
+    min-height: 3rem;
+  }
+  .ep-contact-page .ep-contact-intro-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ep-contact-page .ep-contact-visuals {
+    min-height: 6.5rem;
+    max-height: 8rem;
+    overflow: hidden;
+  }
+
+  /* Prevent anchored section headings from hiding behind the sticky chrome. */
+  .ep-landing main section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+@media (max-width: 359px) {
+  .ep-business-landing .ep-platform-ribbon-item {
+    gap: 0.25rem;
+    padding-inline: 0.2rem;
+  }
+  .ep-business-landing .ep-platform-ribbon-item strong {
+    font-size: 10px;
+  }
+  .ep-business-landing .ep-platform-ribbon-item span span {
+    font-size: 8px;
+  }
+  .ep-about-page nav[aria-label="On this page"] a {
+    min-height: 40px;
+    padding-inline: 0.8rem;
+    font-size: 11px;
+  }
+}
+
+/* Step 3 — mobile interaction polish and overflow protection. */
+@media (max-width: 1023px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* Keep touch gestures predictable: vertical scrolling belongs to the drawer,
+     while the header controls remain comfortably tappable. */
+  .ep-mobile-site-drawer {
+    touch-action: pan-y;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ep-mobile-site-drawer nav a,
+  .ep-mobile-site-drawer button,
+  #site-header button[aria-controls="mobile-nav-panel"],
+  #site-header button[role="switch"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .ep-mobile-site-drawer nav a {
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      transform 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .ep-mobile-site-drawer nav a:active {
+    transform: scale(0.985);
+  }
+
+  .ep-mobile-site-drawer button:active,
+  #site-header button[aria-controls="mobile-nav-panel"]:active,
+  #site-header button[role="switch"]:active {
+    transform: scale(0.96);
+  }
+}
+
+/* Do not leave a hidden drawer exposed to assistive technology or pointer input. */
+.ep-mobile-site-drawer[data-state="closed"] {
+  pointer-events: none;
+}
+
+.ep-mobile-site-drawer[data-state="open"] {
+  pointer-events: auto;
+}
+
+/* The drawer and backdrop should respect the user's motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  .ep-mobile-site-drawer,
+  .ep-mobile-site-drawer nav a,
+  #site-header button[aria-controls="mobile-nav-panel"],
+  #site-header button[role="switch"] {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .ep-mobile-site-drawer nav a:active,
+  .ep-mobile-site-drawer button:active,
+  #site-header button[aria-controls="mobile-nav-panel"]:active,
+  #site-header button[role="switch"]:active {
+    transform: none !important;
+  }
+}

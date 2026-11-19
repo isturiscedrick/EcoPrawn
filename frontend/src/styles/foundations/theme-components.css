@@ -182,7 +182,9 @@ html.dark .dashboard-shell :is(.bg-\[var\(--ep-accent\)\], .bg-\[var\(--ep-accen
 .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(--ep-accent-hover\)\] {
   color: var(--ep-secondary);
 }
-html:not(.dark) .dashboard-shell .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(--ep-accent-hover\)\] {
+html:not(.dark)
+  .dashboard-shell
+  .bg-\[rgba\(60\,122\,92\,0\.1\)\].text-\[var\(--ep-accent-hover\)\] {
   background-color: var(--ep-accent-tint);
 }
 
@@ -230,10 +232,11 @@ html.dark .dashboard-shell [style*="var(--ep-accent)"] {
   --tw-shadow: 0 0 0 3px color-mix(in srgb, var(--ep-accent) 12%, transparent);
 }
 
-.dashboard-shell :is(
-  .focus-visible\:outline-\[var\(--ep-accent\)\],
-  .focus-visible\:outline-\[var\(--ep-accent-hover\)\]
-):focus-visible {
+.dashboard-shell
+  :is(
+    .focus-visible\:outline-\[var\(--ep-accent\)\],
+    .focus-visible\:outline-\[var\(--ep-accent-hover\)\]
+  ):focus-visible {
   outline-color: var(--ep-secondary);
 }
 
@@ -267,8 +270,6 @@ html.dark .ep-auth-modal {
 .ep-auth-modal .focus\:ring-\[rgba\(178\,63\,28\,0\.15\)\]:focus {
   --tw-ring-color: color-mix(in srgb, var(--ep-accent, #087e8b) 15%, transparent);
 }
-
-
 
 /* Dashboard chart and filter accents use Ocean Teal, not the former slate secondary. */
 .dashboard-shell polyline[stroke="var(--ep-accent)"],

@@ -4,8 +4,10 @@ This directory is the single source of truth for frontend CSS. Files are grouped
 
 ## Folder structure
 
-- `globals.css` — global entry point imported by `src/routes/__root.tsx`. Its import order is intentional.
-- `landing-global.css` — public-page entry point for landing, About, Contact, and shared marketing styles.
+- `globals.css` — global entry point imported by `src/routes/__root.tsx`.
+- `marketing.css` — public-page entry point for landing, About, Contact, and shared marketing styles.
+- `dashboard.css` — dashboard stylesheet entry point, imported by `SystemLayout`.
+- `marketing/conversion-band.css` — CTA band styles, imported by `CtaBand`.
 - `foundations/` — Tailwind theme bridge, semantic tokens, typography, accessibility defaults, and shared theme components.
 - `dashboard/` — dashboard shell, monitoring components, desktop/mobile layouts, and responsive module styles.
 - `palette/` — shared brand utilities, light/dark surfaces, dashboard palette, marketing palette, and public/dashboard chrome palette layers.
@@ -13,10 +15,14 @@ This directory is the single source of truth for frontend CSS. Files are grouped
 - `components/` — component-owned styles for the authentication modal, SiteHeader, BrandMark, and logo intro.
 - `utilities/` — cross-page responsive and overflow safeguards.
 
+Use the folder for scope and the filename for the stylesheet's responsibility.
+Keep `globals.css`, `marketing.css`, and `dashboard.css` as the only root-level
+CSS entry points.
+
 ## Import ownership
 
 1. Import only `globals.css` from the TanStack root route.
-2. Keep the original order of imports in `globals.css` and `landing-global.css`; cascade order is part of the design.
+2. Keep the original order of imports in `globals.css` and `marketing.css`; cascade order is part of the design.
 3. Keep shared Ocean Teal and Soft Coral Sand tokens in the palette foundation layers. Feature styles may consume tokens but should not redefine the shared brand palette.
 4. Keep dashboard selectors scoped under `.dashboard-shell`.
 5. Keep public-page selectors scoped under `.ep-landing`, `.ep-about-page`, or `.ep-contact-page`, except intentionally shared public chrome.
@@ -28,6 +34,8 @@ This directory is the single source of truth for frontend CSS. Files are grouped
 ## Maintenance notes
 
 - Keep stylesheet files focused on one responsibility.
+- `components/auth-modal.css` and the marketing `landing-sections.css`,
+  `chrome.css`, and `responsive.css` files are ordered import aggregators.
+  Preserve their child import order because it matches the original cascade.
 - The 400-line target is a maintainability guideline, not a reason to split tightly coupled rules without checking selector dependencies and import order.
 - Do not create new files in this root unless they are stylesheet entry points or architecture documentation.
-- `marketing-overrides.css` is deprecated; do not add new rules to it.

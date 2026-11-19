@@ -159,10 +159,12 @@
   }
 }
 
-
 /* Desktop header actions: keep theme, login, and get-started controls as
    consistently sized icon-only circles in both themes and at every width. */
-#site-header > div > div:last-child :is(button[role="switch"], .ep-cta-control.ep-cta-secondary, .ep-cta-control.ep-cta-primary) {
+#site-header
+  > div
+  > div:last-child
+  :is(button[role="switch"], .ep-cta-control.ep-cta-secondary, .ep-cta-control.ep-cta-primary) {
   box-sizing: border-box !important;
   display: inline-flex !important;
   flex: 0 0 44px !important;
@@ -192,7 +194,6 @@
   flex: 0 0 18px !important;
 }
 
-
 /* Give the action buttons their full text labels on wider desktop layouts.
    Compact/tablet widths keep the three controls circular and icon-only. */
 @media (min-width: 1280px) {
@@ -217,7 +218,6 @@
     display: block !important;
   }
 }
-
 
 /* Mobile public header: reserve a real column for the centered brand and
    prevent desktop account actions from being forced visible by desktop rules. */
@@ -294,7 +294,6 @@
   }
 }
 
-
 /* Definitive public landing mobile menu override.
    Keep this after the older mobile header layout rules above: they were
    re-applying a surface fill and border to the hamburger button. */
@@ -321,7 +320,6 @@
     display: none !important;
   }
 }
-
 
 /* Match the landing hamburger glyph's rendered box to the dashboard Icon.
    The older header rule above forced all header SVGs to 18px even though

@@ -1,0 +1,19 @@
+/* Dashboard-only styles. Imported by SystemLayout so public pages do not need them. */
+@import "./dashboard/foundations.css";
+@import "./dashboard/monitoring.css";
+@import "./dashboard/layout.css";
+@import "./dashboard/mobile-layouts.css";
+@import "./dashboard/mobile-modules.css";
+@import "./dashboard/responsive-layout-safeguards.css";
+@import "./dashboard/responsive-overview.css";
+@import "./dashboard/responsive-monitoring.css";
+@import "./dashboard/responsive-controls.css";
+@import "./dashboard/responsive-page-chrome.css";
+@import "./dashboard/responsive-cards.css";
+
+/* Dashboard palette overrides remain last, matching their original cascade role. */
+@import "./palette/dashboard-brand.css";
+@import "./palette/dashboard-sidebar-foundations.css";
+@import "./palette/dashboard-sidebar-states.css";
+@import "./palette/dashboard-mobile-header.css";
+@import "./palette/dashboard-contrast.css";

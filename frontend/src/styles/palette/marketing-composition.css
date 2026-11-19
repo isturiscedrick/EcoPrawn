@@ -1,0 +1,107 @@
+/* 60 / 30 / 10 color distribution for Landing, About, Contact and Auth.
+   60% neutral = page/dialog canvas and content surfaces.
+   30% deep ocean = typography, navigation, footer and structural framing.
+   10% accents = Ocean Teal for actions and highlights. This is a visual hierarchy, not a literal pixel calculation. */
+/* Authentication dialog tokens remain global for the root-level auth provider. */
+.ep-auth-modal {
+  --ep-color-neutral-60: #f8fafc;
+  --ep-color-ocean-30: #173b46;
+  --ep-color-teal-10: #087e8b;
+  --ep-page-bg: var(--ep-color-neutral-60);
+  --ep-page-surface: #ffffff;
+  --ep-structure: var(--ep-color-ocean-30);
+}
+html.dark .ep-auth-modal {
+  --ep-color-neutral-60: #0b171b;
+  --ep-color-ocean-30: #102b31;
+  --ep-color-teal-10: #45c5b3;
+  --ep-page-bg: var(--ep-color-neutral-60);
+  --ep-page-surface: #102328;
+  --ep-structure: var(--ep-color-ocean-30);
+}
+
+/* Auth modal: neutral dialog/input surfaces dominate; ocean is used for
+   text and structure; teal stay on compact interactive accents. */
+.ep-auth-modal {
+  background-color: var(--ep-page-surface) !important;
+  color: var(--ep-text) !important;
+}
+.ep-auth-modal :is(input, [role="group"][aria-label="Account access"]) {
+  background-color: var(--ep-page-bg) !important;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"],
+.ep-auth-modal button[type="submit"] {
+  background-color: var(--ep-accent) !important;
+  border-color: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important;
+}
+.ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="false"] {
+  background-color: var(--ep-page-bg) !important;
+}
+html.dark .ep-auth-modal {
+  background-color: #102328 !important;
+  color: #e8f4f2 !important;
+}
+html.dark .ep-auth-modal :is(input, [role="group"][aria-label="Account access"]) {
+  background-color: #0b171b !important;
+}
+html.dark .ep-auth-modal [role="group"][aria-label="Account access"] button[aria-pressed="true"],
+html.dark .ep-auth-modal button[type="submit"] {
+  background-color: #45c5b3 !important;
+  border-color: #45c5b3 !important;
+  color: #071426 !important;
+}
+
+/* Site chrome follows the same 60/30/10 hierarchy as the public pages.
+   Header stays neutral/floating; footer is the deep-ocean structural anchor.
+   Teal is reserved for primary controls and Ocean Teal for small highlights. */
+#site-header {
+  --ep-chrome-neutral: #f8fafc;
+  --ep-chrome-structure: #173b46;
+  --ep-chrome-text: #173b46;
+  --ep-chrome-muted: #58717a;
+  --ep-chrome-accent: #087e8b;
+  color: var(--ep-chrome-text);
+  border-color: color-mix(in srgb, var(--ep-chrome-structure) 14%, transparent);
+}
+#site-header :is(nav a, button) {
+  color: var(--ep-chrome-text);
+}
+#site-header :is(nav a:hover, button:hover) {
+  color: var(--ep-chrome-accent);
+}
+#site-header :is(a, button):focus-visible {
+  outline: 2px solid var(--ep-chrome-accent) !important;
+  outline-offset: 3px;
+}
+#site-header :is(.ep-header-desktop-auth, [data-brand-color="primary"]) {
+  --ep-accent: var(--ep-chrome-accent);
+}
+#site-header [data-brand-color="secondary"] {
+  background: var(--ep-chrome-accent) !important;
+  border-color: var(--ep-chrome-accent) !important;
+  color: var(--ep-chrome-structure) !important;
+}
+html.dark #site-header {
+  --ep-chrome-neutral: #0b171b;
+  --ep-chrome-structure: #102b31;
+  --ep-chrome-text: #e8f4f2;
+  --ep-chrome-muted: #a7c2c1;
+  --ep-chrome-accent: #45c5b3;
+  color: var(--ep-chrome-text);
+  border-color: rgba(232, 244, 242, 0.12);
+}
+html.dark #site-header :is(nav a, button) {
+  color: var(--ep-chrome-text);
+}
+html.dark #site-header :is(nav a:hover, button:hover) {
+  color: var(--ep-chrome-accent);
+}
+html.dark #site-header :is(a, button):focus-visible {
+  outline-color: var(--ep-chrome-accent) !important;
+}
+html.dark #site-header [data-brand-color="secondary"] {
+  background: var(--ep-chrome-accent) !important;
+  border-color: var(--ep-chrome-accent) !important;
+  color: #173b46 !important;
+}

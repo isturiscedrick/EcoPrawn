@@ -1,4 +1,4 @@
-import "@/styles/landing-global.css";
+import "@/styles/marketing.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { PublicChromeMotion } from "@/components/motion/PublicChromeMotion";
 import { SiteFooter } from "@/components/layout/SiteFooter";

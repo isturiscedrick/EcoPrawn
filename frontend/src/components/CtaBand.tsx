@@ -1,4 +1,4 @@
-import "@/styles/landing-conversion.css";
+import "@/styles/marketing/conversion-band.css";
 import { Link } from "@tanstack/react-router";
 import { AuthLink } from "@/features/auth/AuthModalProvider";
 

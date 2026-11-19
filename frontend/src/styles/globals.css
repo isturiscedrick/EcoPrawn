@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -7,15 +7,15 @@
 @import "./foundations/theme-components.css";
 
 /* Public pages and shared responsive safeguards. */
-@import "./utilities/responsive-overrides.css";
+@import "./utilities/responsive.css";
 
 /* Palette layers: ordering is intentional and must remain stable. */
-@import "./palette/palette-brand-utilities.css";
-@import "./palette/palette-shared-brand-states.css";
-@import "./palette/palette-surface-foundations.css";
-@import "./palette/palette-theme-surfaces.css";
-@import "./palette/palette-surface-final-overrides.css";
-@import "./palette/palette-marketing-foundations.css";
-@import "./palette/palette-marketing-composition.css";
-@import "./palette/palette-public-contrast.css";
-@import "./palette/palette-mobile-public-chrome.css";
+@import "./palette/brand-utilities.css";
+@import "./palette/brand-states.css";
+@import "./palette/surfaces.css";
+@import "./palette/theme-surfaces.css";
+@import "./palette/surface-overrides.css";
+@import "./palette/marketing-foundations.css";
+@import "./palette/marketing-composition.css";
+@import "./palette/public-contrast.css";
+@import "./palette/mobile-public-chrome.css";

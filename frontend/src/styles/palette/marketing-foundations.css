@@ -1,0 +1,68 @@
+/* Legacy secondary-action selectors now inherit the single Ocean Teal brand. */
+:is(.ecoprawn-root, .dashboard-shell) :is(.ep-secondary-action, [data-brand-color="secondary"]) {
+  background-color: var(--ep-accent) !important;
+  border-color: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important;
+}
+:is(.ecoprawn-root, .dashboard-shell)
+  :is(.ep-secondary-action, [data-brand-color="secondary"]):is(:hover, :focus-visible) {
+  background-color: var(--ep-accent-hover) !important;
+  border-color: var(--ep-accent-hover) !important;
+  color: var(--ep-on-accent) !important;
+}
+:is(.ecoprawn-root, .dashboard-shell) :is(.ep-secondary-accent, [data-secondary-accent]) {
+  color: var(--ep-accent) !important;
+}
+:is(.ecoprawn-root, .dashboard-shell) :is(.ep-secondary-tint, [data-secondary-tint]) {
+  background-color: var(--ep-accent-tint) !important;
+  border-color: color-mix(in srgb, var(--ep-accent) 30%, transparent) !important;
+}
+
+/* Authentication dialog accent tokens remain global because its provider lives at the app root. */
+.ep-auth-modal {
+  --ep-accent: #087e8b;
+  --ep-accent-hover: #066874;
+  --ep-on-accent: #ffffff;
+  --ep-accent-tint: rgba(8, 126, 139, 0.12);
+  --ep-accent-tint-soft: rgba(8, 126, 139, 0.065);
+}
+html.dark .ep-auth-modal {
+  --ep-accent: #45c5b3;
+  --ep-accent-hover: #70d7c8;
+  --ep-on-accent: #071426;
+  --ep-accent-tint: rgba(69, 197, 179, 0.14);
+  --ep-accent-tint-soft: rgba(69, 197, 179, 0.075);
+}
+.ep-auth-modal :is(.ep-secondary-accent, [data-secondary-accent]) {
+  color: var(--ep-accent) !important;
+}
+.ep-auth-modal :is(.ep-secondary-tint, [data-secondary-tint]) {
+  background-color: var(--ep-accent-tint) !important;
+  border-color: color-mix(in srgb, var(--ep-accent) 32%, transparent) !important;
+}
+.ep-auth-modal :is(.ep-secondary-action, [data-brand-color="secondary"]) {
+  background-color: var(--ep-accent) !important;
+  border-color: var(--ep-accent) !important;
+  color: var(--ep-on-accent) !important;
+}
+.ep-auth-modal
+  :is(.ep-secondary-action, [data-brand-color="secondary"]):is(:hover, :focus-visible) {
+  background-color: var(--ep-accent-hover) !important;
+  border-color: var(--ep-accent-hover) !important;
+  color: var(--ep-on-accent) !important;
+}
+.ep-auth-modal :is(.ep-auth-eyebrow, [data-auth-accent]) {
+  color: var(--ep-accent) !important;
+}
+.ep-auth-modal .ep-auth-brand {
+  border-color: color-mix(in srgb, var(--ep-accent) 38%, transparent) !important;
+}
+html.dark .ep-auth-modal :is(.ep-auth-eyebrow, [data-auth-accent]) {
+  color: #45c5b3 !important;
+  -webkit-text-fill-color: #45c5b3 !important;
+}
+html.dark .ep-auth-modal button[aria-label="Close"]:hover {
+  border-color: #45c5b3 !important;
+  background: rgba(69, 197, 179, 0.12) !important;
+  color: #70d7c8 !important;
+}

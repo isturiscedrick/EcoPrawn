@@ -43,18 +43,28 @@ html.dark .ep-logo {
   animation:
     ep-logo-draw var(--t, 1s) cubic-bezier(0.65, 0, 0.35, 1)
       calc(var(--ep-logo-wait) + var(--d, 0s)) both,
-    ep-logo-settle 0.45s ease-out
-      calc(var(--ep-logo-wait) + var(--d, 0s) + var(--t, 1s) * 0.75) both;
+    ep-logo-settle 0.45s ease-out calc(var(--ep-logo-wait) + var(--d, 0s) + var(--t, 1s) * 0.75)
+      both;
 }
 
 @keyframes ep-logo-draw {
-  from { stroke-dashoffset: 1; }
-  to   { stroke-dashoffset: 0; }
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes ep-logo-settle {
-  from { fill-opacity: 0; stroke-opacity: 1; }
-  to   { fill-opacity: 1; stroke-opacity: 0; }
+  from {
+    fill-opacity: 0;
+    stroke-opacity: 1;
+  }
+  to {
+    fill-opacity: 1;
+    stroke-opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -75,8 +85,14 @@ html.ep-nav-seen header .ep-logo-shape {
 }
 
 @keyframes ep-wordmark-in {
-  from { opacity: 0; transform: translateX(-8px); }
-  to   { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

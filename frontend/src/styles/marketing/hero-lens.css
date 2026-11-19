@@ -20,12 +20,24 @@
   transform: translateZ(0);
   transform-style: preserve-3d;
 }
-.ep-landing #top .ep-lens-core .ep-lens-rings { transform: translateZ(9px); }
-.ep-landing #top .ep-lens-core .ep-lens-ticks { transform: translateZ(13px); }
-.ep-landing #top .ep-lens-core .ep-lens-arcs  { transform: translateZ(19px); }
-.ep-landing #top .ep-lens-core .ep-lens-shrimp{ transform: translateZ(25px); }
-.ep-landing #top .ep-lens-core .ep-lens-scan  { transform: translateZ(28px); }
-.ep-landing #top .ep-lens-core .ep-lens-glare { transform: translateZ(31px); }
+.ep-landing #top .ep-lens-core .ep-lens-rings {
+  transform: translateZ(9px);
+}
+.ep-landing #top .ep-lens-core .ep-lens-ticks {
+  transform: translateZ(13px);
+}
+.ep-landing #top .ep-lens-core .ep-lens-arcs {
+  transform: translateZ(19px);
+}
+.ep-landing #top .ep-lens-core .ep-lens-shrimp {
+  transform: translateZ(25px);
+}
+.ep-landing #top .ep-lens-core .ep-lens-scan {
+  transform: translateZ(28px);
+}
+.ep-landing #top .ep-lens-core .ep-lens-glare {
+  transform: translateZ(31px);
+}
 
 @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
   .ep-landing #top .ep-lens-core {
@@ -240,7 +252,7 @@
 
 /* ---------- Light Theme: Instrument Finish & Optics ---------- */
 html:not(.dark) .ep-landing #top figure[aria-label^="A shrimp"] > div {
-  background: linear-gradient(145deg, #477F86 0%, #28636D 48%, #174B55 100%) !important;
+  background: linear-gradient(145deg, #477f86 0%, #28636d 48%, #174b55 100%) !important;
   border: 1px solid rgba(8, 126, 139, 0.32);
   box-shadow:
     0 30px 58px -30px rgba(8, 126, 139, 0.42),
@@ -249,12 +261,12 @@ html:not(.dark) .ep-landing #top figure[aria-label^="A shrimp"] > div {
     0 0 0 5px rgba(8, 126, 139, 0.08) !important;
 }
 html:not(.dark) .ep-landing #top figure[aria-label^="A shrimp"] > div > div {
-  background: radial-gradient(circle at 48% 38%, #397780 0%, #245D67 48%, #123F49 100%) !important;
+  background: radial-gradient(circle at 48% 38%, #397780 0%, #245d67 48%, #123f49 100%) !important;
   --tw-ring-color: rgba(8, 126, 139, 0.48) !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-rings,
 html:not(.dark) .ep-landing #top .ep-lens-ticks {
-  color: #D9EFEB !important;
+  color: #d9efeb !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-rings circle {
   stroke: currentColor;
@@ -267,33 +279,38 @@ html:not(.dark) .ep-landing #top .ep-lens-shrimp .ep-logo {
   --ep-logo-text: #45c5b3 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-speck {
-  background: #EAF7F2 !important;
+  background: #eaf7f2 !important;
   opacity: 0.34 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-glare {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 48%, transparent 72%) !important;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.08) 48%,
+    transparent 72%
+  ) !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-iris {
-  background: #123F49 !important;
+  background: #123f49 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-ping {
   border-color: #45c5b3 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-scan {
-  background: linear-gradient(90deg, transparent, #D9EFEB, transparent) !important;
+  background: linear-gradient(90deg, transparent, #d9efeb, transparent) !important;
   box-shadow: 0 0 12px rgba(217, 239, 235, 0.6) !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-readout > span:first-child {
-  color: #31504C !important;
+  color: #31504c !important;
   font-weight: 750 !important;
   letter-spacing: 0.01em;
 }
 html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child {
-  color: #0F3439 !important;
+  color: #0f3439 !important;
   font-weight: 800 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-readout > span:last-child > span:last-child {
-  color: #315A5C !important;
+  color: #315a5c !important;
   font-weight: 700 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-readout .ep-lens-dot {
@@ -308,19 +325,20 @@ html:not(.dark) .ep-landing #top .ep-lens-connectors circle {
   fill: #111827 !important;
 }
 html:not(.dark) .ep-landing #top .ep-lens-caption {
-  color: #31504C !important;
+  color: #31504c !important;
   text-shadow: none !important;
 }
 
 /* ---------- Dark Theme: Instrument Finish & Optics ---------- */
 html.dark .ep-landing figure[aria-label^="A shrimp"] > div {
-  background: linear-gradient(145deg, #26383A 0%, #142629 52%, #0A171A 100%) !important;
-  box-shadow: 0 42px 78px -32px rgba(0, 0, 0, 0.82),
+  background: linear-gradient(145deg, #26383a 0%, #142629 52%, #0a171a 100%) !important;
+  box-shadow:
+    0 42px 78px -32px rgba(0, 0, 0, 0.82),
     inset 0 2px 0 rgba(69, 197, 179, 0.18),
     0 0 36px rgba(69, 197, 179, 0.08) !important;
 }
 html.dark .ep-landing figure[aria-label^="A shrimp"] > div > div {
-  background: radial-gradient(circle at 50% 44%, #244044 0%, #142B2F 48%, #091619 100%) !important;
+  background: radial-gradient(circle at 50% 44%, #244044 0%, #142b2f 48%, #091619 100%) !important;
   --tw-ring-color: rgba(69, 197, 179, 0.34) !important;
 }
 html.dark .ep-landing .ep-lens-rings,
@@ -343,13 +361,13 @@ html.dark .ep-landing .ep-lens-iris {
 html.dark .ep-landing .ep-lens-readout,
 html.dark .ep-landing .ep-lens-readout span,
 html.dark .ep-landing .ep-lens-caption {
-  color: #EAF4EF !important;
+  color: #eaf4ef !important;
 }
 html.dark .ep-landing .ep-lens-readout .ep-lens-dot {
   background-color: #70d7c8 !important;
 }
 html.dark .ep-landing .ep-lens-speck {
-  background: #DDF8E7 !important;
+  background: #ddf8e7 !important;
 }
 html.dark .ep-landing .ep-lens-flash {
   background: #45c5b3 !important;
