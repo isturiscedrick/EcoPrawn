@@ -44,17 +44,31 @@ export const DASHBOARD_NAV_ITEMS: DashboardNavItem[] = [
     section: "operations",
   },
   {
+    icon: "waves",
+    label: "Water Quality",
+    view: "water",
+    description: "Live sensor readings and thresholds",
+    section: "operations",
+  },
+  {
+    icon: "camera",
+    label: "Vision",
+    view: "vision",
+    description: "Shrimp scans and growth records",
+    section: "operations",
+  },
+  {
+    icon: "utensils",
+    label: "Feeding",
+    view: "feeding",
+    description: "Feed schedule and tank allocations",
+    section: "operations",
+  },
+  {
     icon: "chart-bars-trend",
     label: "Analytics",
     view: "analytics",
     description: "Telemetry trends & biomass forecasts",
-    section: "operations",
-  },
-  {
-    icon: "waves",
-    label: "Water Quality",
-    view: "water",
-    description: "DO, pH, salinity, ORP & temperature",
     section: "operations",
   },
   {

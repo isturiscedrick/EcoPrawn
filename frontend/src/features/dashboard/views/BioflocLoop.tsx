@@ -2,6 +2,7 @@ import { KpiGrid, Panel, KpiCard } from "@/features/dashboard/components/Dashboa
 import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
+import { DashboardPageHeader } from "@/features/dashboard/components/DashboardPageHeader";
 
 const loopSteps = [
   { step: "01", title: "Biofloc reactor", body: "Bacteria convert ammonia and organic waste into biofloc." },
@@ -17,20 +18,15 @@ export function BioflocLoop() {
 
   return (
     <>
-      <div className="flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--ep-line)]">
-        <div>
-          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)] mb-2">
-            Biofloc &amp; effluent
-          </div>
-          <h1 className="ep-font-display text-[28px] font-semibold text-[var(--water-deep)] leading-tight">
-            Biofloc Loop
-          </h1>
-        </div>
-        <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
+      <DashboardPageHeader
+        eyebrow="Biofloc & effluent"
+        title="Biofloc Loop"
+        description="Treatment metrics and discharge activity."
+        actions={<div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">
           <span className="ep-pulse-dot w-[7px] h-[7px] rounded-full bg-[var(--ep-accent)]" />
           Loop active
-        </div>
-      </div>
+        </div>}
+      />
 
       <KpiGrid label="Biofloc metric summary">
         {bioflocMetrics.map((m) => (

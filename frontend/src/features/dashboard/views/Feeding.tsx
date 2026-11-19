@@ -4,6 +4,7 @@ import { FeedingProgressChart } from "@/features/dashboard/components/AnalyticsC
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardInlineEmptyState, DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { downloadCsv } from "@/utils/downloadCsv";
+import { DashboardPageHeader } from "@/features/dashboard/components/DashboardPageHeader";
 
 export function Feeding() {
   const { tanks, feedSchedule, loading } = useTanks();
@@ -19,6 +20,11 @@ export function Feeding() {
 
   return (
     <>
+      <DashboardPageHeader
+        eyebrow="Operations"
+        title="Feeding"
+        description="Daily schedule and feed allocation by tank."
+      />
       <div className="mb-4 flex flex-wrap items-center justify-end gap-3">
         
         <button

@@ -3,6 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Icon } from "@/components/ui/Icon";
 import { AlertRow } from "@/features/dashboard/components/DashboardRows";
 import { KpiGrid, Panel, KpiCard } from "@/features/dashboard/components/DashboardPrimitives";
+import { DashboardPageHeader } from "@/features/dashboard/components/DashboardPageHeader";
 import { DonutChart } from "@/features/dashboard/components/AnalyticsCharts";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { downloadCsv } from "@/utils/downloadCsv";
@@ -88,18 +89,11 @@ export function AlertsView() {
           />
         </div>
       )}
-      <div className="dashboard-page-header flex justify-between items-start mb-7 flex-wrap gap-4 pb-6 border-b border-[var(--ep-line)]">
-        <div>
-          <div className="ep-font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)] mb-2">
-            Facility Monitoring
-          </div>
-          <h1 className="ep-font-display text-[28px] font-semibold text-[var(--ep-text)] leading-tight">
-            Alerts
-          </h1>
-          <div className="text-[13px] text-[var(--ep-text-muted)] mt-1.5">
-            Warnings and event history.
-          </div>
-        </div>
+      <DashboardPageHeader
+        eyebrow="Facility monitoring"
+        title="Alerts"
+        description="Active warnings and recent events."
+        actions={<>
         <button
           type="button"
           onClick={() => void navigate({ to: "/dashboard/activity" })}
@@ -117,7 +111,8 @@ export function AlertsView() {
         }} className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)]">
           <span aria-hidden="true">↓</span> Export alerts
         </button>
-      </div>
+        </>}
+      />
 
       <KpiGrid label="Alert summary">
         <KpiCard

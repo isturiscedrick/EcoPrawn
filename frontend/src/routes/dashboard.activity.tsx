@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Panel } from "@/features/dashboard/components/DashboardPrimitives";
+import { DashboardPageHeader } from "@/features/dashboard/components/DashboardPageHeader";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { readAuditEvents, type AuditLogEntry } from "@/features/dashboard/lib/audit-log";
@@ -51,11 +52,11 @@ function ActivityPage() {
 
   return (
     <>
-      <div className="dashboard-page-header mb-7 border-b border-[var(--ep-line)] pb-7">
-        <div className="mb-2 ep-font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent-hover)]">Facility history</div>
-        <h1 className="ep-font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)]">Activity Log</h1>
-        <p className="mt-2 text-[15px] text-[var(--ep-text-muted)]">Detailed user actions, tank changes, and monitoring events.</p>
-      </div>
+      <DashboardPageHeader
+        eyebrow="Facility history"
+        title="Activity Log"
+        description="User actions, tank changes, and monitoring events."
+      />
 
       <Panel title="Activity history" badge={`${visibleItems.length} entries`} icon="clock">
         {!isDbConnected && error && (

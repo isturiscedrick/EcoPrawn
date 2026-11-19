@@ -7,6 +7,7 @@ import { EditTankModal } from "@/features/dashboard/components/EditTankModal";
 import { DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { useTanks, type Tank, type NewTankInput } from "@/features/dashboard/context/TankContext";
 import { recordAuditEvent } from "@/features/dashboard/lib/audit-log";
+import { DashboardPageHeader } from "@/features/dashboard/components/DashboardPageHeader";
 
 export function TanksView() {
   const { tanks, loading, error, addTank, updateTank, removeTank } = useTanks();
@@ -61,20 +62,18 @@ export function TanksView() {
 
   return (
     <div className="mx-auto w-full max-w-none space-y-6">
-      <header className="flex flex-col gap-4 border-b border-[var(--ep-line)] pb-6 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ep-primary)]">Facility management</p>
-          <h1 className="text-2xl font-semibold tracking-tight text-[var(--ep-text)] sm:text-3xl">Tanks</h1>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ep-text-muted)]">Tank identification, stocking records, and real-time biometric metrics.</p>
-        </div>
-        <button
+      <DashboardPageHeader
+        eyebrow="Facility management"
+        title="Tanks"
+        description="Stocking records and live tank metrics."
+        actions={<button
           type="button"
           onClick={() => setAdding(true)}
           className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[var(--ep-primary)] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2 sm:w-auto"
         >
           <Icon name="plus" size={17} /> Add tank
-        </button>
-      </header>
+        </button>}
+      />
 
       <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <div className="rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-sm">

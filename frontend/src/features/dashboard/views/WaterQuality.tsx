@@ -6,6 +6,7 @@ import { downloadCsv } from "@/utils/downloadCsv";
 import { DashboardInlineEmptyState, DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
 import { saveThresholds, THRESHOLDS } from "@/features/dashboard/lib/thresholds";
 import { useThresholdSettings } from "@/features/dashboard/hooks/useThresholdSettings";
+import { DashboardPageHeader } from "@/features/dashboard/components/DashboardPageHeader";
 export function WaterQuality() {
   const { tanks, waterHistory = [], loading } = useTanks();
   const [selectedTankId, setSelectedTankId] = useState<string | null>(null);
@@ -91,6 +92,11 @@ export function WaterQuality() {
 
   return (
     <div className="dashboard-water-quality-page">
+      <DashboardPageHeader
+        eyebrow="Operations"
+        title="Water Quality"
+        description="Live readings, safe ranges, and sensor history."
+      />
       <div className="mb-4 flex flex-wrap items-center justify-end gap-3">
         
         <button type="button" onClick={() => {

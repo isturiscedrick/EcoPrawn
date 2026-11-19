@@ -3,6 +3,7 @@ import { KpiGrid, Panel, KpiCard } from "@/features/dashboard/components/Dashboa
 import { ScrollFadeContainer } from "@/components/motion/ScrollFadeContainer";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { DashboardInlineEmptyState, DashboardViewSkeleton } from "@/features/dashboard/components/DashboardStates";
+import { DashboardPageHeader } from "@/features/dashboard/components/DashboardPageHeader";
 
 function GrowthTrendChart({ values }: { values: number[] }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -134,6 +135,11 @@ export function VisionGrowth() {
 
   return (
     <>
+      <DashboardPageHeader
+        eyebrow="Operations"
+        title="Vision"
+        description="Camera scans, shrimp growth, and behavior signals."
+      />
       <div className="mb-4 flex flex-wrap items-center justify-end gap-3">
         
         <div className="inline-flex items-center gap-2 bg-[var(--ep-surface)] border border-[var(--ep-line)] px-4 py-[9px] rounded-full text-[12.5px] font-semibold text-[var(--water-deep)] shadow-[var(--shadow-pill)]">

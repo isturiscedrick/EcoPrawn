@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { DashboardErrorState, DashboardLoadingState } from "@/features/dashboard/components/DashboardStates";
 import { KpiCard, KpiGrid } from "@/features/dashboard/components/DashboardPrimitives";
 import { RecentActivityPanel } from "@/features/dashboard/components/RecentActivityPanel";
+import { DashboardPageHeader } from "@/features/dashboard/components/DashboardPageHeader";
 import { TankSnapshotSection } from "@/features/dashboard/components/TankSnapshotSection";
 import { useTanks } from "@/features/dashboard/context/TankContext";
 import { buildRecentDashboardActivity } from "@/features/dashboard/lib/dashboard-activity";
@@ -67,17 +68,11 @@ export function Dashboard() {
 
   return (
     <>
-      <header className="dashboard-page-header mb-6 block w-full border-b border-[var(--ep-line)] pb-6">
-        <div className="ep-font-mono mb-2 block text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
-          Facility overview
-        </div>
-        <h1 className="ep-font-display block w-full text-[26px] font-semibold leading-tight tracking-[-0.02em] text-[var(--ep-text)] sm:text-[30px]">
-          Dashboard
-        </h1>
-        <p className="mt-2 block w-full text-sm text-[var(--ep-text-muted)]">
-          Real-time facility telemetry, tank biometrics, and water quality monitoring.
-        </p>
-      </header>
+      <DashboardPageHeader
+        eyebrow="Facility overview"
+        title="Dashboard"
+        description="Live facility status and tank performance."
+      />
 
       {/* 4 PRIMARY KPI CARDS */}
       <KpiGrid label="Facility snapshot metrics">
