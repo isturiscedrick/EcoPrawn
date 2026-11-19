@@ -18,3 +18,6 @@
 @import "./palette/dashboard-sidebar-states.css";
 @import "./palette/dashboard-mobile-header.css";
 @import "./palette/dashboard-contrast.css";
+@import "./dashboard/modal-responsive.css";
+@import "./dashboard/tanks-mobile.css";
+@import "./dashboard/laptop-density.css";

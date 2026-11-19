@@ -11,8 +11,6 @@ import { useTanks } from "@/features/dashboard/context/TankContext";
 import { deriveTankAlerts } from "@/features/dashboard/lib/alerts";
 import { DASHBOARD_QUICK_LINKS } from "./system-layout-utils";
 import { DashboardCommandSearch } from "./DashboardCommandSearch";
-import { DashboardProfileMenu } from "./DashboardProfileMenu";
-import { DashboardLogoutDialogs } from "./DashboardLogoutDialogs";
 
 interface SystemLayoutProps {
   children: ReactNode;
@@ -36,8 +34,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     }
   }, []);
 
-  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
-  const [logoutErrorOpen, setLogoutErrorOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchDialogRef = useRef<HTMLElement>(null);
@@ -54,8 +50,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
     setSearchOpen(false);
   }, []);
   const [scrolled, setScrolled] = useState(false);
-  const [profileName, setProfileName] = useState("Facility Operator");
-  const [profileRole, setProfileRole] = useState("FACILITY OPERATOR");
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const pullStartY = useRef<number | null>(null);
 
@@ -86,22 +80,15 @@ export function SystemLayout({ children }: SystemLayoutProps) {
   }, [pathname]);
 
   useEffect(() => {
-    const savedName = window.localStorage.getItem("ep-profile-name");
-    const savedRole = window.localStorage.getItem("ep-profile-role");
-    const savedImage = window.localStorage.getItem("ep-profile-image");
-    if (savedName) setProfileName(savedName);
-    if (savedRole) setProfileRole(savedRole.toUpperCase());
-    setProfileImage(savedImage);
-    const syncProfile = () => {
-      setProfileName(window.localStorage.getItem("ep-profile-name") ?? "Facility Operator");
-      setProfileRole((window.localStorage.getItem("ep-profile-role") ?? "FACILITY OPERATOR").toUpperCase());
+    const syncProfileImage = () => {
       setProfileImage(window.localStorage.getItem("ep-profile-image"));
     };
-    window.addEventListener("ecoprawn:profile-updated", syncProfile);
-    window.addEventListener("storage", syncProfile);
+    syncProfileImage();
+    window.addEventListener("ecoprawn:profile-updated", syncProfileImage);
+    window.addEventListener("storage", syncProfileImage);
     return () => {
-      window.removeEventListener("ecoprawn:profile-updated", syncProfile);
-      window.removeEventListener("storage", syncProfile);
+      window.removeEventListener("ecoprawn:profile-updated", syncProfileImage);
+      window.removeEventListener("storage", syncProfileImage);
     };
   }, []);
 
@@ -236,13 +223,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
                 </span>
               )}
             </Link>
-            <DashboardProfileMenu
-              pathname={pathname}
-              profileName={profileName}
-              profileRole={profileRole}
-              profileImage={profileImage}
-              onRequestLogout={() => setLogoutConfirmOpen(true)}
-            />
           </div>
         </div>
       </header>
@@ -268,23 +248,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         dialogRef={searchDialogRef}
         onQueryChange={setSearchQuery}
         onClose={closeSearch}
-      />
-
-      <DashboardLogoutDialogs
-        confirmOpen={logoutConfirmOpen}
-        errorOpen={logoutErrorOpen}
-        onCancel={() => setLogoutConfirmOpen(false)}
-        onConfirm={async () => {
-          setLogoutConfirmOpen(false);
-          try {
-            const response = await fetch("/api/auth/logout", { method: "POST" });
-            if (!response.ok) throw new Error("Logout failed");
-            window.location.replace("/login");
-          } catch {
-            setLogoutErrorOpen(true);
-          }
-        }}
-        onErrorDismiss={() => setLogoutErrorOpen(false)}
       />
 
       {/* Responsive dashboard content area. */}
@@ -354,9 +317,9 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         className="fixed inset-x-0 bottom-0 z-[70] grid grid-cols-5 gap-1 border-t border-[var(--ep-line)] bg-[color-mix(in_srgb,var(--ep-surface)_98%,transparent)] px-2 pt-1.5 pb-[max(.4rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-24px_rgba(15,23,42,.42)] backdrop-blur-xl lg:hidden"
       >
         {DASHBOARD_QUICK_LINKS.map((item) => {
-          const active = pathname === item.href || pathname.startsWith(item.href + "/") ||
-            (item.key === "home" && pathname === "/dashboard/overview") ||
-            (item.key === "vision" && pathname === "/dashboard/vision");
+          const active = item.key === "home"
+            ? pathname === item.href || pathname === "/dashboard/overview"
+            : pathname === item.href || pathname.startsWith(item.href + "/");
           return (
             <Link
               key={item.key}

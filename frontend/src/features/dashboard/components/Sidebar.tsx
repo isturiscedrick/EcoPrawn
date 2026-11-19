@@ -482,31 +482,6 @@ export function Sidebar({
             </Link>
           </div>
 
-          {/* Quick AI Action Card on Mobile */}
-          <div className="px-4 pt-3 pb-1 shrink-0">
-            <Link
-              to="/dashboard/assistant"
-              onClick={closeDrawer}
-              className={`group flex items-center gap-3 rounded-xl border p-2.5 transition-all ${
-                pathname.startsWith("/dashboard/assistant")
-                  ? "border-[var(--ep-primary)] bg-[var(--ep-accent-tint)]"
-                  : "border-teal-500/25 bg-gradient-to-r from-teal-500/10 via-emerald-500/5 to-transparent hover:border-teal-500/40"
-              }`}
-            >
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500 to-emerald-600 text-white shadow-2xs">
-                <Icon name="sparkles" size={15} />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-bold text-[var(--ep-text)]">AI Assistant</span>
-                  <span className="rounded bg-teal-500/20 px-1 text-[9px] font-bold text-teal-600 dark:text-teal-300">ONLINE</span>
-                </div>
-                <div className="truncate text-[10px] text-[var(--ep-text-muted)]">Ask water & feeding copilot</div>
-              </div>
-              <Icon name="arrow-right" size={14} className="text-[var(--ep-text-muted)]" />
-            </Link>
-          </div>
-
           {/* Navigation */}
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3 space-y-4">
             <div>

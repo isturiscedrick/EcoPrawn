@@ -124,7 +124,7 @@ export function ConfirmDialog({
       aria-modal="true"
       aria-labelledby={titleId}
       aria-describedby={descId}
-      className="fixed inset-0 z-[110] flex items-center justify-center p-5"
+      className="dashboard-confirm-layer fixed inset-0 z-[110] flex items-center justify-center p-5"
     >
       <div
         aria-hidden="true"
@@ -135,7 +135,7 @@ export function ConfirmDialog({
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="ep-pop-in relative z-10 w-full max-w-[400px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-2xl outline-none"
+        className="dashboard-confirm-panel ep-pop-in relative z-10 w-full max-w-[400px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-2xl outline-none"
       >
         <h2
           id={titleId}

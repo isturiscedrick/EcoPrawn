@@ -94,14 +94,6 @@ export function AlertsView() {
         title="Alerts"
         description="Active warnings and recent events."
         actions={<>
-        <button
-          type="button"
-          onClick={() => void navigate({ to: "/dashboard/activity" })}
-          className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 text-xs font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-tint)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-primary)] lg:hidden"
-        >
-          <Icon name="clock" size={15} />
-          Activity Log
-        </button>
         <button type="button" onClick={() => {
           const rows = [
             ...liveAlerts.map(alert => ["Active warning", alert.title, alert.detail, alert.time]),

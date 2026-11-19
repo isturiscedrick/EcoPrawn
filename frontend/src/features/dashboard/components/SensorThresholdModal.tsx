@@ -109,8 +109,12 @@ export function SensorThresholdModal({ open, onClose }: SensorThresholdModalProp
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    window.requestAnimationFrame(() => {
-      dialogRef.current?.querySelector<HTMLInputElement>("input")?.focus();
+    const focusFrame = window.requestAnimationFrame(() => {
+      if (window.matchMedia("(max-width: 639px)").matches) {
+        dialogRef.current?.focus({ preventScroll: true });
+      } else {
+        dialogRef.current?.querySelector<HTMLInputElement>("input")?.focus();
+      }
     });
 
     function onKeyDown(event: KeyboardEvent) {
@@ -135,6 +139,7 @@ export function SensorThresholdModal({ open, onClose }: SensorThresholdModalProp
 
     window.addEventListener("keydown", onKeyDown);
     return () => {
+      window.cancelAnimationFrame(focusFrame);
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = originalOverflow;
       opener?.focus();

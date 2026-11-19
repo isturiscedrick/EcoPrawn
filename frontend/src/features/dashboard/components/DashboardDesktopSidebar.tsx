@@ -59,7 +59,6 @@ export function DashboardDesktopSidebar({
   const [hoveredSettings, setHoveredSettings] = useState(false);
   const [hoveredLogout, setHoveredLogout] = useState(false);
 
-  const isAssistantActive = pathname.startsWith("/dashboard/assistant");
   const isSettingsActive = pathname.startsWith("/dashboard/settings");
 
   // Filter grouped items
@@ -185,43 +184,6 @@ export function DashboardDesktopSidebar({
           </SidebarTooltip>
         )}
       </div>
-
-      {/* 3. FEATURED AI ASSISTANT SPOTLIGHT CARD (When Expanded) */}
-      {!collapsed && (
-        <div className="px-4 pt-3.5 pb-1">
-          <Link
-            to="/dashboard/assistant"
-            className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border p-3 transition-all duration-200 ${
-              isAssistantActive
-                ? "border-[var(--ep-primary)] bg-[var(--ep-accent-tint)] shadow-sm ring-1 ring-[var(--ep-primary)]/20"
-                : "border-teal-500/25 bg-gradient-to-br from-teal-500/10 via-emerald-500/5 to-transparent hover:border-teal-500/40 hover:bg-teal-500/15"
-            }`}
-          >
-            {/* Glowing Sparkles Avatar */}
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 text-white shadow-sm group-hover:scale-105 transition-transform">
-              <Icon name="sparkles" size={18} className="animate-pulse" />
-            </div>
-
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-bold text-[var(--ep-text)] group-hover:text-[var(--ep-primary)] transition-colors">
-                  AI Assistant
-                </span>
-                <span className="inline-flex items-center rounded-md border border-teal-500/30 bg-teal-500/20 px-1 py-0.2 text-[9px] font-bold text-teal-600 dark:text-teal-300">
-                  LIVE
-                </span>
-              </div>
-              <p className="truncate text-[11px] text-[var(--ep-text-muted)]">
-                Ask water & feeding copilot
-              </p>
-            </div>
-
-            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-[var(--ep-text-muted)] group-hover:translate-x-0.5 group-hover:text-[var(--ep-primary)] transition-all">
-              <Icon name="arrow-right" size={14} />
-            </span>
-          </Link>
-        </div>
-      )}
 
       {/* 4. NAVIGATION MODULES */}
       <div className={`min-h-0 flex-1 overflow-y-auto py-3 space-y-4 ${collapsed ? "px-2" : "px-4"}`}>

@@ -29,7 +29,7 @@ export function DashboardCommandSearch({
 
   return (
     <div
-      className="fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/60 px-3 pt-[12vh] backdrop-blur-md"
+      className="dashboard-search-layer fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/60 px-3 pt-[12vh] backdrop-blur-md"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -40,7 +40,7 @@ export function DashboardCommandSearch({
         role="dialog"
         aria-modal="true"
         aria-labelledby="dashboard-search-title"
-        className="w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text)] shadow-2xl"
+        className="dashboard-search-panel w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text)] shadow-2xl"
       >
         <div className="flex items-center gap-3 border-b border-[var(--ep-line)] px-4">
           <Icon name="search" size={19} className="shrink-0 text-[var(--ep-text-muted)]" />

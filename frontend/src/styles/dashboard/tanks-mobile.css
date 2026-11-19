@@ -1,0 +1,11 @@
+@media (max-width: 639px) {
+  .tanks-page {
+    gap: 1rem;
+  }
+
+  .tanks-page .dashboard-page-header {
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+}

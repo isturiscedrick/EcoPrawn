@@ -51,7 +51,7 @@ interface KpiGridProps {
 /** Responsive 4-card grid for dashboard KPI summaries. */
 export function KpiGrid({ label, children }: KpiGridProps) {
   return (
-    <section aria-label={label} className="mb-6 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <section aria-label={label} className="dashboard-kpi-grid mb-6 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {children}
     </section>
   );
@@ -146,7 +146,7 @@ export function DashboardModalShell({
   backdropDisabled = false,
 }: DashboardModalShellProps) {
   return (
-    <div className={`fixed inset-0 ${layerClassName} flex items-center justify-center p-4 sm:p-6`} role="presentation">
+    <div className={`dashboard-modal-layer fixed inset-0 ${layerClassName} flex items-center justify-center p-4 sm:p-6`} role="presentation">
       <button
         type="button"
         tabIndex={backdropTabIndex}
@@ -157,10 +157,11 @@ export function DashboardModalShell({
       />
       <section
         ref={dialogRef}
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className={`relative z-10 max-h-[90dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text)] shadow-2xl transition-all duration-200 ${panelClassName}`}
+        className={`dashboard-modal-panel relative z-10 max-h-[90dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text)] shadow-2xl transition-all duration-200 ${panelClassName}`}
       >
         {children}
       </section>

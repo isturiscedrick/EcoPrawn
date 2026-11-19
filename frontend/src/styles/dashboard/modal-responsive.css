@@ -1,0 +1,71 @@
+/* Mobile dialog sizing, safe areas, and nested scroll behavior. */
+@media (max-width: 639px) {
+  .dashboard-modal-layer,
+  .dashboard-confirm-layer {
+    align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding:
+      max(0.75rem, env(safe-area-inset-top))
+      0.75rem
+      max(0.75rem, env(safe-area-inset-bottom));
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dashboard-modal-panel,
+  .dashboard-confirm-panel {
+    box-sizing: border-box;
+    max-height: calc(
+      100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 1.5rem
+    );
+    margin-block: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 1rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dashboard-search-layer {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding:
+      max(0.75rem, env(safe-area-inset-top))
+      0.75rem
+      max(0.75rem, env(safe-area-inset-bottom));
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dashboard-search-panel {
+    display: flex;
+    max-height: calc(
+      100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 1.5rem
+    );
+    flex-direction: column;
+  }
+
+  .dashboard-search-panel > div:nth-child(2) {
+    min-height: 0;
+    max-height: none;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .add-tank-field-grid {
+    gap: 0.65rem;
+  }
+
+  .add-tank-water-grid {
+    gap: 0.65rem;
+  }
+}
+
+@media (max-width: 379px) {
+  .add-tank-field-grid,
+  .add-tank-water-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -34,12 +34,12 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     <ToastContext.Provider value={{ showToast }}>
       {children}
       {toasts.map((toast) => (
-        <div key={toast.id} className="fixed inset-0 z-[200] flex items-center justify-center bg-[rgba(8,30,34,0.38)] p-4 backdrop-blur-sm dark:bg-[rgba(0,0,0,0.58)]">
+        <div key={toast.id} className="dashboard-confirm-layer fixed inset-0 z-[200] flex items-center justify-center bg-[rgba(8,30,34,0.38)] p-4 backdrop-blur-sm dark:bg-[rgba(0,0,0,0.58)]">
           <section
             role={toast.tone === "error" ? "alert" : "status"}
             aria-live={toast.tone === "error" ? "assertive" : "polite"}
             aria-atomic="true"
-            className="ep-pop-in relative w-full max-w-[520px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center text-[var(--ep-primary)] shadow-[0_28px_90px_rgba(8,30,34,0.32)] sm:p-8 dark:border-[rgba(255,255,255,0.14)] dark:bg-[#102328] dark:text-[#e8f4f2]"
+            className="dashboard-confirm-panel ep-pop-in relative w-full max-w-[520px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-center text-[var(--ep-primary)] shadow-[0_28px_90px_rgba(8,30,34,0.32)] sm:p-8 dark:border-[rgba(255,255,255,0.14)] dark:bg-[#102328] dark:text-[#e8f4f2]"
           >
             <button
               type="button"

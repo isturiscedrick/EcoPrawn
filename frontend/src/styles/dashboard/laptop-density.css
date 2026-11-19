@@ -1,0 +1,40 @@
+/* Match the compact dashboard scale used in the laptop reference. */
+@media (min-width: 1024px) and (max-width: 1599px) {
+  .dashboard-shell {
+    zoom: 0.75;
+    width: 133.333333%;
+    min-height: 133.333333vh;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar {
+    inset-block-end: auto;
+    height: 133.333333dvh;
+  }
+}
+
+@media (max-width: 1023px) {
+  .dashboard-shell {
+    zoom: 1;
+    width: 100%;
+    min-height: 100vh;
+  }
+}
+
+@media (min-width: 1600px) {
+  .dashboard-shell {
+    zoom: 1;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .dashboard-shell aside#dashboard-sidebar {
+    inset-block-end: auto;
+    height: 100dvh;
+  }
+
+  .dashboard-shell main > * {
+    width: 100%;
+    max-width: 2200px;
+    margin-inline: auto;
+  }
+}

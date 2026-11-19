@@ -24,14 +24,14 @@ export function DashboardLogoutDialog({
         aria-modal="true"
         aria-labelledby="logout-modal-title"
         aria-describedby="logout-modal-description"
-        className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6"
+        className="dashboard-confirm-layer fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6"
       >
         <div
           aria-hidden="true"
           onClick={onCancel}
           className="ep-fade-in absolute inset-0 bg-slate-950/60 backdrop-blur-md dark:bg-black/80"
         />
-        <div ref={dialogRef} tabIndex={-1} className="ep-pop-in relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-[var(--ep-text)] shadow-2xl">
+        <div ref={dialogRef} tabIndex={-1} className="dashboard-confirm-panel ep-pop-in relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 text-[var(--ep-text)] shadow-2xl">
           <h2
             id="logout-modal-title"
             className="ep-font-display mb-2 text-xl font-bold tracking-tight text-[var(--ep-text)]"

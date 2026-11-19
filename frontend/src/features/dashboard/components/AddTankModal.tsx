@@ -60,6 +60,20 @@ export function AddTankModal({
   const { tankFormDefaults: defaults } = useDemoData(open);
   const uid = useId();
   const firstFieldRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    openerRef.current = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+    return () => {
+      const opener = openerRef.current;
+      openerRef.current = null;
+      if (opener?.isConnected) opener.focus({ preventScroll: true });
+    };
+  }, [open]);
 
   const [name, setName] = useState(`Tank ${existingCount + 1}`);
   const [pl, setPl] = useState("");
@@ -90,7 +104,14 @@ export function AddTankModal({
     setPopulation(d.population);
     setConfirming(false);
     setFormError(null);
-    firstFieldRef.current?.focus();
+    const focusFrame = window.requestAnimationFrame(() => {
+      if (window.matchMedia("(max-width: 639px)").matches) {
+        dialogRef.current?.focus({ preventScroll: true });
+      } else {
+        firstFieldRef.current?.focus({ preventScroll: true });
+      }
+    });
+    return () => window.cancelAnimationFrame(focusFrame);
   }, [open, defaults, existingCount]);
 
   // Escape closes the modal. While the confirm dialog is up, Escape belongs
@@ -149,11 +170,13 @@ export function AddTankModal({
   }
 
   return (
+    <>
     <div
       role="dialog"
-      aria-modal="true"
+      aria-modal={confirming ? undefined : true}
+      aria-hidden={confirming ? true : undefined}
       aria-labelledby={`${uid}-title`}
-      className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6"
+      className="dashboard-modal-layer fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6"
     >
       <div
         aria-hidden="true"
@@ -161,7 +184,7 @@ export function AddTankModal({
         className="ep-fade-in absolute inset-0 bg-slate-950/60 backdrop-blur-md dark:bg-black/80"
       />
 
-      <div className="ep-pop-in relative z-10 max-h-[90dvh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-2xl sm:p-8">
+      <div ref={dialogRef} tabIndex={-1} className="dashboard-modal-panel ep-pop-in relative z-10 max-h-[90dvh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-2xl outline-none sm:p-8">
         <div className="mb-6 flex items-start justify-between gap-4">
           <div>
             <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
@@ -199,7 +222,7 @@ export function AddTankModal({
             <Icon name="package" size={12} strokeWidth={2} />
             Identity
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="add-tank-field-grid grid grid-cols-2 gap-3">
             <Field
               id={`${uid}-name`}
               ref={firstFieldRef}
@@ -225,7 +248,7 @@ export function AddTankModal({
             <Icon name="egg" size={12} strokeWidth={2} />
             Stock
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="add-tank-field-grid grid grid-cols-2 gap-3">
             <Field
               id={`${uid}-biomass`}
               label="Biomass (kg)"
@@ -255,7 +278,7 @@ export function AddTankModal({
             <Icon name="waves" size={12} strokeWidth={2} />
             Water Parameters
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="add-tank-field-grid grid grid-cols-2 gap-3">
             <Field
               id={`${uid}-do`}
               label="Dissolved O₂ (mg/L)"
@@ -282,7 +305,7 @@ export function AddTankModal({
             />
           </div>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="add-tank-water-grid grid grid-cols-2 gap-3 sm:grid-cols-3">
             <Field
               id={`${uid}-temp`}
               label="Temp (°C)"
@@ -341,14 +364,15 @@ export function AddTankModal({
         </form>
       </div>
 
-      <ConfirmDialog
-        open={confirming}
-        title={`Add ${resolvedName}?`}
-        description={`This adds ${resolvedName} to the facility with the readings you entered.`}
-        confirmLabel="Add tank"
-        onCancel={() => setConfirming(false)}
-        onConfirm={handleConfirm}
-      />
     </div>
+    <ConfirmDialog
+      open={confirming}
+      title={`Add ${resolvedName}?`}
+      description={`This adds ${resolvedName} to the facility with the readings you entered.`}
+      confirmLabel="Add tank"
+      onCancel={() => setConfirming(false)}
+      onConfirm={handleConfirm}
+    />
+    </>
   );
 }
