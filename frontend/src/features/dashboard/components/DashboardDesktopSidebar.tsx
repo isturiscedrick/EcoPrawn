@@ -1,9 +1,10 @@
+import { useRef, useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { DASHBOARD_NAV_ITEMS, type DashboardView } from "@/config/nav";
 import { Icon } from "@/components/ui/Icon";
 import { SidebarNavItem } from "./SidebarNavItem";
-import { LogoutIcon, drawerRowClass } from "./SidebarPrimitives";
+import { LogoutIcon, drawerRowClass, SidebarTooltip } from "./SidebarPrimitives";
 
 interface DashboardDesktopSidebarProps {
   collapsed: boolean;
@@ -11,6 +12,9 @@ interface DashboardDesktopSidebarProps {
   activeView: DashboardView;
   profileName: string;
   profileRole: string;
+  alertCount?: number;
+  tankCount?: number;
+  isDbConnected?: boolean;
   onToggleCollapsed: () => void;
   onLogoutClick: () => void;
   onMobileClose: () => void;
@@ -22,54 +26,334 @@ export function DashboardDesktopSidebar({
   activeView,
   profileName,
   profileRole,
+  alertCount = 0,
+  tankCount = 0,
+  isDbConnected = true,
   onToggleCollapsed,
   onLogoutClick,
   onMobileClose,
 }: DashboardDesktopSidebarProps) {
+  // Shortcut Ctrl+B / Cmd+B to toggle sidebar
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "b") {
+        e.preventDefault();
+        onToggleCollapsed();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onToggleCollapsed]);
+
+  // Tooltip refs for collapsed mode
+  const toggleBtnRef = useRef<HTMLButtonElement>(null);
+  const profileRef = useRef<HTMLAnchorElement>(null);
+  const settingsRef = useRef<HTMLAnchorElement>(null);
+  const logoutRef = useRef<HTMLButtonElement>(null);
+
+  const [hoveredToggle, setHoveredToggle] = useState(false);
+  const [hoveredProfile, setHoveredProfile] = useState(false);
+  const [hoveredSettings, setHoveredSettings] = useState(false);
+  const [hoveredLogout, setHoveredLogout] = useState(false);
+
+  const isAssistantActive = pathname.startsWith("/dashboard/assistant");
+  const isSettingsActive = pathname.startsWith("/dashboard/settings");
+
+  // Filter grouped items
+  const operationsItems = DASHBOARD_NAV_ITEMS.filter((i) => i.section === "operations");
+  const intelligenceItems = DASHBOARD_NAV_ITEMS.filter((i) => i.section === "intelligence");
+  const systemItems = DASHBOARD_NAV_ITEMS.filter((i) => i.section === "system");
+
   return (
     <aside
       id="dashboard-sidebar"
-      className={`fixed bottom-0 left-0 top-0 z-30 hidden flex-col border-r border-[var(--ep-line)] bg-[var(--ep-surface)] transition-[width] duration-300 ease-in-out lg:flex ${collapsed ? "w-[76px]" : "w-[260px]"}`}
+      className={`fixed bottom-0 left-0 top-0 z-30 hidden flex-col border-r border-[var(--ep-line)] bg-[var(--ep-surface)] transition-[width] duration-300 ease-in-out lg:flex ${
+        collapsed ? "w-[76px]" : "w-[268px]"
+      }`}
     >
-      <div className={`flex shrink-0 items-center border-b border-[var(--ep-line)] py-3 ${collapsed ? "min-h-[88px] flex-col justify-center gap-2 px-2" : "min-h-[68px] justify-between gap-3 px-5"}`}>
+      {/* 1. HEADER */}
+      <div
+        className={`flex shrink-0 items-center border-b border-[var(--ep-line)] py-3 ${
+          collapsed
+            ? "min-h-[72px] flex-col justify-center gap-2 px-2"
+            : "min-h-[72px] justify-between gap-3 px-5"
+        }`}
+      >
         <Link
           to="/dashboard"
           aria-label="EcoPrawn dashboard"
-          title={collapsed ? "EcoPrawn dashboard" : undefined}
-          className={`flex min-w-0 items-center rounded-lg transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] ${collapsed ? "shrink-0" : ""}`}
+          className={`group flex min-w-0 items-center gap-2 rounded-xl transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] ${
+            collapsed ? "shrink-0" : ""
+          }`}
         >
           <BrandMark size={collapsed ? 28 : 32} showWordmark={!collapsed} />
+          {!collapsed && (
+            <span className="rounded-md border border-[var(--ep-accent)]/30 bg-[var(--ep-accent-tint)]/60 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[var(--ep-primary)]">
+              AI OS
+            </span>
+          )}
         </Link>
-        <button type="button" onClick={onToggleCollapsed} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} aria-pressed={collapsed} title={collapsed ? "Expand sidebar" : "Collapse sidebar"} className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-transparent text-[var(--ep-text-muted)] transition-all duration-200 hover:border-[var(--ep-line)] hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] ${collapsed ? "mt-0" : ""}`}>
-          <Icon name="sidebar-toggle" size={18} />
+
+        <button
+          ref={toggleBtnRef}
+          type="button"
+          onClick={onToggleCollapsed}
+          onMouseEnter={() => setHoveredToggle(true)}
+          onMouseLeave={() => setHoveredToggle(false)}
+          onFocus={() => setHoveredToggle(true)}
+          onBlur={() => setHoveredToggle(false)}
+          aria-label={collapsed ? "Expand sidebar (Ctrl+B)" : "Collapse sidebar (Ctrl+B)"}
+          aria-pressed={collapsed}
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-transparent text-[var(--ep-text-muted)] transition-all duration-200 hover:border-[var(--ep-line)] hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]`}
+        >
+          <Icon
+            name="sidebar-toggle"
+            size={18}
+            className={`transition-transform duration-200 ${collapsed ? "rotate-180" : ""}`}
+          />
         </button>
+
+        {collapsed && hoveredToggle && (
+          <SidebarTooltip targetRef={toggleBtnRef}>
+            <span className="font-semibold">Expand sidebar</span>
+            <kbd className="rounded border border-[var(--ep-line)] px-1 py-0.5 text-[10px] text-[var(--ep-text-muted)]">
+              ⌘B
+            </kbd>
+          </SidebarTooltip>
+        )}
       </div>
+
+      {/* 2. PROFILE CARD */}
       <div className={`shrink-0 border-b border-[var(--ep-line)] py-3 ${collapsed ? "px-2" : "px-4"}`}>
-        <Link to="/dashboard/profile" title={collapsed ? profileName : undefined} className={`flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] py-3 text-left transition-colors hover:bg-[var(--ep-tint)] ${collapsed ? "justify-center px-1" : "px-3"}`}>
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]" aria-hidden="true"><Icon name="user-round" size={19} strokeWidth={1.9} /></span>
-          <span className={`min-w-0 ${collapsed ? "hidden" : ""}`}>
-            <span className="block truncate text-sm font-semibold text-[var(--ep-text)]">{profileName}</span>
-            <span className="block truncate text-[11px] text-[var(--ep-text-muted)]">{profileRole}</span>
+        <Link
+          ref={profileRef}
+          to="/dashboard/profile"
+          onMouseEnter={() => setHoveredProfile(true)}
+          onMouseLeave={() => setHoveredProfile(false)}
+          onFocus={() => setHoveredProfile(true)}
+          onBlur={() => setHoveredProfile(false)}
+          className={`group flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] py-2.5 text-left transition-all duration-200 hover:border-[var(--ep-accent)]/40 hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] ${
+            collapsed ? "justify-center px-1" : "px-3"
+          }`}
+        >
+          {/* Avatar with Live Status Pulse */}
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--ep-accent-tint)] text-[var(--ep-accent)] shadow-2xs">
+            <Icon name="user-round" size={19} strokeWidth={1.9} />
+            <span
+              title="Telemetry Connected"
+              className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3"
+            >
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 ring-2 ring-[var(--ep-surface)]" />
+            </span>
+          </div>
+
+          <div className={`min-w-0 flex-1 ${collapsed ? "hidden" : ""}`}>
+            <div className="truncate text-sm font-semibold text-[var(--ep-text)] group-hover:text-[var(--ep-primary)] transition-colors">
+              {profileName}
+            </div>
+            <div className="truncate text-[11px] font-medium text-[var(--ep-text-muted)]">
+              {profileRole}
+            </div>
+          </div>
+        </Link>
+
+        {collapsed && hoveredProfile && (
+          <SidebarTooltip targetRef={profileRef}>
+            <div className="flex flex-col">
+              <span className="font-semibold">{profileName}</span>
+              <span className="text-[10px] text-[var(--ep-text-muted)]">{profileRole}</span>
+            </div>
+          </SidebarTooltip>
+        )}
+      </div>
+
+      {/* 3. FEATURED AI ASSISTANT SPOTLIGHT CARD (When Expanded) */}
+      {!collapsed && (
+        <div className="px-4 pt-3.5 pb-1">
+          <Link
+            to="/dashboard/assistant"
+            className={`group relative flex items-center gap-3 overflow-hidden rounded-xl border p-3 transition-all duration-200 ${
+              isAssistantActive
+                ? "border-[var(--ep-primary)] bg-[var(--ep-accent-tint)] shadow-sm ring-1 ring-[var(--ep-primary)]/20"
+                : "border-teal-500/25 bg-gradient-to-br from-teal-500/10 via-emerald-500/5 to-transparent hover:border-teal-500/40 hover:bg-teal-500/15"
+            }`}
+          >
+            {/* Glowing Sparkles Avatar */}
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 text-white shadow-sm group-hover:scale-105 transition-transform">
+              <Icon name="sparkles" size={18} className="animate-pulse" />
+            </div>
+
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-bold text-[var(--ep-text)] group-hover:text-[var(--ep-primary)] transition-colors">
+                  AI Assistant
+                </span>
+                <span className="inline-flex items-center rounded-md border border-teal-500/30 bg-teal-500/20 px-1 py-0.2 text-[9px] font-bold text-teal-600 dark:text-teal-300">
+                  LIVE
+                </span>
+              </div>
+              <p className="truncate text-[11px] text-[var(--ep-text-muted)]">
+                Ask water & feeding copilot
+              </p>
+            </div>
+
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-[var(--ep-text-muted)] group-hover:translate-x-0.5 group-hover:text-[var(--ep-primary)] transition-all">
+              <Icon name="arrow-right" size={14} />
+            </span>
+          </Link>
+        </div>
+      )}
+
+      {/* 4. NAVIGATION MODULES */}
+      <div className={`min-h-0 flex-1 overflow-y-auto py-3 space-y-4 ${collapsed ? "px-2" : "px-4"}`}>
+        {/* Operations Section */}
+        <div>
+          {!collapsed && (
+            <div className="px-2.5 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+              Operations
+            </div>
+          )}
+          <nav aria-label="Facility operations" className="flex flex-col items-stretch gap-1">
+            {operationsItems.map((item) => (
+              <SidebarNavItem
+                key={item.label}
+                item={item}
+                active={item.view === activeView}
+                collapsed={collapsed}
+                alertCount={alertCount}
+                tankCount={tankCount}
+              />
+            ))}
+          </nav>
+        </div>
+
+        {/* Intelligence / AI Section (in collapsed mode or full list) */}
+        <div>
+          {!collapsed && (
+            <div className="px-2.5 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+              Intelligence
+            </div>
+          )}
+          {collapsed && <div className="h-px w-8 mx-auto bg-[var(--ep-line)] my-1.5" />}
+          <nav aria-label="AI Intelligence" className="flex flex-col items-stretch gap-1">
+            {intelligenceItems.map((item) => (
+              <SidebarNavItem
+                key={item.label}
+                item={item}
+                active={item.view === activeView}
+                collapsed={collapsed}
+                alertCount={alertCount}
+                tankCount={tankCount}
+              />
+            ))}
+          </nav>
+        </div>
+
+        {/* Monitoring & System Section */}
+        <div>
+          {!collapsed && (
+            <div className="px-2.5 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+              System & Alarms
+            </div>
+          )}
+          {collapsed && <div className="h-px w-8 mx-auto bg-[var(--ep-line)] my-1.5" />}
+          <nav aria-label="System and alerts" className="flex flex-col items-stretch gap-1">
+            {systemItems.map((item) => (
+              <SidebarNavItem
+                key={item.label}
+                item={item}
+                active={item.view === activeView}
+                collapsed={collapsed}
+                alertCount={alertCount}
+                tankCount={tankCount}
+              />
+            ))}
+          </nav>
+        </div>
+
+        {/* Telemetry Status Bar (When Expanded) */}
+        {!collapsed && (
+          <div className="pt-2 px-1">
+            <div className="flex items-center justify-between rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-2 text-[11px] text-[var(--ep-text-muted)]">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="font-medium text-[var(--ep-text)]">Telemetry Feed</span>
+              </div>
+              <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                {isDbConnected ? "Online" : "Cached"}
+              </span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 5. FOOTER ACTIONS (Settings & Logout) */}
+      <div
+        className={`flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-bg)] py-3 ${
+          collapsed ? "items-center px-2" : "px-4"
+        }`}
+      >
+        <Link
+          ref={settingsRef}
+          to="/dashboard/settings"
+          aria-current={isSettingsActive ? "page" : undefined}
+          onMouseEnter={() => setHoveredSettings(true)}
+          onMouseLeave={() => setHoveredSettings(false)}
+          onFocus={() => setHoveredSettings(true)}
+          onBlur={() => setHoveredSettings(false)}
+          className={
+            drawerRowClass +
+            (collapsed ? " !w-11 !justify-center !px-0" : "") +
+            (isSettingsActive
+              ? " dashboard-nav-active border border-[var(--ep-accent)]/40 bg-[var(--ep-accent-tint)] font-semibold text-[var(--ep-text)]"
+              : "")
+          }
+          onClick={onMobileClose}
+        >
+          <span className="flex w-5 shrink-0 items-center justify-center">
+            <Icon name="settings" size={18} strokeWidth={1.8} />
           </span>
+          {!collapsed && <span>Settings</span>}
         </Link>
-      </div>
-      <div className={`min-h-0 flex-1 overflow-y-auto py-4 ${collapsed ? "px-2" : "px-4"}`}>
-        {!collapsed && <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">Navigation</div>}
-        <nav aria-label="Dashboard modules" className="flex flex-col items-stretch gap-1.5">
-          {DASHBOARD_NAV_ITEMS.map((item) => (
-            <SidebarNavItem key={item.label} item={item} active={item.view === activeView} collapsed={collapsed} />
-          ))}
-        </nav>
-      </div>
-      <div className={`flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-bg)] py-4 ${collapsed ? "items-center px-2" : "px-4"}`}>
-        <Link to="/dashboard/settings" aria-current={pathname.startsWith("/dashboard/settings") ? "page" : undefined} title={collapsed ? "Settings" : undefined} className={drawerRowClass + (collapsed ? " !w-11 !justify-center !px-0" : "") + (pathname.startsWith("/dashboard/settings") ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
-          <span className="flex w-5 shrink-0 items-center justify-center"><Icon name="settings" size={19} strokeWidth={1.8} /></span>
-          {!collapsed && "Settings"}
-        </Link>
-        <button type="button" onClick={onLogoutClick} title={collapsed ? "Log out" : undefined} aria-label="Log out" className={`dashboard-logout-button flex min-h-11 items-center gap-2.5 rounded-lg py-2.5 text-left text-[14.5px] font-semibold transition-colors ${collapsed ? "w-11 justify-center px-0" : "w-full px-3"}`}>
-          <span className="flex w-4 justify-center" aria-hidden="true"><LogoutIcon /></span>
-          {!collapsed && "Log out"}
+
+        {collapsed && hoveredSettings && (
+          <SidebarTooltip targetRef={settingsRef}>
+            <span className="font-semibold">Settings</span>
+          </SidebarTooltip>
+        )}
+
+        <button
+          ref={logoutRef}
+          type="button"
+          onClick={onLogoutClick}
+          onMouseEnter={() => setHoveredLogout(true)}
+          onMouseLeave={() => setHoveredLogout(false)}
+          onFocus={() => setHoveredLogout(true)}
+          onBlur={() => setHoveredLogout(false)}
+          aria-label="Log out"
+          className={`dashboard-logout-button flex min-h-11 items-center gap-2.5 rounded-xl py-2.5 text-left text-[14.5px] font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-500/10 transition-colors ${
+            collapsed ? "w-11 justify-center px-0" : "w-full px-3"
+          }`}
+        >
+          <span className="flex w-4 justify-center" aria-hidden="true">
+            <LogoutIcon />
+          </span>
+          {!collapsed && <span>Log out</span>}
         </button>
+
+        {collapsed && hoveredLogout && (
+          <SidebarTooltip targetRef={logoutRef}>
+            <span className="font-semibold text-rose-500">Log out</span>
+          </SidebarTooltip>
+        )}
+
+        {!collapsed && (
+          <div className="flex items-center justify-between px-1 pt-1 text-[10px] text-[var(--ep-text-muted)]">
+            <span>EcoPrawn OS</span>
+            <span>Ctrl + B to toggle</span>
+          </div>
+        )}
       </div>
     </aside>
   );

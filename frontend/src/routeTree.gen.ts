@@ -19,6 +19,7 @@ import { Route as DashboardAboutRouteImport } from './routes/dashboard.about'
 import { Route as DashboardActivityRouteImport } from './routes/dashboard.activity'
 import { Route as DashboardAlertsRouteImport } from './routes/dashboard.alerts'
 import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
+import { Route as DashboardAssistantRouteImport } from './routes/dashboard.assistant'
 import { Route as DashboardBioflocRouteImport } from './routes/dashboard.biofloc'
 import { Route as DashboardFeedingRouteImport } from './routes/dashboard.feeding'
 import { Route as DashboardProfileRouteImport } from './routes/dashboard.profile'
@@ -78,6 +79,11 @@ const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardAssistantRoute = DashboardAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardBioflocRoute = DashboardBioflocRouteImport.update({
   id: '/biofloc',
   path: '/biofloc',
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/assistant': typeof DashboardAssistantRoute
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/assistant': typeof DashboardAssistantRoute
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -170,6 +178,7 @@ export interface FileRoutesById {
   '/dashboard/activity': typeof DashboardActivityRoute
   '/dashboard/alerts': typeof DashboardAlertsRoute
   '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/assistant': typeof DashboardAssistantRoute
   '/dashboard/biofloc': typeof DashboardBioflocRoute
   '/dashboard/feeding': typeof DashboardFeedingRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -192,6 +201,7 @@ export interface FileRouteTypes {
     | '/dashboard/activity'
     | '/dashboard/alerts'
     | '/dashboard/analytics'
+    | '/dashboard/assistant'
     | '/dashboard/biofloc'
     | '/dashboard/feeding'
     | '/dashboard/profile'
@@ -211,6 +221,7 @@ export interface FileRouteTypes {
     | '/dashboard/activity'
     | '/dashboard/alerts'
     | '/dashboard/analytics'
+    | '/dashboard/assistant'
     | '/dashboard/biofloc'
     | '/dashboard/feeding'
     | '/dashboard/profile'
@@ -231,6 +242,7 @@ export interface FileRouteTypes {
     | '/dashboard/activity'
     | '/dashboard/alerts'
     | '/dashboard/analytics'
+    | '/dashboard/assistant'
     | '/dashboard/biofloc'
     | '/dashboard/feeding'
     | '/dashboard/profile'
@@ -322,6 +334,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAnalyticsRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/assistant': {
+      id: '/dashboard/assistant'
+      path: '/assistant'
+      fullPath: '/dashboard/assistant'
+      preLoaderRoute: typeof DashboardAssistantRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/biofloc': {
       id: '/dashboard/biofloc'
       path: '/biofloc'
@@ -397,6 +416,7 @@ interface DashboardRouteChildren {
   DashboardActivityRoute: typeof DashboardActivityRoute
   DashboardAlertsRoute: typeof DashboardAlertsRoute
   DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
+  DashboardAssistantRoute: typeof DashboardAssistantRoute
   DashboardBioflocRoute: typeof DashboardBioflocRoute
   DashboardFeedingRoute: typeof DashboardFeedingRoute
   DashboardProfileRoute: typeof DashboardProfileRoute
@@ -412,6 +432,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardActivityRoute: DashboardActivityRoute,
   DashboardAlertsRoute: DashboardAlertsRoute,
   DashboardAnalyticsRoute: DashboardAnalyticsRoute,
+  DashboardAssistantRoute: DashboardAssistantRoute,
   DashboardBioflocRoute: DashboardBioflocRoute,
   DashboardFeedingRoute: DashboardFeedingRoute,
   DashboardProfileRoute: DashboardProfileRoute,

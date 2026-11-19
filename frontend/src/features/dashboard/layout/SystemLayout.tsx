@@ -158,7 +158,11 @@ export function SystemLayout({ children }: SystemLayoutProps) {
 
   const normalizedSearch = searchQuery.trim().toLowerCase();
   const matchingPages = DASHBOARD_NAV_ITEMS.filter((item) =>
-    !normalizedSearch || item.label.toLowerCase().includes(normalizedSearch) || item.view.includes(normalizedSearch),
+    !normalizedSearch ||
+    item.label.toLowerCase().includes(normalizedSearch) ||
+    item.view.includes(normalizedSearch) ||
+    (item.description && item.description.toLowerCase().includes(normalizedSearch)) ||
+    (item.badge && item.badge.toLowerCase().includes(normalizedSearch)),
   );
   const matchingTanks = tanks.filter((tank) =>
     normalizedSearch && `${tank.name} ${tank.pl}`.toLowerCase().includes(normalizedSearch),
@@ -218,7 +222,13 @@ export function SystemLayout({ children }: SystemLayoutProps) {
       </header>
 
       {/* Persistent desktop navigation and mobile drawer. */}
-      <Sidebar collapsed={desktopSidebarCollapsed} onToggleCollapsed={() => setDesktopSidebarCollapsed((collapsed) => { const next = !collapsed; try { window.localStorage.setItem("ep-sidebar-collapsed", String(next)); } catch { /* Keep the in-memory preference for this session. */ } return next; })} />
+      <Sidebar
+        collapsed={desktopSidebarCollapsed}
+        alertCount={activeAlertCount}
+        tankCount={tanks.length}
+        isDbConnected={isDbConnected}
+        onToggleCollapsed={() => setDesktopSidebarCollapsed((collapsed) => { const next = !collapsed; try { window.localStorage.setItem("ep-sidebar-collapsed", String(next)); } catch { /* Keep the in-memory preference for this session. */ } return next; })}
+      />
 
       <DashboardCommandSearch
         open={searchOpen}

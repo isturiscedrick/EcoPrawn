@@ -15,6 +15,9 @@ interface SidebarProps {
   mobileOpen?: boolean;
   onMobileClose?: () => void;
   collapsed?: boolean;
+  alertCount?: number;
+  tankCount?: number;
+  isDbConnected?: boolean;
   onToggleCollapsed?: () => void;
 }
 
@@ -22,6 +25,9 @@ export function Sidebar({
   mobileOpen = false,
   onMobileClose = () => {},
   collapsed = false,
+  alertCount = 0,
+  tankCount = 0,
+  isDbConnected = true,
   onToggleCollapsed = () => {},
 }: SidebarProps) {
   const pathname = useRouterState({
@@ -323,6 +329,9 @@ export function Sidebar({
         activeView={activeView}
         profileName={profileName}
         profileRole={profileRole}
+        alertCount={alertCount}
+        tankCount={tankCount}
+        isDbConnected={isDbConnected}
         onToggleCollapsed={onToggleCollapsed}
         onLogoutClick={onLogoutClick}
         onMobileClose={onMobileClose}
@@ -438,11 +447,15 @@ export function Sidebar({
               activeOptions={{ exact: true }}
             >
               <div
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold"
+                className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold"
                 style={{ background: "var(--ep-accent-tint)", color: "var(--ep-primary)" }}
                 aria-hidden="true"
               >
                 <Icon name="user-round" size={19} strokeWidth={1.9} />
+                <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 ring-2 ring-[var(--ep-surface)]" />
+                </span>
               </div>
               <div className="min-w-0">
                 <div className="truncate text-[15px] font-semibold text-[var(--ep-text)]">
@@ -455,21 +468,86 @@ export function Sidebar({
             </Link>
           </div>
 
+          {/* Quick AI Action Card on Mobile */}
+          <div className="px-4 pt-3 pb-1 shrink-0">
+            <Link
+              to="/dashboard/assistant"
+              onClick={closeDrawer}
+              className={`group flex items-center gap-3 rounded-xl border p-2.5 transition-all ${
+                pathname.startsWith("/dashboard/assistant")
+                  ? "border-[var(--ep-primary)] bg-[var(--ep-accent-tint)]"
+                  : "border-teal-500/25 bg-gradient-to-r from-teal-500/10 via-emerald-500/5 to-transparent hover:border-teal-500/40"
+              }`}
+            >
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-teal-500 to-emerald-600 text-white shadow-2xs">
+                <Icon name="sparkles" size={15} />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-bold text-[var(--ep-text)]">AI Assistant</span>
+                  <span className="rounded bg-teal-500/20 px-1 text-[9px] font-bold text-teal-600 dark:text-teal-300">ONLINE</span>
+                </div>
+                <div className="truncate text-[10px] text-[var(--ep-text-muted)]">Ask water & feeding copilot</div>
+              </div>
+              <Icon name="arrow-right" size={14} className="text-[var(--ep-text-muted)]" />
+            </Link>
+          </div>
+
           {/* Navigation */}
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
-            <div className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--ep-text-muted)]">
-              Navigation
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3 space-y-4">
+            <div>
+              <div className="px-2 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+                Operations
+              </div>
+              <nav aria-label="Facility operations" className="flex flex-col items-stretch gap-1">
+                {DASHBOARD_NAV_ITEMS.filter(i => i.section === 'operations').map((item) => (
+                  <SidebarNavItem
+                    key={item.label}
+                    item={item}
+                    active={item.view === activeView}
+                    collapsed={false}
+                    alertCount={alertCount}
+                    tankCount={tankCount}
+                  />
+                ))}
+              </nav>
             </div>
-            <nav aria-label="Dashboard modules" className="flex flex-col items-stretch gap-1.5">
-              {DASHBOARD_NAV_ITEMS.map((item) => (
-                <SidebarNavItem
-                  key={item.label}
-                  item={item}
-                  active={item.view === activeView}
-                  collapsed={false}
-                />
-              ))}
-            </nav>
+
+            <div>
+              <div className="px-2 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+                Intelligence
+              </div>
+              <nav aria-label="AI Intelligence" className="flex flex-col items-stretch gap-1">
+                {DASHBOARD_NAV_ITEMS.filter(i => i.section === 'intelligence').map((item) => (
+                  <SidebarNavItem
+                    key={item.label}
+                    item={item}
+                    active={item.view === activeView}
+                    collapsed={false}
+                    alertCount={alertCount}
+                    tankCount={tankCount}
+                  />
+                ))}
+              </nav>
+            </div>
+
+            <div>
+              <div className="px-2 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+                System & Alarms
+              </div>
+              <nav aria-label="System and alarms" className="flex flex-col items-stretch gap-1">
+                {DASHBOARD_NAV_ITEMS.filter(i => i.section === 'system').map((item) => (
+                  <SidebarNavItem
+                    key={item.label}
+                    item={item}
+                    active={item.view === activeView}
+                    collapsed={false}
+                    alertCount={alertCount}
+                    tankCount={tankCount}
+                  />
+                ))}
+              </nav>
+            </div>
           </div>
 
           {/* Account actions */}

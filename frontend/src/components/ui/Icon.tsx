@@ -313,6 +313,30 @@ const PATHS = {
       <path d="m13 10 2 2-2 2" />
     </>
   ),
+  sparkles: (
+    <>
+      <path d="m12 3-1.91 5.82a2 2 0 0 1-1.27 1.27L3 12l5.82 1.91a2 2 0 0 1 1.27 1.27L12 21l1.91-5.82a2 2 0 0 1 1.27-1.27L21 12l-5.82-1.91a2 2 0 0 1-1.27-1.27Z" />
+      <path d="M5 3v4M7 5H3M19 17v4M21 19h-4" />
+    </>
+  ),
+  bot: (
+    <>
+      <path d="M12 8V4H8" />
+      <rect width="16" height="12" x="4" y="8" rx="2" />
+      <path d="M2 14h2M20 14h2M9 13v2M15 13v2" />
+    </>
+  ),
+  "message-square": (
+    <>
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </>
+  ),
+  "circle-dot": (
+    <>
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="3" />
+    </>
+  ),
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof PATHS;
