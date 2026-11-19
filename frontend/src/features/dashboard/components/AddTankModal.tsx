@@ -153,36 +153,41 @@ export function AddTankModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby={`${uid}-title`}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-5"
+      className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6"
     >
       <div
         aria-hidden="true"
         onClick={onClose}
-        className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.72)]"
+        className="ep-fade-in absolute inset-0 bg-slate-950/60 backdrop-blur-md dark:bg-black/80"
       />
 
-      <div className="ep-pop-in relative z-10 max-h-[90dvh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 shadow-[0_28px_90px_rgba(8,30,34,0.28)] sm:p-8 lg:p-9">
-        <div className="mb-7 flex items-start justify-between gap-5">
+      <div className="ep-pop-in relative z-10 max-h-[90dvh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-2xl sm:p-8">
+        <div className="mb-6 flex items-start justify-between gap-4">
           <div>
-            <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ep-accent)]">
+            <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
               <Icon name="layers" size={12} strokeWidth={2} />
-              Facility configuration
+              Facility Configuration
             </p>
-            <h2
-              id={`${uid}-title`}
-              className="ep-font-display text-[25px] font-semibold leading-tight text-[var(--water-deep)]"
-            >
-              Add a new tank
-            </h2>
-            <p className="mt-2 max-w-[30rem] text-[14px] leading-relaxed text-[var(--ep-text-muted)]">
-              Set initial readings for the tank. You can adjust these later.
+            <div className="mt-1 flex items-center gap-2 flex-wrap">
+              <h2
+                id={`${uid}-title`}
+                className="ep-font-display text-xl font-bold text-[var(--ep-text)] sm:text-2xl"
+              >
+                Add a new tank
+              </h2>
+              <span className="inline-flex items-center rounded-md border border-[var(--ep-accent)]/30 bg-[var(--ep-accent-tint)]/60 px-2 py-0.5 font-mono text-xs font-bold text-[var(--ep-primary)] shadow-2xs">
+                Auto ID: #{String(existingCount + 1).padStart(2, '0')}
+              </span>
+            </div>
+            <p className="mt-1.5 text-xs text-[var(--ep-text-muted)] sm:text-sm">
+              Configure initial biometrics and sensory thresholds for the new tank.
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close add tank dialog"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xl leading-none text-[var(--ep-text-muted)] transition-colors hover:bg-[rgba(11,46,51,0.06)] hover:text-[var(--ep-primary)]"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)]"
           >
             ×
           </button>
@@ -316,20 +321,20 @@ export function AddTankModal({
             />
           </div>
 
-          <div className="mt-2 flex gap-3">
+          <div className="mt-4 flex gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border-2 border-[var(--ep-primary)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-primary)] transition-colors hover:bg-[var(--ep-accent)] hover:text-[var(--ep-on-accent)]"
+              className="min-h-11 inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 text-sm font-semibold text-[var(--ep-text)] transition-colors hover:bg-[var(--ep-tint)]"
             >
               <Icon name="x" size={14} strokeWidth={2} />
               Cancel
             </button>
             <button
               type="submit"
-              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border-2 border-[var(--ep-accent)] bg-[var(--ep-accent)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-on-accent)] transition-colors hover:border-[var(--ep-accent-hover)] hover:bg-[var(--ep-accent-hover)]"
+              className="min-h-11 inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-[var(--ep-primary)] px-4 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
             >
-              <Icon name="check" size={14} strokeWidth={2.2} />
+              <Icon name="plus" size={15} strokeWidth={2.2} />
               Add Tank
             </button>
           </div>

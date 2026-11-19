@@ -21,6 +21,8 @@ export function TankSnapshotCard({ tank, thresholdSettings }: TankSnapshotCardPr
     : [];
   const warningCount = warningLabels.length;
 
+  const displayId = `#${tank.id.replace(/^tank-?/i, "").padStart(2, "0") || tank.id}`;
+
   return (
     <Link
       to="/dashboard/water"
@@ -28,24 +30,31 @@ export function TankSnapshotCard({ tank, thresholdSettings }: TankSnapshotCardPr
       className="dashboard-tank-snapshot group min-w-0 rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--ep-accent)] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)]"
     >
       <div className="mb-3 flex items-center justify-between gap-2">
-        <div className="flex min-w-0 items-center gap-2">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--ep-accent-tint)] text-[var(--ep-accent)]">
-            <Icon name="layers" size={17} />
+        <div className="flex min-w-0 items-center gap-2.5">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--ep-accent-tint)] text-[var(--ep-accent)] shadow-2xs">
+            <Icon name="layers" size={18} />
           </span>
-          <span className="min-w-0">
-            <span className="block truncate text-sm font-semibold text-[var(--ep-text)]">{tank.name}</span>
-            <span className="block truncate text-[11px] text-[var(--ep-text-muted)]">{tank.pl}</span>
-          </span>
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="inline-flex items-center rounded-md border border-[var(--ep-accent)]/30 bg-[var(--ep-accent-tint)]/70 px-1.5 py-0.5 font-mono text-[10px] font-bold text-[var(--ep-primary)] shadow-2xs">
+                {displayId}
+              </span>
+              <span className="truncate text-sm font-semibold text-[var(--ep-text)]">{tank.name}</span>
+            </div>
+            <span className="block truncate text-[11px] text-[var(--ep-text-muted)]">PL batch: {tank.pl}</span>
+          </div>
         </div>
         <span className={!tank.hasWaterReadings ? "dashboard-status-badge" : warningCount ? "dashboard-status-badge dashboard-status-warning" : "dashboard-status-badge dashboard-status-success"}>
           {!tank.hasWaterReadings ? "No readings" : warningCount ? `${warningCount} to check` : "Healthy"}
         </span>
       </div>
+
       {warningLabels.length > 0 && (
         <p className="mb-3 rounded-lg border border-[var(--ep-status-warning)]/25 bg-[var(--ep-status-warning)]/5 px-2.5 py-2 text-[11px] leading-relaxed text-[var(--ep-status-warning)]">
           <span className="font-semibold">Check:</span> {warningLabels.join(" · ")}
         </p>
       )}
+
       {tank.hasWaterReadings ? (
         <div className="grid grid-cols-2 gap-2 border-t border-[var(--ep-line)] pt-3 sm:grid-cols-3">
           {readings.map((reading) => (
@@ -66,8 +75,12 @@ export function TankSnapshotCard({ tank, thresholdSettings }: TankSnapshotCardPr
           <p className="text-xs font-medium text-[var(--ep-text-muted)]">No readings yet</p>
         </div>
       )}
-      <div className="mt-3 flex items-center justify-end gap-1 text-[11px] font-semibold text-[var(--ep-accent)]">
-        View water quality <Icon name="arrow-right" size={12} />
+
+      <div className="mt-3 flex items-center justify-between border-t border-[var(--ep-line)]/50 pt-2 text-[11px]">
+        <span className="font-mono text-[10px] text-[var(--ep-text-muted)]">ID: {tank.id}</span>
+        <span className="flex items-center gap-1 font-semibold text-[var(--ep-accent)] group-hover:translate-x-0.5 transition-transform">
+          View water quality <Icon name="arrow-right" size={12} />
+        </span>
       </div>
     </Link>
   );

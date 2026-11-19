@@ -1,5 +1,6 @@
 import { useEffect, useId } from "react";
 import { DashboardModalShell } from "./DashboardPrimitives";
+import { Icon } from "@/components/ui/Icon";
 
 interface DashboardDetailModalProps {
   open: boolean;
@@ -38,37 +39,49 @@ export function DashboardDetailModal({
       titleId={`${uid}-title`}
       onClose={onClose}
       backdropLabel="Close details"
-      panelClassName="ep-pop-in p-6 sm:p-8"
+      panelClassName="p-6 sm:p-8"
     >
-        <div className="mb-6 flex items-start justify-between gap-4">
-          <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)]">
-              Dashboard detail
-            </p>
-            <h2 id={`${uid}-title`} className="ep-font-display text-2xl font-semibold">
-              {title}
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">
-              {description}
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[rgba(11,46,51,0.05)] hover:text-[var(--ep-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)]"
-          >
-            ×
-          </button>
+      <div className="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
+            <Icon name="layers" size={12} strokeWidth={2} />
+            Dashboard Detail
+          </p>
+          <h2 id={`${uid}-title`} className="mt-1 ep-font-display text-xl font-bold tracking-tight text-[var(--ep-text)] sm:text-2xl">
+            {title}
+          </h2>
+          <p className="mt-1.5 text-xs text-[var(--ep-text-muted)] sm:text-sm leading-relaxed">
+            {description}
+          </p>
         </div>
-        <ul className="space-y-3 border-t border-[var(--ep-line)] pt-5 text-sm">
-          {details.map((detail) => (
-            <li key={detail} className="flex gap-3 leading-relaxed text-[var(--ep-text-muted)]">
-              <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ep-accent)]" />
-              {detail}
-            </li>
-          ))}
-        </ul>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close details dialog"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)]"
+        >
+          ×
+        </button>
+      </div>
+
+      <ul className="space-y-3 border-t border-[var(--ep-line)] pt-5 text-sm">
+        {details.map((detail) => (
+          <li key={detail} className="flex items-start gap-3 leading-relaxed text-[var(--ep-text)]">
+            <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--ep-primary)]" />
+            <span>{detail}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-6 pt-4 border-t border-[var(--ep-line)] flex justify-end">
+        <button
+          type="button"
+          onClick={onClose}
+          className="min-h-10 rounded-xl bg-[var(--ep-primary)] px-5 text-xs font-semibold text-white shadow-sm hover:opacity-90 transition"
+        >
+          Close
+        </button>
+      </div>
     </DashboardModalShell>
   );
 }

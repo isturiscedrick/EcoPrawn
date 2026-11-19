@@ -129,23 +129,23 @@ export function ConfirmDialog({
       <div
         aria-hidden="true"
         onClick={showCancel ? onCancel : undefined}
-        className="ep-fade-in absolute inset-0 bg-[rgba(8,30,34,0.55)] backdrop-blur-sm dark:bg-[rgba(0,0,0,0.72)]"
+        className="ep-fade-in absolute inset-0 bg-slate-950/60 backdrop-blur-md dark:bg-black/80"
       />
 
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="ep-pop-in relative z-10 w-full max-w-[380px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-[var(--shadow-overlay)] outline-none dark:shadow-[0_28px_90px_rgba(0,0,0,0.7)]"
+        className="ep-pop-in relative z-10 w-full max-w-[400px] rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-2xl outline-none"
       >
         <h2
           id={titleId}
-          className="ep-font-display mb-1.5 text-[18px] font-semibold text-[var(--ep-text)]"
+          className="ep-font-display mb-2 text-xl font-bold tracking-tight text-[var(--ep-text)]"
         >
           {title}
         </h2>
         <div
           id={descId}
-          className="mb-6 text-[13px] leading-[1.55] text-[var(--ep-text-muted)]"
+          className="mb-6 text-sm leading-relaxed text-[var(--ep-text-muted)]"
         >
           {description}
         </div>
@@ -155,7 +155,7 @@ export function ConfirmDialog({
               ref={cancelRef}
               type="button"
               onClick={onCancel}
-              className={`flex-1 rounded-lg border border-[var(--ep-line)] px-4 py-2.5 text-[13.5px] font-semibold text-[var(--ep-text)] transition-colors hover:bg-[var(--ep-tint)] ${focusRing} focus-visible:ring-[var(--ep-primary)]`}
+              className={`min-h-11 flex-1 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 text-sm font-semibold text-[var(--ep-text)] transition-colors hover:bg-[var(--ep-tint)] ${focusRing} focus-visible:ring-[var(--ep-primary)]`}
             >
               {cancelLabel}
             </button>
@@ -164,7 +164,7 @@ export function ConfirmDialog({
             ref={confirmRef}
             type="button"
             onClick={onConfirm}
-            className={`${showCancel ? "flex-1" : "w-full"} rounded-lg px-4 py-2.5 text-[13.5px] font-semibold text-white transition-colors ${confirmClass} ${focusRing}`}
+            className={`${showCancel ? "flex-1" : "w-full"} min-h-11 rounded-xl px-4 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 ${confirmClass} ${focusRing}`}
           >
             {confirmLabel}
           </button>

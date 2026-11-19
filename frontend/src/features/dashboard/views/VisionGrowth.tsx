@@ -196,9 +196,16 @@ export function VisionGrowth() {
                   </tr>
                 </thead>
                 <tbody>
-                  {tanks.map((t) => (
+                  {tanks.map((t, index) => (
                     <tr key={t.id} className="border-b border-[var(--ep-line)] last:border-b-0">
-                      <td className="py-3 pr-3 text-[13.5px] font-semibold text-[var(--water-deep)]">{t.name}</td>
+                      <td className="py-3 pr-3 text-[13.5px] font-semibold text-[var(--water-deep)]">
+                        <div className="flex items-center gap-2">
+                          <span className="rounded-md border border-[var(--ep-line)] bg-[var(--ep-surface)] px-1.5 py-0.5 ep-font-mono text-[10px] font-bold text-[var(--ep-accent)]">
+                            #{String(index + 1).padStart(2, "0")}
+                          </span>
+                          <span>{t.name}</span>
+                        </div>
+                      </td>
                       <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.bodyLength.toFixed(1)} cm</td>
                       <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.weight.toFixed(1)} g</td>
                       <td className="py-3 pr-3 ep-font-mono text-[13px] text-[var(--water-deep)]">{t.population.toLocaleString()}</td>

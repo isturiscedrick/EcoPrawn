@@ -29,7 +29,7 @@ export function DashboardCommandSearch({
 
   return (
     <div
-      className="fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/45 px-3 pt-[12vh] backdrop-blur-sm"
+      className="fixed inset-0 z-[120] flex items-start justify-center bg-slate-950/60 px-3 pt-[12vh] backdrop-blur-md"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -87,8 +87,13 @@ export function DashboardCommandSearch({
                   className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm transition-colors hover:bg-[var(--ep-tint)]"
                 >
                   <Icon name="layers" size={17} className="text-[var(--ep-primary)]" />
-                  <span className="font-medium">{tank.name}</span>
-                  <span className="ml-auto text-xs text-[var(--ep-text-muted)]">{tank.pl}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-md border border-[var(--ep-accent)]/30 bg-[var(--ep-accent-tint)]/60 px-1.5 py-0.5 font-mono text-[10px] font-bold text-[var(--ep-primary)] shadow-2xs">
+                      #{tank.id.replace(/^tank-?/i, "").padStart(2, "0") || tank.id}
+                    </span>
+                    <span className="font-medium">{tank.name}</span>
+                  </div>
+                  <span className="ml-auto text-xs text-[var(--ep-text-muted)]">PL: {tank.pl}</span>
                 </Link>
               ))}
             </>

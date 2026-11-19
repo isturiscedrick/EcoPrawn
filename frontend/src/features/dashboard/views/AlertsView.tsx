@@ -44,9 +44,13 @@ export function AlertsView() {
     if (!alert.tankId) return groups;
     const existing = groups.get(alert.tankId);
     if (existing) existing.alerts.push(alert);
-    else groups.set(alert.tankId, { tankId: alert.tankId, tankName: tanks.find(tank => tank.id === alert.tankId)?.name ?? "Tank", alerts: [alert] });
+    else {
+      const tankIndex = tanks.findIndex(t => t.id === alert.tankId);
+      const tankNumber = tankIndex >= 0 ? `#${String(tankIndex + 1).padStart(2, "0")}` : "";
+      groups.set(alert.tankId, { tankId: alert.tankId, tankNumber, tankName: tanks.find(tank => tank.id === alert.tankId)?.name ?? "Tank", alerts: [alert] });
+    }
     return groups;
-  }, new Map<string, { tankId: string; tankName: string; alerts: typeof liveAlerts }>());
+  }, new Map<string, { tankId: string; tankNumber: string; tankName: string; alerts: typeof liveAlerts }>());
   const affectedTanks = [...tankAttention.values()].sort((a, b) => b.alerts.length - a.alerts.length || a.tankName.localeCompare(b.tankName));
   const visibleLiveAlerts = filter === "info" ? [] : liveAlerts;
   const visibleWarningEvents = filter === "info" ? [] : warningEvents;
@@ -136,6 +140,9 @@ export function AlertsView() {
                 <div key={group.tankId} className="flex min-w-0 flex-wrap items-center justify-between gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-3">
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
+                      {group.tankNumber && (
+                        <span className="rounded-md border border-[var(--ep-line)] bg-[var(--ep-bg)] px-1.5 py-0.5 ep-font-mono text-[10px] font-bold text-[var(--ep-primary)]">{group.tankNumber}</span>
+                      )}
                       <span className="text-sm font-semibold text-[var(--ep-text)]">{group.tankName}</span>
                       <span className="rounded-full bg-[var(--ep-status-warning)]/10 px-2 py-0.5 text-[10px] font-semibold text-[var(--ep-status-warning)]">{group.alerts.length} parameter warning{group.alerts.length === 1 ? "" : "s"}</span>
                     </div>

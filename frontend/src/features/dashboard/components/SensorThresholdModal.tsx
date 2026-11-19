@@ -99,21 +99,23 @@ export function SensorThresholdModal({ open, onClose }: SensorThresholdModalProp
     onCloseRef.current = onClose;
   });
 
-  // On open: load saved values, lock page scroll, focus the first field, trap Tab,
-  // close on Escape, and hand focus back to whatever opened the dialog.
   useEffect(() => {
     if (!open) return;
     setValues(loadSaved());
     setTouched({});
     setSubmitted(false);
 
-    const opener = document.activeElement as HTMLElement | null;
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    dialogRef.current?.querySelector<HTMLElement>("input")?.focus();
+
+    window.requestAnimationFrame(() => {
+      dialogRef.current?.querySelector<HTMLInputElement>("input")?.focus();
+    });
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
+        event.preventDefault();
         onCloseRef.current();
         return;
       }
@@ -181,80 +183,95 @@ export function SensorThresholdModal({ open, onClose }: SensorThresholdModalProp
       backdropLabel="Close sensor settings"
       backdropTabIndex={-1}
     >
-        <div className="mb-6">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--ep-accent)]">Sensor configuration</p>
-          <h2 id={`${uid}-title`} className="ep-font-display text-2xl font-semibold">Configure safe ranges</h2>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--ep-text-muted)]">
-            Saved on this device only. Alerts and gauge colors still use the facility defaults until these ranges are connected.
+      <div className="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
+            <Icon name="sliders-horizontal" size={12} strokeWidth={2} />
+            Sensor Configuration
+          </p>
+          <h2 id={`${uid}-title`} className="mt-1 ep-font-display text-xl font-bold tracking-tight text-[var(--ep-text)] sm:text-2xl">
+            Configure Safe Ranges
+          </h2>
+          <p className="mt-1.5 text-xs text-[var(--ep-text-muted)] sm:text-sm leading-relaxed">
+            Custom sensory thresholds saved on this device. Live telemetry warnings and gauge alerts will reference these bounds.
           </p>
         </div>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close sensor settings dialog"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)]"
+        >
+          ×
+        </button>
+      </div>
 
-        <form onSubmit={handleSubmit} noValidate>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {FIELDS.map((field) => {
-              const error = touched[field.key] || submitted ? errors[field.key] : undefined;
-              const errorId = `${uid}-${field.key}-error`;
-              return (
-                <DashboardFormField
-                  key={field.key}
+      <form onSubmit={handleSubmit} noValidate>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {FIELDS.map((field) => {
+            const error = touched[field.key] || submitted ? errors[field.key] : undefined;
+            const errorId = `${uid}-${field.key}-error`;
+            return (
+              <DashboardFormField
+                key={field.key}
+                id={`${uid}-${field.key}`}
+                label={`${field.label}${field.unit ? ` (${field.unit})` : ""}`}
+                labelClassName="mb-1.5 block text-xs font-semibold text-[var(--ep-text-muted)]"
+              >
+                <input
                   id={`${uid}-${field.key}`}
-                  label={`${field.label}${field.unit ? ` (${field.unit})` : ""}`}
-                  labelClassName="mb-1.5 block text-sm font-semibold"
-                >
-                  <input
-                    id={`${uid}-${field.key}`}
-                    name={field.key}
-                    type="number"
-                    inputMode="decimal"
-                    step="0.1"
-                    value={values[field.key]}
-                    onChange={(event) => update(field.key, event.target.value)}
-                    onBlur={() => setTouched((current) => ({ ...current, [field.key]: true }))}
-                    aria-invalid={error ? true : undefined}
-                    aria-describedby={error ? errorId : undefined}
-                    className={`min-h-11 w-full rounded-lg border bg-[var(--ep-bg)] px-3 text-base outline-none focus:border-[var(--ep-accent)] ${
-                      error ? "border-[#b3261e] dark:border-[#ff8a80]" : "border-[var(--ep-line)]"
-                    }`}
-                  />
-                  {error && (
-                    <p
-                      id={errorId}
-                      className="mt-1.5 flex items-start gap-1.5 text-[13px] font-semibold text-[#b3261e] dark:text-[#ff8a80]"
-                    >
-                      <Icon name="x" size={14} strokeWidth={2.5} className="mt-0.5 shrink-0" />
-                      <span>{error}</span>
-                    </p>
-                  )}
-                </DashboardFormField>
-              );
-            })}
-          </div>
+                  name={field.key}
+                  type="number"
+                  inputMode="decimal"
+                  step="0.1"
+                  value={values[field.key]}
+                  onChange={(event) => update(field.key, event.target.value)}
+                  onBlur={() => setTouched((current) => ({ ...current, [field.key]: true }))}
+                  aria-invalid={error ? true : undefined}
+                  aria-describedby={error ? errorId : undefined}
+                  className={`min-h-11 w-full rounded-xl border bg-[var(--ep-bg)] px-3 text-sm text-[var(--ep-text)] outline-none transition focus:border-[var(--ep-primary)] focus:ring-2 focus:ring-[var(--ep-primary)]/15 ${
+                    error ? "border-rose-500" : "border-[var(--ep-line)]"
+                  }`}
+                />
+                {error && (
+                  <p
+                    id={errorId}
+                    className="mt-1.5 flex items-start gap-1 text-xs font-medium text-rose-600 dark:text-rose-400"
+                  >
+                    <Icon name="x" size={13} strokeWidth={2.5} className="mt-0.5 shrink-0" />
+                    <span>{error}</span>
+                  </p>
+                )}
+              </DashboardFormField>
+            );
+          })}
+        </div>
 
-          <div className="mt-7 flex flex-wrap items-center justify-between gap-3">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--ep-line)] pt-5">
+          <button
+            type="button"
+            onClick={handleReset}
+            className="min-h-11 rounded-xl px-3 text-xs font-semibold text-[var(--ep-text-muted)] hover:text-[var(--ep-primary)] transition-colors"
+          >
+            Reset to defaults
+          </button>
+          <div className="flex gap-3">
             <button
               type="button"
-              onClick={handleReset}
-              className="min-h-11 rounded-lg px-3 text-sm font-semibold text-[var(--ep-text-muted)] underline underline-offset-4 hover:text-[var(--ep-primary)]"
+              onClick={onClose}
+              className="min-h-11 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 text-sm font-semibold text-[var(--ep-text)] hover:bg-[var(--ep-tint)] transition-colors"
             >
-              Reset to defaults
+              Cancel
             </button>
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={onClose}
-                className="min-h-11 rounded-lg border border-[var(--ep-line)] px-4 text-sm font-semibold"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="min-h-11 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-white hover:bg-[var(--ep-accent-hover)]"
-              >
-                Save ranges
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="min-h-11 rounded-xl bg-[var(--ep-primary)] px-5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+            >
+              Save ranges
+            </button>
           </div>
-        </form>
+        </div>
+      </form>
     </DashboardModalShell>
   );
 }

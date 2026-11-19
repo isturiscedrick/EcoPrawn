@@ -34,6 +34,21 @@ export function Dashboard() {
     [visibleTanks],
   );
 
+  const healthyCount = useMemo(
+    () => visibleTanks.filter((t) => t.hasWaterReadings && t.status === "ok").length,
+    [visibleTanks],
+  );
+
+  const attentionCount = useMemo(
+    () => visibleTanks.filter((t) => t.hasWaterReadings && t.status !== "ok").length,
+    [visibleTanks],
+  );
+
+  const totalPopulation = useMemo(
+    () => visibleTanks.reduce((sum, t) => sum + (t.population || 0), 0),
+    [visibleTanks],
+  );
+
   const recentActivity = useMemo(
     () => buildRecentDashboardActivity(tanks, waterHistory, visionScanLog),
     [tanks, waterHistory, visionScanLog],
@@ -60,59 +75,43 @@ export function Dashboard() {
           Dashboard
         </h1>
         <p className="mt-2 block w-full text-sm text-[var(--ep-text-muted)]">
-          Tank status, water parameters, and biomass at a glance.
+          Real-time facility telemetry, tank biometrics, and water quality monitoring.
         </p>
       </header>
 
-      <KpiGrid label="Tank snapshot metrics">
+      {/* 4 PRIMARY KPI CARDS */}
+      <KpiGrid label="Facility snapshot metrics">
         <KpiCard
-          label="Tanks shown"
+          icon="tank-stack"
+          label="Active Tanks"
           value={String(metrics.count)}
           unit="tanks"
-          delta="Current table results"
-          deltaTone="ok"
+          delta={`${healthyCount} nominal · ${attentionCount} attention`}
+          deltaTone={attentionCount > 0 ? "warn" : "ok"}
         />
         <KpiCard
-          label="Total biomass"
-          value={metrics.biomass.toFixed(1)}
+          icon="package"
+          label="Total Biomass"
+          value={metrics.biomass.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
           unit="kg"
-          delta="Visible tanks"
+          delta={`${totalPopulation.toLocaleString()} prawns stocked`}
           deltaTone="ok"
         />
         <KpiCard
-          label="Average dissolved oxygen"
+          icon="waves"
+          label="Mean Dissolved Oxygen"
           value={formatDashboardMetric(metrics.avgDo)}
           unit="mg/L"
-          delta="Tanks with readings"
-          deltaTone="ok"
+          delta={metrics.avgDo !== null && metrics.avgDo < 5.0 ? "Below target threshold" : "Optimal (5.5 - 7.5 mg/L)"}
+          deltaTone={metrics.avgDo !== null && metrics.avgDo < 5.0 ? "warn" : "ok"}
         />
         <KpiCard
-          label="Average pH"
-          value={formatDashboardMetric(metrics.avgPh)}
-          unit="pH"
-          delta="Tanks with readings"
-          deltaTone="ok"
-        />
-        <KpiCard
-          label="Average temperature"
+          icon="thermometer"
+          label="Mean Temperature"
           value={formatDashboardMetric(metrics.avgTemp)}
           unit="°C"
-          delta="Tanks with readings"
-          deltaTone="ok"
-        />
-        <KpiCard
-          label="Average salinity"
-          value={formatDashboardMetric(metrics.avgSalinity)}
-          unit="ppt"
-          delta="Tanks with readings"
-          deltaTone="ok"
-        />
-        <KpiCard
-          label="Average water level"
-          value={formatDashboardMetric(metrics.avgWaterLevel)}
-          unit="%"
-          delta="Tanks with readings"
-          deltaTone="ok"
+          delta={metrics.avgTemp !== null && (metrics.avgTemp < 26 || metrics.avgTemp > 31.5) ? "Outside optimal band" : "Nominal (27 - 31 °C)"}
+          deltaTone={metrics.avgTemp !== null && (metrics.avgTemp < 26 || metrics.avgTemp > 31.5) ? "warn" : "ok"}
         />
       </KpiGrid>
 

@@ -136,6 +136,7 @@ export function WaterQuality() {
                   }`}
                 >
                   <span className={`mr-2 inline-block h-2 w-2 rounded-full align-middle ${!tank.hasWaterReadings ? "bg-slate-400" : tank.status === "ok" ? "bg-emerald-500" : "bg-amber-500"}`} aria-hidden="true" />
+                  <span className="mr-1.5 ep-font-mono text-[11px] font-bold opacity-80">#{String(index + 1).padStart(2, "0")}</span>
                   {tank.name}
                 </button>
               ))}
@@ -148,7 +149,7 @@ export function WaterQuality() {
             aria-labelledby={`water-tank-tab-${selectedTankIndex}`}
             className="mb-4"
           >
-            <Panel title="Water quality limits" badge="All tanks">
+            <Panel title={`Water quality limits — #${String(selectedTankIndex + 1).padStart(2, "0")} ${selectedTank.name}`} badge="Sensor limits">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                   <button type="button" onClick={() => { setEditingThresholds(value => !value); setThresholdMessage(""); }} className="min-h-9 rounded-lg border border-[var(--ep-line)] px-3 text-xs font-semibold text-[var(--ep-primary)] hover:bg-[var(--ep-tint)]">{editingThresholds ? "Close settings" : "Customize limits"}</button>
               </div>

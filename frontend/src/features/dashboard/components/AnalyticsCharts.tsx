@@ -590,13 +590,18 @@ export function FeedingProgressChart({
           Remaining target
         </span>
       </div>
-      {rows.map((t) => {
+      {rows.map((t, index) => {
         const pct =
           t.targetToday > 0 ? Math.min(100, (t.dispensedToday / t.targetToday) * 100) : 100;
         return (
           <div key={t.id}>
             <div className="mb-1.5 flex items-center justify-between gap-3 text-sm">
-              <strong className="truncate text-[var(--ep-text)]">{t.name}</strong>
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="ep-font-mono text-[10px] font-bold text-[var(--ep-accent)] rounded bg-[var(--ep-tint)] px-1.5 py-0.5">
+                  #{String(index + 1).padStart(2, "0")}
+                </span>
+                <strong className="truncate text-[var(--ep-text)]">{t.name}</strong>
+              </div>
               <span className="ep-font-mono shrink-0 text-xs text-[var(--ep-text-muted)]">
                 {number(t.dispensedToday)} / {number(t.targetToday)} kg
               </span>

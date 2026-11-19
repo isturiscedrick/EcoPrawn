@@ -1,5 +1,6 @@
 import { useEffect, useId, useState, type FormEvent } from "react";
 import type { Tank } from "@/features/dashboard/context/TankContext";
+import { Icon } from "@/components/ui/Icon";
 import { DashboardFormField, DashboardModalShell } from "./DashboardPrimitives";
 
 interface EditTankModalProps {
@@ -8,7 +9,8 @@ interface EditTankModalProps {
   onSave: (id: string, patch: Pick<Tank, "name" | "pl" | "biomass" | "targetToday" | "dispensedToday" | "fcr">) => Promise<boolean>;
 }
 
-const fieldClass = "min-h-11 w-full rounded-lg border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 text-sm text-[var(--ep-text)] outline-none focus:border-[var(--ep-accent)] focus:ring-2 focus:ring-[var(--ep-accent-tint)]";
+const fieldClass =
+  "min-h-11 w-full rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 text-sm text-[var(--ep-text)] outline-none transition focus:border-[var(--ep-primary)] focus:ring-2 focus:ring-[var(--ep-primary)]/15";
 
 export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
   const uid = useId();
@@ -46,6 +48,7 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
 
   if (!tank) return null;
   const currentTank = tank;
+  const displayId = `#${currentTank.id.replace(/^tank-?/i, "").padStart(2, "0") || currentTank.id}`;
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -85,12 +88,12 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
   }
 
   const fields = [
-    { id: "name", label: "Tank name", value: name, change: setName, type: "text" },
-    { id: "pl", label: "PL batch", value: pl, change: setPl, type: "text" },
-    { id: "biomass", label: "Biomass (kg)", value: biomass, change: setBiomass, type: "number" },
-    { id: "target", label: "Feed target today (kg)", value: targetToday, change: setTargetToday, type: "number" },
-    { id: "dispensed", label: "Feed dispensed today (kg)", value: dispensedToday, change: setDispensedToday, type: "number" },
-    { id: "fcr", label: "Feed conversion ratio", value: fcr, change: setFcr, type: "number" },
+    { id: "name", label: "Tank name", value: name, change: setName, type: "text", icon: "layers" as const },
+    { id: "pl", label: "PL batch code", value: pl, change: setPl, type: "text", icon: "package" as const },
+    { id: "biomass", label: "Biomass stock (kg)", value: biomass, change: setBiomass, type: "number", icon: "sprout" as const },
+    { id: "target", label: "Feed target today (kg)", value: targetToday, change: setTargetToday, type: "number", icon: "utensils" as const },
+    { id: "dispensed", label: "Feed dispensed today (kg)", value: dispensedToday, change: setDispensedToday, type: "number", icon: "clock" as const },
+    { id: "fcr", label: "Feed conversion ratio (FCR)", value: fcr, change: setFcr, type: "number", icon: "chart-bars-trend" as const },
   ] as const;
 
   return (
@@ -99,42 +102,119 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
       onClose={onClose}
       backdropLabel="Close edit tank dialog"
       backdropDisabled={saving}
-      backdropClassName="bg-black/55 backdrop-blur-sm"
-      panelClassName="p-5 shadow-2xl sm:p-8"
+      panelClassName="p-6 sm:p-8"
     >
-        <div className="mb-5 flex items-start justify-between gap-4">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--ep-accent)]">Tank configuration</p>
-            <h2 id={`${uid}-title`} className="mt-1 ep-font-display text-xl font-semibold text-[var(--ep-primary)]">Edit {tank.name}</h2>
-            <p className="mt-1 text-sm text-[var(--ep-text-muted)]">Update the tank details and feeding targets.</p>
+      <div className="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ep-primary)]">
+            <Icon name="layers" size={12} strokeWidth={2} />
+            Tank Configuration
+          </p>
+          <div className="mt-1 flex items-center gap-2 flex-wrap">
+            <h2 id={`${uid}-title`} className="ep-font-display text-xl font-bold text-[var(--ep-text)] sm:text-2xl">
+              Edit {tank.name}
+            </h2>
+            <span className="inline-flex items-center rounded-md border border-[var(--ep-accent)]/30 bg-[var(--ep-accent-tint)]/60 px-2 py-0.5 font-mono text-xs font-bold text-[var(--ep-primary)] shadow-2xs">
+              {displayId}
+            </span>
           </div>
-          <button type="button" onClick={onClose} disabled={saving} aria-label="Close" className="min-h-10 min-w-10 rounded-lg text-xl text-[var(--ep-text-muted)] hover:bg-[var(--ep-bg-subtle)]">×</button>
+          <p className="mt-1.5 text-xs text-[var(--ep-text-muted)] sm:text-sm">
+            Update stocking density, batch information, and feeding targets.
+          </p>
         </div>
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {fields.map((field) => (
-            <DashboardFormField key={field.id} id={`${uid}-${field.id}`} label={field.label}>
-              <input id={`${uid}-${field.id}`} className={`${fieldClass} mt-1.5`} type={field.type} inputMode={field.type === "number" ? "decimal" : undefined} min={field.type === "number" ? "0" : undefined} maxLength={field.type === "text" ? 100 : undefined} step={field.type === "number" ? "any" : undefined} value={field.value} onChange={(event) => field.change(event.target.value)} required />
-            </DashboardFormField>
-          ))}
-          {error && <p role="alert" className="sm:col-span-2 text-sm text-[var(--ep-status-danger)]">{error}</p>}
-          <div className="mt-2 flex gap-3 sm:col-span-2">
-            <button type="button" onClick={onClose} disabled={saving} className="min-h-11 flex-1 rounded-lg border border-[var(--ep-line)] px-4 text-sm font-semibold text-[var(--ep-text-muted)] hover:bg-[var(--ep-bg-subtle)] disabled:opacity-50">Cancel</button>
-            <button type="submit" disabled={saving} className="min-h-11 flex-1 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-white hover:bg-[var(--ep-accent-hover)] disabled:cursor-wait disabled:opacity-60">{saving ? "Saving…" : "Save changes"}</button>
-          </div>
-        </form>
-        {pendingChanges && (
-          <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm" role="presentation">
-            <section role="alertdialog" aria-modal="true" aria-labelledby={`${uid}-confirm-title`} aria-describedby={`${uid}-confirm-description`} className="w-full max-w-md rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-5 shadow-2xl">
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ep-accent-tint)] text-[var(--ep-primary)]">✓</div>
-              <h3 id={`${uid}-confirm-title`} className="text-lg font-semibold text-[var(--ep-text)]">Save tank changes?</h3>
-              <p id={`${uid}-confirm-description`} className="mt-2 text-sm leading-6 text-[var(--ep-text-muted)]">Are you sure you want to save the updated details for <strong className="text-[var(--ep-text)]">{pendingChanges.name}</strong>? This will update the tank record.</p>
-              <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-                <button type="button" disabled={saving} onClick={() => setPendingChanges(null)} className="min-h-10 rounded-xl border border-[var(--ep-line)] px-4 text-sm font-semibold text-[var(--ep-text-muted)] hover:bg-[var(--ep-bg-subtle)] disabled:opacity-50">Review changes</button>
-                <button type="button" disabled={saving} onClick={() => void confirmSave()} className="min-h-10 rounded-xl bg-[var(--ep-primary)] px-4 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50">{saving ? "Saving…" : "Yes, save changes"}</button>
-              </div>
-            </section>
-          </div>
+        <button
+          type="button"
+          onClick={onClose}
+          disabled={saving}
+          aria-label="Close edit tank dialog"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] text-lg text-[var(--ep-text-muted)] transition-colors hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)] disabled:opacity-50"
+        >
+          ×
+        </button>
+      </div>
+
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {fields.map((field) => (
+          <DashboardFormField key={field.id} id={`${uid}-${field.id}`} label={field.label} icon={field.icon}>
+            <input
+              id={`${uid}-${field.id}`}
+              className={`${fieldClass} mt-1`}
+              type={field.type}
+              inputMode={field.type === "number" ? "decimal" : undefined}
+              min={field.type === "number" ? "0" : undefined}
+              maxLength={field.type === "text" ? 100 : undefined}
+              step={field.type === "number" ? "any" : undefined}
+              value={field.value}
+              onChange={(event) => field.change(event.target.value)}
+              required
+            />
+          </DashboardFormField>
+        ))}
+
+        {error && (
+          <p role="alert" className="sm:col-span-2 rounded-xl border border-rose-500/30 bg-rose-500/10 p-3 text-xs font-medium text-rose-600 dark:text-rose-300">
+            {error}
+          </p>
         )}
+
+        <div className="mt-4 flex gap-3 sm:col-span-2">
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={saving}
+            className="min-h-11 flex-1 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-4 text-sm font-semibold text-[var(--ep-text)] transition-colors hover:bg-[var(--ep-tint)] disabled:opacity-50"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={saving}
+            className="min-h-11 flex-1 rounded-xl bg-[var(--ep-primary)] px-4 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 disabled:cursor-wait disabled:opacity-60"
+          >
+            {saving ? "Saving…" : "Save changes"}
+          </button>
+        </div>
+      </form>
+
+      {pendingChanges && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-md" role="presentation">
+          <section
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby={`${uid}-confirm-title`}
+            aria-describedby={`${uid}-confirm-description`}
+            className="w-full max-w-md rounded-2xl border border-[var(--ep-line)] bg-[var(--ep-surface)] p-6 shadow-2xl"
+          >
+            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--ep-accent-tint)] text-[var(--ep-primary)]">
+              <Icon name="check" size={18} strokeWidth={2.5} />
+            </div>
+            <h3 id={`${uid}-confirm-title`} className="text-lg font-bold text-[var(--ep-text)]">
+              Save changes to {displayId}?
+            </h3>
+            <p id={`${uid}-confirm-description`} className="mt-2 text-sm leading-6 text-[var(--ep-text-muted)]">
+              Are you sure you want to update the records for <strong className="text-[var(--ep-text)]">{pendingChanges.name}</strong>?
+            </p>
+            <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+              <button
+                type="button"
+                disabled={saving}
+                onClick={() => setPendingChanges(null)}
+                className="min-h-10 rounded-xl border border-[var(--ep-line)] px-4 text-sm font-semibold text-[var(--ep-text)] hover:bg-[var(--ep-tint)] disabled:opacity-50"
+              >
+                Review changes
+              </button>
+              <button
+                type="button"
+                disabled={saving}
+                onClick={() => void confirmSave()}
+                className="min-h-10 rounded-xl bg-[var(--ep-primary)] px-4 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50"
+              >
+                {saving ? "Saving…" : "Yes, save changes"}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
     </DashboardModalShell>
   );
 }
