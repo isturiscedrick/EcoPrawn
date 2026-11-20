@@ -163,3 +163,34 @@ html.dark .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > 
       transform 160ms ease, box-shadow 160ms ease;
   }
 }
+
+/* Dark mode: active navigation row is a quiet teal-tinted surface, not a solid fill.
+   Uses an ID selector so it outranks the solid-teal !important rules in
+   brand-utilities.css, brand-states.css and marketing/chrome-navigation.css. */
+html.dark body .dashboard-shell :is(aside#dashboard-sidebar, #dashboard-mobile-drawer) nav > a[aria-current="page"] > span {
+  background: #214f4c !important;
+  background-color: #214f4c !important;
+  border: 1px solid #39736d !important;
+  color: #e8f4f2 !important;
+  -webkit-text-fill-color: #e8f4f2 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045) !important;
+}
+html.dark body .dashboard-shell :is(aside#dashboard-sidebar, #dashboard-mobile-drawer) nav > a[aria-current="page"] > span > span:nth-child(2) {
+  background: transparent !important;
+  color: #e8f4f2 !important;
+  -webkit-text-fill-color: #e8f4f2 !important;
+}
+html.dark body .dashboard-shell :is(aside#dashboard-sidebar, #dashboard-mobile-drawer) nav > a[aria-current="page"] > span > span:first-child {
+  background: rgba(69, 197, 179, 0.18) !important;
+  color: #70d7c8 !important;
+}
+html.dark body .dashboard-shell :is(aside#dashboard-sidebar, #dashboard-mobile-drawer) nav > a[aria-current="page"] > span > span:first-child svg {
+  color: #70d7c8 !important;
+  stroke: currentColor !important;
+}
+html.dark body .dashboard-shell :is(aside#dashboard-sidebar, #dashboard-mobile-drawer) nav > a[aria-current="page"] > span > .absolute {
+  background: #45c5b3 !important;
+}
+html.dark body .dashboard-shell :is(aside#dashboard-sidebar, #dashboard-mobile-drawer) nav > a[aria-current="page"] .dashboard-nav-active-dot {
+  background: #70d7c8 !important;
+}
