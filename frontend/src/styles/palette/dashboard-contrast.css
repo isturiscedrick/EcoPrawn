@@ -67,17 +67,17 @@ html.dark body .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a:hov
 
 .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav {
   display: flex;
-  width: 48px !important;
+  width: 44px !important;
   margin-inline: auto !important;
-  gap: 0.35rem;
+  gap: 0.2rem;
   align-items: center;
 }
 
 .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a {
   display: flex;
-  width: 48px !important;
-  flex: 0 0 48px;
-  min-height: 48px;
+  width: 44px !important;
+  flex: 0 0 40px;
+  min-height: 40px;
   align-self: center;
   margin-inline: auto !important;
   align-items: center;
@@ -86,13 +86,13 @@ html.dark body .dashboard-shell aside#dashboard-sidebar > div:nth-child(2) a:hov
 }
 
 .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] nav > a > span {
-  width: 46px !important;
-  flex: 0 0 46px;
-  min-height: 46px;
+  width: 40px !important;
+  flex: 0 0 40px;
+  min-height: 40px;
   margin-inline: auto !important;
   justify-content: center;
   padding: 0;
-  border-radius: 13px;
+  border-radius: 11px;
   transform: none !important;
 }
 
@@ -133,16 +133,16 @@ html body .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:
 }
 
 .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:last-child :is(a, button) {
-  width: 46px;
+  width: 40px;
   justify-content: center;
   padding-inline: 0;
 }
 
 .dashboard-shell aside#dashboard-sidebar[data-collapsed="true"] > div:last-child a {
-  width: 46px !important;
-  height: 46px;
-  min-height: 46px;
-  flex: 0 0 46px;
+  width: 40px !important;
+  height: 40px;
+  min-height: 40px;
+  flex: 0 0 40px;
   justify-content: center;
   padding: 0;
 }

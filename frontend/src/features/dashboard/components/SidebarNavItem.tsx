@@ -132,8 +132,8 @@ export function SidebarNavItem({
       >
         <span
           aria-busy={pending}
-          className={`relative flex min-h-12 touch-manipulation items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-[14.5px] font-medium transition-all duration-200 lg:w-full ${
-            collapsed ? "lg:mx-auto lg:h-11 lg:!w-11 lg:justify-center lg:px-0 lg:py-0" : ""
+          className={`relative flex min-h-12 touch-manipulation items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-[14.5px] font-medium transition-all duration-200 lg:min-h-9 lg:w-full lg:px-2.5 lg:py-1.5 lg:text-[13.5px] ${
+            collapsed ? "lg:mx-auto lg:h-10 lg:!w-10 lg:min-h-10 lg:justify-center lg:px-0 lg:py-0" : ""
           } ${
             routeActive || pending
               ? "dashboard-nav-active border border-[var(--ep-accent)]/40 bg-[var(--ep-accent-tint)] font-semibold text-[var(--ep-text)] shadow-sm"
@@ -145,10 +145,10 @@ export function SidebarNavItem({
           {/* 1. Icon Container (always first child for CSS selectors) */}
           <span
             aria-hidden="true"
-            className="relative flex h-8 w-8 shrink-0 items-center justify-center"
+            className="relative flex h-8 w-8 shrink-0 items-center justify-center lg:h-7 lg:w-7"
           >
             <span
-              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all duration-200 ${
+              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all duration-200 lg:h-7 lg:w-7 ${
                 routeActive
                   ? "bg-[var(--ep-accent-tint)] text-[var(--ep-primary)] shadow-2xs"
                   : isAi

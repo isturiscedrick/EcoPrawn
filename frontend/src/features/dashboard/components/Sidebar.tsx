@@ -433,46 +433,46 @@ export function Sidebar({
           }`}
         >
           {/* Drawer header */}
-          <div className="relative flex shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-5 py-4">
-            <div className="flex min-w-0 flex-col gap-1">
-              <BrandMark size={32} logoColor="var(--ep-primary)" logoTextColor="var(--ep-text)" />
-              <span className="ep-mobile-drawer-caption pl-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ep-text-muted)]">EcoPrawn Dashboard</span>
+          <div className="relative flex shrink-0 items-center justify-between border-b border-[var(--ep-line)] px-4 py-2.5">
+            <div className="flex min-w-0 flex-col gap-0.5">
+              <BrandMark size={28} logoColor="var(--ep-primary)" logoTextColor="var(--ep-text)" />
+              <span className="ep-mobile-drawer-caption pl-1 text-[9.5px] font-semibold uppercase tracking-[0.18em] text-[var(--ep-text-muted)]">EcoPrawn Dashboard</span>
             </div>
             <button
               ref={closeButtonRef}
               type="button"
               onClick={closeDrawer}
               aria-label="Close navigation menu"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] shadow-sm transition-all duration-200 hover:rotate-90 hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--ep-line)] bg-[var(--ep-surface)] text-[var(--ep-text-muted)] shadow-sm transition-all duration-200 hover:rotate-90 hover:bg-[var(--ep-tint)] hover:text-[var(--ep-primary)]"
             >
-              <Icon name="x" size={20} strokeWidth={2} />
+              <Icon name="x" size={18} strokeWidth={2} />
             </button>
           </div>
 
           {/* Profile */}
-          <div className="shrink-0 border-b border-[var(--ep-line)] px-4 py-3">
+          <div className="shrink-0 border-b border-[var(--ep-line)] px-3.5 py-2">
             <Link
               to="/dashboard/profile"
               aria-label="Edit user profile"
-              className="flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-3 py-3 text-left transition-colors hover:bg-[var(--ep-tint)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
+              className="flex w-full items-center gap-2.5 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-surface)] px-2.5 py-2 text-left transition-colors hover:bg-[var(--ep-tint)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)]"
               activeOptions={{ exact: true }}
             >
               <div
-                className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold"
+                className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[12px] font-semibold"
                 style={{ background: "var(--ep-accent-tint)", color: "var(--ep-primary)" }}
                 aria-hidden="true"
               >
-                <ProfileAvatar name={profileName} image={profileImage} />
-                <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
+                <ProfileAvatar name={profileName} image={profileImage} size="sm" />
+                <span className="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 ring-2 ring-[var(--ep-surface)]" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 ring-2 ring-[var(--ep-surface)]" />
                 </span>
               </div>
               <div className="min-w-0">
-                <div className="truncate text-[15px] font-semibold text-[var(--ep-text)]">
+                <div className="truncate text-[14px] font-semibold text-[var(--ep-text)]">
                   {profileName}
                 </div>
-                <div className="ep-font-mono truncate text-xs text-[var(--ep-text-muted)]">
+                <div className="ep-font-mono truncate text-[11px] text-[var(--ep-text-muted)]">
                   {profileRole}
                 </div>
               </div>
@@ -480,12 +480,12 @@ export function Sidebar({
           </div>
 
           {/* Navigation */}
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3 space-y-4">
+          <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-visible px-3.5 py-2 space-y-2">
             <div>
-              <div className="px-2 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
                 Operations
               </div>
-              <nav aria-label="Facility operations" className="flex flex-col items-stretch gap-1">
+              <nav aria-label="Facility operations" className="flex flex-col items-stretch gap-0.5">
                 {DASHBOARD_NAV_ITEMS.filter(i => i.section === 'operations').map((item) => (
                   <SidebarNavItem
                     key={item.label}
@@ -500,10 +500,10 @@ export function Sidebar({
             </div>
 
             <div>
-              <div className="px-2 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
                 Intelligence
               </div>
-              <nav aria-label="AI Intelligence" className="flex flex-col items-stretch gap-1">
+              <nav aria-label="AI Intelligence" className="flex flex-col items-stretch gap-0.5">
                 {DASHBOARD_NAV_ITEMS.filter(i => i.section === 'intelligence').map((item) => (
                   <SidebarNavItem
                     key={item.label}
@@ -518,10 +518,10 @@ export function Sidebar({
             </div>
 
             <div>
-              <div className="px-2 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+              <div className="px-2 pb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
                 System & Alarms
               </div>
-              <nav aria-label="System and alarms" className="flex flex-col items-stretch gap-1">
+              <nav aria-label="System and alarms" className="flex flex-col items-stretch gap-0.5">
                 {DASHBOARD_NAV_ITEMS.filter(i => i.section === 'system').map((item) => (
                   <SidebarNavItem
                     key={item.label}
@@ -537,8 +537,8 @@ export function Sidebar({
           </div>
 
           {/* Account actions */}
-          <div className="flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-surface)]/70 px-5 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-          <Link to="/dashboard/settings" aria-current={pathname.startsWith("/dashboard/settings") ? "page" : undefined} className={drawerRowClass + (pathname.startsWith("/dashboard/settings") ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
+          <div className="flex shrink-0 flex-col gap-1.5 border-t border-[var(--ep-line)] bg-[var(--ep-surface)]/70 px-3.5 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <Link to="/dashboard/settings" aria-current={pathname.startsWith("/dashboard/settings") ? "page" : undefined} className={drawerRowClass + " !min-h-10 !py-2 !text-[13.5px]" + (pathname.startsWith("/dashboard/settings") ? " dashboard-nav-active" : "")} onClick={onMobileClose}>
             <span className="flex w-4 justify-center"><Icon name="settings" size={16} /></span>
             Settings
           </Link>
@@ -548,7 +548,7 @@ export function Sidebar({
                 onMobileClose();
                 onLogoutClick();
               }}
-              className="dashboard-logout-button group flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-[14.5px] font-semibold transition-all duration-200 active:scale-[0.99]"
+              className="dashboard-logout-button group flex min-h-10 w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-[13.5px] font-semibold transition-all duration-200 active:scale-[0.99]"
             >
               <span className="flex w-4 justify-center" aria-hidden="true">
                 <LogoutIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />

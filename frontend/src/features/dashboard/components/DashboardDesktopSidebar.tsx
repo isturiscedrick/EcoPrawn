@@ -74,10 +74,10 @@ export function DashboardDesktopSidebar({
     >
       {/* 1. HEADER */}
       <div
-        className={`flex shrink-0 items-center border-b border-[var(--ep-line)] py-3 ${
+        className={`flex shrink-0 items-center border-b border-[var(--ep-line)] py-2 ${
           collapsed
-            ? "min-h-[72px] justify-center px-2"
-            : "min-h-[72px] justify-between gap-3 px-5"
+            ? "min-h-[56px] justify-center px-2"
+            : "min-h-[56px] justify-between gap-3 px-4"
         }`}
       >
         {collapsed ? (
@@ -139,7 +139,7 @@ export function DashboardDesktopSidebar({
       </div>
 
       {/* 2. PROFILE CARD */}
-      <div className={`shrink-0 border-b border-[var(--ep-line)] py-3 ${collapsed ? "px-2" : "px-4"}`}>
+      <div className={`shrink-0 border-b border-[var(--ep-line)] py-2 ${collapsed ? "px-2" : "px-4"}`}>
         <Link
           ref={profileRef}
           to="/dashboard/profile"
@@ -147,7 +147,7 @@ export function DashboardDesktopSidebar({
           onMouseLeave={() => setHoveredProfile(false)}
           onFocus={() => setHoveredProfile(true)}
           onBlur={() => setHoveredProfile(false)}
-          className={`group flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] py-2.5 text-left transition-all duration-200 hover:border-[var(--ep-accent)]/40 hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] ${
+          className={`group flex w-full items-center gap-3 rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] py-1.5 text-left transition-all duration-200 hover:border-[var(--ep-accent)]/40 hover:bg-[var(--ep-tint)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] ${
             collapsed ? "justify-center px-1" : "px-3"
           }`}
         >
@@ -184,15 +184,15 @@ export function DashboardDesktopSidebar({
       </div>
 
       {/* 4. NAVIGATION MODULES */}
-      <div className={`min-h-0 flex-1 overflow-y-auto py-3 space-y-4 ${collapsed ? "px-2" : "px-4"}`}>
+      <div className={`min-h-0 flex-1 overflow-x-hidden overflow-y-visible py-2 space-y-2.5 ${collapsed ? "px-2" : "px-4"}`}>
         {/* Operations Section */}
         <div>
           {!collapsed && (
-            <div className="px-2.5 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+            <div className="px-2.5 pb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
               Operations
             </div>
           )}
-          <nav aria-label="Facility operations" className="flex flex-col items-stretch gap-1">
+          <nav aria-label="Facility operations" className="flex flex-col items-stretch gap-0.5">
             {operationsItems.map((item) => (
               <SidebarNavItem
                 key={item.label}
@@ -209,12 +209,12 @@ export function DashboardDesktopSidebar({
         {/* Intelligence / AI Section (in collapsed mode or full list) */}
         <div>
           {!collapsed && (
-            <div className="px-2.5 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+            <div className="px-2.5 pb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
               Intelligence
             </div>
           )}
-          {collapsed && <div className="h-px w-8 mx-auto bg-[var(--ep-line)] my-1.5" />}
-          <nav aria-label="AI Intelligence" className="flex flex-col items-stretch gap-1">
+          {collapsed && <div className="h-px w-8 mx-auto bg-[var(--ep-line)] my-1" />}
+          <nav aria-label="AI Intelligence" className="flex flex-col items-stretch gap-0.5">
             {intelligenceItems.map((item) => (
               <SidebarNavItem
                 key={item.label}
@@ -231,12 +231,12 @@ export function DashboardDesktopSidebar({
         {/* Monitoring & System Section */}
         <div>
           {!collapsed && (
-            <div className="px-2.5 pb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
+            <div className="px-2.5 pb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--ep-text-muted)]">
               System & Alarms
             </div>
           )}
-          {collapsed && <div className="h-px w-8 mx-auto bg-[var(--ep-line)] my-1.5" />}
-          <nav aria-label="System and alerts" className="flex flex-col items-stretch gap-1">
+          {collapsed && <div className="h-px w-8 mx-auto bg-[var(--ep-line)] my-1" />}
+          <nav aria-label="System and alerts" className="flex flex-col items-stretch gap-0.5">
             {systemItems.map((item) => (
               <SidebarNavItem
                 key={item.label}
@@ -253,7 +253,7 @@ export function DashboardDesktopSidebar({
 
       {/* 5. FOOTER ACTIONS (Settings & Logout) */}
       <div
-        className={`flex shrink-0 flex-col gap-2 border-t border-[var(--ep-line)] bg-[var(--ep-bg)] py-3 ${
+        className={`flex shrink-0 flex-col gap-1.5 border-t border-[var(--ep-line)] bg-[var(--ep-bg)] py-2.5 ${
           collapsed ? "items-center px-2" : "px-4"
         }`}
       >
@@ -267,7 +267,8 @@ export function DashboardDesktopSidebar({
           onBlur={() => setHoveredSettings(false)}
           className={
             drawerRowClass +
-            (collapsed ? " !w-11 !justify-center !px-0" : "") +
+            " lg:min-h-9 lg:py-1.5" +
+            (collapsed ? " !w-10 !justify-center !px-0" : "") +
             (isSettingsActive
               ? " dashboard-nav-active border border-[var(--ep-accent)]/40 bg-[var(--ep-accent-tint)] font-semibold text-[var(--ep-text)]"
               : "")
@@ -275,7 +276,7 @@ export function DashboardDesktopSidebar({
           onClick={onMobileClose}
         >
           <span className="flex w-5 shrink-0 items-center justify-center">
-            <Icon name="settings" size={18} strokeWidth={1.8} />
+            <Icon name="settings" size={17} strokeWidth={1.8} />
           </span>
           {!collapsed && <span>Settings</span>}
         </Link>
@@ -295,12 +296,12 @@ export function DashboardDesktopSidebar({
           onFocus={() => setHoveredLogout(true)}
           onBlur={() => setHoveredLogout(false)}
           aria-label="Log out"
-          className={`dashboard-logout-button group flex min-h-11 items-center gap-2.5 rounded-xl py-2.5 text-left text-[14.5px] font-semibold transition-all duration-200 active:scale-[0.99] ${
-            collapsed ? "w-11 justify-center px-0" : "w-full px-3"
+          className={`dashboard-logout-button group flex min-h-9 items-center gap-2.5 rounded-xl py-1.5 text-left text-[13.5px] font-semibold transition-all duration-200 active:scale-[0.99] ${
+            collapsed ? "w-10 justify-center px-0" : "w-full px-3"
           }`}
         >
           <span className="flex w-5 shrink-0 items-center justify-center" aria-hidden="true">
-            <LogoutIcon className="h-[18px] w-[18px] transition-transform duration-200 group-hover:translate-x-0.5" />
+            <LogoutIcon className="h-[17px] w-[17px] transition-transform duration-200 group-hover:translate-x-0.5" />
           </span>
           {!collapsed && <span>Log out</span>}
         </button>
@@ -312,7 +313,7 @@ export function DashboardDesktopSidebar({
         )}
 
         {!collapsed && (
-          <div className="flex items-center justify-between px-1 pt-1 text-[10px] text-[var(--ep-text-muted)]">
+          <div className="dashboard-sidebar-caption flex items-center justify-between px-1 pt-0.5 text-[10px] text-[var(--ep-text-muted)]">
             <span>EcoPrawn OS</span>
             <span>Ctrl + B to toggle</span>
           </div>
