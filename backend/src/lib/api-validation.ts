@@ -17,11 +17,22 @@ export function validNumber(value: unknown, min: number, max = Number.MAX_VALUE)
 }
 
 export const waterFields = {
-  dissolvedOxygen: [0, 100],
+  dissolvedOxygen: [0, 20],
   ph: [0, 14],
-  temperature: [-55, 125],
-  salinity: [0, 1000],
+  temperature: [0, 50],
+  salinity: [0, 50],
   waterLevel: [0, 100],
+} as const;
+
+export const tankNumericFields = {
+  biomass: [0, 10000],
+  targetToday: [0, 5000],
+  dispensedToday: [0, 5000],
+  fcr: [0, 20],
+  bodyLength: [0, 100],
+  weight: [0, 1000],
+  population: [0, 1000000],
+  abnormal: [0, 1000000],
 } as const;
 
 export function validWaterReading(body: Record<string, unknown>): boolean {

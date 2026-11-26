@@ -34,13 +34,13 @@ const defaults: ThresholdForm = {
 
 // Allowed range per field matches the limits validateNewTank enforces.
 const FIELDS: { key: FieldKey; label: string; unit: string; min: number; max: number }[] = [
-  { key: "dissolvedOxygenMin", label: "Dissolved oxygen minimum", unit: "mg/L", min: 0, max: 100 },
+  { key: "dissolvedOxygenMin", label: "Dissolved oxygen minimum", unit: "mg/L", min: 0, max: 20 },
   { key: "phMin", label: "pH minimum", unit: "", min: 0, max: 14 },
   { key: "phMax", label: "pH maximum", unit: "", min: 0, max: 14 },
-  { key: "temperatureMin", label: "Temperature minimum", unit: "°C", min: -55, max: 125 },
-  { key: "temperatureMax", label: "Temperature maximum", unit: "°C", min: -55, max: 125 },
-  { key: "salinityMin", label: "Salinity minimum", unit: "ppt", min: 0, max: 1000 },
-  { key: "salinityMax", label: "Salinity maximum", unit: "ppt", min: 0, max: 1000 },
+  { key: "temperatureMin", label: "Temperature minimum", unit: "°C", min: 0, max: 50 },
+  { key: "temperatureMax", label: "Temperature maximum", unit: "°C", min: 0, max: 50 },
+  { key: "salinityMin", label: "Salinity minimum", unit: "ppt", min: 0, max: 50 },
+  { key: "salinityMax", label: "Salinity maximum", unit: "ppt", min: 0, max: 50 },
 ];
 
 const PAIRS: [FieldKey, FieldKey][] = [

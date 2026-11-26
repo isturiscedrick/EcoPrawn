@@ -44,15 +44,15 @@ const request = (path, body, method = "POST") => new Request(`http://localhost/a
 const patch = (body, id = "tank-a") => tankIdRoute.PATCH(request(`tanks/${id}`, body, "PATCH"), { params: { id } });
 
 assert.equal((await tankRoute.POST(request("tanks", { name: "Tank A" }))).status, 201);
-assert.equal((await tankRoute.POST(request("tanks", { name: "Zero", pl: "PL-0", biomass: 0, targetToday: 0, fcr: 0, dispensedToday: 0, dissolvedOxygen: 0, ph: 0, temperature: -55, salinity: 0, waterLevel: 0, bodyLength: 0, weight: 0, population: 0, abnormal: 0 }))).status, 201);
+assert.equal((await tankRoute.POST(request("tanks", { name: "Zero", pl: "PL-0", biomass: 0, targetToday: 0, fcr: 0, dispensedToday: 0, dissolvedOxygen: 0, ph: 0, temperature: 0, salinity: 0, waterLevel: 0, bodyLength: 0, weight: 0, population: 0, abnormal: 0 }))).status, 201);
 assert.equal((await tankRoute.POST(request("tanks", { name: "Full frontend payload", pl: "PL-42", biomass: 31.2, targetToday: 1.56, fcr: 1.3, dispensedToday: 0, dissolvedOxygen: 6, ph: 8, temperature: 28, salinity: 15, waterLevel: 95, bodyLength: 11.6, weight: 18.6, population: 1720, abnormal: 0 }))).status, 201);
-for (const body of [null, [], "oops", { name: " " }, { name: " Tank A" }, { name: "A".repeat(101) }, { name: "A", pl: "PL ".repeat(30) }, { name: "A", biomass: "1" }, { name: "A", population: 1.5 }, { name: "A", population: 2147483648 }, { name: "A", population: 2, abnormal: 3 }, { name: "A", ph: 15 }, { name: "A", dissolvedOxygen: -1 }, { name: "A", waterLevel: 101 }, { name: "A", unknown: true }]) {
+for (const body of [null, [], "oops", { name: " " }, { name: " Tank A" }, { name: "A".repeat(101) }, { name: "A", pl: "PL ".repeat(30) }, { name: "A", biomass: "1" }, { name: "A", biomass: 10001 }, { name: "A", targetToday: 5001 }, { name: "A", fcr: 21 }, { name: "A", population: 1.5 }, { name: "A", population: 1000001 }, { name: "A", population: 2, abnormal: 3 }, { name: "A", ph: 15 }, { name: "A", dissolvedOxygen: -1 }, { name: "A", dissolvedOxygen: 21 }, { name: "A", temperature: -1 }, { name: "A", temperature: 51 }, { name: "A", salinity: 51 }, { name: "A", waterLevel: 101 }, { name: "A", unknown: true }]) {
   assert.equal((await tankRoute.POST(request("tanks", body))).status, 400, JSON.stringify(body));
 }
 assert.equal((await tankRoute.POST(request("tanks", "{bad"))).status, 400);
 assert.equal(writes, 3, "Invalid tank creation must not write");
 
-for (const body of [{}, [], null, { name: " A" }, { pl: "" }, { fcr: -1 }, { biomass: "2" }, { waterLevel: 50 }]) {
+for (const body of [{}, [], null, { name: " A" }, { pl: "" }, { fcr: -1 }, { fcr: 21 }, { biomass: "2" }, { biomass: 10001 }, { targetToday: 5001 }, { dispensedToday: 5001 }, { waterLevel: 50 }]) {
   assert.equal((await patch(body)).status, 400, JSON.stringify(body));
 }
 assert.equal((await patch("{bad")).status, 400);
@@ -64,7 +64,7 @@ assert.equal(writes, 4, "Invalid patches and IDs must not write");
 
 const good = { tankId: "tank-a", dissolvedOxygen: 6, ph: 8, temperature: 28, salinity: 15, waterLevel: 95 };
 assert.equal((await waterRoute.POST(request("water", good))).status, 201);
-for (const body of [null, [], { ...good, ph: 15 }, { ...good, temperature: 126 }, { ...good, salinity: -1 }, { ...good, dissolvedOxygen: "6" }, { ...good, waterLevel: 101 }, { ...good, tankId: " tank-a" }, { ...good, extra: 1 }]) {
+for (const body of [null, [], { ...good, ph: 15 }, { ...good, temperature: 51 }, { ...good, temperature: -1 }, { ...good, dissolvedOxygen: 21 }, { ...good, salinity: -1 }, { ...good, salinity: 51 }, { ...good, dissolvedOxygen: "6" }, { ...good, waterLevel: 101 }, { ...good, tankId: " tank-a" }, { ...good, extra: 1 }]) {
   assert.equal((await waterRoute.POST(request("water", body))).status, 400, JSON.stringify(body));
 }
 assert.equal((await waterRoute.POST(request("water", "{bad"))).status, 400);

@@ -1,5 +1,6 @@
 import { useEffect, useId, useState, type FormEvent } from "react";
 import type { Tank } from "@/features/dashboard/context/TankContext";
+import { TANK_LIMITS } from "@/features/dashboard/validateNewTank";
 import { Icon } from "@/components/ui/Icon";
 import { DashboardFormField, DashboardModalShell } from "./DashboardPrimitives";
 
@@ -64,23 +65,38 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    const values = [biomass, targetToday, dispensedToday, fcr].map(Number);
-    if (!name.trim() || name.trim().length > 100 || !pl.trim() || pl.trim().length > 100) {
-      setError("Enter a tank name and PL batch (up to 100 characters each).");
+    if (!name.trim() || name.trim().length > TANK_LIMITS.nameMaxLength || !pl.trim() || pl.trim().length > TANK_LIMITS.plMaxLength) {
+      setError(`Enter a tank name and PL batch (up to ${TANK_LIMITS.nameMaxLength} characters each).`);
       return;
     }
-    if (values.some((value, index) => !Number.isFinite(value) || value < 0 || (index === 3 && value > 1000))) {
-      setError("Enter valid non-negative numbers. FCR must be 1,000 or less.");
-      return;
+    const rawNumeric = [
+      { label: "Biomass", raw: biomass, min: TANK_LIMITS.biomass.min, max: TANK_LIMITS.biomass.max, unit: " kg" },
+      { label: "Feed target", raw: targetToday, min: TANK_LIMITS.targetToday.min, max: TANK_LIMITS.targetToday.max, unit: " kg" },
+      { label: "Feed dispensed", raw: dispensedToday, min: TANK_LIMITS.dispensedToday.min, max: TANK_LIMITS.dispensedToday.max, unit: " kg" },
+      { label: "FCR", raw: fcr, min: TANK_LIMITS.fcr.min, max: TANK_LIMITS.fcr.max, unit: "" },
+    ];
+    const parsed: number[] = [];
+    for (const item of rawNumeric) {
+      const trimmed = item.raw.trim();
+      if (!/^\d+(?:\.\d{1,4})?$/.test(trimmed)) {
+        setError(`${item.label} must be a valid non-negative number (up to 4 decimal places).`);
+        return;
+      }
+      const value = Number(trimmed);
+      if (!Number.isFinite(value) || value < item.min || value > item.max) {
+        setError(`${item.label} must be between ${item.min.toLocaleString("en-US")} and ${item.max.toLocaleString("en-US")}${item.unit}.`);
+        return;
+      }
+      parsed.push(value);
     }
     setError(null);
     setPendingChanges({
       name: name.trim(),
       pl: pl.trim(),
-      biomass: values[0],
-      targetToday: values[1],
-      dispensedToday: values[2],
-      fcr: values[3],
+      biomass: parsed[0],
+      targetToday: parsed[1],
+      dispensedToday: parsed[2],
+      fcr: parsed[3],
     });
   }
 
@@ -100,12 +116,12 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
   }
 
   const fields = [
-    { id: "name", label: "Tank name", value: name, change: setName, type: "text", icon: "layers" as const },
-    { id: "pl", label: "PL batch code", value: pl, change: setPl, type: "text", icon: "package" as const },
-    { id: "biomass", label: "Biomass stock (kg)", value: biomass, change: setBiomass, type: "number", icon: "sprout" as const },
-    { id: "target", label: "Feed target today (kg)", value: targetToday, change: setTargetToday, type: "number", icon: "utensils" as const },
-    { id: "dispensed", label: "Feed dispensed today (kg)", value: dispensedToday, change: setDispensedToday, type: "number", icon: "clock" as const },
-    { id: "fcr", label: "Feed conversion ratio (FCR)", value: fcr, change: setFcr, type: "number", icon: "chart-bars-trend" as const },
+    { id: "name", label: "Tank name", value: name, change: setName, type: "text", icon: "layers" as const, max: undefined },
+    { id: "pl", label: "PL batch code", value: pl, change: setPl, type: "text", icon: "package" as const, max: undefined },
+    { id: "biomass", label: "Biomass stock (kg)", value: biomass, change: setBiomass, type: "number", icon: "sprout" as const, max: TANK_LIMITS.biomass.max },
+    { id: "target", label: "Feed target today (kg)", value: targetToday, change: setTargetToday, type: "number", icon: "utensils" as const, max: TANK_LIMITS.targetToday.max },
+    { id: "dispensed", label: "Feed dispensed today (kg)", value: dispensedToday, change: setDispensedToday, type: "number", icon: "clock" as const, max: TANK_LIMITS.dispensedToday.max },
+    { id: "fcr", label: "Feed conversion ratio (FCR)", value: fcr, change: setFcr, type: "number", icon: "chart-bars-trend" as const, max: TANK_LIMITS.fcr.max },
   ] as const;
 
   return (
@@ -146,7 +162,7 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {fields.map((field) => (
           <DashboardFormField key={field.id} id={`${uid}-${field.id}`} label={field.label} icon={field.icon}>
             <input
@@ -155,7 +171,8 @@ export function EditTankModal({ tank, onClose, onSave }: EditTankModalProps) {
               type={field.type}
               inputMode={field.type === "number" ? "decimal" : undefined}
               min={field.type === "number" ? "0" : undefined}
-              maxLength={field.type === "text" ? 100 : undefined}
+              max={field.max}
+              maxLength={field.type === "text" ? TANK_LIMITS.nameMaxLength : undefined}
               step={field.type === "number" ? "any" : undefined}
               value={field.value}
               onChange={(event) => field.change(event.target.value)}

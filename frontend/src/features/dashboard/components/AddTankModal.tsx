@@ -10,7 +10,12 @@ import {
 import { useDemoData } from "@/hooks/useDemoData";
 import type { NewTankInput } from "@/features/dashboard/context/TankContext";
 import { getThresholds, rangeStatus } from "@/features/dashboard/lib/thresholds";
-import { validateNewTank } from "@/features/dashboard/validateNewTank";
+import {
+  TANK_LIMITS,
+  validateNewTank,
+  type NewTankFieldErrors,
+  type NewTankFieldKey,
+} from "@/features/dashboard/validateNewTank";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { DashboardFormField } from "./DashboardPrimitives";
@@ -31,6 +36,9 @@ const inputNormalClass =
 const inputWarnClass =
   `${inputBaseClass} border-amber-500/60 focus:border-amber-500 focus:shadow-[0_0_0_3px_rgba(245,158,11,0.18)]`;
 
+const inputErrorClass =
+  `${inputBaseClass} border-rose-500/70 focus:border-rose-500 focus:shadow-[0_0_0_3px_rgba(244,63,94,0.18)]`;
+
 const labelClass =
   "mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--ep-text-muted)]";
 
@@ -43,6 +51,7 @@ interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: IconName;
   hint?: string;
   warn?: boolean;
+  error?: string;
 }
 
 // Label + input pair. The htmlFor/id link means clicking the label focuses
@@ -53,23 +62,31 @@ function Field({
   icon,
   hint,
   warn = false,
+  error,
   ref,
   ...inputProps
 }: FieldProps & { ref?: React.Ref<HTMLInputElement> }) {
+  const errorId = error ? `${id}-error` : undefined;
+  const inputClass = error ? inputErrorClass : warn ? inputWarnClass : inputNormalClass;
   return (
     <DashboardFormField id={id} label={label} icon={icon} labelClassName={labelClass}>
       <input
         id={id}
         ref={ref}
-        className={warn ? inputWarnClass : inputNormalClass}
-        aria-invalid={warn || undefined}
+        className={inputClass}
+        aria-invalid={error || warn ? true : undefined}
+        aria-describedby={errorId}
         {...inputProps}
       />
-      {hint && (
+      {error ? (
+        <p id={errorId} role="alert" className="mt-1 text-[11px] font-medium leading-tight text-rose-600 dark:text-rose-400">
+          {error}
+        </p>
+      ) : hint ? (
         <p className={`mt-1 text-[11px] leading-tight ${warn ? "font-medium text-amber-600 dark:text-amber-400" : "text-[var(--ep-text-muted)]"}`}>
           {hint}
         </p>
-      )}
+      ) : null}
     </DashboardFormField>
   );
 }
@@ -109,6 +126,8 @@ export function AddTankModal({
   const [population, setPopulation] = useState("");
   const [confirming, setConfirming] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [touched, setTouched] = useState<Partial<Record<NewTankFieldKey, boolean>>>({});
+  const [submitted, setSubmitted] = useState(false);
   const thresholds = useMemo(() => getThresholds(), [open]);
 
   function resetToDefaults() {
@@ -125,6 +144,8 @@ export function AddTankModal({
     setPopulation(d.population);
     setConfirming(false);
     setFormError(null);
+    setTouched({});
+    setSubmitted(false);
   }
 
   // Fresh form every time the modal opens. Without this, the state from the
@@ -167,40 +188,62 @@ export function AddTankModal({
   if (!open || !defaults.pl) return null;
 
   const resolvedName = name.trim();
+  const validation = validateNewTank(
+    { name, pl, biomass, dissolvedOxygen, ph, temperature, salinity, waterLevel, population },
+    { bodyLength: 0, weight: 0, fcr: 0 },
+  );
+  const allFieldErrors: NewTankFieldErrors = validation.value ? {} : validation.fieldErrors;
+  const fieldError = (key: NewTankFieldKey) =>
+    submitted || touched[key] ? allFieldErrors[key] : undefined;
+  const markTouched = (key: NewTankFieldKey) =>
+    setTouched((prev) => (prev[key] ? prev : { ...prev, [key]: true }));
+
   const parsedBiomass = Number(biomass);
   const parsedPopulation = Number(population);
-  const hasStockEstimate =
-    Number.isFinite(parsedBiomass) &&
-    parsedBiomass > 0 &&
-    Number.isFinite(parsedPopulation) &&
-    parsedPopulation > 0;
+  const validBiomassForPreview =
+    !allFieldErrors.biomass && Number.isFinite(parsedBiomass) && parsedBiomass > 0;
+  const validPopulationForPreview =
+    !allFieldErrors.population && Number.isFinite(parsedPopulation) && parsedPopulation > 0;
+  const hasStockEstimate = validBiomassForPreview && validPopulationForPreview;
   const avgWeightGrams = hasStockEstimate ? (parsedBiomass * 1000) / parsedPopulation : null;
-  const feedTargetKg = Number.isFinite(parsedBiomass) && parsedBiomass > 0 ? parsedBiomass * 0.05 : null;
+  const feedTargetKg = validBiomassForPreview ? parsedBiomass * 0.05 : null;
 
-  const checkWarn = (raw: string, min?: number, max?: number) => {
-    if (!raw.trim()) return false;
+  const checkWarn = (raw: string, key: NewTankFieldKey, min?: number, max?: number) => {
+    if (!raw.trim() || allFieldErrors[key]) return false;
     const n = Number(raw);
     return Number.isFinite(n) && rangeStatus(n, min, max) === "warn";
   };
-  const doWarn = checkWarn(dissolvedOxygen, thresholds.dissolvedOxygen.min);
-  const phWarn = checkWarn(ph, thresholds.ph.min, thresholds.ph.max);
-  const tempWarn = checkWarn(temperature, thresholds.temperature.min, thresholds.temperature.max);
-  const salinityWarn = checkWarn(salinity, thresholds.salinity.min, thresholds.salinity.max);
-  const levelWarn = checkWarn(waterLevel, thresholds.waterLevel.min);
+  const doWarn = checkWarn(dissolvedOxygen, "dissolvedOxygen", thresholds.dissolvedOxygen.min);
+  const phWarn = checkWarn(ph, "ph", thresholds.ph.min, thresholds.ph.max);
+  const tempWarn = checkWarn(temperature, "temperature", thresholds.temperature.min, thresholds.temperature.max);
+  const salinityWarn = checkWarn(salinity, "salinity", thresholds.salinity.min, thresholds.salinity.max);
+  const levelWarn = checkWarn(waterLevel, "waterLevel", thresholds.waterLevel.min);
   const anyWaterWarn = doWarn || phWarn || tempWarn || salinityWarn || levelWarn;
 
-  function validatedInput() {
-    return validateNewTank(
-      { name, pl, biomass, dissolvedOxygen, ph, temperature, salinity, waterLevel, population },
-      { bodyLength: 0, weight: 0, fcr: 0 },
-    );
-  }
+  const fieldIdMap: Record<NewTankFieldKey, string> = {
+    name: `${uid}-name`,
+    pl: `${uid}-pl`,
+    biomass: `${uid}-biomass`,
+    population: `${uid}-population`,
+    dissolvedOxygen: `${uid}-do`,
+    ph: `${uid}-ph`,
+    temperature: `${uid}-temp`,
+    salinity: `${uid}-salinity`,
+    waterLevel: `${uid}-level`,
+  };
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const result = validatedInput();
-    if (!result.value) {
-      setFormError(result.error);
+    setSubmitted(true);
+    if (!validation.value) {
+      setFormError(validation.error);
+      const firstInvalidKey = (Object.keys(fieldIdMap) as NewTankFieldKey[]).find(
+        (key) => validation.fieldErrors[key],
+      );
+      if (firstInvalidKey) {
+        const el = document.getElementById(fieldIdMap[firstInvalidKey]);
+        el?.focus();
+      }
       return;
     }
     setFormError(null);
@@ -208,13 +251,13 @@ export function AddTankModal({
   }
 
   function handleConfirm() {
-    const result = validatedInput();
-    if (!result.value) {
+    if (!validation.value) {
       setConfirming(false);
-      setFormError(result.error);
+      setSubmitted(true);
+      setFormError(validation.error);
       return;
     }
-    onSubmit(result.value);
+    onSubmit(validation.value);
     setConfirming(false);
     onClose();
   }
@@ -271,10 +314,10 @@ export function AddTankModal({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} onInput={() => setFormError(null)} className="flex min-h-0 flex-1 flex-col">
+        <form onSubmit={handleSubmit} onInput={() => setFormError(null)} noValidate className="flex min-h-0 flex-1 flex-col">
           <div className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain px-4 py-3.5 sm:space-y-4 sm:px-7 sm:py-5">
             {formError && (
-              <p role="alert" className="rounded-xl border border-red-500/30 bg-red-500/10 px-3.5 py-2.5 text-xs font-medium text-red-700 dark:text-red-300">
+              <p role="alert" className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-3.5 py-2.5 text-xs font-medium text-rose-700 dark:text-rose-300">
                 {formError}
               </p>
             )}
@@ -293,7 +336,9 @@ export function AddTankModal({
                   placeholder="e.g. Tank 3"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  maxLength={100}
+                  onBlur={() => markTouched("name")}
+                  error={fieldError("name")}
+                  maxLength={TANK_LIMITS.nameMaxLength}
                   required
                 />
                 <Field
@@ -303,7 +348,9 @@ export function AddTankModal({
                   placeholder="e.g. PL-1"
                   value={pl}
                   onChange={(e) => setPl(e.target.value)}
-                  maxLength={100}
+                  onBlur={() => markTouched("pl")}
+                  error={fieldError("pl")}
+                  maxLength={TANK_LIMITS.plMaxLength}
                   required
                 />
               </div>
@@ -338,9 +385,13 @@ export function AddTankModal({
                   type="number"
                   step="any"
                   inputMode="decimal"
-                  min="0"
+                  min={TANK_LIMITS.biomass.min}
+                  max={TANK_LIMITS.biomass.max}
                   value={biomass}
                   onChange={(e) => setBiomass(e.target.value)}
+                  onBlur={() => markTouched("biomass")}
+                  error={fieldError("biomass")}
+                  hint={`0–${TANK_LIMITS.biomass.max.toLocaleString("en-US")} kg`}
                   required
                 />
                 <Field
@@ -349,9 +400,14 @@ export function AddTankModal({
                   icon="activity"
                   type="number"
                   inputMode="numeric"
-                  min="0" max="2147483647" step="1"
+                  min={TANK_LIMITS.population.min}
+                  max={TANK_LIMITS.population.max}
+                  step="1"
                   value={population}
                   onChange={(e) => setPopulation(e.target.value)}
+                  onBlur={() => markTouched("population")}
+                  error={fieldError("population")}
+                  hint={`0–${TANK_LIMITS.population.max.toLocaleString("en-US")} prawns`}
                   required
                 />
               </div>
@@ -383,11 +439,14 @@ export function AddTankModal({
                     type="number"
                     step="any"
                     inputMode="decimal"
-                    min="0" max="100"
+                    min={TANK_LIMITS.dissolvedOxygen.min}
+                    max={TANK_LIMITS.dissolvedOxygen.max}
                     value={dissolvedOxygen}
                     onChange={(e) => setDissolvedOxygen(e.target.value)}
+                    onBlur={() => markTouched("dissolvedOxygen")}
+                    error={fieldError("dissolvedOxygen")}
                     warn={doWarn}
-                    hint={`Target ≥ ${thresholds.dissolvedOxygen.min} mg/L`}
+                    hint={`Target ≥ ${thresholds.dissolvedOxygen.min} mg/L (max ${TANK_LIMITS.dissolvedOxygen.max})`}
                     required
                   />
                   <Field
@@ -397,11 +456,14 @@ export function AddTankModal({
                     type="number"
                     step="any"
                     inputMode="decimal"
-                    min="0" max="14"
+                    min={TANK_LIMITS.ph.min}
+                    max={TANK_LIMITS.ph.max}
                     value={ph}
                     onChange={(e) => setPh(e.target.value)}
+                    onBlur={() => markTouched("ph")}
+                    error={fieldError("ph")}
                     warn={phWarn}
-                    hint={`Target ${thresholds.ph.min}–${thresholds.ph.max}`}
+                    hint={`Target ${thresholds.ph.min}–${thresholds.ph.max} (0–${TANK_LIMITS.ph.max})`}
                     required
                   />
                 </div>
@@ -414,11 +476,14 @@ export function AddTankModal({
                     type="number"
                     step="any"
                     inputMode="decimal"
-                    min="-55" max="125"
+                    min={TANK_LIMITS.temperature.min}
+                    max={TANK_LIMITS.temperature.max}
                     value={temperature}
                     onChange={(e) => setTemperature(e.target.value)}
+                    onBlur={() => markTouched("temperature")}
+                    error={fieldError("temperature")}
                     warn={tempWarn}
-                    hint={`Target ${thresholds.temperature.min}–${thresholds.temperature.max} °C`}
+                    hint={`Target ${thresholds.temperature.min}–${thresholds.temperature.max} °C (${TANK_LIMITS.temperature.min}–${TANK_LIMITS.temperature.max})`}
                     required
                   />
                   <Field
@@ -428,11 +493,14 @@ export function AddTankModal({
                     type="number"
                     step="any"
                     inputMode="decimal"
-                    min="0" max="1000"
+                    min={TANK_LIMITS.salinity.min}
+                    max={TANK_LIMITS.salinity.max}
                     value={salinity}
                     onChange={(e) => setSalinity(e.target.value)}
+                    onBlur={() => markTouched("salinity")}
+                    error={fieldError("salinity")}
                     warn={salinityWarn}
-                    hint={`Target ${thresholds.salinity.min}–${thresholds.salinity.max} ppt`}
+                    hint={`Target ${thresholds.salinity.min}–${thresholds.salinity.max} ppt (${TANK_LIMITS.salinity.min}–${TANK_LIMITS.salinity.max})`}
                     required
                   />
                   <Field
@@ -442,11 +510,14 @@ export function AddTankModal({
                     type="number"
                     step="1"
                     inputMode="numeric"
-                    min="0" max="100"
+                    min={TANK_LIMITS.waterLevel.min}
+                    max={TANK_LIMITS.waterLevel.max}
                     value={waterLevel}
                     onChange={(e) => setWaterLevel(e.target.value)}
+                    onBlur={() => markTouched("waterLevel")}
+                    error={fieldError("waterLevel")}
                     warn={levelWarn}
-                    hint={`Target ≥ ${thresholds.waterLevel.min}%`}
+                    hint={`Target ≥ ${thresholds.waterLevel.min}% (0–${TANK_LIMITS.waterLevel.max}%)`}
                     required
                   />
                 </div>

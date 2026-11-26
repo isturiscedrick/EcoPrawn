@@ -1,6 +1,6 @@
 import { accountAccess } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { isRecord, validLabel, validNumber, validWaterReading } from "@/lib/api-validation";
+import { isRecord, tankNumericFields, validLabel, validNumber, validWaterReading } from "@/lib/api-validation";
 
 export async function GET() {
   const account = await accountAccess({ write: false, admin: false });
@@ -71,9 +71,14 @@ export async function POST(request: Request) {
       );
     }
     if (!validLabel(pl) ||
-      ![biomass, targetToday, fcr, dispensedToday, bodyLength, weight].every((value) => validNumber(value, 0)) ||
-      !Number.isInteger(population) || !validNumber(population, 0, 2147483647) ||
-      !Number.isInteger(abnormal) || !validNumber(abnormal, 0, 2147483647) || (abnormal as number) > (population as number) ||
+      !validNumber(biomass, ...tankNumericFields.biomass) ||
+      !validNumber(targetToday, ...tankNumericFields.targetToday) ||
+      !validNumber(fcr, ...tankNumericFields.fcr) ||
+      !validNumber(dispensedToday, ...tankNumericFields.dispensedToday) ||
+      !validNumber(bodyLength, ...tankNumericFields.bodyLength) ||
+      !validNumber(weight, ...tankNumericFields.weight) ||
+      !Number.isInteger(population) || !validNumber(population, ...tankNumericFields.population) ||
+      !Number.isInteger(abnormal) || !validNumber(abnormal, ...tankNumericFields.abnormal) || (abnormal as number) > (population as number) ||
       !validWaterReading({ dissolvedOxygen, ph, temperature, salinity, waterLevel })) {
       return Response.json({ success: false, error: "Invalid tank field" }, { status: 400 });
     }

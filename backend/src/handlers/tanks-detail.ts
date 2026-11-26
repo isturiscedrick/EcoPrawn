@@ -1,6 +1,6 @@
 import { accountAccess } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { isRecord, validLabel, validNumber, validTankId } from "@/lib/api-validation";
+import { isRecord, tankNumericFields, validLabel, validNumber, validTankId } from "@/lib/api-validation";
 
 export async function GET(
   _request: Request,
@@ -83,9 +83,13 @@ export async function PATCH(
       return Response.json({ success: false, error: "Unsupported tank fields" }, { status: 400 });
     }
     for (const [key, value] of Object.entries(body)) {
-      const valid = ["name", "pl"].includes(key)
-        ? validLabel(value)
-        : validNumber(value, 0);
+      let valid: boolean;
+      if (key === "name" || key === "pl") {
+        valid = validLabel(value);
+      } else {
+        const [min, max] = tankNumericFields[key as "biomass" | "targetToday" | "fcr" | "dispensedToday"];
+        valid = validNumber(value, min, max);
+      }
       if (!valid) return Response.json({ success: false, error: "Invalid tank field" }, { status: 400 });
     }
 

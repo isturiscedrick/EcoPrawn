@@ -19,26 +19,46 @@ test("trims text and preserves valid zero readings", () => {
   assert.equal(result.value.targetToday, 0);
 });
 
-test("rejects blank, malformed, nonfinite and fractional population", () => {
+test("rejects blank, malformed, scientific notation, nonfinite and fractional population", () => {
   for (const [field, value] of [
     ["name", "   "], ["pl", " "], ["biomass", ""], ["biomass", "1kg"],
-    ["biomass", "Infinity"], ["biomass", "0x10"], ["population", "1.2"], ["population", "12abc"],
+    ["biomass", "Infinity"], ["biomass", "0x10"], ["biomass", "1e5"], ["biomass", "1.12345"],
+    ["population", "1.2"], ["population", "12abc"], ["population", "1e6"],
   ]) {
     const result = validateNewTank({ ...valid, [field]: value }, defaults);
     assert.ok(result.error, `${field}=${JSON.stringify(value)} should fail`);
+    assert.ok(result.fieldErrors?.[field], `${field}=${JSON.stringify(value)} should set fieldErrors.${field}`);
   }
 });
 
-test("enforces backend ranges and text lengths", () => {
+test("enforces realistic aquaculture ranges and text lengths", () => {
   for (const [field, value] of [
     ["name", "x".repeat(101)], ["pl", "x".repeat(101)],
-    ["biomass", "-0.1"], ["dissolvedOxygen", "100.1"],
-    ["ph", "14.1"], ["temperature", "-55.1"],
-    ["salinity", "1000.1"], ["waterLevel", "100.1"],
-    ["population", "2147483648"],
+    ["biomass", "-0.1"], ["biomass", "10000.1"], ["biomass", "999999999"],
+    ["dissolvedOxygen", "-0.1"], ["dissolvedOxygen", "20.1"],
+    ["ph", "-0.1"], ["ph", "14.1"],
+    ["temperature", "-0.1"], ["temperature", "50.1"],
+    ["salinity", "-0.1"], ["salinity", "50.1"],
+    ["waterLevel", "-1"], ["waterLevel", "100.1"],
+    ["population", "-1"], ["population", "1000001"], ["population", "999999999"],
   ]) {
     const result = validateNewTank({ ...valid, [field]: value }, defaults);
     assert.ok(result.error, `${field}=${JSON.stringify(value)} should fail`);
+    assert.ok(result.fieldErrors?.[field], `${field}=${JSON.stringify(value)} should set fieldErrors.${field}`);
   }
-  assert.ok(validateNewTank({ ...valid, dissolvedOxygen: "100", ph: "14", temperature: "-55", salinity: "1000", waterLevel: "100", population: "2147483647" }, defaults).value);
+  assert.ok(
+    validateNewTank(
+      {
+        ...valid,
+        biomass: "10000",
+        dissolvedOxygen: "20",
+        ph: "14",
+        temperature: "50",
+        salinity: "50",
+        waterLevel: "100",
+        population: "1000000",
+      },
+      defaults,
+    ).value,
+  );
 });
