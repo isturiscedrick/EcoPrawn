@@ -115,7 +115,7 @@ export function ProfileEditForm() {
       </div>
       <div className="mt-7 flex items-center justify-between gap-3">
         {saved ? <p className="text-sm font-semibold text-[var(--ep-status-success)]" role="status">Profile saved.</p> : <span />}
-        <button type="button" onClick={save} className="min-h-11 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-white hover:bg-[var(--ep-accent-hover)]">
+        <button type="button" onClick={save} className="min-h-11 rounded-lg bg-[var(--ep-accent)] px-4 text-sm font-semibold text-[var(--ep-on-accent)] hover:bg-[var(--ep-accent-hover)]">
           Save profile
         </button>
       </div>

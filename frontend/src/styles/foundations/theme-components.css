@@ -272,15 +272,21 @@ html.dark .ep-auth-modal {
 }
 
 /* Dashboard chart and filter accents use Ocean Teal, not the former slate secondary. */
-.dashboard-shell polyline[stroke="var(--ep-accent)"],
-.dashboard-shell .inline-block.h-\[2px\].bg-\[var\(--ep-accent\)\],
-.dashboard-shell .bg-\[\#4b8db8\],
-.dashboard-shell .bg-\[var\(--ep-accent\)\].text-white,
-.dashboard-shell summary.text-\[var\(--ep-accent\)\] {
-  color: var(--ep-accent);
+.dashboard-shell polyline[stroke="var(--ep-accent)"] {
   stroke: var(--ep-accent);
+}
+.dashboard-shell .inline-block.h-\[2px\].bg-\[var\(--ep-accent\)\],
+.dashboard-shell .bg-\[\#4b8db8\] {
+  background-color: var(--ep-accent);
+}
+.dashboard-shell .bg-\[var\(--ep-accent\)\].text-white {
+  color: var(--ep-on-accent);
   background-color: var(--ep-accent);
   border-color: var(--ep-accent);
+}
+.dashboard-shell summary.text-\[var\(--ep-accent\)\] {
+  color: var(--ep-accent);
+  background-color: transparent;
 }
 html.dark .dashboard-shell .bg-\[var\(--ep-accent\)\].text-white {
   color: var(--ep-on-accent) !important;

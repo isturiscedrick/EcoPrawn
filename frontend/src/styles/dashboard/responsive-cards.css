@@ -78,8 +78,21 @@
   line-height: 1.4;
 }
 .dashboard-shell .dashboard-kpi > div:first-child > div:first-child,
-.dashboard-shell .dashboard-panel :is(.text-xs, .text-\[10px\], .text-\[11px\]) {
+.dashboard-shell
+  .dashboard-panel
+  :is(.text-xs, .text-\[10px\], .text-\[11px\]):not(
+    button,
+    a,
+    [role="button"],
+    [role="tab"],
+    [aria-pressed="true"],
+    [aria-selected="true"]
+  ) {
   color: var(--ep-text-muted);
+}
+.dashboard-shell .dashboard-panel [aria-pressed="true"].bg-\[var\(--ep-accent\)\],
+.dashboard-shell .dashboard-trend-chart [aria-pressed="true"].bg-\[var\(--ep-accent\)\] {
+  color: var(--ep-on-accent);
 }
 .dashboard-shell .dashboard-sensor-gauge,
 .dashboard-shell .dashboard-trend-chart {

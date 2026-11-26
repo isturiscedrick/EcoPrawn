@@ -194,3 +194,9 @@ html.dark body .dashboard-shell :is(aside#dashboard-sidebar, #dashboard-mobile-d
 html.dark body .dashboard-shell :is(aside#dashboard-sidebar, #dashboard-mobile-drawer) nav > a[aria-current="page"] .dashboard-nav-active-dot {
   background: #70d7c8 !important;
 }
+
+/* --ep-primary switches to light text (#e8f4f2) in dark mode, so solid primary
+   fills paired with text-white must invert their foreground for legibility. */
+html.dark .dashboard-shell .bg-\[var\(--ep-primary\)\].text-white {
+  color: var(--ep-page-bg);
+}

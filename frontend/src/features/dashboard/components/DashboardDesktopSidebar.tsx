@@ -16,7 +16,6 @@ interface DashboardDesktopSidebarProps {
   profileImage?: string | null;
   alertCount?: number;
   tankCount?: number;
-  isDbConnected?: boolean;
   onToggleCollapsed: () => void;
   onLogoutClick: () => void;
   onMobileClose: () => void;
@@ -31,7 +30,6 @@ export function DashboardDesktopSidebar({
   profileImage,
   alertCount = 0,
   tankCount = 0,
-  isDbConnected = true,
   onToggleCollapsed,
   onLogoutClick,
   onMobileClose,
@@ -251,21 +249,6 @@ export function DashboardDesktopSidebar({
             ))}
           </nav>
         </div>
-
-        {/* Telemetry Status Bar (When Expanded) */}
-        {!collapsed && (
-          <div className="pt-2 px-1">
-            <div className="flex items-center justify-between rounded-xl border border-[var(--ep-line)] bg-[var(--ep-bg)] px-3 py-2 text-[11px] text-[var(--ep-text-muted)]">
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="font-medium text-[var(--ep-text)]">Telemetry Feed</span>
-              </div>
-              <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                {isDbConnected ? "Online" : "Cached"}
-              </span>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* 5. FOOTER ACTIONS (Settings & Logout) */}
@@ -312,19 +295,19 @@ export function DashboardDesktopSidebar({
           onFocus={() => setHoveredLogout(true)}
           onBlur={() => setHoveredLogout(false)}
           aria-label="Log out"
-          className={`dashboard-logout-button flex min-h-11 items-center gap-2.5 rounded-xl py-2.5 text-left text-[14.5px] font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-500/10 transition-colors ${
+          className={`dashboard-logout-button group flex min-h-11 items-center gap-2.5 rounded-xl py-2.5 text-left text-[14.5px] font-semibold transition-all duration-200 active:scale-[0.99] ${
             collapsed ? "w-11 justify-center px-0" : "w-full px-3"
           }`}
         >
-          <span className="flex w-4 justify-center" aria-hidden="true">
-            <LogoutIcon />
+          <span className="flex w-5 shrink-0 items-center justify-center" aria-hidden="true">
+            <LogoutIcon className="h-[18px] w-[18px] transition-transform duration-200 group-hover:translate-x-0.5" />
           </span>
           {!collapsed && <span>Log out</span>}
         </button>
 
         {collapsed && hoveredLogout && (
           <SidebarTooltip targetRef={logoutRef}>
-            <span className="font-semibold text-rose-500">Log out</span>
+            <span className="font-semibold text-red-600 dark:text-red-400">Log out</span>
           </SidebarTooltip>
         )}
 

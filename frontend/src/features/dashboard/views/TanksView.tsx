@@ -69,7 +69,7 @@ export function TanksView() {
         actions={<button
           type="button"
           onClick={() => setAdding(true)}
-          className="inline-flex min-h-11 w-auto items-center justify-center gap-2 rounded-xl bg-[var(--ep-primary)] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-primary)] focus-visible:ring-offset-2"
+          className="inline-flex min-h-11 w-auto items-center justify-center gap-2 rounded-xl bg-[var(--ep-accent)] px-4 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] shadow-sm transition hover:bg-[var(--ep-accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-bg)]"
         >
           <Icon name="plus" size={17} /> Add tank
         </button>}
@@ -145,7 +145,7 @@ export function TanksView() {
             <button
               type="button"
               onClick={() => setAdding(true)}
-              className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-xl bg-[var(--ep-primary)] px-4 text-sm font-semibold text-white shadow-sm hover:opacity-90"
+              className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-xl bg-[var(--ep-accent)] px-4 text-sm font-semibold text-[var(--ep-on-accent)] shadow-sm transition hover:bg-[var(--ep-accent-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-surface)]"
             >
               <Icon name="plus" size={16} /> Add tank
             </button>

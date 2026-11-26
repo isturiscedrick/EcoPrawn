@@ -65,7 +65,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             <button
               type="button"
               onClick={() => dismissToast(toast.id)}
-              className="mt-6 min-h-11 min-w-28 rounded-lg bg-[var(--ep-accent)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--ep-accent-hover)]"
+              className="mt-6 min-h-11 min-w-28 rounded-lg bg-[var(--ep-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ep-on-accent)] transition-colors hover:bg-[var(--ep-accent-hover)]"
             >
               Okay
             </button>

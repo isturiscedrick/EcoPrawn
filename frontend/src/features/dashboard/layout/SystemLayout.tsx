@@ -234,7 +234,6 @@ export function SystemLayout({ children }: SystemLayoutProps) {
         collapsed={desktopSidebarCollapsed}
         alertCount={activeAlertCount}
         tankCount={tanks.length}
-        isDbConnected={isDbConnected}
         profileImage={profileImage}
         onToggleCollapsed={() => setDesktopSidebarCollapsed((collapsed) => { const next = !collapsed; try { window.localStorage.setItem("ep-sidebar-collapsed", String(next)); } catch { /* Keep the in-memory preference for this session. */ } return next; })}
       />

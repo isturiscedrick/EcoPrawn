@@ -103,7 +103,7 @@ function RangeControl({ value, onChange }: { value: Range; onChange: (value: Ran
             type="button"
             aria-pressed={value === option.value}
             onClick={() => onChange(option.value)}
-            className={`min-h-11 shrink-0 whitespace-nowrap rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)] ${value === option.value ? "bg-[var(--ep-accent)] text-[var(--ep-on-accent)] shadow-sm" : "text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)]"}`}
+            className={`min-h-11 shrink-0 whitespace-nowrap rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)] ${value === option.value ? "bg-[var(--ep-accent)] text-[var(--ep-on-accent)] shadow-sm" : "text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)] hover:text-[var(--ep-text)]"}`}
           >
             {option.label}
           </button>

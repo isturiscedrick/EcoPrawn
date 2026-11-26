@@ -107,9 +107,9 @@ export function DashboardProfileMenu({
               setOpen(false);
               onRequestLogout();
             }}
-            className="mt-1 flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 text-left text-sm font-semibold text-red-600 transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:bg-red-50 focus-visible:ring-1 focus-visible:ring-red-400/60 dark:hover:bg-red-950/30 dark:focus-visible:bg-red-950/30"
+            className="group mt-1 flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 text-left text-sm font-semibold text-red-600 dark:text-red-400 transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:bg-red-50 focus-visible:ring-1 focus-visible:ring-red-400/60 dark:hover:bg-red-950/30 dark:focus-visible:bg-red-950/30"
           >
-            <Icon name="log-out" size={17} />
+            <Icon name="log-out" size={17} className="transition-transform duration-200 group-hover:translate-x-0.5" />
             Log out
           </button>
         </div>

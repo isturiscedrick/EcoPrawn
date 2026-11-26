@@ -113,7 +113,7 @@ export function ConfirmDialog({
 
   const confirmClass =
     tone === "danger"
-      ? "bg-[var(--ep-status-danger)] hover:brightness-95 focus-visible:ring-[var(--ep-status-danger)]"
+      ? "bg-red-600 hover:bg-red-700 focus-visible:ring-red-500"
       : "bg-[var(--ep-accent)] hover:bg-[var(--ep-accent-hover)] focus-visible:ring-[var(--ep-primary)]";
 
   const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-surface)]";

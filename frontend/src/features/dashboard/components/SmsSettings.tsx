@@ -80,7 +80,7 @@ export function SmsSettings() {
       </label>
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={enabled} disabled={busy} onChange={(event) => setEnabled(event.target.checked)} /> Send water-quality alerts to this number</label>
       <div className="flex flex-wrap gap-3">
-        <button disabled={busy} type="submit" className="rounded-full px-4 py-2 text-sm bg-[var(--ep-accent)] text-white disabled:opacity-50">{busy ? "Please wait..." : "Save preferences"}</button>
+        <button disabled={busy} type="submit" className="rounded-full px-4 py-2 text-sm font-semibold bg-[var(--ep-accent)] text-[var(--ep-on-accent)] transition-colors hover:bg-[var(--ep-accent-hover)] disabled:opacity-50">{busy ? "Please wait..." : "Save preferences"}</button>
         <button type="button" disabled={busy || !settings.configured || !settings.smsEnabled || Boolean(dirty) || retrySeconds > 0} onClick={() => void perform(true)} className="rounded-full border border-[var(--ep-line)] px-4 py-2 text-sm disabled:opacity-50">{retrySeconds > 0 ? `Try again in ${Math.floor(retrySeconds / 60)}:${String(retrySeconds % 60).padStart(2, "0")}` : "Send test SMS"}</button>
         <button type="button" disabled={busy || Boolean(dirty)} onClick={() => { setBusy(true); load().catch(() => { setFailed(true); setFeedback("Could not refresh delivery status."); }).finally(() => setBusy(false)); }} className="px-2 py-2 text-sm underline disabled:opacity-50">Refresh delivery status</button>
       </div>

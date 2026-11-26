@@ -27,6 +27,13 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  .dashboard-modal-panel[data-modal-structured] {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+  }
+
   .dashboard-search-layer {
     align-items: flex-start;
     overflow-y: auto;

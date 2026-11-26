@@ -18,7 +18,6 @@ interface SidebarProps {
   collapsed?: boolean;
   alertCount?: number;
   tankCount?: number;
-  isDbConnected?: boolean;
   profileImage?: string | null;
   onToggleCollapsed?: () => void;
 }
@@ -29,7 +28,6 @@ export function Sidebar({
   collapsed = false,
   alertCount = 0,
   tankCount = 0,
-  isDbConnected = true,
   profileImage,
   onToggleCollapsed = () => {},
 }: SidebarProps) {
@@ -345,7 +343,6 @@ export function Sidebar({
         profileImage={profileImage}
         alertCount={alertCount}
         tankCount={tankCount}
-        isDbConnected={isDbConnected}
         onToggleCollapsed={onToggleCollapsed}
         onLogoutClick={onLogoutClick}
         onMobileClose={onMobileClose}
@@ -551,10 +548,10 @@ export function Sidebar({
                 onMobileClose();
                 onLogoutClick();
               }}
-              className="dashboard-logout-button flex min-h-11 w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-[14.5px] font-semibold transition-colors duration-200"
+              className="dashboard-logout-button group flex min-h-11 w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-[14.5px] font-semibold transition-all duration-200 active:scale-[0.99]"
             >
               <span className="flex w-4 justify-center" aria-hidden="true">
-                <LogoutIcon />
+                <LogoutIcon className="transition-transform duration-200 group-hover:translate-x-0.5" />
               </span>
               Log out
             </button>

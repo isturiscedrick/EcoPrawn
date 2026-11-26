@@ -341,12 +341,13 @@ html.dark .dashboard-shell aside#dashboard-sidebar nav a > span.dashboard-nav-ac
 
   .dashboard-shell aside#dashboard-sidebar .dashboard-logout-button {
     border: 1px solid transparent;
+    background: transparent !important;
     color: #b42332 !important;
   }
 
   .dashboard-shell aside#dashboard-sidebar .dashboard-logout-button:hover {
-    border-color: #f2d6d9 !important;
-    background: #fff1f2 !important;
+    border-color: rgba(220, 38, 38, 0.24) !important;
+    background: rgba(220, 38, 38, 0.08) !important;
     color: #9f1d2b !important;
   }
 
@@ -402,11 +403,13 @@ html.dark .dashboard-shell aside#dashboard-sidebar > div:last-child {
 }
 
 html.dark .dashboard-shell aside#dashboard-sidebar .dashboard-logout-button {
-  color: #ff9da5 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #fda4af !important;
 }
 
 html.dark .dashboard-shell aside#dashboard-sidebar .dashboard-logout-button:hover {
-  border-color: rgba(239, 120, 130, 0.24) !important;
-  background: rgba(180, 35, 50, 0.12) !important;
-  color: #ffb0b6 !important;
+  border-color: rgba(248, 113, 113, 0.28) !important;
+  background: rgba(248, 113, 113, 0.14) !important;
+  color: #fecdd3 !important;
 }

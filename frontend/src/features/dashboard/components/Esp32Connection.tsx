@@ -64,7 +64,7 @@ export function Esp32Connection({ tankId, tankName }: { tankId: string; tankName
       </dl>
       <p className="text-xs text-[var(--ep-text-muted)] mb-4">{reading ? `Last saved ${new Date(reading.recordedAt).toLocaleString()}. ` : "No hardware measurements saved yet. "}Oxygen, pH and salinity require additional sensors. These USB test readings do not send SMS alerts.</p>
       <details>
-        <summary className="cursor-pointer text-sm font-semibold text-[var(--ep-accent)]">Water level calibration, optional</summary>
+        <summary className="cursor-pointer select-none text-sm font-semibold text-[var(--ep-accent)] hover:text-[var(--ep-accent-hover)]">Water level calibration, optional</summary>
         <p className="text-xs text-[var(--ep-text-muted)] my-3">Measure from the sensor to the water surface at empty and full levels. Set both before connecting, or leave both blank to record distance only.</p>
         <div className="flex flex-wrap gap-4">
           <label className="text-sm">Distance at empty (cm)<input type="number" min="2" max="400" step="0.1" value={emptyDistance} onChange={event => setEmptyDistance(event.target.value)} disabled={status !== "disconnected"} className="block mt-1 w-40 rounded-lg border border-[var(--ep-line)] px-3 py-2" /></label>

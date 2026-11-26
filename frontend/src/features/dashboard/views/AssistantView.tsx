@@ -327,7 +327,7 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
               <div
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-xs font-semibold ${
                   msg.sender === "user"
-                    ? "bg-[var(--ep-primary)] text-white shadow-sm"
+                    ? "bg-[var(--ep-accent)] text-[var(--ep-on-accent)] shadow-sm"
                     : "bg-gradient-to-br from-teal-500 to-emerald-600 text-white shadow-sm"
                 }`}
               >
@@ -343,7 +343,7 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
                 <div
                   className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                     msg.sender === "user"
-                      ? "bg-[var(--ep-primary)] text-white font-medium rounded-tr-sm shadow-sm"
+                      ? "bg-[var(--ep-accent)] text-[var(--ep-on-accent)] font-medium rounded-tr-sm shadow-sm"
                       : "bg-[var(--ep-bg)] border border-[var(--ep-line)] text-[var(--ep-text)] rounded-tl-sm shadow-sm"
                   }`}
                 >
@@ -419,7 +419,7 @@ Would you like me to analyze a specific tank's sensor stream or generate an auto
               type="submit"
               disabled={!inputQuery.trim() || isGenerating}
               aria-label="Send message"
-              className="flex min-h-12 px-5 items-center justify-center gap-2 rounded-xl bg-[var(--ep-primary)] text-white text-sm font-semibold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
+              className="flex min-h-12 px-5 items-center justify-center gap-2 rounded-xl bg-[var(--ep-accent)] text-[var(--ep-on-accent)] text-sm font-semibold hover:bg-[var(--ep-accent-hover)] disabled:bg-[var(--ep-tint)] disabled:text-[var(--ep-text-muted)] disabled:border disabled:border-[var(--ep-line)] disabled:shadow-none disabled:cursor-not-allowed transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ep-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ep-surface)]"
             >
               <span data-assistant-send-label>Ask</span>
               <Icon name="arrow-up" size={16} strokeWidth={2.2} />

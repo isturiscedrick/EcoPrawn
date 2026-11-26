@@ -84,7 +84,7 @@ export function TrendChart({ values = [], onPointClick, label = "Trend", unit = 
                 }}
                 className={`min-h-9 min-w-10 rounded-full px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ep-accent)] ${
                   active
-                    ? "bg-[var(--ep-accent)] text-white shadow-sm"
+                    ? "bg-[var(--ep-accent)] text-[var(--ep-on-accent)] shadow-sm"
                     : "text-[var(--ep-text-muted)] hover:bg-[var(--ep-accent-tint)] hover:text-[var(--ep-accent)]"
                 }`}
               >
